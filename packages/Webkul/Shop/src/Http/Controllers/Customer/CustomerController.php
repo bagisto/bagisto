@@ -46,7 +46,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
-        return view('shop::customers.account.profile.index')->with('customer', $customer);
+        return view('shop::customers.account.profile.index', compact('customer'));
     }
 
     /**
@@ -58,7 +58,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find(auth()->guard('customer')->user()->id);
 
-        return view('shop::customers.account.profile.edit')->with('customer', $customer);
+        return view('shop::customers.account.profile.edit', compact('customer'));
     }
 
     /**
@@ -206,6 +206,6 @@ class CustomerController extends Controller
     {
         $reviews = $this->productReviewRepository->getCustomerReview();
 
-        return view('shop::customers.account.reviews.index')->with('reviews', $reviews);
+        return view('shop::customers.account.reviews.index', compact('reviews'));
     }
 }
