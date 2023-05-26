@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import dotenv from "dotenv";
-import dotenvExpand from 'dotenv-expand';
+import dotenvExpand from "dotenv-expand";
 import laravel from "laravel-vite-plugin";
+import path from "path";
 
 const config = dotenv.config({ path: "../../../.env" });
 dotenvExpand(config);
@@ -29,5 +30,13 @@ export default defineConfig(({ mode }) => {
                 refresh: true,
             }),
         ],
+
+        experimental: {
+            renderBuiltUrl(filename, { hostId, hostType, type }) {
+                if (hostType === "css") {
+                    return path.basename(filename);
+                }
+            },
+        },
     };
 });
