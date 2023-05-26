@@ -7,7 +7,7 @@ return [
 
             'addresses' => [
                 'title'           => 'Address',
-                'edit-page'       => 'Edit',
+                'edit'            => 'Edit',
                 'add-address'     => 'Add Address',
                 'comapny-name'    => 'Company Name',
                 'vat-id'          => 'Vat ID',
@@ -23,21 +23,10 @@ return [
                 'street-address'  => 'Street Address',
                 'post-code'       => 'Post Code',
 
-                'create'          => [
-                    'success' => 'Address have been successfully added.',
-                ],
-
-                'edit' => [
-                    'success'   => 'Address updated successfully.',
-                ],
-
-                'index' => [
-                    'default-delete' => 'Default address cannot be changed.',
-                ],
-
-                'delete' => [
-                    'success'        => 'Address successfully deleted',
-                ],
+                'create-success' => 'Address have been successfully added.',
+                'edit-success'   => 'Address updated successfully.',
+                'default-delete' => 'Default address cannot be changed.',
+                'delete-success' => 'Address successfully deleted',
 
             ],
 

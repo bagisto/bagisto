@@ -53,18 +53,4 @@ class AddressRequest extends FormRequest
             'address1.*' => 'address',
         ];
     }
-
-    /**
-     * handle merge request.
-     *
-     * @return array
-     */
-    public function mergeRequest($customer)
-    {
-        request()->merge([
-            'customer_id'     => $customer->id,
-            'address1'        => implode(PHP_EOL, array_filter(request()->input('address1'))),
-            'default_address' => ! $customer->addresses->count(),
-        ]);
-    }
 }

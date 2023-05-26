@@ -60,17 +60,30 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        // $requestInput = request()->only('_token','company_name' , 'first_name' , 'last_name' , 'vat_id' , 'address1' , 'country' , 'state' , 'city' , 'postcode' , 'phone');
-
-        $request->mergeRequest($customer);
+        $requestData = [
+            'company_name' => $request['company_name'],
+            'first_name'   => $request['first_name'],
+            'last_name'    => $request['last_name'],
+            'vat_id'       => $request['vat_id'],
+            'address1'     => $request['address1'],
+            'country'      => $request['country'],
+            'state'        => $request['state'],
+            'city'         => $request['city'],
+            'postcode'     => $request['postcode'],
+            'phone'        => $request['phone'],
+        ];
 
         Event::dispatch('customer.addresses.create.before');
 
-        $customerAddress = $this->customerAddressRepository->create(request()->input());
+        $customerAddress = $this->customerAddressRepository->create(array_merge($requestData, [
+            'customer_id'     => $customer->id,
+            'address1'        => implode(PHP_EOL, array_filter($requestData['address1'])),
+            'default_address' => ! $customer->addresses->count(),
+        ]));
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customers.account.addresses.create.success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.create-success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }
@@ -82,11 +95,18 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        $address = $this->customerAddressRepository->find(auth()->guard('customer')->id());
+        $address = $this->customerAddressRepository->findOneWhere([
+            'id'          => $id,
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
 
-        return view('shop::customers.account.addresses.edit', array_merge(compact('address'), [
-            'defaultCountry' => config('app.default_country'),
-        ]));
+        $address['defaultCountry']  =  config('app.default_country');
+
+        if (! $address) {
+            abort(404);
+        }        
+
+        return view('shop::customers.account.addresses.edit')->with('address', $address);
     }
 
     /**
@@ -105,15 +125,28 @@ class AddressController extends Controller
             return redirect()->route('shop.customer.addresses.index');
         }
 
+        $requestData = [
+            'company_name' => $request['company_name'],
+            'first_name'   => $request['first_name'],
+            'last_name'    => $request['last_name'],
+            'vat_id'       => $request['vat_id'],
+            'address1'     => $request['address1'],
+            'country'      => $request['country'],
+            'state'        => $request['state'],
+            'city'         => $request['city'],
+            'postcode'     => $request['postcode'],
+            'phone'        => $request['phone'],
+        ];
+
         Event::dispatch('customer.addresses.update.before', $id);
 
-        $customerAddress = $this->customerAddressRepository->update(array_merge($request->input(), [
-            'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
+        $customerAddress = $this->customerAddressRepository->update(array_merge($requestData, [
+            'address1' => implode(PHP_EOL, array_filter($requestData['address1'])),
         ]), $id);
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 
-        session()->flash('success', trans('shop::app.customers.account.addresses.edit.success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.edit-success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }
@@ -135,7 +168,7 @@ class AddressController extends Controller
         if ($address = $this->customerAddressRepository->find($id)) {
             $address->update(['default_address' => 1]);
         } else {
-            session()->flash('success', trans('shop::app.customers.account.addresses.index.default-delete'));
+            session()->flash('success', trans('shop::app.customers.account.addresses.default-delete'));
         }
 
         return redirect()->back();
@@ -151,10 +184,14 @@ class AddressController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        $this->customerAddressRepository->findOneWhere([
+        $address = $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
             'customer_id' => $customer->id,
         ]);
+
+        if (! $address) {
+            abort(404);
+        }
 
         Event::dispatch('customer.addresses.delete.before', $id);
 
@@ -162,7 +199,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('shop::app.customers.account.addresses.delete.success'));
+        session()->flash('success', trans('shop::app.customers.account.addresses.delete-success'));
 
         return redirect()->route('shop.customer.addresses.index');
     }

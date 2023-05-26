@@ -1,6 +1,6 @@
 <x-shop::layouts.account>
     <h2 class="text-[26px] font-medium">
-        @lang('shop::app.customers.account.addresses.edit-page')
+        @lang('shop::app.customers.account.addresses.edit')
         @lang('shop::app.customers.account.addresses.title')
     </h2>
 
@@ -131,7 +131,7 @@
 
                 @foreach (core()->countries() as $country)
                     <option 
-                        {{ $country->code === $defaultCountry ? 'selected' : '' }}  
+                        {{ $country->code === $address->defaultCountry ? 'selected' : '' }}  
                         value="{{ $country->code }}"
                     >
                         {{ $country->name }}
@@ -208,12 +208,32 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        <x-shop::form.control-group class="mb-4">
+            <x-shop::form.control-group.label>
+                @lang('shop::app.customers.account.addresses.phone')
+            </x-shop::form.control-group.label>
+
+            <x-shop::form.control-group.control
+                type="text"
+                name="phone"
+                :value="old('phone') ?? $address->phone"
+                rules="required|integer"
+                label="Phone"
+                placeholder="Phone"
+            >
+            </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="phone"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
         <button
             type="submit"
             class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
         >
             @lang('shop::app.customers.account.save')
         </button>
-
     </x-shop::form>
 </x-shop::layouts.account>
