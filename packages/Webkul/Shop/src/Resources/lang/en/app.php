@@ -22,12 +22,10 @@ return [
                 'phone'           => 'Phone',
                 'street-address'  => 'Street Address',
                 'post-code'       => 'Post Code',
-
-                'create-success' => 'Address have been successfully added.',
-                'edit-success'   => 'Address updated successfully.',
-                'default-delete' => 'Default address cannot be changed.',
-                'delete-success' => 'Address successfully deleted',
-
+                'create-success'  => 'Address have been successfully added.',
+                'edit-success'    => 'Address updated successfully.',
+                'default-delete'  => 'Default address cannot be changed.',
+                'delete-success'  => 'Address successfully deleted',
             ],
 
             'orders' => [
@@ -61,7 +59,6 @@ return [
             'profile' => 'Profile',
             'save'    => 'Save',
         ],
-
     ],
 
     'response' => [
