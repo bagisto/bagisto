@@ -119,7 +119,7 @@
                             class="px-6 py-[16px] text-black"
                         >
                             <a 
-                                href="{{ route('shop.customer.orders.view', $order->id) }}" 
+                                href="{{ route('shop.customers.account.orders.view', $order->id) }}" 
                                 class=" block bg-[position:-74px_-66px] bs-main-sprite w-[20px] h-[20px] font-medium" 
                                 aria-label="action"
                             >
