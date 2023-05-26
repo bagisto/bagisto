@@ -10,7 +10,7 @@ return [
                 'last-name'  => 'Last Name',
                 'gender'     => 'Gender',
                 'dob'        => 'Date of Birth',
-                'Email'      => 'Email',
+                'email'      => 'Email',
                 'delete-profile' => 'Delete Profile',
                 'edit-profile' => 'Edit Profile',
                 'edit'        => 'Edit',
