@@ -1,21 +1,14 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\BookingProduct;
+namespace Webkul\BookingProduct\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\BookingProduct\DataGrids\Admin\BookingDataGrid;
+use Webkul\BookingProduct\Http\Controllers\Controller;
 use Webkul\BookingProduct\Repositories\BookingRepository;
 
 class BookingController extends Controller
 {
-    /**
-     * Contains route configuration
-     *
-     * @return array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -23,7 +16,6 @@ class BookingController extends Controller
      */
     public function __construct(protected BookingRepository $bookingRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -33,7 +25,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view']);
+        return view('bookingproduct::admin.sales.bookings.index');
     }
 
     /**
@@ -64,8 +56,8 @@ class BookingController extends Controller
             return response()->json([
                 'bookings' => $bookings,
             ]);
-        } else {
-            return app(BookingDataGrid::class)->toJson();
         }
+
+        return app(BookingDataGrid::class)->toJson();
     }
 }
