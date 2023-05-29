@@ -28,37 +28,47 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             /**
              * Forgot password routes.
              */
-            Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('shop.customer.forgot_password.create');
+            Route::controller(ForgotPasswordController::class)->prefix('forgot-password')->group(function () {
+                Route::get('',  'create')->name('shop.customer.forgot_password.create');
 
-            Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('shop.customer.forgot_password.store');
+                Route::post('', 'store')->name('shop.customer.forgot_password.store');
+            });
 
             /**
              * Reset password routes.
              */
-            Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->name('shop.customer.reset_password.create');
+            Route::controller(ResetPasswordController::class)->prefix('reset-password')->group(function () {
+                Route::get('{token}',  'create')->name('shop.customer.reset_password.create');
 
-            Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('shop.customer.reset_password.store');
+                Route::post('', 'store')->name('shop.customer.reset_password.store');
+            });
 
             /**
              * Login routes.
              */
-            Route::get('login', [SessionController::class, 'show'])->name('shop.customer.session.index');
+            Route::controller(SessionController::class)->prefix('login')->group(function () {
+                Route::get('', 'show')->name('shop.customer.session.index');
 
-            Route::post('login', [SessionController::class, 'create'])->name('shop.customer.session.create');
+                Route::post('', 'create')->name('shop.customer.session.create');
+            });
 
             /**
              * Registration routes.
              */
-            Route::get('register', [RegistrationController::class, 'show'])->name('shop.customer.register.index');
+            Route::controller(RegistrationController::class)->group(function () {
+                Route::prefix('register')->group(function () {
+                    Route::get('', 'show')->name('shop.customer.register.index');
+    
+                    Route::post('', 'create')->name('shop.customer.register.create');
+                });
 
-            Route::post('register', [RegistrationController::class, 'create'])->name('shop.customer.register.create');
+                /**
+                 * Customer verification routes.
+                 */
+                Route::get('verify-account/{token}', 'verifyAccount')->name('shop.customer.verify');
 
-            /**
-             * Customer verification routes.
-             */
-            Route::get('/verify-account/{token}', [RegistrationController::class, 'verifyAccount'])->name('shop.customer.verify');
-
-            Route::get('/resend/verification/{email}', [RegistrationController::class, 'resendVerificationEmail'])->name('shop.customer.resend.verification_email');
+                Route::get('resend/verification/{email}', 'resendVerificationEmail')->name('shop.customer.resend.verification_email');
+            });
 
             /**
              * Customer authenticated routes. All the below routes only be accessible
