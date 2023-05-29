@@ -117,11 +117,18 @@
                                 </div>
 
                                 <div class="button-group">
-                                    <a class="btn btn-primary btn-md" href="{{ route('shop.customer.session.index') }}" style="color: #ffffff">
+                                    <a 
+                                        class="btn btn-primary btn-md" 
+                                        href="{{ route('shop.customer.session.index') }}" style="color: #ffffff"
+                                    >
                                         {{ __('shop::app.header.sign-in') }}
                                     </a>
 
-                                    <a class="btn btn-primary btn-md" href="{{ route('shop.customers.register.index') }}" style="float: right; color: #ffffff">
+                                    <a 
+                                        class="btn btn-primary btn-md" 
+                                        href="{{ route('shop.customers.register.index') }}" 
+                                        style="float: right; color: #ffffff"
+                                    >
                                         {{ __('shop::app.header.sign-up') }}
                                     </a>
                                 </div>
