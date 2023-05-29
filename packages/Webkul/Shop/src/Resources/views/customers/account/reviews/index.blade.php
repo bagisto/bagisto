@@ -15,7 +15,7 @@
                 @lang('shop::app.customers.account.reviews.title')
             </h2>
 
-            @if(! $reviews->isEmpty())
+            @if (! $reviews->isEmpty())
                 <div class="grid mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
                     @foreach($reviews as $review)
                         <a href="#" id="{{ $review->product_id }}">
