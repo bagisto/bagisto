@@ -6,17 +6,17 @@ return [
         'account' => [
 
             'profile'   => [
-                'first-name' => 'First Name',
-                'last-name'  => 'Last Name',
-                'gender'     => 'Gender',
-                'dob'        => 'Date of Birth',
-                'Email'      => 'Email',
-                'delete-profile' => 'Delete Profile',
-                'edit-profile' => 'Edit Profile',
-                'edit'        => 'Edit',
-                'phone'       => 'Phone',
+                'first-name'        => 'First Name',
+                'last-name'         => 'Last Name',
+                'gender'            => 'Gender',
+                'dob'               => 'Date of Birth',
+                'email'             => 'Email',
+                'delete-profile'    => 'Delete Profile',
+                'edit-profile'      => 'Edit Profile',
+                'edit'              => 'Edit',
+                'phone'             => 'Phone',
                 'current-password'  => 'Current Password',
-                'new-password'  => 'New Password',
+                'new-password'      => 'New Password',
                 'confirm-password'  => 'Confirm Password',
             ],
 
