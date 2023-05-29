@@ -14,7 +14,9 @@
                     Cookie::has('enable-resend')
                     && Cookie::get('enable-resend') == true
                 )
-                    <a href="{{ route('shop.customers.resend.verification_email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
+                    <a href="{{ route('shop.customers.resend.verification_email', Cookie::get('email-for-resend')) }}">
+                        {{ __('shop::app.customer.login-form.resend-verification') }}
+                    </a>
                 @endif
             </div>
         </div>
