@@ -29,18 +29,18 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
              * Forgot password routes.
              */
             Route::controller(ForgotPasswordController::class)->prefix('forgot-password')->group(function () {
-                Route::get('',  'create')->name('shop.customer.forgot_password.create');
+                Route::get('',  'create')->name('shop.customers.forgot_password.create');
 
-                Route::post('', 'store')->name('shop.customer.forgot_password.store');
+                Route::post('', 'store')->name('shop.customers.forgot_password.store');
             });
 
             /**
              * Reset password routes.
              */
             Route::controller(ResetPasswordController::class)->prefix('reset-password')->group(function () {
-                Route::get('{token}',  'create')->name('shop.customer.reset_password.create');
+                Route::get('{token}',  'create')->name('shop.customers.reset_password.create');
 
-                Route::post('', 'store')->name('shop.customer.reset_password.store');
+                Route::post('', 'store')->name('shop.customers.reset_password.store');
             });
 
             /**
@@ -57,17 +57,17 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
              */
             Route::controller(RegistrationController::class)->group(function () {
                 Route::prefix('register')->group(function () {
-                    Route::get('', 'show')->name('shop.customer.register.index');
+                    Route::get('', 'show')->name('shop.customers.register.index');
     
-                    Route::post('', 'create')->name('shop.customer.register.create');
+                    Route::post('', 'create')->name('shop.customers.register.create');
                 });
 
                 /**
                  * Customer verification routes.
                  */
-                Route::get('verify-account/{token}', 'verifyAccount')->name('shop.customer.verify');
+                Route::get('verify-account/{token}', 'verifyAccount')->name('shop.customers.verify');
 
-                Route::get('resend/verification/{email}', 'resendVerificationEmail')->name('shop.customer.resend.verification_email');
+                Route::get('resend/verification/{email}', 'resendVerificationEmail')->name('shop.customers.resend.verification_email');
             });
 
             /**
