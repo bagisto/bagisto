@@ -18,8 +18,11 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('position')->default(0);
             $table->string('image')->nullable();
+            $table->string('category_banner')->nullable();
             $table->boolean('status')->default(0);
+            $table->string('display_mode')->default('products_and_description')->nullable();
             NestedSet::columns($table);
+            $table->json('additional')->nullable();
             $table->timestamps();
         });
     }
