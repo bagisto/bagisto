@@ -9,8 +9,7 @@
     template as much as possible.
 --}}
 @php
-    $categories = $categoryRepository
-        ->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+    $categories = $categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 @endphp
 
 <div
@@ -35,40 +34,102 @@
 
     <div class="flex items-center gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px] pb-[11px]">
         <form class="flex items-center max-w-[445px]">
-            <label for="organic-search" class="sr-only">Search</label>
+            <label
+                for="organic-search"
+                class="sr-only"
+            >
+                {{-- @translations --}}
+                @lang('Search')
+            </label>
+
             <div class="relative w-full">
                 <div
                     class="icon-search text-[22px] absolute left-[12px] top-[12px] flex items-center pointer-events-none">
                 </div>
 
-                <input type="text"
+                <input
+                    type="text"
                     class="bg-[#F5F5F5] rounded-lg block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
-                    placeholder="Search for products" required>
+                    placeholder="Search for products"
+                    required
+                >
 
-                <button type="button"
-                    class="icon-camera text-[22px] absolute top-[12px] right-[12px] flex items-center pr-3">
+                <button
+                    type="button"
+                    class="icon-camera text-[22px] absolute top-[12px] right-[12px] flex items-center pr-3"
+                >
                 </button>
             </div>
         </form>
 
-        {{-- Will remove it. --}}
-        @auth('customer')
-            <form id="customerLogout" action="{{ route('shop.customer.session.destroy') }}" method="POST">
-                @csrf
+        {{-- =============== Will remove it. =============== --}}
+            @auth('customer')
+                <form
+                    method="POST"
+                    action="{{ route('shop.customer.session.destroy') }}"
+                    id="customerLogout"
+                >
+                    @csrf
 
-                @method('DELETE')
-            </form>
+                    @method('DELETE')
+                </form>
 
-            <a
-                class="border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
-                href="{{ route('shop.customer.session.destroy') }}"
-                onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
-                {{ __('shop::app.header.logout') }}
-            </a>
-        @endauth
+                <a
+                    class="border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                    href="{{ route('shop.customer.session.destroy') }}"
+                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
+                >
+                    {{ __('shop::app.header.logout') }}
+                </a>
+            @endauth
+        {{-- =============== Will remove it. =============== --}}
 
-        <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-        <span class="icon-cart text-[24px] cursor-pointer"></span>
-        <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
+        <div>
+            <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
+        </div>
+
+        <div>
+            <span class="icon-cart text-[24px] cursor-pointer"></span>
+        </div>
+
+        <x-shop::dropdown position="bottom-right">
+            <x-slot:toggle>
+                <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
+            </x-slot:toggle>
+
+            <x-slot:content>
+                <div class="grid gap-[10px]">
+                    <p class="text-[20px] font-dmserif">
+                        {{-- @translations --}}
+                        @lang('Welcome Guest')
+                    </p>
+
+                    <p class="text-[14px]">
+                        {{-- @translations --}}
+                        @lang('Manage Cart, Orders & Wishlist')
+                    </p>
+                </div>
+
+                <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+
+                <div class="flex gap-[16px] mt-[25px]">
+                    <a
+                        href="{{ route('shop.customer.session.create') }}"
+                        class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[15px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                    >
+                        {{-- @translations --}}
+                        @lang('Sign In')
+                    </a>
+
+                    <a
+                        href="{{ route('shop.customer.register.create') }}"
+                        class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                    >
+                        {{-- @translations --}}
+                        @lang('Sign Up')
+                    </a>
+                </div>
+            </x-slot:content>
+        </x-shop::dropdown>
     </div>
 </div>
