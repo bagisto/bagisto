@@ -41,19 +41,20 @@ return new class extends Migration
             $table->decimal('tax_total', 12, 4)->default(0)->nullable();
             $table->decimal('base_tax_total', 12, 4)->default(0)->nullable();
 
-            $table->decimal('discount', 12, 4)->default(0)->nullable();
-            $table->decimal('base_discount', 12, 4)->default(0)->nullable();
+            $table->decimal('discount_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('base_discount_amount', 12, 4)->default(0)->nullable();
 
             $table->string('checkout_method')->nullable();
             $table->boolean('is_guest')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
-            $table->dateTime('conversion_time')->nullable();
+            $table->string('applied_cart_rule_ids')->nullable();
 
             $table->integer('customer_id')->unsigned()->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->integer('channel_id')->unsigned();
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
         });
     }
 
