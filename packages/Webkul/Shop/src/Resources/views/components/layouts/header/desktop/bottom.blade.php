@@ -15,6 +15,10 @@
 <div
     class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 pb-[5px] pt-[17px]"
 >
+    {{--
+        This section will provide categories for the first, second, and third levels. If
+        additional levels are required, users can customize them according to their needs.
+    --}}
     <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
         <a
             herf=""
@@ -22,12 +26,44 @@
         >
         </a>
 
-        <div class="flex items-center gap-x-[45px] max-[1180px]:gap-x-[30px]">
+        <div class="flex items-center gap-x-[45px]  max-[1180px]:gap-x-[30px]">
             {{--
-                For active category: `pb-[20px] text-sm border-t-0 border-b-[2px] border-l-0 border-r-0 border-navyBlue`.
+                For active category: `text-sm border-t-0 border-b-[2px] border-l-0 border-r-0 border-navyBlue`.
             --}}
-            @foreach ($categories as $category)
-                <span class="pb-[20px]">{{ $category->name }}</span>
+            @foreach ($categories as $firstLevelCategory)
+                <div class="pt-[8px] pb-[20px] relative group">
+                    <span class="text-sm">
+                        <a href="{{ $firstLevelCategory->url }}">
+                            {{ $firstLevelCategory->name }}
+                        </a>
+                    </span>
+
+                    <div
+                        class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto -left-[35px] w-max absolute top-[54px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3]"
+                    >
+                        <div class="flex aigns gap-x-[70px] justify-between">
+                            <div class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]">
+                                @foreach ($firstLevelCategory->children as $secondLevelCategory)
+                                    <p class="text-navyBlue font-medium">
+                                        <a href="{{ $secondLevelCategory->url }}">
+                                            {{ $secondLevelCategory->name }}
+                                        </a>
+                                    </p>
+
+                                    <ul class="grid grid-cols-[1fr] gap-[12px]">
+                                        @foreach ($secondLevelCategory->children as $thirdLevelCategory)
+                                            <li class="text-[14px] font-medium text-[#7D7D7D]">
+                                                <a href="{{ $thirdLevelCategory->url }}">
+                                                    {{ $thirdLevelCategory->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>
