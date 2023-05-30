@@ -10,6 +10,7 @@ use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\SessionController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 use Webkul\Shop\Http\Controllers\Customer\OrderController;
+use Webkul\Shop\Http\Controllers\Customer\CompareController;
 use Webkul\Shop\Http\Controllers\Customer\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\ReviewController;
 
@@ -144,6 +145,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     Route::get('wishlist', [WishlistController::class, 'index'])->defaults('_config', [
                         'view' => 'shop::customers.account.wishlist.wishlist',
                     ])->name('shop.customer.wishlist.index');
+
+                    /**
+                     * Compare.
+                     */
+                    Route::get('', [CompareController::class, 'index'])->name('shop.customers.account.compare.index');
 
                     /**
                      * Orders.

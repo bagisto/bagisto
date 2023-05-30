@@ -72,6 +72,11 @@ return [
                 'payment-error'       => 'Payment has not been done for this download.',
             ],
 
+            'compare'  => [
+                'compare-similar-items'   => 'Compare Similar items',
+                'delete-all' => 'Delete All',
+            ],
+
             'title'   => 'Profile',
             'save'    => 'Save',
         ],

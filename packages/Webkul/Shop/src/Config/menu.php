@@ -46,7 +46,7 @@ return [
     ], [
         'key'   => 'account.compare',
         'name'  => 'shop::app.customer.compare.text',
-        'route' => 'shop.customers.account.orders.index',
+        'route' => 'shop.customers.account.compare.index',
         'icon'  => '',
         'sort'  => 7,
     ],
