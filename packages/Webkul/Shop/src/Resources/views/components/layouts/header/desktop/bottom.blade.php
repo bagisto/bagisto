@@ -158,7 +158,7 @@
                     </a>
 
                     <a
-                        href="{{ route('shop.customer.register.create') }}"
+                        href="{{ route('shop.customers.register.index') }}"
                         class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
                     >
                         {{-- @translations --}}
