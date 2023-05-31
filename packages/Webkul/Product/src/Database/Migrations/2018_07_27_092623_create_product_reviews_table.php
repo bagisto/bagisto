@@ -20,10 +20,10 @@ return new class extends Migration
             $table->integer('rating');
             $table->text('comment')->nullable();
             $table->string('status');
-            $table->timestamps();
             $table->integer('product_id')->unsigned();
             $table->integer('customer_id')->nullable();
-            
+            $table->timestamps();
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }

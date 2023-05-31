@@ -17,10 +17,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('sku')->unique();
             $table->string('type');
-            $table->timestamps();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('attribute_family_id')->unsigned()->nullable();
             $table->json('additional')->nullable();
+            $table->timestamps();
 
             $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
         });
@@ -64,7 +64,7 @@ return new class extends Migration
         Schema::create('product_cross_sells', function (Blueprint $table) {
             $table->integer('parent_id')->unsigned();
             $table->integer('child_id')->unsigned();
-            
+
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('child_id')->references('id')->on('products')->onDelete('cascade');
         });
