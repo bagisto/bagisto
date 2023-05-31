@@ -76,8 +76,8 @@
                     </div>
 
                     <div class="block">
-                        <a 
-                            href="{{ route('shop.customers.forgot_password.create') }}" 
+                        <a
+                            href="{{ route('shop.customers.forgot_password.create') }}"
                             class="text-[16px] cursor-pointer text-black max-sm:text-[12px]"
                         >
                             <span>
@@ -102,31 +102,31 @@
                     </button>
 
                     {!! view_render_event('bagisto.shop.customers.login.after') !!}
-                
+
                     <div class="flex gap-[15px] flex-wrap">
-                        <a 
-                            href="" 
+                        <a
+                            href=""
                             class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
                             aria-label="Facebook"
                         >
                         </a>
-                        
-                        <a 
-                            href="" 
+
+                        <a
+                            href=""
                             class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
                             aria-label="Twitter"
                         >
                         </a>
-                        
-                        <a 
-                            href="" 
+
+                        <a
+                            href=""
                             class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
                             aria-label="Pintrest"
                         >
                         </a>
-                        
-                        <a 
-                            href="" 
+
+                        <a
+                            href=""
                             class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
                             aria-label="LinkedIn"
                         ></a>
@@ -136,9 +136,9 @@
 
             <p class="text-[#7D7D7D] font-medium mt-[20px]">
                 @lang('shop::app.customer.login-form.new-customer')
-                
-                <a 
-                    class="text-navyBlue" 
+
+                <a
+                    class="text-navyBlue"
                     href="{{ route('shop.customers.register.index') }}"
                 >
                     @lang('shop::app.customer.login-form.create-your-account')
@@ -157,7 +157,7 @@
         <script>
             function switchVisibility() {
                 let passwordField = document.getElementById("password");
-            
+
                 if (passwordField.type === "password") {
                     passwordField.type = "text";
                 } else {

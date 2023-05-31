@@ -97,7 +97,7 @@
                 <li>
                     <span class="dropdown-toggle">
                         <i class="icon account-icon"></i>
-                      
+
                         <span class="name">{{ __('shop::app.header.account') }}</span>
 
                         <i class="icon arrow-down-icon"></i>
@@ -117,16 +117,16 @@
                                 </div>
 
                                 <div class="button-group">
-                                    <a 
-                                        class="btn btn-primary btn-md" 
+                                    <a
+                                        class="btn btn-primary btn-md"
                                         href="{{ route('shop.customer.session.index') }}" style="color: #ffffff"
                                     >
                                         {{ __('shop::app.header.sign-in') }}
                                     </a>
 
-                                    <a 
-                                        class="btn btn-primary btn-md" 
-                                        href="{{ route('shop.customers.register.index') }}" 
+                                    <a
+                                        class="btn btn-primary btn-md"
+                                        href="{{ route('shop.customers.register.index') }}"
                                         style="float: right; color: #ffffff"
                                     >
                                         {{ __('shop::app.header.sign-up') }}

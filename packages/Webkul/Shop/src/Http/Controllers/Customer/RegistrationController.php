@@ -37,7 +37,7 @@ class RegistrationController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+    public function index()
     {
         return view('shop::customers.sign-up');
     }
@@ -47,7 +47,7 @@ class RegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(RegistrationRequest $registrationRequest)
+    public function store(RegistrationRequest $registrationRequest)
     {
         $data = array_merge(request()->input(), [
             'password'                  => bcrypt(request()->input('password')),
