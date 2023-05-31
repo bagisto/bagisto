@@ -23,14 +23,15 @@ return new class extends Migration
             $table->string('country');
             $table->string('state');
             $table->string('city');
-            $table->integer('postcode');
+            $table->string('postcode');
             $table->string('phone');
             $table->string('address_type');
             $table->integer('cart_id')->nullable()->unsigned();
-            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
             $table->integer('customer_id')->nullable()->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

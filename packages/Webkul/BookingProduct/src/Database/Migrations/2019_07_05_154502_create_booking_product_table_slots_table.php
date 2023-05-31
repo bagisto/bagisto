@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('booking_product_table_slots', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('booking_product_id')->unsigned();
             $table->string('price_type');
             $table->integer('guest_limit')->default(0);
             $table->integer('duration');
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->boolean('same_slot_all_days')->nullable();
             $table->json('slots')->nullable();
 
-            $table->integer('booking_product_id')->unsigned();
             $table->foreign('booking_product_id')->references('id')->on('booking_products')->onDelete('cascade');
         });
     }
