@@ -28,22 +28,16 @@ return new class extends Migration
             $table->text('meta_title')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
-
             $table->decimal('price', 12, 4)->nullable();
             $table->decimal('special_price', 12, 4)->nullable();
             $table->date('special_price_from')->nullable();
             $table->date('special_price_to')->nullable();
-
             $table->decimal('weight', 12, 4)->nullable();
-
             $table->datetime('created_at')->nullable();
-
             $table->string('locale')->nullable();
             $table->string('channel')->nullable();
-
             $table->integer('attribute_family_id')->unsigned()->nullable();
             $table->integer('product_id')->unsigned();
-
             $table->datetime('updated_at')->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->boolean('visible_individually')->nullable();
