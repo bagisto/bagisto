@@ -22,10 +22,10 @@ return new class extends Migration
             $table->integer('type')->unsigned()->default(0);
             $table->boolean('is_primary')->default(0);
             $table->date('expired_at')->nullable();
-
             $table->integer('cart_rule_id')->unsigned();
-            $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('cart_rule_id')->references('id')->on('cart_rules')->onDelete('cascade');
         });
     }
 

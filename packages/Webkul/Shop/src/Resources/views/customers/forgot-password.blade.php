@@ -14,7 +14,7 @@
             {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
 
             <x-shop::form
-                :action="route('shop.customer.forgot_password.store')"
+                :action="route('shop.customers.forgot_password.store')"
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
 

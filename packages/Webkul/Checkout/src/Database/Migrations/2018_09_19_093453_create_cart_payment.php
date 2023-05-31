@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('method');
             $table->string('method_title')->nullable();
             $table->integer('cart_id')->nullable()->unsigned();
-            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
         });
     }
 

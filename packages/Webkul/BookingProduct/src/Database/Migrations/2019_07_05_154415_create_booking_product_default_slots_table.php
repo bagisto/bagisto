@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('booking_product_default_slots', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('booking_product_id')->unsigned();
             $table->string('booking_type');
             $table->integer('duration')->nullable();
             $table->integer('break_time')->nullable();
             $table->json('slots')->nullable();
 
-            $table->integer('booking_product_id')->unsigned();
             $table->foreign('booking_product_id')->references('id')->on('booking_products')->onDelete('cascade');
         });
     }
