@@ -16,20 +16,22 @@ return new class extends Migration
         Schema::create('channels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('name');
-            $table->text('description')->nullable();
             $table->string('timezone')->nullable();
             $table->string('theme')->nullable();
             $table->string('hostname')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
-            $table->text('home_page_content')->nullable();
-            $table->text('footer_content')->nullable();
+            $table->json('home_seo')->nullable();
+            $table->boolean('is_maintenance_on')->default(0);
+            $table->text('allowed_ips')->nullable();
+            $table->integer('root_category_id')->nullable()->unsigned();
             $table->integer('default_locale_id')->unsigned();
             $table->integer('base_currency_id')->unsigned();
-            $table->foreign('default_locale_id')->references('id')->on('locales')->onDelete('cascade');
-            $table->foreign('base_currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('root_category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('default_locale_id')->references('id')->on('locales');
+            $table->foreign('base_currency_id')->references('id')->on('currencies');
         });
 
         Schema::create('channel_locales', function (Blueprint $table) {

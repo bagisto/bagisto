@@ -34,6 +34,8 @@ return new class extends Migration
             $table->integer('order_item_id')->unsigned();
             $table->foreign('order_item_id')->references('id')->on('order_items')->onDelete('cascade');
 
+            $table->integer('download_canceled')->default(0);
+
             $table->timestamps();
         });
     }

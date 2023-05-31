@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('attribute_family_id')->unsigned()->nullable();
             $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
+            $table->json('additional')->nullable();
         });
 
         Schema::table('products', function (Blueprint $table) {

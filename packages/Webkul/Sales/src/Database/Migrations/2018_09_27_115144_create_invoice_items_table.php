@@ -37,6 +37,10 @@ return new class extends Migration
             $table->integer('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('invoice_items')->onDelete('cascade');
 
+            $table->decimal('discount_percent', 12, 4)->default(0)->nullable();
+            $table->decimal('discount_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('base_discount_amount', 12, 4)->default(0)->nullable();
+
             $table->json('additional')->nullable();
             $table->timestamps();
         });

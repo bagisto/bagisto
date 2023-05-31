@@ -28,6 +28,7 @@ return new class extends Migration
             $table->date('moved_to_cart')->nullable();
             $table->boolean('shared')->nullable();
             $table->date('time_of_moving')->nullable();
+            $table->json('additional')->nullable();
             $table->timestamps();
         });
     }

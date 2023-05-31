@@ -16,13 +16,9 @@ return new class extends Migration
         Schema::create('tax_categories', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('channel_id')->unsigned();
-
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
-
             $table->string('code')->unique();
 
-            $table->string('name')->unique();
+            $table->string('name');
 
             $table->longtext('description');
 

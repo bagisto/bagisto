@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('increment_id');
+            $table->string('increment_id')->unique();
             $table->string('status')->nullable();
             $table->string('channel_name')->nullable();
 
@@ -72,6 +72,8 @@ return new class extends Migration
             $table->decimal('base_shipping_invoiced', 12, 4)->default(0)->nullable();
             $table->decimal('shipping_refunded', 12, 4)->default(0)->nullable();
             $table->decimal('base_shipping_refunded', 12, 4)->default(0)->nullable();
+            $table->decimal('shipping_discount_amount', 12, 4)->default(0)->nullable();
+            $table->decimal('base_shipping_discount_amount', 12, 4)->default(0)->nullable();
 
             $table->integer('customer_id')->unsigned()->nullable();
             $table->string('customer_type')->nullable();
@@ -79,6 +81,8 @@ return new class extends Migration
             $table->integer('channel_id')->unsigned()->nullable();
             $table->string('channel_type')->nullable();
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('set null');
+            $table->integer('cart_id')->nullable();
+            $table->string('applied_cart_rule_ids')->nullable();
             $table->timestamps();
         });
     }

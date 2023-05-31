@@ -41,10 +41,13 @@ return new class extends Migration
             $table->decimal('base_discount_amount', 12, 4)->default(0)->nullable();
 
             $table->integer('order_id')->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->integer('order_address_id')->unsigned()->nullable();
-            $table->foreign('order_address_id')->references('id')->on('order_address')->onDelete('set null');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
+            $table->string('transaction_id')->nullable();
+            $table->integer('reminders')->default(0);
+            $table->timestamp('next_reminder_at')->nullable();
         });
     }
 
