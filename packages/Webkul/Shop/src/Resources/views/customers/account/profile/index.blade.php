@@ -79,7 +79,7 @@
             <div>
                 <p v-text="message">@{{ message }}</p>
 
-                <x-shop::dropdown>
+                <x-shop::dropdown class="112">
                     <x-slot:toggle>
                         <button
                             class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
