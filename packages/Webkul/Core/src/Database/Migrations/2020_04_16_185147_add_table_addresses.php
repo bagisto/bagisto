@@ -2,13 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Models\CartShippingRate;
-use Webkul\Sales\Models\Invoice;
-use Webkul\Sales\Models\OrderAddress;
-use Webkul\Sales\Models\Shipment;
 
 return new class extends Migration
 {
