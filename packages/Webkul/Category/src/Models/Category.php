@@ -225,6 +225,16 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * Get url attribute.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return url($this->translate(core()->getCurrentLocale()->code)->url_path);
+    }
+
+    /**
      * Get image url for the category image.
      *
      * @return string
