@@ -12,7 +12,7 @@
             </p>
 
             <x-shop::form
-                :action="route('shop.customer.register.create')"  
+                :action="route('shop.customers.register.create')"  
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
 

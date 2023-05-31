@@ -77,7 +77,7 @@
 
                     <div class="block">
                         <a 
-                            href="{{ route('shop.customer.forgot_password.create') }}" 
+                            href="{{ route('shop.customers.forgot_password.create') }}" 
                             class="text-[16px] cursor-pointer text-black max-sm:text-[12px]"
                         >
                             <span>
@@ -139,7 +139,7 @@
                 
                 <a 
                     class="text-navyBlue" 
-                    href="{{ route('shop.customer.register.index') }}"
+                    href="{{ route('shop.customers.register.index') }}"
                 >
                     @lang('shop::app.customer.login-form.create-your-account')
                 </a>

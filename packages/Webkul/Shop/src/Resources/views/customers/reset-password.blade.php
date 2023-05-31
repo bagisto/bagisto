@@ -10,7 +10,7 @@
             {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
             <x-shop::form
-                :action="route('shop.customer.reset_password.store')"
+                :action="route('shop.customers.reset_password.store')"
                 class="rounded mt-[60px] max-sm:mt-[30px]"
             >
                 <x-shop::form.control-group.control
