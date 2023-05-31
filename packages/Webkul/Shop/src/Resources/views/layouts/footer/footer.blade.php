@@ -29,7 +29,7 @@
 
             <div class="list-container">
                 @if(core()->getConfigData('customer.settings.newsletter.subscription'))
-                    <label class="list-heading" for="subscribe-field">{{ __('shop::app.footer.subscribe-newsletter') }}</label>
+                    <label class="list-heading" for="subscribe-field">{{ __('shop::app.components.layouts.footer.subscribe-newsletter') }}</label>
                     <div class="form-container">
                         <form action="{{ route('shop.subscribe') }}">
                             <div class="control-group" :class="[errors.has('subscriber_email') ? 'has-error' : '']">
@@ -49,7 +49,7 @@
                     }
                 ?>
 
-                <label class="list-heading" for="locale-switcher">{{ __('shop::app.footer.locale') }}</label>
+                <label class="list-heading" for="locale-switcher">{{ __('shop::app.components.layouts.footer.locale') }}</label>
                 <div class="form-container">
                     <div class="control-group">
                         <select class="control locale-switcher" id="locale-switcher" onchange="window.location.href = this.value" @if (count(core()->getCurrentChannel()->locales) == 1) disabled="disabled" @endif>
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="currency">
-                    <label class="list-heading" for="currency-switcher">{{ __('shop::app.footer.currency') }}</label>
+                    <label class="list-heading" for="currency-switcher">{{ __('shop::app.components.layouts.footer.currency') }}</label>
                     <div class="form-container">
                         <div class="control-group">
                             <select class="control locale-switcher" id="currency-switcher" onchange="window.location.href = this.value">

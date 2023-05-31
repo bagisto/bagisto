@@ -3,6 +3,65 @@
 return [
     'customers' => [
 
+        'forgot-password' => [
+            'title'                => 'Recover Password',
+            'email'                => 'Email',
+            'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
+            'submit'               => 'Reset Password',
+            'page_title'           => 'Forgot your password ?',
+            'footer'               => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
+        ],
+
+        'reset-password' => [
+            'title'            => 'Reset Password',
+            'email'            => 'Registered Email',
+            'password'         => 'Password',
+            'confirm-password' => 'Confirm Password',
+            'back-link-title'  => 'Back to Sign In',
+            'submit-btn-title' => 'Reset Password',
+            'footer'           => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
+        ],
+        
+        'login-form' => [
+            'page-title'          => 'Customer Login',
+            'form-login-text'     => 'If you have an account, sign in with your email address.',
+            'show-password'       => 'Show Password',
+            'title'               => 'Sign In',
+            'email'               => 'Email',
+            'password'            => 'Password',
+            'forgot_pass'         => 'Forgot Password?',
+            'button_title'        => 'Sign In',
+            'new-customer'        => 'New customer?',
+            'create-your-account' => 'Create your account',
+            'footer'              => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
+            'invalid-creds'       => 'Please check your credentials and try again.',
+            'not-activated'       => 'Your activation seeks admin approval',
+            'verify-first'        => 'Verify your email account first.',
+        ],
+        
+        'signup-form' => [
+            'page-title'                  => 'Become User',
+            'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
+            'sign-in-button'              => 'Sign In',
+            'firstname'                   => 'First Name',
+            'lastname'                    => 'Last Name',
+            'email'                       => 'Email',
+            'password'                    => 'Password',
+            'confirm_pass'                => 'Confirm Password',
+            'subscribe-to-newsletter'     => 'Subscribe to newsletter',
+            'button_title'                => 'Register',
+            'account_exists'              => 'Already have an account ?',
+            'footer'                      => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
+            'failed'                      => 'Error! Can not create your account, pleae try again later.',
+            'success-verify'              => 'Account created successfully, an e-mail has been sent for verification.',
+            'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
+            'success'                     => 'Account created successfully.',
+            'verified'                    => 'Your account has been verified, try to login now.',
+            'verify-failed'               => 'We cannot verify your mail account.',
+            'verification-not-sent'       => 'Error! Problem in sending verification email, please try again later.',
+            'verification-sent'           => 'Verification email sent',
+        ],
+
         'account' => [
 
             'profile'   => [
@@ -72,10 +131,49 @@ return [
                 'payment-error'       => 'Payment has not been done for this download.',
             ],
 
+            'wishlist' => [
+                'page-title'         => 'Wishlist',
+                'title'              => 'Wishlist',
+                'color'              => 'Color',
+                'remove'             => 'Remove',
+                'empty'              => 'No products were added to the wishlist page.',
+                'move-to-cart'       => 'Move To Cart',
+                'profile'            => 'Profile',
+                'removed'            => 'Item Successfully Removed From Wishlist',
+                'remove-fail'        => 'Item Cannot Be Removed From Wishlist',
+                'moved'              => 'Item successfully moved To cart',
+                'missing_options'    => 'Options are missing for this product.',
+                'product-removed'    => 'Product Is No More Available As Removed By Admin',
+                'remove-all-success' => 'All the items from your wishlist have been removed',
+            ],    
+
             'title'   => 'Profile',
             'save'    => 'Save',
         ],
     ],
+
+    'components' => [
+        'layouts' => [
+            'footer' => [
+                'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
+                'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
+                'subscribe-newsletter'   => 'Subscribe Newsletter',
+                'subscribe'              => 'Subscribe',
+                'footer-text'            => '© Copyright 2010 - 2023, Webkul Software (Registered in India). All rights reserved.',
+                'locale'                 => 'Locale',
+                'currency'               => 'Currency',
+                'about-us'               => 'About Us',
+                'customer-service'       => 'Customer Service',
+                'whats-new'              => 'What’s New',
+                'contact-us'             => 'Contact Us',
+                'order-return'           => 'Order and Returns',
+                'payment-policy'         => 'Payment Policy',
+                'shipping-policy'        => 'Shipping Policy',
+                'privacy-cookies-policy' => 'Privacy and Cookies Policy',
+            ],
+        ],
+    ],   
+
 
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
@@ -454,7 +552,6 @@ return [
                 'move-to-cart'         => 'Move To Cart',
                 'error'                => 'Cannot add product to wishlist due to unknown problems, please checkback later',
                 'add'                  => 'Item successfully added to wishlist',
-                'remove'               => 'Item successfully removed from wishlist',
                 'add-wishlist-text'    => 'Add product to wishlist',
                 'remove-wishlist-text' => 'Remove product from wishlist',
                 'moved'                => 'Item successfully moved To cart',
@@ -465,7 +562,6 @@ return [
                 'already'              => 'Item already present in your wishlist',
                 'removed'              => 'Item successfully removed from wishlist',
                 'remove-fail'          => 'Item cannot Be removed from wishlist, Please try again later',
-                'empty'                => 'You do not have any items in your wishlist',
                 'remove-all-success'   => 'All the items from your wishlist have been removed',
                 'save'                 => 'Save',
                 'share'                => 'Share',

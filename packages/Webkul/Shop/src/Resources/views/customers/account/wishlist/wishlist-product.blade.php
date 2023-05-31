@@ -1,67 +1,68 @@
-<div class="account-item-card mt-15 mb-15">
-    <div class="media-info">
+<div class="flex gap-[65px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
+    <div class="flex gap-x-[20px]">
+
         @php
             $image = $item->product->getTypeInstance()->getBaseImage($item);
         @endphp
 
-        <a href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}" title="{{ $item->product->name }}">
-            <img class="media" src="{{ $image['small_image_url'] }}" alt="" />
-        </a>
+        <div>
+            <a href="{{ route('shop.productOrCategory.index', $item->product->url_key) }}">
+                <img 
+                    class="max-w-[110px] max-h-[110px] rounded-[12px]" 
+                    src="{{ $image['small_image_url'] }}" 
+                    alt=""
+                />
+            </a>
+        </div>
 
-        <div class="info">
-            <div class="product-name">
+        <div class="grid gap-y-[10px]">
+            <p class="text-[16px]">
                 {{ $item->product->name }}
+            </p>
 
-                @if (isset($item->additional['attributes']))
-                    <div class="item-options">
-                        @foreach ($item->additional['attributes'] as $attribute)
-                            <b>{{ $attribute['attribute_name'] }} : </b> {{ $attribute['option_label'] }}
-                            </br>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
+            <p class="text-[16px]">
+                @lang('shop::app.customers.account.wishlist.color') 
+                {{ $item->product->color }}
+            </p>
 
-            @if ($visibility ?? false)
-                <div class="mb-2">
-                    <span class="fs16">
-                        {{ __('shop::app.customer.account.wishlist.visibility') }} :
+            <x-shop::form
+                method="DELETE"
+                id="wishlist-{{ $item->id }}" 
+                action="{{ route('shop.customers.account.wishlist.destroy', $item->id) }}" 
+            >
+            </x-shop::form>
 
-                        <span class="badge badge-sm {{ $item->shared ? 'badge-success' : 'badge-danger' }}">
-                            {{ $item->shared ? __('shop::app.customer.account.wishlist.public') : __('shop::app.customer.account.wishlist.private') }}
-                        </span>
-                    </span>
-                </div>
-            @endif
-
-            <span class="stars" style="display: inline">
-                @for ($i = 1; $i <= $reviewHelper->getAverageRating($item->product); $i++)
-                    <span class="icon star-icon"></span>
-                @endfor
-            </span>
+            @auth('customer')
+                <a 
+                    class="text-[16px] text-[#4D7EA8]" 
+                    href="javascript:void(0);"
+                    onclick="document.getElementById('wishlist-{{ $item->id }}').submit();"
+                >
+                    @lang('shop::app.customers.account.wishlist.remove')
+                </a>
+            @endauth
         </div>
     </div>
 
-    <div class="operations">
-        <form id="wishlist-{{ $item->id }}" action="{{ route('shop.customer.wishlist.remove', $item->id) }}" method="POST">
-            @method('DELETE')
+    <p class="text-[18px]">
+        {{ $item->product->price }}
+    </p>
 
-            @csrf
-        </form>
+    <div class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center">
 
-        @auth('customer')
-            <a
-                class="mb-50"
-                href="javascript:void(0);"
-                onclick="document.getElementById('wishlist-{{ $item->id }}').submit();">
-                <span class="icon trash-icon"></span>
-            </a>
-        @endauth
+        <span class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px]"></span>
 
-        <a href="{{ route('shop.customer.wishlist.move', $item->id) }}" class="btn btn-primary btn-md">
-            {{ __('shop::app.customer.account.wishlist.move-to-cart') }}
-        </a>
+        <p>2</p>
+
+        <span class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px]"></span>
     </div>
-</div>
 
-<div class="horizontal-rule mb-10 mt-10"></div>
+    <x-shop::form
+        :action="route('shop.customers.account.wishlist.move_to_cart', $item->id)"
+    >
+        <button class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center">
+            @lang('shop::app.customers.account.wishlist.move-to-cart')
+        </button>
+    </x-shop::form>
+</div>
+           

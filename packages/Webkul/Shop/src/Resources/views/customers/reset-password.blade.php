@@ -4,7 +4,7 @@
             class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
-                @lang('shop::app.customer.reset-password.title')
+                @lang('shop::app.customers.reset-password.title')
             </h1>
 
             {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
@@ -24,7 +24,7 @@
 
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.reset-password.email')
+                        @lang('shop::app.customers.reset-password.email')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -46,7 +46,7 @@
 
                 <x-shop::form.control-group class="mb-6">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.reset-password.password')
+                        @lang('shop::app.customers.reset-password.password')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -68,7 +68,7 @@
 
                 <x-shop::form.control-group class="mb-6">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.reset-password.confirm-password')
+                        @lang('shop::app.customers.reset-password.confirm-password')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -94,7 +94,7 @@
                         class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
                         type="submit"
                     >
-                        @lang('shop::app.customer.reset-password.submit-btn-title')
+                        @lang('shop::app.customers.reset-password.submit-btn-title')
                     </button>
                 </div>
 
@@ -105,7 +105,7 @@
         </div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
-            @lang('shop::app.customer.login-form.footer')
+            @lang('shop::app.customers.reset_password.footer')
         </p>
     </div>
 </x-shop::layouts>
