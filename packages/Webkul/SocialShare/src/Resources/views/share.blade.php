@@ -21,7 +21,7 @@
 @if (core()->getConfigData('catalog.products.social_share.enabled'))
     <div class="bb-social-share">
         <label class="bb-social-share__title">
-            {{ trans('SocialShare::app.share-now') }}
+            @lang('SocialShare::app.share-now')
         </label>
 
         <ul class="bb-social-share__items">
