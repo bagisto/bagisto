@@ -19,7 +19,6 @@
         "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
         "bagisto/laravel-datafaker": "^2.0@alpha",
-        "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "cviebrock/laravel-elasticsearch": "^10.0",
         "diglactic/laravel-breadcrumbs": "^8.0",
@@ -110,7 +109,8 @@
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
-            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src"
+            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src",
+            "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src"
         }
     },
     "autoload-dev": {
