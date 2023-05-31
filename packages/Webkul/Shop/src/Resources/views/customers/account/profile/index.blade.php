@@ -76,7 +76,24 @@
     {{-- sample --}}
     @pushOnce('scripts')
         <script type="text/x-template" id="test-template">
-            <p v-text="message"></p>
+            <div>
+                <p v-text="message">@{{ message }}</p>
+
+                <x-shop::dropdown>
+                    <x-slot:toggle>
+                        <button
+                            class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                        >
+                            Toggle
+                        </button>
+                    </x-slot:toggle>
+
+                    <x-slot:menu>
+                        <x-shop::dropdown.menu.item @click="function1('Message 1')">Test 1</x-shop::dropdown.menu.item>
+                        <x-shop::dropdown.menu.item @click="function2('Message 2')">Test 1</x-shop::dropdown.menu.item>
+                    </x-slot:menu>
+                </x-shop::dropdown>
+            </div>
         </script>
 
         <script type="module">
@@ -88,6 +105,16 @@
                         message: "This is a message from MyComponent",
                     };
                 },
+
+                methods: {
+                    function1(message) {
+                        alert(message);
+                    },
+
+                    function2(message) {
+                        alert(message);
+                    },
+                }
             });
         </script>
     @endpushOnce
