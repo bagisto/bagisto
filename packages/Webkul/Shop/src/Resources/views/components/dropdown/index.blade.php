@@ -1,6 +1,6 @@
 @props(['position' => 'bottom-left'])
 
-<v-dropdown position="{{ $position }}">
+<v-dropdown position="{{ $position }}" {{ $attributes->merge(['class' => 'relative']) }}>
     @isset($toggle)
         <template v-slot:toggle>
             {{ $toggle }}
@@ -26,7 +26,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-dropdown-template">
-        <div {{ $attributes->merge(['class' => 'relative']) }}>
+        <div>
             <div
                 ref="toggleBlock"
                 @click="toggle()"
