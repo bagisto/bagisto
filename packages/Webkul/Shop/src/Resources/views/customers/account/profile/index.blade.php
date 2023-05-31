@@ -77,7 +77,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="test-template">
             <div>
-                <p v-text="message">@{{ message }}</p>
+                <p v-text="message"></p>
 
                 <x-shop::dropdown>
                     <x-slot:toggle>
