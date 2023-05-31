@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('refund_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('sku')->nullable();
@@ -37,16 +38,15 @@ return new class extends Migration
             $table->string('product_type')->nullable();
 
             $table->integer('order_item_id')->unsigned()->nullable();
-            $table->foreign('order_item_id')->references('id')->on('order_items')->onDelete('cascade');
-
             $table->integer('refund_id')->unsigned()->nullable();
-            $table->foreign('refund_id')->references('id')->on('refunds')->onDelete('cascade');
-
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('refund_items')->onDelete('cascade');
 
             $table->json('additional')->nullable();
+            
             $table->timestamps();
+
+            $table->foreign('parent_id')->references('id')->on('refund_items')->onDelete('cascade');
+            $table->foreign('order_item_id')->references('id')->on('order_items')->onDelete('cascade');
+            $table->foreign('refund_id')->references('id')->on('refunds')->onDelete('cascade');
         });
     }
 

@@ -15,13 +15,9 @@ return new class extends Migration
     {
         Schema::create('tax_categories', function (Blueprint $table) {
             $table->increments('id');
-
             $table->string('code')->unique();
-
             $table->string('name');
-
             $table->longtext('description');
-
             $table->timestamps();
         });
     }

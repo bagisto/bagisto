@@ -48,8 +48,10 @@ return new class extends Migration
             $table->decimal('base_discount_amount', 12, 4)->default(0)->nullable();
 
             $table->integer('order_id')->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

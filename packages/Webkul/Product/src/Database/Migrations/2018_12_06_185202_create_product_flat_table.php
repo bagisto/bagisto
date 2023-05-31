@@ -42,16 +42,16 @@ return new class extends Migration
             $table->string('channel')->nullable();
 
             $table->integer('attribute_family_id')->unsigned()->nullable();
-            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->datetime('updated_at')->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->boolean('visible_individually')->nullable();
 
-            $table->foreign('parent_id')->references('id')->on('product_flat')->onDelete('cascade');
             $table->unique(['product_id', 'channel', 'locale'], 'product_flat_unique_index');
+            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('product_flat')->onDelete('cascade');
         });
     }
 

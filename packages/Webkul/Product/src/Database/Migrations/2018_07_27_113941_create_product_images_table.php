@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('path');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('position')->default(0)->unsigned();
+            
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

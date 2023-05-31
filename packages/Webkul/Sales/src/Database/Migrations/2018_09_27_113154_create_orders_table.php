@@ -77,13 +77,17 @@ return new class extends Migration
 
             $table->integer('customer_id')->unsigned()->nullable();
             $table->string('customer_type')->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('set null');
+
             $table->integer('channel_id')->unsigned()->nullable();
             $table->string('channel_type')->nullable();
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('set null');
+
             $table->integer('cart_id')->nullable();
             $table->string('applied_cart_rule_ids')->nullable();
+
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('set null');
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('set null');
         });
     }
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('product_id')->unsigned();
             $table->integer('customer_id')->nullable();
+            
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }

@@ -25,7 +25,6 @@ return new class extends Migration
             $table->unsignedInteger('customer_id')->nullable()->comment('null if guest checkout');
             $table->unsignedInteger('cart_id')->nullable()->comment('only for cart_addresses');
             $table->unsignedInteger('order_id')->nullable()->comment('only for order_addresses');
-
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender')->nullable();
@@ -38,14 +37,9 @@ return new class extends Migration
             $table->string('postcode')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-
             $table->string('vat_id')->nullable();
-            $table->boolean('default_address')
-                ->default(false)
-                ->comment('only for customer_addresses');
-
+            $table->boolean('default_address')->default(false)->comment('only for customer_addresses');
             $table->json('additional')->nullable();
-
             $table->timestamps();
 
             $table->foreign(['customer_id'])->references('id')->on('customers')->onDelete('cascade');

@@ -26,9 +26,10 @@ return new class extends Migration
             $table->json('json_value')->nullable();
             $table->integer('product_id')->unsigned();
             $table->integer('attribute_id')->unsigned();
+
+            $table->unique(['channel', 'locale', 'attribute_id', 'product_id'], 'chanel_locale_attribute_value_index_unique');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->unique(['channel', 'locale', 'attribute_id', 'product_id'], 'chanel_locale_attribute_value_index_unique');
         });
     }
 

@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->integer('customer_group_id')->unsigned()->nullable();
-            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('set null');
             $table->boolean('subscribed_to_news_letter')->default(0);
             $table->boolean('is_verified')->default(0);
             $table->tinyInteger('is_suspended')->unsigned()->default(0);
@@ -34,6 +33,8 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('set null');
         });
     }
 

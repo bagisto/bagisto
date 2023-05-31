@@ -26,14 +26,17 @@ return new class extends Migration
 
             $table->integer('customer_id')->unsigned()->nullable();
             $table->string('customer_type')->nullable();
+
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('order_address_id')->unsigned()->nullable();
 
-            $table->string('inventory_source_name')->nullable();
             $table->integer('inventory_source_id')->unsigned()->nullable();
-            $table->foreign('inventory_source_id')->references('id')->on('inventory_sources')->onDelete('set null');
+            $table->string('inventory_source_name')->nullable();
+            
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('inventory_source_id')->references('id')->on('inventory_sources')->onDelete('set null');
         });
     }
 

@@ -23,8 +23,9 @@ return new class extends Migration
             $table->json('data')->nullable();
             $table->integer('invoice_id')->unsigned();
             $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

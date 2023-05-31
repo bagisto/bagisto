@@ -58,12 +58,12 @@ return new class extends Migration
             $table->integer('product_id')->unsigned()->nullable();
             $table->string('product_type')->nullable();
             $table->integer('order_id')->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('order_items')->onDelete('cascade');
-
             $table->json('additional')->nullable();
             $table->timestamps();
+            
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('order_items')->onDelete('cascade');
         });
     }
 
