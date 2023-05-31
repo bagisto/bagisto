@@ -42,7 +42,41 @@
                             </div>
                         @endif
 
-                        <span class="icon-more text-[24px] text-[#7D7D7D]"></span>
+                        <x-shop::dropdown>
+                            <x-slot:toggle>
+                                <span class="icon-more text-[24px] text-[#7D7D7D] cursor-pointer"></span>
+                            </x-slot:toggle>
+
+                            <x-slot:menu>
+                                <x-shop::dropdown.menu.item>
+                                    <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
+                                        @lang('shop::app.customers.account.addresses.edit')
+                                    </a>    
+                                </x-shop::dropdown.menu.item>
+
+                                <x-shop::dropdown.menu.item>
+                                    <x-shop::form
+                                        :action="route('shop.customers.account.addresses.delete', $address->id)"
+                                        method="DELETE"
+                                    >
+                                        <button>
+                                            @lang('shop::app.customers.account.addresses.delete')
+                                        </button>
+                                    </x-shop::form>
+                                </x-shop::dropdown.menu.item>
+
+                                <x-shop::dropdown.menu.item>
+                                    <x-shop::form
+                                        :action="route('shop.customers.account.addresses.update.default', $address->id)"
+                                        method="PATCH"
+                                    >
+                                        <button>
+                                            @lang('shop::app.customers.account.addresses.set-as-default')
+                                        </button>
+                                    </x-shop::form>
+                                </x-shop::dropdown.menu.item>
+                            </x-slot:menu>
+                        </x-shop::dropdown>
                     </div>
                 </div>
 
