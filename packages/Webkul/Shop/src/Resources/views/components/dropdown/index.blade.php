@@ -1,41 +1,54 @@
-@props([
-    'position' => 'bottom-left',
-])
+@props(['position' => 'bottom-left'])
 
-<vee-dropdown position="{{ $position }}"></vee-dropdown>
+<v-dropdown position="{{ $position }}">
+    @isset($toggle)
+        <template v-slot:toggle>
+            {{ $toggle }}
+        </template>
+    @endisset
+
+    @isset($menu)
+        <template v-slot:menu>
+            <ul {{ $menu->attributes->merge(['class' => 'py-[15px]']) }}>
+                {{ $menu }}
+            </ul>
+        </template>
+    @endisset
+
+    @isset($content)
+        <template v-slot:content>
+            <div {{ $content->attributes->merge(['class' => 'p-[20px]']) }}>
+                {{ $content }}
+            </div>
+        </template>
+    @endisset
+</v-dropdown>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="vee-dropdown-template">
-        <div
-            {{ $attributes->merge(['class' => 'relative']) }}
-            {{ $attributes }}
-        >
-            @isset($toggle)
-                <div
-                    ref="toggleBlock"
-                    {{ $toggle->attributes }}
-                    @click="toggle()"
-                >
-                    {{ $toggle }}
-                </div>
-            @endisset
+    <script type="text/x-template" id="v-dropdown-template">
+        <div {{ $attributes->merge(['class' => 'relative']) }}>
+            <div
+                ref="toggleBlock"
+                @click="toggle()"
+            >
+                <slot name="toggle">Toggle</slot>
+            </div>
 
-            @isset($content)
-                <div
-                    :class="[hiddenClass]"
-                    {{ $content->attributes->merge(['class' => 'absolute p-[20px] bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[12px] w-max']) }}
-                    {{ $content->attributes }}
-                    :style="positionStyles"
-                >
-                    {{ $content }}
-                </div>
-            @endisset
+            <div
+                class="absolute bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px] w-max"
+                :class="[hiddenClass]"
+                :style="positionStyles"
+            >
+                <slot name="menu"></slot>
+
+                <slot name="content"></slot>
+            </div>
         </div>
     </script>
 
     <script type="module">
-        app.component('vee-dropdown', {
-            template: '#vee-dropdown-template',
+        app.component('v-dropdown', {
+            template: '#v-dropdown-template',
 
             props: {
                 position: String,
@@ -44,6 +57,7 @@
             data() {
                 return {
                     toggleBlockHeight: 0,
+                    
                     isActive: false,
                 };
             },
