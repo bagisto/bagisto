@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -24,8 +24,8 @@ return new class extends Migration
         DB::table('product_flat')
             ->join('products', 'product_flat.product_id', '=', 'products.id')
             ->update([
-                'product_flat.type' => DB::raw('products.type'),
-                'product_flat.attribute_family_id' => DB::raw('products.attribute_family_id')
+                'product_flat.type'                => DB::raw(DB::getTablePrefix() . 'products.type'),
+                'product_flat.attribute_family_id' => DB::raw(DB::getTablePrefix() . 'products.attribute_family_id'),
             ]);
     }
 
