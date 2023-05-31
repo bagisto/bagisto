@@ -1,14 +1,14 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\BookingProduct;
+namespace Webkul\BookingProduct\Http\Controllers\Shop;
 
 use Webkul\BookingProduct\Helpers\AppointmentSlot as AppointmentSlotHelper;
 use Webkul\BookingProduct\Helpers\DefaultSlot as DefaultSlotHelper;
 use Webkul\BookingProduct\Helpers\EventTicket as EventTicketHelper;
 use Webkul\BookingProduct\Helpers\RentalSlot as RentalSlotHelper;
 use Webkul\BookingProduct\Helpers\TableSlot as TableSlotHelper;
+use Webkul\BookingProduct\Http\Controllers\Controller;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\Shop\Http\Controllers\Controller;
 
 class BookingProductController extends Controller
 {
