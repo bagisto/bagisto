@@ -77,6 +77,25 @@ return [
         ],
     ],
 
+    'components' => [
+
+        'layouts' => [
+
+            'header' => [
+
+                'desktop' => [
+                    'shopping-cart'   => 'Shopping Cart',
+                    'offer-on-orders' => 'Get Up To 30% OFF on your 1st order',
+                    'empty-cart'      => 'Your cart is empty',
+                    'return-to-shop'  => 'Return To Shop',
+                ],
+
+            ],
+
+        ],
+
+    ],
+
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
         'cancel-error'       => ':name can not be canceled.',

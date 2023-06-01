@@ -68,7 +68,44 @@
         @endauth
 
         <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-        <span class="icon-cart text-[24px] cursor-pointer"></span>
+
+        <x-shop::dropdown position="bottom-right">
+            <x-slot:toggle>
+                <span class="icon-cart text-[24px] cursor-pointer"></span>
+            </x-slot:toggle>
+
+            <x-slot:content>
+                <div class="grid gap-y-[10px]">
+                    <div class="flex justify-between items-center">
+
+                        <p class="text-[26px] font-medium">
+                            @lang('shop::app.components.layouts.header.desktop.shopping-cart')    
+                        </p>
+
+                        <span class="icon-cancel text-[30px] cursor-pointer"></span>
+                    </div>
+
+                    <p class="text-[16px]">
+                        @lang('shop::app.components.layouts.header.desktop.offer-on-orders')
+                    </p>
+                </div>
+    
+                <div class="bottom-[0] left-[50%]">
+                    <div class="grid gap-y-[20px] place-items-center">
+                        <img class="" src="../images/thank-you.png" alt="" title="">
+
+                        <p class="text-[20px]">
+                            @lang('shop::app.components.layouts.header.desktop.empty-cart')
+                        </p>
+
+                        <div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
+                            @lang('shop::app.components.layouts.header.desktop.return-to-shop')
+                        </div>
+                    </div>
+                </div>
+            </x-slot:content>
+        </x-shop::dropdown>
+
         <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
     </div>
 </div>
