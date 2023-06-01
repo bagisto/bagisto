@@ -4,11 +4,11 @@
             class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
-                @lang('shop::app.customer.login-form.page-title')
+                @lang('shop::app.customers.login-form.page-title')
             </h1>
 
             <p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]">
-                @lang('shop::app.customer.login-form.form-login-text')
+                @lang('shop::app.customers.login-form.form-login-text')
             </p>
 
             {!! view_render_event('bagisto.shop.customers.login.before') !!}
@@ -19,7 +19,7 @@
             >
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.login-form.email')
+                        @lang('shop::app.customers.login-form.email')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -40,7 +40,7 @@
 
                 <x-shop::form.control-group class="mb-6">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.login-form.password')
+                        @lang('shop::app.customers.login-form.password')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -69,7 +69,7 @@
                                 onclick="switchVisibility()"
                             >
                                 <span class="select-none  text-[16] text-[#7d7d7d] max-sm:text-[12px]">
-                                    @lang('shop::app.customer.login-form.show-password')
+                                    @lang('shop::app.customers.login-form.show-password')
                                 </span>
                             </x-shop::form.control-group.control>
                         </x-shop::form.control-group>
@@ -81,7 +81,7 @@
                             class="text-[16px] cursor-pointer text-black max-sm:text-[12px]"
                         >
                             <span>
-                                @lang('shop::app.customer.login-form.forgot_pass')
+                                @lang('shop::app.customers.login-form.forgot_pass')
                             </span>
                         </a>
                     </div>
@@ -98,7 +98,7 @@
                         class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
                         type="submit"
                     >
-                        @lang('shop::app.customer.login-form.button_title')
+                        @lang('shop::app.customers.login-form.button_title')
                     </button>
 
                     {!! view_render_event('bagisto.shop.customers.login.after') !!}
@@ -135,19 +135,19 @@
             </x-shop::form>
 
             <p class="text-[#7D7D7D] font-medium mt-[20px]">
-                @lang('shop::app.customer.login-form.new-customer')
-
-                <a
-                    class="text-navyBlue"
-                    href="{{ route('shop.customers.register.index') }}"
+                @lang('shop::app.customers.login-form.new-customer')
+                
+                <a 
+                    class="text-navyBlue" 
+                    href="{{ route('shop.customer.register.index') }}"
                 >
-                    @lang('shop::app.customer.login-form.create-your-account')
+                    @lang('shop::app.customers.login-form.create-your-account')
                 </a>
             </p>
         </div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
-            @lang('shop::app.customer.login-form.footer')
+            @lang('shop::app.customers.login-form.footer')
         </p>
     </div>
 

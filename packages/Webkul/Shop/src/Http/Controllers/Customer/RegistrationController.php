@@ -65,7 +65,7 @@ class RegistrationController extends Controller
         Event::dispatch('customer.registration.after', $customer);
 
         if (! $customer) {
-            session()->flash('error', trans('shop::app.customer.signup-form.failed'));
+            session()->flash('error', trans('shop::app.customers.signup-form.failed'));
 
             return redirect()->back();
         }
@@ -102,11 +102,11 @@ class RegistrationController extends Controller
                     Mail::queue(new VerificationEmail(['email' => $data['email'], 'token' => $data['token']]));
                 }
 
-                session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
+                session()->flash('success', trans('shop::app.customers.signup-form.success-verify'));
             } catch (\Exception $e) {
                 report($e);
 
-                session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
+                session()->flash('info', trans('shop::app.customers.signup-form.success-verify-email-unsent'));
             }
         } else {
             try {
@@ -118,13 +118,13 @@ class RegistrationController extends Controller
                     Mail::queue(new RegistrationEmail(request()->all(), 'admin'));
                 }
 
-                session()->flash('success', trans('shop::app.customer.signup-form.success-verify'));
+                session()->flash('success', trans('shop::app.customers.signup-form.success-verify'));
             } catch (\Exception $e) {
                 report($e);
 
-                session()->flash('info', trans('shop::app.customer.signup-form.success-verify-email-unsent'));
+                session()->flash('info', trans('shop::app.customers.signup-form.success-verify-email-unsent'));
             }
-            session()->flash('success', trans('shop::app.customer.signup-form.success'));
+            session()->flash('success', trans('shop::app.customers.signup-form.success'));
         }
 
         return redirect()->route('shop.customer.session.index');
@@ -145,9 +145,9 @@ class RegistrationController extends Controller
 
             $this->customerRepository->syncNewRegisteredCustomerInformation($customer);
 
-            session()->flash('success', trans('shop::app.customer.signup-form.verified'));
+            session()->flash('success', trans('shop::app.customers.signup-form.verified'));
         } else {
-            session()->flash('warning', trans('shop::app.customer.signup-form.verify-failed'));
+            session()->flash('warning', trans('shop::app.customers.signup-form.verify-failed'));
         }
 
         return redirect()->route('shop.customer.session.index');
@@ -183,12 +183,12 @@ class RegistrationController extends Controller
         } catch (\Exception $e) {
             report($e);
 
-            session()->flash('error', trans('shop::app.customer.signup-form.verification-not-sent'));
+            session()->flash('error', trans('shop::app.customers.signup-form.verification-not-sent'));
 
             return redirect()->back();
         }
 
-        session()->flash('success', trans('shop::app.customer.signup-form.verification-sent'));
+        session()->flash('success', trans('shop::app.customers.signup-form.verification-sent'));
 
         return redirect()->back();
     }

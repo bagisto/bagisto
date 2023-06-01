@@ -83,24 +83,18 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                 ])->name('shop.customer.session.destroy');
 
                 /**
-                 * Wishlist.
-                 */
-                Route::post('wishlist/add/{id}', [WishlistController::class, 'add'])->name('shop.customer.wishlist.add');
+                * Wishlist.
+                */
+                Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customers.account.wishlist.index');
 
-                Route::post('wishlist/share', [WishlistController::class, 'share'])->name('shop.customer.wishlist.share');
+                Route::post('wishlist', [WishlistController::class, 'store'])->name('shop.customers.account.wishlist.store');
 
-                Route::get('wishlist/shared', [WishlistController::class, 'shared'])
-                    ->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.wishlist-shared',
-                    ])
-                    ->withoutMiddleware('customer')
-                    ->name('shop.customer.wishlist.shared');
+                Route::post('wishlist/{id}/move-to-cart', [WishlistController::class, 'moveToCart'])->name('shop.customers.account.wishlist.move_to_cart');
+                
+                Route::delete('wishlist/mass-destroy', [WishlistController::class, 'massDestroy'])->name('shop.customers.account.wishlist.mass_destroy');
 
-                Route::delete('wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('shop.customer.wishlist.remove');
+                Route::delete('wishlist/{id}', [WishlistController::class, 'destroy'])->name('shop.customers.account.wishlist.destroy');
 
-                Route::delete('wishlist/remove-all', [WishlistController::class, 'removeAll'])->name('shop.customer.wishlist.remove_all');
-
-                Route::get('wishlist/move/{id}', [WishlistController::class, 'move'])->name('shop.customer.wishlist.move');
 
                 /**
                  * Customer account. All the below routes are related to
@@ -147,13 +141,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
                         Route::delete('delete/{id}', 'destroy')->name('shop.customers.account.addresses.delete');
                     });
-
-                    /**
-                     * Wishlist.
-                     */
-                    Route::get('wishlist', [WishlistController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.wishlist',
-                    ])->name('shop.customer.wishlist.index');
 
                     /**
                      * Orders.
