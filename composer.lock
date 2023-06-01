@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b52cddd51c83b4116fa117da0a2e815e",
+    "content-hash": "f352d6f5de8e8113ea34bbec16f41bad",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -12843,7 +12843,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "bagisto/laravel-datafaker": 15,
         "codeception/codeception": 20,
