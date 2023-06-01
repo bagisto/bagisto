@@ -171,52 +171,55 @@
                     <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
 
                     <div class="grid gap-[4px] mt-[10px] pb-[10px]"> 
-                        <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">
-                            <a href="{{ route('shop.customers.account.profile.index') }}">
+                            <a 
+                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                href="{{ route('shop.customers.account.profile.index') }}"
+                            >
                                 @lang('shop::app.components.layouts.header.profile')
                             </a>
-                        </p> 
-
-                        <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">
-                            <a href="{{ route('shop.customers.account.orders.index') }}">
+                
+                            <a 
+                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                href="{{ route('shop.customers.account.orders.index') }}"
+                            >
                                 @lang('shop::app.components.layouts.header.orders')
                             </a>
-                        </p> 
 
                         @if ($showWishlist)
-                            <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"> 
-                                <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                                    @lang('shop::app.components.layouts.header.wishlist') 
-                                </a>
-                            </p>
+                            <a 
+                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                href="{{ route('shop.customers.account.wishlist.index') }}"
+                            >
+                                @lang('shop::app.components.layouts.header.wishlist') 
+                            </a>
                         @endif     
 
                         @if ($showCompare)
-                            <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">
-                                <a href="{{ route('shop::customers.account.compare.index') }}">
+                            <a 
+                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                href="{{ route('shop::customers.account.compare.index') }}"
+                            >
                                 @lang('shop::app.components.layouts.header.compare') 
-                                </a>
-                            </p> 
+                            </a>
                         @endif
 
                         {{--Customers logout--}}
-                        <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">   
-                            @auth('customer')
-                                <x-shop::form 
-                                    method="DELETE"
-                                    action="{{ route('shop.customer.session.destroy') }}"
-                                    id="customerLogout"
-                                >
-                                </x-shop::form>
-            
-                                <a
-                                    href="{{ route('shop.customer.session.destroy') }}"
-                                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
-                                >
-                                    @lang('shop::app.components.layouts.header.logout')
-                                </a>
-                            @endauth
-                        </p> 
+                        @auth('customer')
+                            <x-shop::form 
+                                method="DELETE"
+                                action="{{ route('shop.customer.session.destroy') }}"
+                                id="customerLogout"
+                            >
+                            </x-shop::form>
+        
+                            <a
+                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                href="{{ route('shop.customer.session.destroy') }}"
+                                onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
+                            >
+                                @lang('shop::app.components.layouts.header.logout')
+                            </a>
+                        @endauth
                     </div> 
                 </x-slot:content>
             @endauth
