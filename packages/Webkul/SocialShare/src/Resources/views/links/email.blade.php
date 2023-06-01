@@ -1,13 +1,7 @@
 @php
-    /**
-     * @var Webkul\Product\Models\ProductFlat $product
-     * @var string $message
-     */
     $url = route('shop.productOrCategory.index', $product->url_key);
 
-    if (empty($message)) {
-        $message = $product->name;
-    }
+    $message = empty($message) ? $product->name : $message;
 
     $email_url = 'mailto:your@email.com?subject=' . $message . '&body=' . $message . ' ' . $url;
 @endphp
@@ -17,7 +11,10 @@
 @push('scripts')
     <script type="text/x-template" id="email-share-link">
         <li class="bb-social-share__item bb-social--email">
-            <a href="{{ $email_url }}" target="_blank">
+            <a 
+                href="{{ $email_url }}" 
+                target="_blank"
+            >
                 @include('social_share::icons.email')
             </a>
         </li>
