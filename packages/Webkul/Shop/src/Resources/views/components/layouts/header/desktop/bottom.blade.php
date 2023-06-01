@@ -10,6 +10,11 @@
 --}}
 @php
     $categories = $categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+
+    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+
+    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+
 @endphp
 
 <div
@@ -99,13 +104,14 @@
         </form>
 
         {{-- =============== Will remove it. =============== --}}
-
-        <div>
-            <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-            </a>
-        </div>
-
+        @if($showWishlist)
+            <div>
+                <a href="{{ route('shop.customers.account.wishlist.index') }}">
+                    <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
+                </a>
+            </div>
+        @endif
+        
         <div>
             <span class="icon-cart text-[24px] cursor-pointer"></span>
         </div>
@@ -177,17 +183,21 @@
                             </a>
                         </p> 
 
-                        <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"> 
-                            <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                                @lang('shop::app.components.layouts.header.wishlist') 
-                            </a>
-                        </p> 
+                        @if ($showWishlist)
+                            <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"> 
+                                <a href="{{ route('shop.customers.account.wishlist.index') }}">
+                                    @lang('shop::app.components.layouts.header.wishlist') 
+                                </a>
+                            </p>
+                        @endif     
 
-                        <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">
-                            <a href="{{ route('shop::customers.account.compare.index') }}">
-                               @lang('shop::app.components.layouts.header.compare') 
-                            </a>
-                        </p> 
+                        @if ($showCompare)
+                            <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">
+                                <a href="{{ route('shop::customers.account.compare.index') }}">
+                                @lang('shop::app.components.layouts.header.compare') 
+                                </a>
+                            </p> 
+                        @endif
 
                         {{--Customers logout--}}
                         <p class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100">   
