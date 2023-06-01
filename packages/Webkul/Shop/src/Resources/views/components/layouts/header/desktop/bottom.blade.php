@@ -124,9 +124,15 @@
             <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
         </div>
 
-        <div>
-            <span class="icon-cart text-[24px] cursor-pointer"></span>
-        </div>
+        <x-shop::dropdown position="bottom-right">
+            <x-slot:toggle>
+                <mini-cart></mini-cart>
+            </x-slot:toggle>
+
+            <x-slot:content>
+                <x-shop::mini-cart></x-shop::mini-cart>
+            </x-slot:content>
+        </x-shop::dropdown>
 
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>
@@ -169,3 +175,33 @@
         </x-shop::dropdown>
     </div>
 </div>
+
+<script>
+    function closeCart() {
+       document.getElementById('mini-cart').style.display = 'none';
+   }
+</script>
+
+@pushOnce('scripts')
+   <script type="text/x-template" id="mini-cart-template">
+       <div>
+           <span class="icon-cart text-[24px] cursor-pointer" @click="miniCart"></span>  
+       </div>
+   </script>
+
+   <script type="module">
+       app.component("mini-cart", {
+           template: '#mini-cart-template',
+
+           methods: {
+               miniCart(e) {
+                   document.getElementById('mini-cart').style.display = 'block';
+
+                   this.$axios.get(`{{ route('shop.components.mini-cart.index') }}`).then(response => {
+                       console.log(response);
+                   }).catch(error => {});
+               },
+           }
+       });
+   </script>
+@endpushOnce

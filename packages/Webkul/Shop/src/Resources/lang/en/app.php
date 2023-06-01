@@ -155,7 +155,9 @@ return [
     ],
 
     'components' => [
+
         'layouts' => [
+
             'footer' => [
                 'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
                 'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
@@ -173,8 +175,18 @@ return [
                 'shipping-policy'        => 'Shipping Policy',
                 'privacy-cookies-policy' => 'Privacy and Cookies Policy',
             ],
+
+            'mini-cart'   => [
+                'shopping-cart'   => 'Shopping Cart',
+                'offer-on-orders' => 'Get Up To 30% OFF on your 1st order',
+                'subtotal'        => 'Subtotal',
+                'continue-to-checkout'  => 'Continue to Checkout',
+                'empty-cart'      => 'Your cart is empty',
+                'return-to-shop'  => 'Return To Shop',
+            ],
+
         ],
-    ],   
+    ],
 
 
     'response' => [

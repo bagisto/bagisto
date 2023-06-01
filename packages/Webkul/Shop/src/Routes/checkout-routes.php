@@ -8,9 +8,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Cart routes.
      */
-    Route::get('checkout/cart', [CartController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::checkout.cart.index',
-    ])->name('shop.checkout.cart.index');
+    Route::get('checkout/cart', [CartController::class, 'index'])->name('shop.components.mini-cart.index');
 
     Route::post('checkout/cart/add/{id}', [CartController::class, 'add'])->defaults('_config', [
         'redirect' => 'shop.checkout.cart.index',
