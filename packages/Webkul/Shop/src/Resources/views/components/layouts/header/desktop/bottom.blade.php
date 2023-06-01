@@ -129,8 +129,8 @@
                 <mini-cart></mini-cart>
             </x-slot:toggle>
 
-            <x-slot:content>
-                <x-shop::mini-cart></x-shop::mini-cart>
+            <x-slot:content>                
+                <x-shop::mini-cart v-for="cartProduct in miniCart"></x-shop::mini-cart>
             </x-slot:content>
         </x-shop::dropdown>
 
@@ -178,7 +178,7 @@
 
 <script>
     function closeCart() {
-       document.getElementById('mini-cart').style.display = 'none';
+       document.getElementById('mini-cart').parentElement.parentElement.style.display = 'none';
    }
 </script>
 
@@ -195,10 +195,9 @@
 
            methods: {
                miniCart(e) {
-                   document.getElementById('mini-cart').style.display = 'block';
-
+                   document.getElementById('mini-cart').parentElement.parentElement.style.display = 'block';
                    this.$axios.get(`{{ route('shop.components.mini-cart.index') }}`).then(response => {
-                       console.log(response);
+                       this.miniCart = response.data;
                    }).catch(error => {});
                },
            }
