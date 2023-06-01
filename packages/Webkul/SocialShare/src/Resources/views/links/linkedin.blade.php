@@ -14,7 +14,6 @@
 @push('scripts')
     <script type="text/x-template" id="linkedin-share-link">
         <li class="bb-social-share__item bb-social--linkedin">
-            
             <a 
                 href="#" 
                 @click="openSharePopup"
