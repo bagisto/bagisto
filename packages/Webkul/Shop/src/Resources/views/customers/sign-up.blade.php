@@ -1,4 +1,8 @@
-<x-shop::layouts>
+<x-shop::layouts
+    :has-header="false"
+    :has-feature="false"
+    :has-footer="false"
+>
 	<div class="container mt-20 max-1180:px-[20px]">
 		<div
 			class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
