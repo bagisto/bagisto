@@ -116,8 +116,8 @@
                         delete this.filters.applied[filter];
                     }
 
-                    for(let key in this.filters.applied) {
-                        if (key != 'page') {
+                    for (let key in this.filters.applied) {
+                        if (key == filter && key != 'page') {
                             this.filters.applied[filter] = this.filters.applied[key].join(',');
                         }
                     }

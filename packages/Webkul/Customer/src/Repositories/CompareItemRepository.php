@@ -3,6 +3,7 @@
 namespace Webkul\Customer\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Contracts\CompareItem;
 
 class CompareItemRepository extends Repository
 {
@@ -13,6 +14,6 @@ class CompareItemRepository extends Repository
      */
     function model(): string
     {
-        return 'Webkul\Customer\Contracts\CompareItem';
+        return CompareItem::class;
     }
 }

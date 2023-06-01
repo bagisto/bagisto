@@ -59,7 +59,7 @@
                         },
 
                         applied: {
-                            sort: "{{ request()->query('sort') ?? (core()->getConfigData('catalog.products.storefront.sort_by') ?? 'price-desc') }}",
+                            sort: "{{ (core()->getConfigData('catalog.products.storefront.sort_by') ?? 'price-desc') }}",
 
                             limit: "{{ request()->query('limit') ?? 12 }}",
 

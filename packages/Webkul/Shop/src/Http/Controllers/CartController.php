@@ -68,6 +68,8 @@ class CartController extends Controller
         try {
             $productId = request()->input('product_id');
 
+            Cart::deactivateCurrentCartIfBuyNowIsActive();
+
             $cart = Cart::addProduct($productId, request()->all());
     
             if (
@@ -88,7 +90,7 @@ class CartController extends Controller
                 }
 
                 return response()->json([
-                    'message'  => trans('shop::app.component.products.item-add-to-cart')
+                    'message'  => trans('shop::app.components.products.item-add-to-cart')
                 ]);
             }
         } catch (\Exception $exception) {

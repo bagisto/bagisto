@@ -33,18 +33,18 @@ class CompareController extends Controller
         ]);
 
         if (! $compareProduct) {
-            $this->compareItemRepository->create([
-                'customer_id'  => $customerId,
-                'product_id'   => $productId,
-            ]);
-
             return response()->json([
-                'message' => trans('shop::app.component.products.compare-add'),
-            ]);
-        } else {
-            return response()->json([
-                'message' => trans('shop::app.component.products.already-added'),
+                'message' => trans('shop::app.components.products.already-added'),
             ]);
         }
+        
+        $this->compareItemRepository->create([
+            'customer_id'  => $customerId,
+            'product_id'   => $productId,
+        ]);
+
+        return response()->json([
+            'message' => trans('shop::app.components.products.compare-add'),
+        ]);
     }
 }

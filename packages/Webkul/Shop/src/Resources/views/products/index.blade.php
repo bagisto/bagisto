@@ -53,16 +53,16 @@
 
             methods: {
                 setFilters(sort, filters) {
-                    // console.log(filters);
                     if (sort == 'filter') {
-                        this.filters.toolbar = filters
+                        this.filters.filter = filters
                     } else if (sort == 'toolbar') {
                         filters = filters.sort.split('-');
-                        this.filters.filter['sort'] = filters[0];
-                        this.filters.filter['order'] = filters[1]
+                        this.filters.toolbar['sort'] = filters[0];
+                        this.filters.toolbar['order'] = filters[1]
                     }
 
                     this.params = { ...this.filters.filter, ...this.filters.toolbar };
+                    this.params['category_id'] = @json($category->id);
 
                     // For GET parameters in URL
                     window.history.pushState({}, "", "?" + this.jsonToString());
@@ -71,9 +71,6 @@
                 },
 
                 getProducts(params) {
-                    params['category_id'] = @json($category->id);
-                    // console.log(params)
-
                     this.$axios.get("{{ route('shop.category_products.get') }}", { params })
                         .then(response => {
                             this.products = response.data.data
