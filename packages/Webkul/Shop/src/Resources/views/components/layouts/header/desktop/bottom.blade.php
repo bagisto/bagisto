@@ -103,7 +103,6 @@
             </div>
         </form>
 
-        {{-- =============== Will remove it. =============== --}}
         @if($showWishlist)
             <div>
                 <a href="{{ route('shop.customers.account.wishlist.index') }}">
