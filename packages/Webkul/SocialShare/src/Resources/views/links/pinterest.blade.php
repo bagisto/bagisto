@@ -15,7 +15,10 @@
 @push('scripts')
     <script type="text/x-template" id="pinterest-share-link">
         <li class="bb-social-share__item bb-social--pinterest">
-            <a href="#" @click="openSharePopup">
+            <a 
+                href="#" 
+                @click="openSharePopup"
+            >
                 @include('social_share::icons.pinterest')
             </a>
         </li>
