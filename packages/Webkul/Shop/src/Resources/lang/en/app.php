@@ -156,6 +156,24 @@ return [
 
     'components' => [
         'layouts' => [
+            'header' => [
+                'title'         => 'Account',
+                'welcome'       => 'Welcome',
+                'welcome-guest' => 'Welcome Guest',
+                'dropdown-text' => 'Manage Cart, Orders & Wishlist',
+                'sign-in'       => 'Sign In',
+                'sign-up'       => 'Sign Up',
+                'account'       => 'Account',
+                'cart'          => 'Cart',
+                'profile'       => 'Profile',
+                'wishlist'      => 'Wishlist',
+                'compare'       => 'Compare',
+                'orders'        => 'Orders',
+                'cart'          => 'Cart',
+                'logout'        => 'Logout',
+                'search-text'   => 'Search products here',
+            ],
+
             'footer' => [
                 'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
                 'subscribe-stay-touch'   => 'Subscribe to stay in touch.',
