@@ -8,7 +8,6 @@
         },
         "concat_space": {
             "spacing": "one"
-        },
-        "no_superfluous_phpdoc_tags": false
+        }
     }
 }
