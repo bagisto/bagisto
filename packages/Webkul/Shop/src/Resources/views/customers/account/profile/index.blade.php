@@ -88,10 +88,19 @@
                         </button>
                     </x-slot:toggle>
 
-                    <x-slot:menu>
-                        <x-shop::dropdown.menu.item @click="function1('Message 1')">Test 1</x-shop::dropdown.menu.item>
-                        <x-shop::dropdown.menu.item @click="function2('Message 2')">Test 1</x-shop::dropdown.menu.item>
-                    </x-slot:menu>
+                    <x-slot:content class="p-0">
+                        <div class="grid gap-[10px] p-[20px] pb-0 border-bottom-[1px]">
+                            <p class="text-[20px] font-dmserif">Welcome’ Jhon</p>
+                            <p class="text-[14px]">Manage Cart, Orders &amp; Wishlist</p>
+                        </div>
+
+                        <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+
+                        <x-slot:menu>
+                            <x-shop::dropdown.menu.item @click="function1('Message 1')">Test 1</x-shop::dropdown.menu.item>
+                            <x-shop::dropdown.menu.item @click="function2('Message 2')">Test 1</x-shop::dropdown.menu.item>
+                        </x-slot:menu>
+                    </x-slot:content>
                 </x-shop::dropdown>
             </div>
         </script>
