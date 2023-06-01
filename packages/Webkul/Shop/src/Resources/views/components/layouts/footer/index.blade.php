@@ -9,11 +9,11 @@
         @if(core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-[10px]">
                 <p class="text-[30px] italic max-w-[288px] leading-[45px] text-navyBlue">
-                    @lang('shop::app.footer.newsletter-text')
+                    @lang('shop::app.components.layouts.footer.newsletter-text')
                 </p>
 
                 <p class="text-[12px]">
-                    @lang('shop::app.footer.subscribe-stay-touch')
+                    @lang('shop::app.components.layouts.footer.subscribe-stay-touch')
                 </p>
 
                 <x-shop::form
@@ -30,7 +30,7 @@
                         class="bg-[#F1EADF] w-[420px] max-w-full placeholder:text-black border-[2px] border-[#E9DECC] rounded-[12px] block px-[20px] py-[20px] text-gray-900 text-xs font-medium pr-[110px] max-1060:w-full"
                         rules="required|email"
                         label="Email"
-                        placeholder="email"
+                        placeholder="email@example.com"
                     >
                     </x-shop::form.control-group.control>
 
@@ -43,7 +43,7 @@
                             type="submit"
                             class="w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium absolute top-[8px] right-[8px] flex items-center"
                         >
-                            @lang('shop::app.subscription.subscribe')
+                            @lang('shop::app.components.layouts.footer.subscribe')
                         </button>
                     </div>
                 </x-shop::form>
@@ -53,7 +53,7 @@
 
     <div class="flex justify-between  px-[60px] py-[13px] bg-[#F1EADF]">
         <p class="text-[14px] text-[#7D7D7D]">
-            @lang('shop::app.footer.footer-text')
+            @lang('shop::app.components.layouts.footer.footer-text')
         </p>
     </div>
 </footer>

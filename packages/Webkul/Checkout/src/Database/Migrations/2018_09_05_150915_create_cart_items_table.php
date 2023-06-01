@@ -23,28 +23,22 @@ return new class extends Migration
             $table->decimal('weight', 12, 4)->default(0);
             $table->decimal('total_weight', 12, 4)->default(0);
             $table->decimal('base_total_weight', 12, 4)->default(0);
-
             $table->decimal('price', 12, 4)->default(1);
             $table->decimal('base_price', 12, 4)->default(0);
             $table->decimal('custom_price', 12, 4)->nullable();
-
             $table->decimal('total', 12, 4)->default(0);
             $table->decimal('base_total', 12, 4)->default(0);
-
             $table->decimal('tax_percent', 12, 4)->default(0)->nullable();
             $table->decimal('tax_amount', 12, 4)->default(0)->nullable();
             $table->decimal('base_tax_amount', 12, 4)->default(0)->nullable();
-
             $table->decimal('discount_percent', 12, 4)->default(0);
             $table->decimal('discount_amount', 12, 4)->default(0);
             $table->decimal('base_discount_amount', 12, 4)->default(0);
-
-            $table->json('additional')->nullable();
-
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('product_id')->unsigned();
             $table->integer('cart_id')->unsigned();
             $table->integer('tax_category_id')->unsigned()->nullable();
+            $table->json('additional')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('cart_items')->onDelete('cascade');

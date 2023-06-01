@@ -4,11 +4,11 @@
 			class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >
 			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
-                @lang('shop::app.customer.signup-form.page-title')
+                @lang('shop::app.customers.signup-form.page-title')
             </h1>
 
-			<p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]">
-                @lang('shop::app.customer.signup-form.form-signup-text')
+			<p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]"> 
+                @lang('shop::app.customers.signup-form.form-signup-text')
             </p>
 
             <x-shop::form
@@ -20,7 +20,7 @@
 
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.signup-form.firstname')
+                        @lang('shop::app.customers.signup-form.firstname')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -43,7 +43,7 @@
 
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.signup-form.lastname')
+                        @lang('shop::app.customers.signup-form.lastname')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -66,7 +66,7 @@
 
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.signup-form.email')
+                        @lang('shop::app.customers.signup-form.email')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -89,7 +89,7 @@
 
                 <x-shop::form.control-group class="mb-6">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.signup-form.password')
+                        @lang('shop::app.customers.signup-form.password')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -113,7 +113,7 @@
 
 				<x-shop::form.control-group class="mb-6">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.signup-form.confirm_pass')
+                        @lang('shop::app.customers.signup-form.confirm_pass')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -149,8 +149,8 @@
                                 >
                                 <span
                                     class="select-none  text-[16] text-navyBlue max-sm:text-[12px]"
-                                >
-                                    @lang('shop::app.customer.signup-form.subscribe-to-newsletter')
+                                > 
+                                    @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
                                 </span>
                                 </x-shop::form.control-group.control>
                             </x-shop::form.control-group>
@@ -164,7 +164,7 @@
 						class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
 						type="submit"
                     >
-                        @lang('shop::app.customer.signup-form.button_title')
+                        @lang('shop::app.customers.signup-form.button_title')
                     </button>
 
 					<div class="flex gap-[15px] flex-wrap">
@@ -198,12 +198,12 @@
             </x-shop::form>
 
 			<p class="text-[#7D7D7D] font-medium mt-[20px]">
-                @lang('shop::app.customer.signup-text.account_exists')
-
-                <a class="text-navyBlue"
+                @lang('shop::app.customers.signup-form.account_exists')
+                
+                <a class="text-navyBlue" 
                     href="{{ route('shop.customer.session.index') }}"
                 >
-                    @lang('shop::app.customer.signup-text.title')
+                    @lang('shop::app.customers.signup-form.sign-in-button')
                 </a>
             </p>
 		</div>

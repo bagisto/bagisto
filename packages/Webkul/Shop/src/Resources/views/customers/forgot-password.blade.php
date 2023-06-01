@@ -4,11 +4,11 @@
             class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >
             <h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
-                @lang('shop::app.customer.forgot-password.title')
+                @lang('shop::app.customers.forgot-password.title')
             </h1>
 
             <p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]">
-                @lang('shop::app.customer.forgot-password.forgot-password-text')
+                @lang('shop::app.customers.forgot-password.forgot-password-text')
             </p>
 
             {!! view_render_event('bagisto.shop.customers.forget_password.before') !!}
@@ -22,7 +22,7 @@
 
                 <x-shop::form.control-group class="mb-4">
                     <x-shop::form.control-group.label>
-                        @lang('shop::app.customer.login-form.email')
+                        @lang('shop::app.customers.login-form.email')
                     </x-shop::form.control-group.label>
 
                     <x-shop::form.control-group.control
@@ -54,7 +54,7 @@
                         class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
                         type="submit"
                     >
-                        @lang('shop::app.customer.forgot-password.submit')
+                        @lang('shop::app.customers.forgot-password.submit')
                     </button>
                 </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
-            @lang('shop::app.customer.login-form.footer')
+            @lang('shop::app.customers.forgot-password.footer')
         </p>
     </div>
 

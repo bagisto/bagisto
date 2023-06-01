@@ -17,9 +17,11 @@ return new class extends Migration
             $table->increments('id');
             $table->string('sku')->unique();
             $table->string('type');
-            $table->timestamps();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('attribute_family_id')->unsigned()->nullable();
+            $table->json('additional')->nullable();
+            $table->timestamps();
+
             $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
         });
 
@@ -30,6 +32,7 @@ return new class extends Migration
         Schema::create('product_categories', function (Blueprint $table) {
             $table->integer('product_id')->unsigned();
             $table->integer('category_id')->unsigned();
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
@@ -37,6 +40,7 @@ return new class extends Migration
         Schema::create('product_relations', function (Blueprint $table) {
             $table->integer('parent_id')->unsigned();
             $table->integer('child_id')->unsigned();
+
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('child_id')->references('id')->on('products')->onDelete('cascade');
         });
@@ -44,6 +48,7 @@ return new class extends Migration
         Schema::create('product_super_attributes', function (Blueprint $table) {
             $table->integer('product_id')->unsigned();
             $table->integer('attribute_id')->unsigned();
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('restrict');
         });
@@ -51,6 +56,7 @@ return new class extends Migration
         Schema::create('product_up_sells', function (Blueprint $table) {
             $table->integer('parent_id')->unsigned();
             $table->integer('child_id')->unsigned();
+
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('child_id')->references('id')->on('products')->onDelete('cascade');
         });
@@ -58,6 +64,7 @@ return new class extends Migration
         Schema::create('product_cross_sells', function (Blueprint $table) {
             $table->integer('parent_id')->unsigned();
             $table->integer('child_id')->unsigned();
+
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('child_id')->references('id')->on('products')->onDelete('cascade');
         });
