@@ -16,7 +16,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
     Route::controller(CategoryController::class)->group(function () {
         Route::get('categories/{id}/attributes', 'getAttributes')
-            ->name('shop.categories.filterable_attributes');
+            ->name('shop.categories.attributes');
 
         Route::get('categories/{id}/maximum-price', 'getProductMaximumPrice')
             ->name('shop.categories.maximum-price');

@@ -87,7 +87,7 @@
 
             methods: {
                 getFilters() {
-                    this.$axios.get('{{ route("shop.categories.filterable_attributes", $category->id) }}')
+                    this.$axios.get('{{ route("shop.categories.attributes", $category->id) }}')
                         .then((response) => {
                             response.data.filter_attributes.forEach((val, index) => {
                                 this.filters.available[index] = {
