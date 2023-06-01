@@ -10,7 +10,10 @@
 @push('scripts')
     <script type="text/x-template" id="twitter-share-link">
         <li class="bb-social-share__item bb-social--twitter">
-            <a href="#" @click="openSharePopup">
+            <a 
+                href="#" 
+                @click="openSharePopup"
+            >
                 @include('social_share::icons.twitter')
             </a>
         </li>
