@@ -4,6 +4,7 @@
 .php_cs.cache
 .vscode
 .vagrant
+*.hot
 /stubs
 /data
 /docker-compose-collection

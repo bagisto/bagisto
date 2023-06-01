@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Tree;
+use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
-use Webkul\Shop\Http\Middleware\RedirectIfNotCustomer;
 use Webkul\Shop\Http\Middleware\Theme;
 
 class ShopServiceProvider extends ServiceProvider
@@ -24,6 +24,8 @@ class ShopServiceProvider extends ServiceProvider
     {
         /* loaders */
         Route::middleware('web')->group(__DIR__ . '/../Routes/web.php');
+        Route::middleware('web')->group(__DIR__ . '/../Routes/api.php');
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'shop');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'shop');
@@ -31,7 +33,7 @@ class ShopServiceProvider extends ServiceProvider
         /* aliases */
         $router->aliasMiddleware('currency', Currency::class);
         $router->aliasMiddleware('locale', Locale::class);
-        $router->aliasMiddleware('customer', RedirectIfNotCustomer::class);
+        $router->aliasMiddleware('customer', AuthenticateCustomer::class);
         $router->aliasMiddleware('theme', Theme::class);
 
         /* View Composers */

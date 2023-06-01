@@ -1,83 +1,85 @@
-@inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 {!! view_render_event('bagisto.shop.products.list.toolbar.before') !!}
 
-<div class="top-toolbar mb-35">
-
-    <div class="page-info">
-        <span>
-            {{ __('shop::app.products.pager-info', ['showing' => $products->firstItem() . '-' . $products->lastItem(), 'total' => $products->total()]) }}
-        </span>
-
-        <span class="sort-filter">
-            <i class="icon sort-icon" id="sort" ></i>
-            <i class="icon filter-icon" id="filter"></i>
-        </span>
-    </div>
-
-    <div class="pager">
-
-        <div class="view-mode">
-            @if ($toolbarHelper->isModeActive('grid'))
-                <span class="grid-view">
-                    <i class="icon grid-view-icon"></i>
-                </span>
-            @else
-                <a href="{{ $toolbarHelper->getModeUrl('grid') }}" class="grid-view" aria-label="Grid">
-                    <i class="icon grid-view-icon"></i>
-                </a>
-            @endif
-
-            @if ($toolbarHelper->isModeActive('list'))
-                <span class="list-view">
-                    <i class="icon list-view-icon"></i>
-                </span>
-            @else
-                <a href="{{ $toolbarHelper->getModeUrl('list') }}" class="list-view" aria-label="list">
-                    <i class="icon list-view-icon"></i>
-                </a>
-            @endif
-        </div>
-
-        <div class="sorter">
-            <label for="sort-by-toolbar">{{ __('shop::app.products.sort-by') }}</label>
-
-            <select onchange="window.location.href = this.value" id="sort-by-toolbar">
-
-                @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
-
-                    <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
-                        {{ __('shop::app.products.' . $order) }}
-                    </option>
-
-                @endforeach
-
-            </select>
-        </div>
-
-        <div class="limiter">
-            <label for="show-toolbar">{{ __('shop::app.products.show') }}</label>
-
-            <select onchange="window.location.href = this.value" id="show-toolbar">
-
-                @foreach ($toolbarHelper->getAvailableLimits() as $limit)
-
-                    <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
-                        {{ $limit }}
-                    </option>
-
-                @endforeach
-
-            </select>
-        </div>
-
-    </div>
-
-</div>
+<v-toolbar @onFilterApplied='setFilters("toolbar", $event)'></v-toolbar>
 
 {!! view_render_event('bagisto.shop.products.list.toolbar.after') !!}
 
+@pushOnce('scripts')
+    <script type="text/x-template" id='v-toolbar-template'>
+        <div class="flex justify-between max-md:items-center">
+            <div class="text-[16px] font-medium hidden max-md:block">Filters</div>
 
-<div class="responsive-layred-filter mb-20">
-    <layered-navigation></layered-navigation>
-</div>
+            <div>
+                <select 
+                    class="custom-select max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]  max-md:border-0 max-md:outline-none max-md:w-[110px]"
+                    v-model="filters.applied.sort"
+                    @change="apply('sort', $event)"
+                >
+                    <option value=''>Sort by</option>
+                    <option :value="key" v-for="(sort, key) in filters.available.sort">
+                        @{{ sort }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="flex gap-[40px] items-center max-md:hidden">
+                <select 
+                    class="custom-select max-w-[120px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]"
+                    v-model="filters.applied.limit"
+                    @change="apply('limit', $event)"
+                >
+                    <option value=''>Show</option>
+                    <option :value="limit" v-for="limit in filters.available.limit">
+                        @{{ limit }}
+                    </option>
+                </select>
+
+                <div class="flex items-center gap-[20px]">
+                    <span class="icon-listing text-[24px]"></span>
+                    <span class="icon-grid-view text-[24px]"></span>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-toolbar', {
+            template: '#v-toolbar-template',
+
+            data() {
+                return {
+                    filters: {
+                        queryParams: @json(request()->input()),
+
+                        available: {
+                            sort: @json($productHelper->getAvailableOrders()),
+
+                            limit: @json($productHelper->getAvailableLimits()),
+                        },
+
+                        applied: {
+                            sort: "{{ request()->query('sort') ?? (core()->getConfigData('catalog.products.storefront.sort_by') ?? 'price-desc') }}",
+
+                            limit: "{{ request()->query('limit') ?? 12 }}",
+
+                            category_id: @json($category->id)
+                        }
+                    }
+                };
+            },
+
+            mounted() {
+                this.$emit('onFilterApplied', this.filters.applied);
+            },
+
+            methods: {
+                apply(type, value) {
+                    this.filters.applied[type] = value.target.value;
+
+                    this.$emit('onFilterApplied', this.filters.applied);
+                }
+            },
+        });
+    </script>
+@endPushOnce

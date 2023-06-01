@@ -86,14 +86,17 @@ class WishlistController extends Controller
         $product = $this->productRepository->find($productId);
 
         if (! $product) {
-            session()->flash('error', trans('shop::app.customers.account.wishlist.product-removed'));
+            return response()->json([
+                'message'  => trans('customer::app.product-removed')
+            ]);
 
-            return redirect()->back();
         } elseif (
             (! $product->status)
             || (! $product->visible_individually)
         ) {
-            abort(404);
+            return response()->json([
+                'message'  => trans('shop::app.component.products.check-product-visibility')
+            ]);
         }
 
         $data = [
@@ -116,17 +119,18 @@ class WishlistController extends Controller
         if (! $wishlist) {
             $wishlist = $this->wishlistRepository->create($data);
 
-            session()->flash('success', trans('shop::app.customers.account.wishlist.product-removed'));
+            return response()->json([
+                'message'  => trans('customer::app.wishlist.success')
+            ]);
 
-            return redirect()->back();
         } else {
             $this->wishlistRepository->findOneWhere([
                 'product_id' => $data['product_id'],
             ])->delete();
 
-            session()->flash('success', trans('shop::app.customers.account.wishlist.removed'));
-
-            return redirect()->back();
+            return response()->json([
+                'message'  => trans('customer::app.wishlist.removed')
+            ]);
         }
     }
 

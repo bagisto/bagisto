@@ -3,9 +3,8 @@
 namespace Webkul\Shop\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class RedirectIfNotCustomer
+class AuthenticateCustomer
 {
     /**
      * Handle an incoming request.
@@ -17,11 +16,23 @@ class RedirectIfNotCustomer
      */
     public function handle($request, Closure $next, $guard = 'customer')
     {
-        if (! Auth::guard($guard)->check()) {
+        if (! auth()->guard($guard)->check()) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => '',
+                ], 401);
+            }
+
             return redirect()->route('shop.customer.session.index');
         } else {
-            if (! Auth::guard($guard)->user()->status) {
-                Auth::guard($guard)->logout();
+            if (! auth()->guard($guard)->user()->status) {
+                auth()->guard($guard)->logout();
+
+                if ($request->expectsJson()) {
+                    return response()->json([
+                        'message' => trans('shop::app.customer.login-form.not-activated'),
+                    ], 401);
+                }
 
                 session()->flash('warning', trans('shop::app.customer.login-form.not-activated'));
 

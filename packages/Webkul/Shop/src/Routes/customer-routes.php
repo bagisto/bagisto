@@ -87,14 +87,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                 */
                 Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customers.account.wishlist.index');
 
-                Route::post('wishlist', [WishlistController::class, 'store'])->name('shop.customers.account.wishlist.store');
-
                 Route::post('wishlist/{id}/move-to-cart', [WishlistController::class, 'moveToCart'])->name('shop.customers.account.wishlist.move_to_cart');
                 
                 Route::delete('wishlist/mass-destroy', [WishlistController::class, 'massDestroy'])->name('shop.customers.account.wishlist.mass_destroy');
 
                 Route::delete('wishlist/{id}', [WishlistController::class, 'destroy'])->name('shop.customers.account.wishlist.destroy');
-
 
                 /**
                  * Customer account. All the below routes are related to
