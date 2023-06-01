@@ -194,7 +194,7 @@
            template: '#mini-cart-template',
 
            methods: {
-               miniCart(e) {
+               miniCart() {
                    document.getElementById('mini-cart').parentElement.parentElement.style.display = 'block';
                    this.$axios.get(`{{ route('shop.components.mini-cart.index') }}`).then(response => {
                        this.miniCart = response.data;
