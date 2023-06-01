@@ -71,7 +71,7 @@
                 },
 
                 getProducts(params) {
-                    this.$axios.get("{{ route('shop.category_products.get') }}", { params })
+                    this.$axios.get("{{ route('shop.products.index') }}", { params })
                         .then(response => {
                             this.products = response.data.data
                         }).catch(error => {

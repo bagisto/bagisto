@@ -11,7 +11,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
     Route::controller(ProductController::class)->group(function () {
         Route::get('products', 'index')
-            ->name('shop.category_products.get');
+            ->name('shop.products.index');
     });
 
     Route::controller(CategoryController::class)->group(function () {
