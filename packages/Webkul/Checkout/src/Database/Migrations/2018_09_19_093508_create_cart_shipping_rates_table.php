@@ -13,6 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        /**
+         * To Do (@devansh-webkul)
+         *
+         * - On delete cascade for `cart_address_id`.
+         */
         Schema::create('cart_shipping_rates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('carrier');
@@ -27,8 +32,6 @@ return new class extends Migration
             $table->boolean('is_calculate_tax')->default(true);
             $table->integer('cart_address_id')->nullable()->unsigned();
             $table->timestamps();
-
-            $table->foreign('cart_address_id')->references('id')->on('cart_address')->onDelete('cascade');
         });
     }
 

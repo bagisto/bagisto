@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('product_videos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id')->unsigned();
             $table->string('type')->nullable();
             $table->string('path');
-            $table->integer('product_id')->unsigned();
+            $table->integer('position')->default(0)->unsigned();
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
