@@ -7,19 +7,19 @@
         </template>
     @endisset
 
-    @isset($menu)
-        <template v-slot:menu>
-            <ul {{ $menu->attributes->merge(['class' => 'py-[15px]']) }}>
-                {{ $menu }}
-            </ul>
-        </template>
-    @endisset
-
     @isset($content)
         <template v-slot:content>
             <div {{ $content->attributes->merge(['class' => 'p-[20px]']) }}>
                 {{ $content }}
             </div>
+        </template>
+    @endisset
+
+    @isset($menu)
+        <template v-slot:menu>
+            <ul {{ $menu->attributes->merge(['class' => 'py-[15px]']) }}>
+                {{ $menu }}
+            </ul>
         </template>
     @endisset
 </v-dropdown>
@@ -39,9 +39,9 @@
                 :class="[hiddenClass]"
                 :style="positionStyles"
             >
-                <slot name="menu"></slot>
-
                 <slot name="content"></slot>
+
+                <slot name="menu"></slot>
             </div>
         </div>
     </script>
