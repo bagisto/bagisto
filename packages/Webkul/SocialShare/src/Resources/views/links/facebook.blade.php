@@ -9,7 +9,6 @@
 @push('scripts')
     <script type="text/x-template" id="facebook-share-link">
         <li class="bb-social-share__item bb-social--facebook">
-
             <a 
                 href="#" 
                 @click="openSharePopup"
