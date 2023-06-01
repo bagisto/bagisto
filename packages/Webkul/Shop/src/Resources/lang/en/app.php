@@ -82,6 +82,8 @@ return [
             'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
+                'delete'          => 'Delete',
+                'set-as-default'  => 'Set as Default',
                 'add-address'     => 'Add Address',
                 'comapny-name'    => 'Company Name',
                 'vat-id'          => 'Vat ID',
