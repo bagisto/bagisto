@@ -42,7 +42,9 @@ class ProductsCategoriesProxyController extends Controller
             if ($category = $this->categoryRepository->findByPath($slugOrPath)) {
                 $childCategory = $this->categoryRepository->getChildCategories($category->id);
 
-                return view($this->_config['category_view'], compact('category', 'childCategory'));
+                $productHelper  = app('Webkul\Product\Helpers\Toolbar');
+
+                return view($this->_config['category_view'], compact('category', 'childCategory', 'productHelper'));
             }
 
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {

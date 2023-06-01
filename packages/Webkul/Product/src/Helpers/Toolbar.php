@@ -37,35 +37,6 @@ class Toolbar
     }
 
     /**
-     * Returns the sort order url.
-     *
-     * @param  string  $key
-     * @return string
-     */
-    public function getOrderUrl($key)
-    {
-        $keys = explode('-', $key);
-
-        return $this->fullUrlWithQuery([
-            'sort'  => current($keys),
-            'order' => end($keys),
-        ]);
-    }
-
-    /**
-     * Returns the limit url.
-     *
-     * @param  int  $limit
-     * @return string
-     */
-    public function getLimitUrl($limit)
-    {
-        return $this->fullUrlWithQuery([
-            'limit' => $limit,
-        ]);
-    }
-
-    /**
      * Returns the mode url.
      *
      * @param  string  $mode
@@ -76,50 +47,6 @@ class Toolbar
         return $this->fullUrlWithQuery([
             'mode' => $mode,
         ]);
-    }
-
-    /**
-     * Checks if sort order is active.
-     *
-     * @param  string $key
-     * @return bool
-     */
-    public function isOrderCurrent($key)
-    {
-        $params = request()->input();
-        $orderDirection = $params['order'] ?? 'asc';
-
-        if (
-            isset($params['sort'])
-            && $key == $params['sort'] . '-' . $orderDirection
-        ) {
-            return true;
-        } elseif (! isset($params['sort'])) {
-            $sortBy = core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc';
-
-            if ($key == $sortBy) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Checks if limit is active.
-     *
-     * @param  int  $limit
-     * @return bool
-     */
-    public function isLimitCurrent($limit)
-    {
-        $params = request()->input();
-
-        if (isset($params['limit']) && $limit == $params['limit']) {
-            return true;
-        }
-
-        return false;
     }
 
     /**

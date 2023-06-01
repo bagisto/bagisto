@@ -21,8 +21,7 @@ class CategoryController extends Controller
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository
         
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -31,7 +30,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getFilterableAttributes($categoryId)
+    public function getAttributes($categoryId)
     {
         $category = $this->categoryRepository->findOrFail($categoryId);
 
@@ -45,13 +44,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get category product maximum price.
+     * Get product maximum price.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getCategoryProductMaximumPrice($categoryId)
+    public function getProductMaximumPrice($categoryId)
     {
-        $maxPrice = $this->productRepository->getCategoryProductMaximumPrice($categoryId);
+        $maxPrice = $this->productRepository->getMaximumPriceByCategory($categoryId);
 
         return response()->json([
             'max_price' => core()->convertPrice($maxPrice),

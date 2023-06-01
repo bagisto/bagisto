@@ -21,7 +21,7 @@ return [
             'submit-btn-title' => 'Reset Password',
             'footer'           => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
         ],
-        
+
         'login-form' => [
             'page-title'          => 'Customer Login',
             'form-login-text'     => 'If you have an account, sign in with your email address.',
@@ -38,7 +38,7 @@ return [
             'not-activated'       => 'Your activation seeks admin approval',
             'verify-first'        => 'Verify your email account first.',
         ],
-        
+
         'signup-form' => [
             'page-title'                  => 'Become User',
             'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
@@ -147,7 +147,7 @@ return [
                 'missing_options'    => 'Options are missing for this product.',
                 'product-removed'    => 'Product Is No More Available As Removed By Admin',
                 'remove-all-success' => 'All the items from your wishlist have been removed',
-            ],    
+            ],
 
             'title'   => 'Profile',
             'save'    => 'Save',
@@ -192,8 +192,15 @@ return [
                 'privacy-cookies-policy' => 'Privacy and Cookies Policy',
             ],
         ],
-    ],   
 
+        'products'   => [
+            'add-to-cart'              => 'Add To Cart',
+            'already-added'            => 'Item already added to compare list',
+            'item-add-to-cart'         => 'Item added successfully',
+            'check-product-visibility' => 'Check the Product status or visibility',
+            'compare-add'              => 'Item successfully added to compare list',
+        ],
+    ],
 
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
