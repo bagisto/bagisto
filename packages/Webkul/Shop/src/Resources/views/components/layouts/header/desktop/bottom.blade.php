@@ -111,10 +111,6 @@
             </div>
         @endif
 
-        <div>
-            <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-        </div>
-
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>
                 <mini-cart></mini-cart>
