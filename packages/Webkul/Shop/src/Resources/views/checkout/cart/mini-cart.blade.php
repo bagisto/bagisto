@@ -24,7 +24,7 @@
                         {{-- Product Listing in cart --}}
                         <div class="px-[25px] overflow-auto flex-1" v-if="cartProduct > 0">
                             <div class="grid gap-[50px] mt-[35px]">
-                                <v-cart-product {{ $attributes }} :cartProduct="cartProduct"></v-cart-product>
+                                <v-mini-cart {{ $attributes }} :cartProduct="cartProduct"></v-mini-cart>
                             </div>
                         </div>
 
@@ -79,7 +79,7 @@
 </script>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-cart-product-template">        
+    <script type="text/x-template" id="v-mini-cart-template">        
         <div class="flex gap-x-[20px]">
             <div class="">
                 <img 
