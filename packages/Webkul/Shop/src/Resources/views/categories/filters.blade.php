@@ -113,9 +113,7 @@
                 },
 
                 clear() {
-                    this.filters.applied = [];
-
-                    this.applyFilter([]);
+                    this.applyFilter(this.filters.applied = {});
                 }
             }
         });

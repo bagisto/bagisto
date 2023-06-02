@@ -10,7 +10,7 @@
     </div>
 
     {{-- Product Listing --}}
-    <v-category></v-category>
+    <v-category category-id="{{ $category->id }}"></v-category>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-category-template">
@@ -37,10 +37,11 @@
             app.component('v-category', {
                 template: '#v-category-template',
 
+                props: ['categoryId'],
+
                 data() {
                     return {
-                        filters: {
-                        },
+                        filters: {},
 
                         products: [],
                     }
@@ -55,7 +56,7 @@
 
                             queryParams = this.removeJsonEmptyValues(queryParams);
 
-                            let queryString = this.jsonToQueryString(queryParams)
+                            let queryString = this.jsonToQueryString(queryParams);
 
                             if (queryString = this.jsonToQueryString(queryParams)) {
                                 window.history.pushState({}, '', '?' + queryString);
@@ -67,9 +68,9 @@
 
                     getProducts(params) {
                         this.$axios.get("{{ route('shop.products.index') }}", {
-                                params: Object.assign({}, params, {category_id: {{ $category->id }}})
+                                params: Object.assign({}, params, {category_id: this.categoryId})
                             }).then(response => {
-                                this.products = response.data.data
+                                this.products = response.data.data;
                             }).catch(error => {
                                 console.log(error);
                             })
@@ -102,5 +103,5 @@
             });
         </script>
     @endPushOnce
-    
+
 </x-shop::layouts>
