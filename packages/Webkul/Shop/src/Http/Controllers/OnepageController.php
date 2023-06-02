@@ -242,7 +242,7 @@ class OnepageController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        return view('shop::checkout.success' );
+        return view('shop::checkout.success', compact('order'));
     }
 
     /**
