@@ -1,37 +1,32 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\AttributeResource;
 
-class CategoryController extends Controller
+class CategoryController extends APIController
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository
-        
+
     ) {
-        parent::__construct();
     }
 
     /**
-     * Get filterable attributes for category
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Get filterable attributes for category.
      */
-    public function getAttributes($categoryId)
+    public function getAttributes($categoryId): JsonResource
     {
         $category = $this->categoryRepository->findOrFail($categoryId);
 
@@ -44,14 +39,12 @@ class CategoryController extends Controller
 
     /**
      * Get product maximum price.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function getProductMaxPrice($categoryId)
+    public function getProductMaxPrice($categoryId): JsonResource
     {
         $maxPrice = $this->productRepository->getMaxPriceByCategory($categoryId);
 
-        return response()->json([
+        return new JsonResource([
             'max_price' => core()->convertPrice($maxPrice),
         ]);
     }

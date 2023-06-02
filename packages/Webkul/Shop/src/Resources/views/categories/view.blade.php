@@ -2,8 +2,8 @@
     {{-- Hero Image --}}
     <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
         <div>
-            <img 
-                class="rounded-[12px]" 
+            <img
+                class="rounded-[12px]"
                 src='{{ bagisto_asset("images/product-hero.png") }}'
             >
         </div>
@@ -68,12 +68,12 @@
 
                     getProducts(params) {
                         this.$axios.get("{{ route('shop.products.index') }}", {
-                                params: Object.assign({}, params, {category_id: this.categoryId})
+                                params: Object.assign({}, params, { category_id: this.categoryId })
                             }).then(response => {
                                 this.products = response.data.data;
                             }).catch(error => {
                                 console.log(error);
-                            })
+                            });
                     },
 
                     removeJsonEmptyValues(params) {
@@ -103,5 +103,4 @@
             });
         </script>
     @endPushOnce
-
 </x-shop::layouts>

@@ -1,4 +1,3 @@
-
 {!! view_render_event('bagisto.shop.categories.view.toolbar.before') !!}
 
 <v-toolbar @onFilterApplied='setFilters("toolbar", $event)'></v-toolbar>
@@ -13,7 +12,7 @@
             <div class="text-[16px] font-medium hidden max-md:block">Filters</div>
 
             <div>
-                <select 
+                <select
                     class="custom-select max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]  max-md:border-0 max-md:outline-none max-md:w-[110px]"
                     v-model="filters.applied.sort"
                     @change="apply('sort', filters.applied.sort)"
@@ -26,7 +25,7 @@
             </div>
 
             <div class="flex gap-[40px] items-center max-md:hidden">
-                <select 
+                <select
                     class="custom-select max-w-[120px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]"
                     v-model="filters.applied.limit"
                     @change="apply('limit', filters.applied.limit)"

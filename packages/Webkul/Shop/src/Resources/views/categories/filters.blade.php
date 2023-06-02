@@ -11,7 +11,8 @@
         <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
             <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
                 <p class="text-[18px] font-semibold ">Filters:</p>
-                <p class="text-[12px] font-medium" @click='clear()'>Clear All</p>
+
+                <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>Clear All</p>
             </div>
 
             <v-filter-item
@@ -33,14 +34,22 @@
                 @click="active = ! active"
             >
                 <div class="flex pb-[10px] justify-between items-center">
-                    <p class="text-[18px] font-semibold ">@{{ filter.name }}</p>
+                    <p
+                        class="text-[18px] font-semibold"
+                        v-text="filter.name"
+                    >
+                    </p>
                 </div>
 
                 <span :class="`text-[24px] ${active ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
             </div>
 
             <div class="z-10 bg-white rounded-lg" v-if='active'>
-                <ul class="pb-3 text-sm text-gray-700" v-if="filter.type != 'price'">
+                <ul v-if="filter.type === 'price'">
+                    <v-price-filter></v-price-filter>
+                </ul>
+
+                <ul class="pb-3 text-sm text-gray-700" v-else>
                     <li v-for='(option, index) in filter.options'>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                             <input
@@ -51,6 +60,7 @@
                                 v-model="appliedValues"
                                 @change="apply($event)"
                             />
+
                             <label
                                 for="checkbox-item-11"
                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded"
@@ -60,6 +70,59 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="v-price-filter-template">
+        <div>
+            <div class="flex items-center gap-[15px]">
+                <p class="text-[14px] ">Price Range:</p>
+
+                <p class="text-[14px] font-semibold">$0-$1000</p>
+            </div>
+
+            <div class="relative h-[4px] w-[246px] mt-[30px] mb-[24px]">
+                <div class="absolute left-0 right-0 top-0 h-[4px] bg-[#F5F5F5] rounded-[12px]">
+                    <div
+                        id="line"
+                        class="absolute left-0 right-0 top-0 h-[4px] bg-navyBlue"
+                        style="left: 20%; right: 10%;"
+                    >
+                    </div>
+
+                    <span
+                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px]  -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
+                        style="left:20%"
+                    >
+                    </span>
+
+                    <span
+                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px]  -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
+                        style="left:90%"
+                    >
+                    </span>
+                </div>
+
+                <input
+                    type="range"
+                    name="min_price"
+                    value="0"
+                    class="two-range-slider"
+                    min="10"
+                    max="100"
+                    step="5"
+                >
+
+                <input
+                    type="range"
+                    name="max_price"
+                    class="two-range-slider"
+                    value="100"
+                    min="10"
+                    max="100"
+                    step="5"
+                >
             </div>
         </div>
     </script>
@@ -192,5 +255,15 @@
             }
         });
 
+        app.component('v-price-filter', {
+            template: '#v-price-filter-template',
+
+            data() {
+                return {
+                    min: 0,
+                    max: 100,
+                };
+            },
+        });
     </script>
 @endPushOnce
