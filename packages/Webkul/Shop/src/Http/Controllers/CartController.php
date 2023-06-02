@@ -3,6 +3,9 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
+use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
