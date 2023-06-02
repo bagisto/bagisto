@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
-use Webkul\Shop\Http\Resources\MiniCart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
@@ -54,31 +53,6 @@ class CartController extends Controller
                 ->unique('id')
                 ->take($crossSellProductCount != "" ? $crossSellProductCount : 12),
         ]);
-    }
-
-    /**
-     * Function for get the cart product.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function allProducts()
-    {
-        Cart::collectTotals();
-
-        $cart = Cart::getCart();
-
-        return MiniCart::collection($cart);
-    }
-
-    /**
-     * Function for remove single cart product.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function removeProducts($id) {
-        Cart::removeItem($id)
-            ? session()->flash('success', trans('shop::app.components.mini-cart.item.success-remove'))
-            : session()->flash('success', trans('shop::app.components.mini-cart.item.warning-remove'));
     }
 
     /**

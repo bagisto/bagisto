@@ -154,6 +154,27 @@ return [
         ],
     ],
 
+    'checkout' => [
+
+        'cart' => [
+
+            'item' => [
+                'color'           => 'Color:',
+                'size'            => 'Size:',
+                'success-remove'  => 'Item is successfully removed from the cart.',
+                'warning-remove'  => 'No items to remove from the cart.',
+            ],
+
+            'shopping-cart'         => 'Shopping Cart',
+            'offer-on-orders'       => 'Get Up To 30% OFF on your 1st order',
+            'subtotal'              => 'Subtotal',
+            'continue-to-checkout'  => 'Continue to Checkout',
+            'empty-cart'            => 'Your cart is empty',
+            'return-to-shop'        => 'Return To Shop',
+            'remove'                => 'Remove',
+        ],
+    ],
+
     'components' => [
 
         'layouts' => [
@@ -191,23 +212,6 @@ return [
                 'payment-policy'         => 'Payment Policy',
                 'shipping-policy'        => 'Shipping Policy',
                 'privacy-cookies-policy' => 'Privacy and Cookies Policy',
-            ],
-        ],
-
-        'mini-cart'   => [
-            'shopping-cart'         => 'Shopping Cart',
-            'offer-on-orders'       => 'Get Up To 30% OFF on your 1st order',
-            'subtotal'              => 'Subtotal',
-            'continue-to-checkout'  => 'Continue to Checkout',
-            'empty-cart'            => 'Your cart is empty',
-            'return-to-shop'        => 'Return To Shop',
-            'remove'                => 'Remove',
-
-            'item'   => [
-                'color'           => 'Color:',
-                'size'            => 'Size:',
-                'success-remove'  => 'Item is successfully removed from the cart.',
-                'warning-remove'  => 'No items to remove from the cart.',
             ],
         ],
     ],

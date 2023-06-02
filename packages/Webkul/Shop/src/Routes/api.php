@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Shop\Http\Controllers\CartController;
+use Webkul\Shop\Http\Controllers\Api\Checkout\CartController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
@@ -23,12 +23,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::controller(CartController::class)->group(function () {
-        Route::post('cart', 'store')->name('shop.customers.cart.store');
+        Route::post('cart', 'store')->name('shop.checkout.cart.store');
 
-        Route::prefix('checkout')->group(function () {
-            Route::get('cart', 'allProducts')->name('shop.components.mini-cart.index');
+        Route::prefix('checkout/cart')->group(function () {
+            Route::get('', 'index')->name('shop.checkout.cart');
         
-            Route::get('cart/remove/{id}', 'removeProducts')->name('shop.components.mini-cart.remove');
+            Route::delete('remove/{id}', 'destroy')->name('shop.checkout.cart.destroy');
         });
 
     });

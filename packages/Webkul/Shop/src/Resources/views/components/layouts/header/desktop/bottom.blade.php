@@ -111,19 +111,9 @@
             @endauth
         {{-- =============== Will remove it. =============== --}}
 
-        <div>
-            <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-        </div>
+        <v-cart></v-cart>
 
-        <x-shop::dropdown position="bottom-right">
-            <x-slot:toggle>
-                <mini-cart></mini-cart>
-            </x-slot:toggle>
-
-            <x-slot:content>                
-                <x-shop::mini-cart v-for="cartProduct in miniCart"></x-shop::mini-cart>
-            </x-slot:content>
-        </x-shop::dropdown>
+        @include('shop::checkout.cart.mini-cart')
 
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>
@@ -236,27 +226,24 @@
     </div>
 </div>
 
-<script>
-    function closeCart() {
-       document.getElementById('mini-cart').parentElement.parentElement.style.display = 'none';
-   }
-</script>
-
 @pushOnce('scripts')
-   <script type="text/x-template" id="mini-cart-template">
+   <script type="text/x-template" id="v-cart-template">
        <div>
-           <span class="icon-cart text-[24px] cursor-pointer" @click="miniCart"></span>  
+           <span class="icon-cart text-[24px] cursor-pointer"></span>  
        </div>
    </script>
 
    <script type="module">
-       app.component("mini-cart", {
-           template: '#mini-cart-template',
+       app.component("v-cart", {
+           template: '#v-cart-template',
+
+           mounted() {
+                this.cart();
+           },
 
            methods: {
-               miniCart() {
-                   document.getElementById('mini-cart').parentElement.parentElement.style.display = 'block';
-                   this.$axios.get(`{{ route('shop.components.mini-cart.index') }}`).then(response => {
+               cart() {
+                   this.$axios.get(`{{ route('shop.checkout.cart') }}`).then(response => {
                        this.miniCart = response.data;
                    }).catch(error => {});
                },
