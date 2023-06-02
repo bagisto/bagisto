@@ -111,7 +111,7 @@
             </div>
         @endif
 
-        <v-cart></v-cart>
+        <v-mini-cart></v-mini-cart>
 
         @include('shop::checkout.cart.mini-cart')
 
@@ -227,15 +227,15 @@
 </div>
 
 @pushOnce('scripts')
-   <script type="text/x-template" id="v-cart-template">
+   <script type="text/x-template" id="v-mini-cart-template">
        <div>
            <span class="icon-cart text-[24px] cursor-pointer"></span>  
        </div>
    </script>
 
    <script type="module">
-       app.component("v-cart", {
-           template: '#v-cart-template',
+       app.component("v-mini-cart", {
+           template: '#v-mini-cart-template',
 
            mounted() {
                 this.cart();
