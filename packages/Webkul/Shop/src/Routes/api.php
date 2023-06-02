@@ -22,9 +22,17 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             ->name('shop.categories.maximum-price');
     });
 
+    Route::controller(CartController::class)->group(function () {
+        Route::post('cart', 'store')->name('shop.customers.cart.store');
 
-    Route::post('cart', [CartController::class, 'store'])
-        ->name('shop.customers.cart.store');
+        Route::prefix('checkout')->group(function () {
+            Route::get('cart', 'allProducts')->name('shop.components.mini-cart.index');
+        
+            Route::get('cart/remove/{id}', 'removeProducts')->name('shop.components.mini-cart.remove');
+        });
+
+    });
+
 
     Route::group(['middleware' => ['customer']], function () {
         Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])

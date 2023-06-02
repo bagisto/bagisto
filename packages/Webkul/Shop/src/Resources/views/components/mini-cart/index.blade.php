@@ -4,7 +4,9 @@
         <div class="bg-white h-full pointer-events-auto w-full overflow-auto">
             <div class="flex flex-col h-full w-full ">
                 <div class="overflow-auto flex-1 min-h-0 min-w-0">
-                    <div class="flex flex-col  h-full">
+                    <div class="flex flex-col h-full">
+
+                        {{-- Cart Header with offer message --}}
                         <div class="grid gap-y-[10px] p-[25px] pb-[20px]">
                             <div class="flex justify-between items-center">
                                 <p class="text-[26px] font-medium">
@@ -19,13 +21,14 @@
                             </p>
                         </div>
 
-                        <div class="px-[25px] overflow-auto flex-1">
+                        {{-- Product Listing in cart --}}
+                        <div class="px-[25px] overflow-auto flex-1" v-if="cartProduct > 0">
                             <div class="grid gap-[50px] mt-[35px]">
                                 <v-cart-product {{$attributes}} :cartProduct="cartProduct"></v-cart-product>
                             </div>
                         </div>
 
-                        <div class="pb-[30px]">
+                        <div class="pb-[30px]" v-if="cartProduct > 0">
                             <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
                                 <p class="text-[14px] font-medium text-[#7D7D7D]">
                                     @lang('shop::app.components.mini-cart.subtotal')
@@ -39,6 +42,26 @@
                             <div class="px-[25px]">
                                 <div class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]">
                                     @lang('shop::app.components.mini-cart.continue-to-checkout')
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Empty Cart page --}}
+                        <div class="pb-[30px]" v-else>
+                            <div class="grid gap-y-[20px] b-0 place-items-center">
+                                <img 
+                                    class="" 
+                                    src="{{ bagisto_asset('images/thank-you.png') }}" 
+                                    alt="" 
+                                    title=""
+                                >
+
+                                <p class="text-[20px]">
+                                    @lang('shop::app.components.mini-cart.empty-cart')
+                                </p>
+
+                                <div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
+                                    @lang('shop::app.components.mini-cart.return-to-shop')
                                 </div>
                             </div>
                         </div>
@@ -67,8 +90,15 @@
                 </p>
 
                 <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
-                    <p class="text-[14px]">Color: black</p>
-                    <p class="text-[14px]">Size: Xl</p>
+                    <p class="text-[14px]">
+                        @lang('shop::app.components.mini-cart.color') 
+                        @{{ cartProduct.color }}
+                    </p>
+
+                    <p class="text-[14px]">
+                        @lang('shop::app.components.mini-cart.size')
+                        @{{ cartProduct.size }}
+                    </p>
                 </div>
 
                 <div class="flex gap-[20px] items-center flex-wrap">

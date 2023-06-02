@@ -3,9 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Log;
-use Webkul\Checkout\Contracts\Cart as CartModel;
+use Webkul\Shop\Http\Resources\MiniCart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
@@ -48,16 +46,39 @@ class CartController extends Controller
        
         $crossSellProductCount = core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products');
  
-        $data = [
+        return view($this->_config['view'], [
             'cart' => $cart,
             'crossSellProducts' => $cart?->items
-                                   ->map(fn ($item) => $item->product->cross_sells)
-                                   ->collapse()
-                                   ->unique('id')
-                                   ->take($crossSellProductCount != "" ? $crossSellProductCount : 12),
-        ];
+                ->map(fn ($item) => $item->product->cross_sells)
+                ->collapse()
+                ->unique('id')
+                ->take($crossSellProductCount != "" ? $crossSellProductCount : 12),
+        ]);
+    }
 
-        return response()->json($data);
+    /**
+     * Function for get the cart product.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function allProducts()
+    {
+        Cart::collectTotals();
+
+        $cart = Cart::getCart();
+
+        return MiniCart::collection($cart);
+    }
+
+    /**
+     * Function for remove single cart product.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function removeProducts($id) {
+        Cart::removeItem($id)
+            ? session()->flash('success', trans('shop::app.components.mini-cart.item.success-remove'))
+            : session()->flash('success', trans('shop::app.components.mini-cart.item.warning-remove'));
     }
 
     /**
