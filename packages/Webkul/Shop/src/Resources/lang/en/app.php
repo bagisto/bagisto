@@ -21,7 +21,7 @@ return [
             'submit-btn-title' => 'Reset Password',
             'footer'           => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
         ],
-        
+
         'login-form' => [
             'page-title'          => 'Customer Login',
             'form-login-text'     => 'If you have an account, sign in with your email address.',
@@ -38,7 +38,7 @@ return [
             'not-activated'       => 'Your activation seeks admin approval',
             'verify-first'        => 'Verify your email account first.',
         ],
-        
+
         'signup-form' => [
             'page-title'                  => 'Become User',
             'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
@@ -147,7 +147,7 @@ return [
                 'missing_options'    => 'Options are missing for this product.',
                 'product-removed'    => 'Product Is No More Available As Removed By Admin',
                 'remove-all-success' => 'All the items from your wishlist have been removed',
-            ],    
+            ],
 
             'title'   => 'Profile',
             'save'    => 'Save',
@@ -157,6 +157,23 @@ return [
     'components' => [
 
         'layouts' => [
+            'header' => [
+                'title'         => 'Account',
+                'welcome'       => 'Welcome',
+                'welcome-guest' => 'Welcome Guest',
+                'dropdown-text' => 'Manage Cart, Orders & Wishlist',
+                'sign-in'       => 'Sign In',
+                'sign-up'       => 'Sign Up',
+                'account'       => 'Account',
+                'cart'          => 'Cart',
+                'profile'       => 'Profile',
+                'wishlist'      => 'Wishlist',
+                'compare'       => 'Compare',
+                'orders'        => 'Orders',
+                'cart'          => 'Cart',
+                'logout'        => 'Logout',
+                'search-text'   => 'Search products here',
+            ],
 
             'footer' => [
                 'newsletter-text'        => 'Get Ready for our Fun Newsletter!',
@@ -188,7 +205,6 @@ return [
 
         ],
     ],
-
 
     'response' => [
         'cancel-success'     => ':name canceled successfully.',

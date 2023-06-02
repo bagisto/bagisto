@@ -1,101 +1,95 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    {{-- Hero Image --}}
+    <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+        <div>
+            <img 
+                class="rounded-[12px]" 
+                src='{{ bagisto_asset("images/product-hero.png") }}'
+            >
+        </div>
+    </div>
 
-@section('page_title')
-    {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
-@stop
+    {{-- Product Listing --}}
+    <v-category></v-category>
 
-@section('seo')
-    <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
+    @pushOnce('scripts')
+    <script type="text/x-template" id="v-category-template">
+        <div class="container px-[60px] max-lg:px-[30px]">
+            <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
+                <!--Filters-->
+                @include ('shop::products.list.filters')
 
-    <meta name="keywords" content="{{ $category->meta_keywords }}"/>
-
-    @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
-        <script type="application/ld+json">
-            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
-        </script>
-    @endif
-@stop
-
-@section('content-wrapper')
-    @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
-
-    <div class="main">
-        {!! view_render_event('bagisto.shop.products.index.before', ['category' => $category]) !!}
-
-        <div class="category-container">
-
-            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-                @include ('shop::products.list.layered-navigation')
-            @endif
-
-            <div class="category-block" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
-                <div class="hero-image mb-35">
-                    @if (!is_null($category->image))
-                        <img class="logo" src="{{ $category->image_url }}" alt="" />
-                    @endif
-                </div>
-
-                @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
-                    @if ($category->description)
-                        <div class="category-description">
-                            {!! $category->description !!}
-                        </div>
-                    @endif
-                @endif
-
-                @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-                    <?php $products = $productRepository->getAll($category->id); ?>
-
+                <!-- Product Listing Container -->
+                <div>
+                    <!-- Product Listing Toolbar -->
                     @include ('shop::products.list.toolbar')
 
-                    @if ($products->count())
-
-                        @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
-
-                        @if ($toolbarHelper->getCurrentMode() == 'grid')
-                            <div class="product-grid-3">
-                                @foreach ($products as $productFlat)
-
-                                    @include ('shop::products.list.card', ['product' => $productFlat])
-
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="product-list">
-                                @foreach ($products as $productFlat)
-
-                                    @include ('shop::products.list.card', ['product' => $productFlat])
-
-                                @endforeach
-                            </div>
-                        @endif
-
-                        {!! view_render_event('bagisto.shop.products.index.pagination.before', ['category' => $category]) !!}
-
-                        <div class="bottom-toolbar">
-                            {{ $products->appends(request()->input())->links() }}
-                        </div>
-
-                        {!! view_render_event('bagisto.shop.products.index.pagination.after', ['category' => $category]) !!}
-
-                    @else
-
-                        <div class="product-list empty">
-                            <h2>{{ __('shop::app.products.whoops') }}</h2>
-
-                            <p>
-                                {{ __('shop::app.products.empty') }}
-                            </p>
-                        </div>
-
-                    @endif
-                @endif
+                    <!-- Product Card Container -->
+                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
+                        <x-shop::products.card v-for="product in products"></x-shop::products.card>
+                    </div>
+                </div>
             </div>
         </div>
+    </script>
 
-        {!! view_render_event('bagisto.shop.products.index.after', ['category' => $category]) !!}
-    </div>
-@stop
+    <script type="module">
+        app.component('v-category', {
+            template: '#v-category-template',
 
-@push('scripts')
-@endpush
+            data() {
+                return {
+                    filters: {
+                        toolbar: {},
+
+                        filter: []
+                    },
+
+                    products: [],
+
+                    params: {}
+                }
+            },
+
+            methods: {
+                setFilters(sort, filters) {
+                    if (sort == 'filter') {
+                        this.filters.filter = filters
+                    } else if (sort == 'toolbar') {
+                        filters = filters.sort.split('-');
+                        this.filters.toolbar['sort'] = filters[0];
+                        this.filters.toolbar['order'] = filters[1]
+                    }
+
+                    this.params = { ...this.filters.filter, ...this.filters.toolbar };
+                    this.params['category_id'] = @json($category->id);
+
+                    // For GET parameters in URL
+                    window.history.pushState({}, "", "?" + this.jsonToString());
+
+                    this.getProducts(this.params);
+                },
+
+                getProducts(params) {
+                    this.$axios.get("{{ route('shop.products.index') }}", { params })
+                        .then(response => {
+                            this.products = response.data.data
+                        }).catch(error => {
+                            console.log(error);
+                        })
+                },
+
+                jsonToString() { 
+                    let parameters = new URLSearchParams();
+                    for (const key in this.params) {
+                        parameters.append(key, this.params[key]);
+                    }
+
+                    return parameters.toString();
+                }
+            },
+        });
+    </script>
+@endPushOnce
+
+</x-shop::layouts>
