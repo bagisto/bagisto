@@ -97,13 +97,11 @@
 
                 <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
                     <p class="text-[14px]">
-                        @lang('shop::app.checkout.cart.item.color') 
-                        @{{ cartProduct.color }}
+                        @lang('shop::app.checkout.cart.item.color') Red
                     </p>
 
                     <p class="text-[14px]">
-                        @lang('shop::app.checkout.cart.item.size')
-                        @{{ cartProduct.size }}
+                        @lang('shop::app.checkout.cart.item.size') XL
                     </p>
                 </div>
 
