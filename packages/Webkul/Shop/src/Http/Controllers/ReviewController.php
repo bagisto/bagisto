@@ -61,32 +61,36 @@ class ReviewController extends Controller
      */
     public function store($id)
     {
-        $this->validate(request(), [
-            'comment' => 'required',
-            'rating'  => 'required|numeric|min:1|max:5',
-            'title'   => 'required',
-        ]);
-
-        $product = $this->productRepository->find($id);
-
-        $data = array_merge(request()->all(), [
-            'status'     => 'pending',
-            'product_id' => $id,
-        ]);
-
-        if (auth()->guard('customer')->user()) {
-            $data['customer_id'] = auth()->guard('customer')->user()->id;
-
-            $data['name'] = auth()->guard('customer')->user()->first_name . ' ' . auth()->guard('customer')->user()->last_name;
+        try {
+            $this->validate(request(), [
+                'comment' => 'required',
+                'rating'  => 'required|numeric|min:1|max:5',
+                'title'   => 'required',
+            ]);
+    
+            $data = array_merge(request()->all(), [
+                'status'     => 'pending',
+                'product_id' => $id,
+            ]);
+    
+            if (auth()->guard('customer')->user()) {
+                $data['customer_id'] = auth()->guard('customer')->user()->id;
+    
+                $data['name'] = auth()->guard('customer')->user()->first_name . ' ' . auth()->guard('customer')->user()->last_name;
+            }
+    
+            $review = $this->productReviewRepository->create($data);
+    
+            $this->productReviewImageRepository->uploadImages($data, $review);
+    
+            return response()->json([
+                'message' => 'Submit Successfully'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 401);
         }
-
-        $review = $this->productReviewRepository->create($data);
-
-        $this->productReviewImageRepository->uploadImages($data, $review);
-
-        session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
-
-        return redirect()->route('shop.productOrCategory.index', $product->url_key);
     }
 
     /**

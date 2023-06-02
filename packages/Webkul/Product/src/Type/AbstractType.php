@@ -852,15 +852,11 @@ abstract class AbstractType
     {
         $minPrice = $this->getMinimalPrice();
 
-        if ($minPrice < $this->product->price) {
-            $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>';
-        } else {
-            $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
-        }
+        $price = $this->product->price;
 
-        return $html;
+        $evaluatePrice = $this->evaluatePrice($price);
+
+        return view('shop::products.view.prices.simple', compact('minPrice', 'price', 'evaluatePrice'))->render();
     }
 
     /**

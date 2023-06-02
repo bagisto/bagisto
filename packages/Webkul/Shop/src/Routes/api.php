@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\CartController;
+use Webkul\Shop\Http\Controllers\ReviewController;
 use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
-use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 use Webkul\Shop\Http\Controllers\CategoryController;
+use Webkul\Shop\Http\Controllers\Customer\WishlistController;
+use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
 
@@ -25,6 +26,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
     Route::post('cart', [CartController::class, 'store'])
         ->name('shop.customers.cart.store');
+
+    Route::post('product/{id}/review', [ReviewController::class, 'store'])
+        ->name('shop.products.reviews.store');
 
     Route::group(['middleware' => ['customer']], function () {
         Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])
