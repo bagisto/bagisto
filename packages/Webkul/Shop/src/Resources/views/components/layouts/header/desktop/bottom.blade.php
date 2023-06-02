@@ -106,10 +106,10 @@
         @if($showWishlist)
             <div>
                 <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                    <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
+                    <span class="icon-cart text-[24px] inline-block cursor-pointer"></span>
                 </a>
-            @endauth
-        {{-- =============== Will remove it. =============== --}}
+            </div>
+        @endif
 
         <div>
             <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
