@@ -1,37 +1,46 @@
-@extends('shop::layouts.master')
+<x-shop::layouts
+    :has-header="true"
+    :has-feature="false"
+    :has-footer="false"
+>
+	<div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+		<div class="grid gap-y-[20px] place-items-center">
+			<img 
+				class="" 
+				src="{{ bagisto_asset('images/thank-you.png') }}" 
+				alt="" 
+				title=""
+			>
 
-@section('page_title')
-    {{ __('shop::app.checkout.success.title') }}
-@stop
+			<p class="text-[20px]">
 
-@section('content-wrapper')
+				@if (auth()->guard('customer')->user())
+					@lang('shop::app.checkout.success.order-id-info', [
+							'order_id' => '<a class="text-[#0A49A7]" href="' . route('shop.customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
+					])
+				@else
+					@lang('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) 
+				@endif
+			</p>
 
-    <div class="order-success-content" style="min-height: 300px;">
-        <h1>{{ __('shop::app.checkout.success.thanks') }}</h1>
+			<p class="text-[26px] font-medium">
+				@lang('shop::app.checkout.success.thanks')
+			</p>
+			
+			<p class="text-[20px] text-[#7D7D7D]">
+				@lang('shop::app.checkout.success.info')
+			</p>
 
-        <p>
-            @if (auth()->guard('customer')->user())
-                {!! 
-                    __('shop::app.checkout.success.order-id-info', [
-                        'order_id' => '<a href="' . route('shop.customer.orders.view', $order->id) . '">' . $order->increment_id . '</a>'
-                    ])
-                !!}
-            @else
-                {{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}
-            @endif
-        </p>
+			{{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
 
-        <p>{{ __('shop::app.checkout.success.info') }}</p>
-
-        {{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
-
-        <div class="misc-controls">
-            <a style="display: inline-block" href="{{ route('shop.home.index') }}" class="btn btn-lg btn-primary">
-                {{ __('shop::app.checkout.cart.continue-shopping') }}
-            </a>
-        </div>
-        
-        {{ view_render_event('bagisto.shop.checkout.continue-shopping.after', ['order' => $order]) }}
-        
-    </div>
-@endsection
+			<a href="{{ route('shop.home.index') }}">
+				<div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
+             		@lang('shop::app.checkout.cart.continue-shopping')
+				</div> 
+			</a>
+			
+			{{ view_render_event('bagisto.shop.checkout.continue-shopping.after', ['order' => $order]) }}
+			
+		</div>
+	</div>
+</x-shop::layouts>
