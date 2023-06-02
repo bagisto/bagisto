@@ -1,9 +1,9 @@
 <div class="layered-filter-wrapper">
-    {!!view_render_event('bagisto.shop.products.list.layered-navigation.before') !!}
+    {!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
     <v-filters @onFilterApplied='setFilters("filter", $event)'></v-filters>
 
-    {!!view_render_event('bagisto.shop.products.list.layered-navigation.after') !!}
+    {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 </div>
 
 @pushOnce('scripts')
@@ -19,7 +19,7 @@
                 :key="index"
                 :index="index"
                 :filter="filter"
-                :appliedFilterValues="appliedValues[filter.code]"
+                :appliedFilterValues="filters.applied[filter.code]"
                 @onFilterAdded="applyFilter($event, filter.code)"
             >
             </v-filter-item>
@@ -28,13 +28,14 @@
 
     <script type="text/x-template" id="v-filter-item-template">
         <div class="border-b-[1px] border-[#E9E9E9]">
-            <div :class="`flex pb-[10px] justify-between items-center ${active ? 'active' : ''}`">
-                <div 
-                    class="flex pb-[10px] justify-between items-center" 
-                    @click="active = ! active"
-                >
-                    <p class="text-[18px] font-semibold ">@{{ filter.name ? filter.name : filter.admin_name }}</p>
+            <div
+                :class="`flex pb-[10px] justify-between items-center cursor-pointer select-none ${active ? 'active' : ''}`"
+                @click="active = ! active"
+            >
+                <div class="flex pb-[10px] justify-between items-center">
+                    <p class="text-[18px] font-semibold ">@{{ filter.name }}</p>
                 </div>
+
                 <span :class="`text-[24px] ${active ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
             </div>
 
@@ -54,7 +55,7 @@
                                 for="checkbox-item-11"
                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded"
                             >
-                                @{{ option.label ? option.label : option.admin_name }}
+                                @{{ option.name }}
                             </label>
                         </div>
                     </li>
@@ -69,8 +70,6 @@
 
             data() {
                 return {
-                    appliedValues: [],
-
                     filters: {
                         available: {},
 
@@ -79,7 +78,7 @@
                 };
             },
 
-            created() {
+            mounted() {
                 this.getFilters();
 
                 this.setFilters();
@@ -89,46 +88,32 @@
                 getFilters() {
                     this.$axios.get('{{ route("shop.categories.attributes", $category->id) }}')
                         .then((response) => {
-                            response.data.filter_attributes.forEach((val, index) => {
-                                this.filters.available[index] = {
-                                    'id'     : val.id,
-                                    'name'   : val.name,
-                                    'code'   : val.code,
-                                    'type'   : val.type,
-                                    'options': val.options
-                                }
-                            })
+                            this.filters.available = response.data.data;
                         });
                 },
 
                 setFilters() {
-                    let urlParams = new URLSearchParams(window.location.search);
+                    let queryParams = new URLSearchParams(window.location.search);
 
-                    urlParams.forEach((value, index) => {
-                        this.filters.applied[index] = value.split(',');
+                    queryParams.forEach((value, filter) => {
+                        this.filters.applied[filter] = value.split(',');
                     });
+
+                    this.$emit('onFilterApplied', this.filters.applied);
                 },
 
-                applyFilter(values,filter) {
+                applyFilter(values, filter) {
                     if (values.length) {
                         this.filters.applied[filter] = values;
                     } else {
                         delete this.filters.applied[filter];
                     }
 
-                    for (let key in this.filters.applied) {
-                        if (key == filter && key != 'page') {
-                            this.filters.applied[filter] = this.filters.applied[key].join(',');
-                        }
-                    }
-
                     this.$emit('onFilterApplied', this.filters.applied);
                 },
 
                 clear() {
-                    this.filters.applied = [];
-
-                    this.applyFilter([]);
+                    this.applyFilter(this.filters.applied = {});
                 }
             }
         });
@@ -166,9 +151,9 @@
             },
 
             created() {
-                if (!this.index) this.active = true;
+                if (! this.index) this.active = true;
 
-                if (this.appliedFilterValues && this.appliedFilterValues.length) {
+                if (this.appliedFilterValues !== undefined && this.appliedFilterValues.length) {
                     this.appliedValues = this.appliedFilterValues;
 
                     if (this.filter.type == 'price') {
@@ -187,7 +172,7 @@
                         return;
                     }
 
-                    this.$axios.get('{{ route("shop.catalog.categories.maximum_price", $category->id) }}')
+                    this.$axios.get('{{ route("shop.categories.max_price", $category->id) }}')
                         .then((response) => {
                             let maxPrice = response.data.max_price;
 
