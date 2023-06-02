@@ -202,6 +202,15 @@ return [
         ],
     ],
 
+    'checkout' => [
+        'success' => [
+            'title'         => 'Order successfully placed',
+            'thanks'        => 'Thank you for your order!',
+            'order-id-info' => 'Your order id is #:order_id',
+            'info'          => 'We will email you, your order details and tracking information',
+        ],
+    ],
+
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
         'cancel-error'       => ':name can not be canceled.',
