@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\AttributeResource;
 
 class CategoryController extends Controller
 {
@@ -38,9 +39,7 @@ class CategoryController extends Controller
             $filterableAttributes = $this->attributeRepository->getFilterableAttributes();
         }
 
-        return response()->json([
-            'filter_attributes' => $filterableAttributes,
-        ]);
+        return AttributeResource::collection($filterableAttributes);
     }
 
     /**
@@ -48,9 +47,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getProductMaximumPrice($categoryId)
+    public function getProductMaxPrice($categoryId)
     {
-        $maxPrice = $this->productRepository->getMaximumPriceByCategory($categoryId);
+        $maxPrice = $this->productRepository->getMaxPriceByCategory($categoryId);
 
         return response()->json([
             'max_price' => core()->convertPrice($maxPrice),

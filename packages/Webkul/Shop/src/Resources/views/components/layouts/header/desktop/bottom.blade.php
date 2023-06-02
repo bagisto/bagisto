@@ -155,7 +155,7 @@
 
             {{--Customers dropdown--}}
             @auth('customer')
-                <x-slot:content>
+                <x-slot:content class="!p-[0px]">
                     <div class="grid gap-[10px] p-[20px] pb-0">
                         <p class="text-[20px] font-dmserif">
                             @lang('shop::app.components.layouts.header.welcome')’ 
@@ -170,19 +170,19 @@
                     <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
 
                     <div class="grid gap-[4px] mt-[10px] pb-[10px]"> 
-                            <a 
-                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
-                                href="{{ route('shop.customers.account.profile.index') }}"
-                            >
-                                @lang('shop::app.components.layouts.header.profile')
-                            </a>
-                
-                            <a 
-                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
-                                href="{{ route('shop.customers.account.orders.index') }}"
-                            >
-                                @lang('shop::app.components.layouts.header.orders')
-                            </a>
+                        <a 
+                            class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                            href="{{ route('shop.customers.account.profile.index') }}"
+                        >
+                            @lang('shop::app.components.layouts.header.profile')
+                        </a>
+            
+                        <a 
+                            class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                            href="{{ route('shop.customers.account.orders.index') }}"
+                        >
+                            @lang('shop::app.components.layouts.header.orders')
+                        </a>
 
                         @if ($showWishlist)
                             <a 
@@ -196,7 +196,7 @@
                         @if ($showCompare)
                             <a 
                                 class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
-                                href="{{ route('shop::customers.account.compare.index') }}"
+                                {{-- href="{{ route('shop::customers.account.compare.index') }}" --}}
                             >
                                 @lang('shop::app.components.layouts.header.compare') 
                             </a>

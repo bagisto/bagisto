@@ -18,8 +18,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::get('categories/{id}/attributes', 'getAttributes')
             ->name('shop.categories.attributes');
 
-        Route::get('categories/{id}/maximum-price', 'getProductMaximumPrice')
-            ->name('shop.categories.maximum-price');
+        Route::get('categories/{id}/max-price', 'getProductMaxPrice')
+            ->name('shop.categories.max_price');
     });
 
 

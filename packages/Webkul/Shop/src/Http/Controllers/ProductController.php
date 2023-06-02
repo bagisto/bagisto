@@ -3,12 +3,12 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Shop\Http\Resources\Product;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Shop\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -123,6 +123,6 @@ class ProductController extends Controller
         $products = $this->productRepository->getAll(request()->input('category_id'));
         $products->withPath($categoryDetails->slug);
         
-        return Product::collection($products);
+        return ProductResource::collection($products);
     }
 }
