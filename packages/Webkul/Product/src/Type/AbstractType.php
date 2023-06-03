@@ -854,9 +854,9 @@ abstract class AbstractType
 
         $price = $this->product->price;
 
-        $evaluatePrice = $this->evaluatePrice($price);
+        $roundOffPrice = $this->getRoundOffPrice($price);
 
-        return view('shop::products.view.prices.simple', compact('minPrice', 'price', 'evaluatePrice'))->render();
+        return view('shop::products.view.prices.simple', compact('minPrice', 'price', 'roundOffPrice'))->render();
     }
 
     /**
@@ -909,7 +909,7 @@ abstract class AbstractType
      *
      * @return array
      */
-    public function evaluatePrice($price)
+    public function getRoundOffPrice($price)
     {
         $roundedOffPrice = round($price, 2);
 

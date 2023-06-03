@@ -61,36 +61,30 @@ class ReviewController extends Controller
      */
     public function store($id)
     {
-        try {
-            $this->validate(request(), [
-                'comment' => 'required',
-                'rating'  => 'required|numeric|min:1|max:5',
-                'title'   => 'required',
-            ]);
-    
-            $data = array_merge(request()->all(), [
-                'status'     => 'pending',
-                'product_id' => $id,
-            ]);
-    
-            if (auth()->guard('customer')->user()) {
-                $data['customer_id'] = auth()->guard('customer')->user()->id;
-    
-                $data['name'] = auth()->guard('customer')->user()->first_name . ' ' . auth()->guard('customer')->user()->last_name;
-            }
-    
-            $review = $this->productReviewRepository->create($data);
-    
-            $this->productReviewImageRepository->uploadImages($data, $review);
-    
-            return response()->json([
-                'message' => 'Submit Successfully'
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 401);
+        $this->validate(request(), [
+            'comment' => 'required',
+            'rating'  => 'required|numeric|min:1|max:5',
+            'title'   => 'required',
+        ]);
+
+        $data = [
+            'comment'    => request()->input('comment'),
+            'rating'     => request()->input('rating'),
+            'title'      => request()->input('title'),
+            'status'     => 'pending',
+            'product_id' => $id,
+        ];
+
+        if ($customer = auth()->guard('customer')->user()) {
+            $data['name'] = $customer->getNameAttribute();
+            $data['customer_id'] = $customer->id;
         }
+
+        $review = $this->productReviewRepository->create($data);
+
+        return response()->json([
+            'message' => trans('shop::app.products.submit-success')
+        ], 200);
     }
 
     /**
