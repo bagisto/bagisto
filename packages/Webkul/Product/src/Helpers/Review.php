@@ -31,13 +31,7 @@ class Review
      */
     public function getAverageRating($product)
     {
-        static $avgRating = [];
-
-        if (array_key_exists($product->id, $avgRating)) {
-            return $avgRating[$product->id];
-        }
-
-        return $avgRating[$product->id] = number_format(round($product->reviews->where('status', 'approved')->avg('rating'), 2), 1);
+        return number_format(round($product->reviews->where('status', 'approved')->avg('rating'), 2), 1);
     }
 
     /**

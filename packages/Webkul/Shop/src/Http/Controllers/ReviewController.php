@@ -26,6 +26,17 @@ class ReviewController extends Controller
     }
 
     /**
+     * Get Product review
+     *
+     * @param int $productId
+     * @return void
+     */
+    public function getByProduct()
+    {
+        return request()->input('product_id');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @param  string  $slug
