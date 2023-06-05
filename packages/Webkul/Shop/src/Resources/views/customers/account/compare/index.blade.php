@@ -46,8 +46,13 @@
                                 {{ $item->product->description }}
                             </p>
 
-                            <p class="text-[14px] font-medium text-[#3A3A3A]">₹ {{ $item->product->price }}</p>
-                            <p class="text-[14px] font-medium text-[#3A3A3A]">Prada</p>
+                            <p class="text-[14px] font-medium text-[#3A3A3A]">
+                                ₹ {{ $item->product->price }}
+                            </p>
+
+                            <p class="text-[14px] font-medium text-[#3A3A3A]">
+                                Prada
+                            </p>
                         </div>
                     @endforeach
                 </div>
