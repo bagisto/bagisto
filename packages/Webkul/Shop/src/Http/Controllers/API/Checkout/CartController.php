@@ -31,11 +31,9 @@ class CartController extends Controller
 
         $cart = Cart::getCart();
 
-        if ($cart->count()) {
+        if (! is_null($cart) && $cart->count()) {
             return  new CartResource($cart);
         }
-
-        return true;
     }
 
     /**

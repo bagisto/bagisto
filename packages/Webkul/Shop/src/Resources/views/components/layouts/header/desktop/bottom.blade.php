@@ -226,35 +226,37 @@
 </div>
 
 @pushOnce('scripts')
-   <script type="text/x-template" id="v-mini-cart-template">
-       <div>
-            @include('shop::checkout.cart.mini-cart')
+    <script type="text/x-template" id="v-mini-cart-template">
+        <div>
+            @auth('customer')
+                @include('shop::checkout.cart.mini-cart')
+            @endauth
 
-           <span class="icon-cart text-[24px] cursor-pointer"></span>  
-       </div>
-   </script>
+            <span class="icon-cart text-[24px] cursor-pointer"></span>  
+        </div>
+    </script>
 
-   <script type="module">
-       app.component("v-mini-cart", {
-           template: '#v-mini-cart-template',
+    <script type="module">
+        app.component("v-mini-cart", {
+            template: '#v-mini-cart-template',
 
-           data() {
+            data() {
                 return  {
                     miniCart: [],
                 }
-           },
+            },
 
-           mounted() {
+            mounted() {
                 this.cart();
-           },
+            },
 
-           methods: {
+            methods: {
                 cart() {
                     this.$axios.get(`{{ route('shop.checkout.cart') }}`).then(response => {
                         this.miniCart = response.data;
                     }).catch(error => {});
                 },
-           }
-       });
-   </script>
+            }
+        });
+    </script>
 @endpushOnce
