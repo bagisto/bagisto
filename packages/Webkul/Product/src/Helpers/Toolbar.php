@@ -2,38 +2,104 @@
 
 namespace Webkul\Product\Helpers;
 
+use Illuminate\Support\Collection;
+
 class Toolbar
 {
     /**
      * Returns available sort orders.
-     *
-     * @return array
      */
-    public function getAvailableOrders()
+    public function getAvailableOrders(): Collection
     {
-        return [
-            'name-asc'        => 'from-a-z',
-            'name-desc'       => 'from-z-a',
-            'created_at-desc' => 'newest-first',
-            'created_at-asc'  => 'oldest-first',
-            'price-asc'       => 'cheapest-first',
-            'price-desc'      => 'expensive-first',
-        ];
+        return collect([
+            [
+                'title'    => trans('shop::app.products.from-a-z'),
+                'value'    => 'name-asc',
+                'sort'     => 'name',
+                'order'    => 'asc',
+                'position' => 1,
+            ],
+            [
+                'title'    => trans('shop::app.products.from-z-a'),
+                'value'    => 'name-desc',
+                'sort'     => 'name',
+                'order'    => 'desc',
+                'position' => 2,
+            ],
+            [
+                'title'    => trans('shop::app.products.latest-first'),
+                'value'    => 'created_at-desc',
+                'sort'     => 'created_at',
+                'order'    => 'desc',
+                'position' => 3,
+            ],
+            [
+                'title'    => trans('shop::app.products.oldest-first'),
+                'value'    => 'created_at-asc',
+                'sort'     => 'created_at',
+                'order'    => 'asc',
+                'position' => 4,
+            ],
+            [
+                'title'    => trans('shop::app.products.cheapest-first'),
+                'value'    => 'price-asc',
+                'sort'     => 'price',
+                'order'    => 'asc',
+                'position' => 5,
+            ],
+            [
+                'title'    => trans('shop::app.products.expensive-first'),
+                'value'    => 'price-desc',
+                'sort'     => 'price',
+                'order'    => 'desc',
+                'position' => 6,
+            ],
+        ]);
     }
+
+    /**
+     * Get default order.
+     */
+    public function getDefaultOrder(): array
+    {
+        return $this->getAvailableOrders()
+            ->where('value', core()->getConfigData('catalog.products.storefront.sort_by') ?? 'price-desc')
+            ->firstOrFail();
+    }
+
     /**
      * Returns available limits.
-     *
-     * @return array
      */
-    public function getAvailableLimits()
+    public function getAvailableLimits(): Collection
     {
         if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', $productsPerPage);
 
-            return $pages;
+            return collect($pages);
         }
 
-        return [12, 24, 36, 48];
+        return collect([12, 24, 36, 48]);
+    }
+
+    /**
+     * Get default limit. Currently returning integer in future
+     * may be come from configuration.
+     */
+    public function getDefaultLimit(array $params = []): int
+    {
+        /**
+         * Set a default value of 12 for the 'limit' parameter,
+         * in case it is not provided or is not a valid integer.
+         */
+        $limit = (int) ($params['limit'] ?? 12);
+
+        /**
+         * If the 'limit' parameter is present but value not present
+         * in available limits, use the default value of 12 instead.
+         */
+        return in_array($limit, $this->getAvailableLimits()->toArray())
+            ? $limit
+            : 12;
     }
 
     /**

@@ -422,7 +422,7 @@ return [
             'customer-not-notified'        => ':date | Customer <b>Not Notified</b>',
             'transactions'                 => 'Transactions',
             'create-success'               => 'Order created successfully',
-            'cancel-error'                 => 'Order not be canceled'
+            'cancel-error'                 => 'Order not be canceled',
         ],
 
         'invoices' => [
@@ -455,7 +455,7 @@ return [
             'status-overdue'         => 'Overdue',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
-            'create-success'         => 'Invoice created successfully'
+            'create-success'         => 'Invoice created successfully',
         ],
 
         'shipments' => [
@@ -483,7 +483,7 @@ return [
             'creation-error'    => 'Shipment can not be created for this order.',
             'order-error'       => 'Order shipment creation is not allowed.',
             'quantity-invalid'  => 'Requested quantity is invalid or not available.',
-            'create-success'    => 'Shipments created successfully'
+            'create-success'    => 'Shipments created successfully',
         ],
 
         'refunds' => [
@@ -507,7 +507,7 @@ return [
             'action'                      => 'Action',
             'view-title'                  => 'Refund #:refund_id',
             'invalid-refund-amount-error' => 'Refund amount should be non zero.',
-            'create-success'              => 'Refund created successfully'
+            'create-success'              => 'Refund created successfully',
 
         ],
 
@@ -527,11 +527,11 @@ return [
             'created-at'          => 'Created At',
             'transaction-details' => 'Transaction Details',
             'response'            => [
-                'invoice-missing'   => 'This invoice id does not exist',
-                'transaction-saved' => 'The transaction has been saved',
-                'already-paid'      => 'This invoice has already been paid',
+                'invoice-missing'            => 'This invoice id does not exist',
+                'transaction-saved'          => 'The transaction has been saved',
+                'already-paid'               => 'This invoice has already been paid',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
-                'transaction-amount-zero' => 'Transaction amount can be zero or less',
+                'transaction-amount-zero'    => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -555,7 +555,7 @@ return [
                 'configurable'                  => 'Configurable',
 
             ],
-            'family'                       => 'Attribute Family',
+            'family'                        => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
             'attribute-header'              => 'Attribute(s)',
@@ -707,30 +707,30 @@ return [
             ],
         ],
         'families'   => [
-            'title'                => 'Families',
-            'add-family-btn-title' => 'Add Family',
-            'add-title'            => 'Add Family',
-            'edit-title'           => 'Edit Family',
-            'save-btn-title'       => 'Save Family',
-            'general'              => 'General',
-            'code'                 => 'Family Code',
-            'name'                 => 'Name',
-            'groups'               => 'Groups',
-            'add-group-title'      => 'Add Group',
-            'edit-group-title'     => 'Edit Group',
-            'update-group-title'   => 'Update Group',
-            'position'             => 'Position',
-            'attribute-code'       => 'Code',
-            'type'                 => 'Type',
-            'add-attribute-title'  => 'Add Attributes',
-            'search'               => 'Search',
-            'group-exist-error'    => 'Group with same name already exists.',
-            'create-success'       => 'Family created successfully.',
-            'update-success'       => 'Family updated successfully.',
-            'delete-success'       => 'Family deleted successfully.',
-            'delete-failed'        => 'Error encountered while deleting Family.',
-            'user-define-error'    => 'Can not delete system Attribute family',
-            'last-delete-error'    => 'At least one family is required.',
+            'title'                     => 'Families',
+            'add-family-btn-title'      => 'Add Family',
+            'add-title'                 => 'Add Family',
+            'edit-title'                => 'Edit Family',
+            'save-btn-title'            => 'Save Family',
+            'general'                   => 'General',
+            'code'                      => 'Family Code',
+            'name'                      => 'Name',
+            'groups'                    => 'Groups',
+            'add-group-title'           => 'Add Group',
+            'edit-group-title'          => 'Edit Group',
+            'update-group-title'        => 'Update Group',
+            'position'                  => 'Position',
+            'attribute-code'            => 'Code',
+            'type'                      => 'Type',
+            'add-attribute-title'       => 'Add Attributes',
+            'search'                    => 'Search',
+            'group-exist-error'         => 'Group with same name already exists.',
+            'create-success'            => 'Family created successfully.',
+            'update-success'            => 'Family updated successfully.',
+            'delete-success'            => 'Family deleted successfully.',
+            'delete-failed'             => 'Error encountered while deleting Family.',
+            'user-define-error'         => 'Can not delete system Attribute family',
+            'last-delete-error'         => 'At least one family is required.',
             'attribute-product-error'   => 'family is used in products.',
         ],
         'categories' => [
@@ -774,12 +774,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'Configuration',
-        'save-btn-title' => 'Save',
-        'save-message'   => 'Configuration saved successfully',
-        'yes'            => 'Yes',
-        'no'             => 'No',
-        'delete'         => 'Delete',
+        'title'                       => 'Configuration',
+        'save-btn-title'              => 'Save',
+        'save-message'                => 'Configuration saved successfully',
+        'yes'                         => 'Yes',
+        'no'                          => 'No',
+        'delete'                      => 'Delete',
         'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
         'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
 
@@ -856,19 +856,19 @@ return [
             'name'           => 'Name',
         ],
         'currencies'        => [
-            'title'             => 'Currencies',
-            'add-title'         => 'Add Currency',
-            'edit-title'        => 'Edit Currency',
-            'save-btn-title'    => 'Save Currency',
-            'general'           => 'General',
-            'code'              => 'Code',
-            'name'              => 'Name',
-            'symbol'            => 'Symbol',
+            'title'              => 'Currencies',
+            'add-title'          => 'Add Currency',
+            'edit-title'         => 'Edit Currency',
+            'save-btn-title'     => 'Save Currency',
+            'general'            => 'General',
+            'code'               => 'Code',
+            'name'               => 'Name',
+            'symbol'             => 'Symbol',
             'decimal'            => 'Decimal',
-            'create-success'    => 'Currency created successfully.',
-            'update-success'    => 'Currency updated successfully.',
-            'delete-success'    => 'Currency deleted successfully.',
-            'last-delete-error' => 'At least one Currency is required.',
+            'create-success'     => 'Currency created successfully.',
+            'update-success'     => 'Currency updated successfully.',
+            'delete-success'     => 'Currency deleted successfully.',
+            'last-delete-error'  => 'At least one Currency is required.',
         ],
         'exchange_rates'    => [
             'title'                    => 'Exchange Rates',
@@ -1034,18 +1034,18 @@ return [
 
     'customers' => [
         'groups' => [
-            'add-title'       => 'Add Group',
-            'edit-title'      => 'Edit Group',
-            'save-btn-title'  => 'Save Group',
-            'title'           => 'Groups',
-            'code'            => 'Code',
-            'name'            => 'Name',
-            'is_user_defined' => 'User Defined',
-            'yes'             => 'Yes',
-            'create-success'  => 'Customer Group created successfully',
-            'update-success'  => 'Customer Group updated successfully',
-            'delete-success'  => 'Customer Group deleted successfully',
-            'delete-failed'   => 'Error! Customer Group cannot be deleted',
+            'add-title'                 => 'Add Group',
+            'edit-title'                => 'Edit Group',
+            'save-btn-title'            => 'Save Group',
+            'title'                     => 'Groups',
+            'code'                      => 'Code',
+            'name'                      => 'Name',
+            'is_user_defined'           => 'User Defined',
+            'yes'                       => 'Yes',
+            'create-success'            => 'Customer Group created successfully',
+            'update-success'            => 'Customer Group updated successfully',
+            'delete-success'            => 'Customer Group deleted successfully',
+            'delete-failed'             => 'Error! Customer Group cannot be deleted',
             'customer-associate'        => 'Customer can not be deleted because customer is associated with this group.',
         ],
 
@@ -1082,7 +1082,7 @@ return [
 
         'loginascustomer' => [
             'grid-title'    => 'login as customer',
-            'login-message' => 'you logged in as :customer_name'
+            'login-message' => 'you logged in as :customer_name',
         ],
 
         'note' => [
@@ -1258,7 +1258,7 @@ return [
                 'create-success' => 'Coupon created successfully',
                 'update-success' => 'Coupon updated successfully',
                 'delete-success' => 'Coupon deleted successfully',
-            ]
+            ],
         ],
 
         'catalog-rules' => [
@@ -1649,7 +1649,7 @@ return [
             'sort-by'                               => 'Sort By',
             'from-z-a'                              => 'From Z-A',
             'from-a-z'                              => 'From A-Z',
-            'newest-first'                          => 'Newest First',
+            'latest-first'                          => 'Newest First',
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
@@ -1741,11 +1741,11 @@ return [
         'read-all'                    => 'Mark as Read',
         'notification-marked-success' => 'Notification Marked Successfully',
         'order-status-messages'       => [
-            'completed'  => 'Order Completed',
-            'closed'     => 'Order Closed',
-            'canceled'   => 'Order Canceled',
-            'pending'    => 'Order Pending',
-            'processing' => 'Order Processing',
+            'completed'       => 'Order Completed',
+            'closed'          => 'Order Closed',
+            'canceled'        => 'Order Canceled',
+            'pending'         => 'Order Pending',
+            'processing'      => 'Order Processing',
             'pending_payment' => 'Pending Payment',
         ],
     ],

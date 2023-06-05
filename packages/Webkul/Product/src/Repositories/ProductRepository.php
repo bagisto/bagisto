@@ -10,18 +10,12 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Helpers\Toolbar;
 
 class ProductRepository extends Repository
 {
     /**
      * Create a new repository instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
-     * @param  \Webkul\Product\Repositories\ElasticSearchRepository  $elasticSearchRepository
-     * @param  \Illuminate\Container\Container  $container
      * @return void
      */
     public function __construct(
@@ -36,8 +30,6 @@ class ProductRepository extends Repository
 
     /**
      * Specify model class name.
-     *
-     * @return string
      */
     public function model(): string
     {
@@ -47,7 +39,6 @@ class ProductRepository extends Repository
     /**
      * Create product.
      *
-     * @param  array  $data
      * @return \Webkul\Product\Contracts\Product
      */
     public function create(array $data)
@@ -62,7 +53,6 @@ class ProductRepository extends Repository
     /**
      * Update product.
      *
-     * @param  array  $data
      * @param  int  $id
      * @param  string  $attribute
      * @return \Webkul\Product\Contracts\Product
@@ -383,7 +373,7 @@ class ProductRepository extends Repository
 
         $count = collect(
             DB::select("select count(id) as aggregate from ({$countQuery->select('products.id')->reorder('products.id')->toSql()}) c",
-            $countQuery->getBindings())
+                $countQuery->getBindings())
         )->pluck('aggregate')->first();
 
         $items = [];
@@ -459,56 +449,23 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Products to show per page
-     *
-     * @param  array  $params
-     * @return int
+     * Fetch per page limit from toolbar helper. Adapter for this repository.
      */
-    public function getPerPageLimit($params)
+    public function getPerPageLimit(array $params): int
     {
-        /**
-         * Currently container binding not injecting in constructor.
-         *
-         * To Do (@devansh): Need a global helper or static helper
-         * or a one place constant array to handle this.
-         */
-        $availableLimits = app(Toolbar::class)->getAvailableLimits();
-
-        /**
-         * Set a default value of 12 for the 'limit' parameter,
-         * in case it is not provided or is not a valid integer.
-         */
-        $limit = (int) ($params['limit'] ?? 12);
-
-        /**
-         * If the 'limit' parameter is present but value not present
-         * in available limits, use the default value of 12 instead.
-         */
-        $limit = in_array($limit, $availableLimits) ? $limit : 12;
-
-        if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', $productsPerPage);
-
-            $limit = $params['limit'] ?? current($pages);
-        }
-
-        return $limit;
+        return product_toolbar()->getDefaultLimit($params);
     }
 
     /**
-     * Products to show per page
-     *
-     * @param  array  $params
-     * @return array
+     * Fetch sort option from toolbar helper. Adapter for this repository.
      */
-    public function getSortOptions($params)
+    public function getSortOptions(array $params): array
     {
-        $sortOptions = explode('-', core()->getConfigData('catalog.products.storefront.sort_by') ?: 'name-desc');
+        $sortOptions = product_toolbar()->getAvailableOrders()
+            ->where('value', $params['sort'])
+            ->first();
 
-        return [
-            'sort'  => $params['sort'] ?? current($sortOptions),
-            'order' => $params['order'] ?? end($sortOptions),
-        ];
+        return $sortOptions ?: product_toolbar()->getDefaultOrder();
     }
 
     /**

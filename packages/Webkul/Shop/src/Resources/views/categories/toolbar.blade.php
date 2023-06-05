@@ -1,6 +1,6 @@
 {!! view_render_event('bagisto.shop.categories.view.toolbar.before') !!}
 
-<v-toolbar @onFilterApplied='setFilters("toolbar", $event)'></v-toolbar>
+<v-toolbar @filter-applied='setFilters("toolbar", $event)'></v-toolbar>
 
 {!! view_render_event('bagisto.shop.categories.view.toolbar.after') !!}
 
@@ -9,7 +9,10 @@
 @pushOnce('scripts')
     <script type="text/x-template" id='v-toolbar-template'>
         <div class="flex justify-between max-md:items-center">
-            <div class="text-[16px] font-medium hidden max-md:block">Filters</div>
+            <div class="text-[16px] font-medium hidden max-md:block">
+                {{-- @translations --}}
+                @lang('Filters')
+            </div>
 
             <div>
                 <select
@@ -17,9 +20,16 @@
                     v-model="filters.applied.sort"
                     @change="apply('sort', filters.applied.sort)"
                 >
-                    <option value=''>Sort by</option>
-                    <option :value="key" v-for="(sort, key) in filters.available.sort">
-                        @{{ sort }}
+                    <option value=''>
+                        {{-- @translations --}}
+                        @lang('Sort By')
+                    </option>
+
+                    <option
+                        :value="sort.value"
+                        v-for="(sort, key) in filters.available.sort"
+                        v-text="sort.title"
+                    >
                     </option>
                 </select>
             </div>
@@ -30,9 +40,16 @@
                     v-model="filters.applied.limit"
                     @change="apply('limit', filters.applied.limit)"
                 >
-                    <option value=''>Show</option>
-                    <option :value="limit" v-for="limit in filters.available.limit">
-                        @{{ limit }}
+                    <option value=''>
+                        {{-- @translations --}}
+                        @lang('Show')
+                    </option>
+
+                    <option
+                        :value="limit"
+                        v-for="limit in filters.available.limit"
+                        v-text="limit"
+                    >
                     </option>
                 </select>
 
@@ -51,8 +68,6 @@
             data() {
                 return {
                     filters: {
-                        queryParams: @json(request()->input()),
-
                         available: {
                             sort: @json($toolbar->getAvailableOrders()),
 
@@ -60,24 +75,24 @@
                         },
 
                         applied: {
-                            sort: "{{ (core()->getConfigData('catalog.products.storefront.sort_by') ?? 'price-desc') }}",
+                            sort: '{{ $toolbar->getDefaultOrder()['value'] }}',
 
-                            limit: "{{ request()->query('limit') ?? 12 }}",
+                            limit: '{{ $toolbar->getDefaultLimit() }}',
                         }
                     }
                 };
             },
 
             mounted() {
-                this.$emit('onFilterApplied', this.filters.applied);
+                this.$emit('filter-applied', this.filters.applied);
             },
 
             methods: {
                 apply(type, value) {
                     this.filters.applied[type] = value;
 
-                    this.$emit('onFilterApplied', this.filters.applied);
-                }
+                    this.$emit('filter-applied', this.filters.applied);
+                },
             },
         });
     </script>

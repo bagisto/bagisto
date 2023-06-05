@@ -418,7 +418,7 @@ return [
             'customer-not-notified'        => ':date | Cliente <b>Non Notificato</b>',
             'transactions'                 => 'Transactions',
             'create-success'               => 'Ordine creato con successo',
-            'cancel-error'                 => 'Ordine non cancellabile'
+            'cancel-error'                 => 'Ordine non cancellabile',
         ],
 
         'invoices' => [
@@ -451,7 +451,7 @@ return [
             'status-overdue'         => 'Pending',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
-            'create-success'         => 'Fattura creata con successo'
+            'create-success'         => 'Fattura creata con successo',
         ],
 
         'shipments' => [
@@ -478,7 +478,7 @@ return [
             'creation-error'    => 'La spedizione non può essere creata per questo ordine.',
             'order-error'       => 'La creazione della spedizione dell\'Ordine non è consentita.',
             'quantity-invalid'  => 'La quantità richiesta non è valida  non è disponibile.',
-            'create-success'    => 'Spedizioni create con successo'
+            'create-success'    => 'Spedizioni create con successo',
         ],
 
         'refunds' => [
@@ -502,7 +502,7 @@ return [
             'action'                      => 'Azione',
             'view-title'                  => 'Rimborso #:refund_id',
             'invalid-refund-amount-error' => 'La somma rimborsata dovrebbe essere diversa da zero.',
-            'create-success'              => 'Rimborso creato con successo'
+            'create-success'              => 'Rimborso creato con successo',
 
         ],
 
@@ -522,11 +522,11 @@ return [
             'created-at'          => 'Created At',
             'transaction-details' => 'Transaction Details',
             'response'            => [
-                'invoice-missing'   => 'This invoice id does not exist',
-                'transaction-saved' => 'The transaction has been saved',
-                'already-paid'      => 'This invoice has already been paid',
+                'invoice-missing'            => 'This invoice id does not exist',
+                'transaction-saved'          => 'The transaction has been saved',
+                'already-paid'               => 'This invoice has already been paid',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
-                'transaction-amount-zero' => 'Transaction amount can be zero or less',
+                'transaction-amount-zero'    => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -542,7 +542,7 @@ return [
             'product-type'                  => 'Tipo Prodotto',
             'simple'                        => 'Semplice',
             'configurable'                  => 'Configurabile',
-            'family'                       => 'Famiglia Attributo',
+            'family'                        => 'Famiglia Attributo',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Attributi Configurabili',
             'attribute-header'              => 'Attributo(i)',
@@ -734,12 +734,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'Configurazione',
-        'save-btn-title' => 'Salva',
-        'save-message'   => 'Configurazione salvata con successo',
-        'yes'            => 'Sì',
-        'no'             => 'No',
-        'delete'         => 'Elimina',
+        'title'                       => 'Configurazione',
+        'save-btn-title'              => 'Salva',
+        'save-message'                => 'Configurazione salvata con successo',
+        'yes'                         => 'Sì',
+        'no'                          => 'No',
+        'delete'                      => 'Elimina',
         'enable-atleast-one-shipping' => 'Abilita almeno un metodo di spedizione.',
         'enable-atleast-one-payment'  => 'Abilita almeno un metodo di pagamento.',
 
@@ -818,19 +818,19 @@ return [
             'name'           => 'Nome',
         ],
         'currencies'        => [
-            'title'             => 'Valute',
-            'add-title'         => 'Aggiungi Valuta',
-            'edit-title'        => 'Modifica Valuta',
-            'save-btn-title'    => 'Salva Valuta',
-            'general'           => 'Generale',
-            'code'              => 'Codice',
-            'name'              => 'Nome',
-            'symbol'            => 'Simbolo',
+            'title'              => 'Valute',
+            'add-title'          => 'Aggiungi Valuta',
+            'edit-title'         => 'Modifica Valuta',
+            'save-btn-title'     => 'Salva Valuta',
+            'general'            => 'Generale',
+            'code'               => 'Codice',
+            'name'               => 'Nome',
+            'symbol'             => 'Simbolo',
             'decimal'            => 'Decimal',
-            'create-success'    => 'Valuta creata con successo.',
-            'update-success'    => 'Valuta aggiornata con successo.',
-            'delete-success'    => 'Valuta eliminata con successo.',
-            'last-delete-error' => 'Almeno una valuta è necessaria.',
+            'create-success'     => 'Valuta creata con successo.',
+            'update-success'     => 'Valuta aggiornata con successo.',
+            'delete-success'     => 'Valuta eliminata con successo.',
+            'last-delete-error'  => 'Almeno una valuta è necessaria.',
         ],
         'exchange_rates'    => [
             'title'                    => 'Tasso di cambio',
@@ -992,21 +992,21 @@ return [
 
     'customers' => [
         'groups' => [
-            'add-title'       => 'Aggiungi Gruppo',
-            'edit-title'      => 'Modifica Gruppo',
-            'save-btn-title'  => 'Salva Gruppo',
-            'title'           => 'Gruppi',
-            'save-btn-title'  => 'Salva Gruppo',
-            'code'            => 'Codice',
-            'name'            => 'Nome',
-            'is_user_defined' => 'Utente Definito',
-            'yes'             => 'Sì',
-            'create-success'  => 'Gruppo di clienti creato con successo',
-            'update-success'  => 'Gruppo clienti aggiornato con successo',
-            'delete-success'  => 'Gruppo clienti eliminato correttamente',
-            'delete-failed'   => 'Errore! Il gruppo di clienti non può essere eliminato',
+            'add-title'          => 'Aggiungi Gruppo',
+            'edit-title'         => 'Modifica Gruppo',
+            'save-btn-title'     => 'Salva Gruppo',
+            'title'              => 'Gruppi',
+            'save-btn-title'     => 'Salva Gruppo',
+            'code'               => 'Codice',
+            'name'               => 'Nome',
+            'is_user_defined'    => 'Utente Definito',
+            'yes'                => 'Sì',
+            'create-success'     => 'Gruppo di clienti creato con successo',
+            'update-success'     => 'Gruppo clienti aggiornato con successo',
+            'delete-success'     => 'Gruppo clienti eliminato correttamente',
+            'delete-failed'      => 'Errore! Il gruppo di clienti non può essere eliminato',
             'customer-associate' => 'Il cliente non può essere eliminato perché il cliente è associato a questo gruppo.',
-       
+
         ],
 
         'addresses' => [
@@ -1040,8 +1040,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'accedi come cliente',
-            'login-message'=>'hai effettuato l accesso come :customer_name'
+            'grid-title'   => 'accedi come cliente',
+            'login-message'=> 'hai effettuato l accesso come :customer_name',
         ],
 
         'note' => [
@@ -1583,7 +1583,7 @@ return [
             'sort-by'                               => 'Ordina Per',
             'from-z-a'                              => 'Da Z-A',
             'from-a-z'                              => 'Da A-Z',
-            'newest-first'                          => 'I più recenti prima',
+            'latest-first'                          => 'I più recenti prima',
             'oldest-first'                          => 'I più vecchi prima',
             'cheapest-first'                        => 'I più convenienti prima',
             'expensive-first'                       => 'I più cari prima',
@@ -1668,11 +1668,11 @@ return [
         'read-all'                    => 'Segna come letto',
         'notification-marked-success' => 'Notifica contrassegnata con successo',
         'order-status-messages'       => [
-            'completed'  => 'Ordine completato',
-            'closed'     => 'Ordine chiuso',
-            'canceled'   => 'Ordine annullato',
-            'pending'    => 'ordine pendente',
-            'processing' => "Elaborazione dell'ordine",
+            'completed'       => 'Ordine completato',
+            'closed'          => 'Ordine chiuso',
+            'canceled'        => 'Ordine annullato',
+            'pending'         => 'ordine pendente',
+            'processing'      => "Elaborazione dell'ordine",
             'pending_payment' => 'In attesa di Pagamento',
         ],
     ],

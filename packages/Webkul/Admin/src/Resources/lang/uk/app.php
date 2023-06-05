@@ -290,7 +290,7 @@ return [
             'submit-btn-title' => 'Отправить письмо для сброса пароля',
             'passwords'        => [
                 'throttled'        => 'Warning: Вы недавно запрашивали сброс пароля, пожалуйста, проверьте свою электронную почту.',
-            ]
+            ],
         ],
 
         'reset-password' => [
@@ -522,11 +522,11 @@ return [
             'created-at'          => 'Создано на',
             'transaction-details' => 'Детали транзакции',
             'response'            => [
-                'invoice-missing'   => 'Этот идентификатор счета-фактуры не существует',
-                'transaction-saved' => 'Транзакция сохранена',
-                'already-paid'      => 'Этот счет уже оплачен',
+                'invoice-missing'            => 'Этот идентификатор счета-фактуры не существует',
+                'transaction-saved'          => 'Транзакция сохранена',
+                'already-paid'               => 'Этот счет уже оплачен',
                 'transaction-amount-exceeds' => 'Указанная сумма данной операции превышает общую сумму счета.',
-                'transaction-amount-zero' => 'Сумма транзакции может быть равна нулю или меньше',
+                'transaction-amount-zero'    => 'Сумма транзакции может быть равна нулю или меньше',
             ],
         ],
     ],
@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'Настраиваемый',
 
             ],
-            'family'                       => 'Семейство атрибутов',
+            'family'                        => 'Семейство атрибутов',
             'sku'                           => 'Артикул',
             'configurable-attributes'       => 'Настраиваемые атрибуты',
             'attribute-header'              => 'Атрибут(ы)',
@@ -745,12 +745,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'Конфигурация',
-        'save-btn-title' => 'Сохранить',
-        'save-message'   => 'Конфигурация успешно сохранена',
-        'yes'            => 'Да',
-        'no'             => 'Нет',
-        'delete'         => 'Удалить',
+        'title'                       => 'Конфигурация',
+        'save-btn-title'              => 'Сохранить',
+        'save-message'                => 'Конфигурация успешно сохранена',
+        'yes'                         => 'Да',
+        'no'                          => 'Нет',
+        'delete'                      => 'Удалить',
         'enable-atleast-one-shipping' => 'Включите хотя бы один способ доставки.',
         'enable-atleast-one-payment'  => 'Включите хотя бы один способ оплаты.',
 
@@ -827,19 +827,19 @@ return [
             'name'           => 'Имя',
         ],
         'currencies'        => [
-            'title'             => 'Валюты',
-            'add-title'         => 'Добавить валюту',
-            'edit-title'        => 'Редактировать валюту',
-            'save-btn-title'    => 'Сохранить валюту',
-            'general'           => 'Общий',
-            'code'              => 'Код',
-            'name'              => 'Имя',
-            'symbol'            => 'Символ',
+            'title'              => 'Валюты',
+            'add-title'          => 'Добавить валюту',
+            'edit-title'         => 'Редактировать валюту',
+            'save-btn-title'     => 'Сохранить валюту',
+            'general'            => 'Общий',
+            'code'               => 'Код',
+            'name'               => 'Имя',
+            'symbol'             => 'Символ',
             'decimal'            => 'Десятковий',
-            'create-success'    => 'Валюта успешно создана.',
-            'update-success'    => 'Валюта успешно обновлена.',
-            'delete-success'    => 'Валюта успешно удалена.',
-            'last-delete-error' => 'Требуется хотя бы одна валюта.',
+            'create-success'     => 'Валюта успешно создана.',
+            'update-success'     => 'Валюта успешно обновлена.',
+            'delete-success'     => 'Валюта успешно удалена.',
+            'last-delete-error'  => 'Требуется хотя бы одна валюта.',
         ],
         'exchange_rates'    => [
             'title'                    => 'Курсы валют',
@@ -1047,8 +1047,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'увійти як клієнт',
-            'login-message'=>'ви ввійшли як :customer_name'
+            'grid-title'   => 'увійти як клієнт',
+            'login-message'=> 'ви ввійшли як :customer_name',
         ],
 
         'note' => [
@@ -1337,7 +1337,7 @@ return [
             'create-success' => 'Карта сайта успешно создана.',
             'update-success' => 'Карта сайта успешно обновлена.',
             'delete-success' => 'Карта сайта успешно удалена.',
-        ]
+        ],
     ],
 
     'error' => [
@@ -1597,7 +1597,7 @@ return [
             'sort-by'                               => 'Сортировать по',
             'from-z-a'                              => 'От Я-А',
             'from-a-z'                              => 'От А до Я',
-            'newest-first'                          => 'Новички вперед',
+            'latest-first'                          => 'Новички вперед',
             'oldest-first'                          => 'Сначала старые',
             'cheapest-first'                        => 'Сначала самые дешевые',
             'expensive-first'                       => 'Сначала дорого',
@@ -1688,11 +1688,11 @@ return [
         'read-all'                    => 'Пометить, как прочитанное',
         'notification-marked-success' => 'Уведомление отмечено успешно',
         'order-status-messages'       => [
-            'completed'  => 'Заказ завершен',
-            'closed'     => 'Заказ закрыт',
-            'canceled'   => 'Заказ отменен',
-            'pending'    => 'Ожидание заказа',
-            'processing' => 'Обработка заказов',
+            'completed'       => 'Заказ завершен',
+            'closed'          => 'Заказ закрыт',
+            'canceled'        => 'Заказ отменен',
+            'pending'         => 'Ожидание заказа',
+            'processing'      => 'Обработка заказов',
             'pending_payment' => 'Ожидающий платеж',
         ],
     ],

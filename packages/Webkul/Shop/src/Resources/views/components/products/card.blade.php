@@ -10,7 +10,7 @@
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <img
                     class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                    :src="product.base_image.original_image_url"
+                    :src="product.base_image.medium_image_url"
                 >
 
                 <div class="action-items bg-black">

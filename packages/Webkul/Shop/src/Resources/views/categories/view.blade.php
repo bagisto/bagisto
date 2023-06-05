@@ -16,7 +16,7 @@
         <script type="text/x-template" id="v-category-template">
             <div class="container px-[60px] max-lg:px-[30px]">
                 <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
-                    <!--Filters-->
+                    <!-- Product Listing Filters -->
                     @include ('shop::categories.filters')
 
                     <!-- Product Listing Container -->
@@ -41,34 +41,49 @@
 
                 data() {
                     return {
-                        filters: {},
+                        filters: {
+                            toolbar: {},
+                            filter: {},
+                        },
 
                         products: [],
                     }
                 },
 
+                computed: {
+                    queryParams() {
+                        let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar);
+
+                        return this.removeJsonEmptyValues(queryParams);
+                    },
+
+                    queryString() {
+                        return this.jsonToQueryString(this.queryParams);
+                    },
+                },
+
+                watch: {
+                    queryParams() {
+                        this.getProducts();
+                    },
+
+                    queryString() {
+                        window.history.pushState({}, '', '?' + this.queryString);
+                    },
+                },
+
                 methods: {
                     setFilters(type, filters) {
                         this.filters[type] = filters;
-
-                        if (this.filters.filter != undefined && this.filters.toolbar != undefined) {
-                            let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar);
-
-                            queryParams = this.removeJsonEmptyValues(queryParams);
-
-                            let queryString = this.jsonToQueryString(queryParams);
-
-                            if (queryString = this.jsonToQueryString(queryParams)) {
-                                window.history.pushState({}, '', '?' + queryString);
-                            }
-
-                            this.getProducts(queryParams);
-                        }
                     },
 
-                    getProducts(params) {
+                    clearFilters(type, filters) {
+                        this.filters[type] = {};
+                    },
+
+                    getProducts() {
                         this.$axios.get("{{ route('shop.products.index') }}", {
-                                params: Object.assign({}, params, { category_id: this.categoryId })
+                                params: Object.assign({}, this.queryParams, { category_id: this.categoryId })
                             }).then(response => {
                                 this.products = response.data.data;
                             }).catch(error => {
