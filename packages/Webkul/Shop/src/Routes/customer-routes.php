@@ -143,7 +143,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     /**
                      * Compare.
                      */
-                    Route::get('', [CompareController::class, 'index'])->name('shop.customers.account.compare.index');
+                    Route::controller(CompareController::class)->prefix('compare')->group(function () {
+                        Route::get('', 'index')->name('shop.customers.account.compare.index');
+                        Route::delete('destroyAll', 'destroyAll')->name('shop.customers.account.compare.destroyAll');
+
+                    });
 
                     /**
                      * Orders.

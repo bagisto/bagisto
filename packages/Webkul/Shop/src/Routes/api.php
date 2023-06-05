@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\CartController;
 use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
+use Webkul\Shop\Http\Controllers\Customer\CompareController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 use Webkul\Shop\Http\Controllers\CategoryController;
 
