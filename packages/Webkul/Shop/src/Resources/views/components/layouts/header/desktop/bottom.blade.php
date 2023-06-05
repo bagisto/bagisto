@@ -106,7 +106,7 @@
         @if($showWishlist)
             <div>
                 <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                    <span class="icon-heart text-[24px] cursor-pointer"></span>
+                    <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
                 </a>
             </div>
         @endif
