@@ -40,7 +40,7 @@ return [
     ], [
         'key'   => 'account.wishlist',
         'name'  => 'shop::app.layouts.wishlist',
-        'route' => 'shop.customer.wishlist.index',
+        'route' => 'shop.customers.account.wishlist.index',
         'icon'  => '',
         'sort'  => 6,
     ], [

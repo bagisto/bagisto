@@ -543,7 +543,7 @@ class ProductRepository extends Repository
      * @param  int  $categoryId
      * @return float
      */
-    public function getCategoryProductMaximumPrice($categoryId)
+    public function getMaxPriceByCategory($categoryId)
     {
         $customerGroup = $this->customerRepository->getCurrentGroup();
 

@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('product_grouped_products', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id')->unsigned();
+            $table->integer('associated_product_id')->unsigned();
             $table->integer('qty')->default(0);
             $table->integer('sort_order')->default(0);
 
-            $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
-            $table->integer('associated_product_id')->unsigned();
             $table->foreign('associated_product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }

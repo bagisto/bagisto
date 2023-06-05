@@ -59,59 +59,48 @@ class CartController extends Controller
     }
 
     /**
-     * Function for guests user to add the product in the cart.
+     * Function for user to add the product in the cart.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function add($id)
+    public function store()
     {
         try {
-            if ($product = $this->productRepository->findOrFail($id)) {
-                if (! $product->visible_individually) {
-                    return redirect()->back();
-                }
-            }
+            $productId = request()->input('product_id');
 
             Cart::deactivateCurrentCartIfBuyNowIsActive();
 
-            $result = Cart::addProduct($id, request()->all());
-
-            if ($this->onFailureAddingToCart($result)) {
-                return redirect()->back();
-            }
-
-            session()->flash('success', __('shop::app.checkout.cart.item.success'));
-
-            if ($customer = auth()->guard('customer')->user()) {
-                $this->wishlistRepository->deleteWhere([
-                    'product_id'  => $id,
-                    'customer_id' => $customer->id,
+            $cart = Cart::addProduct($productId, request()->all());
+    
+            if (
+                is_array($cart)
+                && isset($cart['warning'])
+            ) {
+                return response()->json([
+                    'message' => $cart['warning'],
                 ]);
             }
+    
+            if ($cart) {
+                if ($customer = auth()->guard('customer')->user()) {
+                    $this->wishlistRepository->deleteWhere([
+                        'product_id' => $productId, 
+                        'customer_id' => $customer->id
+                    ]);
+                }
 
-            if (request()->get('is_buy_now')) {
-                Event::dispatch('shop.item.buy-now', $id);
-
-                return redirect()->route('shop.checkout.onepage.index');
+                return response()->json([
+                    'message'  => trans('shop::app.components.products.item-add-to-cart')
+                ]);
             }
-        } catch (\Exception $e) {
-            session()->flash('warning', __($e->getMessage()));
+        } catch (\Exception $exception) {
+            \Log::error('CartController: ' . $exception->getMessage(),
+                ['product_id' => $productId, 'cart_id' => cart()->getCart() ?? 0]);
 
-            $product = $this->productRepository->findOrFail($id);
-
-            Log::error(
-                'Shop CartController: ' . $e->getMessage(),
-                [
-                    'product_id' => $id,
-                    'cart_id'    => cart()->getCart() ?? 0
-                ]
-            );
-
-            return redirect()->route('shop.productOrCategory.index', $product->url_key);
+            return response()->json([
+                'message'   => $exception->getMessage()
+            ]);
         }
-
-        return redirect()->back();
     }
 
     /**

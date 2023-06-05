@@ -5,13 +5,13 @@
 @stop
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('themes/default/assets/css/admin-booking.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/webkul/booking-product/assets/css/admin-booking.css') }}">
 
     <style>
         .grid-container .datagrid-filters .filter-right {
             grid-template-columns: auto auto auto;
         }
-        
+
         @media only screen and (max-width: 768px) {
             .vuecal__no-event {
                 padding-top: 0rem !important;
@@ -21,7 +21,7 @@
 @endpush
 
 @push('scripts')
-    <script type="text/javascript" src="{{ asset('themes/default/assets/js/admin-booking.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/webkul/booking-product/assets/js/admin-booking.js') }}"></script>
 @endpush
 
 @section('content')
@@ -39,7 +39,7 @@
             @endphp
 
             @if ($viewType == "table")
-            
+
                 <datagrid-plus src="{{ route('admin.sales.bookings.get') }}">
                     <template v-slot:extra-filters>
                         @include('bookingproduct::admin.sales.bookings.index.view-swither')

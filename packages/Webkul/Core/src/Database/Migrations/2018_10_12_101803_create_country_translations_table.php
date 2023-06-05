@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('country_translations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('country_id')->unsigned();
             $table->string('locale');
             $table->text('name')->nullable();
 
-            $table->integer('country_id')->unsigned();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }

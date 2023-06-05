@@ -32,25 +32,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'about-us') . '">
-                                ' . trans('shop::app.footer.about-us') . '
+                                ' . trans('shop::app.components.layouts.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'customer-service') . '">
-                                ' . trans('shop::app.footer.customer-service') . '
+                                ' . trans('shop::app.components.layouts.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'whats-new') . '">
-                                ' . trans('shop::app.footer.whats-new') . '
+                                ' . trans('shop::app.components.layouts.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'contact-us') . '">
-                                ' . trans('shop::app.footer.contact-us') . '
+                                ' . trans('shop::app.components.layouts.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
@@ -58,25 +58,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'order-return') . '">
-                                ' . trans('shop::app.footer.order-return') . '
+                                ' . trans('shop::app.components.layouts.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'payment-policy') . '">
-                                ' . trans('shop::app.footer.payment-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'shipping-policy') . '">
-                                ' . trans('shop::app.footer.shipping-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
-                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -103,25 +103,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'about-us') . '">
-                                ' . trans('shop::app.footer.about-us') . '
+                                ' . trans('shop::app.components.layouts.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'customer-service') . '">
-                                ' . trans('shop::app.footer.customer-service') . '
+                                ' . trans('shop::app.components.layouts.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'whats-new') . '">
-                                ' . trans('shop::app.footer.whats-new') . '
+                                ' . trans('shop::app.components.layouts.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'contact-us') . '">
-                                ' . trans('shop::app.footer.contact-us') . '
+                                ' . trans('shop::app.components.layouts.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
@@ -129,25 +129,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'order-return') . '">
-                                ' . trans('shop::app.footer.order-return') . '
+                                ' . trans('shop::app.components.layouts.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'payment-policy') . '">
-                                ' . trans('shop::app.footer.payment-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'shipping-policy') . '">
-                                ' . trans('shop::app.footer.shipping-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
-                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -174,25 +174,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'about-us') . '">
-                                ' . trans('shop::app.footer.about-us') . '
+                                ' . trans('shop::app.components.layouts.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'customer-service') . '">
-                                ' . trans('shop::app.footer.customer-service') . '
+                                ' . trans('shop::app.components.layouts.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'whats-new') . '">
-                                ' . trans('shop::app.footer.whats-new') . '
+                                ' . trans('shop::app.components.layouts.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'contact-us') . '">
-                                ' . trans('shop::app.footer.contact-us') . '
+                                ' . trans('shop::app.components.layouts.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
@@ -200,25 +200,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'order-return') . '">
-                                ' . trans('shop::app.footer.order-return') . '
+                                ' . trans('shop::app.components.layouts.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'payment-policy') . '">
-                                ' . trans('shop::app.footer.payment-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'shipping-policy') . '">
-                                ' . trans('shop::app.footer.shipping-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
-                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -245,25 +245,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'about-us') . '">
-                                ' . trans('shop::app.footer.about-us') . '
+                                ' . trans('shop::app.components.layouts.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'customer-service') . '">
-                                ' . trans('shop::app.footer.customer-service') . '
+                                ' . trans('shop::app.components.layouts.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'whats-new') . '">
-                                ' . trans('shop::app.footer.whats-new') . '
+                                ' . trans('shop::app.components.layouts.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'contact-us') . '">
-                                ' . trans('shop::app.footer.contact-us') . '
+                                ' . trans('shop::app.components.layouts.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
@@ -271,25 +271,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'order-return') . '">
-                                ' . trans('shop::app.footer.order-return') . '
+                                ' . trans('shop::app.components.layouts.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'payment-policy') . '">
-                                ' . trans('shop::app.footer.payment-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'shipping-policy') . '">
-                                ' . trans('shop::app.footer.shipping-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
-                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>
@@ -316,25 +316,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'about-us') . '">
-                                ' . trans('shop::app.footer.about-us') . '
+                                ' . trans('shop::app.components.layouts.footer.about-us') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'customer-service') . '">
-                                ' . trans('shop::app.footer.customer-service') . '
+                                ' . trans('shop::app.components.layouts.footer.customer-service') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'whats-new') . '">
-                                ' . trans('shop::app.footer.whats-new') . '
+                                ' . trans('shop::app.components.layouts.footer.whats-new') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'contact-us') . '">
-                                ' . trans('shop::app.footer.contact-us') . '
+                                ' . trans('shop::app.components.layouts.footer.contact-us') . '
                             </a>
                         </li>
                     </ul>
@@ -342,25 +342,25 @@ class ChannelTableSeeder extends Seeder
                     <ul class="grid gap-[20px] text-[14px]">
                         <li>
                             <a href="' . route('shop.cms.page', 'order-return') . '">
-                                ' . trans('shop::app.footer.order-return') . '
+                                ' . trans('shop::app.components.layouts.footer.order-return') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'payment-policy') . '">
-                                ' . trans('shop::app.footer.payment-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.payment-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'shipping-policy') . '">
-                                ' . trans('shop::app.footer.shipping-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.shipping-policy') . '
                             </a>
                         </li>
 
                         <li>
                             <a href="' . route('shop.cms.page', 'privacy-cookies-policy') . '">
-                                ' . trans('shop::app.footer.privacy-cookies-policy') . '
+                                ' . trans('shop::app.components.layouts.footer.privacy-cookies-policy') . '
                             </a>
                         </li>
                     </ul>

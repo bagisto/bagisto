@@ -1,12 +1,12 @@
 {
     "name": "bagisto/bagisto",
+    "type": "project",
     "description": "Bagisto Laravel E-Commerce",
     "keywords": [
         "framework",
         "laravel"
     ],
     "license": "MIT",
-    "type": "project",
     "require": {
         "php": "^8.1",
         "ext-calendar": "*",
@@ -18,7 +18,6 @@
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
-        "bagisto/laravel-datafaker": "^2.0@alpha",
         "bagistobrasil/bagisto-product-social-share": "^0.1.2",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "cviebrock/laravel-elasticsearch": "^10.0",
@@ -45,6 +44,7 @@
         "spatie/laravel-sitemap": "^6.2"
     },
     "require-dev": {
+        "bagisto/laravel-datafaker": "^2.0@alpha",
         "barryvdh/laravel-debugbar": "^3.8",
         "codeception/codeception": "*@dev",
         "codeception/module-asserts": "^3.0.0",
@@ -58,59 +58,38 @@
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.0"
     },
-    "replace": {
-        "bagisto/laravel-user": "v0.1.0",
-        "bagisto/laravel-admin": "v0.1.0",
-        "bagisto/laravel-ui": "v0.1.0",
-        "bagisto/laravel-core": "v0.1.0",
-        "bagisto/laravel-attribute": "v0.1.0",
-        "bagisto/laravel-checkout": "v0.1.0",
-        "bagisto/laravel-customer": "v0.1.0",
-        "bagisto/laravel-inventory": "v0.1.0",
-        "bagisto/laravel-category": "v0.1.0",
-        "bagisto/laravel-product": "v0.1.0",
-        "bagisto/laravel-shop": "v0.1.0",
-        "bagisto/laravel-theme": "v0.1.0",
-        "bagisto/laravel-shipping": "v0.1.0",
-        "bagisto/laravel-payment": "v0.1.0",
-        "bagisto/laravel-sales": "v0.1.0",
-        "bagisto/laravel-tax": "v0.1.0",
-        "bagisto/laravel-api": "v0.1.0",
-        "bagisto/laravel-paypal": "v0.1.0",
-        "bagisto/laravel-discount": "v0.1.0"
-    },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Webkul\\User\\": "packages/Webkul/User/src",
             "Webkul\\Admin\\": "packages/Webkul/Admin/src",
-            "Webkul\\Ui\\": "packages/Webkul/Ui/src",
+            "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
+            "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
+            "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
+            "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
             "Webkul\\Category\\": "packages/Webkul/Category/src",
             "Webkul\\Checkout\\": "packages/Webkul/Checkout/src",
-            "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
-            "Webkul\\Shop\\": "packages/Webkul/Shop/src",
+            "Webkul\\CMS\\": "packages/Webkul/CMS/src",
             "Webkul\\Core\\": "packages/Webkul/Core/src",
             "Webkul\\Customer\\": "packages/Webkul/Customer/src",
-            "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
-            "Webkul\\Product\\": "packages/Webkul/Product/src",
-            "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
-            "Webkul\\Payment\\": "packages/Webkul/Payment/src",
-            "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
-            "Webkul\\Sales\\": "packages/Webkul/Sales/src",
-            "Webkul\\Tax\\": "packages/Webkul/Tax/src",
-            "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
-            "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
-            "Webkul\\Rule\\": "packages/Webkul/Rule/src",
-            "Webkul\\CMS\\": "packages/Webkul/CMS/src",
-            "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
-            "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
+            "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
-            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src"
+            "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
+            "Webkul\\Payment\\": "packages/Webkul/Payment/src",
+            "Webkul\\Product\\": "packages/Webkul/Product/src",
+            "Webkul\\Rule\\": "packages/Webkul/Rule/src",
+            "Webkul\\Sales\\": "packages/Webkul/Sales/src",
+            "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
+            "Webkul\\Shop\\": "packages/Webkul/Shop/src",
+            "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
+            "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src",
+            "Webkul\\Tax\\": "packages/Webkul/Tax/src",
+            "Webkul\\Theme\\": "packages/Webkul/Theme/src",
+            "Webkul\\Ui\\": "packages/Webkul/Ui/src",
+            "Webkul\\User\\": "packages/Webkul/User/src"
         }
     },
     "autoload-dev": {
@@ -121,12 +100,14 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-                "laravel/dusk"
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
@@ -134,16 +115,11 @@
             "@php artisan key:generate",
             "Webkul\\Core\\Events\\ComposerEvents::postCreateProject"
         ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
-        ],
         "test": [
             "set -e",
             "@php artisan migrate:fresh --env=testing",
             "vendor/bin/codecept run unit",
-            "vendor/bin/codecept run functional",
-            "vendor/bin/codecept run api"
+            "vendor/bin/codecept run functional"
         ],
         "test-win": [
             "@set -e",
@@ -155,9 +131,12 @@
     "config": {
         "preferred-install": "stable",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "support": {
         "issues": "https://github.com/bagisto/bagisto/issues",

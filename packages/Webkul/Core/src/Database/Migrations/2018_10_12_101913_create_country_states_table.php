@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('country_states', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('country_id')->nullable()->unsigned();
             $table->string('country_code')->nullable();
             $table->string('code')->nullable();
             $table->string('default_name')->nullable();
 
-            $table->integer('country_id')->nullable()->unsigned();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }

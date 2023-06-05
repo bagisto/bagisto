@@ -6,7 +6,7 @@ if (mix == 'undefined') {
 
 require('laravel-mix-merge-manifest');
 
-let publicPath = '../../../public/themes/default/assets';
+let publicPath = '../../../public/vendor/webkul/booking-product/assets';
 
 if (mix.inProduction()) {
     publicPath = 'publishable/assets';
@@ -28,15 +28,11 @@ mix.js(__dirname + '/src/Resources/assets/js/app.js', 'js/admin-booking.js')
         __dirname + '/src/Resources/assets/sass/default.scss',
         'css/default-booking.css'
     )
-    .sass(
-        __dirname + '/src/Resources/assets/sass/velocity.scss',
-        'css/velocity-booking.css'
-    )
     .options({
         processCssUrls: false,
     });
 
-if (!mix.inProduction()) {
+if (! mix.inProduction()) {
     mix.sourceMaps();
 }
 

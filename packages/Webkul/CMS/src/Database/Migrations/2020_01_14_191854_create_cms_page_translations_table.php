@@ -17,13 +17,13 @@ return new class extends Migration
             $table->increments('id');
             $table->string('page_title');
             $table->string('url_key');
-            $table->text('html_content')->nullable();
+            $table->longtext('html_content')->nullable();
             $table->text('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->string('locale');
-
             $table->integer('cms_page_id')->unsigned();
+
             $table->unique(['cms_page_id', 'url_key', 'locale']);
             $table->foreign('cms_page_id')->references('id')->on('cms_pages')->onDelete('cascade');
         });
