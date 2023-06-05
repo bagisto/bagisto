@@ -141,13 +141,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                     });
 
                     /**
-                     * Wishlist.
-                     */
-                    Route::get('wishlist', [WishlistController::class, 'index'])->defaults('_config', [
-                        'view' => 'shop::customers.account.wishlist.wishlist',
-                    ])->name('shop.customer.wishlist.index');
-
-                    /**
                      * Compare.
                      */
                     Route::get('', [CompareController::class, 'index'])->name('shop.customers.account.compare.index');
