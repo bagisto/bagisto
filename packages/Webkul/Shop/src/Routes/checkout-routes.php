@@ -56,9 +56,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
     Route::post('checkout/save-order', [OnepageController::class, 'saveOrder'])->name('shop.checkout.save_order');
 
-    Route::get('checkout/success', [OnepageController::class, 'success'])->defaults('_config', [
-        'view' => 'shop::checkout.success',
-    ])->name('shop.checkout.success');
+    Route::get('checkout/success', [OnepageController::class, 'success'])->name('shop.checkout.success');
 
     Route::prefix('customer')->group(function () {
         /**

@@ -23,7 +23,7 @@
 	@endphp
 
 	<x-shop::products.carousel
-        title="Men’s Collections"
+        title="Men's Collections"
         :products="$products"
         :navigation-link="route('shop.home.index')"
     >

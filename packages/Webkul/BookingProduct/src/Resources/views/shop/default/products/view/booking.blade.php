@@ -3,10 +3,10 @@
     @if ($bookingProduct = app('\Webkul\BookingProduct\Repositories\BookingProductRepository')->findOneByField('product_id', $product->id))
 
         @push('css')
-            <link rel="stylesheet" href="{{ bagisto_asset('css/default-booking.css') }}">
+            <link rel="stylesheet" href="{{ asset('vendor/webkul/booking-product/assets/css/default-booking.css') }}">
         @endpush
 
-        <booking-information></booking-information>        
+        <booking-information></booking-information>
 
         @push('scripts')
 
@@ -40,7 +40,7 @@
                     }
                 });
             </script>
-        
+
         @endpush
 
     @endif

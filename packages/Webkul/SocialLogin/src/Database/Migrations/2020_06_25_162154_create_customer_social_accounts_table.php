@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('customer_social_accounts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('customer_id')->unsigned();
             $table->string('provider_name')->nullable();
             $table->string('provider_id')->unique()->nullable();
-
-            $table->integer('customer_id')->unsigned();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

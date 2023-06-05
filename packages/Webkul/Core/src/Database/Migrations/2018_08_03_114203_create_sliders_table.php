@@ -17,10 +17,14 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('path');
-            $table->string('content');
+            $table->text('content')->nullable();
             $table->integer('channel_id')->unsigned();
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->string('locale');
+            $table->integer('sort_order')->unsigned()->default(0);
+            $table->date('expired_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
         });
     }
 
@@ -31,8 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('sliders');
-        Schema::enableForeignKeyConstraints();
     }
 };

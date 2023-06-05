@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\customer;
+namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Shop\Http\Controllers\Controller;

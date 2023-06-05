@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('core_config', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('value');
-            $table->integer('channel_id')->unsigned();
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->text('value');
+            $table->string('channel_code')->nullable();
+            $table->string('locale_code')->nullable();
+            $table->timestamps();
         });
     }
 
