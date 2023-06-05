@@ -35,27 +35,25 @@
                             </div>
                         </div>
                         <div class="text-[#7D7D7D] mt-[25px]">
-                            <li
-                                v-text="addresses.company_name"
-                                v-if="addresses.company_name != ''"
-                            >
-                            </li>
+                            <p>
+                                <span v-if="addresses.company_name != ''">
+                                   @{{addresses.company_name}},
+                                </span>
 
-                            <li v-text="addresses.address1"></li>
+                                    @{{addresses.address1}},
+                                    @{{addresses.city}},
+                                    @{{addresses.state}},  
+                                    
+                                <span v-if="addresses.country">
+                                    @{{addresses.country}},
+                                </span>
 
-                            <li v-text="addresses.city"></li>
+                                <span v-if="addresses.postcode">
+                                    @{{addresses.postcode}},
+                                </span>
 
-                            <li v-text="addresses.state"></li>
-
-                            <li v-text="addresses.country" v-if="addresses.country"></li>
-
-                            <li  v-text="addresses.postcode" v-if="addresses.postcode"></li>
-
-                            <li>
-                                <b>{{ __('shop::app.customer.account.address.index.contact') }}</b> :
-                                <span v-text="addresses.phone"></span>
-                            </li>
-
+                                    @{{addresses.phone}}
+                            </p>
                         </div>
                     </div>
                     <!-- Single card addredd -->
