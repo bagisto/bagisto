@@ -75,9 +75,9 @@
                         },
 
                         applied: {
-                            sort: '{{ $toolbar->getDefaultOrder()['value'] }}',
+                            sort: '{{ $toolbar->getOrder($params)['value'] }}',
 
-                            limit: '{{ $toolbar->getDefaultLimit() }}',
+                            limit: '{{ $toolbar->getLimit($params) }}',
                         }
                     }
                 };

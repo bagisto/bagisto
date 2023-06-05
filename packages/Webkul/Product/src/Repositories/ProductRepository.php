@@ -453,7 +453,7 @@ class ProductRepository extends Repository
      */
     public function getPerPageLimit(array $params): int
     {
-        return product_toolbar()->getDefaultLimit($params);
+        return product_toolbar()->getLimit($params);
     }
 
     /**
@@ -461,11 +461,7 @@ class ProductRepository extends Repository
      */
     public function getSortOptions(array $params): array
     {
-        $sortOptions = product_toolbar()->getAvailableOrders()
-            ->where('value', $params['sort'])
-            ->first();
-
-        return $sortOptions ?: product_toolbar()->getDefaultOrder();
+        return product_toolbar()->getOrder($params);
     }
 
     /**

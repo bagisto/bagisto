@@ -3,32 +3,28 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Category\Repositories\CategoryRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
         protected SliderRepository $sliderRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
     /**
      * Show product or category view. If neither category nor product matches, abort with code 404.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View|\Exception
      */
     public function index(Request $request)
@@ -47,7 +43,13 @@ class ProductsCategoriesProxyController extends Controller
         $category = $this->categoryRepository->findByPath($slugOrPath);
 
         if ($category) {
-            return view('shop::categories.view', compact('category'));
+            return view('shop::categories.view', [
+                'category' => $category,
+                'params'   => [
+                    'sort'  => request()->query('sort'),
+                    'limit' => request()->query('limit'),
+                ],
+            ]);
         }
 
         $product = $this->productRepository->findBySlug($slugOrPath);

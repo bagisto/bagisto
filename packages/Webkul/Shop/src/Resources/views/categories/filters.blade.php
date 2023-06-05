@@ -202,7 +202,7 @@
                     this.filters.applied = {};
 
                     /**
-                     * Clearing child components.
+                     * Clearing child components. Improvisation needed here.
                      */
                     this.$refs.filterItemComponent.forEach((filterItem) => {
                         filterItem.$data.appliedValues = [];
@@ -226,6 +226,13 @@
 
                     appliedValues: [],
                 }
+            },
+
+            mounted() {
+                /**
+                 * Improvisation needed here. Need to figure out other way and sepration also.
+                 */
+                this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
             },
 
             methods: {

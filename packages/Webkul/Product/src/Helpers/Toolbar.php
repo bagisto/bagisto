@@ -58,13 +58,26 @@ class Toolbar
     }
 
     /**
-     * Get default order.
+     * Get default order. This is a crucial part of our system configuration.
+     * It should either be available or fail. There should be no further proceeding.
      */
     public function getDefaultOrder(): array
     {
         return $this->getAvailableOrders()
             ->where('value', core()->getConfigData('catalog.products.storefront.sort_by') ?? 'price-desc')
             ->firstOrFail();
+    }
+
+    /**
+     * Get order.
+     */
+    public function getOrder(array $params = []): array
+    {
+        $order = $this->getAvailableOrders()
+            ->where('value', $params['sort'])
+            ->first();
+
+        return $order ?: $this->getDefaultOrder();
     }
 
     /**
@@ -82,24 +95,34 @@ class Toolbar
     }
 
     /**
-     * Get default limit. Currently returning integer in future
-     * may be come from configuration.
+     * Returns default limit. By default it will be 12. Leaved a
+     * space for the admin configuration and customization.
+     *
+     * @return integer
      */
-    public function getDefaultLimit(array $params = []): int
+    public function getDefaultLimit(): int
+    {
+        return 12;
+    }
+
+    /**
+     * Get limit.
+     */
+    public function getLimit(array $params): int
     {
         /**
-         * Set a default value of 12 for the 'limit' parameter,
+         * Set a default value for the 'limit' parameter,
          * in case it is not provided or is not a valid integer.
          */
-        $limit = (int) ($params['limit'] ?? 12);
+        $limit = (int) ($params['limit'] ?? $this->getDefaultLimit());
 
         /**
          * If the 'limit' parameter is present but value not present
-         * in available limits, use the default value of 12 instead.
+         * in available limits, use the default value instead.
          */
         return in_array($limit, $this->getAvailableLimits()->toArray())
             ? $limit
-            : 12;
+            : $this->getDefaultLimit();
     }
 
     /**
