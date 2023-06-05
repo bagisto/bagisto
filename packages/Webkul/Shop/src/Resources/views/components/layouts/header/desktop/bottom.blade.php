@@ -245,11 +245,11 @@
            },
 
            mounted() {
-                this.cart();
+                this.getCart();
            },
 
            methods: {
-                cart() {
+                getCart() {
                     this.$axios.get(`{{ route('shop.checkout.cart') }}`).then(response => {
                         this.miniCart = response.data;
                     }).catch(error => {});
