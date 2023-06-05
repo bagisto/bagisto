@@ -4,7 +4,7 @@
         <div class="bg-white h-full pointer-events-auto w-full overflow-auto">
             <div class="flex flex-col h-full w-full ">
                 <div class="overflow-auto flex-1 min-h-0 min-w-0">
-                    <div class="flex flex-col h-full">
+                    <div class="flex flex-col h-full" v-for="cart in miniCart">
 
                         {{-- Cart Header with offer message --}}
                         <div class="grid gap-y-[10px] p-[25px] pb-[20px]">
@@ -22,20 +22,69 @@
                         </div>
 
                         {{-- Product Listing in cart --}}
-                        <div class="px-[25px] overflow-auto flex-1" v-if="cartProduct > 0">
+                        <div class="px-[25px] overflow-auto flex-1">
                             <div class="grid gap-[50px] mt-[35px]">
-                                <v-mini-cart {{ $attributes }} :cartProduct="cartProduct"></v-mini-cart>
+                                <div class="flex gap-x-[20px]" v-for="item in cart.items">
+                                    <div class="">
+                                        <img 
+                                            class="max-w-[110px] max-h-[110px] rounded-[12px]"
+                                            src="{{ bagisto_asset('images/wishlist-user.png')}}" 
+                                            alt="" 
+                                            title=""
+                                        >
+                                    </div>
+                        
+                                    <div class="grid gap-y-[10px]" >
+                                        <p class="text-[16px] font-medium">
+                                            @{{ item.name }}
+                                        </p>
+                        
+                                        <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
+                                            <p class="text-[14px]">
+                                                @lang('shop::app.checkout.cart.item.quantity') 
+                                                @{{ item.quantity }}
+                                            </p>
+                                        </div>
+                        
+                                        <div class="flex gap-[20px] items-center flex-wrap">
+                                            <div class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]">
+                                                <span class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"></span>
+                        
+                                                <p>
+                                                    @{{ item.quantity }}
+                                                </p>
+                        
+                                                <span class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"></span>
+                                            </div>
+                        
+                                            {{-- <x-shop::form
+                                                :action="`{{ route('shop.checkout.cart.destroy', { item.id }) }}`"
+                                                method="DELETE"
+                                            >
+                                                <button>
+                                                    @lang('shop::app.checkout.cart.remove')
+                                                </button>
+                                            </x-shop::form> --}}
+                                            <a 
+                                                class="text-[16px] text-[#4D7EA8]" 
+                                                :href="`{{ route('shop.checkout.cart.destroy', '')}}/${ item.id }`"
+                                            >
+                                                @lang('shop::app.checkout.cart.remove')
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="pb-[30px]" v-if="cartProduct > 0">
+                        <div class="pb-[30px]" v-if="cart.items_count > 0">
                             <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
                                 <p class="text-[14px] font-medium text-[#7D7D7D]">
                                     @lang('shop::app.checkout.cart.subtotal')
                                 </p>
 
                                 <p class="text-[30px] font-semibold">
-                                    $20.00
+                                    $@{{ cart.grand_total }}
                                 </p>
                             </div>
 
@@ -72,53 +121,10 @@
     </div>
 </div>
 
-<script>
-    function closeCart() {
-        document.getElementById('mini-cart').style.display = 'none';
-    }
-</script>
-
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-mini-cart-template">        
-        <div class="flex gap-x-[20px]">
-            <div class="">
-                <img 
-                    class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                    src="{{ bagisto_asset('images/wishlist-user.png')}}" 
-                    alt="" 
-                    title=""
-                >
-            </div>
-
-            <div class="grid gap-y-[10px]">
-                <p class="text-[16px] font-medium">
-                    @{{ cartProduct.name }}
-                </p>
-
-                <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
-                    <p class="text-[14px]">
-                        @lang('shop::app.checkout.cart.item.color') Red
-                    </p>
-
-                    <p class="text-[14px]">
-                        @lang('shop::app.checkout.cart.item.size') XL
-                    </p>
-                </div>
-
-                <div class="flex gap-[20px] items-center flex-wrap">
-                    <div class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]">
-                        <span class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"></span>
-
-                        <p>2</p>
-
-                        <span class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"></span>
-                    </div>
-
-                    <a class="text-[16px] text-[#4D7EA8]" href="/">
-                        @lang('shop::app.checkout.cart.remove')
-                    </a>
-                </div>
-            </div>
-        </div>
+    <script>
+        function closeCart() {
+            document.getElementById('mini-cart').style.display = 'none';
+        }
     </script>
 @endpushOnce

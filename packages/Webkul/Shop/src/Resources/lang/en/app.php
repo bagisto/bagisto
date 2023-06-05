@@ -159,8 +159,7 @@ return [
         'cart' => [
 
             'item' => [
-                'color'           => 'Color:',
-                'size'            => 'Size:',
+                'quantity'        => 'Quantity:',
                 'success-remove'  => 'Item is successfully removed from the cart.',
                 'warning-remove'  => 'No items to remove from the cart.',
             ],

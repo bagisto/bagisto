@@ -106,14 +106,13 @@
         @if($showWishlist)
             <div>
                 <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                    <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
+                    <span class="icon-heart text-[24px] cursor-pointer"></span>
                 </a>
             </div>
         @endif
 
         <v-mini-cart></v-mini-cart>
 
-        @include('shop::checkout.cart.mini-cart')
 
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>
@@ -229,6 +228,8 @@
 @pushOnce('scripts')
    <script type="text/x-template" id="v-mini-cart-template">
        <div>
+            @include('shop::checkout.cart.mini-cart')
+
            <span class="icon-cart text-[24px] cursor-pointer"></span>  
        </div>
    </script>
@@ -237,16 +238,22 @@
        app.component("v-mini-cart", {
            template: '#v-mini-cart-template',
 
+           data() {
+                return  {
+                    miniCart: [],
+                }
+           },
+
            mounted() {
                 this.cart();
            },
 
            methods: {
-               cart() {
-                   this.$axios.get(`{{ route('shop.checkout.cart') }}`).then(response => {
-                       this.miniCart = response.data;
-                   }).catch(error => {});
-               },
+                cart() {
+                    this.$axios.get(`{{ route('shop.checkout.cart') }}`).then(response => {
+                        this.miniCart = response.data;
+                    }).catch(error => {});
+                },
            }
        });
    </script>

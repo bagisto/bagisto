@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\Api\Checkout;
+namespace Webkul\Shop\Http\Controllers\API\Checkout;
 
 use Cart;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -31,20 +31,20 @@ class CartController extends Controller
 
         $cart = Cart::getCart();
 
-        return CartResource::collection($cart);
+        if ($cart->count()) {
+            return  new CartResource($cart);
+        }
+
+        return true;
     }
 
     /**
      * Function for remove single cart product.
-     *
-     * @return \Illuminate\View\View
      */
     public function destroy($id) {
         Cart::removeItem($id)
             ? session()->flash('success', trans('shop::app.components.mini-cart.item.success-remove'))
-            : session()->flash('success', trans('shop::app.components.mini-cart.item.warning-remove'));
-
-        return redirect()->back();
+            : session()->flash('success', trans('shop::app.components.mini-cart.item.warning-remove'));        
     }
 
     /**
