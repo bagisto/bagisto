@@ -419,7 +419,7 @@ return [
             'customer-not-notified'        => ':date | Cliente <b>No Notificado</b>',
             'transactions'                 => 'Transacciones',
             'create-success'               => 'Pedido creado con éxito',
-            'cancel-error'                 => 'Pedido no cancelado'
+            'cancel-error'                 => 'Pedido no cancelado',
         ],
 
         'invoices' => [
@@ -452,7 +452,7 @@ return [
             'status-overdue'         => 'Atrasado',
             'status-pending'         => 'Pendiente de pago',
             'status-paid'            => 'Pagado',
-            'create-success'         => 'Factura creada con éxito'
+            'create-success'         => 'Factura creada con éxito',
         ],
 
         'shipments' => [
@@ -480,7 +480,7 @@ return [
             'creation-error'    => 'El envío no puede ser creado para este pedido.',
             'order-error'       => 'La creación de envíos no está permitido.',
             'quantity-invalid'  => 'La cantidad pedida es inválida o no está disponible.',
-            'create-success'    => 'Envíos creados con éxito'
+            'create-success'    => 'Envíos creados con éxito',
         ],
 
         'refunds' => [
@@ -504,7 +504,7 @@ return [
             'action'                      => 'Acción',
             'view-title'                  => 'Reembolso #:refund_id',
             'invalid-refund-amount-error' => 'El monto del reembolso no debe ser cero.',
-            'create-success'              => 'Reembolso creado con éxito'
+            'create-success'              => 'Reembolso creado con éxito',
 
         ],
 
@@ -524,11 +524,11 @@ return [
             'created-at'          => 'Creado en',
             'transaction-details' => 'Detalles de la transacción',
             'response'            => [
-                'invoice-missing'   => 'Este factura # no existe',
-                'transaction-saved' => 'La transacción ha sido guardada',
-                'already-paid'      => 'Esta factura ya ha sido pagada',
+                'invoice-missing'            => 'Este factura # no existe',
+                'transaction-saved'          => 'La transacción ha sido guardada',
+                'already-paid'               => 'Esta factura ya ha sido pagada',
                 'transaction-amount-exceeds' => 'El monto especificado de esta transacción excede el monto total de la factura.',
-                'transaction-amount-zero' => 'Monto de la transacción puede ser cero o menos',
+                'transaction-amount-zero'    => 'Monto de la transacción puede ser cero o menos',
             ],
         ],
     ],
@@ -554,7 +554,7 @@ return [
             ],
             'simple'                        => 'Simple',
             'configurable'                  => 'Configurable',
-            'family'                       => 'Familia de atributos',
+            'family'                        => 'Familia de atributos',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Atributos configurables',
             'attribute-header'              => 'Atributo(s)',
@@ -699,30 +699,30 @@ return [
             ],
         ],
         'families'   => [
-            'title'                => 'Familias',
-            'add-family-btn-title' => 'Agregar familia',
-            'add-title'            => 'Agregar familia',
-            'edit-title'           => 'Editar familia',
-            'save-btn-title'       => 'Guardar familia',
-            'general'              => 'General',
-            'code'                 => 'Código familia',
-            'name'                 => 'Nombre',
-            'groups'               => 'Grupos',
-            'add-group-title'      => 'Agregar grupo',
-            'edit-group-title'     => 'Editar grupo',
-            'update-group-title'   => 'Actualizar grupo',
-            'position'             => 'Posición',
-            'attribute-code'       => 'Código',
-            'type'                 => 'Tipo',
-            'add-attribute-title'  => 'Agregar atributos',
-            'search'               => 'Buscar',
-            'group-exist-error'    => 'Ya existe un grupo con el mismo nombre.',
-            'create-success'       => 'Familia creada con éxito.',
-            'update-success'       => 'Familia actualizada con éxito.',
-            'delete-success'       => 'Familia eliminada con éxito.',
-            'delete-failed'        => 'Se encontró un error al eliminar la familia.',
-            'user-define-error'    => 'No se puede eliminar la familia de atributos del sistema',
-            'last-delete-error'    => 'Se requiere al menos una familia.',
+            'title'                   => 'Familias',
+            'add-family-btn-title'    => 'Agregar familia',
+            'add-title'               => 'Agregar familia',
+            'edit-title'              => 'Editar familia',
+            'save-btn-title'          => 'Guardar familia',
+            'general'                 => 'General',
+            'code'                    => 'Código familia',
+            'name'                    => 'Nombre',
+            'groups'                  => 'Grupos',
+            'add-group-title'         => 'Agregar grupo',
+            'edit-group-title'        => 'Editar grupo',
+            'update-group-title'      => 'Actualizar grupo',
+            'position'                => 'Posición',
+            'attribute-code'          => 'Código',
+            'type'                    => 'Tipo',
+            'add-attribute-title'     => 'Agregar atributos',
+            'search'                  => 'Buscar',
+            'group-exist-error'       => 'Ya existe un grupo con el mismo nombre.',
+            'create-success'          => 'Familia creada con éxito.',
+            'update-success'          => 'Familia actualizada con éxito.',
+            'delete-success'          => 'Familia eliminada con éxito.',
+            'delete-failed'           => 'Se encontró un error al eliminar la familia.',
+            'user-define-error'       => 'No se puede eliminar la familia de atributos del sistema',
+            'last-delete-error'       => 'Se requiere al menos una familia.',
             'attribute-product-error' => 'familia se utiliza en productos.',
         ],
         'categories' => [
@@ -762,12 +762,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'Configuración',
-        'save-btn-title' => 'Guardar',
-        'save-message'   => 'Configuración guardada con éxito',
-        'yes'            => 'Sí',
-        'no'             => 'No',
-        'delete'         => 'Borrar',
+        'title'                       => 'Configuración',
+        'save-btn-title'              => 'Guardar',
+        'save-message'                => 'Configuración guardada con éxito',
+        'yes'                         => 'Sí',
+        'no'                          => 'No',
+        'delete'                      => 'Borrar',
         'enable-atleast-one-shipping' => 'Habilite al menos un método de envío.',
         'enable-atleast-one-payment'  => 'Habilite al menos un método de pago.',
 
@@ -844,19 +844,19 @@ return [
             'name'           => 'Nombre',
         ],
         'currencies'        => [
-            'title'             => 'Monedas',
-            'add-title'         => 'Agregar moneda',
-            'edit-title'        => 'Editar moneda',
-            'save-btn-title'    => 'Guardar moneda',
-            'general'           => 'General',
-            'code'              => 'Código',
-            'name'              => 'Nombre',
-            'symbol'            => 'Símbolo',
+            'title'              => 'Monedas',
+            'add-title'          => 'Agregar moneda',
+            'edit-title'         => 'Editar moneda',
+            'save-btn-title'     => 'Guardar moneda',
+            'general'            => 'General',
+            'code'               => 'Código',
+            'name'               => 'Nombre',
+            'symbol'             => 'Símbolo',
             'decimal'            => 'Decimal',
-            'create-success'    => 'Moneda creada con éxito.',
-            'update-success'    => 'Moneda actualizada con éxito.',
-            'delete-success'    => 'Moneda borrada con éxito.',
-            'last-delete-error' => 'Se requiere al menos una moneda.',
+            'create-success'     => 'Moneda creada con éxito.',
+            'update-success'     => 'Moneda actualizada con éxito.',
+            'delete-success'     => 'Moneda borrada con éxito.',
+            'last-delete-error'  => 'Se requiere al menos una moneda.',
         ],
         'exchange_rates'    => [
             'title'                    => 'Tasas de cambio',
@@ -1017,20 +1017,20 @@ return [
 
     'customers' => [
         'groups' => [
-            'add-title'       => 'Agregar grupo',
-            'edit-title'      => 'Editar grupo',
-            'save-btn-title'  => 'Guardar grupo',
-            'title'           => 'Grupos',
-            'code'            => 'Código',
-            'name'            => 'Nombre',
-            'is_user_defined' => 'Usuario definido',
-            'yes'             => 'Sí',
-            'create-success'  => 'Grupo de clientes creado con éxito',
-            'update-success'  => 'Grupo de clientes actualizado con éxito',
-            'delete-success'  => 'Grupo de clientes eliminado con éxito',
-            'delete-failed'   => '¡Error! El grupo de clientes no se puede eliminar',
+            'add-title'          => 'Agregar grupo',
+            'edit-title'         => 'Editar grupo',
+            'save-btn-title'     => 'Guardar grupo',
+            'title'              => 'Grupos',
+            'code'               => 'Código',
+            'name'               => 'Nombre',
+            'is_user_defined'    => 'Usuario definido',
+            'yes'                => 'Sí',
+            'create-success'     => 'Grupo de clientes creado con éxito',
+            'update-success'     => 'Grupo de clientes actualizado con éxito',
+            'delete-success'     => 'Grupo de clientes eliminado con éxito',
+            'delete-failed'      => '¡Error! El grupo de clientes no se puede eliminar',
             'customer-associate' => 'El cliente no se puede eliminar porque el cliente está asociado con este grupo.',
-       
+
         ],
 
         'addresses' => [
@@ -1065,8 +1065,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'logige sisse kliendina',
-            'login-message'=>'logisite sisse kui :customer_name'
+            'grid-title'   => 'logige sisse kliendina',
+            'login-message'=> 'logisite sisse kui :customer_name',
         ],
 
         'note' => [
@@ -1135,7 +1135,6 @@ return [
             'delete'         => 'El suscriptor fue borrado con éxito',
             'delete-failed'  => '¡Error! El suscriptor no pudo ser borrado',
         ],
-
 
         'orders' => [
             'list'  => ':customer_name\'s orders List',
@@ -1364,7 +1363,7 @@ return [
             'create-success' => 'Mapa del sitio creado con éxito.',
             'update-success' => 'Mapa del sitio actualizado con éxito.',
             'delete-success' => 'Mapa del sitio borrado con éxito.',
-        ]
+        ],
     ],
 
     'error' => [
@@ -1626,7 +1625,7 @@ return [
             'sort-by'                               => 'Ordenar Por',
             'from-z-a'                              => 'Desde Z-A',
             'from-a-z'                              => 'Desde A-Z',
-            'newest-first'                          => 'Más Nuevos Primero',
+            'latest-first'                          => 'Más Nuevos Primero',
             'oldest-first'                          => 'Más Viejos Primero',
             'cheapest-first'                        => 'Más Barato Primero',
             'expensive-first'                       => 'Más Caro Primero',
@@ -1709,11 +1708,11 @@ return [
         'read-all'                    => 'Marcar como leído',
         'notification-marked-success' => 'Notificación marcada con éxito',
         'order-status-messages'       => [
-            'completed'  => 'Pedido completado',
-            'closed'     => 'Orden Cerrada',
-            'canceled'   => 'Orden cancelada',
-            'pending'    => 'Orden pendiente',
-            'processing' => 'procesando orden',
+            'completed'       => 'Pedido completado',
+            'closed'          => 'Orden Cerrada',
+            'canceled'        => 'Orden cancelada',
+            'pending'         => 'Orden pendiente',
+            'processing'      => 'procesando orden',
             'pending_payment' => 'Pago pendiente',
         ],
     ],

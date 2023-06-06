@@ -16,7 +16,7 @@ return [
     ],
 
     'common' => [
-        'error'              =>'משהו השתבש, אנא נסה שוב מאוחר יותר.',
+        'error'              => 'משהו השתבש, אנא נסה שוב מאוחר יותר.',
         'image-upload-limit' => 'גודל העלאת התמונה המקסימלי הוא 2MB',
         'no-result-found'    => 'לא הצלחנו למצוא רשומות',
     ],
@@ -50,7 +50,7 @@ return [
         'zero'      => '0',
     ],
     'footer' => [
-        'subscribe-newsletter' =>'הירשם לניוזלטר',
+        'subscribe-newsletter' => 'הירשם לניוזלטר',
         'subscribe'            => 'הירשם',
         'locale'               => 'מקומי',
         'currency'             => 'מַטְבֵּעַ',
@@ -103,7 +103,7 @@ return [
             'removed'               => 'פריט הוסר בהצלחה מרשימת ההשוואה',
             'removed-all'           => 'כל הפריטים הוסרו בהצלחה מרשימת ההשוואה',
             'confirm-remove-all'    => 'האם אתה בטוח שברצונך למחוק את כל פריטי ההשוואה?',
-            'empty-text'            => "אין לך פריטים ברשימת ההשוואה שלך",
+            'empty-text'            => 'אין לך פריטים ברשימת ההשוואה שלך',
             'product_image'         => 'תמונת מוצר',
             'actions'               => 'פעולות',
         ],
@@ -433,7 +433,7 @@ return [
         'sort-by'                  => 'מיין לפי',
         'from-a-z'                 => 'מא-ת',
         'from-z-a'                 => 'מז-א',
-        'newest-first'             => 'החדש ביותר יהיה ראשון',
+        'latest-first'             => 'החדש ביותר יהיה ראשון',
         'oldest-first'             => 'המבוגר ביותר ראשון',
         'cheapest-first'           => 'הכי זול ראשון',
         'expensive-first'          => 'יקר קודם',
@@ -483,17 +483,17 @@ return [
     ],
 
     'buynow' => [
-        'no-options' =>'אנא בחר אפשרויות לפני רכישת מוצר זה.',
+        'no-options' => 'אנא בחר אפשרויות לפני רכישת מוצר זה.',
     ],
 
     'checkout' => [
         'cart' => [
             'integrity'                 => [
-                'missing_fields'  => 'חסרים כמה שדות חובה עבור מוצר זה.',
-                'missing_options' => 'חסרות אפשרויות עבור המוצר הזה.',
-                'missing_links'   => 'חסרים קישורים להורדה למוצר זה.',
-                'qty_missing'     => 'לפחות מוצר אחד צריך לכלול יותר מכמות אחת.',
-                'qty_impossible'  => 'לא ניתן להוסיף יותר מאחד מהמוצרים האלה לעגלה.',
+                'missing_fields'         => 'חסרים כמה שדות חובה עבור מוצר זה.',
+                'missing_options'        => 'חסרות אפשרויות עבור המוצר הזה.',
+                'missing_links'          => 'חסרים קישורים להורדה למוצר זה.',
+                'qty_missing'            => 'לפחות מוצר אחד צריך לכלול יותר מכמות אחת.',
+                'qty_impossible'         => 'לא ניתן להוסיף יותר מאחד מהמוצרים האלה לעגלה.',
                 'select_hourly_duration' => 'בחר משך משבצת של שעה אחת.',
             ],
             'create-error'              => 'נתקלתי בבעיה כלשהי בעת יצירת מופע של עגלה.',
@@ -536,7 +536,7 @@ return [
             ],
             'minimum-order-message'     => 'כמות ההזמנה המינימלית היא :כמות',
             'suspended-account-message' => 'חשבונך הושעה.',
-            'inactive-account-message' =>  'החשבון שלך לא היה פעיל.',
+            'inactive-account-message'  => 'החשבון שלך לא היה פעיל.',
             'check-shipping-address'    => 'אנא בדוק כתובת למשלוח.',
             'check-billing-address'     => 'אנא בדוק את כתובת החיוב.',
             'specify-shipping-method'   => 'אנא ציין את שיטת המשלוח.',
@@ -599,22 +599,22 @@ return [
         ],
 
         'total' => [
-            'order-summary'       => 'סיכום הזמנה',
-            'sub-total'           => 'פריטים',
-            'grand-total'         => 'סכום סופי',
-            'delivery-charges'    => 'דמי משלוח',
-            'tax'                 => 'מַס',
-            'discount'            => 'הנחה',
-            'price'               => 'מחיר',
-            'disc-amount'         => 'כמות בהנחה',
-            'new-grand-total'     => 'Grand Total חדש',
-            'coupon'              => 'קוּפּוֹן',
-            'coupon-applied'      => 'קופון מוחל',
-            'remove-coupon'       => 'הסר קופון',
-            'cannot-apply-coupon' => 'לא ניתן להחיל קופון',
-            'invalid-coupon'      => 'קוד הקופון אינו חוקי.',
-            'success-coupon'      => 'קוד הקופון הוחל בהצלחה.',
-            'coupon-apply-issue'  => 'לא ניתן להחיל קוד קופון.',
+            'order-summary'          => 'סיכום הזמנה',
+            'sub-total'              => 'פריטים',
+            'grand-total'            => 'סכום סופי',
+            'delivery-charges'       => 'דמי משלוח',
+            'tax'                    => 'מַס',
+            'discount'               => 'הנחה',
+            'price'                  => 'מחיר',
+            'disc-amount'            => 'כמות בהנחה',
+            'new-grand-total'        => 'Grand Total חדש',
+            'coupon'                 => 'קוּפּוֹן',
+            'coupon-applied'         => 'קופון מוחל',
+            'remove-coupon'          => 'הסר קופון',
+            'cannot-apply-coupon'    => 'לא ניתן להחיל קופון',
+            'invalid-coupon'         => 'קוד הקופון אינו חוקי.',
+            'success-coupon'         => 'קוד הקופון הוחל בהצלחה.',
+            'coupon-apply-issue'     => 'לא ניתן להחיל קוד קופון.',
             'coupon-already-applied' => 'קוד קופון כבר הוחל.',
         ],
 
@@ -647,7 +647,7 @@ return [
             'tax'               => 'מַס',
             'discount'          => 'הנחה',
             'grand-total'       => 'סכום סופי',
-            'final-summary'     => "תודה שהבעת את התעניינותך בחנות שלנו, אנו נשלח לך מספר מעקב לאחר שנשלח",
+            'final-summary'     => 'תודה שהבעת את התעניינותך בחנות שלנו, אנו נשלח לך מספר מעקב לאחר שנשלח',
             'help'              => 'אם אתה צריך כל סוג של עזרה, אנא צור איתנו קשר בכתובת:support_email',
             'thanks'            => 'תודה!',
 
@@ -778,4 +778,4 @@ return [
         'delete-success' => ':name נמחק בהצלחה.',
         'submit-success' => ':name נשלח בהצלחה.',
     ],
-];?>
+];

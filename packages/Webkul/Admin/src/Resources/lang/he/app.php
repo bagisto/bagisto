@@ -290,7 +290,7 @@ return [
             'submit-btn-title' => 'Send Password Reset Email',
             'passwords'        => [
                 'throttled'        => 'Warning: You have requested password reset recently, please check your email.',
-            ]
+            ],
         ],
 
         'reset-password' => [
@@ -522,11 +522,11 @@ return [
             'created-at'          => 'Created At',
             'transaction-details' => 'Transaction Details',
             'response'            => [
-                'invoice-missing'   => 'This invoice id does not exist',
-                'transaction-saved' => 'The transaction has been saved',
-                'already-paid'      => 'This invoice has already been paid',
+                'invoice-missing'            => 'This invoice id does not exist',
+                'transaction-saved'          => 'The transaction has been saved',
+                'already-paid'               => 'This invoice has already been paid',
                 'transaction-amount-exceeds' => 'The specified amount of this transaction exceeds the total amount of the invoice.',
-                'transaction-amount-zero' => 'Transaction amount can be zero or less',
+                'transaction-amount-zero'    => 'Transaction amount can be zero or less',
             ],
         ],
     ],
@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'Configurable',
 
             ],
-            'family'                       => 'Attribute Family',
+            'family'                        => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
             'attribute-header'              => 'Attribute(s)',
@@ -744,12 +744,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'Configuration',
-        'save-btn-title' => 'Save',
-        'save-message'   => 'Configuration saved successfully',
-        'yes'            => 'Yes',
-        'no'             => 'No',
-        'delete'         => 'Delete',
+        'title'                       => 'Configuration',
+        'save-btn-title'              => 'Save',
+        'save-message'                => 'Configuration saved successfully',
+        'yes'                         => 'Yes',
+        'no'                          => 'No',
+        'delete'                      => 'Delete',
         'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
         'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
 
@@ -826,19 +826,19 @@ return [
             'name'           => 'Name',
         ],
         'currencies'        => [
-            'title'             => 'Currencies',
-            'add-title'         => 'Add Currency',
-            'edit-title'        => 'Edit Currency',
-            'save-btn-title'    => 'Save Currency',
-            'general'           => 'General',
-            'code'              => 'Code',
-            'name'              => 'Name',
-            'symbol'            => 'Symbol',
+            'title'              => 'Currencies',
+            'add-title'          => 'Add Currency',
+            'edit-title'         => 'Edit Currency',
+            'save-btn-title'     => 'Save Currency',
+            'general'            => 'General',
+            'code'               => 'Code',
+            'name'               => 'Name',
+            'symbol'             => 'Symbol',
             'decimal'            => 'Decimal',
-            'create-success'    => 'Currency created successfully.',
-            'update-success'    => 'Currency updated successfully.',
-            'delete-success'    => 'Currency deleted successfully.',
-            'last-delete-error' => 'At least one Currency is required.',
+            'create-success'     => 'Currency created successfully.',
+            'update-success'     => 'Currency updated successfully.',
+            'delete-success'     => 'Currency deleted successfully.',
+            'last-delete-error'  => 'At least one Currency is required.',
         ],
         'exchange_rates'    => [
             'title'                    => 'Exchange Rates',
@@ -1046,8 +1046,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'login as customer',
-            'login-message'=>'you logged in as :customer_name'
+            'grid-title'   => 'login as customer',
+            'login-message'=> 'you logged in as :customer_name',
         ],
 
         'note' => [
@@ -1336,7 +1336,7 @@ return [
             'create-success' => 'Sitemap created successfully.',
             'update-success' => 'Sitemap updated successfully.',
             'delete-success' => 'Sitemap deleted successfully.',
-        ]
+        ],
     ],
 
     'error' => [
@@ -1593,7 +1593,7 @@ return [
             'sort-by'                               => 'Sort By',
             'from-z-a'                              => 'From Z-A',
             'from-a-z'                              => 'From A-Z',
-            'newest-first'                          => 'Newest First',
+            'latest-first'                          => 'Newest First',
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
@@ -1684,11 +1684,11 @@ return [
         'read-all'                    => 'Mark as Read',
         'notification-marked-success' => 'Notification Marked Successfully',
         'order-status-messages'       => [
-            'completed'  => 'Order Completed',
-            'closed'     => 'Order Closed',
-            'canceled'   => 'Order Canceled',
-            'pending'    => 'Order Pending',
-            'processing' => 'Order Processing',
+            'completed'       => 'Order Completed',
+            'closed'          => 'Order Closed',
+            'canceled'        => 'Order Canceled',
+            'pending'         => 'Order Pending',
+            'processing'      => 'Order Processing',
             'pending_payment' => 'Pending Payment',
         ],
     ],

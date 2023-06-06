@@ -38,6 +38,7 @@ return new class extends Migration
             $table->integer('product_id')->unsigned();
             $table->integer('cart_id')->unsigned();
             $table->integer('tax_category_id')->unsigned()->nullable();
+            $table->string('applied_cart_rule_ids')->nullable();
             $table->json('additional')->nullable();
             $table->timestamps();
 

@@ -215,6 +215,15 @@ return [
         ],
     ],
 
+    'checkout' => [
+        'success' => [
+            'title'         => 'Order successfully placed',
+            'thanks'        => 'Thank you for your order!',
+            'order-id-info' => 'Your order id is #:order_id',
+            'info'          => 'We will email you, your order details and tracking information',
+        ],
+    ],
+
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
         'cancel-error'       => ':name can not be canceled.',
@@ -667,7 +676,7 @@ return [
         'sort-by'                  => 'Sort By',
         'from-a-z'                 => 'From A-Z',
         'from-z-a'                 => 'From Z-A',
-        'newest-first'             => 'Newest First',
+        'latest-first'             => 'Newest First',
         'oldest-first'             => 'Oldest First',
         'cheapest-first'           => 'Cheapest First',
         'expensive-first'          => 'Expensive First',

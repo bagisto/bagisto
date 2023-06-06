@@ -519,9 +519,9 @@ return [
             'created-at'          => 'पर बनाया गया',
             'transaction-details' => 'लेनदेन का विवरण',
             'response'            => [
-                'invoice-missing'   => 'यह चालान आईडी मौजूद नहीं है',
-                'transaction-saved' => 'लेन-देन सहेजा गया है',
-                'already-paid'      => 'इस चालान का भुगतान पहले ही किया जा चुका है',
+                'invoice-missing'            => 'यह चालान आईडी मौजूद नहीं है',
+                'transaction-saved'          => 'लेन-देन सहेजा गया है',
+                'already-paid'               => 'इस चालान का भुगतान पहले ही किया जा चुका है',
                 'transaction-amount-exceeds' => 'इस लेन-देन की निर्दिष्ट राशि चालान की कुल राशि से अधिक है।',
                 'transaction-amount-zero'    => 'लेन-देन की राशि शून्य या कम हो सकती है',
             ],
@@ -547,7 +547,7 @@ return [
                 'configurable'                  => 'कॉन्फ़िगर करने योग्य',
 
             ],
-            'family'                       => 'विशेषता परिवार',
+            'family'                        => 'विशेषता परिवार',
             'sku'                           => 'एसकेयू',
             'configurable-attributes'       => 'कॉन्फ़िगर करने योग्य गुण',
             'attribute-header'              => 'गुण)',
@@ -626,7 +626,7 @@ return [
                 'quantity-integer'  => 'मात्रा पूर्णांक होनी चाहिए।',
                 'quantity-min-zero' => 'मात्रा शून्य से अधिक होनी चाहिए।',
             ],
-            'video-size'                    =>'अधिकतम वीडियो आकार इस प्रकार होना चाहिए: आकार',
+            'video-size'                    => 'अधिकतम वीडियो आकार इस प्रकार होना चाहिए: आकार',
             'pending-ordered-qty'           => 'लंबित आदेशित मात्रा: :मात्रा',
             'pending-ordered-qty-info'      => 'शिपमेंट के बाद लंबित आदेशित मात्रा को संबंधित इन्वेंट्री सोर्स से घटा दिया जाएगा। रद्दीकरण के मामले में लंबित मात्रा बिक्री के लिए उपलब्ध होगी।',
         ],
@@ -741,12 +741,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'विन्यास',
-        'save-btn-title' => 'सहेजें',
-        'save-message'   => 'कॉन्फ़िगरेशन सफलतापूर्वक सहेजा गया',
-        'yes'            => 'हां',
-        'no'             => 'नहीं',
-        'delete'         => 'हटाएं',
+        'title'                       => 'विन्यास',
+        'save-btn-title'              => 'सहेजें',
+        'save-message'                => 'कॉन्फ़िगरेशन सफलतापूर्वक सहेजा गया',
+        'yes'                         => 'हां',
+        'no'                          => 'नहीं',
+        'delete'                      => 'हटाएं',
         'enable-atleast-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
         'enable-atleast-one-payment'  => 'कम से कम एक भुगतान विधि सक्षम करें।',
 
@@ -823,19 +823,19 @@ return [
             'name'           => 'नाम',
         ],
         'currencies'        => [
-            'title'             => 'मुद्राएं',
-            'add-title'         => 'मुद्रा जोड़ें',
-            'edit-title'        => 'मुद्रा संपादित करें',
-            'save-btn-title'    => 'मुद्रा बचाओ',
-            'general'           => 'आम',
-            'code'              => 'कोड',
-            'name'              => 'नाम',
-            'symbol'            => 'प्रतीक',
+            'title'              => 'मुद्राएं',
+            'add-title'          => 'मुद्रा जोड़ें',
+            'edit-title'         => 'मुद्रा संपादित करें',
+            'save-btn-title'     => 'मुद्रा बचाओ',
+            'general'            => 'आम',
+            'code'               => 'कोड',
+            'name'               => 'नाम',
+            'symbol'             => 'प्रतीक',
             'decimal'            => 'Decimal',
-            'create-success'    => 'मुद्रा सफलतापूर्वक बनाई गई।',
-            'update-success'    => 'मुद्रा सफलतापूर्वक अपडेट की गई।',
-            'delete-success'    => 'मुद्रा सफलतापूर्वक हटाई गई।',
-            'last-delete-error' => 'कम से कम एक मुद्रा की आवश्यकता है।',
+            'create-success'     => 'मुद्रा सफलतापूर्वक बनाई गई।',
+            'update-success'     => 'मुद्रा सफलतापूर्वक अपडेट की गई।',
+            'delete-success'     => 'मुद्रा सफलतापूर्वक हटाई गई।',
+            'last-delete-error'  => 'कम से कम एक मुद्रा की आवश्यकता है।',
         ],
         'exchange_rates'    => [
             'title'                    => 'विनिमय दरें',
@@ -1043,8 +1043,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'ग्राहक के रूप में लॉगिन करें',
-            'login-message'=>'आप के रूप में लॉग इन किया :customer_name'
+            'grid-title'   => 'ग्राहक के रूप में लॉगिन करें',
+            'login-message'=> 'आप के रूप में लॉग इन किया :customer_name',
         ],
 
         'note' => [
@@ -1055,7 +1055,7 @@ return [
         ],
 
         'customers' => [
-            'add-title'                 =>'ग्राहक जोड़ें',
+            'add-title'                 => 'ग्राहक जोड़ें',
             'edit-title'                => 'ग्राहक संपादित करें',
             'title'                     => 'ग्राहक',
             'first_name'                => 'पहला नाम',
@@ -1333,7 +1333,7 @@ return [
             'create-success' => 'साइटमैप सफलतापूर्वक बनाया गया।',
             'update-success' => 'साइटमैप सफलतापूर्वक अपडेट किया गया।',
             'delete-success' => 'साइटमैप सफलतापूर्वक हटा दिया गया।',
-        ]
+        ],
     ],
 
     'error' => [
@@ -1479,7 +1479,7 @@ return [
         ],
 
         'system' => [
-            'catalog'                               =>'कैटलॉग',
+            'catalog'                               => 'कैटलॉग',
             'homepage'                              => 'मुखपृष्ठ विन्यास',
             'product-view-page'                     => 'उत्पाद दृश्य पृष्ठ कॉन्फ़िगरेशन',
             'cart-view-page'                        => 'कार्ट व्यू पेज कॉन्फ़िगरेशन',
@@ -1590,7 +1590,7 @@ return [
             'sort-by'                               => 'इसके अनुसार क्रमबद्ध करें',
             'from-z-a'                              => 'जेड-ए से',
             'from-a-z'                              => 'ए-जेड से',
-            'newest-first'                          => 'नवीनतम पहले',
+            'latest-first'                          => 'नवीनतम पहले',
             'oldest-first'                          => 'सबसे पुराना पहले',
             'cheapest-first'                        => 'सबसे सस्ता पहला',
             'expensive-first'                       => 'महंगा पहले',
@@ -1681,11 +1681,11 @@ return [
         'read-all'                    => 'पढ़े हुए का चिह्न',
         'notification-marked-success' => 'अधिसूचना सफलतापूर्वक चिह्नित',
         'order-status-messages'       => [
-            'completed'  =>'आर्डर पूरा हुआ',
-            'closed'     => 'आदेश बंद',
-            'canceled'   => 'आदेश रद्द',
-            'pending'    => 'आदेश लम्बित',
-            'processing' => 'आदेश प्रसंस्करण',
+            'completed'       => 'आर्डर पूरा हुआ',
+            'closed'          => 'आदेश बंद',
+            'canceled'        => 'आदेश रद्द',
+            'pending'         => 'आदेश लम्बित',
+            'processing'      => 'आदेश प्रसंस्करण',
             'pending_payment' => 'एन अटेंशन डे पैमेंट',
         ],
     ],

@@ -128,12 +128,37 @@
 
 <?php $products = [1,2,3,3,4]  ?>
 
-<x-products.carousel
-    title="Men’s Collections"
-    :products="$products"
+{{-- default product listing --}}
+<x-shop::products.carousel
+    title="Men's Collections"
+    :src="route('shop.products.index')"
     :navigation-link="route('shop.home.index')"
 >
-</x-products.carousel>
+</x-shop::products.carousel>
+
+{{-- category product listing --}}
+<x-shop::products.carousel
+    title="Men's Collections"
+    :src="route('shop.products.index', ['category_id' => 1])"
+    :navigation-link="route('shop.home.index')"
+>
+</x-shop::products.carousel>
+
+{{-- featured product listing --}}
+<x-shop::products.carousel
+    title="Men's Collections"
+    :src="route('shop.products.index', ['featured' => 1])"
+    :navigation-link="route('shop.home.index')"
+>
+</x-shop::products.carousel>
+
+{{-- new product listing --}}
+<x-shop::products.carousel
+    title="Men's Collections"
+    :src="route('shop.products.index', ['new' => 1])"
+    :navigation-link="route('shop.home.index')"
+>
+</x-shop::products.carousel>
 
 <x-form
     method="post"

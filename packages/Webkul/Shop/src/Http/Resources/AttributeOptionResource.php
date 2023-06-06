@@ -4,7 +4,7 @@ namespace Webkul\Shop\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Product extends JsonResource
+class AttributeOptionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +15,8 @@ class Product extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'      => $this->id,
-            'name'    => $this->name,
-            'sku'     => $this->sku,
-            'url_key' => $this->url_key,
-            'status'  => $this->status,
-            'images'  => product_image()->getGalleryImages($this),
+            'id'   => $this->id,
+            'name' => $this->label ?? $this->admin_name,
         ];
     }
 }
