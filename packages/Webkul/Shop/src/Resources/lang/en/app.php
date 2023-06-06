@@ -202,6 +202,47 @@ return [
         ],
     ],
 
+    'checkout' => [
+
+        'cart' => [
+
+            'item' => [
+                'quantity'        => 'Quantity:',
+                'success-remove'  => 'Item is successfully removed from the cart.',
+                'warning-remove'  => 'No items to remove from the cart.',
+            ],
+
+            'cart-page'              => 'Cart Page',
+            'shopping-cart'          => 'Shopping Cart',
+            'offer-on-orders'        => 'Get Up To 30% OFF on your 1st order',
+            'subtotal'               => 'Subtotal',
+            'continue-to-checkout'   => 'Continue to Checkout',
+            'empty-cart'             => 'Your cart is empty',
+            'return-to-shop'         => 'Return To Shop',
+            'remove'                 => 'Remove',
+            'continue-shopping'      => 'Continue Shopping',
+            'update-cart'            => 'Update Cart',
+            'product-name'           => 'Product Name',
+            'price'                  => 'Price',
+            'quantity'               => 'Quantity',
+            'total'                  => 'Total',
+            'tax'                    => 'Tax',
+            'proceed-to-checkout'    => 'Proceed To Checkout',
+            'grand-total'            => 'Grand Total',
+            'apply-coupon'           => 'Apply Coupon',
+            'coupon-discount'        => 'Coupon Discount',
+            'subtotal'               => 'Subtotal',
+            'cart-summary'           => 'Cart Summary',
+            'home'                   => 'Home',
+            'cannot-apply-coupon'    => 'Cannot Apply Coupon',
+            'invalid-coupon'         => 'Coupon code is invalid.',
+            'success-coupon'         => 'Coupon code applied successfully.',
+            'coupon-apply-issue'     => 'Coupon code can\'t be applied.',
+            'coupon-already-applied' => 'Coupon code already applied.',
+            
+        ],
+    ],
+
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
         'cancel-error'       => ':name can not be canceled.',

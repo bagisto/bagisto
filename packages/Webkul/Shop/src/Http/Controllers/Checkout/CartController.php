@@ -1,11 +1,9 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\Checkout;
 
 use Cart;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Log;
-use Webkul\Checkout\Contracts\Cart as CartModel;
+use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
@@ -27,10 +25,6 @@ class CartController extends Controller
     )
     {
         $this->middleware('throttle:5,1')->only('applyCoupon');
-
-        $this->middleware('customer')->only('moveToWishlist');
-
-        parent::__construct();
     }
 
     /**
@@ -47,60 +41,14 @@ class CartController extends Controller
         $cart?->load('items.product.cross_sells');
        
         $crossSellProductCount = core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products');
- 
-        return view($this->_config['view'], [
-            'cart' => $cart,
-            'crossSellProducts' => $cart?->items
-                ->map(fn ($item) => $item->product->cross_sells)
-                ->collapse()
-                ->unique('id')
-                ->take($crossSellProductCount != "" ? $crossSellProductCount : 12),
-        ]);
-    }
 
-    /**
-     * Function for user to add the product in the cart.
-     *
-     * @return array
-     */
-    public function store()
-    {
-        try {
-            $productId = request()->input('product_id');
+        $crossSellProducts = $cart?->items
+                            ->map(fn ($item) => $item->product->cross_sells)
+                            ->collapse()
+                            ->unique('id')
+                            ->take($crossSellProductCount != "" ? $crossSellProductCount : 12);
 
-            Cart::deactivateCurrentCartIfBuyNowIsActive();
-
-            $cart = Cart::addProduct($productId, request()->all());
-    
-            if (
-                is_array($cart)
-                && isset($cart['warning'])
-            ) {
-                return response()->json([
-                    'message' => $cart['warning'],
-                ]);
-            }
-    
-            if ($cart) {
-                if ($customer = auth()->guard('customer')->user()) {
-                    $this->wishlistRepository->deleteWhere([
-                        'product_id' => $productId, 
-                        'customer_id' => $customer->id
-                    ]);
-                }
-
-                return response()->json([
-                    'message'  => trans('shop::app.components.products.item-add-to-cart')
-                ]);
-            }
-        } catch (\Exception $exception) {
-            \Log::error('CartController: ' . $exception->getMessage(),
-                ['product_id' => $productId, 'cart_id' => cart()->getCart() ?? 0]);
-
-            return response()->json([
-                'message'   => $exception->getMessage()
-            ]);
-        }
+        return view('shop::checkout.cart.index', compact('cart', 'crossSellProducts'));
     }
 
     /**
@@ -115,22 +63,6 @@ class CartController extends Controller
 
         if ($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
-        }
-
-        return redirect()->back();
-    }
-
-    /**
-     * Removes the item from the cart if it exists.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function removeAllItems()
-    {
-        $result = Cart::removeAllItems();
-
-        if ($result) {
-            session()->flash('success', trans('shop::app.checkout.cart.item.success-all-remove'));
         }
 
         return redirect()->back();
@@ -157,25 +89,6 @@ class CartController extends Controller
     }
 
     /**
-     * Function to move a already added product to wishlist will run only on customer authentication.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function moveToWishlist($id)
-    {
-        $result = Cart::moveToWishlist($id);
-
-        if ($result) {
-            session()->flash('success', trans('shop::app.checkout.cart.move-to-wishlist-success'));
-        } else {
-            session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
-        }
-
-        return redirect()->back();
-    }
-
-    /**
      * Apply coupon to the cart.
      *
      * @return \Illuminate\Http\Response
@@ -192,7 +105,7 @@ class CartController extends Controller
                     if (Cart::getCart()->coupon_code == $couponCode) {
                         return response()->json([
                             'success' => false,
-                            'message' => trans('shop::app.checkout.total.coupon-already-applied'),
+                            'message' => trans('shop::app.checkout.cart.coupon-already-applied'),
                         ]);
                     }
     
@@ -201,7 +114,7 @@ class CartController extends Controller
                     if (Cart::getCart()->coupon_code == $couponCode) {
                         return response()->json([
                             'success' => true,
-                            'message' => trans('shop::app.checkout.total.success-coupon'),
+                            'message' => trans('shop::app.checkout.cart.success-coupon'),
                         ]);
                     }
                 }
@@ -209,14 +122,14 @@ class CartController extends Controller
            
             return response()->json([
                 'success' => false,
-                'message' => trans('shop::app.checkout.total.invalid-coupon'),
+                'message' => trans('shop::app.checkout.cart.invalid-coupon'),
             ]);
         } catch (\Exception $e) {
             report($e);
 
             return response()->json([
                 'success' => false,
-                'message' => trans('shop::app.checkout.total.coupon-apply-issue'),
+                'message' => trans('shop::app.checkout.cart.coupon-apply-issue'),
             ]);
         }
     }
@@ -258,5 +171,40 @@ class CartController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * Removes the item from the cart if it exists.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeAllItems()
+    {
+        $result = Cart::removeAllItems();
+
+        if ($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.item.success-all-remove'));
+        }
+
+        return redirect()->back();
+    }
+
+    /**
+     * Function to move a already added product to wishlist will run only on customer authentication.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function moveToWishlist($id)
+    {
+        $result = Cart::moveToWishlist($id);
+
+        if ($result) {
+            session()->flash('success', trans('shop::app.checkout.cart.move-to-wishlist-success'));
+        } else {
+            session()->flash('warning', trans('shop::app.checkout.cart.move-to-wishlist-error'));
+        }
+
+        return redirect()->back();
     }
 }
