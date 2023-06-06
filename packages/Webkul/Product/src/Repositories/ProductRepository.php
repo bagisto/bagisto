@@ -177,25 +177,31 @@ class ProductRepository extends Repository
     /**
      * Get all products.
      *
-     * @param  string  $categoryId
+     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
+     * good request parameter with an array type as an argument. Make a clean pull request for
+     * this to have track record.
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function getAll($categoryId = null)
+    public function getAll()
     {
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            return $this->searchFromElastic($categoryId);
+            return $this->searchFromElastic();
         } else {
-            return $this->searchFromDatabase($categoryId);
+            return $this->searchFromDatabase();
         }
     }
 
     /**
      * Search product from database.
      *
-     * @param  string  $categoryId
+     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
+     * good request parameter with an array type as an argument. Make a clean pull request for
+     * this to have track record.
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromDatabase($categoryId)
+    public function searchFromDatabase()
     {
         $params = array_merge([
             'status'               => 1,
@@ -214,7 +220,7 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
-        ])->scopeQuery(function ($query) use ($params, $categoryId) {
+        ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
             $qb = $query->distinct()
@@ -227,9 +233,9 @@ class ProductRepository extends Repository
                         ->where('product_price_indices.customer_group_id', $customerGroup->id);
                 });
 
-            if ($categoryId) {
+            if (! empty($params['category_id'])) {
                 $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
-                    ->whereIn('product_categories.category_id', explode(',', $categoryId));
+                    ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
             }
 
             if (! empty($params['type'])) {
@@ -397,12 +403,15 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Search product from elastic search
+     * Search product from elastic search.
      *
-     * @param  string  $categoryId
+     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
+     * good request parameter with an array type as an argument. Make a clean pull request for
+     * this to have track record.
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function searchFromElastic($categoryId)
+    public function searchFromElastic()
     {
         $params = request()->input();
 
@@ -412,7 +421,7 @@ class ProductRepository extends Repository
 
         $sortOptions = $this->getSortOptions($params);
 
-        $indices = $this->elasticSearchRepository->search($categoryId, [
+        $indices = $this->elasticSearchRepository->search($params['category_id'] ?? null, [
             'type'  => $params['type'] ?? '',
             'from'  => ($currentPage * $limit) - $limit,
             'limit' => $limit,

@@ -10,7 +10,11 @@
     </div>
 
     {{-- Product Listing --}}
-    <v-category category-id="{{ $category->id }}"></v-category>
+    <v-category
+        src="{{ route('shop.products.index', ['category_id' => $category->id]) }}"
+        category-id="{{ $category->id }}"
+    >
+    </v-category>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-category-template">
@@ -28,6 +32,15 @@
                         <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                             <x-shop::products.card v-for="product in products"></x-shop::products.card>
                         </div>
+
+                        <button
+                            class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                            @click="loadMoreProducts()"
+                            v-if="links.next"
+                        >
+                            {{-- @translations --}}
+                            @lang('Load More')
+                        </button>
                     </div>
                 </div>
             </div>
@@ -37,7 +50,10 @@
             app.component('v-category', {
                 template: '#v-category-template',
 
-                props: ['categoryId'],
+                props: [
+                    'src',
+                    'categoryId',
+                ],
 
                 data() {
                     return {
@@ -47,6 +63,8 @@
                         },
 
                         products: [],
+
+                        links: {},
                     }
                 },
 
@@ -82,13 +100,26 @@
                     },
 
                     getProducts() {
-                        this.$axios.get("{{ route('shop.products.index') }}", {
-                                params: Object.assign({}, this.queryParams, { category_id: this.categoryId })
-                            }).then(response => {
+                        this.$axios.get(this.src, { params: this.queryParams })
+                            .then(response => {
                                 this.products = response.data.data;
+
+                                this.links = response.data.links;
                             }).catch(error => {
                                 console.log(error);
                             });
+                    },
+
+                    loadMoreProducts() {
+                        if (this.links.next) {
+                            this.$axios.get(this.links.next).then(response => {
+                                this.products = [...this.products, ...response.data.data];
+
+                                this.links = response.data.links;
+                            }).catch(error => {
+                                console.log(error);
+                            });
+                        }
                     },
 
                     removeJsonEmptyValues(params) {

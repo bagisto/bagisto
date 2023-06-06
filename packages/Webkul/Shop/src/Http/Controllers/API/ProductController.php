@@ -25,14 +25,6 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        if (request()->has('category_id')) {
-            $category = $this->categoryRepository->findOrFail(request()->input('category_id'));
-
-            return ProductResource::collection(
-                $this->productRepository->getAll($category->id)->withPath($category->slug)
-            );
-        }
-
         return ProductResource::collection($this->productRepository->getAll());
     }
 }
