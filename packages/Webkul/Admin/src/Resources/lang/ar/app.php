@@ -419,7 +419,7 @@ return [
             'notify-customer'              => 'بإخطار العملاء',
             'transactions'                 => 'المعاملات',
             'create-success'               => 'تم إنشاء الطلب بنجاح',
-            'cancel-error'                 => "لم يتم إلغاء الطلب"
+            'cancel-error'                 => 'لم يتم إلغاء الطلب',
         ],
 
         'invoices' => [
@@ -452,7 +452,7 @@ return [
             'status-overdue'         => 'متأخر',
             'status-pending'         => 'في انتظار الدفع',
             'status-paid'            => 'مدفوع',
-            'create-success'         => 'تم إنشاء الفاتورة بنجاح'
+            'create-success'         => 'تم إنشاء الفاتورة بنجاح',
         ],
 
         'shipments' => [
@@ -480,7 +480,7 @@ return [
             'creation-error'    => 'لا يمكن إنشاء الشحنة لهذا الطلب.',
             'order-error'       => 'لا يسمح بإنشاء شحنة الطلب.',
             'quantity-invalid'  => 'الكمية المطلوبة غير صالحة أو غير متاحة.',
-            'create-success'    => 'تم إنشاء الشحنات بنجاح'
+            'create-success'    => 'تم إنشاء الشحنات بنجاح',
         ],
 
         'refunds' => [
@@ -505,7 +505,7 @@ return [
             'action'                      => 'عمل',
             'view-title'                  => '#:refund_id إعادة مال',
             'invalid-refund-amount-error' => 'يجب ألا يكون المبلغ المسترد صفرًا',
-            'create-success'              => 'تم إنشاء رد الأموال بنجاح'
+            'create-success'              => 'تم إنشاء رد الأموال بنجاح',
         ],
 
         'transactions' => [
@@ -524,11 +524,11 @@ return [
             'created-at'          => 'أنشئت في',
             'transaction-details' => 'تفاصيل الصفقه',
             'response'            => [
-                'invoice-missing'   => 'معرف الفاتورة هذا غير موجود',
-                'transaction-saved' => 'تم حفظ الصفقة',
-                'already-paid'      => 'تم دفع هذه الفاتورة بالفعل',
+                'invoice-missing'            => 'معرف الفاتورة هذا غير موجود',
+                'transaction-saved'          => 'تم حفظ الصفقة',
+                'already-paid'               => 'تم دفع هذه الفاتورة بالفعل',
                 'transaction-amount-exceeds' => 'المبلغ المحدد لهذه المعاملة أكبر من المبلغ الإجمالي للفاتورة.',
-                'transaction-amount-zero' => 'يمكن أن يكون مبلغ الصفقة صفرًا أو أقل',
+                'transaction-amount-zero'    => 'يمكن أن يكون مبلغ الصفقة صفرًا أو أقل',
             ],
         ],
     ],
@@ -554,7 +554,7 @@ return [
             ],
             'simple'                        => 'بسيط',
             'configurable'                  => 'مهيء',
-            'family'                       => 'الصفة الأسرة',
+            'family'                        => 'الصفة الأسرة',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'خصائص قابلة للتهيئة',
             'attribute-header'              => '(السمات (السمة',
@@ -627,8 +627,8 @@ return [
             'saved-inventory-message'       => 'تم حفظ مخزون المنتج بنجاح.',
             'create-success'                => 'تم إنشاء المنتج بنجاح.،',
             'update-success'                => 'تم تحديث المنتج بنجاح.',
-            'delete-success'                => 'تم حذف المنتج بنجاح.',   
-            'delete-failed'                 => 'حدث خطأ أثناء حذف المنتج.', 
+            'delete-success'                => 'تم حذف المنتج بنجاح.',
+            'delete-failed'                 => 'حدث خطأ أثناء حذف المنتج.',
             'validations'                   => [
                 'quantity-required' => 'الكمية مطلوبة.',
                 'quantity-integer'  => 'يجب أن تكون الكمية عددًا صحيحًا.',
@@ -702,30 +702,30 @@ return [
             ],
         ],
         'families'   => [
-            'title'                => 'الأسر',
-            'add-family-btn-title' => 'إضافة عائلة',
-            'add-title'            => 'إضافة عائلة',
-            'edit-title'           => 'حرر العائلة',
-            'save-btn-title'       => 'أنقذ العائلة',
-            'general'              => 'ألف-لمحة عامة',
-            'code'                 => 'رمز العائلة',
-            'name'                 => 'اسم',
-            'groups'               => 'المجموعات',
-            'add-group-title'      => 'أضف المجموعة',
-            'edit-group-title'     => 'تحرير المجموعة',
-            'update-group-title'   => 'تحديث المجموعة',
-            'position'             => 'موضع',
-            'attribute-code'       => 'الشفرة',
-            'type'                 => 'النوع',
-            'add-attribute-title'  => 'إضافة خصائص',
-            'search'               => 'ابحث',
-            'group-exist-error'    => 'المجموعة مع الاسم موجود.',
-            'create-success'       => 'تم إنشاء العائلة بنجاح.',
-            'update-success'       => 'تم تحديث العائلة بنجاح.',
-            'delete-success'       => 'تم حذف العائلة بنجاح.',
-            'delete-failed'        => 'حدث خطأ أثناء حذف العائلة.',
-            'user-define-error'    => 'لا يمكن حذف عائلة سمات النظام',
-            'last-delete-error'    => 'مطلوب عائلة واحدة على الأقل.',
+            'title'                     => 'الأسر',
+            'add-family-btn-title'      => 'إضافة عائلة',
+            'add-title'                 => 'إضافة عائلة',
+            'edit-title'                => 'حرر العائلة',
+            'save-btn-title'            => 'أنقذ العائلة',
+            'general'                   => 'ألف-لمحة عامة',
+            'code'                      => 'رمز العائلة',
+            'name'                      => 'اسم',
+            'groups'                    => 'المجموعات',
+            'add-group-title'           => 'أضف المجموعة',
+            'edit-group-title'          => 'تحرير المجموعة',
+            'update-group-title'        => 'تحديث المجموعة',
+            'position'                  => 'موضع',
+            'attribute-code'            => 'الشفرة',
+            'type'                      => 'النوع',
+            'add-attribute-title'       => 'إضافة خصائص',
+            'search'                    => 'ابحث',
+            'group-exist-error'         => 'المجموعة مع الاسم موجود.',
+            'create-success'            => 'تم إنشاء العائلة بنجاح.',
+            'update-success'            => 'تم تحديث العائلة بنجاح.',
+            'delete-success'            => 'تم حذف العائلة بنجاح.',
+            'delete-failed'             => 'حدث خطأ أثناء حذف العائلة.',
+            'user-define-error'         => 'لا يمكن حذف عائلة سمات النظام',
+            'last-delete-error'         => 'مطلوب عائلة واحدة على الأقل.',
             'attribute-product-error'   => 'الأسرة المستخدمة في المنتجات.',
         ],
         'categories' => [
@@ -765,12 +765,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'إعدادات',
-        'save-btn-title' => 'احفظ',
-        'save-message'   => 'الإعدادات المحفوظة بنجاح',
-        'yes'            => 'نعم.',
-        'no'             => 'لا.',
-        'delete'         => 'احذف',
+        'title'                       => 'إعدادات',
+        'save-btn-title'              => 'احفظ',
+        'save-message'                => 'الإعدادات المحفوظة بنجاح',
+        'yes'                         => 'نعم.',
+        'no'                          => 'لا.',
+        'delete'                      => 'احذف',
         'enable-atleast-one-shipping' => 'تفعيل طريقة شحن واحدة على الأقل.',
         'enable-atleast-one-payment'  => 'تفعيل طريقة دفع واحدة على الأقل.',
 
@@ -849,19 +849,19 @@ return [
             'name'           => 'اسم',
         ],
         'currencies'        => [
-            'title'             => 'العملات',
-            'add-title'         => 'أضف عملة',
-            'edit-title'        => 'حرر العملة',
-            'save-btn-title'    => 'احفظ العملة',
-            'general'           => 'جنرال لواء',
-            'code'              => 'الشفرة',
-            'name'              => 'اسم',
-            'symbol'            => 'رمز',
+            'title'              => 'العملات',
+            'add-title'          => 'أضف عملة',
+            'edit-title'         => 'حرر العملة',
+            'save-btn-title'     => 'احفظ العملة',
+            'general'            => 'جنرال لواء',
+            'code'               => 'الشفرة',
+            'name'               => 'اسم',
+            'symbol'             => 'رمز',
             'decimal'            => 'عدد عشري',
-            'create-success'    => 'تم إنشاء اللغة بنجاح',
-            'update-success'    => 'تم تحديث اللغة بنجاح',
-            'delete-success'    => 'تم حذف اللغة بنجاح',
-            'last-delete-error' => 'مطلوب لغة واحدة على الأقل',
+            'create-success'     => 'تم إنشاء اللغة بنجاح',
+            'update-success'     => 'تم تحديث اللغة بنجاح',
+            'delete-success'     => 'تم حذف اللغة بنجاح',
+            'last-delete-error'  => 'مطلوب لغة واحدة على الأقل',
         ],
         'exchange_rates'    => [
             'title'                    => 'معدل التحويل',
@@ -1023,21 +1023,21 @@ return [
 
     'customers' => [
         'groups' => [
-            'add-title'       => 'أضف المجموعة',
-            'edit-title'      => 'حرر المجموعة',
-            'save-btn-title'  => 'احفظ المجموعة',
-            'title'           => 'المجموعات',
-            'save-btn-title'  => 'احفظ المجموعة',
-            'code'            => 'الشفرة',
-            'name'            => 'اسم',
-            'is_user_defined' => 'تعريف المستخدم',
-            'yes'             => 'نعم.',
-            'create-success'  => 'تم إنشاء مجموعة العملاء بنجاح',
-            'update-success'  => 'تم تحديث مجموعة العملاء بنجاح',
-            'delete-success'  => 'تم حذف مجموعة العملاء بنجاح',
-            'delete-failed'   => 'خطأ! لا يمكن حذف مجموعة العملاء',
+            'add-title'           => 'أضف المجموعة',
+            'edit-title'          => 'حرر المجموعة',
+            'save-btn-title'      => 'احفظ المجموعة',
+            'title'               => 'المجموعات',
+            'save-btn-title'      => 'احفظ المجموعة',
+            'code'                => 'الشفرة',
+            'name'                => 'اسم',
+            'is_user_defined'     => 'تعريف المستخدم',
+            'yes'                 => 'نعم.',
+            'create-success'      => 'تم إنشاء مجموعة العملاء بنجاح',
+            'update-success'      => 'تم تحديث مجموعة العملاء بنجاح',
+            'delete-success'      => 'تم حذف مجموعة العملاء بنجاح',
+            'delete-failed'       => 'خطأ! لا يمكن حذف مجموعة العملاء',
             'customer-associate'  => 'لا يمكن حذف العميل لأن العميل مرتبط بهذه المجموعة.',
-        
+
         ],
 
         'addresses' => [
@@ -1071,8 +1071,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'سجل دخولك كعميل',
-            'login-message'=>'you login as :customer_name'
+            'grid-title'   => 'سجل دخولك كعميل',
+            'login-message'=> 'you login as :customer_name',
         ],
 
         'note' => [
@@ -1144,7 +1144,7 @@ return [
 
         'orders' => [
             'list'  => ':customer_name\'s قائمة الطلبات',
-            'title' => 'ترتيب' ,
+            'title' => 'ترتيب',
         ],
         'create-success' => 'تم إنشاء العميل بنجاح',
         'update-success' => 'تم تحديث العميل بنجاح',
@@ -1247,7 +1247,7 @@ return [
                 'update-success' => 'تم تحديث القسيمة بنجاح',
                 'delete-success' => 'تم حذف القسيمة بنجاح',
             ],
-            
+
         ],
 
         'catalog-rules' => [
@@ -1634,7 +1634,7 @@ return [
             'sort-by'                               => 'صنف حسب',
             'from-z-a'                              => 'من Z-A',
             'from-a-z'                              => 'من الألف إلى الياء',
-            'newest-first'                          => 'الأحدث أولاً',
+            'latest-first'                          => 'الأحدث أولاً',
             'oldest-first'                          => 'الأقدم أولا',
             'cheapest-first'                        => 'الأرخص أولا',
             'expensive-first'                       => 'مكلفة أولا',
@@ -1723,11 +1723,11 @@ return [
         'read-all'                    => 'ضع إشارة مقروء',
         'notification-marked-success' => 'تم تعليم الإخطار بنجاح',
         'order-status-messages'       => [
-            'completed'  => 'تم اكتمال الطلب',
-            'closed'     => 'الطلب مغلق',
-            'canceled'   => 'تم إلغاء الطلب',
-            'pending'    => 'انتظار الطلب',
-            'processing' => 'معالجة الطلب',
+            'completed'       => 'تم اكتمال الطلب',
+            'closed'          => 'الطلب مغلق',
+            'canceled'        => 'تم إلغاء الطلب',
+            'pending'         => 'انتظار الطلب',
+            'processing'      => 'معالجة الطلب',
             'pending_payment' => 'في انتظار الدفع',
         ],
     ],

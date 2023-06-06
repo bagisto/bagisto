@@ -1,30 +1,25 @@
 <x-shop::layouts>
-    {{-- hero section --}}
+    {{-- Hero Section --}}
 	<div class="bs-hero-section">
 		<picture>
 			<img alt="" src="{{ bagisto_asset('images/hero-image.webp') }}" />
 		</picture>
 
 		<div class="">
-			<a href="/" class="block text-[22px] py-[20px] font-medium text-center bg-[#E8EDFE] font-dmserif">Get UPTO 40% OFF on
-				your 1st order SHOP NOW</a>
+			<a
+                href="javascript:void(0);"
+                class="block text-[22px] py-[20px] font-medium text-center bg-[#E8EDFE] font-dmserif"
+            >
+                {{-- @translations --}}
+                @lang('Get UPTO 40% OFF on your 1st order SHOP NOW')
+            </a>
 		</div>
 	</div>
 
-    {{-- product collection --}}
-	@php
-		$products = [
-			[
-				'name' => 'Test 1'
-			], [
-				'name' => 'Test 2'
-			]
-		]
-	@endphp
-
+    {{-- Carousel --}}
 	<x-shop::products.carousel
         title="Men's Collections"
-        :products="$products"
+        :src="route('shop.products.index')"
         :navigation-link="route('shop.home.index')"
     >
     </x-shop::products.carousel>

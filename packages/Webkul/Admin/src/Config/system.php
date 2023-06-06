@@ -153,22 +153,22 @@ return [
             ], [
                 'name'       => 'no_of_up_sells_products',
                 'title'      => 'admin::app.admin.system.allow-no-of-up-sells-products',
-                'type'       => 'number', 
+                'type'       => 'number',
                 'validation' => 'min:0',
-            ], 
+            ],
         ],
     ], [
-            'key'    => 'catalog.products.cart_view_page',
-            'name'   => 'admin::app.admin.system.cart-view-page',
-            'sort'   => 3,
-            'fields' => [
-                [
-                    'name'       => 'no_of_cross_sells_products',
-                    'title'      => 'admin::app.admin.system.allow-no-of-cross-sells-products',
-                    'type'       => 'number',
-                    'validation' => 'min:0',
-                ],
+        'key'    => 'catalog.products.cart_view_page',
+        'name'   => 'admin::app.admin.system.cart-view-page',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'       => 'no_of_cross_sells_products',
+                'title'      => 'admin::app.admin.system.allow-no-of-cross-sells-products',
+                'type'       => 'number',
+                'validation' => 'min:0',
             ],
+        ],
     ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
@@ -213,13 +213,13 @@ return [
                 'type'          => 'select',
                 'options'       => [
                     [
-                        'title' => 'admin::app.admin.system.from-z-a',
-                        'value' => 'name-desc',
-                    ], [
                         'title' => 'admin::app.admin.system.from-a-z',
                         'value' => 'name-asc',
                     ], [
-                        'title' => 'admin::app.admin.system.newest-first',
+                        'title' => 'admin::app.admin.system.from-z-a',
+                        'value' => 'name-desc',
+                    ], [
+                        'title' => 'admin::app.admin.system.latest-first',
                         'value' => 'created_at-desc',
                     ], [
                         'title' => 'admin::app.admin.system.oldest-first',

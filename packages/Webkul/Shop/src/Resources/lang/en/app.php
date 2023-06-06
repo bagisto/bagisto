@@ -663,7 +663,7 @@ return [
         'sort-by'                  => 'Sort By',
         'from-a-z'                 => 'From A-Z',
         'from-z-a'                 => 'From Z-A',
-        'newest-first'             => 'Newest First',
+        'latest-first'             => 'Newest First',
         'oldest-first'             => 'Oldest First',
         'cheapest-first'           => 'Cheapest First',
         'expensive-first'          => 'Expensive First',

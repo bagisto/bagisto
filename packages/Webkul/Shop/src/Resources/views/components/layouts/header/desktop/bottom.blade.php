@@ -43,31 +43,35 @@
                         </a>
                     </span>
 
-                    <div
-                        class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto -left-[35px] w-max absolute top-[54px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3]"
-                    >
-                        <div class="flex aigns gap-x-[70px] justify-between">
-                            <div class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]">
-                                @foreach ($firstLevelCategory->children as $secondLevelCategory)
-                                    <p class="text-navyBlue font-medium">
-                                        <a href="{{ $secondLevelCategory->url }}">
-                                            {{ $secondLevelCategory->name }}
-                                        </a>
-                                    </p>
+                    @if ($firstLevelCategory->children->isNotEmpty())
+                        <div
+                            class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto -left-[35px] w-max absolute top-[54px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3]"
+                        >
+                            <div class="flex aigns gap-x-[70px] justify-between">
+                                <div class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]">
+                                    @foreach ($firstLevelCategory->children as $secondLevelCategory)
+                                        <p class="text-navyBlue font-medium">
+                                            <a href="{{ $secondLevelCategory->url }}">
+                                                {{ $secondLevelCategory->name }}
+                                            </a>
+                                        </p>
 
-                                    <ul class="grid grid-cols-[1fr] gap-[12px]">
-                                        @foreach ($secondLevelCategory->children as $thirdLevelCategory)
-                                            <li class="text-[14px] font-medium text-[#7D7D7D]">
-                                                <a href="{{ $thirdLevelCategory->url }}">
-                                                    {{ $thirdLevelCategory->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endforeach
+                                        @if ($secondLevelCategory->children->isNotEmpty())
+                                            <ul class="grid grid-cols-[1fr] gap-[12px]">
+                                                @foreach ($secondLevelCategory->children as $thirdLevelCategory)
+                                                    <li class="text-[14px] font-medium text-[#7D7D7D]">
+                                                        <a href="{{ $thirdLevelCategory->url }}">
+                                                            {{ $thirdLevelCategory->name }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -110,7 +114,7 @@
                 </a>
             </div>
         @endif
-        
+
         <div>
             <span class="icon-cart text-[24px] cursor-pointer"></span>
         </div>
@@ -125,11 +129,11 @@
                 <x-slot:content>
                     <div class="grid gap-[10px]">
                         <p class="text-[20px] font-dmserif">
-                            @lang('shop::app.components.layouts.header.welcome-guest') 
+                            @lang('shop::app.components.layouts.header.welcome-guest')
                         </p>
 
                         <p class="text-[14px]">
-                            @lang('shop::app.components.layouts.header.dropdown-text') 
+                            @lang('shop::app.components.layouts.header.dropdown-text')
                         </p>
                     </div>
 
@@ -140,14 +144,14 @@
                             href="{{ route('shop.customer.session.create') }}"
                             class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[15px] px-[29px] rounded-[18px] text-center cursor-pointer"
                         >
-                            @lang('shop::app.components.layouts.header.sign-in') 
+                            @lang('shop::app.components.layouts.header.sign-in')
                         </a>
 
                         <a
                             href="{{ route('shop.customers.register.index') }}"
                             class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
                         >
-                            @lang('shop::app.components.layouts.header.sign-up') 
+                            @lang('shop::app.components.layouts.header.sign-up')
                         </a>
                     </div>
                 </x-slot:content>
@@ -158,26 +162,26 @@
                 <x-slot:content class="!p-[0px]">
                     <div class="grid gap-[10px] p-[20px] pb-0">
                         <p class="text-[20px] font-dmserif">
-                            @lang('shop::app.components.layouts.header.welcome')’ 
+                            @lang('shop::app.components.layouts.header.welcome')’
                             {{ auth()->guard('customer')->user()->first_name }}
-                        </p> 
+                        </p>
 
                         <p class="text-[14px]">
-                            @lang('shop::app.components.layouts.header.dropdown-text') 
-                        </p> 
-                    </div> 
+                            @lang('shop::app.components.layouts.header.dropdown-text')
+                        </p>
+                    </div>
 
                     <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
 
-                    <div class="grid gap-[4px] mt-[10px] pb-[10px]"> 
-                        <a 
+                    <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+                        <a
                             class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
                             href="{{ route('shop.customers.account.profile.index') }}"
                         >
                             @lang('shop::app.components.layouts.header.profile')
                         </a>
-            
-                        <a 
+
+                        <a
                             class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
                             href="{{ route('shop.customers.account.orders.index') }}"
                         >
@@ -185,32 +189,32 @@
                         </a>
 
                         @if ($showWishlist)
-                            <a 
+                            <a
                                 class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
                                 href="{{ route('shop.customers.account.wishlist.index') }}"
                             >
-                                @lang('shop::app.components.layouts.header.wishlist') 
+                                @lang('shop::app.components.layouts.header.wishlist')
                             </a>
-                        @endif     
+                        @endif
 
                         @if ($showCompare)
-                            <a 
+                            <a
                                 class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
                                 {{-- href="{{ route('shop::customers.account.compare.index') }}" --}}
                             >
-                                @lang('shop::app.components.layouts.header.compare') 
+                                @lang('shop::app.components.layouts.header.compare')
                             </a>
                         @endif
 
                         {{--Customers logout--}}
                         @auth('customer')
-                            <x-shop::form 
+                            <x-shop::form
                                 method="DELETE"
                                 action="{{ route('shop.customer.session.destroy') }}"
                                 id="customerLogout"
                             >
                             </x-shop::form>
-        
+
                             <a
                                 class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
                                 href="{{ route('shop.customer.session.destroy') }}"
@@ -219,7 +223,7 @@
                                 @lang('shop::app.components.layouts.header.logout')
                             </a>
                         @endauth
-                    </div> 
+                    </div>
                 </x-slot:content>
             @endauth
         </x-shop::dropdown>

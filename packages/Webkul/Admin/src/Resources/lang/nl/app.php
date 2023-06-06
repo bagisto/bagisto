@@ -413,7 +413,7 @@ return [
             'notify-customer'              => 'Notify Customer',
             'transactions'                 => 'Transacties',
             'create-success'               => 'Bestelling succesvol aangemaakt',
-            'cancel-error'                 => 'Bestelling niet te annuleren'
+            'cancel-error'                 => 'Bestelling niet te annuleren',
         ],
 
         'invoices' => [
@@ -446,7 +446,7 @@ return [
             'status-overdue'         => 'Verlopen',
             'status-pending'         => 'Wachten op betaling',
             'status-paid'            => 'Betaald',
-            'create-success'         => 'Factuur succesvol aangemaakt'
+            'create-success'         => 'Factuur succesvol aangemaakt',
         ],
 
         'shipments' => [
@@ -474,7 +474,7 @@ return [
             'creation-error'    => 'Er kan geen verzending worden aangemaakt voor deze bestelling.',
             'order-error'       => 'Het aanmaken van een verzending is niet toegestaan.',
             'quantity-invalid'  => 'Requested quantity is invalid or not available.',
-            'create-success'    => 'Zendingen succesvol aangemaakt'
+            'create-success'    => 'Zendingen succesvol aangemaakt',
         ],
 
         'refunds' => [
@@ -498,7 +498,7 @@ return [
             'action'                      => 'Actie',
             'view-title'                  => 'Terugbetaling #:restitutie_id',
             'invalid-refund-amount-error' => 'Het restitutiebedrag mag niet nul zijn.',
-            'create-success'              => 'Terugbetaling succesvol aangemaakt'
+            'create-success'              => 'Terugbetaling succesvol aangemaakt',
 
         ],
 
@@ -518,11 +518,11 @@ return [
             'created-at'          => 'Toegevoegd op',
             'transaction-details' => 'Transactie details',
             'response'            => [
-                'invoice-missing'   => 'Dit factuurnummer bestaat niet',
-                'transaction-saved' => 'De transactie is geregistreerd',
-                'already-paid'      => 'Dit factuur is al voldaan',
+                'invoice-missing'            => 'Dit factuurnummer bestaat niet',
+                'transaction-saved'          => 'De transactie is geregistreerd',
+                'already-paid'               => 'Dit factuur is al voldaan',
                 'transaction-amount-exceeds' => 'Het opgegeven bedrag van deze transactie overschrijdt het totaalbedrag van de factuur.',
-                'transaction-amount-zero' => 'Transactiebedrag kan nul of minder zijn',
+                'transaction-amount-zero'    => 'Transactiebedrag kan nul of minder zijn',
             ],
         ],
     ],
@@ -538,7 +538,7 @@ return [
             'product-type'                  => 'Product Type',
             'simple'                        => 'Simpel',
             'configurable'                  => 'Configureerbaar',
-            'family'                       => 'Attribuut Family',
+            'family'                        => 'Attribuut Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configureerbaar attributen',
             'attribute-header'              => 'Attribuut(s)',
@@ -733,12 +733,12 @@ return [
     ],
 
     'configuration' => [
-        'title'          => 'Configuratie',
-        'save-btn-title' => 'Opslaan',
-        'save-message'   => 'Configuratie succesvol opgeslagen',
-        'yes'            => 'Ja',
-        'no'             => 'Nee',
-        'delete'         => 'Verwijder',
+        'title'                       => 'Configuratie',
+        'save-btn-title'              => 'Opslaan',
+        'save-message'                => 'Configuratie succesvol opgeslagen',
+        'yes'                         => 'Ja',
+        'no'                          => 'Nee',
+        'delete'                      => 'Verwijder',
         'enable-atleast-one-shipping' => 'Schakel ten minste één verzendmethode in.',
         'enable-atleast-one-payment'  => 'Schakel ten minste één betaalmethode in.',
 
@@ -817,19 +817,19 @@ return [
             'name'           => 'Naam',
         ],
         'currencies'        => [
-            'title'             => 'Valuta instellingen',
-            'add-title'         => 'Valuta toevoegen',
-            'edit-title'        => 'Valuta wijzigen',
-            'save-btn-title'    => 'Valuta opslaan',
-            'general'           => 'Algemeen',
-            'code'              => 'Code',
-            'name'              => 'Naam',
-            'symbol'            => 'Symbool',
+            'title'              => 'Valuta instellingen',
+            'add-title'          => 'Valuta toevoegen',
+            'edit-title'         => 'Valuta wijzigen',
+            'save-btn-title'     => 'Valuta opslaan',
+            'general'            => 'Algemeen',
+            'code'               => 'Code',
+            'name'               => 'Naam',
+            'symbol'             => 'Symbool',
             'decimal'            => 'Engels',
-            'create-success'    => 'Het valuta is toegevoegd.',
-            'update-success'    => 'Het valuta is gewijzigd.',
-            'delete-success'    => 'Het valuta is verwijderd.',
-            'last-delete-error' => 'Minimaal één valuta is vereist.',
+            'create-success'     => 'Het valuta is toegevoegd.',
+            'update-success'     => 'Het valuta is gewijzigd.',
+            'delete-success'     => 'Het valuta is verwijderd.',
+            'last-delete-error'  => 'Minimaal één valuta is vereist.',
         ],
         'exchange_rates'    => [
             'title'                    => 'Wisselkoersen',
@@ -991,21 +991,21 @@ return [
 
     'customers' => [
         'groups' => [
-            'add-title'       => 'Groep toevoegen',
-            'edit-title'      => 'Groep wijzigen',
-            'save-btn-title'  => 'Groep opslaan',
-            'title'           => 'Groepen',
-            'save-btn-title'  => 'Groep opslaan',
-            'code'            => 'Code',
-            'name'            => 'Naam',
-            'is_user_defined' => 'Door de gebruiker gedefinieerd',
-            'yes'             => 'Ja',
-            'create-success'  => 'Klantengroep succesvol aangemaakt',
-            'update-success'  => 'Klantengroep succesvol bijgewerkt',
-            'delete-success'  => 'Klantengroep succesvol verwijderd',
-            'delete-failed'   => 'Fout! Klantengroep kan niet worden verwijderd',
+            'add-title'          => 'Groep toevoegen',
+            'edit-title'         => 'Groep wijzigen',
+            'save-btn-title'     => 'Groep opslaan',
+            'title'              => 'Groepen',
+            'save-btn-title'     => 'Groep opslaan',
+            'code'               => 'Code',
+            'name'               => 'Naam',
+            'is_user_defined'    => 'Door de gebruiker gedefinieerd',
+            'yes'                => 'Ja',
+            'create-success'     => 'Klantengroep succesvol aangemaakt',
+            'update-success'     => 'Klantengroep succesvol bijgewerkt',
+            'delete-success'     => 'Klantengroep succesvol verwijderd',
+            'delete-failed'      => 'Fout! Klantengroep kan niet worden verwijderd',
             'customer-associate' => 'Klant kan niet worden verwijderd omdat klant aan deze groep is gekoppeld.',
-       
+
         ],
 
         'addresses' => [
@@ -1039,8 +1039,8 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'login as customer',
-            'login-message'=>'you login as :customer_name'
+            'grid-title'   => 'login as customer',
+            'login-message'=> 'you login as :customer_name',
         ],
 
         'note' => [
@@ -1115,7 +1115,7 @@ return [
         'delete-success' => 'Klant succesvol verwijderd',
         'order-pending'  => 'Kan klantaccount niet verwijderen omdat sommige bestelling(en) in behandeling zijn of in behandeling zijn.',
         'delete-failed'  => 'Er is een fout opgetreden bij het verwijderen van de klant.',
-    
+
     ],
 
     'promotions' => [
@@ -1588,7 +1588,7 @@ return [
             'sort-by'                               => 'Sorteer op',
             'from-z-a'                              => 'Van Z-A',
             'from-a-z'                              => 'Van A-Z',
-            'newest-first'                          => 'Nieuwste eerst',
+            'latest-first'                          => 'Nieuwste eerst',
             'oldest-first'                          => 'Oudste eerst',
             'cheapest-first'                        => 'Goedkoopste eerst',
             'expensive-first'                       => 'Expensive First',
@@ -1673,11 +1673,11 @@ return [
         'read-all'                    => 'Markeer als gelezen',
         'notification-marked-success' => 'Melding succesvol gemarkeerd',
         'order-status-messages'       => [
-            'completed'  => 'Bestelling voltooid',
-            'closed'     => 'Bestelling gesloten',
-            'canceled'   => 'Bestelling geannuleerd',
-            'pending'    => 'Order in behandeling',
-            'processing' => 'Orderverwerking',
+            'completed'       => 'Bestelling voltooid',
+            'closed'          => 'Bestelling gesloten',
+            'canceled'        => 'Bestelling geannuleerd',
+            'pending'         => 'Order in behandeling',
+            'processing'      => 'Orderverwerking',
             'pending_payment' => 'In afwachting van betaling',
         ],
     ],
