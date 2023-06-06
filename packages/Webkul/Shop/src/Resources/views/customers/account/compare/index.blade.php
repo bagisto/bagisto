@@ -18,20 +18,22 @@
                     </h2>
                 </div>
 
-                <div
-                    class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
-                >
-                    <span class="icon-bin text-[24px]"></span>
-
-                    <x-shop::form
-                        :action="route('shop.customers.account.compare.destroyAll')"
-                        method="DELETE"
+                @if ($compareItem->count())
+                    <div
+                        class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
                     >
-                        <button>                            
-                            @lang('shop::app.customers.account.compare.delete-all')
-                        </button>
-                    </x-shop::form>
-                </div>
+                        <span class="icon-bin text-[24px]"></span>
+
+                        <x-shop::form
+                            :action="route('shop.customers.account.compare.destroyAll')"
+                            method="DELETE"
+                        >
+                            <button>                            
+                                @lang('shop::app.customers.account.compare.delete-all')
+                            </button>
+                        </x-shop::form>
+                    </div>
+                @endif
             </div>
 
             <div class="">
@@ -51,7 +53,14 @@
                             </p>
 
                             <p class="text-[14px] font-medium text-[#3A3A3A]">
-                                Prada
+                                <x-shop::form
+                                    :action="route('shop.customers.account.compare.destroy', $item->product_id)"
+                                    method="DELETE"
+                                >
+                                    <button>                            
+                                        @lang('shop::app.customers.account.compare.delete')
+                                    </button>
+                                </x-shop::form>
                             </p>
                         </div>
                     @endforeach

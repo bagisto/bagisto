@@ -136,6 +136,7 @@ return [
             'compare'  => [
                 'compare-similar-items'   => 'Compare Similar items',
                 'delete-all'              => 'Delete All',
+                'delete'                  => 'Delete',
                 'success'                 => 'All Compare items has deleted Succesfully',
                 'error'                   => 'Something went wrong, please try again later.',
             ],

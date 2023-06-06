@@ -64,10 +64,19 @@ class CompareController extends Controller
      *
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function destroyAll() {
-        $compareItem = $this->compareItemRepository->deleteWhere([
-            'customer_id' => auth()->guard('customer')->user()->id
-        ]);
+    public function destroy($productId = null) {
+
+        if (! $productId) {
+            // For mass delete
+            $compareItem = $this->compareItemRepository->deleteWhere([
+                'customer_id' => auth()->guard('customer')->user()->id
+            ]);
+        } else {
+            // For single delete 
+            $compareItem = $this->compareItemRepository->deleteWhere([
+                'product_id' => $productId
+            ]);
+        }
 
         if ($compareItem) {
             session()->flash('success', trans('shop::app.customers.account.compare.success'));

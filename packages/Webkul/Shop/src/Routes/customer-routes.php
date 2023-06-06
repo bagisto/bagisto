@@ -145,8 +145,10 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
                      */
                     Route::controller(CompareController::class)->prefix('compare')->group(function () {
                         Route::get('', 'index')->name('shop.customers.account.compare.index');
-|
-                        Route::delete('destroyAll', 'destroyAll')->name('shop.customers.account.compare.destroyAll');
+
+                        Route::delete('destroy/{id}', 'destroy')->name('shop.customers.account.compare.destroy');
+
+                        Route::delete('destroyAll', 'destroy')->name('shop.customers.account.compare.destroyAll');
                     });
 
                     /**

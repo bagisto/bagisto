@@ -4,7 +4,7 @@ namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Customer\Models\CustomerProxy;
-use Webkul\Product\Models\ProductFlatProxy;
+use Webkul\Product\Models\ProductProxy;
 use Webkul\Customer\Contracts\CompareItem as CompareItemContract;
 
 class CompareItem extends Model implements CompareItemContract
@@ -39,6 +39,6 @@ class CompareItem extends Model implements CompareItemContract
      * @return void
      */
     public function product() {
-        return $this->belongsTo(ProductFlatProxy::modelClass(), 'product_id', 'product_id');
+        return $this->belongsTo(ProductProxy::modelClass(), 'product_id');
     }
 }
