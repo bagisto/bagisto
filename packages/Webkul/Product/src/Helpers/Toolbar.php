@@ -73,6 +73,10 @@ class Toolbar
      */
     public function getOrder(array $params = []): array
     {
+        if (! isset($params['sort'])) {
+            return $this->getDefaultOrder();
+        }
+
         $order = $this->getAvailableOrders()
             ->where('value', $params['sort'])
             ->first();
