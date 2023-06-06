@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\ProductReviewResource;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductReviewImageRepository;
 
@@ -33,7 +34,9 @@ class ReviewController extends Controller
      */
     public function getByProduct()
     {
-        return request()->input('product_id');
+        $product = $this->productRepository->find(request()->input('product_id'));
+
+        return ProductReviewResource::collection($product->reviews()->paginate(2));
     }
 
     /**

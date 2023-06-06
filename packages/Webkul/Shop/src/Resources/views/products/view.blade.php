@@ -204,15 +204,6 @@
 
                                         <x-shop::products.star-rating star='5' editable=true></x-shop::products.star-rating>
 
-                                        <span
-                                            v-for='rating in totalRating'
-                                            :class='`icon-star-fill cursor-pointer text-[24px] text-${(starValue >= rating) ? "[#ffb600]" : "[#7D7D7D]"} `'
-                                            :id="rating"
-                                            @click='setRating($event)'
-                                            @mouseover='setRating($event)'
-                                        >
-                                        </span>
-                                        <input type='hidden' name='star_rating' v-model='starValue'>
                                     </div>
 
                                     <div class="mb-4 mt-[15px]">
@@ -303,67 +294,63 @@
                             <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
 
                                 <!-- Single card review -->
-                                @foreach ($product->reviews as $review)
-                                    <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
-                                        <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
-                                            <img 
-                                                class="rounded-[12px]" 
-                                                src='{{ bagisto_asset("images/review-man.png") }}' 
-                                                title="" 
-                                                alt=""
-                                            >
-                                        </div>
+                                <div 
+                                    v-for='review in reviews' 
+                                    class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap"
+                                >
+                                    <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
+                                        <img 
+                                            class="rounded-[12px]" 
+                                            src='{{ bagisto_asset("images/review-man.png") }}' 
+                                            title="" 
+                                            alt=""
+                                        >
+                                    </div>
 
-                                        <div class="">
-                                            <div class="flex justify-between">
-                                                <p class="text-[20px] font-medium max-sm:text-[16px]">
-                                                    {{ $review->title }}
+                                    <div>
+                                        <div class="flex justify-between">
+                                            <p class="text-[20px] font-medium max-sm:text-[16px]">
+                                                @{{ review.name }}
+                                            </p>
+
+                                            <div class="flex items-center">
+                                                <x-shop::products.star-rating :star="'review.name'" editable=false></x-shop::products.star-rating>
+                                            </div>
+                                        </div>
+                                        <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]">
+                                            @{{ review.created_at }}
+                                        </p>
+                                        
+                                        <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]">
+                                            @{{ review.comment }}
+                                        </p>
+
+                                        <div class="flex justify-between items-center mt-[20px] flex-wrap gap-[10px]">
+                                            <div class="flex gap-x-[10px]">
+                                                <p class="text-[16px] text-[#7D7D7D] max-sm:text-[12px]">
+                                                    @lang('shop::app.products.was-this-helpful')
                                                 </p>
 
-                                                <div class="flex items-center">
-                                                    <x-shop::products.star-rating star='{{ $review->rating }}' editable=false></x-shop::products.star-rating>
-                                                </div>
-                                            </div>
-                                            <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]">
-                                                {{ $review->created_at->format('M d, Y') }}
-                                            </p>
-                                            
-                                            <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]">
-                                                {{ $review->comment }}
-                                            </p>
-
-                                            <div class="flex justify-between items-center mt-[20px] flex-wrap gap-[10px]">
-                                                <div class="flex gap-x-[15px] item-center text-[#7D7D7D]">
-                                                    <span class="icon-share text-[24px] text-[#D1D1D1]"></span>
-                                                    @lang('shop::app.products.share')
+                                                <div class="flex gap-[8px] text-[#7D7D7D]">
+                                                    <span class="icon-like text-[24px] text-[#D1D1D1]"></span>
+                                                    0
                                                 </div>
 
-                                                <div class="flex gap-x-[10px]">
-                                                    <p class="text-[16px] text-[#7D7D7D] max-sm:text-[12px]">
-                                                        @lang('shop::app.products.was-this-helpful')
-                                                    </p>
-
-                                                    <div class="flex gap-[8px] text-[#7D7D7D]">
-                                                        <span class="icon-like text-[24px] text-[#D1D1D1]"></span>
-                                                        0
-                                                    </div>
-
-                                                    <div class="flex gap-[8px] text-[#7D7D7D]">
-                                                        <span class="icon-dislike text-[24px] text-[#D1D1D1]"></span>
-                                                        0
-                                                    </div>
+                                                <div class="flex gap-[8px] text-[#7D7D7D]">
+                                                    <span class="icon-dislike text-[24px] text-[#D1D1D1]"></span>
+                                                    0
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                </div>
                                 <!-- Single card review -->
-
                             </div>
 
                             <button 
                                 class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
-                                @click='getReview()'
+                                @click='getReviews()'
+                                v-if='reviews.length < {{ $product->reviews->count() }}'
                             >
                                 @lang('shop::app.products.load-more')
                             </button>
@@ -451,7 +438,15 @@
                         addInfo: false,
 
                         qty: 1,
+
+                        reviews: {},
+
+                        page: 1
                     }
+                },
+
+                mounted() {
+                    this.getReviews()
                 },
 
                 methods: {
@@ -491,11 +486,16 @@
                         this.qty = qty;
                     },
 
-                    getReview() {
-                        this.$axios.post('{{ route("shop.products.reviews") }}' ,{
+                    getReviews() {
+                        this.$axios.post('{{ route("shop.products.reviews") }}' + '?page=' + this.page ,{
                             'product_id': this.productId,
                         }).then(response => {
-                            console.log(response);
+                            this.page++;
+                            if (this.reviews.length > 0) {
+                                this.reviews = this.reviews.concat(response.data.data);
+                            } else {
+                                this.reviews = response.data.data;
+                            }
                         }).catch(error => {});
                     }
                 }
@@ -551,4 +551,3 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
-
