@@ -115,9 +115,19 @@
             </div>
         @endif
 
-        <div>
-            <span class="icon-cart text-[24px] cursor-pointer"></span>
-        </div>
+        <x-shop::drawer>
+            <x-slot:toggle>
+                <span class="icon-cart text-[24px] cursor-pointer"></span>
+            </x-slot:toggle>
+
+            <x-slot:header>
+                Drawer Header
+            </x-slot:header>
+
+            <x-slot:content>
+                Drawer Content
+            </x-slot:content>
+        </x-shop::drawer>
 
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>
