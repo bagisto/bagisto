@@ -3,13 +3,14 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-checkout-address-template">
        	<!-- Billing Address -->
-        <form>
+        <form>            
             <div class="">
                 <div class="" v-if="! this.newBillingAddress">
                     <div class="flex justify-between items-center">
                         <h2 class="text-[26px] font-medium">1.Billing Address</h2>
                         <span class="icon-arrow-up text-[24px]"></span>
                     </div>
+
                     <div class="grid mt-[30px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr]" >
                         <!-- Single card addredd -->
                         <div class="border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap"  v-for='(addresses, index) in this.allAddress'>
@@ -18,10 +19,11 @@
                                     type="radio"  
                                     name="billing[address_id]" 
                                     id="billing[address_id]" 
-                                    value="addresses.id" 
                                     rules="required"
                                     v-model="address.billing.address_id" 
+                                    :value="addresses.id"
                                 />
+
                                 <p 
                                     v-text="`${addresses.first_name} ${addresses.last_name}`" 
                                     class="text-[16px] font-medium"
@@ -29,16 +31,17 @@
                                 </p>
                                 
                                 <div class="flex gap-[25px] items-center" >
-                                    <div
-                                        class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white w-max font-medium p-[5px] rounded-[10px] text-center text-[12px]">
+                                    <div class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white w-max font-medium p-[5px] rounded-[10px] text-center text-[12px]">
                                         Default Address
                                     </div>
                                 </div>
+
                             </div>
+
                             <div class="text-[#7D7D7D] mt-[25px]">
                                 <p>
                                     <span v-if="addresses.company_name != ''">
-                                    @{{addresses.company_name}},
+                                        @{{addresses.company_name}},
                                     </span>
 
                                         @{{addresses.address1}},
@@ -57,6 +60,7 @@
                                 </p>
                             </div>
                         </div>
+
                         <!-- Single card addredd -->
                         <div  
                             class="flex justify-center items-center border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap"
@@ -68,13 +72,28 @@
                             </div>
                         </div>
                     </div>
+
+                    @if ($cart->haveStockableItems())
+                        <div class="mb-4">
+                            <label class="block text-[16px] mb-[15px] mt-[30px]" for="billing[use_for_shipping]"></label>
+                                <input
+                                    type="checkbox"
+                                    name="billing[use_for_shipping]"
+                                    id="billing[use_for_shipping]"
+                                    v-model="address.billing.use_for_shipping"
+                                />
+            
+                                {{ __('shop::app.checkout.onepage.use_for_shipping') }}
+                        </div>
+                    @endif
                 </div>
 
                 <div v-if="this.newBillingAddress" class="rounded">
-
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-[26px] font-medium">1.Billing Address</h2>
-                        <span class="icon-arrow-up text-[24px]"></span>
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-[26px] font-medium">1.Billing Address</h2>
+                            <span class="icon-arrow-up text-[24px]"></span>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-x-[30px]"> 
@@ -112,8 +131,8 @@
                             name="billing[email]"
                             id="billing[email]"
                             class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                            placeholder="Email" 
-                            v-model="address.billing.email"
+                            placeholder="Email"
+                            v-model="address.billing.email" 
                         />
                     </div>
 
@@ -154,11 +173,11 @@
                             </label>
                             <input
                                 type="text"
-                                {{-- name="billing[address1][{{ $i }}]" --}}
-                                {{-- id="billing_address_{{ $i }}" --}}
+                                name="billing[address1][{{ $i }}]"
+                                id="billing_address_{{ $i }}"
                                 class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                 placeholder="Streat name" 
-                                {{-- v-model="address.billing.address1[{{$i}}]" --}}
+                                v-model="address.billing.address1[{{$i}}]"
                             />
                         </div>
                     @endif
@@ -223,8 +242,25 @@
                                 class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                 placeholder="State" 
                                 v-model="address.billing.state"
-                                {{-- v-if="! haveStates('billing')" --}}
+                                v-if="! haveStates('billing')"
                             />
+
+                            <select
+                                name="billing[state]"
+                                id="billing[state]"   
+                                class="text-[14px] border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"       
+                                v-model="address.billing.state"
+                                v-if="haveStates('billing')"
+                            >
+                            <option value="">select</option>
+        
+                                <option 
+                                    v-for='(state, index) in countryStates[address.billing.country]' 
+                                    value="state.code" 
+                                    v-text="state.default_name">
+                                </option>
+                            </select>
+
                         </div>
                         
                         <div class="mb-4">
@@ -267,7 +303,7 @@
                         />
                     </div>
 
-                    {{-- @if ($cart->haveStockableItems()) --}}
+                    @if ($cart->haveStockableItems())
                         <div class="mb-4">
                             <label class="block text-[16px] mb-[15px] mt-[30px]" for="billing[use_for_shipping]"></label>
                                 <input
@@ -279,7 +315,7 @@
             
                                 {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                         </div>
-                    {{-- @endif --}}
+                    @endif
 
                     @auth('customer')
                         <div class="mb-4">
@@ -294,14 +330,15 @@
                                 id="billing[save_as_address]"
                                 name="billing[save_as_address]"
                                 v-model="address.billing.save_as_address"
+                                @change="saveAddress"
                             />
                                 Save this address
                         </div>
                     @endauth
                     </div>
                 </div>
-
-            {{-- @if ($cart->haveStockableItems()) --}}
+                
+            @if ($cart->haveStockableItems())
                     <div class="">
                         <div class="" v-if="! address.billing.use_for_shipping && ! this.newShippingAddress">
                             <div class="flex justify-between items-center">
@@ -317,7 +354,7 @@
                                             type="radio"  
                                             name="shipping[address_id]"
                                             id="shipping[address_id]"
-                                            value="addresses.id"
+                                            :value="addresses.id"
                                             rules="required"
                                             v-model="address.shipping.address_id"
                                         />
@@ -441,11 +478,11 @@
                                     </label>
                                     <input
                                         type="text"
-                                        {{-- name="shipping[address1][{{ $i }}]" --}}
-                                        {{-- id="shipping_address_{{ $i }}" --}}
+                                        name="shipping[address1][{{ $i }}]"
+                                        id="shipping_address_{{ $i }}"
                                         class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                         placeholder="Streat name" 
-                                        {{-- v-model="address.shipping.address1[{{$i}}]" --}}
+                                        v-model="address.shipping.address1[{{$i}}]"
                                     />
                                 </div>
                             @endif
@@ -510,8 +547,25 @@
                                         class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                         placeholder="State" 
                                         v-model="address.shipping.state"
-                                        {{-- v-if="! haveStates('billing')" --}}
+                                        v-if="! haveStates('billing')"
                                     />
+
+                                    <select
+                                        name="shipping[state]"
+                                        id="shipping[state]"
+                                        class="text-[14px] border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline" 
+                                        v-model="address.shipping.state"
+                                        v-if="haveStates('shipping')"
+                                    >
+                                        <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
+                    
+                                        <option 
+                                            v-for='(state, index) in countryStates[address.shipping.country]' 
+                                            :value="state.code"
+                                        >
+                                            @{{ state.default_name }}
+                                        </option>
+                                    </select>
                                 </div>
                                 
                                 <div class="mb-4">
@@ -596,27 +650,29 @@
                 return {
                     newBillingAddress: false,
 
-
                     newShippingAddress: false,
 
                     address: {
                         billing: {
-                            address1: [''],
+                            address1: [],
 
                             use_for_shipping: true,
                         },
 
                         shipping: {
-                            address1: ['']
+                            address1: []
                         },
                     },
 
                     allAddress: {},
+
+                    countryStates: @json(core()->groupedStatesByCountries()),
+
+                    country: @json(core()->countries()),
                 }
             },
 
             created: function() {
-
                 if(! customerAddress) {
                     this.newShippingAddress = true;
                     this.newBillingAddress = true;
@@ -635,39 +691,49 @@
             },
 
             methods: {
+                haveStates: function(addressType) {
+                    if (this.countryStates[this.address[addressType].country] && this.countryStates[this.address[addressType].country].length)
+                        return true;
+
+                    return false;
+                },
+
                 addBillingAddress: function() {
                     this.newBillingAddress = true;
+                    this.address.billing.address_id = null;
                 },
 
                 addShippingAddress: function() {
                     this.newShippingAddress = true;
-                    // this.address.shipping.address_id = null;
+                    this.address.shipping.address_id = null;
                 },
-
 
                 saveAddress: async function() {
                     let self = this;
-
                     this.disable_button = true;
-                    this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
-
+                    this.saveAddressCheckbox = document.getElementsByName("billing[save_as_address]");
+                    
                     if (this.saveAddressCheckbox.prop('checked') == true) {
                         this.saveAddressCheckbox.attr('disabled', 'disabled');
                         this.saveAddressCheckbox.prop('checked', true);
                     }
 
+                    if (this.saveAddressCheckbox) {
+                        this.saveAddressCheckbox = true;
+                    }
+                    
                     if (this.allAddress.length > 0) {
                         let address = this.allAddress.forEach(address => {
                             if (address.id == this.address.billing.address_id) {
                                 this.address.billing.address1 = [address.address1];
                             }
-
+                            
                             if (address.id == this.address.shipping.address_id) {
                                 this.address.shipping.address1 = [address.address1];
                             }
                         });
                     }
-
+                    
                     this.$http.post("{{ route('shop.checkout.save_address') }}", this.address)
                         .then(function(response) {
                             self.disable_button = false;
