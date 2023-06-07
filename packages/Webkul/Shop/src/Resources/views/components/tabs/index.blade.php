@@ -1,35 +1,32 @@
-<tabs>
-    {{ $slot }}
-</tabs>
+<v-tabs>
+    <template v-slot>
+        {{ $slot }}
+    </template>
+</v-tabs>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="tabs-template">
+    <script type="text/x-template" id="v-tabs-template">
         <div>
-            <div {{ $attributes->merge(['class' => 'tabs']) }}>
+            <div>
                 <ul>
                     <li
                         v-for="tab in tabs"
-                        :class="{ 'active': tab.isActive }"
+                        v-text="tab.title"
                         @click="change(tab)"
                     >
-                        <a>@{{ tab.name }}</a>
                     </li>
                 </ul>
             </div>
 
-            <div class="tabs-content">
-
+            <div>
                 <slot></slot>
-
             </div>
         </div>
     </script>
 
     <script type="module">
-        app.component('tabs', {
-            template: '#tabs-template',
-
-            inject: ['$validator'],
+        app.component('v-tabs', {
+            template: '#v-tabs-template',
 
             data() {
                 return {
@@ -37,17 +34,13 @@
                 }
             },
 
-            created() {
-                this.tabs = this.$children;
-            },
-
             methods: {
                 change(selectedTab) {
                     this.tabs.forEach(tab => {
-                        tab.isActive = (tab.name == selectedTab.name);
+                        tab.isActive = (tab.title == selectedTab.title);
                     });
-                }
-            }
+                },
+            },
         });
     </script>
 @endPushOnce

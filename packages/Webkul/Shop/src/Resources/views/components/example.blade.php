@@ -1,9 +1,3 @@
-<x-accordion title="Test Accordion">
-    <x-slot:header>Accordion Header</x-slot:header>
-
-    <x-slot:body>Accordion Body</x-slot:body>
-</x-accordion>
-
 <x-table>
     <x-table.thead>
         <x-table.tr>
@@ -27,17 +21,6 @@
         </x-table.tr>
     </x-table.tbody>
 </x-table>
-
-<x-tabs>
-    <x-tabs.item
-        name="Tab 1"
-        is-selected="true"
-    >
-        Tab 1 Content
-    </x-tabs.item>
-
-    <x-tabs.item name="Tab 2">Tab 2 Content</x-tabs.item>
-</x-tabs>
 
 <x-form.control>
     <x-slot:label class="required">
@@ -118,8 +101,6 @@
     <x-slot:body>Panel Body</x-slot:body>
 </x-panel>
 
-<?php $products = [1,2,3,3,4]  ?>
-
 {{-- default product listing --}}
 <x-shop::products.carousel
     title="Men's Collections"
@@ -152,23 +133,60 @@
 >
 </x-shop::products.carousel>
 
-<x-form
-    method="post"
-    action=""
+{{-- form  --}}
+<x-shop::form
+    :action="route('shop.customer.session.create')"
+    class="rounded mt-[60px] max-sm:mt-[30px]"
 >
-    <x-form.control-group>
-        <x-form.control-group.label>
+    <x-shop::form.control-group class="mb-4">
+        <x-shop::form.control-group.label>
             Email
-        </x-form.control-group.label>
+        </x-shop::form.control-group.label>
 
-        <x-form.control-group.control type="text" name="email" />
+        <x-shop::form.control-group.control
+            type="email"
+            name="email"
+            value=""
+            rules="required|email"
+            label="Email"
+            placeholder="email@example.com"
+        >
+        </x-shop::form.control-group.control>
 
-        <x-form.control-group.error>
-            This is error
-        </x-form.control-group.error>
-    </x-form.control-group>
-</x-form>
+        <x-shop::form.control-group.error
+            control-name="email"
+        >
+        </x-shop::form.control-group.error>
+    </x-shop::form.control-group>
+</x-shop::form>
 
+{{-- tabs --}}
+<x-shop::tabs>
+    <x-shop::tabs.item
+        title="Tab 1"
+    >
+        Tab 1 Content
+    </x-shop::tabs.item>
+
+    <x-shop::tabs.item
+        title="Tab 2"
+    >
+        Tab 2 Content
+    </x-shop::tabs.item>
+</x-shop::tabs>
+
+{{-- accordion --}}
+<x-shop::accordion>
+    <x-slot:header>
+        Accordion Header
+    </x-slot:header>
+
+    <x-slot:content>
+        Accordion Content
+    </x-slot:content>
+</x-shop::accordion>
+
+{{-- modal --}}
 <x-shop::modal>
     <x-slot:toggle>
         Modal Toggle
@@ -183,6 +201,7 @@
     </x-slot:content>
 </x-shop::modal>
 
+{{-- drawer --}}
 <x-shop::drawer>
     <x-slot:toggle>
         Drawer Toggle
@@ -197,6 +216,7 @@
     </x-slot:content>
 </x-shop::drawer>
 
+{{-- dropdown --}}
 <x-shop::dropdown>
     <x-slot:toggle>
         Toogle
