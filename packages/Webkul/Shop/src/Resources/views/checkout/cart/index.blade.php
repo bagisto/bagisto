@@ -124,14 +124,63 @@
 
                             <div class="flex text-right justify-between">
                                 <p class="text-[16px]">
-                                    @lang('shop::app.checkout.cart.coupon-discount')
+                                    @lang('shop::app.checkout.cart.coupon.discount')
                                 </p>
 
-                                <p class="text-[16px] font-medium">
+                                <p class="text-[16px] font-medium cursor-pointer">
+
                                     @if (! $cart->discount_amount)
-                                        @lang('shop::app.checkout.cart.apply-coupon')
+                                        <x-shop::modal>
+                                            <x-slot:toggle>
+                                                @lang('shop::app.checkout.cart.coupon.apply')
+                                            </x-slot:toggle>
+
+                                            <x-slot:header>
+                                                @lang('shop::app.checkout.cart.coupon.apply')
+                                            </x-slot:header>
+
+                                            <x-slot:content>
+                                                <x-form
+                                                    method="post"
+                                                    action="{{ route('shop.checkout.cart.coupon.apply') }}"
+                                                >
+                                                    <x-form.control-group>
+                                                        <x-form.control-group.label>
+                                                            @lang('shop::app.checkout.cart.coupon.code')
+                                                        </x-form.control-group.label>
+
+                                                        <x-form.control-group.control 
+                                                            type="text" 
+                                                            name="code" 
+                                                            placeholder="Enter your code"
+                                                        />
+
+                                                        <x-form.control-group.error
+                                                            control-name="code"
+                                                        >
+                                                        </x-form.control-group.error>
+                                                    </x-form.control-group>
+
+                                                    <button
+                                                        type="submit"
+                                                        class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                                    >
+                                                        @lang('shop::app.customers.account.save')
+                                                    </button>
+                                                </x-form>
+                                            </x-slot:content>
+                                        </x-shop::modal>
                                     @else
-                                        ${{ $cart->discount_amount }}
+                                        <x-form
+                                            method="DELETE"
+                                            action="{{ route('shop.checkout.cart.coupon.remove') }}"
+                                        >
+                                            <button
+                                                type="submit"
+                                            >
+                                                ${{ $cart->discount_amount }}
+                                            </button>
+                                        </x-form>
                                     @endif
                                 </p>
                             </div>

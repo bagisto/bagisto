@@ -52,6 +52,51 @@ class CartController extends Controller
     }
 
     /**
+     * Function for user to add the product in the cart.
+     *
+     * @return array
+     */
+    public function store()
+    {
+        try {
+            $productId = request()->input('product_id');
+
+            Cart::deactivateCurrentCartIfBuyNowIsActive();
+
+            $cart = Cart::addProduct($productId, request()->all());
+    
+            if (
+                is_array($cart)
+                && isset($cart['warning'])
+            ) {
+                return response()->json([
+                    'message' => $cart['warning'],
+                ]);
+            }
+    
+            if ($cart) {
+                if ($customer = auth()->guard('customer')->user()) {
+                    $this->wishlistRepository->deleteWhere([
+                        'product_id'  => $productId, 
+                        'customer_id' => $customer->id
+                    ]);
+                }
+
+                return response()->json([
+                    'message'  => trans('shop::app.components.products.item-add-to-cart')
+                ]);
+            }
+        } catch (\Exception $exception) {
+            \Log::error('CartController: ' . $exception->getMessage(),
+                ['product_id' => $productId, 'cart_id' => cart()->getCart() ?? 0]);
+
+            return response()->json([
+                'message'   => $exception->getMessage()
+            ]);
+        }
+    }
+
+    /**
      * Removes the item from the cart if it exists.
      *
      * @param  int  $itemId
@@ -100,38 +145,36 @@ class CartController extends Controller
         try {
             if (strlen($couponCode)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
-
                 if ($coupon->cart_rule->status) {
 
                     if (Cart::getCart()->coupon_code == $couponCode) {
                         return response()->json([
                             'success' => false,
-                            'message' => trans('shop::app.checkout.cart.coupon-already-applied'),
+                            'message' => trans('shop::app.checkout.cart.coupon.already-applied'),
                         ]);
                     }
-    
+
                     Cart::setCouponCode($couponCode)->collectTotals();
-                  
+
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        return response()->json([
-                            'success' => true,
-                            'message' => trans('shop::app.checkout.cart.success-coupon'),
-                        ]);
+                        session()->flash('success', trans('shop::app.checkout.cart.coupon.success-apply'));
+                        
+                        return redirect()->back();
                     }
+
+                    session()->flash('error', trans('shop::app.checkout.cart.coupon.cannot-apply'));
+                    return redirect()->back();
                 }
             }
            
-            return response()->json([
-                'success' => false,
-                'message' => trans('shop::app.checkout.cart.invalid-coupon'),
-            ]);
+            session()->flash('success', trans('shop::app.checkout.cart.coupon.invalid'));
+
+            return redirect()->back();            
         } catch (\Exception $e) {
             report($e);
+            session()->flash('success', trans('shop::app.checkout.cart.coupon.apply-issue'));
 
-            return response()->json([
-                'success' => false,
-                'message' => trans('shop::app.checkout.cart.coupon-apply-issue'),
-            ]);
+            return redirect()->back();
         }
     }
 
@@ -144,10 +187,9 @@ class CartController extends Controller
     {
         Cart::removeCouponCode()->collectTotals();
 
-        return response()->json([
-            'success' => true,
-            'message' => trans('shop::app.checkout.total.remove-coupon'),
-        ]);
+        session()->flash('success', trans('shop::app.checkout.cart.coupon.remove'));
+
+        return redirect()->back();
     }
 
     /**

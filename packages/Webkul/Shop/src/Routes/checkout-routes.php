@@ -16,16 +16,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         Route::get('remove/{id}', 'remove')->name('shop.checkout.cart.remove');
 
         Route::post('coupon', 'applyCoupon')->name('shop.checkout.cart.coupon.apply');
+
+        Route::delete('coupon', 'removeCoupon')->name('shop.checkout.cart.coupon.remove');
     });
 
     Route::post('checkout/cart/remove}', [CartController::class, 'removeAllItems'])->name('shop.cart.remove.all.items');
 
     Route::post('move/wishlist/{id}', [CartController::class, 'moveToWishlist'])->name('shop.move_to_wishlist');
-
-    /**
-     * Coupon routes.
-     */
-    Route::delete('checkout/cart/coupon', [CartController::class, 'removeCoupon'])->name('shop.checkout.coupon.remove.coupon');
 
     /**
      * Checkout routes.
