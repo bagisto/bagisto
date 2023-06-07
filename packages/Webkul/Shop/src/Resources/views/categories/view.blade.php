@@ -24,7 +24,7 @@
                     @include ('shop::categories.filters')
 
                     <!-- Product Listing Container -->
-                    <div>
+                    <div class="flex-1">
                         <!-- Product Listing Toolbar -->
                         @include ('shop::categories.toolbar')
 

@@ -832,11 +832,12 @@ abstract class AbstractType
     public function getProductPrices()
     {
         return [
-            'regular_price' => [
+            'regular' => [
                 'price'           => core()->convertPrice($this->evaluatePrice($regularPrice = $this->product->price)),
                 'formatted_price' => core()->currency($this->evaluatePrice($regularPrice)),
             ],
-            'final_price'   => [
+
+            'final'   => [
                 'price'           => core()->convertPrice($this->evaluatePrice($minimalPrice = $this->getMinimalPrice())),
                 'formatted_price' => core()->currency($this->evaluatePrice($minimalPrice)),
             ],
@@ -850,17 +851,10 @@ abstract class AbstractType
      */
     public function getPriceHtml()
     {
-        $minPrice = $this->getMinimalPrice();
-
-        if ($minPrice < $this->product->price) {
-            $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($minPrice)) . '</span>';
-        } else {
-            $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
-        }
-
-        return $html;
+        return view('shop::products.prices.index', [
+            'product' => $this->product,
+            'prices'  => $this->getProductPrices(),
+        ])->render();
     }
 
     /**

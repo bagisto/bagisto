@@ -518,9 +518,9 @@ class Configurable extends AbstractType
         $minPrice = $this->getMinimalPrice();
 
         return [
-            'regular_price' => [
-                'formatted_price' => core()->currency($this->evaluatePrice($minPrice)),
+            'regular' => [
                 'price'           => $this->evaluatePrice($minPrice),
+                'formatted_price' => core()->currency($this->evaluatePrice($minPrice)),
             ],
         ];
     }
@@ -532,15 +532,10 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
-        if ($this->haveDiscount()) {
-            return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-                . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span>' . '<span class="regular-price"></span>';
-        } else {
-            return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-                . ' '
-                . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</span> <span class="regular-price"></span>';
-        }
+        return view('shop::products.prices.configurable', [
+            'product' => $this->product,
+            'prices'  => $this->getProductPrices(),
+        ])->render();
     }
 
     /**

@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-35cbfad1.css",
+    "file": "assets/app-124cd060.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -84,9 +84,17 @@
     "file": "assets/kids-506542fb.png",
     "src": "src/Resources/assets/images/kids.png"
   },
+  "src/Resources/assets/images/large-product-placeholder.svg": {
+    "file": "assets/large-product-placeholder-76e4aab4.svg",
+    "src": "src/Resources/assets/images/small-product-placeholder.svg"
+  },
   "src/Resources/assets/images/leather-bag.png": {
     "file": "assets/leather-bag-f158141b.png",
     "src": "src/Resources/assets/images/leather-bag.png"
+  },
+  "src/Resources/assets/images/medium-product-placeholder.svg": {
+    "file": "assets/medium-product-placeholder-39d28ee1.svg",
+    "src": "src/Resources/assets/images/medium-product-placeholder.svg"
   },
   "src/Resources/assets/images/mens-collections.jpg": {
     "file": "assets/mens-collections-9e0579ae.jpg",
@@ -131,6 +139,10 @@
   "src/Resources/assets/images/shoes.png": {
     "file": "assets/shoes-27e968bd.png",
     "src": "src/Resources/assets/images/shoes.png"
+  },
+  "src/Resources/assets/images/small-product-placeholder.svg": {
+    "file": "assets/large-product-placeholder-76e4aab4.svg",
+    "src": "src/Resources/assets/images/small-product-placeholder.svg"
   },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-aa4a2b62.png",
@@ -193,7 +205,7 @@
     "src": "src/Resources/assets/images/womens.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-00f7f3f2.js",
+    "file": "assets/app-af2f5aee.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

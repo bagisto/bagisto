@@ -21,10 +21,12 @@ class ProductResource extends JsonResource
             'name'        => $this->name,
             'sku'         => $this->sku,
             'url_key'     => $this->url_key,
+            'status'      => $this->status,
             'is_new'      => $this->new,
             'is_featured' => $this->featured,
-            'status'      => $this->status,
+            'on_sale'     => $productTypeInstance->haveDiscount(),
             'prices'      => $productTypeInstance->getProductPrices(),
+            'price_html'  => $productTypeInstance->getPriceHtml(),
             'base_image'  => product_image()->getProductBaseImage($this),
             'images'      => product_image()->getGalleryImages($this),
         ];
