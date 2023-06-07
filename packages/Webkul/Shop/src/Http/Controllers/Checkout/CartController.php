@@ -108,8 +108,9 @@ class CartController extends Controller
 
         if ($result) {
             session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
+        } else {
+            session()->flash('error', trans('shop::app.checkout.cart.item.warning-remove'));
         }
-
         return redirect()->back();
     }
 
