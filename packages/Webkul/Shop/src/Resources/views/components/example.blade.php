@@ -110,14 +110,6 @@
     </x-slot:control>
 </x-form.control>
 
-<button @click="$root.showModal('testModal')">Open Modal</button>
-
-<x-modal id="testModal" is-open="$root.modalIds.testModal">
-    <x-slot:header>Modal Title</x-slot:header>
-
-    <x-slot:body>Modal Body</x-slot:body>
-</x-modal>
-
 <x-flash-group></x-flash-group>
 
 <x-panel>
@@ -177,22 +169,40 @@
     </x-form.control-group>
 </x-form>
 
+<x-shop::modal>
+    <x-slot:toggle>
+        Modal Toggle
+    </x-slot:toggle>
+
+    <x-slot:header>
+        Modal Header
+    </x-slot:header>
+
+    <x-slot:content>
+        Modal Content
+    </x-slot:content>
+</x-shop::modal>
+
+<x-shop::drawer>
+    <x-slot:toggle>
+        Drawer Toggle
+    </x-slot:toggle>
+
+    <x-slot:header>
+        Drawer Header
+    </x-slot:header>
+
+    <x-slot:content>
+        Drawer Content
+    </x-slot:content>
+</x-shop::drawer>
+
 <x-shop::dropdown>
-    <x-shop::dropdown.toggle>
-        Toggle
-    </x-shop::dropdown.toggle>
+    <x-slot:toggle>
+        Toogle
+    </x-slot:toggle>
 
-    <x-shop::dropdown.menu>
-        <x-shop::dropdown.menu.item>
-            Item 1
-        </x-shop::dropdown.menu.item>
-
-        <x-shop::dropdown.menu.item>
-            Item 2
-        </x-shop::dropdown.menu.item>
-
-        <x-shop::dropdown.menu.item>
-            Item 3
-        </x-shop::dropdown.menu.item>
-    </x-shop::dropdown.menu>
+    <x-slot:content>
+        Content
+    </x-slot:content>
 </x-shop::dropdown>
