@@ -5,7 +5,7 @@
         <transition-group
             tag='div'
             name="flash-group"
-            class='alert-wrapper'
+            class='grid gap-[10px] fixed top-[20px] right-[20px] z-[1]'
         >
             <x-shop::flash-group.item></x-shop::flash-group.item>
         </transition-group>
@@ -26,7 +26,7 @@
             created() {
                 @foreach (['success', 'warning', 'error', 'info'] as $key)
                     @if (session()->has($key))
-                        this.flashes.push({'type': 'alert-{{ $key }}', 'message': "{{ session($key) }}", 'uid':  this.uid++});
+                        this.flashes.push({'type': '{{ $key }}', 'message': "{{ session($key) }}", 'uid':  this.uid++});
                     @endif
                 @endforeach
             },

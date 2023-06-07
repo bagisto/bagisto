@@ -6,7 +6,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="product-card-template">
-        <div class='grid gap-2.5 relative {{ $attributes["class"] }}'>
+        <div class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'>
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <img
                     class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
@@ -48,18 +48,10 @@
             <div class="grid gap-2.5 content-start">
                 <p class="text-base" v-text="product.name"></p>
 
-                <div class="flex gap-2.5">
-                    <p
-                        class="text-lg font-semibold"
-                        v-text="product.prices.final_price.formatted_price"
-                    >
-                    </p>
-
-                    <p
-                        class="text-lg font-medium text-[#7D7D7D]"
-                        v-text="product.prices.regular_price.formatted_price"
-                    >
-                    </p>
+                <div
+                    class="flex gap-2.5 text-lg"
+                    v-html="product.price_html"
+                >
                 </div>
 
                 <div class="flex gap-4 mt-[8px]">
