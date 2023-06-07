@@ -251,7 +251,6 @@ return [
                 'success-apply'   => 'Coupon code applied successfully.',
                 'already-applied' => 'Coupon code already applied.',
             ],
-            
         ],
     ],
 
@@ -760,7 +759,7 @@ return [
         'no-options' => 'Please select options before buying this product.',
     ],
 
-    'checkout' => [
+    'checkout-change' => [
         'cart' => [
             'integrity'                 => [
                 'missing_fields'         => 'Some required fields missing for this product.',

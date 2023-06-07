@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
-use Webkul\Shop\Http\Controllers\CartController;
+use Webkul\Shop\Http\Controllers\API\Checkout\CartController;
 use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 
@@ -20,9 +20,20 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::get('categories/{id}/max-price', 'getProductMaxPrice')
             ->name('shop.categories.max_price');
     });
+    
+    Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
+        Route::get('', 'index')->name('shop.checkout.cart.index');
+        
+        Route::post('', 'store')->name('shop.checkout.cart.store');
 
-    Route::post('cart', [CartController::class, 'store'])
-        ->name('shop.customers.cart.store');
+        Route::put('', 'update')->name('shop.checkout.cart.update');
+
+        Route::delete('', 'destroy')->name('shop.checkout.cart.destroy');
+
+        Route::post('coupon', 'storeCoupon')->name('shop.checkout.cart.coupon.apply');
+
+        Route::delete('coupon', 'destroyCoupon')->name('shop.checkout.cart.coupon.remove');
+    });
 
     Route::group(['middleware' => ['customer']], function () {
         Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])

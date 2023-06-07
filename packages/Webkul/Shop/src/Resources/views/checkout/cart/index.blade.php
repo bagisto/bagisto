@@ -16,196 +16,316 @@
                 </div>
             </div>
 
-            @if ($cart)
-                <div class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]">
-                    <div class="grid gap-y-[25px]">
-                        <div class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]">
-                            <div class="text-[14px] font-medium">
-                                @lang('shop::app.checkout.cart.product-name')
-                            </div>
+            <v-cart-product :params="params"></v-cart-product>
+        </div>
+    </div>
 
-                            <div class="text-[14px] font-medium">
-                                @lang('shop::app.checkout.cart.price')
-                            </div>
-
-                            <div class="text-[14px] font-medium">
-                                @lang('shop::app.checkout.cart.quantity')
-                            </div>
-
-                            <div class="text-[14px] font-medium">
-                                @lang('shop::app.checkout.cart.total')
-                            </div>
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-cart-product-template">
+            <div class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" v-if="cart">
+                <div class="grid gap-y-[25px]">
+                    <div class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]">
+                        <div class="text-[14px] font-medium">
+                            @lang('shop::app.checkout.cart.product-name')
                         </div>
 
-                        @foreach ($cart->items as $item)
-                            <div class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]">
-                                <div class="flex gap-x-[20px]">
-                                    <div class="">
-                                        <img 
-                                            class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                            src="{{ bagisto_asset('images/wishlist-user.png')}}"
-                                            alt="" 
-                                            title=""
-                                        >
-                                    </div>
+                        <div class="text-[14px] font-medium">
+                            @lang('shop::app.checkout.cart.price')
+                        </div>
 
-                                    <div class="grid gap-y-[10px]">
-                                        <p class="text-[16px] font-medium">
-                                            {{ $item->name }}
-                                        </p>
+                        <div class="text-[14px] font-medium">
+                            @lang('shop::app.checkout.cart.quantity')
+                        </div>
 
-                                        <form action="{{ route('shop.checkout.cart.remove', $item->id) }}" method="DELETE">
-                                            @csrf
-                                            <button>
-                                                @lang('shop::app.checkout.cart.remove')
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <p class="text-[18px]">
-                                    ${{ $item->price }}
-                                </p>
-
-                                <div class="flex gap-[20px] flex-wrap">
-                                    <span class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px]"></span>
-
-                                    <p>
-                                        {{ $item->quantity }}
-                                    </p>
-
-                                    <span class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px]"></span>
-                                </div>
-
-                                <p class="text-[18px] font-semibold">
-                                    {{ $item->total }}
-                                </p>
-                            </div>
-                        @endforeach
-        
-                        <div class="flex flex-wrap gap-[30px] justify-end">
-                            <div class="bs-secondary-button rounded-[18px]">
-                                <a href="{{ route('shop.home.index') }}">
-                                    @lang('shop::app.checkout.cart.continue-shopping')
-                                </a>
-                            </div>
-
-                            <div class="bs-secondary-button rounded-[18px]">
-                                @lang('shop::app.checkout.cart.update-cart')
-                            </div>
+                        <div class="text-[14px] font-medium">
+                            @lang('shop::app.checkout.cart.total')
                         </div>
                     </div>
 
-                    <div class="w-[418px] max-w-full">
-                        <p class="text-[26px] font-medium">
-                            @lang('shop::app.checkout.cart.cart-summary')
+                    <div 
+                        class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]" 
+                        v-for="item in cart.items"
+                    >
+                        <div class="flex gap-x-[20px]">
+                            <div class="">
+                                <img 
+                                    class="max-w-[110px] max-h-[110px] rounded-[12px]" 
+                                    src="{{ bagisto_asset('images/wishlist-user.png')}}"
+                                    alt="" 
+                                    title=""
+                                >
+                            </div>
+
+                            <div class="grid gap-y-[10px]">
+                                <p class="text-[16px] font-medium">
+                                    @{{ item.name }}
+                                </p>
+
+                                <button type="button" @click="removeItem(item.id)">
+                                    @lang('shop::app.checkout.cart.remove')
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="text-[18px]">
+                            @{{ item.price }}
                         </p>
 
-                        <div class="grid gap-[15px] mt-[25px]">
-                            <div class="flex text-right justify-between">
-                                <p class="text-[16px]">
-                                    @lang('shop::app.checkout.cart.subtotal')
-                                </p>
+                        <v-quantity-changer 
+                            @OnParams='getParams($event)' 
+                            :item-id="item.id" 
+                            :item-quantity="item.quantity"
+                        >
+                        </v-quantity-changer>
 
-                                <p class="text-[16px] font-medium">
-                                    ${{ $cart->sub_total }}
-                                </p>
-                            </div>
+                        <p class="text-[18px] font-semibold">
+                            @{{ item.total }}
+                        </p>
+                    </div>
 
-                            <div class="flex text-right justify-between">
-                                <p class="text-[16px]">
-                                    @lang('shop::app.checkout.cart.tax') 0 %
-                                </p>
+                    <div class="flex flex-wrap gap-[30px] justify-end">
+                        <div class="bs-secondary-button rounded-[18px]">
+                            <a href="{{ route('shop.home.index') }}">
+                                @lang('shop::app.checkout.cart.continue-shopping')
+                            </a>
+                        </div>
 
-                                <p class="text-[16px] font-medium">
-                                    ${{ $cart->tax_total }}
-                                </p>
-                            </div>
-
-                            <div class="flex text-right justify-between">
-                                <p class="text-[16px]">
-                                    @lang('shop::app.checkout.cart.coupon.discount')
-                                </p>
-
-                                <p class="text-[16px] font-medium cursor-pointer">
-
-                                    @if (! $cart->discount_amount)
-                                        <x-shop::modal>
-                                            <x-slot:toggle>
-                                                @lang('shop::app.checkout.cart.coupon.apply')
-                                            </x-slot:toggle>
-
-                                            <x-slot:header>
-                                                @lang('shop::app.checkout.cart.coupon.apply')
-                                            </x-slot:header>
-
-                                            <x-slot:content>
-                                                <x-form
-                                                    method="post"
-                                                    action="{{ route('shop.checkout.cart.coupon.apply') }}"
-                                                >
-                                                    <x-form.control-group>
-                                                        <x-form.control-group.label>
-                                                            @lang('shop::app.checkout.cart.coupon.code')
-                                                        </x-form.control-group.label>
-
-                                                        <x-form.control-group.control 
-                                                            type="text" 
-                                                            name="code" 
-                                                            placeholder="Enter your code"
-                                                        />
-
-                                                        <x-form.control-group.error
-                                                            control-name="code"
-                                                        >
-                                                        </x-form.control-group.error>
-                                                    </x-form.control-group>
-
-                                                    <button
-                                                        type="submit"
-                                                        class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-                                                    >
-                                                        @lang('shop::app.customers.account.save')
-                                                    </button>
-                                                </x-form>
-                                            </x-slot:content>
-                                        </x-shop::modal>
-                                    @else
-                                        <x-form
-                                            method="DELETE"
-                                            action="{{ route('shop.checkout.cart.coupon.remove') }}"
-                                        >
-                                            <button
-                                                type="submit"
-                                            >
-                                                ${{ $cart->discount_amount }}
-                                            </button>
-                                        </x-form>
-                                    @endif
-                                </p>
-                            </div>
-
-                            <div class="flex text-right justify-between">
-                                <p class="text-[16px]">
-                                    @lang('shop::app.checkout.cart.grand-total')
-                                </p>
-
-                                <p class="text-[26px] font-medium">
-                                    ${{ $cart->grand_total }}
-                                </p>
-                            </div>
-
-                            <div class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]">
-                                @lang('shop::app.checkout.cart.proceed-to-checkout')
-                            </div>
+                        <div class="bs-secondary-button rounded-[18px]">
+                            <button 
+                                type="button" 
+                                @click="updateItem()"
+                            >
+                                @lang('shop::app.checkout.cart.update-cart')
+                            </button>
                         </div>
                     </div>
                 </div>
-            @else
-                <div class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]">
-                    <h1>Don't Have product in your cart</h1>
+
+                <div class="w-[418px] max-w-full">
+                    <p class="text-[26px] font-medium">
+                        @lang('shop::app.checkout.cart.cart-summary')
+                    </p>
+
+                    <div class="grid gap-[15px] mt-[25px]">
+                        <div class="flex text-right justify-between">
+                            <p class="text-[16px]">
+                                @lang('shop::app.checkout.cart.subtotal')
+                            </p>
+
+                            <p class="text-[16px] font-medium">
+                                $ @{{ cart.sub_total}}
+                            </p>
+                        </div>
+
+                        <div class="flex text-right justify-between">
+                            <p class="text-[16px]">
+                                @lang('shop::app.checkout.cart.tax') 0 %
+                            </p>
+
+                            <p class="text-[16px] font-medium">
+                                $ @{{ cart.tax_total }}
+                            </p>
+                        </div>
+
+                        <div class="flex text-right justify-between">
+                            <p class="text-[16px]">
+                                @lang('shop::app.checkout.cart.coupon.discount')
+                            </p>
+
+                            <p class="text-[16px] font-medium cursor-pointer" v-if="! cart.discount_amount">
+                                <x-shop::modal>
+                                    <x-slot:toggle>
+                                        @lang('shop::app.checkout.cart.coupon.apply')
+                                    </x-slot:toggle>
+
+                                    <x-slot:header>
+                                        @lang('shop::app.checkout.cart.coupon.apply')
+                                    </x-slot:header>
+
+                                    <x-slot:content>
+                                        <x-form
+                                            method="post"
+                                            action="{{ route('shop.checkout.cart.coupon.apply') }}"
+                                        >
+                                            <x-form.control-group>
+                                                <x-form.control-group.label>
+                                                    @lang('shop::app.checkout.cart.coupon.code')
+                                                </x-form.control-group.label>
+
+                                                <x-form.control-group.control
+                                                    type="text"
+                                                    name="code"
+                                                    placeholder="Enter your code"
+                                                />
+
+                                                <x-form.control-group.error
+                                                    control-name="code"
+                                                >
+                                                </x-form.control-group.error>
+                                            </x-form.control-group>
+
+                                            <button
+                                                type="submit"
+                                                class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                            >
+                                                @lang('shop::app.customers.account.save')
+                                            </button>
+                                        </x-form>
+                                    </x-slot:content>
+                                </x-shop::modal>
+                            </p>
+
+                            <p class="text-[16px] font-medium cursor-pointer" v-else>
+                                <x-form
+                                    method="DELETE"
+                                    action="{{ route('shop.checkout.cart.coupon.remove') }}"
+                                >
+                                    <button type="submit">
+                                        $ @{{ cart.discount_amount }}
+                                    </button>
+                                </x-form>                            
+                            </p>
+                        </div>
+
+                        <div class="flex text-right justify-between">
+                            <p class="text-[16px]">
+                                @lang('shop::app.checkout.cart.grand-total')
+                            </p>
+
+                            <p class="text-[26px] font-medium">
+                                $ @{{ cart.grand_total }}
+                            </p>
+                        </div>
+
+                        <div class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]">
+                            @lang('shop::app.checkout.cart.proceed-to-checkout')
+                        </div>
+                    </div>
                 </div>
-            @endif
-        </div>            
-    </div>
+            </div>
+
+            <div class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" v-else>
+                <h1>Don't Have product in your cart</h1>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component("v-cart-product", {
+                template: '#v-cart-product-template',
+
+                data() {
+                    return  {
+                        cart: [],
+                        params: [],
+                    }
+                },
+
+                props:[
+                    'params'
+                ],
+
+                mounted() {
+                    this.getItems();
+                },
+
+                methods: {
+
+                    getParams(event) {
+                        this.params = event;
+                        console.log(this.params);
+                    },
+
+                    getItems() {
+                        this.$axios.get('{{ route('shop.checkout.cart.index') }}')
+                            .then(response => {
+                                this.cart = response.data.data;
+                            })
+                            .catch(error => {});     
+                    },
+
+                    updateItem(itemId, params) {
+
+                        this.$axios.put('{{ route('shop.checkout.cart.destroy') }}', {
+                            'qty': this.params,
+                        })
+                        .then(response => {
+                            this.getItems();
+                        })
+                        .catch(error => {});
+                    },
+
+                    removeItem(itemId) {
+                        this.$axios.post('{{ route('shop.checkout.cart.destroy') }}', {
+                            '_method': 'DELETE',
+                            'cart_item_id': itemId,
+                        })
+                        .then(response => {
+                            console.log(response);
+                            this.getItems();
+                        })
+                        .catch(error => {});
+                    },
+                }
+            });
+        </script>
+
+        <script type="text/x-template" id="v-quantity-changer-template">
+            <div class="flex gap-[20px] flex-wrap">
+                <span 
+                    class="icon-plus text-[24px] cursor-pointer"
+                    @click='increase()'
+                >
+                </span>
+
+                <p>@{{ quantity }}</p>
+
+                <span 
+                    class="icon-minus text-[24px cursor-pointer"
+                    @click='decrease()'
+                >
+                </span>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component("v-quantity-changer", {
+                template: '#v-quantity-changer-template',
+
+                props:[
+                    'itemId',
+                    'itemQuantity'
+                ],
+
+                data() {
+                    return  {
+                        quantity: this.itemQuantity,
+
+                        params: [],
+                    }
+                },
+
+                methods: {
+                    decrease(id) {
+                        if (this.quantity > 1) this.quantity -= 1;
+
+                        this.params = {
+                            id: this.itemId
+                            quantity: this.quantity,
+                        };
+                    },
+
+                    increase(id) {
+                        this.quantity += 1;
+
+                        this.params = {
+                            id: this.itemId 
+                            quantity: this.quantity,
+                        };
+
+                        this.$emit("on-params", this.params);
+                    }
+                }
+            });
+        </script>
+    @endpushOnce
 </x-shop::layouts>

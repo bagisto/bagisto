@@ -1,14 +1,15 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\Checkout;
+namespace Webkul\Shop\Http\Controllers\API\Checkout;
 
 use Cart;
-use Webkul\Shop\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Shop\Http\Controllers\API\APIController;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
-class CartController extends Controller
+class CartController extends APIController
 {
     /**
      * Create a new controller instance.
@@ -32,7 +33,13 @@ class CartController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+
+    public function home()
+    {
+        return view('shop::checkout.cart.index');
+    }
+
+    public function index(): JsonResource
     {
         Cart::collectTotals();
 
@@ -48,15 +55,19 @@ class CartController extends Controller
                             ->unique('id')
                             ->take($crossSellProductCount != "" ? $crossSellProductCount : 12);
 
-        return view('shop::checkout.cart.index', compact('cart', 'crossSellProducts'));
+        return new JsonResource([
+            'data'  => $cart,
+            'crossSellProducts'  => $crossSellProducts,
+            'message'  => trans('shop::app.components.products.item-add-to-cart')
+        ]);
     }
 
-    /**
+     /**
      * Function for user to add the product in the cart.
      *
      * @return array
      */
-    public function store()
+    public function store(): JsonResource
     {
         try {
             $productId = request()->input('product_id');
@@ -77,12 +88,14 @@ class CartController extends Controller
             if ($cart) {
                 if ($customer = auth()->guard('customer')->user()) {
                     $this->wishlistRepository->deleteWhere([
-                        'product_id'  => $productId, 
+                        'product_id' => $productId, 
                         'customer_id' => $customer->id
                     ]);
                 }
 
-                return response()->json([
+                session()->flash('success', trans('shop::app.components.products.item-add-to-cart'));
+
+                return new JsonResource([
                     'message'  => trans('shop::app.components.products.item-add-to-cart')
                 ]);
             }
@@ -90,7 +103,9 @@ class CartController extends Controller
             \Log::error('CartController: ' . $exception->getMessage(),
                 ['product_id' => $productId, 'cart_id' => cart()->getCart() ?? 0]);
 
-            return response()->json([
+            session()->flash('success', $exception->getMessage());
+
+            return new JsonResource([
                 'message'   => $exception->getMessage()
             ]);
         }
@@ -102,16 +117,18 @@ class CartController extends Controller
      * @param  int  $itemId
      * @return \Illuminate\Http\Response
      */
-    public function remove($itemId)
+    public function destroy(): JsonResource
     {
-        $result = Cart::removeItem($itemId);
+        $cartItemId = request()->all();
+        dd($cartItemId);
 
-        if ($result) {
-            session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
-        } else {
-            session()->flash('error', trans('shop::app.checkout.cart.item.warning-remove'));
-        }
-        return redirect()->back();
+        Cart::removeItem($cartItemId);
+
+        session()->flash('success', trans('shop::app.checkout.cart.item.success-remove'));
+
+        return new JsonResource([
+            'messege' => trans('shop::app.checkout.cart.item.success-remove'),
+        ]);
     }
 
     /**
@@ -119,19 +136,23 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateBeforeCheckout()
+    public function update(): JsonResource
     {
         try {
-            $result = Cart::updateItems(request()->all());
+            Cart::updateItems(request()->all());
 
-            if ($result) {
-                session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
-            }
+            session()->flash('success', trans('shop::app.checkout.cart.quantity.success'));
+
+            return new JsonResource([
+                'messege' => trans('shop::app.checkout.cart.quantity.success'),
+            ]);
         } catch (\Exception $e) {
             session()->flash('error', trans($e->getMessage()));
         }
 
-        return redirect()->back();
+        return new JsonResource([
+            'messege' => trans('error'),
+        ]);
     }
 
     /**
@@ -139,43 +160,49 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function applyCoupon()
+    public function storeCoupon()
     {
         $couponCode = request()->get('code');
 
         try {
             if (strlen($couponCode)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
+
                 if ($coupon->cart_rule->status) {
 
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        return response()->json([
-                            'success' => false,
+
+                        session()->flash('warning',trans('shop::app.checkout.cart.coupon.already-applied'));
+
+                        return new JsonResource([
                             'message' => trans('shop::app.checkout.cart.coupon.already-applied'),
                         ]);
                     }
-
+    
                     Cart::setCouponCode($couponCode)->collectTotals();
-
+                  
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        session()->flash('success', trans('shop::app.checkout.cart.coupon.success-apply'));
-                        
+
+                        session()->flash('success', trans('shop::app.checkout.cart.coupon.success'));
+
                         return redirect()->back();
                     }
-
-                    session()->flash('error', trans('shop::app.checkout.cart.coupon.cannot-apply'));
-                    return redirect()->back();
                 }
             }
            
-            session()->flash('success', trans('shop::app.checkout.cart.coupon.invalid'));
+            session()->flash('error', trans('shop::app.checkout.cart.coupon.invalid'));
 
-            return redirect()->back();            
+            return new JsonResource([
+                'message' => trans('shop::app.checkout.cart.coupon.invalid'),
+            ]);
         } catch (\Exception $e) {
             report($e);
-            session()->flash('success', trans('shop::app.checkout.cart.coupon.apply-issue'));
 
-            return redirect()->back();
+            session()->flash('error', trans('shop::app.checkout.cart.coupon-apply-issue'));
+
+            return new JsonResource([
+                'message' => trans('shop::app.checkout.cart.coupon-apply-issue'),
+            ]);
         }
     }
 
@@ -184,37 +211,13 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function removeCoupon()
+    public function destroyCoupon()
     {
         Cart::removeCouponCode()->collectTotals();
 
-        session()->flash('success', trans('shop::app.checkout.cart.coupon.remove'));
+        session()->flash('error', trans('shop::app.checkout.total.remove-coupon'));
 
         return redirect()->back();
-    }
-
-    /**
-     * Returns true, if result of adding product to cart
-     * is an array and contains a key "warning" or "info".
-     *
-     * @param  array  $result
-     * @return boolean
-     */
-    private function onFailureAddingToCart($result): bool
-    {
-        if (! is_array($result)) {
-            return false;
-        }
-
-        if (isset($result['warning'])) {
-            session()->flash('warning', $result['warning']);
-        } elseif (isset($result['info'])) {
-            session()->flash('info', $result['info']);
-        } else {
-            return false;
-        }
-
-        return true;
     }
 
     /**

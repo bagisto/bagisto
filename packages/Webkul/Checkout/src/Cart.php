@@ -270,9 +270,10 @@ class Cart
      */
     public function updateItems($data)
     {
-        foreach ($data['qty'] as $itemId => $quantity) {
-            $item = $this->cartItemRepository->find($itemId);
-
+        foreach ($data as $value) {
+            // dd($value);
+            $item = $this->cartItemRepository->find($value['id']);
+            // dd($item->quantity);
             if (! $item) {
                 continue;
             }
@@ -284,13 +285,13 @@ class Cart
                 throw new Exception(__('shop::app.checkout.cart.item.inactive'));
             }
 
-            if ($quantity <= 0) {
-                $this->removeItem($itemId);
+            if ($value['quantity'] <= 0) {
+                $this->removeItem($value['id']);
 
                 throw new Exception(__('shop::app.checkout.cart.quantity.illegal'));
             }
 
-            $item->quantity = $quantity;
+            $item->quantity = $value['quantity'];
 
             if (! $this->isItemHaveQuantity($item)) {
                 throw new Exception(__('shop::app.checkout.cart.quantity.inventory_warning'));
@@ -298,13 +299,13 @@ class Cart
 
             Event::dispatch('checkout.cart.update.before', $item);
 
-            $this->cartItemRepository->update([
-                'quantity'          => $quantity,
-                'total'             => core()->convertPrice($item->price * $quantity),
-                'base_total'        => $item->price * $quantity,
-                'total_weight'      => $item->weight * $quantity,
-                'base_total_weight' => $item->weight * $quantity,
-            ], $itemId);
+            $hey = $this->cartItemRepository->update([
+                'quantity'          => $value['quantity'],
+                'total'             => core()->convertPrice($item->price * $value['quantity']),
+                'base_total'        => $item->price * $value['quantity'],
+                'total_weight'      => $item->weight * $value['quantity'],
+                'base_total_weight' => $item->weight * $value['quantity'],
+            ], $value['id']);
 
             Event::dispatch('checkout.cart.update.after', $item);
         }
