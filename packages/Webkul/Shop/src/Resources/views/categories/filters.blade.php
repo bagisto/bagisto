@@ -13,12 +13,12 @@
         <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
             <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
                 <p class="text-[18px] font-semibold ">
-                    {{-- @translations --}}
+                    <!-- @translations -->
                     @lang('Filters:')
                 </p>
 
                 <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>
-                    {{-- @translations --}}
+                    <!-- @translations -->
                     @lang('Clear All')
                 </p>
             </div>
@@ -35,11 +35,8 @@
     </script>
 
     <script type="text/x-template" id="v-filter-item-template">
-        <div class="border-b-[1px] border-[#E9E9E9]">
-            <div
-                :class="`flex pb-[10px] justify-between items-center cursor-pointer select-none ${active ? 'active' : ''}`"
-                @click="active = ! active"
-            >
+        <x-shop::accordion>
+            <x-slot:header>
                 <div class="flex pb-[10px] justify-between items-center">
                     <p
                         class="text-[18px] font-semibold"
@@ -47,11 +44,9 @@
                     >
                     </p>
                 </div>
+            </x-slot:header>
 
-                <span :class="`text-[24px] ${active ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
-            </div>
-
-            <div class="z-10 bg-white rounded-lg" v-if='active'>
+            <x-slot:content>
                 <ul v-if="filter.type === 'price'">
                     <v-price-filter></v-price-filter>
                 </ul>
@@ -80,8 +75,8 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </x-slot:content>
+        </x-shop::accordion>
     </script>
 
     <script type="text/x-template" id="v-price-filter-template">
