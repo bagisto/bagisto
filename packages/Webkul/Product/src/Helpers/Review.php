@@ -43,7 +43,7 @@ class Review
     /**
      * Returns the total review of the product
      *
-    * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getTotalReviews($product)
@@ -57,7 +57,7 @@ class Review
         return $totalReviews[$product->id] = $product->reviews->where('status', 'approved')->count();
     }
 
-     /**
+    /**
      * Returns the total rating of the product
      *
      * @param  \Webkul\Product\Contracts\Product  $product
@@ -96,7 +96,7 @@ class Review
             ->get();
     }
 
-     /**
+    /**
      * Returns the Percentage rating of the product
      *
      * @param  \Webkul\Product\Contracts\Product  $product

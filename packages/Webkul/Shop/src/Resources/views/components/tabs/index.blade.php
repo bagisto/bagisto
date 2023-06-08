@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="container mt-[60px] max-1180:px-[20px]">
+            <div>
                 <slot></slot>
             </div>
         </div>

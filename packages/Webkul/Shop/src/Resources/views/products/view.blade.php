@@ -138,6 +138,7 @@
                 {{-- Tab section --}}
                 <x-shop::tabs position="center">
                     <x-shop::tabs.item
+                        class="container mt-[60px] !p-0"
                         {{-- @translations --}}
                         :title="trans('Description')"
                         :is-selected="true"
@@ -148,6 +149,7 @@
                     </x-shop::tabs.item>
 
                     <x-shop::tabs.item
+                        class="container mt-[60px] !p-0"
                         {{-- @translations --}}
                         :title="trans('Additional Information')"
                         :is-selected="false"
@@ -165,6 +167,7 @@
                     </x-shop::tabs.item>
 
                     <x-shop::tabs.item
+                        class="container mt-[60px] !p-0"
                         {{-- @translations --}}
                         :title="trans('Reviews')"
                         :is-selected="false"
@@ -408,8 +411,8 @@
                             'product_id': this.productId,
                         };
 
-                        this.$axios.post('{{ route("shop.customers.cart.store") }}', params).then(response => {
-                            alert(response.data.message);
+                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
+                            alert(response.data.data.message);
                             if (buyNow); //Redirect to Cart Page
                         }).catch(error => {});
                     },

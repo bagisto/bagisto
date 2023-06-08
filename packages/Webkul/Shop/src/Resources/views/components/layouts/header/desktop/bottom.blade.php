@@ -115,26 +115,16 @@
             </div>
         @endif
 
-        <x-shop::drawer>
-            <x-slot:toggle>
-                <span class="icon-cart text-[24px] cursor-pointer"></span>
-            </x-slot:toggle>
-
-            <x-slot:header>
-                Drawer Header
-            </x-slot:header>
-
-            <x-slot:content>
-                Drawer Content
-            </x-slot:content>
-        </x-shop::drawer>
+        @auth('customer')
+            @include('shop::checkout.cart.mini-cart')
+        @endauth
 
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>
                 <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
             </x-slot:toggle>
 
-            {{--Guest dropdown--}}
+            {{-- Guest Dropdown --}}
             @guest('customer')
                 <x-slot:content>
                     <div class="grid gap-[10px]">
@@ -167,7 +157,7 @@
                 </x-slot:content>
             @endguest
 
-            {{--Customers dropdown--}}
+            {{-- Customers Dropdown --}}
             @auth('customer')
                 <x-slot:content class="!p-[0px]">
                     <div class="grid gap-[10px] p-[20px] pb-0">

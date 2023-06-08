@@ -21,8 +21,7 @@
                     @change="apply('sort', filters.applied.sort)"
                 >
                     <option value=''>
-                        <!-- @translations -->
-                        @lang('Sort By')
+                        @lang('shop::app.products.sort-by.title')
                     </option>
 
                     <option

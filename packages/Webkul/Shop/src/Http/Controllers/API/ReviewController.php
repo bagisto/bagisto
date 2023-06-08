@@ -3,8 +3,8 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
 
 class ReviewController extends APIController
@@ -22,8 +22,8 @@ class ReviewController extends APIController
 
     /**
      * Product listings.
-     * 
-     * @param  integer  $id
+     *
+     * @param  int  $id
      */
     public function index($id): JsonResource
     {
@@ -32,7 +32,7 @@ class ReviewController extends APIController
         return ProductReviewResource::collection($product->reviews()->paginate(2));
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  int  $id
@@ -46,9 +46,9 @@ class ReviewController extends APIController
         ]);
 
         $data = [
-            'comment' => request()->input('comment'),
-            'rating' => request()->input('rating'),
-            'title' => request()->input('title'),
+            'comment'    => request()->input('comment'),
+            'rating'     => request()->input('rating'),
+            'title'      => request()->input('title'),
             'status'     => 'pending',
             'product_id' => $id,
         ];

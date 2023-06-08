@@ -30,8 +30,8 @@ class ProductController extends APIController
 
     /**
      * Related product listings.
-     * 
-     * @param  integer  $id
+     *
+     * @param  int  $id
      */
     public function relatedProducts($id): JsonResource
     {
@@ -46,8 +46,8 @@ class ProductController extends APIController
 
     /**
      * Upsell product listings.
-     * 
-     * @param  integer  $id
+     *
+     * @param  int  $id
      */
     public function upSellProducts($id): JsonResource
     {
