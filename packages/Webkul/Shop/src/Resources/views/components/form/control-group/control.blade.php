@@ -1,6 +1,6 @@
 @props([
     'type' => 'text',
-    'name',
+    'name' => '',
 ])
 
 @switch($type)
@@ -11,10 +11,15 @@
         <v-field
             type="{{ $type }}"
             name="{{ $name }}"
-            :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-            {{ $attributes->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+            v-slot="{ field }"
             {{ $attributes }}
-        ></v-field>
+        >
+            <input
+                v-bind="field"
+                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                {{ $attributes->except(['value'])->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+            >
+        </v-field>
 
         @break
 
@@ -48,13 +53,17 @@
 
     @case('select')
         <v-field
-            as="select"
             name="{{ $name }}"
-            :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-            {{ $attributes->merge(['class' => 'custom-select shadow appearance-none bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]']) }}
+            v-slot="{ field }"
             {{ $attributes }}
         >
-            {{ $slot }}
+            <select
+                v-bind="field"
+                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                {{ $attributes->except(['value'])->merge(['class' => 'custom-select shadow appearance-none bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]']) }}
+            >
+                {{ $slot }}
+            </select>
         </v-field>
 
         @break
