@@ -14,7 +14,10 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-tab-item-template">
-        <div v-if="isActive">
+        <div 
+            {{ $attributes->merge(['class' => 'p-5 max-1180:px-[20px]']) }} 
+            v-if="isActive"
+        >
             <slot></slot>
         </div>
     </script>
