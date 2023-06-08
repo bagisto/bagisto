@@ -4,37 +4,83 @@
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
 
-    <product-options></product-options>
+    <v-product-options></v-product-options>
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.after', ['product' => $product]) !!}
 
     @push('scripts')
-
-        <script type="text/x-template" id="product-options-template">
+        <script type="text/x-template" id="v-product-options-template">
             <div class="attributes">
+                <input type="hidden" id="selected_configurable_option" ref="selected_configurable_option" name="selected_configurable_option" :value="selectedProductId">
 
-                <input type="hidden" id="selected_configurable_option" name="selected_configurable_option" :value="selectedProductId">
-
-                <div v-for='(attribute, index) in childAttributes' class="attribute control-group" :class="[errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : '']">
-                    <label class="required">@{{ attribute.label }}</label>
-
+                <div v-for='(attribute, index) in childAttributes' class="attribute control-group" >
                     <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
-                        <select
-                            class="control"
-                            v-validate="'required'"
-                            :name="['super_attribute[' + attribute.id + ']']"
-                            :disabled="attribute.disabled"
-                            @change="configure(attribute, $event.target.value)"
-                            :id="['attribute_' + attribute.id]"
-                            :data-vv-as="'&quot;' + attribute.label + '&quot;'">
+                        <div class="mt-[20px]">
+                            <h3 class="text-[20px] mb-[15px] max-sm:text-[16px]" v-if="(attribute.options).length > 1" v-text="attribute.label"></h3>
+                            
+                            <div v-if="attribute.code == 'color'" class="flex items-center space-x-3">   
+                                <template v-for="(option, index) in attribute.options">
+                                    <label
+                                      class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none undefined"
+                                      :class="{'ring-gray-900 ring ring-offset-1' : index == attribute.selectedIndex }"
+                                      :title="option.label"
+                                    >
+                                        <input
+                                            type="radio"
+                                            :name="['super_attribute[' + attribute.id + ']']"
+                                            :value="option.id"
+                                            :id="['attribute_' + attribute.id]"
+                                            class="sr-only"
+                                            :aria-labelledby="'color-choice-' + index + '-label'"
+                                            v-model="color"
+                                            @click="configure(attribute, $event.target.value)"
+                                        >
+                                        <span :style="{ 'background-color': option.label }" class="h-8 w-8 rounded-full bg-navyBlue border border-navyBlue border-opacity-10 max-sm:h-[25px] max-sm:w-[25px]"></span>
+                                    </label>
+                                </template>
+                            </div>
 
-                            <option
-                                v-for='(option, index) in attribute.options' :value="option.id"
-                                :selected="index == attribute.selectedIndex">
-                                @{{ option.label }}
-                            </option>
+                            <div v-else-if="attribute.code == 'size'"  class="flex flex-wrap gap-[12px]">
+                                <template v-for="(option, index) in attribute.options">
+                                    <label 
+                                        class="group relative flex items-center justify-center rounded-full border h-[60px] w-[60px] py-3 px-4 font-medium uppercase hover:bg-gray-50 focus:outline-none sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm  max-sm:w-[35px] max-sm:h-[35px]"
+                                        :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
+                                        :title="option.label"
+                                        >
+                                        <input
+                                            type="radio"
+                                            :name="['super_attribute[' + attribute.id + ']']"
+                                            :value="option.id"
+                                            :id="['attribute_' + attribute.id]"
+                                            class="sr-only"
+                                            :aria-labelledby="'color-choice-' + index + '-label'"
+                                            v-model="size"
+                                            @click="configure(attribute, $event.target.value)"
+                                        >
 
-                        </select>
+                                        <span class="text-[18px] max-sm:text-[14px]" v-text="option.label"></span>
+                                        <span class="pointer-events-none absolute -inset-px rounded-full"></span>
+                                    </label>
+                                </template>
+                            </div>
+
+                            <div v-else class="flex flex-wrap gap-[12px]">
+                                <select
+                                    :name="['super_attribute[' + attribute.id + ']']"
+                                    :id="['attribute_' + attribute.id]"
+                                    class="bg-gray-50 mt-5 border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    :disabled="attribute.disabled"
+                                    :data-vv-as="'&quot;' + attribute.label + '&quot;'"
+                                    @change="configure(attribute, $event.target.value)"
+                                >
+                                    <option
+                                        v-for='(option, index) in attribute.options' :value="option.id"
+                                        :selected="index == attribute.selectedIndex">
+                                        @{{ option.label }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
                     </span>
 
                     <span class="swatch-container" v-else>
@@ -66,11 +112,7 @@
                         <span v-if="! attribute.options.length" class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
                     </span>
 
-                    <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')">
-                        @{{ errors.first('super_attribute[' + attribute.id + ']') }}
-                    </span>
                 </div>
-
             </div>
         </script>
 
@@ -80,14 +122,11 @@
             $config = $configurableOptionHelper->getConfigurationConfig($product);
         @endphp
 
-        <script>
+        <script type="module">
+            app.component('v-product-options', {
+                template: '#v-product-options-template',
 
-            Vue.component('product-options', {
-                template: '#product-options-template',
-
-                inject: ['$validator'],
-
-                data: function() {
+                data() {
                     return {
                         defaultVariant: @json($defaultVariant),
 
@@ -103,14 +142,14 @@
                     }
                 },
 
-                mounted: function() {
+                mounted() {
                     this.init();
 
                     this.initDefaultSelection();
                 },
 
                 methods: {
-                    init: function () {
+                    init() {
                         let config = @json($config);
 
                         let childAttributes = this.childAttributes,
@@ -139,7 +178,7 @@
                         }
                     },
 
-                    initDefaultSelection: function() {
+                    initDefaultSelection() {
                         if (this.defaultVariant) {
                             this.childAttributes.forEach((attribute) => {
                                 let attributeValue = this.defaultVariant[attribute.code];
@@ -149,7 +188,7 @@
                         }
                     },
 
-                    configure: function(attribute, value) {
+                    configure(attribute, value) {
                         this.simpleProduct = this.getSelectedProductId(attribute, value);
 
                         if (value) {
@@ -177,7 +216,7 @@
                         this.changeStock(this.simpleProduct);
                     },
 
-                    getSelectedIndex: function(attribute, value) {
+                    getSelectedIndex(attribute, value) {
                         let selectedIndex = 0;
 
                         attribute.options.forEach(function(option, index) {
@@ -189,7 +228,7 @@
                         return selectedIndex;
                     },
 
-                    getSelectedProductId: function(attribute, value) {
+                    getSelectedProductId(attribute, value) {
                         let options = attribute.options,
                             matchedOptions;
 
@@ -204,7 +243,7 @@
                         return undefined;
                     },
 
-                    fillSelect: function(attribute) {
+                    fillSelect(attribute) {
                         let options = this.getAttributeOptions(attribute.id),
                             prevOption,
                             index = 1,
@@ -245,7 +284,7 @@
                         }
                     },
 
-                    resetChildren: function(attribute) {
+                    resetChildren(attribute) {
                         if (attribute.childAttributes) {
                             attribute.childAttributes.forEach(function (set) {
                                 set.selectedIndex = 0;
@@ -254,7 +293,7 @@
                         }
                     },
 
-                    clearSelect: function (attribute) {
+                    clearSelect (attribute) {
                         if (! attribute)
                             return;
 
@@ -275,7 +314,7 @@
                         }
                     },
 
-                    getAttributeOptions: function (attributeId) {
+                    getAttributeOptions (attributeId) {
                         let self = this,
                             options;
 
@@ -288,7 +327,7 @@
                         return options;
                     },
 
-                    reloadPrice: function () {
+                    reloadPrice () {
                         let selectedOptionCount = 0;
 
                         this.childAttributes.forEach(function(attribute) {
@@ -325,7 +364,7 @@
                         }
                     },
 
-                    changeProductImages: function () {
+                    changeProductImages () {
                         galleryImages.splice(0, galleryImages.length)
 
                         if (this.simpleProduct) {
@@ -343,7 +382,7 @@
                         });
                     },
 
-                    changeStock: function (productId) {
+                    changeStock (productId) {
                         let inStockElement = document.querySelector('.stock-status');
 
                         if (productId) {

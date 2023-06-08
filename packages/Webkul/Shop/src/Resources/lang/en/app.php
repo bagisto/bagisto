@@ -202,6 +202,36 @@ return [
         ],
     ],
 
+    'products'  => [
+        'review'                 => 'Review',
+        'add-to-cart'            => 'Add To Cart',
+        'buy-now'                => 'Buy Now',
+        'compare'                => 'Compare',
+        'rating'                 => 'Rating',
+        'title'                  => 'Title',
+        'comment'                => 'Comment',
+        'submit-review'          => 'Submit Review',
+        'customer-review'        => 'Customer Reviews',
+        'write-a-review'         => 'Write a Review',
+        'stars'                  => 'Stars',
+        'share'                  => 'Share',
+        'was-this-helpful'       => 'Was This Review Helpful?',
+        'load-more'              => 'Load More',
+        'add-image'              => 'Add Image',
+        'product-description'    => 'Product Description',
+        'additional-information' => 'Additional Information',
+        'submit-success'         => 'Submit Successfully',
+        'something-went-wrong'   => 'Something went wrong',
+        'sale'                   => 'Sale',
+        'in-stock'               => 'In Stock',
+        'available-for-order'    => 'Available For Order',
+        'out-of-stock'           => 'Out of Stock',
+        'related-product-title'  => 'Related Products',
+        'up-sell-title'          => 'Upsell Products',
+        'new'                    => 'New',
+        'as-low-as'              => 'As Low As',
+    ],
+
     'checkout' => [
         'success' => [
             'title'         => 'Order successfully placed',
@@ -655,7 +685,7 @@ return [
         ],
     ],
 
-    'products' => [
+    'old-products' => [
         'layered-nav-title'        => 'Shop By',
         'price-label'              => 'As low as',
         'remove-filter-link-title' => 'Clear All',
