@@ -9,7 +9,7 @@
         <div class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'>
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <div
-                    class="relative overflow-hidden  rounded-sm  min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
+                    class="relative overflow-hidden rounded-sm  min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
                     v-show="isImageLoading"
                 >
                     <img class="rounded-sm bg-[#F5F5F5]" src="">
@@ -17,18 +17,11 @@
 
                 <img
                     class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                    :src="product.base_image.original_image_url"
+                    :src="product.base_image.medium_image_url"
                     width="291"
                     height="300"
                     @load="onImageLoad()"
                     v-show="! isImageLoading"
-                >
-
-                <img
-                    class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                    :src="product.base_image.original_image_url"
-                    width="291"
-                    height="300"
                 >
 
                 <div class="action-items bg-black">
