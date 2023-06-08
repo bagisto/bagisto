@@ -1,0 +1,52 @@
+.bb-social-share {
+    padding: 1rem 0;
+}
+
+.bb-social-share__title {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.bb-social-share__items {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.bb-social-share__item {
+    margin-right: 1rem;
+}
+
+.bb-social-share__item a {
+    text-decoration: none;
+}
+
+.bb-social-share__item a:hover {
+    text-decoration: none;
+}
+
+.bb-social-share__item a svg {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+}
+
+.bb-social--facebook a svg > path {
+    fill: #3b5998;
+}
+
+.bb-social--linkedin a svg > path {
+    fill: #1DA1F2;
+}
+.bb-social--pinterest a svg > path {
+    fill: #c8232c;
+}
+.bb-social--twitter a svg > path {
+    fill: #1DA1F2;
+}
+.bb-social--whatsapp a svg > path {
+    fill: #25D366;
+}
+.bb-social--email a svg > path {
+    fill: #272928;
+}
