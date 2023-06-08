@@ -49,6 +49,8 @@
             <x-slot:content>
                 <ul v-if="filter.type === 'price'">
                     <li>
+                        <v-price-filter></v-price-filter>
+
                         <x-shop::range-slider></x-shop::range-slider>
                     </li>
                 </ul>
