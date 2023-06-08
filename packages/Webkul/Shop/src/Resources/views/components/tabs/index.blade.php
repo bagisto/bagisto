@@ -1,4 +1,3 @@
-
 @props([
     'position' => 'left'
 ])
@@ -22,11 +21,12 @@
                     v-for="tab in tabs" 
                     class="text-[20px] font-medium text-[#7D7D7D] pb-[18px] px-[30px] cursor-pointer"
                     :class="{'text-black border-navyBlue border-b-[2px]': tab.isActive }"
-                    @click="change(tab)"
                     v-text="tab.title"
+                    @click="change(tab)"
                 >
                 </div>
             </div>
+
             <div class="container mt-[60px] max-1180:px-[20px]">
                 <slot></slot>
             </div>

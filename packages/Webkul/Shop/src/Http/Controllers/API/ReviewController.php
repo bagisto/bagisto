@@ -12,8 +12,6 @@ class ReviewController extends APIController
     /**
      * Create a controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
-     * @param  
      * @return void
      */
     public function __construct(
@@ -38,9 +36,8 @@ class ReviewController extends APIController
      * Store a newly created resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function store($id)
+    public function store($id): JsonResource
     {
         $this->validate(request(), [
             'comment' => 'required',
@@ -48,23 +45,25 @@ class ReviewController extends APIController
             'title'   => 'required',
         ]);
 
-        request()->merge([
+        $data = [
+            'comment' => request()->input('comment'),
+            'rating' => request()->input('rating'),
+            'title' => request()->input('title'),
             'status'     => 'pending',
             'product_id' => $id,
-        ]);
+        ];
 
         if ($customer = auth()->guard('customer')->user()) {
-            request()->merge([
-                'name'        => $customer->getNameAttribute(),
-                'customer_id' => $customer->id
+            $data = array_merge($data, [
+                'name'        => $customer->name,
+                'customer_id' => $customer->id,
             ]);
         }
 
-        $this->productReviewRepository->create(request()->all());
+        $this->productReviewRepository->create($data);
 
-        return response()->json([
-            'message' => trans('shop::app.products.submit-success')
-        ], 200);
+        return new JsonResource([
+            'message' => trans('shop::app.products.submit-success'),
+        ]);
     }
-
 }

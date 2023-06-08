@@ -22,7 +22,7 @@
                 <div class="container px-[60px] max-1180:px-[0px]">
                     <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
                         
-                        @include('shop::products.view.v-gallery')
+                        @include('shop::products.view.gallery')
                         
                         {{-- Product Details --}}
                         <div class="max-w-[590px] relative max-1180:px-[20px]">
