@@ -24,13 +24,13 @@
 
         <div class="z-10 bg-white rounded-lg">
             <ul class="pb-3 text-sm text-gray-700 grid gap-[16px]">
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
-                <li class="h-[20px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
+                <li class="h-[24px] w-[60%] bg-[#E9E9E9] shimmer"></li>
             </ul>
         </div>
     </div>
