@@ -63,6 +63,8 @@
                             </p>
 
                             @include('shop::products.view.types.configurable')
+                            
+                            @include('shop::products.view.types.grouped')
 
                             {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
                             
@@ -70,16 +72,27 @@
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
                                 
-                                @include('shop::products.view.quantity-changer')
+                                @if ($product->type != 'grouped')
+                                    @include('shop::products.view.quantity-changer')
+                                @endif
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
                                 
-                                <button 
-                                    class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
-                                    @click='addToCart("")'
-                                >
-                                    @lang('shop::app.products.add-to-cart')
-                                </button>
+                                @if ($product->type != 'grouped')
+                                    <button 
+                                        class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                        @click='addToCart("")'
+                                    >
+                                        @lang('shop::app.products.add-to-cart')
+                                    </button>
+                                @else 
+                                    <button 
+                                        class="rounded-[12px] border text-navyBlue border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
+                                        @click='addToCart("")'
+                                    >
+                                        @lang('shop::app.products.add-to-cart')
+                                    </button>
+                                @endif
                             </div>
 
 

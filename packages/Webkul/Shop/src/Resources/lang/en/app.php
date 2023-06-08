@@ -230,6 +230,9 @@ return [
         'up-sell-title'          => 'Upsell Products',
         'new'                    => 'New',
         'as-low-as'              => 'As Low As',
+        'starting-at'            => 'Starting At',
+        'name'                   => 'Name',
+        'qty'                    => 'Qty',
     ],
 
     'checkout' => [

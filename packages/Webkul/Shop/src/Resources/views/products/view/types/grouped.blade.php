@@ -7,36 +7,22 @@
         @endphp
 
         @if ($groupedProducts->count())
-            <div class="grouped-product-list">
-                <ul type="none">
-                    <li>
-                        <span>{{ __('shop::app.products.name') }}</span>
-                        <span>{{ __('shop::app.products.qty') }}</span>
-                    </li>
-                    @foreach ($groupedProducts as $groupedProduct)
-                        @if($groupedProduct->associated_product->getTypeInstance()->isSaleable())
-                            <li>
-                                <span class="name">
-                                    {{ $groupedProduct->associated_product->name }}
+            <div class="grid gap-[20px] mt-[30px]">
+                @foreach ($groupedProducts as $groupedProduct)
+                    @if ($groupedProduct->associated_product->getTypeInstance()->isSaleable())
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-[14px] font-medium text-[#7D7D7D] mt-[5px]">{{ $groupedProduct->associated_product->name }}</p>
+                                {!! $groupedProduct->associated_product->getTypeInstance()->getPriceHtml() !!}
+                            </div>
 
-                                    @include ('shop::products.price', ['product' => $groupedProduct->associated_product])
-                                </span>
-
-                                <span class="qty">
-                                    <quantity-changer
-                                        :control-name="'qty[{{$groupedProduct->associated_product_id}}]'"
-                                        :validations="'required|numeric|min_value:0'"
-                                        quantity="{{ $groupedProduct->qty }}"
-                                        quantity-text="{{ __('shop::app.products.quantity') }}"
-                                        min-quantity="0">
-                                    </quantity-changer>
-                                </span>
-                            </li>
-                        @endif
-                    @endforeach
-                </ul>
+                            @include('shop::products.view.quantity-changer')
+                        </div>
+                    @endif
+                @endforeach
             </div>
         @endif
+        
     </div>
 
     {!! view_render_event('bagisto.shop.products.view.grouped_products.before', ['product' => $product]) !!}
