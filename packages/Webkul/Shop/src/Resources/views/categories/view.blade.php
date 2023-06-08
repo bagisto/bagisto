@@ -1,6 +1,10 @@
 <x-shop::layouts>
     {{-- Hero Image --}}
     <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+        <div style="margin-bottom: 50px">
+            <x-shop::range-slider></x-shop::range-slider>
+        </div>
+
         <div>
             <img
                 class="rounded-[12px]"
@@ -8,7 +12,7 @@
             >
         </div>
     </div>
-
+    
     {{-- Product Listing --}}
     <v-category
         src="{{ route('shop.products.index', ['category_id' => $category->id]) }}"
