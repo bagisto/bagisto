@@ -84,6 +84,7 @@ class CartController extends APIController
         Cart::removeItem(request()->input('cart_item_id'));
 
         return new JsonResource([
+            'data'      => Cart::getCart(),
             'messege' => trans('shop::app.checkout.cart.item.success-remove'),
         ]);
     }
@@ -97,6 +98,7 @@ class CartController extends APIController
             Cart::updateItems(request()->input());
 
             return new JsonResource([
+                'data'      => Cart::getCart(),
                 'message' => trans('shop::app.checkout.cart.quantity-update'),
             ]);
         } catch (\Exception $exception) {

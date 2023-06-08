@@ -20,7 +20,7 @@
             </x-slot:header>
 
             <x-slot:content>
-                <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items.length">
+                <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items?.length">
                     <div class="flex gap-x-[20px]" v-for="item in cart?.items">
                         <div class="">
                             <img 
@@ -81,7 +81,7 @@
             </x-slot:content>
 
             <x-slot:footer>
-                <div v-if="cart?.items.length">
+                <div v-if="cart?.items?.length">
                     <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
                         <p class="text-[14px] font-medium text-[#7D7D7D]">
                             @lang('shop::app.checkout.cart.subtotal')
@@ -133,7 +133,7 @@
 
                     this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
                         .then(response => {
-                            this.getCart();
+                            this.cart = response.data.data;
                         })
                         .catch(error => {});
                 },
@@ -144,7 +144,7 @@
                             'cart_item_id': itemId,
                         })
                         .then(response => {
-                            this.getCart();
+                            this.cart = response.data.data;
                         })
                         .catch(error => {});
                 },
