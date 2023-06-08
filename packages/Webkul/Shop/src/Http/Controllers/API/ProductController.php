@@ -27,4 +27,36 @@ class ProductController extends APIController
     {
         return ProductResource::collection($this->productRepository->getAll());
     }
+
+    /**
+     * Related product listings.
+     * 
+     * @param  integer  $id
+     */
+    public function relatedProducts($id): JsonResource
+    {
+        $product = $this->productRepository->findOrFail($id);
+
+        $relatedProducts = $product->related_products()
+            ->take(core()->getConfigData('catalog.products.product_view_page.no_of_related_products'))
+            ->get();
+
+        return ProductResource::collection($relatedProducts);
+    }
+
+    /**
+     * Upsell product listings.
+     * 
+     * @param  integer  $id
+     */
+    public function upSellProducts($id): JsonResource
+    {
+        $product = $this->productRepository->findOrFail($id);
+
+        $upSellProducts = $product->up_sells()
+            ->take(core()->getConfigData('catalog.products.product_view_page.no_of_up_sells_products'))
+            ->get();
+
+        return ProductResource::collection($upSellProducts);
+    }
 }

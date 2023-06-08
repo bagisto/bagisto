@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\ProductReviewResource;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductReviewImageRepository;
 
@@ -51,42 +52,6 @@ class ReviewController extends Controller
         session()->flash('error', trans('shop::app.reviews.login-to-review'));
 
         return redirect()->route('shop.customer.session.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function store($id)
-    {
-        $this->validate(request(), [
-            'comment' => 'required',
-            'rating'  => 'required|numeric|min:1|max:5',
-            'title'   => 'required',
-        ]);
-
-        $product = $this->productRepository->find($id);
-
-        $data = array_merge(request()->all(), [
-            'status'     => 'pending',
-            'product_id' => $id,
-        ]);
-
-        if (auth()->guard('customer')->user()) {
-            $data['customer_id'] = auth()->guard('customer')->user()->id;
-
-            $data['name'] = auth()->guard('customer')->user()->first_name . ' ' . auth()->guard('customer')->user()->last_name;
-        }
-
-        $review = $this->productReviewRepository->create($data);
-
-        $this->productReviewImageRepository->uploadImages($data, $review);
-
-        session()->flash('success', trans('shop::app.response.submit-success', ['name' => 'Product Review']));
-
-        return redirect()->route('shop.productOrCategory.index', $product->url_key);
     }
 
     /**

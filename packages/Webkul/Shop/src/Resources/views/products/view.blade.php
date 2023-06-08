@@ -1,320 +1,445 @@
-@extends('shop::layouts.master')
+@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
+@inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 
-@section('page_title')
-    {{ trim($product->meta_title) != "" ? $product->meta_title : $product->name }}
-@stop
+@php
+    $avgRatings = round($reviewHelper->getAverageRating($product));
 
-@section('seo')
-    <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
+    $percentageRatings = $reviewHelper->getPercentageRating($product);
 
-    <meta name="keywords" content="{{ $product->meta_keywords }}"/>
+    $customAttributeValues = $productViewHelper->getAdditionalData($product);
+@endphp
 
-    @if (core()->getConfigData('catalog.rich_snippets.products.enable'))
-        <script type="application/ld+json">
-            {{ app('Webkul\Product\Helpers\SEO')->getProductJsonLd($product) }}
-        </script>
-    @endif
-
-    <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
-
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <meta name="twitter:title" content="{{ $product->name }}" />
-
-    <meta name="twitter:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
-
-    <meta name="twitter:image:alt" content="" />
-
-    <meta name="twitter:image" content="{{ $productBaseImage['medium_image_url'] }}" />
-
-    <meta property="og:type" content="og:product" />
-
-    <meta property="og:title" content="{{ $product->name }}" />
-
-    <meta property="og:image" content="{{ $productBaseImage['medium_image_url'] }}" />
-
-    <meta property="og:description" content="{!! htmlspecialchars(trim(strip_tags($product->description))) !!}" />
-
-    <meta property="og:url" content="{{ route('shop.productOrCategory.index', $product->url_key) }}" />
-@stop
-
-@section('content-wrapper')
-
+<x-shop::layouts>
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
-    <section class="product-detail">
+    <v-product></v-product>
+       
+    {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 
-        <div class="layouter">
-            <product-view>
-                <div class="form-container">
-                    @csrf()
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-product-template">
+            <div>
+                <div class="container px-[60px] max-1180:px-[0px]">
+                    <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                        
+                        @include('shop::products.view.gallery')
+                        
+                        {{-- Product Details --}}
+                        <div class="max-w-[590px] relative max-1180:px-[20px]">
+                            <div class="flex justify-between gap-[15px]">
+                                <h1 class="text-[30px] font-medium max-sm:text-[20px]">
+                                    {{ $product->name }}
+                                </h1>
 
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-
-                    @include ('shop::products.view.gallery')
-
-                    <div class="details">
-
-                        <div class="product-heading">
-                            <span>{{ $product->name }}</span>
-                        </div>
-
-                        @include ('shop::products.review', ['product' => $product])
-
-                        @include ('shop::products.price', ['product' => $product])
-
-                        @if (
-                            Webkul\Tax\Helpers\Tax::isTaxInclusive()
-                            && $product->getTypeInstance()->getTaxCategory()
-                        )
-                            <div>
-                                {{ __('shop::app.products.tax-inclusive') }}
-                            </div>
-                        @endif
-
-                        @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()))
-                            <div class="discount-offers">
-                                @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offer)
-                                    <p> {{ $offer }} </p>
-                                @endforeach
-                            </div>
-                        @endif
-
-                        @include ('shop::products.view.stock', ['product' => $product])
-
-                        {!! view_render_event('bagisto.shop.products.view.short_description.before', ['product' => $product]) !!}
-
-                        <div class="description">
-                            {!! $product->short_description !!}
-                        </div>
-
-                        {!! view_render_event('bagisto.shop.products.view.short_description.after', ['product' => $product]) !!}
-
-
-                        {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                        @if ($product->getTypeInstance()->showQuantityBox())
-                            <quantity-changer></quantity-changer>
-                        @else
-                            <input type="hidden" name="quantity" value="1">
-                        @endif
-
-                        {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                        @include ('shop::products.view.configurable-options')
-
-                        @include ('shop::products.view.downloadable')
-
-                        @include ('shop::products.view.grouped-products')
-
-                        @include ('shop::products.view.bundle-options')
-
-                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
-
-                        <accordian :title="'{{ __('shop::app.products.description') }}'" :active="true">
-                            <div slot="header">
-                                {{ __('shop::app.products.description') }}
-                                <i class="icon expand-icon right"></i>
-                            </div>
-
-                            <div slot="body">
-                                <div class="full-description">
-                                    {!! $product->description !!}
+                                <div 
+                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]  max-1180:absolute max-1180:-top-[82px] max-1180:right-[12px] max-1180:border-0"
+                                    @click='addToWishlist()'
+                                >
                                 </div>
                             </div>
-                        </accordian>
 
-                        {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
+                            <div class='flex items-center'>
+                                <x-shop::products.star-rating star='{{ $avgRatings }}' :is-editable=false></x-shop::products.star-rating>
 
-                        @include ('shop::products.view.attributes')
+                                <div class="flex gap-[15px] items-center">
+                                    <p class="text-[#7D7D7D] text-[14px]">({{ count($product->reviews) }} reviews)</p>
+                                </div>
+                            </div>
+                            
+                            {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
+                            
+                            @include ('shop::products.view.stock', ['product' => $product])
 
-                        @include ('shop::products.view.reviews')
+                            <p class="text-[24px] flex items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                                {!! $product->getTypeInstance()->getPriceHtml() !!}
+                            </p>
+
+                            {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
+
+                            {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
+
+                            <p class="text-[18px] text-[#7D7D7D] mt-[25px] max-sm:text-[14px] max-sm:mt-[15px]">
+                                {!! $product->short_description !!}
+                            </p>
+
+                            @include('shop::products.view.types.configurable')
+
+                            {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
+                            
+                            <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
+
+                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+                                
+                                @include('shop::products.view.quantity-changer')
+
+                                {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+                                
+                                <button 
+                                    class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                    @click='addToCart("")'
+                                >
+                                    @lang('shop::app.products.add-to-cart')
+                                </button>
+                            </div>
+
+
+                            <button
+                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
+                                @click='addToCart("buy_now")'
+                                {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
+                            >
+                                @lang('shop::app.products.buy-now')
+                            </button>
+                            
+                            <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
+                                <div 
+                                    class=" flex justify-center items-center gap-[10px] cursor-pointer" 
+                                    @click='addToCompare()'
+                                >
+                                    <span class="icon-compare text-[24px]"></span>
+                                    @lang('shop::app.products.compare')
+                                </div>
+
+                                <div class="flex gap-[25px] max-sm:flex-wrap">
+                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer"><span
+                                            class="icon-share text-[24px]"></span>Share</div>
+                                    <div class="flex gap-[15px]">
+                                        <a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Facebook"></a>
+                                        <a href="" class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Twitter"></a>
+                                        <a href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Pintrest"></a>
+                                        <a href="" class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Linkdln"></a>
+                                    </div>
+                                </div>
+
+                                {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                            </div>
+                        </div>
+                        {{-- Product Details --}}
                     </div>
                 </div>
-            </product-view>
-        </div>
+                
+                {{-- Tab section --}}
+                <x-shop::tabs position="center">
+                    <x-shop::tabs.item
+                        {{-- @translations --}}
+                        :title="trans('Description')"
+                        :is-selected="true"
+                    >   
+                        <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                            {!! $product->description !!}
+                        </p>
+                    </x-shop::tabs.item>
 
-        @include ('shop::products.view.related-products')
+                    <x-shop::tabs.item
+                        {{-- @translations --}}
+                        :title="trans('Additional Information')"
+                        :is-selected="false"
+                    >   
+                        <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                            @foreach ($customAttributeValues as $values)
+                                <div class="grid">
+                                    <p class="text-[16px] text-black">{{ $values['label'] }}</p>
+                                </div>
+                                <div class="grid">
+                                    <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
+                                </div>
+                            @endforeach
+                        </p>
+                    </x-shop::tabs.item>
 
-        @include ('shop::products.view.up-sells')
+                    <x-shop::tabs.item
+                        {{-- @translations --}}
+                        :title="trans('Reviews')"
+                        :is-selected="false"
+                    >   
+                    <div>
+                        <!-- Write Review Section -->
+                        <div class="w-full">
+                            <form 
+                                ref='review' 
+                                @submit.prevent='addToReview()' 
+                                class='rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center'
+                            >
+                                <div class="flex w-full">
+                                    <label 
+                                        for="dropzone-file"
+                                        class="flex flex-col w-[286px] h-[286px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100 "
+                                    >
+                                        <div class="m-0 block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center">
+                                            @lang('shop::app.products.add-image')
+                                        </div>
 
-    </section>
+                                        <input id="dropzone-file" type="file" class="hidden" />
+                                    </label>
+                                </div>
+                                
+                                <div>
+                                    <div class="">
+                                        <label class="block text-gray-700 text-[12px] font-medium mb-2" for="username">
+                                            @lang('shop::app.products.rating')
+                                        </label>
 
-    {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
-@endsection
+                                        <x-shop::products.star-rating star='5' is-editable=true></x-shop::products.star-rating>
 
-@push('scripts')
+                                    </div>
 
-    <script type="text/x-template" id="product-view-template">
-        <form method="POST" id="product-form" action="{{ route('shop.cart.add', $product->id) }}" @click="onSubmit($event)">
+                                    <div class="mb-4 mt-[15px]">
+                                        <label 
+                                            class="block text-gray-700 text-[12px] font-medium mb-2" for="username"
+                                        > 
+                                            @lang('shop::app.products.title') 
+                                        </label>
 
-            <input type="hidden" name="is_buy_now" v-model="is_buy_now">
+                                        <input
+                                            class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="username" 
+                                            type="text" 
+                                            placeholder="Username" 
+                                            name='title' 
+                                            v-validate='required'
+                                        >
+                                    </div>
 
-            <slot></slot>
+                                    <div class="mb-6">
+                                        <label 
+                                            class="block text-gray-700 text-[12px] font-medium mb-2" for="password"
+                                        >
+                                            @lang('shop::app.products.comment')
+                                        </label>
 
-        </form>
-    </script>
+                                        <textarea 
+                                            rows="12" 
+                                            class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                            placeholder="comment" 
+                                            v-validate='required' 
+                                            name='comment'
+                                        ></textarea>
+                                    </div>
 
-    <script type="text/x-template" id="quantity-changer-template">
-        <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
-            <label class="required">{{ __('shop::app.products.quantity') }}</label>
+                                    <button
+                                        class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                                        type='submit'
+                                    >
+                                        @lang('shop::app.products.submit-review')
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Write Review Section -->
 
-            <span class="quantity-container">
-                <button type="button" class="decrease" @click="decreaseQty()">-</button>
+                        <!-- Review List Section -->
+                        <div>
+                            <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
+                                <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
+                                    @lang('shop::app.products.customer-review')
+                                </h3>
 
-                <input
-                    ref="quantityChanger"
-                    :name="controlName"
-                    :model="qty"
-                    class="control"
-                    v-validate="validations"
-                    data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
-                    @keyup="setQty($event)">
+                                <div 
+                                    class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px]"
+                                    @click='if (info) info = false; writeReview = true;'
+                                >
+                                    <span class="icon-pen text-[24px]"></span> 
+                                    @lang('shop::app.products.write-a-review')
+                                </div>
+                            </div>
 
-                <button type="button" class="increase" @click="increaseQty()">+</button>
-            </span>
+                            <div class="flex justify-between items-center gap-[15px] mt-[30px] max-w-[365px] max-sm:flex-wrap">
+                                <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
+                                    
+                                <x-shop::products.star-rating star='{{ $avgRatings }}' editable=false></x-shop::products.star-rating>
 
-            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
-        </div>
-    </script>
+                                <p class="text-[12px] text-[#858585]">
+                                    ({{ count($product->reviews) }} @lang('shop::app.products.customer-review'))
+                                </p>
+                            </div>
 
-    <script>
+                            <div class="flex gap-x-[20px] items-center">
+                                <div class="flex gap-y-[18px] max-w-[365px] mt-[10px] flex-wrap">
 
-        Vue.component('product-view', {
+                                @for ($i = 5; $i >= 1; $i--)
+                                    <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
+                                        <div class="text-[16px] font-medium">{{ $i }} Stars</div>
+                                        <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
+                                            <div class="h-[16px] bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
+                                        </div>
+                                    </div>
+                                @endfor
+                                
+                                </div>
+                            </div>
 
-            template: '#product-view-template',
+                            <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
 
-            inject: ['$validator'],
+                                <!-- Single card review -->
+                                <div 
+                                    v-for='review in reviews' 
+                                    class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap"
+                                >
+                                    <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
+                                        <img 
+                                            class="rounded-[12px]" 
+                                            src='{{ bagisto_asset("images/review-man.png") }}' 
+                                            title="" 
+                                            alt=""
+                                        >
+                                    </div>
 
-            data: function() {
-                return {
-                    is_buy_now: 0,
-                }
-            },
+                                    <div>
+                                        <div class="flex justify-between">
+                                            <p class="text-[20px] font-medium max-sm:text-[16px]">
+                                                @{{ review.name }}
+                                            </p>
 
-            methods: {
-                onSubmit: function(e) {
-                    if (e.target.getAttribute('type') != 'submit')
-                        return;
+                                            <div class="flex items-center">
+                                                <x-shop::products.star-rating :star="'review.name'" editable=false></x-shop::products.star-rating>
+                                            </div>
+                                        </div>
+                                        <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]">
+                                            @{{ review.created_at }}
+                                        </p>
+                                        
+                                        <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]">
+                                            @{{ review.comment }}
+                                        </p>
 
-                    e.preventDefault();
+                                        <div class="flex justify-between items-center mt-[20px] flex-wrap gap-[10px]">
+                                            <div class="flex gap-x-[10px]">
+                                                <p class="text-[16px] text-[#7D7D7D] max-sm:text-[12px]">
+                                                    @lang('shop::app.products.was-this-helpful')
+                                                </p>
 
-                    var this_this = this;
+                                                <div class="flex gap-[8px] text-[#7D7D7D]">
+                                                    <span class="icon-like text-[24px] text-[#D1D1D1]"></span>
+                                                    0
+                                                </div>
 
-                    this.$validator.validateAll().then(function (result) {
-                        if (result) {
-                            this_this.is_buy_now = e.target.classList.contains('buynow') ? 1 : 0;
+                                                <div class="flex gap-[8px] text-[#7D7D7D]">
+                                                    <span class="icon-dislike text-[24px] text-[#D1D1D1]"></span>
+                                                    0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single card review -->
+                            </div>
 
-                            setTimeout(function() {
-                                document.getElementById('product-form').submit();
-                            }, 0);
-                        }
-                    });
-                }
-            }
-        });
+                            <button 
+                                class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                                @click='getReviews()'
+                                v-if='reviews.length < {{ $product->reviews->count() }}'
+                            >
+                                @lang('shop::app.products.load-more')
+                            </button>
+                        </div>
+                        <!-- Review List Section -->
 
-        Vue.component('quantity-changer', {
-            template: '#quantity-changer-template',
+                    </div>
+                    </x-shop::tabs.item>
+                </x-shop::tabs>
+                {{-- End Tab section --}}
+                
+                {{-- Featured Products --}}
+                <x-shop::products.carousel
+                    {{-- @translations --}}
+                    :title="trans('Related Products')"
+                    :src="route('shop.products.related.index', ['id' => $product->id])"
+                    :navigation-link="route('shop.home.index')"
+                >
+                </x-shop::products.carousel>
 
-            inject: ['$validator'],
+                {{-- Upsells Products. --}}
+                <x-shop::products.carousel
+                    {{-- @translations --}}
+                    :title="trans('We found other products you might like!')"
+                    :src="route('shop.products.up-sell.index', ['id' => $product->id])"
+                    :navigation-link="route('shop.home.index')"
+                >
+                </x-shop::products.carousel>
+            </div>
+            
+        </script>
 
-            props: {
-                controlName: {
-                    type: String,
-                    default: 'quantity'
-                },
+        <script type="module">
+            app.component('v-product', {
+                template: '#v-product-template',
 
-                quantity: {
-                    type: [Number, String],
-                    default: 1
-                },
+                data() {
+                    return {
+                        productId: @json($product->id),
 
-                minQuantity: {
-                    type: [Number, String],
-                    default: 1
-                },
+                        writeReview: false,
 
-                validations: {
-                    type: String,
-                    default: 'required|numeric|min_value:1'
-                }
-            },
+                        reviewList: false,
 
-            data: function() {
-                return {
-                    qty: this.quantity
-                }
-            },
+                        qty: 1,
 
-            mounted: function() {
-                this.$refs.quantityChanger.value = this.qty > this.minQuantity
-                    ? this.qty
-                    : this.minQuantity;
-            },
+                        reviews: {},
 
-            watch: {
-                qty: function (val) {
-                    this.$refs.quantityChanger.value = ! isNaN(parseFloat(val)) ? val : 0;
-
-                    this.qty = ! isNaN(parseFloat(val)) ? this.qty : 0;
-
-                    this.$emit('onQtyUpdated', this.qty);
-
-                    this.$validator.validate();
-                }
-            },
-
-            methods: {
-                setQty: function({ target }) {
-                    this.qty = parseInt(target.value);
-                },
-
-                decreaseQty: function() {
-                    if (this.qty > this.minQuantity)
-                        this.qty = parseInt(this.qty) - 1;
-                },
-
-                increaseQty: function() {
-                    this.qty = parseInt(this.qty) + 1;
-                }
-            }
-        });
-
-        window.onload = function() {
-            var thumbList = document.getElementsByClassName('thumb-list')[0];
-            var thumbFrame = document.getElementsByClassName('thumb-frame');
-            var productHeroImage = document.getElementsByClassName('product-hero-image')[0];
-
-            if (thumbList && productHeroImage) {
-
-                for(let i=0; i < thumbFrame.length ; i++) {
-                    thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                    thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
-                }
-
-                if (screen.width > 720) {
-                    thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
-                    thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
-                    thumbList.style.height = productHeroImage.offsetHeight + "px";
-                }
-            }
-
-            window.onresize = function() {
-                if (thumbList && productHeroImage) {
-
-                    for(let i=0; i < thumbFrame.length; i++) {
-                        thumbFrame[i].style.height = (productHeroImage.offsetHeight/4) + "px";
-                        thumbFrame[i].style.width = (productHeroImage.offsetHeight/4)+ "px";
+                        page: 1
                     }
+                },
 
-                    if (screen.width > 720) {
-                        thumbList.style.width = (productHeroImage.offsetHeight/4) + "px";
-                        thumbList.style.minWidth = (productHeroImage.offsetHeight/4) + "px";
-                        thumbList.style.height = productHeroImage.offsetHeight + "px";
+                mounted() {
+                    this.getReviews()
+                },
+
+                methods: {
+                    addToCart(buyNow) {
+                        const params = {
+                            'quantity': this.qty,
+                            'product_id': this.productId,
+                        };
+
+                        this.$axios.post('{{ route("shop.customers.cart.store") }}', params).then(response => {
+                            alert(response.data.message);
+                            if (buyNow); //Redirect to Cart Page
+                        }).catch(error => {});
+                    },
+
+                    addToWishlist() {
+                        this.$axios.post('{{ route("shop.customers.account.wishlist.store", $product->id) }}').then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {});
+                    },
+
+                    addToCompare() {
+                        this.$axios.get('{{ route("shop.customers.account.compare.store", $product->id) }}').then(response => {
+                            alert(response.data.message);
+                        }).catch(error => {});
+                    },
+
+                    addToReview() {
+                        this.$axios.post('{{ route("shop.products.reviews.store", $product->id) }}', {
+                            'comment': this.$refs.review.comment.value,
+                            'rating' : this.$refs.review.star_rating.value,
+                            'title'  : this.$refs.review.title.value,
+                        }).then(response => {
+                            if (response.status == 200) alert(response.data.message); this.$refs.review.reset();
+                        }).catch(error => { alert('Something went wrong')});
+                    },
+
+                    updateQty(qty) {
+                        this.qty = qty;
+                    },
+
+                    getReviews() {
+                        this.$axios.get('{{ route("shop.products.reviews.index", $product->id) }}' + '?page=' + this.page).then(response => {
+                            this.page++;
+                            if (this.reviews.length > 0) {
+                                this.reviews = this.reviews.concat(response.data.data);
+                            } else {
+                                this.reviews = response.data.data;
+                            }
+                        }).catch(error => {});
                     }
                 }
-            }
-        };
-    </script>
-@endpush
+            })
+        </script>
+        
+    @endPushOnce
+</x-shop::layouts>

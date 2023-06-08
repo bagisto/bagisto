@@ -1,4 +1,5 @@
 <products-carousel
+    src="{{ $src }}"
     title="{{ $title }}"
     navigation-link="{{ $navigationLink ?? '' }}"
 >
@@ -43,6 +44,7 @@
             template: '#products-carousel-template',
 
             props: [
+                'src',
                 'title',
                 'navigationLink',
             ],
@@ -59,7 +61,7 @@
 
             methods: {
                 getProducts() {
-                    this.$axios.get('{{ $src }}').then(response => {
+                    this.$axios.get(this.src).then(response => {
                             this.products = response.data.data;
                         }).catch(error => {
                             console.log(error);

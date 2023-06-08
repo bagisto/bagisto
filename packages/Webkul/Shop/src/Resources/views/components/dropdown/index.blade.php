@@ -26,7 +26,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-dropdown-template">
-        <div>
+        <div>   
             <div
                 ref="toggleBlock"
                 @click="toggle()"
