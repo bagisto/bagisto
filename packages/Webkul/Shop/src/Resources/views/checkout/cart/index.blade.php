@@ -238,7 +238,7 @@
                     get() {
                         this.$axios.get('{{ route('shop.checkout.cart.index') }}')
                             .then(response => {
-                                this.cart = response.data.data;
+                                this.cart = response.data.data.cart;
                             })
                             .catch(error => {});     
                     },
@@ -246,7 +246,7 @@
                     update() {
                         this.$axios.put('{{ route('shop.checkout.cart.destroy') }}', { qty: this.applied.quantity })
                             .then(response => {
-                                this.get();
+                                this.cart = response.data.data.cart;
                             })
                             .catch(error => {});
                     },
@@ -261,7 +261,7 @@
                                 'cart_item_id': itemId,
                             })
                             .then(response => {
-                                this.get();
+                                this.cart = response.data.data.cart;
                             })
                             .catch(error => {});
                     },
