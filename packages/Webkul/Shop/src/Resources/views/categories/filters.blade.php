@@ -37,11 +37,8 @@
     </script>
 
     <script type="text/x-template" id="v-filter-item-template">
-        <div class="border-b-[1px] border-[#E9E9E9]">
-            <div
-                :class="`flex pb-[10px] justify-between items-center cursor-pointer select-none ${active ? 'active' : ''}`"
-                @click="active = ! active"
-            >
+        <x-shop::accordion>
+            <x-slot:header>
                 <div class="flex pb-[10px] justify-between items-center">
                     <p
                         class="text-[18px] font-semibold"
@@ -49,11 +46,9 @@
                     >
                     </p>
                 </div>
+            </x-slot:header>
 
-                <span :class="`text-[24px] ${active ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
-            </div>
-
-            <div class="z-10 bg-white rounded-lg" v-if='active'>
+            <x-slot:content>
                 <ul v-if="filter.type === 'price'">
                     <v-price-filter></v-price-filter>
                 </ul>
@@ -82,8 +77,8 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </x-slot:content>
+        </x-shop::accordion>
     </script>
 
     <script type="text/x-template" id="v-price-filter-template">
