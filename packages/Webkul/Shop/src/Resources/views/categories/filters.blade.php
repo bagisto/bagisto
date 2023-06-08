@@ -48,7 +48,11 @@
 
             <x-slot:content>
                 <ul v-if="filter.type === 'price'">
-                    <v-price-filter></v-price-filter>
+                    <li>
+                        <v-price-filter></v-price-filter>
+
+                        <x-shop::range-slider></x-shop::range-slider>
+                    </li>
                 </ul>
 
                 <ul class="pb-3 text-sm text-gray-700" v-else>
@@ -56,19 +60,24 @@
                         :key="option.id"
                         v-for="(option, optionIndex) in filter.options"
                     >
-                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                        <div class="select-none items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100">
                             <input
                                 type="checkbox"
-                                :key="option.id"
+                                :id="option.id"
+                                class="hidden peer"
                                 :value="option.id"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                 v-model="appliedValues"
                                 @change="applyValue()"
                             />
 
                             <label
-                                for="checkbox-item-11"
-                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded"
+                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
+                                :for="option.id"
+                            ></label>
+
+                            <label
+                                :for="option.id"
+                                class="w-full text-[16px] text-gray-900 p-2 pl-0 cursor-pointer"
                                 v-text="option.name"
                             >
                             </label>

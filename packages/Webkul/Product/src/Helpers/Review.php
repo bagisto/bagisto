@@ -10,7 +10,7 @@ class Review
      * Returns the product's avg rating
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function getReviews($product)
     {
@@ -27,7 +27,7 @@ class Review
      * Returns the product's avg rating
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @return float
+     * @return string
      */
     public function getAverageRating($product)
     {
@@ -99,8 +99,8 @@ class Review
      /**
      * Returns the Percentage rating of the product
      *
-    * @param  \Webkul\Product\Contracts\Product  $product
-     * @return int
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return array
      */
     public function getPercentageRating($product)
     {

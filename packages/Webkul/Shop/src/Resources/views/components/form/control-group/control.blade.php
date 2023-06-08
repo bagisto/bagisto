@@ -8,6 +8,7 @@
     @case('email')
     @case('password')
     @case('hidden')
+    @case('textarea')
         <v-field
             type="{{ $type }}"
             name="{{ $name }}"

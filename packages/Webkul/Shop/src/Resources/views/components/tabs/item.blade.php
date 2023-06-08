@@ -3,25 +3,25 @@
     'isSelected' => false,
 ])
 
-<tab-item
+<v-tab-item
     title="{{ $title }}"
     is-selected="{{ $isSelected }}"
 >
     <template v-slot>
         {{ $slot }}
     </template>
-</tab-item>
+</v-tab-item>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="tab-item-template">
+    <script type="text/x-template" id="v-tab-item-template">
         <div v-if="isActive">
             <slot></slot>
         </div>
     </script>
 
     <script type="module">
-        app.component('tab-item', {
-            template: '#tab-item-template',
+        app.component('v-tab-item', {
+            template: '#v-tab-item-template',
 
             props: ['title', 'isSelected'],
 
