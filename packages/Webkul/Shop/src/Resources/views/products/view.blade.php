@@ -395,8 +395,8 @@
                             'product_id': this.productId,
                         };
 
-                        this.$axios.post('{{ route("shop.customers.cart.store") }}', params).then(response => {
-                            alert(response.data.message);
+                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
+                            alert(response.data.data.message);
                             if (buyNow); //Redirect to Cart Page
                         }).catch(error => {});
                     },
