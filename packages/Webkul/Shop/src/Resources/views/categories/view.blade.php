@@ -14,6 +14,7 @@
         src="{{ route('shop.products.index', ['category_id' => $category->id]) }}"
         category-id="{{ $category->id }}"
     >
+        <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
     </v-category>
 
     @pushOnce('scripts')
@@ -21,24 +22,33 @@
             <div class="container px-[60px] max-lg:px-[30px]">
                 <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
-                    @include ('shop::categories.filters')
+                    @include('shop::categories.filters')
 
                     <!-- Product Listing Container -->
                     <div class="flex-1">
                         <!-- Product Listing Toolbar -->
-                        @include ('shop::categories.toolbar')
+                        @include('shop::categories.toolbar')
 
                         <!-- Product Card Container -->
                         <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
-                            <x-shop::products.card v-for="product in products"></x-shop::products.card>
+                            <!-- Product Card Shimmer Effect -->
+                            <template v-if="isLoading">
+                                <x-shop::shimmer.products.card count="12"></x-shop::shimmer.products.card>
+                            </template>
+
+                            <!-- Product Card Listing -->
+                            <template v-else>
+                                <x-shop::products.card v-for="product in products"></x-shop::products.card>
+                            </template>
                         </div>
 
+                        <!-- Load More Button -->
                         <button
                             class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
                             @click="loadMoreProducts()"
-                            v-if="links.next"
+                            :disabled="! links.next"
                         >
-                            {{-- @translations --}}
+                            <!-- @translations -->
                             @lang('Load More')
                         </button>
                     </div>
@@ -57,6 +67,8 @@
 
                 data() {
                     return {
+                        isLoading: true,
+
                         filters: {
                             toolbar: {},
                             filter: {},
@@ -102,6 +114,8 @@
                     getProducts() {
                         this.$axios.get(this.src, { params: this.queryParams })
                             .then(response => {
+                                this.isLoading = false;
+
                                 this.products = response.data.data;
 
                                 this.links = response.data.links;

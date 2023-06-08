@@ -1,26 +1,24 @@
-<div class="layered-filter-wrapper">
-    {!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
+{!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
-    <v-filters
-        @filter-applied="setFilters('filter', $event)"
-        @filter-clear="clearFilters('filter', $event)"
-    >
-    </v-filters>
+<v-filters
+    @filter-applied="setFilters('filter', $event)"
+    @filter-clear="clearFilters('filter', $event)"
+>
+</v-filters>
 
-    {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
-</div>
+{!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-filters-template">
         <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
             <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
                 <p class="text-[18px] font-semibold ">
-                    {{-- @translations --}}
+                    <!-- @translations -->
                     @lang('Filters:')
                 </p>
 
                 <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>
-                    {{-- @translations --}}
+                    <!-- @translations -->
                     @lang('Clear All')
                 </p>
             </div>
