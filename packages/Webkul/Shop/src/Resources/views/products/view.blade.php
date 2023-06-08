@@ -114,17 +114,39 @@
                                 </div>
 
                                 <div class="flex gap-[25px] max-sm:flex-wrap">
-                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer"><span
-                                            class="icon-share text-[24px]"></span>Share</div>
+                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer">
+                                        <span class="icon-share text-[24px]"></span>
+                                        Share
+                                    </div>
+
                                     <div class="flex gap-[15px]">
-                                        <a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Facebook"></a>
-                                        <a href="" class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Twitter"></a>
-                                        <a href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Pintrest"></a>
-                                        <a href="" class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Linkdln"></a>
+                                        <a 
+                                            href="" 
+                                            class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Facebook"
+                                        >
+                                        </a>
+
+                                        <a 
+                                            href="" 
+                                            class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Twitter"
+                                        >
+                                        </a>
+
+                                        <a 
+                                            href="" 
+                                            class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Pintrest"
+                                        >
+                                        </a>
+
+                                        <a 
+                                            href="" 
+                                            class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Linkdln"
+                                        >
+                                        </a>
                                     </div>
                                 </div>
 
@@ -233,7 +255,8 @@
                                             placeholder="comment" 
                                             v-validate='required' 
                                             name='comment'
-                                        ></textarea>
+                                        >
+                                        </textarea>
                                     </div>
 
                                     <button
