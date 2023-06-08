@@ -300,4 +300,28 @@
         background-image: url('../images/bs-main-sprite.png');
         background-repeat: no-repeat;
     }
+
+    .bs-secondary-button {
+        max-width: -moz-max-content;
+        max-width: max-content;
+        cursor: pointer;
+        border-radius: 12px;
+        border-width: 1px;
+        --tw-border-opacity: 1;
+        border-color: rgb(6 12 59 / var(--tw-border-opacity));
+        --tw-bg-opacity: 1;
+        background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        --tw-text-opacity: 1;
+        color: rgb(6 12 59 / var(--tw-text-opacity));
+    }
+
+    .border-navyBlue {
+        --tw-border-opacity: 1;
+        border-color: rgb(6 12 59 / var(--tw-border-opacity));
+      }
 }

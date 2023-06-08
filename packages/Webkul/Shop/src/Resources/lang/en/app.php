@@ -192,22 +192,60 @@ return [
                 'privacy-cookies-policy' => 'Privacy and Cookies Policy',
             ],
         ],
-
-        'products'   => [
-            'add-to-cart'              => 'Add To Cart',
-            'already-added'            => 'Item already added to compare list',
-            'item-add-to-cart'         => 'Item added successfully',
-            'check-product-visibility' => 'Check the Product status or visibility',
-            'compare-add'              => 'Item successfully added to compare list',
-        ],
     ],
 
     'checkout' => [
+
         'success' => [
             'title'         => 'Order successfully placed',
             'thanks'        => 'Thank you for your order!',
             'order-id-info' => 'Your order id is #:order_id',
             'info'          => 'We will email you, your order details and tracking information',
+        ],
+
+        'cart' => [
+
+            'item' => [
+                'quantity'        => 'Quantity:',
+                'success-remove'  => 'Item is successfully removed from the cart.',
+                'warning-remove'  => 'No items to remove from the cart.',
+            ],
+
+            'cart-page'              => 'Cart Page',
+            'shopping-cart'          => 'Shopping Cart',
+            'offer-on-orders'        => 'Get Up To 30% OFF on your 1st order',
+            'subtotal'               => 'Subtotal',
+            'continue-to-checkout'   => 'Continue to Checkout',
+            'empty-cart'             => 'Your cart is empty',
+            'return-to-shop'         => 'Return To Shop',
+            'remove'                 => 'Remove',
+            'continue-shopping'      => 'Continue Shopping',
+            'item-add-to-cart'       => 'Item Added To Cart Successfully',
+            'update-cart'            => 'Update Cart',
+            'product-name'           => 'Product Name',
+            'price'                  => 'Price',
+            'quantity'               => 'Quantity',
+            'quantity-update'        => 'Quantity Updated Successfully',
+            'total'                  => 'Total',
+            'tax'                    => 'Tax',
+            'proceed-to-checkout'    => 'Proceed To Checkout',
+            'grand-total'            => 'Grand Total',
+            'home'                   => 'Home',
+            'subtotal'               => 'Subtotal',
+            'cart-summary'           => 'Cart Summary',
+
+            'coupon'      => [
+                'code'            => 'Coupon code',
+                'applied'         => 'Coupon applied',
+                'apply'           => 'Apply Coupon',
+                'remove'          => 'Remove Coupon',
+                'invalid'         => 'Coupon code is invalid.',
+                'discount'        => 'Coupon Discount',
+                'apply-issue'     => 'Coupon code can\'t be applied.',
+                'cannot-apply'    => 'Cannot Apply Coupon',
+                'success-apply'   => 'Coupon code applied successfully.',
+                'already-applied' => 'Coupon code already applied.',
+            ],
         ],
     ],
 
@@ -716,7 +754,7 @@ return [
         'no-options' => 'Please select options before buying this product.',
     ],
 
-    'checkout' => [
+    'checkout-change' => [
         'cart' => [
             'integrity'                 => [
                 'missing_fields'         => 'Some required fields missing for this product.',

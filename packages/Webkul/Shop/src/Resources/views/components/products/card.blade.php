@@ -87,16 +87,16 @@
                 },
 
                 addToCart() {
-                    this.$axios.post('{{ route("shop.customers.cart.store") }}', {
+                    this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
                             'quantity': 1,
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            alert(response.data.message);
+                            alert(response.data.data.message);
                         })
                         .catch(error => {});
                 },
-            }
+            },
         });
     </script>
 @endpushOnce
