@@ -67,7 +67,7 @@ configure({
             },
         },
     }),
-    
+
     validateOnBlur: true,
     validateOnInput: true,
     validateOnChange: true,
@@ -77,12 +77,6 @@ configure({
  * Main root application registry.
  */
 window.app = createApp({
-    components: {
-        VForm: Form,
-        VField: Field,
-        VErrorMessage: ErrorMessage,
-    },
-
     data() {
         return {};
     },
@@ -93,6 +87,13 @@ window.app = createApp({
         onInvalidSubmit() {},
     },
 });
+
+/**
+ * Global components registration;
+ */
+app.component('VForm', Form);
+app.component('VField', Field);
+app.component('VErrorMessage', ErrorMessage);
 
 /**
  * Global properties registration.
