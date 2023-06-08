@@ -3,26 +3,21 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Shop\Http\Resources\ProductReviewResource;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductReviewImageRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
-     * @param  \Webkul\Product\Repositories\ProductReviewImageRepository  $productReviewImageRepository
      * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected ProductReviewImageRepository $productReviewImageRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -59,7 +54,7 @@ class ReviewController extends Controller
      *
      * @param  string  $slug
      * @return \Illuminate\View\View
-    */
+     */
     public function show($slug)
     {
         $product = $this->productRepository->findBySlugOrFail($slug);
@@ -95,7 +90,7 @@ class ReviewController extends Controller
      * Customer delete all reviews from their account
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function deleteAll()
     {
         $reviews = auth()->guard('customer')->user()->all_reviews;

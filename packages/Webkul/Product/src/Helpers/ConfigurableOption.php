@@ -113,7 +113,6 @@ class ConfigurableOption
      * Get product attributes.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @param  array  $options
      * @return array
      */
     public function getAttributesData($product, array $options = [])
@@ -152,7 +151,7 @@ class ConfigurableOption
             if (! isset($options[$attribute->id][$optionId])) {
                 continue;
             }
-            
+
             $attributeOptionsData[] = [
                 'id'           => $optionId,
                 'label'        => $attributeOption->label ? $attributeOption->label : $attributeOption->admin_name,
