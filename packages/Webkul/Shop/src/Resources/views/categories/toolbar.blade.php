@@ -10,7 +10,7 @@
     <script type="text/x-template" id='v-toolbar-template'>
         <div class="flex justify-between max-md:items-center">
             <div class="text-[16px] font-medium hidden max-md:block">
-                {{-- @translations --}}
+                <!-- @translations -->
                 @lang('Filters')
             </div>
 
@@ -21,7 +21,7 @@
                     @change="apply('sort', filters.applied.sort)"
                 >
                     <option value=''>
-                        {{-- @translations --}}
+                        <!-- @translations -->
                         @lang('Sort By')
                     </option>
 
@@ -41,7 +41,7 @@
                     @change="apply('limit', filters.applied.limit)"
                 >
                     <option value=''>
-                        {{-- @translations --}}
+                        <!-- @translations -->
                         @lang('Show')
                     </option>
 
