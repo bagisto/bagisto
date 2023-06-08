@@ -233,11 +233,54 @@ return [
     ],
 
     'checkout' => [
+
         'success' => [
             'title'         => 'Order successfully placed',
             'thanks'        => 'Thank you for your order!',
             'order-id-info' => 'Your order id is #:order_id',
             'info'          => 'We will email you, your order details and tracking information',
+        ],
+
+        'cart' => [
+
+            'item' => [
+                'quantity'        => 'Quantity:',
+                'success-remove'  => 'Item is successfully removed from the cart.',
+                'warning-remove'  => 'No items to remove from the cart.',
+            ],
+
+            'home'                   => 'Home',
+            'cart-page'              => 'Cart Page',
+            'product-name'           => 'Product Name',
+            'remove'                 => 'Remove',
+            'quantity'               => 'Quantity',
+            'price'                  => 'Price',
+            'tax'                    => 'Tax',
+            'subtotal'               => 'Subtotal',
+            'total'                  => 'Total',
+            'grand-total'            => 'Grand Total',
+            'cart-summary'           => 'Cart Summary',
+            'item-add-to-cart'       => 'Item Added To Cart Successfully',
+            'update-cart'            => 'Update Cart',
+            'empty-cart'             => 'Your cart is empty',
+            'shopping-cart'          => 'Shopping Cart',
+            'offer-on-orders'        => 'Get Up To 30% OFF on your 1st order',
+            'return-to-shop'         => 'Return To Shop',
+            'continue-shopping'      => 'Continue Shopping',
+            'continue-to-checkout'   => 'Continue to Checkout',
+            'proceed-to-checkout'    => 'Proceed To Checkout',
+
+            'coupon'   => [
+                'code'            => 'Coupon code',
+                'applied'         => 'Coupon applied',
+                'apply'           => 'Apply Coupon',
+                'remove'          => 'Remove Coupon',
+                'invalid'         => 'Coupon code is invalid.',
+                'discount'        => 'Coupon Discount',
+                'apply-issue'     => 'Coupon code can\'t be applied.',
+                'success-apply'   => 'Coupon code applied successfully.',
+                'already-applied' => 'Coupon code already applied.',
+            ],
         ],
     ],
 
@@ -746,7 +789,7 @@ return [
         'no-options' => 'Please select options before buying this product.',
     ],
 
-    'checkout' => [
+    'checkout-change' => [
         'cart' => [
             'integrity'                 => [
                 'missing_fields'         => 'Some required fields missing for this product.',

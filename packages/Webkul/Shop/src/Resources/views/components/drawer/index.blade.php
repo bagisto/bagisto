@@ -28,6 +28,14 @@
             </div>
         </template>
     @endisset
+
+    @isset($footer)
+        <template v-slot:footer>
+            <div>
+                {{ $footer }}
+            </div>
+        </template>
+    @endisset
 </v-drawer>
 
 @pushOnce('scripts')
@@ -73,6 +81,12 @@
                                     <div class="px-[25px] overflow-auto flex-1">
                                         <slot name="content">
                                             Default Content
+                                        </slot>
+                                    </div>
+
+                                    <div class="pb-[30px]">
+                                        <slot name="footer">
+                                            Default Footer
                                         </slot>
                                     </div>
                                 </div>

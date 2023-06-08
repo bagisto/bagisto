@@ -8,34 +8,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Cart routes.
      */
-    Route::get('checkout/cart', [CartController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::checkout.cart.index',
-    ])->name('shop.checkout.cart.index');
+    Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
+        Route::get('', 'index')->name('shop.checkout.cart.index');
 
-    Route::post('checkout/cart/add/{id}', [CartController::class, 'add'])->defaults('_config', [
-        'redirect' => 'shop.checkout.cart.index',
-    ])->name('shop.cart.add');
+        Route::post('coupon', 'storeCoupon')->name('shop.checkout.cart.coupon.apply');
 
-    Route::get('checkout/cart/remove/{id}', [CartController::class, 'remove'])->name('shop.cart.remove');
-
-    Route::post('checkout/cart/remove}', [CartController::class, 'removeAllItems'])->name('shop.cart.remove.all.items');
-
-    Route::post('checkout/cart', [CartController::class, 'updateBeforeCheckout'])->defaults('_config', [
-        'redirect' => 'shop.checkout.cart.index',
-    ])->name('shop.checkout.cart.update');
-
-    Route::get('checkout/cart/remove/{id}', [CartController::class, 'remove'])->defaults('_config', [
-        'redirect' => 'shop.checkout.cart.index',
-    ])->name('shop.checkout.cart.remove');
-
-    Route::post('move/wishlist/{id}', [CartController::class, 'moveToWishlist'])->name('shop.move_to_wishlist');
-
-    /**
-     * Coupon routes.
-     */
-    Route::post('checkout/cart/coupon', [CartController::class, 'applyCoupon'])->name('shop.checkout.cart.coupon.apply');
-
-    Route::delete('checkout/cart/coupon', [CartController::class, 'removeCoupon'])->name('shop.checkout.coupon.remove.coupon');
+        Route::delete('coupon', 'destroyCoupon')->name('shop.checkout.cart.coupon.remove');
+    });
 
     /**
      * Checkout routes.
