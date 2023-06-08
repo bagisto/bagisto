@@ -41,20 +41,29 @@ class CartController extends Controller
 
                 if ($coupon->cart_rule->status) {
                     if (Cart::getCart()->coupon_code == $couponCode) {
+                        session()->flash('success', trans('shop::app.checkout.cart.coupon-already-applied'));
+
                         return redirect()->back();
                     }
 
                     Cart::setCouponCode($couponCode)->collectTotals();
 
                     if (Cart::getCart()->coupon_code == $couponCode) {
+                        session()->flash('success', trans('shop::app.checkout.cart.coupon.success-apply'));
+
                         return redirect()->back();
                     }
                 }
             }
 
+            session()->flash('danger', trans('shop::app.checkout.cart.coupon.invalid'));
+
             return redirect()->back();
+
         } catch (\Exception $e) {
             report($e);
+
+            session()->flash('warning', trans('shop::app.checkout.cart.coupon.apply-issue'));
 
             return redirect()->back();
         }
@@ -68,6 +77,8 @@ class CartController extends Controller
     public function destroyCoupon()
     {
         Cart::removeCouponCode()->collectTotals();
+
+        session()->flash('warning', trans('shop::app.checkout.cart.coupon.remove'));
 
         return redirect()->back();
     }
