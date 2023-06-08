@@ -30,163 +30,217 @@
     .icon-add-new:before {
         content: "\e900";
     }
+
     .icon-arrow-down-2:before {
         content: "\e901";
     }
+
     .icon-arrow-down:before {
         content: "\e902";
     }
+
     .icon-arrow-left-stylish:before {
         content: "\e903";
     }
+
     .icon-arrow-left:before {
         content: "\e904";
     }
+
     .icon-arrow-right-stylish:before {
         content: "\e905";
     }
+
     .icon-arrow-right:before {
         content: "\e906";
     }
+
     .icon-arrow-up:before {
         content: "\e907";
     }
+
     .icon-bin:before {
         content: "\e908";
     }
+
     .icon-calendar:before {
         content: "\e909";
     }
+
     .icon-camera-fill:before {
         content: "\e90a";
     }
+
     .icon-camera:before {
         content: "\e90b";
     }
+
     .icon-cancel:before {
         content: "\e90c";
     }
+
     .icon-cart:before {
         content: "\e90d";
     }
+
     .icon-check:before {
         content: "\e90e";
     }
+
     .icon-compare-1:before {
         content: "\e90f";
     }
+
     .icon-compare:before {
         content: "\e910";
     }
+
     .icon-dislike:before {
         content: "\e911";
     }
+
     .icon-dollar-sign:before {
         content: "\e912";
     }
+
     .icon-double-arrow:before {
         content: "\e913";
     }
+
     .icon-download:before {
         content: "\e914";
     }
+
     .icon-email:before {
         content: "\e915";
     }
+
     .icon-eye:before {
         content: "\e916";
     }
+
     .icon-filter:before {
         content: "\e917";
     }
+
     .icon-flate-rate:before {
         content: "\e918";
     }
+
+
     .icon-Free-Shipping:before {
         content: "\e919";
     }
+
     .icon-grid-view:before {
         content: "\e91a";
     }
+
     .icon-hamburger:before {
         content: "\e91b";
     }
+
     .icon-heart-1:before {
         content: "\e91c";
     }
+
     .icon-heart:before {
         content: "\e91d";
     }
+
     .icon-left-arrow:before {
         content: "\e91e";
     }
+
     .icon-like:before {
         content: "\e91f";
     }
+
     .icon-listing:before {
         content: "\e920";
     }
+
     .icon-location:before {
         content: "\e921";
     }
+
     .icon-minus:before {
         content: "\e922";
     }
+
     .icon-more:before {
         content: "\e923";
     }
+
     .icon-orders:before {
         content: "\e924";
     }
+
     .icon-pen:before {
         content: "\e925";
     }
+
     .icon-plus:before {
         content: "\e926";
     }
+
     .icon-product:before {
         content: "\e927";
     }
+
     .icon-radio-select:before {
         content: "\e928";
     }
+
     .icon-radio-unselect:before {
         content: "\e929";
     }
+
     .icon-right-arrow:before {
         content: "\e92a";
     }
+
     .icon-search:before {
         content: "\e92b";
     }
+
     .icon-share:before {
         content: "\e92c";
     }
+
     .icon-sort-by:before {
         content: "\e92d";
     }
+
     .icon-sort:before {
         content: "\e92e";
         color: #7d7d7d;
     }
+
     .icon-star-fill:before {
         content: "\e92f";
     }
+
     .icon-star:before {
         content: "\e930";
     }
+
     .icon-support:before {
         content: "\e931";
     }
+
     .icon-truck:before {
         content: "\e932";
     }
+
     .icon-uncheck:before {
         content: "\e933";
     }
+
     .icon-users:before {
         content: "\e934";
     }
+
     .two-range-slider {
         -webkit-appearance: none;
         appearance: none;
@@ -209,16 +263,19 @@
         width: 18px;
         height: 18px;
     }
+
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
         cursor: pointer;
     }
+
     .journal-scroll::-webkit-scrollbar-track {
         background-color: #fff;
         cursor: pointer;
         border-radius: 12px;
         border: 1px solid #e9e9e9;
     }
+
     .journal-scroll::-webkit-scrollbar-thumb {
         cursor: pointer;
         background-color: #e9e9e9;
@@ -226,6 +283,7 @@
         border: 3px solid transparent;
         background-clip: content-box;
     }
+
     .custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -234,10 +292,6 @@
         background-repeat: no-repeat;
         background-position-x: 96%;
         background-position-y: 14px;
-    }
-
-    .section-title {
-        @apply text-[70px] font-normal text-navyBlue text-center px-[15px] leading-[90px] max-sm:text-[32px] max-sm:leading-normal font-dmserif;
     }
 
     * {
@@ -256,38 +310,6 @@
         /* Firefox */
     }
 
-    .bs-single-card {
-        @apply grid gap-2.5;
-    }
-
-    .bs-single-card img {
-        @apply rounded-sm bg-[#F5F5F5];
-    }
-
-    .bs-single-card .price-block {
-        @apply flex gap-2.5;
-    }
-
-    .bs-single-card .price-block .offer-price {
-        @apply text-lg font-semibold;
-    }
-
-    .bs-single-card .price-block .original-price {
-        @apply text-lg font-medium text-[#7D7D7D];
-    }
-
-    .bs-single-card .change-card-color {
-        @apply flex gap-4 mt-[8px];
-    }
-
-    .bs-single-card .change-card-color span {
-        @apply rounded-full w-[30px] h-[30px] block cursor-pointer;
-    }
-
-    .bs-single-card .change-card-color span.active {
-        @apply border-black border-[3px];
-    }
-
     .direction-ltr {
         direction: ltr;
     }
@@ -299,5 +321,31 @@
     .bs-main-sprite {
         background-image: url('../images/bs-main-sprite.png');
         background-repeat: no-repeat;
+    }
+
+    .bs-primary-button {
+        @apply  font-medium rounded-[12px] text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer;
+    }
+    .bs-secondary-button {
+        @apply  font-medium rounded-[12px] bg-white text-navyBlue border border-navyBlue  px-[30px] py-[15px] max-w-max cursor-pointer;
+    }
+
+    .shimmer {
+        animation-duration: 2.2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: skeleton;
+        animation-timing-function: linear;
+        background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+        background-size: 1250px 100%;
+    }
+    @keyframes skeleton {
+        0% {
+            background-position: -1250px 0;
+        }
+      
+        100% {
+            background-position: 1250px 0;
+        }
     }
 }

@@ -1,14 +1,12 @@
-<div class="layered-filter-wrapper">
-    {!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
+{!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
-    <v-filters
-        @filter-applied="setFilters('filter', $event)"
-        @filter-clear="clearFilters('filter', $event)"
-    >
-    </v-filters>
+<v-filters
+    @filter-applied="setFilters('filter', $event)"
+    @filter-clear="clearFilters('filter', $event)"
+>
+</v-filters>
 
-    {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
-</div>
+{!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-filters-template">
@@ -37,8 +35,11 @@
     </script>
 
     <script type="text/x-template" id="v-filter-item-template">
-        <x-shop::accordion>
-            <x-slot:header>
+        <div class="border-b-[1px] border-[#E9E9E9]">
+            <div
+                :class="`flex pb-[10px] justify-between items-center cursor-pointer select-none ${active ? 'active' : ''}`"
+                @click="active = ! active"
+            >
                 <div class="flex pb-[10px] justify-between items-center">
                     <p
                         class="text-[18px] font-semibold"
@@ -46,9 +47,11 @@
                     >
                     </p>
                 </div>
-            </x-slot:header>
 
-            <x-slot:content>
+                <span :class="`text-[24px] ${active ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
+            </div>
+
+            <div class="z-10 bg-white rounded-lg" v-if='active'>
                 <ul v-if="filter.type === 'price'">
                     <v-price-filter></v-price-filter>
                 </ul>
@@ -77,8 +80,8 @@
                         </div>
                     </li>
                 </ul>
-            </x-slot:content>
-        </x-shop::accordion>
+            </div>
+        </div>
     </script>
 
     <script type="text/x-template" id="v-price-filter-template">

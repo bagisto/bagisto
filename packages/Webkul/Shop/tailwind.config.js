@@ -37,7 +37,7 @@ module.exports = {
                 poppins: ["Poppins"],
                 dmserif: ["DM Serif Display"],
             },
-        },
+        }
     },
 
     plugins: [],

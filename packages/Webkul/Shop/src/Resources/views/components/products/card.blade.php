@@ -8,9 +8,27 @@
     <script type="text/x-template" id="product-card-template">
         <div class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'>
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
+                <div
+                    class="relative overflow-hidden  rounded-sm  min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
+                    v-show="isImageLoading"
+                >
+                    <img class="rounded-sm bg-[#F5F5F5]" src="">
+                </div>
+
                 <img
                     class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                    :src="product.base_image.medium_image_url"
+                    :src="product.base_image.original_image_url"
+                    width="291"
+                    height="300"
+                    @load="onImageLoad()"
+                    v-show="! isImageLoading"
+                >
+
+                <img
+                    class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                    :src="product.base_image.original_image_url"
+                    width="291"
+                    height="300"
                 >
 
                 <div class="action-items bg-black">
@@ -25,19 +43,19 @@
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <a
                             class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
-                            @click='addToWishlist()'
+                            @click="addToWishlist()"
                         >
                         </a>
 
                         <a
                             class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
-                            @click='addToCompare()'
+                            @click="addToCompare()"
                         >
                         </a>
 
                         <a
                             class="rounded-xl bg-white text-navyBlue text-xs w-max font-medium py-[11px] px-[43px] cursor-pointer absolute bottom-[15px] left-[50%] -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
-                            @click='addToCart()'
+                            @click="addToCart()"
                         >
                             @lang('shop::app.components.products.add-to-cart')
                         </a>
@@ -69,7 +87,17 @@
 
             props: ['product'],
 
+            data() {
+                return {
+                    isImageLoading: true
+                }
+            },
+
             methods: {
+                onImageLoad() {
+                    this.isImageLoading = false;
+                },
+
                 addToWishlist() {
                     this.$axios.post(`{{ route('shop.customers.account.wishlist.store', '') }}/${this.product.id}`)
                         .then(response => {
