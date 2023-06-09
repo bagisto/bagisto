@@ -2,11 +2,11 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Customer\Models\Customer;
 use Webkul\Sales\Models\Order;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory
 {

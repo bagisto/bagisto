@@ -2,13 +2,13 @@
 
 namespace Webkul\Product\Http\Requests;
 
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Contracts\Validations\Slug;
-use Webkul\Core\Contracts\Validations\Decimal;
-use Webkul\Product\Repositories\ProductRepository;
+use Illuminate\Support\Str;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
+use Webkul\Core\Contracts\Validations\Decimal;
+use Webkul\Core\Contracts\Validations\Slug;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductForm extends FormRequest
 {

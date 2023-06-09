@@ -3,11 +3,11 @@
 namespace Webkul\Tax\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Tax\Database\Factories\TaxRateFactory;
-use Webkul\Tax\Contracts\TaxRate as TaxRateContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Webkul\Tax\Contracts\TaxRate as TaxRateContract;
+use Webkul\Tax\Database\Factories\TaxRateFactory;
 
 class TaxRate extends Model implements TaxRateContract
 {

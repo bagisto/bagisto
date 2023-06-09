@@ -2,8 +2,8 @@
 
 namespace Webkul\Tax\Database\Factories;
 
-use Webkul\Tax\Models\TaxRate;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Tax\Models\TaxRate;
 
 class TaxRateFactory extends Factory
 {

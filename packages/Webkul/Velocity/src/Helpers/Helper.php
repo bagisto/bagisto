@@ -2,9 +2,9 @@
 
 namespace Webkul\Velocity\Helpers;
 
+use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Review;
-use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
@@ -65,7 +65,7 @@ class Helper extends Review
         if (empty($orderBrands)) {
             return;
         }
-        
+
         foreach ($orderBrands as $product) {
             $productCategories = $this->productRepository->with('categories')->findWhereIn('id', [$product['product_id']])->toArray();
         }

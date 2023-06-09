@@ -3,8 +3,8 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductInventoryIndexRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Inventory extends AbstractIndexer
 {
@@ -86,19 +86,19 @@ class Inventory extends AbstractIndexer
                 ])
                 ->whereIn('type', ['simple', 'virtual'])
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
         request()->query->remove('cursor');
     }
-    
+
     /**
      * Reindex products by batch size
      *
@@ -193,7 +193,7 @@ class Inventory extends AbstractIndexer
 
         return $qty;
     }
-    
+
     /**
      * Returns all channels
      *

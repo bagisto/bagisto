@@ -2,9 +2,9 @@
 
 namespace Webkul\Velocity\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Eloquent\Repository;
 
 class CategoryRepository extends Repository
 {

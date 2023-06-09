@@ -5,7 +5,6 @@ namespace Webkul\Admin\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewInventorySourceNotification extends Mailable
 {
@@ -29,7 +28,7 @@ class NewInventorySourceNotification extends Mailable
     public function build()
     {
         $order = $this->shipment->order;
-        
+
         $inventory = $this->shipment->inventory_source;
 
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])

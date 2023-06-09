@@ -3,8 +3,8 @@
 namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
 
 class CatalogRuleProductPrice
 {

@@ -1,5 +1,5 @@
 import Draggable from 'vuedraggable';
-import { Multiselect } from 'vue-multiselect';
+import {Multiselect} from 'vue-multiselect';
 import VTooltip from 'v-tooltip';
 
 import Accordian from './components/accordian';

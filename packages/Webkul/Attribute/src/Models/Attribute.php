@@ -4,11 +4,11 @@ namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Core\Eloquent\TranslatableModel;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Attribute\Database\Factories\AttributeFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\Attribute\Contracts\Attribute as AttributeContract;
+use Webkul\Attribute\Database\Factories\AttributeFactory;
+use Webkul\Core\Eloquent\TranslatableModel;
 
 class Attribute extends TranslatableModel implements AttributeContract
 {

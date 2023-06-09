@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Database\Factories;
 
-use Webkul\Product\Models\ProductDownloadableLink;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Product\Models\ProductDownloadableLink;
 use Webkul\Product\Models\ProductDownloadableLinkTranslation;
 
 class ProductDownloadableLinkTranslationFactory extends Factory

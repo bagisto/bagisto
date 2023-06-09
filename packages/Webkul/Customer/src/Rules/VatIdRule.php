@@ -3,7 +3,6 @@
 namespace Webkul\Customer\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Webkul\Customer\Rules\VatValidator;
 
 /**
  * Class VatIdRule

@@ -3,8 +3,8 @@
 namespace Webkul\Velocity\Helpers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Category\Contracts\Category;
+use Webkul\Category\Repositories\CategoryRepository;
 
 class AdminHelper
 {

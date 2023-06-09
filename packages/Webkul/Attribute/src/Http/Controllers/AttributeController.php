@@ -3,10 +3,10 @@
 namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Admin\DataGrids\AttributeDataGrid;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Contracts\Validations\Code;
+use Webkul\Product\Repositories\ProductRepository;
 
 class AttributeController extends Controller
 {
@@ -21,7 +21,7 @@ class AttributeController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository  
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
@@ -203,7 +203,7 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return  \Illuminate\Http\JsonResponse
      */
-    public function productSuperAttributes($id) 
+    public function productSuperAttributes($id)
     {
         $product = $this->productRepository->findOrFail($id);
 

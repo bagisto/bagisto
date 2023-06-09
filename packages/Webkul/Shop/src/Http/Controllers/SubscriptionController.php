@@ -3,8 +3,8 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Shop\Mail\SubscriptionEmail;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Shop\Mail\SubscriptionEmail;
 
 class SubscriptionController extends Controller
 {

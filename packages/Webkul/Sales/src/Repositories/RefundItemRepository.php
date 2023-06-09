@@ -3,7 +3,6 @@
 namespace Webkul\Sales\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\RefundItem;
 
 class RefundItemRepository extends Repository
 {
@@ -56,7 +55,7 @@ class RefundItemRepository extends Repository
                     } else {
                         $shippedQty = $shipmentItem->qty;
                     }
-                    
+
                     $shippedQtyToRefund = $totalShippedQtyToRefund > $shippedQty ? $shippedQty : $totalShippedQtyToRefund;
 
                     $totalShippedQtyToRefund = $totalShippedQtyToRefund > $shippedQty ? $totalShippedQtyToRefund - $shippedQty : 0;
@@ -65,7 +64,7 @@ class RefundItemRepository extends Repository
                         //  ->where('vendor_id', $data['vendor_id'])
                         ->where('inventory_source_id', $shipmentItem->shipment->inventory_source_id)
                         ->first();
-            
+
                     $inventory->update(['qty' => $inventory->qty + $shippedQtyToRefund]);
                 }
 

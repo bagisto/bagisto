@@ -9,7 +9,6 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
-use Webkul\Shop\Http\Controllers\Controller;
 
 class OnepageController extends Controller
 {
@@ -58,7 +57,7 @@ class OnepageController extends Controller
         }
 
         $cart = Cart::getCart();
-        
+
         if ($cart->applied_cart_rule_ids != '') {
             session()->flash('success', trans('shop::app.checkout.cart.rule-applied'));
         }

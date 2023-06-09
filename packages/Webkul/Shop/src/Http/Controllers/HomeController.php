@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\SearchRepository;
 

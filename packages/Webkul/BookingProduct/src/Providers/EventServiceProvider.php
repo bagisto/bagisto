@@ -2,9 +2,9 @@
 
 namespace Webkul\BookingProduct\Providers;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 use Webkul\Theme\ViewRenderEventManager;
 
 class EventServiceProvider extends ServiceProvider

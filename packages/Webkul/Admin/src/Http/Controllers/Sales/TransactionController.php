@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\InvoiceRepository;
-use Webkul\Sales\Repositories\ShipmentRepository;
-use Webkul\Sales\Repositories\OrderTransactionRepository;
 use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderTransactionRepository;
+use Webkul\Sales\Repositories\ShipmentRepository;
 
 class TransactionController extends Controller
 {
@@ -87,7 +87,7 @@ class TransactionController extends Controller
         }
 
         $transactionAmtBefore = $this->orderTransactionRepository->where('invoice_id', $invoice->id)->sum('amount');
-        
+
         $transactionAmtFinal = $request->amount + $transactionAmtBefore;
 
         if ($invoice->state == 'paid') {
@@ -101,7 +101,7 @@ class TransactionController extends Controller
 
             return redirect(route('admin.sales.transactions.create'));
         }
-        
+
         if ($request->amount <= 0) {
             session()->flash('info', trans('admin::app.sales.transactions.response.transaction-amount-zero'));
 

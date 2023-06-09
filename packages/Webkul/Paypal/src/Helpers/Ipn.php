@@ -3,8 +3,8 @@
 namespace Webkul\Paypal\Helpers;
 
 use Webkul\Paypal\Payment\Standard;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class Ipn
 {

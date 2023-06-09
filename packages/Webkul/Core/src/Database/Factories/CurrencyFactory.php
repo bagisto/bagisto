@@ -2,9 +2,8 @@
 
 namespace Webkul\Core\Database\Factories;
 
-use Faker\Generator as Faker;
-use Webkul\Core\Models\Currency;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Core\Models\Currency;
 
 class CurrencyFactory extends Factory
 {

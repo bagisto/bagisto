@@ -4,22 +4,21 @@ namespace Webkul\Product\Type;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
-use Webkul\Product\Models\ProductFlat;
-use Webkul\Product\Facades\ProductImage;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
 use Webkul\Tax\Helpers\Tax;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 abstract class AbstractType
 {

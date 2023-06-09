@@ -13,7 +13,6 @@ import axios from 'axios';
 import VueSlider from 'vue-slider-component';
 import accounting from 'accounting';
 import ImageSlider from './components/image-slider';
-import GoTop from '@inotom/vue-go-top';
 import 'lazysizes';
 
 window.jQuery = window.$ = $;

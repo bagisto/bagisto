@@ -3,10 +3,10 @@
 namespace Webkul\CatalogRule\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
+use Webkul\CatalogRule\Contracts\CatalogRuleProduct as CatalogRuleProductContract;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
-use Webkul\CatalogRule\Contracts\CatalogRuleProduct as CatalogRuleProductContract;
+use Webkul\Product\Models\ProductProxy;
 
 class CatalogRuleProduct extends Model implements CatalogRuleProductContract
 {

@@ -3,8 +3,8 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Ui\DataGrid\DataGrid;
 
 class UserDataGrid extends DataGrid
 {
@@ -68,7 +68,7 @@ class UserDataGrid extends DataGrid
                 if ($row->user_image) {
                     return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
                 }
-                
+
                 return '<div class="avatar"><span class="icon profile-pic-icon"></span></div>' . $row->user_name;
             },
         ]);
@@ -84,7 +84,7 @@ class UserDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 }
-                
+
                 return trans('admin::app.datagrid.inactive');
             },
         ]);

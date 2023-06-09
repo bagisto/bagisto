@@ -2,18 +2,18 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
-use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Webkul\BookingProduct\Repositories\BookingProductAppointmentSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductDefaultSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingProductEventTicketRepository;
 use Webkul\BookingProduct\Repositories\BookingProductRentalSlotRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Repositories\BookingProductTableSlotRepository;
 use Webkul\BookingProduct\Repositories\BookingRepository;
-use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 
 
 class Booking
@@ -230,7 +230,7 @@ class Booking
 
         foreach ($slots as $index => $slot) {
             $slots[$index]['from']  = Carbon::createFromTimeString($slot['from'])->format("h:i a");
-            
+
             $slots[$index]['to']  = Carbon::createFromTimeString($slot['to'])->format("h:i a");
         }
 

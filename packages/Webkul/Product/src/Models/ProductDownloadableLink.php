@@ -3,11 +3,11 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Core\Eloquent\TranslatableModel;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Product\Database\Factories\ProductDownloadableLinkFactory;
+use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Contracts\ProductDownloadableLink as ProductDownloadableLinkContract;
+use Webkul\Product\Database\Factories\ProductDownloadableLinkFactory;
 
 class ProductDownloadableLink extends TranslatableModel implements ProductDownloadableLinkContract
 {

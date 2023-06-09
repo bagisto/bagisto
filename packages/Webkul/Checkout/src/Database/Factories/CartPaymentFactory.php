@@ -2,9 +2,8 @@
 
 namespace Webkul\Checkout\Database\Factories;
 
-use Faker\Generator as Faker;
-use Webkul\Checkout\Models\CartPayment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Checkout\Models\CartPayment;
 
 class CartPaymentFactory extends Factory
 {

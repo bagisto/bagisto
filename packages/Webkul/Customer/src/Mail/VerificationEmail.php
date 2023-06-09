@@ -5,7 +5,6 @@ namespace Webkul\Customer\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class VerificationEmail extends Mailable
 {

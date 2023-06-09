@@ -2,10 +2,10 @@
  * Main imports.
  */
 import Accounting from 'accounting';
-import Vue         from 'vue';
+import Vue from 'vue';
 import VeeValidate from 'vee-validate';
 import VueCarousel from 'vue-carousel';
-import translate   from '@components/trans';
+import translate from '@components/trans';
 import './bootstrap';
 
 /**

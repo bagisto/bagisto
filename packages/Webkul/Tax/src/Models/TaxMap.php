@@ -3,10 +3,10 @@
 namespace Webkul\Tax\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Tax\Database\Factories\TaxMapFactory;
-use Webkul\Tax\Contracts\TaxMap as TaxMapContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Webkul\Tax\Contracts\TaxMap as TaxMapContract;
+use Webkul\Tax\Database\Factories\TaxMapFactory;
 
 class TaxMap extends Model implements TaxMapContract
 {

@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\InvoiceRepository;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
 use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
+use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Traits\Mails;
 use Webkul\Core\Traits\PDFHandler;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class InvoiceController extends Controller
 {

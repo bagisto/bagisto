@@ -2,10 +2,10 @@
 
 namespace Webkul\Core\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartRuleCouponFactory extends Factory
 {

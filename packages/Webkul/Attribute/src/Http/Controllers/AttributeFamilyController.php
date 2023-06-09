@@ -3,9 +3,9 @@
 namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Core\Contracts\Validations\Code;
 
 class AttributeFamilyController extends Controller

@@ -2,10 +2,10 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Inventory\Models\InventorySource;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\Shipment;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ShipmentFactory extends Factory
 {

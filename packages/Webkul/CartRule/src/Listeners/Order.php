@@ -2,10 +2,10 @@
 
 namespace Webkul\CartRule\Listeners;
 
-use Webkul\CartRule\Repositories\CartRuleRepository;
-use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
+use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
+use Webkul\CartRule\Repositories\CartRuleRepository;
 
 class Order
 {

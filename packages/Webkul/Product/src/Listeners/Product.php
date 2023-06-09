@@ -2,10 +2,10 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Helpers\Indexers\{ElasticSearch, Flat, Inventory, Price};
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
+use Webkul\Product\Repositories\ProductRepository;
 
 class Product
 {

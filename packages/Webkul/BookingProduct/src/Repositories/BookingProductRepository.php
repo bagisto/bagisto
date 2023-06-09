@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Container\Container;
 use Carbon\Carbon;
+use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
 
 class BookingProductRepository extends Repository
@@ -130,7 +130,7 @@ class BookingProductRepository extends Repository
 
                     foreach ($data['slots'][$i] as $slot) {
                         $slots[] = array_merge($slot, ['id' => $i . '_slot_' . $count]);
-                        
+
                         $count++;
                     }
 
@@ -180,7 +180,7 @@ class BookingProductRepository extends Repository
 
             if ($from > $to) {
                 unset($slots[$key]);
-                
+
                 continue;
             }
 

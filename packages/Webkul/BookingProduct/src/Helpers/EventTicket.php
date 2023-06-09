@@ -2,11 +2,10 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Checkout\Facades\Cart;
-use Webkul\Product\DataTypes\CartItemValidationResult;
+use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class EventTicket extends Booking
 {
@@ -114,7 +113,7 @@ class EventTicket extends Booking
             $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
 
             $price = $ticket->price;
-            
+
             if ($this->isInSale($ticket)) {
                 $price = $ticket->special_price;
             }

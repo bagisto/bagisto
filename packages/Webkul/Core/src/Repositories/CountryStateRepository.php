@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Eloquent\Repository;
 
 class CountryStateRepository extends Repository
 {

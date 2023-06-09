@@ -2,9 +2,6 @@
 
 namespace Webkul\Theme;
 
-use Illuminate\Support\Facades\Config;
-use Webkul\Theme\Facades\Themes as Themes;
-
 class Theme
 {
     /**
@@ -55,7 +52,7 @@ class Theme
     {
         return $this->parent;
     }
-    
+
     /**
      * Return all the possible view paths
      *
@@ -96,7 +93,7 @@ class Theme
         if (preg_match('/^((http(s?):)?\/\/)/i', $url)) {
             return $url;
         }
-        
+
         if (preg_match('/^((http(s?):)?\/\/)/i', $this->assetsPath)) {
             return $this->assetsPath . '/' . $url;
         }

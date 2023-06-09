@@ -5,7 +5,6 @@ namespace Webkul\Customer\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Customer\Captcha;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Customer\Http\Middleware\RedirectIfNotCustomer;
 
 class CustomerServiceProvider extends ServiceProvider

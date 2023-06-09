@@ -4,7 +4,6 @@ namespace Webkul\Theme\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Webkul\Theme\Themes;
-use Webkul\Theme\Facades\Themes as ThemeFacade;
 
 class ThemeServiceProvider extends ServiceProvider
 {

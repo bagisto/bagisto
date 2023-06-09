@@ -2,9 +2,8 @@
 
 namespace Webkul\SocialLogin\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -2,11 +2,10 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
-use Illuminate\Support\Arr;
 use Elasticsearch as ElasticsearchClient;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
 class ElasticSearch extends AbstractIndexer
@@ -128,19 +127,19 @@ class ElasticSearch extends AbstractIndexer
                         ->where('status_pav.boolean_value', 1);
                 })
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
         request()->query->remove('cursor');
     }
-    
+
     /**
      * Reindex products by batch size
      *
@@ -175,7 +174,7 @@ class ElasticSearch extends AbstractIndexer
                                 '_id'    => $product->id,
                             ],
                         ];
-            
+
                         $refreshIndices['body'][] = $this->getIndices();
                     }
                 }
@@ -205,7 +204,7 @@ class ElasticSearch extends AbstractIndexer
                     'index' => $indexName,
                     'id'    => $id,
                 ];
-    
+
                 try {
                     ElasticsearchClient::delete($params);
                 } catch(\Exception $e) {}
@@ -258,7 +257,7 @@ class ElasticSearch extends AbstractIndexer
                     } else {
                         $groupPrice = $this->product->getTypeInstance()->getMinimalPrice();
                     }
-                    
+
                     $properties[$attribute->code . '_' . $customerGroup->id] = (float) $groupPrice;
                 }
             } elseif ($attribute->type == 'boolean') {
@@ -335,7 +334,7 @@ class ElasticSearch extends AbstractIndexer
 
         return $attributeValues->first();
     }
-    
+
     /**
      * Returns all channels
      *
@@ -351,7 +350,7 @@ class ElasticSearch extends AbstractIndexer
 
         return $channels = $this->channelRepository->all();
     }
-    
+
     /**
      * Returns all customer groups
      *

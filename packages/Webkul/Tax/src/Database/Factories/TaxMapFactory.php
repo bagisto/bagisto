@@ -2,10 +2,10 @@
 
 namespace Webkul\Tax\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Tax\Models\TaxCategory;
 use Webkul\Tax\Models\TaxMap;
 use Webkul\Tax\Models\TaxRate;
-use Webkul\Tax\Models\TaxCategory;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxMapFactory extends Factory
 {

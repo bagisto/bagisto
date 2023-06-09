@@ -3,7 +3,6 @@
 namespace Webkul\Checkout\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Checkout\Contracts\CartItem;
 
 class CartItemRepository extends Repository
 {

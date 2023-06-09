@@ -2,11 +2,11 @@
 
 namespace Webkul\SocialLogin\Http\Controllers;
 
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Event;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Webkul\SocialLogin\Repositories\CustomerSocialAccountRepository;
 
 class LoginController extends Controller
@@ -19,7 +19,7 @@ class LoginController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * Create a new controller instance.
      *

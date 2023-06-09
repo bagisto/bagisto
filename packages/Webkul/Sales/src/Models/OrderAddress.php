@@ -2,14 +2,14 @@
 
 namespace Webkul\Sales\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Core\Models\Address;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Sales\Database\Factories\OrderAddressFactory;
 use Webkul\Sales\Contracts\OrderAddress as OrderAddressContract;
-use Illuminate\Database\Eloquent\Builder;
+use Webkul\Sales\Database\Factories\OrderAddressFactory;
 
 /**
  * Class OrderAddress
@@ -55,10 +55,10 @@ class OrderAddress extends Address implements OrderAddressContract
                     $address->address_type = self::ADDRESS_TYPE_BILLING;
 
                     break;
-                    
+
                 case CartAddress::ADDRESS_TYPE_SHIPPING:
                     $address->address_type = self::ADDRESS_TYPE_SHIPPING;
-                    
+
                     break;
             }
         });

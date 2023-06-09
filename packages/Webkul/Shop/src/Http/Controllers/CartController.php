@@ -5,10 +5,9 @@ namespace Webkul\Shop\Http\Controllers;
 use Cart;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
-use Webkul\Checkout\Contracts\Cart as CartModel;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
 class CartController extends Controller
 {
@@ -45,9 +44,9 @@ class CartController extends Controller
         $cart = Cart::getCart();
 
         $cart?->load('items.product.cross_sells');
-       
+
         $crossSellProductCount = core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products');
- 
+
         return view($this->_config['view'], [
             'cart' => $cart,
             'crossSellProducts' => $cart?->items
@@ -206,9 +205,9 @@ class CartController extends Controller
                             'message' => trans('shop::app.checkout.total.coupon-already-applied'),
                         ]);
                     }
-    
+
                     Cart::setCouponCode($couponCode)->collectTotals();
-                  
+
                     if (Cart::getCart()->coupon_code == $couponCode) {
                         return response()->json([
                             'success' => true,
@@ -217,7 +216,7 @@ class CartController extends Controller
                     }
                 }
             }
-           
+
             return response()->json([
                 'success' => false,
                 'message' => trans('shop::app.checkout.total.invalid-coupon'),

@@ -3,8 +3,8 @@
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 use Webkul\Velocity\Helpers\Helper;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 
 class ComparisonController extends Controller
 {
@@ -14,7 +14,7 @@ class ComparisonController extends Controller
      * @var array
      */
     protected $_config;
-    
+
     /**
      * Create a new controller instance.
      *
@@ -140,7 +140,7 @@ class ComparisonController extends Controller
         }
 
         $product = $this->productRepository->find($productId);
-                        
+
         if (! $product) {
             return response()->json([
                 'status'  => 'warning',
@@ -184,7 +184,7 @@ class ComparisonController extends Controller
                 'product_id'  => request()->get('productId'),
                 'customer_id' => auth()->guard('customer')->user()->id,
             ]);
-            
+
             $message = trans('velocity::app.customer.compare.removed');
         }
 

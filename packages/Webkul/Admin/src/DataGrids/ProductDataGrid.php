@@ -5,9 +5,9 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
-use Webkul\Ui\DataGrid\DataGrid;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Ui\DataGrid\DataGrid;
 
 class ProductDataGrid extends DataGrid
 {
@@ -176,7 +176,7 @@ class ProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if (
-                    ! empty($row->visible_individually) 
+                    ! empty($row->visible_individually)
                     && ! empty($row->url_key)
                 ) {
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
@@ -244,7 +244,7 @@ class ProductDataGrid extends DataGrid
                 if (is_null($row->quantity)) {
                     return 0;
                 }
-                
+
                 return $this->renderQuantityView($row);
             },
         ]);
@@ -262,7 +262,7 @@ class ProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function () {                
+            'condition' => function () {
                 return true;
             },
         ]);

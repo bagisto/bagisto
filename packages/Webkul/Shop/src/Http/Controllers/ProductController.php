@@ -3,7 +3,6 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;

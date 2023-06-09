@@ -5,10 +5,10 @@ namespace Webkul\Category\Http\Controllers;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Admin\DataGrids\CategoryProductDataGrid;
-use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Repositories\ChannelRepository;
 
 class CategoryController extends Controller
 {
@@ -168,7 +168,7 @@ class CategoryController extends Controller
     public function massDestroy()
     {
         $suppressFlash = true;
-        
+
         $categoryIds = explode(',', request()->input('indexes'));
 
         foreach ($categoryIds as $categoryId) {
@@ -247,7 +247,7 @@ class CategoryController extends Controller
     public function categoryProductCount()
     {
         $productCount = 0;
-        
+
         $indexes = explode(',', request()->input('indexes'));
 
         foreach ($indexes as $index) {

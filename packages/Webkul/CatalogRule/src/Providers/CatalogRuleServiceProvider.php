@@ -2,9 +2,9 @@
 
 namespace Webkul\CatalogRule\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use Webkul\CatalogRule\Console\Commands\PriceRuleIndex;
 
 class CatalogRuleServiceProvider extends ServiceProvider

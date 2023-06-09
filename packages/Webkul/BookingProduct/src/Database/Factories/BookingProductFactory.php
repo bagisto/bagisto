@@ -3,9 +3,9 @@
 namespace Webkul\BookingProduct\Database\Factories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\Product\Models\Product;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookingProductFactory extends Factory
 {

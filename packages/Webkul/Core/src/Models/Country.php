@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Models;
 
-use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Core\Contracts\Country as CountryContract;
+use Webkul\Core\Eloquent\TranslatableModel;
 
 class Country extends TranslatableModel implements CountryContract
 {

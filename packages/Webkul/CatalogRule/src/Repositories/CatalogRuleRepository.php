@@ -3,10 +3,10 @@
 namespace Webkul\CatalogRule\Repositories;
 
 use Illuminate\Container\Container;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class CatalogRuleRepository extends Repository

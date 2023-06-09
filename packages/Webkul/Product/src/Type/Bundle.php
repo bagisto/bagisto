@@ -2,21 +2,21 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Product\Repositories\ProductBundleOptionRepository;
-use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
-use Webkul\Product\Helpers\BundleOption;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
+use Webkul\Product\Helpers\BundleOption;
 use Webkul\Product\Helpers\Indexers\Price\Bundle as BundleIndexer;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
+use Webkul\Product\Repositories\ProductBundleOptionRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Bundle extends AbstractType
 {

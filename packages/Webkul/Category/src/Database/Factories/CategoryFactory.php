@@ -2,8 +2,8 @@
 
 namespace Webkul\Category\Database\Factories;
 
-use Webkul\Category\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Category\Models\Category;
 
 class CategoryFactory extends Factory
 {

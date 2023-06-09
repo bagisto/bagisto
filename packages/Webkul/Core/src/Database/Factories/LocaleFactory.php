@@ -2,8 +2,8 @@
 
 namespace Webkul\Core\Database\Factories;
 
-use Webkul\Core\Models\Locale;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Core\Models\Locale;
 
 class LocaleFactory extends Factory
 {

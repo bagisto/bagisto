@@ -5,8 +5,6 @@ namespace Webkul\Attribute\Repositories;
 use Illuminate\Container\Container;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Attribute\Repositories\AttributeGroupRepository;
 
 class AttributeFamilyRepository extends Repository
 {
@@ -79,7 +77,7 @@ class AttributeFamilyRepository extends Repository
     public function update(array $data, $id, $attribute = "id")
     {
         $family = $this->find($id);
-        
+
         $family->update($data);
 
         $previousAttributeGroupIds = $family->attribute_groups()->pluck('id');

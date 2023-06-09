@@ -3,7 +3,6 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Inventory\Models\InventorySource;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Product\Contracts\ProductSalableInventory as ProductSalableInventoryContract;
 

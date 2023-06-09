@@ -3,8 +3,8 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Models\Attribute;
+use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Listeners\ProductFlat;
 
 class ProductFlatRepository extends Repository

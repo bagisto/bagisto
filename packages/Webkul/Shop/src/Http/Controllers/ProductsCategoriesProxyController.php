@@ -3,9 +3,9 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Category\Repositories\CategoryRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
@@ -47,7 +47,7 @@ class ProductsCategoriesProxyController extends Controller
 
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {
                 if (
-                    $product->visible_individually 
+                    $product->visible_individually
                     && $product->url_key
                     && $product->status
                 ) {

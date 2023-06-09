@@ -2,10 +2,10 @@
 
 namespace Webkul\Shipping\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Webkul\Shipping\Shipping;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Shipping\Facades\Shipping as ShippingFacade;
+use Webkul\Shipping\Shipping;
 
 class ShippingServiceProvider extends ServiceProvider
 {
@@ -18,7 +18,7 @@ class ShippingServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../Http/helpers.php';
     }
-    
+
     /**
      * Register services.
      *
@@ -45,7 +45,7 @@ class ShippingServiceProvider extends ServiceProvider
             return new Shipping();
         });
     }
-    
+
     /**
      * Register package config.
      *

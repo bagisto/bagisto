@@ -2,8 +2,8 @@
 
 namespace Webkul\DebugBar\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\ServiceProvider;
 use Webkul\DebugBar\DataCollector\ModuleCollector;
 
 class DebugBarServiceProvider extends ServiceProvider

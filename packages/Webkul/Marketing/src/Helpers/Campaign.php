@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Marketing\Mail\NewsletterMail;
-use Webkul\Marketing\Repositories\EventRepository;
 use Webkul\Marketing\Repositories\CampaignRepository;
+use Webkul\Marketing\Repositories\EventRepository;
 
 class Campaign
 {

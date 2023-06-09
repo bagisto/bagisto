@@ -3,7 +3,6 @@
 namespace Webkul\Product\Repositories;
 
 use Illuminate\Container\Container;
-use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImageRepository extends ProductMediaRepository
 {

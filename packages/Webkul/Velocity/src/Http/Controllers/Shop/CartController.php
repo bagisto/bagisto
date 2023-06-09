@@ -3,8 +3,8 @@
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
 use Illuminate\Support\Facades\Log;
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Contracts\Cart as CartModel;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Product\Repositories\ProductRepository;
 
 class CartController extends Controller
@@ -76,7 +76,7 @@ class CartController extends Controller
             $cart = Cart::getCart();
 
             $id = request()->get('product_id');
-            
+
             if ($product = $this->productRepository->findOrFail($id)) {
                 if (! $product->visible_individually) {
                     abort(404);

@@ -6,9 +6,9 @@
 </template>
 
 <script>
-	import Swatches from 'vue-swatches';
+import Swatches from 'vue-swatches';
 
-	export default {
+export default {
 		components: { Swatches },
 
         props: ['inputName', 'color'],

@@ -2,7 +2,6 @@
 
 namespace Webkul\Core\Helpers\Exchange;
 
-use Webkul\Core\Helpers\Exchange\ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -10,15 +9,15 @@ class FixerExchange extends ExchangeRate
 {
     /**
      * API key
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $apiKey;
 
     /**
      * API endpoint
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $apiEndPoint;
 
@@ -41,7 +40,7 @@ class FixerExchange extends ExchangeRate
 
     /**
      * Fetch rates and updates in currency_exchange_rates table
-     * 
+     *
      * @return \Exception|void
      */
     public function updateRates()

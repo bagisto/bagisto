@@ -2,10 +2,10 @@
 
 namespace Webkul\Velocity\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container;
-use Webkul\Product\Repositories\ProductRepository;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ContentRepository extends Repository
 {
@@ -104,7 +104,7 @@ class ContentRepository extends Repository
         $query = $this->model::orderBy('position', 'ASC');
 
         $velocityMetaData = app('Webkul\Velocity\Helpers\Helper')->getVelocityMetaData();
-        
+
         $headerContentCount = $velocityMetaData->header_content_count ?? '';
 
         $headerContentCount = $headerContentCount != '' ? $headerContentCount : 5;

@@ -5,7 +5,6 @@ namespace Webkul\Core\Repositories;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Prettus\Repository\Traits\CacheableRepository;
-use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Traits\CoreConfigField;
 

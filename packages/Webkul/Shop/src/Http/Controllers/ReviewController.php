@@ -3,8 +3,8 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductReviewImageRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
 {

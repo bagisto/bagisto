@@ -5,7 +5,6 @@ namespace Webkul\Admin\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewAdminNotification extends Mailable
 {
@@ -13,7 +12,7 @@ class NewAdminNotification extends Mailable
 
     /**
      * Create a new message instance.
-     * 
+     *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
      */

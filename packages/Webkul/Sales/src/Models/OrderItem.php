@@ -3,15 +3,15 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Product\Type\AbstractType;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Webkul\Sales\Database\Factories\OrderItemFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Webkul\Product\Type\AbstractType;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
+use Webkul\Sales\Database\Factories\OrderItemFactory;
 
 class OrderItem extends Model implements OrderItemContract
 {

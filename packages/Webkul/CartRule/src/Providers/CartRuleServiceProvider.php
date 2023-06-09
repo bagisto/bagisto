@@ -2,8 +2,8 @@
 
 namespace Webkul\CartRule\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
 
 class CartRuleServiceProvider extends ServiceProvider
 {

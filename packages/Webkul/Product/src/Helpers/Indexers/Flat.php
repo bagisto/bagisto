@@ -4,8 +4,8 @@ namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Facades\Schema;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Helpers\ProductType;
+use Webkul\Product\Repositories\ProductFlatRepository;
 
 class Flat
 {

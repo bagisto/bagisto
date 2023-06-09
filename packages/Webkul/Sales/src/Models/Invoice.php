@@ -3,15 +3,15 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Webkul\Sales\Contracts\Invoice as InvoiceContract;
-use Webkul\Sales\Traits\PaymentTerm;
-use Webkul\Sales\Database\Factories\InvoiceFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Webkul\Sales\Contracts\Invoice as InvoiceContract;
+use Webkul\Sales\Database\Factories\InvoiceFactory;
 use Webkul\Sales\Traits\InvoiceReminder;
+use Webkul\Sales\Traits\PaymentTerm;
 
 class Invoice extends Model implements InvoiceContract
 {

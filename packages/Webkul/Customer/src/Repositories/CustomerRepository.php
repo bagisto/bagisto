@@ -5,7 +5,6 @@ namespace Webkul\Customer\Repositories;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Sales\Models\Order;
 
 class CustomerRepository extends Repository
@@ -58,7 +57,7 @@ class CustomerRepository extends Repository
         if ($customer = auth()->guard()->user()) {
             return $customer->group;
         }
-        
+
         return $this->customerGroupRepository->getCustomerGuestGroup();
     }
 

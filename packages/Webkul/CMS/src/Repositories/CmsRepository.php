@@ -3,8 +3,8 @@
 namespace Webkul\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Webkul\Core\Eloquent\Repository;
 use Webkul\CMS\Models\CmsPageTranslationProxy;
+use Webkul\Core\Eloquent\Repository;
 
 class CmsRepository extends Repository
 {

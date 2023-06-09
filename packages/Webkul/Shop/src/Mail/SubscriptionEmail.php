@@ -5,7 +5,6 @@ namespace Webkul\Shop\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SubscriptionEmail extends Mailable
 {
@@ -13,7 +12,7 @@ class SubscriptionEmail extends Mailable
 
     /**
      * Create a mailable instance
-     * 
+     *
      * @param  array  $subscriptionData
      */
     public function __construct(public $subscriptionData)

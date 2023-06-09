@@ -2,8 +2,8 @@
 
 namespace Webkul\CMS\Models;
 
-use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\CMS\Contracts\CmsPage as CmsPageContract;
+use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Core\Models\ChannelProxy;
 
 class CmsPage extends TranslatableModel implements CmsPageContract

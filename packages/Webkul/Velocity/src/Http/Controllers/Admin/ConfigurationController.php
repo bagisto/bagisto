@@ -2,11 +2,11 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Traits\Sanitizer;
 use Webkul\Velocity\Helpers\Helper;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class ConfigurationController extends Controller

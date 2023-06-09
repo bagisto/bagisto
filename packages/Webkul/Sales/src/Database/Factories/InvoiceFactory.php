@@ -2,10 +2,10 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\OrderAddress;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory
 {
@@ -35,7 +35,7 @@ class InvoiceFactory extends Factory
         $subTotal = $this->faker->randomFloat(2);
 
         $shippingAmount = $this->faker->randomFloat(2);
-        
+
         $taxAmount = $this->faker->randomFloat(2);
 
         if (! isset($attributes['order_id'])) {

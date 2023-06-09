@@ -2,15 +2,15 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\ShipmentRepository;
 use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\ShipmentRepository;
 
 class ShipmentController extends Controller
 {
-    /** 
+    /**
      * Display a listing of the resource.
      *
      * @return array

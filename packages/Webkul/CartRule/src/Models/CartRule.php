@@ -3,10 +3,10 @@
 namespace Webkul\CartRule\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Core\Database\Factories\CartRuleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Webkul\CartRule\Contracts\CartRule as CartRuleContract;
+use Webkul\Core\Database\Factories\CartRuleFactory;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 

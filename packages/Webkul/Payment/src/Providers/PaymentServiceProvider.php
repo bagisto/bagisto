@@ -2,10 +2,10 @@
 
 namespace Webkul\Payment\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Webkul\Payment\Payment;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Payment\Facades\Payment as PaymentFacade;
+use Webkul\Payment\Payment;
 
 class PaymentServiceProvider extends ServiceProvider
 {

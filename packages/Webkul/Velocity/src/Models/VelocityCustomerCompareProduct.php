@@ -3,8 +3,8 @@
 namespace Webkul\Velocity\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Webkul\Customer\Models\CustomerProxy;
+use Webkul\Product\Models\ProductProxy;
 use Webkul\Velocity\Contracts\VelocityCustomerCompareProduct as VelocityCustomerCompareProductContract;
 
 class VelocityCustomerCompareProduct extends Model implements VelocityCustomerCompareProductContract

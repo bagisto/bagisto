@@ -2,9 +2,8 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Checkout\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 

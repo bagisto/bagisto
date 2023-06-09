@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -132,7 +132,7 @@ class CustomerController extends Controller
         ]);
 
         Event::dispatch('customer.update.before', $id);
-        
+
         $customer = $this->customerRepository->update(array_merge(request()->all(), [
             'status'       => request()->has('status'),
             'is_suspended' => request()->has('is_suspended'),
@@ -259,7 +259,7 @@ class CustomerController extends Controller
         if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
             foreach ($customerIds as $customerId) {
                 Event::dispatch('customer.delete.before', $customerId);
-                
+
                 $this->customerRepository->delete($customerId);
 
                 Event::dispatch('customer.delete.after', $customerId);

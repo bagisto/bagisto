@@ -2,16 +2,15 @@
 
 namespace Webkul\CartRule\Helpers;
 
-use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\CartRule\Repositories\CartRuleRepository;
+use Illuminate\Database\Eloquent\Builder;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
-use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
-use Webkul\Rule\Helpers\Validator;
-use Webkul\Checkout\Facades\Cart;
+use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
+use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Rule\Helpers\Validator;
 
 class CartRule
 {
@@ -108,7 +107,7 @@ class CartRule
         $cartRules = $this->getCartRuleQuery($customerGroup->id, core()->getCurrentChannel()->id);
 
         $staticCartRules::$cartRules = $cartRules;
-        
+
         return $cartRules;
     }
 

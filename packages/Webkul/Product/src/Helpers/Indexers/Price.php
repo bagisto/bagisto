@@ -4,8 +4,8 @@ namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Carbon;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductPriceIndexRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class Price extends AbstractIndexer
 {
@@ -52,13 +52,13 @@ class Price extends AbstractIndexer
                     'variants.catalog_rule_prices',
                 ])
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
@@ -99,19 +99,19 @@ class Price extends AbstractIndexer
                         ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'));
                 })
                 ->cursorPaginate($this->batchSize);
- 
+
             $this->reindexBatch($paginator->items());
- 
+
             if (! $cursor = $paginator->nextCursor()) {
                 break;
             }
- 
+
             request()->query->add(['cursor' => $cursor->encode()]);
         }
 
         request()->query->remove('cursor');
     }
-    
+
     /**
      * Reindex products by batch size
      *
@@ -180,7 +180,7 @@ class Price extends AbstractIndexer
 
         return $typeIndexers[$product->type] = $product->getTypeInstance()->getPriceIndexer();
     }
-    
+
     /**
      * Returns all customer groups
      *

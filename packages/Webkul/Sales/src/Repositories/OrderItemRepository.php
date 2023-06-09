@@ -4,7 +4,6 @@ namespace Webkul\Sales\Repositories;
 
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\OrderItem;
 
 class OrderItemRepository extends Repository
 {
@@ -134,7 +133,7 @@ class OrderItemRepository extends Repository
                         $qty = $item->parent->qty_ordered;
                     } else {
                         $qty = 1;
-                        
+
                         Log::info('OrderItem has no parent with `qty_ordered`', [
                             'orderItem' => $item,
                             'parent'    => $item->parent,

@@ -2,10 +2,10 @@
 
 namespace Webkul\Sales\Database\Factories;
 
-use Webkul\Sales\Models\Order;
-use Webkul\Product\Models\Product;
-use Webkul\Sales\Models\OrderItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Product\Models\Product;
+use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderItem;
 
 class OrderItemFactory extends Factory
 {

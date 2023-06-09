@@ -2,9 +2,9 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Sales\Models\Order;
 use Webkul\Sales\Models\Refund;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RefundFactory extends Factory
 {

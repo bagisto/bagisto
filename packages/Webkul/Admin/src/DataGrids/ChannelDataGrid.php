@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\DataGrid;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Ui\DataGrid\DataGrid;
 
 class ChannelDataGrid extends DataGrid
 {

@@ -2,8 +2,8 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
-use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Sales\Repositories\OrderRepository;
 
 class StandardController extends Controller

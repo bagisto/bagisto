@@ -2,23 +2,23 @@
 
 namespace Webkul\BookingProduct\Type;
 
-use Illuminate\Support\Arr;
 use Carbon\Carbon;
-use Webkul\Product\Type\Virtual;
-use Webkul\Customer\Repositories\CustomerRepository;
+use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Product\Type\Virtual;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Booking extends Virtual
 {

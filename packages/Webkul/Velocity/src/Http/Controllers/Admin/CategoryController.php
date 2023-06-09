@@ -2,7 +2,6 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
-use Illuminate\Http\Response;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Velocity\Repositories\CategoryRepository as VelocityCategoryRepository;
 
@@ -22,7 +21,7 @@ class CategoryController extends Controller
     {
         $this->_config = request('_config');
     }
-    
+
     /**
      * Display a listing of the resource.
      *

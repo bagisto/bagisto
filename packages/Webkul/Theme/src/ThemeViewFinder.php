@@ -2,10 +2,10 @@
 
 namespace Webkul\Theme;
 
-use Webkul\Theme\Facades\Themes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
+use Webkul\Theme\Facades\Themes;
 
 class ThemeViewFinder extends FileViewFinder
 {

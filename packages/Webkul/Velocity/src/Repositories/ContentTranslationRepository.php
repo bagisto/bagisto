@@ -2,8 +2,8 @@
 
 namespace Webkul\Velocity\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Eloquent\Repository;
 
 class ContentTranslationRepository extends Repository
 {

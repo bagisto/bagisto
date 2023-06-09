@@ -1,19 +1,13 @@
 /**
  * Main imports.
  */
-import Vue    from 'vue';
-import axios  from 'axios';
+import Vue from 'vue';
+import axios from 'axios';
 
 /**
  * Helper functions.
  */
-import {
-    getBaseUrl,
-    isMobile,
-    loadDynamicScript,
-    showAlert,
-    removeTrailingSlash
-} from './app-helpers';
+import {getBaseUrl, isMobile, loadDynamicScript, showAlert} from './app-helpers';
 
 /**
  * Vue prototype.

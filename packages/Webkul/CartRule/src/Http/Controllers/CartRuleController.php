@@ -5,7 +5,6 @@ namespace Webkul\CartRule\Http\Controllers;
 use Exception;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\CartRuleDataGrid;
 use Webkul\CartRule\Http\Requests\CartRuleRequest;

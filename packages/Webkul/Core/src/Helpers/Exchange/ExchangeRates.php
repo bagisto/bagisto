@@ -2,7 +2,6 @@
 
 namespace Webkul\Core\Helpers\Exchange;
 
-use Webkul\Core\Helpers\Exchange\ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -59,9 +58,9 @@ class ExchangeRates extends ExchangeRate
                     'headers' => [
                         'Content-Type' => "text/plain",
                         'apikey'       => $this->apiKey,
-                    ], 
+                    ],
                     'query' => [
-                        'to'     => $currency->code, 
+                        'to'     => $currency->code,
                         'from'   => config('app.currency'),
                         'amount' => 1
                     ]

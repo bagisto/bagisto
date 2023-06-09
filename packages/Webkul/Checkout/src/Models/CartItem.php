@@ -3,14 +3,14 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Checkout\Database\Factories\CartItemFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\Checkout\Contracts\CartItem as CartItemContract;
+use Webkul\Checkout\Database\Factories\CartItemFactory;
+use Webkul\Product\Models\ProductProxy;
 
 
 class CartItem extends Model implements CartItemContract

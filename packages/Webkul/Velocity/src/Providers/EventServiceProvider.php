@@ -2,8 +2,8 @@
 
 namespace Webkul\Velocity\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

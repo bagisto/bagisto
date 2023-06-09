@@ -2,7 +2,6 @@
 
 namespace Webkul\Paypal\Payment;
 
-use Illuminate\Support\Facades\Config;
 use Webkul\Payment\Payment\Payment;
 
 abstract class Paypal extends Payment
@@ -78,7 +77,7 @@ abstract class Paypal extends Payment
 
     /**
      * Format a currency value according to paypal's api constraints
-     * 
+     *
      * @param float|int $long
      * @return float
      */
@@ -89,10 +88,10 @@ abstract class Paypal extends Payment
 
     /**
      * Format phone field according to paypal's api constraints
-     * 
-     * Strips non-numbers characters like '+' or ' ' in 
+     *
+     * Strips non-numbers characters like '+' or ' ' in
      * inputs like "+54 11 3323 2323"
-     * 
+     *
      * @param mixed $phone
      * @return string
      */

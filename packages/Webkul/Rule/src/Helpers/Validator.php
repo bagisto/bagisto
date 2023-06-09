@@ -2,7 +2,6 @@
 
 namespace Webkul\Rule\Helpers;
 
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Contracts\Cart as CheckoutContract;
 
 class Validator
@@ -275,7 +274,7 @@ class Validator
         if (in_array($conditionValue, $attributeValue, true) === true) {
             return true;
         }
-        
+
         foreach ($attributeValue as $subValue) {
             if (! is_array($subValue)) {
                 continue;

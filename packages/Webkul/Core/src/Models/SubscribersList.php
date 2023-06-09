@@ -3,12 +3,12 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Customer\Models\CustomerProxy;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Core\Database\Factories\SubscriberListFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Core\Contracts\SubscribersList as SubscribersListContract;
+use Webkul\Core\Database\Factories\SubscriberListFactory;
+use Webkul\Customer\Models\CustomerProxy;
 
 class SubscribersList extends Model implements SubscribersListContract
 {

@@ -2,9 +2,8 @@
 
 namespace Webkul\Paypal\Providers;
 
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use Webkul\Theme\ViewRenderEventManager;
 
 class EventServiceProvider extends ServiceProvider

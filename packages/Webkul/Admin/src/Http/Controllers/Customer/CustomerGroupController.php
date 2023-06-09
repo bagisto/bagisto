@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Contracts\Validations\Code;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 
 class CustomerGroupController extends Controller
 {

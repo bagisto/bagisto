@@ -2,10 +2,10 @@
 
 namespace Webkul\Sales\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Models\InvoiceItem;
 use Webkul\Sales\Models\OrderItem;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceItemFactory extends Factory
 {

@@ -2,8 +2,8 @@
 
 namespace Webkul\Checkout\Database\Factories;
 
-use Webkul\Checkout\Models\CartAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Checkout\Models\CartAddress;
 
 class CartAddressFactory extends Factory
 {

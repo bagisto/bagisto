@@ -3,11 +3,11 @@
 namespace Webkul\Attribute\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Core\Eloquent\TranslatableModel;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Attribute\Database\Factories\AttributeOptionFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Attribute\Contracts\AttributeOption as AttributeOptionContract;
+use Webkul\Attribute\Database\Factories\AttributeOptionFactory;
+use Webkul\Core\Eloquent\TranslatableModel;
 
 class AttributeOption extends TranslatableModel implements AttributeOptionContract
 {

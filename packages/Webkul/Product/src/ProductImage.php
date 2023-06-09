@@ -4,9 +4,9 @@ namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Local\LocalFilesystemAdapter;
+use Webkul\Customer\Contracts\Wishlist;
 use Webkul\Product\Helpers\AbstractProduct;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Contracts\Wishlist;
 
 class ProductImage
 {
@@ -83,7 +83,7 @@ class ProductImage
                 $product = $item->product;
             }
         } else {
-            
+
             $product = $item->product;
         }
 

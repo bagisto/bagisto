@@ -2,8 +2,8 @@
 
 namespace Webkul\Product\Repositories;
 
-use Webkul\Core\Eloquent\Repository;
 use Illuminate\Support\Str;
+use Webkul\Core\Eloquent\Repository;
 
 class ProductBundleOptionProductRepository extends Repository
 {

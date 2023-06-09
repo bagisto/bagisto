@@ -3,9 +3,9 @@
 namespace Webkul\Tax\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
-use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
 
 class TaxCategoryController extends Controller
 {

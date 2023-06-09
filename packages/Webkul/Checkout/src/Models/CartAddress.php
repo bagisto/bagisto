@@ -4,11 +4,11 @@ namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Checkout\Database\Factories\CartAddressFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\Checkout\Contracts\CartAddress as CartAddressContract;
+use Webkul\Checkout\Database\Factories\CartAddressFactory;
 use Webkul\Core\Models\Address;
 
 /**

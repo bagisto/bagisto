@@ -4,8 +4,8 @@ namespace Webkul\Admin\Validations;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Models\CategoryTranslationProxy;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 
 class ProductCategoryUniqueSlug implements Rule

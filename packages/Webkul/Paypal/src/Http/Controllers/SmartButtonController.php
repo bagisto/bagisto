@@ -4,8 +4,8 @@ namespace Webkul\Paypal\Http\Controllers;
 
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Payment\SmartButton;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class SmartButtonController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\DataGrids\Admin;
 
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class BookingDataGrid extends DataGrid
@@ -96,7 +96,7 @@ class BookingDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => function ($value) {                
+            'closure'    => function ($value) {
                 return Carbon::createFromTimestamp($value->to)->format('d F, Y H:iA');
             }
         ]);

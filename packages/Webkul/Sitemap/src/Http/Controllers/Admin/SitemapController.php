@@ -2,11 +2,11 @@
 
 namespace Webkul\Sitemap\Http\Controllers\Admin;
 
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\SitemapDataGrid;
 use Webkul\Sitemap\Repositories\SitemapRepository;

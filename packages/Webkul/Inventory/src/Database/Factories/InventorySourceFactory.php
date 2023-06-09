@@ -2,8 +2,8 @@
 
 namespace Webkul\Inventory\Database\Factories;
 
-use Webkul\Inventory\Models\InventorySource;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Inventory\Models\InventorySource;
 
 class InventorySourceFactory extends Factory
 {

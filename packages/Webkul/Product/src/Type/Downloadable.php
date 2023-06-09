@@ -2,20 +2,20 @@
 
 namespace Webkul\Product\Type;
 
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductImageRepository;
-use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
-use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Helpers\Indexers\Price\Downloadable as DownloadableIndexer;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductImageRepository;
+use Webkul\Product\Repositories\ProductInventoryRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class Downloadable extends AbstractType
 {

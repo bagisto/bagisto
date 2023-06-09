@@ -3,9 +3,9 @@
 namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Illuminate\Support\Carbon;
+use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
 
 abstract class AbstractType
 {

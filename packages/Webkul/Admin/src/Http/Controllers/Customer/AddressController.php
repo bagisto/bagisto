@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\DataGrids\AddressDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Core\Contracts\Validations\AlphaNumericSpace;
 use Webkul\Core\Contracts\Validations\PhoneNumber;
-use Webkul\Admin\DataGrids\AddressDataGrid;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Rules\VatIdRule;
 
 class AddressController extends Controller
 {
@@ -86,13 +86,13 @@ class AddressController extends Controller
         request()->merge([
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
         ]);
-        
+
         Event::dispatch('customer.addresses.create.before');
 
         $customerAddress = $this->customerAddressRepository->create(request()->all());
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
-        
+
         session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
         return redirect()->route('admin.customer.edit', ['id' => request('customer_id')]);
@@ -129,11 +129,11 @@ class AddressController extends Controller
             'phone'        => ['required', new PhoneNumber],
             'vat_id'       => [new VatIdRule()],
         ]);
-        
+
         request()->merge([
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1')))
         ]);
-        
+
         Event::dispatch('customer.addresses.update.before', $id);
 
         $customerAddress = $this->customerAddressRepository->update(request()->all(), $id);

@@ -4,7 +4,6 @@ namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use Webkul\Theme\Theme;
 
 class Themes
 {

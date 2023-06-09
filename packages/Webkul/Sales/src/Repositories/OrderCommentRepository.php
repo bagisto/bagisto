@@ -3,7 +3,6 @@
 namespace Webkul\Sales\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Sales\Contracts\OrderComment;
 
 class OrderCommentRepository extends Repository
 {

@@ -3,7 +3,6 @@
 namespace Webkul\Marketing\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\ProductProxy;
 use Webkul\Marketing\Contracts\Template as TemplateContract;
 
 class Template extends Model implements TemplateContract

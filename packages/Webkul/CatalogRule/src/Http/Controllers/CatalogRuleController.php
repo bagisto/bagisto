@@ -2,7 +2,6 @@
 
 namespace Webkul\CatalogRule\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;

@@ -2,9 +2,9 @@
 
 namespace Webkul\Marketing\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Marketing\Console\Commands\EmailsCommand;
-use Illuminate\Console\Scheduling\Schedule;
 
 class MarketingServiceProvider extends ServiceProvider
 {

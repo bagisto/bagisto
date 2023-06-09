@@ -1,19 +1,19 @@
 <?php
- 
+
 namespace Webkul\Product\Jobs;
- 
+
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Bus\Batchable;
 use Illuminate\Queue\SerializesModels;
 use Webkul\Product\Helpers\Indexer as IndexerHelper;
- 
+
 class Indexer implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
- 
+
     /**
      * Product collection
      *
@@ -39,7 +39,7 @@ class Indexer implements ShouldQueue
 
         $this->indexers = $indexers;
     }
- 
+
     /**
      * Execute the job.
      *

@@ -3,11 +3,11 @@
 namespace Webkul\Core\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Webkul\Core\Database\Factories\CurrencyFactory;
 use Webkul\Core\Contracts\Currency as CurrencyContract;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Core\Database\Factories\CurrencyFactory;
 
 class Currency extends Model implements CurrencyContract
 {

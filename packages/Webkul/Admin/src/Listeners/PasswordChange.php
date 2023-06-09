@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\User\Notifications\AdminUpdatePassword;
-use Webkul\Customer\Notifications\CustomerUpdatePassword;
 use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Notifications\CustomerUpdatePassword;
 use Webkul\User\Models\Admin;
+use Webkul\User\Notifications\AdminUpdatePassword;
 
 class PasswordChange
 {

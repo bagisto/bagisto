@@ -5,7 +5,6 @@ namespace Webkul\Admin\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class InvoiceOverdueReminder extends Mailable
 {

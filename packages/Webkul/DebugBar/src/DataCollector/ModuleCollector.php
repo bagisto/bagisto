@@ -2,15 +2,14 @@
 
 namespace Webkul\DebugBar\DataCollector;
 
-use Illuminate\Support\Str;
+use DebugBar\DataCollector\AssetProvider;
 use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\DataCollectorInterface;
-use DebugBar\DataCollector\Renderable;
-use DebugBar\DataCollector\AssetProvider;
-use Konekt\Concord\Facades\Concord;
-use Illuminate\Contracts\Events\Dispatcher;
 use DebugBar\DataCollector\PDO\PDOCollector;
-use Debugbar;
+use DebugBar\DataCollector\Renderable;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\Str;
+use Konekt\Concord\Facades\Concord;
 
 /**
  * Collector for Bagisto's Module Collector
@@ -62,7 +61,7 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
             }
         );
     }
-    
+
     /**
      * @param  \Illuminate\Database\Events\QueryExecuted  $query
      * @return string
@@ -112,7 +111,7 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
 
         return $bindings;
     }
-    
+
     /**
      * @param  string  $name
      * @param  string  $path
@@ -133,7 +132,7 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
     public function collect()
     {
         $modules = [];
-        
+
         foreach (Concord::getModules() as $moduleId => $module) {
             $models = $this->getModels($module->getNamespaceRoot());
 
@@ -189,7 +188,7 @@ class ModuleCollector extends DataCollector implements DataCollectorInterface, R
         $viewNamespace = Str::lower(class_basename($classNamespace));
 
         $classNamespace = str_replace('\\', '/', $classNamespace) . '/';
-        
+
         $views = [];
 
         foreach ($this->views as $view) {

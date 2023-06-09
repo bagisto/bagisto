@@ -3,8 +3,6 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Models\Channel;
-use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
 
 class CategoryProductDataGrid extends DataGrid
@@ -164,7 +162,7 @@ class CategoryProductDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 }
-                
+
                 return trans('admin::app.datagrid.inactive');
             },
         ]);
@@ -191,7 +189,7 @@ class CategoryProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function () {                
+            'condition' => function () {
                 return true;
             },
         ]);

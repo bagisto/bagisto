@@ -2,9 +2,8 @@
 
 namespace Webkul\Product\Database\Factories;
 
-use Webkul\Product\Models\Product;
-use Webkul\Product\Models\ProductAttributeValue;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Product\Models\ProductAttributeValue;
 
 class ProductAttributeValueFactory extends Factory
 {

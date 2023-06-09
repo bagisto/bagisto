@@ -2,8 +2,8 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
-use Illuminate\Support\Facades\Event;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 
 class BookingRepository extends Repository

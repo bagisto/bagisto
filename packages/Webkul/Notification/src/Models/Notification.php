@@ -2,9 +2,9 @@
 
 namespace Webkul\Notification\Models;
 
-use Webkul\Sales\Models\OrderProxy;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Notification\Contracts\Notification as NotificationContract;
+use Webkul\Sales\Models\OrderProxy;
 
 class Notification extends Model implements NotificationContract
 {

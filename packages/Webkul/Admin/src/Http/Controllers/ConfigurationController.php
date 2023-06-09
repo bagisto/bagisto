@@ -3,8 +3,8 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
+use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Tree;
 
 class ConfigurationController extends Controller
@@ -103,26 +103,26 @@ class ConfigurationController extends Controller
     public function store(ConfigurationForm $request)
     {
         $data = $request->request->all();
-        
+
         if (isset($data['sales']['carriers'])) {
             $atLeastOneCarrierEnabled = false;
-            
+
             foreach ($data['sales']['carriers'] as $carrier) {
                 if ($carrier['active']) {
                     $atLeastOneCarrierEnabled = true;
-                    
+
                     break;
                 }
             }
-            
+
             if (! $atLeastOneCarrierEnabled) {
                 session()->flash('error', trans('admin::app.configuration.enable-atleast-one-shipping'));
-                
+
                 return redirect()->back();
             }
         } elseif (isset($data['sales']['paymentmethods'])) {
             $atLeastOnePaymentMethodEnabled = false;
-            
+
             foreach ($data['sales']['paymentmethods'] as $paymentMethod) {
                 if ($paymentMethod['active']) {
                     $atLeastOnePaymentMethodEnabled = true;
@@ -130,10 +130,10 @@ class ConfigurationController extends Controller
                     break;
                 }
             }
-            
+
             if (! $atLeastOnePaymentMethodEnabled) {
                 session()->flash('error', trans('admin::app.configuration.enable-atleast-one-payment'));
-                
+
                 return redirect()->back();
             }
         }

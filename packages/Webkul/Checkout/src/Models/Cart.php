@@ -3,10 +3,10 @@
 namespace Webkul\Checkout\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 use Webkul\Checkout\Database\Factories\CartFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model implements CartContract
 {

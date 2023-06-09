@@ -3,11 +3,11 @@
 namespace Webkul\Tax\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
-use Webkul\Tax\Database\Factories\TaxCategoryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Webkul\Tax\Contracts\TaxCategory as TaxCategoryContract;
+use Webkul\Tax\Database\Factories\TaxCategoryFactory;
 
 class TaxCategory extends Model implements TaxCategoryContract
 {

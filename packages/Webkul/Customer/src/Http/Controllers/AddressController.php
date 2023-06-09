@@ -2,7 +2,6 @@
 
 namespace Webkul\Customer\Http\Controllers;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Http\Requests\CustomerAddressRequest;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
@@ -117,7 +116,7 @@ class AddressController extends Controller
 
         if (! $customer->addresses()->find($id)) {
             session()->flash('warning', trans('shop::app.security-warning'));
-            
+
             return redirect()->route('shop.customer.addresses.index');
         }
 

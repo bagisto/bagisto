@@ -2,9 +2,9 @@
 
 namespace Webkul\User\Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Illuminate\Database\Seeder;
 
 class AdminsTableSeeder extends Seeder
 {
