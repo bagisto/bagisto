@@ -1,9 +1,14 @@
-@props(['defaultQuantity' => 1])
+@props([
+    'name'  => '',
+    'value' => 1
+])
 
 <v-quantity-changer
+    name="{{ $name }}"
+    value="{{ $value }}"
     {{ $attributes }}
-    :default-quantity="{{ $defaultQuantity }}"
-></v-quantity-changer>
+>
+</v-quantity-changer>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-quantity-changer-template">
@@ -23,7 +28,13 @@
                 @click="increase"
             >
             </span>
-            
+
+            <v-field
+                type="hidden"
+                :name="name"
+                v-model="quantity"
+                {{ $attributes }}
+            ></v-field>
         </div>
     </script>
 
@@ -31,11 +42,11 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['defaultQuantity'],
+            props:['name', 'value'],
 
             data() {
                 return  {
-                    quantity: this.defaultQuantity,
+                    quantity: this.value,
                 }
             },
 
