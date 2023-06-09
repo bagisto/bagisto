@@ -22,77 +22,6 @@
     </x-table.tbody>
 </x-table>
 
-<x-form.control>
-    <x-slot:label class="required">
-        Input Control
-    </x-slot:label>
-
-    <x-slot:control
-        type="input"
-        name="input"
-        class="just-checking"
-        value="Input Value"
-        v-validate="'required'"
-    ></x-slot:control>
-</x-form.control>
-
-<x-form.control>
-    <x-slot:control
-        type="select"
-        name="select"
-        v-validate="'required'"
-    >
-        <option value=""></option>
-        <option value="1">Option 1</option>
-    </x-slot:control>
-
-    <x-slot:error class="custom-error-class"></x-slot:error>
-</x-form.control>
-
-<x-form.control>
-    <x-slot:label
-        class="required"
-    >
-        Multi Select Control
-    </x-slot:label>
-
-    <x-slot:control
-        type="select"
-        name="multiselect"
-        v-validate="'required'"
-        multiple
-    >
-        <option value="1" selected>Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-    </x-slot:control>
-</x-form.control>
-
-<x-form.control>
-    <x-slot:label class="required">Checkbox Control</x-slot:label>
-
-    <x-slot:control
-        type="checkbox"
-        name="checkbox"
-        value="1"
-        checked
-    >
-        Checkbox Label
-    </x-slot:control>
-</x-form.control>
-
-<x-form.control>
-    <x-slot:label class="required">Radio Control</x-slot:label>
-
-    <x-slot:control
-        type="radio"
-        name="radio[]"
-        value="1"
-    >
-        Radio Label
-    </x-slot:control>
-</x-form.control>
-
 <x-flash-group></x-flash-group>
 
 <x-panel>
@@ -133,12 +62,9 @@
 >
 </x-shop::products.carousel>
 
-{{-- form  --}}
-<x-shop::form
-    :action="route('shop.customer.session.create')"
-    class="rounded mt-[60px] max-sm:mt-[30px]"
->
-    <x-shop::form.control-group class="mb-4">
+{{-- basic/traditional form  --}}
+<x-shop::form action="">
+    <x-shop::form.control-group>
         <x-shop::form.control-group.label>
             Email
         </x-shop::form.control-group.label>
@@ -158,6 +84,37 @@
         >
         </x-shop::form.control-group.error>
     </x-shop::form.control-group>
+</x-shop::form>
+
+{{-- customized/ajax form --}}
+<x-shop::form
+    v-slot="{ meta, errors, handleSubmit }"
+    as="div"
+>
+    <form @submit="handleSubmit($event, callMethodInComponent)">
+        <x-shop::form.control-group>
+            <x-shop::form.control-group.label>
+                Email
+            </x-shop::form.control-group.label>
+
+            <x-shop::form.control-group.control
+                type="email"
+                name="email"
+                :value="old('email')"
+                rules="required"
+                label="Email"
+                placeholder="email@example.com"
+            >
+            </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="email"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
+        <button>Submit</button>
+    </form>
 </x-shop::form>
 
 {{-- tabs --}}

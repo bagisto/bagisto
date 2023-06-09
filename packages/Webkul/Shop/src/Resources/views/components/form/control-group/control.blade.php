@@ -4,11 +4,10 @@
 ])
 
 @switch($type)
+    @case('hidden')
     @case('text')
     @case('email')
     @case('password')
-    @case('hidden')
-    @case('textarea')
         <v-field
             type="{{ $type }}"
             name="{{ $name }}"
@@ -24,12 +23,28 @@
 
         @break
 
+    @case('textarea')
+        <v-field
+            type="{{ $type }}"
+            name="{{ $name }}"
+            v-slot="{ field }"
+            {{ $attributes }}
+        >
+            <textarea
+                v-bind="field"
+                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                {{ $attributes->except(['value'])->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+            >
+            </textarea>
+        </v-field>
+
+        @break
+
     @case('checkbox')
         <span class="">
             <input
                 type="checkbox"
                 name="{{ $name }}"
-                {{ $attributes->merge(['class' => '']) }}
                 {{ $attributes }}
             >
 
@@ -43,7 +58,6 @@
             <input
                 type="radio"
                 name="{{ $name }}"
-                {{ $attributes->merge(['class' => '']) }}
                 {{ $attributes }}
             >
 
@@ -88,4 +102,9 @@
         </div>
 
         @break
+
+    @case('custom')
+        <v-field {{ $attributes }}>
+            {{ $slot }}
+        </v-field>
 @endswitch
