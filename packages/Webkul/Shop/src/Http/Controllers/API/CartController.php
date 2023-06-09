@@ -30,10 +30,7 @@ class CartController extends APIController
     {
         Cart::collectTotals();
 
-        return new JsonResource([
-            'data'     => new CartResource(Cart::getCart()),
-            'message'  => trans('shop::app.components.products.item-add-to-cart'),
-        ]);
+        return new CartResource(Cart::getCart());
     }
 
     /**
