@@ -79,8 +79,9 @@
                                     
                                     @if ($product->type != 'grouped')
                                         <x-shop::quantity-changer
+                                            name="quantity"
+                                            value="1"
                                             class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
-                                            default-quantity="1"
                                             @change="updateItem($event)"
                                         >
                                         </x-shop::quantity-changer>
@@ -94,7 +95,7 @@
                                     @else
                                         <button
                                             class="rounded-[12px] border text-navyBlue border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
-                                            @click='addToCart("")'
+                                            type="submit"
                                         >
                                             @lang('shop::app.products.add-to-cart')
                                         </button>
