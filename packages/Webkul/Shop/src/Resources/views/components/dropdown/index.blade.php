@@ -2,6 +2,8 @@
 
 <v-dropdown position="{{ $position }}" {{ $attributes->merge(['class' => 'relative']) }}>
     @isset($toggle)
+        {{ $toggle }}
+        
         <template v-slot:toggle>
             {{ $toggle }}
         </template>

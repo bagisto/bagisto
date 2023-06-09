@@ -147,7 +147,9 @@
                             <p class="text-[16px] font-medium cursor-pointer" v-if="! cart.discount_amount">
                                 <x-shop::modal>
                                     <x-slot:toggle>
-                                        @lang('shop::app.checkout.cart.coupon.apply')
+                                        <span class="text-[#4D7EA8]">
+                                            @lang('shop::app.checkout.cart.coupon.apply')
+                                        </span>
                                     </x-slot:toggle>
 
                                     <x-slot:header>

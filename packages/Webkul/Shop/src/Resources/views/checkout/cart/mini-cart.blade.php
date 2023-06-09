@@ -1,4 +1,6 @@
-<v-mini-cart></v-mini-cart>
+<v-mini-cart>
+    <span class="icon-cart text-[24px] cursor-pointer"></span>
+</v-mini-cart>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mini-cart-template">
