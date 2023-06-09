@@ -46,7 +46,8 @@
 
                                 <x-shop::quantity-changer
                                     class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
-                                    :cart-item="'item'"
+                                    :quantity="'item.quantity'"
+                                    @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
 
@@ -127,10 +128,10 @@
                         .catch(error => {});
                 },
 
-                updateItem({id, quantity}) {
+                updateItem(quantity, item) {
                     let qty = {};
 
-                    qty[id] = quantity;
+                    qty[item.id] = quantity;
 
                     this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
                         .then(response => {

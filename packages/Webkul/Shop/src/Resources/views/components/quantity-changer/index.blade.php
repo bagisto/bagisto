@@ -1,13 +1,9 @@
-@props([
-    'cartItem' => null,
-])
+@props(['quantity' => 1])
 
-<v-quantity-changer 
+<v-quantity-changer
     {{ $attributes }}
-    :cartItem="{{ $cartItem }}" 
-    @updateItem='updateItem'
->
-</v-quantity-changer>
+    :quantity="{{ $quantity }}"
+></v-quantity-changer>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-quantity-changer-template">
@@ -20,7 +16,7 @@
             >
             </span>
 
-            <p v-text="quantity"></p>
+            <p v-text="qty"></p>
             
             <span 
                 class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"
@@ -35,41 +31,25 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['cartItem'],
+            props:['quantity'],
 
             data() {
                 return  {
-                    quantity: this.cartItem.quantity ?? 1,
+                    qty: this.quantity,
                 }
             },
 
             methods: {
                 increase() {
-                    this.quantity += 1;
-
-                    this.$emit('change', this.quantity);
-
-                    /**
-                     * Update quantity to the database.
-                     */
-                    this.$emit('updateItem', {
-                        id: this.cartItem.id,
-                        quantity: this.quantity
-                    });
+                    this.$emit('change', ++this.qty);
                 },
 
                 decrease() {
-                    if (this.quantity > 1) this.quantity -= 1;
+                    if (this.qty > 1) {
+                        this.qty -= 1;
+                    }
 
-                    this.$emit('change', this.quantity);
-
-                    /**
-                     * Update quantity to the database.
-                     */
-                    this.$emit('updateItem', {
-                        id: this.cartItem.id,
-                        quantity: this.quantity
-                    });
+                    this.$emit('change', this.qty);
                 },
             }
         });
