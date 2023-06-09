@@ -19,12 +19,12 @@
             <p class="text-[16px]">
                 {{ $item->product->name }}
             </p>
-
+      
             <p class="text-[16px]">
                 @lang('shop::app.customers.account.wishlist.color') 
                 {{ $item->product->color }}
             </p>
-
+            
             <x-shop::form
                 method="DELETE"
                 id="wishlist-{{ $item->id }}" 
@@ -45,7 +45,7 @@
     </div>
 
     <p class="text-[18px]">
-        {{ $item->product->price }}
+        {{ core()->currency($item->product->getTypeInstance()->getFinalprice()) }}
     </p>
 
     <div class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center">

@@ -107,14 +107,6 @@
             </div>
         </form>
 
-        @if($showWishlist)
-            <div>
-                <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                    <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-                </a>
-            </div>
-        @endif
-
         @auth('customer')
             @include('shop::checkout.cart.mini-cart')
         @endauth
