@@ -49,8 +49,6 @@
             <x-slot:content>
                 <ul v-if="filter.type === 'price'">
                     <li>
-                        <v-price-filter></v-price-filter>
-
                         <x-shop::range-slider></x-shop::range-slider>
                     </li>
                 </ul>
@@ -86,59 +84,6 @@
                 </ul>
             </x-slot:content>
         </x-shop::accordion>
-    </script>
-
-    <script type="text/x-template" id="v-price-filter-template">
-        <div>
-            <div class="flex items-center gap-[15px]">
-                <p class="text-[14px] ">Price Range:</p>
-
-                <p class="text-[14px] font-semibold">$0-$1000</p>
-            </div>
-
-            <div class="relative h-[4px] w-[246px] mt-[30px] mb-[24px]">
-                <div class="absolute left-0 right-0 top-0 h-[4px] bg-[#F5F5F5] rounded-[12px]">
-                    <div
-                        id="line"
-                        class="absolute left-0 right-0 top-0 h-[4px] bg-navyBlue"
-                        style="left: 20%; right: 10%;"
-                    >
-                    </div>
-
-                    <span
-                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px]  -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
-                        style="left:20%"
-                    >
-                    </span>
-
-                    <span
-                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px]  -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
-                        style="left:90%"
-                    >
-                    </span>
-                </div>
-
-                <input
-                    type="range"
-                    name="min_price"
-                    value="0"
-                    class="two-range-slider"
-                    min="10"
-                    max="100"
-                    step="5"
-                >
-
-                <input
-                    type="range"
-                    name="max_price"
-                    class="two-range-slider"
-                    value="100"
-                    min="10"
-                    max="100"
-                    step="5"
-                >
-            </div>
-        </div>
     </script>
 
     <script type='module'>
@@ -235,46 +180,25 @@
                  * Improvisation needed here. Need to figure out other way and sepration also.
                  */
                 this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
-            },
-
-            methods: {
-                applyValue() {
-                    this.$emit('values-applied', this.appliedValues);
-                },
-            },
-        });
-
-        /**
-         * In development. Segregated all price related stuffs.
-         * Waiting for design team to provide the slider.
-         */
-        app.component('v-price-filter', {
-            template: '#v-price-filter-template',
-
-            data() {
-                return {
-                    min: 0,
-                    max: 100,
-                };
-            },
-
-            mounted() {
-                if (! this.index) this.active = true;
 
                 this.getMaxPrice();
             },
 
             methods: {
                 getMaxPrice() {
-                    // if (this.filter['code'] != 'price') {
-                    //     return;
-                    // }
+                    if (this.filter['code'] != 'price') {
+                        return;
+                    }
 
                     this.$axios.get('{{ route("shop.categories.max_price", $category->id) }}')
                         .then((response) => {})
                         .catch(error => {
                             console.log(error);
                         });
+                },
+                
+                applyValue() {
+                    this.$emit('values-applied', this.appliedValues);
                 },
             },
         });
