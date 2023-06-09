@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
 {
@@ -29,10 +30,7 @@ class CartController extends APIController
     {
         Cart::collectTotals();
 
-        return new JsonResource([
-            'cart'     => Cart::getCart(),
-            'message'  => trans('shop::app.components.products.item-add-to-cart'),
-        ]);
+        return new CartResource(Cart::getCart());
     }
 
     /**
@@ -66,7 +64,7 @@ class CartController extends APIController
                 }
 
                 return new JsonResource([
-                    'cart'     => Cart::getCart(),
+                    'data'     => new CartResource(Cart::getCart()),
                     'message'  => trans('shop::app.components.products.item-add-to-cart'),
                 ]);
             }
@@ -85,8 +83,8 @@ class CartController extends APIController
         Cart::removeItem(request()->input('cart_item_id'));
 
         return new JsonResource([
-            'cart'      => Cart::getCart(),
-            'message'   => trans('shop::app.checkout.cart.item.success-remove'),
+            'data'    => new CartResource(Cart::getCart()),
+            'message' => trans('shop::app.checkout.cart.item.success-remove'),
         ]);
     }
 
@@ -99,12 +97,12 @@ class CartController extends APIController
             Cart::updateItems(request()->input());
 
             return new JsonResource([
-                'cart'      => Cart::getCart(),
-                'message'   => trans('shop::app.checkout.cart.quantity-update'),
+                'data'    => new CartResource(Cart::getCart()),
+                'message' => trans('shop::app.checkout.cart.quantity-update'),
             ]);
         } catch (\Exception $exception) {
             return new JsonResource([
-                'message'   => $exception->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }
