@@ -25,7 +25,7 @@
                         @include('shop::products.view.gallery')
                         
                         {{-- Product Details --}}
-                        <div class="max-w-[590px] relative max-1180:px-[20px]">
+                        <div class="max-w-[465px] relative max-1180:px-[20px]">
                             <div class="flex justify-between gap-[15px]">
                                 <h1 class="text-[30px] font-medium max-sm:text-[20px]">
                                     {{ $product->name }}
@@ -70,29 +70,28 @@
                             
                             <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
 
-                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-                                
                                 @if ($product->type != 'grouped')
-                                    @include('shop::products.view.quantity-changer')
-                                @endif
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
-                                {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-                                
-                                @if ($product->type != 'grouped')
-                                    <button 
+                                    @include('shop::products.view.quantity-changer')
+                                    
+                                    {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                    <button
                                         class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
                                         @click='addToCart("")'
                                     >
                                         @lang('shop::app.products.add-to-cart')
                                     </button>
-                                @else 
-                                    <button 
-                                        class="rounded-[12px] border text-navyBlue border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
+                                @else
+                                    <button
+                                        class="rounded-[12px] border text-navyBlue border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
                                         @click='addToCart("")'
                                     >
                                         @lang('shop::app.products.add-to-cart')
                                     </button>
                                 @endif
+                                
                             </div>
 
 

@@ -1,4 +1,3 @@
-
 <v-quantity-changer @updateQuantity='updateQty($event)'></v-quantity-changer>
 
 @pushOnce('scripts')
@@ -28,7 +27,7 @@
                     quantity: 1
                 }
             },
-
+            
             methods: {
                 decrease() {
                     if (this.quantity > 1) this.quantity -= 1;
