@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-d8bb287e.css",
+    "file": "assets/app-c2daf055.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -205,7 +205,7 @@
     "src": "src/Resources/assets/images/womens.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-8644b3b6.js",
+    "file": "assets/app-cc0253ac.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
