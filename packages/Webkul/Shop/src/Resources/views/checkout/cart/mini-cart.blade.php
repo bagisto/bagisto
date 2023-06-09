@@ -31,8 +31,19 @@
                             >
                         </div>
     
-                        <div class="grid gap-y-[10px]" >
-                            <p class="text-[16px] font-medium" v-text="item.name"></p>
+                        <div class="grid gap-y-[10px] flex-1">
+                            <div class="flex flex-wrap justify-between">
+                                <p 
+                                    class="text-[16px] font-medium max-w-[80%]" 
+                                    v-text="item.name"
+                                >
+                                </p>
+                                <p 
+                                    class="text-[18px]" 
+                                    v-text="item.formatted_price"
+                                >
+                                </p>
+                            </div>
     
                             <div class="flex gap-[20px] items-center flex-wrap">
                                 <v-quantity-changer 
