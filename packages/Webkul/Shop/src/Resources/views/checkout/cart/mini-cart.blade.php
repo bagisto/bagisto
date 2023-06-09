@@ -1,4 +1,6 @@
-<v-mini-cart></v-mini-cart>
+<v-mini-cart>
+    <span class="icon-cart text-[24px] cursor-pointer"></span>
+</v-mini-cart>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mini-cart-template">
@@ -31,26 +33,31 @@
                             >
                         </div>
     
-                        <div class="grid gap-y-[10px]" >
-                            <p class="text-[16px] font-medium" v-text="item.name"></p>
-    
-                            <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
-                                <p class="text-[14px]">
-                                    @lang('shop::app.checkout.cart.item.quantity')
-
-                                    @{{ item.quantity }}
+                        <div class="grid gap-y-[10px] flex-1">
+                            <div class="flex flex-wrap justify-between">
+                                <p 
+                                    class="text-[16px] font-medium max-w-[80%]" 
+                                    v-text="item.name"
+                                >
+                                </p>
+                                <p 
+                                    class="text-[18px]" 
+                                    v-text="item.formatted_price"
+                                >
                                 </p>
                             </div>
     
                             <div class="flex gap-[20px] items-center flex-wrap">
-                                <v-quantity-changer 
-                                    :default-quantity="item.quantity" 
-                                    @change="updateItem(item.id, $event)"
+                                <x-shop::quantity-changer
+                                    class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
+                                    ::default-quantity="item.quantity"
+                                    @change="updateItem($event, item)"
                                 >
-                                </v-quantity-changer>
-    
+                                </x-shop::quantity-changer>
+
                                 <button 
-                                    type="button" 
+                                    type="button"
+                                    class="text-[#4D7EA8]"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.remove')
@@ -127,10 +134,10 @@
                         .catch(error => {});
                 },
 
-                updateItem(itemId, $event) {
+                updateItem(quantity, item) {
                     let qty = {};
 
-                    qty[itemId] = $event;
+                    qty[item.id] = quantity;
 
                     this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
                         .then(response => {
@@ -148,56 +155,6 @@
                             this.cart = response.data.data;
                         })
                         .catch(error => {});
-                },
-            }
-        });
-    </script>
-@endpushOnce
-
-@pushOnce('scripts')
-    <script type="text/x-template" id="v-quantity-changer-template">
-        <div class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]">
-            <span 
-                class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"
-                @click="increase"
-            >
-            </span>
-            
-            <p v-text="quantity"></p>
-
-            <span 
-                class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px] cursor-pointer" 
-                @click="decrease"
-            >
-            </span>
-        </div>
-    </script>
-
-    <script type="module">
-        app.component("v-quantity-changer", {
-            template: '#v-quantity-changer-template',
-
-            props:[
-                'defaultQuantity',
-            ],
-
-            data() {
-                return  {
-                    quantity: this.defaultQuantity ?? 0,
-                }
-            },
-
-            methods: {
-                increase() {
-                    this.quantity += 1;
-
-                    this.$emit('change', this.quantity);
-                },
-
-                decrease() {
-                    if (this.quantity > 1) this.quantity -= 1;
-
-                    this.$emit('change', this.quantity);
                 },
             }
         });

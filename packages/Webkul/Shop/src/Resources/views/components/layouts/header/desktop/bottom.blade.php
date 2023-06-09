@@ -107,7 +107,7 @@
             </div>
         </form>
 
-        @if($showWishlist)
+        @if ($showWishlist)
             <div>
                 <a href="{{ route('shop.customers.account.wishlist.index') }}">
                     <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
@@ -115,9 +115,7 @@
             </div>
         @endif
 
-        @auth('customer')
-            @include('shop::checkout.cart.mini-cart')
-        @endauth
+        @include('shop::checkout.cart.mini-cart')
 
         <x-shop::dropdown position="bottom-right">
             <x-slot:toggle>

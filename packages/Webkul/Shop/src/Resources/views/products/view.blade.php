@@ -70,12 +70,15 @@
                             
                             <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
 
+                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+                                
                                 @if ($product->type != 'grouped')
-                                    {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                                    @include('shop::products.view.quantity-changer')
-                                    
-                                    {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+                                    <x-shop::quantity-changer
+                                        class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                        default-quantity="1"
+                                        @change="updateItem($event)"
+                                    >
+                                    </x-shop::quantity-changer>
 
                                     <button
                                         class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
@@ -93,7 +96,6 @@
                                 @endif
                                 
                             </div>
-
 
                             <button
                                 class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
@@ -416,6 +418,8 @@
 
                         qty: 1,
 
+                        productWithQuantity: {},
+
                         reviews: {},
 
                         page: 1
@@ -429,12 +433,16 @@
                 methods: {
                     addToCart(buyNow) {
                         const params = {
-                            'quantity': this.qty,
                             'product_id': this.productId,
+                            'quantity': this.qty,
+                            'qty': this.productWithQuantity
                         };
 
                         this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
-                            alert(response.data.message);
+                            if (response.data.message) {
+                                alert(response.data.message);
+                            }
+
                             if (buyNow); //Redirect to Cart Page
                         }).catch(error => {});
                     },
@@ -461,8 +469,18 @@
                         }).catch(error => { alert('Something went wrong')});
                     },
 
-                    updateQty(qty) {
-                        this.qty = qty;
+                    updateItem(quantity, id) {
+                        this.qty = quantity;
+                        
+                        let productExist = Object.keys(this.productWithQuantity).find(
+                            key => this.productWithQuantity[key] === id
+                        )
+
+                        if (productExist) {
+                            productExist.quantity += 1
+                        } else {
+                            this.productWithQuantity[id] = quantity
+                        }
                     },
 
                     getReviews() {
@@ -478,6 +496,6 @@
                 }
             })
         </script>
-        
+
     @endPushOnce
 </x-shop::layouts>

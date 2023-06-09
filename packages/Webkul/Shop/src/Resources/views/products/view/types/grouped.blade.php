@@ -16,7 +16,12 @@
                                 {!! $groupedProduct->associated_product->getTypeInstance()->getPriceHtml() !!}
                             </div>
 
-                            @include('shop::products.view.quantity-changer')
+                            <x-shop::quantity-changer
+                                class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                default-quantity="{{ $groupedProduct->qty }}"
+                                @change="updateItem($event, '{{ $groupedProduct->associated_product->id }}')"
+                            >
+                            </x-shop::quantity-changer>
                         </div>
                     @endif
                 @endforeach

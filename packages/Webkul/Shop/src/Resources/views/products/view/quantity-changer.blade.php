@@ -27,7 +27,8 @@
                     quantity: 1
                 }
             },
-            
+
+
             methods: {
                 decrease() {
                     if (this.quantity > 1) this.quantity -= 1;
