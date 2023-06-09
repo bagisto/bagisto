@@ -46,7 +46,7 @@
 
                                 <x-shop::quantity-changer
                                     class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
-                                    :quantity="'item.quantity'"
+                                    ::default-quantity="item.quantity"
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>

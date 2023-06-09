@@ -1,8 +1,8 @@
-@props(['quantity' => 1])
+@props(['defaultQuantity' => 1])
 
 <v-quantity-changer
     {{ $attributes }}
-    :quantity="{{ $quantity }}"
+    :default-quantity="{{ $defaultQuantity }}"
 ></v-quantity-changer>
 
 @pushOnce('scripts')
@@ -16,7 +16,7 @@
             >
             </span>
 
-            <p v-text="qty"></p>
+            <p v-text="quantity"></p>
             
             <span 
                 class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"
@@ -31,25 +31,25 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['quantity'],
+            props:['defaultQuantity'],
 
             data() {
                 return  {
-                    qty: this.quantity,
+                    quantity: this.defaultQuantity,
                 }
             },
 
             methods: {
                 increase() {
-                    this.$emit('change', ++this.qty);
+                    this.$emit('change', ++this.quantity);
                 },
 
                 decrease() {
-                    if (this.qty > 1) {
-                        this.qty -= 1;
+                    if (this.quantity > 1) {
+                        this.quantity -= 1;
                     }
 
-                    this.$emit('change', this.qty);
+                    this.$emit('change', this.quantity);
                 },
             }
         });
