@@ -43,7 +43,6 @@
                             </div>
     
                             <div class="flex gap-[20px] items-center flex-wrap">
-
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="'item.quantity'"
