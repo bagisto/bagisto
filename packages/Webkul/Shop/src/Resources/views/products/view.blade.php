@@ -400,7 +400,6 @@
                             'quantity': this.qty,
                             'product_id': this.productId,
                         };
-                        console.log(params);
 
                         this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
                             alert(response.data.data.message);
