@@ -74,7 +74,7 @@
 
                         <p 
                             class="text-[18px]"
-                            v-text="item.price"
+                            v-text="item.formatted_price"
                         >
                         </p>
 
@@ -86,7 +86,7 @@
 
                         <p 
                             class="text-[18px] font-semibold" 
-                            v-text="item.total"
+                            v-text="item.formatted_total"
                         >
                         </p>
                     </div>
@@ -120,8 +120,10 @@
                                 @lang('shop::app.checkout.cart.subtotal')
                             </p>
 
-                            <p class="text-[16px] font-medium">
-                                $ @{{ cart.sub_total}}
+                            <p 
+                                class="text-[16px] font-medium"
+                                v-text="cart.formatted_sub_total"
+                            >
                             </p>
                         </div>
 
@@ -130,8 +132,10 @@
                                 @lang('shop::app.checkout.cart.tax') 0 %
                             </p>
 
-                            <p class="text-[16px] font-medium">
-                                $ @{{ cart.tax_total }}
+                            <p 
+                                class="text-[16px] font-medium"
+                                v-text="cart.formatted_tax_total"
+                            >
                             </p>
                         </div>
 
@@ -187,8 +191,10 @@
                                     method="DELETE"
                                     action="{{ route('shop.checkout.cart.coupon.remove') }}"
                                 >
-                                    <button type="submit">
-                                        $ @{{ cart.discount_amount }}
+                                    <button 
+                                        type="submit"
+                                        v-text="cart.formatted_discount_amount"
+                                    >
                                     </button>
                                 </x-form>                            
                             </p>
@@ -199,8 +205,10 @@
                                 @lang('shop::app.checkout.cart.grand-total')
                             </p>
 
-                            <p class="text-[26px] font-medium">
-                                $ @{{ cart.grand_total }}
+                            <p 
+                                class="text-[26px] font-medium" 
+                                v-text="cart.formatted_grand_total"
+                            >
                             </p>
                         </div>
 
@@ -238,7 +246,7 @@
                     get() {
                         this.$axios.get('{{ route('shop.checkout.cart.index') }}')
                             .then(response => {
-                                this.cart = response.data.data.cart;
+                                this.cart = response.data.data;
                             })
                             .catch(error => {});     
                     },
@@ -246,7 +254,7 @@
                     update() {
                         this.$axios.put('{{ route('shop.checkout.cart.destroy') }}', { qty: this.applied.quantity })
                             .then(response => {
-                                this.cart = response.data.data.cart;
+                                this.cart = response.data.data;
                             })
                             .catch(error => {});
                     },
@@ -261,7 +269,7 @@
                                 'cart_item_id': itemId,
                             })
                             .then(response => {
-                                this.cart = response.data.data.cart;
+                                this.cart = response.data.data;
                             })
                             .catch(error => {});
                     },

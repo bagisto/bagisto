@@ -399,7 +399,7 @@
                         };
 
                         this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
-                            alert(response.data.data.message);
+                            alert(response.data.message);
                             if (buyNow); //Redirect to Cart Page
                         }).catch(error => {});
                     },
