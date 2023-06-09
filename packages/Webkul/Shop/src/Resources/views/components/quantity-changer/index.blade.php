@@ -4,9 +4,9 @@
 ])
 
 <v-quantity-changer
+    {{ $attributes }}
     name="{{ $name }}"
     value="{{ $value }}"
-    {{ $attributes }}
 >
 </v-quantity-changer>
 
