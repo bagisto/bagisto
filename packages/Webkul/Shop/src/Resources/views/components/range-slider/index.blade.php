@@ -2,28 +2,35 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-range-slider-template">
-        <div class="relative h-[4px] w-full mt-[30px] mb-[24px]">
-            <div class="absolute left-0 right-0 top-0 h-[4px] bg-[#F5F5F5] rounded-[12px]">
-                <div
-                    id="track-highlight"
-                    class="absolute left-0 right-0 top-0 h-[4px] bg-navyBlue"
-                    ref="trackHighlight"
-                ></div>
-
-                <button
-                    id="track1"
-                    class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px] -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
-                    ref="track1"
-                ></button>
-
-                <button
-                    id="track2"
-                    class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px] -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
-                    ref="track2"
-                ></button>
+        <div>
+            <div class="flex items-center gap-[15px]">
+                <p class="text-[14px]">Range:</p>
+                <p class="text-[14px] font-semibold">@{{ minValue + '-' + maxValue }}</p>
             </div>
 
-            <div class="track" ref="_vpcTrack"></div>
+            <div class="relative h-[4px] w-[246px] mt-[30px] mb-[24px]">
+                <div class="absolute left-0 right-0 top-0 h-[4px] bg-[#F5F5F5] rounded-[12px]">
+                    <div
+                        id="track-highlight"
+                        class="absolute left-0 right-0 top-0 h-[4px] bg-navyBlue"
+                        ref="trackHighlight"
+                    ></div>
+
+                    <button
+                        id="track1"
+                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px] -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
+                        ref="track1"
+                    ></button>
+
+                    <button
+                        id="track2"
+                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px] -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
+                        ref="track2"
+                    ></button>
+                </div>
+
+                <div class="track" ref="_vpcTrack"></div>
+            </div>
         </div>
     </script>
 
@@ -32,18 +39,17 @@
             template: '#v-range-slider-template',
 
             props: {
-                trackHeight: {
-                    type: Number,
-                    deafult: 1
+                min: {
+                    default: 10
+                },
+
+                max: {
+                    default: 210
                 }
             },
 
             data() {
                 return {
-                    min: 10,
-
-                    max: 210,
-
                     minValue: 40,
 
                     maxValue: 150,
@@ -58,8 +64,8 @@
 
                     isDragging: false,
 
-                    pos: {
-                        curTrack: null
+                    possition: {
+                        currentTrack: null
                     }
                 }
             },
@@ -69,116 +75,111 @@
 
                 this.percentPerStep = 100 / this.totalSteps;
                 
-                document.querySelector('#track1').style.left = this.valueToPercent(this.minValue) + '%'
+                document.querySelector('#track1').style.left = this.valueToPercent(this.minValue) + '%';
                 
-                document.querySelector('#track2').style.left = this.valueToPercent(this.maxValue) + '%'
+                document.querySelector('#track2').style.left = this.valueToPercent(this.maxValue) + '%';
                 
-                this.setTrackHightlight()
+                this.setTrackHightlight();
 
                 var self = this;
 
-                ['mouseup', 'mousemove'].forEach( type => {
-                    document.body.addEventListener(type, (event) => {
-                        // ev.preventDefault();
-                        if (self.isDragging && self.pos.curTrack){
-                            self[type](event, self.pos.curTrack)
-                        }
-                    })
-                });
-
                 ['mousedown', 'mouseup', 'mousemove', 'touchstart', 'touchmove', 'touchend'].forEach( type => {
+                    if (type == 'mouseup' || type == 'mousemove') {
+                        document.body.addEventListener(type, (event) => {
+                            if (self.isDragging && self.possition.currentTrack) {
+                                self[type](event, self.possition.currentTrack);
+                            }
+                        })
+                    }
+
                     document.querySelector('#track1').addEventListener(type, (event) => {
                         event.stopPropagation();
-                        self[type](event, 'track1')
+
+                        self[type](event, 'track1');
                     })
 
                     document.querySelector('#track2').addEventListener(type, (event) => {
                         event.stopPropagation();
-                        self[type](event, 'track2')
+
+                        self[type](event, 'track2');
                     })
-                })
-
-                document.querySelector('.track').addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    self.setClickMove(event)
-                })
-
-                document.querySelector('#track-highlight').addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    self.setClickMove(event)
                 })
             },
 
             methods: {
                 moveTrack(track, event) {
+                    //if (! this.isDragging) {
+                        console.log(this.isDragging, track, event);
+                    //}
+
                     let percentInPx = this.getPercentInPx();
                     
                     let trackX = Math.round(this.$refs._vpcTrack.getBoundingClientRect().left);
                     let clientX = event.clientX;
                     let moveDiff = clientX-trackX;
 
-                    let moveInPct = moveDiff / percentInPx
+                    let moveInPct = moveDiff / percentInPx;
 
                     if (moveInPct < 1 || moveInPct > 100) return;
 
                     let value = ( Math.round(moveInPct / this.percentPerStep) * this.step ) + this.min;
 
-                    if (track === 'track1'){
+                    if (track === 'track1') {
                         if (value >= (this.maxValue - this.step)) return;
 
                         this.minValue = value;
                     }
 
-                    if (track === 'track2'){
+                    if (track === 'track2') {
                         if(value <= (this.minValue + this.step)) return;
 
                         this.maxValue = value;
                     }
                     
                     this.$refs[track].style.left = moveInPct + '%';
-                    this.setTrackHightlight()
-                        
+
+                    this.setTrackHightlight();
                 },
 
                 mousedown(event, track) {
                     if (this.isDragging) return;
 
                     this.isDragging = true;
-                    this.pos.curTrack = track;
+                    this.possition.currentTrack = track;
                 },
 
                 touchstart(event, track) {
-                    this.mousedown(event, track)
+                    this.mousedown(event, track);
                 },
 
                 mouseup(event, track) {
                     if (! this.isDragging) return;
 
-                    this.isDragging = false
+                    this.isDragging = false;
                 },
 
                 touchend(event, track) {
-                    this.mouseup(event, track)
+                    this.mouseup(event, track);
                 },
 
                 mousemove(event, track) {
                     if (! this.isDragging) return;
 
-                    this.moveTrack(track, event)
+                    this.moveTrack(track, event);
                 },
 
                 touchmove(event, track) {
-                    this.mousemove(event.changedTouches[0], track)
+                    this.mousemove(event.changedTouches[0], track);
                 },
 
                 valueToPercent(value) {
-                    return ((value - this.min) / this.step) * this.percentPerStep
+                    return ((value - this.min) / this.step) * this.percentPerStep;
                 },
 
                 setTrackHightlight(){
-                    this.$refs.trackHighlight.style.left = this.valueToPercent(this.minValue) + '%'
+                    this.$refs.trackHighlight.style.left = this.valueToPercent(this.minValue) + '%';
 
-                    this.$refs.trackHighlight.style.width = (this.valueToPercent(this.maxValue) - this.valueToPercent(this.minValue)) + '%'
+                    this.$refs.trackHighlight.style.width = (this.valueToPercent(this.maxValue) - this.valueToPercent(this.minValue)) + '%';
                 },
 
                 getPercentInPx() {
@@ -188,20 +189,6 @@
                     let percentInPx = oneStepInPx / this.percentPerStep;
                     
                     return percentInPx;
-                },
-
-                setClickMove(event) {
-                    let track1Left = this.$refs.track1.getBoundingClientRect().left;
-                    let track2Left = this.$refs.track2.getBoundingClientRect().left;
-
-                    
-                    if (event.clientX < track1Left){
-                        this.moveTrack('track1', event)
-                    } else if ((event.clientX - track1Left) < (track2Left - event.clientX) ){
-                        this.moveTrack('track1', event)
-                    } else {
-                        this.moveTrack('track2', event)
-                    }
                 }
             }
         });
