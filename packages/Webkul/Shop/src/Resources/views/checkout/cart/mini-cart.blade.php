@@ -43,7 +43,6 @@
                             </div>
     
                             <div class="flex gap-[20px] items-center flex-wrap">
-
                                 <x-shop::quantity-changer
                                     class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
                                     ::default-quantity="item.quantity"
