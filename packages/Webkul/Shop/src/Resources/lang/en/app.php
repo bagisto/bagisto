@@ -121,7 +121,6 @@ return [
                     'billing-address'    => 'Billing Address',
                     'shipping-method'    => 'Shipping Method',
                     'payment-method'     => 'Payment Method',
-                    'print'              => 'Print',
                     'cancel-btn-title'   => 'Cancel',
                     'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
 
@@ -163,6 +162,7 @@ return [
                         'shipping-handling'   => 'Shipping & Handling',
                         'discount'            => 'Discount',
                         'tax'                 => 'Tax',
+                        'print'               => 'Print',
                     ], 
                 
                     'shipments' => [

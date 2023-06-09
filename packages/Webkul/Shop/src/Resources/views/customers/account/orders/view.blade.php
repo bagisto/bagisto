@@ -21,9 +21,11 @@
             </h2>
         </div>
 
-        <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
-            @lang('shop::app.customer.account.order.view.cancel-btn-title')
-        </div>
+        @if ($order->canCancel())
+            <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
+                @lang('shop::app.customer.account.order.view.cancel-btn-title')
+            </div>
+        @endif    
     </div>
 
     {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
@@ -332,6 +334,12 @@
                 <x-shop::tabs.item  title="{{ __('shop::app.customers.account.orders.view.invoices.invoices') }}">
 
                     @foreach ($order->invoices as $invoice)
+                        <div class="secton-title">
+                            <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                @lang('shop::app.customer.account.order.view.invoices.print')
+                            </a>
+                        </div>
+
                         <div>
                             <label>
                                 <span>{{ __('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
