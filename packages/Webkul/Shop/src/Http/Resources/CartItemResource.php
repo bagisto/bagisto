@@ -20,9 +20,9 @@ class CartItemResource extends JsonResource
             'type'            => $this->type,
             'name'            => $this->name,
             'price'           => $this->price,
-            'formatted_price' => core()->formatBasePrice($this->price),
+            'formatted_price' => core()->formatPrice($this->price),
             'total'           => $this->total,
-            'formatted_total' => core()->formatBasePrice($this->total),
+            'formatted_total' => core()->formatPrice($this->total),
             'options'         => $this->additional,
         ];
     }
