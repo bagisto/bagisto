@@ -83,21 +83,17 @@
 
         @break
 
-    {{--
-        This type is currently in the development phase, and I will update
-        it accordingly.
-    --}}
     @case('image')
-        <div class="flex items-center w-full gap-[30px]">
-            <div class="w-[200px] h-[200px] rounded-[12px] cursor-pointer bg-[#F5F5F5]">
-                <img class="" src="../images/user-placeholder.png" title="" alt="">
-            </div>
+        <div class="flex w-full">
+            <label class="flex flex-col w-[286px] h-[286px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100">
+                <div class="m-0 block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center">
+                    @lang('shop::app.products.add-image')
+                </div>
 
-            <label
-                for="dropzone-file"
-                class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-            >
-                Add Image <input id="dropzone-file" type="file" class="hidden">
+                <input
+                    type="file"
+                    class="hidden"
+                />
             </label>
         </div>
 

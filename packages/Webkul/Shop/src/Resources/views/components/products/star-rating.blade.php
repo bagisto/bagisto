@@ -1,5 +1,5 @@
 @props([
-    'name'       => 'ratings',
+    'name'       => 'rating',
     'value'      => 0,
     'disabled'   => true,
 ])

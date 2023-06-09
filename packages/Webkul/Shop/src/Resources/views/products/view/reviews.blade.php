@@ -6,7 +6,7 @@
     <script type="text/x-template" id="v-product-review-template">
         <div>
             <!-- Write Review Section -->
-            <div class="w-full">
+            <div class="w-full" v-if="canReview">
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -15,17 +15,19 @@
                         class="rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
                     >
-                        <div class="flex w-full">
-                            <label
-                                for="dropzone-file"
-                                class="flex flex-col w-[286px] h-[286px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100 "
-                            >
-                                <div class="m-0 block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center">
-                                    @lang('shop::app.products.add-image')
-                                </div>
-
-                                <input id="dropzone-file" type="file" class="hidden" />
-                            </label>
+                        <div>
+                            <x-shop::form.control-group>
+                                <x-shop::form.control-group.control
+                                    type="image"
+                                    name="title"
+                                    :value="old('title')"
+                                    class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    rules="required"
+                                    :label="trans('shop::app.products.title')"
+                                    :placeholder="trans('shop::app.products.title')"
+                                >
+                                </x-shop::form.control-group.control>
+                            </x-shop::form.control-group>
                         </div>
 
                         <div>
@@ -106,7 +108,7 @@
             </div>
 
             <!-- Review List Section -->
-            {{-- <div>
+            <div v-if="! canReview">
                 <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
                     <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
                         @lang('shop::app.products.customer-review')
@@ -114,8 +116,10 @@
 
                     <div
                         class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px]"
+                        @click="canReview = true"
                     >
                         <span class="icon-pen text-[24px]"></span>
+
                         @lang('shop::app.products.write-a-review')
                     </div>
                 </div>
@@ -123,10 +127,10 @@
                 <div class="flex justify-between items-center gap-[15px] mt-[30px] max-w-[365px] max-sm:flex-wrap">
                     <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
 
-                    <x-shop::products.star-rating star='{{ $avgRatings }}' editable=false></x-shop::products.star-rating>
+                    <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
 
                     <p class="text-[12px] text-[#858585]">
-                        ({{ count($product->reviews) }} @lang('shop::app.products.customer-review'))
+                        (@{{ meta.total }} @lang('shop::app.products.customer-review'))
                     </p>
                 </div>
 
@@ -144,7 +148,6 @@
                 </div>
 
                 <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
-
                     <!-- Single card review -->
                     <div
                         v-for='review in reviews'
@@ -161,20 +164,27 @@
 
                         <div>
                             <div class="flex justify-between">
-                                <p class="text-[20px] font-medium max-sm:text-[16px]">
-                                    @{{ review.name }}
+                                <p
+                                    class="text-[20px] font-medium max-sm:text-[16px]"
+                                    v-text="review.name"
+                                >
                                 </p>
 
                                 <div class="flex items-center">
-                                    <x-shop::products.star-rating :star="'review.name'" editable=false></x-shop::products.star-rating>
+                                    <x-shop::products.star-rating ::name="review.name" ::value="review.rating"></x-shop::products.star-rating>
                                 </div>
                             </div>
-                            <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]">
-                                @{{ review.created_at }}
+
+                            <p
+                                class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]"
+                                v-text="review.created_at"
+                            >
                             </p>
 
-                            <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]">
-                                @{{ review.comment }}
+                            <p
+                                class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"
+                                v-text="review.comment"
+                            >
                             </p>
 
                             <div class="flex justify-between items-center mt-[20px] flex-wrap gap-[10px]">
@@ -185,28 +195,29 @@
 
                                     <div class="flex gap-[8px] text-[#7D7D7D]">
                                         <span class="icon-like text-[24px] text-[#D1D1D1]"></span>
-                                        0
+
+                                        <span>0</span>
                                     </div>
 
                                     <div class="flex gap-[8px] text-[#7D7D7D]">
                                         <span class="icon-dislike text-[24px] text-[#D1D1D1]"></span>
-                                        0
+
+                                        <span>0</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Single card review -->
                 </div>
 
                 <button
                     class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
-                    @click='getReviews()'
-                    v-if='reviews.length < {{ $product->reviews->count() }}'
+                    v-if="links?.next"
+                    @click="get()"
                 >
                     @lang('shop::app.products.load-more')
                 </button>
-            </div> --}}
+            </div>
         </div>
     </script>
 
@@ -218,36 +229,43 @@
 
             data() {
                 return {
-                    canWriteReview: false,
+                    canReview: false,
 
                     reviews: [],
+
+                    links: {
+                        next: '{{ route("shop.products.reviews.index", $product->id) }}',
+                    },
+
+                    meta: {},
                 }
             },
 
-            mounted() {},
+            mounted() {
+                this.get();
+            },
 
             methods: {
                 get() {
-                    this.$axios.get('{{ route("shop.products.reviews.index", $product->id) }}' + '?page=' + this.page).then(response => {
-                        this.page++;
-                        if (this.reviews.length > 0) {
-                            this.reviews = this.reviews.concat(response.data.data);
-                        } else {
-                            this.reviews = response.data.data;
-                        }
-                    }).catch(error => {});
+                    if (this.links?.next) {
+                        this.$axios.get(this.links.next)
+                            .then(response => {
+                                this.reviews = [...this.reviews, ...response.data.data];
+
+                                this.links = response.data.links;
+
+                                this.meta = response.data.meta;
+                            })
+                            .catch(error => {});
+                    }
                 },
 
                 store(params) {
-                    console.log(params);
-
-                    // this.$axios.post('{{ route("shop.products.reviews.store", $product->id) }}', {
-                    //     'comment': this.$refs.review.comment.value,
-                    //     'rating' : this.$refs.review.star_rating.value,
-                    //     'title'  : this.$refs.review.title.value,
-                    // }).then(response => {
-                    //     if (response.status == 200) alert(response.data.message); this.$refs.review.reset();
-                    // }).catch(error => { alert('Something went wrong')});
+                    this.$axios.post('{{ route("shop.products.reviews.store", $product->id) }}', params)
+                        .then(response => {
+                            alert(response.data.data.message);
+                        })
+                        .catch(error => {});
                 },
             }
         });
