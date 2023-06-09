@@ -79,7 +79,7 @@
                                 @lang('shop::app.products.add-to-cart')
                             </button>
                         </div>
-                        
+
                         <button
                             class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
                             @click='addToCart("buy_now")'
@@ -194,20 +194,8 @@
 
                 data() {
                     return {
-                        writeReview: false,
-
-                        reviewList: false,
-
                         qty: 1,
-
-                        reviews: {},
-
-                        page: 1
                     }
-                },
-
-                mounted() {
-                    this.getReviews()
                 },
 
                 methods: {
@@ -235,33 +223,11 @@
                         }).catch(error => {});
                     },
 
-                    addToReview() {
-                        this.$axios.post('{{ route("shop.products.reviews.store", $product->id) }}', {
-                            'comment': this.$refs.review.comment.value,
-                            'rating' : this.$refs.review.star_rating.value,
-                            'title'  : this.$refs.review.title.value,
-                        }).then(response => {
-                            if (response.status == 200) alert(response.data.message); this.$refs.review.reset();
-                        }).catch(error => { alert('Something went wrong')});
-                    },
-
                     updateItem(quantity) {
                         this.qty = quantity;
                     },
-
-                    getReviews() {
-                        this.$axios.get('{{ route("shop.products.reviews.index", $product->id) }}' + '?page=' + this.page).then(response => {
-                            this.page++;
-                            if (this.reviews.length > 0) {
-                                this.reviews = this.reviews.concat(response.data.data);
-                            } else {
-                                this.reviews = response.data.data;
-                            }
-                        }).catch(error => {});
-                    }
                 }
             })
         </script>
-
     @endPushOnce
 </x-shop::layouts>
