@@ -163,10 +163,10 @@ class ProductImage
     private function getFallbackImageUrls(): array
     {
         return [
-            'small_image_url'    => bagisto_asset('images/small-product-placeholder.svg'),
-            'medium_image_url'   => bagisto_asset('images/medium-product-placeholder.svg'),
-            'large_image_url'    => bagisto_asset('images/large-product-placeholder.svg'),
-            'original_image_url' => bagisto_asset('images/large-product-placeholder.svg'),
+            'small_image_url'    => bagisto_asset('images/small-product-placeholder.png'),
+            'medium_image_url'   => bagisto_asset('images/medium-product-placeholder.png'),
+            'large_image_url'    => bagisto_asset('images/large-product-placeholder.png'),
+            'original_image_url' => bagisto_asset('images/large-product-placeholder.png'),
         ];
     }
 
