@@ -70,7 +70,10 @@
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
                                 
-                                @include('shop::products.view.quantity-changer')
+                                <x-shop::quantity-changer
+                                    class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                >
+                                </x-shop::quantity-changer>
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
                                 
@@ -397,6 +400,7 @@
                             'quantity': this.qty,
                             'product_id': this.productId,
                         };
+                        console.log(params);
 
                         this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
                             alert(response.data.data.message);
@@ -426,8 +430,8 @@
                         }).catch(error => { alert('Something went wrong')});
                     },
 
-                    updateQty(qty) {
-                        this.qty = qty;
+                    updateItem({ quantity }) {
+                        this.qty = quantity;
                     },
 
                     getReviews() {

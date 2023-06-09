@@ -43,12 +43,13 @@
                             </div>
     
                             <div class="flex gap-[20px] items-center flex-wrap">
-                                <v-quantity-changer 
-                                    :default-quantity="item.quantity" 
-                                    @change="updateItem(item.id, $event)"
+
+                                <x-shop::quantity-changer
+                                    class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
+                                    :cart-item="'item'"
                                 >
-                                </v-quantity-changer>
-    
+                                </x-shop::quantity-changer>
+
                                 <button 
                                     type="button" 
                                     @click="removeItem(item.id)"
@@ -126,10 +127,10 @@
                         .catch(error => {});
                 },
 
-                updateItem(itemId, $event) {
+                updateItem({id, quantity}) {
                     let qty = {};
 
-                    qty[itemId] = $event;
+                    qty[id] = quantity;
 
                     this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
                         .then(response => {
@@ -147,56 +148,6 @@
                             this.cart = response.data.data.cart;
                         })
                         .catch(error => {});
-                },
-            }
-        });
-    </script>
-@endpushOnce
-
-@pushOnce('scripts')
-    <script type="text/x-template" id="v-quantity-changer-template">
-        <div class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]">
-            <span 
-                class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"
-                @click="increase"
-            >
-            </span>
-            
-            <p v-text="quantity"></p>
-
-            <span 
-                class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px] cursor-pointer" 
-                @click="decrease"
-            >
-            </span>
-        </div>
-    </script>
-
-    <script type="module">
-        app.component("v-quantity-changer", {
-            template: '#v-quantity-changer-template',
-
-            props:[
-                'defaultQuantity',
-            ],
-
-            data() {
-                return  {
-                    quantity: this.defaultQuantity ?? 0,
-                }
-            },
-
-            methods: {
-                increase() {
-                    this.quantity += 1;
-
-                    this.$emit('change', this.quantity);
-                },
-
-                decrease() {
-                    if (this.quantity > 1) this.quantity -= 1;
-
-                    this.$emit('change', this.quantity);
                 },
             }
         });
