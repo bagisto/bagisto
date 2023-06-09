@@ -34,14 +34,6 @@
                         <div class="grid gap-y-[10px]" >
                             <p class="text-[16px] font-medium" v-text="item.name"></p>
     
-                            <div class="flex gap-x-[10px] gap-y-[6px] flex-wrap">
-                                <p class="text-[14px]">
-                                    @lang('shop::app.checkout.cart.item.quantity')
-
-                                    @{{ item.quantity }}
-                                </p>
-                            </div>
-    
                             <div class="flex gap-[20px] items-center flex-wrap">
                                 <v-quantity-changer 
                                     :default-quantity="item.quantity" 
@@ -50,7 +42,8 @@
                                 </v-quantity-changer>
     
                                 <button 
-                                    type="button" 
+                                    type="button"
+                                    class="text-[#4D7EA8]"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.remove')
