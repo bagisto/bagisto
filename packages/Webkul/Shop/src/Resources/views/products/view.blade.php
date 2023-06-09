@@ -71,8 +71,9 @@
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
                                 
                                 <x-shop::quantity-changer
+                                    name="quantity"
+                                    value="1"
                                     class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
-                                    ::default-quantity="1"
                                     @change="updateItem($event)"
                                 >
                                 </x-shop::quantity-changer>

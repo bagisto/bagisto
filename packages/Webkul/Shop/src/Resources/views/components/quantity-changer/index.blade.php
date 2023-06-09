@@ -1,8 +1,12 @@
-@props(['defaultQuantity' => 1])
+@props([
+    'name'  => '',
+    'value' => 1
+])
 
 <v-quantity-changer
     {{ $attributes }}
-    :default-quantity="{{ $defaultQuantity }}"
+    name="{{ $name }}"
+    value="{{ $value }}"
 >
 </v-quantity-changer>
 
@@ -24,6 +28,13 @@
                 @click="increase"
             >
             </span>
+
+            <v-field
+                type="hidden"
+                :name="name"
+                v-model="quantity"
+                {{ $attributes }}
+            ></v-field>
         </div>
     </script>
 
@@ -31,11 +42,11 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['defaultQuantity'],
+            props:['name', 'value'],
 
             data() {
                 return  {
-                    quantity: this.defaultQuantity,
+                    quantity: this.value,
                 }
             },
 
