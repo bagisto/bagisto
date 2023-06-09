@@ -87,9 +87,10 @@
                             @lang('shop::app.checkout.cart.subtotal')
                         </p>
         
-                        <p class="text-[30px] font-semibold">
-                            {{-- Need to add formatted grand total. --}}
-                            @{{ cart?.grand_total }}
+                        <p 
+                            class="text-[30px] font-semibold"
+                            v-text="cart.formatted_grand_total"
+                        >
                         </p>
                     </div>
         
@@ -121,7 +122,7 @@
                 getCart() {
                     this.$axios.get('{{ route('shop.checkout.cart.index') }}')
                         .then(response => {
-                            this.cart = response.data.data.cart;
+                            this.cart = response.data.data;
                         })
                         .catch(error => {});
                 },
@@ -133,7 +134,7 @@
 
                     this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
                         .then(response => {
-                            this.cart = response.data.data.cart;
+                            this.cart = response.data.data;
                         })
                         .catch(error => {});
                 },
@@ -144,7 +145,7 @@
                             'cart_item_id': itemId,
                         })
                         .then(response => {
-                            this.cart = response.data.data.cart;
+                            this.cart = response.data.data;
                         })
                         .catch(error => {});
                 },

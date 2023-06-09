@@ -113,7 +113,7 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            alert(response.data.data.message);
+                            alert(response.data.message);
                         })
                         .catch(error => {});
                 },
