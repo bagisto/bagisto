@@ -59,13 +59,19 @@
                         {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
 
                         <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
+
+                            {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+
                             <x-shop::quantity-changer
+                                name="quantity"
+                                value="1"
                                 class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
-                                ::default-quantity="1"
                                 @change="updateItem($event)"
                             >
                             </x-shop::quantity-changer>
-                            
+
+                            {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
                             <button
                                 class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
                                 @click='addToCart("")'
@@ -73,7 +79,7 @@
                                 @lang('shop::app.products.add-to-cart')
                             </button>
                         </div>
-
+                        
                         <button
                             class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
                             @click='addToCart("buy_now")'
