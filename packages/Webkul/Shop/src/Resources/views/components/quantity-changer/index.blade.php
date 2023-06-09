@@ -3,7 +3,8 @@
 <v-quantity-changer
     {{ $attributes }}
     :default-quantity="{{ $defaultQuantity }}"
-></v-quantity-changer>
+>
+</v-quantity-changer>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-quantity-changer-template">
@@ -23,7 +24,6 @@
                 @click="increase"
             >
             </span>
-            
         </div>
     </script>
 
