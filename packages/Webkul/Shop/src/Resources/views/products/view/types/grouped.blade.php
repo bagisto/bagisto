@@ -17,6 +17,7 @@
                             </div>
 
                             <x-shop::quantity-changer
+                                :control-name="'qty[{{$groupedProduct->associated_product_id}}]'"
                                 class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
                                 :default-quantity="$groupedProduct->qty"
                                 @change="updateItem($event, '{{ $groupedProduct->associated_product->id }}')"

@@ -14,6 +14,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         Route::post('coupon', 'storeCoupon')->name('shop.checkout.cart.coupon.apply');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.checkout.cart.coupon.remove');
+
+        Route::post('checkout/cart/add/{id}', [CartController::class, 'add'])->name('shop.cart.add');
     });
 
     /**
