@@ -6,7 +6,7 @@ use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
-use Webkul\Shop\Http\Controllers\Customer\WishlistController;
+use Webkul\Shop\Http\Controllers\API\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
-        Route::get('', 'index')->name('shop.checkout.cart.index');
+        Route::get('', 'index')->name('shop.checkout.cart');
 
         Route::post('', 'store')->name('shop.checkout.cart.store');
 
@@ -46,9 +46,18 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::delete('', 'destroy')->name('shop.checkout.cart.destroy');
     });
 
+    Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customers.wishlist.index');
+    
+    Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])->name('shop.customers.account.wishlist.store');
+
+    Route::post('wishlist/{id}/move-to-cart', [WishlistController::class, 'moveToCart'])->name('shop.customers.account.wishlist.move_to_cart');
+            
+    Route::delete('wishlist/mass-destroy', [WishlistController::class, 'massDestroy'])->name('shop.customers.account.wishlist.mass_destroy');
+
+    Route::delete('wishlist', [WishlistController::class, 'destroy'])->name('shop.customers.account.wishlist.destroy');
+
+
     Route::group(['middleware' => ['customer']], function () {
-        Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])
-            ->name('shop.customers.account.wishlist.store');
 
         Route::get('compare-items/{product_id}', [CompareController::class, 'store'])
             ->name('shop.customers.account.compare.store');

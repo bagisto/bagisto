@@ -56,7 +56,18 @@
                             {!! $product->short_description !!}
                         </p>
 
+<<<<<<< Updated upstream
                         {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
+=======
+                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+                                
+                                <x-shop::quantity-changer
+                                    class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                    ::default-quantity="1"
+                                    @change="updateItem($event)"
+                                >
+                                </x-shop::quantity-changer>
+>>>>>>> Stashed changes
 
                         <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
 
@@ -223,6 +234,19 @@
                         }).catch(error => {});
                     },
 
+<<<<<<< Updated upstream
+=======
+                    addToReview() {
+                        this.$axios.post('{{ route("shop.products.reviews.store", $product->id) }}', {
+                            'comment': this.$refs.review.comment.value,
+                            'rating' : this.$refs.review.star_rating.value,
+                            'title'  : this.$refs.review.title.value,
+                        }).then(response => {
+                            if (response.status == 200) alert(response.data.message); this.$refs.review.reset();
+                        }).catch(error => { alert('Something went wrong')});
+                    },
+
+>>>>>>> Stashed changes
                     updateItem(quantity) {
                         this.qty = quantity;
                     },

@@ -1,14 +1,13 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\Customer;
+namespace Webkul\Shop\Http\Controllers\API;
 
-use Cart;
-use Webkul\Customer\Repositories\CustomerRepository;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Http\Resources\WishlistResource;
 
-class WishlistController extends Controller
+class WishlistController extends APIController
 {
     /**
      * Create a new controller instance.
@@ -28,9 +27,27 @@ class WishlistController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): JsonResource
     {    
-        return view('shop::customers.account.wishlist.index');
+        $customer = auth()->guard('customer')->user();
+        
+        if (! core()->getConfigData('general.content.shop.wishlist_option')) {
+            abort(404);
+            
+        }
+
+        $deletedItemsCount = $this->removeInactiveItems();
+
+        if ($deletedItemsCount) {
+            session()->flash('info', trans('shop::app.customers.account.wishlist.product-removed'));
+        }
+    
+        $items = $this->wishlistRepository->where([
+            'channel_id'  => core()->getCurrentChannel()->id,
+            'customer_id' => auth()->guard('customer')->user()->id,
+        ])->get();
+
+        return WishlistResource::collection($items);
     }
 
     /**
@@ -63,7 +80,7 @@ class WishlistController extends Controller
     public function store($productId)
     {
         $customer = auth()->guard('customer')->user();
-
+        
         $product = $this->productRepository->find($productId);
 
         if (! $product) {
@@ -101,10 +118,12 @@ class WishlistController extends Controller
             $wishlist = $this->wishlistRepository->create($data);
 
             return response()->json([
+                'data'     => $wishlist,
                 'message'  => trans('customer::app.wishlist.success')
             ]);
 
         } else {
+
             $this->wishlistRepository->findOneWhere([
                 'product_id' => $data['product_id'],
             ])->delete();
@@ -121,26 +140,22 @@ class WishlistController extends Controller
      * @param  int  $itemId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($itemId)
+    public function destroy()
     {
-        $customer = auth()->guard('customer')->user();
+        $itemId = request()->input('product_id');
 
-        $customerWishlistItems = $customer->wishlist_items;
-        $referer = strtok(request()->headers->get('referer'), '?');
+        if ($itemId) {
+            $data = $this->wishlistRepository->deleteWhere([
+                'product_id' => $itemId,
+            ]);
 
-        foreach ($customerWishlistItems as $customerWishlistItem) {
-            if ($itemId == $customerWishlistItem->id) {
-                $this->wishlistRepository->delete($itemId);
+            $items = $this->wishlistRepository->get();
 
-                session()->flash('success', trans('shop::app.customers.account.wishlist.removed'));
-
-                return redirect()->to($referer);
-            }
+            return new JsonResource([
+                'data'    => WishlistResource::collection($items),
+                'message' => trans('shop::app.customers.account.wishlist.removed'),
+            ]);
         }
-
-        session()->flash('error', trans('shop::app.customers.account.wishlist.remove-fail'));
-
-        return redirect()->back();
     }
 
     /**
