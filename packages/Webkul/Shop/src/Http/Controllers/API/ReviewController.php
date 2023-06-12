@@ -40,15 +40,15 @@ class ReviewController extends APIController
     public function store($id): JsonResource
     {
         $this->validate(request(), [
+            'title'   => 'required',
             'comment' => 'required',
             'rating'  => 'required|numeric|min:1|max:5',
-            'title'   => 'required',
         ]);
 
         $data = [
+            'title'      => request()->input('title'),
             'comment'    => request()->input('comment'),
             'rating'     => request()->input('rating'),
-            'title'      => request()->input('title'),
             'status'     => 'pending',
             'product_id' => $id,
         ];
