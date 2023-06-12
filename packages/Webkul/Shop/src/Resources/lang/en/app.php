@@ -309,8 +309,8 @@ return [
         'related-product-title'  => 'Related Products',
         'up-sell-title'          => 'Upsell Products',
         'new'                    => 'New',
-        'as-low-as'              => 'As Low As',
-        'starting-at'            => 'Starting At',
+        'as-low-as'              => 'As low as',
+        'starting-at'            => 'Starting at',
         'name'                   => 'Name',
         'qty'                    => 'Qty',
         'sort-by'                => [
