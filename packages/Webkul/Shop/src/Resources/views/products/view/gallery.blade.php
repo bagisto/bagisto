@@ -51,9 +51,9 @@
 
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
             <img 
-                v-for='image in mediaContents.images'
-                class="min-w-[450px] max-sm:min-w-full" 
-                :src="image.large_image_url" 
+                :src="image.large_image_url"
+                class="min-w-[450px] max-sm:min-w-full"
+                v-for="image in mediaContents.images"
             >
         </div>
     </script>
