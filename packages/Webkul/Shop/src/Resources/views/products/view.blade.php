@@ -14,109 +14,139 @@
 
     <v-product :product-id="{{ $product->id }}">
         <div>
-            <div class="container px-[60px] max-1180:px-[0px]">
-                <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
-                    @include('shop::products.view.gallery')
+            <form action="{{ route('shop.cart.add', $product->id) }}" method="POST">
+                @csrf
 
-                    {{-- Product Details --}}
-                    <div class="max-w-[590px] relative max-1180:px-[20px]">
-                        <div class="flex justify-between gap-[15px]">
-                            <h1 class="text-[30px] font-medium max-sm:text-[20px]">
-                                {{ $product->name }}
-                            </h1>
+                <input 
+                    type="hidden" 
+                    name="product_id" 
+                    value="{{ $product->id }}"
+                >
+                
+                <input 
+                    type="hidden" 
+                    name="quantity" 
+                    :value="qty"
+                >
 
-                            <div
-                                class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]  max-1180:absolute max-1180:-top-[82px] max-1180:right-[12px] max-1180:border-0"
-                                @click='addToWishlist()'
-                            >
-                            </div>
-                        </div>
+                <div class="container px-[60px] max-1180:px-[0px]">
+                    <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                        @include('shop::products.view.gallery')
 
-                        <div class='flex items-center'>
-                            <x-shop::products.star-rating star='{{ $avgRatings }}' :is-editable=false></x-shop::products.star-rating>
+                        {{-- Product Details --}}
+                        <div class="max-w-[590px] relative max-1180:px-[20px]">
+                            <div class="flex justify-between gap-[15px]">
+                                <h1 class="text-[30px] font-medium max-sm:text-[20px]">
+                                    {{ $product->name }}
+                                </h1>
 
-                            <div class="flex gap-[15px] items-center">
-                                <p class="text-[#7D7D7D] text-[14px]">({{ count($product->reviews) }} reviews)</p>
-                            </div>
-                        </div>
-
-                        {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
-
-                        @include ('shop::products.view.stock', ['product' => $product])
-
-                        <p class="text-[24px] flex items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
-                            {!! $product->getTypeInstance()->getPriceHtml() !!}
-                        </p>
-
-                        {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
-
-                        {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
-
-                        <p class="text-[18px] text-[#7D7D7D] mt-[25px] max-sm:text-[14px] max-sm:mt-[15px]">
-                            {!! $product->short_description !!}
-                        </p>
-
-                        {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
-
-                        <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
-
-                            {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
-
-                            <x-shop::quantity-changer
-                                name="quantity"
-                                value="1"
-                                class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
-                                @change="updateItem($event)"
-                            >
-                            </x-shop::quantity-changer>
-
-                            {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
-
-                            <button
-                                class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
-                                @click='addToCart("")'
-                            >
-                                @lang('shop::app.products.add-to-cart')
-                            </button>
-                        </div>
-
-                        <button
-                            class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
-                            @click='addToCart("buy_now")'
-                            {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
-                        >
-                            @lang('shop::app.products.buy-now')
-                        </button>
-
-                        <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
-                            <div
-                                class=" flex justify-center items-center gap-[10px] cursor-pointer"
-                                @click='addToCompare()'
-                            >
-                                <span class="icon-compare text-[24px]"></span>
-                                @lang('shop::app.products.compare')
-                            </div>
-
-                            <div class="flex gap-[25px] max-sm:flex-wrap">
-                                <div class=" flex justify-center items-center gap-[10px] cursor-pointer"><span
-                                        class="icon-share text-[24px]"></span>Share</div>
-                                <div class="flex gap-[15px]">
-                                    <a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                        aria-label="Facebook"></a>
-                                    <a href="" class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                        aria-label="Twitter"></a>
-                                    <a href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                        aria-label="Pintrest"></a>
-                                    <a href="" class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                        aria-label="Linkdln"></a>
+                                <div
+                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]  max-1180:absolute max-1180:-top-[82px] max-1180:right-[12px] max-1180:border-0"
+                                    @click='addToWishlist()'
+                                >
                                 </div>
                             </div>
 
-                            {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                            <div class='flex items-center'>
+                                <x-shop::products.star-rating star='{{ $avgRatings }}' :is-editable=false></x-shop::products.star-rating>
+
+                                <div class="flex gap-[15px] items-center">
+                                    <p class="text-[#7D7D7D] text-[14px]">({{ count($product->reviews) }} reviews)</p>
+                                </div>
+                            </div>
+
+                            {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
+
+                            @include ('shop::products.view.stock', ['product' => $product])
+
+                            <p class="text-[24px] flex items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                                {!! $product->getTypeInstance()->getPriceHtml() !!}
+                            </p>
+
+                            {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
+
+                            {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
+
+                            <p class="text-[18px] text-[#7D7D7D] mt-[25px] max-sm:text-[14px] max-sm:mt-[15px]">
+                                {!! $product->short_description !!}
+                            </p>
+
+                            {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
+
+                            @include('shop::products.view.types.configurable')
+
+                            @include('shop::products.view.types.grouped')
+
+                            <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
+
+                                {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
+
+                                @if ($product->type != 'grouped')
+                                    <x-shop::quantity-changer
+                                        name="quantity"
+                                        value="1"
+                                        class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                        @change="updateItem($event)"
+                                    >
+                                    </x-shop::quantity-changer>
+
+                                    <button
+                                        type="submit"
+                                        class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                    >
+                                        @lang('shop::app.products.add-to-cart')
+                                    </button>
+                                @else
+                                    <button
+                                        class="rounded-[12px] border text-navyBlue border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
+                                        type="submit"
+                                    >
+                                        @lang('shop::app.products.add-to-cart')
+                                    </button>
+                                @endif
+
+                                {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+                            </div>
+
+                            <button
+                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
+                                @click='addToCart("buy_now")'
+                                {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
+                            >
+                                @lang('shop::app.products.buy-now')
+                            </button>
+
+                            <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
+                                <div
+                                    class=" flex justify-center items-center gap-[10px] cursor-pointer"
+                                    @click='addToCompare()'
+                                >
+                                    <span class="icon-compare text-[24px]"></span>
+                                    @lang('shop::app.products.compare')
+                                </div>
+
+                                <div class="flex gap-[25px] max-sm:flex-wrap">
+                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer"><span
+                                            class="icon-share text-[24px]"></span>Share</div>
+                                    <div class="flex gap-[15px]">
+                                        <a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Facebook"></a>
+                                        <a href="" class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Twitter"></a>
+                                        <a href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Pintrest"></a>
+                                        <a href="" class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
+                                            aria-label="Linkdln"></a>
+                                    </div>
+                                </div>
+                                <!-- Review List Section -->
+
+                                {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
             {{-- Tab Section --}}
             <x-shop::tabs position="center">
@@ -199,35 +229,40 @@
                 },
 
                 methods: {
-                    addToCart(buyNow) {
-                        const params = {
-                            'quantity': this.qty,
-                            'product_id': this.productId,
-                        };
-
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
-                            alert(response.data.message);
-                            if (buyNow); //Redirect to Cart Page
-                        }).catch(error => {});
-                    },
-
-                    addToWishlist() {
-                        this.$axios.post('{{ route("shop.customers.account.wishlist.store", $product->id) }}').then(response => {
-                            alert(response.data.message);
-                        }).catch(error => {});
-                    },
-
-                    addToCompare() {
-                        this.$axios.get('{{ route("shop.customers.account.compare.store", $product->id) }}').then(response => {
-                            alert(response.data.message);
-                        }).catch(error => {});
-                    },
-
                     updateItem(quantity) {
                         this.qty = quantity;
                     },
-                }
-            })
+
+                    addToCart(buyNow) {
+                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
+                                product_id: this.productId,
+                                quantity: this.qty,
+                            })
+                            .then(response => {
+                                if (response.data.message) {
+                                    alert(response.data.message);
+                                }
+                            })
+                            .catch(error => {});
+                    },
+
+                    addToWishlist() {
+                        this.$axios.post('{{ route("shop.customers.account.wishlist.store", $product->id) }}')
+                            .then(response => {
+                                alert(response.data.message);
+                            })
+                            .catch(error => {});
+                    },
+
+                    addToCompare() {
+                        this.$axios.get('{{ route("shop.customers.account.compare.store", $product->id) }}')
+                            .then(response => {
+                                alert(response.data.message);
+                            })
+                            .catch(error => {});
+                    },
+                },
+            });
         </script>
     @endPushOnce
 </x-shop::layouts>

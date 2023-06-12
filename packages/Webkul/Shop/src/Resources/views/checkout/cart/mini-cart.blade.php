@@ -50,7 +50,7 @@
                             <div class="flex gap-[20px] items-center flex-wrap">
                                 <x-shop::quantity-changer
                                     name="quantity"
-                                    ::value="'item.quantity'"
+                                    ::value="item.quantity"
                                     class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
                                     @change="updateItem($event, item)"
                                 >
