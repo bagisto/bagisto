@@ -1,4 +1,4 @@
-<v-gallery></v-gallery>
+<v-gallery ref="gallery"></v-gallery>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-gallery-template">
@@ -51,11 +51,9 @@
 
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
             <img 
+                v-for='image in mediaContents.images'
                 class="min-w-[450px] max-sm:min-w-full" 
-                v-for='mediaContent in mediaContents' 
-                :src="mediaContent.path" 
-                alt="" 
-                title=""
+                :src="image.large_image_url" 
             >
         </div>
     </script>
