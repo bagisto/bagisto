@@ -55,7 +55,6 @@
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
-                                
 
                                 <button 
                                     type="button"
