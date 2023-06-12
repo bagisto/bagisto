@@ -10,7 +10,7 @@
         <script type="text/x-template" id="v-bundle-option-list-template">
             <div class="bundle-options-wrapper">
                 <div class="bundle-option-list">
-                    <h3>{{ __('shop::app.products.customize-options') }}</h3>
+                    <h3>@lang('Customize Options')</h3>
 
                     <bundle-option-item
                         v-for="(option, index) in options"
@@ -22,15 +22,21 @@
                 </div>
 
                 <div class="bundle-summary">
-                    <h3>{{ __('shop::app.products.your-customization') }}</h3>
+                    <h3>@lang('Your Customization')</h3>
 
-                    <quantity-changer></quantity-changer>
+                    <x-shop::quantity-changer   
+                        name="quantity"
+                        value="1"
+                        class="gap-x-[16px] w-max rounded-[12px] py-[10px] px-[17px]"
+                        @change="updateItem($event, item)"
+                    >
+                    </x-shop::quantity-changer>
 
                     <div class="control-group">
                         <label>{{ __('shop::app.products.total-amount') }}</label>
 
                         <div class="bundle-price">
-                            @{{ formatted_total_price | currency(currency_options) }}
+                            {{-- @{{ formatted_total_price | currency(currency_options) }} --}}
                         </div>
                     </div>
 
@@ -39,7 +45,11 @@
                             @{{ option.label }}
 
                             <div class="selected-products">
-                                <div v-for="(product, index1) in option.products" v-if="product.is_default">
+                                <div 
+                                    v-for="(product, index1) in option.products"
+                                    :key="product.id" 
+                                    :if="product.is_default"
+                                >
                                     @{{ product.qty + ' x ' + product.name }}
                                 </div>
                             </div>
@@ -55,10 +65,16 @@
                     <label :class="[option.is_required ? 'required' : '']">@{{ option.label }}</label>
 
                     <div v-if="option.type == 'select'">
-                        <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="option.label + '&quot;'">
+                        <select 
+                            class="control" 
+                            :name="'bundle_options[' + option.id + '][]'" 
+                            v-model="selected_product" 
+                        >
                             <option value="">{{ __('shop::app.products.choose-selection') }}</option>
-                            <option v-for="(product, index2) in option.products" :value="product.id">
-                                @{{ product.name + ' + ' + product.price.final_price.formatted_price }}
+                            <option 
+                                v-for="(product, index2) in option.products" :value="product.id"
+                            >
+                                @{{ product.name + ' + ' }}
                             </option>
                         </select>
                     </div>
@@ -78,9 +94,27 @@
                             @{{ product.name }}
 
                             <span class="price">
-                                + @{{ product.price.final_price.formatted_price }}
+                                {{-- + @{{ product.price.final_price.formatted_price }} --}}
+                                formatted price
                             </span>
                         </span>
+
+
+                        <div class="grid gap-[10px]" v-if="! option.is_required">
+                            <div class="select-none flex gap-x-[15px]">
+                                <input 
+                                    type="radio"
+                                    id="radio-check" value="" 
+                                    name="shipping" class="hidden peer">
+                                <span class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"></span>
+                                <label for="radio-check" class=""> Flat Wooden Chess Board for kids $118.00</label>
+                            </div>
+                            <div class="select-none flex gap-x-[15px]">
+                                <input type="radio" id="radio-check1" value="" name="shipping" class="hidden peer">
+                                <span class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"></span>
+                                <label for="radio-check1" class=""> Flat Wooden Chess Board for kids $118.00</label>
+                            </div>
+                        </div>
                     </div>
 
                     <div v-if="option.type == 'checkbox'">
@@ -91,7 +125,8 @@
                             @{{ product.name }}
 
                             <span class="price">
-                                + @{{ product.price.final_price.formatted_price }}
+                                {{-- + @{{ product.price.final_price.formatted_price }} --}}
+                                formatted price
                             </span>
                         </span>
                     </div>
@@ -100,14 +135,11 @@
                         <select class="control" :name="'bundle_options[' + option.id + '][]'" v-model="selected_product" v-validate="option.is_required ? 'required' : ''" :data-vv-as="'&quot;' + option.label + '&quot;'" multiple>
                             <option value="0" v-if="! option.is_required">{{ __('shop::app.products.none') }}</option>
                             <option v-for="(product, index2) in option.products" :value="product.id">
-                                @{{ product.name + ' + ' + product.price.final_price.formatted_price }}
+                                {{-- @{{ product.name + ' + ' + product.price.final_price.formatted_price }} --}}
+                                formatter price
                             </option>
                         </select>
                     </div>
-
-                    <span class="control-error" v-if="errors.has('bundle_options[' + option.id + '][]')">
-                        @{{ errors.first('bundle_options[' + option.id + '][]') }}
-                    </span>
                 </div>
 
                 <div v-if="option.type == 'select' || option.type == 'radio'">
@@ -174,8 +206,6 @@
                 template: '#bundle-option-item-template',
 
                 props: ['index', 'option'],
-
-                inject: ['$validator'],
 
                 data: function() {
                     return {
