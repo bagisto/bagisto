@@ -4,11 +4,10 @@
 ])
 
 @switch($type)
+    @case('hidden')
     @case('text')
     @case('email')
     @case('password')
-    @case('hidden')
-    @case('textarea')
         <v-field
             type="{{ $type }}"
             name="{{ $name }}"
@@ -24,12 +23,28 @@
 
         @break
 
+    @case('textarea')
+        <v-field
+            type="{{ $type }}"
+            name="{{ $name }}"
+            v-slot="{ field }"
+            {{ $attributes }}
+        >
+            <textarea
+                v-bind="field"
+                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                {{ $attributes->except(['value'])->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+            >
+            </textarea>
+        </v-field>
+
+        @break
+
     @case('checkbox')
         <span class="">
             <input
                 type="checkbox"
                 name="{{ $name }}"
-                {{ $attributes->merge(['class' => '']) }}
                 {{ $attributes }}
             >
 
@@ -43,7 +58,6 @@
             <input
                 type="radio"
                 name="{{ $name }}"
-                {{ $attributes->merge(['class' => '']) }}
                 {{ $attributes }}
             >
 
@@ -69,23 +83,24 @@
 
         @break
 
-    {{--
-        This type is currently in the development phase, and I will update
-        it accordingly.
-    --}}
     @case('image')
-        <div class="flex items-center w-full gap-[30px]">
-            <div class="w-[200px] h-[200px] rounded-[12px] cursor-pointer bg-[#F5F5F5]">
-                <img class="" src="../images/user-placeholder.png" title="" alt="">
-            </div>
+        <div class="flex w-full">
+            <label class="flex flex-col w-[286px] h-[286px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100">
+                <div class="m-0 block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center">
+                    @lang('shop::app.products.add-image')
+                </div>
 
-            <label
-                for="dropzone-file"
-                class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-            >
-                Add Image <input id="dropzone-file" type="file" class="hidden">
+                <input
+                    type="file"
+                    class="hidden"
+                />
             </label>
         </div>
 
         @break
+
+    @case('custom')
+        <v-field {{ $attributes }}>
+            {{ $slot }}
+        </v-field>
 @endswitch

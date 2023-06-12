@@ -1,5 +1,4 @@
 <div
-    {{ $attributes->merge(['class' => '']) }}
     {{ $attributes }}
 >
     {{ $slot }}
