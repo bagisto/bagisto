@@ -2,12 +2,12 @@
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.before', ['product' => $product]) !!}
 
-    <bundle-option-list></bundle-option-list>
+    <v-bundle-option-list></v-bundle-option-list>
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.after', ['product' => $product]) !!}
 
-    @push('scripts')
-        <script type="text/x-template" id="bundle-option-list-template">
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-bundle-option-list-template">
             <div class="bundle-options-wrapper">
                 <div class="bundle-option-list">
                     <h3>{{ __('shop::app.products.customize-options') }}</h3>
@@ -51,7 +51,7 @@
 
         <script type="text/x-template" id="bundle-option-item-template">
             <div class="bundle-option-item">
-                <div class="control-group" :class="[errors.has('bundle_options[' + option.id + '][]') ? 'has-error' : '']">
+                <div class="control-group">
                     <label :class="[option.is_required ? 'required' : '']">@{{ option.label }}</label>
 
                     <div v-if="option.type == 'select'">
@@ -121,12 +121,10 @@
             </div>
         </script>
 
-        <script>
-            Vue.component('bundle-option-list', {
+        <script type="module">
+            app.component('v-bundle-option-list', {
 
-                template: '#bundle-option-list-template',
-
-                inject: ['$validator'],
+                template: '#v-bundle-option-list-template',
 
                 data: function() {
                     return {
@@ -172,7 +170,7 @@
                 }
             });
 
-            Vue.component('bundle-option-item', {
+            app.component('bundle-option-item', {
                 template: '#bundle-option-item-template',
 
                 props: ['index', 'option'],
@@ -232,5 +230,5 @@
                 }
             });
         </script>
-    @endpush
+    @endPushOnce
 @endif

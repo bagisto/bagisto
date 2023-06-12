@@ -71,8 +71,6 @@
                                 
                                 @include('shop::products.view.types.grouped')
 
-                                @include('shop::products.view.types.bundle')
-
                                 {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
                                 
                                 <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
