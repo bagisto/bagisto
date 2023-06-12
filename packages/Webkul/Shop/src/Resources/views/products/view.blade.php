@@ -477,16 +477,6 @@
 
                     updateItem(quantity, id) {
                         this.qty = quantity;
-                        
-                        let productExist = Object.keys(this.productWithQuantity).find(
-                            key => this.productWithQuantity[key] === id
-                        )
-
-                        if (productExist) {
-                            productExist.quantity += 1
-                        } else {
-                            this.productWithQuantity[id] = quantity
-                        }
                     },
 
                     getReviews() {
