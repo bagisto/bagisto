@@ -441,7 +441,6 @@
                         const params = {
                             'product_id': this.productId,
                             'quantity': this.qty,
-                            'qty': this.productWithQuantity
                         };
 
                         this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
