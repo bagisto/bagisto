@@ -424,8 +424,6 @@
 
                         qty: 1,
 
-                        productWithQuantity: {},
-
                         reviews: {},
 
                         page: 1
@@ -438,18 +436,16 @@
 
                 methods: {
                     addToCart(buyNow) {
-                        const params = {
-                            'product_id': this.productId,
-                            'quantity': this.qty,
-                        };
-
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', params).then(response => {
-                            if (response.data.message) {
-                                alert(response.data.message);
-                            }
-
-                            if (buyNow); //Redirect to Cart Page
-                        }).catch(error => {});
+                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
+                                product_id: this.productId,
+                                quantity: this.qty,
+                            })
+                            .then(response => {
+                                if (response.data.message) {
+                                    alert(response.data.message);
+                                }
+                            })
+                            .catch(error => {});
                     },
 
                     addToWishlist() {
