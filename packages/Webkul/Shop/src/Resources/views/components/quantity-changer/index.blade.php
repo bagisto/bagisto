@@ -1,6 +1,6 @@
 @props([
     'name'  => '',
-    'value' => 1
+    'value' => 1,
 ])
 
 <v-quantity-changer
