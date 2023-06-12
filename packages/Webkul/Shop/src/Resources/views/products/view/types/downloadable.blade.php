@@ -41,7 +41,12 @@
                         
                         <span class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"></span>
                         
-                        <label for="{{ $link->id }}" class="ml-1 cursor-pointer">{{ $link->title . ' + ' . core()->currency($link->price) }}</label>
+                        <label
+                            for="{{ $link->id }}"
+                            class="ml-1 cursor-pointer"
+                        >
+                            {{ $link->title . ' + ' . core()->currency($link->price) }}
+                        </label>
 
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
