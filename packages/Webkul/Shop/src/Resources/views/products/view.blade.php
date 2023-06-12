@@ -71,13 +71,18 @@
                                 
                                 @include('shop::products.view.types.grouped')
 
+                                @include('shop::products.view.types.downloadable')
+
                                 {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
                                 
                                 <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
                                     
-                                    @if ($product->type != 'grouped')
+                                    @if (
+                                        $product->type != 'grouped'
+                                        && $product->type != 'downloadable'
+                                    )
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
