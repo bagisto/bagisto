@@ -32,7 +32,9 @@ class CartController extends Controller
     }
 
     /**
-     * Function for guests user to add the product in the cart.
+     * Add the product in the cart.
+     * 
+     * To Do: Need to remove this old methods once all pages are developed.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -147,6 +149,8 @@ class CartController extends Controller
     /**
      * Returns true, if result of adding product to cart
      * is an array and contains a key "warning" or "info".
+     * 
+     * To Do: Need to remove this old methods once all pages are developed.
      *
      * @param  array  $result
      * @return boolean
