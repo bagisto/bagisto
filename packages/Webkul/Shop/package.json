@@ -18,7 +18,6 @@
   "dependencies": {
     "@vee-validate/i18n": "^4.9.1",
     "@vee-validate/rules": "^4.9.1",
-    "accounting": "^0.4.1",
     "vee-validate": "^4.9.1",
     "vue-flatpickr": "^2.3.0"
   }

@@ -213,7 +213,6 @@
 
         <script type="module">
             app.component('v-bundle-select-option', {
-
                 template: '#v-bundle-select-option-template',
 
                 props:['option', 'selected_product'],
@@ -245,7 +244,6 @@
             });
 
             app.component('v-bundle-option-list', {
-
                 template: '#v-bundle-option-list-template',
 
                 data: function() {
