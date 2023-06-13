@@ -10,9 +10,9 @@
         .range-slider {
             position: relative;
             width: 100%;
-            height: 10px;
+            height: 4px;
             border-radius: 15px;
-            background: transparent linear-gradient(90deg, #5f822d 0%, #a5af33 100%) 0% 0% no-repeat padding-box;
+            background: rgb(245 245 245 / var(--tw-bg-opacity));
         }
 
         .range-slider .progress {
@@ -21,37 +21,48 @@
             right: 0%;
             height: 100%;
             border-radius: 15px;
-            background: transparent linear-gradient(90deg, #e4e7c1 0%, #d39892 100%) 0% 0% no-repeat padding-box;
+            background: rgb(6 12 59 / var(--tw-bg-opacity));
         }
 
         .range-slider input[type="range"] {
             position: absolute;
             width: 100%;
-            height: 10px;
+            height: 4px;
             -webkit-appearance: none;
             pointer-events: none;
             background: none;
             outline: none;
         }
 
-        .range-slider .range-min::-webkit-slider-thumb {
+        .range-slider input[type="range"]::-webkit-slider-thumb {
             pointer-events: auto;
             -webkit-appearance: none;
-            width: 61px;
-            height: 35px;
+            width: 25px;
+            height: 25px;
             background: #fcfcfc 0% 0% no-repeat padding-box;
-            border: 2px solid #8b9e30;
+            border: 4px solid rgb(6 12 59 / var(--tw-bg-opacity));
             border-radius: 20px;
             opacity: 1;
         }
 
-        .range-slider .range-max::-webkit-slider-thumb {
+        .range-slider input[type="range"]::-moz-range-thumb {
             pointer-events: auto;
             -webkit-appearance: none;
-            width: 61px;
-            height: 35px;
+            width: 25px;
+            height: 25px;
             background: #fcfcfc 0% 0% no-repeat padding-box;
-            border: 2px solid #a22a2a;
+            border: 4px solid rgb(6 12 59 / var(--tw-bg-opacity));
+            border-radius: 20px;
+            opacity: 1;
+        }
+
+        .range-slider input[type="range"]::-ms-thumb {
+            pointer-events: auto;
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #fcfcfc 0% 0% no-repeat padding-box;
+            border: 4px solid rgb(6 12 59 / var(--tw-bg-opacity));
             border-radius: 20px;
             opacity: 1;
         }
