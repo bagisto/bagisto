@@ -297,4 +297,12 @@ class InvoiceRepository extends Repository
 
         return true;
     }
+
+    /**
+     * @return float
+     */
+    public function getTotalAmountOfPendingInvoices(): float
+    {
+        return $this->getModel()->where('state', 'pending')->sum('grand_total');
+    }
 }

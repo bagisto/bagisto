@@ -2,7 +2,9 @@
 
 namespace Webkul\Sales\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
@@ -385,6 +387,113 @@ class OrderRepository extends Repository
 
         return $order;
     }
+
+    /**
+     * @param Carbon|null $from
+     * @param Carbon|null $to
+     * @return int|null
+     */
+    public function getOrdersCountByDate(?Carbon $from = null, Carbon $to = null): ?int
+    {
+        if ($from && $to) {
+            return $this->count([['created_at', '>=', $from], ['created_at', '<=', $to]]);
+        }
+
+        if ($from) {
+            return $this->count([['created_at', '>=', $from]]);
+        }
+
+        if ($to) {
+            return $this->count([['created_at', '<=', $to]]);
+        }
+
+        return $this->count();
+    }
+
+    /**
+     * @param Carbon|null $from
+     * @param Carbon|null $to
+     * @return float|null
+     */
+    public function calculateSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    {
+        if ($from && $to) {
+            return $this->getModel()
+                ->whereBetween('created_at', [$from, $to])
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($from) {
+            return $this->getModel()
+                ->where('created_at', '>=', $from)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($to) {
+            return $this->getModel()
+                ->where('created_at', '<=', $to)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        return $this->model->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+    }
+
+    /**
+     * @param Carbon|null $from
+     * @param Carbon|null $to
+     * @return float|null
+     */
+    public function calculateAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
+    {
+        if ($from && $to) {
+            return $this->getModel()
+                ->whereBetween('created_at', [$from, $to])
+                ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($from) {
+            return $this->getModel()
+                ->where('created_at', '>=', $from)
+                ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        if ($to) {
+            return $this->getModel()
+                ->where('created_at', '<=', $to)
+                ->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+        }
+
+        return $this->getModel()->avg(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'));
+    }
+
+    /**
+     * @param Carbon|null $from
+     * @param Carbon|null $to
+     * @return Collection
+     */
+    public function getCustomerWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
+    {
+        $query = $this->getModel()
+            ->whereNotIn('orders.status', ['closed', 'canceled'])
+            ->select(
+                'customer_id',
+                'customer_email',
+                'customer_first_name',
+                'customer_last_name',
+                DB::raw("(SUM(base_grand_total) - SUM(IFNULL((SELECT SUM(base_grand_total) FROM refunds WHERE refunds.order_id = orders.id), 0))) as total_base_grand_total")
+            );
+
+        if ($from && $to) {
+            $query->whereBetween('orders.created_at', [$from, $to]);
+        } elseif ($from) {
+            $query->where('orders.created_at', '>=', $from);
+        } elseif ($to) {
+            $query->where('orders.created_at', '<=', $to);
+        }
+
+        return $query->groupBy('customer_email')->orderBy('total_base_grand_total', 'DESC')->limit(5)->get();
+    }
+
 
     /**
      * This method will find order if id is given else pass the order as it is.
