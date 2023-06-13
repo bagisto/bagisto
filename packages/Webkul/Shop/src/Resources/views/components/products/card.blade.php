@@ -96,7 +96,7 @@
                             product_id: this.product.id
                         })
                         .then(response => {
-                            alert(response.data.message);
+                            alert(response.data.data.message);
                         })
                         .catch(error => {});
                 },

@@ -49,53 +49,43 @@ class WishlistController extends APIController
     {
         $customer = auth()->guard('customer')->user();
 
-        $product = $this->productRepository->find(request()->input('product_id'));
-
+        $productId = request()->input('product_id');
+        
+        $product = $this->productRepository->with('parent')->find($productId);
+            
         if (! $product) {
             return new JsonResource([
-                'message'  => trans('customer::app.product-removed'),
-            ]);
-        } elseif (
-            (! $product->status)
-            || (! $product->visible_individually)
-        ) {
-            return new JsonResource([
-                'message'  => trans('shop::app.component.products.check-product-visibility'),
+                'message' => trans('customer::app.product-removed'),
             ]);
         }
-
+    
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
-            'product_id'  => request()->input('product_id'),
+            'product_id'  => $productId,
             'customer_id' => $customer->id,
         ];
-
-        $wishlist = $this->wishlistRepository->findOneWhere($data);
-
-        if (
-            $product->parent
-            && $product->parent->type !== 'configurable'
-        ) {
-            $product = $this->productRepository->find($product->parent_id);
-
+    
+        if ($product->parent && $product->parent->type !== 'configurable') {
+            $product = $product->parent;
             $data['product_id'] = $product->id;
         }
-
+    
+        $wishlist = $this->wishlistRepository->findOneWhere($data);
+    
         if (! $wishlist) {
             $wishlist = $this->wishlistRepository->create($data);
-
-            return new JsonResource([
-                'data'     => $wishlist,
-                'message'  => trans('customer::app.wishlist.success'),
+    
+            return new JsonResource ([
+                'message' => trans('customer::app.wishlist.success'),
             ]);
         }
-
+    
         $this->wishlistRepository->findOneWhere([
             'product_id' => $data['product_id'],
         ])->delete();
-
-        return response()->json([
-            'message'  => trans('customer::app.wishlist.removed'),
+    
+        return new JsonResource ([
+            'message' => trans('customer::app.wishlist.removed'),
         ]);
     }
 
