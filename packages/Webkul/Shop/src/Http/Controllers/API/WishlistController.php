@@ -75,7 +75,7 @@ class WishlistController extends APIController
         if (! $wishlist) {
             $wishlist = $this->wishlistRepository->create($data);
     
-            return new JsonResource ([
+            return new JsonResource([
                 'message' => trans('customer::app.wishlist.success'),
             ]);
         }
@@ -84,7 +84,7 @@ class WishlistController extends APIController
             'product_id' => $data['product_id'],
         ])->delete();
     
-        return new JsonResource ([
+        return new JsonResource([
             'message' => trans('customer::app.wishlist.removed'),
         ]);
     }
