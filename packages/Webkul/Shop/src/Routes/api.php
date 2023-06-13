@@ -53,9 +53,9 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::delete('', 'destroy')->name('shop.customers.compare.destroy');
 
-        Route::post('move', 'moveCart')->name('shop.checkout.cart.move');
+        Route::post('move', 'moveToCart')->name('shop.checkout.cart.move');
 
-        Route::post('moveToWisthlist', 'moveToWisthlist')->name('shop.checkout.cart.move-to-wishlist');
+        Route::post('moveToWishlist', 'moveToWishlist')->name('shop.checkout.cart.move-to-wishlist');
     });
 
     Route::group(['middleware' => ['customer']], function () {

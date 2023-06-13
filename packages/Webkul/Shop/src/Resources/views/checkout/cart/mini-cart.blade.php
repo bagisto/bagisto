@@ -130,7 +130,7 @@
                 getCart() {
                     this.$axios.get('{{ route('shop.checkout.cart.index') }}')
                         .then(response => {
-                            this.cart = response.data.data[0];
+                            this.cart = response.data.data;
                         })
                         .catch(error => {});
                 },

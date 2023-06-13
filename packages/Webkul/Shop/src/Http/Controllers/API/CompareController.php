@@ -106,7 +106,7 @@ class CompareController extends APIController
     /**
      * Method for compare items move to cart products from comparison.
      */
-    public function moveCart(): JsonResource
+    public function moveToCart(): JsonResource
     {
         try {
             $customer = auth()->guard('customer')->user();
@@ -154,7 +154,7 @@ class CompareController extends APIController
     /**
      * Method for compare items move to wishlist products from comparison.
      */
-    public function moveToWisthlist(): JsonResource
+    public function moveToWishlist(): JsonResource
     {
         try {
             $productId = request()->input('product_id');
@@ -201,7 +201,7 @@ class CompareController extends APIController
                     'product_id' => $productId,
                 ]);
 
-                return response()->json([
+                return new JsonResource([
                     'data'     => CompareResource::collection($this->compareItemRepository->get()),
                     'message'  => trans('shop::app.compare.wishlist-success'),
                 ]);

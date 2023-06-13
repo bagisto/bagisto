@@ -23,27 +23,13 @@ class CartController extends APIController
      */
     public function index(): JsonResource
     {
-        $customer = auth()->guard('customer')->user();
-
         Cart::collectTotals();
 
-        if ($cart = Cart::getCart()) {
-            if (! $customer) {
-                $cart = $cart->where('is_guest', 1)->get();
+        $cart = Cart::getCart();
 
-                return new JsonResource([
-                    'data' => $cart ? CartResource::collection($cart) : null,
-                ]);
-            } else {
-                $cart = $cart->where('customer_id', $customer->id)->get();
-
-                return new JsonResource([
-                    'data' => $cart ? CartResource::collection($cart) : null,
-                ]);
-            }
-        }
-
-        return null;
+        return new JsonResource([
+            'data' => $cart ? new CartResource($cart) : null,
+        ]);
     }
 
     /**
@@ -56,21 +42,7 @@ class CartController extends APIController
 
             $productId = request()->input('product_id');
 
-            $request = request()->all();
-
-            if (! $customer) {
-                $request = array_merge($request, [
-                    'guest_id'    => 1,
-                    'customer_id' => null,
-                ]);
-            } else {
-                $request = array_merge($request, [
-                    'guest_id'    => null,
-                    'customer_id' => $customer->id,
-                ]);
-            }
-
-            $cart = Cart::addProduct($productId, $request);
+            $cart = Cart::addProduct($productId, request()->all());
 
             /**
              * To Do (@devansh-webkul): Need to check this and improve cart facade.
