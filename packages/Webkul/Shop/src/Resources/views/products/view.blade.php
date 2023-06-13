@@ -138,6 +138,8 @@
 
                             @include('shop::products.view.types.grouped')
 
+                            @include('shop::products.view.types.bundle')
+
                             @include('shop::products.view.types.downloadable')
 
                             <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
