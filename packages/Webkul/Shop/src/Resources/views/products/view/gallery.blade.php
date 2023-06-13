@@ -1,17 +1,17 @@
-<v-gallery></v-gallery>
+<v-gallery>
+    <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
+</v-gallery>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-gallery-template">
         <div class="flex gap-[30px] max-1180:hidden h-max sticky top-[30px]">
             <div class="flex-24 h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
                 <img 
-                    :class="`rounded-[12px] min-w-[100px] min-h-[100px] ${ hover ? 'cursor-pointer' : '' }`" 
+                    :class="`rounded-[12px] min-w-[100px] max-h-[100px] ${ hover ? 'cursor-pointer' : '' }`" 
                     v-for='image in mediaContents.images'
                     :src="image.small_image_url" 
-                    alt="" 
-                    title="" 
                     @mouseover='change(image)'
-                >
+                />
 
                 <!-- Need to Set Play Button  -->
                 <video 
@@ -22,27 +22,39 @@
                     <source 
                         :src="video.video_url" 
                         type="video/mp4"
-                    >
+                    />
                 </video>
             </div>
-            <div class="max-h-[609px] max-w-[560px]">
+            
+
+            <div
+                class="max-h-[609px] max-w-[560px]"
+                v-show="isMediaLoading"
+            >
+                <div class="rounded-[12px] min-w-[560px] bg-[#E9E9E9] shimmer min-h-[607px]"></div>
+            </div>
+
+            <div
+                class="max-h-[609px] max-w-[560px]"
+                v-show="! isMediaLoading"
+            >
                 <img 
                     class="rounded-[12px] min-w-[450px]" 
                     :src="baseFile.path" 
-                    alt="" 
-                    title=""
                     v-if='baseFile.type == "image"'
-                >
+                    @load="onMediaLoad()"
+                />
 
                 <div class="rounded-[12px] min-w-[450px]" v-if='baseFile.type == "video"'>
                     <video  
                         controls                             
                         width='475'
+                        @load="onMediaLoad()"
                     >
                         <source 
                             :src="baseFile.path" 
                             type="video/mp4"
-                        >
+                        />
                     </video>    
                 </div>
                 
@@ -66,6 +78,8 @@
 
             data() {
                 return {
+                    isMediaLoading: true,
+
                     mediaContents: {
                         images: @json(product_image()->getGalleryImages($product)),
 
@@ -93,6 +107,10 @@
             },
 
             methods: {
+                onMediaLoad() {
+                    this.isMediaLoading = false;
+                },
+
                 change(file) {
                     if (file.type == 'video') {
                         this.baseFile.type = file.type;

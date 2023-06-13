@@ -13,7 +13,70 @@
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
     <v-product :product-id="{{ $product->id }}">
-        <div>
+        <x-shop::shimmer.products.view></x-shop::shimmer.products.view>
+    </v-product>
+
+    {{-- Information Section --}}
+    <x-shop::tabs position="center">
+        <x-shop::tabs.item
+            class="container mt-[60px] !p-0"
+            {{-- @translations --}}
+            :title="trans('Description')"
+            :is-selected="true"
+        >
+            <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                {!! $product->description !!}
+            </p>
+        </x-shop::tabs.item>
+
+        <x-shop::tabs.item
+            class="container mt-[60px] !p-0"
+            {{-- @translations --}}
+            :title="trans('Additional Information')"
+            :is-selected="false"
+        >
+            <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                @foreach ($customAttributeValues as $values)
+                    <div class="grid">
+                        <p class="text-[16px] text-black">{{ $values['label'] }}</p>
+                    </div>
+                    <div class="grid">
+                        <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
+                    </div>
+                @endforeach
+            </p>
+        </x-shop::tabs.item>
+
+        <x-shop::tabs.item
+            class="container mt-[60px] !p-0"
+            {{-- @translations --}}
+            :title="trans('Reviews')"
+            :is-selected="false"
+        >
+            @include('shop::products.view.reviews')
+        </x-shop::tabs.item>
+    </x-shop::tabs>
+
+    {{-- Featured Products --}}
+    <x-shop::products.carousel
+        {{-- @translations --}}
+        :title="trans('Related Products')"
+        :src="route('shop.products.related.index', ['id' => $product->id])"
+    >
+    </x-shop::products.carousel>
+
+    {{-- Upsell Products --}}
+    <x-shop::products.carousel
+        {{-- @translations --}}
+        :title="trans('We found other products you might like!')"
+        :src="route('shop.products.up-sell.index', ['id' => $product->id])"
+    >
+    </x-shop::products.carousel>
+
+    {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
+
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-product-template">
             <form action="{{ route('shop.cart.add', $product->id) }}" method="POST">
                 @csrf
 
@@ -147,73 +210,6 @@
                     </div>
                 </div>
             </form>
-
-            {{-- Tab Section --}}
-            <x-shop::tabs position="center">
-                <x-shop::tabs.item
-                    class="container mt-[60px] !p-0"
-                    {{-- @translations --}}
-                    :title="trans('Description')"
-                    :is-selected="true"
-                >
-                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                        {!! $product->description !!}
-                    </p>
-                </x-shop::tabs.item>
-
-                <x-shop::tabs.item
-                    class="container mt-[60px] !p-0"
-                    {{-- @translations --}}
-                    :title="trans('Additional Information')"
-                    :is-selected="false"
-                >
-                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                        @foreach ($customAttributeValues as $values)
-                            <div class="grid">
-                                <p class="text-[16px] text-black">{{ $values['label'] }}</p>
-                            </div>
-                            <div class="grid">
-                                <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
-                            </div>
-                        @endforeach
-                    </p>
-                </x-shop::tabs.item>
-
-                <x-shop::tabs.item
-                    class="container mt-[60px] !p-0"
-                    {{-- @translations --}}
-                    :title="trans('Reviews')"
-                    :is-selected="false"
-                >
-                    @include('shop::products.view.reviews')
-                </x-shop::tabs.item>
-            </x-shop::tabs>
-
-            {{-- Featured Products --}}
-            <x-shop::products.carousel
-                {{-- @translations --}}
-                :title="trans('Related Products')"
-                :src="route('shop.products.related.index', ['id' => $product->id])"
-                :navigation-link="route('shop.home.index')"
-            >
-            </x-shop::products.carousel>
-
-            {{-- Upsell Products --}}
-            <x-shop::products.carousel
-                {{-- @translations --}}
-                :title="trans('We found other products you might like!')"
-                :src="route('shop.products.up-sell.index', ['id' => $product->id])"
-                :navigation-link="route('shop.home.index')"
-            >
-            </x-shop::products.carousel>
-        </div>
-    </v-product>
-
-    {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
-
-    @pushOnce('scripts')
-        <script type="text/x-template" id="v-product-template">
-            <slot></slot>
         </script>
 
         <script type="module">

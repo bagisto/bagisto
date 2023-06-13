@@ -1,13 +1,7 @@
-@props([
-    'position' => 'left'
-])
+@props(['position' => 'left'])
 
-<v-tabs
-    position="{{ $position }}"
->
-    <template v-slot>
-        {{ $slot }}
-    </template>
+<v-tabs position="{{ $position }}">
+    <x-shop::shimmer.tabs></x-shop::shimmer.tabs>
 </v-tabs>
 
 @pushOnce('scripts')
@@ -28,7 +22,7 @@
             </div>
 
             <div>
-                <slot></slot>
+                {{ $slot }}
             </div>
         </div>
     </script>
