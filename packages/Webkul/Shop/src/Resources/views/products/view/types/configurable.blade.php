@@ -22,7 +22,7 @@
                                 <template v-for="(option, index) in attribute.options">
                                     <label
                                       class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none undefined"
-                                      :class="{'ring-gray-900 ring ring-offset-1' : index == attribute.selectedIndex }"
+                                      :class="{'ring-gray-900 ring ring-offset-1' : index == attribute.selectedIndex}"
                                       :title="option.label"
                                     >
                                         <input
@@ -32,7 +32,6 @@
                                             :id="['attribute_' + attribute.id]"
                                             class="sr-only"
                                             :aria-labelledby="'color-choice-' + index + '-label'"
-                                            v-model="color"
                                             @click="configure(attribute, $event.target.value)"
                                         >
                                         <span :style="{ 'background-color': option.label }" class="h-8 w-8 rounded-full bg-navyBlue border border-navyBlue border-opacity-10 max-sm:h-[25px] max-sm:w-[25px]"></span>
@@ -47,6 +46,7 @@
                                         :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
                                         :title="option.label"
                                         >
+
                                         <input
                                             type="radio"
                                             :name="['super_attribute[' + attribute.id + ']']"
@@ -54,7 +54,6 @@
                                             :id="['attribute_' + attribute.id]"
                                             class="sr-only"
                                             :aria-labelledby="'color-choice-' + index + '-label'"
-                                            v-model="size"
                                             @click="configure(attribute, $event.target.value)"
                                         >
 
@@ -91,7 +90,6 @@
                             :for="['attribute_' + attribute.id + '_option_' + option.id]">
 
                             <input type="radio"
-                                v-validate="'required'"
                                 :name="['super_attribute[' + attribute.id + ']']"
                                 :id="['attribute_' + attribute.id + '_option_' + option.id]"
                                 :value="option.id"
@@ -120,9 +118,13 @@
             $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
             
             $config = $configurableOptionHelper->getConfigurationConfig($product);
+
+            $galleryImages = product_image()->getGalleryImages($product);
         @endphp
 
         <script type="module">
+            let galleryImages = @json($galleryImages);
+
             app.component('v-product-options', {
                 template: '#v-product-options-template',
 
@@ -213,7 +215,6 @@
 
                         this.reloadPrice();
                         this.changeProductImages();
-                        this.changeStock(this.simpleProduct);
                     },
 
                     getSelectedIndex(attribute, value) {
@@ -347,20 +348,17 @@
                                 regularPriceElement.style.display = 'none';
                             }
 
-                            priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final_price.formatted_price;
+                            priceElement.innerHTML = this.config.variant_prices[this.simpleProduct].final.formatted_price;
 
-                            if (regularPriceElement && this.config.variant_prices[this.simpleProduct].final_price.price < this.config.variant_prices[this.simpleProduct].regular_price.price) {
-                                regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular_price.formatted_price;
+                            if (regularPriceElement && this.config.variant_prices[this.simpleProduct].final.price < this.config.variant_prices[this.simpleProduct].regular.price) {
+                                regularPriceElement.innerHTML = this.config.variant_prices[this.simpleProduct].regular.formatted_price;
                                 regularPriceElement.style.display = 'inline-block';
                             }
 
-                            eventBus.$emit('configurable-variant-selected-event', this.simpleProduct)
                         } else {
                             priceLabelElement.style.display = 'inline-block';
 
-                            priceElement.innerHTML = this.config.regular_price.formatted_price;
-
-                            eventBus.$emit('configurable-variant-selected-event', 0)
+                            priceElement.innerHTML = this.config.regular.formatted_price;
                         }
                     },
 
@@ -380,15 +378,9 @@
                         this.galleryImages.forEach(function(image) {
                             galleryImages.push(image)
                         });
-                    },
 
-                    changeStock (productId) {
-                        let inStockElement = document.querySelector('.stock-status');
-
-                        if (productId) {
-                            inStockElement.style.display= "block";
-                        } else {
-                            inStockElement.style.display= "none";
+                        if (galleryImages.length) {
+                            this.$parent.$root.$refs.gallery.mediaContents.images =  { ...galleryImages };
                         }
                     },
                 }

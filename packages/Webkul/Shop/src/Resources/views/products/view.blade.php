@@ -104,7 +104,7 @@
                                 </h1>
 
                                 <div
-                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]  max-1180:absolute max-1180:-top-[82px] max-1180:right-[12px] max-1180:border-0"
+                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]"
                                     @click='addToWishlist()'
                                 >
                                 </div>
@@ -119,8 +119,6 @@
                             </div>
 
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
-
-                            @include ('shop::products.view.stock', ['product' => $product])
 
                             <p class="text-[24px] flex items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
                                 {!! $product->getTypeInstance()->getPriceHtml() !!}
@@ -140,11 +138,13 @@
 
                             @include('shop::products.view.types.grouped')
 
+                            @include('shop::products.view.types.downloadable')
+
                             <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
-                                @if ($product->type != 'grouped')
+                                @if ($product->getTypeInstance()->showQuantityBox())
                                     <x-shop::quantity-changer
                                         name="quantity"
                                         value="1"
@@ -152,23 +152,16 @@
                                         @change="updateItem($event)"
                                     >
                                     </x-shop::quantity-changer>
-
-                                    <button
-                                        type="submit"
-                                        class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
-                                    >
-                                        @lang('shop::app.products.add-to-cart')
-                                    </button>
-                                @else
-                                    <button
-                                        class="rounded-[12px] border text-navyBlue border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
-                                        type="submit"
-                                    >
-                                        @lang('shop::app.products.add-to-cart')
-                                    </button>
                                 @endif
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
+
+                                <button
+                                    type="submit"
+                                    class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                >
+                                    @lang('shop::app.products.add-to-cart')
+                                </button>
                             </div>
 
                             <button

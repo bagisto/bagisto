@@ -1,4 +1,4 @@
-<v-gallery>
+<v-gallery ref="gallery">
     <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
 </v-gallery>
 
@@ -63,11 +63,9 @@
 
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
             <img 
-                class="min-w-[450px] max-sm:min-w-full" 
-                v-for='mediaContent in mediaContents' 
-                :src="mediaContent.path" 
-                alt="" 
-                title=""
+                :src="image.large_image_url"
+                class="min-w-[450px] max-sm:min-w-full"
+                v-for="image in mediaContents.images"
             >
         </div>
     </script>
