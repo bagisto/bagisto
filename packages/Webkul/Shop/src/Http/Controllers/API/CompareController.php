@@ -35,7 +35,7 @@ class CompareController extends APIController
      *
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function store()
+    public function store(): JsonResource
     {
         $customer = auth()->guard('customer')->user();
 
@@ -63,7 +63,7 @@ class CompareController extends APIController
         ]);
 
         if (! is_null($compareProduct)) {
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('shop::app.compare.already-added'),
             ]);
         }
@@ -73,7 +73,7 @@ class CompareController extends APIController
             'product_id'   => $productId,
         ]);
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('shop::app.compare.item-add'),
         ]);
     }
@@ -115,11 +115,7 @@ class CompareController extends APIController
 
             $data = request()->all();
 
-            if (! $customer) {
-                $data['customer_id'] = null;
-            } else {
-                $data['customer_id'] = $customer->id;
-            }
+            $data['customer_id'] = $customer ? $customer->id : null;
 
             $cart = Cart::addProduct($productId, $data);
 
@@ -141,12 +137,12 @@ class CompareController extends APIController
                 }
 
                 return new JsonResource([
-                    'message'  => trans('shop::app.compare.item-add-to-cart'),
+                    'message' => trans('shop::app.compare.item-add-to-cart'),
                 ]);
             }
         } catch (\Exception $exception) {
             return new JsonResource([
-                'message'   => $exception->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }
@@ -164,7 +160,7 @@ class CompareController extends APIController
             $product = $this->productRepository->find($productId);
 
             if (! $product) {
-                return response()->json([
+                return new JsonResource([
                     'message'  => trans('shop::app.compare.product-removed'),
                 ]);
 
@@ -172,7 +168,7 @@ class CompareController extends APIController
                 ! $product->status
                 || ! $product->visible_individually
             ) {
-                return response()->json([
+                return new JsonResource([
                     'message'  => trans('shop::app.compare.check-product-visibility'),
                 ]);
             }
@@ -201,8 +197,10 @@ class CompareController extends APIController
                     'product_id' => $productId,
                 ]);
 
+                $compareItem = $this->compareItemRepository->get();
+
                 return new JsonResource([
-                    'data'     => CompareResource::collection($this->compareItemRepository->get()),
+                    'data'     => CompareResource::collection($compareItem),
                     'message'  => trans('shop::app.compare.wishlist-success'),
                 ]);
 
