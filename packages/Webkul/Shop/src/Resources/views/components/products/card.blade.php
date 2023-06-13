@@ -84,7 +84,7 @@
                 return {
                     isImageLoading: true,
 
-                    customer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    customer: '{{ auth()->guard('customer')->check() }}',
                 }
             },
 
@@ -104,7 +104,7 @@
                 },
 
                 addToCompare(productId) {
-                    if (this.customer == "true" || this.customer == true) {
+                    if (this.customer) {
                         this.$axios.post("{{ route('shop.customers.compare.store') }}", {
                                 'product_id': this.product.id,
                             })
