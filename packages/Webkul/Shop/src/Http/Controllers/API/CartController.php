@@ -11,11 +11,6 @@ use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
@@ -28,13 +23,27 @@ class CartController extends APIController
      */
     public function index(): JsonResource
     {
+        $customer = auth()->guard('customer')->user();
+
         Cart::collectTotals();
 
-        $cart = Cart::getCart();
+        if ($cart = Cart::getCart()) {
+            if (! $customer) {
+                $cart = $cart->where('is_guest', 1)->get();
 
-        return new JsonResource([
-            'data' => $cart ? new CartResource($cart) : null,
-        ]);
+                return new JsonResource([
+                    'data' => $cart ? CartResource::collection($cart) : null,
+                ]);
+            } else {
+                $cart = $cart->where('customer_id', $customer->id)->get();
+
+                return new JsonResource([
+                    'data' => $cart ? CartResource::collection($cart) : null,
+                ]);
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -43,9 +52,25 @@ class CartController extends APIController
     public function store(): JsonResource
     {
         try {
+            $customer = auth()->guard('customer')->user();
+
             $productId = request()->input('product_id');
 
-            $cart = Cart::addProduct($productId, request()->all());
+            $request = request()->all();
+
+            if (! $customer) {
+                $request = array_merge($request, [
+                    'guest_id'    => 1,
+                    'customer_id' => null,
+                ]);
+            } else {
+                $request = array_merge($request, [
+                    'guest_id'    => null,
+                    'customer_id' => $customer->id,
+                ]);
+            }
+
+            $cart = Cart::addProduct($productId, $request);
 
             /**
              * To Do (@devansh-webkul): Need to check this and improve cart facade.
@@ -60,7 +85,7 @@ class CartController extends APIController
             }
 
             if ($cart) {
-                if ($customer = auth()->guard('customer')->user()) {
+                if ($customer) {
                     $this->wishlistRepository->deleteWhere([
                         'product_id'  => $productId,
                         'customer_id' => $customer->id,

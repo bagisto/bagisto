@@ -328,6 +328,20 @@ return [
         ],
     ],
 
+    'compare'  => [
+        'compare-similar-item'     => 'compare similar item',
+        'new'                      => 'New',
+        'add-to-cart'              => 'Add to Cart',
+        'check-product-visibility' => 'Check the Product status or visibility',
+        'product-removed'          => 'Product Is No More Available As Removed By Admin',
+        'item-add-to-cart'         => 'Item added successfully',
+        'success'                  => 'All Compare items has deleted Succesfully',
+        'error'                    => 'Something went wrong, please try again later.',
+        'item-add'                 => 'Item successfully added to compare list',
+        'already-added'            => 'Item already added to compare list',
+        'wishlist-success'         => 'Item Successfully Added To Wishlist',
+    ],
+
     'checkout' => [
 
         'success' => [

@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\API\CartController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
+use Webkul\Shop\Http\Controllers\API\CompareController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
-use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
 use Webkul\Shop\Http\Controllers\Customer\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
@@ -46,11 +46,21 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::delete('', 'destroy')->name('shop.checkout.cart.destroy');
     });
 
+    Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
+        Route::get('', 'index')->name('shop.customers.compare.index');
+
+        Route::post('', 'store')->name('shop.customers.compare.store');
+
+        Route::delete('', 'destroy')->name('shop.customers.compare.destroy');
+
+        Route::post('move', 'moveCart')->name('shop.checkout.cart.move');
+
+        Route::post('moveToWisthlist', 'moveToWisthlist')->name('shop.checkout.cart.move-to-wishlist');
+    });
+
     Route::group(['middleware' => ['customer']], function () {
         Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])
             ->name('shop.customers.account.wishlist.store');
 
-        Route::get('compare-items/{product_id}', [CompareController::class, 'store'])
-            ->name('shop.customers.account.compare.store');
     });
 });

@@ -52,7 +52,7 @@
 
         <span class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px]"></span>
 
-        <p>2</p>
+        <p>1</p>
 
         <span class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px]"></span>
     </div>

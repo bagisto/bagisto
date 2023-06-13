@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
 use Webkul\Shop\Http\Controllers\CountryStateController;
+use Webkul\Shop\Http\Controllers\CompareController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ReviewController;
@@ -61,6 +62,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('shop.subscribe');
 
     Route::get('unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe'])->name('shop.unsubscribe');
+
+    /**
+     * Compare products
+     */
+    Route::get('compare', [CompareController::class, 'index'])->name('shop.compare');
 
     /**
      * Product and categories routes.

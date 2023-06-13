@@ -42,7 +42,7 @@
 
                         <a
                             class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
-                            @click="addToCompare()"
+                            @click="addToCompare(product.id)"
                         >
                         </a>
 
@@ -82,7 +82,9 @@
 
             data() {
                 return {
-                    isImageLoading: true
+                    isImageLoading: true,
+
+                    customer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                 }
             },
 
@@ -99,12 +101,53 @@
                         .catch(error => {});
                 },
 
-                addToCompare() {
-                    this.$axios.get(`{{ route('shop.customers.account.compare.store', '') }}/${this.product.id}`)
-                        .then(response => {
-                            alert(response.data.message);
-                        })
-                        .catch(error => {});
+                addToCompare(productId) {
+                    if (this.customer == "true" || this.customer == true) {
+                        this.$axios.post("{{ route('shop.customers.compare.store') }}", {
+                                'product_id': this.product.id,
+                            })
+                            .then(response => {
+                                alert(response.data.message);
+                            })
+                            .catch(error => {});
+                    } else {
+                        let updatedItems = [productId];
+
+                        let existingItems = this.getStorageValue('compared_product');
+
+                        if (existingItems) {
+                            if (! existingItems.includes(productId)) {
+                                if (existingItems.indexOf(this.productId) == -1) {
+                                    updatedItems = existingItems.concat(updatedItems);
+
+                                    this.setStorageValue('compared_product', updatedItems);
+
+                                    alert('Added product in compare for guest');
+                                }
+                            } else {
+                                alert('Product is already added in compare.');
+                            }
+                        } else {
+                            this.setStorageValue('compared_product', updatedItems);
+                        }
+
+                    }
+                },
+
+                setStorageValue(key, value) {
+                    window.localStorage.setItem(key, JSON.stringify(value));
+
+                    return true;
+                },
+
+                getStorageValue(key) {
+                    let value = window.localStorage.getItem(key);
+
+                    if (value) {
+                        value = JSON.parse(value);
+                    }
+
+                    return value;
                 },
 
                 addToCart() {

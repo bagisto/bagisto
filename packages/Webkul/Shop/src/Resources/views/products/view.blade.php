@@ -175,9 +175,9 @@
                             </button>
 
                             <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
-                                <div
-                                    class=" flex justify-center items-center gap-[10px] cursor-pointer"
-                                    @click='addToCompare()'
+                                <div 
+                                    class=" flex justify-center items-center gap-[10px] cursor-pointer" 
+                                    @click='addToCompare({{ $product->id }})'
                                 >
                                     <span class="icon-compare text-[24px]"></span>
                                     @lang('shop::app.products.compare')
@@ -216,6 +216,12 @@
                 data() {
                     return {
                         qty: 1,
+
+                        reviews: {},
+
+                        page: 1,
+
+                        customer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
                     }
                 },
 
@@ -225,16 +231,15 @@
                     },
 
                     addToCart(buyNow) {
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
-                                product_id: this.productId,
-                                quantity: this.qty,
-                            })
-                            .then(response => {
-                                if (response.data.message) {
-                                    alert(response.data.message);
-                                }
-                            })
-                            .catch(error => {});
+                        const params = {
+                            'quantity': this.qty,
+                            'product_id': this.productId,
+                        };
+
+                        this.$axios.post('{{ route("shop.checkout.cart.index") }}', params).then(response => {
+                            alert(response.data.message);
+                            if (buyNow); //Redirect to Cart Page
+                        }).catch(error => {});
                     },
 
                     addToWishlist() {
@@ -245,12 +250,52 @@
                             .catch(error => {});
                     },
 
-                    addToCompare() {
-                        this.$axios.get('{{ route("shop.customers.account.compare.store", $product->id) }}')
-                            .then(response => {
-                                alert(response.data.message);
-                            })
-                            .catch(error => {});
+                    addToCompare(productId) {
+                        if (this.customer == "true" || this.customer == true) {
+                            this.$axios.post('{{ route("shop.customers.compare.store") }}', {
+                                    'product_id': productId
+                                })
+                                .then(response => {
+                                    alert(response.data.message);
+                                })
+                                .catch(error => {});            
+                        } else {
+                            let updatedItems = [productId];
+
+                            let existingItems = this.getStorageValue('compared_product');
+
+                            if (existingItems) {
+                                if (! existingItems.includes(productId)) {
+                                    if (existingItems.indexOf(this.productId) == -1) {
+                                        updatedItems = existingItems.concat(updatedItems);
+
+                                        this.setStorageValue('compared_product', updatedItems);
+
+                                        alert('Added product in compare for guest');
+                                    }
+                                } else {
+                                    alert('Product is already added in compare.');
+                                }
+                            } else {
+                                this.setStorageValue('compared_product', updatedItems);
+                            }
+                        }                        
+                    },
+
+                    setStorageValue(key, value) {
+                        window.localStorage.setItem(key, JSON.stringify(value));
+
+                        return true;
+                    },
+
+                    getStorageValue(key) {
+                        let value = window.localStorage.getItem(key);
+
+                        if (value) {
+                            value = JSON.parse(value);
+                        }
+
+                        return value;
                     },
                 },
             });
