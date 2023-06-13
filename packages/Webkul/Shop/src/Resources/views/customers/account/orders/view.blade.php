@@ -336,7 +336,7 @@
                     @foreach ($order->invoices as $invoice)
                         <div class="secton-title">
                             <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
-                                @lang('shop::app.customer.account.order.view.invoices.print')
+                                @lang('shop::app.customers.account.orders.view.invoices.print')
                             </a>
                         </div>
 
