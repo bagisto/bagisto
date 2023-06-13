@@ -77,9 +77,7 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-product-template">
-            <form action="{{ route('shop.cart.add', $product->id) }}" method="POST">
-                @csrf
-
+            <form ref="formData">
                 <input 
                     type="hidden" 
                     name="product_id" 
@@ -159,14 +157,16 @@
                                 {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
                                 <button
-                                    type="submit"
+                                    type="button"
                                     class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                    @click='addToCart("")'
                                 >
                                     @lang('shop::app.products.add-to-cart')
                                 </button>
                             </div>
 
                             <button
+                                type="button"
                                 class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
                                 @click='addToCart("buy_now")'
                                 {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
@@ -225,9 +225,18 @@
                     },
 
                     addToCart(buyNow) {
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
-                                product_id: this.productId,
-                                quantity: this.qty,
+                        let formData = new FormData(this.$refs.formData);
+
+                        let formObject = {};
+
+                        formData.forEach((value, key, data) => {
+                            formObject[key] = value
+                        });
+
+                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', formObject, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                }
                             })
                             .then(response => {
                                 if (response.data.message) {
