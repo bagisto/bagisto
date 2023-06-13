@@ -1,45 +1,5 @@
 <v-range-slider {{ $attributes }}></v-range-slider>
 
-@pushOnce('styles')
-    {{--
-        Only pseudo classes conversion left for tailwind.
-    --}}
-    <style>
-        .thumb-range::-webkit-slider-thumb {
-            pointer-events: auto;
-            -webkit-appearance: none;
-            width: 25px;
-            height: 25px;
-            background: #fcfcfc 0% 0% no-repeat padding-box;
-            border: 4px solid rgb(6 12 59 / var(--tw-bg-opacity));
-            border-radius: 20px;
-            opacity: 1;
-        }
-
-        .thumb-range::-moz-range-thumb {
-            pointer-events: auto;
-            -webkit-appearance: none;
-            width: 25px;
-            height: 25px;
-            background: #fcfcfc 0% 0% no-repeat padding-box;
-            border: 4px solid rgb(6 12 59 / var(--tw-bg-opacity));
-            border-radius: 20px;
-            opacity: 1;
-        }
-
-        .thumb-range::-ms-thumb {
-            pointer-events: auto;
-            -webkit-appearance: none;
-            width: 25px;
-            height: 25px;
-            background: #fcfcfc 0% 0% no-repeat padding-box;
-            border: 4px solid rgb(6 12 59 / var(--tw-bg-opacity));
-            border-radius: 20px;
-            opacity: 1;
-        }
-    </style>
-@endPushOnce
-
 @pushOnce('scripts')
     <script type="text/x-template" id="v-range-slider-template">
         <div>
@@ -56,7 +16,7 @@
                 </p>
             </div>
 
-            <div class="flex relative justify-center items-center h-20 w-full mx-auto">
+            <div class="flex relative justify-center items-center p-2 h-20 w-full mx-auto">
                 <div class="relative w-full h-[4px] rounded-2xl bg-gray-200">
                     <div
                         ref="progress"
@@ -69,7 +29,7 @@
                             ref="minRange"
                             type="range"
                             :value="minRange"
-                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none thumb-range"
+                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:ring-navyBlue [&::-webkit-slider-thumb]:ring [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:ring-navyBlue [&::-moz-range-thumb]:ring [&::-ms-thumb]:pointer-events-auto [&::-ms-thumb]:bg-white [&::-ms-thumb]:appearance-none [&::-ms-thumb]:h-[18px] [&::-ms-thumb]:w-[18px] [&::-ms-thumb]:rounded-full [&::-ms-thumb]:ring-navyBlue [&::-ms-thumb]:ring"
                             :min="allowedMinRange"
                             :max="allowedMaxRange"
                             @input="handle('min')"
@@ -82,7 +42,7 @@
                             ref="maxRange"
                             type="range"
                             :value="maxRange"
-                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none thumb-range"
+                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:ring-navyBlue [&::-webkit-slider-thumb]:ring [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:ring-navyBlue [&::-moz-range-thumb]:ring [&::-ms-thumb]:pointer-events-auto [&::-ms-thumb]:bg-white [&::-ms-thumb]:appearance-none [&::-ms-thumb]:h-[18px] [&::-ms-thumb]:w-[18px] [&::-ms-thumb]:rounded-full [&::-ms-thumb]:ring-navyBlue [&::-ms-thumb]:ring"
                             :min="allowedMinRange"
                             :max="allowedMaxRange"
                             @input="handle('max')"
