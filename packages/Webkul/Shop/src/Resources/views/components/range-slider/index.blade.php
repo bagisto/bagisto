@@ -1,40 +1,11 @@
 <v-range-slider {{ $attributes }}></v-range-slider>
 
 @pushOnce('styles')
+    {{--
+        Only pseudo classes conversion left for tailwind.
+    --}}
     <style>
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-        }
-
-        .range-slider {
-            position: relative;
-            width: 100%;
-            height: 4px;
-            border-radius: 15px;
-            background: rgb(245 245 245 / var(--tw-bg-opacity));
-        }
-
-        .range-slider .progress {
-            position: absolute;
-            left: 25%;
-            right: 0%;
-            height: 100%;
-            border-radius: 15px;
-            background: rgb(6 12 59 / var(--tw-bg-opacity));
-        }
-
-        .range-slider input[type="range"] {
-            position: absolute;
-            width: 100%;
-            height: 4px;
-            -webkit-appearance: none;
-            pointer-events: none;
-            background: none;
-            outline: none;
-        }
-
-        .range-slider input[type="range"]::-webkit-slider-thumb {
+        .thumb-range::-webkit-slider-thumb {
             pointer-events: auto;
             -webkit-appearance: none;
             width: 25px;
@@ -45,7 +16,7 @@
             opacity: 1;
         }
 
-        .range-slider input[type="range"]::-moz-range-thumb {
+        .thumb-range::-moz-range-thumb {
             pointer-events: auto;
             -webkit-appearance: none;
             width: 25px;
@@ -56,7 +27,7 @@
             opacity: 1;
         }
 
-        .range-slider input[type="range"]::-ms-thumb {
+        .thumb-range::-ms-thumb {
             pointer-events: auto;
             -webkit-appearance: none;
             width: 25px;
@@ -86,19 +57,19 @@
             </div>
 
             <div class="flex relative justify-center items-center h-20 w-full mx-auto">
-                <div class="range-slider">
+                <div class="relative w-full h-[4px] rounded-2xl bg-gray-200">
                     <div
                         ref="progress"
-                        class="progress"
+                        class="absolute left-1/4 right-0 h-full rounded-xl bg-navyBlue"
                     >
                     </div>
 
-                    <span class="range-min-wrapper">
+                    <span>
                         <input
                             ref="minRange"
                             type="range"
                             :value="minRange"
-                            class="range-min"
+                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none thumb-range"
                             :min="allowedMinRange"
                             :max="allowedMaxRange"
                             @input="handle('min')"
@@ -106,12 +77,12 @@
                         >
                     </span>
 
-                    <span class="range-max-wrapper">
+                    <span>
                         <input
                             ref="maxRange"
                             type="range"
                             :value="maxRange"
-                            class="range-max"
+                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none thumb-range"
                             :min="allowedMinRange"
                             :max="allowedMaxRange"
                             @input="handle('max')"
