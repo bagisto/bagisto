@@ -6,7 +6,7 @@ use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\CompareController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
-use Webkul\Shop\Http\Controllers\Customer\WishlistController;
+use Webkul\Shop\Http\Controllers\API\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -59,8 +59,20 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::group(['middleware' => ['customer']], function () {
-        Route::post('wishlist-items/{product_id}', [WishlistController::class, 'store'])
-            ->name('shop.customers.account.wishlist.store');
+        Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {
+            /**
+             * To Do (@shivendra):
+             *
+             * Need to fix the `api` for all route.
+             */
+            Route::get('', 'index')->name('api.shop.customers.account.wishlist.index');
+
+            Route::post('', 'store')->name('shop.customers.account.wishlist.store');
+
+            Route::post('{id}/move-to-cart', 'moveToCart')->name('shop.customers.account.wishlist.move_to_cart');
+
+            Route::delete('{id}', 'destroy')->name('shop.customers.account.wishlist.destroy');
+        });
 
     });
 });
