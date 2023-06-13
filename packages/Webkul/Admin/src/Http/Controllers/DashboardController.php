@@ -14,6 +14,9 @@ class DashboardController extends Controller
      */
     protected array $_config;
 
+    /**
+     * @param DashboardService $dashboardService
+     */
     public function __construct(
         protected DashboardService $dashboardService
     )
@@ -21,6 +24,9 @@ class DashboardController extends Controller
         $this->_config = request('_config');
     }
 
+    /**
+     * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+     */
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $statistics = $this->dashboardService
