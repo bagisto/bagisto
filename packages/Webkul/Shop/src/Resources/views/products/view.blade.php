@@ -229,7 +229,7 @@
 
                         let formObject = {};
 
-                        formData.forEach((value, key, data) => {
+                        formData.forEach((value, key) => {
                             formObject[key] = value
                         });
 
