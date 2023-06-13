@@ -8,7 +8,9 @@ return [
             'email'                => 'Email',
             'forgot-password-text' => 'If you forgot your password, recover it by entering your email address.',
             'submit'               => 'Reset Password',
-            'page_title'           => 'Forgot your password ?',
+            'page-title'           => 'Forgot your password ?',
+            'back'                 => 'Back to sign In ?',
+            'sign-in-button'       => 'Sign In',
             'footer'               => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
         ],
 

@@ -62,6 +62,16 @@
                     </button>
                 </div>
 
+                <p class="text-[#7D7D7D] font-medium mt-[20px]">
+                    @lang('shop::app.customers.forgot-password.back')
+                    
+                    <a class="text-navyBlue" 
+                        href="{{ route('shop.customer.session.index') }}"
+                    >
+                        @lang('shop::app.customers.forgot-password.sign-in-button')
+                    </a>
+                </p>
+
                 {!! view_render_event('bagisto.shop.customers.forget_password.after') !!}
 
             </x-shop::form>
