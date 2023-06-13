@@ -159,7 +159,7 @@
                                 <button
                                     type="button"
                                     class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
-                                    @click='addToCart("")'
+                                    @click="addToCart"
                                 >
                                     @lang('shop::app.products.add-to-cart')
                                 </button>
@@ -168,7 +168,7 @@
                             <button
                                 type="button"
                                 class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
-                                @click='addToCart("buy_now")'
+                                @click="addToCart(true)"
                                 {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                             >
                                 @lang('shop::app.products.buy-now')
@@ -177,7 +177,7 @@
                             <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
                                 <div
                                     class=" flex justify-center items-center gap-[10px] cursor-pointer"
-                                    @click='addToCompare()'
+                                    @click="addToCompare()"
                                 >
                                     <span class="icon-compare text-[24px]"></span>
                                     @lang('shop::app.products.compare')
@@ -224,7 +224,7 @@
                         this.qty = quantity;
                     },
 
-                    addToCart(buyNow) {
+                    addToCart(isBuyNow = false) {
                         let formData = new FormData(this.$refs.formData);
 
                         let formObject = {};
