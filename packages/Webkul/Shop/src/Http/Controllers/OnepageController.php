@@ -10,14 +10,13 @@ use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class OnepageController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @return void
      */
     public function __construct(
@@ -86,7 +85,7 @@ class OnepageController extends Controller
 
         Cart::collectTotals();
 
-        return view($this->_config['view'], compact('cart'));
+        return view('shop::checkout.onepage.index', compact('cart'));
     }
 
     /**
@@ -109,7 +108,7 @@ class OnepageController extends Controller
      * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function saveAddress(CustomerAddressForm $request)
+    public function saveAddress(CustomerAddressForm $request): JsonResource
     {
         $data = $request->all();
 
@@ -117,7 +116,10 @@ class OnepageController extends Controller
             ! auth()->guard('customer')->check()
             && ! Cart::getCart()->hasGuestCheckoutItems()
         ) {
-            return response()->json(['redirect_url' => route('shop.customer.session.index')], 403);
+            return new JsonResource([
+                'redirect' => true,
+                'data' => route('shop.customer.session.index')
+            ]);
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
