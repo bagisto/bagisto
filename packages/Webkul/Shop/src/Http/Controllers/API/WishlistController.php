@@ -89,50 +89,46 @@ class WishlistController extends APIController
         ]);
     }
 
+
     /**
-     * Function to move item from wishlist to cart.
+     * Move wishlist item to the cart.
      * 
      * @param  int  $id
      */
     public function moveToCart($id): JsonResource
     {
+        $customer = auth()->guard('customer')->user();
+        
+        $wishlistItem = $this->wishlistRepository->findOneWhere([
+            'id'          => $id,
+            'customer_id' => $customer->id,
+        ]);
+
+        if (! $wishlistItem) {
+            abort(404);
+        }
+
         try {
-            /**
-             * To Do (@shivendre):
-             * 
-             * Need to remove request()->all() dependency. Only pass array keys which
-             * are actaully needed.
-             */
-            $cart = Cart::addProduct(request()->input('product_id'), request()->all());
+            $result = Cart::moveToCart($wishlistItem);
 
-            /**
-             * To Do (@devansh-webkul): Need to check this and improve cart facade.
-             */
-            if (
-                is_array($cart)
-                && isset($cart['warning'])
-            ) {
-                return new JsonResource([
-                    'message' => $cart['warning'],
-                ]);
-            }
-
-            if ($cart) {
-                if ($customer = auth()->guard('customer')->user()) {
-                    $this->wishlistRepository->deleteWhere([
-                        'product_id'  => request()->input('product_id'),
-                        'customer_id' => $customer->id,
-                    ]);
-                }
-
+            if ($result) {
                 return new JsonResource([
                     'data'     => WishlistResource::collection($this->wishlistRepository->get()),
                     'message'  => trans('shop::app.components.products.item-add-to-cart'),
                 ]);
             }
+            
+            return new JsonResource([
+                'redirect' => true,
+                'data'     => route('shop.productOrCategory.index', $wishlistItem->product->url_key),
+                'message'  => trans('shop::app.checkout.cart.integrity.missing_options'),
+            ]);
+            
         } catch (\Exception $exception) {
             return new JsonResource([
-                'message'   => $exception->getMessage(),
+                'redirect' => true,
+                'data'     => route('shop.productOrCategory.index', $wishlistItem->product->url_key),
+                'message'  => $exception->getMessage(),
             ]);
         }
     }

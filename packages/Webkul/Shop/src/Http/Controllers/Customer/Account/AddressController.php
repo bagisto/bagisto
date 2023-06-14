@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\Customer;
+namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
