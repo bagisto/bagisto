@@ -259,7 +259,7 @@
 
                     allowedMaxPrice: 100,
 
-                    priceRange: this.defaultPriceRange ?? '0,100',
+                    priceRange: this.defaultPriceRange ?? [0, 100].join(','),
                 };
             },
 
@@ -290,7 +290,7 @@
                             this.allowedMaxPrice = response.data.data.max_price;
 
                             if (! this.defaultPriceRange) {
-                                this.priceRange = `0,${this.allowedMaxPrice}`;
+                                this.priceRange = [0, this.allowedMaxPrice].join(',');
                             }
 
                             ++this.refreshKey;
