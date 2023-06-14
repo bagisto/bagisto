@@ -9,7 +9,7 @@ class CompareResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -18,7 +18,6 @@ class CompareResource extends JsonResource
             'id'           => $this->id,
             'product_id'   => $this->items_count,
             'customer_id'  => $this->items_qty,
-            // Will create with resource
             'product'      => new ProductResource($this->product),
         ];
     }

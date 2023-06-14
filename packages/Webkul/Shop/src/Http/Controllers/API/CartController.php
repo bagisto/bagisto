@@ -11,6 +11,11 @@ use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct(
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
@@ -56,7 +61,7 @@ class CartController extends APIController
                 ]);
             }
 
-            if ($cart) {
+            if (auth()->guard('customer')->user()) {
                 if ($customer) {
                     $this->wishlistRepository->deleteWhere([
                         'product_id'  => $productId,
