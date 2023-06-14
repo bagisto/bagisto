@@ -93,14 +93,20 @@
 
     <script type="text/x-template" id="v-price-filter-template">
         <div>
-            <x-shop::range-slider
-                ::key="refreshKey"
-                ::default-allowed-max-range="allowedMaxPrice"
-                ::default-min-range="minRange"
-                ::default-max-range="maxRange"
-                @change-range="setPriceRange($event)"
-            >
-            </x-shop::range-slider>
+            <template v-if="isLoading">
+                <x-shop::shimmer.range-slider.index></x-shop::shimmer.range-slider.index>
+            </template>
+
+            <template v-else>
+                <x-shop::range-slider
+                    ::key="refreshKey"
+                    ::default-allowed-max-range="allowedMaxPrice"
+                    ::default-min-range="minRange"
+                    ::default-max-range="maxRange"
+                    @change-range="setPriceRange($event)"
+                >
+                </x-shop::range-slider>
+            </template>
         </div>
     </script>
 
@@ -249,6 +255,8 @@
                 return {
                     refreshKey: 0,
 
+                    isLoading: true,
+
                     allowedMaxPrice: 100,
 
                     priceRange: this.defaultPriceRange ?? '0,100',
@@ -277,6 +285,8 @@
                 getMaxPrice() {
                     this.$axios.get('{{ route("shop.categories.max_price", $category->id) }}')
                         .then((response) => {
+                            this.isLoading = false;
+
                             this.allowedMaxPrice = response.data.data.max_price;
 
                             if (! this.defaultPriceRange) {
