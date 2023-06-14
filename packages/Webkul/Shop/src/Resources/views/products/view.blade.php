@@ -103,7 +103,7 @@
 
                                 <div
                                     class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]"
-                                    @click='addToWishlist()'
+                                    @click="addToWishlist"
                                 >
                                 </div>
                             </div>
@@ -167,8 +167,9 @@
 
                             <button
                                 type="button"
-                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px]  w-full max-w-[470px] mt-[20px]"
-                                @click="addToCart(true)"
+                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
+                                {{-- To Do @(suraj-webkul) handle buy now option with another endpoint/method --}}
+                                @click="addToCart"
                                 {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
                             >
                                 @lang('shop::app.products.buy-now')
@@ -177,7 +178,7 @@
                             <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
                                 <div
                                     class=" flex justify-center items-center gap-[10px] cursor-pointer"
-                                    @click="addToCompare()"
+                                    @click="addToCompare"
                                 >
                                     <span class="icon-compare text-[24px]"></span>
                                     @lang('shop::app.products.compare')
@@ -224,20 +225,16 @@
                         this.qty = quantity;
                     },
 
-                    addToCart(isBuyNow = false) {
+                    addToCart() {
                         let formData = new FormData(this.$refs.formData);
 
-                        let formObject = Object.fromEntries(formData.entries());
-
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', formObject, {
+                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
                             })
                             .then(response => {
-                                if (response?.status === 200) {
-                                    alert(response.data.message || response.data.data.message);
-                                }
+                                alert(response.data.message || response.data.data.message);
                             })
                             .catch(error => {});
                     },
