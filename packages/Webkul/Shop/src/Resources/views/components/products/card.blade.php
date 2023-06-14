@@ -105,24 +105,24 @@
 
                 addToCompare(productId) {
                     if (this.customer) {
-                        this.$axios.post("{{ route('shop.customers.compare.store') }}", {
+                        this.$axios.post("{{ route('shop.api.compare.store') }}", {
                                 'product_id': this.product.id,
                             })
                             .then(response => {
-                                alert(response.data.message);
+                                alert(response.data.data.message);
                             })
                             .catch(error => {});
                     } else {
                         let updatedItems = [productId];
 
-                        let existingItems = this.getStorageValue('compared_product');
+                        let existingItems = this.getStorageValue('compare_items');
 
                         if (existingItems) {
                             if (! existingItems.includes(productId)) {
                                 if (existingItems.indexOf(this.productId) == -1) {
                                     updatedItems = existingItems.concat(updatedItems);
 
-                                    this.setStorageValue('compared_product', updatedItems);
+                                    this.setStorageValue('compare_items', updatedItems);
 
                                     alert('Added product in compare for guest');
                                 }
@@ -130,7 +130,7 @@
                                 alert('Product is already added in compare.');
                             }
                         } else {
-                            this.setStorageValue('compared_product', updatedItems);
+                            this.setStorageValue('compare_items', updatedItems);
                         }
 
                     }

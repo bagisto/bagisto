@@ -341,6 +341,7 @@ return [
         'item-add'                 => 'Item successfully added to compare list',
         'already-added'            => 'Item already added to compare list',
         'wishlist-success'         => 'Item Successfully Added To Wishlist',
+        'alredy-in-wishlist'       => 'Item Already Available in Wishlist.',
     ],
 
     'checkout' => [

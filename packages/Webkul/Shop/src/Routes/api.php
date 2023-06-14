@@ -47,15 +47,15 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
-        Route::get('', 'index')->name('shop.customers.compare.index');
+        Route::get('', 'index')->name('shop.api.compare.index');
 
-        Route::post('', 'store')->name('shop.customers.compare.store');
+        Route::post('', 'store')->name('shop.api.compare.store');
 
-        Route::delete('', 'destroy')->name('shop.customers.compare.destroy');
+        Route::delete('', 'destroy')->name('shop.api.compare.destroy');
 
-        Route::post('move', 'moveToCart')->name('shop.checkout.cart.move');
+        Route::post('move-to-cart', 'moveToCart')->name('shop.api.compare.move_to_cart');
 
-        Route::post('moveToWishlist', 'moveToWishlist')->name('shop.checkout.cart.move-to-wishlist');
+        Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.compare.move_to_wishlist');
     });
 
     Route::group(['middleware' => ['customer']], function () {

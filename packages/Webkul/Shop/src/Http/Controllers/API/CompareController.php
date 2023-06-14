@@ -11,6 +11,11 @@ use Webkul\Shop\Http\Resources\CompareResource;
 
 class CompareController extends APIController
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct(
         protected CompareItemRepository $compareItemRepository,
         protected ProductRepository $productRepository,
@@ -23,11 +28,29 @@ class CompareController extends APIController
      *
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): JsonResource
     {
-        $compareItem = $this->compareItemRepository->get();
+        /**
+         * This will handle for customers.
+         */
+        if (auth()->guard('customer')->check()) {
+            $compareItem = $this->compareItemRepository->get();
 
-        return CompareResource::collection($compareItem);
+            return CompareResource::collection($compareItem);
+        }
+
+        /**
+         * This will handle for guest users.
+         */
+        if ($productIds = request()->input('product_ids')) {
+            $products = $this->productRepository->whereIn('id', $productIds)->get();
+
+            return CompareResource::collection($products);
+        }
+
+        return new JsonResource([
+            'message' => trans('shop::app.compare.products-not-available'),
+        ]);
     }
 
     /**
@@ -37,38 +60,20 @@ class CompareController extends APIController
      */
     public function store(): JsonResource
     {
-        $customer = auth()->guard('customer')->user();
-
-        if (! $customer) {
-            $compareProductIds = request()->input('compare_product_ids');
-
-            if ($compareProductIds) {
-                $products = $this->productRepository->whereIn('id', $compareProductIds)->get();
-
-                return CompareResource::collection($products);
-            }
-
-            return new JsonResource([
-                'message' => trans('shop::app.compare.products-not-available'),
-            ]);
-        }
-
-        $productId = request()->input('product_id');
-
         $compareProduct = $this->compareItemRepository->findOneByField([
-            'customer_id'  => $customer->id,
-            'product_id'   => $productId,
+            'customer_id'  => auth()->guard('customer')->user()->id,
+            'product_id'   => request()->input('product_id'),
         ]);
 
-        if (! is_null($compareProduct)) {
+        if ($compareProduct) {
             return new JsonResource([
                 'message' => trans('shop::app.compare.already-added'),
             ]);
         }
 
         $this->compareItemRepository->create([
-            'customer_id'  => $customer->id,
-            'product_id'   => $productId,
+            'customer_id'  => auth()->guard('customer')->user()->id,
+            'product_id'   => request()->input('product_id'),
         ]);
 
         return new JsonResource([
@@ -171,8 +176,6 @@ class CompareController extends APIController
                 'customer_id' => auth()->guard('customer')->user()->id,
             ];
 
-            $wishlist = $this->wishlistRepository->findOneWhere($data);
-
             if (
                 $product->parent
                 && $product->parent->type !== 'configurable'
@@ -182,21 +185,23 @@ class CompareController extends APIController
                 $data['product_id'] = $product->id;
             }
 
-            if (! $wishlist) {
-                $wishlist = $this->wishlistRepository->create($data);
+            if (! $this->wishlistRepository->findOneWhere($data)) {
+                $this->wishlistRepository->create($data);
 
-                $this->compareItemRepository->deleteWhere([
+                $compareItem = $this->compareItemRepository->deleteWhere([
                     'product_id' => $product->id,
                 ]);
 
-                $compareItem = $this->compareItemRepository->get();
-
                 return new JsonResource([
-                    'data'     => CompareResource::collection($compareItem),
+                    'data'     => CompareResource::collection($this->compareItemRepository->get()),
                     'message'  => trans('shop::app.compare.wishlist-success'),
                 ]);
-
             }
+
+            return new JsonResource([
+                'data'     => CompareResource::collection($this->compareItemRepository->get()),
+                'message'  => trans('shop::app.compare.alredy-in-wishlist'),
+            ]);
         } catch (\Exception $exception) {
             return new JsonResource([
                 'message'   => $exception->getMessage(),

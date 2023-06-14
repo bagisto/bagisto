@@ -255,11 +255,11 @@
 
                     addToCompare(productId) {
                         if (this.customer) {
-                            this.$axios.post('{{ route("shop.customers.compare.store") }}', {
+                            this.$axios.post('{{ route("shop.api.compare.store") }}', {
                                     'product_id': productId
                                 })
                                 .then(response => {
-                                    alert(response.data.message);
+                                    alert(response.data.data.message);
                                 })
                                 .catch(error => {});            
                         } else {

@@ -43,8 +43,6 @@ class CartController extends APIController
     public function store(): JsonResource
     {
         try {
-            $customer = auth()->guard('customer')->user();
-
             $productId = request()->input('product_id');
 
             $cart = Cart::addProduct($productId, request()->all());
@@ -61,8 +59,8 @@ class CartController extends APIController
                 ]);
             }
 
-            if (auth()->guard('customer')->user()) {
-                if ($customer) {
+            if ($cart) {
+                if ($customer = auth()->guard('customer')->user()) {
                     $this->wishlistRepository->deleteWhere([
                         'product_id'  => $productId,
                         'customer_id' => $customer->id,

@@ -30,11 +30,11 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-compare-item-template">
-            <div class="grid gap-2.5 relative max-sm:grid-cols-1" v-for="item in compareItem">
+            <div class="grid gap-2.5 relative max-sm:grid-cols-1" v-for="item in compareItems" v-if="compareItems?.length">
                 <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
                     <div 
                         class="relative overflow-hidden rounded-sm min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
-                        v-show="isResponseLoading"
+                        v-show="isLoading"
                     > 
                         <img 
                             class="rounded-sm bg-[#F5F5F5]" 
@@ -46,7 +46,7 @@
                         class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
                         :src='item.product.base_image.medium_image_url'
                         @load="onResponseLoad()"
-                        v-show="! isResponseLoading"
+                        v-show="! isLoading"
                     >
 
                     <div class="action-items bg-black">
@@ -82,7 +82,7 @@
                         @case ('price')
                             <p
                                 class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                v-show="isResponseLoading"    
+                                v-show="isLoading"    
                             >
                             </p>
 
@@ -90,7 +90,7 @@
                                 class="text-[14px] font-medium text-[#3A3A3A]" 
                                 v-html="item.product['{{ $comparableAttribute['code'] }}'] ?? item.product.price_html"
                                 @load="onResponseLoad()"
-                                v-show="! isResponseLoading"
+                                v-show="! isLoading"
                             >
                             </p>
                             @break
@@ -101,7 +101,7 @@
                                 @default
                                     <p
                                         class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                        v-show="isResponseLoading"    
+                                        v-show="isLoading"    
                                     >
                                     </p>
 
@@ -109,7 +109,7 @@
                                         class="text-[14px] font-medium" 
                                         v-html="item.product['{{ $comparableAttribute['code'] }}']"
                                         @load="onResponseLoad()"
-                                        v-show="! isResponseLoading"
+                                        v-show="! isLoading"
                                     >
                                     </p>
                             @endswitch
@@ -125,123 +125,119 @@
 
                 data() {
                     return  {
-                        compareItem: [],
+                        compareItems: [],
 
                         products: [],
 
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
-                        isResponseLoading: true,
+                        isLoading: true,
                     }
                 },
 
                 mounted() {
-                    this.getcompareItem();
+                    this.getcompareItems();
                 },
 
                 methods: {
                     onResponseLoad() {
-                        this.isResponseLoading = false;
+                        this.isLoading = false;
                     },
 
-                    getcompareItem() {
-                        let items = '';
-
-                        let data = {
-                            params: {'data': true}
-                        }
-
-                        if (! this.isCustomer) {
-                            if (data) {
-                                items = this.getStorageValue('compared_product');
-
-                                data = {
-                                    params: {
-                                        items
-                                    }
-                                };
-
-                                this.$axios.post('{{ route('shop.customers.compare.store') }}', {
-                                    'compare_product_ids': data.params.items,
-                                })
+                    getcompareItems() {
+                        if (this.isCustomer) {
+                            this.$axios.get('{{ route('shop.api.compare.index') }}')
                                 .then(response => {
-                                    this.compareItem = response.data.data;
+                                    this.compareItems = response.data.data;
                                 })
                                 .catch(error => {});
-                            }
-                        } else {
-                            this.$axios.get('{{ route('shop.customers.compare.index') }}')
+                            
+                            return;
+                        }
+
+                        let items = this.getStorageValue('compare_items');
+
+                        this.$axios.get('{{ route('shop.api.compare.index') }}', {
+                                params: {
+                                    product_ids: items,
+                                },
+                            })
                             .then(response => {
-                                this.compareItem = response.data.data;
+                                this.compareItems = response.data.data;
                             })
                             .catch(error => {});
-                        }                        
                     },
 
                     remove(productId) {
                         if (this.isCustomer) {
-                            this.$axios.post('{{ route('shop.customers.compare.destroy') }}', {
+                            this.$axios.post('{{ route('shop.api.compare.destroy') }}', {
                                     '_method': 'DELETE',
                                     'product_id': productId,
                                 })
                                 .then(response => {
-                                    this.compareItem = response.data.data;
+                                    this.compareItems = response.data.data;
                                 })
                                 .catch(error => {});
-                        } else {
-                            let existingItems = this.getStorageValue('compared_product');
 
-                            let updatedItems = existingItems.filter(item => item != productId);
-
-                            this.setStorageValue('compared_product', updatedItems);
-                            
-                            location.reload();
-
-                            alert('Selected data removed from local storage');
+                            return;
                         }
+
+                        let existingItems = this.getStorageValue('compare_items');
+
+                        let updatedItems = existingItems.filter(item => item != productId);
+
+                        this.setStorageValue('compare_items', updatedItems);
+                        
+                        location.reload();
+
+                        alert('Selected data removed from local storage');
                     },
 
                     moveToCart(productId) {
-                        if (! this.customer) {
-                            let existingItems = this.getStorageValue('compared_product');
-
-                            let updatedItems = existingItems.filter(item => item != productId);
-
-                            this.$axios.post('{{ route("shop.checkout.cart.move") }}', {
+                        if (this.customer) {
+                            this.$axios.post('{{ route("shop.api.compare.move_to_cart") }}', {
                                     'quantity': 1,
                                     'product_id': productId,
                                 })
                                 .then(response => {
-                                    this.setStorageValue('compared_product', updatedItems);
+                                    this.compareItems = response.data.data;
+                                })
+                                .catch(error => {});
 
-                                    location.reload();
-                                })
-                                .catch(error => {});
-                        } else {
-                            this.$axios.post('{{ route("shop.checkout.cart.move") }}', {
-                                    'quantity': 1,
-                                    'product_id': productId,
-                                })
-                                .then(response => {
-                                    this.compareItem = response.data.data;
-                                })
-                                .catch(error => {});
+                            return;
                         }
+
+                        let existingItems = this.getStorageValue('compare_items');
+
+                        let updatedItems = existingItems.filter(item => item != productId);
+
+                        this.$axios.post('{{ route("shop.api.compare.move_to_cart") }}', {
+                                'quantity': 1,
+                                'product_id': productId,
+                            })
+                            .then(response => {
+                                this.setStorageValue('compare_items', updatedItems);
+                                location.reload();
+                            })
+                            .catch(error => {});
                     },
 
                     moveToWishlist(productId) {
                         if (this.isCustomer) {
-                            this.$axios.post('{{ route("shop.checkout.cart.move-to-wishlist") }}', {
+                            this.$axios.post('{{ route("shop.api.compare.move_to_wishlist") }}', {
                                     'quantity': 1,
                                     'product_id': productId,
                                 })
                                 .then(response => {
-                                    this.compareItem = response.data.data;
+                                    this.compareItems = response.data.data;
+                                    alert(response.data.message);
                                 })
                                 .catch(error => {});
-                        } else {
-                            alert('Guest user can not move compare product to wisthlist');
+
+                            return;
                         }
+
+                        alert('Guest user can not move compare product to wisthlist');
                     },
 
                     getStorageValue(key) {
