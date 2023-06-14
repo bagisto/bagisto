@@ -125,8 +125,6 @@ class WishlistController extends APIController
             ]);
             
         } catch (\Exception $exception) {
-            report($exception);
-
             return new JsonResource([
                 'redirect' => true,
                 'data'     => route('shop.productOrCategory.index', $wishlistItem->product->url_key),

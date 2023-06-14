@@ -44,7 +44,7 @@
                                 <p class="text-[16px]">
                                     @lang('shop::app.customers.account.wishlist.color')
 
-                                    @{{ item.color }}
+                                    @{{ item.item.color }}
                                 </p>
                                 
                                 <button 
@@ -149,7 +149,7 @@
                             })
                             .then(response => {
                                 if (response.data.redirect) {
-                                    window.location.replace(response.data.data);
+                                    window.location.href = response.data.data;
                                 }
                                 
                                 this.wishlist = response.data.data;

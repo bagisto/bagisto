@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
             'status'      => $this->status,
             'is_new'      => $this->new,
             'is_featured' => $this->featured,
+            'color'       => $this->color,
             'on_sale'     => $productTypeInstance->haveDiscount(),
             'prices'      => $productTypeInstance->getProductPrices(),
             'price_html'  => $productTypeInstance->getPriceHtml(),

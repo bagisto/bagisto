@@ -16,7 +16,7 @@ class WishlistResource extends JsonResource
     {
         return [
             'id'    => $this->id,
-            'color' => $this->product->color,
+        
             'item'  => new ProductResource($this->product),
         ];
     }
