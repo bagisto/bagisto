@@ -77,83 +77,43 @@
                     </div>
                 </div>
 
-                @foreach ($comparableAttributes as $comparable)
-                    @switch($comparable['code'])
-                        @case('name')
-                            <p
-                                class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                v-show="isResponseLoading"    
-                            >
-                            </p>
- 
-                            <p 
-                                class="text-[14px] font-medium" 
-                                v-text="item.product.name"
-                                @load="onResponseLoad()"
-                                v-show="! isResponseLoading"
-                            >
-                            </p>
-                            @break
-                        @case('description')
+                @foreach ($comparableAttributes as $comparableAttribute)
+                    @switch ($comparableAttribute['code'])
+                        @case ('price')
                             <p
                                 class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
                                 v-show="isResponseLoading"    
                             >
                             </p>
 
-                            <p 
+                            <p
                                 class="text-[14px] font-medium text-[#3A3A3A]" 
-                                v-text="item.product?.description"
+                                v-html="item.product['{{ $comparableAttribute['code'] }}'] ?? item.product.price_html"
                                 @load="onResponseLoad()"
                                 v-show="! isResponseLoading"
                             >
                             </p>
                             @break
-                        @case('price')
-                            <p
-                                class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                v-show="isResponseLoading"    
-                            >
-                            </p>
-                            
-                            <p 
-                                class="text-[14px] font-medium text-[#3A3A3A]" 
-                                v-html="item.product.price ?? item.product.price_html"
-                                @load="onResponseLoad()"
-                                v-show="! isResponseLoading"
-                            >
-                            </p>
-                            @break
-                        @case('size')
-                            <p
-                                class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                v-show="isResponseLoading"  
-                            >
-                            </p>
+                        @default
+                            @switch ($comparableAttribute['type'])
+                                @case('boolean')
+                                    @break
+                                @default
+                                    <p
+                                        class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
+                                        v-show="isResponseLoading"    
+                                    >
+                                    </p>
 
-                            <p 
-                                class="text-[14px] font-medium text-[#3A3A3A]" 
-                                v-text="item.product?.size"
-                                @load="onResponseLoad()"
-                                v-show="! isResponseLoading"
-                            >
-                            </p>
-                            @break
-                        @case('color')
-                            <p
-                                class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                v-show="isResponseLoading"  
-                            >
-                            </p>
-
-                            <p 
-                                class="text-[14px] font-medium text-[#3A3A3A]" 
-                                v-text="item.product?.color"
-                                @load="onResponseLoad()"
-                                v-show="! isResponseLoading"
-                            >
-                            </p>
-                            @break
+                                    <p 
+                                        class="text-[14px] font-medium" 
+                                        v-html="item.product['{{ $comparableAttribute['code'] }}']"
+                                        @load="onResponseLoad()"
+                                        v-show="! isResponseLoading"
+                                    >
+                                    </p>
+                            @endswitch
+                        @break
                     @endswitch
                 @endforeach
             </div>

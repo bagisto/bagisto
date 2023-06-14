@@ -43,16 +43,14 @@ class CompareController extends APIController
             $compareProductIds = request()->input('compare_product_ids');
 
             if ($compareProductIds) {
-                foreach ($compareProductIds as $id) {
-                    $product[] = $this->productRepository->findOnewhere([
-                        'id' => $id,
-                    ]);
-                }
+                $products = $this->productRepository->whereIn('id', $compareProductIds)->get();
 
-                return CompareResource::collection($product);
+                return CompareResource::collection($products);
             }
 
-            return false;
+            return new JsonResource([
+                'message' => trans('shop::app.compare.products-not-available'),
+            ]);
         }
 
         $productId = request()->input('product_id');
@@ -83,10 +81,8 @@ class CompareController extends APIController
      */
     public function destroy(): JsonResource
     {
-        $productId = request()->input('product_id');
-
         $compareItem = $this->compareItemRepository->deleteWhere([
-            'product_id' => $productId,
+            'product_id' => request()->input('product_id'),
         ]);
 
         $compareData = $this->compareItemRepository->get();
@@ -153,11 +149,7 @@ class CompareController extends APIController
     public function moveToWishlist(): JsonResource
     {
         try {
-            $productId = request()->input('product_id');
-
-            $customer = auth()->guard('customer')->user();
-
-            $product = $this->productRepository->find($productId);
+            $product = $this->productRepository->find(request()->input('product_id'));
 
             if (! $product) {
                 return new JsonResource([
@@ -175,8 +167,8 @@ class CompareController extends APIController
 
             $data = [
                 'channel_id'  => core()->getCurrentChannel()->id,
-                'product_id'  => $productId,
-                'customer_id' => $customer->id,
+                'product_id'  => $product->id,
+                'customer_id' => auth()->guard('customer')->user()->id,
             ];
 
             $wishlist = $this->wishlistRepository->findOneWhere($data);
@@ -194,7 +186,7 @@ class CompareController extends APIController
                 $wishlist = $this->wishlistRepository->create($data);
 
                 $this->compareItemRepository->deleteWhere([
-                    'product_id' => $productId,
+                    'product_id' => $product->id,
                 ]);
 
                 $compareItem = $this->compareItemRepository->get();

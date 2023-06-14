@@ -165,8 +165,8 @@ return [
                         'discount'            => 'Discount',
                         'tax'                 => 'Tax',
                         'print'               => 'Print',
-                    ], 
-                
+                    ],
+
                     'shipments' => [
                         'shipments'           => 'Shipments',
                         'tracking-number'     => 'Tracking Number',
@@ -332,6 +332,7 @@ return [
         'compare-similar-item'     => 'compare similar item',
         'new'                      => 'New',
         'add-to-cart'              => 'Add to Cart',
+        'products-not-available'   => 'Products Not Available',
         'check-product-visibility' => 'Check the Product status or visibility',
         'product-removed'          => 'Product Is No More Available As Removed By Admin',
         'item-add-to-cart'         => 'Item added successfully',
