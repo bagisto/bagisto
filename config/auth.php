@@ -16,16 +16,6 @@ return [
             'driver'   => 'session',
             'provider' => 'admins',
         ],
-
-        'api' => [
-            'driver'   => 'jwt',
-            'provider' => 'customers',
-        ],
-
-        'admin-api' => [
-            'driver'   => 'jwt',
-            'provider' => 'admins',
-        ],
     ],
 
     'providers' => [

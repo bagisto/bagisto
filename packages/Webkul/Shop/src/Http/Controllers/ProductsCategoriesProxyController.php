@@ -46,10 +46,17 @@ class ProductsCategoriesProxyController extends Controller
             }
 
             if ($product = $this->productRepository->findBySlug($slugOrPath)) {
-                if ($product->visible_individually && $product->url_key) {
-                    $customer = auth()->guard('customer')->user();
-
-                    return view($this->_config['product_view'], compact('product', 'customer'));
+                if (
+                    $product->visible_individually 
+                    && $product->url_key
+                    && $product->status
+                ) {
+                    return view($this->_config['product_view'], [
+                        'product'          => $product,
+                        'customer'         => auth()->guard('customer')->user(),
+                        'relatedProducts'  => $product->related_products()->take(core()->getConfigData('catalog.products.product_view_page.no_of_related_products'))->get(),
+                        'upSellProducts'  => $product->up_sells()->take(core()->getConfigData('catalog.products.product_view_page.no_of_up_sells_products'))->get(),
+                    ]);
                 }
             }
 

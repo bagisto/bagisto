@@ -266,6 +266,7 @@ return [
         'recently-viewed'   => 'En Son Gezdiğiniz Ürünler',
         'be-first-review'   => 'Bu ürüne ilk siz inceleme girin!',
         'tax-inclusive'     => 'Tüm vergiler dahildir',
+        'product-removed'  => 'Ürün Yönetici Tarafından Kaldırıldığı İçin Artık Mevcut Değil',
     ],
 
     'shop'          => [

@@ -16,7 +16,7 @@ class CartRuleController extends Controller
     /**
      * Initialize _config, a default request parameter with route.
      *
-     * @param array
+     * @var array
      */
     protected $_config;
 
@@ -95,7 +95,7 @@ class CartRuleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
      * @return \Illuminate\Http\Response
      */
@@ -107,7 +107,7 @@ class CartRuleController extends Controller
             $cartRule = $this->cartRuleRepository->create($cartRuleRequest->all());
 
             Event::dispatch('promotions.cart_rule.create.after', $cartRule);
- 
+
             session()->flash('success', trans('admin::app.promotions.cart-rules.create-success'));
 
             return redirect()->route($this->_config['redirect']);

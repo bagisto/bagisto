@@ -38,17 +38,19 @@ class ReviewController extends Controller
             || core()->getConfigData('catalog.products.review.guest_review')
         ) {
             $product = $this->productRepository->findBySlug($slug);
-            
+
             if ($product == null) {
                 session()->flash('error', trans('customer::app.product-removed'));
-                
+
                 return redirect()->back();
             }
 
             return view($this->_config['view'], compact('product'));
         }
 
-        abort(404);
+        session()->flash('error', trans('shop::app.reviews.login-to-review'));
+
+        return redirect()->route('shop.customer.session.create');
     }
 
     /**

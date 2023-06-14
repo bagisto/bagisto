@@ -71,17 +71,15 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Cart, coupons and checkout.
      */
-    Route::get('mini-cart', [CartController::class, 'getMiniCartDetails'])
-        ->name('velocity.cart.get.details');
+    Route::controller(CartController::class)->group(function () {
+        Route::get('mini-cart', 'getMiniCartDetails')->name('velocity.cart.get.details');
 
-    Route::post('cart/add', [CartController::class, 'addProductToCart'])
-        ->name('velocity.cart.add.product');
+        Route::post('cart/add', 'addProductToCart')->name('velocity.cart.add.product');
 
-    Route::delete('cart/remove/{id}', [CartController::class, 'removeProductFromCart'])
-        ->name('velocity.cart.remove.product');
+        Route::delete('cart/remove/{id}', 'removeProductFromCart')->name('velocity.cart.remove.product');
 
-    Route::post('cart/remove-all', [CartController::class, 'removeAllItems'])
-        ->name('velocity.cart.remove.all.items');
+        Route::post('cart/remove-all', 'removeAllItems')->name('velocity.cart.remove.all.items');
+    });
 
     Route::get('categories', [ShopController::class, 'fetchCategories'])
         ->name('velocity.categories');

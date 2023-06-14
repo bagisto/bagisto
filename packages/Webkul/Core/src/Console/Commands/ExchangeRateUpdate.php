@@ -28,7 +28,7 @@ class ExchangeRateUpdate extends Command
     public function handle()
     {
         try {
-            app(config('services.exchange-api.' . config('services.exchange-api.default') . '.class'))->updateRates();
+            app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
         } catch(\Exception $e) {
 
         }

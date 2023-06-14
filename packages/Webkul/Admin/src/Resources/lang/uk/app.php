@@ -1488,6 +1488,8 @@ return [
         'system' => [
             'catalog'                               => 'Каталог',
             'homepage'                              => 'Конфигурация домашней страницы',
+            'product-view-page'                     => 'Конфігурація сторінки перегляду продукту',
+            'cart-view-page'                        => 'Конфігурація сторінки перегляду кошика',
             'allow-out-of-stock-items'              => 'Разрешить товары, которых нет в наличии',
             'products'                              => 'Товары',
             'guest-checkout'                        => 'Гостевая касса',
@@ -1632,6 +1634,9 @@ return [
             'show-search-input-field'               => 'Показать поле ввода поиска',
             'allow-no-of-new-product-homepage'      => 'Разрешенное количество новых продуктов на главной странице',
             'allow-no-of-featured-product-homepage' => 'Разрешено отсутствие рекомендуемого продукта на главной странице',
+            'allow-no-of-related-products'          => 'Дозволена кількість супутніх продуктів',
+            'allow-no-of-up-sells-products'         => 'Дозволена кількість товарів із вищими продажами',
+            'allow-no-of-cross-sells-products'      => 'Дозволена кількість продуктів перехресного продажу',
             'width'                                 => 'ширина',
             'height'                                => 'высоа',
             'cache-small-image'                     => 'Маленькое изображение',

@@ -629,10 +629,12 @@ return [
             'cancel'                        => 'Cancel',
             'saved-inventory-message'       => 'Product inventory saved successfully.',
             'image-size'                    => 'Image resolution should be like 640px X 640px',
+            'image-drop'                    => 'Browse to find or drag image.',
+            'video-drop'                    => 'Browse to find or drag video.',
             'create-success'                => 'Product created successfully.',
             'update-success'                => 'Product updated successfully.',
-            'delete-success'                => 'Product deleted successfully.',  
-            'delete-failed'                 => 'Error encountered while deleting Product.',          
+            'delete-success'                => 'Product deleted successfully.',
+            'delete-failed'                 => 'Error encountered while deleting Product.',
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
@@ -1079,9 +1081,9 @@ return [
         ],
 
         'loginascustomer' => [
-            'grid-title'=>'login as customer',
-            'login-message'=>'you logged in as :customer_name'
-            ],
+            'grid-title'    => 'login as customer',
+            'login-message' => 'you logged in as :customer_name'
+        ],
 
         'note' => [
             'title'      => 'Add Note',
@@ -1135,7 +1137,7 @@ return [
             'approved'       => 'Approve',
             'disapproved'    => 'Disapprove',
             'update-success' => 'Review updated successfully',
-            'delete-success' => 'Review deleted successfully',            
+            'delete-success' => 'Review deleted successfully',
         ],
 
         'subscribers' => [
@@ -1252,6 +1254,11 @@ return [
             'update-success'                 => 'Cart rule updated successfully',
             'delete-success'                 => 'Cart rule deleted successfully',
             'delete-failed'                  => 'Error encountered while deleting Cart rule.',
+            'coupons'                        => [
+                'create-success' => 'Coupon created successfully',
+                'update-success' => 'Coupon updated successfully',
+                'delete-success' => 'Coupon deleted successfully',
+            ]
         ],
 
         'catalog-rules' => [
@@ -1495,7 +1502,7 @@ return [
         'already-taken'             => 'The :name has already been taken.',
         'order-pending'             => 'Cannot delete :name account because some Order(s) are pending or processing state.',
         'something-went-wrong'      => 'Something went wrong!',
-        'create-success'            => 'Refund added Successfully',
+        'create-success'            => ':name created successfully.',
     ],
 
     'validations' => [
@@ -1530,6 +1537,8 @@ return [
         'system' => [
             'catalog'                               => 'Catalog',
             'homepage'                              => 'Homepage configuration',
+            'product-view-page'                     => 'Product view page configuration',
+            'cart-view-page'                        => 'Cart view page confguration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
             'products'                              => 'Products',
             'guest-checkout'                        => 'Guest Checkout',
@@ -1677,6 +1686,9 @@ return [
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed number of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed number of Featured Product in Homepage',
+            'allow-no-of-related-products'          => 'Allowed number of Related Products',
+            'allow-no-of-up-sells-products'         => 'Allowed number of Up-Sell Products',
+            'allow-no-of-cross-sells-products'      => 'Allowed number of Cross-Sell Products',
             'width'                                 => 'Width',
             'height'                                => 'Height',
             'cache-small-image'                     => 'Small Image',

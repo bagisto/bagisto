@@ -1242,6 +1242,11 @@ return [
             'update-success'                 => 'تم تحديث قاعدة سلة التسوّق بنجاح',
             'delete-success'                 => 'تم حذف قاعدة سلة التسوّق بنجاح',
             'delete-failed'                  => 'حدث خطأ أثناء حذف قاعدة سلة التسوق.',
+            'coupons'                        => [
+                'create-success' => 'تم إنشاء القسيمة بنجاح',
+                'update-success' => 'تم تحديث القسيمة بنجاح',
+                'delete-success' => 'تم حذف القسيمة بنجاح',
+            ],
             
         ],
 
@@ -1485,6 +1490,7 @@ return [
         'already-taken'             => 'بالفعل :name تم أخذ ',
         'order-pending'             => 'لا يمكن حذف الحساب لأن بعض الطلبات (الطلبات) معلقة أو قيد المعالجة.',
         'something-went-wrong'      => 'هناك خطأ ما!',
+        'create-success'            => ':name تم إنشاؤها بنجاح',
     ],
 
     'validations' => [
@@ -1518,8 +1524,13 @@ return [
         'system'             => [
             'catalog'                               => 'فهرس',
             'homepage'                              => 'تكوين الصفحة الرئيسية',
+            'product-view-page'                     => 'تكوين صفحة عرض المنتج',
+            'cart-view-page'                        => 'تكوين صفحة عرض السلة',
             'allow-no-of-new-product-homepage'      => 'عدد المنتجات الجديدة المسموح بها في الصفحة الرئيسية',
             'allow-no-of-featured-product-homepage' => 'عدد المنتجات المميزة المسموح بها في الصفحة الرئيسية',
+            'allow-no-of-related-products'          => 'عدد المنتجات ذات الصلة المسموح به',
+            'allow-no-of-up-sells-products'         => 'عدد منتجات البيع الصعودي المسموح به',
+            'allow-no-of-cross-sells-products'      => 'عدد منتجات البيع المتقاطع المسموح بها',
             'allow-out-of-stock-items'              => 'السماح بعناصر من المخزون',
             'products'                              => 'منتجات',
             'guest-checkout'                        => 'ضيف المحاسبة',

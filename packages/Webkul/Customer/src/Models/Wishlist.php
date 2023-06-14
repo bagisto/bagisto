@@ -43,11 +43,11 @@ class Wishlist extends Model implements WishlistContract
     /**
      * The product that belong to the wishlist.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
-        return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
+        return $this->belongsTo(ProductProxy::modelClass());
     }
 
     /**

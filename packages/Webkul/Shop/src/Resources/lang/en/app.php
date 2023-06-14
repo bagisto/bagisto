@@ -91,6 +91,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'star',
         'name'                      => 'Name',
+        'login-to-review'           => 'Please log in first to review the product',
     ],
 
     'customer' => [

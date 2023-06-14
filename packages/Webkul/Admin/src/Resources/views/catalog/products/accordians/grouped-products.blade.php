@@ -55,7 +55,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="table" style="margin-top: 20px; overflow-x: unset;">
                 <table>
                     <thead>
@@ -95,7 +94,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:0'" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="`required|min_value:0|max_value:${available_qty}`" :name="[inputName + '[qty]']" v-model="groupedProduct.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -127,7 +126,7 @@
 
                     searched_results: [],
 
-                    grouped_products: @json($product->grouped_products()->with('associated_product')->get())
+                    grouped_products: @json($product->grouped_products()->with('associated_product.inventory_indices')->get())
                 }
             },
 
@@ -182,6 +181,7 @@
                     this.$http.get ("{{ route('admin.catalog.products.search_simple_product') }}", {params: {query: this.search_term}})
                         .then (function(response) {
                             self.searched_results = response.data.data;
+                            
 
                             self.is_searching = false;
                         })
@@ -197,14 +197,24 @@
 
             props: ['index', 'groupedProduct'],
 
+            data: function() {
+                return {
+                    available_qty: 0        
+                }
+              },
+
             inject: ['$validator'],
 
             computed: {
                 inputName: function () {
+                    
+                  this.available_qty = this.groupedProduct.associated_product.inventory_indices[0].qty;
+
                     if (this.groupedProduct.id)
+                   
                         return 'links[' + this.groupedProduct.id + ']';
 
-                    return 'links[link_' + this.index + ']';
+                        return 'links[link_' + this.index + ']';
                 }
             },
 

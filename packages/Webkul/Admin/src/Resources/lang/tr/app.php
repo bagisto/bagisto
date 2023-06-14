@@ -1202,6 +1202,11 @@ return [
             'parent-categories'              => 'Kategoriler (Sadece Üst)',
             'categories'                     => 'Kategoriler',
             'attribute_family'               => 'Nitelik Grubu',
+            'coupons'                        => [
+                'create-success' => 'Kupon başarıyla oluşturuldu',
+                'update-success' => 'Kupon başarıyla güncellendi',
+                'delete-success' => 'Kupon başarıyla silindi',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1437,6 +1442,7 @@ return [
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
         'something-went-wrong'    => 'Bir şeyler yanlış gitti!',
+        'create-success'          => ':name başarıyla oluşturuldu.',
     ],
 
     'validations' => [
@@ -1470,8 +1476,13 @@ return [
         'system'             => [
             'catalog'                               => 'Katalog',
             'homepage'                              => 'Ana sayfa yapılandırması',
+            'product-view-page'                     => 'Ürün görüntüleme sayfası yapılandırması',
+            'cart-view-page'                        => 'Sepet görünümü sayfası yapılandırması',
             'allow-no-of-new-product-homepage'      => 'Ana Sayfada İzin Verilen Yeni Ürün Sayısı',
             'allow-no-of-featured-product-homepage' => 'Ana Sayfada İzin Verilen Öne Çıkan Ürün Sayısı',
+            'allow-no-of-related-products'          => 'İzin verilen İlgili Ürün sayısı',
+            'allow-no-of-up-sells-products'         => 'İzin verilen Ek Satış Ürünleri sayısı',
+            'allow-no-of-cross-sells-products'      => 'İzin verilen Çapraz Satış Ürünleri sayısı',
             'allow-out-of-stock-items'              => 'Stokta olmayan ürünlere izin ver',
             'products'                              => 'Ürünler',
             'guest-checkout'                        => 'Ziyaretçi Satışı',

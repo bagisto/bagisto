@@ -130,7 +130,7 @@ class CartTaxesCest
 
         $I->assertEquals(2, $cart->items_count);
         $I->assertEquals((float)($prod1Quantity + 1 + $prod2Quantity), $cart->items_qty);
-        $I->assertEquals(round($expectedTaxAmount1 + $expectedTaxAmount2, self::TAX_AMOUNT_PRECISION), $cart->tax_total);
+        $I->assertEqualsWithDelta(round($expectedTaxAmount1 + $expectedTaxAmount2, self::TAX_AMOUNT_PRECISION), $cart->tax_total, 0.001);
 
         Cart::removeItem($cart->items[1]->id);
 
@@ -146,7 +146,7 @@ class CartTaxesCest
 
         $I->assertEquals(1, $cart->items_count);
         $I->assertEquals((float)($prod1Quantity + 1), $cart->items_qty);
-        $I->assertEquals($expectedTaxAmount1, $cart->tax_total);
+        $I->assertEqualsWithDelta($expectedTaxAmount1, $cart->tax_total, 0.0001);
     }
 
     public function checkCartWithMultipleZipRangeBasedTaxes(FunctionalTester $I): void

@@ -43,6 +43,7 @@ class CartController extends Controller
             foreach ($items as $index => $item) {
                 $images = $item->product->getTypeInstance()->getBaseImage($item);
 
+                $cartItems[$index]['name'] = $item->product->name;
                 $cartItems[$index]['images'] = $images;
                 $cartItems[$index]['url_key'] = $item->product->url_key;
                 $cartItems[$index]['base_total'] = core()->currency($item->base_total);

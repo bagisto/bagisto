@@ -269,6 +269,7 @@ return [
         'recently-viewed' => 'Recent bekeken producten',
         'be-first-review' => 'Wees de eerste om een review te schrijven.',
         'tax-inclusive' => 'Inclusief BTW',
+        'product-removed'  => 'Product is niet meer beschikbaar zoals verwijderd door beheerder',
     ],
 
     'shop' => [

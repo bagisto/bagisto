@@ -1230,6 +1230,11 @@ return [
             'categories'                     => 'Catégories',
             'attribute_family'               => 'Famille d\'attributs',
             'mass-delete-success'            => 'Tous les coupons sélectionnés ont été supprimés avec succès.',
+            'coupons'                        => [
+                'create-success' => 'Coupon créé avec succès',
+                'update-success' => 'Coupon mis à jour avec succès',
+                'delete-success' => 'Coupon supprimé avec succès',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1467,6 +1472,7 @@ return [
         'upload-success'            => ':name téléchargé avec succès.',
         'delete-category-root'      => 'Impossible de supprimer la catégorie racine',
         'create-root-failure'       => 'La catégorie avec le nom root existe déjà',
+        'create-success'            => ':name créé avec succès.',
         'cancel-success'            => ':name annulé avec succès.',
         'cancel-error'              => ':name ne peut pas être annulé.',
         'already-taken'             => 'Le :name a déjà été pris.',
@@ -1505,6 +1511,8 @@ return [
         'system' => [
             'catalog'                               => 'Catalogue',
             'homepage'                              => 'Configuration de la page d\'accueil',
+            'product-view-page'                     => 'Configuration de la page d\'affichage du produit',
+            'cart-view-page'                        => 'Configuration de la page d\'affichage du panier',
             'allow-out-of-stock-items'              => 'Autoriser les articles en rupture de stock',
             'products'                              => 'Des produits',
             'guest-checkout'                        => 'Paiement des invités',
@@ -1649,6 +1657,9 @@ return [
             'show-search-input-field'               => 'Afficher le champ de saisie de la recherche',
             'allow-no-of-new-product-homepage'      => 'Nombre autorisé de nouveaux produits sur la page d\'accueil',
             'allow-no-of-featured-product-homepage' => 'Nombre autorisé de produits en vedette sur la page d\'accueil',
+            'allow-no-of-related-products'          => 'Nombre autorisé de produits associés',
+            'allow-no-of-up-sells-products'         => 'Nombre autorisé de produits de vente incitative',
+            'allow-no-of-cross-sells-products'      => 'Nombre autorisé de produits de vente croisée',
             'width'                                 => 'Largeur',
             'height'                                => 'Hauteur',
             'cache-small-image'                     => 'Petite image',

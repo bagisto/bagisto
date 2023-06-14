@@ -190,7 +190,7 @@
 
             <td>
                 <div class="control-group" :class="[errors.has(inputName + '[qty]') ? 'has-error' : '']">
-                    <input type="number" v-validate="'required|min_value:1'" :name="[inputName + '[qty]']" v-model="product.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
+                    <input type="number" v-validate="`required|min_value:0|max_value:${available_qty}`" :name="[inputName + '[qty]']" v-model="product.qty" class="control" data-vv-as="&quot;{{ __('admin::app.catalog.products.qty') }}&quot;"/>
                     <span class="control-error" v-if="errors.has(inputName + '[qty]')">@{{ errors.first(inputName + '[qty]') }}</span>
                 </div>
             </td>
@@ -216,7 +216,7 @@
 
             data: function() {
                 return {
-                    options: @json($product->bundle_options()->with(['product', 'bundle_option_products', 'bundle_option_products.product'])->get())
+                    options: @json($product->bundle_options()->with(['product','bundle_option_products', 'bundle_option_products.product.inventory_indices'])->get())
                 }
             },
 
@@ -368,10 +368,19 @@
 
             props: ['controlName', 'index', 'bundleOption', 'product'],
 
+            data: function() {
+                return {
+                    available_qty: 0        
+                }
+              },
+
             inject: ['$validator'],
 
             computed: {
                 inputName: function () {
+                 
+                    this.available_qty = this.product.product.inventory_indices[0].qty
+                    
                     if (this.product.id)
                         return this.controlName + "[products][" + this.product.id + "]";
 

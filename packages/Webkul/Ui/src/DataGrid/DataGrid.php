@@ -18,14 +18,14 @@ abstract class DataGrid
      *
      * @var string
      */
-    protected $index;
+    protected $index = 'id';
 
     /**
      * Default sort order of datagrid.
      *
      * @var string
      */
-    protected $sortOrder = 'asc';
+    protected $sortOrder = 'desc';
 
     /**
      * Situation handling property when working with custom columns in datagrid, helps abstaining
@@ -453,7 +453,7 @@ abstract class DataGrid
             ->filter(fn($column) => $column['index'] === $columnName)
             ->first();
 
-        if ($key && isset($column[$key])) {            
+        if ($key && isset($column[$key])) {
             return $column[$key];
         }
 

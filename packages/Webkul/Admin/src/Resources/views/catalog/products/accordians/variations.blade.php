@@ -11,6 +11,10 @@
         .table td.actions .icon {
             margin-top: 8px;
         }
+
+        .image-position {
+            display: contents;
+        }
     </style>
 @endpush
 
@@ -39,7 +43,6 @@
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.after', ['product' => $product]) !!}
     </div>
 </accordian>
-
 {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.after', ['product' => $product]) !!}
 
 <modal id="addVariant" :is-open="modalIds.addVariant">
@@ -59,7 +62,7 @@
             <div class="page-content">
                 <div class="form-container">
                     <div
-                        v-for='(attribute, index) in super_attributes'
+                        v-for='(attribute, index) in superAttributes'
                         :class="['control-group', errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']">
                         <label
                             class="required"
@@ -119,7 +122,9 @@
                         v-for='(variant, index) in variants'
                         :key="index"
                         :index="index"
-                        :variant="variant" @onRemoveVariant="removeVariant($event)">
+                        :variant="variant" @onRemoveVariant="removeVariant($event)"
+                        :attributes="superAttributes"
+                        >
                     </variant-item>
                 </tbody>
             </table>
@@ -132,13 +137,13 @@
                 <div class="control-group">
                     <span class="radio">
                         <input
-                            id="default_variant_id"
+                            id="defaultVariantId"
                             type="radio"
-                            name="default_variant_id"
+                            name="defaultVariantId"
                             :value="variant.id"
                             v-on:change="checkDefaultVariant(variant.id)"
-                            :checked="variant.id == default_variant_id">
-                        <label class="radio-view" :for="[variantInputName + '[default_variant_id]']"></label>
+                            :checked="variant.id == defaultVariantId">
+                        <label class="radio-view" :for="[variantInputName + '[defaultVariantId]']"></label>
                     </span>
                 </div>
             </td>
@@ -181,7 +186,7 @@
                 </div>
 
                 <div class="item-options" style="margin-top: 10px">
-                    <div v-for='(attribute, index) in superAttributes'>
+                    <div v-for='(attribute, index) in attributes'>
                         <b>@{{ attribute.admin_name }} : </b>@{{ optionName(variant[attribute.code]) }}
 
                         <input
@@ -190,17 +195,17 @@
                             :value="variant[attribute.code]"
                         />
                     </div>
-                </div>
+                </div
             </td>
 
-            <td>
+            <td class="image-group">
                 <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
-                    <div v-for='(image, index) in items' class="image-wrapper variant-image">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
+                    <div v-for='(image, index) in items' class="image-wrapper variant-image image-position">
+                        <label class="image-item variant-image" v-bind:class="{ 'has-image': imageData[index] }">
                             <input
                                 type="hidden"
                                 :name="[variantInputName + '[images][files][' + image.id + ']']"
-                                v-if="! new_image[index]"/>
+                                v-if="! newImage[index]"/>
 
                             <input
                                 :ref="'imageInput' + index"
@@ -210,15 +215,21 @@
                                 accept="image/*"
                                 multiple="multiple"
                                 v-validate="'mimes:image/*'"
-                                @change="addImageView($event, index)"/>
+                                class="drag-image"
+                                @change="addImageView($event, index)"
+                                @drop="(event) => event.target.parentElement.classList.remove('dropzone')"
+                                @dragleave="(event) => event.target.parentElement.classList.remove('dropzone')" 
+                                @dragenter="(event) => event.target.parentElement.classList.add('dropzone')" />
 
                             <img
                                 class="preview"
                                 :src="imageData[index]"
                                 v-if="imageData[index]">
-                        </label>
 
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
+                                <label class="remove-image variant" @click="removeImage(image)">
+                                    {{ __('admin::app.catalog.products.remove-image-btn-title') }}
+                                </label>
+                        </label>
                     </div>
 
                     <label class="btn btn-lg btn-primary add-image" @click="createFileType">
@@ -341,14 +352,13 @@
             ];
         });
 
-        let super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
         let variants = @json($product->variants);
 
         Vue.component('variant-form', {
             data: function () {
                 return {
                     variant: {},
-                    super_attributes: super_attributes
+                    superAttributes: {},
                 }
             },
 
@@ -356,6 +366,7 @@
 
             created: function () {
                 this.resetModel();
+                this.getSuperAttributes();
             },
 
             methods: {
@@ -373,7 +384,7 @@
                                     }
                                 }
 
-                                return matchCount == self.super_attributes.length;
+                                return matchCount == self.superAttributes.length;
                             })
 
                             if (filteredVariants.length) {
@@ -408,11 +419,17 @@
                 },
 
                 resetModel: function () {
-                    let self = this;
+                    setTimeout(() => {
+                        this.superAttributes.forEach(attribute => this.variant[attribute.code] = '')
+                    }, 1000);
+                },
 
-                    this.super_attributes.forEach(function (attribute) {
-                        self.variant[attribute.code] = '';
-                    })
+                getSuperAttributes: function() {
+                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product->id) }}")
+                        .then ((response) => {
+                            this.superAttributes = response.data.data;
+                        })
+                        .catch ((error) => {})
                 }
             }
         });
@@ -425,18 +442,16 @@
             data: function () {
                 return {
                     variants: variants,
-
-                    old_variants: @json(old('variants')),
-
-                    superAttributes: super_attributes
+                    oldVariants: @json(old('variants')),
+                    superAttributes: {}
                 }
             },
 
             created: function () {
                 let index = 0;
 
-                for (let key in this.old_variants) {
-                    let variant = this.old_variants[key];
+                for (let key in this.oldVariants) {
+                    let variant = this.oldVariants[key];
 
                     if (key.indexOf('variant_') !== -1) {
                         let inventories = [];
@@ -470,6 +485,8 @@
 
                     index++;
                 }
+                
+                this.getSuperAttributes();
             },
 
             methods: {
@@ -478,28 +495,35 @@
 
                     this.variants.splice(index, 1)
                 },
+
+                getSuperAttributes: function() {
+                    this.$http.get ("{{ route('admin.catalog.product.super-attributes', $product->id) }}")
+                        .then ((response) => {
+                            this.superAttributes = response.data.data;
+                        })
+                        .catch ((error) => {})
+                }
             }
         });
 
         Vue.component('variant-item', {
             template: '#variant-item-template',
 
-            props: ['index', 'variant'],
+            props: ['index', 'variant', 'attributes'],
 
             inject: ['$validator'],
 
             data: function () {
                 return {
-                    default_variant_id: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
+                    defaultVariantId: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
                     inventorySources: @json($inventorySources),
                     inventories: {},
                     totalQty: 0,
-                    superAttributes: super_attributes,
                     items: [],
                     imageCount: 0,
                     images: {},
                     imageData: [],
-                    new_image: [],
+                    newImage: [],
                 }
             },
 
@@ -542,13 +566,13 @@
                 },
 
                 checkDefaultVariant: function (variantId) {
-                    this.default_variant_id = variantId;
+                    this.defaultVariantId = variantId;
                 },
 
                 optionName: function (optionId) {
                     let optionName = '';
 
-                    this.superAttributes.forEach(function (attribute) {
+                    this.attributes.forEach(function (attribute) {
                         attribute.options.forEach(function (option) {
                             if (optionId == option.id) {
                                 optionName = option.admin_name;
@@ -624,7 +648,7 @@
 
                     reader.readAsDataURL(image);
 
-                    this.new_image[index] = 1;
+                    this.newImage[index] = 1;
                 },
             }
         });
