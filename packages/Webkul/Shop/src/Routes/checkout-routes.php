@@ -14,11 +14,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
         Route::post('coupon', 'storeCoupon')->name('shop.checkout.cart.coupon.apply');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.checkout.cart.coupon.remove');
-
-        /**
-         * To Do: Need to remove this end point once all pages completed and need to hit the ajaxified endpoint.
-         */
-        Route::post('checkout/cart/add/{id}', [CartController::class, 'add'])->name('shop.cart.add');
     });
 
     /**
