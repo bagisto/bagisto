@@ -284,7 +284,6 @@
                             >
                             </p>
 
-
                             <p 
                                 class="text-[16px] font-medium"
                                 @load="onPageLoaded"
@@ -333,9 +332,7 @@
                                     </x-slot:header>
 
                                     <x-slot:content>
-                                        <x-form
-                                            action="{{ route('shop.checkout.cart.coupon.apply') }}"
-                                        >
+                                        <x-form action="{{ route('shop.checkout.cart.coupon.apply') }}">
                                             <x-form.control-group>
                                                 <x-form.control-group.label>
                                                     @lang('shop::app.checkout.cart.coupon.code')
