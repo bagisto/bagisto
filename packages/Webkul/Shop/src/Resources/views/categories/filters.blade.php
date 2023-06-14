@@ -94,7 +94,7 @@
     <script type="text/x-template" id="v-price-filter-template">
         <div>
             <template v-if="isLoading">
-                <x-shop::shimmer.range-slider.index></x-shop::shimmer.range-slider.index>
+                <x-shop::shimmer.range-slider></x-shop::shimmer.range-slider>
             </template>
 
             <template v-else>
