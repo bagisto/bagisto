@@ -49,7 +49,12 @@
             <x-slot:content>
                 <ul v-if="filter.type === 'price'">
                     <li>
-                        <x-shop::range-slider></x-shop::range-slider>
+                        <v-price-filter
+                            :key="refreshKey"
+                            :default-price-range="appliedValues"
+                            @set-price-range="applyValue($event)"
+                        >
+                        </v-price-filter>
                     </li>
                 </ul>
 
@@ -65,7 +70,7 @@
                                 class="hidden peer"
                                 :value="option.id"
                                 v-model="appliedValues"
-                                @change="applyValue()"
+                                @change="applyValue"
                             />
 
                             <label
@@ -84,6 +89,19 @@
                 </ul>
             </x-slot:content>
         </x-shop::accordion>
+    </script>
+
+    <script type="text/x-template" id="v-price-filter-template">
+        <div>
+            <x-shop::range-slider
+                ::key="refreshKey"
+                ::default-allowed-max-range="allowedMaxPrice"
+                ::default-min-range="minRange"
+                ::default-max-range="maxRange"
+                @change-range="setPriceRange($event)"
+            >
+            </x-shop::range-slider>
+        </div>
     </script>
 
     <script type='module'>
@@ -152,7 +170,11 @@
                      * Clearing child components. Improvisation needed here.
                      */
                     this.$refs.filterItemComponent.forEach((filterItem) => {
-                        filterItem.$data.appliedValues = [];
+                        if (filterItem.filter.code === 'price') {
+                            filterItem.$data.appliedValues = null;
+                        } else {
+                            filterItem.$data.appliedValues = [];
+                        }
                     });
 
                     this.$emit('filter-applied', this.filters.applied);
@@ -171,34 +193,107 @@
                 return {
                     active: true,
 
-                    appliedValues: [],
+                    appliedValues: null,
+
+                    refreshKey: 0,
+                }
+            },
+
+            watch: {
+                appliedValues() {
+                    if (this.filter.code === 'price' && ! this.appliedValues) {
+                        ++this.refreshKey;
+                    }
+                },
+            },
+
+            mounted() {
+                if (this.filter.code === 'price') {
+                    /**
+                     * Improvisation needed here for `this.$parent.$data`.
+                     */
+                    this.appliedValues = this.$parent.$data.filters.applied[this.filter.code]?.join(',');
+
+                    ++this.refreshKey;
+
+                    return;
+                }
+
+                /**
+                 * Improvisation needed here for `this.$parent.$data`.
+                 */
+                this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
+            },
+
+            methods: {
+                applyValue($event) {
+                    if (this.filter.code === 'price') {
+                        this.appliedValues = $event;
+
+                        this.$emit('values-applied', this.appliedValues);
+
+                        return;
+                    }
+
+                    this.$emit('values-applied', this.appliedValues);
+                },
+            },
+        });
+
+        app.component('v-price-filter', {
+            template: '#v-price-filter-template',
+
+            props: ['defaultPriceRange'],
+
+            data() {
+                return {
+                    refreshKey: 0,
+
+                    allowedMaxPrice: 100,
+
+                    priceRange: this.defaultPriceRange ?? '0,100',
+                };
+            },
+
+            computed: {
+                minRange() {
+                    let priceRange = this.priceRange.split(',');
+
+                    return priceRange[0];
+                },
+
+                maxRange() {
+                    let priceRange = this.priceRange.split(',');
+
+                    return priceRange[1];
                 }
             },
 
             mounted() {
-                /**
-                 * Improvisation needed here. Need to figure out other way and sepration also.
-                 */
-                this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
-
                 this.getMaxPrice();
             },
 
             methods: {
                 getMaxPrice() {
-                    if (this.filter['code'] != 'price') {
-                        return;
-                    }
-
                     this.$axios.get('{{ route("shop.categories.max_price", $category->id) }}')
-                        .then((response) => {})
+                        .then((response) => {
+                            this.allowedMaxPrice = response.data.data.max_price;
+
+                            if (! this.defaultPriceRange) {
+                                this.priceRange = `0,${this.allowedMaxPrice}`;
+                            }
+
+                            ++this.refreshKey;
+                        })
                         .catch(error => {
                             console.log(error);
                         });
                 },
-                
-                applyValue() {
-                    this.$emit('values-applied', this.appliedValues);
+
+                setPriceRange($event) {
+                    this.priceRange = [$event.minRange, $event.maxRange].join(',');
+
+                    this.$emit('set-price-range', this.priceRange);
                 },
             },
         });

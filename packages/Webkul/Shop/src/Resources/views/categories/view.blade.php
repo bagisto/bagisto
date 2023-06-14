@@ -8,7 +8,7 @@
             >
         </div>
     </div>
-    
+
     {{-- Product Listing --}}
     <v-category
         src="{{ route('shop.products.index', ['category_id' => $category->id]) }}"
