@@ -44,7 +44,7 @@
                                 <p class="text-[16px]">
                                     @lang('shop::app.customers.account.wishlist.color')
 
-                                    @{{ item.item.color }}
+                                    @{{ item.color }}
                                 </p>
                                 
                                 <button 
@@ -63,7 +63,7 @@
                             </p>
                             
                             <x-shop::quantity-changer
-                                name="quantity"
+                                name="quantity" 
                                 value="1"
                                 class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center"
                                 @change="updateQuantity($event, item)"
@@ -72,7 +72,7 @@
                              
                             <button 
                                 class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center"
-                                @click="moveToCart(item.item.id)"
+                                @click="moveToCart(item.id)"
                             >
                                 @lang('shop::app.customers.account.wishlist.move-to-cart')
                             </button>
@@ -148,6 +148,10 @@
                                 product_id: id,
                             })
                             .then(response => {
+                                if (response.data.redirect) {
+                                    window.location.replace(response.data.data);
+                                }
+                                
                                 this.wishlist = response.data.data;
                             })
                             .catch(error => {});
