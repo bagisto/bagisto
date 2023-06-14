@@ -13,26 +13,15 @@ use Webkul\Shop\Http\Controllers\SubscriptionController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
-     * Cart merger middleware. This middleware will take care of the items
-     * which are deactivated at the time of buy now functionality. If somehow
-     * user redirects without completing the checkout then this will merge
-     * full cart.
-     *
-     * If some routes are not able to merge the cart, then place the route in this
-     * group.
+     * CMS pages.
      */
-    Route::group(['middleware' => ['cart.merger']], function () {
-        /**
-         * CMS pages.
-         */
-        Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])->name('shop.cms.page');
+    Route::get('page/{slug}', [PagePresenterController::class, 'presenter'])->name('shop.cms.page');
 
-        /**
-         * Fallback route.
-         */
-        Route::fallback(ProductsCategoriesProxyController::class . '@index')
-            ->name('shop.productOrCategory.index');
-    });
+    /**
+     * Fallback route.
+     */
+    Route::fallback(ProductsCategoriesProxyController::class . '@index')
+        ->name('shop.productOrCategory.index');
 
     /**
      * Store front home.

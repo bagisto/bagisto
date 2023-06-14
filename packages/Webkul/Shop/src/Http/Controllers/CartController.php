@@ -32,64 +32,6 @@ class CartController extends Controller
     }
 
     /**
-     * Add the product in the cart.
-     * 
-     * To Do: Need to remove this old methods once all pages are developed.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function add($id)
-    {
-        try {
-            if ($product = $this->productRepository->findOrFail($id)) {
-                if (! $product->visible_individually) {
-                    return redirect()->back();
-                }
-            }
-
-            Cart::deactivateCurrentCartIfBuyNowIsActive();
-
-            $result = Cart::addProduct($id, request()->all());
-
-            if ($this->onFailureAddingToCart($result)) {
-                return redirect()->back();
-            }
-
-            session()->flash('success', __('shop::app.checkout.cart.item.success'));
-
-            if ($customer = auth()->guard('customer')->user()) {
-                $this->wishlistRepository->deleteWhere([
-                    'product_id'  => $id,
-                    'customer_id' => $customer->id,
-                ]);
-            }
-
-            if (request()->get('is_buy_now')) {
-                Event::dispatch('shop.item.buy-now', $id);
-
-                return redirect()->route('shop.checkout.onepage.index');
-            }
-        } catch (\Exception $e) {
-            session()->flash('warning', __($e->getMessage()));
-
-            $product = $this->productRepository->findOrFail($id);
-
-            \Log::error(
-                'Shop CartController: ' . $e->getMessage(),
-                [
-                    'product_id' => $id,
-                    'cart_id'    => cart()->getCart() ?? 0
-                ]
-            );
-
-            return redirect()->route('shop.productOrCategory.index', $product->url_key);
-        }
-
-        return redirect()->back();
-    }
-
-    /**
      * Apply coupon to the cart.
      *
      * @return \Illuminate\Http\Response
@@ -144,31 +86,5 @@ class CartController extends Controller
         session()->flash('warning', trans('shop::app.checkout.cart.coupon.remove'));
 
         return redirect()->back();
-    }
-
-    /**
-     * Returns true, if result of adding product to cart
-     * is an array and contains a key "warning" or "info".
-     * 
-     * To Do: Need to remove this old methods once all pages are developed.
-     *
-     * @param  array  $result
-     * @return boolean
-     */
-    private function onFailureAddingToCart($result): bool
-    {
-        if (! is_array($result)) {
-            return false;
-        }
-
-        if (isset($result['warning'])) {
-            session()->flash('warning', $result['warning']);
-        } elseif (isset($result['info'])) {
-            session()->flash('info', $result['info']);
-        } else {
-            return false;
-        }
-
-        return true;
     }
 }
