@@ -2,15 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\Customer\AccountController;
-use Webkul\Shop\Http\Controllers\Customer\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\CustomerController;
-use Webkul\Shop\Http\Controllers\Customer\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\OrderController;
 use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
 use Webkul\Shop\Http\Controllers\Customer\ResetPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\SessionController;
-use Webkul\Shop\Http\Controllers\Customer\WishlistController;
+use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
+use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
+use Webkul\Shop\Http\Controllers\Customer\Account\WishlistController;
 use Webkul\Shop\Http\Controllers\ReviewController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
