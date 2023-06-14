@@ -89,6 +89,12 @@ window.app = createApp({
 });
 
 /**
+ * Global helpers registration.
+ */
+import LaravelHelpers from "./helpers/laravel-helpers";
+app.use(LaravelHelpers);
+
+/**
  * Global components registration;
  */
 app.component('VForm', Form);
