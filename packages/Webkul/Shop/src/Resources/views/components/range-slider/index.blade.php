@@ -1,35 +1,55 @@
-<v-range-slider></v-range-slider>
+<v-range-slider {{ $attributes }}></v-range-slider>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-range-slider-template">
         <div>
             <div class="flex items-center gap-[15px]">
-                <p class="text-[14px]">Range:</p>
-                <p class="text-[14px] font-semibold">@{{ minValue + '-' + maxValue }}</p>
+                <p class="text-[14px]">
+                    <!-- @translations -->
+                    @lang('Range:')
+                </p>
+
+                <p
+                    class="text-[14px] font-semibold"
+                    v-text="`${minRange} - ${maxRange}`"
+                >
+                </p>
             </div>
 
-            <div class="relative h-[4px] w-[246px] mt-[30px] mb-[24px]">
-                <div class="absolute left-0 right-0 top-0 h-[4px] bg-[#F5F5F5] rounded-[12px]">
+            <div class="flex relative justify-center items-center p-2 h-20 w-full mx-auto">
+                <div class="relative w-full h-[4px] rounded-2xl bg-gray-200">
                     <div
-                        id="track-highlight"
-                        class="absolute left-0 right-0 top-0 h-[4px] bg-navyBlue"
-                        ref="trackHighlight"
-                    ></div>
+                        ref="progress"
+                        class="absolute left-1/4 right-0 h-full rounded-xl bg-navyBlue"
+                    >
+                    </div>
 
-                    <button
-                        id="track1"
-                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px] -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
-                        ref="track1"
-                    ></button>
+                    <span>
+                        <input
+                            ref="minRange"
+                            type="range"
+                            :value="minRange"
+                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:ring-navyBlue [&::-webkit-slider-thumb]:ring [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:ring-navyBlue [&::-moz-range-thumb]:ring [&::-ms-thumb]:pointer-events-auto [&::-ms-thumb]:bg-white [&::-ms-thumb]:appearance-none [&::-ms-thumb]:h-[18px] [&::-ms-thumb]:w-[18px] [&::-ms-thumb]:rounded-full [&::-ms-thumb]:ring-navyBlue [&::-ms-thumb]:ring"
+                            :min="allowedMinRange"
+                            :max="allowedMaxRange"
+                            @input="handle('min')"
+                            @change="change"
+                        >
+                    </span>
 
-                    <button
-                        id="track2"
-                        class="absolute z-[2] text-left border border-red-50 bg-white outline-none -top-[7px] h-[18px] w-[18px] -ml-[9px] -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-navyBlue undefined ring ring-offset-1"
-                        ref="track2"
-                    ></button>
+                    <span>
+                        <input
+                            ref="maxRange"
+                            type="range"
+                            :value="maxRange"
+                            class="absolute w-full h-[4px] appearance-none pointer-events-none bg-transparent outline-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:ring-navyBlue [&::-webkit-slider-thumb]:ring [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-[18px] [&::-moz-range-thumb]:w-[18px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:ring-navyBlue [&::-moz-range-thumb]:ring [&::-ms-thumb]:pointer-events-auto [&::-ms-thumb]:bg-white [&::-ms-thumb]:appearance-none [&::-ms-thumb]:h-[18px] [&::-ms-thumb]:w-[18px] [&::-ms-thumb]:rounded-full [&::-ms-thumb]:ring-navyBlue [&::-ms-thumb]:ring"
+                            :min="allowedMinRange"
+                            :max="allowedMaxRange"
+                            @input="handle('max')"
+                            @change="change"
+                        >
+                    </span>
                 </div>
-
-                <div class="track" ref="_vpcTrack"></div>
             </div>
         </div>
     </script>
@@ -38,159 +58,63 @@
         app.component('v-range-slider', {
             template: '#v-range-slider-template',
 
-            props: {
-                min: {
-                    default: 10
-                },
-
-                max: {
-                    default: 210
-                }
-            },
+            props: [
+                'defaultAllowedMinRange',
+                'defaultAllowedMaxRange',
+                'defaultMinRange',
+                'defaultMaxRange',
+            ],
 
             data() {
                 return {
-                    minValue: 40,
+                    gap: 0.1,
 
-                    maxValue: 150,
+                    allowedMinRange: parseInt(this.defaultAllowedMinRange ?? 0),
 
-                    step: 5,
+                    allowedMaxRange: parseInt(this.defaultAllowedMaxRange ?? 100),
 
-                    totalSteps: 0,
+                    minRange: parseInt(this.defaultMinRange ?? 0),
 
-                    percentPerStep: 1,
-
-                    trackWidth: null,
-
-                    isDragging: false,
-
-                    possition: {
-                        currentTrack: null
-                    }
-                }
+                    maxRange: parseInt(this.defaultMaxRange ?? 100),
+                };
             },
 
             mounted() {
-                this.totalSteps = (this.max - this.min) / this.step;
-
-                this.percentPerStep = 100 / this.totalSteps;
-                
-                document.querySelector('#track1').style.left = this.valueToPercent(this.minValue) + '%';
-                
-                document.querySelector('#track2').style.left = this.valueToPercent(this.maxValue) + '%';
-                
-                this.setTrackHightlight();
-
-                var self = this;
-
-                ['mousedown', 'mouseup', 'mousemove', 'touchstart', 'touchmove', 'touchend'].forEach( type => {
-                    if (type == 'mouseup' || type == 'mousemove') {
-                        document.body.addEventListener(type, (event) => {
-                            if (self.isDragging && self.possition.currentTrack) {
-                                self[type](event, self.possition.currentTrack);
-                            }
-                        })
-                    }
-
-                    document.querySelector('#track1').addEventListener(type, (event) => {
-                        event.stopPropagation();
-
-                        self[type](event, 'track1');
-                    })
-
-                    document.querySelector('#track2').addEventListener(type, (event) => {
-                        event.stopPropagation();
-
-                        self[type](event, 'track2');
-                    })
-                })
+                this.handleProgressBar();
             },
 
             methods: {
-                moveTrack(track, event) {
-                    //if (! this.isDragging) {
-                        console.log(this.isDragging, track, event);
-                    //}
+                handle(rangeType) {
+                    this.minRange = parseInt(this.$refs.minRange.value);
 
-                    let percentInPx = this.getPercentInPx();
-                    
-                    let trackX = Math.round(this.$refs._vpcTrack.getBoundingClientRect().left);
-                    let clientX = event.clientX;
-                    let moveDiff = clientX-trackX;
+                    this.maxRange = parseInt(this.$refs.maxRange.value);
 
-                    let moveInPct = moveDiff / percentInPx;
-
-                    if (moveInPct < 1 || moveInPct > 100) return;
-
-                    let value = ( Math.round(moveInPct / this.percentPerStep) * this.step ) + this.min;
-
-                    if (track === 'track1') {
-                        if (value >= (this.maxValue - this.step)) return;
-
-                        this.minValue = value;
+                    if (this.maxRange - this.minRange < this.gap) {
+                        if (rangeType === 'min') {
+                            this.minRange = this.maxRange - this.gap;
+                        } else {
+                            this.maxRange = this.minRange + this.gap;
+                        }
+                    } else {
+                        this.handleProgressBar();
                     }
-
-                    if (track === 'track2') {
-                        if(value <= (this.minValue + this.step)) return;
-
-                        this.maxValue = value;
-                    }
-                    
-                    this.$refs[track].style.left = moveInPct + '%';
-
-                    this.setTrackHightlight();
                 },
 
-                mousedown(event, track) {
-                    if (this.isDragging) return;
+                handleProgressBar() {
+                    this.$refs.progress.style.left = (this.minRange / this.allowedMaxRange) * 100 + '%';
 
-                    this.isDragging = true;
-                    this.possition.currentTrack = track;
+                    this.$refs.progress.style.right = 100 - (this.maxRange / this.allowedMaxRange) * 100 + '%';
                 },
 
-                touchstart(event, track) {
-                    this.mousedown(event, track);
+                change() {
+                    this.$emit('change-range', {
+                        allowedMinRange: this.allowedMinRange,
+                        allowedMaxRange: this.allowedMaxRange,
+                        minRange: this.minRange,
+                        maxRange: this.maxRange,
+                    });
                 },
-
-                mouseup(event, track) {
-                    if (! this.isDragging) return;
-
-                    this.isDragging = false;
-                },
-
-                touchend(event, track) {
-                    this.mouseup(event, track);
-                },
-
-                mousemove(event, track) {
-                    if (! this.isDragging) return;
-
-                    this.moveTrack(track, event);
-                },
-
-                touchmove(event, track) {
-                    this.mousemove(event.changedTouches[0], track);
-                },
-
-                valueToPercent(value) {
-                    return ((value - this.min) / this.step) * this.percentPerStep;
-                },
-
-                setTrackHightlight(){
-                    this.$refs.trackHighlight.style.left = this.valueToPercent(this.minValue) + '%';
-
-                    this.$refs.trackHighlight.style.width = (this.valueToPercent(this.maxValue) - this.valueToPercent(this.minValue)) + '%';
-                },
-
-                getPercentInPx() {
-                    let trackWidth = this.$refs._vpcTrack.offsetWidth;
-                    let oneStepInPx = trackWidth / this.totalSteps;
-                    
-                    let percentInPx = oneStepInPx / this.percentPerStep;
-                    
-                    return percentInPx;
-                }
-            }
+            },
         });
     </script>
 @endPushOnce

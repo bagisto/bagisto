@@ -92,9 +92,11 @@
                 },
 
                 addToWishlist() {
-                    this.$axios.post(`{{ route('shop.customers.account.wishlist.store', '') }}/${this.product.id}`)
+                    this.$axios.post(`{{ route('shop.customers.account.wishlist.store') }}`, {
+                            product_id: this.product.id
+                        })
                         .then(response => {
-                            alert(response.data.message);
+                            alert(response.data.data.message);
                         })
                         .catch(error => {});
                 },
