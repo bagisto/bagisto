@@ -227,11 +227,7 @@
                     addToCart(isBuyNow = false) {
                         let formData = new FormData(this.$refs.formData);
 
-                        let formObject = {};
-
-                        formData.forEach((value, key) => {
-                            formObject[key] = value
-                        });
+                        let formObject = Object.fromEntries(formData.entries());
 
                         this.$axios.post('{{ route("shop.checkout.cart.store") }}', formObject, {
                                 headers: {
@@ -239,8 +235,8 @@
                                 }
                             })
                             .then(response => {
-                                if (response.data.message) {
-                                    alert(response.data.message);
+                                if (response?.status === 200) {
+                                    alert(response.data.message || response.data.data.message);
                                 }
                             })
                             .catch(error => {});
