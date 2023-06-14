@@ -248,7 +248,7 @@
                                 @lang('shop::app.checkout.cart.subtotal')
                             </p>
 
-						    <p 
+                            <p 
                                 class="w-[30%] h-[24px] shimmer bg-[#E9E9E9]"
                                 v-show="isPageLoading"
                             >
@@ -278,7 +278,7 @@
                                 @lang('shop::app.checkout.cart.tax') 0 %
                             </p>
 
-						    <p 
+                            <p 
                                 class="w-[36%] h-[24px] shimmer bg-[#E9E9E9]"
                                 v-show="isPageLoading"
                             >
@@ -308,7 +308,7 @@
                                 @lang('shop::app.checkout.cart.coupon.discount')
                             </p>
 
-						    <p 
+                            <p 
                                 class="w-[31%] h-[24px] shimmer bg-[#E9E9E9]"
                                 v-show="isPageLoading"
                             >
@@ -395,7 +395,7 @@
                                 @lang('shop::app.checkout.cart.grand-total')
                             </p>
 
-						    <p 
+                            <p 
                                 class="w-[38%] h-[24px] shimmer bg-[#E9E9E9]"
                                 v-show="isPageLoading"
                             >
@@ -444,7 +444,7 @@
 
                         applied: {
                             quantity: {},
-                        },
+                        }
                     }
                 },
 
