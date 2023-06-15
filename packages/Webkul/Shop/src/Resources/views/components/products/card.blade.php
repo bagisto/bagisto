@@ -112,27 +112,28 @@
                                 alert(response.data.data.message);
                             })
                             .catch(error => {});
-                    } else {
-                        let updatedItems = [productId];
 
-                        let existingItems = this.getStorageValue('compare_items');
+                        return;
+                    }
 
-                        if (existingItems) {
-                            if (! existingItems.includes(productId)) {
-                                if (existingItems.indexOf(this.productId) == -1) {
-                                    updatedItems = existingItems.concat(updatedItems);
+                    let updatedItems = [productId];
 
-                                    this.setStorageValue('compare_items', updatedItems);
+                    let existingItems = this.getStorageValue('compare_items');
 
-                                    alert('Added product in compare for guest');
-                                }
-                            } else {
-                                alert('Product is already added in compare.');
+                    if (existingItems) {
+                        if (! existingItems.includes(productId)) {
+                            if (existingItems.indexOf(this.productId) == -1) {
+                                updatedItems = existingItems.concat(updatedItems);
+
+                                this.setStorageValue('compare_items', updatedItems);
+
+                                alert('Added product in compare for guest');
                             }
                         } else {
-                            this.setStorageValue('compare_items', updatedItems);
+                            alert('Product is already added in compare.');
                         }
-
+                    } else {
+                        this.setStorageValue('compare_items', updatedItems);
                     }
                 },
 
@@ -153,7 +154,7 @@
                 },
 
                 addToCart() {
-                    this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
+                    this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
                             'quantity': 1,
                             'product_id': this.product.id,
                         })

@@ -55,7 +55,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Compare products
      */
-    Route::get('compare', [CompareController::class, 'index'])->name('shop.compare');
+    Route::get('compare', [CompareController::class, 'index'])->name('shop.compare.index');
 
     /**
      * Product and categories routes.

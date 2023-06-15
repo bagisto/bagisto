@@ -178,7 +178,7 @@
                             <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
                                 <div
                                     class=" flex justify-center items-center gap-[10px] cursor-pointer"
-                                    @click='addToCompare({{ $product->id }})'
+                                    @click="addToCompare({{ $product->id }})"
                                 >
                                     <span class="icon-compare text-[24px]"></span>
                                     @lang('shop::app.products.compare')
@@ -234,7 +234,7 @@
                     addToCart() {
                         let formData = new FormData(this.$refs.formData);
 
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', formData, {
+                        this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }

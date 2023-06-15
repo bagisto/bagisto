@@ -107,9 +107,8 @@
             </div>
         </form>
 
-        {{-- To Do (@amit-webkul) --}}
         <div>
-            <a href="{{ route('shop.compare') }}">
+            <a href="{{ route('shop.compare.index') }}">
                 <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
             </a>
         </div>

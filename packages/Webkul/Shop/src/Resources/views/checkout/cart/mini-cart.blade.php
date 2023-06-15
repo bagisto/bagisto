@@ -128,7 +128,7 @@
 
            methods: {
                 getCart() {
-                    this.$axios.get('{{ route('shop.checkout.cart.index') }}')
+                    this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                         .then(response => {
                             this.cart = response.data.data;
                         })
@@ -140,7 +140,7 @@
 
                     qty[item.id] = quantity;
 
-                    this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
+                    this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty })
                         .then(response => {
                             this.cart = response.data.data;
                         })
@@ -148,7 +148,7 @@
                 },
 
                 removeItem(itemId) {
-                    this.$axios.post('{{ route('shop.checkout.cart.destroy') }}', {
+                    this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
                             '_method': 'DELETE',
                             'cart_item_id': itemId,
                         })

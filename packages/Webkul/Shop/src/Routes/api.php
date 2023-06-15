@@ -37,13 +37,13 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
-        Route::get('', 'index')->name('shop.checkout.cart.index');
+        Route::get('', 'index')->name('shop.api.checkout.cart.index');
 
-        Route::post('', 'store')->name('shop.checkout.cart.store');
+        Route::post('', 'store')->name('shop.api.checkout.cart.store');
 
-        Route::put('', 'update')->name('shop.checkout.cart.update');
+        Route::put('', 'update')->name('shop.api.checkout.cart.update');
 
-        Route::delete('', 'destroy')->name('shop.checkout.cart.destroy');
+        Route::delete('', 'destroy')->name('shop.api.checkout.cart.destroy');
     });
 
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
