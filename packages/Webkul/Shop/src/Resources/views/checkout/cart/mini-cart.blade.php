@@ -30,21 +30,9 @@
                     <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items?.length">
                         <div class="flex gap-x-[20px]" v-for="item in cart?.items">
                             <div class="">
-                                <div
-                                    class="relative overflow-hidden rounded-[12px] min-w-[110px] min-h-[110px] bg-[#E9E9E9] shimmer"
-                                    v-show="isImageLoading"
-                                >
-                                    <img 
-                                        class="rounded-sm bg-[#F5F5F5]" 
-                                        src=""
-                                    >
-                                </div>
-
                                 <img 
                                     src="{{ bagisto_asset('images/wishlist-user.png')}}" 
                                     class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                                    @load="onImageLoad()"
-                                    v-show="! isImageLoading"
                                     alt="" 
                                     title=""
                                 >
@@ -141,10 +129,6 @@
             data() {
                 return  {
                     cart: null,
-
-                    isLoading: true,
-
-                    isImageLoading: true,
                 }
             },
 
@@ -153,15 +137,9 @@
            },
 
            methods: {
-                onImageLoad() {
-                    this.isImageLoading = false;
-                },
-
                 getCart() {
                     this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                         .then(response => {
-                            this.isLoading = false;
-
                             this.cart = response.data.data;
                         })
                         .catch(error => {});
