@@ -34,7 +34,10 @@
                                     class="relative overflow-hidden rounded-[12px] min-w-[110px] min-h-[110px] bg-[#E9E9E9] shimmer"
                                     v-show="isImageLoading"
                                 >
-                                    <img class="rounded-sm bg-[#F5F5F5]" src="">
+                                    <img 
+                                        class="rounded-sm bg-[#F5F5F5]" 
+                                        src=""
+                                    >
                                 </div>
 
                                 <img 
@@ -54,6 +57,7 @@
                                         v-text="item.name"
                                     >
                                     </p>
+
                                     <p 
                                         class="text-[18px]" 
                                         v-text="item.formatted_price"
@@ -82,7 +86,10 @@
                         </div>
                     </div>
     
-                    <div class="pb-[30px]" v-else>
+                    <div 
+                        class="pb-[30px]" 
+                        v-else
+                    >
                         <div class="grid gap-y-[20px] b-0 place-items-center">
                             <img 
                                 src="{{ bagisto_asset('images/thank-you.png') }}" 
@@ -106,47 +113,19 @@
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
                     <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
-                        <p 
-                            class="w-[15%] h-[21px] shimmer bg-[#E9E9E9]"
-                            v-show="isPageLoading"
-                        >
-                        </p>
-
-                        <p 
-                            class="text-[14px] font-medium text-[#7D7D7D]"
-                            @load="onPageLoaded"
-                            v-show="! isPageLoading"
-                        >
+                        <p class="text-[14px] font-medium text-[#7D7D7D]">
                             @lang('shop::app.checkout.cart.subtotal')
-                        </p>
-        
-                        <p 
-                            class="w-[38%] h-[24px] shimmer bg-[#E9E9E9]"
-                            v-show="isPageLoading"
-                        >
                         </p>
 
                         <p 
                             class="text-[30px] font-semibold"
-                            @load="onPageLoaded"
-                            v-show="! isPageLoading"
                             v-text="cart.formatted_grand_total"
                         >
                         </p>
                     </div>
         
                     <div class="px-[25px]">
-                        <div 
-                            class="block place-self-end mt-[15px] rounded-[18px]  w-[100%] h-[46px] shimmer bg-[#E9E9E9]"
-                            v-show="isPageLoading"
-                        >
-                        </div>
-
-                        <div 
-                            class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
-                            @load="onPageLoaded"
-                            v-show="! isPageLoading"
-                        >
+                        <div class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]">
                             @lang('shop::app.checkout.cart.continue-to-checkout')
                         </div>
                     </div>
@@ -174,9 +153,9 @@
            },
 
            methods: {
-            onImageLoad() {
-                this.isImageLoading = false;
-            },
+                onImageLoad() {
+                    this.isImageLoading = false;
+                },
 
                 getCart() {
                     this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')

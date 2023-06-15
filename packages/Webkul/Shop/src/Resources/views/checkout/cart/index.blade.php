@@ -66,7 +66,7 @@
                                     <img 
                                         class="max-w-[110px] max-h-[110px] rounded-[12px]" 
                                         src="{{ bagisto_asset('images/wishlist-user.png')}}"
-                                        @load="onImageLoad()"
+                                        @load="onImageLoad"
                                         v-show="! isImageLoading"
                                         alt="" 
                                         title=""
@@ -255,8 +255,6 @@
 
                 data() {
                     return  {
-                        isPageLoading: true,
-
                         cart: [],
 
                         applied: {
