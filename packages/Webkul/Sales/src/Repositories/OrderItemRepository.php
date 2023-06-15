@@ -231,9 +231,7 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return Collection
+     * Get top sellling products by date.
      */
     public function getTopSellingProductsByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
