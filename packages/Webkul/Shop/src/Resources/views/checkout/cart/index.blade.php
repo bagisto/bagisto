@@ -16,7 +16,9 @@
                 </div>
             </div>
 
-            <v-cart></v-cart>
+            <v-cart>
+                <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
+            </v-cart>
         </div>
     </div>
 

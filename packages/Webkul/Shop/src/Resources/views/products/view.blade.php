@@ -118,7 +118,7 @@
 
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                            <p class="text-[24px] flex items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                            <p class="text-[24px] flex gap-2.5 items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
                                 {!! $product->getTypeInstance()->getPriceHtml() !!}
                             </p>
 
