@@ -389,9 +389,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return int|null
+     * Get orders count by date.
      */
     public function getOrdersCountByDate(?Carbon $from = null, Carbon $to = null): ?int
     {
@@ -411,9 +409,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return float|null
+     * Calculate sale amount by date.
      */
     public function calculateSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
     {
@@ -439,9 +435,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return float|null
+     * Calculate average sale amount by date.
      */
     public function calculateAvgSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
     {
@@ -467,9 +461,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return Collection
+     * Get customer with most sales by date.
      */
     public function getCustomerWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
@@ -493,7 +485,6 @@ class OrderRepository extends Repository
 
         return $query->groupBy('customer_email')->orderBy('total_base_grand_total', 'DESC')->limit(5)->get();
     }
-
 
     /**
      * This method will find order if id is given else pass the order as it is.
