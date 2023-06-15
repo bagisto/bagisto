@@ -218,7 +218,7 @@
                     return {
                         qty: 1,
 
-                        customer: '{{ auth()->guard('customer')->check() }}',
+                        isCustomer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
 
@@ -250,7 +250,10 @@
                     },
 
                     addToCompare(productId) {
-                        if (this.customer) {
+                        /**
+                         * This will handle for customers.
+                         */
+                        if (this.isCustomer) {
                             this.$axios.post('{{ route("shop.api.compare.store") }}', {
                                     'product_id': productId
                                 })
@@ -262,27 +265,30 @@
                             return;
                         }
 
-                        let updatedItems = [productId];
+                        /**
+                         * This will handle for guests.
+                         */
+                        let existingItems = this.getStorageValue(this.getCompareItemsStorageKey()) ?? [];
 
-                        let existingItems = this.getStorageValue('compare_items');
-
-                        if (existingItems) {
+                        if (existingItems.length) {
                             if (! existingItems.includes(productId)) {
-                                if (existingItems.indexOf(this.productId) == -1) {
-                                    updatedItems = existingItems.concat(updatedItems);
+                                existingItems.push(productId);
 
-                                    this.setStorageValue('compare_items', updatedItems);
+                                this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
 
-                                    alert('Added product in compare for guest');
-                                }
+                                alert('Added product in compare.');
                             } else {
                                 alert('Product is already added in compare.');
                             }
                         } else {
-                            this.setStorageValue('compare_items', updatedItems);
+                            this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
 
-                            alert('Added product in compare for guest');
+                            alert('Added product in compare.');
                         }
+                    },
+
+                    getCompareItemsStorageKey() {
+                        return 'compare_items';
                     },
 
                     setStorageValue(key, value) {
