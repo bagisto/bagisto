@@ -34,25 +34,13 @@ class DashboardServiceCest
             $productRepository
         );
     }
-
-    /**
-     * Test Start Date.
-     *
-     * @param  UnitTester  $I
-     * @return void
-     */
+    
     public function testStartDate(UnitTester $I): void
     {
         $this->dashboardService->setStartDate(now()->subDays(30));
         $I->assertEquals(now()->subDays(30)->startOfDay(), $this->dashboardService->getStartDate());
     }
 
-    /**
-     * Test End Date.
-     *
-     * @param  UnitTester  $I
-     * @return void
-     */
     public function testEndDate(UnitTester $I): void
     {
         $this->dashboardService->setEndDate(now()->subDay());
