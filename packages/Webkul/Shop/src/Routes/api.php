@@ -53,7 +53,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
              *
              * Need to fix the `api` for all route.
              */
-            Route::get('', 'index')->name('api.shop.customers.account.wishlist.index');
+            Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 
             Route::post('', 'store')->name('shop.customers.account.wishlist.store');
 

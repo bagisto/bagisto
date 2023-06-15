@@ -9,14 +9,14 @@
     @case('email')
     @case('password')
         <v-field
-            type="{{ $type }}"
             name="{{ $name }}"
             v-slot="{ field }"
             {{ $attributes }}
         >
             <input
-                v-bind="field"
+                type="{{ $type }}"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                v-bind="field"
                 {{ $attributes->except(['value'])->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
             >
         </v-field>
@@ -25,14 +25,13 @@
 
     @case('textarea')
         <v-field
-            type="{{ $type }}"
             name="{{ $name }}"
             v-slot="{ field }"
             {{ $attributes }}
         >
             <textarea
-                v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                v-bind="field"
                 {{ $attributes->except(['value'])->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
             >
             </textarea>
