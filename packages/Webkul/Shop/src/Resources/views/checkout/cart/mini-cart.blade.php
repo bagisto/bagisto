@@ -22,80 +22,74 @@
             </x-slot:header>
 
             <x-slot:content>
-                <template v-if="isLoading">
-                    <x-shop::shimmer.checkout.cart.mini-cart :count="2"></x-shop::shimmer.checkout.cart.mini-cart>
-                </template>
-
-                <template v-else>
-                    <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items?.length">
-                        <div class="flex gap-x-[20px]" v-for="item in cart?.items">
-                            <div class="">
-                                <img 
-                                    src="{{ bagisto_asset('images/wishlist-user.png')}}" 
-                                    class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                                    alt="" 
-                                    title=""
-                                >
-                            </div>
-        
-                            <div class="grid gap-y-[10px] flex-1">
-                                <div class="flex flex-wrap justify-between">
-                                    <p 
-                                        class="text-[16px] font-medium max-w-[80%]" 
-                                        v-text="item.name"
-                                    >
-                                    </p>
-
-                                    <p 
-                                        class="text-[18px]" 
-                                        v-text="item.formatted_price"
-                                    >
-                                    </p>
-                                </div>
-        
-                                <div class="flex gap-[20px] items-center flex-wrap">
-                                    <x-shop::quantity-changer
-                                        name="quantity"
-                                        ::value="item?.quantity"
-                                        class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
-                                        @change="updateItem($event, item)"
-                                    >
-                                    </x-shop::quantity-changer>
-                                    
-                                    <button 
-                                        type="button"
-                                        class="text-[#4D7EA8]"
-                                        @click="removeItem(item.id)"
-                                    >
-                                        @lang('shop::app.checkout.cart.remove')
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div 
-                        class="pb-[30px]" 
-                        v-else
-                    >
-                        <div class="grid gap-y-[20px] b-0 place-items-center">
+                <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items?.length">
+                    <div class="flex gap-x-[20px]" v-for="item in cart?.items">
+                        <div class="">
                             <img 
-                                src="{{ bagisto_asset('images/thank-you.png') }}" 
-                                class="" 
+                                src="{{ bagisto_asset('images/wishlist-user.png')}}" 
+                                class="max-w-[110px] max-h-[110px] rounded-[12px]"
                                 alt="" 
                                 title=""
                             >
-                    
-                            <p class="text-[20px]">
-                                @lang('shop::app.checkout.cart.empty-cart')
-                            </p>
-                    
-                            <div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
-                                @lang('shop::app.checkout.cart.return-to-shop')
+                        </div>
+    
+                        <div class="grid gap-y-[10px] flex-1">
+                            <div class="flex flex-wrap justify-between">
+                                <p 
+                                    class="text-[16px] font-medium max-w-[80%]" 
+                                    v-text="item.name"
+                                >
+                                </p>
+
+                                <p 
+                                    class="text-[18px]" 
+                                    v-text="item.formatted_price"
+                                >
+                                </p>
+                            </div>
+    
+                            <div class="flex gap-[20px] items-center flex-wrap">
+                                <x-shop::quantity-changer
+                                    name="quantity"
+                                    ::value="item?.quantity"
+                                    class="gap-x-[20px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
+                                    @change="updateItem($event, item)"
+                                >
+                                </x-shop::quantity-changer>
+                                
+                                <button 
+                                    type="button"
+                                    class="text-[#4D7EA8]"
+                                    @click="removeItem(item.id)"
+                                >
+                                    @lang('shop::app.checkout.cart.remove')
+                                </button>
                             </div>
                         </div>
                     </div>
-                </template>
+                </div>
+
+                <div 
+                    class="pb-[30px]" 
+                    v-else
+                >
+                    <div class="grid gap-y-[20px] b-0 place-items-center">
+                        <img 
+                            src="{{ bagisto_asset('images/thank-you.png') }}" 
+                            class="" 
+                            alt="" 
+                            title=""
+                        >
+                
+                        <p class="text-[20px]">
+                            @lang('shop::app.checkout.cart.empty-cart')
+                        </p>
+                
+                        <div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
+                            @lang('shop::app.checkout.cart.return-to-shop')
+                        </div>
+                    </div>
+                </div>
             </x-slot:content>
 
             <x-slot:footer>
