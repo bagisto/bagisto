@@ -2,17 +2,16 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Helpers\Indexers\Inventory;
+use Webkul\Product\Jobs\Indexers\Inventory;
 
 class Refund
 {
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
      * @return void
      */
-    public function __construct(protected Inventory $inventoryIndexer)
+    public function __construct()
     {
     }
 
@@ -30,6 +29,9 @@ class Refund
             $products[] = $item->product;
         }
 
-        $this->inventoryIndexer->reindexRows($products);
+        Inventory::dispatch(
+            $products,
+            'reindexRows'
+        );
     }
 }

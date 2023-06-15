@@ -9,11 +9,11 @@ use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
 
 class Product
 {
-    protected $jobs = [
+    protected $indexers = [
         'inventory' => Inventory::class,
         'price'     => Price::class,
         'elastic'   => ElasticSearch::class,
-        'flat'      => Webkul\Product\Jobs\Indexers\Flat::class,
+        'flat'      => Flat::class,
     ];
 
     /**
@@ -40,7 +40,7 @@ class Product
      */
     public function afterCreate($product)
     {
-        app($this->jobs['flat'])->dispatch($product);
+        app($this->indexers['flat'])->refresh($product);
     }
 
     /**
@@ -53,7 +53,7 @@ class Product
     {
         $products = $this->getAllRelatedProducts($product);
 
-        app($this->jobs['flat'])->dispatch($product);
+        app($this->indexers['flat'])->refresh($product);
 
         app($this->indexers['inventory'])->reindexRows($products);
 

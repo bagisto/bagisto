@@ -10,9 +10,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Helpers\Indexers\Inventory as Indexer;
+use Webkul\Product\Helpers\Indexers\Price as Indexer;
 
-class Inventory implements ShouldQueue
+class Price implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
@@ -22,7 +22,7 @@ class Inventory implements ShouldQueue
     protected $products;
 
     /**
-     * Accept inventory index methods reindexRows, reindexRow
+     * Accept price index methods reindexRows, reindexRow
      *
      * @var string $method
      */

@@ -2,17 +2,16 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Helpers\Indexers\Inventory;
+use Webkul\Product\Jobs\Indexers\Inventory;
 
 class Order
 {
     /**
      * Create a new listener instance.
      *
-     * @param  \Webkul\Product\Helpers\Indexers\Inventory  $inventoryIndexer
      * @return void
      */
-    public function __construct(protected Inventory $inventoryIndexer)
+    public function __construct()
     {
     }
 
@@ -27,9 +26,12 @@ class Order
         $products = [];
 
         foreach ($order->all_items as $item) {
-            $products[] = $item->product;
+            $products[] = $item->product->id;
         }
-
-        $this->inventoryIndexer->reindexRows($products);
+        
+        Inventory::dispatch(
+            collect($products),
+            'reindexRows'
+        );
     }
 }

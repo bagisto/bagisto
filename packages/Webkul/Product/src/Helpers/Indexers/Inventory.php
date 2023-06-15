@@ -110,7 +110,7 @@ class Inventory extends AbstractIndexer
 
         foreach ($products as $product) {
             $this->setProduct($product);
-
+            
             foreach ($this->getChannels() as $channel) {
                 $this->setChannel($channel);
 
