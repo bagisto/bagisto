@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductInventoryRepository extends Repository
@@ -36,5 +38,19 @@ class ProductInventoryRepository extends Repository
                 'qty' => $qty ?? 0,
             ]);
         }
+    }
+
+    /**
+     * Get stock threshold.
+     */
+    public function getStockThreshold(): Collection
+    {
+        return $this->getModel()
+            ->with('product', 'product.attribute_family', 'product.attribute_values', 'product.images')
+            ->select('product_id', DB::raw('SUM(qty) as total_qty'))
+            ->groupBy('product_id')
+            ->orderBy('total_qty', 'ASC')
+            ->limit(5)
+            ->get();
     }
 }

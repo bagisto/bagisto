@@ -2,6 +2,7 @@
 
 namespace Webkul\Customer\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
@@ -58,7 +59,7 @@ class CustomerRepository extends Repository
         if ($customer = auth()->guard()->user()) {
             return $customer->group;
         }
-        
+
         return $this->customerGroupRepository->getCustomerGuestGroup();
     }
 
@@ -156,5 +157,25 @@ class CustomerRepository extends Repository
                 'customer_id' => $customer->id,
             ]);
         });
+    }
+
+    /**
+     * Get customers count by date.
+     */
+    public function getCustomersCountByDate(?Carbon $from = null, Carbon $to = null): ?int
+    {
+        if ($from && $to) {
+            return $this->count([['created_at', '>=', $from], ['created_at', '<=', $to]]);
+        }
+
+        if ($from) {
+            return $this->count([['created_at', '>=', $from]]);
+        }
+
+        if ($to) {
+            return $this->count([['created_at', '<=', $to]]);
+        }
+
+        return $this->count();
     }
 }

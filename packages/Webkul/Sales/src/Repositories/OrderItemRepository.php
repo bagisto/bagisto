@@ -2,6 +2,9 @@
 
 namespace Webkul\Sales\Repositories;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Contracts\OrderItem;
@@ -134,7 +137,7 @@ class OrderItemRepository extends Repository
                         $qty = $item->parent->qty_ordered;
                     } else {
                         $qty = 1;
-                        
+
                         Log::info('OrderItem has no parent with `qty_ordered`', [
                             'orderItem' => $item,
                             'parent'    => $item->parent,
@@ -225,5 +228,46 @@ class OrderItemRepository extends Repository
         }
 
         $orderedInventory->update(['qty' => $qty]);
+    }
+
+    /**
+     * Get top sellling products by date.
+     */
+    public function getTopSellingProductsByDate(?Carbon $from = null, ?Carbon $to = null): Collection
+    {
+        $query = $this->getModel()
+            ->with('product', 'product.images')
+            ->select('product_id', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->whereNull('parent_id');
+
+        if ($from && $to) {
+            $query->whereBetween('order_items.created_at', [$from, $to]);
+        } elseif ($from) {
+            $query->where('order_items.created_at', '>=', $from);
+        } elseif ($to) {
+            $query->where('order_items.created_at', '<=', $to);
+        }
+
+        return $query->groupBy('product_id')->orderBy('total_qty_ordered', 'DESC')->limit(5)->get();
+    }
+
+    /**
+     * Get top sellling order items by date.
+     */
+    public function getTopSellingOrderItemsByDate(?Carbon $from = null, ?Carbon $to = null): Collection
+    {
+        $query = $this->getModel()
+            ->with('product', 'product.categories', 'product.categories.translations')
+            ->select('product_id', DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'));
+
+        if ($from && $to) {
+            $query->whereBetween('order_items.created_at', [$from, $to]);
+        } elseif ($from) {
+            $query->where('order_items.created_at', '>=', $from);
+        } elseif ($to) {
+            $query->where('order_items.created_at', '<=', $to);
+        }
+
+        return $query->groupBy('product_id')->orderBy('total_qty_invoiced', 'DESC')->limit(5)->get();
     }
 }
