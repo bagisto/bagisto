@@ -468,7 +468,7 @@ class OrderRepository extends Repository
         $dbPrefix = DB::getTablePrefix();
 
         $query = $this->getModel()
-            ->whereNotIn("{$dbPrefix}orders.status", ['closed', 'canceled'])
+            ->whereNotIn("orders.status", ['closed', 'canceled'])
             ->select(
                 'customer_id',
                 'customer_email',
@@ -485,11 +485,11 @@ class OrderRepository extends Repository
             );
 
         if ($from && $to) {
-            $query->whereBetween("{$dbPrefix}orders.created_at", [$from, $to]);
+            $query->whereBetween("orders.created_at", [$from, $to]);
         } elseif ($from) {
-            $query->where("{$dbPrefix}orders.created_at", '>=', $from);
+            $query->where("orders.created_at", '>=', $from);
         } elseif ($to) {
-            $query->where("{$dbPrefix}orders.created_at", '<=', $to);
+            $query->where("orders.created_at", '<=', $to);
         }
 
         return $query->groupBy('customer_email')->orderBy('total_base_grand_total', 'DESC')->limit(5)->get();
