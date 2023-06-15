@@ -160,9 +160,7 @@ class CustomerRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return int|null
+     * Get customers count by date.
      */
     public function getCustomersCountByDate(?Carbon $from = null, Carbon $to = null): ?int
     {
