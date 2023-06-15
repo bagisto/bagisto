@@ -254,9 +254,7 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * @param Carbon|null $from
-     * @param Carbon|null $to
-     * @return Collection
+     * Get top sellling order items by date.
      */
     public function getTopSellingOrderItemsByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
@@ -270,7 +268,6 @@ class OrderItemRepository extends Repository
             $query->where('order_items.created_at', '>=', $from);
         } elseif ($to) {
             $query->where('order_items.created_at', '<=', $to);
-
         }
 
         return $query->groupBy('product_id')->orderBy('total_qty_invoiced', 'DESC')->limit(5)->get();
