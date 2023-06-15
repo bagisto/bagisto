@@ -41,7 +41,7 @@ class ProductInventoryRepository extends Repository
     }
 
     /**
-     * @return Collection
+     * Get stock threshold.
      */
     public function getStockThreshold(): Collection
     {
