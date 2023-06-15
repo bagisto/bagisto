@@ -35,8 +35,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        // $customer = auth()->guard('customer')->user();
-        $customer = Auth::guard('customer')->user();
+        $customer = auth()->guard('customer')->user();
 
         return view('shop::customers.account.addresses.index')->with('addresses', $customer->addresses);
     }

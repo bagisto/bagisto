@@ -6,6 +6,7 @@ use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
+use Webkul\Shop\Http\Controllers\API\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
@@ -64,5 +65,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::get('compare-items/{product_id}', [CompareController::class, 'store'])
             ->name('shop.customers.account.compare.store');
+
+        Route::get('/customer/addresses', [AddressController::class,'index'])->name('api.shop.customers.account.addresses.index');
     });
 });
