@@ -299,7 +299,7 @@ class InvoiceRepository extends Repository
     }
 
     /**
-     * @return float
+     * Get total amount of pending invoices.
      */
     public function getTotalAmountOfPendingInvoices(): float
     {
