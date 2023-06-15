@@ -116,7 +116,7 @@
     
                methods: {
                     get() {
-                        this.$axios.get("{{ route('api.shop.customers.account.wishlist.index') }}")
+                        this.$axios.get("{{ route('shop.api.customers.account.wishlist.index') }}")
                             .then(response => {
                                 this.wishlist = response.data.data;
                             })
@@ -125,7 +125,7 @@
                     },
 
                     remove(id) {
-                        this.$axios.post(`{{ route('shop.customers.account.wishlist.destroy', '') }}/${id}`, {
+                        this.$axios.post(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${id}`, {
                                 '_method': 'DELETE',
                             })
                             .then(response => {
@@ -140,7 +140,7 @@
                          * 
                          * - Need global helper method to convert laravel named route to js url.
                          */
-                        let url = `{{ route('shop.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;                        
+                        let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;                        
                         url = url.replace(':wishlist_id:', id);
 
                         this.$axios.post(url, {

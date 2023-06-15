@@ -61,7 +61,7 @@
     <x-shop::products.carousel
         {{-- @translations --}}
         :title="trans('Related Products')"
-        :src="route('shop.products.related.index', ['id' => $product->id])"
+        :src="route('shop.api.products.related.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
 
@@ -69,7 +69,7 @@
     <x-shop::products.carousel
         {{-- @translations --}}
         :title="trans('We found other products you might like!')"
-        :src="route('shop.products.up-sell.index', ['id' => $product->id])"
+        :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
 
@@ -240,7 +240,7 @@
                     },
 
                     addToWishlist() {
-                        this.$axios.post('{{ route("shop.customers.account.wishlist.store", $product->id) }}')
+                        this.$axios.post('{{ route("shop.api.customers.account.wishlist.store", $product->id) }}')
                             .then(response => {
                                 alert(response.data.message);
                             })

@@ -19,7 +19,7 @@
     {{-- Carousel --}}
 	<x-shop::products.carousel
         title="Men's Collections"
-        :src="route('shop.products.index')"
+        :src="route('shop.api.products.index')"
         :navigation-link="route('shop.home.index')"
     >
     </x-shop::products.carousel>

@@ -126,7 +126,7 @@
 
             methods: {
                 getFilters() {
-                    this.$axios.get('{{ route("shop.categories.attributes", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.attributes", $category->id) }}')
                         .then((response) => {
                             this.filters.available = response.data.data;
                         })
@@ -275,7 +275,7 @@
 
             methods: {
                 getMaxPrice() {
-                    this.$axios.get('{{ route("shop.categories.max_price", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.max_price", $category->id) }}')
                         .then((response) => {
                             this.allowedMaxPrice = response.data.data.max_price;
 
