@@ -14,7 +14,7 @@
             </div>
         </div>
         
-        <p class="text-[18px]"></p>
+        <p class="w-[80%] h-[27px] bg-[#E9E9E9] shimmer"></p>
 
         <div class="flex gap-x-[25px] rounded-[54px] py-[10px] px-[20px] items-center w-[60%] h-[46px] bg-[#E9E9E9] shimmer">
         </div>
