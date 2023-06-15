@@ -42,7 +42,7 @@
 
                         <a
                             class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
-                            @click="addToCompare()"
+                            @click="addToCompare(product.id)"
                         >
                         </a>
 
@@ -82,7 +82,9 @@
 
             data() {
                 return {
-                    isImageLoading: true
+                    isImageLoading: true,
+
+                    isCustomer: '{{ auth()->guard('customer')->check() }}',
                 }
             },
 
@@ -101,16 +103,64 @@
                         .catch(error => {});
                 },
 
-                addToCompare() {
-                    this.$axios.get(`{{ route('shop.customers.account.compare.store', '') }}/${this.product.id}`)
-                        .then(response => {
-                            alert(response.data.message);
-                        })
-                        .catch(error => {});
+                addToCompare(productId) {
+                    /**
+                     * This will handle for customers.
+                     */
+                    if (this.isCustomer) {
+                        this.$axios.post('{{ route("shop.api.compare.store") }}', {
+                                'product_id': productId
+                            })
+                            .then(response => {
+                                alert(response.data.data.message);
+                            })
+                            .catch(error => {});
+
+                        return;
+                    }
+
+                    /**
+                     * This will handle for guests.
+                     */
+                    let existingItems = this.getStorageValue(this.getCompareItemsStorageKey()) ?? [];
+
+                    if (existingItems.length) {
+                        if (! existingItems.includes(productId)) {
+                            existingItems.push(productId);
+
+                            this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
+
+                            alert('Added product in compare.');
+                        } else {
+                            alert('Product is already added in compare.');
+                        }
+                    } else {
+                        this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
+
+                        alert('Added product in compare.');
+                    }
+                },
+
+                getCompareItemsStorageKey() {
+                    return 'compare_items';
+                },
+
+                setStorageValue(key, value) {
+                    window.localStorage.setItem(key, JSON.stringify(value));
+                },
+
+                getStorageValue(key) {
+                    let value = window.localStorage.getItem(key);
+
+                    if (value) {
+                        value = JSON.parse(value);
+                    }
+
+                    return value;
                 },
 
                 addToCart() {
-                    this.$axios.post('{{ route("shop.checkout.cart.store") }}', {
+                    this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
                             'quantity': 1,
                             'product_id': this.product.id,
                         })

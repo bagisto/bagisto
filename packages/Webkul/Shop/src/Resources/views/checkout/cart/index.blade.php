@@ -78,11 +78,13 @@
                         >
                         </p>
 
-                        <v-quantity-changer 
-                            :default-quantity="item.quantity"
+                        <x-shop::quantity-changer
+                            name="quantity"
+                            ::value="item?.quantity"
+                            class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[116px] max-h-[36px]"
                             @change="setItemQuantity(item.id, $event)"
                         >
-                        </v-quantity-changer>
+                        </x-shop::quantity-changer>
 
                         <p 
                             class="text-[18px] font-semibold" 
@@ -144,10 +146,13 @@
                                 @lang('shop::app.checkout.cart.coupon.discount')
                             </p>
 
-                            <p class="text-[16px] font-medium cursor-pointer" v-if="! cart.discount_amount">
+                            <p 
+                                class="text-[16px] font-medium cursor-pointer" 
+                                v-if="cart.discount_amount == 0"
+                            >
                                 <x-shop::modal>
                                     <x-slot:toggle>
-                                        <span class="text-[#4D7EA8]">
+                                        <span>
                                             @lang('shop::app.checkout.cart.coupon.apply')
                                         </span>
                                     </x-slot:toggle>
@@ -246,7 +251,7 @@
 
                 methods: {
                     get() {
-                        this.$axios.get('{{ route('shop.checkout.cart.index') }}')
+                        this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                             .then(response => {
                                 this.cart = response.data.data;
                             })
@@ -254,7 +259,7 @@
                     },
 
                     update() {
-                        this.$axios.put('{{ route('shop.checkout.cart.destroy') }}', { qty: this.applied.quantity })
+                        this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty: this.applied.quantity })
                             .then(response => {
                                 this.cart = response.data.data;
                             })
@@ -266,7 +271,7 @@
                     },
 
                     removeItem(itemId) {
-                        this.$axios.post('{{ route('shop.checkout.cart.destroy') }}', {
+                        this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
                                 '_method': 'DELETE',
                                 'cart_item_id': itemId,
                             })

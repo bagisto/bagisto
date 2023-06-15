@@ -107,13 +107,11 @@
             </div>
         </form>
 
-        @if ($showWishlist)
-            <div>
-                <a href="{{ route('shop.customers.account.wishlist.index') }}">
-                    <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-                </a>
-            </div>
-        @endif
+        <div>
+            <a href="{{ route('shop.compare.index') }}">
+                <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
+            </a>
+        </div>
 
         @include('shop::checkout.cart.mini-cart')
 

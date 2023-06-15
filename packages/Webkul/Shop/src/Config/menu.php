@@ -43,11 +43,5 @@ return [
         'route' => 'shop.customers.account.wishlist.index',
         'icon'  => '',
         'sort'  => 6,
-    ], [
-        'key'   => 'account.compare',
-        'name'  => 'shop::app.customer.compare.text',
-        'route' => 'shop.customers.account.orders.index',
-        'icon'  => '',
-        'sort'  => 7,
     ],
 ];
