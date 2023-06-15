@@ -165,8 +165,8 @@ return [
                         'discount'            => 'Discount',
                         'tax'                 => 'Tax',
                         'print'               => 'Print',
-                    ], 
-                
+                    ],
+
                     'shipments' => [
                         'shipments'           => 'Shipments',
                         'tracking-number'     => 'Tracking Number',
@@ -326,6 +326,22 @@ return [
                 'expensive-first' => 'Expensive First',
             ],
         ],
+    ],
+
+    'compare'  => [
+        'compare-similar-item'     => 'compare similar item',
+        'new'                      => 'New',
+        'add-to-cart'              => 'Add to Cart',
+        'products-not-available'   => 'Products Not Available',
+        'check-product-visibility' => 'Check the Product status or visibility',
+        'product-removed'          => 'Product Is No More Available As Removed By Admin',
+        'item-add-to-cart'         => 'Item added successfully',
+        'success'                  => 'All Compare items has deleted Succesfully',
+        'error'                    => 'Something went wrong, please try again later.',
+        'item-add'                 => 'Item successfully added to compare list',
+        'already-added'            => 'Item already added to compare list',
+        'wishlist-success'         => 'Item Successfully Added To Wishlist',
+        'alredy-in-wishlist'       => 'Item Already Available in Wishlist.',
     ],
 
     'checkout' => [

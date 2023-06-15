@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\API\CartController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
+use Webkul\Shop\Http\Controllers\API\CompareController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 use Webkul\Shop\Http\Controllers\API\AddressController;
-use Webkul\Shop\Http\Controllers\Customer\Account\CompareController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -38,13 +38,25 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
-        Route::get('', 'index')->name('shop.checkout.cart.index');
+        Route::get('', 'index')->name('shop.api.checkout.cart.index');
 
-        Route::post('', 'store')->name('shop.checkout.cart.store');
+        Route::post('', 'store')->name('shop.api.checkout.cart.store');
 
-        Route::put('', 'update')->name('shop.checkout.cart.update');
+        Route::put('', 'update')->name('shop.api.checkout.cart.update');
 
-        Route::delete('', 'destroy')->name('shop.checkout.cart.destroy');
+        Route::delete('', 'destroy')->name('shop.api.checkout.cart.destroy');
+    });
+
+    Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
+        Route::get('', 'index')->name('shop.api.compare.index');
+
+        Route::post('', 'store')->name('shop.api.compare.store');
+
+        Route::delete('', 'destroy')->name('shop.api.compare.destroy');
+
+        Route::post('move-to-cart', 'moveToCart')->name('shop.api.compare.move_to_cart');
+
+        Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.compare.move_to_wishlist');
     });
 
     Route::group(['middleware' => ['customer']], function () {
@@ -54,7 +66,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
              *
              * Need to fix the `api` for all route.
              */
-            Route::get('', 'index')->name('api.shop.customers.account.wishlist.index');
+            Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 
             Route::post('', 'store')->name('shop.customers.account.wishlist.store');
 

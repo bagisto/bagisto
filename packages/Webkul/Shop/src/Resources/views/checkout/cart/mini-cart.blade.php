@@ -40,6 +40,7 @@
                                     v-text="item.name"
                                 >
                                 </p>
+
                                 <p 
                                     class="text-[18px]" 
                                     v-text="item.formatted_price"
@@ -68,7 +69,10 @@
                     </div>
                 </div>
 
-                <div class="pb-[30px]" v-else>
+                <div 
+                    class="pb-[30px]" 
+                    v-else
+                >
                     <div class="grid gap-y-[20px] b-0 place-items-center">
                         <img 
                             src="{{ bagisto_asset('images/thank-you.png') }}" 
@@ -94,7 +98,7 @@
                         <p class="text-[14px] font-medium text-[#7D7D7D]">
                             @lang('shop::app.checkout.cart.subtotal')
                         </p>
-        
+
                         <p 
                             class="text-[30px] font-semibold"
                             v-text="cart.formatted_grand_total"
@@ -128,7 +132,7 @@
 
            methods: {
                 getCart() {
-                    this.$axios.get('{{ route('shop.checkout.cart.index') }}')
+                    this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                         .then(response => {
                             this.cart = response.data.data;
                         })
@@ -140,7 +144,7 @@
 
                     qty[item.id] = quantity;
 
-                    this.$axios.put('{{ route('shop.checkout.cart.update') }}', { qty })
+                    this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty })
                         .then(response => {
                             this.cart = response.data.data;
                         })
@@ -148,7 +152,7 @@
                 },
 
                 removeItem(itemId) {
-                    this.$axios.post('{{ route('shop.checkout.cart.destroy') }}', {
+                    this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
                             '_method': 'DELETE',
                             'cart_item_id': itemId,
                         })

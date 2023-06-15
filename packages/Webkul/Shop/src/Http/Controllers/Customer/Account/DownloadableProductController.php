@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers\Customer;
+namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Shop\Http\Controllers\Controller;

@@ -118,7 +118,7 @@
 
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                            <p class="text-[24px] flex items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                            <p class="text-[24px] flex gap-2.5 items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
                                 {!! $product->getTypeInstance()->getPriceHtml() !!}
                             </p>
 
@@ -178,7 +178,7 @@
                             <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
                                 <div
                                     class=" flex justify-center items-center gap-[10px] cursor-pointer"
-                                    @click="addToCompare"
+                                    @click="addToCompare({{ $product->id }})"
                                 >
                                     <span class="icon-compare text-[24px]"></span>
                                     @lang('shop::app.products.compare')
@@ -217,6 +217,8 @@
                 data() {
                     return {
                         qty: 1,
+
+                        isCustomer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
 
@@ -228,7 +230,7 @@
                     addToCart() {
                         let formData = new FormData(this.$refs.formData);
 
-                        this.$axios.post('{{ route("shop.checkout.cart.store") }}', formData, {
+                        this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
@@ -247,12 +249,60 @@
                             .catch(error => {});
                     },
 
-                    addToCompare() {
-                        this.$axios.get('{{ route("shop.customers.account.compare.store", $product->id) }}')
-                            .then(response => {
-                                alert(response.data.message);
-                            })
-                            .catch(error => {});
+                    addToCompare(productId) {
+                        /**
+                         * This will handle for customers.
+                         */
+                        if (this.isCustomer) {
+                            this.$axios.post('{{ route("shop.api.compare.store") }}', {
+                                    'product_id': productId
+                                })
+                                .then(response => {
+                                    alert(response.data.data.message);
+                                })
+                                .catch(error => {});
+
+                            return;
+                        }
+
+                        /**
+                         * This will handle for guests.
+                         */
+                        let existingItems = this.getStorageValue(this.getCompareItemsStorageKey()) ?? [];
+
+                        if (existingItems.length) {
+                            if (! existingItems.includes(productId)) {
+                                existingItems.push(productId);
+
+                                this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
+
+                                alert('Added product in compare.');
+                            } else {
+                                alert('Product is already added in compare.');
+                            }
+                        } else {
+                            this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
+
+                            alert('Added product in compare.');
+                        }
+                    },
+
+                    getCompareItemsStorageKey() {
+                        return 'compare_items';
+                    },
+
+                    setStorageValue(key, value) {
+                        window.localStorage.setItem(key, JSON.stringify(value));
+                    },
+
+                    getStorageValue(key) {
+                        let value = window.localStorage.getItem(key);
+
+                        if (value) {
+                            value = JSON.parse(value);
+                        }
+
+                        return value;
                     },
 
                     onSubmit() {
