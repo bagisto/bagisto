@@ -60,7 +60,7 @@ class CartRuleController extends Controller
      * user is able to configure it before setting it live.
      *
      * @param  int  $cartRuleId
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function copy(int $cartRuleId): View
     {
