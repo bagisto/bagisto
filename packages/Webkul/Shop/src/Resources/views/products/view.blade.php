@@ -254,6 +254,10 @@
                             })
                             .catch(error => {});
                     },
+
+                    onSubmit() {
+                        console.log(this);
+                    }
                 },
             });
         </script>

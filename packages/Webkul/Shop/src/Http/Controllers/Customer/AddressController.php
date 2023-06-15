@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -34,7 +35,8 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $customer = auth()->guard('customer')->user();
+        // $customer = auth()->guard('customer')->user();
+        $customer = Auth::guard('customer')->user();
 
         return view('shop::customers.account.addresses.index')->with('addresses', $customer->addresses);
     }

@@ -866,14 +866,14 @@ class Cart
     ): void {
         $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
 
-        if (! empty($data['billing']['save_as_address'])) {
-            $billingAddress = Arr::except($billingAddress, ['save_as_address', 'use_for_shipping', 'address_id']);
+        if (! empty($data['billing']['isSaveAsAddress'])) {
+            $billingAddress = Arr::except($billingAddress, ['isSaveAsAddress', 'isUseForShipping', 'address_id']);
 
-            $this->customerAddressRepository->updateOrCreate($billingAddress, $billingAddress);
+            $data = $this->customerAddressRepository->updateOrCreate($billingAddress, $billingAddress);
         }
 
-        if (! empty($data['shipping']['save_as_address'])) {
-            $shippingAddress = Arr::except($shippingAddress, ['save_as_address', 'use_for_shipping', 'address_id']);
+        if (! empty($data['shipping']['isSaveAsAddress'])) {
+            $shippingAddress = Arr::except($shippingAddress, ['isSaveAsAddress', 'isUseForShipping', 'address_id']);
 
             $this->customerAddressRepository->updateOrCreate($shippingAddress);
         }

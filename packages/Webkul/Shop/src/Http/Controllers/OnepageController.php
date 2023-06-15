@@ -123,13 +123,17 @@ class OnepageController extends Controller
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
-        $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
+        
+        $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1'])); 
 
         if (
             Cart::hasError()
             || ! Cart::saveCustomerAddress($data)
         ) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+            return new JsonResource([
+                'redirect' => true,
+                'data' => route('shop.checkout.cart.index')
+            ]);
         }
 
         $cart = Cart::getCart();
@@ -138,13 +142,22 @@ class OnepageController extends Controller
 
         if ($cart->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
-                return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+                return new JsonResource([
+                    'redirect' => true,
+                    'data' => route('shop.checkout.cart.index')
+                ]);
             }
 
-            return response()->json($rates);
+            return new JsonResource([
+                'redirect' => false,
+                'data' => $rates
+            ]);
         }
 
-        return response()->json(Payment::getSupportedPaymentMethods());
+        return new JsonResource([
+            'redirect' => false,
+            'data' => Payment::getSupportedPaymentMethods()
+        ]);
     }
 
     /**
