@@ -124,7 +124,7 @@ class CartRuleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
