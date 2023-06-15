@@ -155,13 +155,9 @@ class ProductController extends Controller
      */
     public function update(ProductForm $request, $id)
     {
-        $data = request()->input();
-        
-        $data['name'] =  strip_tags($data['name']);
-
         Event::dispatch('catalog.product.update.before', $id);
 
-        $product = $this->productRepository->update($data, $id);
+        $product = $this->productRepository->update(request()->input(), $id);
 
         Event::dispatch('catalog.product.update.after', $product);
 
