@@ -24,10 +24,7 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form
-                        ref="formData"
-                        @submit="handleSubmit($event, store)"
-                    >
+                    <form @submit="handleSubmit($event, store)">
                         <div v-if="! isNewBillingAddress">
                             {{-- Addressess list --}}
                             <x-shop::accordion>
@@ -51,7 +48,6 @@
                                                 rules="required"
                                                 v-model="address.billing.address_id"
                                                 class="hidden peer"
-                                                @change="validateForm"
                                             >
                                             </v-field>
 
@@ -136,7 +132,6 @@
                                             label="Company name"
                                             placeholder="Company name"
                                             v-model="address.billing.company_name"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -159,7 +154,6 @@
                                             rules="required"
                                             placeholder="First name"
                                             v-model="address.billing.first_name"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -182,7 +176,6 @@
                                             rules="required"
                                             placeholder="Last name"
                                             v-model="address.billing.last_name"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -205,7 +198,6 @@
                                             label="Email"
                                             placeholder="email@example.com"
                                             v-model="address.billing.email"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -229,7 +221,6 @@
                                             label="Street address"
                                             placeholder="Street address"
                                             v-model="address.billing.address1[0]"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -255,7 +246,6 @@
                                             label="Country"
                                             placeholder="Country"
                                             v-model="address.billing.country"
-                                            @change="validateForm"
                                         >
                                             @foreach (core()->countries() as $country)
                                                 <option value="{{ $country->code }}">{{ $country->name }}</option>
@@ -282,7 +272,6 @@
                                             label="State"
                                             placeholder="State"
                                             v-model="address.billing.state"
-                                            @change="validateForm"
                                             v-if="! isHaveStates('billing')"
                                         >
                                         </x-shop::form.control-group.control>
@@ -296,7 +285,6 @@
                                             label="State"
                                             placeholder="State"
                                             v-model="address.billing.state"
-                                            @change="validateForm"
                                             v-if="isHaveStates('billing')"
                                         >
                                             <option value="">@lang('Select state')</option>
@@ -329,7 +317,6 @@
                                             label="City"
                                             placeholder="City"
                                             v-model="address.billing.city"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
             
@@ -353,7 +340,6 @@
                                             label="Zip/Postcode"
                                             placeholder="Zip/Postcode"
                                             v-model="address.billing.postcode"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -378,7 +364,6 @@
                                             label="Telephone"
                                             placeholder="Telephone"
                                             v-model="address.billing.phone"
-                                            @change="validateForm"
                                         >
                                         </x-shop::form.control-group.control>
                 
@@ -390,7 +375,8 @@
             
                                     <div class="mt-[30px] pb-[15px]">
                                         <div class="grid gap-[10px]">
-                                            @if ($cart->haveStockableItems())
+                                            {{-- Todo (@suraj-webkul)  shipping to this address functionality--}}
+                                            @if (! $cart->haveStockableItems())
                                                 <div class="select-none flex gap-x-[15px]">
                                                     <x-shop::form.control-group>
                                                         <x-shop::form.control-group.control
@@ -399,7 +385,6 @@
                                                             ::value="address.billing.isUseForShipping"
                                                             id="billing[isUseForShipping]" 
                                                             v-model="address.billing.isUseForShipping"
-                                                            @change="validateForm"
                                                         >
                                                         </x-shop::form.control-group.control>
                                                     </x-shop::form.control-group>
@@ -417,7 +402,6 @@
                                                             ::value="address.billing.isSaveAsAddress"
                                                             id="billing[isSaveAsAddress]"
                                                             v-model="address.billing.isSaveAsAddress"
-                                                            @change="validateForm"
                                                         >
                                                         </x-shop::form.control-group.control>
                                                     </x-shop::form.control-group>
@@ -427,7 +411,17 @@
                                             @endauth
                                         </div>
                                     </div>
+
+                                    <div class="flex justify-end mt-4 mb-4">
+                                        <button
+                                            type="submit"
+                                            class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                        >
+                                            @lang('Confirm')
+                                        </button>
+                                    </div>
                                 </x-slot:content>
+                                
                             </x-shop::accordion>
 
                             @if ($cart->haveStockableItems())
@@ -457,7 +451,6 @@
                                                     label="Company name"
                                                     placeholder="Company name"
                                                     v-model="address.shipping.company_name"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -480,7 +473,6 @@
                                                     rules="required"
                                                     placeholder="First name"
                                                     v-model="address.shipping.first_name"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -503,7 +495,6 @@
                                                     rules="required"
                                                     placeholder="Last name"
                                                     v-model="address.shipping.last_name"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -526,7 +517,6 @@
                                                     label="Email"
                                                     placeholder="email@example.com"
                                                     v-model="address.shipping.email"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -550,7 +540,6 @@
                                                     label="Street address"
                                                     placeholder="Street address"
                                                     v-model="address.shipping.address1[0]"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -576,7 +565,6 @@
                                                     label="Country"
                                                     placeholder="Country"
                                                     v-model="address.shipping.country"
-                                                    @change="validateForm"
                                                 >
                                                     <option value="">@lang('Select country')</option>
                                                     @foreach (core()->countries() as $country)
@@ -604,7 +592,6 @@
                                                     label="State"
                                                     placeholder="State"
                                                     v-model="address.shipping.state"
-                                                    @change="validateForm"
                                                     v-if="! isHaveStates('shipping')"
                                                 >
                                                 </x-shop::form.control-group.control>
@@ -618,7 +605,6 @@
                                                     label="State"
                                                     placeholder="State"
                                                     v-model="address.shipping.state"
-                                                    @change="validateForm"
                                                     v-if="isHaveStates('shipping')"
                                                 >
                                                     <option value="">@lang('Select state')</option>
@@ -651,7 +637,6 @@
                                                     label="City"
                                                     placeholder="City"
                                                     v-model="address.shipping.city"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -675,7 +660,6 @@
                                                     label="Zip/Postcode"
                                                     placeholder="Zip/Postcode"
                                                     v-model="address.shipping.postcode"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -700,7 +684,6 @@
                                                     label="Telephone"
                                                     placeholder="Telephone"
                                                     v-model="address.shipping.phone"
-                                                    @change="validateForm"
                                                 >
                                                 </x-shop::form.control-group.control>
                                             
@@ -721,7 +704,6 @@
                                                                 id="billing[isSaveAsAddress]"
                                                                 class="hidden peer"
                                                                 v-model="address.billing.isSaveAsAddress"
-                                                                @change="validateForm"
                                                             >
                     
                                                             <span class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"></span>
@@ -734,13 +716,6 @@
                                     </x-shop::accordion>
                                 </div>
                             @endif
-                            
-                            <button 
-                                type="submit"
-                                ref="submitButton"
-                                class="hidden"
-                            >
-                            </button>
                         </div>
                     </form>
                 </x-shop::form>
@@ -791,6 +766,7 @@
                 }, 
                 
                 created() {
+                    console.log(this.customerAddress[0]);
                     this.fetchCountryStates();
 
                     this.fetchCountries ();
@@ -823,11 +799,13 @@
                 },
 
                 methods: {
-                    validateForm() {
-                        this.$refs.submitButton.click();
-                    },
 
-                    store(params) {
+                    store() {
+                        if (! this.address.billing.isSaveAsAddress) {
+                            this.isNewBillingAddress = false;
+                            return;
+                        }
+
                         this.$axios.post('{{ route("shop.checkout.save_address") }}', this.address, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
