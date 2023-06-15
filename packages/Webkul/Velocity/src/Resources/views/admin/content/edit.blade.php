@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('velocity::app.admin.contents.add-title') }}
+    {{ __('velocity::app.admin.contents.edit-title') }}
 @stop
 
 @section('content')
@@ -21,7 +21,7 @@
                     <h1>
                         <i class="icon angle-left-icon back-link" onclick="window.location = history.length > 1 ? document.referrer : '{{ route('admin.dashboard.index') }}'"></i>
 
-                        {{ __('velocity::app.admin.contents.add-title') }}
+                        {{ __('velocity::app.admin.contents.edit-title') }}
                     </h1>
 
                     <div class="control-group">
@@ -62,7 +62,7 @@
                                 {{ __('velocity::app.admin.contents.page.title') }}
                                 <span class="locale">[{{ $locale }}]</span>
                             </label>
-                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? isset($translation->title) ? $translation->title : '' }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
+                            <input type="text" v-validate="'required|max:100'" class="control" id="title" name="{{$locale}}[title]" value="{{ old($locale)['title'] ?? ($translation->title ?? '') }}" data-vv-as="&quot;{{ __('velocity::app.admin.contents.page.title') }}&quot;"/>
 
                             <span class="control-error" v-if="errors.has('{{$locale}}[title]')" v-text="errors.first('{!!$locale!!}[title]')"></span>
                         </div>

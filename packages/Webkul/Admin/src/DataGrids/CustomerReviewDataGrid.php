@@ -29,7 +29,7 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('product_reviews as pr')
-            ->leftjoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
+            ->leftJoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
             ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status', 'pr.rating', 'pr.created_at')
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
@@ -107,7 +107,7 @@ class CustomerReviewDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
                 } elseif ($value->product_review_status == "pending") {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
-                } elseif ($value->product_review_status == "disapproved") {
+                } elseif ($value->product_review_status == "disapproved") {  
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                 }
             },
@@ -155,14 +155,14 @@ class CustomerReviewDataGrid extends DataGrid
         $this->addMassAction([
             'type'  => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.customer.review.massdelete'),
+            'action' => route('admin.customer.review.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'type'    => 'update',
             'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.customer.review.massupdate'),
+            'action'  => route('admin.customer.review.mass_update'),
             'method'  => 'POST',
             'options' => [
                 trans('admin::app.customers.reviews.pending')     => 0,

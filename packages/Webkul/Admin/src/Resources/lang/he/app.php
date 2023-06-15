@@ -2,8 +2,8 @@
 
 return [
     'save'          => 'Save',
-    'copy-of'       => 'Copy of ',
-    'copy-of-slug'  => 'copy-of-',
+    'copy-of'       => 'Copy of :value',
+    'copy-of-slug'  => 'copy-of-:value',
     'create'        => 'Create',
     'update'        => 'Update',
     'delete'        => 'Delete',
@@ -550,7 +550,7 @@ return [
                 'configurable'                  => 'Configurable',
 
             ],
-            'familiy'                       => 'Attribute Family',
+            'family'                       => 'Attribute Family',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Configurable Attributes',
             'attribute-header'              => 'Attribute(s)',
@@ -592,6 +592,7 @@ return [
             'related-products'              => 'Related Products',
             'product-search-hint'           => 'Start typing product name',
             'no-result-found'               => 'Products not found with same name.',
+            'no-product-added'              => 'No Product Added',
             'searching'                     => 'Searching ...',
             'grouped-products'              => 'Grouped Products',
             'search-products'               => 'Search Products',
@@ -629,6 +630,8 @@ return [
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
             'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -681,7 +684,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'File',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Create in Product Flat Table',
             'is_comparable'               => 'Attribute is comparable',
             'default_null_option'         => 'Create default empty option',
             'validation-messages'         => [
@@ -832,6 +834,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Currency created successfully.',
             'update-success'    => 'Currency updated successfully.',
             'delete-success'    => 'Currency deleted successfully.',
@@ -1042,6 +1045,11 @@ return [
             'error-create'        => 'Customer address not created.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you logged in as :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Add Note',
             'save-note'  => 'Save Note',
@@ -1085,14 +1093,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Reviews',
-            'edit-title'  => 'Edit Review',
-            'rating'      => 'Rating',
-            'status'      => 'Status',
-            'comment'     => 'Comment',
-            'pending'     => 'Pending',
-            'approved'    => 'Approve',
-            'disapproved' => 'Disapprove',
+            'title'          => 'Reviews',
+            'edit-title'     => 'Edit Review',
+            'rating'         => 'Rating',
+            'status'         => 'Status',
+            'comment'        => 'Comment',
+            'pending'        => 'Pending',
+            'approved'       => 'Approve',
+            'disapproved'    => 'Disapprove',
+            'update-success' => 'Review updated successfully',
+            'delete-success' => 'Review deleted successfully',
         ],
 
         'subscribers' => [
@@ -1194,7 +1204,7 @@ return [
             'code-prefix'                    => 'Code Prefix',
             'code-suffix'                    => 'Code Suffix',
             'generate'                       => 'Generate',
-            'cart-rule-not-defind-error'     => 'Cart rule is not defined',
+            'cart-rule-not-defined-error'    => 'Cart rule is not defined',
             'end-other-rules'                => 'End Other Rules',
             'children-categories'            => 'Categories (Children Only)',
             'parent-categories'              => 'Categories (Parent Only)',
@@ -1330,9 +1340,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'GO TO HOME',
-        'in-maitainace' => 'In Maintenance',
-        'right-back'    => 'Be Right Back',
+        'go-to-home'     => 'GO TO HOME',
+        'in-maintenance' => 'In Maintenance',
+        'right-back'     => 'Be Right Back',
 
         '404' => [
             'page-title' => '404 Page not found',
@@ -1425,9 +1435,6 @@ return [
         'product-can-not-be-copied' => 'Products of type :type can not be copied',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Cannot delete the default channel',
-        'create-success'            => ':name created successfully.',
-        'update-success'            => ':name updated successfully.',
-        'delete-success'            => ':name deleted successfully.',
         'delete-failed'             => 'Error encountered while deleting :name.',
         'last-delete-error'         => 'At least one :name is required.',
         'user-define-error'         => 'Can not delete system :name',
@@ -1477,6 +1484,8 @@ return [
         'system' => [
             'catalog'                               => 'Catalog',
             'homepage'                              => 'Homepage configuration',
+            'product-view-page'                     => 'Product view page configuration',
+            'cart-view-page'                        => 'Cart view page confguration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
             'products'                              => 'Products',
             'guest-checkout'                        => 'Guest Checkout',
@@ -1588,7 +1597,7 @@ return [
             'oldest-first'                          => 'Oldest First',
             'cheapest-first'                        => 'Cheapest First',
             'expensive-first'                       => 'Expensive First',
-            'comma-seperated'                       => 'Comma Seperated',
+            'comma-separated'                       => 'Comma Seperated',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',
@@ -1621,6 +1630,9 @@ return [
             'show-search-input-field'               => 'Show Search Input Field',
             'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
             'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
+            'allow-no-of-related-products'          => 'Allowed number of Related Products',
+            'allow-no-of-up-sells-products'         => 'Allowed number of Up-Sell Products',
+            'allow-no-of-cross-sells-products'      => 'Allowed number of Cross-Sell Products',
             'width'                                 => 'Width',
             'height'                                => 'Height',
             'cache-small-image'                     => 'Small Image',

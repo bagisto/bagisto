@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class ProductDataGrid extends DataGrid
 {
@@ -57,9 +59,14 @@ class ProductDataGrid extends DataGrid
     /**
      * Create datagrid instance.
      *
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        protected ProductRepository $productRepository,
+        protected InventorySourceRepository $inventorySourceRepository
+    )
     {
         /* locale */
         $this->locale = core()->getRequestedLocaleCode();
@@ -92,20 +99,20 @@ class ProductDataGrid extends DataGrid
 
         /* query builder */
         $queryBuilder = DB::table('product_flat')
-            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-            ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+            ->leftJoin('attribute_families', 'product_flat.attribute_family_id', '=', 'attribute_families.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
                 'product_flat.product_id',
-                'products.sku as product_sku',
+                'product_flat.sku as product_sku',
                 'product_flat.product_number',
                 'product_flat.name as product_name',
-                'products.type as product_type',
+                'product_flat.type as product_type',
                 'product_flat.status',
                 'product_flat.price',
                 'product_flat.url_key',
+                'product_flat.visible_individually',
                 'attribute_families.name as attribute_family',
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
@@ -117,10 +124,10 @@ class ProductDataGrid extends DataGrid
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
-        $this->addFilter('product_sku', 'products.sku');
+        $this->addFilter('product_sku', 'product_flat.sku');
         $this->addFilter('product_number', 'product_flat.product_number');
         $this->addFilter('status', 'product_flat.status');
-        $this->addFilter('product_type', 'products.type');
+        $this->addFilter('product_type', 'product_flat.type');
         $this->addFilter('attribute_family', 'attribute_families.name');
 
         $this->setQueryBuilder($queryBuilder);
@@ -168,7 +175,10 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
             'closure'    => function ($row) {
-                if (! empty($row->url_key)) {
+                if (
+                    ! empty($row->visible_individually) 
+                    && ! empty($row->url_key)
+                ) {
                     return "<a href='" . route('shop.productOrCategory.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
                 }
 
@@ -233,9 +243,9 @@ class ProductDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if (is_null($row->quantity)) {
                     return 0;
-                } else {
-                    return $this->renderQuantityView($row);
                 }
+                
+                return $this->renderQuantityView($row);
             },
         ]);
     }
@@ -252,7 +262,7 @@ class ProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function () {
+            'condition' => function () {                
                 return true;
             },
         ]);
@@ -261,7 +271,7 @@ class ProductDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.catalog.products.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'product']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'icon'         => 'icon trash-icon',
         ]);
 
@@ -283,14 +293,14 @@ class ProductDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.catalog.products.massdelete'),
+            'action' => route('admin.catalog.products.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'type'    => 'update',
             'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.catalog.products.massupdate'),
+            'action'  => route('admin.catalog.products.mass_update'),
             'method'  => 'POST',
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,
@@ -307,9 +317,9 @@ class ProductDataGrid extends DataGrid
      */
     private function renderQuantityView($row)
     {
-        $product = app(\Webkul\Product\Repositories\ProductRepository::class)->find($row->product_id);
+        $product = $this->productRepository->find($row->product_id);
 
-        $inventorySources = app(\Webkul\Inventory\Repositories\InventorySourceRepository::class)->findWhere(['status' => 1]);
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
         $totalQuantity = $row->quantity;
 

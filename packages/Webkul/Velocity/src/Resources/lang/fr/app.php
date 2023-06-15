@@ -63,6 +63,10 @@ return [
             'no-result-found' => 'Aucun Enregistrement Trouvé.',
             'search-hint' => 'Rechercher un produit ici...',
             'mass-delete-success' => 'Contenu sélectionné supprimé avec succès.',
+            'delete-success'      => 'contenu supprimé avec succès',
+            'delete-failed'       => 'Erreur! le contenu ne peut pas être suppriméed',
+            'update-success'      => 'contenu mis à jour avec succès',
+            'create-success'      => 'contenu créé avec succès',
 
             'tab' => [
                 'page' => 'Paramétrage des pages',
@@ -113,7 +117,6 @@ return [
             'update-meta-data' => 'Mettre à jour les métadonnées',
             'product-view-image' => 'Image du produit',
             'advertisement-two' => 'Publicité Deux Images',
-            'advertisement-one' => 'Publicité One Images',
             'footer-middle-content' => 'Contenu intermédiaire du pied de page',
             'advertisement-four' => 'Publicité Quatre Images',
             'advertisement-three' => 'Publicité Trois Images',
@@ -242,7 +245,7 @@ return [
             'login' => 'Connexion',
             'become-user' => 'Devenir utilisateur',
             'user-registration' => 'Enregistrement de l\'utilisateur',
-            'form-sginup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
+            'form-signup-text' => 'Si vous êtes nouveau dans notre magasin, nous sommes heureux de vous compter parmi nos membres.',
         ],
 
         'forget-password' => [
@@ -283,6 +286,7 @@ return [
         'recently-viewed' => 'Derniers produits consultés',
         'be-first-review' => 'Soyez le premier à rédiger un avis',
         'tax-inclusive' => 'Toutes taxes comprises',
+        'product-removed'  => "Le produit n'est plus disponible car supprimé par l'administrateur",
     ],
 
     'shop' => [
@@ -332,7 +336,8 @@ return [
         'header' => [
             'done' => 'Fait',
             'languages' => 'Langues',
-            'greeting' => 'Bienvenue, :customer !',
+            'greeting' => 'Bienvenue, :Customer !',
+            'greeting-for-guest' => 'Bienvenue, Invité'
         ],
     ],
 ];

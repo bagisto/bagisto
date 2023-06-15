@@ -16,7 +16,7 @@ class CartRuleController extends Controller
     /**
      * Initialize _config, a default request parameter with route.
      *
-     * @param array
+     * @var array
      */
     protected $_config;
 
@@ -34,7 +34,7 @@ class CartRuleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|object
      */
     public function index()
     {
@@ -48,7 +48,7 @@ class CartRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -60,20 +60,22 @@ class CartRuleController extends Controller
      * user is able to configure it before setting it live.
      *
      * @param  int  $cartRuleId
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function copy(int $cartRuleId): View
     {
-        $originalCartRule = $this->cartRuleRepository
-            ->findOrFail($cartRuleId)
-            ->load('channels')
-            ->load('customer_groups');
+        $cartRule = $this->cartRuleRepository
+            ->with([
+                'channels',
+                'customer_groups',
+            ])
+            ->findOrFail($cartRuleId);
 
-        $copiedCartRule = $originalCartRule
+        $copiedCartRule = $cartRule
             ->replicate()
             ->fill([
                 'status' => 0,
-                'name'   => __('admin::app.copy-of') . $originalCartRule->name,
+                'name'   => trans('admin::app.copy-of', ['value' => $cartRule->name]),
             ]);
 
         $copiedCartRule->save();
@@ -93,9 +95,9 @@ class CartRuleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CartRuleRequest $cartRuleRequest)
     {
@@ -106,7 +108,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Cart Rule']));
+            session()->flash('success', trans('admin::app.promotions.cart-rules.create-success'));
 
             return redirect()->route($this->_config['redirect']);
         } catch (ValidationException $e) {
@@ -122,7 +124,7 @@ class CartRuleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
@@ -136,7 +138,7 @@ class CartRuleController extends Controller
      *
      * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CartRuleRequest $cartRuleRequest, $id)
     {
@@ -161,7 +163,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Cart Rule']));
+            session()->flash('success', trans('admin::app.promotions.cart-rules.update-success'));
 
             return redirect()->route($this->_config['redirect']);
         } catch (ValidationException $e) {
@@ -177,7 +179,7 @@ class CartRuleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -190,9 +192,9 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Cart Rule'])]);
+            return response()->json(['message' => trans('admin::app.promotions.cart-rules.delete-success')]);
         } catch (Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Cart Rule'])], 400);
+        return response()->json(['message' => trans('admin::app.promotions.cart-rules.delete-failed')], 400);
     }
 }

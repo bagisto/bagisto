@@ -4,7 +4,7 @@
             <div class="mini-cart-content">
                 <i class="material-icons-outlined">shopping_cart</i>
                 <div class="badge-container">
-                    <span class="badge" v-text="cartItems.length" v-if="cartItems.length != 0"></span>
+                    <span class="badge" v-text="cartCount" v-if="cartCount != 0"></span>
                 </div>
                 <span class="fs18 fw6 cart-text" v-text="cartText"></span>
             </div>
@@ -91,9 +91,9 @@
             <div class="modal-footer">
                 <a
                     class="col text-left fs16 link-color remove-decoration"
-                    :href="viewCartRoute"
-                    >{{ viewCartText }}</a
-                >
+                    :href="viewCartRoute">
+                    <span v-html="viewCartText"></span>
+                </a>
 
                 <div class="col text-right no-padding">
                     <a :href="checkoutRoute" @click="checkMinimumOrder($event)">
@@ -129,7 +129,8 @@ export default {
     data: function() {
         return {
             cartItems: [],
-            cartInformation: []
+            cartInformation: [],
+            cartCount: 0
         };
     },
 
@@ -150,8 +151,17 @@ export default {
                 .then(response => {
                     if (response.data.status) {
                         this.cartItems = response.data.mini_cart.cart_items;
+
+                        this.cartCount = 0;
+
+                        for (const [idx, item] of response.data.mini_cart.cart_items.entries()) {
+                            this.cartCount += item.quantity;
+                        }
+                        
                         this.cartInformation =
                             response.data.mini_cart.cart_details;
+                    } else {
+                        this.cartCount = 0;
                     }
                 })
                 .catch(exception => {
@@ -173,10 +183,18 @@ export default {
                         response.data.label,
                         response.data.message
                     );
+                    
+                    if (! this.cartItems.length && this.isCheckoutPage()) {
+                        window.location.href = this.checkoutRoute;  
+                    }
                 })
                 .catch(exception => {
-                    console.log(this.__('error.something_went_wrong'));
-                });
+                    console.log(this.__('error.something_went_wrong')); 
+                });      
+        },
+     
+        isCheckoutPage() {
+            return window.location.href.includes("checkout");
         },
 
         checkMinimumOrder: function(e) {

@@ -2,8 +2,8 @@
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
 
     <layered-navigation
-        attribute-src="{{ route('catalog.categories.filterable-attributes', $category->id ?? null) }}"
-        max-price-src="{{ route('catalog.categories.maximum-price', $category->id ?? null) }}">
+        attribute-src="{{ route('shop.catalog.categories.filterable_attributes', $category->id ?? null) }}"
+        max-price-src="{{ route('shop.catalog.categories.maximum_price', $category->id ?? null) }}">
     </layered-navigation>
 
     {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
@@ -103,11 +103,13 @@
 
             methods: {
                 setFilterAttributes: function () {
-                    axios
-                        .get(this.attributeSrc)
-                        .then((response) => {
-                            this.attributes = response.data.filter_attributes;
-                        });
+                    if (this.attributeSrc) {
+                        axios
+                            .get(this.attributeSrc)
+                            .then((response) => {
+                                this.attributes = response.data.filter_attributes;
+                            });
+                    }
                 },
 
                 setAppliedFilters: function () {

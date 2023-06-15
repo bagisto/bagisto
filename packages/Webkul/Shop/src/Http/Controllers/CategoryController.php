@@ -4,20 +4,22 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Product\Repositories\ProductFlatRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class CategoryController extends Controller
 {
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Product\Repositories\ProductFlatRepository  $productFlatRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
+        protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
-        protected ProductFlatRepository $productFlatRepository
+        protected ProductRepository $productRepository
         
     )
     {
@@ -25,36 +27,34 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get filter attributes for product.
+     * Get filterable attributes for category
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getFilterAttributes($categoryId = null, AttributeRepository $attributeRepository)
+    public function getFilterableAttributes($categoryId)
     {
         $category = $this->categoryRepository->findOrFail($categoryId);
 
-        if (empty($filterAttributes = $category->filterableAttributes)) {
-            $filterAttributes = $attributeRepository->getFilterAttributes();
+        if (empty($filterableAttributes = $category->filterableAttributes)) {
+            $filterableAttributes = $this->attributeRepository->getFilterableAttributes();
         }
 
         return response()->json([
-            'filter_attributes' => $filterAttributes,
+            'filter_attributes' => $filterableAttributes,
         ]);
     }
 
     /**
      * Get category product maximum price.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getCategoryProductMaximumPrice($categoryId = null)
+    public function getCategoryProductMaximumPrice($categoryId)
     {
-        $category = $this->categoryRepository->findOrFail($categoryId);
-
-        $maxPrice = $this->productFlatRepository->handleCategoryProductMaximumPrice($category);
+        $maxPrice = $this->productRepository->getCategoryProductMaximumPrice($categoryId);
 
         return response()->json([
-            'max_price' => $maxPrice,
+            'max_price' => core()->convertPrice($maxPrice),
         ]);
     }
 }

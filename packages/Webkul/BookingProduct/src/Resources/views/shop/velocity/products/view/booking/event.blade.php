@@ -25,12 +25,12 @@
                             @{{ ticket.name }}
                         </div>
 
-                        <div v-if="ticket.original_formated_price" class="ticket-price">
-                            <span class="regular-price">@{{ ticket.original_formated_price }}</span>
-                            <span class="special-price">@{{ ticket.formated_price_text }}</span>
+                        <div v-if="ticket.original_formatted_price" class="ticket-price">
+                            <span class="regular-price">@{{ ticket.original_formatted_price }}</span>
+                            <span class="special-price">@{{ ticket.formatted_price_text }}</span>
                         </div>
                         <div v-else class="ticket-price">
-                            @{{ ticket.formated_price_text }}
+                            @{{ ticket.formatted_price_text }}
                         </div>
                     </div>
 
@@ -42,8 +42,10 @@
                             :min-quantity="defaultQty">
                         </quantity-changer>
                     </div>
-
-                    <p>@{{ ticket.description }}</p>
+                    
+                    <div class="ticket-item">
+                        <p>@{{ ticket.description }}</p>
+                    </div>
                 </div>
             </div>
         </div>

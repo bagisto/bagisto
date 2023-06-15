@@ -90,6 +90,7 @@ return [
         'percentage'                => ': प्रतिशत%',
         'id-star'                   => 'तारा',
         'name'                      => 'नाम',
+        'login-to-review'           => 'कृपया उत्पाद की समीक्षा करने के लिए पहले लॉग इन करें।',
     ],
 
     'customer' => [
@@ -316,6 +317,7 @@ return [
                     'shipping-handling'   => 'शिपिंग और हैंडलिंग',
                     'tax'                 => 'कर',
                     'discount'            => 'छूट',
+                    'coupon'              => 'कूपन',
                     'tax-percent'         => 'कर प्रतिशत',
                     'tax-amount'          => 'कर राशि',
                     'discount-amount'     => 'छूट राशि',
@@ -504,8 +506,8 @@ return [
             'continue-shopping'         => 'खरीदारी जारी रखें',
             'continue-registration'     => 'पंजीकरण जारी रखें',
             'proceed-to-checkout'       => 'चेक आउट करने के लिए आगे बढ़ें',
-            'remove'                    => 'निकालना',
-            'remove-link'               => 'निकालना',
+            'remove'                    => 'हटाना',
+            'remove-link'               => 'हटाना',
             'remove-all-items'          => 'सभी आइटम हटाएं',
             'confirm-action'            => 'इस क्रिया की पुष्टि करें?',
             'move-to-wishlist'          => 'इच्छा सूची की ओर बदें',
@@ -542,7 +544,8 @@ return [
             'check-billing-address'     => 'कृपया बिलिंग पता जांचें।',
             'specify-shipping-method'   => 'कृपया शिपिंग विधि निर्दिष्ट करें।',
             'specify-payment-method'    => 'कृपया भुगतान विधि निर्दिष्ट करें।',
-            'rule-applied'              => 'Cart rule applied',
+            'rule-applied'              => 'कार्ट नियम लागू',
+            'paypal-payment-canceled'   => 'पेपैल भुगतान रद्द कर दिया गया है।',
         ],
 
         'onepage' => [
@@ -572,14 +575,6 @@ return [
             'shipping-method'     => 'जलयात्रा पद्धति का चयन करें',
             'payment-methods'     => 'भुगतान का तरीका चुनें',
             'payment-method'      => 'भुगतान विधि',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'पेपाल स्मार्ट बटन',
-                'PayPal'              => 'पेपाल',
-                'Cash On Delivery'    => 'डिलवरी पर नकदी',               
-                'Money Transfer'      => 'मनी ट्रांसफर',        
-                'PayPal Standard'     => 'पेपैल मानक'
-                
-            ],
             'summary'             => 'आदेश सारांश',
             'price'               => 'कीमत',
             'quantity'            => 'मात्रा',

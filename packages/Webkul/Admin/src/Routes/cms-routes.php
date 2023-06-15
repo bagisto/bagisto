@@ -6,7 +6,7 @@ use Webkul\CMS\Http\Controllers\Admin\PageController;
 /**
  * CMS routes.
  */
-Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('cms')->group(function () {
         Route::get('/', [PageController::class, 'index'])->defaults('_config', [
             'view' => 'admin::cms.index',
@@ -28,12 +28,12 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
             'redirect' => 'admin.cms.index',
         ])->name('admin.cms.update');
 
-        Route::post('/delete/{id}', [PageController::class, 'delete'])->defaults('_config', [
+        Route::post('delete/{id}', [PageController::class, 'delete'])->defaults('_config', [
             'redirect' => 'admin.cms.index',
         ])->name('admin.cms.delete');
 
-        Route::post('/massdelete', [PageController::class, 'massDelete'])->defaults('_config', [
+        Route::post('mass-delete', [PageController::class, 'massDelete'])->defaults('_config', [
             'redirect' => 'admin.cms.index',
-        ])->name('admin.cms.mass-delete');
+        ])->name('admin.cms.mass_delete');
     });
 });

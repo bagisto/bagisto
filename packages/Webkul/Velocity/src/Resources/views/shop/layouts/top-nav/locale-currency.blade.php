@@ -31,7 +31,11 @@
     <div class="d-inline-block">
         <div class="dropdown">
             <div class="locale-icon">
-                <img src="{{ core()->getCurrentLocale()->image_url }}" alt="" width="20" height="20" />
+                @if(! empty(core()->getCurrentLocale()->image_url))
+                    <img src="{{ core()->getCurrentLocale()->image_url }}" alt="" width="20" height="20" />
+                @else
+                    <img src="{{ asset('/themes/velocity/assets/images/flags/default-locale-image.png') }}" alt="" width="20" height="20" />
+                @endif
             </div>
 
             <select
@@ -43,10 +47,7 @@
                 @endif>
 
                 @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
-                    @if (
-                        isset($searchQuery)
-                        && $searchQuery
-                    )
+                    @if (! empty($searchQuery))
                         <option
                             value="?{{ $searchQuery }}&locale={{ $locale->code }}"
                             {{ $locale->code == app()->getLocale() ? 'selected' : '' }}>
@@ -79,10 +80,7 @@
                     class="btn btn-link dropdown-toggle control locale-switcher styled-select"
                     onchange="window.location.href = this.value" aria-label="Locale">
                     @foreach (core()->getCurrentChannel()->currencies as $currency)
-                        @if (
-                            isset($searchQuery)
-                            && $searchQuery
-                        )
+                        @if (! empty($searchQuery))
                             <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
                         @else
                             <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>

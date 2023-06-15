@@ -16,6 +16,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\BookingProduct\Models\BookingProductProxy;
 use Webkul\Category\Models\CategoryProxy;
 use Webkul\Inventory\Models\InventorySourceProxy;
+use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
 use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Product\Database\Factories\ProductFactory;
@@ -59,28 +60,6 @@ class Product extends Model implements ProductContract
      * @var array
      */
     public static $loadedAttributeValues = [];
-
-    /**
-     * The `booted` method of the model.
-     *
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        parent::boot();
-
-        static::deleting(function ($product) {
-            foreach ($product->product_flats as $productFlat) {
-                $productFlat->unsearchable();
-            }
-
-            foreach ($product->variants as $variant) {
-                foreach ($variant->product_flats as $productFlat) {
-                    $productFlat->unsearchable();
-                }
-            }
-        });
-    }
 
     /**
      * Get the product flat entries that are associated with product.
@@ -141,6 +120,36 @@ class Product extends Model implements ProductContract
     public function customer_group_prices(): HasMany
     {
         return $this->hasMany(ProductCustomerGroupPriceProxy::modelClass());
+    }
+
+    /**
+     * Get the product customer group prices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function catalog_rule_prices(): HasMany
+    {
+        return $this->hasMany(CatalogRuleProductPriceProxy::modelClass());
+    }
+
+    /**
+     * Get the price indices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function price_indices(): HasMany
+    {
+        return $this->hasMany(ProductPriceIndexProxy::modelClass());
+    }
+
+    /**
+     * Get the inventory indices that owns the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inventory_indices(): HasMany
+    {
+        return $this->hasMany(ProductInventoryIndexProxy::modelClass());
     }
 
     /**
@@ -296,8 +305,7 @@ class Product extends Model implements ProductContract
      */
     public function related_products(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id')
-            ->limit(4);
+        return $this->belongsToMany(static::class, 'product_relations', 'parent_id', 'child_id');
     }
 
     /**
@@ -307,8 +315,7 @@ class Product extends Model implements ProductContract
      */
     public function up_sells(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id')
-            ->limit(4);
+        return $this->belongsToMany(static::class, 'product_up_sells', 'parent_id', 'child_id');
     }
 
     /**
@@ -318,8 +325,7 @@ class Product extends Model implements ProductContract
      */
     public function cross_sells(): BelongsToMany
     {
-        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id')
-            ->limit(4);
+        return $this->belongsToMany(static::class, 'product_cross_sells', 'parent_id', 'child_id');
     }
 
     /**
@@ -498,6 +504,10 @@ class Product extends Model implements ProductContract
             return self::$loadedAttributeValues[$this->id][$attribute->id];
         }
 
+        if (empty($this->attribute_values->count())) {
+            $this->load('attribute_values');
+        }
+
         if ($attribute->value_per_channel) {
             if ($attribute->value_per_locale) {
                 $attributeValue = $this->attribute_values
@@ -505,6 +515,14 @@ class Product extends Model implements ProductContract
                     ->where('locale', $locale)
                     ->where('attribute_id', $attribute->id)
                     ->first();
+
+                if (empty($attributeValue[$attribute->column_name])) {
+                    $attributeValue = $this->attribute_values
+                        ->where('channel', core()->getDefaultChannelCode())
+                        ->where('locale', core()->getDefaultChannelLocaleCode())
+                        ->where('attribute_id', $attribute->id)
+                        ->first();
+                }
             } else {
                 $attributeValue = $this->attribute_values
                     ->where('channel', $channel)
@@ -517,6 +535,13 @@ class Product extends Model implements ProductContract
                     ->where('locale', $locale)
                     ->where('attribute_id', $attribute->id)
                     ->first();
+
+                    if (empty($attributeValue[$attribute->column_name])) {
+                        $attributeValue = $this->attribute_values
+                            ->where('locale', core()->getDefaultChannelLocaleCode())
+                            ->where('attribute_id', $attribute->id)
+                            ->first();
+                    }
             } else {
                 $attributeValue = $this->attribute_values
                     ->where('attribute_id', $attribute->id)
@@ -524,7 +549,7 @@ class Product extends Model implements ProductContract
             }
         }
 
-        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[ProductAttributeValue::$attributeTypeFields[$attribute->type]] ?? null;
+        return self::$loadedAttributeValues[$this->id][$attribute->id] = $attributeValue[$attribute->column_name] ?? null;
     }
 
     /**
@@ -587,7 +612,7 @@ class Product extends Model implements ProductContract
      *
      * @return void
      */
-    public function refreshloadedAttributeValues(): void
+    public function refreshLoadedAttributeValues(): void
     {
         self::$loadedAttributeValues = [];
     }
@@ -599,6 +624,6 @@ class Product extends Model implements ProductContract
      */
     protected static function newFactory(): Factory
     {
-        return ProductFactory::new ();
+        return ProductFactory::new();
     }
 }

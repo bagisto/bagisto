@@ -79,9 +79,9 @@ class CampaignDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
                 }
+                
+                return trans('admin::app.datagrid.inactive');
             },
         ]);
     }
@@ -104,7 +104,7 @@ class CampaignDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.campaigns.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Campaign']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
             'icon'         => 'icon trash-icon',
         ]);
     }

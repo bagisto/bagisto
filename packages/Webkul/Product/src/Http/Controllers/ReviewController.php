@@ -3,8 +3,8 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 
 class ReviewController extends Controller
 {
@@ -67,7 +67,7 @@ class ReviewController extends Controller
 
         Event::dispatch('customer.review.update.after', $review);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Review']));
+        session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -89,7 +89,7 @@ class ReviewController extends Controller
 
             Event::dispatch('customer.review.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Review'])]);
+            return response()->json(['message' => trans('admin::app.customers.reviews.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
             report($e);
         }
@@ -156,11 +156,10 @@ class ReviewController extends Controller
                 $review = $this->productReviewRepository->find($value);
 
                 try {
-                    if (! isset($data['massaction-type'])) {
-                        return redirect()->back();
-                    }
-
-                    if (! $data['massaction-type'] == 'update') {
+                    if (
+                        ! isset($data['mass-action-type'])
+                        || $data['mass-action-type'] != 'update'
+                    ) {
                         return redirect()->back();
                     }
 

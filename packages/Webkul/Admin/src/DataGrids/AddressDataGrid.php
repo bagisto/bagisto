@@ -148,9 +148,9 @@ class AddressDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if ($row->default_address) {
                     return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
-                } else {
-                    return trans('admin::app.customers.addresses.dash');
                 }
+                
+                return trans('admin::app.customers.addresses.dash');
             },
         ]);
     }
@@ -173,7 +173,7 @@ class AddressDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.customer.addresses.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'address']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'address']),
             'icon'         => 'icon trash-icon',
         ]);
     }
@@ -188,7 +188,7 @@ class AddressDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.customers.addresses.delete'),
-            'action' => route('admin.customer.addresses.massdelete', request('id')),
+            'action' => route('admin.customer.addresses.mass_delete', request('id')),
             'method' => 'POST',
         ]);
     }

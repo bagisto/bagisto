@@ -18,7 +18,7 @@
             <div class="form-container" style="text-align: left">
                 <h1>{{ __('admin::app.users.reset-password.title') }}</h1>
 
-                <form method="POST" action="{{ route('admin.reset-password.store') }}" @submit.prevent="onSubmit">
+                <form method="POST" action="{{ route('admin.reset_password.store') }}" @submit.prevent="onSubmit">
                     @csrf
 
                     <input type="hidden" name="token" value="{{ $token }}">

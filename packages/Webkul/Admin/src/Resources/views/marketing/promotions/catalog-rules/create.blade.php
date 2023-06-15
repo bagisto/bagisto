@@ -13,12 +13,12 @@
 @push('scripts')
     <script type="text/x-template" id="catalog-rule-template">
         <div>
-            <form method="POST" action="{{ route('admin.catalog-rules.store') }}" @submit.prevent="onSubmit">
+            <form method="POST" action="{{ route('admin.catalog_rules.store') }}" @submit.prevent="onSubmit">
                 <div class="page-header">
                     <div class="page-title">
                         <h1>
                         <i class="icon angle-left-icon back-link"
-                            onclick="window.location = '{{ route('admin.catalog-rules.index') }}'"></i>
+                            onclick="window.location = '{{ route('admin.catalog_rules.index') }}'"></i>
 
                             {{ __('admin::app.promotions.catalog-rules.add-title') }}
                         </h1>
@@ -94,16 +94,20 @@
 
                                 <div class="control-group date">
                                     <label for="starts_from">{{ __('admin::app.promotions.catalog-rules.from') }}</label>
+                                    
                                     <date>
                                         <input type="text" name="starts_from" class="control" value="{{ old('starts_from') }}"/>
                                     </date>
                                 </div>
 
-                                <div class="control-group date">
+                                <div class="control-group date" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                     <label for="ends_till">{{ __('admin::app.promotions.catalog-rules.to') }}</label>
-                                    <date>
-                                        <input type="text" name="ends_till" class="control" value="{{ old('ends_till') }}"/>
+
+                                    <date>                          
+                                        <input type="text" v-validate="" class="control" id="ends_till" name="ends_till" value="{{ old('ends_till') }}"/>
                                     </date>
+
+                                    <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                 </div>
 
                                 <div class="control-group">
@@ -219,7 +223,7 @@
 
                     <div v-else>
                         <div class="control-group" :class="[errors.has('conditions[' + index + '][value]') ? 'has-error' : '']" v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'">
-                            <input v-validate="matchedAttribute.type == 'price' ? 'decimal:2' : '' || matchedAttribute.type == 'decimal' ? 'decimal:2' : '' || matchedAttribute.type == 'integer' ? 'decimal:2' : '' || matchedAttribute.type == 'text' ? 'alpha_dash' : ''" class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.conditions') }}&quot;"/>
+                            <input v-validate="matchedAttribute.type == 'price' ? 'decimal:2' : '' || matchedAttribute.type == 'decimal' ? 'decimal:2' : '' || matchedAttribute.type == 'integer' ? 'decimal:2' : '' || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''" class="control" :name="['conditions[' + index + '][value]']" v-model="condition.value" data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.conditions') }}&quot;"/>
                             <span class="control-error" v-if="errors.has('conditions[' + index + '][value]')" v-text="errors.first('conditions[' + index + '][value]')"></span>
                         </div>
 

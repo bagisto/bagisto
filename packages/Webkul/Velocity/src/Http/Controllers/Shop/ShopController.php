@@ -2,10 +2,42 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Velocity\Helpers\Helper;
+use Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository as CustomerCompareProductRepository;
 
 class ShopController extends Controller
 {
+    /**
+     * Contains route related configuration
+     *
+     * @var array
+     */
+    protected $_config;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository,
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository,
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository,
+     * @param  \Webkul\Velocity\Helpers\Helper  $velocityHelper,
+     * @param  \Webkul\Velocity\Repositories\VelocityCustomerCompareProductRepository  $compareProductsRepository
+     * @return void
+     */
+    public function __construct(
+        protected CategoryRepository $categoryRepository,
+        protected WishlistRepository $wishlistRepository,
+        protected ProductRepository $productRepository,
+        protected Helper $velocityHelper,
+        protected CustomerCompareProductRepository $compareProductsRepository
+    ) {
+        $this->_config = request('_config');
+    }
+
     /**
      * Index to handle the view loaded with the search results.
      *
@@ -13,7 +45,9 @@ class ShopController extends Controller
      */
     public function search()
     {
-        $results = $this->velocityProductRepository->searchProductsFromCategory(request()->all());
+        request()->query->add(['name' => request('term')]);
+
+        $results = $this->productRepository->getAll(request('category'));
 
         return view($this->_config['view'])->with('results', $results ? $results : null);
     }
@@ -28,7 +62,7 @@ class ShopController extends Controller
     {
         $product = $this->productRepository->findBySlug($slug);
 
-        if ($product) {
+        if ($product?->status) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
 
             $galleryImages = ProductImage::getProductBaseImage($product);
@@ -70,24 +104,28 @@ class ShopController extends Controller
         switch ($slug) {
             case 'new-products':
             case 'featured-products':
-                $count = request()->get('count');
-
                 if ($slug == 'new-products') {
-                    $products = $this->velocityProductRepository->getNewProducts($count);
+                    request()->query->add([
+                        'new'   => 1,
+                        'order' => 'rand',
+                        'limit' => request()->get('count')
+                            ?? core()->getConfigData('catalog.products.homepage.no_of_new_product_homepage'),
+                    ]);
                 } elseif ($slug == 'featured-products') {
-                    $products = $this->velocityProductRepository->getFeaturedProducts($count);
+                    request()->query->add([
+                        'featured' => 1,
+                        'order'    => 'rand',
+                        'limit'    => request()->get('count')
+                            ?? core()->getConfigData('catalog.products.homepage.no_of_featured_product_homepage'),
+                    ]);
                 }
+
+                $products = $this->productRepository->getAll();
 
                 $response = [
                     'status'   => true,
                     'products' => $products->map(function ($product) {
-                        if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                            return $this->velocityHelper->formatProduct($product);
-                        } else {
-                            if ($product->isSaleable()) {
-                                return $this->velocityHelper->formatProduct($product);
-                            }
-                        }
+                        return $this->velocityHelper->formatProduct($product);
                     })->reject(function ($product) {
                         return is_null($product);
                     })->values(),
@@ -186,25 +224,10 @@ class ShopController extends Controller
     public function getItemsCount()
     {
         if ($customer = auth()->guard('customer')->user()) {
-
-            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                $wishlistItemsCount = $this->wishlistRepository->getModel()
-                    ->leftJoin('products as ps', 'wishlist.product_id', '=', 'ps.id')
-                    ->leftJoin('product_inventories as pv', 'ps.id', '=', 'pv.product_id')
-                    ->where(function ($qb) {
-                        $qb
-                            ->WhereIn('ps.type', ['configurable', 'grouped', 'downloadable', 'bundle', 'booking'])
-                            ->orwhereIn('ps.type', ['simple', 'virtual'])->where('pv.qty', '>', 0);
-                    })
-                    ->where('wishlist.customer_id', $customer->id)
-                    ->where('wishlist.channel_id', core()->getCurrentChannel()->id)
-                    ->count('wishlist.id');
-            } else {
-                $wishlistItemsCount = $this->wishlistRepository->count([
-                    'customer_id' => $customer->id,
-                    'channel_id'  => core()->getCurrentChannel()->id,
-                ]);
-            }
+            $wishlistItemsCount = $this->wishlistRepository->count([
+                'customer_id' => $customer->id,
+                'channel_id'  => core()->getCurrentChannel()->id,
+            ]);
 
             $comparedItemsCount = $this->compareProductsRepository->count([
                 'customer_id' => $customer->id,
@@ -249,7 +272,6 @@ class ShopController extends Controller
      * This method will fetch products from category.
      *
      * @param  int  $categoryId
-     *
      * @return \Illuminate\Http\Response
      */
     public function getCategoryProducts($categoryId)
@@ -271,7 +293,7 @@ class ShopController extends Controller
 
         /* sending response */
         return response()->json([
-            'products'       => collect($products->items())->map(function ($product) {
+            'products' => collect($products->items())->map(function ($product) {
                 return $this->velocityHelper->formatProduct($product);
             }),
             'paginationHTML' => $products->appends(request()->input())->links()->toHtml(),

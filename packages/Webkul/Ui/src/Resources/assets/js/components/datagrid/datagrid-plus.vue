@@ -2,14 +2,12 @@
     <div class="table" v-if="isDataLoaded" :key="dataGridIndex">
         <div class="grid-container">
             <div class="grid-top">
-                <div class="datagrid-filters">
-                    <div class="filter-left">
-                        <datagrid-extra-filters
-                            :extra-filters="extraFilters"
-                            :translations="translations"
-                            @onFilter="changeExtraFilter($event)"
-                        ></datagrid-extra-filters>
-                    </div>
+                <div class="datagrid-filters" id="datagrid-filters">
+                    <datagrid-extra-filters
+                        :extra-filters="extraFilters"
+                        :translations="translations"
+                        @onFilter="changeExtraFilter($event)"
+                    ></datagrid-extra-filters>
                 </div>
 
                 <div class="datagrid-filters" id="datagrid-filters">
@@ -46,6 +44,13 @@
                 <datagrid-filter-tags
                     :filters="filters"
                     :translations="translations"
+                    :mass-actions="massActions"
+                    :mass-action-targets="massActionTargets"
+                    :data-id="indexes"
+                    :mass-actions-toggle="massActionsToggle"
+                    :extra-filters="extraFilters"
+                    :item-count="itemCount"
+                    :total = records.total
                     @onRemoveFilter="removeFilter($event)"
                     @onRemoveAllFilter="clearAllFilters()"
                 ></datagrid-filter-tags>
@@ -65,11 +70,12 @@
                     :enable-mass-actions="enableMassActions"
                     :index="index"
                     :mass-actions="massActions"
-                    :mass-action-targets="massActionTargets"
                     :records="records"
                     :translations="translations"
                     @onSorting="filterData($event)"
                     @onActionSuccess="refresh()"
+                    @onSelect="getDataIds"
+                    @onSelectAll="massActionToggle"
                 ></datagrid-table>
             </div>
 
@@ -117,6 +123,9 @@ export default {
             isDataLoaded: false,
             massActionTargets: [],
             url: this.src,
+            indexes: [],
+            massActionsToggle: false,
+            itemCount: 0
         };
     },
 
@@ -126,7 +135,8 @@ export default {
 
     methods: {
         makeURL() {
-            let newParams = '';
+            let url = new URL(this.src);
+            url.searchParams.set('v', 1);
 
             for (let i = 0; i < this.filters.length; i++) {
                 if (
@@ -148,11 +158,15 @@ export default {
                     condition = '[' + this.filters[i].cond + ']';
                 }
 
-                newParams = `${newParams}&${this.filters[i].column}${condition}=${this.filters[i].val}`;
+                url.searchParams.set(`${this.filters[i].column}${condition}`, this.filters[i].val);
             }
 
-            this.url = `${this.src}?v=1${newParams}`;
+            if (this.extraFilters) {
+                url.searchParams.set('channel', this.extraFilters.current.channel);
+                url.searchParams.set('locale', this.extraFilters.current.locale);
+            }
 
+            this.url = url.href;
             this.refresh();
         },
 
@@ -164,30 +178,30 @@ export default {
             axios
                 .get(this.url)
                 .then(function (response) {
-                    if (response.status === 200) {
-                        let results = response.data;
+                    let results = response.data;
 
-                        if (
-                            ! results.records.data.length &&
-                            results.records.prev_page_url
-                        ) {
-                            self.url = results.records.prev_page_url;
+                    if (
+                        ! results.records.data.length &&
+                        results.records.prev_page_url
+                    ) {
+                        self.url = results.records.prev_page_url;
 
-                            self.refresh();
+                        self.refresh();
 
-                            return;
-                        }
-
-                        self.initResponseProps(results);
-
-                        self.initDatagrid();
-
-                        self.dataGridIndex += 1;
+                        return;
                     }
+
+                    self.initResponseProps(results);
+
+                    self.initDatagrid();
+
+                    self.dataGridIndex += 1;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+
+                this.itemCount = 0;
         },
 
         initResponseProps(results) {
@@ -401,6 +415,26 @@ export default {
             let url = new URL(this.src);
             url.searchParams.set(type, value);
 
+            /**
+             * For channel, given a quick fix because the long term solution is time taking. Will
+             * implement in the new theme with new datagrid.
+             */
+            let channel = document.querySelector('select[name=channel]')?.value;
+
+            if (channel) {
+                url.searchParams.set('channel', channel);
+            }
+
+            /**
+             * For locale, given a quick fix because the long term solution is time taking. Will
+             * implement in the new theme with new datagrid.
+             */
+            let locale = document.querySelector('select[name=locale]')?.value;
+
+            if (locale) {
+                url.searchParams.set('locale', locale);
+            }
+
             this.url = url.href;
             this.refresh();
         },
@@ -456,7 +490,7 @@ export default {
                 }
             }
         },
-        
+
         clearAllFilters() {
             this.filters = [];
 
@@ -470,6 +504,28 @@ export default {
                 this.url = pageLink;
                 this.refresh();
             }
+        },
+
+        getDataIds(dataIds) {
+            if (dataIds[0].target.checked) {
+                this.indexes.push(dataIds[0].target.value);
+            } else {
+                this.indexes.map((value, index) => {
+                    if (value ==  dataIds[0].target.value) {
+                        this.indexes.splice(index, 1);
+                    }
+                })
+            }
+
+            this.itemCount = dataIds[2];
+
+            this.massActionsToggle = dataIds[1];
+        },
+
+        massActionToggle(massAction) {
+            this.indexes = massAction[0];
+            this.massActionsToggle = massAction[1];
+            this.itemCount = massAction[2];
         }
     }
 };

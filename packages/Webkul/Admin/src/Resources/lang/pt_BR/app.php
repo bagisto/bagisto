@@ -532,7 +532,7 @@ return [
             'product-type'                  => 'Tipo de Produto',
             'simple'                        => 'Simples',
             'configurable'                  => 'Configurável',
-            'familiy'                       => 'Grupo de Atributos',
+            'family'                       => 'Grupo de Atributos',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Atributos Configuráveis',
             'attribute-header'              => 'Atributos(s)',
@@ -581,6 +581,7 @@ return [
             'grouped-products'              => 'Produtos Agrupados',
             'search-products'               => 'procurar produtos',
             'no-result-found'               => 'Produtos não encontrados com o mesmo nome.',
+            'no-product-added'              => 'Nenhum produto adicionado',
             'channel'                       => 'Canais',
             'bundle-items'                  => 'Itens do pacote',
             'add-option-btn-title'          => 'Adicionar opção',
@@ -607,6 +608,9 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -660,7 +664,6 @@ return [
             'image'                       => 'Imagem',
             'file'                        => 'Arquivo',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Criar na tabela plana do produto',
             'is_comparable'               => 'O atributo é comparável',
             'default_null_option'         => 'Criar opção vazia padrão',
             'validation-messages'         => [
@@ -811,6 +814,7 @@ return [
             'code'              => 'Código',
             'name'              => 'Nome',
             'symbol'            => 'Símbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Moeda criada com sucesso.',
             'update-success'    => 'Moeda atualizada com sucesso.',
             'delete-success'    => 'Moeda excluída com sucesso.',
@@ -1018,6 +1022,11 @@ return [
             'error-create'        => 'Error: Endereço do cliente não criado.',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'entrar como cliente',
+            'login-message'=>'você se conectou como :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Adicionar nota',
             'save-note'  => 'Salvar nota',
@@ -1061,14 +1070,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Avaliações',
-            'edit-title'  => 'Editar Avaliação',
-            'rating'      => 'Classificação',
-            'status'      => 'Status',
-            'comment'     => 'Comentar',
-            'pending'     => 'Pendente',
-            'approved'    => 'Aprovado',
-            'disapproved' => 'Desaprovar',
+            'title'          => 'Avaliações',
+            'edit-title'     => 'Editar Avaliação',
+            'rating'         => 'Classificação',
+            'status'         => 'Status',
+            'comment'        => 'Comentar',
+            'pending'        => 'Pendente',
+            'approved'       => 'Aprovado',
+            'disapproved'    => 'Desaprovar',
+            'update-success' => 'Revisão atualizada com sucesso',
+            'delete-success' => 'Comentário excluído com sucesso',
         ],
 
         'subscribers' => [
@@ -1162,7 +1173,7 @@ return [
             'code-prefix'                    => 'Prefixo do código',
             'code-suffix'                    => 'Sufixo de código',
             'generate'                       => 'Gerar',
-            'cart-rule-not-defind-error'     => 'A regra do carrinho não está definida',
+            'cart-rule-not-defined-error'    => 'A regra do carrinho não está definida',
             'mass-delete-success'            => 'Todos os cupons selecionados foram excluídos com sucesso.',
             'end-other-rules'                => 'Terminar outras regras',
             'children-categories'            => 'Categorias (Somente Crianças)',
@@ -1298,9 +1309,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'IR PARA PÁGINA INICIAL',
-        'in-maitainace' => 'Em manutenção',
-        'right-back'    => 'Volto logo',
+        'go-to-home'     => 'IR PARA PÁGINA INICIAL',
+        'in-maintenance' => 'Em manutenção',
+        'right-back'     => 'Volto logo',
 
         '404' => [
             'page-title' => '404 Página não Encontrada',
@@ -1390,9 +1401,6 @@ return [
         'being-used'              => 'Este recurso :name está sendo usado em :source',
         'cannot-change'           => 'Cannot change the :name.',
         'cannot-delete-default'   => 'Não é possível excluir o canal padrão',
-        'create-success'          => ':name criado com sucesso.',
-        'update-success'          => ':name atualizaco com sucesso.',
-        'delete-success'          => ':name excluído com sucesso.',
         'delete-failed'           => 'Erro encontrado ao excluir :name.',
         'last-delete-error'       => 'Ao menos um :name é obrigatório.',
         'user-define-error'       => 'Não pode excluir o sistema :name',
@@ -1441,9 +1449,14 @@ return [
         'system'             => [
             'catalog'                               => 'Catálogo',
             'homepage'                              => 'Configuração da HOME',
-            'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
-            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
-            'allow-out-of-stock-items'              => 'Allow out of stock items',
+            'product-view-page'                     => 'Configuração da página de visualização do produto',
+            'cart-view-page'                        => 'Configuração da página de visualização do carrinho',
+            'allow-no-of-new-product-homepage'      => 'Número permitido de novo produto na página inicial',
+            'allow-no-of-featured-product-homepage' => 'Número permitido de produto em destaque na página inicial',
+            'allow-no-of-related-products'          => 'Número permitido de produtos relacionados',
+            'allow-no-of-up-sells-products'         => 'Número permitido de produtos up-sell',
+            'allow-no-of-cross-sells-products'      => 'Número permitido de produtos de venda cruzada',
+            'allow-out-of-stock-items'              => 'Permitir itens fora de estoque',
             'products'                              => 'Produtos',
             'guest-checkout'                        => 'Compras sem cadastro?',
             'allow-guest-checkout'                  => 'Permitir compra para clientes sem cadastros?',
@@ -1553,7 +1566,7 @@ return [
             'oldest-first'                          => 'Mais velhos primeiro',
             'cheapest-first'                        => 'Mais baratos primeiro',
             'expensive-first'                       => 'Mais caros primeiros',
-            'comma-seperated'                       => 'Separado por vírgula',
+            'comma-separated'                       => 'Separado por vírgula',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',

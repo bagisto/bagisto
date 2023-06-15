@@ -11,7 +11,7 @@
         <div class="review-layouter mb-20">
             <div class="product-info">
 
-                <?php $productBaseImage = productimage()->getProductBaseImage($product); ?>
+                <?php $productBaseImage = product_image()->getProductBaseImage($product); ?>
 
                 <div class="product-image">
                     <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
@@ -30,7 +30,7 @@
             </div>
 
             <div class="review-form">
-                <form method="POST" action="{{ route('shop.reviews.store', $product->product_id ) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('shop.reviews.store', $product->id ) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
                     @csrf
 
                     <div class="heading mt-10 mb-25">

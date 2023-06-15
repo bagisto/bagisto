@@ -186,7 +186,7 @@ class Cart extends Model implements CartContract
      */
     public function checkMinimumOrder(): bool
     {
-        $minimumOrderAmount = (float)(core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0);
+        $minimumOrderAmount = (float)(core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?: 0);
 
         $cartBaseSubTotal = (float)$this->base_sub_total;
 

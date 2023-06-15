@@ -60,6 +60,10 @@ return [
             'no-result-found' => 'Kayıt bulunamadı.',
             'search-hint' => 'Ürün arayın...',
             'mass-delete-success' => 'Seçili içerik başarıyla silindi.',
+            'delete-success'      => 'içerik başarıyla silindi',
+            'delete-failed'       => 'Hata! içerik silinemez',
+            'update-success'      => 'içerik başarıyla güncellendi',
+            'create-success'      => 'içerik başarıyla oluşturuldu',
             'tab' => [
                 'page' => 'Sayfa Ayarları',
                 'content' => 'İçerik Ayarları',
@@ -105,7 +109,6 @@ return [
             'update-meta-data' => 'Meta Bilgisi Güncelle',
             'product-view-image' => 'Ürün Görselini Görüntüle',
             'advertisement-two' => 'İki Görselli Reklam',
-            'advertisement-one' => 'Rek Görsel Reklamı',
             'footer-middle-content' => 'Orta İçerikli Alt Kısım',
             'advertisement-four' => 'Dört Görselli Reklam',
             'advertisement-three' => 'Üç Görselli Reklam',
@@ -224,7 +227,7 @@ return [
             'login'             => 'Giriş Yap',
             'become-user'       => 'Kullanıcı Olun',
             'user-registration' => 'Kullanıcı Kaydı',
-            'form-sginup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
+            'form-signup-text'  => 'Eğer mağazamızda yeniyseniz, sizleri üye olarak aramızda görmekten memnuniyet duyarız.',
         ],
         'forget-password'   => [
             'login'                 => 'Giriş Yap',
@@ -263,6 +266,7 @@ return [
         'recently-viewed'   => 'En Son Gezdiğiniz Ürünler',
         'be-first-review'   => 'Bu ürüne ilk siz inceleme girin!',
         'tax-inclusive'     => 'Tüm vergiler dahildir',
+        'product-removed'  => 'Ürün Yönetici Tarafından Kaldırıldığı İçin Artık Mevcut Değil',
     ],
 
     'shop'          => [
@@ -308,7 +312,8 @@ return [
         'header' => [
             'done'      => 'Tamamlandı',
             'languages' => 'Diller',
-            'greeting'  => 'Hoşgeldiniz, :customer !',
+            'greeting'  => 'Hoşgeldiniz, :Customer !',
+            'greeting-for-guest' => 'Hoşgeldin Misafir'
         ]
     ],
 ]

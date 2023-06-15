@@ -93,14 +93,14 @@ body {
             min-width: 50px;
             position: relative;
             padding: 11px 16px;
-            //margin: 0px 25px 0px 30px;
+            //margin:0px 25px 0px 30px;
             font-size: 15px;
             cursor: pointer;
             position: relative;
             border-left: 1px solid $seprator;
 
             .app-version {
-                padding: 10px 20px 0px 20px;
+                padding: 10px 10px 0px;
                 margin-bottom: -10px;
                 display: block;
                 cursor: default;
@@ -199,7 +199,7 @@ body {
             min-width: 50px;
             position: relative;
             padding: 15px 16px;
-            //margin: 0px 25px 0px 30px;
+            //margin:0px 25px 0px 30px;
             font-size: 15px;
             cursor: pointer;
             position: relative;
@@ -329,7 +329,7 @@ body {
 
         ul.menubar {
             overflow-y: auto;
-            height: 86%;
+            height: 84%;
 
             &::-webkit-scrollbar {
                 width: 0px !important;
@@ -487,23 +487,25 @@ body {
 
 .ticket-list {
     .control-group {
-        &.date {
-            &::after {
-                left: unset;
-                right: 10px;
-                top: 34px;
-            }
-        }
-
-        &.has-error {
-            &.date {
-                &::after {
-                    top: 47px;
-                }
-            }
+        .cross-icon {
+            display: none;
         }
 
         @media only screen and (max-width: 425px) {
+            .content-container {
+                .content {
+                    .page-header {
+                        .control-group {
+                            width: 90%;
+                            display: inline-block;
+                            margin-bottom: 0;
+                            margin-left: 20px;
+                            margin-top: 24px;
+                        }
+                    }
+                }
+            }
+
             .flatpickr-input {
                 width: 210px !important;
                 padding-left: 10px;
@@ -514,21 +516,29 @@ body {
 
 .variant-image {
     .image-item {
-        height: 100px !important;
-        width: 100px !important;
-        background-size: 100px 100px !important;
-    }
-
-    .trash-icon {
-        position: absolute;
-        cursor: pointer;
-        margin-top: 25%;
+        height: 120px ;
+        width: 120px ;
+        background-size: 100px 100px;
+        margin-right: 0px;
     }
 }
 
 .btn.add-image {
     display: inline-block;
-    width: auto;
+    width: max-content;
+}
+
+.image-group {
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .variant {
+            font-size: 10px;
+            font-weight: bold;
+            padding: 4px;
+        }
+    }
 }
 
 .rtl {
@@ -591,6 +601,8 @@ body {
     .content {
         .page-header {
             display: inline-block;
+            justify-content: space-between;
+            flex-wrap: wrap;
             width: 100%;
             padding: 16px 10px 15px 16px;
             position: sticky;
@@ -601,6 +613,7 @@ body {
 
             .page-title {
                 float: left;
+                align-items: center;
 
                 .back-link {
                     float: left;
@@ -620,8 +633,12 @@ body {
             }
 
             .page-action {
-                float: right;
                 margin-top: -5px;
+                float: right;
+
+                button {
+                    margin-top: 10px;
+                }
 
                 * {
                     display: inline-block;
@@ -633,7 +650,7 @@ body {
             }
 
             .control-group {
-                width: 180px;
+                width: 90%;
                 display: inline-block;
                 margin-bottom: 0;
                 margin-left: 20px;
@@ -779,6 +796,19 @@ body {
 }
 
 @media only screen and (min-width: 768px) {
+    .content-container {
+        .content {
+            .page-header {
+                .control-group {
+                    width: 180px;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+
     .navbar-left {
         display: block;
     }
@@ -798,13 +828,38 @@ body {
     }
 
     .switch-dark {
-        width: 75%;
+        width: 80%;
+    }
+
+    .page-action {
+        align-items: center;
+        justify-content: space-between;
     }
 }
 
 @media only screen and (max-width: 768px) {
+    .content-container {
+        .content {
+            .page-header {
+                .control-group {
+                    width: 180px;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                    margin-top: 24px;
+                }
+            }
+        }
+    }
+
     h1 {
-        font-size: 18px;
+        font-size: 30px;
+    }
+
+    .page-action {
+        .btn.btn-primary {
+            margin-top: 20px;
+        }
     }
 
     .back-link {
@@ -859,12 +914,14 @@ body {
                         margin-bottom: 0;
                         margin-left: 0px;
                         padding: 0px;
-                        margin-top: 40px;
+                        margin-top: 25px;
                     }
 
                     .page-title {
                         float: left;
                         width: 100%;
+                        display: flex;
+                        grid-gap: 5px;
 
                         .back-link {
                             margin-top: 0px;
@@ -877,6 +934,9 @@ body {
                     .page-action {
                         right: 10px;
                         margin-top: 0px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
                     }
                 }
             }
@@ -894,6 +954,8 @@ body {
 
     .notif-filter {
         margin-top: 12px !important;
+        width: 100% !important;
+        margin-left: inherit !important;
     }
 
     .switch-dark {
@@ -905,20 +967,51 @@ body {
     .content-container {
         .content {
             .page-header {
+                .control-group {
+                    width: 90%;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                    margin-top: 24px;
+                }
+
                 .page-title {
-                    width: 100% !important;
+                    float: left;
                 }
 
                 .page-action {
-                    margin-top: 10px !important;
-                    float: left;
+                    margin-top: -15px !important;
 
                     a {
                         margin-left: 0px !important;
+                        margin-top: 5px;
                     }
 
                     .export-import {
                         margin-top: 0px !important;
+                        padding-right: 5px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .content-container {
+        .content {
+            .page-header {
+                .control-group {
+                    width: 90%;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                    margin-top: 24px;
+                }
+
+                .page-action {
+                    a {
+                        margin-top: 20px;
                     }
                 }
             }
@@ -930,9 +1023,17 @@ body {
     .content-container {
         .content {
             .page-header {
+                .control-group {
+                    width: 90%;
+                    display: inline-block;
+                    margin-bottom: 0;
+                    margin-left: 20px;
+                    margin-top: 24px;
+                }
+
                 .page-action {
                     a {
-                        margin-top: 10px;
+                        margin-top: 20px;
                     }
                 }
             }
@@ -952,7 +1053,7 @@ body {
     margin-right: 15px;
     transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-    input[type="file"] {
+    input[type='file'] {
         width: 100px;
         height: 100px;
         position: absolute;
@@ -994,7 +1095,6 @@ body {
         font-size: 16px;
     }
 }
-
 
 .table {
     td {

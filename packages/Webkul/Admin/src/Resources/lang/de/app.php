@@ -2,8 +2,8 @@
 
 return [
     'save'          => 'Speichern',
-    'copy-of'       => 'Kopie von ',
-    'copy-of-slug'  => 'kopie-von-',
+    'copy-of'       => 'Kopie von :value',
+    'copy-of-slug'  => 'kopie-von-:value',
     'create'        => 'Erstellen',
     'update'        => 'Update',
     'delete'        => 'Löschen',
@@ -543,7 +543,7 @@ return [
             ],
             'simple'                        => 'Einfach',
             'configurable'                  => 'Konfigurierbar',
-            'familiy'                       => 'Attributgruppe',
+            'family'                       => 'Attributgruppe',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Konfigurierbare Attribute',
             'attribute-header'              => 'Attribut(s)',
@@ -586,6 +586,7 @@ return [
             'related-products'              => 'Verwandte Produkte',
             'product-search-hint'           => 'Geben Sie den Produktnamen ein',
             'no-result-found'               => 'Produkte nicht mit demselben Namen gefunden.',
+            'no-product-added'              => 'Kein Produkt hinzugefügt',
             'searching'                     => 'Suche ...',
             'grouped-products'              => 'Gruppierte Produkte',
             'search-products'               => 'Produkte suchen',
@@ -615,6 +616,9 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
         'attributes'            =>
         [
@@ -667,7 +671,6 @@ return [
             'image'                       => 'Bild',
             'file'                        => 'Datei',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'In Produkt Flat Tabelle erstellen',
             'is_comparable'               => 'Attribut ist vergleichbar',
             'default_null_option'         => 'Erstellen Sie eine leere Standardoption',
             'validation-messages'         => [
@@ -825,6 +828,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'symbol'            => 'Symbol',
+            'decimal'            => 'Dezimal',
             'create-success'    => 'Währung erfolgreich erstellt.',
             'update-success'    => 'Währung erfolgreich aktualisiert.',
             'delete-success'    => 'Währung erfolgreich gelöscht.',
@@ -1035,6 +1039,12 @@ return [
             'success-mass-delete' => 'Erfolg: Die ausgewählten Adressen wurden erfolgreich gelöscht.',
             'error-create'        => 'Fehler: Kunde-Adresse nicht erstellt.',
         ],
+
+        'loginascustomer' => [
+            'grid-title'=>'inloggen als klant',
+            'login-message'=>'je bent ingelogd als :customer_name'
+        ],
+
         'note'        =>
         [
             'title'      => 'Notiz hinzufügen',
@@ -1075,17 +1085,19 @@ return [
             'is-suspended'         => 'Is Suspended',
             'suspend'              => 'Suspend',
             'suspended'            => 'Suspended',
-        ],
-        'reviews'     =>
-        [
-            'title'       => 'Bewertungen',
-            'edit-title'  => 'Bewertung bearbeiten',
-            'rating'      => 'Bewertung',
-            'status'      => 'Status',
-            'comment'     => 'Kommentar',
-            'pending'     => 'Ausstehend',
-            'approved'    => 'Genehmigen',
-            'disapproved' => 'Missbilligen',
+        ],   
+        'reviews'     =>   
+        [   
+            'title'          => 'Bewertungen',
+            'edit-title'     => 'Bewertung bearbeiten',
+            'rating'         => 'Bewertung',
+            'status'         => 'Status',
+            'comment'        => 'Kommentar',
+            'pending'        => 'Ausstehend',
+            'approved'       => 'Genehmigen',
+            'disapproved'    => 'Missbilligen',
+            'update-success' => 'Bewertung erfolgreich aktualisiert',
+            'delete-success' => 'Bewertung erfolgreich gelöscht',
         ],
         'subscribers' =>
         [
@@ -1180,7 +1192,7 @@ return [
             'code-prefix'                    => 'Code-Präfix',
             'code-suffix'                    => 'Code Suffix',
             'generate'                       => 'Generieren',
-            'cart-rule-not-defind-error'     => 'Warenkorb-Regel ist nicht definiert',
+            'cart-rule-not-defined-error'    => 'Warenkorb-Regel ist nicht definiert',
             'mass-delete-success'            => 'Alle ausgewählten Gutscheine wurden erfolgreich gelöscht.',
             'end-other-rules'                => 'Ende Andere Regeln',
             'children-categories'            => 'Kategorien (Nur Kinder)',
@@ -1317,9 +1329,9 @@ return [
 
     'error' =>
     [
-        'go-to-home'    => 'HOME ÖFFNEN',
-        'in-maitainace' => 'In Bearbeitung',
-        'right-back'    => 'Gleich wieder zurück',
+        'go-to-home'     => 'HOME ÖFFNEN',
+        'in-maintenance' => 'In Bearbeitung',
+        'right-back'     => 'Gleich wieder zurück',
         404             =>
         [
             'page-title' => '404-Seite nicht gefunden',
@@ -1417,9 +1429,6 @@ return [
         'product-can-not-be-copied' => 'Produkte vom Typ :type können nicht kopiert werden.',
         'cannot-change'             => 'Cannot change the :name.',
         'cannot-delete-default'     => 'Der Standardkanal kann nicht gelöscht werden',
-        'create-success'            => ':name erfolgreich erstellt.',
-        'update-success'            => ':name erfolgreich aktualisiert.',
-        'delete-success'            => ':name erfolgreich gelöscht.',
         'delete-failed'             => 'Fehler beim löschen von :name.',
         'last-delete-error'         => 'Zumindest ein :name ist erforderlich.',
         'user-define-error'         => 'System :name kann nicht gelöscht werden',
@@ -1468,10 +1477,15 @@ return [
         'system' =>
         [
             'catalog'                               => 'Katalog',
-            'homepage'                              => 'Homepage configuration',
-            'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
-            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
-            'allow-out-of-stock-items'              => 'Allow out of stock items',
+            'homepage'                              => 'Homepage-Konfiguration',
+            'product-view-page'                     => 'Konfiguration der Produktansichtsseite',
+            'cart-view-page'                        => 'Konfiguration der Warenkorbansichtsseite',
+            'allow-no-of-new-product-homepage'      => 'Zulässige Anzahl neuer Produkte auf der Homepage',
+            'allow-no-of-featured-product-homepage' => 'Zulässige Anzahl von empfohlenen Produkten auf der Homepage',
+            'allow-no-of-related-products'          => 'Zulässige Anzahl verwandter Produkte',
+            'allow-no-of-up-sells-products'         => 'Zulässige Anzahl von Up-Sell-Produkten',
+            'allow-no-of-cross-sells-products'      => 'Zulässige Anzahl von Cross-Selling-Produkten',
+            'allow-out-of-stock-items'              => 'Ausverkaufte Artikel zulassen',
             'products'                              => 'Produkte',
             'guest-checkout'                        => 'Gastbestellungen',
             'allow-guest-checkout'                  => 'Gastbestellungen erlauben',

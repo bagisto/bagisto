@@ -19,7 +19,7 @@
 @endphp
 
 @section('page_title')
-    {{ isset($metaTitle) ? $metaTitle : "" }}
+    {{ $metaTitle ?? "" }}
 @endsection
 
 @section('head')
@@ -63,7 +63,7 @@
         {!! view_render_event('bagisto.shop.home.content.before') !!}
 
             @if ($velocityMetaData)
-                {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
+                {!! Blade::render($velocityMetaData->home_page_content) !!}
             @else
                 @include('shop::home.advertisements.advertisement-four')
                 @include('shop::home.featured-products')

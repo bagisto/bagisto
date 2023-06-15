@@ -2,11 +2,11 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Webkul\Admin\DataGrids\OrderRefundDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\RefundRepository;
+use Webkul\Admin\DataGrids\OrderRefundDataGrid;
 
 class RefundController extends Controller
 {
@@ -113,7 +113,7 @@ class RefundController extends Controller
 
         $this->refundRepository->create(array_merge($data, ['order_id' => $orderId]));
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Refund']));
+        session()->flash('success', trans('admin::app.sales.refunds.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }

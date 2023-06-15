@@ -177,7 +177,7 @@ class SliderDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.sliders.massdelete'),
+            'action' => route('admin.sliders.mass_delete'),
             'method' => 'POST',
         ]);
     }

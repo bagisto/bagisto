@@ -543,7 +543,7 @@ return [
             ],
             'simple'                        => 'Basit',
             'configurable'                  => 'Ayarlanabilir',
-            'familiy'                       => 'Nitelik Grubu',
+            'family'                       => 'Nitelik Grubu',
             'sku'                           => 'Kodu',
             'configurable-attributes'       => 'Ayarlanabilir Nitelikler',
             'attribute-header'              => 'Nitelik(ler)',
@@ -589,6 +589,7 @@ return [
             'grouped-products'              => 'Gruplandırılmış Ürünler',
             'search-products'               => 'Ürünleri Ara',
             'no-result-found'               => 'Aynı isimde ürün bulunamadı.',
+            'no-product-added'              => 'Ürün Eklenmedi',
             'channel'                       => 'Kanallar',
             'bundle-items'                  => 'Paket İçerik',
             'add-option-btn-title'          => 'Seçenek Ekle',
@@ -610,11 +611,19 @@ return [
             'save'                          => 'Kaydet',
             'cancel'                        => 'İptal',
             'saved-inventory-message'       => 'Ürün envanteri başarıyla kaydedildi.',
+            'image-size'                    => 'Görüntü çözünürlüğü 640px X 640px gibi olmalıdır',
+            'create-success'                => 'Ürün başarıyla oluşturuldu.',
+            'update-success'                => 'Ürün başarıyla güncellendi.',
+            'delete-success'                => 'Ürün başarıyla silindi.',
+            'delete-failed'                 => 'Ürün silinirken hatayla karşılaşıldı.',    
             'validations'                   => [
                 'quantity-required' => 'Quantity is required.',
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -667,9 +676,13 @@ return [
             'image'                       => 'Görsel',
             'file'                        => 'Dosya',
             'checkbox'                    => 'Onay Kutusu',
-            'use_in_flat'                 => 'Ürün Tablosu Oluştur',
             'is_comparable'               => 'Nitelik kıyaslanabilir',
             'default_null_option'         => 'Varsayılan boş seçenek oluştur',
+            'create-success'              => 'Özellik başarıyla oluşturuldu.',
+            'update-success'              => 'Özellik başarıyla güncellendi.',
+            'delete-success'              => 'Özellik başarıyla silindi.',
+            'delete-failed'               => 'Öznitelik silinirken hatayla karşılaşıldı.',
+            'user-define-error'           => 'Sistem Özniteliği silinemez.',
             'validation-messages'         => [
                 'max-size' => 'Resim boyutu 600 KB\'den küçük olmalıdır',
             ],
@@ -693,6 +706,13 @@ return [
             'add-attribute-title'  => 'Nitelik Ekle',
             'search'               => 'Arama',
             'group-exist-error'    => 'Aynı isimde grup bulunuyor.',
+            'create-success'       => 'Aile başarıyla oluşturuldu.',
+            'update-success'       => 'Aile başarıyla güncellendi.',
+            'delete-success'       => 'Aile başarıyla silindi.',
+            'delete-failed'        => 'Aile silinirken hatayla karşılaşıldı.',
+            'user-define-error'    => 'Sistem Öznitelik ailesini silemezsiniz',
+            'last-delete-error'    => 'En az bir aile gereklidir.',
+            'attribute-product-error'   => 'ürünlerde kullanılan familya.',
         ],
         'categories' => [
             'title'                    => 'Kategoriler',
@@ -722,6 +742,11 @@ return [
             'filterable-attributes'    => 'Filtrelenebilir Nitelikler',
             'attributes'               => 'Nitelikler',
             'mass-update-success'      => 'All the selected categories have been updated successfully',
+            'create-success'           => 'kategori başarıyla oluşturuldu.',
+            'update-success'           => 'kategori başarıyla güncellendi.',
+            'delete-success'           => 'Kategori başarıyla silindi.',
+            'delete-failed'            => 'Kategori silinirken hatayla karşılaşıldı.',
+            'delete-category-root'     => 'Kök kategori silinemiyor.',
         ],
     ],
 
@@ -816,6 +841,7 @@ return [
             'code'              => 'Birim Kodu',
             'name'              => 'Birim Adı',
             'symbol'            => 'Sembol',
+            'decimal'            => 'Ondalık',
             'create-success'    => 'Para birimi başarıyla oluşturuldu.',
             'update-success'    => 'Para birimi başarıyla güncellendi.',
             'delete-success'    => 'Para birimi başarıyla silindi.',
@@ -1020,6 +1046,11 @@ return [
             'error-create'        => 'Müşteri adresi silinirken hata oluştu!',
         ],
 
+        'loginascustomer' => [
+            'grid-title'=>'login as customer',
+            'login-message'=>'you login as :customer_name'
+        ],
+
         'note' => [
             'title'      => 'Not Ekle',
             'save-note'  => 'Not Kaydet',
@@ -1062,14 +1093,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'İncelemeler',
-            'edit-title'  => 'İnceleme Düzenle',
-            'rating'      => 'Oylama',
-            'status'      => 'Durum',
-            'comment'     => 'Yorum',
-            'pending'     => 'Bekliyor',
-            'approved'    => 'Onayla',
-            'disapproved' => 'Reddet',
+            'title'          => 'İncelemeler',
+            'edit-title'     => 'İnceleme Düzenle',
+            'rating'         => 'Oylama',
+            'status'         => 'Durum',
+            'comment'        => 'Yorum',
+            'pending'        => 'Bekliyor',
+            'approved'       => 'Onayla',
+            'disapproved'    => 'Reddet',
+            'update-success' => 'İnceleme başarıyla güncellendi',
+            'delete-success' => 'İnceleme başarıyla silindi',
         ],
 
         'subscribers' => [
@@ -1162,13 +1195,18 @@ return [
             'code-prefix'                    => 'Kod Ön Ek',
             'code-suffix'                    => 'Kod Son Ek',
             'generate'                       => 'Oluştur',
-            'cart-rule-not-defind-error'     => 'Sepet kuralı belirtilmemiş',
+            'cart-rule-not-defined-error'    => 'Sepet kuralı belirtilmemiş',
             'mass-delete-success'            => 'Tüm seçili kupon(lar) başarıyla silindi.',
             'end-other-rules'                => 'Diğer Kuralları Sonlandır.',
             'children-categories'            => 'Kategoriler (Sadece Alt)',
             'parent-categories'              => 'Kategoriler (Sadece Üst)',
             'categories'                     => 'Kategoriler',
             'attribute_family'               => 'Nitelik Grubu',
+            'coupons'                        => [
+                'create-success' => 'Kupon başarıyla oluşturuldu',
+                'update-success' => 'Kupon başarıyla güncellendi',
+                'delete-success' => 'Kupon başarıyla silindi',
+            ],
         ],
 
         'catalog-rules' => [
@@ -1298,9 +1336,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'ANA SAYFAYA GİT',
-        'in-maitainace' => 'Bakım Modunda',
-        'right-back'    => 'Yakında Döneceğiz',
+        'go-to-home'     => 'ANA SAYFAYA GİT',
+        'in-maintenance' => 'Bakım Modunda',
+        'right-back'     => 'Yakında Döneceğiz',
 
         '404' => [
             'page-title' => '404 Sayfa Bulunamadı',
@@ -1389,10 +1427,6 @@ return [
     'response' => [
         'being-used'              => ':name isimli kaynak :source isimli kaynakta kullanılıyor.',
         'cannot-change'           => ':name değiştirilemez.',
-        'cannot-delete-default'   => 'Varsayılan kanal silinemez.',
-        'create-success'          => ':name başarıyla oluşturuldu.',
-        'update-success'          => ':name başarıyla güncellendi.',
-        'delete-success'          => ':name başarıyla silindi.',
         'delete-failed'           => ':name silinirken hata oluştu.',
         'last-delete-error'       => 'En az bir :name zorunludur.',
         'user-define-error'       => 'Sistem :name silinemez!',
@@ -1408,6 +1442,7 @@ return [
         'already-taken'           => ':name daha önceden girilmiş.',
         'order-pending'           => 'Bu hesaba ait işlem bekleyen siparişler bulunduğundan hesap silinemez.',
         'something-went-wrong'    => 'Bir şeyler yanlış gitti!',
+        'create-success'          => ':name başarıyla oluşturuldu.',
     ],
 
     'validations' => [
@@ -1441,8 +1476,13 @@ return [
         'system'             => [
             'catalog'                               => 'Katalog',
             'homepage'                              => 'Ana sayfa yapılandırması',
+            'product-view-page'                     => 'Ürün görüntüleme sayfası yapılandırması',
+            'cart-view-page'                        => 'Sepet görünümü sayfası yapılandırması',
             'allow-no-of-new-product-homepage'      => 'Ana Sayfada İzin Verilen Yeni Ürün Sayısı',
             'allow-no-of-featured-product-homepage' => 'Ana Sayfada İzin Verilen Öne Çıkan Ürün Sayısı',
+            'allow-no-of-related-products'          => 'İzin verilen İlgili Ürün sayısı',
+            'allow-no-of-up-sells-products'         => 'İzin verilen Ek Satış Ürünleri sayısı',
+            'allow-no-of-cross-sells-products'      => 'İzin verilen Çapraz Satış Ürünleri sayısı',
             'allow-out-of-stock-items'              => 'Stokta olmayan ürünlere izin ver',
             'products'                              => 'Ürünler',
             'guest-checkout'                        => 'Ziyaretçi Satışı',
@@ -1550,7 +1590,7 @@ return [
             'oldest-first'                          => 'Eskiden Yenile',
             'cheapest-first'                        => 'Ucuzdan Pahallıya',
             'expensive-first'                       => 'Pahallıdan Ucuza',
-            'comma-seperated'                       => 'Virgülle Ayrılsın',
+            'comma-separated'                       => 'Virgülle Ayrılsın',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Zengin Snippet',

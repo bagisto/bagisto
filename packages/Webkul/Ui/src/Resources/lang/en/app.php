@@ -4,7 +4,7 @@ return [
         'actions' => 'Actions',
         'id'      => 'Index columns have value greater than zero only',
 
-        'massaction' => [
+        'mass-action' => [
             'mass-delete-confirm'     => 'Do you really want to delete these selected :resource?',
             'mass-update-status'      => 'Do you really want to update status of these selected :resource?',
             'delete'                  => 'Do you really want to perform this action?',
@@ -59,6 +59,8 @@ return [
         'all-locales'           => 'All Locales',
         'all-customer-groups'   => 'All Customer groups',
         'records-found'         => 'Record(s) found',
-        'clear-all'             => 'Clear All'
+        'clear-all'             => 'Clear All',
+        'of'                    => 'of',
+        'selected'              => 'selected',
     ],
 ];

@@ -2,8 +2,8 @@
 
 namespace Webkul\Attribute\Database\Factories;
 
-use Webkul\Attribute\Models\Attribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Webkul\Attribute\Models\Attribute;
 
 class AttributeFactory extends Factory
 {
@@ -64,7 +64,6 @@ class AttributeFactory extends Factory
             'is_user_defined'     => true,
             'is_visible_on_front' => true,
             'swatch_type'         => null,
-            'use_in_flat'         => true,
         ];
     }
 

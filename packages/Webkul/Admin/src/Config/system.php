@@ -139,18 +139,55 @@ return [
                 'type'       => 'number',
                 'validation' => 'min:0',
             ],
-            [
-                'name'  => 'out_of_stock_items',
-                'title' => 'admin::app.admin.system.allow-out-of-stock-items',
-                'type'  => 'boolean',
-            ],
         ],
+    ], [
+        'key'    => 'catalog.products.product_view_page',
+        'name'   => 'admin::app.admin.system.product-view-page',
+        'sort'   => 3,
+        'fields' => [
+            [
+                'name'       => 'no_of_related_products',
+                'title'      => 'admin::app.admin.system.allow-no-of-related-products',
+                'type'       => 'number',
+                'validation' => 'min:0',
+            ], [
+                'name'       => 'no_of_up_sells_products',
+                'title'      => 'admin::app.admin.system.allow-no-of-up-sells-products',
+                'type'       => 'number', 
+                'validation' => 'min:0',
+            ], 
+        ],
+    ], [
+            'key'    => 'catalog.products.cart_view_page',
+            'name'   => 'admin::app.admin.system.cart-view-page',
+            'sort'   => 3,
+            'fields' => [
+                [
+                    'name'       => 'no_of_cross_sells_products',
+                    'title'      => 'admin::app.admin.system.allow-no-of-cross-sells-products',
+                    'type'       => 'number',
+                    'validation' => 'min:0',
+                ],
+            ],
     ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
         'sort'   => 3,
         'fields' => [
             [
+                'name'          => 'search_mode',
+                'title'         => 'admin::app.admin.system.search-mode',
+                'type'          => 'select',
+                'options'       => [
+                    [
+                        'title' => 'admin::app.admin.system.flat',
+                        'value' => 'flat',
+                    ], [
+                        'title' => 'admin::app.admin.system.elastic',
+                        'value' => 'elastic',
+                    ],
+                ],
+            ], [
                 'name'          => 'mode',
                 'title'         => 'admin::app.admin.system.default-list-mode',
                 'type'          => 'select',
@@ -168,7 +205,7 @@ return [
                 'name'          => 'products_per_page',
                 'title'         => 'admin::app.admin.system.products-per-page',
                 'type'          => 'text',
-                'info'          => 'admin::app.admin.system.comma-seperated',
+                'info'          => 'admin::app.admin.system.comma-separated',
                 'channel_based' => true,
             ], [
                 'name'          => 'sort_by',

@@ -8,7 +8,7 @@
     <div class="account-layout">
         <div class="account-head mb-15">
             <span class="back-icon">
-                <a href="{{ route('customer.address.index') }}"><i class="icon icon-menu-back"></i></a>
+                <a href="{{ route('shop.customer.addresses.index') }}"><i class="icon icon-menu-back"></i></a>
             </span>
 
             <span class="account-heading">{{ __('shop::app.customer.account.address.edit.title') }}</span>
@@ -18,7 +18,7 @@
 
         {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
-        <form id="customer-address-form" method="post" action="{{ route('customer.address.update', $address->id) }}" @submit.prevent="onSubmit">
+        <form id="customer-address-form" method="post" action="{{ route('shop.customer.addresses.update', $address->id) }}" @submit.prevent="onSubmit">
 
             <div class="account-table-content">
                 @method('PUT')
@@ -126,11 +126,11 @@
                 </div>
 
                 @if (
-                    core()->getConfigData('customer.settings.address.street_lines')
-                    && core()->getConfigData('customer.settings.address.street_lines') > 1
+                    core()->getConfigData('customer.address.information.street_lines')
+                    && core()->getConfigData('customer.address.information.street_lines') > 1
                 )
-                    <div class="control-group" style="margin-top: -25px;">
-                        @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    <div class="control-group" style="margin-top: -10px;">
+                        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                             <input
                                 class="control"
                                 id="address_{{ $i }}"

@@ -87,16 +87,20 @@
                         .sub-menu-item {
 
                             .menu-label {
-                                color: $white !important;
+                                color: $menu-label-text-color !important;
                             }
+                        }
+                    }
+                }
 
-                            &.active,
-                            &:hover {
-                                background-color: $dark-mode-left-submenubar-background-color;
+                ul.sub-menubar {
+                    li.sub-menu-item {
+                        &.active,
+                        &:hover {
+                            background-color: $dark-mode-left-submenubar-active-background-color;
 
-                                .menu-label {
-                                    color: $white !important;
-                                }
+                            .menu-label {
+                                color: $white !important;
                             }
                         }
                     }
@@ -277,7 +281,34 @@
                 color: $dark-mode-text-color;
                 border-bottom: 1px solid $seprator;
             }
+
+            .checkbox {
+                input {
+                    top: 1px;
+                    height: 16px;
+                    width: 16px;
+                }
+
+                .checkbox-view {
+                    background-image: inherit;
+                    border: 1px solid white;
+                    height: 19px;
+                    width: 18px;
+                }
+
+                input:checked + .checkbox-view {
+                    background-image: url('../images/Checkbox-Checked.svg');
+                    background-size: 15px 17px;
+                    background-repeat: no-repeat;
+                }
+            }
         }
+    }
+
+    .dropdown-btn.dropdown-toggle {
+        background-color: #02080d;
+        color: hsla(0,0%,100%,.8);
+        border: 1px solid #24384c;
     }
 
     .modal-container {
@@ -621,15 +652,15 @@
     }
 
     .pagination .page-item {
-        background: $black;
+        background: transparent;
         border: 1px solid 000;
         color: $white;
     }
 
     .pagination .page-item.active {
-        background-color: $dark-mode-pagination-page-item-active-background-color !important;
+        background-color: $dashboard-stats-data !important;
         color: $white;
-        border-color: $dark-mode-pagination-page-item-active-border-color !important;
+        border-color: $white !important;
     }
 
     .filter-tag .wrapper {
@@ -731,6 +762,11 @@
     .flatpickr-months .flatpickr-next-month {
         color: $white;
         fill: $white;
+    }
+
+    .flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+        color: $white;
+        background-color: $dark-mode-body-background-color;
     }
 
     .flatpickr-day.endRange,

@@ -1,7 +1,4 @@
-@if (
-    isset($shipping)
-    && $shipping
-)
+@if (! empty($shipping))
     <div :class="`col-12 form-field mb30 ${errors.has('address-form.shipping[first_name]') ? 'has-error' : ''}`">
         <label for="shipping[first_name]" class="mandatory" style="width: unset;">
             {{ __('shop::app.checkout.onepage.first-name') }}
@@ -80,7 +77,7 @@
             name="shipping[address1][]"
             v-model="address.shipping.address1[0]"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;" 
             @change="validateForm('address-form')" />
 
         <span
@@ -91,10 +88,10 @@
     </div>
 
     @if (
-        core()->getConfigData('customer.settings.address.street_lines')
-        && core()->getConfigData('customer.settings.address.street_lines') > 1
+        core()->getConfigData('customer.address.information.street_lines')
+        && core()->getConfigData('customer.address.information.street_lines') > 1
     )
-        @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
             <div class="col-12 form-field" style="margin-top: 10px; margin-bottom: 0">
                 <input
                     class="control"
@@ -107,29 +104,7 @@
         @endfor
     @endif
 
-    <div :class="`col-12 form-field ${errors.has('address-form.shipping[city]') ? 'has-error' : ''}`" style="margin-top: 15px;">
-        <label for="shipping[city]" class="mandatory">
-            {{ __('shop::app.checkout.onepage.city') }}
-        </label>
-
-        <input
-            class="control"
-            id="shipping[city]"
-            type="text"
-            name="shipping[city]"
-            v-model="address.shipping.city"
-            v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;"
-            @change="validateForm('address-form')" />
-
-        <span
-            class="control-error"
-            v-text="errors.first('address-form.shipping[city]')"
-            v-if="errors.has('address-form.shipping[city]')">
-        </span>
-    </div>
-
-    <div :class="`col-12 form-field ${errors.has('address-form.shipping[country]') ? 'has-error' : ''}`">
+    <div :class="`col-12 form-field ${errors.has('address-form.shipping[country]') ? 'has-error' : ''}`" style="margin-top: 15px;">
         <label for="shipping[country]" class="{{ core()->isCountryRequired() ? 'mandatory' : '' }}">
             {{ __('shop::app.checkout.onepage.country') }}
         </label>
@@ -141,7 +116,7 @@
             name="shipping[country]"
             v-model="address.shipping.country"
             v-validate="'{{ core()->isCountryRequired() ? 'required' : '' }}'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;" 
             @change="validateForm('address-form')">
 
             <option value="" disabled>{{ __('ui::form.select-attribute', ['attribute' => __('shop::app.checkout.onepage.country')]) }}</option>
@@ -175,8 +150,8 @@
             v-model="address.shipping.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
-            v-if="! haveStates('shipping')" />
+            v-if="! haveStates('shipping')"
+            @change="validateForm('address-form')" />
 
         <select
             class="control styled-select"
@@ -185,8 +160,8 @@
             v-model="address.shipping.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
-            v-if="haveStates('shipping')">
+            v-if="haveStates('shipping')"
+            @change="validateForm('address-form')">
 
             <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
 
@@ -203,6 +178,28 @@
             class="control-error"
             v-text="errors.first('address-form.shipping[state]')"
             v-if="errors.has('address-form.shipping[state]')">
+        </span>
+    </div>
+
+    <div :class="`col-12 form-field ${errors.has('address-form.shipping[city]') ? 'has-error' : ''}`">
+        <label for="shipping[city]" class="mandatory">
+            {{ __('shop::app.checkout.onepage.city') }}
+        </label>
+
+        <input
+            class="control"
+            id="shipping[city]"
+            type="text"
+            name="shipping[city]"
+            v-model="address.shipping.city"
+            v-validate="'required'"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;" 
+            @change="validateForm('address-form')"/>
+
+        <span
+            class="control-error"
+            v-text="errors.first('address-form.shipping[city]')"
+            v-if="errors.has('address-form.shipping[city]')">
         </span>
     </div>
 
@@ -257,8 +254,10 @@
                     id="shipping[save_as_address]"
                     type="checkbox"
                     name="shipping[save_as_address]"
-                    v-model="address.shipping.save_as_address"
-                    @change="validateForm('address-form')" />
+                    v-model="address.shipping.save_as_address" />
+
+                
+                <label for="shipping[save_as_address]" class="checkbox-view"></label>
 
                 <span>
                     {{ __('shop::app.checkout.onepage.save_as_address') }}
@@ -266,10 +265,7 @@
             </span>
         </div>
     @endauth
-@elseif (
-    isset($billing)
-    && $billing
-)
+@elseif (! empty($billing))
     <div :class="`col-12 form-field ${errors.has('address-form.billing[company_name]') ? 'has-error' : ''}`">
         <label for="billing[company_name]">
             {{ __('shop::app.checkout.onepage.company-name') }}
@@ -325,8 +321,8 @@
             name="billing[last_name]"
             v-model="address.billing.last_name"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.last-name') }}&quot;" 
+            @change="validateForm('address-form')"/>
 
         <span
             class="control-error"
@@ -348,8 +344,7 @@
             v-model="address.billing.email"
             v-validate="'required|email'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.email') }}&quot;"
-            @blur="isCustomerExist"
-            @change="validateForm('address-form')" />
+            @blur="isCustomerExist" />
 
         <span
             class="control-error"
@@ -374,8 +369,8 @@
             name="billing[address1][]"
             v-model="address.billing.address1[0]"
             v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;"
-            @change="validateForm('address-form')" />
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.address1') }}&quot;" 
+            @change="validateForm('address-form')"/>
 
         <span
             class="control-error"
@@ -385,44 +380,23 @@
     </div>
 
     @if (
-        core()->getConfigData('customer.settings.address.street_lines')
-        && core()->getConfigData('customer.settings.address.street_lines') > 1
+        core()->getConfigData('customer.address.information.street_lines')
+        && core()->getConfigData('customer.address.information.street_lines') > 1
     )
-        @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+        @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
             <div class="col-12 form-field" style="margin-top: 10px; margin-bottom: 0">
                     <input
                         class="control"
                         id="billing_address_{{ $i }}"
                         type="text"
                         name="billing[address1][{{ $i }}]"
-                        v-model="address.billing.address1[{{$i}}]" />
+                        v-model="address.billing.address1[{{$i}}]" 
+                        @change="validateForm('address-form')"/>
             </div>
         @endfor
     @endif
-
-    <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`" style="margin-top: 15px;">
-        <label for="billing[city]" class="mandatory">
-            {{ __('shop::app.checkout.onepage.city') }}
-        </label>
-
-        <input
-            class="control"
-            id="billing[city]"
-            type="text"
-            name="billing[city]"
-            v-model="address.billing.city"
-            v-validate="'required'"
-            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;"
-            @change="validateForm('address-form')" />
-
-        <span
-            class="control-error"
-            v-text="errors.first('address-form.billing[city]')"
-            v-if="errors.has('address-form.billing[city]')">
-        </span>
-    </div>
-
-    <div :class="`col-12 form-field ${errors.has('address-form.billing[country]') ? 'has-error' : ''}`">
+    
+    <div :class="`col-12 form-field ${errors.has('address-form.billing[country]') ? 'has-error' : ''}`"  style="margin-top: 15px;">
         <label for="billing[country]" class="{{ core()->isCountryRequired() ? 'mandatory' : '' }}">
             {{ __('shop::app.checkout.onepage.country') }}
         </label>
@@ -435,7 +409,7 @@
             v-model="address.billing.country"
             v-validate="'{{ core()->isCountryRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.country') }}&quot;"
-            @change="validateForm('address-form')">
+            @change="validateForm('address-form')" >
 
             <option value="" disabled>{{ __('ui::form.select-attribute', ['attribute' => __('shop::app.checkout.onepage.country')]) }}</option>
 
@@ -466,8 +440,8 @@
             v-model="address.billing.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
-            v-if="! haveStates('billing')" />
+            v-if="! haveStates('billing')"
+            @change="validateForm('address-form')" />
 
         <select
             class="control styled-select"
@@ -476,8 +450,8 @@
             v-model="address.billing.state"
             v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
             data-vv-as="&quot;{{ __('shop::app.checkout.onepage.state') }}&quot;"
-            @change="validateForm('address-form')"
-            v-if="haveStates('billing')">
+            v-if="haveStates('billing')"
+            @change="validateForm('address-form')">
 
             <option value="">{{ __('shop::app.checkout.onepage.select-state') }}</option>
 
@@ -492,6 +466,28 @@
             class="control-error"
             v-text="errors.first('address-form.billing[state]')"
             v-if="errors.has('address-form.billing[state]')">
+        </span>
+    </div>
+
+    <div :class="`col-12 form-field ${errors.has('address-form.billing[city]') ? 'has-error' : ''}`">
+        <label for="billing[city]" class="mandatory">
+            {{ __('shop::app.checkout.onepage.city') }}
+        </label>
+
+        <input
+            class="control"
+            id="billing[city]"
+            type="text"
+            name="billing[city]"
+            v-model="address.billing.city"
+            v-validate="'required'"
+            data-vv-as="&quot;{{ __('shop::app.checkout.onepage.city') }}&quot;" 
+            @change="validateForm('address-form')"/>
+
+        <span
+            class="control-error"
+            v-text="errors.first('address-form.billing[city]')"
+            v-if="errors.has('address-form.billing[city]')">
         </span>
     </div>
 
@@ -549,6 +545,8 @@
                     v-model="address.billing.use_for_shipping"
                     @change="setTimeout(() => validateForm('address-form'), 0)" />
 
+                <label for="billing[use_for_shipping]" class="checkbox-view"></label>
+
                 <span>
                     {{ __('shop::app.checkout.onepage.use_for_shipping') }}
                 </span>
@@ -563,8 +561,11 @@
                     id="billing[save_as_address]"
                     type="checkbox"
                     name="billing[save_as_address]"
+                    ref="billingSaveAsAddress"
                     v-model="address.billing.save_as_address"
                     @change="validateForm('address-form')" />
+
+                <label for="billing[save_as_address]" class="checkbox-view"></label>
 
                 <span>
                     {{ __('shop::app.checkout.onepage.save_as_address') }}

@@ -52,6 +52,7 @@
         align-items: end;
 
         .filter-right {
+            margin-top: 10px;
             justify-self: end;
             display: grid;
             grid-template-columns: auto auto;
@@ -69,12 +70,16 @@
 
 .filtered-tags {
     display: inline-flex;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     margin-bottom: 10px;
     
     p {
         cursor: pointer;
+    }
+
+    .item-count {
+        margin-left: 10px;
     }
 }
 
@@ -160,6 +165,8 @@
 .filter-advance {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
 
     .datagrid-count {
         margin-bottom: 10px;
@@ -176,6 +183,7 @@
     height: 40px;
     border-radius: 2px;
     margin-right: 20px;
+    margin-left: 10px;
 
     .wrapper {
         margin-left: 4px;
@@ -267,9 +275,11 @@
                 }
 
                 .filter-left {
-                    display: grid;
-                    grid-template-columns: 49.5% 49%;
-                    column-gap: 5px;
+                    .filters {
+                        display: grid;
+                        grid-template-columns: 49.5% 49%;
+                        column-gap: 5px;    
+                    }
                 }
 
                 .filter-right {

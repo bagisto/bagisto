@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
+use Kalnoy\Nestedset\Collection as NestedCollection;
 use Kalnoy\Nestedset\NodeTrait;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webkul\Attribute\Models\AttributeProxy;
@@ -15,16 +16,9 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Models\ProductProxy;
 
-/**
- * Category class.
- *
- * @package Webkul\Category\Models
- *
- * @property-read string (`$url_path` maintained by database triggers.)
- */
 class Category extends TranslatableModel implements CategoryContract
 {
-    use NodeTrait, HasFactory;
+    use HasFactory, NodeTrait;
 
     /**
      * Translated attributes.
@@ -42,7 +36,7 @@ class Category extends TranslatableModel implements CategoryContract
     ];
 
     /**
-     * Fillables.
+     * Fillable.
      *
      * @var array
      */
@@ -66,7 +60,7 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @var array
      */
-    protected $appends = ['image_url', 'category_icon_url'];
+    protected $appends = ['image_url', 'banner_url', 'category_icon_url'];
 
     /**
      * The products that belong to the category.
@@ -163,11 +157,71 @@ class Category extends TranslatableModel implements CategoryContract
 
         while (isset($category->parent)) {
             $category = $category->parent;
-            
+
             $categories[] = $category;
         }
 
         return array_reverse($categories);
+    }
+
+    /**
+     * Get full slug.
+     *
+     * @return void
+     */
+    public function getFullSlug($localeCode)
+    {
+        /**
+         * Getting all ancestors for url preparation.
+         */
+        $ancestors = $this->ancestors()->get();
+
+        $categories = (new NestedCollection())
+            ->merge($ancestors)
+            ->push($this);
+
+        $categories->shift();
+
+        /**
+         * In case of new locale which is not yet updated we need to filter out that one.
+         *
+         * To Do (@devansh): Need to monitor this more and improvisation also needed.
+         */
+        return $categories->map(fn ($category) => $category->translate($localeCode))
+            ->filter(fn ($category) => $category)
+            ->pluck('slug')->join('/');
+    }
+
+    /**
+     * This is updating the full url path for all locale.
+     *
+     * @return void
+     */
+    public function updateFullSlug()
+    {
+        /**
+         * Self and descendants categories.
+         */
+        $selfAndDescendants = $this->getDescendants()->prepend($this);
+
+        /**
+         * This loop will check all the descandant and update all the slug because parent slug got changed.
+         *
+         * To Do (@devansh): Need to monitor this more.
+         */
+        foreach ($selfAndDescendants as $category) {
+            foreach (core()->getAllLocales() as $locale) {
+                $categoryFullUrl = $category->getFullSlug($locale->code);
+
+                $transalatedCategory = $category->translate($locale->code);
+
+                if ($transalatedCategory) {
+                    $transalatedCategory->url_path = $categoryFullUrl;
+                }
+            }
+
+            $category->save();
+        }
     }
 
     /**
@@ -185,6 +239,20 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * Get banner url attribute.
+     *
+     * @return string
+     */
+    public function getBannerUrlAttribute()
+    {
+        if (! $this->category_banner) {
+            return;
+        }
+
+        return Storage::url($this->category_banner);
+    }
+
+    /**
      * Get category icon url for the category icon image.
      *
      * @return string
@@ -199,12 +267,37 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
+     * Use fallback for category.
+     *
+     * @return bool
+     */
+    protected function useFallback(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get fallback locale for category.
+     *
+     * @param  string|null  $locale
+     * @return string|null
+     */
+    protected function getFallbackLocale(?string $locale = null): ?string
+    {
+        if ($fallback = core()->getDefaultChannelLocaleCode()) {
+            return $fallback;
+        }
+
+        return parent::getFallbackLocale();
+    }
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     protected static function newFactory(): Factory
     {
-        return CategoryFactory::new ();
+        return CategoryFactory::new();
     }
 }

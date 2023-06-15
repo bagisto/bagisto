@@ -16,6 +16,8 @@ $locale = core()->getRequestedLocaleCode();
             </div>
 
             <div class="page-action">
+                {!! view_render_event('bagisto.admin.catalog.categories.create.before') !!}
+                
                 @if (bouncer()->hasPermission('catalog.categories.create'))
                     <a
                         href="{{ route('admin.catalog.categories.create') }}"
@@ -24,6 +26,8 @@ $locale = core()->getRequestedLocaleCode();
                         {{ __('admin::app.catalog.categories.add-title') }}
                     </a>
                 @endif
+
+                {!! view_render_event('bagisto.admin.catalog.categories.create.after') !!}
             </div>
         </div>
 
@@ -74,7 +78,7 @@ $locale = core()->getRequestedLocaleCode();
                     success: function(data) {
                         $("input[type='checkbox']").attr('disabled', false);
                         if (data.product_count > 0) {
-                            let message = "{{ trans('ui::app.datagrid.massaction.delete-category-product') }}";
+                            let message = "{{ trans('ui::app.datagrid.mass-action.delete-category-product') }}";
 
                             if (type == 'delete') {
                                 doAction(e, message);

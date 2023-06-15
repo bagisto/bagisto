@@ -91,6 +91,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'Sterne',
         'name'                      => 'Name',
+        'login-to-review'           => 'Bitte melden Sie sich zuerst an, um das Produkt zu überprüfen',
     ],
 
     'customer' => [
@@ -501,8 +502,8 @@ return [
             'proceed-to-checkout'      => 'Zur Kasse',
             'remove'                   => 'Entfernen',
             'remove-link'              => 'Entfernen',
-            'remove-all-items'         => 'Remove all items',
-            'confirm-action'           => 'Confirm this action?',
+            'remove-all-items'         => 'Alle Elemente entfernen',
+            'confirm-action'           => 'Diese Aktion bestätigen?',
             'move-to-wishlist'         => 'Zur Wunschliste verschieben',
             'move-to-wishlist-success' => 'Artikel wurde erfolgreich auf die Wunschliste verschoben.',
             'move-to-wishlist-error'   => 'Das Objekt kann nicht auf die Wunschliste verschoben werden. Bitte versuchen Sie es später erneut.',
@@ -537,6 +538,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal-Zahlung wurde storniert.',
         ],
 
         'onepage' => [

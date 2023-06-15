@@ -61,9 +61,9 @@ class NewsLetterDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
                 }
+                
+                return trans('admin::app.datagrid.false');
             },
         ]);
 
@@ -95,7 +95,7 @@ class NewsLetterDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.customers.subscribers.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'News Letter']),
             'icon'         => 'icon trash-icon',
         ]);
     }

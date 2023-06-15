@@ -48,7 +48,8 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
-
+        $this->uploadImages($data, $category, 'category_banner');
+         
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
         }
@@ -73,6 +74,7 @@ class CategoryRepository extends Repository
         $category->update($data);
 
         $this->uploadImages($data, $category);
+        $this->uploadImages($data, $category, 'category_banner');
 
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
@@ -118,6 +120,16 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Get child categories.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getChildCategories($parentId)
+    {
+        return $this->getModel()->where('parent_id', $parentId)->get();
+    }
+
+    /**
      * get visible category tree.
      *
      * @param  int  $id
@@ -155,7 +167,7 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Retrive category from slug.
+     * Retrieve category from slug.
      *
      * @param string $slug
      * @return \Webkul\Category\Contracts\Category
@@ -209,12 +221,12 @@ class CategoryRepository extends Repository
      */
     public function uploadImages($data, $category, $type = 'image')
     {
+        
         if (isset($data[$type])) {
             $request = request();
-
+           
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
-
                 $dir = 'category/' . $category->id;
 
                 if ($request->hasFile($file)) {
@@ -237,6 +249,7 @@ class CategoryRepository extends Repository
             $category->save();
         }
     }
+    
 
     /**
      * Get partials.
@@ -287,7 +300,7 @@ class CategoryRepository extends Repository
                 if ($requestedLocale == $locale->code) { 
                     foreach ($model->translatedAttributes as $attribute) {
                         if ($attribute === $attributeName) {
-                                $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
+                            $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
                                 ? $data[$requestedLocale][$attribute]
                                 : $data[$data['locale']][$attribute];
                         }

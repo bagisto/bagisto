@@ -4,38 +4,27 @@ namespace Webkul\Core\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
-use Webkul\Core\Models\Locale;
 use Webkul\Core\Helpers\Locales;
 
 class TranslatableModel extends Model
 {
     use Translatable;
 
+    /**
+     * Get locales helper.
+     *
+     * @return \Webkul\Core\Helpers\Locales
+     */
     protected function getLocalesHelper(): Locales
     {
         return app(Locales::class);
     }
 
     /**
-     * @param  string  $key
-     * @return bool
-     */
-    protected function isKeyALocale($key)
-    {
-        $chunks = explode('-', $key);
-
-        if (count($chunks) > 1) {
-            if (Locale::where('code', '=', end($chunks))->first()) {
-                return true;
-            }
-        } elseif (Locale::where('code', '=', $key)->first()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
+     * Locale. This method is being overridden to address the
+     * performance issues caused by the existing implementation
+     * which increases application time.
+     *
      * @return string
      */
     protected function locale()
@@ -52,6 +41,8 @@ class TranslatableModel extends Model
     }
 
     /**
+     * Is channel based.
+     *
      * @return bool
      */
     protected function isChannelBased()

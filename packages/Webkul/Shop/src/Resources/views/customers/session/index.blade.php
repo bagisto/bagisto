@@ -7,12 +7,12 @@
 @section('content-wrapper')
     <div class="auth-content">
         <div class="sign-up-text">
-            {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('customer.register.index') }}">{{ __('shop::app.customer.login-text.title') }}</a>
+            {{ __('shop::app.customer.login-text.no_account') }} - <a href="{{ route('shop.customer.register.index') }}">{{ __('shop::app.customer.login-text.title') }}</a>
         </div>
 
         {!! view_render_event('bagisto.shop.customers.login.before') !!}
 
-        <form method="POST" action="{{ route('customer.session.create') }}" @submit.prevent="onSubmit">
+        <form method="POST" action="{{ route('shop.customer.session.create') }}" @submit.prevent="onSubmit">
 
             {{ csrf_field() }}
 
@@ -40,12 +40,12 @@
 
                     <div class="col-md-6">
                         <div class="forgot-password-link">
-                            <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
+                            <a href="{{ route('shop.customer.forgot_password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
 
                             <div class="mt-10">
                                 @if (Cookie::has('enable-resend'))
                                     @if (Cookie::get('enable-resend') == true)
-                                        <a href="{{ route('customer.resend.verification-email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
+                                        <a href="{{ route('shop.customer.resend.verification_email', Cookie::get('email-for-resend')) }}">{{ __('shop::app.customer.login-form.resend-verification') }}</a>
                                     @endif
                                 @endif
                             </div>

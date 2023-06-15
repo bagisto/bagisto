@@ -2,12 +2,29 @@
 
 namespace Webkul\Customer\Repositories;
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Sales\Models\Order;
 
 class CustomerRepository extends Repository
 {
+    /**
+     * Create a new repository instance.
+     *
+     * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
+     * @param  \Illuminate\Container\Container  $container
+     * @return void
+     */
+    public function __construct(
+        protected CustomerGroupRepository $customerGroupRepository,
+        Container $container
+    )
+    {
+        parent::__construct($container);
+    }
+
     /**
      * Specify model class name.
      *
@@ -32,6 +49,20 @@ class CustomerRepository extends Repository
     }
 
     /**
+     * Returns current customer group
+     *
+     * @return \Webkul\Customer\Models\CustomerGroup
+     */
+    public function getCurrentGroup()
+    {
+        if ($customer = auth()->guard()->user()) {
+            return $customer->group;
+        }
+        
+        return $this->customerGroupRepository->getCustomerGuestGroup();
+    }
+
+    /**
      * Check if bulk customers, if they have order pending or processing.
      *
      * @param  array
@@ -40,7 +71,7 @@ class CustomerRepository extends Repository
     public function checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)
     {
         foreach ($customerIds as $customerId) {
-            $customer = $this->findorFail($customerId);
+            $customer = $this->findOrFail($customerId);
 
             if ($this->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
                 return true;
@@ -92,7 +123,7 @@ class CustomerRepository extends Repository
      * @param  \Webkul\Customer\Contracts\Customer  $customer
      * @return mixed
      */
-    public function syncNewRegisteredCustomerInformations($customer)
+    public function syncNewRegisteredCustomerInformation($customer)
     {
         /**
          * Setting registered customer to orders.

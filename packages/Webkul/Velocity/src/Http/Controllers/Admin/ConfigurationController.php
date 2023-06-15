@@ -110,7 +110,7 @@ class ConfigurationController extends Controller
         /* update row */
         $this->velocityMetadataRepository->update($params, $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.meta-data.title')]));
+        session()->flash('success', trans('velocity::app.admin.meta-data.update-success'));
 
         return redirect()->route($this->_config['redirect'], ['locale' => $locale]);
     }
@@ -152,9 +152,8 @@ class ConfigurationController extends Controller
                     }
                 } else {
                     if (
-                        isset($advertisement[$index][$imageId])
-                        && $advertisement[$index][$imageId]
-                        && !request()->hasFile($file)
+                        ! empty($advertisement[$index][$imageId])
+                        && ! request()->hasFile($file)
                     ) {
                         $saveImage[$imageId] = $advertisement[$index][$imageId];
 
@@ -266,10 +265,7 @@ class ConfigurationController extends Controller
             }
         }
 
-        if (
-            isset($advertisement[$index])
-            && $advertisement[$index]
-        ) {
+        if (! empty($advertisement[$index])) {
             foreach ($advertisement[$index] as $imageId) {
                 Storage::delete($imageId);
             }

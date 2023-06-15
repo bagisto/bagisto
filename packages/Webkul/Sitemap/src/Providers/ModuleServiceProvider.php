@@ -7,6 +7,6 @@ use Webkul\Core\Providers\CoreModuleServiceProvider;
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     protected $models = [
-        \Webkul\Sitemap\Models\Sitemap::class
+        \Webkul\Sitemap\Models\Sitemap::class,
     ];
 }

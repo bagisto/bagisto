@@ -417,6 +417,8 @@ return [
             'customer-notified'            => ':date | Cliente <b>Notificato</b>',
             'customer-not-notified'        => ':date | Cliente <b>Non Notificato</b>',
             'transactions'                 => 'Transactions',
+            'create-success'               => 'Ordine creato con successo',
+            'cancel-error'                 => 'Ordine non cancellabile'
         ],
 
         'invoices' => [
@@ -449,6 +451,7 @@ return [
             'status-overdue'         => 'Pending',
             'status-pending'         => 'Pending Payment',
             'status-paid'            => 'Paid',
+            'create-success'         => 'Fattura creata con successo'
         ],
 
         'shipments' => [
@@ -475,6 +478,7 @@ return [
             'creation-error'    => 'La spedizione non può essere creata per questo ordine.',
             'order-error'       => 'La creazione della spedizione dell\'Ordine non è consentita.',
             'quantity-invalid'  => 'La quantità richiesta non è valida  non è disponibile.',
+            'create-success'    => 'Spedizioni create con successo'
         ],
 
         'refunds' => [
@@ -498,6 +502,7 @@ return [
             'action'                      => 'Azione',
             'view-title'                  => 'Rimborso #:refund_id',
             'invalid-refund-amount-error' => 'La somma rimborsata dovrebbe essere diversa da zero.',
+            'create-success'              => 'Rimborso creato con successo'
 
         ],
 
@@ -537,7 +542,7 @@ return [
             'product-type'                  => 'Tipo Prodotto',
             'simple'                        => 'Semplice',
             'configurable'                  => 'Configurabile',
-            'familiy'                       => 'Famiglia Attributo',
+            'family'                       => 'Famiglia Attributo',
             'sku'                           => 'SKU',
             'configurable-attributes'       => 'Attributi Configurabili',
             'attribute-header'              => 'Attributo(i)',
@@ -586,6 +591,7 @@ return [
             'grouped-products'              => 'Prodotti Raggruppati',
             'search-products'               => 'Cerca Prodotti',
             'no-result-found'               => 'Prodotti con lo stesso nome non trovato.',
+            'no-product-added'              => 'Nessun prodotto aggiunto',
             'channel'                       => 'Canali',
             'bundle-items'                  => 'Elementi Bundle',
             'add-option-btn-title'          => 'Aggiungi Opzione',
@@ -613,6 +619,9 @@ return [
                 'quantity-integer'  => 'Quantity should be integer.',
                 'quantity-min-zero' => 'Quantity should be greater then zero.',
             ],
+            'video-size'                    => 'Maximum video size should be like :size',
+            'pending-ordered-qty'           => 'Pending Ordered Qty: :qty',
+            'pending-ordered-qty-info'      => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
         ],
 
         'attributes' => [
@@ -665,7 +674,6 @@ return [
             'image'                       => 'Image',
             'file'                        => 'File',
             'checkbox'                    => 'Checkbox',
-            'use_in_flat'                 => 'Crea in tabella Product flat',
             'is_comparable'               => "L'attributo è comparabile",
             'default_null_option'         => 'Crea opzione predefinita vuota',
             'validation-messages'         => [
@@ -818,6 +826,7 @@ return [
             'code'              => 'Codice',
             'name'              => 'Nome',
             'symbol'            => 'Simbolo',
+            'decimal'            => 'Decimal',
             'create-success'    => 'Valuta creata con successo.',
             'update-success'    => 'Valuta aggiornata con successo.',
             'delete-success'    => 'Valuta eliminata con successo.',
@@ -992,6 +1001,12 @@ return [
             'name'            => 'Nome',
             'is_user_defined' => 'Utente Definito',
             'yes'             => 'Sì',
+            'create-success'  => 'Gruppo di clienti creato con successo',
+            'update-success'  => 'Gruppo clienti aggiornato con successo',
+            'delete-success'  => 'Gruppo clienti eliminato correttamente',
+            'delete-failed'   => 'Errore! Il gruppo di clienti non può essere eliminato',
+            'customer-associate' => 'Il cliente non può essere eliminato perché il cliente è associato a questo gruppo.',
+       
         ],
 
         'addresses' => [
@@ -1022,6 +1037,11 @@ return [
             'success-delete'      => 'Indirizzo cliente eliminato con successo.',
             'success-mass-delete' => 'indirizzi selezionati eliminati con successo.',
             'error-create'        => 'Indirizzo cliente non creato.',
+        ],
+
+        'loginascustomer' => [
+            'grid-title'=>'accedi come cliente',
+            'login-message'=>'hai effettuato l accesso come :customer_name'
         ],
 
         'note' => [
@@ -1068,14 +1088,16 @@ return [
         ],
 
         'reviews' => [
-            'title'       => 'Recensioni',
-            'edit-title'  => 'Modifica Recensione',
-            'rating'      => 'Rating',
-            'status'      => 'Stato',
-            'comment'     => 'Commento',
-            'pending'     => 'In attesa',
-            'approved'    => 'Approva',
-            'disapproved' => 'Rifiuta',
+            'title'          => 'Recensioni',
+            'edit-title'     => 'Modifica Recensione',
+            'rating'         => 'Rating',
+            'status'         => 'Stato',
+            'comment'        => 'Commento',
+            'pending'        => 'In attesa',
+            'approved'       => 'Approva',
+            'disapproved'    => 'Rifiuta',
+            'update-success' => 'Recensione aggiornata con successo',
+            'delete-success' => 'Recensione eliminata con successo',
         ],
 
         'subscribers' => [
@@ -1089,6 +1111,11 @@ return [
             'delete'         => 'Iscritto eliminato correttamente',
             'delete-failed'  => 'Errore! L\'iscritto non può essere eliminato',
         ],
+        'create-success' => 'Cliente creato con successo',
+        'update-success' => 'Cliente aggiornato correttamente',
+        'delete-success' => 'Cliente eliminato correttamente',
+        'order-pending'  => 'Impossibile eliminare l\'account cliente perché alcuni ordini sono in sospeso o in fase di elaborazione.',
+        'delete-failed'  => 'Errore riscontrato durante l\'eliminazione del cliente.',
     ],
 
     'promotions' => [
@@ -1169,7 +1196,7 @@ return [
             'code-prefix'                    => 'Prefisso Codice',
             'code-suffix'                    => 'Suffisso Codice',
             'generate'                       => 'Genera',
-            'cart-rule-not-defind-error'     => 'La regola del carrello non è stata definitaaCart rule is not defined',
+            'cart-rule-not-defined-error'    => 'La regola del carrello non è stata definitaaCart rule is not defined',
             'mass-delete-success'            => 'Tutti i coupon selezinati sono stati eliminati con successo.',
             'end-other-rules'                => 'Fine altre regole',
             'children-categories'            => 'Categorie (Children Only)',
@@ -1305,9 +1332,9 @@ return [
     ],
 
     'error' => [
-        'go-to-home'    => 'TORNA ALLA HOME',
-        'in-maitainace' => 'In Manutezione',
-        'right-back'    => 'Torno subito',
+        'go-to-home'     => 'TORNA ALLA HOME',
+        'in-maintenance' => 'In Manutezione',
+        'right-back'     => 'Torno subito',
 
         '404' => [
             'page-title' => '404 Pagina non trovata',
@@ -1397,9 +1424,6 @@ return [
         'being-used'              => 'Questa risorsa :name é utilizzata in :source',
         'cannot-change'           => 'Impossibile modificare :name.',
         'cannot-delete-default'   => 'Non è possibile eliminare il canale di default',
-        'create-success'          => ':name creato con successo.',
-        'update-success'          => ':name aggiornato con successo.',
-        'delete-success'          => ':name eliminato con successo.',
         'delete-failed'           => 'Si è verificato un errore durante la cancellazione di :name.',
         'last-delete-error'       => 'Almeno un :name è obbligatorio.',
         'user-define-error'       => 'Non è possibile eliminare il sistema :name',
@@ -1447,10 +1471,15 @@ return [
         ],
         'system'             => [
             'catalog'                               => 'Catalogo',
-            'homepage'                              => 'Homepage configuration',
-            'allow-no-of-new-product-homepage'      => 'Allowed No of New Product in Homepage',
-            'allow-no-of-featured-product-homepage' => 'Allowed No of Featured Product in Homepage',
-            'allow-out-of-stock-items'              => 'Allow out of stock items',
+            'homepage'                              => 'Configurazione della pagina iniziale',
+            'product-view-page'                     => 'Configurazione della pagina di visualizzazione del prodotto',
+            'cart-view-page'                        => 'Configurazione della pagina di visualizzazione del carrello',
+            'allow-no-of-new-product-homepage'      => 'Numero consentito di nuovi prodotti nella home page',
+            'allow-no-of-featured-product-homepage' => 'Numero consentito di prodotti in vetrina nella home page',
+            'allow-no-of-related-products'          => 'Numero consentito di prodotti correlati',
+            'allow-no-of-up-sells-products'         => 'Numero consentito di prodotti Up-Sell',
+            'allow-no-of-cross-sells-products'      => 'Numero consentito di prodotti cross-sell',
+            'allow-out-of-stock-items'              => 'Consenti articoli esauriti',
             'products'                              => 'Prodotti',
             'guest-checkout'                        => 'Checkout come Ospite',
             'allow-guest-checkout'                  => 'Consenti Checkout come Ospite',
@@ -1558,7 +1587,7 @@ return [
             'oldest-first'                          => 'I più vecchi prima',
             'cheapest-first'                        => 'I più convenienti prima',
             'expensive-first'                       => 'I più cari prima',
-            'comma-seperated'                       => 'Separato da virgola',
+            'comma-separated'                       => 'Separato da virgola',
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',

@@ -88,6 +88,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'star',
         'name'                      => 'Adı',
+        'login-to-review'           => 'Lütfen ürünü inceleyebilmek için önce giriş yapın',
     ],
 
     'customer' => [
@@ -502,9 +503,9 @@ return [
             'continue-registration'    => 'Kayda Devam Et',
             'proceed-to-checkout'      => 'Satın Al',
             'remove'                   => 'Kaldır',
-            'remove-link'              => 'Kaldır',
-            'remove-all-items'         => 'Remove all items',
-            'confirm-action'           => 'Confirm this action?',
+            'remove-link'              => 'Bağlantıyı Kaldır',
+            'remove-all-items'         => 'Tüm öğeleri kaldır',
+            'confirm-action'           => 'Bu işlemi onayla?',
             'move-to-wishlist'         => 'Dilek Listesine Ekle',
             'move-to-wishlist-success' => 'Dilek listesine başarıyla eklendi.',
             'move-to-wishlist-error'   => 'Dilek listesine eklenirken hata oluştu, lütfen tekrar deneyin.',
@@ -542,6 +543,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal ödemesi iptal edildi.',
         ],
 
         'onepage' => [

@@ -11,7 +11,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.review.index') }}'"></i>
+                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.campaigns.index') }}'"></i>
 
                         {{ __('admin::app.marketing.campaigns.add-title') }}
                     </h1>
@@ -59,13 +59,15 @@
 
                             <div class="control-group" :class="[errors.has('marketing_template_id') ? 'has-error' : '']">
                                 <label for="marketing_template_id" class="required">{{ __('admin::app.marketing.campaigns.email-template') }}</label>
+
                                 <select v-validate="'required'" class="control" id="marketing_template_id" name="marketing_template_id" data-vv-as="&quot;{{ __('admin::app.marketing.campaigns.email-template') }}&quot;">
-                                    @foreach (app('Webkul\Marketing\Repositories\TemplateRepository')->all() as $template)
+                                    @foreach ($templates as $template)
                                         <option value="{{ $template->id }}" {{ old('marketing_template_id') == $template->id ? 'selected' : '' }}>
                                             {{ $template->name }}
                                         </option>
                                     @endforeach
                                 </select>
+                                
                                 <span class="control-error" v-if="errors.has('marketing_template_id')">@{{ errors.first('marketing_template_id') }}</span>
                             </div>
 

@@ -3,17 +3,17 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use \Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Admin\DataGrids\OrderDataGrid;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     protected $_config;
 
@@ -70,9 +70,9 @@ class OrderController extends Controller
         $result = $this->orderRepository->cancel($id);
 
         if ($result) {
-            session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
+            session()->flash('success', trans('admin::app.sales.orders.cancel-error'));
         } else {
-            session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+            session()->flash('error', trans('admin::app.sales.orders.create-success'));
         }
 
         return redirect()->back();

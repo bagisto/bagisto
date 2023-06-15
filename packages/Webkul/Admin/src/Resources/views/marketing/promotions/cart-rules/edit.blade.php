@@ -13,12 +13,12 @@
 @push('scripts')
     <script type="text/x-template" id="cart-rule-template">
         <div>
-            <form method="POST" action="{{ route('admin.cart-rules.update', $cartRule->id) }}" @submit.prevent="onSubmit">
+            <form method="POST" action="{{ route('admin.cart_rules.update', $cartRule->id) }}" @submit.prevent="onSubmit">
                 <div class="page-header">
                     <div class="page-title">
                         <h1>
                             <i class="icon angle-left-icon back-link"
-                            onclick="window.location = '{{ route('admin.cart-rules.index') }}'"></i>
+                            onclick="window.location = '{{ route('admin.cart_rules.index') }}'"></i>
 
                             {{ __('admin::app.promotions.cart-rules.edit-title') }}
                         </h1>
@@ -161,12 +161,14 @@
                                     </datetime>
                                 </div>
 
-                                <div class="control-group date">
+                                <div class="control-group date" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                     <label for="ends_till">{{ __('admin::app.promotions.cart-rules.to') }}</label>
 
                                     <datetime>
-                                        <input type="text" name="ends_till" class="control" value="{{ old('ends_till') ?: $cartRule->ends_till }}"/>
+                                        <input type="text" v-validate="" class="control" name="ends_till" value="{{ old('ends_till') ?: $cartRule->ends_till }}"/>
                                     </datetime>
+
+                                    <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                 </div>
 
                                 <div class="control-group">
@@ -484,7 +486,7 @@
                 </div>
             </modal>
 
-            <datagrid-plus src="{{ route('admin.cart-rules-coupons.index', $cartRule->id) }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.cart_rules.coupons.index', $cartRule->id) }}"></datagrid-plus>
         </div>
     </script>
 
@@ -761,7 +763,7 @@
 
                     this.$validator.validateAll(formScope).then(function (result) {
                         if (result) {
-                            self.$http.post("{{ route('admin.cart-rules-coupons.store', $cartRule->id) }}", self.coupon_format)
+                            self.$http.post("{{ route('admin.cart_rules.coupons.store', $cartRule->id) }}", self.coupon_format)
                                 .then(function(response) {
                                     window.flashMessages = [{
                                         'type': 'alert-success',

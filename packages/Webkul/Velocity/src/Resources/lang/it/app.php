@@ -92,7 +92,7 @@ return [
         ],
         'meta-data' => [
             'footer' => 'Footer',
-            'title' => 'Velocity meta data',
+            'title' => 'Velocity Meta Data',
             'activate-slider' => 'Attiva Slider',
             'home-page-content' => 'Contenuti Home Page',
             'footer-left-content' => 'Contenuti Footer Sinistra',
@@ -108,7 +108,6 @@ return [
             'update-meta-data' => 'Aggiorna Meta Data',
             'product-view-image' => 'Immagine Vista Prodotto',
             'advertisement-two' => 'Advertisement Two Images',
-            'advertisement-one' => 'Advertisement One Images',
             'footer-middle-content' => 'Contenuto Footer Centrale',
             'advertisement-four' => 'Advertisement Four Images',
             'advertisement-three' => 'Advertisement Three Images',
@@ -228,7 +227,7 @@ return [
             'login' => 'Login',
             'become-user' => 'Diventa Utente',
             'user-registration' => 'Registrazione Utente',
-            'form-sginup-text' => 'Se sei nuovo nel nostro store, siamo lieti di averti come nuovo amico.',
+            'form-signup-text' => 'Se sei nuovo nel nostro store, siamo lieti di averti come nuovo amico.',
         ],
         'forget-password' => [
             'login' => 'Login',
@@ -267,6 +266,7 @@ return [
         'recently-viewed' => 'Prodotti visti di recente',
         'be-first-review' => 'Sii il primo a scrivere una review',
         'tax-inclusive' => 'Inclusive of all taxes',
+        'product-removed'  => 'Il prodotto non è più disponibile in quanto rimosso dall amministratore',
     ],
 
     'shop' => [
@@ -313,7 +313,8 @@ return [
         'header' => [
             'done'      => 'Fatto',
             'languages' => 'Lingue',
-            'greeting' => 'Benvenuto, :customer !',
+            'greeting' => 'Benvenuto, :Customer !',
+            'greeting-for-guest' => 'Benvenuto ospite'
         ]
     ],
 ]

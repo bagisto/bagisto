@@ -88,6 +88,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => '星',
         'name'                      => '名前',
+        'login-to-review'           => '製品を確認するには、まずログインしてください。',
     ],
 
     'customer' => [
@@ -468,8 +469,8 @@ return [
             'proceed-to-checkout'       => '購入手続きに進む',
             'remove'                    => '削除',
             'remove-link'               => '削除',
-            'remove-all-items'          => 'Remove all items',
-            'confirm-action'            => 'Confirm this action?',
+            'remove-all-items'          => 'すべてのアイテムを削除',
+            'confirm-action'            => 'このアクションを確認しますか?',
             'move-to-wishlist'          => 'お気に入りに移動する',
             'move-to-wishlist-success'  => 'アイテムがお気に入りに追加されました。',
             'move-to-wishlist-error'    => 'アイテムをお気に入りに追加することができませんでした。しばらくしてから再度お試し下さい。',
@@ -502,6 +503,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [

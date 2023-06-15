@@ -13,12 +13,12 @@
 @push('scripts')
     <script type="text/x-template" id="cart-rule-template">
         <div>
-            <form method="POST" action="{{ route('admin.cart-rules.store') }}" @submit.prevent="onSubmit">
+            <form method="POST" action="{{ route('admin.cart_rules.store') }}" @submit.prevent="onSubmit">
                 <div class="page-header">
                     <div class="page-title">
                         <h1>
                             <i class="icon angle-left-icon back-link"
-                            onclick="window.location = '{{ route('admin.cart-rules.index') }}'"></i>
+                            onclick="window.location = '{{ route('admin.cart_rules.index') }}'"></i>
 
                             {{ __('admin::app.promotions.cart-rules.add-title') }}
                         </h1>
@@ -144,11 +144,14 @@
                                     </datetime>
                                 </div>
 
-                                <div class="control-group date">
+                                <div class="control-group date" :class="[errors.has('ends_till') ? 'has-error' : '']">
                                     <label for="ends_till">{{ __('admin::app.promotions.cart-rules.to') }}</label>
+
                                     <datetime>
-                                        <input type="text" name="ends_till" class="control" value="{{ old('ends_till') }}"/>
+                                        <input type="text" v-validate="" class="control" name="ends_till" value="{{ old('ends_till') }}"/>
                                     </datetime>
+
+                                    <span class="control-error" v-if="errors.has('ends_till')">@{{ errors.first('ends_till') }}</span>
                                 </div>
 
                                 <div class="control-group">

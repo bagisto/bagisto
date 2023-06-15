@@ -2,18 +2,28 @@
 
 namespace Webkul\Velocity\Http\Controllers\Shop;
 
-use Cart;
 use Illuminate\Support\Facades\Log;
-use Webkul\Velocity\Helpers\Helper;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Contracts\Cart as CartModel;
 use Webkul\Product\Repositories\ProductRepository;
 
 class CartController extends Controller
 {
     /**
-     * Retrives the mini cart details
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     *
+     * @return void
+     */
+    public function __construct(protected ProductRepository $productRepository)
+    {
+    }
+
+    /**
+     * Retrieves the mini cart details
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getMiniCartDetails()
     {
@@ -33,6 +43,7 @@ class CartController extends Controller
             foreach ($items as $index => $item) {
                 $images = $item->product->getTypeInstance()->getBaseImage($item);
 
+                $cartItems[$index]['name'] = $item->product->name;
                 $cartItems[$index]['images'] = $images;
                 $cartItems[$index]['url_key'] = $item->product->url_key;
                 $cartItems[$index]['base_total'] = core()->currency($item->base_total);
@@ -41,15 +52,14 @@ class CartController extends Controller
 
             $response = [
                 'status'    => true,
+
                 'mini_cart' => [
-                    'cart_items' => $cartItems,
+                    'cart_items'   => $cartItems,
                     'cart_details' => $cartDetails,
                 ],
             ];
         } else {
-            $response = [
-                'status' => false,
-            ];
+            $response = ['status' => false];
         }
 
         return response()->json($response);
@@ -66,13 +76,16 @@ class CartController extends Controller
             $cart = Cart::getCart();
 
             $id = request()->get('product_id');
+            
+            if ($product = $this->productRepository->findOrFail($id)) {
+                if (! $product->visible_individually) {
+                    abort(404);
+                }
+            }
 
             $cart = Cart::addProduct($id, request()->all());
 
-            if (
-                is_array($cart)
-                && isset($cart['warning'])
-            ) {
+            if (isset($cart['warning'])) {
                 $response = [
                     'status'  => 'warning',
                     'message' => $cart['warning'],

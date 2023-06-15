@@ -90,9 +90,9 @@ class CategoryDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if ($row->status) {
                     return '<span class="badge badge-md badge-success">Enabled</span>';
-                } else {
-                    return '<span class="badge badge-md badge-danger">Disabled</span>';
                 }
+                
+                return '<span class="badge badge-md badge-danger">Disabled</span>';
             },
         ]);
     }
@@ -117,7 +117,7 @@ class CategoryDataGrid extends DataGrid
             'type'         => 'Delete',
             'method'       => 'POST',
             'route'        => 'velocity.admin.category.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Category']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Category']),
             'icon'         => 'icon trash-icon',
         ]);
     }
@@ -131,7 +131,7 @@ class CategoryDataGrid extends DataGrid
     {
         $this->addMassAction([
             'type'   => 'delete',
-            'action' => route('velocity.admin.category.mass-delete'),
+            'action' => route('velocity.admin.category.mass_delete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
         ]);

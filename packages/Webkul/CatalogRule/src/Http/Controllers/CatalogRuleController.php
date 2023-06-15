@@ -71,9 +71,9 @@ class CatalogRuleController extends Controller
 
         Event::dispatch('promotions.catalog_rule.create.after', $catalogRule);
 
-        $this->catalogRuleIndexHelper->reindexComplete();
+        $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Catalog Rule']));
+        session()->flash('success', trans('admin::app.promotions.catalog-rules.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -108,9 +108,9 @@ class CatalogRuleController extends Controller
 
         Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
 
-        $this->catalogRuleIndexHelper->reindexComplete();
+        $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Catalog Rule']));
+        session()->flash('success', trans('admin::app.promotions.catalog-rules.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -132,9 +132,9 @@ class CatalogRuleController extends Controller
 
             Event::dispatch('promotions.catalog_rule.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Catalog Rule'])]);
+            return response()->json(['message' => trans('admin::app.promotions.catalog-rules.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Catalog Rule'])], 400);
+        return response()->json(['message' => trans('admin::app.promotions.catalog-rules.delete-failed')], 400);
     }
 }

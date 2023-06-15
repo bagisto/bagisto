@@ -4,8 +4,8 @@
     "description" : "Tax package for store front and customers",
     "authors": [
         {
-            "name": "Prashant Singh",
-            "email": "prashant.singh852@webkul.com"
+            "name": "Bagisto",
+            "email": "support@bagisto.com"
         }
     ],
     "require": {},

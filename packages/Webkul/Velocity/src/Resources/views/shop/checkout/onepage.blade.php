@@ -26,8 +26,10 @@
                     <div
                         class="step-content shipping"
                         id="shipping-section"
-                        v-if="showShippingSection">
+                        v-if="showShippingSection"
+                    >
                         <shipping-section
+                            :methods="allShippingMethods"
                             :key="shippingComponentKey"
                             @onShippingMethodSelected="shippingMethodSelected($event)">
                         </shipping-section>
@@ -134,8 +136,10 @@
                         new_shipping_address: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
+                        isShippingMethod:false,
                         countries: [],
                         countryStates: [],
+                        allShippingMethods: [],
 
                         step_numbers: {
                             'information': 1,
@@ -149,10 +153,12 @@
                                 address1: [''],
                                 save_as_address: false,
                                 use_for_shipping: true,
+                                country: '',
                             },
 
                             shipping: {
-                                address1: ['']
+                                address1: [''],
+                                country: '',
                             },
                         },
                     }
@@ -201,7 +207,7 @@
                     },
 
                     fetchCountries: function () {
-                        let countriesEndPoint = `${this.$root.baseUrl}/api/countries?pagination=0&sort=id&order=asc`;
+                        let countriesEndPoint = '{{ route('shop.countries') }}';
 
                         this.$http.get(countriesEndPoint)
                             .then(response => {
@@ -211,7 +217,7 @@
                     },
 
                     fetchCountryStates: function () {
-                        let countryStateEndPoint = `${this.$root.baseUrl}/api/country-states?pagination=0`;
+                        let countryStateEndPoint = '{{ route('shop.countries.states') }}';
 
                         this.$http.get(countryStateEndPoint)
                             .then(response => {
@@ -334,10 +340,9 @@
                             if (! isValid)
                                 return;
 
-                            this.$http.post("{{ route('customer.checkout.exist') }}", {email: this.address.billing.email})
+                            this.$http.post("{{ route('shop.customer.checkout.exist') }}", {email: this.address.billing.email})
                             .then(response => {
                                 this.is_customer_exist = response.data ? 1 : 0;
-                                console.log(this.is_customer_exist);
 
                                 if (response.data)
                                     this.$root.hideLoader();
@@ -348,7 +353,7 @@
                     },
 
                     loginCustomer: function () {
-                        this.$http.post("{{ route('customer.checkout.login') }}", {
+                        this.$http.post("{{ route('shop.customer.checkout.login') }}", {
                                 email: this.address.billing.email,
                                 password: this.address.billing.password
                             })
@@ -374,12 +379,16 @@
                     },
 
                     saveAddress: async function () {
-                        this.disable_button = true;
-                        this.saveAddressCheckbox = $('input[name="billing[save_as_address]"]');
+                        if (this.showPaymentSection || this.showSummarySection) {
+                            this.showPaymentSection = false;
 
-                        if (this.saveAddressCheckbox.prop('checked') == true) {
-                            this.saveAddressCheckbox.attr('disabled', 'disabled');
-                            this.saveAddressCheckbox.prop('checked', true);
+                            this.showSummarySection = false;
+                        }
+
+                        this.disable_button = true;
+
+                        if (this.$refs.billingSaveAsAddress && this.$refs.billingSaveAsAddress.checked) {
+                            this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
                         }
 
                         if (this.allAddress.length > 0) {
@@ -398,6 +407,10 @@
                                     if (address.last_name) {
                                         this.address.billing.last_name = address.last_name;
                                     }
+
+                                    if (address.country) {
+                                        this.address.billing.country = address.country;
+                                    }
                                 }
 
                                 if (address.id == this.address.shipping.address_id) {
@@ -414,11 +427,14 @@
                                     if (address.last_name) {
                                         this.address.shipping.last_name = address.last_name;
                                     }
+
+                                    if (address.country) {
+                                        this.address.shipping.country = address.country;
+                                    }
                                 }
                             });
                         }
-
-                        this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
+                        this.$http.post("{{ route('shop.checkout.save_address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
                                 this.isPlaceOrderEnabled = true;
@@ -440,6 +456,8 @@
 
                                 shippingMethods = response.data.shippingMethods;
 
+                                this.allShippingMethods = shippingMethods;
+
                                 this.shippingComponentKey++;
 
                                 this.getOrderSummary();
@@ -457,7 +475,7 @@
                     saveShipping: async function () {
                         this.disable_button = true;
 
-                        this.$http.post("{{ route('shop.checkout.save-shipping') }}", {'shipping_method': this.selected_shipping_method})
+                        this.$http.post("{{ route('shop.checkout.save_shipping') }}", {'shipping_method': this.selected_shipping_method})
                             .then(response => {
                                 this.$root.hideLoader();
                                 this.disable_button = false;
@@ -490,7 +508,7 @@
                         if (this.isCheckPayment) {
                             this.isCheckPayment = false;
 
-                            this.$http.post("{{ route('shop.checkout.save-payment') }}", {'payment': this.selected_payment_method})
+                            this.$http.post("{{ route('shop.checkout.save_payment') }}", {'payment': this.selected_payment_method})
                             .then(response => {
                                 this.isCheckPayment = true;
                                 this.disable_button = false;
@@ -521,7 +539,7 @@
 
                             this.$root.showLoader();
 
-                            this.$http.post("{{ route('shop.checkout.save-order') }}", {'_token': "{{ csrf_token() }}"})
+                            this.$http.post("{{ route('shop.checkout.save_order') }}", {'_token': "{{ csrf_token() }}"})
                             .then(response => {
                                 if (response.data.success) {
                                     if (response.data.redirect_url) {
@@ -537,7 +555,7 @@
                                 this.disable_button = true;
                                 this.$root.hideLoader();
 
-                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), "{{ __('shop::app.common.error') }}");
+                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), error.response.data.message ? error.response.data.message : "{{ __('shop::app.common.error') }}");
                             })
                         } else {
                             this.disable_button = true;
@@ -567,6 +585,15 @@
                         this.new_billing_address = true;
                         this.isPlaceOrderEnabled = false;
                         this.address.billing.address_id = null;
+
+                        setTimeout(() => {
+                            if (
+                                this.$refs.billingSaveAsAddress
+                                && this.$refs.billingSaveAsAddress.checked
+                            ) {
+                                this.$refs.billingSaveAsAddress.setAttribute('disabled', 'disabled');
+                            }
+                        }, 0);
                     },
 
                     newShippingAddress: function () {
@@ -590,11 +617,33 @@
                             this.validateForm('address-form');
                         }, 0);
                     }
-                }
+                },
+
+                watch: {
+                    address : {
+                        handler: function(v) {
+                            if (
+                                this.$refs.billingSaveAsAddress
+                                && this.$refs.billingSaveAsAddress.hasAttribute('disabled')
+                            ) {
+                                this.$refs.billingSaveAsAddress.removeAttribute('disabled');
+                                this.$refs.billingSaveAsAddress.checked = false;
+                            }
+                        },
+                        deep: true
+                    }
+                },
             });
 
             Vue.component('shipping-section', {
                 inject: ['$validator'],
+
+                props: {
+                    methods: {
+                        type: Object,
+                        default: {}
+                    },
+                },
 
                 data: function () {
                     return {
@@ -611,7 +660,7 @@
                 mounted: function () {
                     this.templateRender = shippingHtml.render;
 
-                    for (var i in shippingHtml.staticRenderFns) {
+                    for (let i in shippingHtml.staticRenderFns) {
                         shippingTemplateRenderFns.push(shippingHtml.staticRenderFns[i]);
                     }
 
@@ -624,6 +673,16 @@
                             this.templateRender() :
                             '')
                         ]);
+                },
+
+                created: function() {
+                    if (Object.keys(this.methods).length == 1) {
+                        let firstMethod = Object.keys(this.methods)[0];
+
+                        let methodRateObject = this.methods[firstMethod]['rates'][0];
+                        this.selected_shipping_method = methodRateObject.method;
+                        this.methodSelected();
+                    }
                 },
 
                 methods: {

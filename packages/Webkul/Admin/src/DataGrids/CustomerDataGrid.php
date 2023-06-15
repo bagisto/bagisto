@@ -114,9 +114,9 @@ class CustomerDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if (! $row->phone) {
                     return '-';
-                } else {
-                    return $row->phone;
                 }
+                
+                return $row->phone;
             },
         ]);
 
@@ -130,9 +130,9 @@ class CustomerDataGrid extends DataGrid
             'closure'    => function ($row) {
                 if (! $row->gender) {
                     return '-';
-                } else {
-                    return $row->gender;
                 }
+                
+                return $row->gender;
             },
         ]);
 
@@ -193,6 +193,14 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addAction([
+            'method' => 'GET',
+            'route'  => 'admin.customer.loginascustomer',
+            'icon'   => 'icon login-icon',
+            'target' => 'blank',
+            'title'  => trans('admin::app.customers.loginascustomer.grid-title'),
+        ]);
+
+        $this->addAction([
             'method' => 'POST',
             'route'  => 'admin.customer.delete',
             'icon'   => 'icon trash-icon',
@@ -210,14 +218,14 @@ class CustomerDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.customer.mass-delete'),
+            'action' => route('admin.customer.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'type'    => 'update',
             'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.customer.mass-update'),
+            'action'  => route('admin.customer.mass_update'),
             'method'  => 'POST',
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,

@@ -86,9 +86,9 @@ class ContentDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return 'Active';
-                } else {
-                    return 'Inactive';
                 }
+                
+                return 'Inactive';
             },
         ]);
 
@@ -106,7 +106,7 @@ class ContentDataGrid extends DataGrid
                     return 'Link';
                 } elseif ($value->content_type == 'product') {
                     return 'Product';
-                } elseif ($value->content_type == 'static') {
+                } elseif ($value->content_type == 'static') {                    
                     return 'Static';
                 }
             },
@@ -133,7 +133,7 @@ class ContentDataGrid extends DataGrid
             'type'         => 'Delete',
             'method'       => 'POST',
             'route'        => 'velocity.admin.content.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'content']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'content']),
             'icon'         => 'icon trash-icon',
         ]);
     }
@@ -147,7 +147,7 @@ class ContentDataGrid extends DataGrid
     {
         $this->addMassAction([
             'type'   => 'delete',
-            'action' => route('velocity.admin.content.mass-delete'),
+            'action' => route('velocity.admin.content.mass_delete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
         ]);
@@ -155,7 +155,7 @@ class ContentDataGrid extends DataGrid
         $this->addMassAction([
             'type'    => 'update',
             'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('velocity.admin.content.mass-update'),
+            'action'  => route('velocity.admin.content.mass_update'),
             'method'  => 'POST',
             'options' => [
                 'Active'   => 1,

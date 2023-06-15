@@ -2,15 +2,14 @@
 
 namespace Webkul\Product\Helpers;
 
-use Webkul\Product\Facades\ProductImage;
-use Webkul\Product\Facades\ProductVideo;
+use Webkul\Product\Facades\{ProductImage, ProductVideo};
 
-class ConfigurableOption extends AbstractProduct
+class ConfigurableOption
 {
     /**
      * Returns the allowed variants.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     public function getAllowedProducts($product)
@@ -21,7 +20,18 @@ class ConfigurableOption extends AbstractProduct
             return $variants;
         }
 
-        foreach ($product->variants as $variant) {
+        $variantCollection = $product->variants()
+            ->with([
+                'parent',
+                'attribute_values',
+                'price_indices',
+                'inventory_indices',
+                'images',
+                'videos',
+            ])
+            ->get();
+
+        foreach ($variantCollection as $variant) {
             if ($variant->isSaleable()) {
                 $variants[] = $variant;
             }
@@ -33,7 +43,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Returns the allowed variants JSON.
      *
-     * @param  \Webkul\Product\Models\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Models\Product  $product
      * @return array
      */
     public function getConfigurationConfig($product)
@@ -42,7 +52,7 @@ class ConfigurableOption extends AbstractProduct
 
         $config = [
             'attributes'     => $this->getAttributesData($product, $options),
-            'index'          => isset($options['index']) ? $options['index'] : [],
+            'index'          => $options['index'] ?? [],
             'variant_prices' => $this->getVariantPrices($product),
             'variant_images' => $this->getVariantImages($product),
             'variant_videos' => $this->getVariantVideos($product),
@@ -55,7 +65,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get allowed attributes.
      *
-     * @param  \Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return \Illuminate\Support\Collection
      */
     public function getAllowAttributes($product)
@@ -66,13 +76,15 @@ class ConfigurableOption extends AbstractProduct
             return $productSuperAttributes[$product->id];
         }
 
-        return $productSuperAttributes[$product->id] = $product->product->super_attributes()->with(['translation', 'options', 'options.translation'])->get();
+        return $productSuperAttributes[$product->id] = $product->super_attributes()
+            ->with(['translation', 'options', 'options.translation'])
+            ->get();
     }
 
     /**
      * Get configurable product options.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $currentProduct
+     * @param  \Webkul\Product\Contracts\Product  $currentProduct
      * @param  array  $allowedProducts
      * @return array
      */
@@ -83,27 +95,14 @@ class ConfigurableOption extends AbstractProduct
         $allowAttributes = $this->getAllowAttributes($currentProduct);
 
         foreach ($allowedProducts as $product) {
-            if ($product instanceof \Webkul\Product\Models\ProductFlat) {
-                $productId = $product->product_id;
-            } else {
-                $productId = $product->id;
-            }
-
             foreach ($allowAttributes as $productAttribute) {
                 $productAttributeId = $productAttribute->id;
 
                 $attributeValue = $product->{$productAttribute->code};
 
-                if (
-                    $attributeValue == ''
-                    && $product instanceof \Webkul\Product\Models\ProductFlat
-                ) {
-                    $attributeValue = $product->product->{$productAttribute->code};
-                }
+                $options[$productAttributeId][$attributeValue][] = $product->id;
 
-                $options[$productAttributeId][$attributeValue][] = $productId;
-
-                $options['index'][$productId][$productAttributeId] = $attributeValue;
+                $options['index'][$product->id][$productAttributeId] = $attributeValue;
             }
         }
 
@@ -113,7 +112,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product attributes.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @param  array  $options
      * @return array
      */
@@ -168,7 +167,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product prices for configurable variations.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     protected function getVariantPrices($product)
@@ -176,13 +175,7 @@ class ConfigurableOption extends AbstractProduct
         $prices = [];
 
         foreach ($this->getAllowedProducts($product) as $variant) {
-            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
-                $variantId = $variant->product_id;
-            } else {
-                $variantId = $variant->id;
-            }
-
-            $prices[$variantId] = $variant->getTypeInstance()->getProductPrices();
+            $prices[$variant->id] = $variant->getTypeInstance()->getProductPrices();
         }
 
         return $prices;
@@ -191,7 +184,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product images for configurable variations.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     protected function getVariantImages($product)
@@ -199,13 +192,7 @@ class ConfigurableOption extends AbstractProduct
         $images = [];
 
         foreach ($this->getAllowedProducts($product) as $variant) {
-            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
-                $variantId = $variant->product_id;
-            } else {
-                $variantId = $variant->id;
-            }
-
-            $images[$variantId] = ProductImage::getGalleryImages($variant);
+            $images[$variant->id] = ProductImage::getGalleryImages($variant);
         }
 
         return $images;
@@ -214,7 +201,7 @@ class ConfigurableOption extends AbstractProduct
     /**
      * Get product videos for configurable variations.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return array
      */
     protected function getVariantVideos($product)
@@ -222,13 +209,7 @@ class ConfigurableOption extends AbstractProduct
         $videos = [];
 
         foreach ($this->getAllowedProducts($product) as $variant) {
-            if ($variant instanceof \Webkul\Product\Models\ProductFlat) {
-                $variantId = $variant->product_id;
-            } else {
-                $variantId = $variant->id;
-            }
-
-            $videos[$variantId] = ProductVideo::getVideos($variant);
+            $videos[$variant->id] = ProductVideo::getVideos($variant);
         }
 
         return $videos;

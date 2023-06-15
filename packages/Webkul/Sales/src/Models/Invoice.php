@@ -20,7 +20,7 @@ class Invoice extends Model implements InvoiceContract
     /**
      * The attributes that aren't mass assignable.
      *
-     * @var string[]|bool
+     * @var string[]
      */
     protected $guarded = [
         'id',

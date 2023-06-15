@@ -13,7 +13,7 @@
 
             @if (count($categories))
                 <div class="list-container">
-                    <span class="list-heading">Categories</span>
+                    <span class="list-heading">{{ __('admin::app.layouts.categories') }}</span>
 
                     <ul class="list-group">
                         @foreach ($categories as $key => $category)
@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            {!! DbView::make(core()->getCurrentChannel())->field('footer_content')->render() !!}
+            {!! Blade::render(core()->getCurrentChannel()->footer_content) !!}
 
             <div class="list-container">
                 @if(core()->getConfigData('customer.settings.newsletter.subscription'))

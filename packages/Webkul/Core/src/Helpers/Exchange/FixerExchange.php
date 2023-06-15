@@ -36,7 +36,7 @@ class FixerExchange extends ExchangeRate
     {
         $this->apiEndPoint = 'http://data.fixer.io/api';
 
-        $this->apiKey = config('services.exchange-api')['fixer']['key'];
+        $this->apiKey = config('services.exchange_api')['fixer']['key'];
     }
 
     /**
@@ -61,10 +61,7 @@ class FixerExchange extends ExchangeRate
                 isset($result['success'])
                 && ! $result['success']
             ) {
-                throw new \Exception(
-                    isset($result['error']['info'])
-                    ? $result['error']['info']
-                    : $result['error']['type'], 1);
+                throw new \Exception($result['error']['info'] ?? $result['error']['type'], 1);
             }
 
             if ($exchangeRate = $currency->exchange_rate) {

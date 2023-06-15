@@ -143,6 +143,9 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
+            'closure'    => function ($value) {
+                return $value->coupon_code ?? '-';
+            },
         ]);
 
         $this->addColumn([
@@ -152,6 +155,9 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+                return $value->starts_from ?? '-';
+              },            
         ]);
 
         $this->addColumn([
@@ -161,6 +167,9 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'closure'    => function ($value) {
+               return $value->ends_till ?? '-'; 
+            },
         ]);
 
         $this->addColumn([
@@ -175,9 +184,9 @@ class CartRuleDataGrid extends DataGrid
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 0) {
                     return trans('admin::app.datagrid.inactive');
-                } else {
-                    return trans('admin::app.datagrid.draft');
                 }
+                
+                return trans('admin::app.datagrid.draft');
             },
         ]);
 
@@ -201,21 +210,21 @@ class CartRuleDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.cart-rules.edit',
+            'route'  => 'admin.cart_rules.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
-            'route'  => 'admin.cart-rules.copy',
+            'route'  => 'admin.cart_rules.copy',
             'icon'   => 'icon copy-icon',
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.cart-rules.delete',
+            'route'  => 'admin.cart_rules.delete',
             'icon'   => 'icon trash-icon',
         ]);
     }

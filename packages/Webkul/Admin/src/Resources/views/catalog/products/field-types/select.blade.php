@@ -1,6 +1,6 @@
 <select v-validate="'{{$validations}}'" class="control" id="{{ $attribute->code }}" name="{{ $attribute->code }}" data-vv-as="&quot;{{ $attribute->admin_name }}&quot;">
 
-    <?php $selectedOption = old($attribute->code) ?: $product[$attribute->code] ?>
+    @php $selectedOption = old($attribute->code) ?: $product[$attribute->code] @endphp
 
     @if ($attribute->code != 'tax_category_id')
 

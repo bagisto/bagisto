@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -117,7 +117,7 @@ class DashboardController extends Controller
             $total = $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_invoiced') - $this->getOrdersBetweenDate($interval['start'], $interval['end'])->sum('base_grand_total_refunded');
 
             $statistics['sale_graph']['total'][] = $total;
-            $statistics['sale_graph']['formated_total'][] = core()->formatBasePrice($total);
+            $statistics['sale_graph']['formatted_total'][] = core()->formatBasePrice($total);
         }
 
         return view($this->_config['view'], compact('statistics'))->with(['startDate' => $this->startDate, 'endDate' => $this->endDate]);
@@ -196,7 +196,7 @@ class DashboardController extends Controller
      */
     public function getStockThreshold()
     {
-        return $this->productInventoryRepository->getModel()
+        return $this->productInventoryRepository->getModel()->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
             ->select(DB::raw('SUM(qty) as total_qty'))
             ->addSelect('product_inventories.product_id')
@@ -213,7 +213,7 @@ class DashboardController extends Controller
      */
     public function getTopSellingProducts()
     {
-        return $this->orderItemRepository->getModel()
+        return $this->orderItemRepository->getModel()->with(['product', 'product.images'])
             ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect('id', 'product_id', 'product_type', 'name')
             ->where('order_items.created_at', '>=', $this->startDate)
@@ -226,7 +226,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Returns cutomer with most sales.
+     * Returns customer with most sales.
      *
      * @return \Illuminate\Support\Collection
      */

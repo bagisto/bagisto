@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class AddColumnUrlPathToCategoryTranslations extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddColumnUrlPathToCategoryTranslations extends Migration
     public function up()
     {
         Schema::table('category_translations', function (Blueprint $table) {
-            $table->string('url_path', 2048)
-                ->comment('maintained by database triggers');
+            $table->string('url_path', 2048);
         });
     }
 
@@ -30,4 +29,4 @@ class AddColumnUrlPathToCategoryTranslations extends Migration
             $table->dropColumn('url_path');
         });
     }
-}
+};

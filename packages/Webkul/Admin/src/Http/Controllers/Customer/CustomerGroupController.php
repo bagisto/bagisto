@@ -3,9 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Core\Contracts\Validations\Code;
 
 class CustomerGroupController extends Controller
 {
@@ -59,7 +60,7 @@ class CustomerGroupController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:customer_groups,code', new Code],
             'name' => 'required',
         ]);
 
@@ -98,7 +99,7 @@ class CustomerGroupController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:customer_groups,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:customer_groups,code,' . $id, new Code],
             'name' => 'required',
         ]);
 
@@ -108,7 +109,7 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Customer Group']));
+        session()->flash('success', trans('admin::app.customers.groups.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -131,7 +132,7 @@ class CustomerGroupController extends Controller
 
         if ($customerGroup->customers->count()) {
             return response()->json([
-                'message' => trans('admin::app.response.customer-associate', ['name' => 'Customer Group']),
+                'message' => trans('admin::app.customers.groups.customer-associate'),
             ], 400);
         }
 
@@ -142,9 +143,9 @@ class CustomerGroupController extends Controller
 
             Event::dispatch('customer.customer_group.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Customer Group'])]);
+            return response()->json(['message' => trans('admin::app.customers.groups.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Customer Group'])], 500);
+        return response()->json(['message' => trans('admin::app.customers.groups.delete-failed')], 500);
     }
 }

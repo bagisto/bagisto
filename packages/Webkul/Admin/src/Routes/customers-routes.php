@@ -9,7 +9,7 @@ use Webkul\Product\Http\Controllers\ReviewController;
 /**
  * Customers routes.
  */
-Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     /**
      * Customer management routes.
      */
@@ -29,6 +29,8 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         'view' => 'admin::customers.edit',
     ])->name('admin.customer.edit');
 
+    Route::get('customers/loginascustomer/{id}', [CustomerController::class, 'loginAsCustomer'])->name('admin.customer.loginascustomer');
+
     Route::get('customers/note/{id}', [CustomerController::class, 'createNote'])->defaults('_config', [
         'view' => 'admin::customers.note',
     ])->name('admin.customer.note.create');
@@ -43,9 +45,9 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
 
     Route::post('customers/delete/{id}', [CustomerController::class, 'destroy'])->name('admin.customer.delete');
 
-    Route::post('customers/masssdelete', [CustomerController::class, 'massDestroy'])->name('admin.customer.mass-delete');
+    Route::post('customers/mass-delete', [CustomerController::class, 'massDestroy'])->name('admin.customer.mass_delete');
 
-    Route::post('customers/masssupdate', [CustomerController::class, 'massUpdate'])->name('admin.customer.mass-update');
+    Route::post('customers/mass-update', [CustomerController::class, 'massUpdate'])->name('admin.customer.mass_update');
 
     Route::get('customers/{id}/invoices', [CustomerController::class, 'invoices'])->name('admin.customer.invoices.data');
 
@@ -82,7 +84,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
 
     Route::post('customers/{id}/addresses', [AddressController::class, 'massDestroy'])->defaults('_config', [
         'redirect' => 'admin.customer.addresses.index',
-    ])->name('admin.customer.addresses.massdelete');
+    ])->name('admin.customer.addresses.mass_delete');
 
     /**
      * Customer's reviews routes.
@@ -103,13 +105,13 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
         'redirect' => 'admin.customer.review.index',
     ])->name('admin.customer.review.delete');
 
-    Route::post('reviews/massdestroy', [ReviewController::class, 'massDestroy'])->defaults('_config', [
+    Route::post('reviews/mass-delete', [ReviewController::class, 'massDestroy'])->defaults('_config', [
         'redirect' => 'admin.customer.review.index',
-    ])->name('admin.customer.review.massdelete');
+    ])->name('admin.customer.review.mass_delete');
 
-    Route::post('reviews/massupdate', [ReviewController::class, 'massUpdate'])->defaults('_config', [
+    Route::post('reviews/mass-update', [ReviewController::class, 'massUpdate'])->defaults('_config', [
         'redirect' => 'admin.customer.review.index',
-    ])->name('admin.customer.review.massupdate');
+    ])->name('admin.customer.review.mass_update');
 
     /**
      * Customer groups routes.

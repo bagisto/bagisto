@@ -4,13 +4,13 @@ namespace Webkul\Product\Helpers;
 
 use Illuminate\Support\Facades\DB;
 
-class Review extends AbstractProduct
+class Review
 {
     /**
      * Returns the product's avg rating
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     * @return float
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Illuminate\Support\Collection
      */
     public function getReviews($product)
     {
@@ -26,7 +26,7 @@ class Review extends AbstractProduct
     /**
      * Returns the product's avg rating
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return float
      */
     public function getAverageRating($product)
@@ -37,13 +37,13 @@ class Review extends AbstractProduct
             return $avgRating[$product->id];
         }
 
-        return $avgRating[$product->id] = number_format(round($product->reviews()->where('status', 'approved')->avg('rating'), 2), 1);
+        return $avgRating[$product->id] = number_format(round($product->reviews->where('status', 'approved')->avg('rating'), 2), 1);
     }
 
     /**
      * Returns the total review of the product
      *
-    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+    * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getTotalReviews($product)
@@ -54,13 +54,13 @@ class Review extends AbstractProduct
             return $totalReviews[$product->id];
         }
 
-        return $totalReviews[$product->id] = $product->reviews()->where('status', 'approved')->count();
+        return $totalReviews[$product->id] = $product->reviews->where('status', 'approved')->count();
     }
 
      /**
      * Returns the total rating of the product
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getTotalRating($product)
@@ -71,15 +71,14 @@ class Review extends AbstractProduct
             return $totalRating[$product->id];
         }
 
-        return $totalRating[$product->id] = $product->reviews()->where('status', 'approved')->sum('rating');
+        return $totalRating[$product->id] = $product->reviews->where('status', 'approved')->sum('rating');
     }
 
     /**
      * Returns reviews with ratings.
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
-     *
-     * @return collection
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return \Illuminate\Support\Collection
      */
     public function getReviewsWithRatings($product)
     {
@@ -89,7 +88,8 @@ class Review extends AbstractProduct
             return $reviews[$product->id];
         }
 
-        return $reviews[$product->id] = $product->reviews()->where('status', 'approved')
+        return $reviews[$product->id] = $product->reviews()
+            ->where('status', 'approved')
             ->select('rating', DB::raw('count(*) as total'))
             ->groupBy('rating')
             ->orderBy('rating', 'desc')
@@ -99,7 +99,7 @@ class Review extends AbstractProduct
      /**
      * Returns the Percentage rating of the product
      *
-    * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
+    * @param  \Webkul\Product\Contracts\Product  $product
      * @return int
      */
     public function getPercentageRating($product)

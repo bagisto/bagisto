@@ -3,9 +3,10 @@
 namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
+use Webkul\Core\Contracts\Validations\Code;
 
 class AttributeFamilyController extends Controller
 {
@@ -67,7 +68,7 @@ class AttributeFamilyController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:attribute_families,code', new Code],
             'name' => 'required',
         ]);
 
@@ -77,7 +78,7 @@ class AttributeFamilyController extends Controller
 
         Event::dispatch('catalog.attribute_family.create.after', $attributeFamily);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Family']));
+        session()->flash('success', trans('admin::app.catalog.families.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -106,7 +107,7 @@ class AttributeFamilyController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:attribute_families,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code' => ['required', 'unique:attribute_families,code,' . $id, new Code],
             'name' => 'required',
         ]);
 
@@ -116,7 +117,7 @@ class AttributeFamilyController extends Controller
 
         Event::dispatch('catalog.attribute_family.update.after', $attributeFamily);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Family']));
+        session()->flash('success', trans('admin::app.catalog.families.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -133,13 +134,13 @@ class AttributeFamilyController extends Controller
 
         if ($this->attributeFamilyRepository->count() == 1) {
             return response()->json([
-                'message' => trans('admin::app.response.last-delete-error', ['name' => 'Family']),
+                'message' => trans('admin::app.catalog.families.last-delete-error'),
             ], 400);
         }
 
         if ($attributeFamily->products()->count()) {
             return response()->json([
-                'message' => trans('admin::app.response.attribute-product-error', ['name' => 'Attribute family']),
+                'message' => trans('admin::app.catalog.families.attribute-product-error'),
             ], 400);
         }
 
@@ -151,14 +152,14 @@ class AttributeFamilyController extends Controller
             Event::dispatch('catalog.attribute_family.delete.after', $id);
 
             return response()->json([
-                'message' => trans('admin::app.response.delete-success', ['name' => 'Family']),
+                'message' => trans('admin::app.catalog.families.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return response()->json([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'Family']),
+            'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'Family']),
         ], 500);
     }
 

@@ -93,10 +93,13 @@ trait ProvideDataGridPlus
         if ($channel !== 'all') {
             $channelLocales = app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales()->orderBy('name')->get();
 
-            if ($channelLocales->contains('code', $locale)) {
+            if (
+                $locale === 'all'
+                || $channelLocales->contains('code', $locale)
+            ) {
                 $locales = $channelLocales;
             } else {
-                $channel = 'all';
+                $channel = $locale = 'all';
             }
         }
 
@@ -154,12 +157,14 @@ trait ProvideDataGridPlus
             'clickOnAction'       => __('ui::app.datagrid.click_on_action'),
             'recordsFound'        => __('ui::app.datagrid.records-found'),
             'norecords'           => __('ui::app.datagrid.no-records'),
-            'massActionDelete'    => __('ui::app.datagrid.massaction.delete'),
+            'massActionDelete'    => __('ui::app.datagrid.mass-action.delete'),
             'emptyField'          => __('ui::app.datagrid.empty-field'),
             'emptyValue'          => __('ui::app.datagrid.empty-value'),
             'active'              => __('ui::app.datagrid.active'),
             'inactive'            => __('ui::app.datagrid.inactive'),
             'clearAll'            => __('ui::app.datagrid.clear-all'),
+            'of'                  => __('ui::app.datagrid.of'),
+            'selected'            => __('ui::app.datagrid.selected'),
         ];
     }
 }

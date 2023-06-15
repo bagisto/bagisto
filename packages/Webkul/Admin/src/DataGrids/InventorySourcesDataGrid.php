@@ -88,9 +88,9 @@ class InventorySourcesDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
-                } else {
-                    return trans('admin::app.datagrid.inactive');
                 }
+                
+                return trans('admin::app.datagrid.inactive');
             },
         ]);
     }
@@ -113,7 +113,7 @@ class InventorySourcesDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.inventory_sources.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Inventory Source']),
             'icon'         => 'icon trash-icon',
         ]);
     }

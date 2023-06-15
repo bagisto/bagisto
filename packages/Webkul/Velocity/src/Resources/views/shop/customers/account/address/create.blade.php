@@ -15,7 +15,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.address.create.before') !!}
 
-        <form method="post" action="{{ route('customer.address.store') }}" @submit.prevent="onSubmit">
+        <form method="post" action="{{ route('shop.customer.addresses.store') }}" @submit.prevent="onSubmit">
             <div class="account-table-content mb-2">
                 @csrf
 
@@ -125,10 +125,10 @@
                 </div>
 
                 @if (
-                    core()->getConfigData('customer.settings.address.street_lines')
-                    && core()->getConfigData('customer.settings.address.street_lines') > 1
+                    core()->getConfigData('customer.address.information.street_lines')
+                    && core()->getConfigData('customer.address.information.street_lines') > 1
                 )
-                    @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                    @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                         <div class="control-group" style="margin-top: -25px;">
                             <input
                                 class="control"

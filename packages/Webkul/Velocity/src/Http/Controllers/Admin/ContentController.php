@@ -2,7 +2,6 @@
 
 namespace Webkul\Velocity\Http\Controllers\Admin;
 
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Velocity\DataGrids\ContentDataGrid;
 use Webkul\Velocity\Repositories\ContentRepository;
 
@@ -11,14 +10,10 @@ class ContentController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @param  \Webkul\Velocity\Repositories\ContentRepository  $contentRepository
      * @return void
      */
-    public function __construct(
-        protected ProductRepository $productRepository,
-        protected ContentRepository $contentRepository
-    )
+    public function __construct(protected ContentRepository $contentRepository)
     {
         $this->_config = request('_config');
     }
@@ -35,31 +30,6 @@ class ContentController extends Controller
         }
 
         return view($this->_config['view']);
-    }
-
-    /**
-     * Search for catalog.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function search()
-    {
-        $results = [];
-
-        $params = request()->input();
-
-        if (
-            isset($params['query'])
-            && $params['query']
-        ) {
-            foreach ($this->productRepository->searchProductByAttribute(request()->input('query')) as $row) {
-                $results[] = [
-                    'id'   => $row->product_id,
-                    'name' => $row->name,
-                ];
-            }
-        }
-        return response()->json($results);
     }
 
     /**
@@ -87,7 +57,7 @@ class ContentController extends Controller
 
         $this->contentRepository->create($params);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => trans('velocity::app.admin.layouts.header-content')]));
+        session()->flash('success', trans('velocity::app.admin.contents.create-successs'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -116,16 +86,13 @@ class ContentController extends Controller
     {
         $params = request()->all();
 
-        if (
-            isset($params['locale'])
-            && isset($params[$params['locale']]['products'])
-        ) {
+        if (isset($params[$params['locale']]['products'])) {
             $params[$params['locale']]['products'] = json_encode($params[$params['locale']]['products']);
         }
 
         $content = $this->contentRepository->update($params, $id);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => trans('velocity::app.admin.layouts.header-content')]));
+        session()->flash('success', trans('velocity::app.admin.contents.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -143,10 +110,10 @@ class ContentController extends Controller
         try {
             $this->contentRepository->delete($id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Content'])]);
+            return response()->json(['message' => trans('velocity::app.admin.contents.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Content'])], 400);
+        return response()->json(['message' => trans('velocity::app.admin.contents.delete-failed')], 400);
     }
 
     /**
@@ -180,6 +147,7 @@ class ContentController extends Controller
     public function massUpdate()
     {
         $contentIds = explode(',', request()->input('indexes'));
+        
         $updateOption = request()->input('update-options');
 
         foreach ($contentIds as $contentId) {

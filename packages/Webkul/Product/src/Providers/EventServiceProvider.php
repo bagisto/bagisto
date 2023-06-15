@@ -12,20 +12,23 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'catalog.attribute.create.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated'
+        'catalog.product.create.after'  => [
+            'Webkul\Product\Listeners\Product@afterCreate',
         ],
-        'catalog.attribute.update.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeCreatedUpdated'
+        'catalog.product.update.after'  => [
+            'Webkul\Product\Listeners\Product@afterUpdate',
         ],
-        'catalog.attribute.delete.before' => [
-            'Webkul\Product\Listeners\ProductFlat@afterAttributeDeleted'
+        'catalog.product.delete.before' => [
+            'Webkul\Product\Listeners\Product@beforeDelete',
         ],
-        'catalog.product.create.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated'
+        'checkout.order.save.after'     => [
+            'Webkul\Product\Listeners\Order@afterCancelOrCreate',
         ],
-        'catalog.product.update.after' => [
-            'Webkul\Product\Listeners\ProductFlat@afterProductCreatedUpdated'
+        'sales.order.cancel.after'      => [
+            'Webkul\Product\Listeners\Order@afterCancelOrCreate',
+        ],
+        'sales.refund.save.after'       => [
+            'Webkul\Product\Listeners\Refund@afterCreate',
         ],
     ];
 }

@@ -5,21 +5,29 @@
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.inventories.controls.before', ['product' => $product]) !!}
 
+        <div class="control-group">
+            @php
+                $orderedQty = $product->ordered_inventories->pluck('qty')->first() ?? 0;
+            @endphp
+
+            <div style="margin-bottom: 10px">
+                <span class="badge badge-sm badge-warning" style="display: inline-block; padding: 5px;"></span>
+
+                {{ __('admin::app.catalog.products.pending-ordered-qty', ['qty' => $orderedQty]) }}
+            </div>
+
+            <span class="control-info">{{ __('admin::app.catalog.products.pending-ordered-qty-info') }}</span>
+        </div>
+
         @foreach ($inventorySources as $inventorySource)
-            <?php
+            @php
+                $qty = old('inventories[' . $inventorySource->id . ']')
+                    ?: (
+                        $product->inventories->where('inventory_source_id', $inventorySource->id)->pluck('qty')->first()
+                        ?? 0
+                    );
+            @endphp
 
-                $qty = 0;
-                foreach ($product->inventories as $inventory) {
-                    if ($inventory->inventory_source_id == $inventorySource->id) {
-                        $qty = $inventory->qty;
-                        
-                        break;
-                    }
-                }
-
-                $qty = old('inventories[' . $inventorySource->id . ']') ?: $qty;
-
-            ?>
             <div class="control-group" :class="[errors.has('inventories[{{ $inventorySource->id }}]') ? 'has-error' : '']">
                 <label>{{ $inventorySource->name }}</label>
 

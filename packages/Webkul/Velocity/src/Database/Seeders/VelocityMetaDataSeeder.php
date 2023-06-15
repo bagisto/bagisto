@@ -21,7 +21,7 @@ class VelocityMetaDataSeeder extends Seeder
 
                 'header_content_count'     => "5",
                 'channel'                  => "default",
-                'home_page_content'        => "<p>@include('shop::home.advertisements.advertisement-four')@include('shop::home.featured-products') @include('shop::home.product-policy') @include('shop::home.advertisements.advertisement-three') @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two')</p>",
+                'home_page_content'        => "<p>@include('shop::home.advertisements.advertisement-four', ['one'=>'/page/refund-policy','two'=>'/page/privacy-policy','three'=>'/page/shipping-policy','four'=>'/page/whats-new'])@include('shop::home.featured-products') @include('shop::home.product-policy') @include('shop::home.advertisements.advertisement-three', ['one'=>'/page/refund-policy','two'=>'/page/privacy-policy','three'=>'/page/shipping-policy']) @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two', ['one'=>'/page/refund-policy','two'=>'/page/privacy-policy'])</p>",
                 'footer_left_content'      => __('velocity::app.admin.meta-data.footer-left-raw-content'),
 
                 'footer_middle_content'    => '<div class="col-lg-6 col-md-12 col-sm-12 no-padding"><ul type="none"><li><a href="{!! url(\'page/about-us\') !!}">About Us</a></li><li><a href="{!! url(\'page/cutomer-service\') !!}">Customer Service</a></li><li><a href="{!! url(\'page/whats-new\') !!}">What&rsquo;s New</a></li><li><a href="{!! url(\'page/contact-us\') !!}">Contact Us </a></li></ul></div><div class="col-lg-6 col-md-12 col-sm-12 no-padding"><ul type="none"><li><a href="{!! url(\'page/return-policy\') !!}"> Order and Returns </a></li><li><a href="{!! url(\'page/payment-policy\') !!}"> Payment Policy </a></li><li><a href="{!! url(\'page/shipping-policy\') !!}"> Shipping Policy</a></li><li><a href="{!! url(\'page/privacy-policy\') !!}"> Privacy and Cookies Policy </a></li></ul></div>',
@@ -42,284 +42,245 @@ class VelocityMetaDataSeeder extends Seeder
                 'locale_code'  => 'en',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'fr',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'ar',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'de',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'es',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'fa',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'it',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'ja',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'nl',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'pl',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'pt_BR',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.compare_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'tr',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-
-            //Wishlist show config data
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'en',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'fr',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'ar',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'de',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'es',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'fa',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'it',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'ja',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'nl',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'pl',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'pt_BR',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.wishlist_option',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'tr',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-
-            /* Image search core config data starts here */
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'en',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'fr',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'ar',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'de',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'es',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'fa',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'it',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'ja',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'nl',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'pl',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
                 'locale_code'  => 'pt_BR',
                 'created_at'   => $now,
                 'updated_at'   => $now,
-            ],
-            [
+            ], [
                 'code'         => 'general.content.shop.image_search',
                 'value'        => '1',
                 'channel_code' => 'default',
@@ -327,7 +288,6 @@ class VelocityMetaDataSeeder extends Seeder
                 'created_at'   => $now,
                 'updated_at'   => $now,
             ],
-            /* Image search core config data ends here */
         ]);
     }
 }

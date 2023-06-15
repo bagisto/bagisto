@@ -91,6 +91,7 @@ return [
         'percentage'                => ': ප්‍රතිශතය %',
         'id-star'                   => 'තරුව',
         'name'                      => 'නම',
+        'login-to-review'           => 'පිටුව සඳහා පෙර පවතීරු වීමට පෙර පිවිසෙන්න',
     ],
 
     'customer' => [
@@ -504,7 +505,9 @@ return [
             'continue-registration'     => 'ලියාපදිංචිය දිගටම කරගෙන යන්න',
             'proceed-to-checkout'       => 'පරීක්ෂා කිරීම වෙත යන්න',
             'remove'                    => 'ඉවත් කරන්න',
-            'remove-link'               => 'ඉවත් කරන්න',
+            'remove-link'               => 'සබැඳිය ඉවත් කරන්න',
+            'remove-all-items'          => 'සියලුම අයිතම ඉවත් කරන්න',
+            'confirm-action'            => 'ක්‍රියාව තහවුරු කරන්න',
             'move-to-wishlist'          => 'අවශ්ය ලැයිස්තු වෙත ගෙන යන්න',
             'move-to-wishlist-success'  => 'අයිතමය පැතුම් ලැයිස්තුවට සාර්ථකව ගෙන ගියා.',
             'move-to-wishlist-error'    => 'අයිතමය පැතුම් ලැයිස්තුවට ගෙන යා නොහැක, කරුණාකර පසුව නැවත උත්සාහ කරන්න.',
@@ -539,6 +542,7 @@ return [
             'specify-shipping-method'   => 'කරුණාකර නැව්ගත කිරීමේ ක්‍රමය සඳහන් කරන්න.',
             'specify-payment-method'    => 'කරුණාකර ගෙවීමේ ක්‍රමය සඳහන් කරන්න.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [

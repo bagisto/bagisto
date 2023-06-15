@@ -91,6 +91,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'star',
         'name'                      => 'Name',
+        'login-to-review'           => 'Please log in first to review the product',
     ],
 
     'customer' => [
@@ -317,6 +318,7 @@ return [
                     'shipping-handling'   => 'Shipping & Handling',
                     'tax'                 => 'Tax',
                     'discount'            => 'Discount',
+                    'coupon'              => 'Coupon',
                     'tax-percent'         => 'Tax Percent',
                     'tax-amount'          => 'Tax Amount',
                     'discount-amount'     => 'Discount Amount',
@@ -545,6 +547,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [
@@ -574,13 +577,6 @@ return [
             'shipping-method'     => 'Select Shipping Method',
             'payment-methods'     => 'Select Payment Method',
             'payment-method'      => 'Payment Method',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'PayPal Smart Button',
-                'PayPal'              => 'PayPal',
-                'Cash On Delivery'    => 'Cash On Delivery',                
-                'Money Transfer'      => 'Money Transfer',                
-                'Paypal Standard'     => 'PayPal Standard'    
-            ],
             'summary'             => 'Order Summary',
             'price'               => 'Price',
             'quantity'            => 'Quantity',

@@ -91,9 +91,9 @@ class AttributeDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->is_required) {
                     return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
                 }
+                
+                return trans('admin::app.datagrid.false');
             },
         ]);
 
@@ -107,9 +107,9 @@ class AttributeDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->is_unique) {
                     return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
                 }
+                
+                return trans('admin::app.datagrid.false');
             },
         ]);
 
@@ -123,9 +123,9 @@ class AttributeDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->value_per_locale) {
                     return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
                 }
+
+                return trans('admin::app.datagrid.false');
             },
         ]);
 
@@ -139,9 +139,9 @@ class AttributeDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->value_per_channel) {
                     return trans('admin::app.datagrid.true');
-                } else {
-                    return trans('admin::app.datagrid.false');
                 }
+                
+                return trans('admin::app.datagrid.false');
             },
         ]);
     }
@@ -177,7 +177,7 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addMassAction([
             'type'   => 'delete',
-            'action' => route('admin.catalog.attributes.massdelete'),
+            'action' => route('admin.catalog.attributes.mass_delete'),
             'label'  => trans('admin::app.datagrid.delete'),
             'index'  => 'admin_name',
             'method' => 'POST',

@@ -42,7 +42,20 @@ class CartController extends Controller
     {
         Cart::collectTotals();
 
-        return view($this->_config['view'])->with('cart', Cart::getCart());
+        $cart = Cart::getCart();
+
+        $cart?->load('items.product.cross_sells');
+       
+        $crossSellProductCount = core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products');
+ 
+        return view($this->_config['view'], [
+            'cart' => $cart,
+            'crossSellProducts' => $cart?->items
+                ->map(fn ($item) => $item->product->cross_sells)
+                ->collapse()
+                ->unique('id')
+                ->take($crossSellProductCount != "" ? $crossSellProductCount : 12),
+        ]);
     }
 
     /**
@@ -54,6 +67,12 @@ class CartController extends Controller
     public function add($id)
     {
         try {
+            if ($product = $this->productRepository->findOrFail($id)) {
+                if (! $product->visible_individually) {
+                    return redirect()->back();
+                }
+            }
+
             Cart::deactivateCurrentCartIfBuyNowIsActive();
 
             $result = Cart::addProduct($id, request()->all());

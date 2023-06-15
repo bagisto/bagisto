@@ -106,7 +106,6 @@ return [
             'update-meta-data'          => 'עדכון',
             'product-view-image'        => 'תמונת תצוגת מוצר',
             'advertisement-two'         => 'מודעה שתי תמונות',
-            'advertisement-one'         => 'תמונות פרסומת אחת',
             'footer-middle-content'     => 'תוכן תחתונה באמצע',
             'advertisement-four'        => 'פרסומת ארבע תמונות',
             'advertisement-three'       => 'פרסומת שלוש תמונות',
@@ -247,7 +246,7 @@ return [
             'login'             => 'התחברות',
             'become-user'       => 'הפוך למשתמש',
             'user-registration' => 'רישום משתמש',
-            'form-sginup-text'  => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לקבל אותך כחבר',
+            'form-signup-text'  => 'אם אתה חדש בחנות שלנו, אנחנו שמחים לקבל אותך כחבר',
         ],
         'forget-password'   => [
             'login'                 => 'התחברות',
@@ -286,6 +285,7 @@ return [
         'recently-viewed'   => 'מוצרים שנצפו לאחרונה',
         'be-first-review'   => 'היה הראשון לכתוב ביקורת',
         'tax-inclusive'     => 'כולל כל המסים',
+        'product-removed'  => 'המוצר אינו זמין יותר כפי שהוסר על ידי מנהל המערכת',
     ],
 
     'shop'          => [
@@ -332,7 +332,8 @@ return [
         'header' => [
             'done'      => 'בוצע',
             'languages' => 'שפות',
-            'greeting'  => 'ברוך הבא, :לקוח !',
+            'greeting'  => 'ברוך הבא, :customer !',
+            'greeting-for-guest' => 'ברוך הבא אורח'
         ]
     ],
 ];

@@ -64,13 +64,15 @@ return [
                 'status' => '状态',
                 'open' => '开门',
                 'close' => '关门',
-                'time-error' => '这个时间必须大于开始时间.'
+                'time-error' => '这个时间必须大于开始时间.',
             ]
         ],
 
         'sales' => [
             'bookings' => [
                 'title' => '预订信息',
+                'table-view' => "表視圖",
+                'calender-view' => "日曆視圖",
             ]
         ],
 
@@ -101,7 +103,7 @@ return [
             'book-an-appointment' => '预约',
             'date' => '日期',
             'slot' => '插槽',
-            'no-slots-available' => 'No slots available',
+            'no-slots-available' => '没有可用的插槽',
             'rent-an-item' => '租一个项目',
             'choose-rent-option' => '选择租金选项',
             'daily-basis' => '每日基础',

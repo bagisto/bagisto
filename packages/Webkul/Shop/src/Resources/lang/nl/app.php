@@ -90,6 +90,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'star',
         'name'                      => 'Naam',
+        'login-to-review'           => 'Log alstublieft eerst in om het product te beoordelen',
     ],
 
     'customer' => [
@@ -509,9 +510,9 @@ return [
             'continue-registration'    => 'Doorgaan met registratie',
             'proceed-to-checkout'      => 'Ga naar de kassa',
             'remove'                   => 'Verwijderen',
-            'remove-link'              => 'Verwijderen',
-            'remove-all-items'         => 'Remove all items',
-            'confirm-action'           => 'Confirm this action?',
+            'remove-link'              => 'link verwijderen',
+            'remove-all-items'         => 'verwijder alle items',
+            'confirm-action'           => 'Deze actie bevestigen?',
             'move-to-wishlist'         => 'Verplaats naar wens lijst',
             'move-to-wishlist-success' => 'Item is succesvol naar de verlanglijst verplaatst.',
             'move-to-wishlist-error'   => 'Kan item niet naar verlanglijstje verplaatsen, probeer het later opnieuw.',
@@ -548,6 +549,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal-betaling is geannuleerd.',
         ],
 
         'onepage' => [

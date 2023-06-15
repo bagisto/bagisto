@@ -134,6 +134,6 @@ class TaxCest
             return;
         }
 
-        $I->assertEquals($this->scenario['expectedTaxTotal'], $result);
+        $I->assertEqualsWithDelta($this->scenario['expectedTaxTotal'], $result, 0.001);
     }
 }

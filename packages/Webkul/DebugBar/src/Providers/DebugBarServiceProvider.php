@@ -3,15 +3,11 @@
 namespace Webkul\DebugBar\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Webkul\DebugBar\DataCollector\ModuleCollector;
-use Debugbar;
 
 class DebugBarServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-    }
-
     /**
      * Register services.
      *
@@ -19,6 +15,8 @@ class DebugBarServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Debugbar::addCollector(app(ModuleCollector::class));
+        if (class_exists(Debugbar::class)) {
+            Debugbar::addCollector(app(ModuleCollector::class));
+        }
     }
 }

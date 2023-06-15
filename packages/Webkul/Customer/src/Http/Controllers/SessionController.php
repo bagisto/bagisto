@@ -33,7 +33,7 @@ class SessionController extends Controller
     public function show()
     {
         return auth()->guard('customer')->check()
-            ? redirect()->route('customer.profile.index')
+            ? redirect()->route('shop.customer.profile.index')
             : view($this->_config['view']);
     }
 

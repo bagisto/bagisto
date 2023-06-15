@@ -100,20 +100,20 @@
                                     <input type="text" v-validate="'required'" v-model="group.name" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('add-group-form.name')">@{{ errors.first('add-group-form.name') }}</span>
                                 </div>
-            
+
                                 <div class="control-group" :class="[errors.has('add-group-form.position') ? 'has-error' : '']">
                                     <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
                                     <input type="text" v-validate="'required|numeric'" v-model="group.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('add-group-form.position')">@{{ errors.first('add-group-form.position') }}</span>
                                 </div>
-            
+
                                 <button type="submit" class="btn btn-lg btn-primary">
                                     {{ __('admin::app.catalog.families.add-group-title') }}
                                 </button>
-            
+
                             </div>
                         </div>
-            
+
                     </form>
                 </div>
             </modal>
@@ -131,20 +131,20 @@
                                     <input type="text" v-validate="'required'" v-model="editGroup.name" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.catalog.families.name') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('edit-group-form.name')">@{{ errors.first('edit-group-form.name') }}</span>
                                 </div>
-            
+
                                 <div class="control-group" :class="[errors.has('edit-group-form.position') ? 'has-error' : '']">
                                     <label for="position" class="required">{{ __('admin::app.catalog.families.position') }}</label>
                                     <input type="text" v-validate="'required|numeric'" v-model="editGroup.position" class="control" id="position" name="position" data-vv-as="&quot;{{ __('admin::app.catalog.families.position') }}&quot;"/>
                                     <span class="control-error" v-if="errors.has('edit-group-form.position')">@{{ errors.first('edit-group-form.position') }}</span>
                                 </div>
-            
+
                                 <button type="submit" class="btn btn-lg btn-primary">
                                     {{ __('admin::app.catalog.families.update-group-title') }}
                                 </button>
-            
+
                             </div>
                         </div>
-            
+
                     </form>
                 </div>
             </modal>
@@ -167,11 +167,11 @@
         <accordian :title="group.name" :active="true">
             <div slot="header">
                 <i class="icon expand-icon left"></i>
-                
+
                 <h1>@{{ group.name }}</h1>
-                
+
                 <i class="icon trash-icon" @click="removeGroup()" v-if="group.is_user_defined"></i>
-                
+
                 <span class="icon pencil-lg-icon" @click="editGroup()"></span>
             </div>
 
@@ -180,30 +180,32 @@
                 <input type="hidden":name="[groupInputName + '[position]']" :value="group.position"/>
 
                 <div class="table" v-if="group.custom_attributes.length" style="margin-bottom: 20px;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{{ __('admin::app.catalog.families.attribute-code') }}</th>
-                                <th>{{ __('admin::app.catalog.families.name') }}</th>
-                                <th>{{ __('admin::app.catalog.families.type') }}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                    <div class="table-responsive attributes-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ __('admin::app.catalog.families.attribute-code') }}</th>
+                                    <th>{{ __('admin::app.catalog.families.name') }}</th>
+                                    <th>{{ __('admin::app.catalog.families.type') }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr v-for='(attribute, index) in group.custom_attributes'>
-                                <td>
-                                    <input type="hidden" :name="[groupInputName + '[custom_attributes][][id]']" :value="attribute.id"/>
-                                    @{{ attribute.code }}
-                                </td>
-                                <td>@{{ attribute.admin_name }}</td>
-                                <td>@{{ attribute.type }}</td>
-                                <td class="actions">
-                                    <i class="icon trash-icon" @click="removeAttribute(attribute)" v-if="attribute.is_user_defined || attribute.removable"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody>
+                                <tr v-for='(attribute, index) in group.custom_attributes'>
+                                    <td>
+                                        <input type="hidden" :name="[groupInputName + '[custom_attributes][][id]']" :value="attribute.id"/>
+                                        @{{ attribute.code }}
+                                    </td>
+                                    <td>@{{ attribute.admin_name }}</td>
+                                    <td>@{{ attribute.type }}</td>
+                                    <td class="actions">
+                                        <i class="icon trash-icon" @click="removeAttribute(attribute)" v-if="attribute.is_user_defined || attribute.removable"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <button type="button" class="btn btn-md btn-primary dropdown-toggle">
@@ -283,13 +285,11 @@
 
             methods: {
                 addGroup: function (formScope) {
-                    var this_this = this;
-
-                    this.$validator.validateAll(formScope).then(function (result) {
+                    this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
 
-                            var filteredGroups = groups.filter(function(group) {
-                                return this_this.group.name.trim() === group.name.trim()
+                            var filteredGroups = groups.filter((group) => {
+                                return this.group.name.trim() === group.name.trim()
                             })
 
                             if (filteredGroups.length) {
@@ -304,13 +304,15 @@
                                     });
                                 }
                             } else {
-                                groups.push(this_this.group);
+                                groups.push(this.group);
 
-                                groups = this_this.sortGroups();
+                                groups = this.sortGroups();
 
                                 this.group = {'name': '', 'position': '', 'is_user_defined': 1, 'custom_attributes': []};
 
-                                self.$set(self.$root.modalIds, 'addGroupForm', false);
+                                this.$set(this.$root.modalIds, 'addGroupForm', false);
+                                
+                                this.$validator.pause();
                             }
                         }
                     });

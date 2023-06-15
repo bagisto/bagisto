@@ -13,7 +13,7 @@
                         {{ __('velocity::app.customer.signup-form.user-registration')}}
                     </h2>
 
-                    <a href="{{ route('customer.session.index') }}" class="btn-new-customer">
+                    <a href="{{ route('shop.customer.session.index') }}" class="btn-new-customer">
                         <button type="button" class="theme-btn light">
                             {{ __('velocity::app.customer.signup-form.login')}}
                         </button>
@@ -26,14 +26,14 @@
                     </h3>
 
                     <p class="fs16">
-                        {{ __('velocity::app.customer.signup-form.form-sginup-text')}}
+                        {{ __('velocity::app.customer.signup-form.form-signup-text')}}
                     </p>
 
                     {!! view_render_event('bagisto.shop.customers.signup.before') !!}
 
                     <form
                         method="post"
-                        action="{{ route('customer.register.create') }}"
+                        action="{{ route('shop.customer.register.create') }}"
                         @submit.prevent="onSubmit">
 
                         {{ csrf_field() }}

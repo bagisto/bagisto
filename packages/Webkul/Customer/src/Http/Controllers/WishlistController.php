@@ -44,12 +44,39 @@ class WishlistController extends Controller
             abort(404);
         }
 
+        $deletedItemsCount = $this->removeInactiveItems();
+
+        if ($deletedItemsCount) {
+            session()->flash('info', trans('customer::app.product-removed'));
+        }
+
         return view($this->_config['view'], [
             'items'              => $this->wishlistRepository->getCustomerWishlist(),
             'isSharingEnabled'   => $this->isSharingEnabled(),
             'isWishlistShared'   => $customer->isWishlistShared(),
             'wishlistSharedLink' => $customer->getWishlistSharedLink()
         ]);
+    }
+
+    /**
+     * Removing inactive wishlist item.
+     *
+     * @return void|int
+     */
+    public function removeInactiveItems()
+    {
+        $customer = auth()->guard('customer')->user();
+
+        $customer->load(['wishlist_items.product']);
+
+        $inactiveItemIds = $customer->wishlist_items
+            ->filter(fn ($item) => ! $item->product->status)
+            ->pluck('product_id')
+            ->toArray();
+
+        return $customer->wishlist_items()
+            ->whereIn('product_id', $inactiveItemIds)
+            ->delete();
     }
 
     /**
@@ -68,8 +95,11 @@ class WishlistController extends Controller
             session()->flash('error', trans('customer::app.product-removed'));
 
             return redirect()->back();
-        } elseif (! $product->status) {
-            return redirect()->back();
+        } elseif (
+            (! $product->status) 
+            || (! $product->visible_individually)
+        ) {
+            abort(404);
         }
 
         $data = [
@@ -199,6 +229,7 @@ class WishlistController extends Controller
     /**
      * Function to move item from wishlist to cart.
      *
+     * @param  int  $productId
      * @param  int  $itemId
      * @return \Illuminate\Http\Response
      */

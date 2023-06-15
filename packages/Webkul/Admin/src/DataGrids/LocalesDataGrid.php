@@ -77,9 +77,9 @@ class LocalesDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->direction == 'ltr') {
                     return trans('admin::app.datagrid.ltr');
-                } else {
-                    return trans('admin::app.datagrid.rtl');
                 }
+                
+                return trans('admin::app.datagrid.rtl');
             },
         ]);
     }
@@ -102,7 +102,7 @@ class LocalesDataGrid extends DataGrid
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'POST',
             'route'        => 'admin.locales.delete',
-            'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => 'Exchange Rate']),
+            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Locale']),
             'icon'         => 'icon trash-icon',
         ]);
     }

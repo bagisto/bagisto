@@ -91,6 +91,7 @@ return [
         'percentage'                => ':percentage %',
         'id-star'                   => 'estrela',
         'name'                      => 'Nome',
+        'login-to-review'           => 'Por favor, faça login primeiro para revisar o produto',
     ],
 
     'customer' => [
@@ -308,6 +309,7 @@ return [
                     'shipping-handling'   => 'Entrega & Manuseio',
                     'tax'                 => 'Imposto',
                     'discount'            => 'Discount',
+                    'coupon'              => 'Coupon',
                     'tax-percent'         => 'Percentagem de imposto',
                     'tax-amount'          => 'Valor de Imposto',
                     'discount-amount'     => 'Valor de Desconto',
@@ -495,7 +497,7 @@ return [
             'continue-registration'    => 'Continuar o registro',
             'proceed-to-checkout'      => 'Finalizar Compra',
             'remove'                   => 'Remover',
-            'remove-link'              => 'Remover',
+            'remove-link'              => 'Remover enlace',
             'remove-all-items'         => 'Remover todos os itens',
             'confirm-action'           => 'Confirme esta ação?',
             'move-to-wishlist'         => 'Mover para Lista de Desejos',
@@ -534,6 +536,7 @@ return [
             'specify-shipping-method'   => 'Please specify shipping method.',
             'specify-payment-method'    => 'Please specify payment method.',
             'rule-applied'              => 'Cart rule applied',
+            'paypal-payment-canceled'   => 'Paypal payment has been canceled.',
         ],
 
         'onepage' => [
@@ -563,13 +566,6 @@ return [
             'shipping-method'   => 'Selecione o Método de Entrega',
             'payment-methods'   => 'Selecione o Método de Pagamento',
             'payment-method'    => 'Método de Pagamento',
-            'payment-method-name' => [
-                'PayPal Smart Button' => 'Botão Inteligente do PayPal',
-                'PayPal'              => 'PayPal',
-                'Cash On Delivery'    => 'Dinheiro na entrega',          
-                'Money Transfer'      => 'Transferência de dinheiro',        
-                'Paypal Standard'     => 'Padrão do PayPal'
-            ],
             'summary'           => 'Resumo do Pedido',
             'price'             => 'Preço',
             'quantity'          => 'Quantidade',

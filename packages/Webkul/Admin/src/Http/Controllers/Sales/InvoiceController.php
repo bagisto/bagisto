@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
-use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Traits\Mails;
-use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
+use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
+use Webkul\Admin\Traits\Mails;
+use Webkul\Core\Traits\PDFHandler;
 
 class InvoiceController extends Controller
 {
@@ -18,7 +18,7 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     protected $_config;
 
@@ -115,7 +115,7 @@ class InvoiceController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Invoice']));
+        session()->flash('success', trans('admin::app.sales.invoices.create-success'));
 
         return redirect()->route($this->_config['redirect'], $orderId);
     }

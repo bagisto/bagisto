@@ -45,7 +45,7 @@
                     @foreach ($comparableAttributes as $attribute)
                         <tr>
                             <td class="header">
-                                <span class="fs16 font-weight-bold">{{ isset($attribute['name']) ? $attribute['name'] : $attribute['admin_name'] }}</span>
+                                <span class="fs16 font-weight-bold">{{ empty($attribute['name']) ? $attribute['admin_name'] : $attribute['name'] }}</span>
                             </td>
 
                             <td :key="`title-${index}`" v-for="(product, index) in products">
@@ -74,13 +74,11 @@
                                     @case('addToCartHtml')
                                         <div class="action">
                                             <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
-
-                                            <i
-                                                class="material-icons cross fs16"
-                                                @click="removeProductCompare(product.id)">
-
-                                                close
-                                            </i>
+                                            <div class="comparison-remove" style="">
+                                                <span class="rango-delete fs24" @click="removeProductCompare(product.id)"></span>
+                                        
+                                                <span class="align-vertical-top" @click="removeProductCompare(product.id)">{{ __('shop::app.checkout.cart.remove') }}</span>
+                                            </div>
                                         </div>
                                         @break
 
@@ -161,22 +159,83 @@
 
             data: function () {
                 return {
-                    'products': [],
-                    'storageUrl': '{{ Storage::url('/') }}',
-                    'isCustomer': '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
-                    'isProductListLoaded': false,
-                    'attributeOptions': @json($attributeOptionTranslations),
+                    count: 0,
+                    products: [],
+                    storageUrl: '{{ Storage::url('/') }}',
+                    isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                    isProductListLoaded: false,
+                    attributeOptions: @json($attributeOptionTranslations),
                 };
             },
 
             mounted: function () {
-                this.getComparedProducts();
+                this.removeInactiveItems();
 
                 this.activateSlider();
             },
 
             methods: {
-                'getComparedProducts': function () {
+                removeInactiveItems: function () {
+                    let items = '';
+                    let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
+
+                    let data = {
+                        params: {'data': true}
+                    }
+
+                    if (! this.isCustomer) {
+                        items = this.getStorageValue('compared_product');
+                        items = items ? items.join('&') : '';
+
+                        data = {
+                            params: {
+                                items
+                            }
+                        };
+                    }
+
+                    if (this.isCustomer || (! this.isCustomer && items != "")) {
+                        this.$http.get(url, data)
+                        .then(response => {
+                            this.isProductListLoaded = true;
+
+                            this.products = response.data.products;
+
+                            this.products.forEach(product => {
+                                if (product.status != 1) {
+                                    let existingItems = this.getStorageValue('compared_product');
+                                    let updatedItems = existingItems.filter(item => item != product.id);
+                                    
+                                    this.$set(this, 'products', this.products.filter(product => product.id != product.id));
+
+                                    this.setStorageValue('compared_product', updatedItems);
+                                    
+                                    this.$root.headerItemsCount++;
+
+                                    this.count++;
+                                } 
+                            });
+
+                            if (this.count > 0) {
+                                window.showAlert(
+                                    `alert-info`,
+                                    this.__('shop.general.alert.info'),
+                                    `${this.__('products.product-removed')}`
+                                );
+                            }
+
+                            this.getComparedProducts();
+                        })
+                        .catch(error => {
+                            this.isProductListLoaded = true;
+                            console.log(this.__('error.something_went_wrong'));
+                        });
+                    } else {
+                        this.isProductListLoaded = true;
+                    }
+                },
+                
+                getComparedProducts: function () {
                     let items = '';
                     let url = `${this.$root.baseUrl}/${this.isCustomer ? 'comparison' : 'detailed-products'}`;
 
@@ -211,7 +270,7 @@
                     }
                 },
 
-                'removeProductCompare': function (productId) {
+                removeProductCompare: function (productId) {
                     if (productId == 'all' && ! confirm('{{ __('shop::app.customer.compare.confirm-remove-all') }}')) {
                         return;
                     }
@@ -261,7 +320,7 @@
                     this.$root.headerItemsCount++;
                 },
 
-                'getAttributeOptions': function (productDetails, attributeValues, type) {
+                getAttributeOptions: function (productDetails, attributeValues, type) {
                     var attributeOptions = '__';
 
                     if (productDetails && attributeValues) {

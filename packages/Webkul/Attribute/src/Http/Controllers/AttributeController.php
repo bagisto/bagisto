@@ -3,8 +3,10 @@
 namespace Webkul\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\DataGrids\AttributeDataGrid;
+use Webkul\Core\Contracts\Validations\Code;
 
 class AttributeController extends Controller
 {
@@ -19,10 +21,13 @@ class AttributeController extends Controller
      * Create a new controller instance.
      *
      * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository  
      * @return void
      */
-    public function __construct(protected AttributeRepository $attributeRepository)
-    {
+    public function __construct(
+        protected AttributeRepository $attributeRepository,
+        protected ProductRepository $productRepository
+    ) {
         $this->_config = request('_config');
     }
 
@@ -58,7 +63,7 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
@@ -71,7 +76,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Attribute']));
+        session()->flash('success', trans('admin::app.catalog.attributes.create-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -111,7 +116,7 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'       => ['required', 'unique:attributes,code,' . $id, new \Webkul\Core\Contracts\Validations\Code],
+            'code'       => ['required', 'unique:attributes,code,' . $id, new Code],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
@@ -122,7 +127,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Attribute']));
+        session()->flash('success', trans('admin::app.catalog.attributes.update-success'));
 
         return redirect()->route($this->_config['redirect']);
     }
@@ -139,7 +144,7 @@ class AttributeController extends Controller
 
         if (! $attribute->is_user_defined) {
             return response()->json([
-                'message' => trans('admin::app.response.user-define-error', ['name' => 'Attribute']),
+                'message' => trans('admin::app.catalog.attributes.user-define-error'),
             ], 400);
         }
 
@@ -150,10 +155,10 @@ class AttributeController extends Controller
 
             Event::dispatch('catalog.attribute.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Attribute'])]);
+            return response()->json(['message' => trans('admin::app.catalog.attributes.delete-success')]);
         } catch (\Exception $e) {}
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Attribute'])], 500);
+        return response()->json(['message' => trans('admin::app.catalog.attributes.delete-failed')], 500);
     }
 
     /**
@@ -170,7 +175,7 @@ class AttributeController extends Controller
                 $attribute = $this->attributeRepository->find($index);
 
                 if (! $attribute->is_user_defined) {
-                    session()->flash('error', trans('admin::app.response.user-define-error', ['name' => 'Attribute']));
+                    session()->flash('error', trans('admin::app.catalog.attributes.user-define-error'));
 
                     return redirect()->back();
                 }
@@ -190,5 +195,22 @@ class AttributeController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * Get super attributes of product.
+     *
+     * @param  int  $id
+     * @return  \Illuminate\Http\JsonResponse
+     */
+    public function productSuperAttributes($id) 
+    {
+        $product = $this->productRepository->findOrFail($id);
+
+        $superAttributes = $this->productRepository->getSuperAttributes($product);
+
+        return response()->json([
+            'data'  => $superAttributes
+        ]);
     }
 }

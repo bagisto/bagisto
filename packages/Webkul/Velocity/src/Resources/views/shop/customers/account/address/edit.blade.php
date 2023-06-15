@@ -13,7 +13,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.address.edit.before', ['address' => $address]) !!}
 
-    <form method="post" action="{{ route('customer.address.update', $address->id) }}" @submit.prevent="onSubmit">
+    <form method="post" action="{{ route('shop.customer.addresses.update', $address->id) }}" @submit.prevent="onSubmit">
         <div class="account-table-content mb-2">
             @method('PUT')
 
@@ -114,7 +114,7 @@
                     id="address_0"
                     type="text"
                     name="address1[]"
-                    value="{{ isset($addresses[0]) ? $addresses[0] : '' }}"
+                    value="{{ $addresses[0] ?? '' }}"
                     v-validate="'required'"
                     data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.street-address') }}&quot;">
 
@@ -125,10 +125,10 @@
             </div>
 
             @if (
-                core()->getConfigData('customer.settings.address.street_lines')
-                && core()->getConfigData('customer.settings.address.street_lines') > 1
+                core()->getConfigData('customer.address.information.street_lines')
+                && core()->getConfigData('customer.address.information.street_lines') > 1
             )
-                @for ($i = 1; $i < core()->getConfigData('customer.settings.address.street_lines'); $i++)
+                @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                     <div class="control-group" style="margin-top: -25px;">
                         <input
                             class="control"

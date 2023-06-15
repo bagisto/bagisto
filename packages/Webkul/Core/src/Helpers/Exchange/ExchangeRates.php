@@ -34,9 +34,9 @@ class ExchangeRates extends ExchangeRate
         protected ExchangeRateRepository $exchangeRateRepository
     )
     {
-        $this->apiEndPoint = 'https://api.exchangeratesapi.io/latest';
+        $this->apiEndPoint = config('services.exchange_api.exchange_rates.url');
 
-        $this->apiKey = config('services.exchange-api.exchange_rates.key');
+        $this->apiKey = config('services.exchange_api.exchange_rates.key');
     }
 
     /**
@@ -53,7 +53,20 @@ class ExchangeRates extends ExchangeRate
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint . '?access_key='. $this->apiKey . '&base=' . config('app.currency') . '&symbols=' . $currency->code);
+            $result = $client->request(
+                'GET',
+                $this->apiEndPoint, [
+                    'headers' => [
+                        'Content-Type' => "text/plain",
+                        'apikey'       => $this->apiKey,
+                    ], 
+                    'query' => [
+                        'to'     => $currency->code, 
+                        'from'   => config('app.currency'),
+                        'amount' => 1
+                    ]
+                ]
+            );
 
             $result = json_decode($result->getBody()->getContents(), true);
 
@@ -61,21 +74,16 @@ class ExchangeRates extends ExchangeRate
                 isset($result['success'])
                 && ! $result['success']
             ) {
-                throw new \Exception(
-                    isset($result['error']['info'])
-                        ? $result['error']['info']
-                        : $result['error']['type'],
-                    1
-                );
+                throw new \Exception($result['error']['info'] ?? $result['error']['type'], 1);
             }
 
             if ($exchangeRate = $currency->exchange_rate) {
                 $this->exchangeRateRepository->update([
-                    'rate' => $result['rates'][$currency->code],
+                    'rate' => $result['result'],
                 ], $exchangeRate->id);
             } else {
                 $this->exchangeRateRepository->create([
-                    'rate'            => $result['rates'][$currency->code],
+                    'rate'            => $result['result'],
                     'target_currency' => $currency->id,
                 ]);
             }
