@@ -34,6 +34,7 @@ class DashboardServiceCest
             $productRepository
         );
     }
+
     /**
      * Test Start Date.
      *

@@ -16,20 +16,27 @@ use Webkul\Sales\Repositories\OrderRepository;
 
 class DashboardService
 {
+    /**
+     * The starting date for a given period
+     */
     protected Carbon $startDate;
-    protected Carbon $endDate;
-
-    protected Carbon $lastStartDate;
-    protected Carbon $lastEndDate;
 
     /**
-     * @param OrderRepository $orderRepository
-     * @param OrderItemRepository $orderItemRepository
-     * @param InvoiceRepository $invoiceRepository
-     * @param CustomerRepository $customerRepository
-     * @param ProductInventoryRepository $productInventoryRepository
-     * @param ProductRepository $productRepository
+     * The ending date for a given period
      */
+    protected Carbon $endDate;
+
+    /**
+     * The starting date for the previous period
+     */
+    protected Carbon $lastStartDate;
+
+    /**
+     * The ending date for the previous period
+     */
+    protected Carbon $lastEndDate;
+
+    // Repositories needed for this service
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
@@ -43,9 +50,7 @@ class DashboardService
         $this->setLastEndDate();
     }
 
-    /**
-     * @return array
-     */
+    // Gets statistics for various metrics
     public function getStatistics(): array
     {
         return [
@@ -62,26 +67,19 @@ class DashboardService
         ];
     }
 
-    /**
-     * @return Carbon
-     */
+    // Get the start date
     public function getStartDate(): Carbon
     {
         return $this->startDate;
     }
 
-    /**
-     * @return Carbon
-     */
+    // Get the start date
     public function getEndDate(): Carbon
     {
         return $this->endDate;
     }
 
-    /**
-     * @param Carbon|null $startDate
-     * @return $this
-     */
+    // Set the start date or default to 30 days ago if not provided
     public function setStartDate(?Carbon $startDate = null): DashboardService
     {
         $this->startDate = $startDate ? $startDate->startOfDay() : now()->subDays(30)->startOfDay();
@@ -89,10 +87,7 @@ class DashboardService
         return $this;
     }
 
-    /**
-     * @param Carbon|null $endDate
-     * @return $this
-     */
+    // Sets the end date to the provided date's end of day, or to the current date if not provided or if the provided date is in the future
     public function setEndDate(?Carbon $endDate = null): DashboardService
     {
         $this->endDate = ($endDate && $endDate->endOfDay() <= now()) ? $endDate->endOfDay() : now();
@@ -100,9 +95,7 @@ class DashboardService
         return $this;
     }
 
-    /**
-     * @return void
-     */
+    // Sets the start date for the last period
     private function setLastStartDate(): void
     {
         if (! isset($this->startDate)) {
@@ -116,19 +109,13 @@ class DashboardService
         $this->lastStartDate = $this->startDate->clone()->subDays($this->startDate->diffInDays($this->endDate));
     }
 
-    /**
-     * @return void
-     */
+    // Sets the end date for the last period
     private function setLastEndDate(): void
     {
         $this->lastEndDate = $this->startDate->clone();
     }
 
-    /**
-     * @param $previous
-     * @param $current
-     * @return float|int
-     */
+    // Calculate the percentage change between previous and current values.
     private function getPercentageChange($previous, $current): float|int
     {
         if (! $previous) {
@@ -138,9 +125,7 @@ class DashboardService
         return ($current - $previous) / $previous * 100;
     }
 
-    /**
-     * @return array
-     */
+    // Retrieves total customers and their progress
     private function getTotalCustomers(): array
     {
         return [
@@ -150,9 +135,7 @@ class DashboardService
         ];
     }
 
-    /**
-     * @return array
-     */
+    // Retrieves total orders and their progress
     private function getTotalOrders(): array
     {
         return [
@@ -162,9 +145,7 @@ class DashboardService
         ];
     }
 
-    /**
-     * @return array
-     */
+    // Retrieves total sales and their progress
     private function getTotalSales(): array
     {
         return [
@@ -174,9 +155,7 @@ class DashboardService
         ];
     }
 
-    /**
-     * @return array
-     */
+    // Retrieves average sales and their progress
     private function getAvgSales(): array
     {
         return [
@@ -186,17 +165,13 @@ class DashboardService
         ];
     }
 
-    /**
-     * @return float
-     */
+    // Gets the total amount of pending invoices
     private function getTotalAmountOfPendingInvoices(): float
     {
         return $this->invoiceRepository->getTotalAmountOfPendingInvoices();
     }
 
-    /**
-     * @return SupportCollection
-     */
+    // Gets the top-selling categories
     private function getTopSellingCategories(): SupportCollection
     {
         $orderItems = $this->orderItemRepository->getTopSellingOrderItemsByDate($this->startDate, $this->endDate);
@@ -205,24 +180,20 @@ class DashboardService
         return $categories->map(fn (array $category) => (object) $category);
     }
 
-    /**
-     * @param Collection $orderItems
-     * @return SupportCollection
-     */
+    // Calculates category statistics from order items
     private function getCategoryStats(Collection $orderItems): SupportCollection
     {
-        return $orderItems->map(function ($orderItem) {
-            $product = $this->productRepository->find($orderItem->product_id);
+        $productIds = $orderItems->pluck('product_id');
+        $products = $this->productRepository->getModel()->whereIn('id', $productIds)->with('categories')->get();
+
+        return $orderItems->map(function ($orderItem) use ($products){
+            $product = $products->firstWhere('id', $orderItem->product_id);
 
             return $this->getCategoryDetails($product, $orderItem);
         });
     }
 
-    /**
-     * @param Product $product
-     * @param OrderItem $orderItem
-     * @return SupportCollection
-     */
+    // Gets category details
     private function getCategoryDetails(Product $product, OrderItem $orderItem): SupportCollection
     {
         return $product->categories->map(function ($category) use ($orderItem) {
@@ -235,33 +206,25 @@ class DashboardService
         });
     }
 
-    /**
-     * @return Collection
-     */
+    // Gets top-selling products
     private function getTopSellingProducts(): Collection
     {
         return $this->orderItemRepository->getTopSellingProductsByDate($this->startDate, $this->endDate);
     }
 
-    /**
-     * @return Collection
-     */
+    // Gets customer with most sales
     private function getCustomerWithMostSales(): Collection
     {
         return $this->orderRepository->getCustomerWithMostSalesByDate($this->startDate, $this->endDate);
     }
 
-    /**
-     * @return Collection
-     */
+    // Gets stock threshold
     private function getStockThreshold(): Collection
     {
         return $this->productInventoryRepository->getStockThreshold();
     }
 
-    /**
-     * @return array
-     */
+    // Generates sale graph data
     private function generateSaleGraphData(): array
     {
         $saleGraphData = [];
