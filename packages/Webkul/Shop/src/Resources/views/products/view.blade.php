@@ -218,10 +218,6 @@
                     return {
                         qty: 1,
 
-                        reviews: {},
-
-                        page: 1,
-
                         customer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
@@ -268,14 +264,14 @@
 
                         let updatedItems = [productId];
 
-                        let existingItems = this.getStorageValue('compared_product');
+                        let existingItems = this.getStorageValue('compare_items');
 
                         if (existingItems) {
                             if (! existingItems.includes(productId)) {
                                 if (existingItems.indexOf(this.productId) == -1) {
                                     updatedItems = existingItems.concat(updatedItems);
 
-                                    this.setStorageValue('compared_product', updatedItems);
+                                    this.setStorageValue('compare_items', updatedItems);
 
                                     alert('Added product in compare for guest');
                                 }
@@ -283,14 +279,14 @@
                                 alert('Product is already added in compare.');
                             }
                         } else {
-                            this.setStorageValue('compared_product', updatedItems);
+                            this.setStorageValue('compare_items', updatedItems);
+
+                            alert('Added product in compare for guest');
                         }
                     },
 
                     setStorageValue(key, value) {
                         window.localStorage.setItem(key, JSON.stringify(value));
-
-                        return true;
                     },
 
                     getStorageValue(key) {

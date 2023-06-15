@@ -134,13 +134,13 @@
                         }
                     } else {
                         this.setStorageValue('compare_items', updatedItems);
+
+                        alert('Added product in compare for guest');
                     }
                 },
 
                 setStorageValue(key, value) {
                     window.localStorage.setItem(key, JSON.stringify(value));
-
-                    return true;
                 },
 
                 getStorageValue(key) {
