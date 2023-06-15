@@ -241,29 +241,6 @@
         content: "\e934";
     }
 
-    .two-range-slider {
-        -webkit-appearance: none;
-        appearance: none;
-        position: absolute;
-        pointer-events: none;
-        z-index: 3;
-        height: 3px;
-        top: 0;
-        width: 100%;
-        opacity: 0;
-        margin: 0;
-    }
-
-    .two-range-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        pointer-events: all;
-        border-radius: 50%;
-        cursor: pointer;
-        width: 18px;
-        height: 18px;
-    }
-
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
         cursor: pointer;
@@ -343,7 +320,7 @@
         0% {
             background-position: -1250px 0;
         }
-      
+
         100% {
             background-position: 1250px 0;
         }

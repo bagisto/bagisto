@@ -35,72 +35,80 @@
     </script>
 
     <script type="text/x-template" id="v-filter-item-template">
-        <x-shop::accordion>
-            <x-slot:header>
-                <div class="flex pb-[10px] justify-between items-center">
-                    <p
-                        class="text-[18px] font-semibold"
-                        v-text="filter.name"
-                    >
-                    </p>
-                </div>
-            </x-slot:header>
-
-            <x-slot:content>
-                <ul v-if="filter.type === 'price'">
-                    <li>
-                        <v-price-filter
-                            :key="refreshKey"
-                            :default-price-range="appliedValues"
-                            @set-price-range="applyValue($event)"
+        <template v-if="filter.type === 'price' || filter.options.length">
+            <x-shop::accordion>
+                <x-slot:header>
+                    <div class="flex pb-[10px] justify-between items-center">
+                        <p
+                            class="text-[18px] font-semibold"
+                            v-text="filter.name"
                         >
-                        </v-price-filter>
-                    </li>
-                </ul>
+                        </p>
+                    </div>
+                </x-slot:header>
 
-                <ul class="pb-3 text-sm text-gray-700" v-else>
-                    <li
-                        :key="option.id"
-                        v-for="(option, optionIndex) in filter.options"
-                    >
-                        <div class="select-none items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100">
-                            <input
-                                type="checkbox"
-                                :id="option.id"
-                                class="hidden peer"
-                                :value="option.id"
-                                v-model="appliedValues"
-                                @change="applyValue"
-                            />
-
-                            <label
-                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
-                                :for="option.id"
-                            ></label>
-
-                            <label
-                                :for="option.id"
-                                class="w-full text-[16px] text-gray-900 p-2 pl-0 cursor-pointer"
-                                v-text="option.name"
+                <x-slot:content>
+                    <ul v-if="filter.type === 'price'">
+                        <li>
+                            <v-price-filter
+                                :key="refreshKey"
+                                :default-price-range="appliedValues"
+                                @set-price-range="applyValue($event)"
                             >
-                            </label>
-                        </div>
-                    </li>
-                </ul>
-            </x-slot:content>
-        </x-shop::accordion>
+                            </v-price-filter>
+                        </li>
+                    </ul>
+
+                    <ul class="pb-3 text-sm text-gray-700" v-else>
+                        <li
+                            :key="option.id"
+                            v-for="(option, optionIndex) in filter.options"
+                        >
+                            <div class="select-none items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100">
+                                <input
+                                    type="checkbox"
+                                    :id="option.id"
+                                    class="hidden peer"
+                                    :value="option.id"
+                                    v-model="appliedValues"
+                                    @change="applyValue"
+                                />
+
+                                <label
+                                    class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
+                                    :for="option.id"
+                                ></label>
+
+                                <label
+                                    :for="option.id"
+                                    class="w-full text-[16px] text-gray-900 p-2 pl-0 cursor-pointer"
+                                    v-text="option.name"
+                                >
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </x-slot:content>
+            </x-shop::accordion>
+        </template>
     </script>
 
     <script type="text/x-template" id="v-price-filter-template">
         <div>
-            <x-shop::range-slider
-                ::key="refreshKey"
-                ::default-allowed-max-range="allowedMaxPrice"
-                ::default-min-range="minRange"
-                ::default-max-range="maxRange"
-                @change-range="setPriceRange($event)"
-            >
-            </x-shop::range-slider>
+            <template v-if="isLoading">
+                <x-shop::shimmer.range-slider></x-shop::shimmer.range-slider>
+            </template>
+
+            <template v-else>
+                <x-shop::range-slider
+                    ::key="refreshKey"
+                    ::default-allowed-max-range="allowedMaxPrice"
+                    ::default-min-range="minRange"
+                    ::default-max-range="maxRange"
+                    @change-range="setPriceRange($event)"
+                >
+                </x-shop::range-slider>
+            </template>
         </div>
     </script>
 
@@ -249,9 +257,11 @@
                 return {
                     refreshKey: 0,
 
+                    isLoading: true,
+
                     allowedMaxPrice: 100,
 
-                    priceRange: this.defaultPriceRange ?? '0,100',
+                    priceRange: this.defaultPriceRange ?? [0, 100].join(','),
                 };
             },
 
@@ -277,10 +287,12 @@
                 getMaxPrice() {
                     this.$axios.get('{{ route("shop.categories.max_price", $category->id) }}')
                         .then((response) => {
+                            this.isLoading = false;
+
                             this.allowedMaxPrice = response.data.data.max_price;
 
                             if (! this.defaultPriceRange) {
-                                this.priceRange = `0,${this.allowedMaxPrice}`;
+                                this.priceRange = [0, this.allowedMaxPrice].join(',');
                             }
 
                             ++this.refreshKey;
