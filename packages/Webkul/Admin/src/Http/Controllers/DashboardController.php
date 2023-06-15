@@ -15,6 +15,8 @@ class DashboardController extends Controller
     protected array $_config;
 
     /**
+     * Create a controller instance.
+     *
      * @param DashboardService $dashboardService
      */
     public function __construct(
@@ -25,7 +27,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * @return View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+     * Dashboard page.
      */
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
