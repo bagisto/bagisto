@@ -261,28 +261,30 @@
                                 .then(response => {
                                     alert(response.data.data.message);
                                 })
-                                .catch(error => {});            
-                        } else {
-                            let updatedItems = [productId];
+                                .catch(error => {});
 
-                            let existingItems = this.getStorageValue('compared_product');
+                            return;
+                        }
 
-                            if (existingItems) {
-                                if (! existingItems.includes(productId)) {
-                                    if (existingItems.indexOf(this.productId) == -1) {
-                                        updatedItems = existingItems.concat(updatedItems);
+                        let updatedItems = [productId];
 
-                                        this.setStorageValue('compared_product', updatedItems);
+                        let existingItems = this.getStorageValue('compared_product');
 
-                                        alert('Added product in compare for guest');
-                                    }
-                                } else {
-                                    alert('Product is already added in compare.');
+                        if (existingItems) {
+                            if (! existingItems.includes(productId)) {
+                                if (existingItems.indexOf(this.productId) == -1) {
+                                    updatedItems = existingItems.concat(updatedItems);
+
+                                    this.setStorageValue('compared_product', updatedItems);
+
+                                    alert('Added product in compare for guest');
                                 }
                             } else {
-                                this.setStorageValue('compared_product', updatedItems);
+                                alert('Product is already added in compare.');
                             }
-                        }                        
+                        } else {
+                            this.setStorageValue('compared_product', updatedItems);
+                        }
                     },
 
                     setStorageValue(key, value) {
