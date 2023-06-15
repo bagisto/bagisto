@@ -744,7 +744,7 @@
                                     @if (! $refund->items->count())
                                         <tr>
                                             <td>@lang('shop::app.customers.account.orders.view.refunds.no-result-found')</td>
-                                        <tr>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
