@@ -465,22 +465,31 @@ class OrderRepository extends Repository
      */
     public function getCustomerWithMostSalesByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
+        $dbPrefix = DB::getTablePrefix();
+
         $query = $this->getModel()
-            ->whereNotIn('orders.status', ['closed', 'canceled'])
+            ->whereNotIn("{$dbPrefix}orders.status", ['closed', 'canceled'])
             ->select(
                 'customer_id',
                 'customer_email',
                 'customer_first_name',
                 'customer_last_name',
-                DB::raw("(SUM(base_grand_total) - SUM(IFNULL((SELECT SUM(base_grand_total) FROM refunds WHERE refunds.order_id = orders.id), 0))) as total_base_grand_total")
+                DB::raw("(
+                    SUM(base_grand_total) -
+                    SUM(
+                        IFNULL(
+                            (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
+                            0)
+                        )
+                    ) as total_base_grand_total")
             );
 
         if ($from && $to) {
-            $query->whereBetween('orders.created_at', [$from, $to]);
+            $query->whereBetween("{$dbPrefix}orders.created_at", [$from, $to]);
         } elseif ($from) {
-            $query->where('orders.created_at', '>=', $from);
+            $query->where("{$dbPrefix}orders.created_at", '>=', $from);
         } elseif ($to) {
-            $query->where('orders.created_at', '<=', $to);
+            $query->where("{$dbPrefix}orders.created_at", '<=', $to);
         }
 
         return $query->groupBy('customer_email')->orderBy('total_base_grand_total', 'DESC')->limit(5)->get();
