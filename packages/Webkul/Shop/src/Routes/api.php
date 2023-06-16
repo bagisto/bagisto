@@ -12,29 +12,29 @@ use Webkul\Shop\Http\Controllers\API\AddressController;
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('products', 'index')
-            ->name('shop.products.index');
+            ->name('shop.api.products.index');
 
         Route::get('products/{id}/related', 'relatedProducts')
-            ->name('shop.products.related.index');
+            ->name('shop.api.products.related.index');
 
         Route::get('products/{id}/up-sell', 'upSellProducts')
-            ->name('shop.products.up-sell.index');
+            ->name('shop.api.products.up-sell.index');
     });
 
     Route::controller(ReviewController::class)->group(function () {
         Route::get('product/{id}/reviews', 'index')
-            ->name('shop.products.reviews.index');
+            ->name('shop.api.products.reviews.index');
 
         Route::post('product/{id}/review', 'store')
-            ->name('shop.products.reviews.store');
+            ->name('shop.api.products.reviews.store');
     });
 
     Route::controller(CategoryController::class)->group(function () {
         Route::get('categories/{id}/attributes', 'getAttributes')
-            ->name('shop.categories.attributes');
+            ->name('shop.api.categories.attributes');
 
         Route::get('categories/{id}/max-price', 'getProductMaxPrice')
-            ->name('shop.categories.max_price');
+            ->name('shop.api.categories.max_price');
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
@@ -68,11 +68,11 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
              */
             Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 
-            Route::post('', 'store')->name('shop.customers.account.wishlist.store');
+            Route::post('', 'store')->name('shop.api.customers.account.wishlist.store');
 
-            Route::post('{id}/move-to-cart', 'moveToCart')->name('shop.customers.account.wishlist.move_to_cart');
+            Route::post('{id}/move-to-cart', 'moveToCart')->name('shop.api.customers.account.wishlist.move_to_cart');
 
-            Route::delete('{id}', 'destroy')->name('shop.customers.account.wishlist.destroy');
+            Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
 
         Route::get('compare-items/{product_id}', [CompareController::class, 'store'])

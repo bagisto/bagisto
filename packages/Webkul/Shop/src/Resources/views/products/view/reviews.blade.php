@@ -234,7 +234,7 @@
                     reviews: [],
 
                     links: {
-                        next: '{{ route("shop.products.reviews.index", $product->id) }}',
+                        next: '{{ route("shop.api.products.reviews.index", $product->id) }}',
                     },
 
                     meta: {},
@@ -261,7 +261,7 @@
                 },
 
                 store(params) {
-                    this.$axios.post('{{ route("shop.products.reviews.store", $product->id) }}', params)
+                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', params)
                         .then(response => {
                             alert(response.data.data.message);
                         })

@@ -33,7 +33,7 @@
 {{-- default product listing --}}
 <x-shop::products.carousel
     title="Men's Collections"
-    :src="route('shop.products.index')"
+    :src="route('shop.api.products.index')"
     :navigation-link="route('shop.home.index')"
 >
 </x-shop::products.carousel>
@@ -41,7 +41,7 @@
 {{-- category product listing --}}
 <x-shop::products.carousel
     title="Men's Collections"
-    :src="route('shop.products.index', ['category_id' => 1])"
+    :src="route('shop.api.products.index', ['category_id' => 1])"
     :navigation-link="route('shop.home.index')"
 >
 </x-shop::products.carousel>
@@ -49,7 +49,7 @@
 {{-- featured product listing --}}
 <x-shop::products.carousel
     title="Men's Collections"
-    :src="route('shop.products.index', ['featured' => 1])"
+    :src="route('shop.api.products.index', ['featured' => 1])"
     :navigation-link="route('shop.home.index')"
 >
 </x-shop::products.carousel>
@@ -57,7 +57,7 @@
 {{-- new product listing --}}
 <x-shop::products.carousel
     title="Men's Collections"
-    :src="route('shop.products.index', ['new' => 1])"
+    :src="route('shop.api.products.index', ['new' => 1])"
     :navigation-link="route('shop.home.index')"
 >
 </x-shop::products.carousel>
