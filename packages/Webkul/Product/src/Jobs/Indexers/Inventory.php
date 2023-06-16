@@ -31,6 +31,7 @@ class Inventory implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param \Illuminate\Support\Collection $products
      * @param string $method
      * @return void
      */
