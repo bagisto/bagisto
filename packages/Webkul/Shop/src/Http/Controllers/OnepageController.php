@@ -185,7 +185,7 @@ class OnepageController extends Controller
     /**
      * Saves payment method.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function savePayment()
     {
@@ -203,10 +203,9 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        return response()->json([
-            'jump_to_section' => 'review',
-            'html'            => view('shop::checkout.onepage.review', compact('cart'))->render(),
-        ]);
+        return [
+            'cart' => $cart
+        ];
     }
 
     /**

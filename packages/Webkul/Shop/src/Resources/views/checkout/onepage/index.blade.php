@@ -12,8 +12,14 @@
                         {{-- Customer addresses component --}}
                         <v-checkout-addresses ref="vCheckoutAddress"></v-checkout-addresses>
 
-                        {{-- shipping method component --}}
+                        {{-- Shipping method component --}}
                         <v-shipping-method ref="vShippingMethod"></v-shipping-method>
+
+                        {{-- Payment method component --}}
+                        <v-payment-method ref="vPaymentMethod"></v-payment-method>
+
+                        {{-- Order/Review Summary --}}
+                        <v-review-summary ref="vReview"></v-review-summary>
                     </div>
                     
                     {{-- Cart summary --}}
@@ -819,26 +825,117 @@
             </div>
         </script>
 
+        <script type="text/x-template" id="v-payment-method-template">
+            <div v-if="isShowPaymentMethod">
+                <x-shop::accordion>
+                    <x-slot:header>
+                        <div class="flex justify-between mt-2 items-center">
+                            <h2 class="text-[26px] font-medium">@lang('Payment methods')</h2>
+                        </div>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <div class="flex flex-wrap gap-[29px] mt-[30px] mb-5">
+                            <div 
+                                class="relative"
+                                v-for="(payment, index) in paymentMethods"
+                            >
+                                <input 
+                                    type="radio" 
+                                    name="payment[method]" 
+                                    :value="payment.payment"
+                                    :id="payment.method"
+                                    class="hidden peer"    
+                                    @change="paymentMethodSelected(payment)"
+                                >
+
+                                <label :for="payment.method" class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select"></label>
+
+                                <label :for="payment.method" class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px]">
+                                    <img class="mx-w-[55px] max-h-[45px]" src="http://192.168.15.143/Velocity/resources/images/payapl.svg" alt="" title="">
+                                    <p class="text-[14px] font-semibold mt-[5px]">@{{ payment.method_title }} </p>
+                                    <p class="text-[12px] font-medium mt-[10px]">@{{ payment.description }}</p>
+                                </label>
+                                {{-- Toto implement the additionalDetails --}}
+                                {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}
+                            </div>
+                        </div>
+                    </x-slot:content>
+                </x-shop::accordion>
+            </div>
+        </script>
+
+        <script type="text/x-template" id="v-review-summary-template">
+            <div v-if="isShowReviewSummary">
+                @{{ reviewHtml }}
+            </div>
+        </script>
+
         <script type="module">
+            app.component('v-review-summary', {
+                template: '#v-review-summary-template',
+
+                data() {
+                    return  {
+                        isShowReviewSummary: false,
+
+                        reviewHtml: {},
+                    }
+                }
+            })  
+
+            app.component('v-payment-method', {
+                template: '#v-payment-method-template',
+
+                data() {
+                    return {
+                        paymentMethods: [],
+
+                        isShowPaymentMethod: false,
+                    }
+                },
+
+                methods: {
+                    paymentMethodSelected(selectedPaymentMethod) {
+                        this.$axios.post("{{ route('shop.checkout.save_payment') }}", {
+                                'payment': selectedPaymentMethod
+                            })
+                            .then(response => {
+                                this.$parent.$refs.vReview.reviewHtml = response.data.cart;
+
+                                this.$parent.$refs.vReview.isShowReviewSummary = true;
+                            })
+                            .catch(error => {
+                            });
+                    }
+                }
+            })
+
             app.component('v-shipping-method', {
                 template: '#v-shipping-method-template',
 
                 data() {
                     return {
-                        shippingMethods: '',
+                        shippingMethods: [],
 
                         isShowShippingMethod: false
                     }
                 },
 
-                created() {
-
-                },
-
                 methods: {
-                    save(method) {
-                        // TODO: save method to database 
-                    }
+                    save(selectedShippingMethod) {
+                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                        this.$axios.post("{{ route('shop.checkout.save_shipping') }}", {
+                                shipping_method: selectedShippingMethod,
+                            })
+                            .then(response => {
+                                this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;
+                                    
+                                this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+                            })
+                            .catch(error => {})
+                    },
                 }
             })
 
@@ -907,13 +1004,19 @@
                                     for (let code in this.availableAddresses) {
                                         if (this.availableAddresses[code].country) {
                                             if (this.availableAddresses[code].country == this.countries[country].code) {
-                                                this.availableAddresses[code]['country'] = this.countries[country].name;
+                                                this.availableAddresses[code]['country'] = this.countries[country].code;
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                    },
+
+                    resetPaymentAndShipping() {
+                        this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+
+                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
                     },
 
                     assignAddress() {
@@ -1015,12 +1118,18 @@
                         this.address.shipping.isNew = true;
 
                         this.address.shipping.address_id = null;
+
+                        this.resetPaymentAndShipping();
                     },
 
                     addNewBillingAddress() {
                         this.address.billing.isNew = true;
 
                         this.address.billing.address_id = null;
+
+                        this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+
+                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
                     },
 
                     isHaveStates(addressType) {
@@ -1038,6 +1147,8 @@
                         let selectedAddress = this.availableAddresses.find(data => data.id == address.id);
                         
                         this.address.billing.isSaveAsAddress = true;
+
+                        this.resetPaymentAndShipping();
 
                         this.store();
                     }
