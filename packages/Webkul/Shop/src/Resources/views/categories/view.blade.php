@@ -37,9 +37,14 @@
                             </template>
 
                             <!-- Product Card Listing -->
-                            <template v-else>
-                                <x-shop::products.card v-for="product in products"></x-shop::products.card>
+                            <template v-if="! isLoading && mode == 'grid'">
+                                <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
                             </template>
+                            
+                            <template v-if="! isLoading && mode == 'list'">
+                                <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
+                            </template>
+
                         </div>
 
                         <!-- Load More Button -->
@@ -77,6 +82,8 @@
                         products: [],
 
                         links: {},
+
+                        mode: 'grid',
                     }
                 },
 

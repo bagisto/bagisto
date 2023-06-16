@@ -1,11 +1,11 @@
-<product-card
+<product-grid
     {{ $attributes }}
     :product="product"
 >
-</product-card>
+</product-grid>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="product-card-template">
+    <script type="text/x-template" id="product-grid-template">
         <div class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'>
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <div
@@ -85,8 +85,8 @@
     </script>
 
     <script type="module">
-        app.component('product-card', {
-            template: '#product-card-template',
+        app.component('product-grid', {
+            template: '#product-grid-template',
 
             props: ['product'],
 
