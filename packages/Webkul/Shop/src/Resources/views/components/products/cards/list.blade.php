@@ -6,7 +6,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="product-list-template">
-        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
+        <div class="flex gap-[20px] rounded-[12px] p-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <img
