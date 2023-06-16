@@ -9,7 +9,11 @@
             <div class="container px-[60px] max-lg:px-[30px]">
                 <div class="grid grid-cols-[1fr_auto] gap-[30px]">
                     <div class="grid gap-[30px] mt-[30px]">
+                        {{-- Customer addresses component --}}
                         <v-checkout-addresses></v-checkout-addresses>
+
+                        {{-- shipping method component --}}
+                        <v-shipping-method></v-shipping-method>
                     </div>
                     
                     {{-- Cart summary --}}
@@ -39,6 +43,7 @@
                                         <div 
                                             class="border border-[#e5e5e5] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
                                             v-for="(addresses, index) in availableAddresses"
+                                            @change=""
                                         >
                                             <v-field
                                                 type="radio"
@@ -763,7 +768,30 @@
             </div>
         </script>
 
+        <script type="text/x-template" id="v-shipping-method-template">
+            <div>
+            </div>
+        </script>
+
         <script type="module">
+            app.component('v-shipping-method', {
+                template: '#v-shipping-method-template',
+
+                data() {
+                    return {
+
+                    }
+                },
+
+                created() {
+
+                },
+
+                methods: {
+
+                }
+            })
+
             app.component('v-checkout', {
                 template: '#v-checkout-template',
 
@@ -772,9 +800,6 @@
                 },
             });
 
-        </script>
-
-        <script type="module">
             app.component('v-checkout-addresses', {
                 template: '#v-checkout-addresses-template',
 
@@ -913,6 +938,10 @@
 
                         return false;
                     },
+
+                    showBillingMethods(address) {
+                        this.availableAddresses.find(data => data.id == address.id);
+                    }
                 }
             })
         </script>
