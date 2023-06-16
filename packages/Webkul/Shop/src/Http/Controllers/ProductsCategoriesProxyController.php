@@ -48,6 +48,7 @@ class ProductsCategoriesProxyController extends Controller
                 'params'   => [
                     'sort'  => request()->query('sort'),
                     'limit' => request()->query('limit'),
+                    'mode'  => request()->query('mode'),
                 ],
             ]);
         }

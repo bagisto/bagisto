@@ -26,7 +26,7 @@
     --}}
     <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
         <a
-            herf=""
+            href="{{ route('shop.home.index') }}" 
             class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block mb-[16px]"
         >
         </a>
