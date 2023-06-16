@@ -26,11 +26,11 @@ class Refund
         $products = [];
 
         foreach ($refund->items as $item) {
-            $products[] = $item->product;
+            $products[] = $item->product->id;
         }
 
         Inventory::dispatch(
-            $products,
+            collect($products),
             'reindexRows'
         );
     }
