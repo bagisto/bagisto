@@ -60,8 +60,8 @@
                     </span>
 
                     <span 
-                        @click="mode()" 
                         class="icon-grid-view text-[24px] cursor-pointer"
+                        @click="mode()" 
                     >
                     </span>
                 </div>

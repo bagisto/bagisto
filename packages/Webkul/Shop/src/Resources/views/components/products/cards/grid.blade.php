@@ -104,7 +104,7 @@
                 },
 
                 addToWishlist() {
-                    this.$axios.post(`{{ route('shop.customers.account.wishlist.store') }}`, {
+                    this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
                             product_id: this.product.id
                         })
                         .then(response => {

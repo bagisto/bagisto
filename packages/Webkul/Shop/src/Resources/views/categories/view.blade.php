@@ -11,7 +11,7 @@
 
     {{-- Product Listing --}}
     <v-category
-        src="{{ route('shop.products.index', ['category_id' => $category->id]) }}"
+        src="{{ route('shop.api.products.index', ['category_id' => $category->id]) }}"
         category-id="{{ $category->id }}"
     >
         <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
