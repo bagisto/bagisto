@@ -27,6 +27,9 @@ class CartResource extends JsonResource
             'discount_amount'           => $this->discount_amount,
             'formatted_discount_amount' => core()->formatPrice($this->discount_amount),
             'items'                     => CartItemResource::collection($this->items),
+            'billing_address'           => $this->billing_address,
+            'shipping_address'          => $this->shipping_address,
+            'haveStockableItems'        => $this->haveStockableItems(),
         ];
     }
 }

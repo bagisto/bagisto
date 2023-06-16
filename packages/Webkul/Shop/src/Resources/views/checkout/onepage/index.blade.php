@@ -4,6 +4,10 @@
     {{-- @translations --}}
     <v-checkout></v-checkout>
 
+    <ul>
+        <li></li>
+    </ul>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-checkout-template">
             <div class="container px-[60px] max-lg:px-[30px]">
@@ -867,7 +871,50 @@
 
         <script type="text/x-template" id="v-review-summary-template">
             <div v-if="isShowReviewSummary">
-                @{{ reviewHtml }}
+                <x-shop::accordion>
+                    <x-slot:header>
+                        <div class="flex justify-between mt-2 items-center">
+                            <h2 class="text-[26px] font-medium">@lang('Order Summary')</h2>
+                        </div>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <div class="flex justify-between">
+                            <div>
+                                <div>
+                                    <b>@lang('Billing Address')</b>
+                                </div>
+                                <ul type="none">
+                                    <li>@{{ reviewHtml.billing_address.company_name }}</li>
+                                    <li>@{{ reviewHtml.billing_address.first_name }} @{{ reviewHtml.billing_address.last_name }}</li>
+                                    <li>@{{ reviewHtml.billing_address.address1 }}</li>
+                                    <li>@{{ reviewHtml.billing_address.postcode }} @{{ reviewHtml.billing_address.city }}</li>
+                                    <li>@{{ reviewHtml.billing_address.state }}</li>
+                                    <li>@{{ reviewHtml.billing_address.country }} @{{ reviewHtml.billing_address.postcode }}</li>
+                                    <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewHtml.billing_address.phone }}</li>
+                                </ul>
+                            </div>
+                            <div v-if="
+                                    reviewHtml.haveStockableItems 
+                                    && reviewHtml.shipping_address
+                                "
+                            >
+                                <div>
+                                    <b>@lang('Shipping Address')</b>
+                                </div>
+                                <ul type="none">
+                                    <li>@{{ reviewHtml.shipping_address.company_name }}</li>
+                                    <li>@{{ reviewHtml.shipping_address.first_name }} @{{ reviewHtml.shipping_address.last_name }}</li>
+                                    <li>@{{ reviewHtml.shipping_address.address1 }}</li>
+                                    <li>@{{ reviewHtml.shipping_address.postcode }} @{{ reviewHtml.shipping_address.city }}</li>
+                                    <li>@{{ reviewHtml.shipping_address.state }}</li>
+                                    <li>@{{ reviewHtml.shipping_address.country }} @{{ reviewHtml.shipping_address.postcode }}</li>
+                                    <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewHtml.shipping_address.phone }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </x-slot:content>
+                </x-shop::accordion>
             </div>
         </script>
 
@@ -933,6 +980,8 @@
                                 this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;
                                     
                                 this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+
+                                this.$parent.$refs.vReview.isShowReviewSummary = false;
                             })
                             .catch(error => {})
                     },
@@ -1017,6 +1066,8 @@
                         this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
 
                         this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                        this.$parent.$refs.vReview.isShowReviewSummary = false;
                     },
 
                     assignAddress() {

@@ -11,6 +11,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends Controller
 {
@@ -204,7 +205,7 @@ class OnepageController extends Controller
         $cart = Cart::getCart();
 
         return [
-            'cart' => $cart
+            'cart' => new CartResource($cart),
         ];
     }
 
