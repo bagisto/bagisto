@@ -93,6 +93,10 @@
 
             mounted() {
                 this.$emit('filter-applied', this.filters.applied);
+
+                let query = new URLSearchParams(window.location.search);
+
+                this.$parent.$data.mode = query.get('mode') ?? 'grid';
             },
 
             methods: {
