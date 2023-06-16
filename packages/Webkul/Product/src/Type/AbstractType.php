@@ -163,10 +163,6 @@ abstract class AbstractType
         $route = request()->route()?->getName();
 
         foreach ($product->attribute_family->custom_attributes as $attribute) {
-            if ($attribute->type === 'text') {
-                $data[$attribute->code] = strip_tags($data[$attribute->code]);
-            }
-            
             if (
                 $attribute->type === 'boolean'
                 && $route !== 'admin.catalog.products.mass_update'
@@ -183,6 +179,10 @@ abstract class AbstractType
 
             if (! isset($data[$attribute->code])) {
                 continue;
+            }
+
+            if ($attribute->type === 'text') {
+                $data[$attribute->code] = strip_tags($data[$attribute->code]);
             }
 
             if (
