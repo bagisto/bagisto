@@ -2,20 +2,16 @@
 
 namespace Webkul\Product\Listeners;
 
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Jobs\Indexers\ElasticSearch;
+use Webkul\Product\Jobs\Indexers\Flat;
+use Webkul\Product\Jobs\Indexers\Inventory;
+use Webkul\Product\Jobs\Indexers\Price;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
-use Webkul\Product\Helpers\Indexers\{Inventory, Price, ElasticSearch, Flat};
+use Webkul\Product\Repositories\ProductRepository;
 
 class Product
 {
-    protected $indexers = [
-        'inventory' => Inventory::class,
-        'price'     => Price::class,
-        'elastic'   => ElasticSearch::class,
-        'flat'      => Flat::class,
-    ];
-
     /**
      * Create a new listener instance.
      *
@@ -28,8 +24,7 @@ class Product
         protected ProductRepository $productRepository,
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -40,7 +35,7 @@ class Product
      */
     public function afterCreate($product)
     {
-        app($this->indexers['flat'])->refresh($product);
+        Flat::dispatch($product);
     }
 
     /**
@@ -51,16 +46,26 @@ class Product
      */
     public function afterUpdate($product)
     {
-        $products = $this->getAllRelatedProducts($product);
+        $products = collect($this->getAllRelatedProducts($product))
+            ->pluck('product_id');
 
-        app($this->indexers['flat'])->refresh($product);
+        Flat::dispatch($product);
 
-        app($this->indexers['inventory'])->reindexRows($products);
+        Inventory::dispatch(
+            $products,
+            'reindexRows'
+        );
 
-        app($this->indexers['price'])->reindexRows($products);
+        Price::dispatch(
+            $products,
+            'reindexRows'
+        );
 
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
-            app($this->indexers['elastic'])->reindexRows($products);
+            ElasticSearch::dispatch(
+                $products,
+                'reindexRows'
+            );
         }
     }
 
@@ -78,7 +83,10 @@ class Product
 
         $product = $this->productRepository->find($productId);
 
-        app($this->indexers['elastic'])->reindexRow($product);
+        ElasticSearch::dispatch(
+            $product,
+            'reindexRow'
+        );
     }
 
     /**
