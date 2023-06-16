@@ -53,15 +53,15 @@
                 </select>
 
                 <div class="flex items-center gap-[20px]">
-                    <span 
+                    <span
                         class="icon-listing text-[24px] cursor-pointer"
-                        @click="mode('list')" 
+                        @click="changeMode('list')"
                     >
                     </span>
 
-                    <span 
+                    <span
                         class="icon-grid-view text-[24px] cursor-pointer"
-                        @click="mode()" 
+                        @click="changeMode()"
                     >
                     </span>
                 </div>
@@ -80,12 +80,16 @@
                             sort: @json($toolbar->getAvailableOrders()),
 
                             limit: @json($toolbar->getAvailableLimits()),
+
+                            mode: @json($toolbar->getAvailableModes()),
                         },
 
                         applied: {
                             sort: '{{ $toolbar->getOrder($params)['value'] }}',
 
                             limit: '{{ $toolbar->getLimit($params) }}',
+
+                            mode: '{{ $toolbar->getMode($params) }}',
                         }
                     }
                 };
@@ -93,10 +97,6 @@
 
             mounted() {
                 this.$emit('filter-applied', this.filters.applied);
-
-                let query = new URLSearchParams(window.location.search);
-
-                this.$parent.$data.mode = query.get('mode') ?? 'grid';
             },
 
             methods: {
@@ -106,13 +106,11 @@
                     this.$emit('filter-applied', this.filters.applied);
                 },
 
-                mode(value = 'grid') {
+                changeMode(value = 'grid') {
                     this.filters.applied['mode'] = value;
 
-                    this.$parent.$data.mode = value;
-
                     this.$emit('filter-applied', this.filters.applied);
-                }
+                },
             },
         });
     </script>

@@ -37,13 +37,13 @@
                             </template>
 
                             <!-- Product Card Listing -->
-                            <template v-if="! isLoading && mode == 'grid'">
+                            <template v-if="! isLoading && filters.toolbar.mode === 'grid'">
                                 <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
                             </template>
                         </div>
 
                         <div>
-                            <template v-if="! isLoading && mode == 'list'">
+                            <template v-if="! isLoading && filters.toolbar.mode === 'list'">
                                 <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
                             </template>
                         </div
@@ -83,8 +83,6 @@
                         products: [],
 
                         links: {},
-
-                        mode: 'grid',
                     }
                 },
 
