@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Ui\DataGrid\Traits;
+namespace Webkul\DataGrid\Traits;
 
 use Illuminate\Support\Str;
 
@@ -47,7 +47,7 @@ trait ProvideCollection
                 return $collection;
             }
 
-            match($key) {
+            match ($key) {
                 'sort'   => $this->sortCollection($collection, $info),
                 'search' => $this->searchCollection($collection, $info),
                 default  => $this->filterCollection($collection, $info, $columnType, $columnName)
@@ -101,7 +101,7 @@ trait ProvideCollection
                 return $this->paginatedResults($queryBuilderOrCollection);
             }
         }
-        
+
         return $this->defaultResults($queryBuilderOrCollection);
     }
 
@@ -206,12 +206,12 @@ trait ProvideCollection
 
                 $condition = ($condition === 'undefined') ? '=' : $condition;
 
-                match($columnType) {
+                match ($columnType) {
                     'boolean'  => $this->resolve($collection, $columnName, $condition, $filterValue, 'where', 'resolveBooleanQuery'),
                     'checkbox' => $this->resolve($collection, $columnName, $condition, $filterValue, 'whereIn', 'resolveCheckboxQuery'),
                     'price'    => $this->resolve($collection, $columnName, $condition, $filterValue, 'having'),
                     'datetime' => $this->resolve($collection, $columnName, $condition, $filterValue, 'whereDate'),
-                default    => $this->resolve($collection, $columnName, $condition, $filterValue)
+                    default    => $this->resolve($collection, $columnName, $condition, $filterValue)
                 };
             }
         }
@@ -275,6 +275,7 @@ trait ProvideCollection
      * Transform your actions.
      *
      * @parma  object  $record
+     *
      * @return void
      */
     private function transformActions($record)
@@ -307,7 +308,7 @@ trait ProvideCollection
             if (
                 $column['index'] === $columnName
                 && ! $column['filterable']
-            ) {                
+            ) {
                 return true;
             }
         }

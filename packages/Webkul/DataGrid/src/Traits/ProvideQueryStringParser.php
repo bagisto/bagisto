@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Ui\DataGrid\Traits;
+namespace Webkul\DataGrid\Traits;
 
 trait ProvideQueryStringParser
 {

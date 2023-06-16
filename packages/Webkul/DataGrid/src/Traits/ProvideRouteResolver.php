@@ -1,18 +1,17 @@
 <?php
 
-namespace Webkul\Ui\DataGrid\Traits;
+namespace Webkul\DataGrid\Traits;
 
 trait ProvideRouteResolver
 {
     /**
      * Fetch current route acl. As no access to acl key, this will fetch acl by route name.
      *
-     * @param  $action
      * @return array
      */
     private function fetchCurrentRouteACL($action)
     {
-        return collect(config('acl'))->filter(function ($acl) use ($action) {            
+        return collect(config('acl'))->filter(function ($acl) use ($action) {
             return $acl['route'] === $action['route'];
         })->first();
     }
@@ -20,7 +19,6 @@ trait ProvideRouteResolver
     /**
      * Fetch route name from full url, not the current one.
      *
-     * @param  $action
      * @return array
      */
     private function getRouteNameFromUrl($action, $method)

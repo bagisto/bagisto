@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Ui\Exceptions;
+namespace Webkul\DataGrid\Exceptions;
 
 use Exception;
 

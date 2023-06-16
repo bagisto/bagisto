@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Ui\DataGrid\Traits;
+namespace Webkul\DataGrid\Traits;
 
 trait ProvideQueryResolver
 {
@@ -39,7 +39,7 @@ trait ProvideQueryResolver
      * @param  string  $columnName
      * @param  string  $condition
      * @param  string  $filterValue
-     * @param  null|boolean  $nullCheck
+     * @param  null|bool  $nullCheck
      * @return void
      */
     private function resolveQuery($query, $columnName, $condition, $filterValue, $clause = 'where')
@@ -100,7 +100,7 @@ trait ProvideQueryResolver
      * @param  string  $columnName
      * @param  string  $condition
      * @param  string  $filterValue
-     * @param  null|boolean  $nullCheck
+     * @param  null|bool  $nullCheck
      * @return void
      */
     private function resolveFilterQuery($collection, $columnName, $condition, $filterValue, $nullCheck = null)

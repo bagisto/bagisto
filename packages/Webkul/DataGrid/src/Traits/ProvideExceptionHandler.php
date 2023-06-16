@@ -1,6 +1,9 @@
 <?php
 
-namespace Webkul\Ui\DataGrid\Traits;
+namespace Webkul\DataGrid\Traits;
+
+use Webkul\DataGrid\Exceptions\ActionKeyException;
+use Webkul\DataGrid\Exceptions\ColumnKeyException;
 
 trait ProvideExceptionHandler
 {
@@ -22,14 +25,14 @@ trait ProvideExceptionHandler
      * This will check the keys which are needed for column.
      *
      * @param  array  $column
-     * @return void|\Webkul\Ui\Exceptions\ColumnKeyException
+     * @return void|\Webkul\DataGrid\Exceptions\ColumnKeyException
      */
     public function checkRequiredColumnKeys($column)
     {
         $this->checkRequiredKeys($this->requiredColumnKeys, $column, function ($missingKeys) {
             $message = 'Missing Keys: ' . implode(', ', $missingKeys);
 
-            throw new \Webkul\Ui\Exceptions\ColumnKeyException($message);
+            throw new ColumnKeyException($message);
         });
     }
 
@@ -37,14 +40,14 @@ trait ProvideExceptionHandler
      * This will check the keys which are needed for action.
      *
      * @param  array  $action
-     * @return void|\Webkul\Ui\Exceptions\ActionKeyException
+     * @return void|\Webkul\DataGrid\Exceptions\ActionKeyException
      */
     public function checkRequiredActionKeys($action)
     {
         $this->checkRequiredKeys($this->requiredActionKeys, $action, function ($missingKeys) {
             $message = 'Missing Keys: ' . implode(', ', $missingKeys);
 
-            throw new \Webkul\Ui\Exceptions\ActionKeyException($message);
+            throw new ActionKeyException($message);
         });
     }
 

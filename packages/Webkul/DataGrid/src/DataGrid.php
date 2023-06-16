@@ -1,13 +1,13 @@
 <?php
 
-namespace Webkul\Ui\DataGrid;
+namespace Webkul\DataGrid;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
-use Webkul\Ui\DataGrid\Traits\ProvideBouncer;
-use Webkul\Ui\DataGrid\Traits\ProvideCollection;
-use Webkul\Ui\DataGrid\Traits\ProvideDataGridPlus;
-use Webkul\Ui\DataGrid\Traits\ProvideExceptionHandler;
+use Webkul\DataGrid\Traits\ProvideBouncer;
+use Webkul\DataGrid\Traits\ProvideCollection;
+use Webkul\DataGrid\Traits\ProvideDataGridPlus;
+use Webkul\DataGrid\Traits\ProvideExceptionHandler;
 
 abstract class DataGrid
 {
@@ -88,13 +88,6 @@ abstract class DataGrid
     protected $massActions = [];
 
     /**
-     * Parsed value of the url parameters.
-     *
-     * @var array
-     */
-    protected $parse;
-
-    /**
      * To show mass action or not.
      *
      * @var bool
@@ -145,62 +138,11 @@ abstract class DataGrid
     ];
 
     /**
-     * Bindings.
-     *
-     * @var array
-     */
-    protected $bindings = [
-        0 => 'select',
-        1 => 'from',
-        2 => 'join',
-        3 => 'where',
-        4 => 'having',
-        5 => 'order',
-        6 => 'union',
-    ];
-
-    /**
-     * Select components.
-     *
-     * @var array
-     */
-    protected $selectcomponents = [
-        0  => 'aggregate',
-        1  => 'columns',
-        2  => 'from',
-        3  => 'joins',
-        4  => 'wheres',
-        5  => 'groups',
-        6  => 'havings',
-        7  => 'orders',
-        8  => 'limit',
-        9  => 'offset',
-        10 => 'lock',
-    ];
-
-    /**
      * Contains the keys for which extra filters to show.
      *
      * @var string[]
      */
     protected $extraFilters = [];
-
-    /**
-     * The current admin user.
-     *
-     * @var object
-     */
-    protected $currentUser;
-
-    /**
-     * Create datagrid instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->invoker = $this;
-    }
 
     /**
      * Abstract method.
@@ -215,9 +157,8 @@ abstract class DataGrid
     /**
      * Add the index as alias of the column and use the column to make things happen.
      *
-     * @param string  $alias
-     * @param string  $column
-     *
+     * @param  string  $alias
+     * @param  string  $column
      * @return void
      */
     public function addFilter($alias, $column)
@@ -274,7 +215,7 @@ abstract class DataGrid
      * in second param.
      *
      * @param  array  $action
-     * @param  bool   $specialPermission
+     * @param  bool  $specialPermission
      * @return void
      */
     public function addAction($action, $specialPermission = false)
@@ -299,7 +240,7 @@ abstract class DataGrid
      * in second param.
      *
      * @param  array  $massAction
-     * @param  bool   $specialPermission
+     * @param  bool  $specialPermission
      * @return void
      */
     public function addMassAction($massAction, $specialPermission = false)
@@ -402,17 +343,9 @@ abstract class DataGrid
      */
     protected function fireEvent($name)
     {
-        if (isset($name)) {
-            $className = get_class($this->invoker);
+        $className = strtolower(class_basename($this));
 
-            $className = last(explode('\\', $className));
-
-            $className = strtolower($className);
-
-            $eventName = $className . '.' . $name;
-
-            Event::dispatch($eventName, $this->invoker);
-        }
+        Event::dispatch($className . '.' . $name, $this);
     }
 
     /**
@@ -450,7 +383,7 @@ abstract class DataGrid
     protected function getColumnByName($columnName, $key = null)
     {
         $column = collect($this->columns)
-            ->filter(fn($column) => $column['index'] === $columnName)
+            ->filter(fn ($column) => $column['index'] === $columnName)
             ->first();
 
         if ($key && isset($column[$key])) {

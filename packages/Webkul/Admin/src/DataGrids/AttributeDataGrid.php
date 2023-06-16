@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class AttributeDataGrid extends DataGrid
 {
@@ -92,7 +92,7 @@ class AttributeDataGrid extends DataGrid
                 if ($value->is_required) {
                     return trans('admin::app.datagrid.true');
                 }
-                
+
                 return trans('admin::app.datagrid.false');
             },
         ]);
@@ -108,7 +108,7 @@ class AttributeDataGrid extends DataGrid
                 if ($value->is_unique) {
                     return trans('admin::app.datagrid.true');
                 }
-                
+
                 return trans('admin::app.datagrid.false');
             },
         ]);
@@ -140,7 +140,7 @@ class AttributeDataGrid extends DataGrid
                 if ($value->value_per_channel) {
                     return trans('admin::app.datagrid.true');
                 }
-                
+
                 return trans('admin::app.datagrid.false');
             },
         ]);
@@ -164,7 +164,7 @@ class AttributeDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.catalog.attributes.delete',
-            'icon'  => 'icon trash-icon',
+            'icon'   => 'icon trash-icon',
         ]);
     }
 

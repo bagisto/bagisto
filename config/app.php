@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -205,6 +204,7 @@ return [
         Webkul\Core\Providers\CoreServiceProvider::class,
         Webkul\Core\Providers\EnvValidatorServiceProvider::class,
         Webkul\Customer\Providers\CustomerServiceProvider::class,
+        Webkul\DataGrid\Providers\DataGridServiceProvider::class,
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\Inventory\Providers\InventoryServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,

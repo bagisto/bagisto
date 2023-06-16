@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Ui\DataGrid\Traits;
+namespace Webkul\DataGrid\Traits;
 
 trait ProvideBouncer
 {
@@ -37,7 +37,7 @@ trait ProvideBouncer
     private function generateEventName($titleOrLabel)
     {
         $eventName = explode(' ', strtolower($titleOrLabel));
-        
+
         return implode('.', $eventName);
     }
 }
