@@ -8,12 +8,12 @@
         <script type="text/x-template" id="v-checkout-template">
             <div class="container px-[60px] max-lg:px-[30px]">
                 <div class="grid grid-cols-[1fr_auto] gap-[30px]">
-                    <div class="grid gap-[30px] mt-[30px]">
+                    <div class="grid mt-[30px]">
                         {{-- Customer addresses component --}}
-                        <v-checkout-addresses></v-checkout-addresses>
+                        <v-checkout-addresses ref="vCheckoutAddress"></v-checkout-addresses>
 
                         {{-- shipping method component --}}
-                        <v-shipping-method></v-shipping-method>
+                        <v-shipping-method ref="vShippingMethod"></v-shipping-method>
                     </div>
                     
                     {{-- Cart summary --}}
@@ -43,7 +43,7 @@
                                         <div 
                                             class="border border-[#e5e5e5] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
                                             v-for="(addresses, index) in availableAddresses"
-                                            @change=""
+                                            @change="showBillingMethods(addresses)"
                                         >
                                             <v-field
                                                 type="radio"
@@ -769,7 +769,53 @@
         </script>
 
         <script type="text/x-template" id="v-shipping-method-template">
-            <div>
+            <div v-if="isShowShippingMethod">
+                <x-shop::accordion>
+                    <x-slot:header>
+                        <div class="flex justify-between mt-2 items-center">
+                            <h2 class="text-[26px] font-medium">@lang('Shipping methods')</h2>
+                        </div>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <div class="flex">
+                            <div
+                                class="relative max-w-[218px] select-none m-2"
+                                v-for="shippingMethod in shippingMethods"
+                            >
+                                <div v-for="rate in shippingMethod.rates">
+                                    <input 
+                                        type="radio"
+                                        name="shipping_method"
+                                        :id="rate.method"
+                                        :value="rate.method"
+                                        class="hidden peer"
+                                        @change="save(rate.method)"
+                                    >
+
+                                    <label 
+                                        class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                        :for="rate.method"
+                                    >
+                                    </label>
+
+                                    <label 
+                                        class="block border border-[#E9E9E9] p-[20px] rounded-[12px] h-[190px] cursor-pointer"
+                                        :for="rate.method"
+                                    >
+                                        <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
+
+                                        <p class="text-[25px] font-semibold mt-[5px]">@{{ rate.base_price }}</p>
+                                        
+                                        <p class="text-[12px] font-medium mt-[10px]">
+                                            <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </x-slot:content>
+                </x-shop::accordion>
             </div>
         </script>
 
@@ -779,7 +825,9 @@
 
                 data() {
                     return {
+                        shippingMethods: '',
 
+                        isShowShippingMethod: false
                     }
                 },
 
@@ -788,7 +836,9 @@
                 },
 
                 methods: {
-
+                    save(method) {
+                        // TODO: save method to database 
+                    }
                 }
             })
 
@@ -866,25 +916,70 @@
                         }
                     },
 
-                    store(values, { resetForm }) {
+                    assignAddress() {
+                        if (this.availableAddresses.length > 0) {
+                            let address = this.availableAddresses.forEach(address => {
+                                if (address.id == this.address.billing.address_id) {
+                                    this.address.billing.address1 = [address.address1];
+
+                                    if (address.email) {
+                                        this.address.billing.email = address.email;
+                                    }
+
+                                    if (address.first_name) {
+                                        this.address.billing.first_name = address.first_name;
+                                    }
+
+                                    if (address.last_name) {
+                                        this.address.billing.last_name = address.last_name;
+                                    }
+
+                                    if (address.country) {
+                                        this.address.billing.country = address.country;
+                                    }
+                                }
+
+                                if (address.id == this.address.shipping.address_id) {
+                                    this.address.shipping.address1 = [address.address1];
+
+                                    if (address.email) {
+                                        this.address.shipping.email = address.email;
+                                    }
+
+                                    if (address.first_name) {
+                                        this.address.shipping.first_name = address.first_name;
+                                    }
+
+                                    if (address.last_name) {
+                                        this.address.shipping.last_name = address.last_name;
+                                    }
+
+                                    if (address.country) {
+                                        this.address.shipping.country = address.country;
+                                    }
+                                }
+                            });
+                        }
+                    },
+
+                    store() {
                         if (! this.address.billing.isSaveAsAddress) {
                             this.availableAddresses.push(this.address.billing);
                         } else {
-                            this.$axios.post('{{ route("shop.checkout.save_address") }}', this.address, {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
-                            })
-                            .then(response => {
-                                if (! response.data.data.redirect) {
-                                    alert('Address saved successfully')
-                                }
-                                
-                                this.getCustomerAddress();
-                            })
-                            .catch(error => {                 
-                                console.log(error);
-                            })
+
+                            this.assignAddress();
+
+                            this.$axios.post('{{ route("shop.checkout.save_address") }}', this.address)
+                                .then(response => {
+                                    this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
+                                    
+                                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = true
+                                    
+                                    this.getCustomerAddress();
+                                })
+                                .catch(error => {                 
+                                    console.log(error);
+                                })
                         }
 
                         this.address.billing.isNew = false
@@ -940,7 +1035,11 @@
                     },
 
                     showBillingMethods(address) {
-                        this.availableAddresses.find(data => data.id == address.id);
+                        let selectedAddress = this.availableAddresses.find(data => data.id == address.id);
+                        
+                        this.address.billing.isSaveAsAddress = true;
+
+                        this.store();
                     }
                 }
             })
