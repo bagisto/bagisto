@@ -39,6 +39,8 @@ class ReviewController extends APIController
      */
     public function store($id): JsonResource
     {
+        dd(request()->all());
+        
         $this->validate(request(), [
             'title'   => 'required',
             'comment' => 'required',

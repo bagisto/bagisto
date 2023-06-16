@@ -67,7 +67,7 @@
 
                                     <img 
                                         class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                        src="{{ bagisto_asset('images/wishlist-user.png')}}"
+                                        :src="item.images[0].small_image_url ?? item.base_image.small_image_url"
                                         @load="onImageLoad"
                                         v-show="! isImageLoading"
                                         alt="" 

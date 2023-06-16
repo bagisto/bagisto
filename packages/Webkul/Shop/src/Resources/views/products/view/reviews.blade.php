@@ -14,31 +14,44 @@
                     <form
                         class="rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
+                        enctype="multipart/form-data"
                     >
                         <div>
-                            <x-shop::form.control-group>
+                            {{-- <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    name="title"
-                                    :value="old('title')"
+                                    name="image"
+                                    :value="old('image')"
                                     class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    :label="trans('shop::app.products.title')"
-                                    :placeholder="trans('shop::app.products.title')"
+                                    :label="trans('shop::app.products.image')"
+                                    :placeholder="trans('shop::app.products.image')"
                                 >
                                 </x-shop::form.control-group.control>
-                            </x-shop::form.control-group>
-                        </div>
 
+                                <x-shop::form.control-group.error
+                                    control-name="image"
+                                >
+                                </x-shop::form.control-group.error>
+                            </x-shop::form.control-group> --}}
+                            
+                        </div>
+                        
                         <div>
+                            <input 
+                                type="file"
+                                name="image"
+                                @change="selectReviewImage"
+                                class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            />
+
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
                                     @lang('shop::app.products.rating')
                                 </x-shop::form.control-group.label>
 
                                 <x-shop::products.star-rating
-                                    name="rating"
-                                    :value="old('rating') ?? 5"
+                                    ::name="review.rating"
                                     :disabled="false"
                                     rules="required"
                                     :label="trans('shop::app.products.rating')"
@@ -59,7 +72,6 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="title"
-                                    :value="old('title')"
                                     class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
                                     :label="trans('shop::app.products.title')"
@@ -94,7 +106,7 @@
                                     control-name="comment"
                                 >
                                 </x-shop::form.control-group.error>
-                            </x-shop::form.control-group>
+                            </x-shop::form.control-group> 
 
                             <button
                                 class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
@@ -238,6 +250,8 @@
                     },
 
                     meta: {},
+
+                    review: {}
                 }
             },
 
@@ -261,12 +275,23 @@
                 },
 
                 store(params) {
-                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', params)
+                    let formData = new FormData();
+
+                    formData.append('image', this.review.image);
+                    formData.append('title', params.title);
+                    formData.append('comment', params.comment);
+                    formData.append('rating', params.rating);
+                    
+                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', formData)
                         .then(response => {
                             alert(response.data.data.message);
                         })
                         .catch(error => {});
                 },
+
+                selectReviewImage() {
+                    this.review.image = event.target.files[0];
+                }
             }
         });
     </script>
