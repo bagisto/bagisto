@@ -18,7 +18,10 @@
             @if (! $reviews->isEmpty())
                 <div class="grid mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
                     @foreach($reviews as $review)
-                        <a href="#" id="{{ $review->product_id }}">
+                        <a 
+                            href="{{route('shop.productOrCategory.index', $review->product->url_key) }}" 
+                            id="{{ $review->product_id }}"
+                        >
                             <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
                                 @php $image = product_image()->getProductBaseImage($review->product); @endphp
 
@@ -26,9 +29,11 @@
                                     <img class="rounded-[12px]" src="{{ $image['small_image_url'] }}" title="" alt="">
                                 </div>
 
-                                <div class="">
+                                <div class="w-full">
                                     <div class="flex justify-between">
-                                        <p class="text-[20px] font-medium max-sm:text-[16px]"> {{ $review->title}} </p>
+                                        <p class="text-[20px] font-medium max-sm:text-[16px]">
+                                            {{ $review->title}}
+                                        </p>
 
                                         <div class="flex gap-[10px] items-center">
                                             {{-- For Active stars --}}

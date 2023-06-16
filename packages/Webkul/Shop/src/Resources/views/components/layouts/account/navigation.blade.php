@@ -41,19 +41,19 @@
     >
         @foreach ($menu->items as $menuItem)
             @foreach ($menuItem['children'] as $subMenuItem)
-                <div
-                    class="flex px-[25px] py-[20px] justify-between border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-[#E9E9E9] rounded-t-[6px]' : '' }}"
-                >
-                    <p
-                        class="flex gap-x-[15px] text-[18px] font-medium items-center before:content-[' '] before:bg-[position:-146px_-65px] before:bs-main-sprite before:w-[18px] before:h-[20px]"
+                <a href="{{ $subMenuItem['url'] }}">
+                    <div
+                        class="flex px-[25px] py-[20px] justify-between border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-[#E9E9E9] rounded-t-[6px]' : '' }}"
                     >
-                        <a href="{{ $subMenuItem['url'] }}">
+                        <p
+                            class="flex gap-x-[15px] text-[18px] font-medium items-center before:content-[' '] before:bg-[position:-146px_-65px] before:bs-main-sprite before:w-[18px] before:h-[20px]" 
+                        >
                             @lang($subMenuItem['name'])
-                        </a>
-                    </p>
+                        </p>
 
-                    <span class="inline-block bg-[position:-7px_-41px] bs-main-sprite w-[9px] h-[20px]"></span>
-                </div>
+                        <span class="inline-block bg-[position:-7px_-41px] bs-main-sprite w-[9px] h-[20px]"></span>
+                    </div>
+                </a>
             @endforeach
         @endforeach
     </div>
