@@ -2,6 +2,7 @@
 .env.testing
 .idea
 .php_cs.cache
+.phpunit.result.cache
 .vscode
 .vagrant
 *.hot
