@@ -5,6 +5,7 @@
 ])
 
 <v-star-rating
+    {{ $attributes }}
     name="{{ $name }}"
     value="{{ $value }}"
     disabled="{{ $disabled }}"

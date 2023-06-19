@@ -51,7 +51,7 @@
                                 </x-shop::form.control-group.label>
 
                                 <x-shop::products.star-rating
-                                    ::name="review.rating"
+                                    name="rating"
                                     :value="old('rating') ?? 5"
                                     :disabled="false"
                                     rules="required"
@@ -185,7 +185,11 @@
                                 </p>
 
                                 <div class="flex items-center">
-                                    <x-shop::products.star-rating ::name="review.name" ::value="review.rating"></x-shop::products.star-rating>
+                                    <x-shop::products.star-rating 
+                                        ::name="review.name" 
+                                        ::value="review.rating"
+                                    >
+                                    </x-shop::products.star-rating>
                                 </div>
                             </div>
 
@@ -253,7 +257,7 @@
 
                     meta: {},
 
-                    review: {}
+                    reviewImage: {},
                 }
             },
 
@@ -281,7 +285,7 @@
 
                     let formData = new FormData();
 
-                    formData.append('attachments[]', this.review.image);
+                    formData.append('attachments[]', this.reviewImage);
                     formData.append('title', title);
                     formData.append('comment', comment);
                     formData.append('rating', rating);
@@ -294,8 +298,8 @@
                 },
 
                 selectReviewImage() {
-                    this.review.image = event.target.files[0];
-                }
+                    this.reviewImage = event.target.files[0];
+                },
             }
         });
     </script>

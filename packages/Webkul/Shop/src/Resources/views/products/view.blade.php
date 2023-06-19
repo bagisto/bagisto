@@ -109,7 +109,11 @@
                             </div>
 
                             <div class='flex items-center'>
-                                <x-shop::products.star-rating star='{{ $avgRatings }}' :is-editable=false></x-shop::products.star-rating>
+                                <x-shop::products.star-rating 
+                                    :value="$avgRatings"
+                                    :is-editable=false
+                                >
+                                </x-shop::products.star-rating>
 
                                 <div class="flex gap-[15px] items-center">
                                     <p class="text-[#7D7D7D] text-[14px]">({{ count($product->reviews) }} reviews)</p>
