@@ -4,10 +4,6 @@
     {{-- @translations --}}
     <v-checkout></v-checkout>
 
-    <ul>
-        <li></li>
-    </ul>
-
     @pushOnce('scripts')
         <script type="text/x-template" id="v-checkout-template">
             <div class="container px-[60px] max-lg:px-[30px]">
@@ -27,7 +23,7 @@
                     </div>
                     
                     {{-- Cart summary --}}
-                    <v-cart-summary></v-cart-summary>
+                    <v-cart-summary ref="vSartSummary" :cart="cart"></v-cart-summary>
                 </div>
             </div>
         </script>
@@ -885,43 +881,43 @@
                                     <b>@lang('Billing Address')</b>
                                 </div>
                                 <ul type="none">
-                                    <li>@{{ reviewHtml.billing_address.company_name }}</li>
-                                    <li>@{{ reviewHtml.billing_address.first_name }} @{{ reviewHtml.billing_address.last_name }}</li>
-                                    <li>@{{ reviewHtml.billing_address.address1 }}</li>
-                                    <li>@{{ reviewHtml.billing_address.postcode }} @{{ reviewHtml.billing_address.city }}</li>
-                                    <li>@{{ reviewHtml.billing_address.state }}</li>
-                                    <li>@{{ reviewHtml.billing_address.country }} @{{ reviewHtml.billing_address.postcode }}</li>
-                                    <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewHtml.billing_address.phone }}</li>
+                                    <li>@{{ reviewCart.billing_address.company_name }}</li>
+                                    <li>@{{ reviewCart.billing_address.first_name }} @{{ reviewCart.billing_address.last_name }}</li>
+                                    <li>@{{ reviewCart.billing_address.address1 }}</li>
+                                    <li>@{{ reviewCart.billing_address.postcode }} @{{ reviewCart.billing_address.city }}</li>
+                                    <li>@{{ reviewCart.billing_address.state }}</li>
+                                    <li>@{{ reviewCart.billing_address.country }} @{{ reviewCart.billing_address.postcode }}</li>
+                                    <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewCart.billing_address.phone }}</li>
                                 </ul>
                             </div>
                             <div v-if="
-                                    reviewHtml.haveStockableItems 
-                                    && reviewHtml.shipping_address
+                                    reviewCart.haveStockableItems 
+                                    && reviewCart.shipping_address
                                 "
                             >
                                 <div>
                                     <b>@lang('Shipping Address')</b>
                                 </div>
                                 <ul type="none">
-                                    <li>@{{ reviewHtml.shipping_address.company_name }}</li>
-                                    <li>@{{ reviewHtml.shipping_address.first_name }} @{{ reviewHtml.shipping_address.last_name }}</li>
-                                    <li>@{{ reviewHtml.shipping_address.address1 }}</li>
-                                    <li>@{{ reviewHtml.shipping_address.postcode }} @{{ reviewHtml.shipping_address.city }}</li>
-                                    <li>@{{ reviewHtml.shipping_address.state }}</li>
-                                    <li>@{{ reviewHtml.shipping_address.country }} @{{ reviewHtml.shipping_address.postcode }}</li>
-                                    <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewHtml.shipping_address.phone }}</li>
+                                    <li>@{{ reviewCart.shipping_address.company_name }}</li>
+                                    <li>@{{ reviewCart.shipping_address.first_name }} @{{ reviewCart.shipping_address.last_name }}</li>
+                                    <li>@{{ reviewCart.shipping_address.address1 }}</li>
+                                    <li>@{{ reviewCart.shipping_address.postcode }} @{{ reviewCart.shipping_address.city }}</li>
+                                    <li>@{{ reviewCart.shipping_address.state }}</li>
+                                    <li>@{{ reviewCart.shipping_address.country }} @{{ reviewCart.shipping_address.postcode }}</li>
+                                    <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewCart.shipping_address.phone }}</li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <div v-for="item in reviewHtml.items" :key="item">
+                        <div v-for="item in reviewCart.items" :key="item">
                             <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px]">
                                 <div class="flex gap-x-[15px] pb-[20px]">
                                     <img
                                         class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
                                         :src="item.image.medium_image_url"
-                                        title=""
-                                        alt=""
+                                        :title="item.name"
+                                        :alt="item.name"
                                     />
                                     <div>
                                         {{-- Need to discussed with (@devansh-sir) about these events --}}
@@ -951,14 +947,14 @@
                         <div class="flex justify-between">
                             <div>
                                 <div class="grid gap-[15px] mt-[25px] mb-[30px]">
-                                    <div v-if="reviewHtml.haveStockableItems">
-                                        <p class="text-[16px] font-medium">@{{ reviewHtml.selected_shipping_rate }}</p>
-                                        <p class="text-[16px]">@{{ reviewHtml.selected_shipping_rate_method }}</p>
+                                    <div v-if="reviewCart.haveStockableItems">
+                                        <p class="text-[16px] font-medium">@{{ reviewCart.selected_shipping_rate }}</p>
+                                        <p class="text-[16px]">@{{ reviewCart.selected_shipping_rate_method }}</p>
                                     </div>
                                     
                                     <div>
                                         <p class="text-[16px]">@lang('Payment method')</p>
-                                        <p class="text-[16px] font-medium">@{{ reviewHtml.payment_method }}</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewCart.payment_method }}</p>
                                     </div>
 
                                     <div
@@ -973,22 +969,22 @@
                                 <div class="grid gap-[15px] mt-[25px] mb-[30px]">
                                     <div class="flex text-right justify-between">
                                         <p class="text-[16px]">@lang('Subtotal')</p>
-                                        <p class="text-[16px] font-medium">@{{ reviewHtml.base_sub_total  }}</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewCart.base_sub_total  }}</p>
                                     </div>
 
                                     <div 
                                         class="flex text-right justify-between"
-                                        v-if="reviewHtml.selected_shipping_rate"
+                                        v-if="reviewCart.selected_shipping_rate"
                                     >
-                                        <p class="text-[16px]">@lang('Tax 0 %')</p>
-                                        <p class="text-[16px] font-medium">@{{ reviewHtml.selected_shipping_rate }}</p>
+                                        <p class="text-[16px]">@lang('Tax')</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewCart.selected_shipping_rate }}</p>
                                     </div>
 
                                     <div 
                                         class="flex text-right justify-between"
-                                        v-if="reviewHtml.base_tax_total"
+                                        v-if="reviewCart.base_tax_total"
                                     >
-                                        <div v-for="(amount, index) in reviewHtml.base_tax_amounts">
+                                        <div v-for="(amount, index) in reviewCart.base_tax_amounts">
                                             <p class="text-[16px]">@{{ index }}</p>
                                             <p class="text-[16px] font-medium">@{{ amount }}</p>
                                         </div>
@@ -996,15 +992,15 @@
 
                                     <div 
                                         class="flex text-right justify-between"
-                                        v-if="reviewHtml.base_discount_amount && reviewHtml.base_discount_amount > 0"
+                                        v-if="reviewCart.base_discount_amount && reviewCart.base_discount_amount > 0"
                                     >
                                         <p class="text-[16px]">@lang('Discount amount')</p>
-                                        <p class="text-[26px] font-medium">@{{ reviewHtml.base_discount_amount }}</p>
+                                        <p class="text-[26px] font-medium">@{{ reviewCart.base_discount_amount }}</p>
                                     </div>
 
                                     <div class="flex text-right justify-between">
                                         <p class="text-[16px] mr-2">@lang('Grand total')</p>
-                                        <p class="text-[16px] font-medium"> @{{ reviewHtml.base_grand_total }}</p>
+                                        <p class="text-[16px] font-medium"> @{{ reviewCart.base_grand_total }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1016,38 +1012,62 @@
 
         <script type="text/x-template" id="v-cart-summary-template">
             <div class="w-[442px] max-w-full pl-[30px] h-max sticky top-[30px]">
-                <h2 class="text-[26px] font-medium">Cart Summary</h2>
+                <h2 class="text-[26px] font-medium">@lang('Cart Summary')</h2>
                 <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px]">
-                    <div class="flex gap-x-[15px] pb-[20px]">
-                        <img class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
-                            src="http://192.168.15.143/Velocity/resources/images/mini-cart-img.png" title="" alt="">
+                    <div 
+                        class="flex gap-x-[15px] pb-[20px]"
+                        v-for="item in cart.items"
+                    >
+                        <img
+                            class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
+                            :src="item.image.medium_image_url"
+                            :title="item.name"
+                            :alt="item.name"
+                        />
                         <div class="">
-                            <p class="text-[16px]">Slim High Ankle Jeans</p>
-                            <p class="text-[18px] font-medium mt-[10px]">$100</p>
+                            <p class="text-[16px] text-navyBlue">@{{ item.name }}</p>
+                            <p class="text-[18px] font-medium mt-[10px]">@{{ item.formatted_total }}</p>
+                            <p class="text-[15px]">@{{ item.formatted_price }} X @{{ item.quantity }} (@lang('Quantity'))</p>
                         </div>
                     </div>
                 </div>
                 <div class="grid gap-[15px] mt-[25px] mb-[30px]">
                     <div class="flex text-right justify-between">
-                        <p class="text-[16px]">Subtotal</p>
-                        <p class="text-[16px] font-medium">$1,060.00</p>
+                        <p class="text-[16px]">@lang('Subtotal')</p>
+                        <p class="text-[16px] font-medium">@{{ cart.base_sub_total  }}</p>
                     </div>
-                    <div class="flex text-right justify-between">
-                        <p class="text-[16px]">Tax 0 %</p>
-                        <p class="text-[16px] font-medium">$0.00</p>
+
+                    <div 
+                        class="flex text-right justify-between"
+                        v-if="parseFloat(cart.base_tax_total)"
+                    >
+                        <div v-for="(amount, index) in cart.base_tax_amounts">
+                            <p class="text-[16px]">@{{ index }}</p>
+                            <p class="text-[16px] font-medium">@{{ amount }}</p>
+                        </div>
                     </div>
-                    <div class="flex text-right justify-between">
-                        <p class="text-[16px]">Coupon Discount</p>
-                        <p class="text-[16px] font-medium">Apply Coupon</p>
+
+                    <div 
+                        class="flex text-right justify-between"
+                        v-if="cart.selected_shipping_rate"
+                    >
+                        <p class="text-[16px]">@lang('Tax')</p>
+                        <p class="text-[16px] font-medium">@{{ cart.selected_shipping_rate }}</p>
                     </div>
+
+                    <div 
+                        class="flex text-right justify-between"
+                        v-if="cart.base_discount_amount && cart.base_discount_amount > 0"
+                    >
+                        <p class="text-[16px]">@lang('Discount amount')</p>
+                        <p class="text-[26px] font-medium">@{{ cart.base_discount_amount }}</p>
+                    </div>
+
                     <div class="flex text-right justify-between">
-                        <p class="text-[16px]">Grand Total</p>
-                        <p class="text-[26px] font-medium">$530.00</p>
+                        <p class="text-[16px] mr-2">@lang('Grand total')</p>
+                        <p class="text-[16px] font-medium"> @{{ cart.base_grand_total }}</p>
                     </div>
                 </div>
-                <div
-                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
-                    Proceed To Checkout</div>
             </div>
         </script>
 
@@ -1055,12 +1075,16 @@
 
             app.component('v-cart-summary', {
                 template: '#v-cart-summary-template',
+                
+                props: ['cart'],
 
                 data() {
-                    return  {
-
-                    }
+                    return  {}
                 },
+
+                mounted() {
+                    console.log(this.cart);
+                }
             })
 
             app.component('v-review-summary', {
@@ -1070,7 +1094,7 @@
                     return  {
                         isShowReviewSummary: false,
 
-                        reviewHtml: {},
+                        reviewCart: {},
                     }
                 }, 
 
@@ -1080,7 +1104,6 @@
                                 '_token': "{{ csrf_token() }}"
                             })
                             .then(response => {
-                                console.log(JSON.stringify(response))
                                 if (response.data.success) {
                                     if (response.data.redirect_url) {
                                         window.location.href = response.data.redirect_url;
@@ -1089,15 +1112,10 @@
                                     }
                                 }
                             })
-                            .catch(error => {
-                                this.disable_button = true;
-                                this.$root.hideLoader();
-
-                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), error.response.data.message ? error.response.data.message : "{{ __('shop::app.common.error') }}");
-                            })
+                            .catch(error => console.log(error))
                     }
                 }
-            })  
+            })
 
             app.component('v-payment-method', {
                 template: '#v-payment-method-template',
@@ -1116,12 +1134,11 @@
                                 'payment': selectedPaymentMethod
                             })
                             .then(response => {
-                                this.$parent.$refs.vReview.reviewHtml = response.data.cart;
-
+                                this.$parent.$refs.vReview.reviewCart = response.data.cart;
+                                
                                 this.$parent.$refs.vReview.isShowReviewSummary = true;
                             })
-                            .catch(error => {
-                            });
+                            .catch(error => console.log(error));
                     }
                 }
             })
@@ -1145,6 +1162,8 @@
                                 shipping_method: selectedShippingMethod,
                             })
                             .then(response => {
+                                this.$parent.getOrderSummary();
+
                                 this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;
                                     
                                 this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
@@ -1160,8 +1179,24 @@
                 template: '#v-checkout-template',
 
                 data() {
-                    return {}
+                    return {
+                        cart: {}
+                    }
                 },
+
+                created() {
+                    this.getOrderSummary();
+                }, 
+
+                methods: {
+                    getOrderSummary() {
+                        this.$axios.get("{{ route('shop.checkout.summary') }}")
+                            .then(response => {
+                                this.cart = response.data.data;
+                            })
+                            .catch(error => console.log(error))
+                    }
+                }
             });
 
             app.component('v-checkout-addresses', {

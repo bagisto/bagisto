@@ -91,16 +91,12 @@ class OnepageController extends Controller
 
     /**
      * Return order short summary.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function summary()
+    public function summary(): JsonResource
     {
         $cart = Cart::getCart();
 
-        return response()->json([
-            'html' => view('shop::checkout.total.summary', compact('cart'))->render(),
-        ]);
+        return new CartResource($cart);
     }
 
     /**
