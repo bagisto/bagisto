@@ -29,9 +29,13 @@ class ReviewController extends APIController
      */
     public function index($id): JsonResource
     {
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository
+                    ->find($id)
+                    ->reviews()
+                    ->Where('status', 'Approved')
+                    ->paginate(2);
 
-        return ProductReviewResource::collection($product->reviews()->paginate(2));
+        return ProductReviewResource::collection($product);
     }
 
     /**

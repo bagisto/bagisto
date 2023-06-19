@@ -24,9 +24,11 @@
             :title="trans('Description')"
             :is-selected="true"
         >
-            <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                {!! $product->description !!}
-            </p>
+            <div class="container mt-[60px] max-1180:px-[20px]">
+                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    {!! $product->description !!}
+                </p>
+            </div>
         </x-shop::tabs.item>
 
         <x-shop::tabs.item
@@ -35,16 +37,18 @@
             :title="trans('Additional Information')"
             :is-selected="false"
         >
-            <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                @foreach ($customAttributeValues as $values)
-                    <div class="grid">
-                        <p class="text-[16px] text-black">{{ $values['label'] }}</p>
-                    </div>
-                    <div class="grid">
-                        <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
-                    </div>
-                @endforeach
-            </p>
+            <div class="container mt-[60px] max-1180:px-[20px]">
+                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    @foreach ($customAttributeValues as $values)
+                        <div class="grid">
+                            <p class="text-[16px] text-black">{{ $values['label'] }}</p>
+                        </div>
+                        <div class="grid">
+                            <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
+                        </div>
+                    @endforeach
+                </p>
+            </div>
         </x-shop::tabs.item>
 
         <x-shop::tabs.item

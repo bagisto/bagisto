@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-review-template">
-        <div>
+        <div class="container mt-[60px] max-1180:px-[20px]">
             <!-- Write Review Section -->
             <div class="w-full" v-if="canReview">
                 <x-shop::form
@@ -176,7 +176,7 @@
                             >
                         </div>
 
-                        <div>
+                        <div class="w-full">
                             <div class="flex justify-between">
                                 <p
                                     class="text-[20px] font-medium max-sm:text-[16px]"
