@@ -992,10 +992,10 @@
 
                                     <div 
                                         class="flex text-right justify-between"
-                                        v-if="reviewCart.base_discount_amount && reviewCart.base_discount_amount > 0"
+                                        v-if="reviewCart.base_discount_amount && parseFloat(reviewCart.base_discount_amount) > 0"
                                     >
-                                        <p class="text-[16px]">@lang('Discount amount')</p>
-                                        <p class="text-[26px] font-medium">@{{ reviewCart.base_discount_amount }}</p>
+                                        <p class="text-[16px] mr-2">@lang('Discount amount')</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewCart.formatted_base_discount_amount }}</p>
                                     </div>
 
                                     <div class="flex text-right justify-between">
@@ -1041,8 +1041,8 @@
                         class="flex text-right justify-between"
                         v-if="parseFloat(cart.base_tax_total)"
                     >
-                        <div v-for="(amount, index) in cart.base_tax_amounts">
-                            <p class="text-[16px]">@{{ index }}</p>
+                        <div v-for="(amount, taxRate) in cart.base_tax_amounts">
+                            <p class="text-[16px]">Tax @{{ taxRate }}%</p>
                             <p class="text-[16px] font-medium">@{{ amount }}</p>
                         </div>
                     </div>
@@ -1051,22 +1051,102 @@
                         class="flex text-right justify-between"
                         v-if="cart.selected_shipping_rate"
                     >
-                        <p class="text-[16px]">@lang('Tax')</p>
+                        <p class="text-[16px]">@lang('Delivery Charges')</p>
                         <p class="text-[16px] font-medium">@{{ cart.selected_shipping_rate }}</p>
                     </div>
 
                     <div 
                         class="flex text-right justify-between"
-                        v-if="cart.base_discount_amount && cart.base_discount_amount > 0"
+                        v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
                     >
                         <p class="text-[16px]">@lang('Discount amount')</p>
-                        <p class="text-[26px] font-medium">@{{ cart.base_discount_amount }}</p>
+                        <p class="text-[16px] font-medium">@{{ cart.formatted_base_discount_amount }}</p>
                     </div>
+
+                    <v-coupon :is-coupon-applied="cart.coupon_code"></v-coupon>
 
                     <div class="flex text-right justify-between">
                         <p class="text-[16px] mr-2">@lang('Grand total')</p>
                         <p class="text-[16px] font-medium"> @{{ cart.base_grand_total }}</p>
                     </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/x-template" id="v-coupon-template">
+            <div>   
+                <div class="flex text-right justify-between">
+                    <p class="text-[16px] mr-2">@lang('shop::app.checkout.cart.coupon.discount')</p>
+                    <p class="text-[16px] font-medium cursor-pointer">
+                        <x-shop::modal>
+                            <x-slot:toggle>
+                                <span class="text-navyBlue">
+                                    @lang('shop::app.checkout.cart.coupon.apply')
+                                </span>
+                            </x-slot:toggle>
+
+                            <x-slot:header>
+                                @lang('shop::app.checkout.cart.coupon.apply')
+                            </x-slot:header>
+
+                            <x-slot:content>
+
+                                <x-shop::form
+                                    v-slot="{ meta, errors, handleSubmit }"
+                                    as="div"
+                                >
+                                    <form @submit="handleSubmit($event, applyCoupon)">
+                                        <x-shop::form.control-group>
+                                            <x-shop::form.control-group.label>
+                                                @lang('shop::app.checkout.cart.coupon.code')
+                                            </x-shop::form.control-group.label>
+
+                                            <x-shop::form.control-group.control
+                                                type="text"
+                                                name="code"
+                                                placeholder="Enter your code"
+                                                rules="required"
+                                            >
+                                            </x-shop::form.control-group.control>
+
+                                            <x-shop::form.control-group.error
+                                                control-name="code"
+                                            >
+                                            </x-shop::form.control-group.error>
+                                        </x-shop::form.control-group>
+
+                                        <button
+                                            type="submit"
+                                            class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                        >
+                                            @lang('shop::app.customers.account.save')
+                                        </button>
+                                    </form>
+                                </x-shop::form>
+                            </x-slot:content>
+                        </x-shop::modal>
+
+                        <div 
+                            class="text-[12px] font-small flex justify-between items-center"
+                            v-if="isCouponApplied"
+                        >
+                            <p class="text-[12px] mr-2">@lang('Applied coupon')</p>
+                            
+                            <p 
+                                class="text-[16px] font-medium cursor-pointer text-navyBlue"
+                                title="@lang('Applied coupon')"
+                            >
+                                "@{{ isCouponApplied }}"
+                            </p>
+
+                            <span 
+                                class="icon-cancel text-[30px] cursor-pointer"
+                                title="@lang('Remove coupon')"
+                                @click="destroyCoupon"
+                            >
+                            </span>
+                        </div>
+                    </p>
                 </div>
             </div>
         </script>
@@ -1077,13 +1157,36 @@
                 template: '#v-cart-summary-template',
                 
                 props: ['cart'],
+            })
 
-                data() {
-                    return  {}
-                },
+            app.component('v-coupon', {
+                template: '#v-coupon-template',
+                
+                props: ['isCouponApplied'],
 
-                mounted() {
-                    console.log(this.cart);
+                methods: {
+                    applyCoupon(params) {
+                        this.$axios.post("{{ route('shop.checkout.cart.coupon.apply') }}", params)
+                            .then((response) => {
+                                alert(response.data.data.message)
+                                this.$parent.$parent.getOrderSummary();
+                            })
+                            .catch((error) => {console.log(error);})
+
+                    },
+
+                    destroyCoupon() {
+                        this.$axios.delete("{{ route('shop.checkout.cart.coupon.remove') }}", {
+                                '_token': "{{ csrf_token() }}"
+                            })
+                            .then((response) => {
+
+                                this.$emit('updateOrderSummary')
+
+                                this.$parent.$parent.getOrderSummary();
+                            })
+                            .catch(error => console.log(error));
+                    }
                 }
             })
 
@@ -1162,6 +1265,9 @@
                                 shipping_method: selectedShippingMethod,
                             })
                             .then(response => {
+                                /*
+                                 * Calling v-checkout's getOrderSummary method component(parent component) getOrdersSummary for update cart summary data.
+                                 */
                                 this.$parent.getOrderSummary();
 
                                 this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;

@@ -3,7 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Cart;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
@@ -33,12 +33,10 @@ class CartController extends Controller
 
     /**
      * Apply coupon to the cart.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function storeCoupon()
+    public function storeCoupon(): JsonResource
     {
-        $couponCode = request()->get('code');
+        $couponCode = request()->input('code');
 
         try {
             if (strlen($couponCode)) {
@@ -46,45 +44,40 @@ class CartController extends Controller
 
                 if ($coupon->cart_rule->status) {
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        session()->flash('success', trans('shop::app.checkout.cart.coupon-already-applied'));
-
-                        return redirect()->back();
+                        return new JsonResource([
+                            'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
+                        ]);
                     }
 
                     Cart::setCouponCode($couponCode)->collectTotals();
 
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        session()->flash('success', trans('shop::app.checkout.cart.coupon.success-apply'));
-
-                        return redirect()->back();
+                        return new JsonResource([
+                            'message'  => trans('shop::app.checkout.cart.coupon.success-apply'),
+                        ]);
                     }
                 }
             }
 
-            session()->flash('danger', trans('shop::app.checkout.cart.coupon.invalid'));
-
-            return redirect()->back();
-
+            return new JsonResource([
+                'message'  => trans('shop::app.checkout.cart.coupon.invalid'),
+            ]);
         } catch (\Exception $e) {
-            report($e);
-
-            session()->flash('warning', trans('shop::app.checkout.cart.coupon.apply-issue'));
-
-            return redirect()->back();
+            return new JsonResource([
+                'message'  => trans('shop::app.checkout.cart.coupon.apply-issue'),
+            ]);
         }
     }
 
     /**
      * Remove applied coupon from the cart.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function destroyCoupon()
+    public function destroyCoupon(): JsonResource
     {
         Cart::removeCouponCode()->collectTotals();
 
-        session()->flash('warning', trans('shop::app.checkout.cart.coupon.remove'));
-
-        return redirect()->back();
+        return new JsonResource([
+            'message'  => trans('shop::app.checkout.cart.coupon.remove'),
+        ]);
     }
 }
