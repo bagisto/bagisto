@@ -41,10 +41,15 @@
                 <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
                     @foreach ($customAttributeValues as $values)
                         <div class="grid">
-                            <p class="text-[16px] text-black">{{ $values['label'] }}</p>
+                            <p class="text-[16px] text-black">
+                                {{ $values['label'] }}
+                            </p>
                         </div>
+
                         <div class="grid">
-                            <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
+                            <p class="text-[16px] text-[#7D7D7D]">
+                                {{ $values['value']??'-' }}
+                            </p>
                         </div>
                     @endforeach
                 </p>
@@ -120,7 +125,9 @@
                                 </x-shop::products.star-rating>
 
                                 <div class="flex gap-[15px] items-center">
-                                    <p class="text-[#7D7D7D] text-[14px]">({{ count($product->reviews) }} reviews)</p>
+                                    <p class="text-[#7D7D7D] text-[14px]">
+                                        ({{ count($product->reviews) }} reviews)
+                                    </p>
                                 </div>
                             </div>
 
@@ -252,7 +259,7 @@
                     addToWishlist() {
                         this.$axios.post('{{ route("shop.api.customers.account.wishlist.store", $product->id) }}')
                             .then(response => {
-                                alert(response.data.message);
+                                alert(response.data.data.message);
                             })
                             .catch(error => {});
                     },
