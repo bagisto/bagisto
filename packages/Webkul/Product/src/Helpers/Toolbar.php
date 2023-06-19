@@ -130,98 +130,40 @@ class Toolbar
     }
 
     /**
-     * Returns the mode url.
-     *
-     * @param  string  $mode
-     * @return string
+     * Returns available modes.
      */
-    public function getModeUrl($mode)
+    public function getAvailableModes(): Collection
     {
-        return $this->fullUrlWithQuery([
-            'mode' => $mode,
-        ]);
+        return collect(['grid', 'list']);
     }
 
     /**
-     * Checks if mode is active.
+     * Returns default mode.
      *
-     * @param  string  $key
-     * @return bool
+     * @return integer
      */
-    public function isModeActive($key)
+    public function getDefaultMode(): string
     {
-        $params = request()->input();
-
-        $defaultMode = core()->getConfigData('catalog.products.storefront.mode') ?: 'grid';
-
-        if (
-            request()->input() == null
-            && $key == $defaultMode
-        ) {
-            return true;
-        } elseif (
-            isset($params['mode'])
-            && $key == $params['mode']
-        ) {
-            return true;
-        }
-
-        return false;
+        return 'grid';
     }
 
     /**
-     * Returns the current mode.
-     *
-     * @return string
+     * Get mode.
      */
-    public function getCurrentMode()
+    public function getMode(array $params): string
     {
-        $params = request()->input();
+        /**
+         * Set a default value for the 'mode' parameter,
+         * in case it is not provided.
+         */
+        $mode = $params['mode'] ?? $this->getDefaultMode();
 
-        if (isset($params['mode'])) {
-            return $params['mode'];
-        }
-
-        return core()->getConfigData('catalog.products.storefront.mode') ?: 'grid';
-    }
-
-    /**
-     * Returns the view option if mode is set by param then it will overwrite default one and return new mode.
-     *
-     * @return string
-     */
-    public function getViewOption()
-    {
-        /* checking default option first */
-        $viewOption = core()->getConfigData('catalog.products.storefront.mode');
-
-        /* checking mode param if exist then overwrite the default option */
-        if ($this->isModeActive('grid')) {
-            $viewOption = 'grid';
-        }
-
-        /* checking mode param if exist then overwrite the default option */
-        if ($this->isModeActive('list')) {
-            $viewOption = 'list';
-        }
-
-        /* if still default config is not set from the admin then in last needed hardcoded value */
-        return $viewOption ?? 'grid';
-    }
-
-    /**
-     * Returns the query string. As request built in method does not able to handle the
-     * multiple question marks, this method will check the query string and append the query string.
-     *
-     * @param  array  $additionalQuery
-     * @return string
-     */
-    public function fullUrlWithQuery($additionalQuery)
-    {
-        $requestQuery = array_merge(request()->query(), $additionalQuery);
-
-        $queryString = http_build_query($requestQuery);
-
-        return url()->current() . '?' . $queryString;
+        /**
+         * If the 'mode' parameter is present but value not present
+         * in available modes, use the default mode instead.
+         */
+        return in_array($mode, $this->getAvailableModes()->toArray())
+            ? $mode
+            : $this->getDefaultMode();
     }
 }

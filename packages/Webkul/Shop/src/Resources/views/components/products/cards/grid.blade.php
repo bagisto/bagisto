@@ -1,11 +1,11 @@
-<product-card
+<product-grid
     {{ $attributes }}
     :product="product"
 >
-</product-card>
+</product-grid>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="product-card-template">
+    <script type="text/x-template" id="product-grid-template">
         <div class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'>
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <div
@@ -15,15 +15,17 @@
                     <img class="rounded-sm bg-[#F5F5F5]" src="">
                 </div>
 
-                <img
-                    class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                    :src="product.base_image.medium_image_url"
-                    width="291"
-                    height="300"
-                    @load="onImageLoad()"
-                    v-show="! isImageLoading"
-                >
-
+                <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
+                    <img
+                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                        :src="product.base_image.medium_image_url"
+                        width="291"
+                        height="300"
+                        @load="onImageLoad()"
+                        v-show="! isImageLoading"
+                    >
+                </a>   
+                 
                 <div class="action-items bg-black">
                     <p
                         class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
@@ -31,6 +33,14 @@
                     >
                         {{-- @translations --}}
                         @lang('New')
+                    </p>
+
+                    <p
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.on_sale"
+                    >
+                        {{-- @translations --}}
+                        @lang('Sale')
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -75,8 +85,8 @@
     </script>
 
     <script type="module">
-        app.component('product-card', {
-            template: '#product-card-template',
+        app.component('product-grid', {
+            template: '#product-grid-template',
 
             props: ['product'],
 
