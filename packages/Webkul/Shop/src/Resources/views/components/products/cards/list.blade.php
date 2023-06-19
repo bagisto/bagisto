@@ -1,11 +1,11 @@
-<product-list
+<v-product-list
     {{ $attributes }}
     :product="product"
 >
-</product-list>
+</v-product-list>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="product-list-template">
+    <script type="text/x-template" id="v-product-list-template">
         <div class="flex gap-[20px] rounded-[12px] p-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
@@ -74,8 +74,8 @@
     </script>
 
     <script type="module">
-        app.component('product-list', {
-            template: '#product-list-template',
+        app.component('v-product-list', {
+            template: '#v-product-list-template',
 
             props: ['product'],
 
