@@ -22,7 +22,7 @@ class CartResource extends JsonResource
             'grand_total'                    => $this->grand_total,
             'base_sub_total'                 => core()->currency($this->base_sub_total),
             'base_tax_total'                 => $this->base_tax_total,
-            'base_tax_amounts'               => Tax::getTaxRatesWithAmount($this, true),
+            'base_tax_amounts'               => collect(Tax::getTaxRatesWithAmount($this, true)),
             'formatted_base_discount_amount' => core()->currency($this->base_discount_amount),
             'base_discount_amount'           => $this->base_discount_amount,
             'base_grand_total'               => core()->currency($this->base_grand_total),

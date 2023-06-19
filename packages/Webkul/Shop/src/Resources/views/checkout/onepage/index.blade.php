@@ -23,7 +23,11 @@
                     </div>
                     
                     {{-- Cart summary --}}
-                    <v-cart-summary ref="vSartSummary" :cart="cart"></v-cart-summary>
+                    <v-cart-summary
+                        ref="vCartSummary"
+                        :cart="cart"
+                    >
+                    </v-cart-summary>
                 </div>
             </div>
         </script>
@@ -974,20 +978,19 @@
 
                                     <div 
                                         class="flex text-right justify-between"
-                                        v-if="reviewCart.selected_shipping_rate"
+                                        v-for="(amount, index) in reviewCart.base_tax_amounts"
+                                        v-if="parseFloat(reviewCart.base_tax_total)"
                                     >
-                                        <p class="text-[16px]">@lang('Tax')</p>
-                                        <p class="text-[16px] font-medium">@{{ reviewCart.selected_shipping_rate }}</p>
+                                        <p class="text-[16px]">Tax (@{{ index }})%</p>
+                                        <p class="text-[16px] font-medium">@{{ amount }}</p>
                                     </div>
 
                                     <div 
                                         class="flex text-right justify-between"
-                                        v-if="reviewCart.base_tax_total"
+                                        v-if="reviewCart.selected_shipping_rate"
                                     >
-                                        <div v-for="(amount, index) in reviewCart.base_tax_amounts">
-                                            <p class="text-[16px]">@{{ index }}</p>
-                                            <p class="text-[16px] font-medium">@{{ amount }}</p>
-                                        </div>
+                                        <p class="text-[16px] mr-2">@lang('Delivery Charges')</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewCart.selected_shipping_rate }}</p>
                                     </div>
 
                                     <div 
@@ -1039,12 +1042,11 @@
 
                     <div 
                         class="flex text-right justify-between"
+                        v-for="(amount, index) in cart.base_tax_amounts"
                         v-if="parseFloat(cart.base_tax_total)"
                     >
-                        <div v-for="(amount, taxRate) in cart.base_tax_amounts">
-                            <p class="text-[16px]">Tax @{{ taxRate }}%</p>
-                            <p class="text-[16px] font-medium">@{{ amount }}</p>
-                        </div>
+                        <p class="text-[16px]">Tax (@{{ index }})%</p>
+                        <p class="text-[16px] font-medium">@{{ amount }}</p>
                     </div>
 
                     <div 
@@ -1130,7 +1132,7 @@
                             class="text-[12px] font-small flex justify-between items-center"
                             v-if="isCouponApplied"
                         >
-                            <p class="text-[12px] mr-2">@lang('Applied coupon')</p>
+                            <p class="text-[12px] mr-2">@lang('Coupon applied')</p>
                             
                             <p 
                                 class="text-[16px] font-medium cursor-pointer text-navyBlue"
