@@ -39,10 +39,10 @@
                         
                         <div>
                             <input 
+                                class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="file"
                                 name="image"
                                 @change="selectReviewImage"
-                                class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             />
 
                             <x-shop::form.control-group>
@@ -52,6 +52,7 @@
 
                                 <x-shop::products.star-rating
                                     ::name="review.rating"
+                                    :value="old('rating') ?? 5"
                                     :disabled="false"
                                     rules="required"
                                     :label="trans('shop::app.products.rating')"
@@ -72,6 +73,7 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="title"
+                                    :value="old('title')"
                                     class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
                                     :label="trans('shop::app.products.title')"
@@ -168,7 +170,7 @@
                         <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
                             <img
                                 class="rounded-[12px]"
-                                src='{{ bagisto_asset("images/review-man.png") }}'
+                                :src="review.image[0].small_image_url"
                                 title=""
                                 alt=""
                             >
@@ -275,12 +277,14 @@
                 },
 
                 store(params) {
+                    let { title, comment, rating } = params;
+
                     let formData = new FormData();
 
-                    formData.append('image', this.review.image);
-                    formData.append('title', params.title);
-                    formData.append('comment', params.comment);
-                    formData.append('rating', params.rating);
+                    formData.append('attachments[]', this.review.image);
+                    formData.append('title', title);
+                    formData.append('comment', comment);
+                    formData.append('rating', rating);
                     
                     this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', formData)
                         .then(response => {

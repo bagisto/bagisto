@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Product\Repositories\ProductReviewImageRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
 
 class ReviewController extends APIController
@@ -16,7 +17,8 @@ class ReviewController extends APIController
      */
     public function __construct(
         protected ProductRepository $productRepository,
-        protected ProductReviewRepository $productReviewRepository
+        protected ProductReviewRepository $productReviewRepository,
+        protected ProductReviewImageRepository $productReviewImageRepository
     ) {
     }
 
@@ -39,21 +41,16 @@ class ReviewController extends APIController
      */
     public function store($id): JsonResource
     {
-        dd(request()->all());
-        
         $this->validate(request(), [
             'title'   => 'required',
             'comment' => 'required',
             'rating'  => 'required|numeric|min:1|max:5',
         ]);
 
-        $data = [
-            'title'      => request()->input('title'),
-            'comment'    => request()->input('comment'),
-            'rating'     => request()->input('rating'),
+        $data = array_merge(request()->all(), [
             'status'     => 'pending',
             'product_id' => $id,
-        ];
+        ]);
 
         if ($customer = auth()->guard('customer')->user()) {
             $data = array_merge($data, [
@@ -62,7 +59,9 @@ class ReviewController extends APIController
             ]);
         }
 
-        $this->productReviewRepository->create($data);
+        $review = $this->productReviewRepository->create($data);
+
+        $this->productReviewImageRepository->uploadImages($data, $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.submit-success'),

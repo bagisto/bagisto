@@ -23,10 +23,15 @@
                             id="{{ $review->product_id }}"
                         >
                             <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
-                                @php $image = product_image()->getProductBaseImage($review->product); @endphp
+                                @php $image = product_image()->getGalleryImages($review);@endphp
 
                                 <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
-                                    <img class="rounded-[12px]" src="{{ $image['small_image_url'] }}" title="" alt="">
+                                    <img 
+                                        class="rounded-[12px]" 
+                                        src="{{ $image[0]['small_image_url'] }}" 
+                                        title="" 
+                                        alt=""
+                                    >
                                 </div>
 
                                 <div class="w-full">
