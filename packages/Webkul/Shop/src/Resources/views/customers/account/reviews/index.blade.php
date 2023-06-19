@@ -28,7 +28,7 @@
                                 <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
                                     <img 
                                         class="rounded-[12px]" 
-                                        src="{{ $image[0]['small_image_url'] ?? bagisto_assets('images/review-man.png') }}" 
+                                        src="{{ $image[0]['small_image_url'] ?? bagisto_asset('images/small-product-placeholder.png') }}" 
                                         title="" 
                                         alt=""
                                     >
