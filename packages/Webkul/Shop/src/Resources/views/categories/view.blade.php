@@ -33,14 +33,20 @@
                         <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <x-shop::shimmer.products.card count="12"></x-shop::shimmer.products.card>
+                                <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                             </template>
 
                             <!-- Product Card Listing -->
-                            <template v-else>
-                                <x-shop::products.card v-for="product in products"></x-shop::products.card>
+                            <template v-if="! isLoading && filters.toolbar.mode === 'grid'">
+                                <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
                             </template>
                         </div>
+
+                        <div>
+                            <template v-if="! isLoading && filters.toolbar.mode === 'list'">
+                                <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
+                            </template>
+                        </div
 
                         <!-- Load More Button -->
                         <button

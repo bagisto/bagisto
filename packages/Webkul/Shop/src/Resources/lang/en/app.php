@@ -100,6 +100,7 @@ return [
                 'phone'           => 'Phone',
                 'street-address'  => 'Street Address',
                 'post-code'       => 'Post Code',
+                'empty-address'   => 'You have not added an address to your account yet.',
                 'create-success'  => 'Address have been successfully added.',
                 'edit-success'    => 'Address updated successfully.',
                 'default-delete'  => 'Default address cannot be changed.',
@@ -107,13 +108,14 @@ return [
             ],
 
             'orders' => [
-                'title'      => 'Orders',
-                'order_id'   => 'Order Id',
-                'order'      => 'Order',
-                'order_date' => 'Order Date',
-                'total'      => 'Total',
-                'status'     => 'Status',
-                'action'     => 'Action',
+                'title'         => 'Orders',
+                'order_id'      => 'Order Id',
+                'order'         => 'Order',
+                'order_date'    => 'Order Date',
+                'total'         => 'Total',
+                'status'        => 'Status',
+                'action'        => 'Action',
+                'empty-order'   => 'You have not ordered any product yet',
 
                 'view' => [
                     'title'              => 'View',
@@ -363,6 +365,7 @@ return [
 
             'home'                   => 'Home',
             'cart-page'              => 'Cart Page',
+            'view-cart'              => 'View Cart',
             'product-name'           => 'Product Name',
             'remove'                 => 'Remove',
             'quantity'               => 'Quantity',

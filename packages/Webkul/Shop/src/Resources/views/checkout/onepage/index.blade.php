@@ -27,7 +27,7 @@
                     </div>
                     
                     {{-- Cart summary --}}
-                    @include('shop::checkout.onepage.cart-summary')
+                    <v-cart-summary></v-cart-summary>
                 </div>
             </div>
         </script>
@@ -839,9 +839,9 @@
                     </x-slot:header>
 
                     <x-slot:content>
-                        <div class="flex flex-wrap gap-[29px] mt-[30px] mb-5">
+                        <div class="flex flex-wrap gap-[29px] mb-5">
                             <div 
-                                class="relative"
+                                class="relative cursor-pointer"
                                 v-for="(payment, index) in paymentMethods"
                             >
                                 <input 
@@ -853,14 +853,14 @@
                                     @change="paymentMethodSelected(payment)"
                                 >
 
-                                <label :for="payment.method" class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select"></label>
+                                <label :for="payment.method" class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"></label>
 
-                                <label :for="payment.method" class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px]">
+                                <label :for="payment.method" class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] cursor-pointer">
                                     <img class="mx-w-[55px] max-h-[45px]" src="http://192.168.15.143/Velocity/resources/images/payapl.svg" alt="" title="">
                                     <p class="text-[14px] font-semibold mt-[5px]">@{{ payment.method_title }} </p>
                                     <p class="text-[12px] font-medium mt-[10px]">@{{ payment.description }}</p>
                                 </label>
-                                {{-- Toto implement the additionalDetails --}}
+                                {{-- Todo implement the additionalDetails --}}
                                 {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}
                             </div>
                         </div>
@@ -917,35 +917,96 @@
                         <div v-for="item in reviewHtml.items" :key="item">
                             <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px]">
                                 <div class="flex gap-x-[15px] pb-[20px]">
-                                  <img
-                                    class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
-                                    :src="item.image.medium_image_url"
-                                    title=""
-                                    alt=""
-                                  />
-                                  <div>
+                                    <img
+                                        class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
+                                        :src="item.image.medium_image_url"
+                                        title=""
+                                        alt=""
+                                    />
+                                    <div>
+                                        {{-- Need to discussed with (@devansh-sir) about these events --}}
+                                        {{-- {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!} --}}
 
-                                    {{-- Need to discussed with (@devansh-sir) about these events --}}
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!} --}}
+                                        <p class="text-[26px] font-medium text-navyBlue">@{{ item.name }}</p>
 
-                                    <p class="text-[26px] font-medium mt-[10px] text-navyBlue">@{{ item.name }}</p>
+                                        {{-- {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
+                                        {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!} --}}
 
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
-                                    {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!} --}}
+                                        <p class="text-[18px] font-medium mt-[10px]">@{{ item.formatted_total }}</p>
 
-                                    <p class="text-[18px] font-medium mt-[10px]">@{{ item.formatted_total }}</p>
+                                        {{-- {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
+                                        {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!} --}}
 
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
-                                    {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!} --}}
+                                        <p class="text-[18px]">@{{ item.formatted_price }} X @{{ item.quantity }} (@lang('Quantity'))</p>
 
-                                    <p class="text-[18px]">@{{ item.formatted_total }} X @{{ item.quantity }} (@lang('Quantity'))</p>
+                                        {{-- {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
 
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
-
-                                    {!! view_render_event('bagisto.shop.checkout.options.before', ['item' => $item]) !!} --}}
-                                  </div>
+                                        {!! view_render_event('bagisto.shop.checkout.options.before', ['item' => $item]) !!} --}}
+                                    </div>
                                 </div>
                                 {{-- Need to show additionl data of product --}}
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+                                    <div v-if="reviewHtml.haveStockableItems">
+                                        <p class="text-[16px] font-medium">@{{ reviewHtml.selected_shipping_rate }}</p>
+                                        <p class="text-[16px]">@{{ reviewHtml.selected_shipping_rate_method }}</p>
+                                    </div>
+                                    
+                                    <div>
+                                        <p class="text-[16px]">@lang('Payment method')</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewHtml.payment_method }}</p>
+                                    </div>
+
+                                    <div
+                                        class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                        @click="placeOrder"
+                                    >
+                                        @lang('Place Order')
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+                                    <div class="flex text-right justify-between">
+                                        <p class="text-[16px]">@lang('Subtotal')</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewHtml.base_sub_total  }}</p>
+                                    </div>
+
+                                    <div 
+                                        class="flex text-right justify-between"
+                                        v-if="reviewHtml.selected_shipping_rate"
+                                    >
+                                        <p class="text-[16px]">@lang('Tax 0 %')</p>
+                                        <p class="text-[16px] font-medium">@{{ reviewHtml.selected_shipping_rate }}</p>
+                                    </div>
+
+                                    <div 
+                                        class="flex text-right justify-between"
+                                        v-if="reviewHtml.base_tax_total"
+                                    >
+                                        <div v-for="(amount, index) in reviewHtml.base_tax_amounts">
+                                            <p class="text-[16px]">@{{ index }}</p>
+                                            <p class="text-[16px] font-medium">@{{ amount }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div 
+                                        class="flex text-right justify-between"
+                                        v-if="reviewHtml.base_discount_amount && reviewHtml.base_discount_amount > 0"
+                                    >
+                                        <p class="text-[16px]">@lang('Discount amount')</p>
+                                        <p class="text-[26px] font-medium">@{{ reviewHtml.base_discount_amount }}</p>
+                                    </div>
+
+                                    <div class="flex text-right justify-between">
+                                        <p class="text-[16px] mr-2">@lang('Grand total')</p>
+                                        <p class="text-[16px] font-medium"> @{{ reviewHtml.base_grand_total }}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </x-slot:content>
@@ -953,7 +1014,55 @@
             </div>
         </script>
 
+        <script type="text/x-template" id="v-cart-summary-template">
+            <div class="w-[442px] max-w-full pl-[30px] h-max sticky top-[30px]">
+                <h2 class="text-[26px] font-medium">Cart Summary</h2>
+                <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px]">
+                    <div class="flex gap-x-[15px] pb-[20px]">
+                        <img class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
+                            src="http://192.168.15.143/Velocity/resources/images/mini-cart-img.png" title="" alt="">
+                        <div class="">
+                            <p class="text-[16px]">Slim High Ankle Jeans</p>
+                            <p class="text-[18px] font-medium mt-[10px]">$100</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid gap-[15px] mt-[25px] mb-[30px]">
+                    <div class="flex text-right justify-between">
+                        <p class="text-[16px]">Subtotal</p>
+                        <p class="text-[16px] font-medium">$1,060.00</p>
+                    </div>
+                    <div class="flex text-right justify-between">
+                        <p class="text-[16px]">Tax 0 %</p>
+                        <p class="text-[16px] font-medium">$0.00</p>
+                    </div>
+                    <div class="flex text-right justify-between">
+                        <p class="text-[16px]">Coupon Discount</p>
+                        <p class="text-[16px] font-medium">Apply Coupon</p>
+                    </div>
+                    <div class="flex text-right justify-between">
+                        <p class="text-[16px]">Grand Total</p>
+                        <p class="text-[26px] font-medium">$530.00</p>
+                    </div>
+                </div>
+                <div
+                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
+                    Proceed To Checkout</div>
+            </div>
+        </script>
+
         <script type="module">
+
+            app.component('v-cart-summary', {
+                template: '#v-cart-summary-template',
+
+                data() {
+                    return  {
+
+                    }
+                },
+            })
+
             app.component('v-review-summary', {
                 template: '#v-review-summary-template',
 
@@ -962,6 +1071,30 @@
                         isShowReviewSummary: false,
 
                         reviewHtml: {},
+                    }
+                }, 
+
+                methods: {
+                    placeOrder() {
+                        this.$axios.post("{{ route('shop.checkout.save_order') }}", {
+                                '_token': "{{ csrf_token() }}"
+                            })
+                            .then(response => {
+                                console.log(JSON.stringify(response))
+                                if (response.data.success) {
+                                    if (response.data.redirect_url) {
+                                        window.location.href = response.data.redirect_url;
+                                    } else {
+                                        window.location.href = "{{ route('shop.checkout.success') }}";
+                                    }
+                                }
+                            })
+                            .catch(error => {
+                                this.disable_button = true;
+                                this.$root.hideLoader();
+
+                                window.showAlert(`alert-danger`, this.__('shop.general.alert.danger'), error.response.data.message ? error.response.data.message : "{{ __('shop::app.common.error') }}");
+                            })
                     }
                 }
             })  
@@ -1008,7 +1141,7 @@
                     save(selectedShippingMethod) {
                         this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
 
-                        this.$axios.post("{{ route('shop.checkout.save_shipping') }}", {
+                        this.$axios.post("{{ route('shop.checkout.save_shipping') }}", {    
                                 shipping_method: selectedShippingMethod,
                             })
                             .then(response => {

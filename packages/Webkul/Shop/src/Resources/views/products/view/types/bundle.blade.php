@@ -227,7 +227,7 @@
                 },
 
                 created() {
-                    this.value = this.option.products.find(data => data.id == this.selected_product ?? 0)
+                    this.value = this.option.products.find(data => data.id == this.selected_product)
 
                     this.$emit('selected-product', this.value.id);
                 },
