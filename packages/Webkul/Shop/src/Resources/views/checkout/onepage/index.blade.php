@@ -913,6 +913,41 @@
                                 </ul>
                             </div>
                         </div>
+                        
+                        <div v-for="item in reviewHtml.items" :key="item">
+                            <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px]">
+                                <div class="flex gap-x-[15px] pb-[20px]">
+                                  <img
+                                    class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
+                                    :src="item.image.medium_image_url"
+                                    title=""
+                                    alt=""
+                                  />
+                                  <div>
+
+                                    {{-- Need to discussed with (@devansh-sir) about these events --}}
+                                    {{-- {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!} --}}
+
+                                    <p class="text-[26px] font-medium mt-[10px] text-navyBlue">@{{ item.name }}</p>
+
+                                    {{-- {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
+                                    {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!} --}}
+
+                                    <p class="text-[18px] font-medium mt-[10px]">@{{ item.formatted_total }}</p>
+
+                                    {{-- {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
+                                    {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!} --}}
+
+                                    <p class="text-[18px]">@{{ item.formatted_total }} X @{{ item.quantity }} (@lang('Quantity'))</p>
+
+                                    {{-- {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
+
+                                    {!! view_render_event('bagisto.shop.checkout.options.before', ['item' => $item]) !!} --}}
+                                  </div>
+                                </div>
+                                {{-- Need to show additionl data of product --}}
+                            </div>
+                        </div>
                     </x-slot:content>
                 </x-shop::accordion>
             </div>
