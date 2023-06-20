@@ -23,10 +23,15 @@
                             id="{{ $review->product_id }}"
                         >
                             <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
-                                @php $image = product_image()->getProductBaseImage($review->product); @endphp
+                                @php $image = product_image()->getGalleryImages($review);@endphp
 
                                 <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
-                                    <img class="rounded-[12px]" src="{{ $image['small_image_url'] }}" title="" alt="">
+                                    <img 
+                                        class="rounded-[12px]" 
+                                        src="{{ $image[0]['small_image_url'] ?? bagisto_asset('images/small-product-placeholder.png') }}" 
+                                        title="" 
+                                        alt=""
+                                    >
                                 </div>
 
                                 <div class="w-full">
@@ -36,21 +41,11 @@
                                         </p>
 
                                         <div class="flex gap-[10px] items-center">
-                                            {{-- For Active stars --}}
-                                            @if ($review->rating)
-                                                @for($i = 1; $i <= $review->rating; $i++)
-                                                    <span class="bg-[position:-151px_-229px] bs-main-sprite w-[14px] h-[14px]"></span>
-                                                @endfor
-                                            @endif
-
-                                            @php $remaining_stars = 5 - $review->rating; @endphp
-
-                                            {{-- For Inactive stars --}}
-                                            @if ($remaining_stars)
-                                                @for($i = 1; $i <= $remaining_stars; $i++)
-                                                    <span class="bg-[position:-151px_-253px] bs-main-sprite w-[14px] h-[14px]"></span>
-                                                @endfor
-                                            @endif
+                                            <x-shop::products.star-rating 
+                                                ::name="{{ json_encode($review->name) }}" 
+                                                ::value="{{ json_encode($review->rating) }}"
+                                            >
+                                            </x-shop::products.star-rating>
                                         </div>
                                     </div>
 

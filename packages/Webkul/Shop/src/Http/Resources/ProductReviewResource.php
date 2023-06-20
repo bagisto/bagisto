@@ -19,6 +19,7 @@ class ProductReviewResource extends JsonResource
             'name'       => $this->name,
             'comment'    => $this->comment,
             'rating'     => $this->rating,
+            'image'      => product_image()->getGalleryImages($this),
             'created_at' => $this->created_at->format('M d, Y'),
         ];
     }

@@ -84,10 +84,6 @@
                         <p class="text-[20px]">
                             @lang('shop::app.checkout.cart.empty-cart')
                         </p>
-                
-                        <div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
-                            @lang('shop::app.checkout.cart.return-to-shop')
-                        </div>
                     </div>
                 </div>
             </x-slot:content>
