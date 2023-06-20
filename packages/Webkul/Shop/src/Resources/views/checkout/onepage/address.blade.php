@@ -13,12 +13,12 @@
                         <x-shop::accordion>
                             <x-slot:header>
                                 <div class="flex justify-between items-center">
-                                    <h2 class="text-[26px] font-medium">@lang('Billing Address')</h2>
+                                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Billing Address')</h2>
                                 </div>
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <div class="grid mt-[30px] mb-[30px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr]">
+                                <div class="grid mt-[30px] mb-[30px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                                     <div 
                                         class="border border-[#e5e5e5] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
                                         v-for="(addresses, index) in availableAddresses"
@@ -69,13 +69,13 @@
                                         </label>
                                     </div>
 
-                                    <div 
+                                    <div
                                         class="flex justify-center items-center border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap cursor-pointer"
                                         @click="addNewBillingAddress"
                                     >
                                         <div class="flex gap-x-[10px] items-center">
                                             <span class="icon-plus text-[30px] p-[30px] border border-black rounded-full"></span>
-                                            <p>@lang('Add new Address')</p>
+                                            <p class="text-[16px]">@lang('Add new Address')</p>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                         <x-shop::accordion>
                             <x-slot:header>
                                 <div class="flex justify-between items-center">
-                                    <h2 class="text-[26px] font-medium">@lang('Billing Address')</h2>
+                                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Billing Address')</h2>
                                 </div>
                             </x-slot:header>
                         
@@ -427,7 +427,7 @@
                                 <x-shop::accordion>
                                     <x-slot:header>
                                         <div class="flex justify-between items-center">
-                                            <h2 class="text-[26px] font-medium">@lang('Shipping Address')</h2>
+                                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Shipping Address')</h2>
                                         </div>
                                     </x-slot:header>
                                 

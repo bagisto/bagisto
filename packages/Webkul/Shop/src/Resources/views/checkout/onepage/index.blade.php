@@ -7,7 +7,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-checkout-template">
             <div class="container px-[60px] max-lg:px-[30px]">
-                <div class="grid grid-cols-[1fr_auto] gap-[30px]">
+                <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
                     <div class="grid mt-[30px]">
                         @include('shop::checkout.onepage.address')
 

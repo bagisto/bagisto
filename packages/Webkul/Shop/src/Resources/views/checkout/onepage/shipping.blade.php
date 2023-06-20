@@ -6,14 +6,14 @@
             <x-shop::accordion>
                 <x-slot:header>
                     <div class="flex justify-between mt-2 items-center">
-                        <h2 class="text-[26px] font-medium">@lang('Shipping methods')</h2>
+                        <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Shipping methods')</h2>
                     </div>
                 </x-slot:header>
 
                 <x-slot:content>
                     <div class="flex">
                         <div
-                            class="relative max-w-[218px] select-none m-2"
+                            class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto m-2"
                             v-for="shippingMethod in shippingMethods"
                         >
                             <div v-for="rate in shippingMethod.rates">
