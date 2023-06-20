@@ -19,23 +19,23 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Checkout routes.
      */
-    Route::get('checkout/onepage', [OnepageController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::checkout.onepage',
-    ])->name('shop.checkout.onepage.index');
+    Route::controller(OnepageController::class)->prefix('checkout')->group(function () {
+        Route::get('onepage', 'index')->name('shop.checkout.onepage.index');
 
-    Route::get('checkout/summary', [OnepageController::class, 'summary'])->name('shop.checkout.summary');
-
-    Route::post('checkout/save-address', [OnepageController::class, 'saveAddress'])->name('shop.checkout.save_address');
-
-    Route::post('checkout/save-shipping', [OnepageController::class, 'saveShipping'])->name('shop.checkout.save_shipping');
-
-    Route::post('checkout/save-payment', [OnepageController::class, 'savePayment'])->name('shop.checkout.save_payment');
-
-    Route::post('checkout/check-minimum-order', [OnepageController::class, 'checkMinimumOrder'])->name('shop.checkout.check_minimum_order');
-
-    Route::post('checkout/save-order', [OnepageController::class, 'saveOrder'])->name('shop.checkout.save_order');
-
-    Route::get('checkout/success', [OnepageController::class, 'success'])->name('shop.checkout.success');
+        Route::get('summary', 'summary')->name('shop.checkout.summary');
+    
+        Route::post('save-address', 'saveAddress')->name('shop.checkout.save_address');
+    
+        Route::post('save-shipping', 'saveShipping')->name('shop.checkout.save_shipping');
+    
+        Route::post('save-payment', 'savePayment')->name('shop.checkout.save_payment');
+    
+        Route::post('check-minimum-order', 'checkMinimumOrder')->name('shop.checkout.check_minimum_order');
+    
+        Route::post('save-order', 'saveOrder')->name('shop.checkout.save_order');
+    
+        Route::get('success', 'success')->name('shop.checkout.success');
+    });
 
     Route::prefix('customer')->group(function () {
         /**

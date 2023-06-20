@@ -1,48 +1,103 @@
-<form data-vv-scope="shipping-form">
-    <div class="form-container">
-        <div class="form-header mb-30">
-            <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.shipping-method') }}</span>
-        </div>
+{!! view_render_event('bagisto.shop.checkout.shipping.method.before') !!}
+<v-shipping-method ref="vShippingMethod">
+    <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
+</v-shipping-method>
+{!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
 
-        <div class="shipping-methods">
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-shipping-method-template">
+        <template v-if="! isShowShippingMethod && isShippingLoading">
+            <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
+        </template>
 
-            <div class="control-group" :class="[errors.has('shipping-form.shipping_method') ? 'has-error' : '']">
+        <template v-if="isShowShippingMethod">
+            <x-shop::accordion>
+                <x-slot:header>
+                    <div class="flex justify-between mt-2 items-center">
+                        <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Shipping methods')</h2>
+                    </div>
+                </x-slot:header>
 
-                @foreach ($shippingRateGroups as $rateGroup)
-                    {!! view_render_event('bagisto.shop.checkout.shipping-method.before', ['rateGroup' => $rateGroup]) !!}
+                <x-slot:content>
+                    <div class="flex">
+                        <div
+                            class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto m-2"
+                            v-for="shippingMethod in shippingMethods"
+                        >
+                            <div v-for="rate in shippingMethod.rates">
+                                <input 
+                                    type="radio"
+                                    name="shipping_method"
+                                    :id="rate.method"
+                                    :value="rate.method"
+                                    class="hidden peer"
+                                    @change="save(rate.method)"
+                                >
 
-                    <span class="carrier-title" id="carrier-title" style="font-size:18px; font-weight: bold;">
-                        {{ $rateGroup['carrier_title'] }}
-                    </span>
-
-                    @foreach ($rateGroup['rates'] as $rate)
-                        <div class="checkout-method-group mb-20">
-                            <div class="line-one">
-                                <label class="radio-container">
-                                    <input v-validate="'required'" type="radio" id="{{ $rate->method }}" name="shipping_method" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.shipping-method') }}&quot;" value="{{ $rate->method }}" v-model="selected_shipping_method" @change="methodSelected()">
-                                    <span class="checkmark"></span>
+                                <label 
+                                    class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                    :for="rate.method"
+                                >
                                 </label>
-                                {{-- <label class="radio-view" for="{{ $rate->method }}"></label> --}}
-                                <b class="ship-rate method-label">{{ core()->currency($rate->base_price) }}</b>
-                            </div>
 
-                            <div class="line-two mt-5">
-                                <div class="method-summary">
-                                    <b>{{ $rate->method_title }}</b> - {{ __($rate->method_description) }}
-                                </div>
+                                <label 
+                                    class="block border border-[#E9E9E9] p-[20px] rounded-[12px] h-[190px] cursor-pointer"
+                                    :for="rate.method"
+                                >
+                                    <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
+
+                                    <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">@{{ rate.base_price }}</p>
+                                    
+                                    <p class="text-[12px] font-medium mt-[10px]">
+                                        <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
+                                    </p>
+                                </label>
                             </div>
                         </div>
+                    </div>
+                </x-slot:content>
+            </x-shop::accordion>
+        </template>
+    </script>
 
-                    @endforeach
+    <script type="module">
+        app.component('v-shipping-method', {
+            template: '#v-shipping-method-template',
 
-                    {!! view_render_event('bagisto.shop.checkout.shipping-method.after', ['rateGroup' => $rateGroup]) !!}
+            data() {
+                return {
+                    shippingMethods: [],
 
-                @endforeach
+                    isShowShippingMethod: false,
 
-                <span class="control-error" v-if="errors.has('shipping-form.shipping_method')">
-                    @{{ errors.first('shipping-form.shipping_method') }}
-                </span>
-            </div>
-        </div>
-    </div>
-</form>
+                    isShippingLoading: false,
+                }
+            },
+
+            methods: {
+                save(selectedShippingMethod) {
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                    this.$parent.$refs.vPaymentMethod.isPaymentLoading = true;
+
+                    this.$axios.post("{{ route('shop.checkout.save_shipping') }}", {    
+                            shipping_method: selectedShippingMethod,
+                        })
+                        .then(response => {
+                            this.$parent.getOrderSummary();
+
+                            this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;
+                                
+                            this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+
+                            this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
+
+                            this.$parent.$refs.vReview.isShowReviewSummary = false;
+                        })
+                        .catch(error => {})
+                },
+            }
+        })
+
+    </script>
+@endPushOnce

@@ -23,7 +23,7 @@
         <div class="">
             <img
                 class="bg-navyBlue w-[60px] h-[60px] rounded-full"
-                src=""
+                src="{{ bagisto_asset('images/user-placeholder.png') }}"
                 alt=""
                 title=""
             >

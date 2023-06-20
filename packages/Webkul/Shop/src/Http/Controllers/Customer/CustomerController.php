@@ -24,9 +24,6 @@ class CustomerController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Product\Repositories\ProductReviewRepository  $productReviewRepository
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
      */
     public function __construct(
@@ -162,36 +159,32 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        $id = auth()->guard('customer')->user()->id;
-
-        $data = request()->all();
-
-        $customerRepository = $this->customerRepository->findorFail($id);
+        $customerRepository = $this->customerRepository->findorFail(auth()->guard('customer')->user()->id);
 
         try {
-            if (Hash::check($data['password'], $customerRepository->password)) {
+            if (Hash::check(request()->input('password'), $customerRepository->password)) {
                 $orders = $customerRepository->all_orders->whereIn('status', ['pending', 'processing'])->first();
 
                 if ($orders) {
-                    session()->flash('error', trans('admin::app.response.order-pending', ['name' => 'Customer']));
+                    session()->flash('error', trans('shop::app.customers.account.profile.order-pending'));
 
                     return redirect()->route('shop.customers.account.profile.index');
                 } else {
-                    $this->customerRepository->delete($id);
+                    $this->customerRepository->delete(auth()->guard('customer')->user()->id);
 
-                    session()->flash('success', trans('admin::app.response.delete-success', ['name' => 'Customer']));
+                    session()->flash('success', trans('shop::app.customers.account.profile.delete-success'));
 
                     return redirect()->route('shop.customer.session.index');
                 }
             } else {
-                session()->flash('error', trans('shop::app.customer.account.address.delete.wrong-password'));
+                session()->flash('error', trans('shop::app.customers.account.profile.wrong-password'));
 
                 return redirect()->back();
             }
         } catch (\Exception $e) {
-            session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Customer']));
+            session()->flash('error', trans('shop::app.customers.account.profile.delete-failed'));
 
             return redirect()->route($this->_config['redirect']);
         }

@@ -102,7 +102,7 @@
                     if (self.removeIconEnabled) { 
                         self.removeIconEnabled = false;
 
-                        axios.delete('{{ route('shop.checkout.coupon.remove.coupon') }}')
+                        axios.delete('{{ route('shop.checkout.cart.coupon.remove') }}')
                         .then(function(response) {
                             self.$emit('onRemoveCoupon')
 

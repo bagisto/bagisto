@@ -82,12 +82,12 @@
                                     >
                                     </p>
     
-                                    <button 
-                                        type="button" 
+                                    <span
+                                        class="text-[#4D7EA8] cursor-pointer" 
                                         @click="removeItem(item.id)"
                                     >
                                         @lang('shop::app.checkout.cart.remove')
-                                    </button>
+                                </span>
                                 </div>
                             </div>
     
@@ -171,7 +171,7 @@
                                 >
                                     <x-shop::modal>
                                         <x-slot:toggle>
-                                            <span>
+                                            <span class="text-[#4D7EA8]">
                                                 @lang('shop::app.checkout.cart.coupon.apply')
                                             </span>
                                         </x-slot:toggle>
