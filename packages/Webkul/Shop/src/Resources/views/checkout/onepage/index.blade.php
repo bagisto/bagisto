@@ -146,7 +146,6 @@
                                         <x-shop::form.control-group.control
                                             type="text"
                                             name="billing[company_name]"
-                                            ::value="address.billing.company_name"
                                             label="Company name"
                                             placeholder="Company name"
                                             v-model="address.billing.company_name"
@@ -169,7 +168,6 @@
                                             <x-shop::form.control-group.control
                                                 type="text"
                                                 name="billing[first_name]"
-                                                ::value="address.billing.first_name"
                                                 label="First name"
                                                 rules="required"
                                                 placeholder="First name"
@@ -191,7 +189,6 @@
                                             <x-shop::form.control-group.control
                                                 type="text"
                                                 name="billing[last_name]"
-                                                ::value="address.billing.last_name"
                                                 label="Last name"
                                                 rules="required"
                                                 placeholder="Last name"
@@ -214,7 +211,6 @@
                                         <x-shop::form.control-group.control
                                             type="email"
                                             name="billing[email]"
-                                            ::value="address.billing.email"
                                             rules="required|email"
                                             label="Email"
                                             placeholder="email@example.com"
@@ -236,7 +232,6 @@
                                         <x-shop::form.control-group.control
                                             type="text"
                                             name="billing[address1][]"
-                                            ::value="address.billing.address1[0]"
                                             class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                             rules="required"
                                             label="Street address"
@@ -263,7 +258,6 @@
                                             <x-shop::form.control-group.control
                                                 type="select"
                                                 name="billing[country]"
-                                                ::value="address.billing.country"
                                                 class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                 rules="required"
                                                 label="Country"
@@ -289,7 +283,6 @@
                                             <x-shop::form.control-group.control
                                                 type="text"
                                                 name="billing[state]"
-                                                ::value="address.billing.state"
                                                 class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                 rules="required"
                                                 label="State"
@@ -302,7 +295,6 @@
                                             <x-shop::form.control-group.control
                                                 type="select"
                                                 name="billing[state]"
-                                                ::value="address.billing.state"
                                                 class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                 rules="required"
                                                 label="State"
@@ -336,7 +328,6 @@
                                             <x-shop::form.control-group.control
                                                 type="text"
                                                 name="billing[city]"
-                                                ::value="address.billing.city"
                                                 class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                 rules="required"
                                                 label="City"
@@ -359,7 +350,6 @@
                                             <x-shop::form.control-group.control
                                                 type="text"
                                                 name="billing[postcode]"
-                                                ::value="address.billing.postcode"
                                                 class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                 rules="required"
                                                 label="Zip/Postcode"
@@ -384,7 +374,6 @@
                                         <x-shop::form.control-group.control
                                             type="text"
                                             name="billing[phone]"
-                                            ::value="address.billing.phone"
                                             class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                             rules="required|numeric"
                                             label="Telephone"
@@ -406,7 +395,6 @@
                                                     <input 
                                                         type="checkbox" 
                                                         name="billing[isUseForShipping]"
-                                                        ::value="address.billing.isUseForShipping"
                                                         id="billing[isUseForShipping]" 
                                                         class="hidden peer"
                                                         v-model="address.billing.isUseForShipping"
@@ -429,7 +417,6 @@
                                                     <input 
                                                         type="checkbox"
                                                         name="billing[isSaveAsAddress]"
-                                                        ::value="address.billing.isSaveAsAddress"
                                                         id="billing[isSaveAsAddress]"
                                                         class="hidden peer"
                                                         v-model="address.billing.isSaveAsAddress"
@@ -484,7 +471,6 @@
                                                 <x-shop::form.control-group.control
                                                     type="text"
                                                     name="shipping[company_name]"
-                                                    ::value="address.shipping.company_name"
                                                     label="Company name"
                                                     placeholder="Company name"
                                                     v-model="address.shipping.company_name"
@@ -506,7 +492,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="text"
                                                         name="shipping[first_name]"
-                                                        ::value="address.shipping.first_name"
                                                         label="First name"
                                                         rules="required"
                                                         placeholder="First name"
@@ -528,7 +513,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="text"
                                                         name="shipping[last_name]"
-                                                        ::value="address.shipping.last_name"
                                                         label="Last name"
                                                         rules="required"
                                                         placeholder="Last name"
@@ -551,7 +535,6 @@
                                                 <x-shop::form.control-group.control
                                                     type="email"
                                                     name="shipping[email]"
-                                                    ::value="address.shipping.email"
                                                     rules="required|email"
                                                     label="Email"
                                                     placeholder="email@example.com"
@@ -573,7 +556,6 @@
                                                 <x-shop::form.control-group.control
                                                     type="text"
                                                     name="shipping[address1][]"
-                                                    ::value="address.shipping.address1[0]"
                                                     class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                     rules="required"
                                                     label="Street address"
@@ -599,7 +581,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="select"
                                                         name="shipping[country]"
-                                                        ::value="address.shipping.country"
                                                         class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                         rules="required"
                                                         label="Country"
@@ -626,7 +607,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="text"
                                                         name="shipping[state]"
-                                                        ::value="address.shipping.state"
                                                         class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                         rules="required"
                                                         label="State"
@@ -639,7 +619,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="select"
                                                         name="shipping[state]"
-                                                        ::value="address.shipping.state"
                                                         class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                         rules="required"
                                                         label="State"
@@ -673,7 +652,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="text"
                                                         name="shipping[city]"
-                                                        ::value="address.shipping.city"
                                                         class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                         rules="required"
                                                         label="City"
@@ -696,7 +674,6 @@
                                                     <x-shop::form.control-group.control
                                                         type="text"
                                                         name="shipping[postcode]"
-                                                        ::value="address.shipping.postcode"
                                                         class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                         rules="required"
                                                         label="Zip/Postcode"
@@ -721,7 +698,6 @@
                                                 <x-shop::form.control-group.control
                                                     type="text"
                                                     name="shipping[phone]"
-                                                    ::value="address.shipping.phone"
                                                     class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                                     rules="required|numeric"
                                                     label="Telephone"
@@ -743,7 +719,6 @@
                                                             <input 
                                                                 type="checkbox"
                                                                 name="billing[isSaveAsAddress]"
-                                                                ::value="address.billing.isSaveAsAddress"
                                                                 id="billing[isSaveAsAddress]"
                                                                 class="hidden peer"
                                                                 v-model="address.billing.isSaveAsAddress"
@@ -856,7 +831,7 @@
                                 <label :for="payment.method" class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"></label>
 
                                 <label :for="payment.method" class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] cursor-pointer">
-                                    <img class="mx-w-[55px] max-h-[45px]" src="http://192.168.15.143/Velocity/resources/images/payapl.svg" alt="" title="">
+                                    <img class="mx-w-[55px] max-h-[45px]" src="{{ bagisto_asset('images/paypal.png') }}" :alt="payment.method_title" :title="payment.method_title">
                                     <p class="text-[14px] font-semibold mt-[5px]">@{{ payment.method_title }} </p>
                                     <p class="text-[12px] font-medium mt-[10px]">@{{ payment.description }}</p>
                                 </label>
@@ -1014,7 +989,7 @@
         </script>
 
         <script type="text/x-template" id="v-cart-summary-template">
-            <div class="w-[442px] max-w-full pl-[30px] h-max sticky top-[30px]">
+            <div class="w-[442px] max-w-full pl-[30px] h-max sticky top-[30px] mt-[30px]">
                 <h2 class="text-[26px] font-medium">@lang('Cart Summary')</h2>
                 <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px]">
                     <div 
@@ -1428,17 +1403,25 @@
                     },
 
                     store() {
+                        this.assignAddress();
+                        
+                        if (this.address.billing.isUseForShipping) {
+                            this.address.shipping = this.address.billing;
+                        }
+                        
                         if (! this.address.billing.isSaveAsAddress) {
+                            /*
+                             * If the user not click on the save this address checkbox then the address1 array will take first index of address array
+                             */
+                            this.address.billing.address1 = this.address.billing.address1[0];
+
                             this.availableAddresses.push(this.address.billing);
                         } else {
-
-                            this.assignAddress();
-
                             this.$axios.post('{{ route("shop.checkout.save_address") }}', this.address)
                                 .then(response => {
                                     this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
                                     
-                                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = true
+                                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
                                     
                                     this.getCustomerAddress();
                                 })
