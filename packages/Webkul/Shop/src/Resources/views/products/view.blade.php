@@ -39,16 +39,16 @@
         >
             <div class="container mt-[60px] max-1180:px-[20px]">
                 <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                    @foreach ($customAttributeValues as $values)
+                    @foreach ($customAttributeValues as $customAttributeValue)
                         <div class="grid">
                             <p class="text-[16px] text-black">
-                                {{ $values['label'] }}
+                                {{ $customAttributeValue['label'] }}
                             </p>
                         </div>
 
                         <div class="grid">
                             <p class="text-[16px] text-[#7D7D7D]">
-                                {{ $values['value']??'-' }}
+                                {{ $customAttributeValue['value']??'-' }}
                             </p>
                         </div>
                     @endforeach
@@ -126,7 +126,7 @@
 
                                 <div class="flex gap-[15px] items-center">
                                     <p class="text-[#7D7D7D] text-[14px]">
-                                        ({{ count($product->reviews) }} reviews)
+                                        ({{ $product->reviews->count() }} reviews)
                                     </p>
                                 </div>
                             </div>

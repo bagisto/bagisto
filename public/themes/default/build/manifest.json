@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-46e84f94.css",
+    "file": "assets/app-480c8d37.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -107,6 +107,10 @@
   "src/Resources/assets/images/mini-cart-img.png": {
     "file": "assets/mini-cart-img-a078ffca.png",
     "src": "src/Resources/assets/images/mini-cart-img.png"
+  },
+  "src/Resources/assets/images/no-address.png": {
+    "file": "assets/no-address-740c7843.png",
+    "src": "src/Resources/assets/images/no-address.png"
   },
   "src/Resources/assets/images/our-collection-2.jpg": {
     "file": "assets/our-collection-2-1fa54a9e.jpg",

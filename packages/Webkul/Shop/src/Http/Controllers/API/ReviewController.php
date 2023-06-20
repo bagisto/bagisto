@@ -4,8 +4,8 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Product\Repositories\ProductReviewImageRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
 
 class ReviewController extends APIController
@@ -23,6 +23,13 @@ class ReviewController extends APIController
     }
 
     /**
+     * Using const variable for status
+     */
+    const STATUS_APPROVED = 'approved';
+
+    const STATUS_PENDING = ' pending';
+
+    /**
      * Product listings.
      *
      * @param  int  $id
@@ -30,10 +37,10 @@ class ReviewController extends APIController
     public function index($id): JsonResource
     {
         $product = $this->productRepository
-                    ->find($id)
-                    ->reviews()
-                    ->Where('status', 'Approved')
-                    ->paginate(2);
+            ->find($id)
+            ->reviews()
+            ->Where('status', self::STATUS_APPROVED)
+            ->paginate(8);
 
         return ProductReviewResource::collection($product);
     }
@@ -52,7 +59,7 @@ class ReviewController extends APIController
         ]);
 
         $data = array_merge(request()->all(), [
-            'status'     => 'pending',
+            'status'     => self::STATUS_PENDING,
             'product_id' => $id,
         ]);
 
