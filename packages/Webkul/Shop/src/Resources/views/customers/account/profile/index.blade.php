@@ -63,10 +63,48 @@
             </p>
         </div>
 
-        <div
-            class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-        >
-            @lang('shop::app.customers.account.profile.delete-profile')
-        </div>
+        <x-shop::modal>
+            <x-slot:toggle>
+                <div
+                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                >
+                    @lang('shop::app.customers.account.profile.delete-profile')
+                </div>
+            </x-slot:toggle>
+
+            <x-slot:header>
+                @lang('shop::app.customers.account.enter-password')
+            </x-slot:header>
+
+            <x-slot:content>
+                <x-form
+                    action="{{ route('shop.customers.account.profile.destroy') }}"
+                >
+                    <x-form.control-group>
+                        <x-form.control-group.label>
+                            @lang('shop::app.customers.account.password')
+                        </x-form.control-group.label>
+
+                        <x-form.control-group.control
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                        />
+
+                        <x-form.control-group.error
+                            control-name="password"
+                        >
+                        </x-form.control-group.error>
+                    </x-form.control-group>
+
+                    <button
+                        type="submit"
+                        class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                    >
+                        @lang('shop::app.customers.account.delete')
+                    </button>
+                </x-form>
+            </x-slot:content>
+        </x-shop::modal>
     </div>
 </x-shop::layouts.account>

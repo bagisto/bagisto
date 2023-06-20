@@ -79,6 +79,10 @@ return [
                 'current-password'  => 'Current Password',
                 'new-password'      => 'New Password',
                 'confirm-password'  => 'Confirm Password',
+                'delete-success'    => 'Customer deleted successfully',
+                'wrong-password'    => 'Wrong Password !',
+                'delete-failed'     => 'Error encountered while deleting customer.',
+                'order-pending'     => 'Cannot delete customer account because some Order(s) are pending or processing state.',
             ],
 
             'addresses' => [
@@ -233,8 +237,11 @@ return [
                 'remove-all-success' => 'All the items from your wishlist have been removed',
             ],
 
-            'title'   => 'Profile',
-            'save'    => 'Save',
+            'title'          => 'Profile',
+            'save'           => 'Save',
+            'delete'         => 'Delete',
+            'password'       => 'Password',
+            'enter-password' => 'Enter Your password',
         ],
     ],
 
