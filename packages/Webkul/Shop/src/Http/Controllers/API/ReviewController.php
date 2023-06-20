@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductReviewImageRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
 
@@ -16,9 +17,17 @@ class ReviewController extends APIController
      */
     public function __construct(
         protected ProductRepository $productRepository,
-        protected ProductReviewRepository $productReviewRepository
+        protected ProductReviewRepository $productReviewRepository,
+        protected ProductReviewImageRepository $productReviewImageRepository
     ) {
     }
+
+    /**
+     * Using const variable for status
+     */
+    const STATUS_APPROVED = 'approved';
+
+    const STATUS_PENDING = ' pending';
 
     /**
      * Product listings.
@@ -27,9 +36,13 @@ class ReviewController extends APIController
      */
     public function index($id): JsonResource
     {
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository
+            ->find($id)
+            ->reviews()
+            ->Where('status', self::STATUS_APPROVED)
+            ->paginate(8);
 
-        return ProductReviewResource::collection($product->reviews()->paginate(2));
+        return ProductReviewResource::collection($product);
     }
 
     /**
@@ -45,13 +58,10 @@ class ReviewController extends APIController
             'rating'  => 'required|numeric|min:1|max:5',
         ]);
 
-        $data = [
-            'title'      => request()->input('title'),
-            'comment'    => request()->input('comment'),
-            'rating'     => request()->input('rating'),
-            'status'     => 'pending',
+        $data = array_merge(request()->all(), [
+            'status'     => self::STATUS_PENDING,
             'product_id' => $id,
-        ];
+        ]);
 
         if ($customer = auth()->guard('customer')->user()) {
             $data = array_merge($data, [
@@ -60,7 +70,9 @@ class ReviewController extends APIController
             ]);
         }
 
-        $this->productReviewRepository->create($data);
+        $review = $this->productReviewRepository->create($data);
+
+        $this->productReviewImageRepository->uploadImages($data, $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.submit-success'),

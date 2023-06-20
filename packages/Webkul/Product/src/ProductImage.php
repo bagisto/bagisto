@@ -4,16 +4,14 @@ namespace Webkul\Product;
 
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Local\LocalFilesystemAdapter;
-use Webkul\Product\Helpers\AbstractProduct;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Contracts\Wishlist;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductImage
 {
     /**
      * Create a new helper instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(protected ProductRepository $productRepository)
@@ -51,7 +49,7 @@ class ProductImage
         if (
             ! $product->parent_id
             && ! count($images)
-            && ! count($product->videos)
+            && ! count($product->videos ?? [])
         ) {
             $images[] = $this->getFallbackImageUrls();
         }
@@ -83,7 +81,6 @@ class ProductImage
                 $product = $item->product;
             }
         } else {
-            
             $product = $item->product;
         }
 
@@ -134,7 +131,6 @@ class ProductImage
      * Get cached urls configured for intervention package.
      *
      * @param  string  $path
-     * @return array
      */
     private function getCachedImageUrls($path): array
     {
@@ -157,8 +153,6 @@ class ProductImage
 
     /**
      * Get fallback urls.
-     *
-     * @return array
      */
     private function getFallbackImageUrls(): array
     {
@@ -172,8 +166,6 @@ class ProductImage
 
     /**
      * Is driver local.
-     *
-     * @return bool
      */
     private function isDriverLocal(): bool
     {
