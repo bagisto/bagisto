@@ -304,10 +304,6 @@
 
                         return value;
                     },
-
-                    onSubmit() {
-                        console.log(this);
-                    }
                 },
             });
         </script>

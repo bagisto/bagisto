@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Cart;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;

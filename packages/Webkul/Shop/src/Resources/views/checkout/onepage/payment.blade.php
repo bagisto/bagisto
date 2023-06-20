@@ -1,51 +1,71 @@
-<form data-vv-scope="payment-form">
-    <div class="form-container">
-        <div class="form-header mb-30">
-            <span class="checkout-step-heading">{{ __('shop::app.checkout.onepage.payment-methods') }}</span>
-        </div>
+<v-payment-method ref="vPaymentMethod"></v-payment-method>
 
-        <div class="payment-methods">
-
-            <div class="control-group" :class="[errors.has('payment-form.payment[method]') ? 'has-error' : '']">
-
-                @foreach ($paymentMethods as $payment)
-
-                    {!! view_render_event('bagisto.shop.checkout.payment-method.before', ['payment' => $payment]) !!}
-
-                    <div class="checkout-method-group mb-20">
-                        <div class="line-one">
-                            <label class="radio-container">
-                                <input v-validate="'required'" type="radio" id="{{ $payment['method'] }}" name="payment[method]" value="{{ $payment['method'] }}" v-model="payment.method" @change="methodSelected()" data-vv-as="&quot;{{ __('shop::app.checkout.onepage.payment-method') }}&quot;">
-                                <span class="checkmark"></span>
-                            </label>
-                            <span class="payment-method method-label">
-                                <b>{{ $payment['method_title'] }}</b>
-                            </span>
-                        </div>
-
-                        <div class="line-two mt-5">
-                            <span class="method-summary">{{ __($payment['description']) }}</span>
-                        </div>
-
-                        <?php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($payment['method']); ?>
-
-                        @if (! empty($additionalDetails))
-                            <div class="instructions" v-show="payment.method == '{{$payment['method']}}'">
-                                <label>{{ $additionalDetails['title'] }}</label>
-                                <p>{{ $additionalDetails['value'] }}</p>
-                            </div>
-                        @endif
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-payment-method-template">
+        <div v-if="isShowPaymentMethod">
+            <x-shop::accordion>
+                <x-slot:header>
+                    <div class="flex justify-between mt-2 items-center">
+                        <h2 class="text-[26px] font-medium">@lang('Payment methods')</h2>
                     </div>
+                </x-slot:header>
 
-                    {!! view_render_event('bagisto.shop.checkout.payment-method.after', ['payment' => $payment]) !!}
+                <x-slot:content>
+                    <div class="flex flex-wrap gap-[29px] mb-5">
+                        <div 
+                            class="relative cursor-pointer"
+                            v-for="(payment, index) in paymentMethods"
+                        >
+                            <input 
+                                type="radio" 
+                                name="payment[method]" 
+                                :value="payment.payment"
+                                :id="payment.method"
+                                class="hidden peer"    
+                                @change="paymentMethodSelected(payment)"
+                            >
 
-                @endforeach
+                            <label :for="payment.method" class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"></label>
 
-                <span class="control-error" v-if="errors.has('payment-form.payment[method]')">
-                    @{{ errors.first('payment-form.payment[method]') }}
-                </span>
-
-            </div>
+                            <label :for="payment.method" class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] cursor-pointer">
+                                <img class="mx-w-[55px] max-h-[45px]" src="{{ bagisto_asset('images/paypal.png') }}" :alt="payment.method_title" :title="payment.method_title">
+                                <p class="text-[14px] font-semibold mt-[5px]">@{{ payment.method_title }} </p>
+                                <p class="text-[12px] font-medium mt-[10px]">@{{ payment.description }}</p>
+                            </label>
+                            {{-- Todo implement the additionalDetails --}}
+                            {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}
+                        </div>
+                    </div>
+                </x-slot:content>
+            </x-shop::accordion>
         </div>
-    </div>
-</form>
+    </script>
+
+    <script type="module">
+        app.component('v-payment-method', {
+            template: '#v-payment-method-template',
+
+            data() {
+                return {
+                    paymentMethods: [],
+
+                    isShowPaymentMethod: false,
+                }
+            },
+
+            methods: {
+                paymentMethodSelected(selectedPaymentMethod) {
+                    this.$axios.post("{{ route('shop.checkout.save_payment') }}", {
+                            'payment': selectedPaymentMethod
+                        })
+                        .then(response => {
+                            this.$parent.$refs.vReview.reviewCart = response.data.cart;
+                            
+                            this.$parent.$refs.vReview.isShowReviewSummary = true;
+                        })
+                        .catch(error => console.log(error));
+                }
+            }
+        })
+    </script>
+@endPushOnce
