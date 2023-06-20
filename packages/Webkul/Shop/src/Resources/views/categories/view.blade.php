@@ -19,7 +19,7 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-category-template">
-            <div class="container px-[60px] max-lg:px-[30px]">
+            <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
