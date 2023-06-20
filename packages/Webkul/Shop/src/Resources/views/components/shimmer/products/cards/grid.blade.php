@@ -1,9 +1,12 @@
 @props(['count' => 0])
 
 @for ($i = 0;  $i < $count; $i++)
-    <div class="grid gap-2.5  content-start relative max-sm:grid-cols-1 max-w-[291px] {{ $attributes["class"] }}">
+    <div class="grid gap-2.5 content-start relative max-sm:grid-cols-1 max-w-[291px] {{ $attributes["class"] }}">
         <div class="relative overflow-hidden  rounded-sm min-h-[300px] bg-[#E9E9E9] shimmer">
-            <img class="rounded-sm bg-[#F5F5F5]" src="">
+            <img 
+                class="rounded-sm bg-[#F5F5F5]" 
+                src=""
+            >
         </div>
 
         <div class="grid gap-2.5 content-start">

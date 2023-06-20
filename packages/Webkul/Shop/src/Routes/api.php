@@ -29,12 +29,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             ->name('shop.api.products.reviews.store');
     });
 
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('categories/{id}/attributes', 'getAttributes')
-            ->name('shop.api.categories.attributes');
+    Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+        Route::get('', 'index')->name('shop.api.categories.index');
 
-        Route::get('categories/{id}/max-price', 'getProductMaxPrice')
-            ->name('shop.api.categories.max_price');
+        Route::get('{id}/attributes', 'getAttributes')->name('shop.api.categories.attributes');
+
+        Route::get('{id}/max-price', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {

@@ -24,6 +24,19 @@ class CategoryController extends APIController
     }
 
     /**
+     * Get all categoies
+     *
+     * @return void
+     */
+    public function index() {
+        $categories = $this->categoryRepository->scopeQuery(function($query) {
+            return $query->whereNotNull('parent_id')->where('status', 1);
+        })->paginate(7);
+
+        return response()->json($categories);
+    }
+
+    /**
      * Get filterable attributes for category.
      */
     public function getAttributes($categoryId): JsonResource

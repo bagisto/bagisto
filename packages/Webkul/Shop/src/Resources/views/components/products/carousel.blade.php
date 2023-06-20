@@ -15,11 +15,13 @@
                 <div class="flex justify-between items-center gap-8">
                     <span
                         class="icon-arrow-left-stylish text-[24px] inline-block cursor-pointer"
+                        @click="move(this.links?.prev)"
                     >
                     </span>
 
                     <span
                         class="icon-arrow-right-stylish text-[24px] inline-block cursor-pointer"
+                        @click="move(this.links?.next)"
                     >
                     </span>
                 </div>
@@ -64,6 +66,8 @@
                     isLoading: true,
 
                     products: [],
+
+                    links: {},
                 }
             },
 
@@ -77,9 +81,24 @@
                             this.isLoading = false;
 
                             this.products = response.data.data;
+
+                            this.links = response.data.links
                         }).catch(error => {
                             console.log(error);
                         });
+                },
+
+                move(url) {
+                    if (url) {
+                        this.$axios.get(url)
+                            .then(response => {
+                                this.products = response.data.data;
+
+                                this.links = response.data.links;
+                            })
+                            .catch(error => {});
+                    }
+                    console.log('error');
                 },
             },
         });
