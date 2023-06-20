@@ -3,9 +3,9 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-coupon-template">
         <div class="flex text-right justify-between">
-            <p class="text-[16px] mr-2">@lang('shop::app.checkout.cart.coupon.discount')</p>
+            <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">@lang('shop::app.checkout.cart.coupon.discount')</p>
             
-            <p class="text-[16px] font-medium cursor-pointer">
+            <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium cursor-pointer">
                 <x-shop::modal>
                     <x-slot:toggle>
                         <span class="text-navyBlue">

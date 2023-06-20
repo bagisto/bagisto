@@ -115,7 +115,7 @@ class OnepageController extends Controller
         ) {
             return new JsonResource([
                 'redirect' => true,
-                'data' => route('shop.customer.session.index')
+                'data'     => route('shop.customer.session.index')
             ]);
         }
 
@@ -129,7 +129,7 @@ class OnepageController extends Controller
         ) {
             return new JsonResource([
                 'redirect' => true,
-                'data' => route('shop.checkout.cart.index')
+                'data'     => route('shop.checkout.cart.index')
             ]);
         }
 
@@ -141,19 +141,19 @@ class OnepageController extends Controller
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
                     'redirect' => true,
-                    'data' => route('shop.checkout.cart.index')
+                    'data'     => route('shop.checkout.cart.index')
                 ]);
             }
 
             return new JsonResource([
                 'redirect' => false,
-                'data' => $rates
+                'data'     => $rates
             ]);
         }
 
         return new JsonResource([
             'redirect' => false,
-            'data' => Payment::getSupportedPaymentMethods()
+            'data'     => Payment::getSupportedPaymentMethods()
         ]);
     }
 

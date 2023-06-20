@@ -1,6 +1,8 @@
+{!! view_render_event('bagisto.shop.checkout.addresses.before') !!}
 <v-checkout-addresses ref="vCheckoutAddress">
     <x-shop::shimmer.checkout.onepage.address></x-shop::shimmer.checkout.onepage.address>
 </v-checkout-addresses>
+{!! view_render_event('bagisto.shop.checkout.addresses.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-checkout-addresses-template">

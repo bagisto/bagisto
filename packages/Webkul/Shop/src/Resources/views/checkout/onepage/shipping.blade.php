@@ -1,4 +1,8 @@
-<v-shipping-method ref="vShippingMethod"></v-shipping-method>
+{!! view_render_event('bagisto.shop.checkout.shipping.method.before') !!}
+<v-shipping-method ref="vShippingMethod">
+    <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
+</v-shipping-method>
+{!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-method-template">
@@ -6,7 +10,7 @@
             <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
         </template>
 
-        <div v-if="isShowShippingMethod">
+        <template v-if="isShowShippingMethod">
             <x-shop::accordion>
                 <x-slot:header>
                     <div class="flex justify-between mt-2 items-center">
@@ -42,7 +46,7 @@
                                 >
                                     <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
 
-                                    <p class="text-[25px] font-semibold mt-[5px]">@{{ rate.base_price }}</p>
+                                    <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">@{{ rate.base_price }}</p>
                                     
                                     <p class="text-[12px] font-medium mt-[10px]">
                                         <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
@@ -53,7 +57,7 @@
                     </div>
                 </x-slot:content>
             </x-shop::accordion>
-        </div>
+        </template>
     </script>
 
     <script type="module">
@@ -80,9 +84,6 @@
                             shipping_method: selectedShippingMethod,
                         })
                         .then(response => {
-                            /*
-                            * Calling v-checkout's getOrderSummary method component(parent component) getOrdersSummary for update cart (summary data/call getOrderSummary method).
-                            */
                             this.$parent.getOrderSummary();
 
                             this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;

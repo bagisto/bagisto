@@ -1,4 +1,6 @@
+{!! view_render_event('bagisto.shop.checkout.review.summary.before') !!}
 <v-review-summary ref="vReview"></v-review-summary>
+{!! view_render_event('bagisto.shop.checkout.review.summary.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-review-summary-template">
@@ -22,13 +24,13 @@
                             </div>
 
                             <ul type="none">
-                                <li>@{{ reviewCart.billing_address.company_name }}</li>
-                                <li>@{{ reviewCart.billing_address.first_name }} @{{ reviewCart.billing_address.last_name }}</li>
-                                <li>@{{ reviewCart.billing_address.address1 }}</li>
-                                <li>@{{ reviewCart.billing_address.postcode }} @{{ reviewCart.billing_address.city }}</li>
-                                <li>@{{ reviewCart.billing_address.state }}</li>
-                                <li>@{{ reviewCart.billing_address.country }} @{{ reviewCart.billing_address.postcode }}</li>
-                                <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewCart.billing_address.phone }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.billing_address.company_name }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.billing_address.first_name }} @{{ reviewCart.billing_address.last_name }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.billing_address.address1 }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.billing_address.postcode }} @{{ reviewCart.billing_address.city }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.billing_address.state }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.billing_address.country }} @{{ reviewCart.billing_address.postcode }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]"><span class="font-medium">@lang('Contact'):</span> @{{ reviewCart.billing_address.phone }}</li>
                             </ul>
                         </div>
 
@@ -38,17 +40,17 @@
                             "
                         >
                             <div>
-                                <b>@lang('Shipping Address')</b>
+                                <b class="text-[12px] font-medium mt-[10px]">@lang('Shipping Address')</b>
                             </div>
 
                             <ul type="none">
-                                <li>@{{ reviewCart.shipping_address.company_name }}</li>
-                                <li>@{{ reviewCart.shipping_address.first_name }} @{{ reviewCart.shipping_address.last_name }}</li>
-                                <li>@{{ reviewCart.shipping_address.address1 }}</li>
-                                <li>@{{ reviewCart.shipping_address.postcode }} @{{ reviewCart.shipping_address.city }}</li>
-                                <li>@{{ reviewCart.shipping_address.state }}</li>
-                                <li>@{{ reviewCart.shipping_address.country }} @{{ reviewCart.shipping_address.postcode }}</li>
-                                <li><span class="font-medium">@lang('Contact'):</span> @{{ reviewCart.shipping_address.phone }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.shipping_address.company_name }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.shipping_address.first_name }} @{{ reviewCart.shipping_address.last_name }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.shipping_address.address1 }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.shipping_address.postcode }} @{{ reviewCart.shipping_address.city }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.shipping_address.state }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]">@{{ reviewCart.shipping_address.country }} @{{ reviewCart.shipping_address.postcode }}</li>
+                                <li class="text-[12px] font-medium mt-[10px]"><span class="font-medium">@lang('Contact'):</span> @{{ reviewCart.shipping_address.phone }}</li>
                             </ul>
                         </div>
                     </div>
@@ -64,24 +66,11 @@
                                 />
                                 
                                 <div>
-                                    {{-- Need to discussed with (@devansh-sir) about these events --}}
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!} --}}
+                                    <p class="text-[26px] max-sm:text-[14px] max-sm:font-medium text-navyBlue">@{{ item.name }}</p>
 
-                                    <p class="text-[26px] font-medium text-navyBlue">@{{ item.name }}</p>
+                                    <p class="text-[18px] max-sm:text-[14px] max-sm:font-medium font-medium mt-[10px]">@{{ item.formatted_total }}</p>
 
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
-                                    {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!} --}}
-
-                                    <p class="text-[18px] font-medium mt-[10px]">@{{ item.formatted_total }}</p>
-
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
-                                    {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!} --}}
-
-                                    <p class="text-[18px]">@{{ item.formatted_price }} X @{{ item.quantity }} (@lang('Quantity'))</p>
-
-                                    {{-- {!! view_render_event('bagisto.shop.checkout.quantity.after', ['item' => $item]) !!}
-
-                                    {!! view_render_event('bagisto.shop.checkout.options.before', ['item' => $item]) !!} --}}
+                                    <p class="text-[18px] max-sm:text-[14px] max-sm:font-medium">@{{ item.formatted_price }} X @{{ item.quantity }} (@lang('Quantity'))</p>
                                 </div>
                             </div>
                             {{-- Need to show additionl data of product --}}
