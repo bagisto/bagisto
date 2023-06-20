@@ -1,4 +1,8 @@
-<x-shop::layouts>
+<x-shop::layouts
+    :has-header="false"
+    :has-feature="false"
+    :has-footer="false"
+>
     {{-- Checkout component --}}
     {{-- Todo (@suraj-webkul): need change translation of this page.  --}}
     {{-- @translations --}}
@@ -6,9 +10,9 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-checkout-template">
-            <div class="container px-[60px] max-lg:px-[30px]">
+            <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-                    <div class="grid mt-[30px]">
+                    <div class="grid gap-[30px] mt-[30px]">
                         @include('shop::checkout.onepage.address')
 
                         @include('shop::checkout.onepage.shipping')
@@ -18,7 +22,7 @@
                         @include('shop::checkout.onepage.review-summary')
                     </div>
                     
-                    @include('shop::checkout.onepage.cart-summary')
+                    {{-- @include('shop::checkout.onepage.cart-summary') --}}
                 </div>
             </div>
         </script>

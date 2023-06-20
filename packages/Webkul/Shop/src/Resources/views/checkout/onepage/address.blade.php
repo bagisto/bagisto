@@ -18,9 +18,9 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <div class="grid mt-[30px] mb-[30px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                                <div class="grid mt-[30px] mb-[30px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                                     <div 
-                                        class="border border-[#e5e5e5] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
+                                        class="border border-[#e5e5e5] max-w-[414px] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
                                         v-for="(addresses, index) in availableAddresses"
                                         @change="showBillingMethods(addresses)"
                                     >
@@ -60,7 +60,7 @@
                                                 </div>
                                             </div>
 
-                                            <p class="text-[#7D7D7D] mt-[25px]">
+                                            <p class="text-[#7D7D7D] mt-[25px] text-[14px] text-[14px]">
                                                 @{{ addresses.address1 }} @{{ addresses.addresses2 }},
                                                 @{{ addresses.city }}, 
                                                 @{{ addresses.state }}, @{{ addresses.country }}, 
@@ -70,7 +70,7 @@
                                     </div>
 
                                     <div
-                                        class="flex justify-center items-center border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap cursor-pointer"
+                                        class="flex justify-center items-center border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap max-w-[414px] cursor-pointer gap-[10px]"
                                         @click="addNewBillingAddress"
                                     >
                                         <div class="flex gap-x-[10px] items-center">
