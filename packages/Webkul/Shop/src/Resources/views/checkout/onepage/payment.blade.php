@@ -2,6 +2,10 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-payment-method-template">
+        <template v-if="! isShowPaymentMethod && isPaymentLoading">
+            <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
+        </template>
+
         <div v-if="isShowPaymentMethod">
             <x-shop::accordion>
                 <x-slot:header>
@@ -50,11 +54,15 @@
                     paymentMethods: [],
 
                     isShowPaymentMethod: false,
+
+                    isPaymentLoading: false,
                 }
             },
 
             methods: {
                 paymentMethodSelected(selectedPaymentMethod) {
+                    this.$parent.$refs.vReview.isReviewSummaryLoading = true;
+
                     this.$axios.post("{{ route('shop.checkout.save_payment') }}", {
                             'payment': selectedPaymentMethod
                         })
@@ -62,6 +70,8 @@
                             this.$parent.$refs.vReview.reviewCart = response.data.cart;
                             
                             this.$parent.$refs.vReview.isShowReviewSummary = true;
+
+                            this.$parent.$refs.vReview.isReviewSummaryLoading = false;
                         })
                         .catch(error => console.log(error));
                 }

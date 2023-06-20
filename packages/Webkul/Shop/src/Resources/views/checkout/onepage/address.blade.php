@@ -1,4 +1,6 @@
-<v-checkout-addresses ref="vCheckoutAddress"></v-checkout-addresses>
+<v-checkout-addresses ref="vCheckoutAddress">
+    <x-shop::shimmer.checkout.onepage.address></x-shop::shimmer.checkout.onepage.address>
+</v-checkout-addresses>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-checkout-addresses-template">
@@ -861,6 +863,8 @@
                         this.$axios.post('{{ route("shop.checkout.save_address") }}', this.address)
                             .then(response => {
                                 this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
+
+                                this.$parent.$refs.vShippingMethod.isShippingLoading = false;
                                 
                                 this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
                                 
@@ -930,14 +934,16 @@
                 },
 
                 showBillingMethods(address) {
-                    this.$parent.getOrderSummary();
-
                     let selectedAddress = this.availableAddresses.find(data => data.id == address.id);
                     
+                    this.$parent.$refs.vShippingMethod.isShippingLoading = true;
+                    
                     this.address.billing.is_save_as_address = true;
-
+                    
                     this.resetPaymentAndShipping();
 
+                    this.$parent.getOrderSummary();
+                    
                     this.store();
                 }
             }

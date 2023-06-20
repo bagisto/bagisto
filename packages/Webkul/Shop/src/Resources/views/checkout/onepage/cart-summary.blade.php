@@ -1,12 +1,20 @@
 <v-cart-summary
     ref="vCartSummary"
     :cart="cart"
+    :is-cart-loading="isCartLoading"
 >
 </v-cart-summary>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-cart-summary-template">
-        <div class="w-[442px] max-w-full pl-[30px] h-max sticky top-[30px] mt-[30px]">
+        <template v-if="isCartLoading">
+            <x-shop::shimmer.checkout.onepage.cart-summary></x-shop::shimmer.checkout.onepage.cart-summary>
+        </template>
+
+        <div 
+            class="w-[442px] max-w-full pl-[30px] h-max sticky top-[30px] mt-[30px]"
+            v-if="! isCartLoading"
+        >
 
             <h2 class="text-[26px] font-medium">@lang('Cart Summary')</h2>
             
@@ -74,7 +82,7 @@
         app.component('v-cart-summary', {
             template: '#v-cart-summary-template',
             
-            props: ['cart'],
+            props: ['cart', 'isCartLoading'],
         })
     </script>
 @endPushOnce

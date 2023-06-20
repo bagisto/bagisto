@@ -2,6 +2,10 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-method-template">
+        <template v-if="! isShowShippingMethod && isShippingLoading">
+            <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
+        </template>
+
         <div v-if="isShowShippingMethod">
             <x-shop::accordion>
                 <x-slot:header>
@@ -60,13 +64,17 @@
                 return {
                     shippingMethods: [],
 
-                    isShowShippingMethod: false
+                    isShowShippingMethod: false,
+
+                    isShippingLoading: false,
                 }
             },
 
             methods: {
                 save(selectedShippingMethod) {
                     this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+
+                    this.$parent.$refs.vPaymentMethod.isPaymentLoading = true;
 
                     this.$axios.post("{{ route('shop.checkout.save_shipping') }}", {    
                             shipping_method: selectedShippingMethod,
@@ -80,6 +88,8 @@
                             this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.paymentMethods;
                                 
                             this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+
+                            this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
 
                             this.$parent.$refs.vReview.isShowReviewSummary = false;
                         })

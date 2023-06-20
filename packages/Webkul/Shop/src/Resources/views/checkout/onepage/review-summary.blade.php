@@ -2,6 +2,10 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-review-summary-template">
+        <template v-if="! isShowReviewSummary && isReviewSummaryLoading">
+            <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
+        </template>
+
         <div v-if="isShowReviewSummary">
             <x-shop::accordion>
                 <x-slot:header>
@@ -158,6 +162,8 @@
                     isShowReviewSummary: false,
 
                     reviewCart: {},
+
+                    isReviewSummaryLoading: false,
                 }
             }, 
 
