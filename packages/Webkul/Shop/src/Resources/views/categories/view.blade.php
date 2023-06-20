@@ -45,7 +45,7 @@
                         <div>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading && filters.toolbar.mode === 'list'">
-                                <x-shop::shimmer.products.cards.list></x-shop::shimmer.products.cards.list>
+                                <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
                             </template>
 
                             <!-- Product Card Listing -->
