@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-review-template">
-        <div>
+        <div class="container mt-[60px] max-1180:px-[20px]">
             <!-- Write Review Section -->
             <div class="w-full" v-if="canReview">
                 <x-shop::form
@@ -14,23 +14,37 @@
                     <form
                         class="rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
+                        enctype="multipart/form-data"
                     >
                         <div>
-                            <x-shop::form.control-group>
+                            {{-- <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    name="title"
-                                    :value="old('title')"
+                                    name="image"
+                                    :value="old('image')"
                                     class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    :label="trans('shop::app.products.title')"
-                                    :placeholder="trans('shop::app.products.title')"
+                                    :label="trans('shop::app.products.image')"
+                                    :placeholder="trans('shop::app.products.image')"
                                 >
                                 </x-shop::form.control-group.control>
-                            </x-shop::form.control-group>
-                        </div>
 
+                                <x-shop::form.control-group.error
+                                    control-name="image"
+                                >
+                                </x-shop::form.control-group.error>
+                            </x-shop::form.control-group> --}}
+                            
+                        </div>
+                        
                         <div>
+                            <input 
+                                class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                type="file"
+                                name="image"
+                                @change="selectReviewImage"
+                            />
+
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
                                     @lang('shop::app.products.rating')
@@ -94,7 +108,7 @@
                                     control-name="comment"
                                 >
                                 </x-shop::form.control-group.error>
-                            </x-shop::form.control-group>
+                            </x-shop::form.control-group> 
 
                             <button
                                 class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
@@ -156,13 +170,13 @@
                         <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
                             <img
                                 class="rounded-[12px]"
-                                src='{{ bagisto_asset("images/review-man.png") }}'
+                                :src="review.image[0].small_image_url"
                                 title=""
                                 alt=""
                             >
                         </div>
 
-                        <div>
+                        <div class="w-full">
                             <div class="flex justify-between">
                                 <p
                                     class="text-[20px] font-medium max-sm:text-[16px]"
@@ -171,7 +185,11 @@
                                 </p>
 
                                 <div class="flex items-center">
-                                    <x-shop::products.star-rating ::name="review.name" ::value="review.rating"></x-shop::products.star-rating>
+                                    <x-shop::products.star-rating 
+                                        ::name="review.name" 
+                                        ::value="review.rating"
+                                    >
+                                    </x-shop::products.star-rating>
                                 </div>
                             </div>
 
@@ -238,6 +256,8 @@
                     },
 
                     meta: {},
+
+                    reviewImage: {},
                 }
             },
 
@@ -261,11 +281,24 @@
                 },
 
                 store(params) {
-                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', params)
+                    let { title, comment, rating } = params;
+
+                    let formData = new FormData();
+
+                    formData.append('attachments[]', this.reviewImage);
+                    formData.append('title', title);
+                    formData.append('comment', comment);
+                    formData.append('rating', rating);
+                    
+                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', formData)
                         .then(response => {
                             alert(response.data.data.message);
                         })
                         .catch(error => {});
+                },
+
+                selectReviewImage() {
+                    this.reviewImage = event.target.files[0];
                 },
             }
         });

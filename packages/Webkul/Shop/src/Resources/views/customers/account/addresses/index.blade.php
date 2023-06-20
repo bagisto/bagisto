@@ -94,7 +94,7 @@
         <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
             <img 
                 class="" 
-                src="{{ bagisto_asset('images/empty-dwn-product.png') }}" 
+                src="{{ bagisto_asset('images/no-address.png') }}" 
                 alt="" 
                 title=""
             >
