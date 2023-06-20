@@ -10,14 +10,14 @@ use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
      * @return void
      */
     public function __construct(
@@ -86,21 +86,17 @@ class OnepageController extends Controller
 
         Cart::collectTotals();
 
-        return view($this->_config['view'], compact('cart'));
+        return view('shop::checkout.onepage.index', compact('cart'));
     }
 
     /**
      * Return order short summary.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function summary()
+    public function summary(): JsonResource
     {
         $cart = Cart::getCart();
 
-        return response()->json([
-            'html' => view('shop::checkout.total.summary', compact('cart'))->render(),
-        ]);
+        return new CartResource($cart);
     }
 
     /**
@@ -109,7 +105,7 @@ class OnepageController extends Controller
      * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function saveAddress(CustomerAddressForm $request)
+    public function saveAddress(CustomerAddressForm $request): JsonResource
     {
         $data = $request->all();
 
@@ -117,17 +113,24 @@ class OnepageController extends Controller
             ! auth()->guard('customer')->check()
             && ! Cart::getCart()->hasGuestCheckoutItems()
         ) {
-            return response()->json(['redirect_url' => route('shop.customer.session.index')], 403);
+            return new JsonResource([
+                'redirect' => true,
+                'data'     => route('shop.customer.session.index')
+            ]);
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
-        $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
+        
+        $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1'])); 
 
         if (
             Cart::hasError()
             || ! Cart::saveCustomerAddress($data)
         ) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+            return new JsonResource([
+                'redirect' => true,
+                'data'     => route('shop.checkout.cart.index')
+            ]);
         }
 
         $cart = Cart::getCart();
@@ -136,13 +139,22 @@ class OnepageController extends Controller
 
         if ($cart->haveStockableItems()) {
             if (! $rates = Shipping::collectRates()) {
-                return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+                return new JsonResource([
+                    'redirect' => true,
+                    'data'     => route('shop.checkout.cart.index')
+                ]);
             }
 
-            return response()->json($rates);
+            return new JsonResource([
+                'redirect' => false,
+                'data'     => $rates
+            ]);
         }
 
-        return response()->json(Payment::getSupportedPaymentMethods());
+        return new JsonResource([
+            'redirect' => false,
+            'data'     => Payment::getSupportedPaymentMethods()
+        ]);
     }
 
     /**
@@ -170,7 +182,7 @@ class OnepageController extends Controller
     /**
      * Saves payment method.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function savePayment()
     {
@@ -188,10 +200,9 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
 
-        return response()->json([
-            'jump_to_section' => 'review',
-            'html'            => view('shop::checkout.onepage.review', compact('cart'))->render(),
-        ]);
+        return [
+            'cart' => new CartResource($cart),
+        ];
     }
 
     /**

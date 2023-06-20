@@ -222,6 +222,7 @@ return [
         Webkul\Theme\Providers\ThemeServiceProvider::class,
         Webkul\Ui\Providers\UiServiceProvider::class,
         Webkul\User\Providers\UserServiceProvider::class,
+        Webkul\Checkout\Providers\CheckoutServiceProvider::class,
     ])->toArray(),
 
     /*
