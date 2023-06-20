@@ -66,12 +66,11 @@
                                     v-html="item.item.price_html"
                                 >
                                 </p>
-
+            
                                 <x-shop::quantity-changer
-                                    name="quantity"
-                                    value="1"
+                                    name="quantity" 
                                     class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center"
-                                    @change="updateQuantity($event, item)"
+                                    @change="setItemQuantity(item, $event)"
                                 >
                                 </x-shop::quantity-changer>
 
@@ -111,10 +110,10 @@
                 data() {
                     return  {
                         wishlist: [],
-
-                        quantity: 1,
-
+                        
                         isLoading: true,
+
+                        qty: [],
                     };
                 },
 
@@ -123,6 +122,10 @@
                 },
 
                methods: {
+                    setItemQuantity(item, quantity) {
+                        this.qty[item.id] = quantity;       
+                    },
+
                     get() {
                         this.$axios.get("{{ route('shop.api.customers.account.wishlist.index') }}")
                             .then(response => {
@@ -154,7 +157,7 @@
                         url = url.replace(':wishlist_id:', id);
 
                         this.$axios.post(url, {
-                                quantity: this.quantity,
+                                quantity: this.qty[id] ?? 1,
                                 product_id: id,
                             })
                             .then(response => {
@@ -166,10 +169,6 @@
                             })
                             .catch(error => {});
                     },
-
-                    updateQuantity(value) {
-                        this.quantity = value;
-                    }
                 }
             });
         </script>
