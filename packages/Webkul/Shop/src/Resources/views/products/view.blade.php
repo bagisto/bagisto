@@ -24,9 +24,11 @@
             :title="trans('Description')"
             :is-selected="true"
         >
-            <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                {!! $product->description !!}
-            </p>
+            <div class="container mt-[60px] max-1180:px-[20px]">
+                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    {!! $product->description !!}
+                </p>
+            </div>
         </x-shop::tabs.item>
 
         <x-shop::tabs.item
@@ -35,16 +37,23 @@
             :title="trans('Additional Information')"
             :is-selected="false"
         >
-            <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                @foreach ($customAttributeValues as $values)
-                    <div class="grid">
-                        <p class="text-[16px] text-black">{{ $values['label'] }}</p>
-                    </div>
-                    <div class="grid">
-                        <p class="text-[16px] text-[#7D7D7D]">{{ $values['value']??'-' }}</p>
-                    </div>
-                @endforeach
-            </p>
+            <div class="container mt-[60px] max-1180:px-[20px]">
+                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                    @foreach ($customAttributeValues as $customAttributeValue)
+                        <div class="grid">
+                            <p class="text-[16px] text-black">
+                                {{ $customAttributeValue['label'] }}
+                            </p>
+                        </div>
+
+                        <div class="grid">
+                            <p class="text-[16px] text-[#7D7D7D]">
+                                {{ $customAttributeValue['value']??'-' }}
+                            </p>
+                        </div>
+                    @endforeach
+                </p>
+            </div>
         </x-shop::tabs.item>
 
         <x-shop::tabs.item
@@ -109,10 +118,16 @@
                             </div>
 
                             <div class='flex items-center'>
-                                <x-shop::products.star-rating star='{{ $avgRatings }}' :is-editable=false></x-shop::products.star-rating>
+                                <x-shop::products.star-rating 
+                                    :value="$avgRatings"
+                                    :is-editable=false
+                                >
+                                </x-shop::products.star-rating>
 
                                 <div class="flex gap-[15px] items-center">
-                                    <p class="text-[#7D7D7D] text-[14px]">({{ count($product->reviews) }} reviews)</p>
+                                    <p class="text-[#7D7D7D] text-[14px]">
+                                        ({{ $product->reviews->count() }} reviews)
+                                    </p>
                                 </div>
                             </div>
 
@@ -244,7 +259,7 @@
                     addToWishlist() {
                         this.$axios.post('{{ route("shop.api.customers.account.wishlist.store", $product->id) }}')
                             .then(response => {
-                                alert(response.data.message);
+                                alert(response.data.data.message);
                             })
                             .catch(error => {});
                     },
