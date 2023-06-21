@@ -91,8 +91,6 @@
                             this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
 
                             this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
-
-                            this.$parent.$refs.vReview.isShowReviewSummary = false;
                         })
                         .catch(error => {})
                 },

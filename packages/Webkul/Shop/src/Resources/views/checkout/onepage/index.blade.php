@@ -34,8 +34,6 @@
                         @include('shop::checkout.onepage.shipping')
 
                         @include('shop::checkout.onepage.payment')
-
-                        @include('shop::checkout.onepage.review-summary')
                     </div>
                     
                     @include('shop::checkout.onepage.cart-summary')

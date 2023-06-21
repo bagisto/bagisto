@@ -797,8 +797,6 @@
                     this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
 
                     this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-
-                    this.$parent.$refs.vReview.isShowReviewSummary = false;
                 },
 
                 assignAddress() {

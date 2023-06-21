@@ -67,18 +67,10 @@
 
             methods: {
                 paymentMethodSelected(selectedPaymentMethod) {
-                    this.$parent.$refs.vReview.isReviewSummaryLoading = true;
-
                     this.$axios.post("{{ route('shop.checkout.save_payment') }}", {
                             'payment': selectedPaymentMethod
                         })
-                        .then(response => {
-                            this.$parent.$refs.vReview.reviewCart = response.data.cart;
-                            
-                            this.$parent.$refs.vReview.isShowReviewSummary = true;
-
-                            this.$parent.$refs.vReview.isReviewSummaryLoading = false;
-                        })
+                        .then(response => {})
                         .catch(error => console.log(error));
                 }
             }

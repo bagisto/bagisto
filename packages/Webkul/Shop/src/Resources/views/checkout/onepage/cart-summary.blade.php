@@ -31,8 +31,7 @@
                         />
                         <div class="">
                             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium text-navyBlue">@{{ item.name }}</p>
-                            <p class="text-[18px] font-medium mt-[10px] max-sm:text-[14px] max-sm:font-normal">@{{ item.formatted_total }}</p>
-                            <p class="text-[18px] font-medium mt-[10px] max-sm:text-[14px] max-sm:font-normal">@{{ item.formatted_price }} X @{{ item.quantity }} (@lang('Quantity'))</p>
+                            <p class="text-[18px] font-medium mt-[10px] max-sm:text-[14px] max-sm:font-normal">@{{ item.formatted_total }} X @{{ item.quantity }}</p>
                         </div>
                     </div>
                 </div>
