@@ -87,10 +87,29 @@
                                         </div>
                                     </div>
     
-                                    <p class="flex gap-x-[10px] mt-[20px] text-[14px] text-[#7D7D7D]">
-                                        <span class="icon-uncheck text-[20px]"></span> 
-                                        @lang('address is the same as my billing address')
-                                    </p>
+                                    <div class="select-none mt-[20px] text-[14px] text-[#7D7D7D] flex gap-x-[15px]">
+                                        <input
+                                            type="checkbox"
+                                            id="is_use_for_shipping"
+                                            name="is_use_for_shipping"
+                                            class="hidden peer"
+                                            v-model="address.billing.is_use_for_shipping"
+                                        >
+
+                                        <label 
+                                            class="icon-uncheck text-[20px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white cursor-pointer"
+                                            for="is_use_for_shipping"
+                                        >
+                                        </label>
+                                        
+                                        <label 
+                                            for="is_use_for_shipping"
+                                            class="cursor-pointer"
+                                        >
+                                            @lang('address is the same as my billing address')
+                                        </label>
+                                    </div>
+
                                 </x-slot:content>
                             </x-shop::accordion>
                         </div>
@@ -371,25 +390,6 @@
             
                                     <div class="mt-[30px] pb-[15px]">
                                         <div class="grid gap-[10px]">
-                                            @if ($cart->haveStockableItems())
-                                                <div class="select-none flex gap-x-[15px]">
-                                                    <input 
-                                                        type="checkbox" 
-                                                        name="billing[is_use_for_shipping]"
-                                                        id="billing[is_use_for_shipping]" 
-                                                        class="hidden peer"
-                                                        v-model="address.billing.is_use_for_shipping"
-                                                    >
-    
-                                                    <label
-                                                        class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
-                                                        for="billing[is_use_for_shipping]"
-                                                    ></label>
-    
-                                                    <label for="billing[is_use_for_shipping]" @click="addNewShippingAddress">@lang('Ship to this address')</label>
-                                                </div>
-                                            @endif
-            
                                             @auth('customer')
                                                 <div 
                                                     class="select-none flex gap-x-[15px]"
@@ -428,306 +428,6 @@
                                 </x-slot:content>
                                 
                             </x-shop::accordion>
-    
-                            @if ($cart->haveStockableItems())
-                                <div 
-                                    v-if="
-                                        ! address.billing.is_use_for_shipping 
-                                        && address.shipping.isNew
-                                    "
-                                >
-                                    <x-shop::accordion>
-                                        <x-slot:header>
-                                            <div class="flex justify-between items-center">
-                                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Shipping Address')</h2>
-                                            </div>
-                                        </x-slot:header>
-                                    
-                                        <x-slot:content>
-                                            <x-shop::form.control-group>
-                                                <x-shop::form.control-group.label>
-                                                    @lang('Company name')
-                                                </x-shop::form.control-group.label>
-                                            
-                                                <x-shop::form.control-group.control
-                                                    type="text"
-                                                    name="shipping[company_name]"
-                                                    label="Company name"
-                                                    placeholder="Company name"
-                                                    v-model="address.shipping.company_name"
-                                                >
-                                                </x-shop::form.control-group.control>
-                                            
-                                                <x-shop::form.control-group.error
-                                                    control-name="shipping[company_name]"
-                                                >
-                                                </x-shop::form.control-group.error>
-                                            </x-shop::form.control-group>
-    
-                                            <div class="grid grid-cols-2 gap-x-[20px]">
-                                                <x-shop::form.control-group>
-                                                    <x-shop::form.control-group.label class="!mt-[0px]">
-                                                        @lang('First name')
-                                                    </x-shop::form.control-group.label>
-                                                
-                                                    <x-shop::form.control-group.control
-                                                        type="text"
-                                                        name="shipping[first_name]"
-                                                        label="First name"
-                                                        rules="required"
-                                                        placeholder="First name"
-                                                        v-model="address.shipping.first_name"
-                                                    >
-                                                    </x-shop::form.control-group.control>
-                                                
-                                                    <x-shop::form.control-group.error
-                                                        control-name="shipping[first_name]"
-                                                    >
-                                                    </x-shop::form.control-group.error>
-                                                </x-shop::form.control-group>
-                                                
-                                                <x-shop::form.control-group>
-                                                    <x-shop::form.control-group.label class="!mt-[0px]">
-                                                        @lang('Last name')
-                                                    </x-shop::form.control-group.label>
-                                                
-                                                    <x-shop::form.control-group.control
-                                                        type="text"
-                                                        name="shipping[last_name]"
-                                                        label="Last name"
-                                                        rules="required"
-                                                        placeholder="Last name"
-                                                        v-model="address.shipping.last_name"
-                                                    >
-                                                    </x-shop::form.control-group.control>
-                                                
-                                                    <x-shop::form.control-group.error
-                                                        control-name="shipping[last_name]"
-                                                    >
-                                                    </x-shop::form.control-group.error>
-                                                </x-shop::form.control-group>
-                                            </div>
-                                            
-                                            <x-shop::form.control-group>
-                                                <x-shop::form.control-group.label class="!mt-[0px]">
-                                                    @lang('Email')
-                                                </x-shop::form.control-group.label>
-                                            
-                                                <x-shop::form.control-group.control
-                                                    type="email"
-                                                    name="shipping[email]"
-                                                    rules="required|email"
-                                                    label="Email"
-                                                    placeholder="email@example.com"
-                                                    v-model="address.shipping.email"
-                                                >
-                                                </x-shop::form.control-group.control>
-                                            
-                                                <x-shop::form.control-group.error
-                                                    control-name="shipping[email]"
-                                                >
-                                                </x-shop::form.control-group.error>
-                                            </x-shop::form.control-group>
-                                            
-                                            <x-shop::form.control-group>
-                                                <x-shop::form.control-group.label class="!mt-[0px]">
-                                                    @lang('Street address')
-                                                </x-shop::form.control-group.label>
-                                            
-                                                <x-shop::form.control-group.control
-                                                    type="text"
-                                                    name="shipping[address1][]"
-                                                    class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                    rules="required"
-                                                    label="Street address"
-                                                    placeholder="Street address"
-                                                    v-model="address.shipping.address1[0]"
-                                                >
-                                                </x-shop::form.control-group.control>
-                                            
-                                                <x-shop::form.control-group.error
-                                                    control-name="shipping[address1][]"
-                                                >
-                                                </x-shop::form.control-group.error>
-                                            </x-shop::form.control-group>
-                                            
-                                            <div class="grid grid-cols-2 gap-x-[20px]">
-                                                <x-shop::form.control-group
-                                                    class="!mb-4"
-                                                >
-                                                    <x-shop::form.control-group.label class="!mt-[0px]">
-                                                        @lang('Country')
-                                                    </x-shop::form.control-group.label>
-                                                
-                                                    <x-shop::form.control-group.control
-                                                        type="select"
-                                                        name="shipping[country]"
-                                                        class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                        rules="required"
-                                                        label="Country"
-                                                        placeholder="Country"
-                                                        v-model="address.shipping.country"
-                                                    >
-                                                        <option value="">@lang('Select country')</option>
-                                                        @foreach (core()->countries() as $country)
-                                                            <option value="{{ $country->code }}">{{ $country->name }}</option>
-                                                        @endforeach
-                                                    </x-shop::form.control-group.control>
-                                                
-                                                    <x-shop::form.control-group.error
-                                                        control-name="shipping[country]"
-                                                    >
-                                                    </x-shop::form.control-group.error>
-                                                </x-shop::form.control-group>
-                                                
-                                                <x-shop::form.control-group>
-                                                    <x-shop::form.control-group.label class="!mt-[0px]">
-                                                        @lang('State')
-                                                    </x-shop::form.control-group.label>
-                                                
-                                                    <x-shop::form.control-group.control
-                                                        type="text"
-                                                        name="shipping[state]"
-                                                        class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                        rules="required"
-                                                        label="State"
-                                                        placeholder="State"
-                                                        v-model="address.shipping.state"
-                                                        v-if="! isHaveStates('shipping')"
-                                                    >
-                                                    </x-shop::form.control-group.control>
-    
-                                                    <x-shop::form.control-group.control
-                                                        type="select"
-                                                        name="shipping[state]"
-                                                        class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                        rules="required"
-                                                        label="State"
-                                                        placeholder="State"
-                                                        v-model="address.shipping.state"
-                                                        v-if="isHaveStates('shipping')"
-                                                    >
-                                                        <option value="">@lang('Select state')</option>
-    
-                                                        <option 
-                                                            v-for='(state, index) in states[address.shipping.country]' 
-                                                            :value="state.code"
-                                                        >
-                                                            @{{ state.default_name }}
-                                                        </option>
-                                                    </x-shop::form.control-group.control>
-                                                
-                                                    <x-shop::form.control-group.error
-                                                        control-name="shipping[state]"
-                                                    >
-                                                    </x-shop::form.control-group.error>
-                                                </x-shop::form.control-group>
-                                            </div>
-    
-                                            <div class="grid grid-cols-2 gap-x-[20px]">
-                                                <x-shop::form.control-group>
-                                                    <x-shop::form.control-group.label class="!mt-[0px]">
-                                                        @lang('City')
-                                                    </x-shop::form.control-group.label>
-                                                
-                                                    <x-shop::form.control-group.control
-                                                        type="text"
-                                                        name="shipping[city]"
-                                                        class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                        rules="required"
-                                                        label="City"
-                                                        placeholder="City"
-                                                        v-model="address.shipping.city"
-                                                    >
-                                                    </x-shop::form.control-group.control>
-                                                
-                                                    <x-shop::form.control-group.error
-                                                        control-name="shipping[city]"
-                                                    >
-                                                    </x-shop::form.control-group.error>
-                                                </x-shop::form.control-group>
-                                                
-                                                <x-shop::form.control-group>
-                                                    <x-shop::form.control-group.label class="!mt-[0px]">
-                                                        @lang('Zip/Postcode')
-                                                    </x-shop::form.control-group.label>
-                                                
-                                                    <x-shop::form.control-group.control
-                                                        type="text"
-                                                        name="shipping[postcode]"
-                                                        class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                        rules="required"
-                                                        label="Zip/Postcode"
-                                                        placeholder="Zip/Postcode"
-                                                        v-model="address.shipping.postcode"
-                                                    >
-                                                    </x-shop::form.control-group.control>
-                                                
-                                                    <x-shop::form.control-group.error
-                                                        control-name="shipping[postcode]"
-                                                    >
-                                                    </x-shop::form.control-group.error>
-                                                </x-shop::form.control-group>
-                                            </div>
-    
-                                            <x-shop::form.control-group>
-                                                <x-shop::form.control-group.label class="!mt-[0px]">
-                                                    @lang('Telephone')
-                                                </x-shop::form.control-group.label>
-                                            
-                                                
-                                                <x-shop::form.control-group.control
-                                                    type="text"
-                                                    name="shipping[phone]"
-                                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                                    rules="required|numeric"
-                                                    label="Telephone"
-                                                    placeholder="Telephone"
-                                                    v-model="address.shipping.phone"
-                                                >
-                                                </x-shop::form.control-group.control>
-                                            
-                                                <x-shop::form.control-group.error
-                                                    control-name="shipping[phone]"
-                                                >
-                                                </x-shop::form.control-group.error>
-                                            </x-shop::form.control-group>
-    
-                                            <div class="mt-[30px] border-b-[1px] border-[#E9E9E9] pb-[15px]">
-                                                <div class="grid gap-[10px]">
-                                                    @auth('customer')
-                                                        <div class="select-none flex gap-x-[15px]">
-                                                            <input 
-                                                                type="checkbox"
-                                                                name="billing[is_save_as_address]"
-                                                                id="billing[is_save_as_address]"
-                                                                class="hidden peer"
-                                                                v-model="address.billing.is_save_as_address"
-                                                            >
-                    
-                                                            <span class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"></span>
-                                                            
-                                                            <label for="billing[is_save_as_address]">@lang('Save this address')</label>
-                                                        </div>
-                                                    @endauth
-                                                </div>
-                                            </div>
-    
-                                            <div
-                                                class="flex justify-end mt-4 mb-4"
-                                                v-if="! address.billing.is_use_for_shipping"
-                                            >
-                                                <button
-                                                    type="submit"
-                                                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-                                                >
-                                                    @lang('Confirm')
-                                                </button>
-                                            </div>
-                                        </x-slot:content>
-                                    </x-shop::accordion>
-                                </div>
-                            @endif
                         </div>
                     </form>
                 </x-shop::form>
@@ -776,16 +476,38 @@
             },
 
             methods: {
+                assignAddress(selectedAddress) {
+                    if (selectedAddress.email) {
+                        this.address.billing.email = selectedAddress.email;
+                    }
+
+                    if (selectedAddress.first_name) {
+                        this.address.billing.first_name = selectedAddress.first_name;
+                    }
+
+                    if (selectedAddress.last_name) {
+                        this.address.billing.last_name = selectedAddress.last_name;
+                    }
+
+                    if (selectedAddress.country) {
+                        this.address.billing.country = selectedAddress.country;
+                    }
+
+                    if (selectedAddress.address1) {
+                        this.address.billing.address1 = [selectedAddress.address1];
+                    }
+
+                    if (this.address.billing.is_use_for_shipping) {
+                        this.address.shipping = this.address.billing;
+                    }
+                },
+
                 init() {
                     if (! this.availableAddresses) {
                         this.address.shipping.isNew = true;
 
                         this.address.billing.isNew = true;
                     } else {
-                        this.address.billing.first_name = this.address.shipping.first_name = "{{ auth('customer')->user()->first_name }}";
-                        this.address.billing.last_name = this.address.shipping.last_name = "{{ auth('customer')->user()->last_name }}";
-                        this.address.billing.email = this.address.shipping.email = "{{ auth('customer')->user()->email }}";
-
                         if (! this.availableAddresses.length) {
                             this.address.shipping.isNew = true;
 
@@ -810,65 +532,8 @@
                     this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
                 },
 
-                assignAddress() {
-                    if (this.availableAddresses.length > 0) {
-                        let address = this.availableAddresses.forEach(address => {
-                            if (address.id == this.address.billing.address_id) {
-                                this.address.billing.address1 = [address.address1];
-
-                                if (address.email) {
-                                    this.address.billing.email = address.email;
-                                }
-
-                                if (address.first_name) {
-                                    this.address.billing.first_name = address.first_name;
-                                }
-
-                                if (address.last_name) {
-                                    this.address.billing.last_name = address.last_name;
-                                }
-
-                                if (address.country) {
-                                    this.address.billing.country = address.country;
-                                }
-                            }
-
-                            if (address.id == this.address.shipping.address_id) {
-                                this.address.shipping.address1 = [address.address1];
-
-                                if (address.email) {
-                                    this.address.shipping.email = address.email;
-                                }
-
-                                if (address.first_name) {
-                                    this.address.shipping.first_name = address.first_name;
-                                }
-
-                                if (address.last_name) {
-                                    this.address.shipping.last_name = address.last_name;
-                                }
-
-                                if (address.country) {
-                                    this.address.shipping.country = address.country;
-                                }
-                            }
-                        });
-                    }
-                },
-
                 store() {
-                    this.assignAddress();
-                    
-                    if (this.address.billing.is_use_for_shipping) {
-                        this.address.shipping = this.address.billing;
-                    }
-                    
                     if (! this.address.billing.is_save_as_address) {
-                        /*
-                            * If the user not click on the save this address checkbox then the address1 array will take first index of address array
-                            */
-                        this.address.billing.address1 = this.address.billing.address1[0];
-
                         this.availableAddresses.push(this.address.billing);
                     } else {
                         this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', this.address)
@@ -880,6 +545,10 @@
                                 this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
                                 
                                 this.getCustomerAddress();
+
+                                if (this.address.shipping.isNew) {
+                                    this.resetForm();
+                                }
                             })
                             .catch(error => {                 
                                 console.log(error);
@@ -887,6 +556,24 @@
                     }
 
                     this.address.billing.isNew = false
+                },
+
+                resetForm() {
+                    this.address = {
+                        billing: {
+                            address1: [''],
+
+                            is_use_for_shipping: true,
+
+                            isNew: false,
+                        },
+
+                        shipping: {
+                            address1: [''],
+
+                            isNew: false,
+                        },
+                    }
                 },
 
                 getCountries() {
@@ -948,11 +635,13 @@
 
                 showBillingMethods(address) {
                     let selectedAddress = this.availableAddresses.find(data => data.id == address.id);
+
+                    this.assignAddress(selectedAddress);
                     
                     this.$parent.$refs.vShippingMethod.isShippingLoading = true;
                     
                     this.address.billing.is_save_as_address = true;
-                    
+
                     this.resetPaymentAndShipping();
 
                     this.$parent.getOrderSummary();
