@@ -61,11 +61,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
     Route::group(['middleware' => ['customer']], function () {
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {
-            /**
-             * To Do (@shivendra):
-             *
-             * Need to fix the `api` for all route.
-             */
             Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 
             Route::post('', 'store')->name('shop.api.customers.account.wishlist.store');

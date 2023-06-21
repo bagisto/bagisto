@@ -19,7 +19,7 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-category-template">
-            <div class="container px-[60px] max-lg:px-[30px]">
+            <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
@@ -32,7 +32,7 @@
                         <!-- Product Card Container -->
                         <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                             <!-- Product Card Shimmer Effect -->
-                            <template v-if="isLoading">
+                            <template v-if="isLoading && filters.toolbar.mode === 'grid'">
                                 <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                             </template>
 
@@ -43,10 +43,16 @@
                         </div>
 
                         <div>
+                            <!-- Product Card Shimmer Effect -->
+                            <template v-if="isLoading && filters.toolbar.mode === 'list'">
+                                <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
+                            </template>
+
+                            <!-- Product Card Listing -->
                             <template v-if="! isLoading && filters.toolbar.mode === 'list'">
                                 <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
                             </template>
-                        </div
+                        </div>
 
                         <!-- Load More Button -->
                         <button
