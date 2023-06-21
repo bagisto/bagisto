@@ -6,7 +6,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-list-template">
-        <div class="flex gap-[20px] rounded-[12px] p-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
+        <div class="flex gap-[20px] rounded-[12px] mb-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
             <div class="relative overflow-hidden  group max-w-[258px] max-h-[250px]">
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <img
@@ -64,7 +64,7 @@
                 </div>
                 
                 <button
-                    class="mt-[20px] ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                    class="bs-primary-button w-auto py-[10px] px-[10] mt-[20px] w-auto"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.add-to-cart')
