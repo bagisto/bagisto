@@ -75,9 +75,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
 
-        Route::get('compare-items/{product_id}', [CompareController::class, 'store'])
-            ->name('shop.customers.account.compare.store');
-
-        Route::get('/customer/addresses', [AddressController::class,'index'])->name('api.shop.customers.account.addresses.index');
+        Route::get('customer/addresses', [AddressController::class,'index'])->name('api.shop.customers.account.addresses.index');
     });
 });

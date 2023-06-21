@@ -100,12 +100,12 @@ class OnepageController extends Controller
     }
 
     /**
-     * Saves customer address.
+     * Store customer address.
      *
      * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function saveAddress(CustomerAddressForm $request): JsonResource
+    public function storeAddress(CustomerAddressForm $request): JsonResource
     {
         $data = $request->all();
 
@@ -158,11 +158,11 @@ class OnepageController extends Controller
     }
 
     /**
-     * Saves shipping method.
+     * Store shipping method.
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveShipping()
+    public function storeShippingMethod()
     {
         $shippingMethod = request()->get('shipping_method');
 
@@ -180,11 +180,11 @@ class OnepageController extends Controller
     }
 
     /**
-     * Saves payment method.
+     * Store payment method.
      *
      * @return array
      */
-    public function savePayment()
+    public function storePaymentMethod()
     {
         $payment = request()->get('payment');
 
@@ -206,11 +206,11 @@ class OnepageController extends Controller
     }
 
     /**
-     * Saves order.
+     * Store order
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveOrder()
+    public function storeOrder()
     {
         if (Cart::hasError()) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);

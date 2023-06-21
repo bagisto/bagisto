@@ -67,7 +67,7 @@
 
             methods: {
                 paymentMethodSelected(selectedPaymentMethod) {
-                    this.$axios.post("{{ route('shop.checkout.save_payment') }}", {
+                    this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {
                             'payment': selectedPaymentMethod
                         })
                         .then(response => {})

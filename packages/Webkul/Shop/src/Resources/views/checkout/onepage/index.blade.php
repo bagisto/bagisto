@@ -59,7 +59,7 @@
 
                 methods: {
                     getOrderSummary() {
-                        this.$axios.get("{{ route('shop.checkout.summary') }}")
+                        this.$axios.get("{{ route('shop.checkout.onepage.summary') }}")
                             .then(response => {
                                 this.cart = response.data.data;
 

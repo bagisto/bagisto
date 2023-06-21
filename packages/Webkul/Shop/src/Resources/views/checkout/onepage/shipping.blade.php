@@ -80,7 +80,7 @@
 
                     this.$parent.$refs.vPaymentMethod.isPaymentLoading = true;
 
-                    this.$axios.post("{{ route('shop.checkout.save_shipping') }}", {    
+                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
                             shipping_method: selectedShippingMethod,
                         })
                         .then(response => {

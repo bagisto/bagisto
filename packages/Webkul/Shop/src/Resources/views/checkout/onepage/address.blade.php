@@ -860,7 +860,7 @@
 
                         this.availableAddresses.push(this.address.billing);
                     } else {
-                        this.$axios.post('{{ route("shop.checkout.save_address") }}', this.address)
+                        this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', this.address)
                             .then(response => {
                                 this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
 
