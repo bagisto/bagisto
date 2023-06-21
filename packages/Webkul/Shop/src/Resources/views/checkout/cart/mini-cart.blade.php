@@ -26,7 +26,7 @@
                     <div class="flex gap-x-[20px]" v-for="item in cart?.items">
                         <div class="">
                             <img 
-                                src="{{ bagisto_asset('images/wishlist-user.png')}}" 
+                                :src="item.base_image.small_image_url"
                                 class="max-w-[110px] max-h-[110px] rounded-[12px]"
                                 alt="" 
                                 title=""
@@ -103,7 +103,10 @@
                     </div>
         
                     <div class="px-[25px]">
-                        <div class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]">
+                        <a 
+                            href="{{ route('shop.checkout.onepage.index') }}" 
+                            class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
+                        >
                             @lang('shop::app.checkout.cart.continue-to-checkout')
                         </div>
 
