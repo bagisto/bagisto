@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-973736af.css",
+    "file": "assets/app-3b9f4268.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -124,9 +124,9 @@
     "file": "assets/our-collection-71183639.jpg",
     "src": "src/Resources/assets/images/our-collection.jpg"
   },
-  "src/Resources/assets/images/payapl.svg": {
-    "file": "assets/payapl-d3807a34.svg",
-    "src": "src/Resources/assets/images/payapl.svg"
+  "src/Resources/assets/images/paypal.png": {
+    "file": "assets/paypal-df581855.png",
+    "src": "src/Resources/assets/images/paypal.png"
   },
   "src/Resources/assets/images/product-hero.png": {
     "file": "assets/product-hero-9e10fae5.png",
@@ -209,7 +209,7 @@
     "src": "src/Resources/assets/images/womens.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-17970cea.js",
+    "file": "assets/app-8644b3b6.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

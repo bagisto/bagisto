@@ -8,7 +8,7 @@
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium cursor-pointer">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <span class="text-[#4D7EA8]">
+                        <span class="text-[#0A49A7]">
                             @lang('shop::app.checkout.cart.coupon.apply')
                         </span>
                     </x-slot:toggle>
