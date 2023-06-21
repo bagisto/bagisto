@@ -13,7 +13,7 @@
                         >
                     </div>
 
-                    <p class="w-[110px] h-[30px] shimmer"></p>
+                    <p class="w-[90px] h-[32px] rounded-[18px] shimmer"></p>
                 </div>
             @endfor
         </div>

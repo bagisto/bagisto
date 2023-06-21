@@ -34,13 +34,13 @@
 
                 <span 
                     class="bs-carousal-next flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[37px] -left-[41px] cursor-pointer transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px]"
-                    @click="get(this.links?.prev_page_url)"
+                    @click="move(this.links?.prev_page_url)"
                 >
                 </span>
 
                 <span 
                     class="bs-carousal-prev flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[37px] -right-[22px] cursor-pointer transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px]"
-                    @click="get(this.links?.next_page_url)"
+                    @click="move(this.links?.next_page_url)"
                 >
                 </span>
             </div>
@@ -89,7 +89,7 @@
                         });
                 },
 
-                get(url) {
+                move(url) {
                     if (url) {
                         this.$axios.get(url)
                             .then(response => {
