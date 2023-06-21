@@ -13,7 +13,9 @@
                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid> 
                 </div> 
             @else
-                <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
+                <div class="mt-[20px]">
+                    <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
+                </div>
             @endif
 
             <button class="w-[171.516px] h-[48px] block mx-auto py-[11px] rounded-[18px] mt-[60px] shimmer"></button>

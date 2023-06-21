@@ -1,7 +1,7 @@
 @props(['count' => 0])
 
 @for ($i = 0; $i < $count; $i++)
-    <div class="flex gap-[20px] rounded-[12px] mb-[15px]max-sm:flex-wrap mt-[20px]">
+    <div class="flex gap-[20px] rounded-[12px] mb-[15px] max-sm:flex-wrap">
         <div class="flex justify-content:between ml-[2px]">
             <div class="relative overflow-hidden rounded-sm  min-w-[258px] min-h-[250px] bg-[#E9E9E9] shimmer">
                 <img class="rounded-sm bg-[#F5F5F5]">
