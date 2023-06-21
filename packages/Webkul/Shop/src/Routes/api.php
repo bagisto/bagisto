@@ -8,6 +8,7 @@ use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 use Webkul\Shop\Http\Controllers\API\AddressController;
+use Webkul\Shop\Http\Controllers\API\CartRuleController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -80,4 +81,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::get('/customer/addresses', [AddressController::class,'index'])->name('api.shop.customers.account.addresses.index');
     });
+
+    Route::get('cart-rules', [CartRuleController::class, 'index'])->name('shop.api.customers.cart_rules.index');
 });
