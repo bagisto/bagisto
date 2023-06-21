@@ -7,6 +7,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\AttributeResource;
+use Webkul\Shop\Http\Resources\CategoryResource;
 
 class CategoryController extends APIController
 {
@@ -28,12 +29,12 @@ class CategoryController extends APIController
      *
      * @return void
      */
-    public function index() {
+    public function index(): JsonResource {
         $categories = $this->categoryRepository->scopeQuery(function($query) {
             return $query->whereNotNull('parent_id')->where('status', 1);
         })->paginate(7);
 
-        return response()->json($categories);
+        return CategoryResource::collection($categories);
     }
 
     /**
