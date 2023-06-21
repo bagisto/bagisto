@@ -1,4 +1,7 @@
-<x-shop::layouts>
+<x-shop::layouts
+    :has-feature="false"
+    :has-footer="false"
+>
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
             <!-- Breadcrumb -->
