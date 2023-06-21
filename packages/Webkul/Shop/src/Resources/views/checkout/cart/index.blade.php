@@ -1,4 +1,7 @@
-<x-shop::layouts>
+<x-shop::layouts
+    :has-feature="false"
+    :has-footer="false"
+>
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
             <!-- Breadcrumb -->
@@ -66,8 +69,8 @@
                                     </div>
 
                                     <img 
-                                        class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                        :src="item.images[0].small_image_url ?? item.base_image.small_image_url"
+                                        class="w-[110px] h-[110px] rounded-[12px]" 
+                                        :src="item.base_image.small_image_url"
                                         @load="onImageLoad"
                                         v-show="! isImageLoading"
                                         alt="" 
@@ -238,8 +241,11 @@
                                 </p>
                             </div>
     
-                            <div class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]">
-                                @lang('shop::app.checkout.cart.proceed-to-checkout')
+                            <a 
+                                href="{{ route('shop.checkout.onepage.index') }}" 
+                                class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]"
+                            >
+                                    @lang('shop::app.checkout.cart.proceed-to-checkout')
                             </div>
                         </div>
                     </div>

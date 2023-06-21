@@ -6,7 +6,7 @@
 
 <x-shop::layouts>
     <div class="flex-auto">
-        <div class="container px-[60px] max-lg:px-[30px]">
+        <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
             <!-- Breadcrumb -->
             <div class="flex justify-start mt-[30px] max-lg:hidden">
                 <div class="flex gap-x-[14px] items-center">
