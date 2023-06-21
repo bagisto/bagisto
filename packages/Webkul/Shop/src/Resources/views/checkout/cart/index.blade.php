@@ -67,7 +67,7 @@
 
                                     <img 
                                         class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                        :src="item.images[0].small_image_url ?? item.base_image.small_image_url"
+                                        :src="item.images.small_image_url ?? item.base_image.small_image_url"
                                         @load="onImageLoad"
                                         v-show="! isImageLoading"
                                         alt="" 
@@ -238,8 +238,11 @@
                                 </p>
                             </div>
     
-                            <div class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]">
-                                @lang('shop::app.checkout.cart.proceed-to-checkout')
+                            <a 
+                                href="{{ route('shop.checkout.onepage.index') }}" 
+                                class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]"
+                            >
+                                    @lang('shop::app.checkout.cart.proceed-to-checkout')
                             </div>
                         </div>
                     </div>
