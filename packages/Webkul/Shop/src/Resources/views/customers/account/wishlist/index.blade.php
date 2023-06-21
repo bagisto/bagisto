@@ -70,7 +70,7 @@
                                 <x-shop::quantity-changer
                                     name="quantity" 
                                     class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center"
-                                    @change="setItemQuantity(item, $event)"
+                                    @change="setItemQuantity($event, item)"
                                 >
                                 </x-shop::quantity-changer>
 
@@ -122,8 +122,19 @@
                 },
 
                methods: {
-                    setItemQuantity(item, quantity) {
-                        this.qty[item.id] = quantity;       
+                    setItemQuantity(quantity, item) {
+                        var existingItem = this.qty.find(function (element) {
+                            return element.id === item.id;
+                        });
+
+                        if (existingItem) {
+                            existingItem.quantity += 1;
+                        } else {
+                            this.qty.push({
+                                id: item.id,
+                                quantity: quantity,
+                            });
+                        }
                     },
 
                     get() {
@@ -156,8 +167,10 @@
                         let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;                        
                         url = url.replace(':wishlist_id:', id);
 
+                        let item = this.qty.find(itemQty => itemQty.id == id);
+
                         this.$axios.post(url, {
-                                quantity: this.qty[id] ?? 1,
+                                quantity: item.quantity,
                                 product_id: id,
                             })
                             .then(response => {
