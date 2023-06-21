@@ -230,12 +230,12 @@
                             </div>
     
                             <div class="flex text-right justify-between">
-                                <p class="text-[16px]">
+                                <p class="text-[18px] font-semibold">
                                     @lang('shop::app.checkout.cart.grand-total')
                                 </p>
     
                                 <p 
-                                    class="text-[26px] font-medium" 
+                                    class="text-[18px] font-semibold" 
                                     v-text="cart.formatted_grand_total"
                                 >
                                 </p>

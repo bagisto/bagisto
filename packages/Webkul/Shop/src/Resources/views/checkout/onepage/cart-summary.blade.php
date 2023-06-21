@@ -71,8 +71,8 @@
                     @include('shop::checkout.onepage.coupon')
 
                     <div class="flex text-right justify-between">
-                        <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal mr-2">@lang('Grand total')</p>
-                        <p class="text-[26px] max-sm:text-[14px] font-medium"> @{{ cart.base_grand_total }}</p>
+                        <p class="text-[18px] font-semibold">@lang('Grand total')</p>
+                        <p class="text-[18px] font-semibold"> @{{ cart.base_grand_total }}</p>
                     </div>
                 </div>
             </div>
