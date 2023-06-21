@@ -54,7 +54,7 @@
 
                                     <button
                                         type="button"
-                                        class="text-[16px] text-[#4D7EA8]"
+                                        class="text-[16px] text-[#0A49A7]"
                                         @click="remove(item.id)"
                                     >
                                         @lang('shop::app.customers.account.wishlist.remove')

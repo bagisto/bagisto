@@ -59,7 +59,7 @@
                                 
                                 <button 
                                     type="button"
-                                    class="text-[#4D7EA8]"
+                                    class="text-[#0A49A7]"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.remove')

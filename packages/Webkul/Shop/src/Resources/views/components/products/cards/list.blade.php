@@ -55,7 +55,7 @@
                     <p class="text-base"  v-text="product.name"></p>
                 </div>
 
-                <div class="flex gap-2.5 text-lg" v-html="product.price_html"></div>
+                <div class="flex font-semibold gap-2.5 text-lg" v-html="product.price_html"></div>
 
                 <div class="flex gap-4 mt-[8px]">
                     <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]"></span>
