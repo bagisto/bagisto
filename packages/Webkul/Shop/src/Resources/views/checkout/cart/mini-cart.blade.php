@@ -26,7 +26,7 @@
                     <div class="flex gap-x-[20px]" v-for="item in cart?.items">
                         <div class="">
                             <img 
-                                :src="item.images.small_image_url ?? item.base_image.small_image_url"
+                                :src="item.base_image.small_image_url"
                                 class="max-w-[110px] max-h-[110px] rounded-[12px]"
                                 alt="" 
                                 title=""

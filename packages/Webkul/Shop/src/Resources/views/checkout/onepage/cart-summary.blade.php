@@ -25,7 +25,7 @@
                     >
                         <img
                             class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
-                            :src="item.images.medium_image_url ?? item.base_image.medium_image_url"
+                            :src="item.base_image.medium_image_url"
                             :title="item.name"
                             :alt="item.name"
                         />
