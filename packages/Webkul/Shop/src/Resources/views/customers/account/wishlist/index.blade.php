@@ -29,53 +29,52 @@
                         <div v-for="item in wishlist">
                             <div class="flex gap-[65px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
                                 <div class="flex gap-x-[20px]">
-                                    <div>
+                                    <div class="">
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
-                                            <img
+                                            <img 
+                                                class="max-w-[110px] max-h-[110px] rounded-[12px]" 
                                                 :src='item.item.base_image.small_image_url'
-                                                class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                                                alt=""
-                                            />
+                                                alt="" 
+                                                title=""
+                                            >
+                                        </a>
+                                    </div>
+                                    <div class="grid gap-y-[10px]">
+                                        <p 
+                                            class="text-[16px]" 
+                                            v-text="item.item.name"
+                                        >
+                                        </p>
+
+                                        <p class="text-[16px]">
+                                            @lang('shop::app.customers.account.wishlist.color')
+                                            @{{ item.item.color }}
+                                        </p>
+
+                                        <a
+                                            class="text-[16px] text-[#0A49A7] cursor-pointer"
+                                            @click="remove(item.id)"
+                                        >
+                                            @lang('shop::app.customers.account.wishlist.remove')
                                         </a>
                                     </div>
                                 </div>
 
-                                <div class="grid gap-y-[10px]">
-                                    <p
-                                        class="text-[16px]"
-                                        v-text="item.item.name">
-                                    </p>
-
-                                    <p class="text-[16px]">
-                                        @lang('shop::app.customers.account.wishlist.color')
-
-                                        @{{ item.item.color }}
-                                    </p>
-
-                                    <button
-                                        type="button"
-                                        class="text-[16px] text-[#0A49A7]"
-                                        @click="remove(item.id)"
-                                    >
-                                        @lang('shop::app.customers.account.wishlist.remove')
-                                    </button>
-                                </div>
-
-                                <p
-                                    class="text-[18px]"
+                                <p 
+                                    class="text-[18px]" 
                                     v-html="item.item.price_html"
                                 >
                                 </p>
 
                                 <x-shop::quantity-changer
                                     name="quantity"
-                                    value="1"
-                                    class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center"
-                                    @change="updateQuantity($event, item)"
+                                    class="flex gap-x-[25px] border rounded-[54px] border-navyBlue py-[10px] px-[20px] items-center w-[140px] max-w-full"
+                                    @change="setItemQuantity($event, item)"
                                 >
                                 </x-shop::quantity-changer>
-
+                                
                                 <button
+                                    type="button"
                                     class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center"
                                     @click="moveToCart(item.id)"
                                 >
@@ -110,11 +109,9 @@
 
                 data() {
                     return  {
-                        wishlist: [],
-
-                        quantity: 1,
-
                         isLoading: true,
+                        
+                        wishlist: [],
                     };
                 },
 
@@ -128,7 +125,8 @@
                             .then(response => {
                                 this.isLoading = false;
 
-                                this.wishlist = response.data.data;
+                                this.wishlist = response.data.data
+                                    .map((wishlist) => ({ ...wishlist, quantity: 1 }));
                             })
                             .catch(error => {
                             });
@@ -139,38 +137,41 @@
                                 '_method': 'DELETE',
                             })
                             .then(response => {
-                                this.wishlist = response.data.data;
+                                this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
                             })
                             .catch(error => {});
                     },
 
                     moveToCart(id) {
-                        /**
-                         *  To Do (@devansh-webkul):
-                         *
-                         * - Need global helper method to convert laravel named route to js url.
-                         */
-                        let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;                        
-                        url = url.replace(':wishlist_id:', id);
+                        let url = `{{ route('shop.api.customers.account.wishlist.move_to_cart', ':wishlist_id:') }}`;
+                            url = url.replace(':wishlist_id:', id);
 
-                        this.$axios.post(url, {
-                                quantity: this.quantity,
-                                product_id: id,
-                            })
-                            .then(response => {
-                                if (response.data.redirect) {
-                                    window.location.href = response.data.data;
-                                }
+                        let existingItem = this.wishlist.find(item => item.id == id);
 
-                                this.wishlist = response.data.data;
-                            })
-                            .catch(error => {});
+                        if (existingItem) {
+                            this.$axios.post(url, {
+                                    quantity: existingItem.quantity,
+                                    product_id: id,
+                                })
+                                .then(response => {
+                                    if (response.data.redirect) {
+                                        window.location.href = response.data.data;
+                                    }
+    
+                                    this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+                                })
+                                .catch(error => {});
+                        }
                     },
 
-                    updateQuantity(value) {
-                        this.quantity = value;
-                    }
-                }
+                    setItemQuantity(quantity, requestedItem) {
+                        let existingItem = this.wishlist.find((item) => item.id === requestedItem.id);
+                        
+                        if (existingItem) {
+                            existingItem.quantity = quantity;
+                        }
+                    },
+                },
             });
         </script>
     @endpushOnce

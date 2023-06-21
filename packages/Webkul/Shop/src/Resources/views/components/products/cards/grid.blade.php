@@ -1,11 +1,11 @@
-<product-grid
+<v-product-grid
     {{ $attributes }}
     :product="product"
 >
-</product-grid>
+</v-product-grid>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="product-grid-template">
+    <script type="text/x-template" id="v-product-grid-template">
         <div class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'>
             <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <div
@@ -36,7 +36,7 @@
                     </p>
 
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
                         v-if="product.on_sale"
                     >
                         {{-- @translations --}}
@@ -85,8 +85,8 @@
     </script>
 
     <script type="module">
-        app.component('product-grid', {
-            template: '#product-grid-template',
+        app.component('v-product-grid', {
+            template: '#v-product-grid-template',
 
             props: ['product'],
 
