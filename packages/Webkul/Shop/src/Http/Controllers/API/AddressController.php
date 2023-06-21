@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Shop\Http\Resources\AddressResource;
 
@@ -13,7 +12,7 @@ class AddressController extends APIController
      */
     public function index(): JsonResource
     {
-        $customer = Auth::guard('customer')->user();
+        $customer = auth()->guard('customer')->user();
 
         return AddressResource::collection($customer->addresses);
     }

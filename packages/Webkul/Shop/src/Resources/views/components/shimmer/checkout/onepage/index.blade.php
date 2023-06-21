@@ -15,7 +15,7 @@
     </div>
 
     <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-        <div class="grid gap-[30px] mt-[30px]">
+        <div>
             {{-- Billing Address --}}
             <x-shop::shimmer.checkout.onepage.address></x-shop::shimmer.checkout.onepage.address>
 

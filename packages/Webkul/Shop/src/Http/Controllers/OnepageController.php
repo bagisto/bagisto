@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
@@ -10,7 +11,6 @@ use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends Controller

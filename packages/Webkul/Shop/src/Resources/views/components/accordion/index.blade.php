@@ -2,7 +2,10 @@
     'isActive' => true,
 ])
 
-<v-accordion is-active="{{ $isActive }}">
+<v-accordion 
+    is-active="{{ $isActive }}"
+    {{ $attributes }}
+>
     @isset($header)
         <template v-slot:header>
             {{ $header }}
@@ -20,9 +23,9 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-accordion-template">
-        <div class="border-b-[1px] border-[#E9E9E9]">
-            <div
-                :class="`flex pb-[10px] justify-between items-center cursor-pointer select-none ${isOpen ? 'active' : ''}`"
+        <div {{ $attributes->merge(['class' => 'border-b-[1px] border-[#E9E9E9]']) }}>
+            <div 
+                :class="`flex justify-between items-center cursor-pointer select-none ${isOpen ? 'active' : ''}`"
                 @click="toggle"
             >
                 <slot name="header">

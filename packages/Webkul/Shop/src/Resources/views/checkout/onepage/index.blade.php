@@ -28,12 +28,29 @@
                 </div>
 
                 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-                    <div class="grid gap-[30px] mt-[30px]">
+                    <div>
                         @include('shop::checkout.onepage.address')
 
                         @include('shop::checkout.onepage.shipping')
 
                         @include('shop::checkout.onepage.payment')
+
+                        <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px]">
+                            <a 
+                                href="{{ route('shop.checkout.cart.index') }}"
+                                class="flex gap-x-[6px] items-center"
+                            >
+                                <span class="icon-arrow-left text-[24px] max-sm:text-[14px]"></span>
+                                @lang('Return to cart')
+                            </a>
+            
+                            <a 
+                                href="{{ route('shop.home.index')}}"
+                                class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                            >
+                                @lang('Return To Shop')
+                            </a>
+                        </div>
                     </div>
                     
                     @include('shop::checkout.onepage.cart-summary')

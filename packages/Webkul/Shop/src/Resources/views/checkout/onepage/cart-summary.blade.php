@@ -14,7 +14,7 @@
         </template>
 
         <template v-else>
-            <div class="max-w-full w-[442px] pl-[30px] h-max sticky top-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 mt-[30px]">
+            <div class="max-w-full w-[442px] pl-[30px] h-max sticky top-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
 
                 <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Cart Summary')</h2>
                 
@@ -70,10 +70,18 @@
                     @include('shop::checkout.onepage.coupon')
 
                     <div class="flex text-right justify-between">
-                        <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal mr-2">@lang('Grand total')</p>
-                        <p class="text-[26px] max-sm:text-[14px] font-medium"> @{{ cart.base_grand_total }}</p>
+                        <p class="text-[20px] max-sm:text-[14px] max-sm:font-normal mr-2 font-semibold">@lang('Grand total')</p>
+                        <p class="text-[20px] max-sm:text-[14px] font-semibold"> @{{ cart.base_grand_total }}</p>
                     </div>
                 </div>
+
+                <button
+                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                    v-if="isPlaceOrderVisible"
+                    @click="placeOrder"
+                >
+                    @lang('Place order')    
+                </button>
             </div>
         </template>
     </script>
@@ -83,6 +91,30 @@
             template: '#v-cart-summary-template',
             
             props: ['cart', 'isCartLoading'],
+
+            data() {
+                return {
+                    isPlaceOrderVisible: false,
+                }
+            },
+
+            methods: {
+                placeOrder() {
+                    this.$axios.post("{{ route('shop.checkout.onepage.addresses.store') }}", {
+                            '_token': "{{ csrf_token() }}"
+                        })
+                        .then(response => {
+                            if (response.data.success) {
+                                if (response.data.redirect_url) {
+                                    window.location.href = response.data.redirect_url;
+                                } else {
+                                    window.location.href = "{{ route('shop.checkout.onepage.success') }}";
+                                }
+                            }
+                        })
+                        .catch(error => console.log(error))
+                }
+            }
         })
     </script>
 @endPushOnce
