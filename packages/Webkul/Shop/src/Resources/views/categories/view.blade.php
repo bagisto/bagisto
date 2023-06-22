@@ -51,7 +51,7 @@
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
                                         <!-- @translations -->
-                                        <p class="text-[20px]">@lang('You don’t have a product to download')</p>
+                                        <p class="text-[20px]">@lang('No products available in this category')</p>
                                     </div>
                                 </template>
                             </template>
@@ -77,7 +77,7 @@
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
                                         <!-- @translations -->
-                                        <p class="text-[20px]">@lang('You don’t have a product to download')</p>
+                                        <p class="text-[20px]">@lang('No products available in this category')</p>
                                     </div>
                                 </template>
                             </template>
