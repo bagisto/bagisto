@@ -11,9 +11,16 @@
                 @foreach ($groupedProducts as $groupedProduct)
                     @if ($groupedProduct->associated_product->getTypeInstance()->isSaleable())
                         <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-[14px] font-medium text-[#7D7D7D] mt-[5px]">{{ $groupedProduct->associated_product->name }}</p>
-                                {!! $groupedProduct->associated_product->getTypeInstance()->getPriceHtml() !!}
+                            <div class="text-[14px] font-medium">
+                                <p class="">
+                                    {{-- @translations --}}
+                                    @lang('Name')
+                                </p>
+
+                                <p class="text-[#7D7D7D] mt-[5px]">
+                                    {{ $groupedProduct->associated_product->name . ' + ' . core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) }}
+                                </p>
+
                             </div>
 
                             <x-shop::quantity-changer
