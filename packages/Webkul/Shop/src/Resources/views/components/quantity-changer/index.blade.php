@@ -4,7 +4,6 @@
 ])
 
 <v-quantity-changer
-    {{ $attributes }}
     {{ $attributes->merge(['class' => 'flex border border-navyBlue items-center']) }}
     name="{{ $name }}"
     value="{{ $value }}"
@@ -32,7 +31,6 @@
                 type="hidden"
                 :name="name"
                 v-model="quantity"
-                {{ $attributes }}
             ></v-field>
         </div>
     </script>
