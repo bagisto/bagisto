@@ -84,13 +84,31 @@
                                         v-text="item.name"
                                     >
                                     </p>
+
+                                    <div
+                                        class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                        v-if="item.options.length"
+                                    >
+                                        <div class="grid gap-[8px]">
+                                            <div class="" v-for="option in item.options">
+                                                <p class="text-[14px] font-medium">
+                                                    @{{ option.attribute_name + ':' }}
+                                                </p>
+
+                                                <p class="text-[14px]">
+                                                    @{{ option.option_label }}
+                                                </p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
     
                                     <span
                                         class="text-[#0A49A7] cursor-pointer" 
                                         @click="removeItem(item.id)"
                                     >
                                         @lang('shop::app.checkout.cart.remove')
-                                </span>
+                                    </span>
                                 </div>
                             </div>
     
