@@ -7,7 +7,9 @@
         <div class="flex-1">
             {{-- Toolbar Shimmer Effect --}}
             <x-shop::shimmer.categories.toolbar></x-shop::shimmer.categories.toolbar>
+
             @if(request()->query('mode') =='grid')
+            
                 <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                     {{-- Product Card Shimmer Effect --}}
                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid> 
