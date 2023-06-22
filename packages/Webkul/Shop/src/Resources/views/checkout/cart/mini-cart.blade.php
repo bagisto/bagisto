@@ -6,7 +6,16 @@
     <script type="text/x-template" id="v-mini-cart-template">
         <x-shop::drawer>
             <x-slot:toggle>
-                <span class="icon-cart text-[24px] cursor-pointer"></span>
+                <span class="relative">
+                    <span class="icon-cart text-[24px] cursor-pointer"></span>
+
+                    <span
+                        class="absolute py-[5px] px-[7px] top-[-15px] left-[18px] rounded-[44px] bg-[#060C3B] text-[#fff] text-[10px] font-semibold leading-[9px]"
+                        v-if="cart?.items_count"
+                    >
+                        @{{ cart.items_count }}
+                    </span>
+                </span>
             </x-slot:toggle>
 
             <x-slot:header>
@@ -26,7 +35,7 @@
                     <div class="flex gap-x-[20px]" v-for="item in cart?.items">
                         <div class="">
                             <img 
-                                src="{{ bagisto_asset('images/wishlist-user.png')}}" 
+                                :src="item.base_image.small_image_url"
                                 class="max-w-[110px] max-h-[110px] rounded-[12px]"
                                 alt="" 
                                 title=""
@@ -47,6 +56,39 @@
                                 >
                                 </p>
                             </div>
+
+                            <div
+                                class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                v-if="item.options.length"
+                            >
+                                <div class="">
+                                    <p
+                                        class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                        @click="item.option_show = ! item.option_show"
+                                    >
+                                        <!-- @translations -->
+                                        @lang('See Details')
+
+                                        <span
+                                            class="text-[24px]"
+                                            :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                        ></span>
+                                    </p>
+                                </div>
+
+                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                    <div class="" v-for="option in item.options">
+                                        <p class="text-[14px] font-medium">
+                                            @{{ option.attribute_name + ':' }}
+                                        </p>
+
+                                        <p class="text-[14px]">
+                                            @{{ option.option_label }}
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
     
                             <div class="flex gap-[20px] items-center flex-wrap">
                                 <x-shop::quantity-changer
@@ -59,7 +101,7 @@
                                 
                                 <button 
                                     type="button"
-                                    class="text-[#4D7EA8]"
+                                    class="text-[#0A49A7]"
                                     @click="removeItem(item.id)"
                                 >
                                     @lang('shop::app.checkout.cart.remove')
@@ -74,12 +116,7 @@
                     v-else
                 >
                     <div class="grid gap-y-[20px] b-0 place-items-center">
-                        <img 
-                            src="{{ bagisto_asset('images/thank-you.png') }}" 
-                            class="" 
-                            alt="" 
-                            title=""
-                        >
+                        <img src="{{ bagisto_asset('images/thank-you.png') }}">
                 
                         <p class="text-[20px]">
                             @lang('shop::app.checkout.cart.empty-cart')
@@ -103,9 +140,12 @@
                     </div>
         
                     <div class="px-[25px]">
-                        <div class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]">
+                        <a 
+                            href="{{ route('shop.checkout.onepage.index') }}" 
+                            class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
+                        >
                             @lang('shop::app.checkout.cart.continue-to-checkout')
-                        </div>
+                        </a>
 
                         <div class="m-0 ml-[0px] block text-base py-[15px] text-center font-medium cursor-pointer">
                             <a href="{{ route('shop.checkout.cart.index') }}">

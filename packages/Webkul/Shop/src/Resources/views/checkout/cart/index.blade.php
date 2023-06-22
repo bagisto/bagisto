@@ -1,4 +1,7 @@
-<x-shop::layouts>
+<x-shop::layouts
+    :has-feature="false"
+    :has-footer="false"
+>
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
             <!-- Breadcrumb -->
@@ -66,8 +69,8 @@
                                     </div>
 
                                     <img 
-                                        class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                        :src="item.images[0].small_image_url ?? item.base_image.small_image_url"
+                                        class="w-[110px] h-[110px] rounded-[12px]" 
+                                        :src="item.base_image.small_image_url"
                                         @load="onImageLoad"
                                         v-show="! isImageLoading"
                                         alt="" 
@@ -75,19 +78,37 @@
                                     >
                                 </div>
     
-                                <div class="grid gap-y-[10px]">
+                                <div class="grid place-content-start gap-y-[10px]">
                                     <p 
                                         class="text-[16px] font-medium" 
                                         v-text="item.name"
                                     >
                                     </p>
+
+                                    <div
+                                        class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                        v-if="item.options.length"
+                                    >
+                                        <div class="grid gap-[8px]">
+                                            <div class="" v-for="option in item.options">
+                                                <p class="text-[14px] font-medium">
+                                                    @{{ option.attribute_name + ':' }}
+                                                </p>
+
+                                                <p class="text-[14px]">
+                                                    @{{ option.option_label }}
+                                                </p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
     
                                     <span
-                                        class="text-[#4D7EA8] cursor-pointer" 
+                                        class="text-[#0A49A7] cursor-pointer" 
                                         @click="removeItem(item.id)"
                                     >
                                         @lang('shop::app.checkout.cart.remove')
-                                </span>
+                                    </span>
                                 </div>
                             </div>
     
@@ -171,7 +192,7 @@
                                 >
                                     <x-shop::modal>
                                         <x-slot:toggle>
-                                            <span class="text-[#4D7EA8]">
+                                            <span class="text-[#0A49A7]">
                                                 @lang('shop::app.checkout.cart.coupon.apply')
                                             </span>
                                         </x-slot:toggle>
@@ -227,19 +248,22 @@
                             </div>
     
                             <div class="flex text-right justify-between">
-                                <p class="text-[16px]">
+                                <p class="text-[18px] font-semibold">
                                     @lang('shop::app.checkout.cart.grand-total')
                                 </p>
     
                                 <p 
-                                    class="text-[26px] font-medium" 
+                                    class="text-[18px] font-semibold" 
                                     v-text="cart.formatted_grand_total"
                                 >
                                 </p>
                             </div>
     
-                            <div class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]">
-                                @lang('shop::app.checkout.cart.proceed-to-checkout')
+                            <a 
+                                href="{{ route('shop.checkout.onepage.index') }}" 
+                                class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]"
+                            >
+                                    @lang('shop::app.checkout.cart.proceed-to-checkout')
                             </div>
                         </div>
                     </div>

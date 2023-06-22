@@ -102,6 +102,7 @@
             <template v-else>
                 <x-shop::range-slider
                     ::key="refreshKey"
+                    default-type="price"
                     ::default-allowed-max-range="allowedMaxPrice"
                     ::default-min-range="minRange"
                     ::default-max-range="maxRange"

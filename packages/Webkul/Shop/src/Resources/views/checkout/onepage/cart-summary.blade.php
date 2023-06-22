@@ -25,7 +25,7 @@
                     >
                         <img
                             class="max-w-[90px] max-h-[90px] w-[90px] h-[90px] rounded-md"
-                            :src="item.image.medium_image_url"
+                            :src="item.base_image.medium_image_url"
                             :title="item.name"
                             :alt="item.name"
                         />
@@ -70,8 +70,8 @@
                     @include('shop::checkout.onepage.coupon')
 
                     <div class="flex text-right justify-between">
-                        <p class="text-[20px] max-sm:text-[14px] max-sm:font-normal mr-2 font-semibold">@lang('Grand total')</p>
-                        <p class="text-[20px] max-sm:text-[14px] font-semibold"> @{{ cart.base_grand_total }}</p>
+                        <p class="text-[18px] font-semibold">@lang('Grand total')</p>
+                        <p class="text-[18px] font-semibold"> @{{ cart.base_grand_total }}</p>
                     </div>
                 </div>
 

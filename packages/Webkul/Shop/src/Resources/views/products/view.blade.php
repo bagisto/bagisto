@@ -117,7 +117,7 @@
                                 </div>
                             </div>
 
-                            <div class='flex items-center'>
+                            <div class="flex gap-[15px] items-center mt-[15px]">
                                 <x-shop::products.star-rating 
                                     :value="$avgRatings"
                                     :is-editable=false
@@ -133,7 +133,7 @@
 
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                            <p class="text-[24px] flex gap-2.5 items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                            <p class="text-[24px] !font-medium flex gap-2.5 items-center mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
                                 {!! $product->getTypeInstance()->getPriceHtml() !!}
                             </p>
 
@@ -164,7 +164,6 @@
                                         name="quantity"
                                         value="1"
                                         class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
-                                        @change="updateItem($event)"
                                     >
                                     </x-shop::quantity-changer>
                                 @endif
@@ -231,17 +230,11 @@
 
                 data() {
                     return {
-                        qty: 1,
-
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
 
                 methods: {
-                    updateItem(quantity) {
-                        this.qty = quantity;
-                    },
-
                     addToCart() {
                         let formData = new FormData(this.$refs.formData);
 

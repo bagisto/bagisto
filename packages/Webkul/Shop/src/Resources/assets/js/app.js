@@ -4,15 +4,6 @@
 import.meta.glob(["../images/**", "../fonts/**"]);
 
 /**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-import axios from "axios";
-window.axios = axios;
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-
-/**
  * Main vue bundler.
  */
 import { createApp } from "vue/dist/vue.esm-bundler";
@@ -89,16 +80,18 @@ window.app = createApp({
 });
 
 /**
- * Global components registration;
+ * Global plugins registration.
  */
-app.component('VForm', Form);
-app.component('VField', Field);
-app.component('VErrorMessage', ErrorMessage);
+import Shop from "./plugins/shop";
+import Axios from "./plugins/axios";
+[Shop, Axios].forEach((plugin) => app.use(plugin));
 
 /**
- * Global properties registration.
+ * Global components registration;
  */
-app.config.globalProperties.$axios = axios;
+app.component("VForm", Form);
+app.component("VField", Field);
+app.component("VErrorMessage", ErrorMessage);
 
 /**
  * Load event, the purpose of using the event is to mount the application
