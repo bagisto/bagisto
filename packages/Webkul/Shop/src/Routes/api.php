@@ -59,7 +59,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.compare.move_to_wishlist');
     });
 
-    Route::group(['middleware' => ['customer']], function () {
+    Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 
@@ -70,9 +70,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
 
-        Route::get('compare-items/{product_id}', [CompareController::class, 'store'])
-            ->name('shop.customers.account.compare.store');
-
-        Route::get('/customer/addresses', [AddressController::class, 'index'])->name('api.shop.customers.account.addresses.index');
+        Route::get('addresses', [AddressController::class, 'index'])->name('api.shop.customers.account.addresses.index');
     });
 });

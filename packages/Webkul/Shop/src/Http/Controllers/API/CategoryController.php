@@ -29,9 +29,10 @@ class CategoryController extends APIController
      */
     public function index(): JsonResource
     {
-        $categories = $this->categoryRepository->scopeQuery(function ($query) {
-            return $query->whereNotNull('parent_id')->where('status', 1);
-        })->paginate();
+        $categories = $this->categoryRepository
+            ->whereNotNull('parent_id')
+            ->where('status', 1)
+            ->paginate();
 
         return CategoryResource::collection($categories);
     }

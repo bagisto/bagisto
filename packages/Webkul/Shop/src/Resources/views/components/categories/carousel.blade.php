@@ -3,7 +3,7 @@
     title="{{ $title }}"
     navigation-link="{{ $navigationLink ?? '' }}"
 >
-    <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false"></x-shop::shimmer.products.carousel>
+    <x-shop::shimmer.categories.carousel :navigation-link="$navigationLink ?? false"></x-shop::shimmer.categories.carousel>
 </v-categories-carousel>
 
 @pushOnce('scripts')
@@ -55,7 +55,11 @@
 
         <!-- category carousel shimmer -->
         <template v-if="isLoading">
-            <x-shop::shimmer.categories.carousel :count="7" :navigation-link="$navigationLink ?? false"></x-shop::shimmer.categories.carousel>
+            <x-shop::shimmer.categories.carousel
+                :count="7"
+                :navigation-link="$navigationLink ?? false"
+            >
+            </x-shop::shimmer.categories.carousel>
         </template>
     </script>
 
