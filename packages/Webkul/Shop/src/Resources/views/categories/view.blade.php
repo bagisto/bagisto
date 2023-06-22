@@ -58,7 +58,7 @@
                         </div>
 
                         <div
-                            class="mt-[30px]"
+                            class="grid grid-cols-1 gap-[25px] mt-[30px] "
                             v-else
                         >
                             <!-- Product Card Shimmer Effect -->
