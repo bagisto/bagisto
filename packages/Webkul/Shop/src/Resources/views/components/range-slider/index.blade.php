@@ -84,26 +84,9 @@
 
             computed: {
                 rangeText() {
-                    /**
-                     * If someone is passing invalid props, this case will check first if they are valid, then continue.
-                     */
-                    if (this.isTypeSupported()) {
-                        switch (this.defaultType) {
-                            case 'price':
-                                return `${this.$shop.formatPrice(this.minRange)} - ${this.$shop.formatPrice(this.maxRange)}`;
+                    let { formattedMinRange, formattedMaxRange } = this.getFormattedData();
 
-                            case 'float':
-                                return `${parseFloat(this.minRange).toFixed(2)} - ${parseFloat(this.maxRange).toFixed(2)}`;
-
-                            default:
-                                return `${this.minRange} - ${this.maxRange}`
-                        }
-                    }
-
-                    /**
-                     * Otherwise, we will load the default formatting.
-                     */
-                    return `${this.minRange} - ${this.maxRange}`;
+                    return `${formattedMinRange} - ${formattedMaxRange}`;
                 },
             },
 
