@@ -42,7 +42,10 @@
                             <template v-else>
                                 <template v-if="products.length">
                                     <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
-                                        <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
+                                        <x-shop::products.card
+                                            ::mode="'grid'"
+                                            v-for="product in products"
+                                        ></x-shop::products.card>
                                     </div>
                                 </template>
 
@@ -69,7 +72,10 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
+                                    <x-shop::products.card
+                                        ::mode="'list'"
+                                        v-for="product in products"
+                                    ></x-shop::products.card>
                                 </template>
 
                                 <template v-else>
