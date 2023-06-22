@@ -1,80 +1,100 @@
-<product-list
+<v-product-list
     {{ $attributes }}
     :product="product"
 >
-</product-list>
-
+</v-product-list>
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-list-template">
-        <div class="flex gap-[20px] rounded-[12px] mb-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
-            <div class="relative overflow-hidden  group max-w-[258px] max-h-[250px]">
+        <div class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap">
+            <div class="relative overflow-hidden group max-w-[250px] max-h-[258px]"> 
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
-                    <img
-                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                    <img 
+                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
                         :src="product.base_image.medium_image_url"
-                        width="258"
-                        height="250"
+                        width="250"
+                        height="258"
                     >
-                </a>   
-                 
-                <div class="action-items bg-black">
-                    <p
+                </a>
+               
+                <div class="action-items bg-black"> 
+                    <p 
                         class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.is_new"
+                        v-if="product.is_new && ! product.on_sale" 
                     >
                         {{-- @translations --}}
                         @lang('New')
                     </p>
 
-                    <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.on_sale"
+                    <p 
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.on_sale" 
                     >
                         {{-- @translations --}}
                         @lang('Sale')
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <a
-                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
+                        <span 
+                            class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
                             @click="addToWishlist()"
                         >
-                        </a>
-
-                        <a
-                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
+                        </span> 
+                        
+                        <span 
+                            class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
                             @click="addToCompare(product.id)"
                         >
-                        </a>
-                    </div>
-                </div>
-            </div>
+                        </span>
+                    </div> 
+                </div> 
+            </div> 
 
-            <div class="">
-                <div class="flex justify-between">
-                    <p class="text-base"  v-text="product.name"></p>
-                </div>
+            <div class="grid gap-[15px] content-start"> 
+                <p 
+                    class="text-base" 
+                    v-text="product.name"
+                >
+                </p> 
 
-                <div class="flex gap-2.5 text-lg" v-html="product.price_html"></div>
+                <div class="flex gap-2.5"> 
+                    <p 
+                        class="text-lg font-semibold" 
+                        v-html="product.price_html">
+                    </p>
+                </div> 
 
-                <div class="flex gap-4 mt-[8px]">
-                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]"></span>
+                <div class="flex gap-4"> 
+                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]">
+                    </span> 
 
-                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#5C5C5C]"></span>
-                </div>
+                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#5C5C5C]">
+                    </span> 
+                </div> 
                 
-                <button
-                    class="bs-primary-button w-auto py-[10px] px-[10] mt-[20px] w-auto"
+                <p class="text-[14px] text-[#7D7D7D]" v-if="! product.avg_ratings">
+                    Be the first to review this product
+                </p>
+            
+                <p v-else class="text-[14px] text-[#7D7D7D]">
+                    <x-shop::products.star-rating 
+                        ::value="product && product.avg_ratings ? product.avg_ratings : 0"
+                        :is-editable=false
+                    >
+                    </x-shop::products.star-rating>
+                </p>
+             
+                <div 
+                    class="bs-primary-button px-[30px] py-[10px]"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.add-to-cart')
-                 </button>
-            </div>
+                </div> 
+            </div> 
         </div>
     </script>
 
     <script type="module">
-        app.component('product-list', {
+        app.component('v-product-list', {
             template: '#v-product-list-template',
 
             props: ['product'],
