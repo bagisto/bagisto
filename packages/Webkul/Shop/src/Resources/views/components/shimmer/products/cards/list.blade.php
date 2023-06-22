@@ -3,7 +3,7 @@
 @for ($i = 0; $i < $count; $i++)
 <div class="grid grid-cols-1 gap-[25px]">
     <div class="grid gap-2.5 grid-cols-2 relative max-sm:grid-cols-1 max-w-max">
-        <div class="relative overflow-hidden rounded-sm min-w-[258px] min-h-[250px] bg-[#E9E9E9] shimmer "> 
+        <div class="relative overflow-hidden rounded-sm min-w-[250px] min-h-[258px] bg-[#E9E9E9] shimmer "> 
             <img
                 class="rounded-sm bg-[#F5F5F5]" 
                 src=""
