@@ -11,6 +11,8 @@
                     <img 
                         class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
                         :src="product.base_image.medium_image_url"
+                        width="250"
+                        height="258"
                     >
                 </a>
                

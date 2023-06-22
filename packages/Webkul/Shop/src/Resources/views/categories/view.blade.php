@@ -57,7 +57,10 @@
                             </template>
                         </div>
 
-                        <div class="grid grid-cols-1 gap-[25px]">
+                        <div
+                            class="grid grid-cols-1 gap-[25px] mt-[30px] "
+                            v-else
+                        >
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
                                 <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
