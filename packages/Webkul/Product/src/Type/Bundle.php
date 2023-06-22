@@ -67,6 +67,13 @@ class Bundle extends AbstractType
     protected $isChildrenCalculated = true;
 
     /**
+     * Show quantity box.
+     *
+     * @var bool
+     */
+    protected $showQuantityBox = true;
+
+    /**
      * Create a new product type instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository

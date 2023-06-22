@@ -70,7 +70,7 @@
                 <p class="text-base" v-text="product.name"></p>
 
                 <div
-                    class="flex gap-2.5 text-lg"
+                    class="flex font-semibold gap-2.5 text-lg"
                     v-html="product.price_html"
                 >
                 </div>

@@ -2,16 +2,16 @@
     {!! view_render_event('bagisto.shop.products.view.downloadable.before', ['product' => $product]) !!}
 
     @if ($product->downloadable_samples->count())
-        <div class="sample-list mb-5">
+        <div class="sample-list mb-[25px] mt-[30px]">
             {{-- @translations --}}
-            <h3>@lang('Samples')</h3>
+            <h3 class="font-medium mb-[15px]">{{ __('Samples') }}</h3>
 
             <ul>
                 @foreach ($product->downloadable_samples as $sample)
-                    <li>
+                    <li class="mb-[5px]">
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'sample', 'id' => $sample->id]) }}" 
-                            class="text-navyBlue "
+                            class="text-[#0A49A7]"
                             target="_blank"
                         >
                             {{ $sample->title }}
@@ -23,7 +23,10 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <div class="grid gap-[10px]">
+        {{-- @translations --}}
+        <h3 class="font-medium mb-[15px]">{{ __('Links') }}</h3>
+
+        <div class="grid gap-[15px]">
             @foreach ($product->downloadable_links as $link)
                 <div class="select-none flex gap-x-[15px]">
                     <div class="flex">
@@ -51,7 +54,7 @@
                         <a 
                             href="{{ route('shop.downloadable.download_sample', ['type' => 'link', 'id' => $link->id]) }}"
                             target="_blank"
-                            class="text-navyBlue ml-2"
+                            class="text-[#0A49A7] ml-2"
                         >
                             {{-- @translations --}}
                             @lang('Sample')

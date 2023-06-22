@@ -1,13 +1,13 @@
-<v-product-list
+<product-list
     {{ $attributes }}
     :product="product"
 >
-</v-product-list>
+</product-list>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-product-list-template">
+    <script type="text/x-template" id="product-list-template">
         <div class="flex gap-[20px] rounded-[12px] p-[15px] max-sm:flex-wrap {{ $attributes["class"] }}">
-            <div class="relative overflow-hidden  group max-w-[258px] max-h-[250px]">
+            <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <img
                         class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
@@ -27,7 +27,7 @@
                     </p>
 
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
                         v-if="product.on_sale"
                     >
                         {{-- @translations --}}
@@ -74,8 +74,8 @@
     </script>
 
     <script type="module">
-        app.component('v-product-list', {
-            template: '#v-product-list-template',
+        app.component('product-list', {
+            template: '#product-list-template',
 
             props: ['product'],
 
