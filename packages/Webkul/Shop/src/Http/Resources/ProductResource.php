@@ -16,6 +16,8 @@ class ProductResource extends JsonResource
     {
         $productTypeInstance = $this->getTypeInstance();
 
+        $reviewHelper = app('Webkul\Product\Helpers\Review');
+
         return [
             'id'          => $this->id,
             'name'        => $this->name,
@@ -32,6 +34,7 @@ class ProductResource extends JsonResource
             'price_html'  => $productTypeInstance->getPriceHtml(),
             'base_image'  => product_image()->getProductBaseImage($this),
             'images'      => product_image()->getGalleryImages($this),
+            'avg_ratings' =>  round($reviewHelper->getAverageRating($this)),
         ];
     }
 }
