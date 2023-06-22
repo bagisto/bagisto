@@ -29,7 +29,7 @@
                                         <div 
                                             class="border border-[#e5e5e5] max-w-[414px] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
                                             v-for="(addresses, index) in availableAddresses"
-                                            @change="showBillingMethods(addresses)"
+                                            @change="storeBilliingAddress(addresses)"
                                         >
                                             <v-field
                                                 type="radio"
@@ -86,30 +86,7 @@
                                             </div>
                                         </div>
                                     </div>
-    
-                                    <div class="select-none mt-[20px] text-[14px] text-[#7D7D7D] flex gap-x-[15px]">
-                                        <input
-                                            type="checkbox"
-                                            id="is_use_for_shipping"
-                                            name="is_use_for_shipping"
-                                            class="hidden peer"
-                                            v-model="address.billing.is_use_for_shipping"
-                                        >
-
-                                        <label 
-                                            class="icon-uncheck text-[20px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white cursor-pointer"
-                                            for="is_use_for_shipping"
-                                        >
-                                        </label>
-                                        
-                                        <label 
-                                            for="is_use_for_shipping"
-                                            class="cursor-pointer"
-                                        >
-                                            @lang('address is the same as my billing address')
-                                        </label>
-                                    </div>
-
+                                    
                                 </x-slot:content>
                             </x-shop::accordion>
                         </div>
@@ -130,17 +107,15 @@
                                                 @lang('Company name')
                                             </x-shop::form.control-group.label>
                                             
-                                            @if(count(auth('customer')->user()->addresses))
-                                                <a 
-                                                    class="flex"
-                                                    href="javascript:void(0)" 
-                                                    @click="address.billing.isNew = ! address.billing.isNew"
-                                                    v-if="address.billing.isNew"
-                                                >
-                                                    <span class="icon-arrow-left text-[24px]"></span>
-                                                    @lang('Back')
-                                                </a>
-                                            @endif
+                                            <a 
+                                                class="flex"
+                                                href="javascript:void(0)" 
+                                                v-if="availableAddresses.length > 0"
+                                                @click="address.billing.isNew = ! address.billing.isNew"
+                                            >
+                                                <span class="icon-arrow-left text-[24px]"></span>
+                                                @lang('Back')
+                                            </a>
                                         </div>
     
                                         <x-shop::form.control-group.control
@@ -416,7 +391,7 @@
     
                                     <div 
                                         class="flex justify-end mt-4 mb-4"
-                                        v-if="address.billing.is_use_for_shipping"
+                                        v-if="address.billing.is_use_for_shipping && ! address.shipping.isNew"
                                     >
                                         <button
                                             type="submit"
@@ -425,9 +400,50 @@
                                             @lang('Confirm')
                                         </button>
                                     </div>
+
                                 </x-slot:content>
                                 
                             </x-shop::accordion>
+                        </div>
+                        
+                        @include('shop::checkout.onepage.shipping-address')
+
+                        <div>
+                            <div 
+                                class="select-none mt-[20px] text-[14px] text-[#7D7D7D] flex gap-x-[15px]"
+                            >
+                                <input
+                                    type="checkbox"
+                                    id="is_use_for_shipping"
+                                    name="is_use_for_shipping"
+                                    class="hidden peer"
+                                    v-model="address.shipping.isNew"
+                                >
+
+                                <label 
+                                    class="icon-uncheck text-[20px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white cursor-pointer"
+                                    for="is_use_for_shipping"
+                                >
+                                </label>
+                                
+                                <label 
+                                    for="is_use_for_shipping"
+                                    class="cursor-pointer"
+                                >
+                                    @lang('address is the same as my billing address')
+                                </label>
+                            </div>
+
+                            <div 
+                                class="flex justify-end mt-4 mb-4"
+                            >
+                                <button
+                                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                    type="submit"
+                                >
+                                    @lang('Confirm')
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </x-shop::form>
@@ -446,14 +462,12 @@
                             address1: [''],
 
                             is_use_for_shipping: true,
-
-                            isNew: false,
                         },
 
                         shipping: {
                             address1: [''],
 
-                            isNew: false,
+                            isNew: true,
                         },
                     },
 
@@ -463,7 +477,7 @@
 
                     states: [],
 
-                    isAddressLoading: true
+                    isAddressLoading: true,
                 }
             }, 
             
@@ -476,32 +490,6 @@
             },
 
             methods: {
-                assignAddress(selectedAddress) {
-                    if (selectedAddress.email) {
-                        this.address.billing.email = selectedAddress.email;
-                    }
-
-                    if (selectedAddress.first_name) {
-                        this.address.billing.first_name = selectedAddress.first_name;
-                    }
-
-                    if (selectedAddress.last_name) {
-                        this.address.billing.last_name = selectedAddress.last_name;
-                    }
-
-                    if (selectedAddress.country) {
-                        this.address.billing.country = selectedAddress.country;
-                    }
-
-                    if (selectedAddress.address1) {
-                        this.address.billing.address1 = [selectedAddress.address1];
-                    }
-
-                    if (this.address.billing.is_use_for_shipping) {
-                        this.address.shipping = this.address.billing;
-                    }
-                },
-
                 init() {
                     if (! this.availableAddresses) {
                         this.address.shipping.isNew = true;
@@ -526,14 +514,24 @@
                     }
                 },
 
-                resetPaymentAndShipping() {
-                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
-
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-                },
-
                 store() {
+                    let billingAddress = this.availableAddresses.find(address => address.id === this.address.billing.address_id);
+
+                    if (billingAddress) {
+                        this.address.billing.address1 = [billingAddress.address1];
+                    }
+
                     if (! this.address.billing.is_save_as_address) {
+                        if (this.address.billing) {
+                            this.tempBillingAddress = this.address.billing;
+                        }
+
+                        if(this.address.shipping) {
+                            this.tempShippingAddress = this.address.shipping;
+                        }
+
+                        this.address.billing.address1 = this.address.billing.address1[0];
+
                         this.availableAddresses.push(this.address.billing);
                     } else {
                         this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', this.address)
@@ -558,22 +556,120 @@
                     this.address.billing.isNew = false
                 },
 
-                resetForm() {
-                    this.address = {
-                        billing: {
-                            address1: [''],
+                getCustomerAddress() {
+                    this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
+                        .then(response => {
+                            this.availableAddresses = response.data.data;
+                            
+                            this.isAddressLoading = false;
 
-                            is_use_for_shipping: true,
+                            this.init();
+                        })
+                        .catch(function (error) {});
+                },
 
-                            isNew: false,
-                        },
+                assignAddress() {
+                    if (this.availableAddresses.length > 0) {
+                        let address = this.availableAddresses.forEach(address => {
+                            if (address.id == this.address.billing.address_id) {
+                                this.address.billing.address1 = [address.address1]
 
-                        shipping: {
-                            address1: [''],
+                                if (address.email) {
+                                    this.address.billing.email = address.email;
+                                }
 
-                            isNew: false,
-                        },
+                                if (address.first_name) {
+                                    this.address.billing.first_name = address.first_name;
+                                }
+
+                                if (address.last_name) {
+                                    this.address.billing.last_name = address.last_name;
+                                }
+
+                                if (address.country) {
+                                    this.address.billing.country = address.country;
+                                }
+
+                                if (address.city) {
+                                    this.address.billing.city = address.city;
+                                }
+
+                                if (address.company_name) {
+                                    this.address.billing.company_name = address.company_name;
+                                }
+
+                                if(address.country) {
+                                    this.address.billing.country = address.country;
+                                }
+
+                                if(address.gender) {
+                                    this.address.billing.gender = address.gender;
+                                }
+
+                                if (address.state) {
+                                    this.address.billing.state = address.state;
+                                }
+
+                                if (address.phone) {
+                                    this.address.billing.phone = address.phone
+                                }
+                            }
+
+                            if (address.id == this.address.shipping.address_id) {
+                                this.address.shipping.address1 = [address.address1];
+
+                                if (address.email) {
+                                    this.address.shipping.email = address.email;
+                                }
+
+                                if (address.first_name) {
+                                    this.address.shipping.first_name = address.first_name;
+                                }
+
+                                if (address.last_name) {
+                                    this.address.shipping.last_name = address.last_name;
+                                }
+
+                                if (address.country) {
+                                    this.address.shipping.country = address.country;
+                                }
+
+                                if (address.country) {
+                                    this.address.shipping.country = address.country;
+                                }
+
+                                if (address.city) {
+                                    this.address.shipping.city = address.city;
+                                }
+
+                                if (address.company_name) {
+                                    this.address.shipping.company_name = address.company_name;
+                                }
+
+                                if (address.country) {
+                                    this.address.shipping.country = address.country;
+                                }
+
+                                if(address.gender) {
+                                    this.address.shipping.gender = address.gender;
+                                }
+
+                                if (address.state) {
+                                    this.address.shipping.state = address.state;
+                                }
+
+                                if (address.phone) {
+                                    this.address.shipping.phone = address.phone
+                                }
+                            }
+                        });
                     }
+                },
+
+                storeBilliingAddress(selectedBillingAddress) {
+                },
+
+                storeShippingAddress(selectedShippingAddress) {
                 },
 
                 getCountries() {
@@ -592,36 +688,6 @@
                         .catch(function (error) {});
                 },
 
-                getCustomerAddress() {
-                    this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
-                        .then(response => {
-                            this.availableAddresses = response.data.data;
-                            
-                            this.isAddressLoading = false;
-
-                            this.init();
-                        })
-                        .catch(function (error) {});
-                },
-
-                addNewShippingAddress: function () {
-                    this.address.shipping.isNew = true;
-
-                    this.address.shipping.address_id = null;
-
-                    this.resetPaymentAndShipping();
-                },
-
-                addNewBillingAddress() {
-                    this.address.billing.isNew = true;
-
-                    this.address.billing.address_id = null;
-
-                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
-
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
-                },
-
                 isHaveStates(addressType) {
                     if (
                         this.states[this.address[addressType].country]
@@ -632,22 +698,50 @@
 
                     return false;
                 },
+             
+                addNewBillingAddress() {
+                    this.selectedBillingAddressId = this.address.billing.address_id
 
-                showBillingMethods(address) {
-                    let selectedAddress = this.availableAddresses.find(data => data.id == address.id);
+                    // this.resetForm();
 
-                    this.assignAddress(selectedAddress);
-                    
-                    this.$parent.$refs.vShippingMethod.isShippingLoading = true;
-                    
-                    this.address.billing.is_save_as_address = true;
+                    this.address.billing.isNew = true;
 
-                    this.resetPaymentAndShipping();
+                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
 
-                    this.$parent.getOrderSummary();
-                    
-                    this.store();
-                }
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                },
+
+                addNewshippingAddress() {
+                    this.selectedShippingAddressId = this.address.shipping.address_id
+
+                    // this.resetForm();
+
+                    this.address.shipping.isNew = false;
+
+                    this.address.shipping.isShowShippingForm = true
+
+                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                },
+
+                resetForm() {
+                    this.address = {
+                        billing: {
+                            address1: [''],
+
+                            is_use_for_shipping: true,
+
+                            isNew: false,
+                        },
+
+                        shipping: {
+                            address1: [''],
+
+                            isNew: true,
+                        },
+                    }
+                },
             }
         });
     </script>

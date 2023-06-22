@@ -27,6 +27,7 @@
                     </div>
                 </div>
 
+
                 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
                     <div>
                         @include('shop::checkout.onepage.address')
@@ -34,6 +35,8 @@
                         @include('shop::checkout.onepage.shipping')
 
                         @include('shop::checkout.onepage.payment')
+
+        
 
                         <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px]">
                             <a 
@@ -83,7 +86,8 @@
                                 this.isCartLoading = false;
                             })
                             .catch(error => console.log(error))
-                    }
+                    },
+
                 }
             });
         </script>
