@@ -3,7 +3,6 @@
     :product="product"
 >
 </v-product-list>
-
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-list-template">
         <div class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap">
@@ -14,14 +13,20 @@
                         :src="product.base_image.medium_image_url"
                     >
                 </a>
-
+               
                 <div class="action-items bg-black"> 
-                    <p  v-if="product.is_new" class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]">
+                    <p 
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.is_new && ! product.on_sale" 
+                    >
                         {{-- @translations --}}
                         @lang('New')
                     </p>
 
-                    <p v-if="product.on_sale" class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]">
+                    <p 
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.on_sale" 
+                    >
                         {{-- @translations --}}
                         @lang('Sale')
                     </p>
@@ -63,9 +68,19 @@
                     <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#5C5C5C]">
                     </span> 
                 </div> 
-
-                <p class="text-[14px] text-[#7D7D7D]">Be the first to review this product</p> 
-
+                
+                <p class="text-[14px] text-[#7D7D7D]" v-if="! product.avg_ratings">
+                    Be the first to review this product
+                </p>
+            
+                <p v-else class="text-[14px] text-[#7D7D7D]">
+                    <x-shop::products.star-rating 
+                        ::value="product && product.avg_ratings ? product.avg_ratings : 0"
+                        :is-editable=false
+                    >
+                    </x-shop::products.star-rating>
+                </p>
+             
                 <div 
                     class="bs-primary-button px-[30px] py-[10px]"
                     @click="addToCart()"
