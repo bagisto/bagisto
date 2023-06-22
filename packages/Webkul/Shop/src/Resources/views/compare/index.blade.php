@@ -23,105 +23,116 @@
             </div>
 
             <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
-                <v-compare-item></v-compare-item>
+                <v-compare></v-compare>
             </div>
         </div>
     </div>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-compare-item-template">
-            <div class="grid gap-2.5 relative max-sm:grid-cols-1" v-for="item in compareItems" v-if="compareItems?.length">
-                <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
-                    <div 
-                        class="relative overflow-hidden rounded-sm min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
-                        v-show="isLoading"
-                    > 
-                        <img 
-                            class="rounded-sm bg-[#F5F5F5]" 
-                            src=""
+        <script type="text/x-template" id="v-compare-template">
+            <template v-if="compareItems.length">
+                <div class="grid gap-2.5 relative max-sm:grid-cols-1" v-for="item in compareItems">
+                    <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
+                        <div 
+                            class="relative overflow-hidden rounded-sm min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
+                            v-show="isLoading"
                         > 
-                    </div>
+                            <img 
+                                class="rounded-sm bg-[#F5F5F5]" 
+                                src=""
+                            > 
+                        </div>
 
-                    <img 
-                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
-                        :src='item.product.base_image.medium_image_url'
-                        @load="onResponseLoad()"
-                        v-show="! isLoading"
-                    >
+                        <img 
+                            class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
+                            :src='item.product.base_image.medium_image_url'
+                            @load="onResponseLoad()"
+                            v-show="! isLoading"
+                        >
 
-                    <div class="action-items bg-black">
-                        <p class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]">
-                            @lang('shop::app.compare.new')
-                        </p>
+                        <div class="action-items bg-black">
+                            <p class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]">
+                                @lang('shop::app.compare.new')
+                            </p>
 
-                        <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <span 
-                                class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
-                                @click="moveToWishlist(item.product.id)"
-                            >
-                            </span>
+                            <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <span 
+                                    class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
+                                    @click="moveToWishlist(item.product.id)"
+                                >
+                                </span>
 
-                            <span 
-                                class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-bin text-[25px]"
-                                @click="remove(item.product.id)"
-                            >
-                            </span>
+                                <span 
+                                    class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-bin text-[25px]"
+                                    @click="remove(item.product.id)"
+                                >
+                                </span>
 
-                            <div 
-                                class="rounded-xl bg-white text-navyBlue text-xs w-max font-medium py-[11px] px-[43px] cursor-pointer absolute bottom-[15px] left-[50%] -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
-                                @click="moveToCart(item.product.id)"
-                            >
-                                @lang('shop::app.compare.add-to-cart')
+                                <div 
+                                    class="rounded-xl bg-white text-navyBlue text-xs w-max font-medium py-[11px] px-[43px] cursor-pointer absolute bottom-[15px] left-[50%] -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
+                                    @click="moveToCart(item.product.id)"
+                                >
+                                    @lang('shop::app.compare.add-to-cart')
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                @foreach ($comparableAttributes as $comparableAttribute)
-                    @switch ($comparableAttribute['code'])
-                        @case ('price')
-                            <p
-                                class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                v-show="isLoading"    
-                            >
-                            </p>
+                    @foreach ($comparableAttributes as $comparableAttribute)
+                        @switch ($comparableAttribute['code'])
+                            @case ('price')
+                                <p
+                                    class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
+                                    v-show="isLoading"    
+                                >
+                                </p>
 
-                            <p
-                                class="text-[14px] font-medium text-[#3A3A3A]" 
-                                v-html="item.product['{{ $comparableAttribute['code'] }}'] ?? item.product.price_html"
-                                @load="onResponseLoad()"
-                                v-show="! isLoading"
-                            >
-                            </p>
+                                <p
+                                    class="text-[14px] font-medium text-[#3A3A3A]" 
+                                    v-html="item.product['{{ $comparableAttribute['code'] }}'] ?? item.product.price_html"
+                                    @load="onResponseLoad()"
+                                    v-show="! isLoading"
+                                >
+                                </p>
+                                @break
+                            @default
+                                @switch ($comparableAttribute['type'])
+                                    @case('boolean')
+                                        @break
+                                    @default
+                                        <p
+                                            class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
+                                            v-show="isLoading"    
+                                        >
+                                        </p>
+
+                                        <p 
+                                            class="text-[14px] font-medium" 
+                                            v-html="item.product['{{ $comparableAttribute['code'] }}']"
+                                            @load="onResponseLoad()"
+                                            v-show="! isLoading"
+                                        >
+                                        </p>
+                                @endswitch
                             @break
-                        @default
-                            @switch ($comparableAttribute['type'])
-                                @case('boolean')
-                                    @break
-                                @default
-                                    <p
-                                        class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                        v-show="isLoading"    
-                                    >
-                                    </p>
+                        @endswitch
+                    @endforeach
+                </div>
+            </template>
 
-                                    <p 
-                                        class="text-[14px] font-medium" 
-                                        v-html="item.product['{{ $comparableAttribute['code'] }}']"
-                                        @load="onResponseLoad()"
-                                        v-show="! isLoading"
-                                    >
-                                    </p>
-                            @endswitch
-                        @break
-                    @endswitch
-                @endforeach
-            </div>
+            <template v-else>
+                <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                    <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                    
+                    <!-- @translations -->
+                    <p class="text-[20px]">@lang('No products were added to the compare page')</p>
+                </div>
+            </template>
         </script>
 
         <script type="module">
-            app.component("v-compare-item", {
-                template: '#v-compare-item-template',
+            app.component("v-compare", {
+                template: '#v-compare-template',
 
                 data() {
                     return  {
