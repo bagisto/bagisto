@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Shop\Http\Controllers\API\AddressController;
 use Webkul\Shop\Http\Controllers\API\CartController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\CompareController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
-use Webkul\Shop\Http\Controllers\API\AddressController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -29,12 +29,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             ->name('shop.api.products.reviews.store');
     });
 
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('categories/{id}/attributes', 'getAttributes')
-            ->name('shop.api.categories.attributes');
+    Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+        Route::get('', 'index')->name('shop.api.categories.index');
 
-        Route::get('categories/{id}/max-price', 'getProductMaxPrice')
-            ->name('shop.api.categories.max_price');
+        Route::get('{id}/attributes', 'getAttributes')->name('shop.api.categories.attributes');
+
+        Route::get('{id}/max-price', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
@@ -73,6 +73,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::get('compare-items/{product_id}', [CompareController::class, 'store'])
             ->name('shop.customers.account.compare.store');
 
-        Route::get('/customer/addresses', [AddressController::class,'index'])->name('api.shop.customers.account.addresses.index');
+        Route::get('/customer/addresses', [AddressController::class, 'index'])->name('api.shop.customers.account.addresses.index');
     });
 });
