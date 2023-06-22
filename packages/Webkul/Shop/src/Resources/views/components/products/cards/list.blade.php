@@ -75,7 +75,7 @@
 
     <script type="module">
         app.component('product-list', {
-            template: '#product-list-template',
+            template: '#v-product-list-template',
 
             props: ['product'],
 

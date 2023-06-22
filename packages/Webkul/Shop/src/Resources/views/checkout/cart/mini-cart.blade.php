@@ -108,7 +108,7 @@
                             class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
                         >
                             @lang('shop::app.checkout.cart.continue-to-checkout')
-                        </div>
+                        </a>
 
                         <div class="m-0 ml-[0px] block text-base py-[15px] text-center font-medium cursor-pointer">
                             <a href="{{ route('shop.checkout.cart.index') }}">
