@@ -30,27 +30,53 @@
                         @include('shop::categories.toolbar')
 
                         <!-- Product Card Container -->
-                        <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
+                        <div v-if="filters.toolbar.mode === 'grid'">
                             <!-- Product Card Shimmer Effect -->
-                            <template v-if="isLoading && filters.toolbar.mode === 'grid'">
-                                <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
+                            <template v-if="isLoading">
+                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
+                                    <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
+                                </div>
                             </template>
 
                             <!-- Product Card Listing -->
-                            <template v-if="! isLoading && filters.toolbar.mode === 'grid'">
-                                <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
+                            <template v-else>
+                                <template v-if="products.length">
+                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
+                                        <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
+                                    </div>
+                                </template>
+
+                                <template v-else>
+                                    <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                                        
+                                        <!-- @translations -->
+                                        <p class="text-[20px]">@lang('No products available in this category')</p>
+                                    </div>
+                                </template>
                             </template>
                         </div>
 
                         <div class="grid grid-cols-1 gap-[25px]">
                             <!-- Product Card Shimmer Effect -->
-                            <template v-if="isLoading && filters.toolbar.mode === 'list'">
+                            <template v-if="isLoading">
                                 <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
                             </template>
 
                             <!-- Product Card Listing -->
-                            <template v-if="! isLoading && filters.toolbar.mode === 'list'">
-                                <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
+                            <template v-else>
+                                <template v-if="products.length">
+                                    <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
+                                </template>
+
+                                <template v-else>
+                                    <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                                        
+                                        <!-- @translations -->
+                                        <p class="text-[20px]">@lang('No products available in this category')</p>
+                                    </div>
+                                </template>
                             </template>
                         </div>
 

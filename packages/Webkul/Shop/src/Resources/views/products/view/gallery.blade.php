@@ -5,7 +5,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-gallery-template">
         <div class="flex gap-[30px] max-1180:hidden h-max sticky top-[30px]">
-            <div class="flex-24 h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
+            <div class="flex-24 place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
                 <img 
                     :class="`rounded-[12px] min-w-[100px] max-h-[100px] ${ hover ? 'cursor-pointer' : '' }`" 
                     v-for='image in mediaContents.images'
