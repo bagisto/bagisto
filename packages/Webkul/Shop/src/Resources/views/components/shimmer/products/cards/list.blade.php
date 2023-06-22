@@ -1,26 +1,32 @@
 @props(['count' => 0])
 
 @for ($i = 0; $i < $count; $i++)
-    <div class="flex gap-[20px] rounded-[12px] mb-[15px] max-sm:flex-wrap">
-        <div class="flex justify-content:between ml-[2px]">
-            <div class="relative overflow-hidden rounded-sm  min-w-[258px] min-h-[250px] bg-[#E9E9E9] shimmer">
-                <img class="rounded-sm bg-[#F5F5F5]">
+    <div class="grid grid-cols-1 gap-[25px]">
+        <div class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap">
+            <div class="relative overflow-hidden rounded-sm min-w-[250px] min-h-[258px] bg-[#E9E9E9] shimmer ">
+                <img 
+                    class="rounded-sm bg-[#F5F5F5]" 
+                    src=""
+                >
             </div>
 
-            <div class="ml-[20px]">
-                <div class="grid gap-2.5 content-start">
-                    <p class="w-[200px] h-[24px] bg-[#E9E9E9] shimmer"></p>
-                    <p class="w-[150px] h-[24px] bg-[#E9E9E9] shimmer"></p>
+            <div class="grid gap-[15px] content-start">
+                <p class="w-[75%] h-[24px] bg-[#E9E9E9] shimmer"></p>
 
-                    <div class="flex gap-4 mt-[8px]">
-                        <span class="rounded-full w-[30px] h-[30px] block bg-[#E9E9E9] shimmer"></span>
-                        <span class="rounded-full w-[30px] h-[30px] block bg-[#E9E9E9] shimmer"></span>
-                    </div>
+                <p class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"></p>
 
-                    <button class="w-[158px] h-[46px] rounded-[12px] py-[10px] px-[10] mt-[20px] bg-[#E9E9E9] shimmer">
-                    </button>
+                <div class="flex gap-4"> 
+                    <span class="rounded-full w-[30px] h-[30px] block bg-[#E9E9E9] shimmer">
+                    </span> 
+
+                    <span class="rounded-full w-[30px] h-[30px] block bg-[#E9E9E9] shimmer">
+                    </span>
                 </div>
+
+                <p class="w-[100%] h-[24px] bg-[#E9E9E9] shimmer"></p>
+                
+                <div class="w-[152px] h-[46px] rounded-[12px] shimmer"></div>
             </div>
         </div>
-    </div>
+    </div>    
 @endfor

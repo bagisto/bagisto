@@ -42,7 +42,7 @@
                             </template>
                         </div>
 
-                        <div>
+                        <div class="grid grid-cols-1 gap-[25px]">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading && filters.toolbar.mode === 'list'">
                                 <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
