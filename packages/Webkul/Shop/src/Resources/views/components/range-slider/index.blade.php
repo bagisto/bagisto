@@ -11,7 +11,7 @@
 
                 <p
                     class="text-[14px] font-semibold"
-                    v-text="`${minRange} - ${maxRange}`"
+                    v-text="rangeText"
                 >
                 </p>
             </div>
@@ -59,6 +59,7 @@
             template: '#v-range-slider-template',
 
             props: [
+                'defaultType',
                 'defaultAllowedMinRange',
                 'defaultAllowedMaxRange',
                 'defaultMinRange',
@@ -68,6 +69,8 @@
             data() {
                 return {
                     gap: 0.1,
+
+                    supportedTypes: ['integer', 'float', 'price'],
 
                     allowedMinRange: parseInt(this.defaultAllowedMinRange ?? 0),
 
@@ -79,11 +82,88 @@
                 };
             },
 
+            computed: {
+                rangeText() {
+                    /**
+                     * If someone is passing invalid props, this case will check first if they are valid, then continue.
+                     */
+                    if (this.isTypeSupported()) {
+                        switch (this.defaultType) {
+                            case 'price':
+                                return `${this.$shop.formatPrice(this.minRange)} - ${this.$shop.formatPrice(this.maxRange)}`;
+
+                            case 'float':
+                                return `${parseFloat(this.minRange).toFixed(2)} - ${parseFloat(this.maxRange).toFixed(2)}`;
+
+                            default:
+                                return `${this.minRange} - ${this.maxRange}`
+                        }
+                    }
+
+                    /**
+                     * Otherwise, we will load the default formatting.
+                     */
+                    return `${this.minRange} - ${this.maxRange}`;
+                },
+            },
+
             mounted() {
                 this.handleProgressBar();
             },
 
             methods: {
+                getData() {
+                    return {
+                        allowedMinRange: this.allowedMinRange,
+                        allowedMaxRange: this.allowedMaxRange,
+                        minRange: this.minRange,
+                        maxRange: this.maxRange,
+                    };
+                },
+
+                getFormattedData() {
+                    /**
+                     * If someone is passing invalid props, this case will check first if they are valid, then continue.
+                     */
+                     if (this.isTypeSupported()) {
+                        switch (this.defaultType) {
+                            case 'price':
+                                return {
+                                    formattedAllowedMinRange: this.$shop.formatPrice(this.allowedMinRange),
+                                    formattedAllowedMaxRange: this.$shop.formatPrice(this.allowedMaxRange),
+                                    formattedMinRange: this.$shop.formatPrice(this.minRange),
+                                    formattedMaxRange: this.$shop.formatPrice(this.maxRange),
+                                };
+
+                            case 'float':
+                                return {
+                                    formattedAllowedMinRange: parseFloat(this.allowedMinRange).toFixed(2),
+                                    formattedAllowedMaxRange: parseFloat(this.allowedMaxRange).toFixed(2),
+                                    formattedMinRange: parseFloat(this.minRange).toFixed(2),
+                                    formattedMaxRange: parseFloat(this.maxRange).toFixed(2),
+                                };
+
+                            default:
+                                return {
+                                    formattedAllowedMinRange: this.allowedMinRange,
+                                    formattedAllowedMaxRange: this.allowedMaxRange,
+                                    formattedMinRange: this.minRange,
+                                    formattedMaxRange: this.maxRange,
+                                };
+                        }
+                    }
+
+                    /**
+                     * Otherwise, we will load the default formatting.
+                     */
+                    return {
+                        formattedAllowedMinRange: this.allowedMinRange,
+                        formattedAllowedMaxRange: this.allowedMaxRange,
+                        formattedMinRange: this.minRange,
+                        formattedMaxRange: this.maxRange,
+                    };
+                },
+
                 handle(rangeType) {
                     this.minRange = parseInt(this.$refs.minRange.value);
 
@@ -108,11 +188,13 @@
 
                 change() {
                     this.$emit('change-range', {
-                        allowedMinRange: this.allowedMinRange,
-                        allowedMaxRange: this.allowedMaxRange,
-                        minRange: this.minRange,
-                        maxRange: this.maxRange,
+                        ...this.getData(),
+                        ...this.getFormattedData(),
                     });
+                },
+
+                isTypeSupported() {
+                    return this.supportedTypes.includes(this.defaultType);
                 },
             },
         });
