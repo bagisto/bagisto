@@ -6,6 +6,7 @@
 <v-tab-item
     title="{{ $title }}"
     is-selected="{{ $isSelected }}"
+    {{ $attributes->merge(['class' => 'p-5 max-1180:px-[20px]']) }}
 >
     <template v-slot>
         {{ $slot }}
@@ -14,8 +15,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-tab-item-template">
-        <div 
-            {{ $attributes->merge(['class' => 'p-5 max-1180:px-[20px]']) }} 
+        <div
             v-if="isActive"
         >
             <slot></slot>
