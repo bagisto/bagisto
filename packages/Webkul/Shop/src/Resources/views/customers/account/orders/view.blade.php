@@ -22,9 +22,19 @@
         </div>
 
         @if ($order->canCancel())
-            <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
+            <x-shop::form 
+                id="cancelOrderForm" 
+                action="{{ route('shop.customers.account.orders.cancel', $order->id) }}"
+            >
+            </x-shop::form>
+
+            <a 
+                class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                href="javascript:void(0);"
+                onclick="cancelOrder('@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')')" 
+            >
                 @lang('shop::app.customer.account.order.view.cancel-btn-title')
-            </div>
+            </a>
         @endif    
     </div>
 
@@ -935,4 +945,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function cancelOrder(message) {
+            if (! confirm(message)) {
+                return;
+            }
+
+            const form = document.getElementById('cancelOrderForm');
+            form.submit();
+        }
+    </script>
 </x-shop::layouts.account>
