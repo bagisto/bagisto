@@ -13,6 +13,9 @@ class CartController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
      * @return void
      */
     public function __construct(
