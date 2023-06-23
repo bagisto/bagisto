@@ -41,7 +41,6 @@ class OnepageController extends APIController
      * Store customer address.
      *
      * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm  $request
-     * @return \Illuminate\Http\Response
      */
     public function storeAddress(CustomerAddressForm $request): JsonResource
     {
@@ -95,7 +94,7 @@ class OnepageController extends APIController
         ]);
     }
 
-      /**
+    /**
      * Store shipping method.
      *
      * @return \Illuminate\Http\Response
