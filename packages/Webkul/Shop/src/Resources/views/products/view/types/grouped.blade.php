@@ -13,8 +13,7 @@
                         <div class="flex justify-between items-center">
                             <div class="text-[14px] font-medium">
                                 <p class="">
-                                    {{-- @translations --}}
-                                    @lang('Name')
+                                    @lang('shop::app.products.view.type.grouped.name')
                                 </p>
 
                                 <p class="text-[#7D7D7D] mt-[5px]">

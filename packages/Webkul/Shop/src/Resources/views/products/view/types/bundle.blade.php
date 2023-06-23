@@ -54,8 +54,7 @@
                                 value="0"
                                 v-if="! option.is_required"
                             >
-                                {{-- @translations --}}
-                                @lang('None')
+                                @lang('shop::app.products.view.type.bundle.none')
                             </option>
 
                             <option
@@ -87,8 +86,7 @@
                                 class="text-[#7D7D7D]"
                                 :for="'bundle_options[' + option.id + '][]'"
                             >
-                                {{-- @translations --}}
-                                @lang('None')
+                                @lang('shop::app.products.view.type.bundle.none')
                             </label>
                         </span>
 
@@ -166,8 +164,7 @@
                                 value="0"
                                 v-if="! option.is_required"
                             >
-                                {{-- @translations --}}
-                                @lang('None')
+                                @lang('shop::app.products.view.type.bundle.none')
                             </option>
 
                             <option

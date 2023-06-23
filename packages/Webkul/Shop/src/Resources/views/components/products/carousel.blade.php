@@ -43,8 +43,7 @@
                 class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
                 v-if="navigationLink"
             >
-                {{-- @translations --}}
-                @lang('View All')
+                @lang('shop::app.components.products.carousel.view-all')
             </a>
         </div>
 
