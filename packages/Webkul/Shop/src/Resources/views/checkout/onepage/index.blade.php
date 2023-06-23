@@ -31,7 +31,7 @@
 
                 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
                     <div>
-                        @include('shop::checkout.onepage.address')
+                        @include('shop::checkout.onepage.addresses.index')
 
                         @include('shop::checkout.onepage.shipping')
 

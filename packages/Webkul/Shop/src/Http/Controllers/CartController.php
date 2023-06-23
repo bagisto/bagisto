@@ -34,7 +34,7 @@ class CartController extends Controller
     /**
      * Apply coupon to the cart.
      */
-    public function storeCoupon()
+    public function storeCoupon(): JsonResource
     {
         $couponCode = request()->input('code');
 
@@ -44,40 +44,40 @@ class CartController extends Controller
 
                 if ($coupon->cart_rule->status) {
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        session()->flash('success', trans('shop::app.checkout.cart.coupon-already-applied'));
-
-                        return redirect()->back();
+                        return new JsonResource([
+                            'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
+                        ]);
                     }
 
                     Cart::setCouponCode($couponCode)->collectTotals();
 
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        session()->flash('success', trans('shop::app.checkout.cart.coupon.success-apply'));
-
-                        return redirect()->back();
+                        return new JsonResource([
+                            'message'  => trans('shop::app.checkout.cart.coupon.success-apply'),
+                        ]);
                     }
                 }
             }
 
-            session()->flash('danger', trans('shop::app.checkout.cart.coupon.invalid'));
-
-            return redirect()->back();
+            return new JsonResource([
+                'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
+            ]);
         } catch (\Exception $e) {
-            session()->flash('warning', trans('shop::app.checkout.cart.coupon.apply-issue'));
-
-            return redirect()->back();
+            return new JsonResource([
+                'message'  => trans('shop::app.checkout.cart.coupon.success-apply'),
+            ]);
         }
     }
 
     /**
      * Remove applied coupon from the cart.
      */
-    public function destroyCoupon()
+    public function destroyCoupon(): JsonResource
     {
         Cart::removeCouponCode()->collectTotals();
 
-        session()->flash('warning', trans('shop::app.checkout.cart.coupon.remove'));
-
-        return redirect()->back();
+        return new JsonResource([
+            'message'  => trans('shop::app.checkout.cart.coupon.remove'),
+        ]);
     }
 }

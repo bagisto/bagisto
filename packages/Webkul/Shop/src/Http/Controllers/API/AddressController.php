@@ -21,7 +21,7 @@ class AddressController extends APIController
     }
 
     /**
-     * Customer addresses
+     * Customer addresses.
      */
     public function index(): JsonResource
     {

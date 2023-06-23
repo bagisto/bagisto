@@ -89,6 +89,7 @@
                     this.$axios.post("{{ route('shop.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
                             alert(response.data.data.message)
+                            
                             this.$parent.$parent.getOrderSummary();
                         })
                         .catch((error) => {console.log(error);})
@@ -100,7 +101,6 @@
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {
-
                             this.$emit('updateOrderSummary')
 
                             this.$parent.$parent.getOrderSummary();
