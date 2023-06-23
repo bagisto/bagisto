@@ -5,8 +5,7 @@
         <div>
             <div class="flex items-center gap-[15px]">
                 <p class="text-[14px]">
-                    <!-- @translations -->
-                    @lang('Range:')
+                    @lang('shop::app.components.range-slider.range')
                 </p>
 
                 <p

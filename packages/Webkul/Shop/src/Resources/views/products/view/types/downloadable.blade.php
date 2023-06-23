@@ -3,8 +3,9 @@
 
     @if ($product->downloadable_samples->count())
         <div class="sample-list mb-[25px] mt-[30px]">
-            {{-- @translations --}}
-            <h3 class="font-medium mb-[15px]">{{ __('Samples') }}</h3>
+            <h3 class="font-medium mb-[15px]">
+                @lang('shop::app.products.view.type.downloadable.samples')
+            </h3>
 
             <ul>
                 @foreach ($product->downloadable_samples as $sample)
@@ -23,8 +24,9 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        {{-- @translations --}}
-        <h3 class="font-medium mb-[15px]">{{ __('Links') }}</h3>
+        <h3 class="font-medium mb-[15px]">
+            @lang('shop::app.products.view.type.downloadable.links')
+        </h3>
 
         <div class="grid gap-[15px]">
             @foreach ($product->downloadable_links as $link)
@@ -37,8 +39,7 @@
                             id="{{ $link->id }}"
                             class="hidden peer"
                             rules="required"
-                            {{-- @translations --}}
-                            label="{{ trans('shop::app.products.links') }}"
+                            label="{{ trans('shop::app.products.view.type.downloadable.links') }}"
                         >
                         </v-field>
                         
@@ -56,8 +57,7 @@
                             target="_blank"
                             class="text-[#0A49A7] ml-2"
                         >
-                            {{-- @translations --}}
-                            @lang('Sample')
+                            @lang('shop::app.products.view.type.downloadable.sample')
                         </a>
                     </div>
                 </div>
