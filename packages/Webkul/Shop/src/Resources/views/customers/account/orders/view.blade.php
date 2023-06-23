@@ -31,12 +31,12 @@
     {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
     <div>
-        <x-shop::tabs>
-            <x-shop::tabs.item 
+        <x-shop::tabs class="!mt-5">
+            <x-shop::tabs.item class="!p-0 !mt-5"
                 title="{{ __('shop::app.customers.account.orders.view.information.info') }}" 
                 :is-selected="true"
             >
-                <div>
+                <div class="text-[15px] font-medium">
                     <label>
                         @lang('shop::app.customers.account.orders.view.information.placed-on')
                     </label>
@@ -334,16 +334,17 @@
                 <x-shop::tabs.item  title="{{ __('shop::app.customers.account.orders.view.invoices.invoices') }}">
 
                     @foreach ($order->invoices as $invoice)
-                        <div class="secton-title">
-                            <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
-                                @lang('shop::app.customers.account.orders.view.invoices.print')
-                            </a>
-                        </div>
-
-                        <div>
-                            <label>
-                                <span>{{ __('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}</span>
-                            </label>
+                        <div class="flex justify-between items-center">
+                            <div class="">
+                                <p class="text-[15px] font-medium">
+                                    {{ __('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
+                                <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
+                                        @lang('shop::app.customers.account.orders.view.invoices.print')
+                                </a>
+                            </div>
                         </div>
 
                         <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">
@@ -547,7 +548,7 @@
 
                     @foreach ($order->shipments as $shipment)
                         <div>
-                            <label>
+                            <label class="text-[15px] font-medium">
                                 @lang('shop::app.customers.account.orders.view.shipments.tracking-number')
                             </label>
 
@@ -556,7 +557,7 @@
                             </span>
                         </div>
         
-                        <div>
+                        <div class="text-[15px] font-medium">
                             <span>{{ __('shop::app.customers.account.orders.view.shipments.individual-shipment', ['shipment_id' => $shipment->id]) }}</span>
                         </div>
              
@@ -624,12 +625,10 @@
                     title="{{ __('shop::app.customers.account.orders.view.refunds.refunds') }}"
                 >
                     @foreach ($order->refunds as $refund)
-                        <div>
-                            <label>
-                                <span>
-                                    {{ __('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id]) }}
-                                </span>
-                            </label>
+                        <div class="text-[15px] font-medium">
+                            <span>
+                                {{ __('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id]) }}
+                            </span>
                         </div>
 
                         <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">

@@ -1,6 +1,9 @@
 @props(['position' => 'left'])
 
-<v-tabs position="{{ $position }}">
+<v-tabs 
+    position="{{ $position }}"
+    {{ $attributes }}
+>
     <x-shop::shimmer.tabs></x-shop::shimmer.tabs>
 </v-tabs>
 
@@ -8,7 +11,7 @@
     <script type="text/x-template" id="v-tabs-template">
         <div>
             <div 
-                class="flex bg-[#F5F5F5] pt-[18px] gap-[30px] justify-center mt-20 max-1180:hidden"
+                {{ $attributes->merge(['class' => 'flex bg-[#F5F5F5] pt-[18px] gap-[30px] justify-center mt-20 max-1180:hidden']) }}
                 :style="positionStyles"
             >
                 <div
