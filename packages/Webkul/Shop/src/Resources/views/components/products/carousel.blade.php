@@ -15,17 +15,22 @@
                 <div class="flex justify-between items-center gap-8">
                     <span
                         class="icon-arrow-left-stylish text-[24px] inline-block cursor-pointer"
+                        @click="swipeLeft"
                     >
                     </span>
 
                     <span
                         class="icon-arrow-right-stylish text-[24px] inline-block cursor-pointer"
+                        @click="swipeRight"
                     >
                     </span>
                 </div>
             </div>
 
-            <div class="flex gap-8 mt-[60px] overflow-auto scrollbar-hide max-sm:mt-[20px]">
+            <div
+                ref="swiperContainer"
+                class="flex gap-8 mt-[60px] overflow-auto scroll-smooth scrollbar-hide max-sm:mt-[20px]"
+            >
                 <x-shop::products.cards.grid
                     class="min-w-[291px]"
                     v-for="product in products"
@@ -64,7 +69,7 @@
                     isLoading: true,
 
                     products: [],
-                }
+                };
             },
 
             mounted() {
@@ -73,13 +78,26 @@
 
             methods: {
                 getProducts() {
-                    this.$axios.get(this.src).then(response => {
+                    this.$axios.get(this.src)
+                        .then(response => {
                             this.isLoading = false;
 
                             this.products = response.data.data;
                         }).catch(error => {
                             console.log(error);
                         });
+                },
+
+                swipeLeft() {
+                    const container = this.$refs.swiperContainer;
+
+                    container.scrollLeft -= 720;
+                },
+
+                swipeRight() {
+                    const container = this.$refs.swiperContainer;
+
+                    container.scrollLeft += 720;
                 },
             },
         });
