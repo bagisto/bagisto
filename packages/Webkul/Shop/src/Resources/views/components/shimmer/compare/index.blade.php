@@ -9,13 +9,13 @@
 <div class="grid mt-[60px] overflow-auto journal-scroll">
     <!-- Single row -->
     <div class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] ">
-        <div class="min-w-[304px] max-w-full">
+        <div class="min-w-[304px] max-w-full max-sm:hidden">
             <p class="w-[55%] h-[21px] bg-[#E9E9E9] shimmer"></p>
         </div>
 
-        <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9]">
+        <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
             <x-shop::shimmer.products.cards.grid
-                class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px]"
+                class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"
                 count="3"
             ></x-shop::shimmer.products.cards.grid>
         </div>

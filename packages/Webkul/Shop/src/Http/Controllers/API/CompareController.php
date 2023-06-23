@@ -73,32 +73,53 @@ class CompareController extends APIController
         ]);
 
         return new JsonResource([
-            'message' => trans('shop::app.compare.item-add'),
+            'message' => trans('shop::app.compare.item-add-success'),
         ]);
     }
 
     /**
-     * Method for compare items to delete products in comparison.
+     * Method to remove the item from compare list.
      * 
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function destroy(): JsonResource
     {
-        $compareItem = $this->compareItemRepository->deleteWhere([
-            'product_id' => request()->input('product_id'),
+        $success = $this->compareItemRepository->deleteWhere([
+            'product_id'  => request()->input('product_id'),
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
-        $compareData = $this->compareItemRepository->get();
-
-        if ($compareItem) {
+        if (! $success) {
             return new JsonResource([
-                'data'     => CompareResource::collection($compareData),
-                'message'  => trans('shop::app.compare.success'),
+                'message'  => trans('shop::app.compare.remove-error'),
             ]);
         }
 
         return new JsonResource([
-            'message'  => trans('shop::app.compare.error'),
+            'data'     => CompareResource::collection($this->compareItemRepository->get()),
+            'message'  => trans('shop::app.compare.remove-success'),
+        ]);
+    }
+
+    /**
+     * Method for remove all items from compare list
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function destroyAll(): JsonResource
+    {
+        $success = $this->compareItemRepository->deleteWhere([
+            'customer_id'  => auth()->guard('customer')->user()->id,
+        ]);
+
+        if (! $success) {
+            return new JsonResource([
+                'message'  => trans('shop::app.compare.remove-error'),
+            ]);
+        }
+
+        return new JsonResource([
+            'message'  => trans('shop::app.compare.remove-all-success'),
         ]);
     }
 }

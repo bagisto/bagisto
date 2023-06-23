@@ -10,7 +10,7 @@
             class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'
             v-if="mode != 'list'"
         >
-            <div class="relative overflow-hidden  group max-w-[291px] max-h-[300px]">
+            <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
                 <div
                     class="relative overflow-hidden rounded-sm  min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
                     v-show="isImageLoading"
@@ -231,21 +231,21 @@
                         if (! items.includes(productId)) {
                             items.push(productId);
 
-                            window.localStorage.setItem('compare_items', JSON.stringify(items));
+                            localStorage.setItem('compare_items', JSON.stringify(items));
 
                             alert('Added product in compare.');
                         } else {
                             alert('Product is already added in compare.');
                         }
                     } else {
-                        window.localStorage.setItem('compare_items', JSON.stringify([productId]));
+                        localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
                         alert('Added product in compare.');
                     }
                 },
 
                 getStorageValue(key) {
-                    let value = window.localStorage.getItem('compare_items');
+                    let value = localStorage.getItem('compare_items');
 
                     if (! value) {
                         return [];

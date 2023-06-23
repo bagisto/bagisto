@@ -17,6 +17,7 @@
     {{-- Compare Component --}}
     <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px] mt-[30px]">
         <v-compare>
+            <!---- Shimmer Effect -->
             <x-shop::shimmer.compare
                 :attributeCount="count($comparableAttributes)"
             >
@@ -29,49 +30,67 @@
             <div>
                 <div v-if="! isLoading">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-[26px] font-medium">Product Compare</h2>
+                        <h2 class="text-[26px] font-medium">@lang('shop::app.compare.title')</h2>
 
-                        <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
+                        <div
+                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                            v-if="items.length"
+                            @click="removeAll"
+                        >
                             <span class="icon-bin text-[24px]"></span>
-                            Delete All
+                            @lang('shop::app.compare.delete-all')
                         </div>
                     </div>
 
-                    <div class="grid mt-[60px] overflow-auto journal-scroll">
+                    <div
+                        class="grid mt-[60px] overflow-auto journal-scroll"
+                        v-if="items.length"
+                    >
                         <template v-for="attribute in comparableAttributes">
                             <!---- Product Card -->
                             <div
                                 class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
                                 v-if="attribute.code == 'product'"
                             >
-                                <div class="min-w-[304px] max-w-full">
+                                <div class="min-w-[304px] max-w-full max-sm:hidden">
                                     <p class="text-[14px] font-medium">@{{ attribute.name ?? attribute.admin_name }}</p>
                                 </div>
 
-                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9]">
-                                    <x-shop::products.card
+                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                    <div
+                                        class="relative group"
                                         v-for="product in items"
-                                        class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px]"
-                                    ></x-shop::products.card>
+                                    >
+                                        <a
+                                            class="hidden justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            @click="remove(product.id)"
+                                        ></a>
+
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"></x-shop::products.card>
+                                    </div>
                                 </div>
                             </div>
 
                             <!---- Comparable Attributes -->
                             <div
-                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
+                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] last:border-none"
                                 v-else
                             >
-                                <div class="min-w-[304px] max-w-full">
+                                <div class="min-w-[304px] max-w-full max-sm:hidden">
                                     <p class="text-[14px] font-medium">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
 
-                                <div class="flex  gap-[12px] border-l-[1px] border-[#E9E9E9]">
+                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
-                                        class="w-[311px] max-w-[311px]  pr-0 p-[20px]"
+                                        class="w-[311px] max-w-[311px]  pr-0 p-[20px] max-sm:pl-0"
                                         v-for="(product, index) in items"
                                     >
+                                        <p class="hidden mb-[5px] text-[14px] font-medium max-sm:block">
+                                            @{{ attribute.name ?? attribute.admin_name }} :
+                                        </p>
+
                                         <p class="text-[14px]">
                                             @{{ product[attribute.code] ?? 'N/A' }}
                                         </p>
@@ -80,9 +99,20 @@
                             </div>
                         </template>
                     </div>
+
+                    <div
+                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
+                        v-else
+                    >
+                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                        
+                        <!-- @translations -->
+                        <p class="text-[20px]">@lang('shop::app.compare.empty-text')</p>
+                    </div>
                 </div>
 
                 <div v-else>
+                    <!---- Shimmer Effect -->
                     <x-shop::shimmer.compare
                         :attributeCount="count($comparableAttributes)"
                     >
@@ -137,26 +167,18 @@
 
                     remove(productId) {
                         if (! this.isCustomer) {
-                            let items = this.items
-                                .filter(function (item) {
-                                    if (item.id == productId) {
+                            const index = this.items.findIndex((item) => item.id === productId);
 
-                                        return false;
-                                    }
+                            this.items.splice(index, 1);
 
-                                    return true;
-                                });
+                            let items = this.getStorageValue()
+                                .filter(item => item != productId);
 
-                            //let items = this.getStorageValue()
-                                //.filter(item => item != productId);
-
-                            //window.localStorage.setItem('compare_items', JSON.stringify(items));
-
-                            //this.getItems();
+                            localStorage.setItem('compare_items', JSON.stringify(items));
 
                             return;
                         }
-
+                        
                         this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
                                 '_method': 'DELETE',
                                 'product_id': productId,
@@ -167,8 +189,27 @@
                             .catch(error => {});
                     },
 
+                    removeAll() {
+                        if (! this.isCustomer) {
+                            localStorage.removeItem('compare_items');
+
+                            this.items = [];
+
+                            return;
+                        }
+                        
+                        this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
+                                '_method': 'DELETE',
+                            })
+                            .then(response => {
+                                this.items = [];
+                            })
+                            .catch(error => {});
+
+                    },
+
                     getStorageValue() {
-                        let value = window.localStorage.getItem('compare_items');
+                        let value = localStorage.getItem('compare_items');
 
                         if (! value) {
                             return [];

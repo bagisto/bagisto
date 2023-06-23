@@ -53,6 +53,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('', 'store')->name('shop.api.compare.store');
 
         Route::delete('', 'destroy')->name('shop.api.compare.destroy');
+
+        Route::delete('all', 'destroyAll')->name('shop.api.compare.destroy_all');
     });
 
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
