@@ -1,4 +1,3 @@
-{{-- shipping address --}}
 <div v-if="! forms.billing.isUsedForShipping">
     <div 
         class="mt-[30px]"

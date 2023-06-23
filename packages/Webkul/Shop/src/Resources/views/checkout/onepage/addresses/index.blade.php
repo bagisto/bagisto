@@ -16,7 +16,6 @@
 
                 @include('shop::checkout.onepage.addresses.shipping')
 
-                {{-- store address --}}
                 <div v-if="! forms.billing.isNew && ! forms.shipping.isNew">
                     <div 
                         class="flex justify-end mt-4 mb-4"
