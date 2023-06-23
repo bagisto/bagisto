@@ -17,64 +17,77 @@
     {{-- Compare Component --}}
     <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px] mt-[30px]">
         <v-compare>
-            <x-shop::shimmer.compare></x-shop::shimmer.compare>
+            <x-shop::shimmer.compare
+                :attributeCount="count($comparableAttributes)"
+            >
+            </x-shop::shimmer.compare>
         </v-compare>
     </div>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-compare-template">
-            <div v-if="! isLoading">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium">Product Compare</h2>
+            <div>
+                <div v-if="! isLoading">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-[26px] font-medium">Product Compare</h2>
 
-                    <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
-                        <span class="icon-bin text-[24px]"></span>
-                        Delete All
-                    </div>
-                </div>
-
-                <div class="grid mt-[60px] overflow-auto journal-scroll">
-                    <template v-for="attribute in comparableAttributes">
-                        <!---- Product Card -->
-                        <div
-                            class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
-                            v-if="attribute.code == 'product'"
-                        >
-                            <div class="min-w-[304px] max-w-full">
-                                <p class="text-[14px] font-medium">@{{ attribute.name ?? attribute.admin_name }}</p>
-                            </div>
-
-                            <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9]">
-                                <x-shop::products.card
-                                    v-for="product in items"
-                                    class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px]"
-                                ></x-shop::products.card>
-                            </div>
+                        <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
+                            <span class="icon-bin text-[24px]"></span>
+                            Delete All
                         </div>
+                    </div>
 
-                        <!---- Comparable Attributes -->
-                        <div class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]">
-                            <div class="min-w-[304px] max-w-full">
-                                <p class="text-[14px] font-medium">
-                                    @{{ attribute.name ?? attribute.admin_name }}
-                                </p>
-                            </div>
-
+                    <div class="grid mt-[60px] overflow-auto journal-scroll">
+                        <template v-for="attribute in comparableAttributes">
+                            <!---- Product Card -->
                             <div
-                                class="w-[311px] max-w-[311px]  pr-0 p-[20px]"
-                                v-for="(product, index) in items"
+                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
+                                v-if="attribute.code == 'product'"
                             >
-                                <p class="text-[14px]">
-                                    @{{ product[attribute.code] ?? 'N/A' }}
-                                </p>
+                                <div class="min-w-[304px] max-w-full">
+                                    <p class="text-[14px] font-medium">@{{ attribute.name ?? attribute.admin_name }}</p>
+                                </div>
+
+                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9]">
+                                    <x-shop::products.card
+                                        v-for="product in items"
+                                        class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px]"
+                                    ></x-shop::products.card>
+                                </div>
                             </div>
-                        </div>
+
+                            <!---- Comparable Attributes -->
+                            <div
+                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
+                                v-else
+                            >
+                                <div class="min-w-[304px] max-w-full">
+                                    <p class="text-[14px] font-medium">
+                                        @{{ attribute.name ?? attribute.admin_name }}
+                                    </p>
+                                </div>
+
+                                <div class="flex  gap-[12px] border-l-[1px] border-[#E9E9E9]">
+                                    <div
+                                        class="w-[311px] max-w-[311px]  pr-0 p-[20px]"
+                                        v-for="(product, index) in items"
+                                    >
+                                        <p class="text-[14px]">
+                                            @{{ product[attribute.code] ?? 'N/A' }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
-            </div>
 
-            <div v-else>
-                <x-shop::shimmer.compare></x-shop::shimmer.compare>
+                <div v-else>
+                    <x-shop::shimmer.compare
+                        :attributeCount="count($comparableAttributes)"
+                    >
+                    </x-shop::shimmer.compare>
+                </div>
             </div>
         </script>
 

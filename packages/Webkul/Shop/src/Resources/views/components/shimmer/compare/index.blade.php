@@ -1,3 +1,5 @@
+@props(['attributeCount' => 3, 'productCount' => 3])
+
 <div class="flex justify-between items-center">
     <h2 class="w-[200px] h-[39px] shimmer"></h2>
 
@@ -20,5 +22,8 @@
     </div>
 
     <!-- Single row -->
-    <x-shop::shimmer.compare.attribute></x-shop::shimmer.compare.attribute>
+    <x-shop::shimmer.compare.attribute
+        :attributeCount="$attributeCount"
+        :productCount="$productCount"
+    ></x-shop::shimmer.compare.attribute>
 </div>
