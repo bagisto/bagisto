@@ -300,11 +300,11 @@
                     },
 
                     setStorageValue(key, value) {
-                        window.localStorage.setItem(key, JSON.stringify(value));
+                        localStorage.setItem(key, JSON.stringify(value));
                     },
 
                     getStorageValue(key) {
-                        let value = window.localStorage.getItem(key);
+                        let value = localStorage.getItem(key);
 
                         if (value) {
                             value = JSON.parse(value);
