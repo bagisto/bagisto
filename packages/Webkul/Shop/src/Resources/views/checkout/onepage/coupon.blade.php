@@ -125,13 +125,6 @@
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {
-<<<<<<< HEAD
-
-                            this.$emit('updateOrderSummary');
-=======
-                            this.$emit('updateOrderSummary')
->>>>>>> upstream/2.x
-
                             this.$parent.$parent.getOrderSummary();
                         })
                         .catch(error => console.log(error));
