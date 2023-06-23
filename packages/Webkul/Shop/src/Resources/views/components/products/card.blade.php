@@ -31,17 +31,17 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.is_new && ! product.on_sale"
-                    >
-                        @lang('shop::app.components.products.card.new')
-                    </p>
-
-                    <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px]  bg-red-700 inline-block absolute top-[20px] left-[20px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
+                    </p>
+
+                    <p
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        v-else-if="product.is_new"
+                    >
+                        @lang('shop::app.components.products.card.new')
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -99,18 +99,18 @@
                 </a>
             
                 <div class="action-items bg-black"> 
-                    <p 
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.is_new && ! product.on_sale" 
-                    >
-                        @lang('shop::app.components.products.card.new')
-                    </p>
-
-                    <p 
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.on_sale" 
+                    <p
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px]  bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
+                    </p>
+
+                    <p
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        v-else-if="product.is_new"
+                    >
+                        @lang('shop::app.components.products.card.new')
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
