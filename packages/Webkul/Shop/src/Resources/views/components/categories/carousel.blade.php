@@ -31,7 +31,7 @@
                             </div>
 
                             <p
-                                class="text-black text-[20px] font-medium"
+                                class="text-center text-black text-[20px] font-medium"
                                 v-text="category.name"
                             >
                             </p>
@@ -78,6 +78,8 @@
                     isLoading: true,
 
                     categories: [],
+
+                    offset: 720,
                 };
             },
 
@@ -100,13 +102,13 @@
                 swipeLeft() {
                     const container = this.$refs.swiperContainer;
 
-                    container.scrollLeft -= 720;
+                    container.scrollLeft -= this.offset;
                 },
 
                 swipeRight() {
                     const container = this.$refs.swiperContainer;
 
-                    container.scrollLeft += 720;
+                    container.scrollLeft += this.offset;
                 },
             },
         });
