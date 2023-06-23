@@ -36,8 +36,6 @@
 
                         @include('shop::checkout.onepage.payment')
 
-        
-
                         <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px]">
                             <a 
                                 href="{{ route('shop.checkout.cart.index') }}"

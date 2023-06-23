@@ -869,8 +869,6 @@ class Cart
         if (! empty($data['billing']['is_save_as_address'])) {
             $billingAddress = Arr::except($billingAddress, ['is_save_as_address', 'is_use_for_shipping', 'address_id', 'isNew', 'created_at', 'updated_at']);
             
-            \Log::info(json_encode($billingAddress, 128));
-
             $this->customerAddressRepository->updateOrCreate($billingAddress, $billingAddress);
         }
 
