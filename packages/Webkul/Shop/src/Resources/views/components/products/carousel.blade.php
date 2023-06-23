@@ -31,11 +31,11 @@
                 ref="swiperContainer"
                 class="flex gap-8 mt-[60px] overflow-auto scroll-smooth scrollbar-hide max-sm:mt-[20px]"
             >
-                <x-shop::products.cards.grid
+                <x-shop::products.card
                     class="min-w-[291px]"
                     v-for="product in products"
                 >
-                </x-shop::products.cards.grid>
+                </x-shop::products.card>
             </div>
 
             <a
