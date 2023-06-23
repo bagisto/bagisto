@@ -16,6 +16,14 @@
 		</div>
 	</div>
 
+    {{-- Categories carousel --}}
+    <x-shop::categories.carousel
+        title="Categories Collections"
+        :src="route('shop.api.categories.index')"
+        :navigation-link="route('shop.home.index')"
+    >
+    </x-shop::categories.carousel>
+
     {{-- Carousel --}}
 	<x-shop::products.carousel
         title="Men's Collections"
