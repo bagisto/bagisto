@@ -38,6 +38,7 @@
                                             rules="required"
                                             v-model="forms.billing.address.address_id"
                                             class="hidden peer"
+                                            @change="resetPaymentAndShipping"
                                         >
                                         </v-field>
     
@@ -451,6 +452,7 @@
                                             rules="required"
                                             v-model="forms.shipping.address.address_id"
                                             class="hidden peer"
+                                            @change="resetPaymentAndShipping"
                                         >
                                         </v-field>
     
@@ -1033,6 +1035,12 @@
                     }
 
                     return false;
+                },
+
+                resetPaymentAndShipping() {
+                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
                 },
             },
         });

@@ -1,4 +1,5 @@
 <x-shop::layouts
+    :has-header="false"
     :has-feature="false"
     :has-footer="false"
 >
