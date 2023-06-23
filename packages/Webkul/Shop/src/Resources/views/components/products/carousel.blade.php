@@ -68,6 +68,8 @@
                     isLoading: true,
 
                     products: [],
+
+                    offset: 323,
                 };
             },
 
@@ -90,13 +92,13 @@
                 swipeLeft() {
                     const container = this.$refs.swiperContainer;
 
-                    container.scrollLeft -= 720;
+                    container.scrollLeft -= this.offset;
                 },
 
                 swipeRight() {
                     const container = this.$refs.swiperContainer;
 
-                    container.scrollLeft += 720;
+                    container.scrollLeft += this.offset;
                 },
             },
         });

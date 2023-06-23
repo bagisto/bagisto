@@ -20,7 +20,6 @@ class CategoryController extends APIController
         protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository
-
     ) {
     }
 
@@ -29,10 +28,16 @@ class CategoryController extends APIController
      */
     public function index(): JsonResource
     {
-        $categories = $this->categoryRepository
-            ->whereNotNull('parent_id')
-            ->where('status', 1)
-            ->paginate();
+        /**
+         * These are the default parameters. By default, only the enabled category
+         * will be shown in the current locale.
+         */
+        $defaultParams = [
+            'status' => 1,
+            'locale' => app()->getLocale(),
+        ];
+
+        $categories = $this->categoryRepository->getAll(array_merge($defaultParams, request()->all()));
 
         return CategoryResource::collection($categories);
     }

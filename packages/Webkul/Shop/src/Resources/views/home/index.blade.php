@@ -18,7 +18,7 @@
     {{-- Categories carousel --}}
     <x-shop::categories.carousel
         title="Categories Collections"
-        :src="route('shop.api.categories.index')"
+        :src="route('shop.api.categories.index', ['only_children' => true])"
         :navigation-link="route('shop.home.index')"
     >
     </x-shop::categories.carousel>
