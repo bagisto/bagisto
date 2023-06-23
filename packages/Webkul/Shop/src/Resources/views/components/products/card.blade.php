@@ -136,11 +136,10 @@
                 >
                 </p> 
 
-                <div class="flex gap-2.5"> 
-                    <p 
-                        class="text-lg font-semibold" 
-                        v-html="product.price_html">
-                    </p>
+                <div 
+                    class="flex gap-2.5 text-lg font-semibold"
+                    v-html="product.price_html"
+                >   
                 </div> 
 
                 <div class="flex gap-4"> 
