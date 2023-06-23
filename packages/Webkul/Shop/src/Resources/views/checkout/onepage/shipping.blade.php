@@ -1,7 +1,9 @@
 {!! view_render_event('bagisto.shop.checkout.shipping.method.before') !!}
+
 <v-shipping-method ref="vShippingMethod">
     <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
 </v-shipping-method>
+
 {!! view_render_event('bagisto.shop.checkout.shipping.method.after') !!}
 
 @pushOnce('scripts')
@@ -12,52 +14,52 @@
             </template>
 
             <template v-if="isShowShippingMethod">
-                    <x-shop::accordion>
-                        <x-slot:header>
-                            <div class="flex justify-between items-center">
-                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('2. Select Shipping Method')</h2>
-                            </div>
-                        </x-slot:header>
+                <x-shop::accordion>
+                    <x-slot:header>
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Select Shipping Method')</h2>
+                        </div>
+                    </x-slot:header>
 
-                        <x-slot:content>
-                            <div class="flex flex-wrap gap-[30px] mt-[30px]">
-                                <div
-                                    class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto"
-                                    v-for="shippingMethod in shippingMethods"
-                                >
-                                    <div v-for="rate in shippingMethod.rates">
-                                        <input 
-                                            type="radio"
-                                            name="shipping_method"
-                                            :id="rate.method"
-                                            :value="rate.method"
-                                            class="hidden peer"
-                                            @change="save(rate.method)"
-                                        >
+                    <x-slot:content>
+                        <div class="flex flex-wrap gap-[30px] mt-[30px]">
+                            <div
+                                class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto"
+                                v-for="shippingMethod in shippingMethods"
+                            >
+                                <div v-for="rate in shippingMethod.rates">
+                                    <input 
+                                        type="radio"
+                                        name="shipping_method"
+                                        :id="rate.method"
+                                        :value="rate.method"
+                                        class="hidden peer"
+                                        @change="save(rate.method)"
+                                    >
 
-                                        <label 
-                                            class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
-                                            :for="rate.method"
-                                        >
-                                        </label>
+                                    <label 
+                                        class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                        :for="rate.method"
+                                    >
+                                    </label>
 
-                                        <label 
-                                            class="block border border-[#E9E9E9] p-[20px] rounded-[12px] h-[190px] cursor-pointer"
-                                            :for="rate.method"
-                                        >
-                                            <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
+                                    <label 
+                                        class="block border border-[#E9E9E9] p-[20px] rounded-[12px] h-[190px] cursor-pointer"
+                                        :for="rate.method"
+                                    >
+                                        <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
 
-                                            <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">@{{ rate.base_formatted_price }}</p>
-                                            
-                                            <p class="text-[12px] font-medium mt-[10px]">
-                                                <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
-                                            </p>
-                                        </label>
-                                    </div>
+                                        <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">@{{ rate.base_formatted_price }}</p>
+                                        
+                                        <p class="text-[12px] font-medium mt-[10px]">
+                                            <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
+                                        </p>
+                                    </label>
                                 </div>
                             </div>
-                        </x-slot:content>
-                    </x-shop::accordion>
+                        </div>
+                    </x-slot:content>
+                </x-shop::accordion>
             </template>
         </div>
     </script>

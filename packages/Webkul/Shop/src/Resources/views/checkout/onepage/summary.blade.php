@@ -100,7 +100,7 @@
 
             methods: {
                 placeOrder() {
-                    this.$axios.post("{{ route('shop.checkout.onepage.addresses.store') }}", {
+                    this.$axios.post("{{ route('shop.checkout.onepage.orders.store') }}", {
                             '_token': "{{ csrf_token() }}"
                         })
                         .then(response => {

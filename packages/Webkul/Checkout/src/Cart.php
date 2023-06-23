@@ -410,8 +410,6 @@ class Cart
 
         $shippingAddressData = $this->gatherShippingAddress($data, $cart);
 
-        $this->saveAddressesWhenRequested($data, $billingAddressData, $shippingAddressData);
-
         $this->linkAddresses($cart, $billingAddressData, $shippingAddressData);
 
         if (
@@ -849,34 +847,6 @@ class Cart
         }
 
         return $attributes;
-    }
-
-    /**
-     * Save addresses when requested.
-     *
-     * @param  array  $data
-     * @param  array  $billingAddress
-     * @param  array  $shippingAddress
-     * @return void
-     */
-    private function saveAddressesWhenRequested(
-        array $data,
-        array $billingAddress,
-        array $shippingAddress
-    ): void {
-        $shippingAddress['cart_id'] = $billingAddress['cart_id'] = null;
-
-        if (! empty($data['billing']['is_save_as_address'])) {
-            $billingAddress = Arr::except($billingAddress, ['is_save_as_address', 'is_use_for_shipping', 'address_id', 'isNew', 'created_at', 'updated_at']);
-            
-            $this->customerAddressRepository->updateOrCreate($billingAddress, $billingAddress);
-        }
-
-        if (! empty($data['shipping']['is_save_as_address'])) {
-            $shippingAddress = Arr::except($shippingAddress, ['is_save_as_address', 'is_use_for_shipping', 'address_id', 'isNew', 'created_at', 'updated_at']);
-
-            $this->customerAddressRepository->updateOrCreate($shippingAddress, $shippingAddress);
-        }
     }
 
     /**
