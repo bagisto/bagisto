@@ -13,7 +13,7 @@
     </div>
 
     <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-        <div class="grid gap-[30px] mt-[30px]">
+        <div>
             {{-- Billing Address --}}
             <x-shop::shimmer.checkout.onepage.address></x-shop::shimmer.checkout.onepage.address>
 
@@ -24,7 +24,7 @@
             <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
 
             {{--Bottom Buttons --}}
-            <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px]">
+            <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px] mt-[30px]">
                 <div class="w-[40%] h-[24px] shimmer"></div>
                 <div class="w-[30%] h-[46px] shimmer rounded-[18px] "></div>
             </div>

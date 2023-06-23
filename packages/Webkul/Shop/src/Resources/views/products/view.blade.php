@@ -312,3 +312,4 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
+larave

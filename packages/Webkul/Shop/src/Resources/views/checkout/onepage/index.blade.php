@@ -1,4 +1,5 @@
 <x-shop::layouts
+    :has-header="false"
     :has-feature="false"
     :has-footer="false"
 >
@@ -25,18 +26,34 @@
                     </div>
                 </div>
 
+
                 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-                    <div class="grid gap-[30px] mt-[30px]">
-                        @include('shop::checkout.onepage.address')
+                    <div>
+                        @include('shop::checkout.onepage.addresses.index')
 
                         @include('shop::checkout.onepage.shipping')
 
                         @include('shop::checkout.onepage.payment')
 
-                        @include('shop::checkout.onepage.review-summary')
+                        <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px]">
+                            <a 
+                                href="{{ route('shop.checkout.cart.index') }}"
+                                class="flex gap-x-[6px] items-center"
+                            >
+                                <span class="icon-arrow-left text-[24px] max-sm:text-[14px]"></span>
+                                @lang('Return to cart')
+                            </a>
+            
+                            <a 
+                                href="{{ route('shop.home.index')}}"
+                                class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                            >
+                                @lang('Return To Shop')
+                            </a>
+                        </div>
                     </div>
                     
-                    @include('shop::checkout.onepage.cart-summary')
+                    @include('shop::checkout.onepage.summary')
                 </div>
             </div>
         </script>
@@ -59,14 +76,15 @@
 
                 methods: {
                     getOrderSummary() {
-                        this.$axios.get("{{ route('shop.checkout.summary') }}")
+                        this.$axios.get("{{ route('shop.checkout.onepage.summary') }}")
                             .then(response => {
                                 this.cart = response.data.data;
 
                                 this.isCartLoading = false;
                             })
                             .catch(error => console.log(error))
-                    }
+                    },
+
                 }
             });
         </script>
