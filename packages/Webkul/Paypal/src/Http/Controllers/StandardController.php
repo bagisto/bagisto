@@ -57,7 +57,7 @@ class StandardController extends Controller
 
         session()->flash('order', $order);
 
-        return redirect()->route('shop.checkout.success');
+        return redirect()->route('shop.checkout.onepage.success');
     }
 
     /**

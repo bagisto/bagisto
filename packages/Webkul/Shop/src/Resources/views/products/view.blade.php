@@ -20,8 +20,7 @@
     <x-shop::tabs position="center">
         <x-shop::tabs.item
             class="container mt-[60px] !p-0"
-            {{-- @translations --}}
-            :title="trans('Description')"
+            :title="trans('shop::app.products.description')"
             :is-selected="true"
         >
             <div class="container mt-[60px] max-1180:px-[20px]">
@@ -33,8 +32,7 @@
 
         <x-shop::tabs.item
             class="container mt-[60px] !p-0"
-            {{-- @translations --}}
-            :title="trans('Additional Information')"
+            :title="trans('shop::app.products.additional-information')"
             :is-selected="false"
         >
             <div class="container mt-[60px] max-1180:px-[20px]">
@@ -58,8 +56,7 @@
 
         <x-shop::tabs.item
             class="container mt-[60px] !p-0"
-            {{-- @translations --}}
-            :title="trans('Reviews')"
+            :title="trans('shop::app.products.reviews')"
             :is-selected="false"
         >
             @include('shop::products.view.reviews')
@@ -68,16 +65,14 @@
 
     {{-- Featured Products --}}
     <x-shop::products.carousel
-        {{-- @translations --}}
-        :title="trans('Related Products')"
+        :title="trans('shop::app.products.related-product-title')"
         :src="route('shop.api.products.related.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
 
     {{-- Upsell Products --}}
     <x-shop::products.carousel
-        {{-- @translations --}}
-        :title="trans('We found other products you might like!')"
+        :title="trans('shop::app.products.up-sell-title')"
         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
@@ -117,7 +112,7 @@
                                 </div>
                             </div>
 
-                            <div class='flex items-center'>
+                            <div class="flex gap-[15px] items-center mt-[15px]">
                                 <x-shop::products.star-rating 
                                     :value="$avgRatings"
                                     :is-editable=false
@@ -133,7 +128,7 @@
 
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                            <p class="text-[24px] flex gap-2.5 items-center font-medium mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                            <p class="text-[24px] !font-medium flex gap-2.5 items-center mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
                                 {!! $product->getTypeInstance()->getPriceHtml() !!}
                             </p>
 
@@ -164,7 +159,6 @@
                                         name="quantity"
                                         value="1"
                                         class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
-                                        @change="updateItem($event)"
                                     >
                                     </x-shop::quantity-changer>
                                 @endif
@@ -231,17 +225,11 @@
 
                 data() {
                     return {
-                        qty: 1,
-
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
 
                 methods: {
-                    updateItem(quantity) {
-                        this.qty = quantity;
-                    },
-
                     addToCart() {
                         let formData = new FormData(this.$refs.formData);
 
@@ -307,11 +295,11 @@
                     },
 
                     setStorageValue(key, value) {
-                        window.localStorage.setItem(key, JSON.stringify(value));
+                        localStorage.setItem(key, JSON.stringify(value));
                     },
 
                     getStorageValue(key) {
-                        let value = window.localStorage.getItem(key);
+                        let value = localStorage.getItem(key);
 
                         if (value) {
                             value = JSON.parse(value);
@@ -324,3 +312,4 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
+larave

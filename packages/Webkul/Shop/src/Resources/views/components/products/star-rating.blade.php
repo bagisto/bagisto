@@ -1,7 +1,7 @@
 @props([
-    'name'       => 'rating',
-    'value'      => 0,
-    'disabled'   => true,
+    'name'     => 'rating',
+    'value'    => 0,
+    'disabled' => true,
 ])
 
 <v-star-rating
@@ -21,20 +21,19 @@
                 v-if="! disabled"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 @click="change(rating)"
-            />
+            ></span>
 
             <span
                 class="icon-star-fill text-[24px]"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 v-else
-            />
+            ></span>
 
             <v-field
                 type="hidden"
                 :name="name"
                 v-model="appliedRatings"
-                {{ $attributes }}
             ></v-field>
         </div>
     </script>

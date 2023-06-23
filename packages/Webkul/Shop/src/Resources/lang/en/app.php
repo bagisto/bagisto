@@ -263,6 +263,7 @@ return [
                 'cart'          => 'Cart',
                 'logout'        => 'Logout',
                 'search-text'   => 'Search products here',
+                'search'        => 'Search',
             ],
 
             'footer' => [
@@ -290,11 +291,25 @@ return [
             'item-add-to-cart'         => 'Item added successfully',
             'check-product-visibility' => 'Check the Product status or visibility',
             'compare-add'              => 'Item successfully added to compare list',
+
+            'card' => [
+                'new'                => 'New',
+                'sale'               => 'Sale',
+                'review-description' => 'Be the first to review this product',
+            ],
+
+            'carousel' => [
+               'view-all' => 'View All'
+            ],
+        ],
+
+        'range-slider' => [
+            'range' => 'Range:'
         ],
     ],
 
     'products'  => [
-        'review'                 => 'Review',
+        'reviews'                => 'Reviews',
         'add-to-cart'            => 'Add To Cart',
         'buy-now'                => 'Buy Now',
         'compare'                => 'Compare',
@@ -309,16 +324,15 @@ return [
         'was-this-helpful'       => 'Was This Review Helpful?',
         'load-more'              => 'Load More',
         'add-image'              => 'Add Image',
-        'product-description'    => 'Product Description',
+        'description'            => 'Description',
         'additional-information' => 'Additional Information',
         'submit-success'         => 'Submit Successfully',
         'something-went-wrong'   => 'Something went wrong',
-        'sale'                   => 'Sale',
         'in-stock'               => 'In Stock',
         'available-for-order'    => 'Available For Order',
         'out-of-stock'           => 'Out of Stock',
         'related-product-title'  => 'Related Products',
-        'up-sell-title'          => 'Upsell Products',
+        'up-sell-title'          => 'We found other products you might like!',
         'new'                    => 'New',
         'as-low-as'              => 'As low as',
         'starting-at'            => 'Starting at',
@@ -335,22 +349,52 @@ return [
                 'expensive-first' => 'Expensive First',
             ],
         ],
+
+        'view' => [ 
+            'type' => [ 
+                'bundle' => [
+                    'none' => 'None',
+                ],
+
+                'downloadable' => [
+                    'samples' => 'Samples',
+                    'links'   => 'Links',
+                    'sample'  => 'Sample',
+                ],
+
+                'grouped' => [
+                    'name' => 'Name'
+                ],
+            ],
+        ],
+    ],
+
+    'categories' => [
+        'filters' => [
+            'filters'   => 'Filters:',
+            'clear-all' => 'Clear All',
+        ],
+
+        'toolbar' => [
+            'filters' => 'Filters:',
+            'show'    => 'Show',
+        ],
+
+        'view' => [
+           'empty' => 'No products available in this category',
+           'load-more' => 'Load More',
+        ],
     ],
 
     'compare'  => [
-        'compare-similar-item'     => 'compare similar item',
-        'new'                      => 'New',
-        'add-to-cart'              => 'Add to Cart',
-        'products-not-available'   => 'Products Not Available',
-        'check-product-visibility' => 'Check the Product status or visibility',
-        'product-removed'          => 'Product Is No More Available As Removed By Admin',
-        'item-add-to-cart'         => 'Item added successfully',
-        'success'                  => 'All Compare items has deleted Succesfully',
-        'error'                    => 'Something went wrong, please try again later.',
-        'item-add'                 => 'Item successfully added to compare list',
-        'already-added'            => 'Item already added to compare list',
-        'wishlist-success'         => 'Item Successfully Added To Wishlist',
-        'alredy-in-wishlist'       => 'Item Already Available in Wishlist.',
+        'delete-all'         => 'Delete All',
+        'empty-text'         => 'You have no items in your compare list',
+        'title'              => 'Product Compare',
+        'already-added'      => 'Item is already added to compare list',
+        'item-add-success'   => 'Item added successfully to the compare list',
+        'remove-success'     => 'Item removed successfully.',
+        'remove-all-success' => 'ALl items removed successfully.',
+        'remove-error'       => 'Something went wrong, please try again later.',
     ],
 
     'checkout' => [
@@ -370,27 +414,30 @@ return [
                 'warning-remove'  => 'No items to remove from the cart.',
             ],
 
-            'home'                   => 'Home',
-            'cart-page'              => 'Cart Page',
-            'view-cart'              => 'View Cart',
-            'product-name'           => 'Product Name',
-            'remove'                 => 'Remove',
-            'quantity'               => 'Quantity',
-            'price'                  => 'Price',
-            'tax'                    => 'Tax',
-            'subtotal'               => 'Subtotal',
-            'total'                  => 'Total',
-            'grand-total'            => 'Grand Total',
-            'cart-summary'           => 'Cart Summary',
-            'item-add-to-cart'       => 'Item Added To Cart Successfully',
-            'update-cart'            => 'Update Cart',
-            'empty-cart'             => 'Your cart is empty',
-            'shopping-cart'          => 'Shopping Cart',
-            'offer-on-orders'        => 'Get Up To 30% OFF on your 1st order',
-            'return-to-shop'         => 'Return To Shop',
-            'continue-shopping'      => 'Continue Shopping',
-            'continue-to-checkout'   => 'Continue to Checkout',
-            'proceed-to-checkout'    => 'Proceed To Checkout',
+            'home'                      => 'Home',
+            'cart-page'                 => 'Cart Page',
+            'view-cart'                 => 'View Cart',
+            'product-name'              => 'Product Name',
+            'remove'                    => 'Remove',
+            'quantity'                  => 'Quantity',
+            'price'                     => 'Price',
+            'tax'                       => 'Tax',
+            'subtotal'                  => 'Subtotal',
+            'total'                     => 'Total',
+            'grand-total'               => 'Grand Total',
+            'cart-summary'              => 'Cart Summary',
+            'item-add-to-cart'          => 'Item Added To Cart Successfully',
+            'update-cart'               => 'Update Cart',
+            'empty-cart'                => 'Your cart is empty',
+            'shopping-cart'             => 'Shopping Cart',
+            'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
+            'return-to-shop'            => 'Return To Shop',
+            'continue-shopping'         => 'Continue Shopping',
+            'continue-to-checkout'      => 'Continue to Checkout',
+            'proceed-to-checkout'       => 'Proceed To Checkout',
+            'rule-applied'              => 'Cart rule applied',
+            'minimum-order-message'     => 'Minimum order amount is :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
 
             'coupon'   => [
                 'code'            => 'Coupon code',
@@ -403,7 +450,30 @@ return [
                 'success-apply'   => 'Coupon code applied successfully.',
                 'already-applied' => 'Coupon code already applied.',
             ],
+
+            'mini-cart' => [
+                'see-datails'               => 'See Details',
+                'shopping-cart'             => 'Shopping Cart',
+                'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
+                'remove'                    => 'Remove',
+                'empty-cart'                => 'Your cart is empty',
+                'subtotal'                  => 'Subtotal',
+                'continue-to-checkout'      => 'Continue to Checkout',
+                'view-cart'                 => 'View Cart',
+            ],
+
         ],
+
+        'onepage' => [
+            'index' => [
+                'home'     => 'Home',
+                'checkout' => 'Checkout',
+            ],
+        ],
+    ],
+
+    'home' => [
+       'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW'
     ],
 
     'response' => [
@@ -412,6 +482,9 @@ return [
     ],
 
     'security-warning'   => 'Suspicious activity found!!!',
+
+
+
 
     'invalid_vat_format' => 'The given vat id has a wrong format',
     'nothing-to-delete'  => 'Nothing to delete',
@@ -438,27 +511,6 @@ return [
         'new-products'        => 'New Products',
         'verify-email'        => 'Verify your email account',
         'resend-verify-email' => 'Resend Verification Email',
-    ],
-
-    'header' => [
-        'title'         => 'Account',
-        'dropdown-text' => 'Manage Cart, Orders & Wishlist',
-        'sign-in'       => 'Sign In',
-        'sign-up'       => 'Sign Up',
-        'account'       => 'Account',
-        'cart'          => 'Cart',
-        'profile'       => 'Profile',
-        'wishlist'      => 'Wishlist',
-        'cart'          => 'Cart',
-        'logout'        => 'Logout',
-        'search-text'   => 'Search products here',
-    ],
-
-    'minicart' => [
-        'view-cart' => 'View Shopping Cart',
-        'checkout'  => 'Checkout',
-        'cart'      => 'Cart',
-        'zero'      => '0',
     ],
 
     'footer' => [

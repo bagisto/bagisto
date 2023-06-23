@@ -29,7 +29,6 @@
         <div>
             <div @click="toggle">
                 <slot name="toggle">
-                    Default Toggle
                 </slot>
             </div>
 

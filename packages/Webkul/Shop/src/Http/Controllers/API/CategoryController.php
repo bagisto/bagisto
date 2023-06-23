@@ -7,6 +7,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\AttributeResource;
+use Webkul\Shop\Http\Resources\CategoryResource;
 
 class CategoryController extends APIController
 {
@@ -19,8 +20,26 @@ class CategoryController extends APIController
         protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository
-
     ) {
+    }
+
+    /**
+     * Get all categories.
+     */
+    public function index(): JsonResource
+    {
+        /**
+         * These are the default parameters. By default, only the enabled category
+         * will be shown in the current locale.
+         */
+        $defaultParams = [
+            'status' => 1,
+            'locale' => app()->getLocale(),
+        ];
+
+        $categories = $this->categoryRepository->getAll(array_merge($defaultParams, request()->all()));
+
+        return CategoryResource::collection($categories);
     }
 
     /**

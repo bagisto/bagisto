@@ -12,7 +12,7 @@
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium cursor-pointer">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <span class="text-navyBlue">
+                        <span class="text-[#0A49A7]">
                             @lang('shop::app.checkout.cart.coupon.apply')
                         </span>
                     </x-slot:toggle>
@@ -113,8 +113,8 @@
                 applyCoupon(params) {
                     this.$axios.post("{{ route('shop.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
-                            alert(response.data.data.message);
-
+                            alert(response.data.data.message)
+                            
                             this.$parent.$parent.getOrderSummary();
                         })
                         .catch((error) => {console.log(error);})
@@ -125,8 +125,12 @@
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {
+<<<<<<< HEAD
 
                             this.$emit('updateOrderSummary');
+=======
+                            this.$emit('updateOrderSummary')
+>>>>>>> upstream/2.x
 
                             this.$parent.$parent.getOrderSummary();
                         })

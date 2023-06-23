@@ -10,11 +10,18 @@
                 href="javascript:void(0);"
                 class="block text-[22px] py-[20px] font-medium text-center bg-[#E8EDFE] font-dmserif"
             >
-                {{-- @translations --}}
-                @lang('Get UPTO 40% OFF on your 1st order SHOP NOW')
+                @lang('shop::app.home.offer')
             </a>
 		</div>
 	</div>
+
+    {{-- Categories carousel --}}
+    <x-shop::categories.carousel
+        title="Categories Collections"
+        :src="route('shop.api.categories.index', ['only_children' => true])"
+        :navigation-link="route('shop.home.index')"
+    >
+    </x-shop::categories.carousel>
 
     {{-- Carousel --}}
 	<x-shop::products.carousel

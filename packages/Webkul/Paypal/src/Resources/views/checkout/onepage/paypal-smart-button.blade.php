@@ -77,7 +77,7 @@
             //                     if (response.data.redirect_url) {
             //                         window.location.href = response.data.redirect_url;
             //                     } else {
-            //                         window.location.href = "{{ route('shop.checkout.success') }}";
+            //                         window.location.href = "{{ route('shop.checkout.onepage.success') }}";
             //                     }
             //                 }
 

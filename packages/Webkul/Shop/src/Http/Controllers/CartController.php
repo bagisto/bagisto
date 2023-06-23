@@ -13,6 +13,9 @@ class CartController extends Controller
     /**
      * Create a new controller instance.
      *
+     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Customer\Repositories\WishlistRepository  $wishlistRepository
      * @return void
      */
     public function __construct(
@@ -60,11 +63,11 @@ class CartController extends Controller
             }
 
             return new JsonResource([
-                'message'  => trans('shop::app.checkout.cart.coupon.invalid'),
+                'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
             ]);
         } catch (\Exception $e) {
             return new JsonResource([
-                'message'  => trans('shop::app.checkout.cart.coupon.apply-issue'),
+                'message'  => trans('shop::app.checkout.cart.coupon.success-apply'),
             ]);
         }
     }

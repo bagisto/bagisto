@@ -4,7 +4,7 @@
 ])
 
 <v-quantity-changer
-    {{ $attributes }}
+    {{ $attributes->merge(['class' => 'flex border border-navyBlue items-center']) }}
     name="{{ $name }}"
     value="{{ $value }}"
 >
@@ -12,9 +12,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-quantity-changer-template">
-        <div 
-            {{ $attributes->merge(['class' => 'flex border border-navyBlue items-center']) }}
-        >
+        <div>
             <span 
                 class="bg-[position:-172px_-44px] bs-main-sprite w-[14px] h-[14px] cursor-pointer" 
                 @click="decrease"
@@ -33,7 +31,6 @@
                 type="hidden"
                 :name="name"
                 v-model="quantity"
-                {{ $attributes }}
             ></v-field>
         </div>
     </script>
