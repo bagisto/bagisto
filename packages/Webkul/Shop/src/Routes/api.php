@@ -60,6 +60,12 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
     });
 
     Route::group(['middleware' => ['customer'], 'prefix' => 'customer'], function () {
+        Route::controller(AddressController::class)->prefix('addresses')->group(function () {
+            Route::get('', 'index')->name('api.shop.customers.account.addresses.index');
+
+            Route::post('', 'store')->name('api.shop.customers.account.addresses.store');
+        });
+        
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 
@@ -69,7 +75,5 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
-
-        Route::get('addresses', [AddressController::class, 'index'])->name('api.shop.customers.account.addresses.index');
     });
 });

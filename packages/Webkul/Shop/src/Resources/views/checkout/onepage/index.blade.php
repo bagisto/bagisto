@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     
-                    @include('shop::checkout.onepage.cart-summary')
+                    @include('shop::checkout.onepage.summary')
                 </div>
             </div>
         </script>
