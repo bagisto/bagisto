@@ -474,7 +474,7 @@ return [
 
     'home' => [
         'index' => [
-            'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
             'verify-email'        => 'Verify your email account',
             'resend-verify-email' => 'Resend Verification Email',
         ],
