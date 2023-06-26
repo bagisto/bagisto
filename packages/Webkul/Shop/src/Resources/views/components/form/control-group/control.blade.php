@@ -92,6 +92,8 @@
                 <input
                     type="file"
                     class="hidden"
+                    name="{{ $name }}"
+                    {{ $attributes }}
                 />
             </label>
         </div>

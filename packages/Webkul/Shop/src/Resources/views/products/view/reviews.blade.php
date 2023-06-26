@@ -17,7 +17,7 @@
                         enctype="multipart/form-data"
                     >
                         <div>
-                            {{-- <x-shop::form.control-group>
+                            <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
                                     name="image"
@@ -26,6 +26,7 @@
                                     rules="required"
                                     :label="trans('shop::app.products.image')"
                                     :placeholder="trans('shop::app.products.image')"
+                                    @change="selectReviewImage"
                                 >
                                 </x-shop::form.control-group.control>
 
@@ -33,18 +34,11 @@
                                     control-name="image"
                                 >
                                 </x-shop::form.control-group.error>
-                            </x-shop::form.control-group> --}}
+                            </x-shop::form.control-group>
                             
                         </div>
                         
                         <div>
-                            <input 
-                                class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                type="file"
-                                name="image"
-                                @change="selectReviewImage"
-                            />
-
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
                                     @lang('shop::app.products.rating')
