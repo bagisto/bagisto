@@ -26,7 +26,7 @@
                             rules="required"
                             v-model="forms.shipping.address.address_id"
                             class="hidden peer"
-                            @change="resetPaymentAndShipping"
+                            @change="resetPaymentAndShippingMethod"
                         >
                         </v-field>
 

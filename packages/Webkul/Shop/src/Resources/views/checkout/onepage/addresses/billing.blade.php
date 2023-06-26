@@ -23,7 +23,7 @@
                             rules="required"
                             v-model="forms.billing.address.address_id"
                             class="hidden peer"
-                            @change="resetPaymentAndShipping"
+                            @change="resetPaymentAndShippingMethod"
                         >
                         </v-field>
 

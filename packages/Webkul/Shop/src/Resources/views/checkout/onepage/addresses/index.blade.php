@@ -97,6 +97,12 @@
                     };
                 },
 
+                resetPaymentAndShippingMethod() {
+                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                },
+
                 getCustomerAddresses() {
                     if (this.isCustomer) {
                         this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
@@ -137,7 +143,7 @@
 
                     this.forms.billing.isNew = true;
 
-                    this.resetPaymentAndShipping();
+                    this.resetPaymentAndShippingMethod();
                 },
 
                 handleBillingAddressForm() {
@@ -168,7 +174,7 @@
 
                     this.forms.shipping.isNew = true;
 
-                    this.resetPaymentAndShipping();
+                    this.resetPaymentAndShippingMethod();
                 },
 
                 handleShippingAddressForm() {
@@ -239,12 +245,6 @@
                     }
 
                     return false;
-                },
-
-                resetPaymentAndShipping() {
-                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
-
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
                 },
             },
         });
