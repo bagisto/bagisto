@@ -17,11 +17,11 @@ class Shipping
     /**
      * Collects rate from available shipping methods.
      *
-     * @return array
+     * @return array|boolean
      */
     public function collectRates()
     {
-        if (! $cart = Cart::getCart()) {
+        if (! Cart::getCart()) {
             return false;
         }
 
@@ -95,7 +95,7 @@ class Shipping
     /**
      * Returns shipping rates, grouped by shipping method.
      *
-     * @return void
+     * @return array
      */
     public function getGroupedAllShippingRates()
     {
@@ -109,6 +109,7 @@ class Shipping
                 ];
             }
 
+            $rate['base_formatted_price'] = core()->currency($rate->base_price);
             $rates[$rate->carrier]['rates'][] = $rate;
         }
 

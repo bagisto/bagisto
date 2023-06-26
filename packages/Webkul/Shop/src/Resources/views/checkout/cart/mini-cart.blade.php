@@ -21,12 +21,12 @@
             <x-slot:header>
                 <div class="flex justify-between items-center">
                     <p class="text-[26px] font-medium">
-                        @lang('shop::app.checkout.cart.shopping-cart')
+                        @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                     </p>
                 </div>
 
                 <p class="text-[16px]">
-                    @lang('shop::app.checkout.cart.offer-on-orders')
+                    @lang('shop::app.checkout.cart.mini-cart.offer-on-orders')
                 </p>
             </x-slot:header>
 
@@ -66,8 +66,7 @@
                                         class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
                                         @click="item.option_show = ! item.option_show"
                                     >
-                                        <!-- @translations -->
-                                        @lang('See Details')
+                                        @lang('shop::app.checkout.cart.mini-cart.see-datails')
 
                                         <span
                                             class="text-[24px]"
@@ -104,7 +103,7 @@
                                     class="text-[#0A49A7]"
                                     @click="removeItem(item.id)"
                                 >
-                                    @lang('shop::app.checkout.cart.remove')
+                                    @lang('shop::app.checkout.cart.mini-cart.remove')
                                 </button>
                             </div>
                         </div>
@@ -119,7 +118,7 @@
                         <img src="{{ bagisto_asset('images/thank-you.png') }}">
                 
                         <p class="text-[20px]">
-                            @lang('shop::app.checkout.cart.empty-cart')
+                            @lang('shop::app.checkout.cart.mini-cart.empty-cart')
                         </p>
                     </div>
                 </div>
@@ -129,7 +128,7 @@
                 <div v-if="cart?.items?.length">
                     <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
                         <p class="text-[14px] font-medium text-[#7D7D7D]">
-                            @lang('shop::app.checkout.cart.subtotal')
+                            @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 
                         <p 
@@ -144,12 +143,12 @@
                             href="{{ route('shop.checkout.onepage.index') }}" 
                             class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
                         >
-                            @lang('shop::app.checkout.cart.continue-to-checkout')
+                            @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
 
                         <div class="m-0 ml-[0px] block text-base py-[15px] text-center font-medium cursor-pointer">
                             <a href="{{ route('shop.checkout.cart.index') }}">
-                                @lang('shop::app.checkout.cart.view-cart')
+                                @lang('shop::app.checkout.cart.mini-cart.view-cart')
                             </a>
                         </div>
                     </div>
