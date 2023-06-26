@@ -144,8 +144,6 @@
                     if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
                         
-                        this.forms.billing.address.address1 = this.forms.billing.address.address1[0];
-
                         this.addresses.push({
                             ...this.forms.billing.address,
                             isSaved: false,
@@ -177,8 +175,6 @@
                     if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
                         this.forms.shipping.isNew = false;
                         
-                        this.forms.shipping.address.address1 = this.forms.shipping.address.address1[0];
-
                         this.addresses.push({
                             ...this.forms.shipping.address,
                             isSaved: false,
