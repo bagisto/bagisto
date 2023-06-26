@@ -70,7 +70,17 @@
                                     <td 
                                         class="px-6 py-[16px] text-black font-medium "
                                     >
-                                        {{ $item->product_name }}
+                                        @if ($item->status == 'available')
+                                            <a  
+                                                class="text-blue-600"
+                                                href="{{ route('shop.customers.account.downloadable_products.download', $item->id) }}" 
+                                                target="_blank"
+                                            >
+                                                {{ $item->product_name }}
+                                            </a>
+                                        @else 
+                                            {{ $item->product_name }}
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-[16px] text-black font-medium ">
@@ -95,6 +105,11 @@
                                                 </span>
                                                 @break
 
+                                            @case('available')
+                                                <span class="text-white text-[12px] px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B]">
+                                                    {{ $item->status }}
+                                                </span>
+                                                @break
                                         @endswitch
                                     </td>
 
