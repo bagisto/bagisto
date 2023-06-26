@@ -131,6 +131,8 @@ return [
                     'payment-method'     => 'Payment Method',
                     'cancel-btn-title'   => 'Cancel',
                     'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
+                    'cancel-success'     => 'Your order has been canceled',
+                    'cancel-error'       => 'Your order can not be canceled.',
 
                     'information' => [
                         'info'              => 'Information',
