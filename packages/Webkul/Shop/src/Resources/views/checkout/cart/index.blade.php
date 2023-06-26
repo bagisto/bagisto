@@ -191,7 +191,7 @@
                                         class="text-[16px] font-medium cursor-pointer" 
                                         v-if="cart.discount_amount == 0"
                                     >
-                                        <x-shop::modal>
+                                        <x-shop::modal ref="modal">
                                             <x-slot:toggle>
                                                 <span class="text-[#0A49A7]">
                                                     @lang('shop::app.checkout.cart.coupon.apply')

@@ -4,7 +4,7 @@
 
 <v-modal
     is-active="{{ $isActive }}"
-    ref="modal"
+    {{ $attributes }}
 >
     @isset($toggle)
         <template v-slot:toggle>

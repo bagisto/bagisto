@@ -117,6 +117,7 @@ class CartController extends APIController
     public function storeCoupon(): JsonResource
     {
         $couponCode = request()->input('code');
+
         try {
             if (strlen($couponCode)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
