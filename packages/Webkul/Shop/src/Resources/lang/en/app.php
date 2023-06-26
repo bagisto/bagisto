@@ -301,12 +301,12 @@ return [
             ],
 
             'carousel' => [
-               'view-all' => 'View All'
+                'view-all' => 'View All',
             ],
         ],
 
         'range-slider' => [
-            'range' => 'Range:'
+            'range' => 'Range:',
         ],
     ],
 
@@ -352,8 +352,8 @@ return [
             ],
         ],
 
-        'view' => [ 
-            'type' => [ 
+        'view' => [
+            'type' => [
                 'bundle' => [
                     'none' => 'None',
                 ],
@@ -365,7 +365,7 @@ return [
                 ],
 
                 'grouped' => [
-                    'name' => 'Name'
+                    'name' => 'Name',
                 ],
             ],
         ],
@@ -383,8 +383,8 @@ return [
         ],
 
         'view' => [
-           'empty' => 'No products available in this category',
-           'load-more' => 'Load More',
+            'empty'     => 'No products available in this category',
+            'load-more' => 'Load More',
         ],
     ],
 
@@ -445,6 +445,7 @@ return [
                 'code'            => 'Coupon code',
                 'applied'         => 'Coupon applied',
                 'apply'           => 'Apply Coupon',
+                'error'           => 'Something went wrong',
                 'remove'          => 'Remove Coupon',
                 'invalid'         => 'Coupon code is invalid.',
                 'discount'        => 'Coupon Discount',
@@ -488,9 +489,6 @@ return [
     ],
 
     'security-warning'   => 'Suspicious activity found!!!',
-
-
-
 
     'invalid_vat_format' => 'The given vat id has a wrong format',
     'nothing-to-delete'  => 'Nothing to delete',

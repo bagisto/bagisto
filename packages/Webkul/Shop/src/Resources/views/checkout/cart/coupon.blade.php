@@ -69,7 +69,7 @@
 
                     self.disableButton = true;
 
-                    axios.post('{{ route('shop.checkout.cart.coupon.apply') }}', {code: self.couponCode})
+                    axios.post('{{ route('shop.api.checkout.cart.coupon.apply') }}', {code: self.couponCode})
                         .then(function(response) {
                             if (response.data.success) {
                                 self.$emit('onApplyCoupon');
@@ -102,7 +102,7 @@
                     if (self.removeIconEnabled) { 
                         self.removeIconEnabled = false;
 
-                        axios.delete('{{ route('shop.checkout.cart.coupon.remove') }}')
+                        axios.delete('{{ route('shop.api.checkout.cart.coupon.remove') }}')
                         .then(function(response) {
                             self.$emit('onRemoveCoupon')
 

@@ -110,4 +110,58 @@ class CartController extends APIController
             ]);
         }
     }
+
+    /**
+     * Apply coupon to the cart.
+     */
+    public function storeCoupon(): JsonResource
+    {
+        $couponCode = request()->input('code');
+        try {
+            if (strlen($couponCode)) {
+                $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
+
+                if ($coupon->cart_rule->status) {
+                    if (Cart::getCart()->coupon_code == $couponCode) {
+                        return new JsonResource([
+                            'data'     => new CartResource(Cart::getCart()),
+                            'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
+                        ]);
+                    }
+
+                    Cart::setCouponCode($couponCode)->collectTotals();
+
+                    if (Cart::getCart()->coupon_code == $couponCode) {
+                        return new JsonResource([
+                            'data'     => new CartResource(Cart::getCart()),
+                            'message'  => trans('shop::app.checkout.cart.coupon.success-apply'),
+                        ]);
+                    }
+                }
+            }
+
+            return new JsonResource([
+                'data'     => new CartResource(Cart::getCart()),
+                'message'  => trans('shop::app.checkout.cart.not-found'),
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResource([
+                'data'     => new CartResource(Cart::getCart()),
+                'message'  => trans('shop::app.checkout.cart.coupon.error'),
+            ]);
+        }
+    }
+
+    /**
+     * Remove applied coupon from the cart.
+     */
+    public function destroyCoupon(): JsonResource
+    {
+        Cart::removeCouponCode()->collectTotals();
+
+        return new JsonResource([
+            'data'     => new CartResource(Cart::getCart()),
+            'message'  => trans('shop::app.checkout.cart.coupon.remove'),
+        ]);
+    }
 }
