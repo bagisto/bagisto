@@ -56,9 +56,10 @@
                                         >
                                         </p>
 
-                                        <p class="text-[16px]">
-                                            @lang('shop::app.customers.account.wishlist.color')
-                                            @{{ item.item.color }}
+                                        <p 
+                                            class="text-[16px]" 
+                                            v-text="item.item.color"
+                                        >
                                         </p>
 
                                         <a
@@ -72,7 +73,7 @@
 
                                 <p 
                                     class="text-[18px]" 
-                                    v-html="item.item.final_price"
+                                    v-html="item.item.prices.final.formatted_price"
                                 >
                                 </p>
 
