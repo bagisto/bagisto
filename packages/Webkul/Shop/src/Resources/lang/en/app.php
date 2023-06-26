@@ -473,7 +473,11 @@ return [
     ],
 
     'home' => [
-       'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW'
+        'index' => [
+            'offer' => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'verify-email'        => 'Verify your email account',
+            'resend-verify-email' => 'Resend Verification Email',
+        ],
     ],
 
     'response' => [
@@ -503,14 +507,6 @@ return [
         'error'              => 'Something went wrong, please try again later.',
         'image-upload-limit' => 'Image max upload size is 2MB',
         'no-result-found'    => 'We could not find any records.',
-    ],
-
-    'home' => [
-        'page-title'          => config('app.name') . ' - Home',
-        'featured-products'   => 'Featured Products',
-        'new-products'        => 'New Products',
-        'verify-email'        => 'Verify your email account',
-        'resend-verify-email' => 'Resend Verification Email',
     ],
 
     'footer' => [

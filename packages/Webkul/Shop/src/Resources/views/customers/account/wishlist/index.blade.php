@@ -30,15 +30,25 @@
                             <div class="flex gap-[65px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
                                 <div class="flex gap-x-[20px]">
                                     <div class="">
+                                        <div
+                                            class="relative overflow-hidden rounded-[12px]  min-w-[110px] min-h-[110px] bg-[#E9E9E9] shimmer"
+                                            v-show="isImageLoading"
+                                        >
+                                            <img class="rounded-[12px] bg-[#F5F5F5]" src="">
+                                        </div>
+
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
                                             <img 
                                                 class="max-w-[110px] max-h-[110px] rounded-[12px]" 
                                                 :src='item.item.base_image.small_image_url'
                                                 alt="" 
                                                 title=""
+                                                @load="onImageLoad()"
+                                                v-show="! isImageLoading"
                                             >
                                         </a>
                                     </div>
+                                    
                                     <div class="grid gap-y-[10px]">
                                         <p 
                                             class="text-[16px]" 
@@ -62,7 +72,7 @@
 
                                 <p 
                                     class="text-[18px]" 
-                                    v-html="item.item.price_html"
+                                    v-html="item.item.final_price"
                                 >
                                 </p>
 
@@ -110,6 +120,8 @@
                 data() {
                     return  {
                         isLoading: true,
+
+                        isImageLoading: true,
                         
                         wishlist: [],
                     };
@@ -120,6 +132,10 @@
                 },
 
                methods: {
+                    onImageLoad() {
+                        this.isImageLoading = false;
+                    },
+
                     get() {
                         this.$axios.get("{{ route('shop.api.customers.account.wishlist.index') }}")
                             .then(response => {
