@@ -10,7 +10,6 @@ use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 use Webkul\Shop\Http\Controllers\API\OnepageController;
 
-
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('products', 'index')
