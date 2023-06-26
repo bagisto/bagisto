@@ -1,133 +1,123 @@
-@php
-    $attributeRepository = app('\Webkul\Attribute\Repositories\AttributeFamilyRepository');
-
-    $comparableAttributes = $attributeRepository->getComparableAttributesBelongsToFamily()->toArray();
-@endphp
-
 <x-shop::layouts>
-    <div class="flex-auto">
-        <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-            <!-- Breadcrumb -->
-            <div class="flex justify-start mt-[30px] max-lg:hidden">
-                <div class="flex gap-x-[14px] items-center">
-                    <p class="flex items-center gap-x-[14px] text-[16px] font-medium">
-                        @lang('shop::app.checkout.cart.home') 
+    <!-- Breadcrumb -->
+    <div class="flex justify-center mt-[20px] max-lg:hidden">
+		<div class="flex gap-x-[10px] items-center">
+			<p class="flex items-center gap-x-[10px] text-[12px] font-medium">
+                Home
+                <span class="icon-arrow-right text-[22px]"></span>
+			</p>
 
-                        <span class="icon-arrow-right text-[24px]"></span>
-                    </p>
+			<p class="flex items-center gap-x-[16px] text-[12px] font-medium">
+                Product Compare
+                <span class="icon-arrow-right text-[22px] last:hidden"></span>
+            </p>
+		</div>
+	</div>
 
-                    <p class="text-[#7D7D7D] text-[12px] flex items-center gap-x-[16px] font-medium  after:content[' '] after:bg-[position:-7px_-41px] after:bs-main-sprite after:w-[9px] after:h-[20px] after:last:hidden">
-                        @lang('shop::app.compare.compare-similar-item')
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
-                <v-compare></v-compare>
-            </div>
-        </div>
+    {{-- Compare Component --}}
+    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px] mt-[30px]">
+        <v-compare>
+            <!---- Shimmer Effect -->
+            <x-shop::shimmer.compare
+                :attributeCount="count($comparableAttributes)"
+            >
+            </x-shop::shimmer.compare>
+        </v-compare>
     </div>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-compare-template">
-            <template v-if="compareItems.length">
-                <div class="grid gap-2.5 relative max-sm:grid-cols-1" v-for="item in compareItems">
-                    <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
-                        <div 
-                            class="relative overflow-hidden rounded-sm min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
-                            v-show="isLoading"
-                        > 
-                            <img 
-                                class="rounded-sm bg-[#F5F5F5]" 
-                                src=""
-                            > 
-                        </div>
+            <div>
+                <div v-if="! isLoading">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-[26px] font-medium">@lang('shop::app.compare.title')</h2>
 
-                        <img 
-                            class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
-                            :src='item.product.base_image.medium_image_url'
-                            @load="onResponseLoad()"
-                            v-show="! isLoading"
+                        <div
+                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                            v-if="items.length"
+                            @click="removeAll"
                         >
-
-                        <div class="action-items bg-black">
-                            <p class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]">
-                                @lang('shop::app.compare.new')
-                            </p>
-
-                            <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                <span 
-                                    class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
-                                    @click="moveToWishlist(item.product.id)"
-                                >
-                                </span>
-
-                                <span 
-                                    class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-bin text-[25px]"
-                                    @click="remove(item.product.id)"
-                                >
-                                </span>
-
-                                <div 
-                                    class="rounded-xl bg-white text-navyBlue text-xs w-max font-medium py-[11px] px-[43px] cursor-pointer absolute bottom-[15px] left-[50%] -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
-                                    @click="moveToCart(item.product.id)"
-                                >
-                                    @lang('shop::app.compare.add-to-cart')
-                                </div>
-                            </div>
+                            <span class="icon-bin text-[24px]"></span>
+                            @lang('shop::app.compare.delete-all')
                         </div>
                     </div>
 
-                    @foreach ($comparableAttributes as $comparableAttribute)
-                        @switch ($comparableAttribute['code'])
-                            @case ('price')
-                                <p
-                                    class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                    v-show="isLoading"    
-                                >
-                                </p>
+                    <div
+                        class="grid mt-[60px] overflow-auto journal-scroll"
+                        v-if="items.length"
+                    >
+                        <template v-for="attribute in comparableAttributes">
+                            <!---- Product Card -->
+                            <div
+                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9]"
+                                v-if="attribute.code == 'product'"
+                            >
+                                <div class="min-w-[304px] max-w-full max-sm:hidden">
+                                    <p class="text-[14px] font-medium">@{{ attribute.name ?? attribute.admin_name }}</p>
+                                </div>
 
-                                <p
-                                    class="text-[14px] font-medium text-[#3A3A3A]" 
-                                    v-html="item.product['{{ $comparableAttribute['code'] }}'] ?? item.product.price_html"
-                                    @load="onResponseLoad()"
-                                    v-show="! isLoading"
-                                >
-                                </p>
-                                @break
-                            @default
-                                @switch ($comparableAttribute['type'])
-                                    @case('boolean')
-                                        @break
-                                    @default
-                                        <p
-                                            class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"
-                                            v-show="isLoading"    
-                                        >
+                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                    <div
+                                        class="relative group"
+                                        v-for="product in items"
+                                    >
+                                        <a
+                                            class="hidden justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            @click="remove(product.id)"
+                                        ></a>
+
+                                        <x-shop::products.card class="min-w-[311px] max-w-[311px] pt-0 pr-0 p-[20px] max-sm:pl-0"></x-shop::products.card>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!---- Comparable Attributes -->
+                            <div
+                                class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] last:border-none"
+                                v-else
+                            >
+                                <div class="min-w-[304px] max-w-full max-sm:hidden">
+                                    <p class="text-[14px] font-medium">
+                                        @{{ attribute.name ?? attribute.admin_name }}
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
+                                    <div
+                                        class="w-[311px] max-w-[311px]  pr-0 p-[20px] max-sm:pl-0"
+                                        v-for="(product, index) in items"
+                                    >
+                                        <p class="hidden mb-[5px] text-[14px] font-medium max-sm:block">
+                                            @{{ attribute.name ?? attribute.admin_name }} :
                                         </p>
 
-                                        <p 
-                                            class="text-[14px] font-medium" 
-                                            v-html="item.product['{{ $comparableAttribute['code'] }}']"
-                                            @load="onResponseLoad()"
-                                            v-show="! isLoading"
-                                        >
+                                        <p class="text-[14px]">
+                                            @{{ product[attribute.code] ?? 'N/A' }}
                                         </p>
-                                @endswitch
-                            @break
-                        @endswitch
-                    @endforeach
-                </div>
-            </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
 
-            <template v-else>
-                <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
-                    <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
-                    
-                    <!-- @translations -->
-                    <p class="text-[20px]">@lang('No products were added to the compare page')</p>
+                    <div
+                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
+                        v-else
+                    >
+                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                        
+                        <p class="text-[20px]">@lang('shop::app.compare.empty-text')</p>
+                    </div>
                 </div>
-            </template>
+
+                <div v-else>
+                    <!---- Shimmer Effect -->
+                    <x-shop::shimmer.compare
+                        :attributeCount="count($comparableAttributes)"
+                    >
+                    </x-shop::shimmer.compare>
+                </div>
+            </div>
         </script>
 
         <script type="module">
@@ -136,9 +126,12 @@
 
                 data() {
                     return  {
-                        compareItems: [],
+                        comparableAttributes: [
+                            ...[{'code': 'product', 'name': 'Product'}],
+                            ...@json($comparableAttributes)
+                        ],
 
-                        products: [],
+                        items: [],
 
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
@@ -147,124 +140,81 @@
                 },
 
                 mounted() {
-                    this.getcompareItems();
+                    this.getItems();
                 },
 
                 methods: {
-                    onResponseLoad() {
-                        this.isLoading = false;
-                    },
-
-                    getcompareItems() {
-                        if (this.isCustomer) {
-                            this.$axios.get('{{ route('shop.api.compare.index') }}')
-                                .then(response => {
-                                    this.compareItems = response.data.data;
-                                })
-                                .catch(error => {});
-                            
-                            return;
+                    getItems() {
+                        let productIds = [];
+                        
+                        if (! this.isCustomer) {
+                            productIds = this.getStorageValue('compare_items');
                         }
 
-                        let items = this.getStorageValue('compare_items');
-
-                        this.$axios.get('{{ route('shop.api.compare.index') }}', {
+                        this.$axios.get("{{ route('shop.api.compare.index') }}", {
                                 params: {
-                                    product_ids: items,
+                                    product_ids: productIds,
                                 },
                             })
                             .then(response => {
-                                this.compareItems = response.data.data;
+                                this.isLoading = false;
+
+                                this.items = response.data.data;
                             })
                             .catch(error => {});
                     },
 
                     remove(productId) {
-                        if (this.isCustomer) {
-                            this.$axios.post('{{ route('shop.api.compare.destroy') }}', {
-                                    '_method': 'DELETE',
-                                    'product_id': productId,
-                                })
-                                .then(response => {
-                                    this.compareItems = response.data.data;
-                                })
-                                .catch(error => {});
+                        if (! this.isCustomer) {
+                            const index = this.items.findIndex((item) => item.id === productId);
+
+                            this.items.splice(index, 1);
+
+                            let items = this.getStorageValue()
+                                .filter(item => item != productId);
+
+                            localStorage.setItem('compare_items', JSON.stringify(items));
 
                             return;
                         }
-
-                        let existingItems = this.getStorageValue('compare_items');
-
-                        let updatedItems = existingItems.filter(item => item != productId);
-
-                        this.setStorageValue('compare_items', updatedItems);
                         
-                        location.reload();
-
-                        alert('Selected data removed from local storage');
-                    },
-
-                    moveToCart(productId) {
-                        if (this.customer) {
-                            this.$axios.post('{{ route("shop.api.compare.move_to_cart") }}', {
-                                    'quantity': 1,
-                                    'product_id': productId,
-                                })
-                                .then(response => {
-                                    this.compareItems = response.data.data;
-                                })
-                                .catch(error => {});
-
-                            return;
-                        }
-
-                        let existingItems = this.getStorageValue('compare_items');
-
-                        let updatedItems = existingItems.filter(item => item != productId);
-
-                        this.$axios.post('{{ route("shop.api.compare.move_to_cart") }}', {
-                                'quantity': 1,
+                        this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
+                                '_method': 'DELETE',
                                 'product_id': productId,
                             })
                             .then(response => {
-                                this.setStorageValue('compare_items', updatedItems);
-                                location.reload();
+                                this.items = response.data.data;
                             })
                             .catch(error => {});
                     },
 
-                    moveToWishlist(productId) {
-                        if (this.isCustomer) {
-                            this.$axios.post('{{ route("shop.api.compare.move_to_wishlist") }}', {
-                                    'quantity': 1,
-                                    'product_id': productId,
-                                })
-                                .then(response => {
-                                    this.compareItems = response.data.data;
-                                    alert(response.data.message);
-                                })
-                                .catch(error => {});
+                    removeAll() {
+                        if (! this.isCustomer) {
+                            localStorage.removeItem('compare_items');
+
+                            this.items = [];
 
                             return;
                         }
+                        
+                        this.$axios.post("{{ route('shop.api.compare.destroy_all') }}", {
+                                '_method': 'DELETE',
+                            })
+                            .then(response => {
+                                this.items = [];
+                            })
+                            .catch(error => {});
 
-                        alert('Guest user can not move compare product to wisthlist');
                     },
 
-                    getStorageValue(key) {
-                        let value = window.localStorage.getItem(key);
+                    getStorageValue() {
+                        let value = localStorage.getItem('compare_items');
 
-                        if (value) {
-                            value = JSON.parse(value);
+                        if (! value) {
+                            return [];
                         }
 
-                        return value;
-                    },
-
-                    setStorageValue(key, value) {
-                        window.localStorage.setItem(key, JSON.stringify(value));
-
-                        return true;
+                        return JSON.parse(value);
                     },
                 }
             });

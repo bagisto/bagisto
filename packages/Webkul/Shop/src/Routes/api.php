@@ -56,9 +56,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::delete('', 'destroy')->name('shop.api.compare.destroy');
 
-        Route::post('move-to-cart', 'moveToCart')->name('shop.api.compare.move_to_cart');
-
-        Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.compare.move_to_wishlist');
+        Route::delete('all', 'destroyAll')->name('shop.api.compare.destroy_all');
     });
     
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {

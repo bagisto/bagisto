@@ -42,7 +42,10 @@
                             <template v-else>
                                 <template v-if="products.length">
                                     <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
-                                        <x-shop::products.cards.grid v-for="product in products"></x-shop::products.cards.grid>
+                                        <x-shop::products.card
+                                            ::mode="'grid'"
+                                            v-for="product in products"
+                                        ></x-shop::products.card>
                                     </div>
                                 </template>
 
@@ -50,8 +53,7 @@
                                     <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
-                                        <!-- @translations -->
-                                        <p class="text-[20px]">@lang('No products available in this category')</p>
+                                        <p class="text-[20px]">@lang('shop::app.categories.view.empty')</p>
                                     </div>
                                 </template>
                             </template>
@@ -69,15 +71,17 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <x-shop::products.cards.list v-for="product in products"></x-shop::products.cards.list>
+                                    <x-shop::products.card
+                                        ::mode="'list'"
+                                        v-for="product in products"
+                                    ></x-shop::products.card>
                                 </template>
 
                                 <template v-else>
                                     <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
-                                        
-                                        <!-- @translations -->
-                                        <p class="text-[20px]">@lang('No products available in this category')</p>
+                                  
+                                        <p class="text-[20px]">@lang('shop::app.categories.view.empty')</p>
                                     </div>
                                 </template>
                             </template>
@@ -89,8 +93,7 @@
                             @click="loadMoreProducts()"
                             v-if="links.next"
                         >
-                            <!-- @translations -->
-                            @lang('Load More')
+                            @lang('shop::app.categories.view.load-more')
                         </button>
                     </div>
                 </div>

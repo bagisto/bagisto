@@ -10,8 +10,7 @@
     <script type="text/x-template" id='v-toolbar-template'>
         <div class="flex justify-between max-md:items-center">
             <div class="text-[16px] font-medium hidden max-md:block">
-                <!-- @translations -->
-                @lang('Filters')
+                @lang('shop::app.categories.toolbar.filters')
             </div>
 
             <div>
@@ -40,8 +39,7 @@
                     @change="apply('limit', filters.applied.limit)"
                 >
                     <option value=''>
-                        <!-- @translations -->
-                        @lang('Show')
+                        @lang('shop::app.categories.toolbar.show')
                     </option>
 
                     <option

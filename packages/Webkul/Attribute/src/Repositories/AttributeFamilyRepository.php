@@ -133,7 +133,6 @@ class AttributeFamilyRepository extends Repository
         return $family;
     }
 
-
     /**
      * @return array
      */
@@ -157,5 +156,19 @@ class AttributeFamilyRepository extends Repository
         }
 
         return $trimmed;
+    }
+
+    /**
+     * Get all the comparable attributes which belongs to attribute family.
+     */
+    public function getComparableAttributesBelongsToFamily()
+    {
+        return $this->attributeRepository
+            ->join('attribute_group_mappings', 'attribute_group_mappings.attribute_id', '=', 'attributes.id')
+            ->select('attributes.*')
+            ->where('attributes.is_comparable', 1)
+            ->whereNotIn('code', ['name', 'price'])
+            ->distinct()
+            ->get();
     }
 }
