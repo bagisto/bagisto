@@ -31,19 +31,17 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.is_new"
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px]  bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.on_sale"
                     >
-                        {{-- @translations --}}
-                        @lang('New')
+                        @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.on_sale"
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        v-else-if="product.is_new"
                     >
-                        {{-- @translations --}}
-                        @lang('Sale')
+                        @lang('shop::app.components.products.card.new')
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -101,20 +99,18 @@
                 </a>
             
                 <div class="action-items bg-black"> 
-                    <p 
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.is_new && ! product.on_sale" 
+                    <p
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px]  bg-red-700 inline-block absolute top-[20px] left-[20px]"
+                        v-if="product.on_sale"
                     >
-                        {{-- @translations --}}
-                        @lang('New')
+                        @lang('shop::app.components.products.card.sale')
                     </p>
 
-                    <p 
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-red-700 inline-block absolute top-[20px] left-[20px]"
-                        v-if="product.on_sale" 
+                    <p
+                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        v-else-if="product.is_new"
                     >
-                        {{-- @translations --}}
-                        @lang('Sale')
+                        @lang('shop::app.components.products.card.new')
                     </p>
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -140,11 +136,10 @@
                 >
                 </p> 
 
-                <div class="flex gap-2.5"> 
-                    <p 
-                        class="text-lg font-semibold" 
-                        v-html="product.price_html">
-                    </p>
+                <div 
+                    class="flex gap-2.5 text-lg font-semibold"
+                    v-html="product.price_html"
+                >   
                 </div> 
 
                 <div class="flex gap-4"> 
@@ -156,7 +151,7 @@
                 </div> 
                 
                 <p class="text-[14px] text-[#7D7D7D]" v-if="! product.avg_ratings">
-                    Be the first to review this product
+                    @lang('shop::app.components.products.card.review-description')
                 </p>
             
                 <p v-else class="text-[14px] text-[#7D7D7D]">

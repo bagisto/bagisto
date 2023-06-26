@@ -20,8 +20,7 @@
     <x-shop::tabs position="center">
         <x-shop::tabs.item
             class="container mt-[60px] !p-0"
-            {{-- @translations --}}
-            :title="trans('Description')"
+            :title="trans('shop::app.products.description')"
             :is-selected="true"
         >
             <div class="container mt-[60px] max-1180:px-[20px]">
@@ -33,8 +32,7 @@
 
         <x-shop::tabs.item
             class="container mt-[60px] !p-0"
-            {{-- @translations --}}
-            :title="trans('Additional Information')"
+            :title="trans('shop::app.products.additional-information')"
             :is-selected="false"
         >
             <div class="container mt-[60px] max-1180:px-[20px]">
@@ -58,8 +56,7 @@
 
         <x-shop::tabs.item
             class="container mt-[60px] !p-0"
-            {{-- @translations --}}
-            :title="trans('Reviews')"
+            :title="trans('shop::app.products.reviews')"
             :is-selected="false"
         >
             @include('shop::products.view.reviews')
@@ -68,16 +65,14 @@
 
     {{-- Featured Products --}}
     <x-shop::products.carousel
-        {{-- @translations --}}
-        :title="trans('Related Products')"
+        :title="trans('shop::app.products.related-product-title')"
         :src="route('shop.api.products.related.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
 
     {{-- Upsell Products --}}
     <x-shop::products.carousel
-        {{-- @translations --}}
-        :title="trans('We found other products you might like!')"
+        :title="trans('shop::app.products.up-sell-title')"
         :src="route('shop.api.products.up-sell.index', ['id' => $product->id])"
     >
     </x-shop::products.carousel>
@@ -317,3 +312,4 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
+larave

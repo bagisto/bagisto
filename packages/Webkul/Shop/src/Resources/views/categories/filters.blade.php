@@ -13,13 +13,11 @@
         <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
             <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
                 <p class="text-[18px] font-semibold ">
-                    <!-- @translations -->
-                    @lang('Filters:')
+                    @lang('shop::app.categories.filters.filters')
                 </p>
 
                 <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>
-                    <!-- @translations -->
-                    @lang('Clear All')
+                    @lang('shop::app.categories.filters.clear-all')
                 </p>
             </div>
 

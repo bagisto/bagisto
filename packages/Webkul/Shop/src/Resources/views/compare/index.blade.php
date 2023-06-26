@@ -106,7 +106,6 @@
                     >
                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                         
-                        <!-- @translations -->
                         <p class="text-[20px]">@lang('shop::app.compare.empty-text')</p>
                     </div>
                 </div>

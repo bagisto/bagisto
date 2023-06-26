@@ -83,8 +83,7 @@
                 for="organic-search"
                 class="sr-only"
             >
-                {{-- @translations --}}
-                @lang('Search')
+                @lang('shop::app.components.layouts.header.search')
             </label>
 
             <div class="relative w-full">
