@@ -12,7 +12,10 @@
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium cursor-pointer">
                 <x-shop::modal>
                     <x-slot:toggle>
-                        <span class="text-[#0A49A7]">
+                        <span 
+                            class="text-[#0A49A7]" 
+                            v-if="! isCouponApplied"
+                        >
                             @lang('shop::app.checkout.cart.coupon.apply')
                         </span>
                     </x-slot:toggle>
@@ -113,9 +116,9 @@
                 applyCoupon(params) {
                     this.$axios.post("{{ route('shop.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
-                            alert(response.data.data.message)
-                            
                             this.$parent.$parent.getOrderSummary();
+
+                            alert(response.data.data.message)
                         })
                         .catch((error) => {console.log(error);})
                 },
@@ -131,6 +134,5 @@
                 },
             }
         })
-
     </script>
 @endPushOnce

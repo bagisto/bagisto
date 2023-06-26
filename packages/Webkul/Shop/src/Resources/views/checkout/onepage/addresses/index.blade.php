@@ -107,10 +107,17 @@
                     if (this.isCustomer) {
                         this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
                             .then(response => {
-                                this.addresses = response.data.data.map(address => {
+                                this.addresses = response.data.data.map((address, index) => {
+                                    let isDefault = address.default_address ? address.default_address : index === 0;
+
+                                    if (isDefault) {
+                                        this.forms.billing.address.address_id = address.id;
+                                    }
+
                                     return {
                                         ...address,
                                         isSaved: true,
+                                        isDefault: isDefault
                                     };
                                 });
 
