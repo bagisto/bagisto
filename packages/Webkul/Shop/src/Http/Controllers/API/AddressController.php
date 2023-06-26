@@ -39,7 +39,7 @@ class AddressController extends APIController
 
         Event::dispatch('customer.addresses.create.before');
 
-        $customerAddress = $this->customerAddressRepository->create([
+        $address = [
             'company_name'    => $request->input('company_name'),
             'first_name'      => $request->input('first_name'),
             'last_name'       => $request->input('last_name'),
@@ -53,7 +53,9 @@ class AddressController extends APIController
             'customer_id'     => $customer->id,
             'address1'        => implode(PHP_EOL, array_filter($request->input('address1'))),
             'default_address' => ! $customer->addresses->count(),
-        ]);
+        ];
+
+        $customerAddress = $this->customerAddressRepository->updateOrCreate($address, $address);
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 

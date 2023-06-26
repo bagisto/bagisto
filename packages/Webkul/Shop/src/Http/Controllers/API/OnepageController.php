@@ -56,6 +56,14 @@ class OnepageController extends APIController
             ]);
         }
 
+        if (is_string($data['billing']['address1'])) {
+            $data['billing']['address1'] = [$data['billing']['address1']];
+        }
+
+        if (is_string($data['shipping']['address1'])) {
+            $data['shipping']['address1'] = [$data['shipping']['address1']];
+        }
+
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1'])); 
