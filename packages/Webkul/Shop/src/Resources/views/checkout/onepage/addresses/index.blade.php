@@ -17,9 +17,7 @@
                 @include('shop::checkout.onepage.addresses.shipping')
 
                 <div v-if="! forms.billing.isNew && ! forms.shipping.isNew">
-                    <div 
-                        class="flex justify-end mt-4 mb-4"
-                    >
+                    <div class="flex justify-end mt-4 mb-4">
                         <button
                             class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                             @click="store"
@@ -69,6 +67,8 @@
                     states: [],
 
                     isAddressLoading: true,
+
+                    isCustomer: "{{ auth()->guard('customer')->check() }}",
                 }
             }, 
             
@@ -97,19 +97,29 @@
                     };
                 },
 
-                getCustomerAddresses() {
-                    this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
-                        .then(response => {
-                            this.addresses = response.data.data.map(address => {
-                                return {
-                                    ...address,
-                                    isSaved: true,
-                                };
-                            });
+                resetPaymentAndShippingMethod() {
+                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
 
-                            this.isAddressLoading = false;
-                        })
-                        .catch(function (error) {});
+                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+                },
+
+                getCustomerAddresses() {
+                    if (this.isCustomer) {
+                        this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
+                            .then(response => {
+                                this.addresses = response.data.data.map(address => {
+                                    return {
+                                        ...address,
+                                        isSaved: true,
+                                    };
+                                });
+
+                                this.isAddressLoading = false;
+                            })
+                            .catch((error) => {});
+                    } else {
+                        this.isAddressLoading = false;
+                    }
                 },
 
                 getCountries() {
@@ -133,21 +143,17 @@
 
                     this.forms.billing.isNew = true;
 
-                    this.resetPaymentAndShipping();
+                    this.resetPaymentAndShippingMethod();
                 },
 
                 handleBillingAddressForm() {
                     if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
                         
-                        this.forms.billing.address.address1 = this.forms.billing.address.address1[0];
-
                         this.addresses.push({
                             ...this.forms.billing.address,
                             isSaved: false,
                         });
-                        
-                        this.resetBillingAddressForm();
                     } else if (this.forms.billing.isNew && this.forms.billing.address.isSaved) {
                         this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.billing.address)
                             .then(response => {
@@ -168,21 +174,17 @@
 
                     this.forms.shipping.isNew = true;
 
-                    this.resetPaymentAndShipping();
+                    this.resetPaymentAndShippingMethod();
                 },
 
                 handleShippingAddressForm() {
                     if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
                         this.forms.shipping.isNew = false;
                         
-                        this.forms.shipping.address.address1 = this.forms.shipping.address.address1[0];
-
                         this.addresses.push({
                             ...this.forms.shipping.address,
                             isSaved: false,
                         });
-                        
-                        this.resetShippingAddressForm();
                     } else if (this.forms.shipping.isNew && this.forms.shipping.address.isSaved) {
                         this.$axios.post('{{ route("api.shop.customers.account.addresses.store") }}', this.forms.shipping.address)
                             .then(response => {
@@ -202,6 +204,8 @@
                     this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', {
                             billing: {
                                 ...this.forms.billing.address,
+
+                                use_for_shipping: this.forms.billing.isUsedForShipping,
                             },
 
                             shipping: {
@@ -209,13 +213,23 @@
                             },
                         })
                         .then(response => {
-                            this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
+                            if (response.data.data.paymentMethods) {
+                                this.$parent.$refs.vPaymentMethod.paymentMethods = response.data.data.paymentMethods;
+                                
+                                this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
+    
+                                this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
+                            } else {
+                                this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
 
-                            this.$parent.$refs.vShippingMethod.isShippingLoading = false;
+                                this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
+
+                                this.$parent.$refs.vShippingMethod.isShippingLoading = false;
+                            }
                             
-                            this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
-                            
-                            this.getCustomerAddresses();
+                            if (this.forms.billing.isUsedForShipping) {
+                                this.getCustomerAddresses();
+                            }
                         })
                         .catch(error => {                 
                             console.log(error);
@@ -231,12 +245,6 @@
                     }
 
                     return false;
-                },
-
-                resetPaymentAndShipping() {
-                    this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
-
-                    this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
                 },
             },
         });
