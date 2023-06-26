@@ -52,6 +52,7 @@
                                 <template v-else>
                                     @{{ address.address1.join(', ') }}
                                 </template>
+                                
                                 @{{ address.city }}, 
                                 @{{ address.state }}, @{{ address.country }}, 
                                 @{{ address.postcode }}
