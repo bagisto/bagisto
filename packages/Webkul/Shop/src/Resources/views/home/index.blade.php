@@ -10,7 +10,7 @@
                 href="javascript:void(0);"
                 class="block text-[22px] py-[20px] font-medium text-center bg-[#E8EDFE] font-dmserif"
             >
-                @lang('shop::app.home.offer')
+                @lang('shop::app.home.index.offer')
             </a>
 		</div>
 	</div>
