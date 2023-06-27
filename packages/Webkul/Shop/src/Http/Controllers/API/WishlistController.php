@@ -154,8 +154,7 @@ class WishlistController extends APIController
      * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function destroyAll(): JsonResource
-    {
-        
+    {  
         $success = $this->wishlistRepository->deleteWhere([
             'customer_id'  => auth()->guard('customer')->user()->id,
         ]);
