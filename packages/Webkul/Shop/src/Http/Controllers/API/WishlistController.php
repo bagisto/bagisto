@@ -22,7 +22,7 @@ class WishlistController extends APIController
     }
 
     /**
-     * Displays the listing resources if the customer having items in wishlist.
+     * Displays the listing resources if the customer has items on the wishlist.
      */
     public function index(): JsonResource
     {
@@ -43,7 +43,7 @@ class WishlistController extends APIController
     }
 
     /**
-     * Function to add item to the wishlist.
+     * Function to add items to the wishlist.
      */
     public function store(): JsonResource
     {
@@ -91,7 +91,7 @@ class WishlistController extends APIController
 
 
     /**
-     * Move wishlist item to the cart.
+     * Move the wishlist item to the cart.
      * 
      * @param  int  $id
      */
@@ -134,7 +134,7 @@ class WishlistController extends APIController
     }
 
     /**
-     * Function to remove item to the wishlist.
+     * Function to remove items to the wishlist.
      *
      * @param  int  $id
      */
@@ -149,9 +149,7 @@ class WishlistController extends APIController
     }
 
     /**
-     * Method for remove all items from wishlist
-     * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * Method for removing all items from the wishlist.
      */
     public function destroyAll(): JsonResource
     {  
@@ -171,7 +169,7 @@ class WishlistController extends APIController
     }
 
     /**
-     * Removing inactive wishlist item.
+     * Removing inactive wishlist items.
      *
      * @return int
      */
