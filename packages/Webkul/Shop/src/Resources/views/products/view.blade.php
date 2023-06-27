@@ -17,51 +17,53 @@
     </v-product>
 
     {{-- Information Section --}}
-    <x-shop::tabs position="center">
-        <x-shop::tabs.item
-            class="container mt-[60px] !p-0"
-            :title="trans('shop::app.products.description')"
-            :is-selected="true"
-        >
-            <div class="container mt-[60px] max-1180:px-[20px]">
-                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                    {!! $product->description !!}
-                </p>
-            </div>
-        </x-shop::tabs.item>
+    <div class="mt-[80px]">
+        <x-shop::tabs position="center">
+            <x-shop::tabs.item
+                class="container mt-[60px] !p-0"
+                :title="trans('shop::app.products.description')"
+                :is-selected="true"
+            >
+                <div class="container mt-[60px] max-1180:px-[20px]">
+                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                        {!! $product->description !!}
+                    </p>
+                </div>
+            </x-shop::tabs.item>
 
-        <x-shop::tabs.item
-            class="container mt-[60px] !p-0"
-            :title="trans('shop::app.products.additional-information')"
-            :is-selected="false"
-        >
-            <div class="container mt-[60px] max-1180:px-[20px]">
-                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
-                    @foreach ($customAttributeValues as $customAttributeValue)
-                        <div class="grid">
-                            <p class="text-[16px] text-black">
-                                {{ $customAttributeValue['label'] }}
-                            </p>
-                        </div>
+            <x-shop::tabs.item
+                class="container mt-[60px] !p-0"
+                :title="trans('shop::app.products.additional-information')"
+                :is-selected="false"
+            >
+                <div class="container mt-[60px] max-1180:px-[20px]">
+                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                        @foreach ($customAttributeValues as $customAttributeValue)
+                            <div class="grid">
+                                <p class="text-[16px] text-black">
+                                    {{ $customAttributeValue['label'] }}
+                                </p>
+                            </div>
 
-                        <div class="grid">
-                            <p class="text-[16px] text-[#7D7D7D]">
-                                {{ $customAttributeValue['value']??'-' }}
-                            </p>
-                        </div>
-                    @endforeach
-                </p>
-            </div>
-        </x-shop::tabs.item>
+                            <div class="grid">
+                                <p class="text-[16px] text-[#7D7D7D]">
+                                    {{ $customAttributeValue['value']??'-' }}
+                                </p>
+                            </div>
+                        @endforeach
+                    </p>
+                </div>
+            </x-shop::tabs.item>
 
-        <x-shop::tabs.item
-            class="container mt-[60px] !p-0"
-            :title="trans('shop::app.products.reviews')"
-            :is-selected="false"
-        >
-            @include('shop::products.view.reviews')
-        </x-shop::tabs.item>
-    </x-shop::tabs>
+            <x-shop::tabs.item
+                class="container mt-[60px] !p-0"
+                :title="trans('shop::app.products.reviews')"
+                :is-selected="false"
+            >
+                @include('shop::products.view.reviews')
+            </x-shop::tabs.item>
+        </x-shop::tabs>
+    </div>
 
     {{-- Featured Products --}}
     <x-shop::products.carousel
