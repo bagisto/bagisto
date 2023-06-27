@@ -48,27 +48,29 @@
                             class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto -left-[35px] w-max absolute top-[54px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3]"
                         >
                             <div class="flex aigns gap-x-[70px] justify-between">
-                                <div class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]">
-                                    @foreach ($firstLevelCategory->children as $secondLevelCategory)
-                                        <p class="text-navyBlue font-medium">
-                                            <a href="{{ $secondLevelCategory->url }}">
-                                                {{ $secondLevelCategory->name }}
-                                            </a>
-                                        </p>
+                                @foreach ($firstLevelCategory->children->chunk(2) as $pair)
+                                    <div class="grid grid-cols-[1fr] gap-[20px] content-start w-full flex-auto min-w-max max-w-[150px]">
+                                        @foreach ($pair as $secondLevelCategory)
+                                            <p class="text-navyBlue font-medium">
+                                                <a href="{{ $secondLevelCategory->url }}">
+                                                    {{ $secondLevelCategory->name }}
+                                                </a>
+                                            </p>
 
-                                        @if ($secondLevelCategory->children->isNotEmpty())
-                                            <ul class="grid grid-cols-[1fr] gap-[12px]">
-                                                @foreach ($secondLevelCategory->children as $thirdLevelCategory)
-                                                    <li class="text-[14px] font-medium text-[#7D7D7D]">
-                                                        <a href="{{ $thirdLevelCategory->url }}">
-                                                            {{ $thirdLevelCategory->name }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    @endforeach
-                                </div>
+                                            @if ($secondLevelCategory->children->isNotEmpty())
+                                                <ul class="grid grid-cols-[1fr] gap-[12px]">
+                                                    @foreach ($secondLevelCategory->children as $thirdLevelCategory)
+                                                        <li class="text-[14px] font-medium text-[#7D7D7D]">
+                                                            <a href="{{ $thirdLevelCategory->url }}">
+                                                                {{ $thirdLevelCategory->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     @endif

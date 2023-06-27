@@ -1,12 +1,12 @@
-<flash-item
+<v-flash-item
     v-for='flash in flashes'
     :key='flash.uid'
     :flash="flash"
     @onRemove="remove($event)"
-></flash-item>
+></v-flash-item>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="flash-item-template">
+    <script type="text/x-template" id="v-flash-item-template">
         <div
             class="flex gap-[46px] justify-between px-[20px] py-[12px] rounded-[8px] max-w-[408px]"
             :style="typeStyles[flash.type]['container']"
@@ -27,8 +27,8 @@
     </script>
 
     <script type="module">
-        app.component('flash-item', {
-            template: '#flash-item-template',
+        app.component('v-flash-item', {
+            template: '#v-flash-item-template',
 
             props: ['flash'],
 
