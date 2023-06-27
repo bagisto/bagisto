@@ -48,8 +48,6 @@
 
                 registerGlobalEvents() {
                     this.$emitter.on('add-flash', this.add);
-
-                    this.$emitter.on('remove-flash', this.remove);
                 },
             }
         });
