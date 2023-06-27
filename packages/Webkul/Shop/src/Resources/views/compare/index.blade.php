@@ -178,8 +178,7 @@
                             return;
                         }
                         
-                        this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
-                                '_method': 'DELETE',
+                        this.$axios.delete("{{ route('shop.api.compare.destroy') }}", {
                                 'product_id': productId,
                             })
                             .then(response => {

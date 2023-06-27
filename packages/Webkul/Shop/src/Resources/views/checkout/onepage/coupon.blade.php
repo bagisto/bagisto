@@ -86,7 +86,7 @@
 
             methods: {
                 applyCoupon(params) {
-                    this.$axios.post("{{ route('shop.checkout.cart.coupon.apply') }}", params)
+                    this.$axios.post("{{ route('shop.api.checkout.cart.coupon.apply') }}", params)
                         .then((response) => {
                             alert(response.data.data.message)
                             
@@ -97,7 +97,7 @@
                 },
 
                 destroyCoupon() {
-                    this.$axios.delete("{{ route('shop.checkout.cart.coupon.remove') }}", {
+                    this.$axios.delete("{{ route('shop.api.checkout.cart.coupon.remove') }}", {
                             '_token': "{{ csrf_token() }}"
                         })
                         .then((response) => {

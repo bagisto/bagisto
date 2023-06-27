@@ -10,10 +10,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
      */
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
         Route::get('', 'index')->name('shop.checkout.cart.index');
-
-        Route::post('coupon', 'storeCoupon')->name('shop.checkout.cart.coupon.apply');
-
-        Route::delete('coupon', 'destroyCoupon')->name('shop.checkout.cart.coupon.remove');
     });
 
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {

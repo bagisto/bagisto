@@ -1,21 +1,22 @@
-import { defineConfig } from "vite";
-import dotenv from "dotenv";
-import dotenvExpand from "dotenv-expand";
+import { defineConfig, loadEnv } from "vite";
 import laravel from "laravel-vite-plugin";
 import path from "path";
 
-const config = dotenv.config({ path: "../../../.env" });
-dotenvExpand(config);
-
 export default defineConfig(({ mode }) => {
+    const envDir = "../../../";
+
+    Object.assign(process.env, loadEnv(mode, envDir));
+
     return {
         build: {
             emptyOutDir: true,
         },
 
+        envDir,
+
         server: {
-            host: process.env.SHOP_VITE_HOST || "localhost",
-            port: process.env.SHOP_VITE_PORT || 5173,
+            host: process.env.VITE_SHOP_HOST || "localhost",
+            port: process.env.VITE_SHOP_PORT || 5173,
         },
 
         plugins: [
