@@ -1,4 +1,4 @@
-const Shop = {
+export default {
     install(app) {
         app.config.globalProperties.$shop = {
             /**
@@ -10,18 +10,24 @@ const Shop = {
              * @returns {string} - The formatted price string.
              */
             formatPrice: (price, localeCode = null, currencyCode = null) => {
-                if (! localeCode) {
-                    localeCode = document.querySelector('meta[http-equiv="content-language"]').content ?? 'en';
+                if (!localeCode) {
+                    localeCode =
+                        document.querySelector(
+                            'meta[http-equiv="content-language"]'
+                        ).content ?? "en";
                 }
 
-                if (! currencyCode) {
-                    currencyCode = document.querySelector('meta[name="currency-code"]').content ?? 'USD';
+                if (!currencyCode) {
+                    currencyCode =
+                        document.querySelector('meta[name="currency-code"]')
+                            .content ?? "USD";
                 }
 
-                return new Intl.NumberFormat(localeCode, { style: 'currency', currency: currencyCode }).format(price);
+                return new Intl.NumberFormat(localeCode, {
+                    style: "currency",
+                    currency: currencyCode,
+                }).format(price);
             },
         };
     },
 };
-
-export default Shop;
