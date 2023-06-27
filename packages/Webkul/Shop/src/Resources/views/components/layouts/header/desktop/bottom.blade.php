@@ -36,9 +36,12 @@
                 For active category: `text-sm border-t-0 border-b-[2px] border-l-0 border-r-0 border-navyBlue`.
             --}}
             @foreach ($categories as $firstLevelCategory)
-                <div class="pb-[21px] px-[15px] relative group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue">
+                <div class="relative group border-b-[4px] border-transparent hover:border-b-[4px] hover:border-navyBlue">
                     <span>
-                        <a href="{{ $firstLevelCategory->url }}">
+                        <a
+                            href="{{ $firstLevelCategory->url }}"
+                            class="pb-[21px] px-[15px] inline-block"
+                        >
                             {{ $firstLevelCategory->name }}
                         </a>
                     </span>
