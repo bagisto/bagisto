@@ -149,6 +149,29 @@ class WishlistController extends APIController
     }
 
     /**
+     * Method for remove all items from wishlist
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function destroyAll(): JsonResource
+    {
+        
+        $success = $this->wishlistRepository->deleteWhere([
+            'customer_id'  => auth()->guard('customer')->user()->id,
+        ]);
+
+       if (! $success) {
+            return new JsonResource([
+                'message'  => trans('shop::app.customers.account.wishlist.remove-fail'),
+            ]);
+        }
+
+        return new JsonResource([
+            'message'  => trans('shop::app.customers.account.wishlist.removed'),
+        ]);
+    }
+
+    /**
      * Removing inactive wishlist item.
      *
      * @return int
