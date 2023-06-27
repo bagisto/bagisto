@@ -42,7 +42,7 @@
                             </p>
 
                             <p class="text-[18px] font-medium mt-[10px] max-sm:text-[14px] max-sm:font-normal">
-                                @{{ item.formatted_total }} X @{{ item.quantity }}
+                                @{{ item.formatted_price }} X @{{ item.quantity }}
                             </p>
                         </div>
                     </div>
@@ -122,15 +122,19 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end">
+                <div
+                    class="flex justify-end"
+                    v-if="isPlaceOrderVisible && selectedPaymentMethod.method != 'paypal_smart_button'"
+                >
                     <button
                         class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
-                        v-if="isPlaceOrderVisible"
                         @click="placeOrder"
                     >
                         @lang('Place order')    
                     </button>
                 </div>
+
+                <paypal-smart-button :selected-payment-method="selectedPaymentMethod"></paypal-smart-button>
             </div>
         </template>
     </script>
@@ -144,6 +148,8 @@
             data() {
                 return {
                     isPlaceOrderVisible: false,
+
+                    selectedPaymentMethod: "",
                 }
             },
 

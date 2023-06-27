@@ -73,6 +73,8 @@
                             'payment': selectedPaymentMethod
                         })
                         .then(response => {
+                            this.$parent.$refs.vCartSummary.selectedPaymentMethod = selectedPaymentMethod;
+
                             if (response.data.cart) {
                                 this.$parent.$refs.vCartSummary.isPlaceOrderVisible = true;
                             }

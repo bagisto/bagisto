@@ -22,12 +22,6 @@
 
             {{-- Payment method --}}
             <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
-
-            {{--Bottom Buttons --}}
-            <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px] mt-[30px]">
-                <div class="w-[40%] h-[24px] shimmer"></div>
-                <div class="w-[30%] h-[46px] shimmer rounded-[18px] "></div>
-            </div>
         </div>
     
         <x-shop::shimmer.checkout.onepage.cart-summary></x-shop::shimmer.checkout.onepage.cart-summary>
