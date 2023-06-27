@@ -14,10 +14,21 @@
                             @lang('shop::app.customers.account.wishlist.title')
                         </p>
                     </div>
+                </div>
 
+                <div class="flex justify-between items-center">
                     <h2 class="text-[26px] font-medium">
                         @lang('shop::app.customers.account.wishlist.page-title')
                     </h2>
+
+                    <div
+                        class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] mr-[60px] cursor-pointer"
+                        @click="removeAll"
+                        v-if="wishlist.length"
+                    >
+                        <span class="icon-bin text-[24px]"></span>
+                        @lang('shop::app.customers.account.wishlist.delete-all')
+                    </div>
                 </div>
 
                 <template v-if="isLoading">
@@ -73,7 +84,7 @@
 
                                 <p 
                                     class="text-[18px]" 
-                                    v-html="item.item.prices.final.formatted_price"
+                                    v-html="item.item.min_price" 
                                 >
                                 </p>
 
@@ -86,7 +97,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center"
+                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center whitespace-nowrap"
                                     @click="moveToCart(item.id)"
                                 >
                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
@@ -150,11 +161,20 @@
                     },
 
                     remove(id) {
-                        this.$axios.post(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${id}`, {
-                                '_method': 'DELETE',
+                        this.$axios.delete(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${id}`, {
                             })
                             .then(response => {
                                 this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+                            })
+                            .catch(error => {});
+                    },
+
+                    removeAll() {
+                        this.$axios.delete("{{ route('shop.api.customers.account.wishlist.destroy_all') }}", {
+                                
+                            })
+                            .then(response => {
+                                this.wishlist = [];
                             })
                             .catch(error => {});
                     },

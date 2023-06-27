@@ -90,6 +90,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
             Route::post('{id}/move-to-cart', 'moveToCart')->name('shop.api.customers.account.wishlist.move_to_cart');
 
+            Route::delete('all', 'destroyAll')->name('shop.api.customers.account.wishlist.destroy_all');
+            
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
     });

@@ -35,6 +35,7 @@ class ProductResource extends JsonResource
             'base_image'  => product_image()->getProductBaseImage($this),
             'images'      => product_image()->getGalleryImages($this),
             'avg_ratings' => round($reviewHelper->getAverageRating($this)),
+            'min_price'   => core()->formatPrice($productTypeInstance->getMinimalPrice()),
         ];
     }
 }

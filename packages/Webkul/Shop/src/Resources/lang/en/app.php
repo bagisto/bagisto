@@ -228,6 +228,7 @@ return [
                 'title'              => 'Wishlist',
                 'color'              => 'Color',
                 'remove'             => 'Remove',
+                'delete-all'         => 'Delete All',
                 'empty'              => 'No products were added to the wishlist page.',
                 'move-to-cart'       => 'Move To Cart',
                 'profile'            => 'Profile',
