@@ -16,7 +16,7 @@ class ReviewController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
-        protected ProductReviewAttachmentRepository $ProductReviewAttachmentRepository
+        protected ProductReviewAttachmentRepository $productReviewAttachmentRepository
     ) {
         parent::__construct();
     }

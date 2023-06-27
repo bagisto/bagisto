@@ -18,7 +18,7 @@ class ReviewController extends APIController
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
-        protected ProductReviewAttachmentRepository $ProductReviewAttachmentRepository
+        protected ProductReviewAttachmentRepository $productReviewAttachmentRepository
     ) {
     }
 
@@ -72,7 +72,7 @@ class ReviewController extends APIController
 
         $review = $this->productReviewRepository->create($data);
 
-        $this->ProductReviewAttachmentRepository->uploadImages($data, $review);
+        $this->productReviewAttachmentRepository->uploadImages($data, $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.submit-success'),
