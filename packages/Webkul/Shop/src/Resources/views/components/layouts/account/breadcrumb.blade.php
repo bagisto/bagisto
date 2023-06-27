@@ -7,7 +7,7 @@
         </p>
 
         <p
-            class="text-[#7D7D7D] text-[12px] flex items-center gap-x-[16px] font-medium  after:content[' '] after:bg-[position:-7px_-41px] after:bs-main-sprite after:w-[9px] after:h-[20px] after:last:hidden"
+            class="text-[#7D7D7D] text-[12px] flex items-center gap-x-[16px] font-medium after:content[' '] after:bg-[position:-7px_-41px] after:bs-main-sprite after:w-[9px] after:h-[20px] after:last:hidden"
         >
             My Account
         </p>
