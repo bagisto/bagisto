@@ -26,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('product_review_images', function (Blueprint $table) {
-            $table->text('type')->nullable()->change();
+            $table->string('type')->nullable()->change();
         });
 
         Schema::rename('product_review_attachments', 'product_review_images');
