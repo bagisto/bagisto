@@ -15,7 +15,7 @@
                         class="border border-[#e5e5e5] max-w-[414px] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
                         v-for="(address, index) in addresses"
                     >
-                        <v-field
+                        <input
                             type="radio"
                             name="billing[address_id]"
                             :id="'billing_address_id_' + address.id"
@@ -24,8 +24,8 @@
                             v-model="forms.billing.address.address_id"
                             class="hidden peer"
                             @change="resetPaymentAndShippingMethod"
+                            :checked="address.isDefault"
                         >
-                        </v-field>
 
                         <label 
                             class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"

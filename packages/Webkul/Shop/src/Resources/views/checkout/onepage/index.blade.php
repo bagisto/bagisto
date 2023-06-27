@@ -3,6 +3,32 @@
     :has-feature="false"
     :has-footer="false"
 >
+    <div class="bs-dekstop-menu flex flex-wrap max-lg:hidden">
+        <div
+            class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 pb-[5px] pt-[17px]"
+        >
+            <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
+                <a
+                    href="{{ route('shop.home.index') }}" 
+                    class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block mb-[16px]"
+                >
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px]gap-[15px] max-lg:mb-[15px]">
+        <div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px] pt-[25px] gap-[15px] max-lg:mb-[15px]">
+            <div class="w-full flex justify-between items-center px-[6px]">
+                <div class="flex  items-center gap-x-[5px]">
+                    <span class="icon-hamburger text-[24px]"></span>
+        
+                    <a herf="" class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Checkout component --}}
     {{-- Todo (@suraj-webkul): need change translation of this page.  --}}
     {{-- @translations --}}
@@ -35,22 +61,6 @@
 
                         @include('shop::checkout.onepage.payment')
 
-                        <div class="flex justify-between items-center flex-wrap gap-[15px] mb-[60px] max-sm:mb-[10px]">
-                            <a 
-                                href="{{ route('shop.checkout.cart.index') }}"
-                                class="flex gap-x-[6px] items-center"
-                            >
-                                <span class="icon-arrow-left text-[24px] max-sm:text-[14px]"></span>
-                                @lang('Return to cart')
-                            </a>
-            
-                            <a 
-                                href="{{ route('shop.home.index')}}"
-                                class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
-                            >
-                                @lang('Return To Shop')
-                            </a>
-                        </div>
                     </div>
                     
                     @include('shop::checkout.onepage.summary')

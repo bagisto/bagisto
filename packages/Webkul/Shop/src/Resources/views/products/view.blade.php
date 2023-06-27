@@ -123,7 +123,7 @@
 
                                 <div class="flex gap-[15px] items-center">
                                     <p class="text-[#7D7D7D] text-[14px]">
-                                        ({{ $product->reviews->count() }} reviews)
+                                        ({{ $product->approvedReviews->count() }} @lang('reviews'))
                                     </p>
                                 </div>
                             </div>

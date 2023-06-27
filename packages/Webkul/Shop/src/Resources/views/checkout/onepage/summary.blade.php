@@ -17,7 +17,6 @@
 
         <template v-else>
             <div class="max-w-full w-[442px] pl-[30px] h-max sticky top-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
-
                 <h2 class="text-[26px] font-medium max-sm:text-[20px]">
                     @lang('Cart Summary')
                 </h2>
@@ -42,7 +41,7 @@
                             </p>
 
                             <p class="text-[18px] font-medium mt-[10px] max-sm:text-[14px] max-sm:font-normal">
-                                @{{ item.formatted_total }} X @{{ item.quantity }}
+                                @{{ item.formatted_price }} X @{{ item.quantity }}
                             </p>
                         </div>
                     </div>
@@ -122,15 +121,23 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end">
-                    <button
-                        class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
-                        v-if="isPlaceOrderVisible"
-                        @click="placeOrder"
+                <template v-if="canPlaceOrder">
+                    <div v-if="selectedPaymentMethod?.method == 'paypal_smart_button'">
+                        <v-paypal-smart-button></v-paypal-smart-button>
+                    </div>
+
+                    <div
+                        class="flex justify-end"
+                        v-else
                     >
-                        @lang('Place order')    
-                    </button>
-                </div>
+                        <button
+                            class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            @click="placeOrder"
+                        >
+                            @lang('Place order')    
+                        </button>
+                    </div>
+                </template>
             </div>
         </template>
     </script>
@@ -143,25 +150,25 @@
 
             data() {
                 return {
-                    isPlaceOrderVisible: false,
+                    canPlaceOrder: false,
+
+                    selectedPaymentMethod: null,
                 }
             },
 
             methods: {
                 placeOrder() {
-                    this.$axios.post("{{ route('shop.checkout.onepage.orders.store') }}", {
-                            '_token': "{{ csrf_token() }}"
-                        })
+                    this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
                         .then(response => {
                             if (response.data.data.redirect) {
                                 window.location.href = response.data.data.redirect_url;
                             } else {
-                                window.location.href = "{{ route('shop.checkout.onepage.success') }}";
+                                window.location.href = '{{ route('shop.checkout.onepage.success') }}';
                             }
                         })
-                        .catch(error => console.log(error))
-                }
-            }
-        })
+                        .catch(error => console.log(error));
+                },
+            },
+        });
     </script>
 @endPushOnce

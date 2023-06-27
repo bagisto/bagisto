@@ -7,7 +7,7 @@
     <div>
         <div class="flex flex-wrap gap-[29px] mt-[30px]">
             <div class="relative max-sm:max-w-full max-sm:flex-auto">
-                <input type="radio" id="paypal" value="" name="payment-method" class="hidden peer">
+                <input type="radio" value="" name="payment-method" class="hidden peer">
                 <span class="block w-[24px] h-[24px] shimmer rounded-full absolute right-[20px] top-[20px]"></span>
                 <label for="paypal"
                     class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full ">
@@ -18,7 +18,7 @@
             </div>
 
             <div class="relative max-sm:max-w-full max-sm:flex-auto">
-                <input type="radio" id="paypal" value="" name="payment-method" class="hidden peer">
+                <input type="radio" value="" name="payment-method" class="hidden peer">
                 <span class="block w-[24px] h-[24px] shimmer rounded-full absolute right-[20px] top-[20px]"></span>
                 <label for="paypal"
                     class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full ">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="relative max-sm:max-w-full max-sm:flex-auto">
-                <input type="radio" id="paypal" value="" name="payment-method" class="hidden peer">
+                <input type="radio" value="" name="payment-method" class="hidden peer">
                 <span class="block w-[24px] h-[24px] shimmer rounded-full absolute right-[20px] top-[20px]"></span>
                 <label for="paypal"
                     class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full ">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="relative max-sm:max-w-full max-sm:flex-auto">
-                <input type="radio" id="paypal" value="" name="payment-method" class="hidden peer">
+                <input type="radio" value="" name="payment-method" class="hidden peer">
                 <span class="block w-[24px] h-[24px] shimmer rounded-full absolute right-[20px] top-[20px]"></span>
                 <label for="paypal"
                     class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full ">

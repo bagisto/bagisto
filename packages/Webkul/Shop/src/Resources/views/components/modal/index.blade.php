@@ -39,27 +39,25 @@
 
                     <div class="fixed inset-0 z-10 overflow-y-auto">
                         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                                    <div>
+                            <div class="w-full bg-[#F5F5F5] max-w-[595px] z-[999] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                                <div>
+                                    <div class="flex justify-between items-center gap-[20px] p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
                                         <slot name="header">
                                             Default Header
                                         </slot>
-                                    </div>
 
-                                    <div>
-                                        <slot name="content">
-                                            Default Content
-                                        </slot>
-                                    </div>
-
-                                    <div class="absolute top-5 right-5">
                                         <span
                                             class="icon-cancel text-[30px] cursor-pointer"
                                             @click="toggle"
                                         >
                                         </span>
                                     </div>
+                                </div>
+
+                                <div>
+                                    <slot name="content">
+                                        Default Content
+                                    </slot>
                                 </div>
                             </div>
                         </div>

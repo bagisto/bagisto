@@ -107,10 +107,17 @@
                     if (this.isCustomer) {
                         this.$axios.get("{{ route('api.shop.customers.account.addresses.index') }}")
                             .then(response => {
-                                this.addresses = response.data.data.map(address => {
+                                this.addresses = response.data.data.map((address, index) => {
+                                    let isDefault = address.default_address ? address.default_address : index === 0;
+
+                                    if (isDefault) {
+                                        this.forms.billing.address.address_id = address.id;
+                                    }
+
                                     return {
                                         ...address,
                                         isSaved: true,
+                                        isDefault: isDefault
                                     };
                                 });
 
@@ -218,13 +225,13 @@
                                 
                                 this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
     
-                                this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
+                                this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
                             } else {
                                 this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
 
                                 this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
 
-                                this.$parent.$refs.vShippingMethod.isShippingLoading = false;
+                                this.$parent.$refs.vShippingMethod.isShippingMethodLoading = false;
                             }
                             
                             if (this.forms.billing.isUsedForShipping) {
