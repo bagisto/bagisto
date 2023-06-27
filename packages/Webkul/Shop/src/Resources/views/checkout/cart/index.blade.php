@@ -179,7 +179,7 @@
                                         class="text-[16px] font-medium cursor-pointer" 
                                         v-if="cart.discount_amount == 0"
                                     >
-                                        <x-shop::modal ref="coupon_modal">
+                                        <x-shop::modal ref="couponModal">
                                             <x-slot:toggle>
                                                 <span class="text-[#0A49A7]">
                                                     @lang('shop::app.checkout.cart.coupon.apply')
@@ -330,7 +330,7 @@
                     applyCoupon(params) {
                         this.$axios.post('{{ route('shop.api.checkout.cart.coupon.apply') }}', params)
                             .then(response => {
-                                this.$refs.coupon_modal.toggle;
+                                this.$refs.couponModal.toggle;
 
                                 alert(response.data.message);
 
