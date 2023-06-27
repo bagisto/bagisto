@@ -9,7 +9,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-shipping-method-template">
         <div class="mt-[30px]">
-            <template v-if="! isShowShippingMethod && isShippingLoading">
+            <template v-if="! isShowShippingMethod && isShippingMethodLoading">
                 <x-shop::shimmer.checkout.onepage.shipping-method ></x-shop::shimmer.checkout.onepage.shipping-method>
             </template>
 
@@ -34,7 +34,7 @@
                                         :id="rate.method"
                                         :value="rate.method"
                                         class="hidden peer"
-                                        @change="save(rate.method)"
+                                        @change="store(rate.method)"
                                     >
 
                                     <label 
@@ -74,17 +74,17 @@
 
                     isShowShippingMethod: false,
 
-                    isShippingLoading: false,
+                    isShippingMethodLoading: false,
                 }
             },
 
             methods: {
-                save(selectedShippingMethod) {
-                    this.$parent.$refs.vCartSummary.isPlaceOrderVisible = false;
+                store(selectedShippingMethod) {
+                    this.$parent.$refs.vCartSummary.canPlaceOrder = false;
 
                     this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
 
-                    this.$parent.$refs.vPaymentMethod.isPaymentLoading = true;
+                    this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
 
                     this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
                             shipping_method: selectedShippingMethod,
@@ -96,12 +96,11 @@
                                 
                             this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
 
-                            this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
+                            this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
                         })
-                        .catch(error => {})
+                        .catch(error => {});
                 },
-            }
-        })
-
+            },
+        });
     </script>
 @endPushOnce

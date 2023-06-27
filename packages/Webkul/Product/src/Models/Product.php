@@ -191,7 +191,15 @@ class Product extends Model implements ProductContract
      */
     public function reviews(): HasMany
     {
-        return $this->hasMany(ProductReviewProxy::modelClass())->where('status', 'approved');
+        return $this->hasMany(ProductReviewProxy::modelClass());
+    }
+
+    /**
+     * Get the approved product reviews.
+     */
+    public function approvedReviews(): HasMany
+    {
+        return $this->reviews()->where('status', 'approved');
     }
 
     /**

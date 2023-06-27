@@ -225,13 +225,13 @@
                                 
                                 this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = true;
     
-                                this.$parent.$refs.vPaymentMethod.isPaymentLoading = false;
+                                this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = false;
                             } else {
                                 this.$parent.$refs.vShippingMethod.shippingMethods = response.data.data.shippingMethods;
 
                                 this.$parent.$refs.vShippingMethod.isShowShippingMethod = true;
 
-                                this.$parent.$refs.vShippingMethod.isShippingLoading = false;
+                                this.$parent.$refs.vShippingMethod.isShippingMethodLoading = false;
                             }
                             
                             if (this.forms.billing.isUsedForShipping) {

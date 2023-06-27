@@ -177,8 +177,6 @@
                  */
                 this.$emitter.on('test-cart', (cart) => {
                     console.log(cart);
-
-                    alert('its a testing global event...');
                 });
 
                 /**
