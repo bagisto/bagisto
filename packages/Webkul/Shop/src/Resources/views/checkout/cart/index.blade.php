@@ -4,20 +4,8 @@
 >
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
-            <!-- Breadcrumb -->
-            <div class="flex justify-start mt-[30px] max-lg:hidden">
-                <div class="flex gap-x-[14px] items-center">
-                    <p class="flex items-center gap-x-[14px] text-[16px] font-medium">
-                        @lang('shop::app.checkout.cart.home') 
 
-                        <span class="icon-arrow-right text-[24px]"></span>
-                    </p>
-
-                    <p class="text-[#7D7D7D] text-[12px] flex items-center gap-x-[16px] font-medium  after:content[' '] after:bg-[position:-7px_-41px] after:bs-main-sprite after:w-[9px] after:h-[20px] after:last:hidden">
-                        @lang('shop::app.checkout.cart.cart-page')
-                    </p>
-                </div>
-            </div>
+            <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
             <v-cart>
                 <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
@@ -191,7 +179,7 @@
                                         class="text-[16px] font-medium cursor-pointer" 
                                         v-if="cart.discount_amount == 0"
                                     >
-                                        <x-shop::modal ref="modal">
+                                        <x-shop::modal ref="coupon_modal">
                                             <x-slot:toggle>
                                                 <span class="text-[#0A49A7]">
                                                     @lang('shop::app.checkout.cart.coupon.apply')
@@ -342,8 +330,10 @@
                     applyCoupon(params) {
                         this.$axios.post('{{ route('shop.api.checkout.cart.coupon.apply') }}', params)
                             .then(response => {
-                                this.$refs.modal.toggle;
+                                this.$refs.coupon_modal.toggle;
+
                                 alert(response.data.message);
+
                                 this.cart = response.data.data;
                             })
                             .catch(error => {
