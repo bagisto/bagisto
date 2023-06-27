@@ -29,20 +29,28 @@
                         this.flashes.push({'type': '{{ $key }}', 'message': "{{ session($key) }}", 'uid':  this.uid++});
                     @endif
                 @endforeach
+
+                this.registerGlobalEvents();
             },
 
             methods: {
                 add(flash) {
                     flash.uid = this.uid++;
 
-                    this.flashes.push(flash)
+                    this.flashes.push(flash);
                 },
 
                 remove(flash) {
-                    let index = this.flashes.indexOf(flash)
+                    let index = this.flashes.indexOf(flash);
 
-                    this.flashes.splice(index, 1)
-                }
+                    this.flashes.splice(index, 1);
+                },
+
+                registerGlobalEvents() {
+                    this.$emitter.on('add-flash', this.add);
+
+                    this.$emitter.on('remove-flash', this.remove);
+                },
             }
         });
     </script>

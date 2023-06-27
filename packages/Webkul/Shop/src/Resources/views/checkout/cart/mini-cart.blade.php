@@ -185,6 +185,8 @@
                  * Calling.
                  */
                 this.$emitter.emit('test-cart', { cart: 1 });
+
+                this.$emitter.emit('add-flash', { type: 'success', message: 'This is a test component.' });
            },
 
            methods: {
