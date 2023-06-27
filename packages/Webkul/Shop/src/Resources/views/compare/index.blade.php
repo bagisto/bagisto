@@ -2,7 +2,7 @@
     <!-- Breadcrumb -->
     <div class="flex justify-center mt-[20px] max-lg:hidden">
 		<div class="flex gap-x-[10px] items-center">
-            {{ Breadcrumbs::render('compare') }}
+            <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
 	</div>
 
