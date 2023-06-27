@@ -4,7 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductReviewImageRepository;
+use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Resources\ProductReviewResource;
 
@@ -18,7 +18,7 @@ class ReviewController extends APIController
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
-        protected ProductReviewImageRepository $productReviewImageRepository
+        protected ProductReviewAttachmentRepository $productReviewAttachmentRepository
     ) {
     }
 
@@ -72,7 +72,7 @@ class ReviewController extends APIController
 
         $review = $this->productReviewRepository->create($data);
 
-        $this->productReviewImageRepository->uploadImages($data, $review);
+        $this->productReviewAttachmentRepository->uploadImages($data, $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.submit-success'),
