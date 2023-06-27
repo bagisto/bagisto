@@ -3,7 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Product\Repositories\ProductReviewImageRepository;
+use Webkul\Product\Repositories\ProductReviewAttachmentRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
@@ -16,7 +16,7 @@ class ReviewController extends Controller
     public function __construct(
         protected ProductRepository $productRepository,
         protected ProductReviewRepository $productReviewRepository,
-        protected ProductReviewImageRepository $productReviewImageRepository
+        protected ProductReviewAttachmentRepository $ProductReviewAttachmentRepository
     ) {
         parent::__construct();
     }

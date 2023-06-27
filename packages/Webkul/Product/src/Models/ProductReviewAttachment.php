@@ -4,9 +4,9 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Product\Contracts\ProductReviewImage as ProductReviewImageContract;
+use Webkul\Product\Contracts\ProductReviewAttachment as ProductReviewAttachmentContract;
 
-class ProductReviewImage extends Model implements ProductReviewImageContract
+class ProductReviewAttachment extends Model implements ProductReviewAttachmentContract
 {
     public $timestamps = false;
 

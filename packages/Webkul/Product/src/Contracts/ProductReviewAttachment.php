@@ -2,6 +2,6 @@
 
 namespace Webkul\Product\Contracts;
 
-interface ProductReviewImage
+interface ProductReviewAttachment
 {
 }

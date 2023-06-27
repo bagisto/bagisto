@@ -5,7 +5,7 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
 
-class ProductReviewImageRepository extends Repository
+class ProductReviewAttachmentRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -14,7 +14,7 @@ class ProductReviewImageRepository extends Repository
      */
     function model(): string
     {
-        return 'Webkul\Product\Contracts\ProductReviewImage';
+        return 'Webkul\Product\Contracts\ProductReviewAttachment';
     }
 
     /**
