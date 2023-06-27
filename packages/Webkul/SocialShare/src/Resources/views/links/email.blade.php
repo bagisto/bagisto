@@ -20,8 +20,8 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('email-share', {
+    <script type="module">
+        app.component('email-share', {
             template: '#email-share-link'
         });
     </script>

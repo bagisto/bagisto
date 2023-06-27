@@ -23,8 +23,8 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('linkedin-share', {
+    <script type="module">
+        app.component('linkedin-share', {
             template: '#linkedin-share-link',
 
             data: function () {

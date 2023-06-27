@@ -24,8 +24,8 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('pinterest-share', {
+    <script type="module">
+        app.component('pinterest-share', {
             template: '#pinterest-share-link',
 
             data: function () {

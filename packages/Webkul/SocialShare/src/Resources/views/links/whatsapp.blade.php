@@ -13,7 +13,7 @@
         <li 
             class="bb-social-share__item bb-social--whatsapp" 
             v-if="isMobile"
-        >    
+        >
             <a 
                 :href="shareUrl" 
                 data-action="share/whatsapp/share" 
@@ -24,8 +24,8 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('whatsapp-share', {
+    <script type="module">
+        app.component('whatsapp-share', {
             template: '#whatsapp-share-link',
 
             data: function () {

@@ -19,8 +19,8 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('twitter-share', {
+    <script type="module">
+        app.component('twitter-share', {
             template: '#twitter-share-link',
 
             data: function () {

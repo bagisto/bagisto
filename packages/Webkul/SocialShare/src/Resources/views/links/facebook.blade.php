@@ -10,16 +10,16 @@
     <script type="text/x-template" id="facebook-share-link">
         <li class="bb-social-share__item bb-social--facebook">
             <a 
-                href="#" 
+                href="#"
                 @click="openSharePopup"
             >
-                @include('social_share::icons.facebook')
+                @include('socialshare::icons.facebook')
             </a>
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('facebook-share', {
+    <script type="module">
+        app.component('facebook-share', {
             template: '#facebook-share-link',
 
             data: function () {
