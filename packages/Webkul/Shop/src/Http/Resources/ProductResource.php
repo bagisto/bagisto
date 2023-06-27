@@ -17,7 +17,7 @@ class ProductResource extends JsonResource
         $productTypeInstance = $this->getTypeInstance();
 
         $reviewHelper = app('Webkul\Product\Helpers\Review');
-        
+
         return [
             'id'          => $this->id,
             'name'        => $this->name,

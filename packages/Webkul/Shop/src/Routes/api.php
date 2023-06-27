@@ -5,11 +5,10 @@ use Webkul\Shop\Http\Controllers\API\AddressController;
 use Webkul\Shop\Http\Controllers\API\CartController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
 use Webkul\Shop\Http\Controllers\API\CompareController;
+use Webkul\Shop\Http\Controllers\API\OnepageController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
-use Webkul\Shop\Http\Controllers\API\OnepageController;
-
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
@@ -47,6 +46,10 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::put('', 'update')->name('shop.api.checkout.cart.update');
 
         Route::delete('', 'destroy')->name('shop.api.checkout.cart.destroy');
+
+        Route::post('coupon', 'storeCoupon')->name('shop.api.checkout.cart.coupon.apply');
+
+        Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
     });
 
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
@@ -58,18 +61,18 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::delete('all', 'destroyAll')->name('shop.api.compare.destroy_all');
     });
-    
+
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {
         Route::get('summary', 'summary')->name('shop.checkout.onepage.summary');
-    
+
         Route::post('addresses', 'storeAddress')->name('shop.checkout.onepage.addresses.store');
-    
+
         Route::post('shipping-methods', 'storeShippingMethod')->name('shop.checkout.onepage.shipping_methods.store');
-    
+
         Route::post('payment-methods', 'storePaymentMethod')->name('shop.checkout.onepage.payment_methods.store');
 
         Route::post('orders', 'storeOrder')->name('shop.checkout.onepage.orders.store');
-    
+
         Route::post('check-minimum-order', 'checkMinimumOrder')->name('shop.checkout.onepage.check_minimum_order');
     });
 
@@ -79,7 +82,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
             Route::post('', 'store')->name('api.shop.customers.account.addresses.store');
         });
-        
+
         Route::controller(WishlistController::class)->prefix('wishlist')->group(function () {
             Route::get('', 'index')->name('shop.api.customers.account.wishlist.index');
 

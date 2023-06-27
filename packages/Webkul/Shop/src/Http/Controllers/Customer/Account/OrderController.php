@@ -3,9 +3,9 @@
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Webkul\Core\Traits\PDFHandler;
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Shop\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -14,8 +14,6 @@ class OrderController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
