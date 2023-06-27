@@ -1,7 +1,7 @@
-<flash-group ref='flashes'></flash-group>
+<v-flash-group ref='flashes'></v-flash-group>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="flash-group-template">
+    <script type="text/x-template" id="v-flash-group-template">
         <transition-group
             tag='div'
             name="flash-group"
@@ -12,8 +12,8 @@
     </script>
 
     <script type="module">
-        app.component('flash-group', {
-            template: '#flash-group-template',
+        app.component('v-flash-group', {
+            template: '#v-flash-group-template',
 
             data() {
                 return {
