@@ -46,7 +46,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::put('', 'update')->name('shop.api.checkout.cart.update');
 
         Route::delete('', 'destroy')->name('shop.api.checkout.cart.destroy');
-        approved
+
         Route::post('coupon', 'storeCoupon')->name('shop.api.checkout.cart.coupon.apply');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
