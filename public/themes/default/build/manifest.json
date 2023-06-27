@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-6f99a3b8.css",
+    "file": "assets/app-ff6d6399.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -8,49 +8,13 @@
     "file": "assets/velicon-b6cad332.woff",
     "src": "src/Resources/assets/fonts/velicon.woff"
   },
-  "src/Resources/assets/images/apple-pay.svg": {
-    "file": "assets/apple-pay-0d12c79a.svg",
-    "src": "src/Resources/assets/images/apple-pay.svg"
-  },
-  "src/Resources/assets/images/bag-item.png": {
-    "file": "assets/bag-item-22163d97.png",
-    "src": "src/Resources/assets/images/bag-item.png"
-  },
   "src/Resources/assets/images/bs-main-sprite.png": {
     "file": "assets/bs-main-sprite-52e1a41b.png",
     "src": "src/Resources/assets/images/bs-main-sprite.png"
   },
-  "src/Resources/assets/images/card.svg": {
-    "file": "assets/card-ac04af6a.svg",
-    "src": "src/Resources/assets/images/card.svg"
-  },
-  "src/Resources/assets/images/cash.svg": {
-    "file": "assets/cash-baf15f8f.svg",
-    "src": "src/Resources/assets/images/cash.svg"
-  },
-  "src/Resources/assets/images/collection-bottom.jpg": {
-    "file": "assets/collection-bottom-38ca451e.jpg",
-    "src": "src/Resources/assets/images/collection-bottom.jpg"
-  },
   "src/Resources/assets/images/empty-dwn-product.png": {
     "file": "assets/empty-dwn-product-3c9202e1.png",
     "src": "src/Resources/assets/images/empty-dwn-product.png"
-  },
-  "src/Resources/assets/images/fitness.png": {
-    "file": "assets/fitness-75787ebc.png",
-    "src": "src/Resources/assets/images/fitness.png"
-  },
-  "src/Resources/assets/images/glasses.png": {
-    "file": "assets/glasses-9d12aa66.png",
-    "src": "src/Resources/assets/images/glasses.png"
-  },
-  "src/Resources/assets/images/graham-mans-slide.png": {
-    "file": "assets/graham-mans-slide-9a287c30.png",
-    "src": "src/Resources/assets/images/graham-mans-slide.png"
-  },
-  "src/Resources/assets/images/graham-mans.png": {
-    "file": "assets/graham-mans-487e6881.png",
-    "src": "src/Resources/assets/images/graham-mans.png"
   },
   "src/Resources/assets/images/hero-image.jpg": {
     "file": "assets/hero-image-feee3420.jpg",
@@ -58,71 +22,19 @@
   },
   "src/Resources/assets/images/hero-image.webp": {
     "file": "assets/hero-image-3170dce6.webp",
-    "src": "src/Resources/assets/images/webp/hero-image.webp"
-  },
-  "src/Resources/assets/images/inline-collection.jpg": {
-    "file": "assets/inline-collection-e2b1cf92.jpg",
-    "src": "src/Resources/assets/images/inline-collection.jpg"
-  },
-  "src/Resources/assets/images/kids-1.jpg": {
-    "file": "assets/kids-1-2e926a43.jpg",
-    "src": "src/Resources/assets/images/kids-1.jpg"
-  },
-  "src/Resources/assets/images/kids-2.jpg": {
-    "file": "assets/kids-2-41f6642c.jpg",
-    "src": "src/Resources/assets/images/kids-2.jpg"
-  },
-  "src/Resources/assets/images/kids-3.jpg": {
-    "file": "assets/kids-3-4eacd11f.jpg",
-    "src": "src/Resources/assets/images/kids-3.jpg"
-  },
-  "src/Resources/assets/images/kids-4.jpg": {
-    "file": "assets/kids-4-309d5aba.jpg",
-    "src": "src/Resources/assets/images/kids-4.jpg"
-  },
-  "src/Resources/assets/images/kids.png": {
-    "file": "assets/kids-506542fb.png",
-    "src": "src/Resources/assets/images/kids.png"
+    "src": "src/Resources/assets/images/hero-image.webp"
   },
   "src/Resources/assets/images/large-product-placeholder.png": {
     "file": "assets/large-product-placeholder-b4cf34bf.png",
     "src": "src/Resources/assets/images/large-product-placeholder.png"
   },
-  "src/Resources/assets/images/leather-bag.png": {
-    "file": "assets/leather-bag-f158141b.png",
-    "src": "src/Resources/assets/images/leather-bag.png"
-  },
   "src/Resources/assets/images/medium-product-placeholder.png": {
     "file": "assets/medium-product-placeholder-e6cf535d.png",
     "src": "src/Resources/assets/images/medium-product-placeholder.png"
   },
-  "src/Resources/assets/images/mens-collections.jpg": {
-    "file": "assets/mens-collections-9e0579ae.jpg",
-    "src": "src/Resources/assets/images/mens-collections.jpg"
-  },
-  "src/Resources/assets/images/mens.png": {
-    "file": "assets/mens-12c742e7.png",
-    "src": "src/Resources/assets/images/mens.png"
-  },
-  "src/Resources/assets/images/mini-cart-img.png": {
-    "file": "assets/mini-cart-img-a078ffca.png",
-    "src": "src/Resources/assets/images/mini-cart-img.png"
-  },
   "src/Resources/assets/images/no-address.png": {
     "file": "assets/no-address-740c7843.png",
     "src": "src/Resources/assets/images/no-address.png"
-  },
-  "src/Resources/assets/images/our-collection-2.jpg": {
-    "file": "assets/our-collection-2-1fa54a9e.jpg",
-    "src": "src/Resources/assets/images/our-collection-2.jpg"
-  },
-  "src/Resources/assets/images/our-collection-bottom.jpg": {
-    "file": "assets/our-collection-bottom-e066cb6d.jpg",
-    "src": "src/Resources/assets/images/our-collection-bottom.jpg"
-  },
-  "src/Resources/assets/images/our-collection.jpg": {
-    "file": "assets/our-collection-71183639.jpg",
-    "src": "src/Resources/assets/images/our-collection.jpg"
   },
   "src/Resources/assets/images/paypal.png": {
     "file": "assets/paypal-df581855.png",
@@ -132,17 +44,9 @@
     "file": "assets/product-hero-9e10fae5.png",
     "src": "src/Resources/assets/images/product-hero.png"
   },
-  "src/Resources/assets/images/review-man.png": {
-    "file": "assets/review-man-d72bfd5a.png",
-    "src": "src/Resources/assets/images/review-man.png"
-  },
   "src/Resources/assets/images/review.png": {
     "file": "assets/review-342fab8f.png",
     "src": "src/Resources/assets/images/review.png"
-  },
-  "src/Resources/assets/images/shoes.png": {
-    "file": "assets/shoes-27e968bd.png",
-    "src": "src/Resources/assets/images/shoes.png"
   },
   "src/Resources/assets/images/small-product-placeholder.png": {
     "file": "assets/small-product-placeholder-9140cd4a.png",
@@ -156,57 +60,9 @@
     "file": "assets/user-placeholder-4670a452.png",
     "src": "src/Resources/assets/images/user-placeholder.png"
   },
-  "src/Resources/assets/images/webp/fitness.webp": {
-    "file": "assets/fitness-eed0255e.webp",
-    "src": "src/Resources/assets/images/webp/fitness.webp"
-  },
-  "src/Resources/assets/images/webp/glasses.webp": {
-    "file": "assets/glasses-0e2ea54b.webp",
-    "src": "src/Resources/assets/images/webp/glasses.webp"
-  },
-  "src/Resources/assets/images/webp/hero-image.webp": {
-    "file": "assets/hero-image-3170dce6.webp",
-    "src": "src/Resources/assets/images/webp/hero-image.webp"
-  },
-  "src/Resources/assets/images/webp/kids.webp": {
-    "file": "assets/kids-85f9b3b0.webp",
-    "src": "src/Resources/assets/images/webp/kids.webp"
-  },
-  "src/Resources/assets/images/webp/leather-bag.webp": {
-    "file": "assets/leather-bag-6fb6f3b2.webp",
-    "src": "src/Resources/assets/images/webp/leather-bag.webp"
-  },
-  "src/Resources/assets/images/webp/mens.webp": {
-    "file": "assets/mens-e8524115.webp",
-    "src": "src/Resources/assets/images/webp/mens.webp"
-  },
-  "src/Resources/assets/images/webp/shoes.webp": {
-    "file": "assets/shoes-517fa77b.webp",
-    "src": "src/Resources/assets/images/webp/shoes.webp"
-  },
-  "src/Resources/assets/images/webp/womens.webp": {
-    "file": "assets/womens-c57aab2b.webp",
-    "src": "src/Resources/assets/images/webp/womens.webp"
-  },
-  "src/Resources/assets/images/wishlist-user.png": {
-    "file": "assets/wishlist-user-32866ac0.png",
-    "src": "src/Resources/assets/images/wishlist-user.png"
-  },
   "src/Resources/assets/images/wishlist.png": {
     "file": "assets/wishlist-8c226c7a.png",
     "src": "src/Resources/assets/images/wishlist.png"
-  },
-  "src/Resources/assets/images/women-collection-1.jpg": {
-    "file": "assets/women-collection-1-f91cd34d.jpg",
-    "src": "src/Resources/assets/images/women-collection-1.jpg"
-  },
-  "src/Resources/assets/images/women-collection2.jpg": {
-    "file": "assets/women-collection2-2ee10fe8.jpg",
-    "src": "src/Resources/assets/images/women-collection2.jpg"
-  },
-  "src/Resources/assets/images/womens.png": {
-    "file": "assets/womens-680e27e4.png",
-    "src": "src/Resources/assets/images/womens.png"
   },
   "src/Resources/assets/js/app.js": {
     "file": "assets/app-e74e3f41.js",
