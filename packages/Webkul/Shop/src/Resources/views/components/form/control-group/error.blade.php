@@ -9,7 +9,7 @@
         v-slot="{ message }"
     >
         <p
-            class="text-red-500 text-xs italic"
+            class="text-red-500 text-xs italic absolute"
             v-text="message"
         >
         </p>
