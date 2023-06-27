@@ -191,7 +191,7 @@
                                         class="text-[16px] font-medium cursor-pointer" 
                                         v-if="cart.discount_amount == 0"
                                     >
-                                        <x-shop::modal>
+                                        <x-shop::modal ref="modal">
                                             <x-slot:toggle>
                                                 <span class="text-[#0A49A7]">
                                                     @lang('shop::app.checkout.cart.coupon.apply')
@@ -203,48 +203,50 @@
                                             </x-slot:header>
         
                                             <x-slot:content>
-                                                <x-form
-                                                    action="{{ route('shop.checkout.cart.coupon.apply') }}"
+
+                                                <x-shop::form
+                                                    v-slot="{ meta, errors, handleSubmit }"
+                                                    as="div"
                                                 >
-                                                    <x-form.control-group>
-                                                        <x-form.control-group.label>
-                                                            @lang('shop::app.checkout.cart.coupon.code')
-                                                        </x-form.control-group.label>
-        
-                                                        <x-form.control-group.control
-                                                            type="text"
-                                                            name="code"
-                                                            placeholder="Enter your code"
-                                                        />
-        
-                                                        <x-form.control-group.error
-                                                            control-name="code"
+                                                    <form @submit="handleSubmit($event, applyCoupon)">
+                                                        <x-shop::form.control-group>
+                                                            <x-shop::form.control-group.label>
+                                                                @lang('shop::app.checkout.cart.coupon.code')
+                                                            </x-shop::form.control-group.label>
+
+                                                            <x-shop::form.control-group.control
+                                                                type="text"
+                                                                name="code"
+                                                                placeholder="Enter your code"
+                                                                rules="required"
+                                                            >
+                                                            </x-shop::form.control-group.control>
+
+                                                            <x-shop::form.control-group.error
+                                                                control-name="code"
+                                                            >
+                                                            </x-shop::form.control-group.error>
+                                                        </x-shop::form.control-group>
+
+                                                        <button
+                                                            type="submit"
+                                                            class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                                                         >
-                                                        </x-form.control-group.error>
-                                                    </x-form.control-group>
-        
-                                                    <button
-                                                        type="submit"
-                                                        class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-                                                    >
-                                                        @lang('shop::app.customers.account.save')
-                                                    </button>
-                                                </x-form>
+                                                            @lang('shop::app.customers.account.save')
+                                                        </button>
+                                                    </form>
+                                                </x-shop::form>
                                             </x-slot:content>
                                         </x-shop::modal>
                                     </p>
                                     
                                     <p class="text-[16px] font-medium cursor-pointer" v-else>
-                                        <x-form
-                                            method="DELETE"
-                                            action="{{ route('shop.checkout.cart.coupon.remove') }}"
+                                        <button 
+                                            type="submit"
+                                            @click="removeCoupon"
+                                            v-text="cart.formatted_discount_amount"
                                         >
-                                            <button 
-                                                type="submit"
-                                                v-text="cart.formatted_discount_amount"
-                                            >
-                                            </button>
-                                        </x-form>                            
+                                        </button>
                                     </p>
                                 </div>
         
@@ -330,6 +332,28 @@
                         this.$axios.post('{{ route('shop.api.checkout.cart.destroy') }}', {
                                 '_method': 'DELETE',
                                 'cart_item_id': itemId,
+                            })
+                            .then(response => {
+                                this.cart = response.data.data;
+                            })
+                            .catch(error => {});
+                    },
+
+                    applyCoupon(params) {
+                        this.$axios.post('{{ route('shop.api.checkout.cart.coupon.apply') }}', params)
+                            .then(response => {
+                                this.$refs.modal.toggle;
+                                alert(response.data.message);
+                                this.cart = response.data.data;
+                            })
+                            .catch(error => {
+                                console.log('error');
+                            });
+                    },
+
+                    removeCoupon() {
+                        this.$axios.post('{{ route('shop.api.checkout.cart.coupon.remove') }}', {
+                                '_method': 'DELETE',
                             })
                             .then(response => {
                                 this.cart = response.data.data;

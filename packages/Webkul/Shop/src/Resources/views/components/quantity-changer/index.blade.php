@@ -19,7 +19,10 @@
             >
             </span>
 
-            <p v-text="quantity"></p>
+            <p
+                class="w-[10px] text-center"
+                v-text="quantity"
+            ></p>
             
             <span 
                 class="bg-[position:-5px_-69px] bs-main-sprite w-[14px] h-[14px] cursor-pointer"

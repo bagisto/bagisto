@@ -34,24 +34,24 @@
                 <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items?.length">
                     <div class="flex gap-x-[20px]" v-for="item in cart?.items">
                         <div class="">
-                            <img 
+                            <img
                                 :src="item.base_image.small_image_url"
                                 class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                                alt="" 
+                                alt=""
                                 title=""
                             >
                         </div>
-    
+
                         <div class="grid gap-y-[10px] flex-1">
                             <div class="flex flex-wrap justify-between">
-                                <p 
-                                    class="text-[16px] font-medium max-w-[80%]" 
+                                <p
+                                    class="text-[16px] font-medium max-w-[80%]"
                                     v-text="item.name"
                                 >
                                 </p>
 
-                                <p 
-                                    class="text-[18px]" 
+                                <p
+                                    class="text-[18px]"
                                     v-text="item.formatted_price"
                                 >
                                 </p>
@@ -85,10 +85,10 @@
                                             @{{ option.option_label }}
                                         </p>
                                     </div>
-                                    
+
                                 </div>
                             </div>
-    
+
                             <div class="flex gap-[20px] items-center flex-wrap">
                                 <x-shop::quantity-changer
                                     name="quantity"
@@ -97,8 +97,8 @@
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
-                                
-                                <button 
+
+                                <button
                                     type="button"
                                     class="text-[#0A49A7]"
                                     @click="removeItem(item.id)"
@@ -110,13 +110,13 @@
                     </div>
                 </div>
 
-                <div 
-                    class="pb-[30px]" 
+                <div
+                    class="pb-[30px]"
                     v-else
                 >
                     <div class="grid gap-y-[20px] b-0 place-items-center">
                         <img src="{{ bagisto_asset('images/thank-you.png') }}">
-                
+
                         <p class="text-[20px]">
                             @lang('shop::app.checkout.cart.mini-cart.empty-cart')
                         </p>
@@ -131,16 +131,16 @@
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
 
-                        <p 
+                        <p
                             class="text-[30px] font-semibold"
                             v-text="cart.formatted_grand_total"
                         >
                         </p>
                     </div>
-        
+
                     <div class="px-[25px]">
-                        <a 
-                            href="{{ route('shop.checkout.onepage.index') }}" 
+                        <a
+                            href="{{ route('shop.checkout.onepage.index') }}"
                             class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
@@ -169,6 +169,24 @@
 
            mounted() {
                 this.getCart();
+
+                /**
+                 * To Do: Implement this.
+                 *
+                 * Action.
+                 */
+                this.$emitter.on('test-cart', (cart) => {
+                    console.log(cart);
+
+                    alert('its a testing global event...');
+                });
+
+                /**
+                 * Calling.
+                 */
+                this.$emitter.emit('test-cart', { cart: 1 });
+
+                this.$emitter.emit('add-flash', { type: 'success', message: 'This is a test component.' });
            },
 
            methods: {

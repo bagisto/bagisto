@@ -82,9 +82,10 @@ window.app = createApp({
 /**
  * Global plugins registration.
  */
-import Shop from "./plugins/shop";
 import Axios from "./plugins/axios";
-[Shop, Axios].forEach((plugin) => app.use(plugin));
+import Emitter from "./plugins/emitter";
+import Shop from "./plugins/shop";
+[Axios, Emitter, Shop].forEach((plugin) => app.use(plugin));
 
 /**
  * Global components registration;
