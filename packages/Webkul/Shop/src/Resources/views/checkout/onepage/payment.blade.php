@@ -18,7 +18,7 @@
                     <x-shop::accordion>
                         <x-slot:header>
                             <div class="flex justify-between items-center">
-                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Select Payment Method')</h2>
+                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Payment Method')</h2>
                             </div>
                         </x-slot:header>
         
