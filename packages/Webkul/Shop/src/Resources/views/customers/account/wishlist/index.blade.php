@@ -60,9 +60,9 @@
                                         </a>
                                     </div>
                                     
-                                    <div class="grid gap-y-[10px]">
+                                    <div class="grid gap-y-[10px] min-w-[80px] max-w-[80px]">
                                         <p 
-                                            class="text-[16px]" 
+                                            class="text-[16px] max-w-[80px] break-words" 
                                             v-text="item.item.name"
                                         >
                                         </p>
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <p 
-                                    class="text-[18px]" 
+                                    class="text-[18px] min-w-[80px] max-w-[80px] break-words" 
                                     v-html="item.item.min_price" 
                                 >
                                 </p>
