@@ -210,15 +210,11 @@
                                 'product_id': productId
                             })
                             .then(response => {
-                                if (response.data.data.success) {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    return;
-                                }
-
-                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message});
+                            });
 
                         return;
                     }
