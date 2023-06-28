@@ -52,8 +52,8 @@
                                             <img 
                                                 class="max-w-[110px] max-h-[110px] rounded-[12px]" 
                                                 :src='item.item.base_image.small_image_url'
-                                                alt="" 
-                                                title=""
+                                                :alt="item.item.name" 
+                                                :title="item.item.name"
                                                 @load="onImageLoad()"
                                                 v-show="! isImageLoading"
                                             >
