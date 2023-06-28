@@ -54,7 +54,10 @@
 
 
                 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-                    <div>
+                    <div    
+                        class="overflow-y-auto"
+                        ref="scrollBottom"
+                    >
                         @include('shop::checkout.onepage.addresses.index')
 
                         @include('shop::checkout.onepage.shipping')
@@ -91,11 +94,19 @@
                                 this.cart = response.data.data;
 
                                 this.isCartLoading = false;
-                            })
-                            .catch(error => console.log(error))
-                    },
 
-                }
+                                let container = this.$refs.scrollBottom;
+
+                                if (container) {
+                                    container.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'end'
+                                    });
+                                }
+                            })
+                            .catch(error => console.log(error));
+                    },
+                },
             });
         </script>
     @endPushOnce
