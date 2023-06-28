@@ -862,8 +862,13 @@ class Cart
 
         if (! empty($data['billing']['address_id'])) {
             $customerAddress = $this->customerAddressRepository
-                ->findOneWhere(['id' => $data['billing']['address_id']])
-                ->toArray();
+                ->find($data['billing']['address_id']);
+            
+            if ($customerAddress) {
+                $customerAddress = $customerAddress->toArray();
+            } else {
+                $customerAddress = [];
+            }
         }
 
         $billingAddress = array_merge(
@@ -871,7 +876,7 @@ class Cart
             $data['billing'],
             ['cart_id' => $cart->id],
             $this->fillCustomerAttributes(),
-            $this->fillAddressAttributes($data['billing'])
+            $this->fillAddressAttributes(! empty($customerAddress) ? $customerAddress : $data['billing']),
         );
 
         return $billingAddress;
@@ -890,8 +895,13 @@ class Cart
 
         if (! empty($data['shipping']['address_id'])) {
             $customerAddress = $this->customerAddressRepository
-                ->findOneWhere(['id' => $data['shipping']['address_id']])
-                ->toArray();
+                ->findOneWhere(['id' => $data['shipping']['address_id']]);
+      
+            if ($customerAddress) {
+                $customerAddress = $customerAddress->toArray();
+            } else {
+                $customerAddress = [];
+            }
         }
 
         $shippingAddress = array_merge(
@@ -899,7 +909,7 @@ class Cart
             $data['shipping'],
             ['cart_id' => $cart->id],
             $this->fillCustomerAttributes(),
-            $this->fillAddressAttributes($data['shipping'])
+            $this->fillAddressAttributes(! empty($customerAddress) ? $customerAddress : $data['shipping'])
         );
 
         return $shippingAddress;

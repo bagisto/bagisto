@@ -15,17 +15,6 @@
                 @include('shop::checkout.onepage.addresses.billing')
 
                 @include('shop::checkout.onepage.addresses.shipping')
-
-                <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping">
-                    <div class="flex justify-end mt-4 mb-4">
-                        <button
-                            class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
-                            @click="store"
-                        >
-                            @lang('Confirm')
-                        </button>
-                    </div>
-                </div>
             </div>
         </template>
     </script>
@@ -69,6 +58,8 @@
                     isAddressLoading: true,
 
                     isCustomer: "{{ auth()->guard('customer')->check() }}",
+
+                    isTempAddressExists: false,
                 }
             }, 
             
@@ -110,9 +101,11 @@
                                 this.addresses = response.data.data.map((address, index) => {
                                     let isDefault = address.default_address ? address.default_address : index === 0;
 
-                                    if (isDefault) {
-                                        this.forms.billing.address.address_id = address.id;
-                                    }
+                                    // if (isDefault) {
+                                    //     this.forms.billing.address.address_id = address.id;
+
+                                    //     this.forms.shipping.address.address_id = address.id;
+                                    // }
 
                                     return {
                                         ...address,
@@ -156,7 +149,9 @@
                 handleBillingAddressForm() {
                     if (this.forms.billing.isNew && ! this.forms.billing.address.isSaved) {
                         this.forms.billing.isNew = false;
-                        
+
+                        this.isTempAddress = true;
+
                         this.addresses.push({
                             ...this.forms.billing.address,
                             isSaved: false,
@@ -187,6 +182,8 @@
                 handleShippingAddressForm() {
                     if (this.forms.shipping.isNew && ! this.forms.shipping.address.isSaved) {
                         this.forms.shipping.isNew = false;
+
+                        this.isTempAddress = true;
                         
                         this.addresses.push({
                             ...this.forms.shipping.address,
@@ -235,8 +232,10 @@
                             }
                             
                             this.$parent.getOrderSummary();
-
-                            if (this.forms.billing.isUsedForShipping) {
+                            
+                            if (this.forms.billing.isUsedForShipping
+                                && this.forms.billing.address_id
+                            ) {
                                 this.getCustomerAddresses();
                             }
                         })
