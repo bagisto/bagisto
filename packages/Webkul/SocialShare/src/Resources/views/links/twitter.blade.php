@@ -5,10 +5,10 @@
     ]);
 @endphp
 
-<twitter-share></twitter-share>
+<v-twitter-share></v-twitter-share>
 
 @push('scripts')
-    <script type="text/x-template" id="twitter-share-link">
+    <script type="text/x-template" id="twitter-share-template">
         <li class="bb-social-share__item bb-social--twitter">
             <a 
                 href="#" 
@@ -20,8 +20,8 @@
     </script>
 
     <script type="module">
-        app.component('twitter-share', {
-            template: '#twitter-share-link',
+        app.component('v-twitter-share', {
+            template: '#v-twitter-share-template',
 
             data: function () {
                 return {
