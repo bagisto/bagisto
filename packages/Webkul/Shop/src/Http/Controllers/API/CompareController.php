@@ -91,6 +91,7 @@ class CompareController extends APIController
 
         if (! $success) {
             return new JsonResource([
+                'data'     => CompareResource::collection($this->compareItemRepository->get()),
                 'message'  => trans('shop::app.compare.remove-error'),
             ]);
         }

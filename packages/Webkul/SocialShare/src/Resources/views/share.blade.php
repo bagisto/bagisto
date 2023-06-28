@@ -6,7 +6,7 @@
         'facebook', 
         'twitter', 
         'instagram', 
-        'pintrest', 
+        'pinterest', 
         'linkedin', 
         'whatsapp', 
         'email'
@@ -21,11 +21,7 @@
 
 @if (core()->getConfigData('catalog.products.social_share.enabled'))
     <div class="bb-social-share">
-        <label class="bb-social-share__title flex justify-center items-center gap-[10px] cursor-pointer">
-            @lang('socialshare::app.share-now')
-        </label>
-
-        <ul class="bb-social-share__items">
+        <ul class="bb-social-share__items" style="display: flex; column-gap:15px;">
             @foreach($links as $link)
                 @if ($link)
                     @include('socialshare::links.' . $link , compact('product', 'message'))

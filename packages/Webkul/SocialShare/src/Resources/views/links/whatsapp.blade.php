@@ -19,7 +19,7 @@
                 data-action="share/whatsapp/share" 
                 target="_blank"
             >
-                @include('social_share::icons.whatsapp')
+                @include('socialshare::icons.whatsapp')
             </a>
         </li>
     </script>
