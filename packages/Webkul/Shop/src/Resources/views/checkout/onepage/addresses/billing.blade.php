@@ -240,6 +240,12 @@
                             >
                             </x-shop::form.control-group.control>
 
+                            <x-shop::form.control-group.error
+                                class="mb-2"
+                                control-name="billing[address1][]"
+                            >
+                            </x-shop::form.control-group.error>
+
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                                 @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                                     <x-shop::form.control-group.control
@@ -253,11 +259,6 @@
                                     </x-shop::form.control-group.control>
                                 @endfor
                             @endif
-    
-                            <x-shop::form.control-group.error
-                                control-name="billing[address1][]"
-                            >
-                            </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
     
 
@@ -272,7 +273,7 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[country]"
-                                    class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                                    class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
                                     rules="required"
                                     label="Country"
                                     placeholder="Country"
@@ -309,7 +310,7 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[state]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
                                     rules="required"
                                     label="State"
                                     placeholder="State"
