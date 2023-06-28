@@ -2,24 +2,24 @@
 
 namespace Webkul\Checkout;
 
-use Exception;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Event;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Tax\Helpers\Tax;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Checkout\Traits\CartValidators;
+use Webkul\Checkout\Traits\CartTools;
+use Webkul\Checkout\Traits\CartCoupons;
+use Webkul\Checkout\Repositories\CartRepository;
+use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\Cart as CartModel;
-use Webkul\Checkout\Models\CartPayment;
-use Webkul\Checkout\Repositories\CartAddressRepository;
-use Webkul\Checkout\Repositories\CartItemRepository;
-use Webkul\Checkout\Repositories\CartRepository;
-use Webkul\Checkout\Traits\CartCoupons;
-use Webkul\Checkout\Traits\CartTools;
-use Webkul\Checkout\Traits\CartValidators;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Tax\Helpers\Tax;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Arr;
+use Exception;
 
 class Cart
 {
@@ -810,8 +810,6 @@ class Cart
 
     /**
      * Fill customer attributes.
-     *
-     * @return array
      */
     private function fillCustomerAttributes(): array
     {
@@ -831,8 +829,6 @@ class Cart
 
     /**
      * Fill address attributes.
-     *
-     * @return array
      */
     private function fillAddressAttributes(array $addressAttributes): array
     {
@@ -852,59 +848,52 @@ class Cart
     /**
      * Gather billing address.
      *
-     * @param  $data
-     * @param  $cart
-     * @return array
+     * @param  array $data
+     * @param  \Webkul\Checkout\Cart as CartModel  $cart
      */
-    private function gatherBillingAddress($data, \Webkul\Checkout\Models\Cart $cart): array
+    private function gatherBillingAddress($data, CartModel $cart): array
     {
-        $customerAddress = [];
+        $requestedBillingAddress = $data['billing'];
 
-        if (! empty($data['billing']['address_id'])) {
-            $customerAddress = $this->customerAddressRepository
-                ->find($data['billing']['address_id']);
-            
-            $customerAddress = $customerAddress ? $customerAddress->toArray() : [];
+        if (! empty($requestedBillingAddress['address_id'])) {
+            $requestedBillingAddress = $this->customerAddressRepository->find($requestedBillingAddress['address_id']);
+
+            if ($requestedBillingAddress) {
+                $requestedBillingAddress = $requestedBillingAddress->toArray();
+            }
         }
 
-        $billingAddress = array_merge(
-            $customerAddress,
-            $data['billing'],
-            ['cart_id' => $cart->id],
-            $this->fillCustomerAttributes(),
-            $this->fillAddressAttributes(! empty($customerAddress) ? $customerAddress : $data['billing']),
-        );
-
-        return $billingAddress;
+        return [
+            'use_for_shipping' => $requestedBillingAddress['use_for_shipping'],
+            'cart_id' => $cart->id,
+            ...$this->fillCustomerAttributes(),
+            ...$this->fillAddressAttributes($requestedBillingAddress),
+        ];
     }
 
     /**
      * Gather shipping address.
      *
      * @param  array  $data
-     * @param  \Webkul\Checkout\Cart|null  $cart
-     * @return array
+     * @param  \Webkul\Checkout\Cart as CartModel $cart
      */
-    private function gatherShippingAddress($data, \Webkul\Checkout\Models\Cart $cart): array
+    private function gatherShippingAddress($data, CartModel $cart): array
     {
-        $customerAddress = [];
+        $requestedShippingAddress = $data['shipping'];
 
-        if (! empty($data['shipping']['address_id'])) {
-            $customerAddress = $this->customerAddressRepository
-                ->find($data['shipping']['address_id']);
-      
-            $customerAddress = $customerAddress ? $customerAddress->toArray() : [];
+        if (! empty($requestedShippingAddress['address_id'])) {
+            $requestedShippingAddress = $this->customerAddressRepository->find($requestedShippingAddress['address_id']);
+
+            if ($requestedShippingAddress) {
+                $requestedShippingAddress = $requestedShippingAddress->toArray();
+            }
         }
 
-        $shippingAddress = array_merge(
-            $customerAddress,
-            $data['shipping'],
-            ['cart_id' => $cart->id],
-            $this->fillCustomerAttributes(),
-            $this->fillAddressAttributes(! empty($customerAddress) ? $customerAddress : $data['shipping'])
-        );
-
-        return $shippingAddress;
+        return [
+            'cart_id' => $cart->id,
+            ...$this->fillCustomerAttributes(),
+            ...$this->fillAddressAttributes($requestedShippingAddress),
+        ];
     }
 
     /**
