@@ -207,6 +207,8 @@
                         this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty: this.applied.quantity })
                             .then(response => {
                                 this.cart = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {});
                     },
@@ -222,6 +224,9 @@
                             })
                             .then(response => {
                                 this.cart = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                             })
                             .catch(error => {});
                     },

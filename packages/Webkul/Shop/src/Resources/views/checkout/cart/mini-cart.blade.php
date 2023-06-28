@@ -213,6 +213,8 @@
                         })
                         .then(response => {
                             this.cart = response.data.data;
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => {});
                 },
