@@ -489,6 +489,10 @@ return [
         'cancel-error'       => ':name can not be canceled.',
     ],
 
+    'error' => [
+        'home' => 'Go To Home',
+    ],
+
     'security-warning'   => 'Suspicious activity found!!!',
 
     'invalid_vat_format' => 'The given vat id has a wrong format',
