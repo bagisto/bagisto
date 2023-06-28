@@ -19,12 +19,6 @@
         </script>
 
         <script type="module">
-            let messages = {
-                universalError: "{{ __('paypal::app.error.universal-error') }}",
-                sdkValidationError: "{{ __('paypal::app.error.sdk-validation-error') }}",
-                authorizationError: "{{ __('paypal::app.error.authorization-error') }}"
-            };
-
             app.component('v-paypal-smart-button', {
                 template: '#v-paypal-smart-button-template',
 
@@ -35,7 +29,7 @@
                 methods: {
                     register() {
                         if (typeof paypal == 'undefined') {
-                            alert(messages.sdkValidationError);
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('Something went wrong.')' });
 
                             return;
                         }
@@ -55,7 +49,7 @@
                             enableStandardCardFields: false,
     
                             alertBox: (message) => {
-                                alert(message);
+                                this.$emitter.emit('add-flash', { type: 'error', message: message });
                             },
     
                             createOrder: (data, actions) => {
@@ -66,7 +60,7 @@
                                         if (error.response.data.error === 'invalid_client') {
                                             options.authorizationFailed = true;
                                             
-                                            options.alertBox(messages.authorizationError);
+                                            options.alertBox('@lang('Something went wrong.')');
                                         }
     
                                         return error;
@@ -92,7 +86,7 @@
     
                             onError: (error) => {
                                 if (! options.authorizationFailed) {
-                                    alert(messages.universalError);
+                                    options.alertBox('@lang('Something went wrong.')');
                                 }
                             },
                         };

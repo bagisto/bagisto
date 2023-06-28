@@ -16,7 +16,6 @@
                     </div>
                 </div>
                 <p class="w-[100%] h-[24px] shimmer mt-[25px]"></p>
-                <p class="w-[70%] h-[24px] shimmer mt-[10px]"></p>
             </div>
 
             {{-- Single card addredd --}}

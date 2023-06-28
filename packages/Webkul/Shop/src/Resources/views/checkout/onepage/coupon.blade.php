@@ -9,11 +9,11 @@
         <div class="flex text-right justify-between">
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">@lang('shop::app.checkout.cart.coupon.discount')</p>
             
-            <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium cursor-pointer">
+            <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
                 <x-shop::modal>
                     <x-slot:toggle>
                         <span 
-                            class="text-[#0A49A7]" 
+                            class="text-[#0A49A7] cursor-pointer" 
                             v-if="! isCouponApplied"
                         >
                             @lang('shop::app.checkout.cart.coupon.apply')
@@ -44,6 +44,7 @@
                                         </x-shop::form.control-group.control>
 
                                         <x-shop::form.control-group.error
+                                            class="flex"
                                             control-name="code"
                                         >
                                         </x-shop::form.control-group.error>
@@ -118,7 +119,7 @@
                         .then((response) => {
                             this.$parent.$parent.getOrderSummary();
 
-                            alert(response.data.data.message)
+                            alert(response.data.message)
                         })
                         .catch((error) => {console.log(error);})
                 },
