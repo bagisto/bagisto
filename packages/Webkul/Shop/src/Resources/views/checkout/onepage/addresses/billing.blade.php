@@ -93,6 +93,17 @@
                         @lang('address is the same as my billing address')
                     </label>
                 </div>
+
+                <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
+                    <div class="flex justify-end mt-4 mb-4">
+                        <button
+                            class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                            @click="store"
+                        >
+                            @lang('Confirm')
+                        </button>
+                    </div>
+                </div>
             </x-slot:content>
         </x-shop::accordion>
     </div>
@@ -229,6 +240,12 @@
                             >
                             </x-shop::form.control-group.control>
 
+                            <x-shop::form.control-group.error
+                                class="mb-2"
+                                control-name="billing[address1][]"
+                            >
+                            </x-shop::form.control-group.error>
+
                             @if (core()->getConfigData('customer.address.information.street_lines') > 1)
                                 @for ($i = 1; $i < core()->getConfigData('customer.address.information.street_lines'); $i++)
                                     <x-shop::form.control-group.control
@@ -242,11 +259,6 @@
                                     </x-shop::form.control-group.control>
                                 @endfor
                             @endif
-    
-                            <x-shop::form.control-group.error
-                                control-name="billing[address1][]"
-                            >
-                            </x-shop::form.control-group.error>
                         </x-shop::form.control-group>
     
 
@@ -261,7 +273,7 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[country]"
-                                    class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                                    class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
                                     rules="required"
                                     label="Country"
                                     placeholder="Country"
@@ -298,7 +310,7 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[state]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
+                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
                                     rules="required"
                                     label="State"
                                     placeholder="State"
