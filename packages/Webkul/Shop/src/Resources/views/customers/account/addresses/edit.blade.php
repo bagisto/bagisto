@@ -1,5 +1,5 @@
 <x-shop::layouts.account>
-    @section('breadcrumb')
+    @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses.edit" :entity="$address"></x-shop::breadcrumbs>
     @endSection
 
