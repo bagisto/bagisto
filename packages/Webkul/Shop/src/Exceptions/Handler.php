@@ -11,6 +11,18 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class Handler extends WebkulCoreHandler
 {
     /**
+     * Json errors.
+     *
+     * @var array
+     */
+    protected $jsonErrorMessages = [
+        404 => 'Resource Not Found',
+        403 => '403 Forbidden Error',
+        401 => 'Unauthenticated',
+        500 => '500 Internal Server Error',
+    ];
+
+    /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -61,6 +73,8 @@ class Handler extends WebkulCoreHandler
             ], $statusCode);
         }
 
-        return response()->view("shop::errors.index", [], $statusCode);
+        $title = $this->jsonErrorMessages[$statusCode];
+
+        return response()->view("shop::errors.index", compact('statusCode', 'title'));
     }
 }
