@@ -16,7 +16,7 @@
 
                 @include('shop::checkout.onepage.addresses.shipping')
 
-                <div v-if="! forms.billing.isNew && ! forms.shipping.isNew">
+                <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && ! forms.billing.isUsedForShipping">
                     <div class="flex justify-end mt-4 mb-4">
                         <button
                             class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
@@ -234,6 +234,8 @@
                                 this.$parent.$refs.vShippingMethod.isShippingMethodLoading = false;
                             }
                             
+                            this.$parent.getOrderSummary();
+
                             if (this.forms.billing.isUsedForShipping) {
                                 this.getCustomerAddresses();
                             }
