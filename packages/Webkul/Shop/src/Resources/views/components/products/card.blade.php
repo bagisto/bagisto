@@ -258,6 +258,10 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
+                            if (response.data.redirect) {
+                                window.location.href = response.data.data;
+                            }
+
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => {});

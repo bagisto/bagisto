@@ -410,6 +410,9 @@ return [
         ],
 
         'cart' => [
+            'integrity'=> [
+                'missing_options'        => 'Options are missing for this product.',
+            ],
 
             'item' => [
                 'quantity'        => 'Quantity:',

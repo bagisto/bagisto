@@ -45,6 +45,8 @@ class CartController extends APIController
         try {
             $productId = request()->input('product_id');
 
+            $product = $this->productRepository->with('parent')->find($productId);
+
             $cart = Cart::addProduct($productId, request()->all());
 
             /**
@@ -74,7 +76,9 @@ class CartController extends APIController
             }
         } catch (\Exception $exception) {
             return new JsonResource([
-                'message'   => $exception->getMessage(),
+                'redirect' => true,
+                'data'     => route('shop.productOrCategory.index', $product->product->url_key),
+                'message'  => $exception->getMessage(),
             ]);
         }
     }
