@@ -63,6 +63,7 @@ class CompareController extends APIController
 
         if ($compareProduct) {
             return new JsonResource([
+                'success' => false,
                 'message' => trans('shop::app.compare.already-added'),
             ]);
         }
@@ -73,6 +74,7 @@ class CompareController extends APIController
         ]);
 
         return new JsonResource([
+            'success' => true,
             'message' => trans('shop::app.compare.item-add-success'),
         ]);
     }

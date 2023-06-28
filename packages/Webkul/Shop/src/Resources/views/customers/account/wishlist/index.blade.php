@@ -165,6 +165,8 @@
                             })
                             .then(response => {
                                 this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {});
                     },
@@ -175,6 +177,8 @@
                             })
                             .then(response => {
                                 this.wishlist = [];
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
                     },
@@ -196,6 +200,8 @@
                                     }
     
                                     this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {});
                         }

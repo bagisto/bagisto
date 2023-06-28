@@ -196,7 +196,7 @@
                             product_id: this.product.id
                         })
                         .then(response => {
-                            alert(response.data.data.message);
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                         })
                         .catch(error => {});
                 },
@@ -210,7 +210,13 @@
                                 'product_id': productId
                             })
                             .then(response => {
-                                alert(response.data.data.message);
+                                if (response.data.data.success) {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                    return;
+                                }
+
+                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
                             })
                             .catch(error => {});
 
@@ -228,14 +234,15 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            alert('Added product in compare.');
+                            this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
                         } else {
-                            alert('Product is already added in compare.');
+                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('Item is already added to compare list')' });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        alert('Added product in compare.');
+                        this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
+
                     }
                 },
 
@@ -255,7 +262,7 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            alert(response.data.message);
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => {});
                 },
