@@ -139,9 +139,9 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
 
                         @include('shop::checkout.cart.summary')
-                        </div>
                     </div>
 
                     <div 
