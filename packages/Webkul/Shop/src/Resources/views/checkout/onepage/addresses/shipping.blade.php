@@ -403,8 +403,7 @@
                             </button>
                         </div>
                     </form>
-                </x-shop::form>            
-
+                </x-shop::form>
             </x-slot:content>
         </x-shop::accordion>
     </div>

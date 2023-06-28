@@ -93,6 +93,17 @@
                         @lang('address is the same as my billing address')
                     </label>
                 </div>
+
+                <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
+                    <div class="flex justify-end mt-4 mb-4">
+                        <button
+                            class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                            @click="store"
+                        >
+                            @lang('Confirm')
+                        </button>
+                    </div>
+                </div>
             </x-slot:content>
         </x-shop::accordion>
     </div>
