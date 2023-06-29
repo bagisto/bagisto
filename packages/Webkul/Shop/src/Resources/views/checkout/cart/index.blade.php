@@ -4,20 +4,7 @@
 >
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
-            <!-- Breadcrumb -->
-            <div class="flex justify-start mt-[30px] max-lg:hidden">
-                <div class="flex gap-x-[14px] items-center">
-                    <p class="flex items-center gap-x-[14px] text-[16px] font-medium">
-                        @lang('shop::app.checkout.cart.home') 
-
-                        <span class="icon-arrow-right text-[24px]"></span>
-                    </p>
-
-                    <p class="text-[#7D7D7D] text-[12px] flex items-center gap-x-[16px] font-medium  after:content[' '] after:bg-[position:-7px_-41px] after:bs-main-sprite after:w-[9px] after:h-[20px] after:last:hidden">
-                        @lang('shop::app.checkout.cart.cart-page')
-                    </p>
-                </div>
-            </div>
+            <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
             <v-cart ref="vCart">
                 <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
@@ -33,123 +20,112 @@
                 </template>
 
                 <template v-else>
-                    <div class="flex flex-wrap gap-[30px] mt-[30px]" v-if="cart?.items?.length">
-                        <div class="grid gap-y-[25px] flex-1">
-                            <div class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]">
-                                <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.product-name')
-                                </div>
-        
-                                <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.price')
-                                </div>
-        
-                                <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.quantity')
-                                </div>
-        
-                                <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.total')
-                                </div>
-                            </div>
-
+                    <div class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" v-if="cart?.items?.length">
+                        <div class="grid gap-[30px] flex-1">
                             <div 
-                                class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]" 
+                                class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-[20px]">
-                                    <div>
-                                        <div 
-                                            class="overflow-hidden rounded-[12px] w-[110px] h-[110px] bg-[#E9E9E9] shimmer"
-                                            v-show="isImageLoading"
-                                        >
-                                            <img class="rounded-sm bg-[#F5F5F5]">
+                                <div class="flex gap-x-[10px] justify-between flex-wrap border-b-[1px] border-[#E9E9E9] pb-[18px]">
+                                    <div class="flex gap-x-[20px]">
+                                        <div>
+                                            <div 
+                                                class="overflow-hidden rounded-[12px] w-[110px] h-[110px] bg-[#E9E9E9] shimmer"
+                                                v-show="isImageLoading"
+                                            >
+                                                <img class="rounded-sm bg-[#F5F5F5]">
+                                            </div>
+                                
+                                            <img 
+                                                class="w-[110px] h-[110px] rounded-[12px]" 
+                                                :src="item.base_image.small_image_url"
+                                                @load="onImageLoad"
+                                                v-show="! isImageLoading"
+                                                :alt="item.name" 
+                                                :title="item.name"
+                                            >
                                         </div>
 
-                                        
-                                        <img 
-                                            class="w-[110px] h-[110px] rounded-[12px]" 
-                                            :src="item.base_image.small_image_url"
-                                            @load="onImageLoad"
-                                            v-show="! isImageLoading"
-                                            :alt="item.name" 
-                                            :title="item.name"
-                                        >
+                                        <div class="grid gap-y-[10px]">
+                                            <p 
+                                                class="text-[16px] font-medium" 
+                                                v-text="item.name"
+                                            >
+                                            </p>
+                                    
+                                            <div
+                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                v-if="item.options.length"
+                                            >
+                                                <div class="grid gap-[8px]">
+                                                    <div v-for="option in item.options">
+                                                        <p 
+                                                            class="text-[14px] font-medium" 
+                                                            v-text="option.attribute_name + ':'"
+                                                        >
+                                                        </p>
+                                    
+                                                        <p class="text-[14px]" v-text="option.option_label"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:hidden">
+                                                <p 
+                                                    class="text-[18px] font-semibold" 
+                                                    v-text="item.formatted_total"
+                                                >
+                                                </p>
+                                                
+                                                <span
+                                                    class="text-[16px] text-[#4D7EA8] cursor-pointer" 
+                                                    @click="removeItem(item.id)"
+                                                >
+                                                    @lang('shop::app.checkout.cart.remove')
+                                                </span>
+                                            </div>
+
+                                            <x-shop::quantity-changer
+                                                name="quantity"
+                                                ::value="item?.quantity"
+                                                class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]"
+                                                @change="setItemQuantity(item.id, $event)"
+                                            >
+                                            </x-shop::quantity-changer>
+                                        </div>
                                     </div>
-        
-                                    <div class="grid place-content-start gap-y-[10px]">
+
+                                    <div class="max-sm:hidden">
                                         <p 
-                                            class="text-[16px] font-medium" 
-                                            v-text="item.name"
+                                            class="text-[18px] font-semibold" 
+                                            v-text="item.formatted_total"
                                         >
                                         </p>
-
-                                        <div
-                                            class="grid gap-x-[10px] gap-y-[6px] select-none"
-                                            v-if="item.options.length"
-                                        >
-                                            <div class="grid gap-[8px]">
-                                                <div class="" v-for="option in item.options">
-                                                    <p class="text-[14px] font-medium">
-                                                        @{{ option.attribute_name + ':' }}
-                                                    </p>
-
-                                                    <p class="text-[14px]">
-                                                        @{{ option.option_label }}
-                                                    </p>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-        
+                                        
                                         <span
-                                            class="text-[#0A49A7] cursor-pointer" 
+                                            class="text-[16px] text-[#4D7EA8] cursor-pointer" 
                                             @click="removeItem(item.id)"
                                         >
-                                            @lang('shop::app.checkout.cart.remove')
+                                            @lang('shop::app.checkout.cart.index.remove')
                                         </span>
                                     </div>
                                 </div>
-        
-                                <p 
-                                    class="text-[18px]"
-                                    v-text="item.formatted_price"
-                                >
-                                </p>
-        
-                                <x-shop::quantity-changer
-                                    name="quantity"
-                                    ::value="item?.quantity"
-                                    class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[116px] max-h-[36px]"
-                                    @change="setItemQuantity(item.id, $event)"
-                                >
-                                </x-shop::quantity-changer>
-        
-                                <p 
-                                    class="text-[18px] font-semibold" 
-                                    v-text="item.formatted_total"
-                                >
-                                </p>
                             </div>
         
-                            <div class="flex flex-wrap gap-[30px] justify-end mt-[16px]">
-                                <div>
-                                    <a
-                                        class="bs-secondary-button rounded-[18px]"
-                                        href="{{ route('shop.home.index') }}"
-                                    >
-                                        @lang('shop::app.checkout.cart.continue-shopping')
-                                    </a>   
-                                </div>
-        
-                                <div>
-                                    <a 
-                                        class="bs-secondary-button rounded-[18px]"
-                                        @click="update()"
-                                    >
-                                        @lang('shop::app.checkout.cart.update-cart')
-                                    </a>
-                                </div>
+                            <div class="flex flex-wrap gap-[30px] justify-end">
+                                <a
+                                    class="bs-secondary-button rounded-[18px] max-h-[55px]"
+                                    href="{{ route('shop.home.index') }}"
+                                >
+                                    @lang('shop::app.checkout.cart.index.continue-shopping')
+                                </a> 
+
+                                <a 
+                                    class="bs-secondary-button rounded-[18px] max-h-[55px]"
+                                    @click="update()"
+                                >
+                                    @lang('shop::app.checkout.cart.index.update-cart')
+                                </a>
                             </div>
                         </div>
 
@@ -160,7 +136,7 @@
                         class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" 
                         v-else
                     >
-                        <h1>@lang('Don\'t Have product in your cart')</h1>
+                        <h1>@lang('shop::app.checkout.cart.index.empty-product')</h1>
                     </div>
                 </template>
             </div>
