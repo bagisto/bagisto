@@ -3,31 +3,33 @@
         <x-shop::breadcrumbs name="wishlist"></x-shop::breadcrumbs>
     @endSection
 
-    <v-wishlist-products></v-wishlist-products>
+    <v-wishlist-products>
+        <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
+    </v-wishlist-products>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
-                <div class="max-lg:hidden flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium">
-                        @lang('shop::app.customers.account.wishlist.page-title')
-                    </h2>
-
-                    <div
-                        class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
-                        @click="removeAll"
-                        v-if="wishlist.length"
-                    >
-                        <span class="icon-bin text-[24px]"></span>
-                        @lang('shop::app.customers.account.wishlist.delete-all')
-                    </div>
-                </div>
-
                 <template v-if="isLoading">
-                    <x-shop::shimmer.customers.account.wishlist.index :count="4"></x-shop::shimmer.customers.account.wishlist.index>
+                    <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
                 </template>
 
                 <template v-else>
+                    <div class="max-lg:hidden flex justify-between items-center">
+                        <h2 class="text-[26px] font-medium">
+                            @lang('shop::app.customers.account.wishlist.page-title')
+                        </h2>
+
+                        <div
+                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                            @click="removeAll"
+                            v-if="wishlist.length"
+                        >
+                            <span class="icon-bin text-[24px]"></span>
+                            @lang('shop::app.customers.account.wishlist.delete-all')
+                        </div>
+                    </div>
+
                     <div v-if="wishlist.length">
                         <div v-for="item in wishlist">
                             <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
