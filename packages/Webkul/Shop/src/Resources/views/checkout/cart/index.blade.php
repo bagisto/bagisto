@@ -20,7 +20,10 @@
                 </template>
 
                 <template v-else>
-                    <div class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" v-if="cart?.items?.length">
+                    <div 
+                        class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col pb-[30px]"
+                        v-if="cart?.items?.length"
+                    >
                         <div class="grid gap-[30px] flex-1">
                             <div 
                                 class="grid gap-y-[25px]" 
@@ -68,7 +71,7 @@
                                                     class="text-[16px] text-[#4D7EA8] cursor-pointer" 
                                                     @click="removeItem(item.id)"
                                                 >
-                                                    @lang('shop::app.checkout.cart.remove')
+                                                    @lang('shop::app.checkout.cart.index.remove')
                                                 </span>
                                             </div>
 
