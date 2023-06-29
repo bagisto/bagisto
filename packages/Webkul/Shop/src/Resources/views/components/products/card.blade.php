@@ -258,14 +258,14 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.data.redirect) {
-                                window.location.href = response.data.data.url;
+                            if (response.data.data.status) {
+                                window.location.href = response.data.data.redirect_uri;
                             }
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => {});
-                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                 },
             },
         });

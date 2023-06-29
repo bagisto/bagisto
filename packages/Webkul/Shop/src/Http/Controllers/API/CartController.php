@@ -76,9 +76,9 @@ class CartController extends APIController
             }
         } catch (\Exception $exception) {
             return new JsonResource([
-                'redirect' => true,
-                'url'     => route('shop.productOrCategory.index', $product->product->url_key),
-                'message'  => $exception->getMessage(),
+                'status'       => true,
+                'redirect_uri' => route('shop.productOrCategory.index', $product->product->url_key),
+                'message'      => $exception->getMessage(),
             ]);
         }
     }
