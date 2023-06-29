@@ -11,7 +11,7 @@
             
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
                 <span v-if="! isCouponApplied">
-                    <x-shop::modal>
+                    <x-shop::modal ref="couponModel">
                         <x-slot:toggle>
                             <span class="text-[#0A49A7] cursor-pointer">
                                 @lang('shop::app.checkout.cart.coupon.apply')
@@ -119,6 +119,8 @@
                             this.$parent.$parent.getOrderSummary();
 
                             alert(response.data.message)
+
+                            this.$refs.couponModel.toggle();
                         })
                         .catch((error) => {console.log(error);})
                 },
