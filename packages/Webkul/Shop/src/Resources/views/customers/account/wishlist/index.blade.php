@@ -8,13 +8,13 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
-                <div class="max-lg:hidden flex justify-between">
+                <div class="max-lg:hidden flex justify-between items-center">
                     <h2 class="text-[26px] font-medium">
                         @lang('shop::app.customers.account.wishlist.page-title')
                     </h2>
 
                     <div
-                        class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] mr-[60px] cursor-pointer"
+                        class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
                         @click="removeAll"
                         v-if="wishlist.length"
                     >
@@ -33,26 +33,52 @@
                             <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
                                 <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                                     <div class="">
-                                        <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
+                                        <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
                                             <x-shop::shimmer.image
                                                 class="max-w-[80px] max-h-[80px] rounded-[12px]"
-                                                ::src="item.item.base_image.small_image_url"
+                                                ::src="item.product.base_image.small_image_url"
                                             ></x-shop::shimmer.image>
                                         </a>
                                     </div>
                                     
-                                    <div class="grid gap-y-[10px]">
+                                    <div class="grid gap-y-[10px] place-content-start">
                                         <p 
                                             class="text-[16px] break-word-custom" 
-                                            v-text="item.item.name"
+                                            v-text="item.product.name"
                                         >
                                         </p>
 
-                                        <p 
-                                            class="text-[16px]" 
-                                            v-text="item.item.color"
+                                        <div
+                                            class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                            v-if="item.options.length"
                                         >
-                                        </p>
+                                            <div class="">
+                                                <p
+                                                    class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                                    @click="item.option_show = ! item.option_show"
+                                                >
+                                                    @lang('shop::app.checkout.cart.mini-cart.see-datails')
+
+                                                    <span
+                                                        class="text-[24px]"
+                                                        :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                                    ></span>
+                                                </p>
+                                            </div>
+
+                                            <div class="grid gap-[8px]" v-show="item.option_show">
+                                                <div class="" v-for="option in item.options">
+                                                    <p class="text-[14px] font-medium">
+                                                        @{{ option.attribute_name + ':' }}
+                                                    </p>
+
+                                                    <p class="text-[14px]">
+                                                        @{{ option.option_label }}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
 
                                         <a
                                             class="text-[16px] text-[#0A49A7] cursor-pointer"
@@ -65,7 +91,7 @@
 
                                 <p 
                                     class="text-[18px] max-w-[100px] min-w-[100px]" 
-                                    v-html="item.item.min_price" 
+                                    v-html="item.product.min_price" 
                                 >
                                 </p>
 
