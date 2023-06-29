@@ -101,7 +101,7 @@
                                 this.addresses = response.data.data.map((address, index) => {
                                     let isDefault = address.default_address ? address.default_address : index === 0;
 
-                                    if (! isDefault) {
+                                    if (isDefault) {
                                         this.forms.billing.address.address_id = address.id;
 
                                         this.forms.shipping.address.address_id = address.id;

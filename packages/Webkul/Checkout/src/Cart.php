@@ -864,7 +864,7 @@ class Cart
         }
 
         return [
-            'use_for_shipping' => $requestedBillingAddress['use_for_shipping'],
+            'use_for_shipping' => $data['billing']['use_for_shipping'],
             'cart_id' => $cart->id,
             ...$this->fillCustomerAttributes(),
             ...$this->fillAddressAttributes($requestedBillingAddress),
