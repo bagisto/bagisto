@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px]gap-[15px] max-lg:mb-[15px]">
+    <div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px] gap-[15px] max-lg:mb-[15px]">
         <div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px] pt-[25px] gap-[15px] max-lg:mb-[15px]">
             <div class="w-full flex justify-between items-center px-[6px]">
                 <div class="flex  items-center gap-x-[5px]">
