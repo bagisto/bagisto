@@ -413,6 +413,15 @@ return [
         ],
 
         'cart' => [
+            'item-add-to-cart'          => 'Item Added To Cart Successfully',
+            'empty-cart'                => 'Your cart is empty',
+            'shopping-cart'             => 'Shopping Cart',
+            'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
+            'return-to-shop'            => 'Return To Shop',
+            'continue-to-checkout'      => 'Continue to Checkout',
+            'rule-applied'              => 'Cart rule applied',
+            'minimum-order-message'     => 'Minimum order amount is :amount',
+            'suspended-account-message' => 'Your account has been suspended.',
 
             'item' => [
                 'quantity'        => 'Quantity:',
@@ -420,30 +429,20 @@ return [
                 'warning-remove'  => 'No items to remove from the cart.',
             ],
 
-            'home'                      => 'Home',
-            'cart-page'                 => 'Cart Page',
-            'view-cart'                 => 'View Cart',
-            'product-name'              => 'Product Name',
-            'remove'                    => 'Remove',
-            'quantity'                  => 'Quantity',
-            'price'                     => 'Price',
-            'tax'                       => 'Tax',
-            'subtotal'                  => 'Subtotal',
-            'total'                     => 'Total',
-            'grand-total'               => 'Grand Total',
-            'cart-summary'              => 'Cart Summary',
-            'item-add-to-cart'          => 'Item Added To Cart Successfully',
-            'update-cart'               => 'Update Cart',
-            'empty-cart'                => 'Your cart is empty',
-            'shopping-cart'             => 'Shopping Cart',
-            'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
-            'return-to-shop'            => 'Return To Shop',
-            'continue-shopping'         => 'Continue Shopping',
-            'continue-to-checkout'      => 'Continue to Checkout',
-            'proceed-to-checkout'       => 'Proceed To Checkout',
-            'rule-applied'              => 'Cart rule applied',
-            'minimum-order-message'     => 'Minimum order amount is :amount',
-            'suspended-account-message' => 'Your account has been suspended.',
+            'index' => [
+                'home'               => 'Home',
+                'cart'               => 'Cart',
+                'view-cart'          => 'View Cart',
+                'product-name'       => 'Product Name',
+                'remove'             => 'Remove',
+                'quantity'           => 'Quantity',
+                'price'              => 'Price',
+                'tax'                => 'Tax',
+                'total'              => 'Total',
+                'continue-shopping'  => 'Continue Shopping',
+                'update-cart'        => 'Update Cart',
+                'empty-product'      => 'Don\'t Have product in your cart',
+            ],
 
             'coupon'   => [
                 'code'            => 'Coupon code',
@@ -459,22 +458,111 @@ return [
             ],
 
             'mini-cart' => [
-                'see-datails'               => 'See Details',
-                'shopping-cart'             => 'Shopping Cart',
-                'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
-                'remove'                    => 'Remove',
-                'empty-cart'                => 'Your cart is empty',
-                'subtotal'                  => 'Subtotal',
-                'continue-to-checkout'      => 'Continue to Checkout',
-                'view-cart'                 => 'View Cart',
+                'see-datails'           => 'See Details',
+                'shopping-cart'         => 'Shopping Cart',
+                'offer-on-orders'       => 'Get Up To 30% OFF on your 1st order',
+                'remove'                => 'Remove',
+                'empty-cart'            => 'Your cart is empty',
+                'subtotal'              => 'Subtotal',
+                'continue-to-checkout'  => 'Continue to Checkout',
+                'view-cart'             => 'View Cart',
+            ],
+
+            'summary' => [
+                'cart-summary'        => 'Cart Summary',
+                'sub-total'           => 'Subtotal',
+                'tax'                 => 'Tax',   
+                'delivery-charges'    => 'Delivery Charges',
+                'discount-amount'     => 'Discount Amount',
+                'grand-total'         => 'Grand Total',
+                'place-order'         => 'Place Order',
+                'proceed-to-checkout' => 'Proceed To Checkout',
+
             ],
 
         ],
 
         'onepage' => [
+            'addresses' => [
+                'billing' => [
+                    'billing-address'       => 'Billing Address',
+                    'add-new-address'       => 'Add new address',
+                    'same-billing-address'  => 'Address is the same as my billing address',
+                    'back'                  => 'Back',
+                    'company-name'          => 'Company Name',
+                    'first-name'            => 'First Name',
+                    'last-name'             => 'Last Name',
+                    'email'                 => 'Email',
+                    'street-address'        => 'Street Address',
+                    'country'               => 'Country',
+                    'state'                 => 'State',
+                    'select-state'          => 'Select State',
+                    'city'                  => 'City',
+                    'postcode'              => 'Zip/Postcode',
+                    'telephone'             => 'Telephone',
+                    'save-address'          => 'Save this address',
+                    'confirm'               => 'Confirm',
+                ],
+
+                'index' => [
+                    'confirm' => 'Confirm',
+                ],
+
+                'shipping' => [
+                    'shipping-address' => 'Shipping Address',
+                    'add-new-address'  => 'Add new address',
+                    'back'             => 'Back',
+                    'company-name'     => 'Company Name',
+                    'first-name'       => 'First Name',
+                    'last-name'        => 'Last Name',
+                    'email'            => 'Email',
+                    'street-address'   => 'Street address',
+                    'country'          => 'Country',
+                    'state'            => 'State',
+                    'select-state'     => 'Select State',
+                    'select-country'   => 'Select Country',
+                    'city'             => 'City',
+                    'postcode'         => 'Zip/Postcode',
+                    'telephone'        => 'Telephone',
+                    'save-address'     => 'Save this address',
+                    'confirm'          => 'Confirm',
+                ],
+            ],
+
+            'coupon' => [
+                'discount'        => 'Coupon Discount',
+                'code'            => 'Coupon Code',
+                'applied'         => 'Coupon Applied',
+                'applied-coupon'  => 'Applied Coupon',
+                'apply'           => 'Apply Coupon',
+                'remove'          => 'Remove Coupon',
+                'apply-issue'     => 'Coupon code can\'t be applied.',
+                'sub-total'       => 'Subtotal',
+                'save'            => 'Save',
+
+            ],
+
             'index' => [
                 'home'     => 'Home',
                 'checkout' => 'Checkout',
+            ],
+
+            'payment' => [
+                'payment-method' => 'Payment Method'
+            ],
+
+            'shipping' => [
+                'shipping-method' => 'Shipping Method',
+            ],
+
+            'summary' =>[
+                'cart-summary'     => 'Cart Summary',
+                'sub-total'        => 'Subtotal',
+                'tax'              => 'Tax',   
+                'delivery-charges' => 'Delivery Charges',
+                'discount-amount'  => 'Discount Amount',
+                'grand-total'      => 'Grand Total',
+                'place-order'      => 'Place Order',
             ],
         ],
     ],
@@ -490,6 +578,12 @@ return [
     'response' => [
         'cancel-success'     => ':name canceled successfully.',
         'cancel-error'       => ':name can not be canceled.',
+    ],
+
+    'error' => [
+        'home'        => 'Go To Home',
+        'page-lost'   => 'Page lost content',
+        'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below."
     ],
 
     'security-warning'   => 'Suspicious activity found!!!',

@@ -4,20 +4,7 @@
 >
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
-            <!-- Breadcrumb -->
-            <div class="flex justify-start mt-[30px] max-lg:hidden">
-                <div class="flex gap-x-[14px] items-center">
-                    <p class="flex items-center gap-x-[14px] text-[16px] font-medium">
-                        @lang('shop::app.checkout.cart.home') 
-
-                        <span class="icon-arrow-right text-[24px]"></span>
-                    </p>
-
-                    <p class="text-[#7D7D7D] text-[12px] flex items-center gap-x-[16px] font-medium  after:content[' '] after:bg-[position:-7px_-41px] after:bs-main-sprite after:w-[9px] after:h-[20px] after:last:hidden">
-                        @lang('shop::app.checkout.cart.cart-page')
-                    </p>
-                </div>
-            </div>
+            <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
             <v-cart ref="vCart">
                 <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
@@ -119,7 +106,7 @@
                                             class="text-[16px] text-[#4D7EA8] cursor-pointer" 
                                             @click="removeItem(item.id)"
                                         >
-                                            @lang('shop::app.checkout.cart.remove')
+                                            @lang('shop::app.checkout.cart.index.remove')
                                         </span>
                                     </div>
                                 </div>
@@ -130,14 +117,14 @@
                                     class="bs-secondary-button rounded-[18px] max-h-[55px]"
                                     href="{{ route('shop.home.index') }}"
                                 >
-                                    @lang('shop::app.checkout.cart.continue-shopping')
+                                    @lang('shop::app.checkout.cart.index.continue-shopping')
                                 </a> 
 
                                 <a 
                                     class="bs-secondary-button rounded-[18px] max-h-[55px]"
                                     @click="update()"
                                 >
-                                    @lang('shop::app.checkout.cart.update-cart')
+                                    @lang('shop::app.checkout.cart.index.update-cart')
                                 </a>
                             </div>
                         </div>
@@ -149,7 +136,7 @@
                         class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" 
                         v-else
                     >
-                        <h1>@lang('Don\'t Have product in your cart')</h1>
+                        <h1>@lang('shop::app.checkout.cart.index.empty-product')</h1>
                     </div>
                 </template>
             </div>
