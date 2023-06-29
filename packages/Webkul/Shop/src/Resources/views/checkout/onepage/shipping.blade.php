@@ -17,7 +17,7 @@
                 <x-shop::accordion>
                     <x-slot:header>
                         <div class="flex justify-between items-center">
-                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Shipping Method')</h2>
+                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('shop::app.checkout.onepage.shipping.shipping-method')</h2>
                         </div>
                     </x-slot:header>
 
