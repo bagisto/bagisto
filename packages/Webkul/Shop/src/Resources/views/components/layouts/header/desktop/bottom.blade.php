@@ -196,15 +196,6 @@
                                 </a>
                             @endif
 
-                            @if ($showCompare)
-                                <a
-                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
-                                    {{-- href="{{ route('shop::customers.account.compare.index') }}" --}}
-                                >
-                                    @lang('shop::app.components.layouts.header.compare')
-                                </a>
-                            @endif
-
                             {{--Customers logout--}}
                             @auth('customer')
                                 <x-shop::form

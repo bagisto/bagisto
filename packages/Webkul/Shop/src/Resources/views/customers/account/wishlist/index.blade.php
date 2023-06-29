@@ -8,7 +8,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
-                <div class="max-lg:hidden">
+                <div class="max-lg:hidden flex justify-between">
                     <h2 class="text-[26px] font-medium">
                         @lang('shop::app.customers.account.wishlist.page-title')
                     </h2>
@@ -30,12 +30,12 @@
                 <template v-else>
                     <div v-if="wishlist.length">
                         <div v-for="item in wishlist">
-                            <div class="flex gap-[65px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
-                                <div class="flex gap-x-[20px]">
+                            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
+                                <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                                     <div class="">
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
                                             <x-shop::shimmer.image
-                                                class="w-[110px] h-[110px] rounded-[12px]"
+                                                class="max-w-[80px] max-h-[80px] rounded-[12px]"
                                                 ::src="item.item.base_image.small_image_url"
                                             ></x-shop::shimmer.image>
                                         </a>
@@ -43,7 +43,7 @@
                                     
                                     <div class="grid gap-y-[10px]">
                                         <p 
-                                            class="text-[16px]" 
+                                            class="text-[16px] break-word-custom" 
                                             v-text="item.item.name"
                                         >
                                         </p>
@@ -64,7 +64,7 @@
                                 </div>
 
                                 <p 
-                                    class="text-[18px]" 
+                                    class="text-[18px] max-w-[100px] min-w-[100px]" 
                                     v-html="item.item.min_price" 
                                 >
                                 </p>
@@ -78,7 +78,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center whitespace-nowrap"
+                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
                                     @click="moveToCart(item.id)"
                                 >
                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
@@ -140,6 +140,8 @@
                             })
                             .then(response => {
                                 this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {});
                     },
@@ -150,6 +152,8 @@
                             })
                             .then(response => {
                                 this.wishlist = [];
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
                     },
@@ -171,6 +175,8 @@
                                     }
     
                                     this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {});
                         }
