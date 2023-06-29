@@ -1,7 +1,7 @@
 @props([
     'error_code' => $statusCode ?? 404,
-    'title' =>  $title ?? "Page lost content",
-    'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below.",
+    'title' =>  $title ?? trans('shop::app.error.page-lost'),
+    'description' => trans('shop::app.error.description')
 ])
 
 <x-shop::layouts
