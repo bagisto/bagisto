@@ -399,7 +399,7 @@ return [
         'already-added'      => 'Item is already added to compare list',
         'item-add-success'   => 'Item added successfully to the compare list',
         'remove-success'     => 'Item removed successfully.',
-        'remove-all-success' => 'ALl items removed successfully.',
+        'remove-all-success' => 'All items removed successfully.',
         'remove-error'       => 'Something went wrong, please try again later.',
     ],
 
@@ -422,6 +422,7 @@ return [
             'rule-applied'              => 'Cart rule applied',
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'suspended-account-message' => 'Your account has been suspended.',
+            'quantity-update'           => 'Quantity updated successfully',
 
             'item' => [
                 'quantity'        => 'Quantity:',

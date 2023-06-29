@@ -185,6 +185,8 @@
 
                             this.items = [];
 
+                            this.$emitter.emit('add-flash', { type: 'success', message:  '@lang('All items removed successfully')' });
+
                             return;
                         }
                         
@@ -193,6 +195,8 @@
                             })
                             .then(response => {
                                 this.items = [];
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
 

@@ -68,7 +68,7 @@
                                                     class="text-[16px] text-[#4D7EA8] cursor-pointer" 
                                                     @click="removeItem(item.id)"
                                                 >
-                                                    @lang('shop::app.checkout.cart.remove')
+                                                    @lang('shop::app.checkout.cart.index.remove')
                                                 </span>
                                             </div>
 
@@ -164,6 +164,8 @@
                         this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty: this.applied.quantity })
                             .then(response => {
                                 this.cart = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {});
                     },
@@ -179,6 +181,9 @@
                             })
                             .then(response => {
                                 this.cart = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                             })
                             .catch(error => {});
                     },
