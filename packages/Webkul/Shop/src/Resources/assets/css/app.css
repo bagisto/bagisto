@@ -325,4 +325,8 @@
             background-position: 1250px 0;
         }
     }
+    
+    .break-word-custom {
+        word-break: break-word;
+    }
 }

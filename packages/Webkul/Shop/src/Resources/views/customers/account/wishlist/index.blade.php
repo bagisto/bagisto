@@ -30,11 +30,11 @@
                 <template v-else>
                     <div v-if="wishlist.length">
                         <div v-for="item in wishlist">
-                            <div class="flex gap-[55px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
-                                <div class="flex gap-x-[20px]">
+                            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
+                                <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                                     <div class="">
                                         <div
-                                            class="relative overflow-hidden rounded-[12px]  min-w-[110px] min-h-[110px] bg-[#E9E9E9] shimmer"
+                                            class="relative overflow-hidden rounded-[12px]  min-w-[80px] min-h-[80px] bg-[#E9E9E9] shimmer"
                                             v-show="isImageLoading"
                                         >
                                             <img class="rounded-[12px] bg-[#F5F5F5]" src="">
@@ -42,7 +42,7 @@
 
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
                                             <img 
-                                                class="max-w-[110px] max-h-[110px] rounded-[12px]" 
+                                                class="max-w-[80px] max-h-[80px] rounded-[12px]" 
                                                 :src='item.item.base_image.small_image_url'
                                                 :alt="item.item.name" 
                                                 :title="item.item.name"
@@ -52,9 +52,9 @@
                                         </a>
                                     </div>
                                     
-                                    <div class="grid gap-y-[10px] min-w-[80px] max-w-[80px]">
+                                    <div class="grid gap-y-[10px]">
                                         <p 
-                                            class="text-[16px] max-w-[80px] break-words" 
+                                            class="text-[16px] break-word-custom" 
                                             v-text="item.item.name"
                                         >
                                         </p>
@@ -75,7 +75,7 @@
                                 </div>
 
                                 <p 
-                                    class="text-[18px] min-w-[80px] max-w-[80px] break-words" 
+                                    class="text-[18px] max-w-[100px] min-w-[100px]" 
                                     v-html="item.item.min_price" 
                                 >
                                 </p>
@@ -89,7 +89,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center whitespace-nowrap"
+                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
                                     @click="moveToCart(item.id)"
                                 >
                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
