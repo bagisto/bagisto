@@ -492,6 +492,12 @@ return [
         'cancel-error'       => ':name can not be canceled.',
     ],
 
+    'error' => [
+        'home'        => 'Go To Home',
+        'page-lost'   => 'Page lost content',
+        'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below."
+    ],
+
     'security-warning'   => 'Suspicious activity found!!!',
 
     'invalid_vat_format' => 'The given vat id has a wrong format',
