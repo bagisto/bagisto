@@ -210,14 +210,16 @@
                                 'product_id': productId
                             })
                             .then(response => {
-                                if (response.data.message) {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                                } else {
-                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
-                                }
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message});
+                                if (error.response.status === 400) {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.data.message });
+
+                                    return;
+                                }
+
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
                             });
 
                         return;
@@ -262,11 +264,11 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.data.redirect_uri) {
+                            if (response.data.data.status) {
                                 window.location.href = response.data.data.redirect_uri;
                             }
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => {});
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
