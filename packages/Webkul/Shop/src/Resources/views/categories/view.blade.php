@@ -29,8 +29,38 @@
                         <!-- Product Listing Toolbar -->
                         @include('shop::categories.toolbar')
 
-                        <!-- Product Card Container -->
-                        <div v-if="filters.toolbar.mode === 'grid'">
+
+                        <!-- Product List Card Container -->
+                        <div
+                            class="grid grid-cols-1 gap-[25px] mt-[30px]"
+                            v-if="filters.toolbar.mode === 'list'"
+                        >
+                            <!-- Product Card Shimmer Effect -->
+                            <template v-if="isLoading">
+                                <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
+                            </template>
+
+                            <!-- Product Card Listing -->
+                            <template v-else>
+                                <template v-if="products.length">
+                                    <x-shop::products.card
+                                        ::mode="'list'"
+                                        v-for="product in products"
+                                    ></x-shop::products.card>
+                                </template>
+
+                                <template v-else>
+                                    <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                                  
+                                        <p class="text-[20px]">@lang('shop::app.categories.view.empty')</p>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+
+                        <!-- Product Grid Card Container -->
+                        <div v-else>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
                                 <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
@@ -53,34 +83,6 @@
                                     <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
-                                        <p class="text-[20px]">@lang('shop::app.categories.view.empty')</p>
-                                    </div>
-                                </template>
-                            </template>
-                        </div>
-
-                        <div
-                            class="grid grid-cols-1 gap-[25px] mt-[30px] "
-                            v-else
-                        >
-                            <!-- Product Card Shimmer Effect -->
-                            <template v-if="isLoading">
-                                <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>
-                            </template>
-
-                            <!-- Product Card Listing -->
-                            <template v-else>
-                                <template v-if="products.length">
-                                    <x-shop::products.card
-                                        ::mode="'list'"
-                                        v-for="product in products"
-                                    ></x-shop::products.card>
-                                </template>
-
-                                <template v-else>
-                                    <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
-                                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
-                                  
                                         <p class="text-[20px]">@lang('shop::app.categories.view.empty')</p>
                                     </div>
                                 </template>
@@ -115,6 +117,7 @@
 
                         filters: {
                             toolbar: {},
+                            
                             filter: {},
                         },
 

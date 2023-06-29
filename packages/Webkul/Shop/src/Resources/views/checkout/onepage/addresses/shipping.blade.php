@@ -7,7 +7,7 @@
             <x-slot:header class="suraj">
                 <div class="flex justify-between items-center">
                     <h2 class="text-[26px] font-medium max-sm:text-[20px]">
-                        @lang('Shipping Address')
+                        @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
                     </h2>
                 </div>
             </x-slot:header>
@@ -68,7 +68,7 @@
                     >
                         <div class="flex gap-x-[10px] items-center cursor-pointer">
                             <span class="icon-plus text-[30px] p-[10px] border border-black rounded-full"></span>
-                            <p class="text-[16px]">@lang('Add new address')</p>
+                            <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
         <x-shop::accordion>
             <x-slot:header>
                 <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('Shipping Address')</h2>
+                    <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')</h2>
                 </div>
             </x-slot:header>
         
@@ -102,13 +102,13 @@
                             >
                                 <span class="icon-arrow-left text-[24px]"></span>
 
-                                <span>@lang('Back')</span>
+                                <span>@lang('shop::app.checkout.onepage.addresses.shipping.back')</span>
                             </a>
                         </div>
 
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label>
-                                @lang('Company name')
+                                @lang('shop::app.checkout.onepage.addresses.shipping.company-name')
                             </x-shop::form.control-group.label>
                         
                             <x-shop::form.control-group.control
@@ -129,7 +129,7 @@
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px]">
-                                    @lang('First name')
+                                    @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
@@ -150,7 +150,7 @@
                             
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px]">
-                                    @lang('Last name')
+                                    @lang('shop::app.checkout.onepage.addresses.shipping.last-name')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
@@ -172,7 +172,7 @@
                         
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px]">
-                                @lang('Email')
+                                @lang('shop::app.checkout.onepage.addresses.shipping.email')
                             </x-shop::form.control-group.label>
                         
                             <x-shop::form.control-group.control
@@ -193,7 +193,7 @@
                         
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px]">
-                                @lang('Street address')
+                                @lang('shop::app.checkout.onepage.addresses.shipping.street-address')
                             </x-shop::form.control-group.label>
                         
                             <x-shop::form.control-group.control
@@ -233,7 +233,7 @@
                                 class="!mb-4"
                             >
                                 <x-shop::form.control-group.label class="!mt-[0px]">
-                                    @lang('Country')
+                                    @lang('shop::app.checkout.onepage.addresses.shipping.country')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
@@ -245,7 +245,7 @@
                                     placeholder="Country"
                                     v-model="forms.shipping.address.country"
                                 >
-                                    <option value="">@lang('Select country')</option>
+                                    <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-country')</option>
                                     @foreach (core()->countries() as $country)
                                         <option value="{{ $country->code }}">{{ $country->name }}</option>
                                     @endforeach
@@ -259,7 +259,7 @@
                             
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px]">
-                                    @lang('State')
+                                    @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
@@ -284,7 +284,7 @@
                                     v-model="forms.shipping.address.state"
                                     v-if="haveStates('shipping')"
                                 >
-                                    <option value="">@lang('Select state')</option>
+                                    <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-state')</option>
 
                                     <option 
                                         v-for='(state, index) in states[forms.shipping.address.country]' 
@@ -304,7 +304,7 @@
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px]">
-                                    @lang('City')
+                                    @lang('shop::app.checkout.onepage.addresses.shipping.city')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
@@ -326,7 +326,7 @@
                             
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="!mt-[0px]">
-                                    @lang('Zip/Postcode')
+                                    @lang('shop::app.checkout.onepage.addresses.shipping.postcode')
                                 </x-shop::form.control-group.label>
                             
                                 <x-shop::form.control-group.control
@@ -349,7 +349,7 @@
 
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="!mt-[0px]">
-                                @lang('Telephone')
+                                @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
                             </x-shop::form.control-group.label>
                         
                             
@@ -387,7 +387,7 @@
                                             for="shipping[is_save_as_address]"
                                         ></label>
 
-                                        <label for="shipping[is_save_as_address]">@lang('Save this address')</label>
+                                        <label for="shipping[is_save_as_address]">@lang('shop::app.checkout.onepage.addresses.shipping.save-address')</label>
                                     </div>
                                 @endauth
                             </div>
@@ -400,7 +400,7 @@
                                 type="submit"
                                 class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                             >
-                                @lang('Confirm')
+                                @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                             </button>
                         </div>
                     </form>

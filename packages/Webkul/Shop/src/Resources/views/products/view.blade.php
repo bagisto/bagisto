@@ -83,6 +83,10 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-product-template">
+            <div class="flex justify-center max-lg:hidden">
+                <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
+            </div>
+
             <form ref="formData">
                 <input 
                     type="hidden" 
