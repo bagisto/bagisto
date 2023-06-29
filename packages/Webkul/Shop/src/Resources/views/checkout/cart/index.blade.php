@@ -127,14 +127,14 @@
         
                             <div class="flex flex-wrap gap-[30px] justify-end">
                                 <a
-                                    class="bs-secondary-button rounded-[18px]"
+                                    class="bs-secondary-button rounded-[18px] max-h-[55px]"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.continue-shopping')
                                 </a> 
 
                                 <a 
-                                    class="bs-secondary-button rounded-[18px]"
+                                    class="bs-secondary-button rounded-[18px] max-h-[55px]"
                                     @click="update()"
                                 >
                                     @lang('shop::app.checkout.cart.update-cart')
