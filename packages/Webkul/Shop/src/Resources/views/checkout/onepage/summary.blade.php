@@ -18,7 +18,7 @@
         <template v-else>
             <div class="max-w-full w-[442px] pl-[30px] h-max sticky top-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
                 <h2 class="text-[26px] font-medium max-sm:text-[20px]">
-                    @lang('Cart Summary')
+                    @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h2>
                 
                 <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px] max-sm:mt-[20px]">
@@ -50,7 +50,7 @@
                 <div class="grid gap-[15px] mt-[25px] mb-[30px]">
                     <div class="flex text-right justify-between">
                         <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
-                            @lang('Subtotal')
+                            @lang('shop::app.checkout.onepage.summary.sub-total')
                         </p>
 
                         <p 
@@ -66,7 +66,7 @@
                         v-if="parseFloat(cart.base_tax_total)"
                     >
                         <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
-                            @lang('Tax') (@{{ index }})%
+                            @lang('shop::app.checkout.onepage.summary.tax') (@{{ index }})%
                         </p>
 
                         <p 
@@ -81,7 +81,7 @@
                         v-if="cart.selected_shipping_rate"
                     >
                         <p class="text-[16px]">
-                            @lang('Delivery Charges')
+                            @lang('shop::app.checkout.onepage.summary.delivery-charges')
                         </p>
 
                         <p 
@@ -96,7 +96,7 @@
                         v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
                     >
                         <p class="text-[16px]">
-                            @lang('Discount amount')
+                            @lang('shop::app.checkout.onepage.summary.discount-amount')
                         </p>
 
                         <p 
@@ -110,7 +110,7 @@
 
                     <div class="flex text-right justify-between">
                         <p class="text-[18px] font-semibold">
-                            @lang('Grand total')
+                            @lang('shop::app.checkout.onepage.summary.grand-total')
                         </p>
 
                         <p 
@@ -134,7 +134,7 @@
                             class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
                             @click="placeOrder"
                         >
-                            @lang('Place order')    
+                            @lang('shop::app.checkout.onepage.summary.place-order')    
                         </button>
                     </div>
                 </template>

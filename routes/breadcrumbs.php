@@ -76,7 +76,7 @@ Breadcrumbs::for('wishlist', function (BreadcrumbTrail $trail) {
 // Home > Cart
 Breadcrumbs::for('cart', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push(trans('shop::app.checkout.cart.cart-page'), route('shop.checkout.cart.index'));
+    $trail->push(trans('shop::app.checkout.cart.index.cart'), route('shop.checkout.cart.index'));
 });
 
 // Home > Checkout

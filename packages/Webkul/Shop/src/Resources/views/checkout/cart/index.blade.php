@@ -25,19 +25,19 @@
                         <div class="grid gap-y-[25px] flex-1">
                             <div class="grid gap-x-[10px] grid-cols-[380px_auto_auto_auto] border-b-[1px] border-[#E9E9E9] pb-[18px]">
                                 <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.product-name')
+                                    @lang('shop::app.checkout.cart.index.product-name')
                                 </div>
         
                                 <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.price')
+                                    @lang('shop::app.checkout.cart.index.price')
                                 </div>
         
                                 <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.quantity')
+                                    @lang('shop::app.checkout.cart.index.quantity')
                                 </div>
         
                                 <div class="text-[14px] font-medium">
-                                    @lang('shop::app.checkout.cart.total')
+                                    @lang('shop::app.checkout.cart.index.total')
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@
                                             class="text-[#0A49A7] cursor-pointer" 
                                             @click="removeItem(item.id)"
                                         >
-                                            @lang('shop::app.checkout.cart.remove')
+                                            @lang('shop::app.checkout.cart.index.remove')
                                         </span>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                                         class="bs-secondary-button rounded-[18px]"
                                         href="{{ route('shop.home.index') }}"
                                     >
-                                        @lang('shop::app.checkout.cart.continue-shopping')
+                                        @lang('shop::app.checkout.cart.index.continue-shopping')
                                     </a>   
                                 </div>
         
@@ -135,7 +135,7 @@
                                         class="bs-secondary-button rounded-[18px]"
                                         @click="update()"
                                     >
-                                        @lang('shop::app.checkout.cart.update-cart')
+                                        @lang('shop::app.checkout.cart.index.update-cart')
                                     </a>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                         class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" 
                         v-else
                     >
-                        <h1>@lang('Don\'t Have product in your cart')</h1>
+                        <h1>@lang('shop::app.checkout.cart.index.empty-product')</h1>
                     </div>
                 </template>
             </div>
