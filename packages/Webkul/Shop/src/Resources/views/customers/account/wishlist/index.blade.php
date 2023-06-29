@@ -8,7 +8,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
-                <div class="max-lg:hidden">
+                <div class="max-lg:hidden flex justify-between">
                     <h2 class="text-[26px] font-medium">
                         @lang('shop::app.customers.account.wishlist.page-title')
                     </h2>
@@ -30,7 +30,7 @@
                 <template v-else>
                     <div v-if="wishlist.length">
                         <div v-for="item in wishlist">
-                            <div class="flex gap-[65px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
+                            <div class="flex gap-[55px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
                                 <div class="flex gap-x-[20px]">
                                     <div class="">
                                         <div
