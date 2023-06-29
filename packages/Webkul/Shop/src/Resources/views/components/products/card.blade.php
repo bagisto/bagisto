@@ -232,7 +232,7 @@
 
                             this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
                         } else {
-                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('Item is already added to compare list')' });
+                            this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('Item is already added to compare list')' });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
@@ -258,13 +258,14 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.redirect) {
-                                window.location.href = response.data.data;
+                            if (response.data.data.redirect) {
+                                window.location.href = response.data.data.url;
                             }
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                         })
                         .catch(error => {});
+                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
                 },
             },
         });
