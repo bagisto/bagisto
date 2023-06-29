@@ -33,22 +33,11 @@
                             <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
                                 <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                                     <div class="">
-                                        <div
-                                            class="relative overflow-hidden rounded-[12px]  min-w-[80px] min-h-[80px] bg-[#E9E9E9] shimmer"
-                                            v-show="isImageLoading"
-                                        >
-                                            <img class="rounded-[12px] bg-[#F5F5F5]" src="">
-                                        </div>
-
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
-                                            <img 
-                                                class="max-w-[80px] max-h-[80px] rounded-[12px]" 
-                                                :src='item.item.base_image.small_image_url'
-                                                :alt="item.item.name" 
-                                                :title="item.item.name"
-                                                @load="onImageLoad()"
-                                                v-show="! isImageLoading"
-                                            >
+                                            <x-shop::shimmer.image
+                                                class="max-w-[80px] max-h-[80px] rounded-[12px]"
+                                                ::src="item.item.base_image.small_image_url"
+                                            ></x-shop::shimmer.image>
                                         </a>
                                     </div>
                                     
@@ -125,8 +114,6 @@
                     return  {
                         isLoading: true,
 
-                        isImageLoading: true,
-                        
                         wishlist: [],
                     };
                 },
@@ -136,10 +123,6 @@
                 },
 
                methods: {
-                    onImageLoad() {
-                        this.isImageLoading = false;
-                    },
-
                     get() {
                         this.$axios.get("{{ route('shop.api.customers.account.wishlist.index') }}")
                             .then(response => {

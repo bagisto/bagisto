@@ -43,7 +43,10 @@
                         >
                         </v-field>
                         
-                        <span class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"></span>
+                        <label
+                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                            for="{{ $link->id }}"
+                        ></label>
                         
                         <label
                             for="{{ $link->id }}"
