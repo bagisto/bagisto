@@ -3,7 +3,7 @@
 @for ($i = 0;  $i < $count; $i++)
     <div class="grid gap-2.5 relative max-sm:grid-cols-1 w-full max-w-[291px] {{ $attributes["class"] }}">
         <div class="relative w-full rounded-sm bg-[#E9E9E9] shimmer">
-            <div class="relative after:content-[' '] after:block after:pb-[100%] "></div>
+            <div class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"></div>
         </div>
 
         <div class="grid gap-2.5 content-start">

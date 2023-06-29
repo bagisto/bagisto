@@ -11,23 +11,12 @@
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
-                <div
-                    class="relative overflow-hidden rounded-sm  min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
-                    v-show="isImageLoading"
-                >
-                    <img class="rounded-sm bg-[#F5F5F5]" src="">
-                </div>
-
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
-                    <img
-                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                        :src="product.base_image.medium_image_url"
-                        width="291"
-                        height="300"
-                        @load="onImageLoad()"
-                        v-show="! isImageLoading"
-                    >
-                </a>   
+                    <x-shop::shimmer.image
+                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"
+                        ::src="product.base_image.medium_image_url"
+                    ></x-shop::shimmer.image>
+                </a>
                 
                 <div class="action-items bg-black">
                     <p
@@ -90,12 +79,10 @@
         >
             <div class="relative overflow-hidden group max-w-[250px] max-h-[258px]"> 
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
-                    <img 
-                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
-                        :src="product.base_image.medium_image_url"
-                        width="250"
-                        height="258"
-                    >
+                    <x-shop::shimmer.image
+                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"
+                        ::src="product.base_image.medium_image_url"
+                    ></x-shop::shimmer.image>
                 </a>
             
                 <div class="action-items bg-black"> 
@@ -180,17 +167,11 @@
 
             data() {
                 return {
-                    isImageLoading: true,
-
                     isCustomer: '{{ auth()->guard('customer')->check() }}',
                 }
             },
 
             methods: {
-                onImageLoad() {
-                    this.isImageLoading = false;
-                },
-
                 addToWishlist() {
                     this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
                             product_id: this.product.id

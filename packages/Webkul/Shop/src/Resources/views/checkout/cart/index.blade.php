@@ -28,23 +28,10 @@
                             >
                                 <div class="flex gap-x-[10px] justify-between flex-wrap border-b-[1px] border-[#E9E9E9] pb-[18px]">
                                     <div class="flex gap-x-[20px]">
-                                        <div>
-                                            <div 
-                                                class="overflow-hidden rounded-[12px] w-[110px] h-[110px] bg-[#E9E9E9] shimmer"
-                                                v-show="isImageLoading"
-                                            >
-                                                <img class="rounded-sm bg-[#F5F5F5]">
-                                            </div>
-                                
-                                            <img 
-                                                class="w-[110px] h-[110px] rounded-[12px]" 
-                                                :src="item.base_image.small_image_url"
-                                                @load="onImageLoad"
-                                                v-show="! isImageLoading"
-                                                :alt="item.name" 
-                                                :title="item.name"
-                                            >
-                                        </div>
+                                        <x-shop::shimmer.image
+                                            class="w-[110px] h-[110px] rounded-[12px]"
+                                            ::src="item.base_image.small_image_url"
+                                        ></x-shop::shimmer.image>
 
                                         <div class="grid gap-y-[10px]">
                                             <p 
@@ -154,8 +141,6 @@
                             quantity: {},
                         },
 
-                        isImageLoading: true,
-
                         isLoading: true,
                     }
                 },
@@ -165,10 +150,6 @@
                 },
 
                 methods: {
-                    onImageLoad() {
-                        this.isImageLoading = false;
-                    },
-
                     get() {
                         this.$axios.get('{{ route('shop.api.checkout.cart.index') }}')
                             .then(response => {
