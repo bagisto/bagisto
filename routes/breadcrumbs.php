@@ -90,3 +90,9 @@ Breadcrumbs::for('compare', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push(trans('shop::app.compare.product-compare'), route('shop.compare.index'));
 });
+
+// Home > Product
+Breadcrumbs::for('product', function (BreadcrumbTrail $trail, $entity) {
+    $trail->parent('home');
+    $trail->push($entity->name, route('shop.productOrCategory.index', $entity->url_key));
+});
