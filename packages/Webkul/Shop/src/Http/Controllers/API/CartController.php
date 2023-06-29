@@ -76,7 +76,6 @@ class CartController extends APIController
             }
         } catch (\Exception $exception) {
             return new JsonResource([
-                'status'       => true,
                 'redirect_uri' => route('shop.productOrCategory.index', $product->product->url_key),
                 'message'      => $exception->getMessage(),
             ]);

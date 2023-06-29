@@ -52,9 +52,9 @@ class CompareController extends APIController
     /**
      * Method for customers to get products in comparison.
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function store()
+    public function store(): JsonResource
     {
         $compareProduct = $this->compareItemRepository->findOneByField([
             'customer_id'  => auth()->guard('customer')->user()->id,
@@ -62,9 +62,9 @@ class CompareController extends APIController
         ]);
 
         if ($compareProduct) {
-            return (new JsonResource([
+            return new JsonResource([
                 'message' => trans('shop::app.compare.already-added'),
-            ]))->response()->setStatusCode(400);
+            ]);
         }
 
         $this->compareItemRepository->create([

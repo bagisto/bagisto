@@ -210,7 +210,11 @@
                                 'product_id': productId
                             })
                             .then(response => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                if (response.data.message) {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                }
                             })
                             .catch(error => {
                                 this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message});
@@ -258,11 +262,11 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.data.status) {
+                            if (response.data.data.redirect_uri) {
                                 window.location.href = response.data.data.redirect_uri;
                             }
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                         })
                         .catch(error => {});
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
