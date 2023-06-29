@@ -2,15 +2,7 @@
     <!-- Breadcrumb -->
     <div class="flex justify-center mt-[20px] max-lg:hidden">
 		<div class="flex gap-x-[10px] items-center">
-			<p class="flex items-center gap-x-[10px] text-[12px] font-medium">
-                Home
-                <span class="icon-arrow-right text-[22px]"></span>
-			</p>
-
-			<p class="flex items-center gap-x-[16px] text-[12px] font-medium">
-                Product Compare
-                <span class="icon-arrow-right text-[22px] last:hidden"></span>
-            </p>
+            <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>
 		</div>
 	</div>
 

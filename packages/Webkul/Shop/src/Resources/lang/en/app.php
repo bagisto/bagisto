@@ -88,6 +88,7 @@ return [
             'addresses' => [
                 'title'           => 'Address',
                 'edit'            => 'Edit',
+                'edit-address'    => 'Edit Address',
                 'delete'          => 'Delete',
                 'set-as-default'  => 'Set as Default',
                 'add-address'     => 'Add Address',
@@ -240,6 +241,7 @@ return [
                 'remove-all-success' => 'All the items from your wishlist have been removed',
             ],
 
+            'home'           => 'Home',
             'title'          => 'Profile',
             'save'           => 'Save',
             'delete'         => 'Delete',
@@ -390,6 +392,7 @@ return [
     ],
 
     'compare'  => [
+        'product-compare'    => 'Product Compare',
         'delete-all'         => 'Delete All',
         'empty-text'         => 'You have no items in your compare list',
         'title'              => 'Product Compare',

@@ -10,7 +10,7 @@
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">@lang('shop::app.checkout.cart.coupon.discount')</p>
             
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
-                <x-shop::modal>
+                <x-shop::modal ref="couponModel">
                     <x-slot:toggle>
                         <span 
                             class="text-[#0A49A7] cursor-pointer" 
@@ -120,6 +120,8 @@
                             this.$parent.$parent.$refs.vCart.get();
                             
                             alert(response.data.message)
+
+                            this.$refs.couponModel.toggle();
                         })
                         .catch((error) => {console.log(error);})
                 },

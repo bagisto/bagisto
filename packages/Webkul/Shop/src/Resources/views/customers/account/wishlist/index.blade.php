@@ -1,22 +1,14 @@
 <x-shop::layouts.account>
+    @section('breadcrumbs')
+        <x-shop::breadcrumbs name="wishlist"></x-shop::breadcrumbs>
+    @endSection
+
     <v-wishlist-products></v-wishlist-products>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
                 <div class="max-lg:hidden">
-                    <div class="flex gap-x-[4px] items-center mb-[10px]">
-                        <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
-                            @lang('shop::app.customers.account.wishlist.profile')
-                        </p>
-
-                        <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
-                            @lang('shop::app.customers.account.wishlist.title')
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center">
                     <h2 class="text-[26px] font-medium">
                         @lang('shop::app.customers.account.wishlist.page-title')
                     </h2>

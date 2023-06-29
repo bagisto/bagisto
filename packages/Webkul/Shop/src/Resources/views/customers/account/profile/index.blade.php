@@ -1,4 +1,8 @@
 <x-shop::layouts.account>
+    @section('breadcrumbs')
+        <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
+    @endSection
+
     <div class="flex justify-between">
         <h2 class="text-[26px] font-medium">
             @lang('shop::app.customers.account.title')
