@@ -16,7 +16,7 @@ class WishlistResource extends JsonResource
     {
         return [
             'id'      => $this->id,
-            'options' => $this->resource->additional['attributes'] ?? [],
+            'options' => array_values($this->resource->additional['attributes'] ?? []),
             'product' => new ProductResource($this->product),
         ];
     }
