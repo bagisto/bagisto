@@ -251,9 +251,11 @@
                     },
 
                     addToWishlist() {
-                        this.$axios.post('{{ route("shop.api.customers.account.wishlist.store", $product->id) }}')
+                        this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
+                                product_id: "{{ $product->id }}"
+                            })
                             .then(response => {
-                                alert(response.data.data.message);
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
                     },
@@ -318,4 +320,3 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
-larave
