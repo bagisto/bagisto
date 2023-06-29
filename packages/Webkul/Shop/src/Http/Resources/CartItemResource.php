@@ -23,7 +23,7 @@ class CartItemResource extends JsonResource
             'formatted_price' => core()->formatPrice($this->price),
             'total'           => $this->total,
             'formatted_total' => core()->formatPrice($this->total),
-            'options'         => $this->resource->additional['attributes'] ?? [],
+            'options'         => array_values($this->resource->additional['attributes'] ?? []),
             'base_image'      => $this->product->getTypeInstance()->getBaseImage($this)
         ];
     }
