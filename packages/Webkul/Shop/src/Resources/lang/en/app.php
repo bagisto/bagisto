@@ -429,7 +429,7 @@ return [
                 'warning-remove'  => 'No items to remove from the cart.',
             ],
 
-            'index' =>[
+            'index' => [
                 'home'               => 'Home',
                 'cart'               => 'Cart',
                 'view-cart'          => 'View Cart',
@@ -468,7 +468,7 @@ return [
                 'view-cart'             => 'View Cart',
             ],
 
-            'summary' =>[
+            'summary' => [
                 'cart-summary'        => 'Cart Summary',
                 'sub-total'           => 'Subtotal',
                 'tax'                 => 'Tax',   
@@ -483,7 +483,7 @@ return [
         ],
 
         'onepage' => [
-            'addresses' =>[
+            'addresses' => [
                 'billing' => [
                     'billing-address'       => 'Billing Address',
                     'add-new-address'       => 'Add new address',
