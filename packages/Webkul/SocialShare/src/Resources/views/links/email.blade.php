@@ -15,7 +15,7 @@
                 href="{{ $email_url }}" 
                 target="_blank"
             >
-                @include('socialshare::icons.email')
+                @include('SocialShare::icons.email')
             </a>
         </li>
     </script>

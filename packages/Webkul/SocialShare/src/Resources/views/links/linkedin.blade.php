@@ -18,7 +18,7 @@
                 href="#" 
                 @click="openSharePopup"
             >
-                @include('socialshare::icons.linkedin')
+                @include('SocialShare::icons.linkedin')
             </a>
         </li>
     </script>

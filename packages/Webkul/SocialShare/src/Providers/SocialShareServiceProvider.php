@@ -8,9 +8,9 @@ class SocialShareServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views/', 'socialshare');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'SocialShare');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'socialshare');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'SocialShare');
 
         $this->app->register(EventServiceProvider::class);
     }

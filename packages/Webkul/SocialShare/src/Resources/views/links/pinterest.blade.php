@@ -19,7 +19,7 @@
                 href="#" 
                 @click="openSharePopup"
             >
-                @include('socialshare::icons.pinterest')
+                @include('SocialShare::icons.pinterest')
             </a>
         </li>
     </script>
