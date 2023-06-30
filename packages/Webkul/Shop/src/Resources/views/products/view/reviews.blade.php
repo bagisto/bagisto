@@ -187,6 +187,12 @@
                             </p>
 
                             <p
+                                class="text-[16px] text-[#7D7D7D] font-semibold mt-[20px] max-sm:text-[12px]"
+                                v-text="review.title"
+                            >
+                            </p>
+
+                            <p
                                 class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"
                                 v-text="review.comment"
                             >

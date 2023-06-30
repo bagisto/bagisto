@@ -23,9 +23,10 @@ class ProductReviewResource extends JsonResource
         return [
             'id'         => $this->id,
             'name'       => $this->name,
+            'title'      => $this->title,
             'comment'    => $this->comment,
             'rating'     => $this->rating,
-            'images'      => $images,
+            'images'     => $images,
             'created_at' => $this->created_at->format('M d, Y'),
         ];
     }
