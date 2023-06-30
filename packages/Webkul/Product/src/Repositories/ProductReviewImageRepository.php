@@ -12,7 +12,7 @@ class ProductReviewImageRepository extends Repository
      *
      * @return string
      */
-    function model(): string
+    public function model(): string
     {
         return 'Webkul\Product\Contracts\ProductReviewImage';
     }
@@ -28,20 +28,18 @@ class ProductReviewImageRepository extends Repository
             return;
         }
 
-        if (getimagesize($data['attachments']['image_1'])) {
-            foreach ($data['attachments'] as $imageId => $image) {
-                $file = 'attachments.' . $imageId;
-                $dir = 'review/' . $review->id;
-    
-                if (
-                    $image instanceof UploadedFile
-                    && request()->hasFile($file)
-                ) {
-                    $this->create([
-                        'path'      => request()->file($file)->store($dir),
-                        'review_id' => $review->id,
-                    ]);
-                }
+        foreach ($data['attachments'] as $imageId => $image) {
+            $file = 'attachments.' . $imageId;
+            $dir = 'review/' . $review->id;
+
+            if (
+                $image instanceof UploadedFile
+                && request()->hasFile($file)
+            ) {
+                $this->create([
+                    'path'      => request()->file($file)->store($dir),
+                    'review_id' => $review->id,
+                ]);
             }
         }
     }
