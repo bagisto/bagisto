@@ -13,6 +13,8 @@ class ProductReviewAttachment extends Model implements ProductReviewAttachmentCo
     protected $fillable = [
         'path',
         'review_id',
+        'type',
+        'mime_type',
     ];
 
     /**

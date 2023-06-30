@@ -4,19 +4,15 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Http\UploadedFile;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Product\Contracts\ProductReviewAttachment;
 
 class ProductReviewAttachmentRepository extends Repository
 {
     /**
      * Specify Model class name
-     *
-     * @return string
      */
-
-    function model(): string
+    public function model(): string
     {
-        return ProductReviewAttachment::class;
+        return 'Webkul\Product\Contracts\ProductReviewAttachment';
     }
 
     /**
@@ -30,18 +26,22 @@ class ProductReviewAttachmentRepository extends Repository
             return;
         }
 
-        foreach ($data['attachments'] as $imageId => $image) {
-            $file = 'attachments.' . $imageId;
+        foreach ($data['attachments'] as $key => $attachment) {
+            $fileType = explode('/', $attachment->getMimeType());
+
+            $file = 'attachments.' . $key;
             
             $dir = 'review/' . $review->id;
 
             if (
-                $image instanceof UploadedFile
+                $attachment instanceof UploadedFile
                 && request()->hasFile($file)
             ) {
                 $this->create([
                     'path'      => request()->file($file)->store($dir),
                     'review_id' => $review->id,
+                    'type'      => $fileType[0],
+                    'mime_type' => $fileType[1],
                 ]);
             }
         }
