@@ -2,14 +2,16 @@
 
 namespace Webkul\Product\Repositories;
 
-use Illuminate\Http\UploadedFile;
-use Webkul\Core\Eloquent\Repository;
+use Illuminate\Support\Facades\MimeType;
 use Webkul\Product\Contracts\ProductReviewAttachment;
+use Webkul\Product\Contracts\ProductReview;
+use Webkul\Core\Eloquent\Repository;
+
 
 class ProductReviewAttachmentRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      */
     public function model(): string
     {
@@ -17,34 +19,21 @@ class ProductReviewAttachmentRepository extends Repository
     }
 
     /**
-     * @param  array  $data
-     * @param  \Webkul\Product\Contracts\ProductReview  $review
+     * Upload.
+     * 
      * @return void
      */
-    public function uploadImages($data, $review)
+    public function upload(array $attachments, ProductReview $review): void
     {
-        if (! isset($data['attachments'])) {
-            return;
-        }
-
-        foreach ($data['attachments'] as $key => $attachment) {
+        foreach ($attachments as $attachment) {
             $fileType = explode('/', $attachment->getMimeType());
 
-            $file = 'attachments.' . $key;
-            
-            $dir = 'review/' . $review->id;
-
-            if (
-                $attachment instanceof UploadedFile
-                && request()->hasFile($file)
-            ) {
-                $this->create([
-                    'path'      => request()->file($file)->store($dir),
-                    'review_id' => $review->id,
-                    'type'      => $fileType[0],
-                    'mime_type' => $fileType[1],
-                ]);
-            }
+            $this->create([
+                'path'      => $attachment->store('review/' . $review->id),
+                'review_id' => $review->id,
+                'type'      => $fileType[0],
+                'mime_type' => $fileType[1],
+            ]);
         }
     }
 }
