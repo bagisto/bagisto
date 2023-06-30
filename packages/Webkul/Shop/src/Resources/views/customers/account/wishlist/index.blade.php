@@ -37,9 +37,10 @@
                                     <div class="">
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
                                             <x-shop::shimmer.image
-                                                class="max-w-[80px] max-h-[80px] rounded-[12px]"
-                                                ::src="item.product.base_image.small_image_url"
-                                            ></x-shop::shimmer.image>
+                                                class="min-w-[80px] w-[80px] h-[80px] rounded-[12px]"
+                                                ::src="item.product.base_image.small_image_url"                                         
+                                            >
+                                            </x-shop::shimmer.image>
                                         </a>
                                     </div>
                                     
