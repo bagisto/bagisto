@@ -239,6 +239,7 @@ return [
                 'missing_options'    => 'Options are missing for this product.',
                 'product-removed'    => 'Product Is No More Available As Removed By Admin',
                 'remove-all-success' => 'All the items from your wishlist have been removed',
+                'see-details'        => 'See Details'         
             ],
 
             'home'           => 'Home',

@@ -15,7 +15,7 @@
                 </template>
 
                 <template v-else>
-                    <div class="max-lg:hidden flex justify-between items-center">
+                    <div class="flex justify-between items-center overflow-auto journal-scroll">
                         <h2 class="text-[26px] font-medium">
                             @lang('shop::app.customers.account.wishlist.page-title')
                         </h2>
@@ -30,9 +30,9 @@
                         </div>
                     </div>
 
-                    <div v-if="wishlist.length">
+                    <div v-if="wishlist.length" class="overflow-auto journal-scroll">
                         <div v-for="item in wishlist">
-                            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
+                            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9] justify-between">
                                 <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                                     <div class="">
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
@@ -59,7 +59,7 @@
                                                     class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
                                                     @click="item.option_show = ! item.option_show"
                                                 >
-                                                    @lang('shop::app.checkout.cart.mini-cart.see-datails')
+                                                    @lang('shop::app.customers.account.wishlist.see-details')
 
                                                     <span
                                                         class="text-[24px]"
@@ -106,7 +106,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
+                                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
                                     @click="moveToCart(item.id)"
                                 >
                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
