@@ -28,19 +28,20 @@ class ProductReviewImageRepository extends Repository
             return;
         }
 
-        foreach ($data['attachments'] as $imageId => $image) {
-            $file = 'attachments.' . $imageId;
-            
-            $dir = 'review/' . $review->id;
-
-            if (
-                $image instanceof UploadedFile
-                && request()->hasFile($file)
-            ) {
-                $this->create([
-                    'path'      => request()->file($file)->store($dir),
-                    'review_id' => $review->id,
-                ]);
+        if (getimagesize($data['attachments']['image_1'])) {
+            foreach ($data['attachments'] as $imageId => $image) {
+                $file = 'attachments.' . $imageId;
+                $dir = 'review/' . $review->id;
+    
+                if (
+                    $image instanceof UploadedFile
+                    && request()->hasFile($file)
+                ) {
+                    $this->create([
+                        'path'      => request()->file($file)->store($dir),
+                        'review_id' => $review->id,
+                    ]);
+                }
             }
         }
     }
