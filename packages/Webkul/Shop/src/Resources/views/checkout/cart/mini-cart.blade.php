@@ -175,14 +175,9 @@
                  *
                  * Action.
                  */
-                this.$emitter.on('test-cart', (cart) => {
-                    console.log(cart);
+                this.$emitter.on('update-mini-cart', (cart) => {
+                    this.cart = cart;
                 });
-
-                /**
-                 * Calling.
-                 */
-                this.$emitter.emit('test-cart', { cart: 1 });
            },
 
            methods: {
