@@ -83,6 +83,10 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-product-template">
+            <div class="flex justify-center max-lg:hidden">
+                <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
+            </div>
+
             <form ref="formData">
                 <input 
                     type="hidden" 
@@ -238,9 +242,11 @@
                     },
 
                     addToWishlist() {
-                        this.$axios.post('{{ route("shop.api.customers.account.wishlist.store", $product->id) }}')
+                        this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
+                                product_id: "{{ $product->id }}"
+                            })
                             .then(response => {
-                                alert(response.data.data.message);
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
                     },
@@ -305,4 +311,3 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
-larave

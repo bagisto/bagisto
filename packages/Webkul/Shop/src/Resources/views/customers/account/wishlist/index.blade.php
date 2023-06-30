@@ -1,77 +1,86 @@
 <x-shop::layouts.account>
-    <v-wishlist-products></v-wishlist-products>
+    @section('breadcrumbs')
+        <x-shop::breadcrumbs name="wishlist"></x-shop::breadcrumbs>
+    @endSection
+
+    <v-wishlist-products>
+        <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
+    </v-wishlist-products>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
-                <div class="max-lg:hidden">
-                    <div class="flex gap-x-[4px] items-center mb-[10px]">
-                        <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/']">
-                            @lang('shop::app.customers.account.wishlist.profile')
-                        </p>
-
-                        <p class="flex items-center gap-x-[4px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden">
-                            @lang('shop::app.customers.account.wishlist.title')
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center">
-                    <h2 class="text-[26px] font-medium">
-                        @lang('shop::app.customers.account.wishlist.page-title')
-                    </h2>
-
-                    <div
-                        class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] mr-[60px] cursor-pointer"
-                        @click="removeAll"
-                        v-if="wishlist.length"
-                    >
-                        <span class="icon-bin text-[24px]"></span>
-                        @lang('shop::app.customers.account.wishlist.delete-all')
-                    </div>
-                </div>
-
                 <template v-if="isLoading">
-                    <x-shop::shimmer.customers.account.wishlist.index :count="4"></x-shop::shimmer.customers.account.wishlist.index>
+                    <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
                 </template>
 
                 <template v-else>
+                    <div class="max-lg:hidden flex justify-between items-center">
+                        <h2 class="text-[26px] font-medium">
+                            @lang('shop::app.customers.account.wishlist.page-title')
+                        </h2>
+
+                        <div
+                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                            @click="removeAll"
+                            v-if="wishlist.length"
+                        >
+                            <span class="icon-bin text-[24px]"></span>
+                            @lang('shop::app.customers.account.wishlist.delete-all')
+                        </div>
+                    </div>
+
                     <div v-if="wishlist.length">
                         <div v-for="item in wishlist">
-                            <div class="flex gap-[65px] p-[25px] items-center border-b-[1px] border-[#E9E9E9]">
-                                <div class="flex gap-x-[20px]">
+                            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9]">
+                                <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                                     <div class="">
-                                        <div
-                                            class="relative overflow-hidden rounded-[12px]  min-w-[110px] min-h-[110px] bg-[#E9E9E9] shimmer"
-                                            v-show="isImageLoading"
-                                        >
-                                            <img class="rounded-[12px] bg-[#F5F5F5]" src="">
-                                        </div>
-
-                                        <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.item.url_key}`">
-                                            <img 
-                                                class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                                :src='item.item.base_image.small_image_url'
-                                                alt="" 
-                                                title=""
-                                                @load="onImageLoad()"
-                                                v-show="! isImageLoading"
-                                            >
+                                        <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
+                                            <x-shop::shimmer.image
+                                                class="max-w-[80px] max-h-[80px] rounded-[12px]"
+                                                ::src="item.product.base_image.small_image_url"
+                                            ></x-shop::shimmer.image>
                                         </a>
                                     </div>
                                     
-                                    <div class="grid gap-y-[10px]">
+                                    <div class="grid gap-y-[10px] place-content-start">
                                         <p 
-                                            class="text-[16px]" 
-                                            v-text="item.item.name"
+                                            class="text-[16px] break-word-custom" 
+                                            v-text="item.product.name"
                                         >
                                         </p>
 
-                                        <p 
-                                            class="text-[16px]" 
-                                            v-text="item.item.color"
+                                        <div
+                                            class="grid gap-x-[10px] gap-y-[6px] select-none"
+                                            v-if="item.options.length"
                                         >
-                                        </p>
+                                            <div class="">
+                                                <p
+                                                    class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                                    @click="item.option_show = ! item.option_show"
+                                                >
+                                                    @lang('shop::app.checkout.cart.mini-cart.see-datails')
+
+                                                    <span
+                                                        class="text-[24px]"
+                                                        :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                                    ></span>
+                                                </p>
+                                            </div>
+
+                                            <div class="grid gap-[8px]" v-show="item.option_show">
+                                                <div class="" v-for="option in item.options">
+                                                    <p class="text-[14px] font-medium">
+                                                        @{{ option.attribute_name + ':' }}
+                                                    </p>
+
+                                                    <p class="text-[14px]">
+                                                        @{{ option.option_label }}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
 
                                         <a
                                             class="text-[16px] text-[#0A49A7] cursor-pointer"
@@ -83,8 +92,8 @@
                                 </div>
 
                                 <p 
-                                    class="text-[18px]" 
-                                    v-html="item.item.min_price" 
+                                    class="text-[18px] max-w-[100px] min-w-[100px]" 
+                                    v-html="item.product.min_price" 
                                 >
                                 </p>
 
@@ -97,7 +106,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[54px] text-center whitespace-nowrap"
+                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
                                     @click="moveToCart(item.id)"
                                 >
                                     @lang('shop::app.customers.account.wishlist.move-to-cart')
@@ -133,8 +142,6 @@
                     return  {
                         isLoading: true,
 
-                        isImageLoading: true,
-                        
                         wishlist: [],
                     };
                 },
@@ -144,10 +151,6 @@
                 },
 
                methods: {
-                    onImageLoad() {
-                        this.isImageLoading = false;
-                    },
-
                     get() {
                         this.$axios.get("{{ route('shop.api.customers.account.wishlist.index') }}")
                             .then(response => {
@@ -165,6 +168,8 @@
                             })
                             .then(response => {
                                 this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {});
                     },
@@ -175,6 +180,8 @@
                             })
                             .then(response => {
                                 this.wishlist = [];
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
                     },
@@ -196,6 +203,8 @@
                                     }
     
                                     this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {});
                         }

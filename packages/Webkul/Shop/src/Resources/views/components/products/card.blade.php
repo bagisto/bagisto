@@ -11,23 +11,12 @@
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
-                <div
-                    class="relative overflow-hidden rounded-sm  min-w-[291px] min-h-[300px] bg-[#E9E9E9] shimmer"
-                    v-show="isImageLoading"
-                >
-                    <img class="rounded-sm bg-[#F5F5F5]" src="">
-                </div>
-
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
-                    <img
-                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
-                        :src="product.base_image.medium_image_url"
-                        width="291"
-                        height="300"
-                        @load="onImageLoad()"
-                        v-show="! isImageLoading"
-                    >
-                </a>   
+                    <x-shop::shimmer.image
+                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"
+                        ::src="product.base_image.medium_image_url"
+                    ></x-shop::shimmer.image>
+                </a>
                 
                 <div class="action-items bg-black">
                     <p
@@ -90,12 +79,10 @@
         >
             <div class="relative overflow-hidden group max-w-[250px] max-h-[258px]"> 
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
-                    <img 
-                        class="rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300" 
-                        :src="product.base_image.medium_image_url"
-                        width="250"
-                        height="258"
-                    >
+                    <x-shop::shimmer.image
+                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"
+                        ::src="product.base_image.medium_image_url"
+                    ></x-shop::shimmer.image>
                 </a>
             
                 <div class="action-items bg-black"> 
@@ -180,23 +167,17 @@
 
             data() {
                 return {
-                    isImageLoading: true,
-
                     isCustomer: '{{ auth()->guard('customer')->check() }}',
                 }
             },
 
             methods: {
-                onImageLoad() {
-                    this.isImageLoading = false;
-                },
-
                 addToWishlist() {
                     this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
                             product_id: this.product.id
                         })
                         .then(response => {
-                            alert(response.data.data.message);
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                         })
                         .catch(error => {});
                 },
@@ -210,9 +191,17 @@
                                 'product_id': productId
                             })
                             .then(response => {
-                                alert(response.data.data.message);
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                if (error.response.status === 400) {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.data.message });
+
+                                    return;
+                                }
+
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
+                            });
 
                         return;
                     }
@@ -228,14 +217,15 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            alert('Added product in compare.');
+                            this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
                         } else {
-                            alert('Product is already added in compare.');
+                            this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('Item is already added to compare list')' });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        alert('Added product in compare.');
+                        this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
+
                     }
                 },
 
@@ -255,9 +245,14 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            alert(response.data.message);
+                            if (response.data.data.status) {
+                                window.location.href = response.data.data.redirect_uri;
+                            }
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => {});
+                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                 },
             },
         });

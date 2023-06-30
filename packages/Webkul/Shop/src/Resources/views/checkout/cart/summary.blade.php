@@ -1,12 +1,12 @@
 <div class="w-[418px] max-w-full">
     <p class="text-[26px] font-medium">
-        @lang('shop::app.checkout.cart.cart-summary')
+        @lang('shop::app.checkout.cart.summary.cart-summary')
     </p>
 
     <div class="grid gap-[15px] mt-[25px]">
         <div class="flex text-right justify-between">
             <p class="text-[16px]">
-                @lang('shop::app.checkout.cart.subtotal')
+                @lang('shop::app.checkout.cart.summary.sub-total')
             </p>
 
             <p 
@@ -22,7 +22,7 @@
             v-if="parseFloat(cart.base_tax_total)"
         >
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
-                @lang('Tax') (@{{ index }})%
+                @lang('shop::app.checkout.cart.summary.tax') (@{{ index }})%
             </p>
 
             <p 
@@ -37,7 +37,7 @@
             v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
         >
             <p class="text-[16px]">
-                @lang('Discount amount')
+                @lang('shop::app.checkout.cart.summary.discount-amount')
             </p>
 
             <p 
@@ -51,7 +51,7 @@
    
         <div class="flex text-right justify-between">
             <p class="text-[18px] font-semibold">
-                @lang('shop::app.checkout.cart.grand-total')
+                @lang('shop::app.checkout.cart.summary.grand-total')
             </p>
 
             <p 
@@ -65,7 +65,7 @@
             href="{{ route('shop.checkout.onepage.index') }}" 
             class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]"
         >
-            @lang('shop::app.checkout.cart.proceed-to-checkout')
+            @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>
     </div>
 </div>

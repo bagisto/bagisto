@@ -22,7 +22,7 @@
                             class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                             @click="store"
                         >
-                            @lang('Confirm')
+                            @lang('shop::app.checkout.onepage.addresses.index.confirm')
                         </button>
                     </div>
                 </div>
