@@ -35,7 +35,6 @@
                         class="hidden"
                         accept="image/*, video/*"
                         multiple
-                        ref="fileInput"
                         @change="onFileChange"
                     >
                     </v-field>

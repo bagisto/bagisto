@@ -10,6 +10,16 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
+                    <div class="flex justify-end gap-[15px] max-sm:flex-wrap">
+                        <div
+                            class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
+                            @click="canReview = false"
+                        >
+                            {{-- @transition --}}
+                            @lang('Back')
+                        </div>
+                    </div>
+
                     <form
                         class="rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
@@ -144,12 +154,12 @@
                         class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap"
                         v-for='review in reviews'
                     >
-                        <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
+                        <div>
                             <img
-                                class="rounded-[12px]"
-                                :src="review.image[0].small_image_url"
-                                title=""
-                                alt=""
+                                class="rounded-[12px] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
+                                :src="review.images[0].url"
+                                :alt="review.name"
+                                :title="review.name"
                             >
                         </div>
 
@@ -183,13 +193,25 @@
                             </p>
 
                             <div class="flex gap-2 mt-2">
-                                <img
-                                    v-for="image in review.image"
-                                    class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
-                                    :src="image.small_image_url"
-                                    :alt="review.name"
-                                    :title="review.name"
-                                >
+                                <template v-for="file in review.images">
+                                    <img
+                                        class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                        :src="file.url"
+                                        :alt="review.name"
+                                        :title="review.name"
+                                        v-if="file.type == 'image'"
+                                    >
+
+                                    <video
+                                        class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                        :src="file.url"
+                                        :alt="review.name"
+                                        :title="review.name"
+                                        controls
+                                        v-else
+                                    >
+                                    </video>
+                                </template>
                             </div>
                         </div>
                     </div>

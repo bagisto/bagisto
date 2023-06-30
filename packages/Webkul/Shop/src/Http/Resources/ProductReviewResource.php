@@ -14,12 +14,18 @@ class ProductReviewResource extends JsonResource
      */
     public function toArray($request)
     {
+        $images = $this->images->map(function ($image) {
+            $image->url = $image->url;
+        
+            return $image;
+        });
+
         return [
             'id'         => $this->id,
             'name'       => $this->name,
             'comment'    => $this->comment,
             'rating'     => $this->rating,
-            'image'      => product_image()->getGalleryImages($this),
+            'images'      => $images,
             'created_at' => $this->created_at->format('M d, Y'),
         ];
     }
