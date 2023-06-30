@@ -26,11 +26,22 @@
                         enctype="multipart/form-data"
                     >
                         <div>
-                            <x-shop::image
-                                ref="attachments"
-                                name="attachments"
-                            >
-                            </x-shop::image>
+                            <x-shop::form.control-group class="mb-4 mt-[15px]">
+                                <x-shop::form.control-group.control
+                                    type="image"
+                                    name="attachments"
+                                    class="shadow text-[14px] appearance-none rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    rules="required"
+                                    :label="trans('Attachments')"
+                                    :is-multiple="true"
+                                >
+                                </x-shop::form.control-group.control>
+
+                                <x-shop::form.control-group.error
+                                    control-name="attachments"
+                                >
+                                </x-shop::form.control-group.error>
+                            </x-shop::form.control-group>
                         </div>
                         
                         <div>
@@ -280,13 +291,11 @@
                             }
                         })
                         .then(response => {
-                            this.$refs.attachments.uploadedFiles = [];
-
-                            this.canReview = false;
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                             resetForm();
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            this.canReview = false;
                         })
                         .catch(error => {});
                 },

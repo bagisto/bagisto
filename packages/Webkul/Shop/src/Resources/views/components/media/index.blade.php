@@ -1,16 +1,8 @@
-@props([
-    'name'  => 'image',
-])
-
-<v-image-wrapper
-    {{ $attributes }}
-    name="{{ $name }}"
->
-</v-image-wrapper>
+<v-media {{ $attributes }} ></v-media>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-image-wrapper-template">
-        <div class="flex flex-col p-4 rounded-lg cursor-pointer">
+    <script type="text/x-template" id="v-media-template">
+        <div class="flex flex-col mb-4 p-4 rounded-lg cursor-pointer">
             <div
                 :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }"
             >
@@ -34,7 +26,8 @@
                         id="file-input"
                         class="hidden"
                         accept="image/*, video/*"
-                        multiple
+                        :rules="rules"
+                        :multiple="isMultiple"
                         @change="onFileChange"
                     >
                     </v-field>
@@ -70,8 +63,7 @@
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                         class="w-4 h-4"
-                                    >
-
+                                    >media
                                     <path
                                         fill-rule="evenodd"
                                         d="M2 5a3 3 0 013-3h10a3 3 0 013 3v10a3 3 0 01-3 3H5a3 3 0 01-3-3V5zm3-1a1 1 0 00-1 1v2h12V5a1 1 0 00-1-1H5zm1 3a1 1 0 011-1h2a1 1 0 110 2H6a1 1 0 01-1-1zm4 4a1 1 0 100 2h2a1 1 0 100-2H11zm-4 0a1 1 0 100 2h2a1 1 0 100-2H7zm4 4a1 1 0 110 2h2a1 1 0 110-2h-2z"
@@ -123,10 +115,10 @@
     </script>
 
     <script type="module">
-        app.component("v-image-wrapper", {
-            template: '#v-image-wrapper-template',
+        app.component("v-media", {
+            template: '#v-media-template',
 
-            props: ['name'],
+            props: ['name', 'isMultiple', 'rules'],
 
             data() {
                 return {
