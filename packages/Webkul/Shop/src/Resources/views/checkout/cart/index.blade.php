@@ -21,7 +21,7 @@
 
                 <template v-else>
                     <div 
-                        class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" 
+                        class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col pb-[30px]"
                         v-if="cart?.items?.length"
                     >
                         <div class="grid gap-[30px] flex-1">
