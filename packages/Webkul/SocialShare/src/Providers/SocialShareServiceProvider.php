@@ -1,4 +1,5 @@
 <?php
+
 namespace Webkul\SocialShare\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +14,7 @@ class SocialShareServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
     }
-    
+
     /**
      * Register services.
      *

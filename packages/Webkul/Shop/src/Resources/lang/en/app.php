@@ -239,6 +239,7 @@ return [
                 'missing_options'    => 'Options are missing for this product.',
                 'product-removed'    => 'Product Is No More Available As Removed By Admin',
                 'remove-all-success' => 'All the items from your wishlist have been removed',
+                'see-details'        => 'See Details'         
             ],
 
             'home'           => 'Home',
@@ -442,7 +443,7 @@ return [
                 'total'              => 'Total',
                 'continue-shopping'  => 'Continue Shopping',
                 'update-cart'        => 'Update Cart',
-                'empty-product'      => 'Don\'t Have product in your cart',
+                'empty-product'      => 'You don’t have a product in your cart',
             ],
 
             'coupon'   => [
@@ -472,7 +473,7 @@ return [
             'summary' => [
                 'cart-summary'        => 'Cart Summary',
                 'sub-total'           => 'Subtotal',
-                'tax'                 => 'Tax',   
+                'tax'                 => 'Tax',
                 'delivery-charges'    => 'Delivery Charges',
                 'discount-amount'     => 'Discount Amount',
                 'grand-total'         => 'Grand Total',
@@ -549,17 +550,17 @@ return [
             ],
 
             'payment' => [
-                'payment-method' => 'Payment Method'
+                'payment-method' => 'Payment Method',
             ],
 
             'shipping' => [
                 'shipping-method' => 'Shipping Method',
             ],
 
-            'summary' =>[
+            'summary' => [
                 'cart-summary'     => 'Cart Summary',
                 'sub-total'        => 'Subtotal',
-                'tax'              => 'Tax',   
+                'tax'              => 'Tax',
                 'delivery-charges' => 'Delivery Charges',
                 'discount-amount'  => 'Discount Amount',
                 'grand-total'      => 'Grand Total',
@@ -584,7 +585,7 @@ return [
     'error' => [
         'home'        => 'Go To Home',
         'page-lost'   => 'Page lost content',
-        'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below."
+        'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below.",
     ],
 
     'security-warning'   => 'Suspicious activity found!!!',

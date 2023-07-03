@@ -173,13 +173,17 @@
 
             methods: {
                 addToWishlist() {
-                    this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
-                            product_id: this.product.id
-                        })
-                        .then(response => {
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                        })
-                        .catch(error => {});
+                    if (this.isCustomer) {
+                        this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
+                                product_id: this.product.id
+                            })
+                            .then(response => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            })
+                            .catch(error => {});
+                        } else {
+                            window.location.href = "{{ route('shop.customer.session.index')}}";
+                        }
                 },
 
                 addToCompare(productId) {
@@ -245,11 +249,15 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            if (response.data.data.status) {
+                            if (response.data.data.redirect_uri) {
                                 window.location.href = response.data.data.redirect_uri;
                             }
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            if (response.data.message) {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                            }
                         })
                         .catch(error => {});
                             this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
