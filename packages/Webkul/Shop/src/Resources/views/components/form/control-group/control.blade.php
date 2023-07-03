@@ -83,18 +83,12 @@
         @break
 
     @case('image')
-        <div class="flex w-full">
-            <label class="flex flex-col w-[286px] h-[286px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100">
-                <div class="m-0 block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center">
-                    @lang('shop::app.products.add-image')
-                </div>
-
-                <input
-                    type="file"
-                    class="hidden"
-                />
-            </label>
-        </div>
+        <x-shop::media
+            name="{{ $name }}"
+            ::class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            {{ $attributes }}
+        >
+        </x-shop::media>
 
         @break
 

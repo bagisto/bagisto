@@ -12,22 +12,17 @@ use Webkul\Shop\Http\Controllers\API\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
     Route::controller(ProductController::class)->group(function () {
-        Route::get('products', 'index')
-            ->name('shop.api.products.index');
+        Route::get('products', 'index')->name('shop.api.products.index');
 
-        Route::get('products/{id}/related', 'relatedProducts')
-            ->name('shop.api.products.related.index');
+        Route::get('products/{id}/related', 'relatedProducts')->name('shop.api.products.related.index');
 
-        Route::get('products/{id}/up-sell', 'upSellProducts')
-            ->name('shop.api.products.up-sell.index');
+        Route::get('products/{id}/up-sell', 'upSellProducts')->name('shop.api.products.up-sell.index');
     });
 
     Route::controller(ReviewController::class)->group(function () {
-        Route::get('product/{id}/reviews', 'index')
-            ->name('shop.api.products.reviews.index');
+        Route::get('product/{id}/reviews', 'index')->name('shop.api.products.reviews.index');
 
-        Route::post('product/{id}/review', 'store')
-            ->name('shop.api.products.reviews.store');
+        Route::post('product/{id}/review', 'store')->name('shop.api.products.reviews.store');
     });
 
     Route::controller(CategoryController::class)->prefix('categories')->group(function () {
