@@ -95,9 +95,20 @@ class CompareController extends APIController
             ]);
         }
 
+        if ($customer = auth()->guard('customer')->user()) {
+            $productIds = $this->compareItemRepository
+                ->findByField('customer_id', $customer->id)
+                ->pluck('product_id')
+                ->toArray();
+        }
+    
+        $products = $this->productRepository
+            ->whereIn('id', $productIds ?? [])
+            ->get();
+    
         return new JsonResource([
-            'data'     => CompareResource::collection($this->compareItemRepository->get()),
-            'message'  => trans('shop::app.compare.remove-success'),
+            'data'    => CompareItemResource::collection($products),
+            'message' => trans('shop::app.compare.remove-success'),
         ]);
     }
 
