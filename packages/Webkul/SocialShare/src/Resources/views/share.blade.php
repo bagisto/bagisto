@@ -24,7 +24,7 @@
         <ul class="bb-social-share__items" style="display: flex; column-gap:15px;">
             @foreach($links as $link)
                 @if ($link)
-                    @include('SocialShare::links.' . $link , compact('product', 'message'))
+                    @include('social_share::links.' . $link , compact('product', 'message'))
                 @endif
             @endforeach
         </ul>

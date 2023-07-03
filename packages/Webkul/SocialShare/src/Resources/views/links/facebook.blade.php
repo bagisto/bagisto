@@ -13,7 +13,7 @@
                 href="#"
                 @click="openSharePopup"
             >
-                @include('SocialShare::icons.facebook')
+                @include('social_share::icons.facebook')
             </a>
         </li>
     </script>
