@@ -37,7 +37,7 @@
                                     >
 
                                     <label
-                                        class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                                        class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                         for="select-all"
                                     ></label>
 
@@ -80,7 +80,7 @@
                                             >
 
                                             <label
-                                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                                 :for="'item_' + item.id"
                                             ></label>
                                         </div>
