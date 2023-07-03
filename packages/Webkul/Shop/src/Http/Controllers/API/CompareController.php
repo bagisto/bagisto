@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Cart;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Customer\Repositories\CompareItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -13,8 +12,6 @@ class CompareController extends APIController
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CompareItemRepository  $compareItemRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
@@ -25,8 +22,6 @@ class CompareController extends APIController
 
     /**
      * Address route index page.
-     *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function index(): JsonResource
     {
@@ -52,9 +47,9 @@ class CompareController extends APIController
     /**
      * Method for customers to get products in comparison.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store(): JsonResource
+    public function store()
     {
         $compareProduct = $this->compareItemRepository->findOneByField([
             'customer_id'  => auth()->guard('customer')->user()->id,
@@ -62,9 +57,9 @@ class CompareController extends APIController
         ]);
 
         if ($compareProduct) {
-            return new JsonResource([
+            return (new JsonResource([
                 'message' => trans('shop::app.compare.already-added'),
-            ]);
+            ]))->response()->setStatusCode(400);
         }
 
         $this->compareItemRepository->create([
@@ -79,8 +74,6 @@ class CompareController extends APIController
 
     /**
      * Method to remove the item from compare list.
-     * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function destroy(): JsonResource
     {
@@ -103,8 +96,6 @@ class CompareController extends APIController
 
     /**
      * Method for remove all items from compare list
-     * 
-     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function destroyAll(): JsonResource
     {

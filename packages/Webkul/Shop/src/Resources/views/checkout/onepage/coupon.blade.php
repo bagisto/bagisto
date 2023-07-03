@@ -7,7 +7,9 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-coupon-template">
         <div class="flex text-right justify-between">
-            <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">@lang('shop::app.checkout.onepage.coupon.discount')</p>
+            <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+                @lang('shop::app.checkout.onepage.coupon.discount')
+            </p>
             
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
                 <span v-if="! isCouponApplied">
@@ -19,7 +21,9 @@
                         </x-slot:toggle>
     
                         <x-slot:header>
-                            <h2 class="text-[25px] font-medium max-sm:text-[22px]">@lang('shop::app.checkout.onepage.coupon.apply')</h2>
+                            <h2 class="text-[25px] font-medium max-sm:text-[22px]">
+                                @lang('shop::app.checkout.onepage.coupon.apply')
+                            </h2>
                         </x-slot:header>
     
                         <x-slot:content>
@@ -51,7 +55,10 @@
     
                                     <div class="p-[30px] bg-white mt-[20px]">
                                         <div class="flex justify-between items-center gap-[15px] flex-wrap">
-                                            <p class="text-[14px] font-medium text-[#7D7D7D]">@lang('shop::app.checkout.onepage.coupon.sub-total')</p>
+                                            <p class="text-[14px] font-medium text-[#7D7D7D]">
+                                                @lang('shop::app.checkout.onepage.coupon.sub-total')
+                                            </p>
+
                                             <div class="flex gap-[30px] items-center flex-auto flex-wrap">
                                                 <p 
                                                     class="text-[30px] font-semibold max-sm:text-[22px]"
@@ -78,7 +85,9 @@
                     class="text-[12px] font-small flex justify-between items-center"
                     v-else
                 >
-                    <p class="text-[12px] mr-2">@lang('shop::app.checkout.onepage.coupon.applied')</p>
+                    <p class="text-[12px] mr-2">
+                        @lang('shop::app.checkout.onepage.coupon.applied')
+                    </p>
                     
                     <p 
                         class="text-[16px] font-medium cursor-pointer text-navyBlue"
@@ -118,7 +127,7 @@
                         .then((response) => {
                             this.$parent.$parent.getOrderSummary();
 
-                            alert(response.data.message)
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             this.$refs.couponModel.toggle();
                         })
@@ -131,6 +140,8 @@
                         })
                         .then((response) => {
                             this.$parent.$parent.getOrderSummary();
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => console.log(error));
                 },

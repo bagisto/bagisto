@@ -446,9 +446,12 @@
                                         <label
                                             class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
                                             for="billing[is_save_as_address]"
-                                        ></label>
+                                        >
+                                        </label>
 
-                                        <label for="billing[is_save_as_address]">@lang('shop::app.checkout.onepage.addresses.billing.save-address')</label>
+                                        <label for="billing[is_save_as_address]">
+                                            @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                                        </label>
                                     </div>
                                 @endauth
                             </div>

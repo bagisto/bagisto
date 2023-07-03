@@ -6,10 +6,10 @@
     $email_url = 'mailto:your@email.com?subject=' . $message . '&body=' . $message . ' ' . $url;
 @endphp
 
-<email-share></email-share>
+<v-email-share></v-email-share>
 
 @push('scripts')
-    <script type="text/x-template" id="email-share-link">
+    <script type="text/x-template" id="v-email-share-template">
         <li class="bb-social-share__item bb-social--email">
             <a 
                 href="{{ $email_url }}" 
@@ -20,9 +20,9 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('email-share', {
-            template: '#email-share-link'
+    <script type="module">
+        app.component('v-email-share', {
+            template: '#v-email-share-template'
         });
     </script>
 @endpush
