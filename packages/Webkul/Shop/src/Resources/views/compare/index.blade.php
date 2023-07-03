@@ -176,8 +176,12 @@
                             })
                             .then(response => {
                                 this.items = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                             })
                             .catch(error => {});
+                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                     },
 
                     removeAll() {
