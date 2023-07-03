@@ -2,12 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Illuminate\Http\Response;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\CartResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 
 class CartController extends APIController
 {
@@ -115,7 +116,7 @@ class CartController extends APIController
     /**
      * Apply coupon to the cart.
      */
-    public function storeCoupon(): JsonResource
+    public function storeCoupon()
     {
         $couponCode = request()->input('code');
 
@@ -123,12 +124,19 @@ class CartController extends APIController
             if (strlen($couponCode)) {
                 $coupon = $this->cartRuleCouponRepository->findOneByField('code', $couponCode);
 
+                if (! $coupon) {
+                    return (new JsonResource([
+                        'data'     => new CartResource(Cart::getCart()),
+                        'message'  => trans('Coupon not found.'),
+                    ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
+                }
+
                 if ($coupon->cart_rule->status) {
                     if (Cart::getCart()->coupon_code == $couponCode) {
-                        return new JsonResource([
+                        return (new JsonResource([
                             'data'     => new CartResource(Cart::getCart()),
                             'message'  => trans('shop::app.checkout.cart.coupon-already-applied'),
-                        ]);
+                        ]))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
                     }
 
                     Cart::setCouponCode($couponCode)->collectTotals();
@@ -141,16 +149,11 @@ class CartController extends APIController
                     }
                 }
             }
-
-            return new JsonResource([
-                'data'     => new CartResource(Cart::getCart()),
-                'message'  => trans('shop::app.checkout.cart.not-found'),
-            ]);
         } catch (\Exception $e) {
-            return new JsonResource([
-                'data'     => new CartResource(Cart::getCart()),
-                'message'  => trans('shop::app.checkout.cart.coupon.error'),
-            ]);
+            return (new JsonResource([
+                'data'    => new CartResource(Cart::getCart()),
+                'message' => trans('shop::app.checkout.cart.coupon.error'),
+            ]))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

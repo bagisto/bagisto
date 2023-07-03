@@ -2,14 +2,15 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Checkout\Http\Requests\CustomerAddressForm;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
-use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Resources\CartResource;
+use Webkul\Sales\Repositories\OrderRepository;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 
 class OnepageController extends APIController
 {
@@ -104,7 +105,7 @@ class OnepageController extends APIController
             || ! $shippingMethod
             || ! Cart::saveShippingMethod($shippingMethod)
         ) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], Response::HTTP_FORBIDDEN);
         }
 
         Cart::collectTotals();
@@ -126,7 +127,7 @@ class OnepageController extends APIController
             || ! $payment
             || ! Cart::savePaymentMethod($payment)
         ) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
+            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], Response::HTTP_FORBIDDEN);
         }
 
         Cart::collectTotals();
