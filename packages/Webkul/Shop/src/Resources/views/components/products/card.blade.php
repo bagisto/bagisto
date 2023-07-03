@@ -198,7 +198,7 @@
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
-                                if (error.response.status === 400) {
+                                if ([400, 422].includes(error.response.status)) {
                                     this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.data.message });
 
                                     return;
