@@ -35,7 +35,7 @@
 
 			<a href="{{ route('shop.home.index') }}">
 				<div class="m-auto block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer">
-             		@lang('shop::app.checkout.cart.continue-shopping')
+             		@lang('shop::app.checkout.cart.index.continue-shopping')
 				</div> 
 			</a>
 			
