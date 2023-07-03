@@ -107,8 +107,11 @@ class WishlistController extends APIController
 
             if ($result) {
                 return new JsonResource([
-                    'data'     => WishlistResource::collection($this->wishlistRepository->get()),
-                    'cart'     => ['items_count'  => Cart::getCart()->items_count],
+                    'data' => [
+                        'wishlist' => WishlistResource::collection($this->wishlistRepository->get()), 
+                        'cart'     => ['items_count'  => Cart::getCart()->items_count],
+                    ],
+
                     'message'  => trans('shop::app.components.products.item-add-to-cart'),
                 ]);
             }

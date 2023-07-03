@@ -201,19 +201,15 @@
                                 .then(response => {
                                     if (response.data.redirect) {
                                         window.location.href = response.data.data;
-                                    }
 
-                                    if (response.data.message) {
-                                        this.$emitter.emit('update-mini-cart', response.data.cart);
-
+                                        this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
+                                    } else{
+                                        this.$emitter.emit('update-mini-cart', response.data.data.cart);
+                                        
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-                                    } else {
-                                        this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
                                     }
 
                                     this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {});
                         }
