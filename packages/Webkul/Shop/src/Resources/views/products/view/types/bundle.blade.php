@@ -138,7 +138,7 @@
                                 >
 
                                 <label
-                                    class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                                    class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
                                 ></label>
 

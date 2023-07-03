@@ -92,7 +92,7 @@
                         />
                 
                         <label 
-                            class="icon-uncheck text-[20px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white cursor-pointer"
+                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="isUsedForShipping"
                         >
                         </label>
@@ -444,7 +444,7 @@
                                         >
 
                                         <label
-                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
+                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                             for="billing[is_save_as_address]"
                                         >
                                         </label>

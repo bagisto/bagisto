@@ -27,35 +27,63 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .icon-grid-view-fill:before {
+        content: "\e919";
+    }
+
+    .icon-grid-view:before {
+        content: "\e93c";
+    }
+
+    .icon-error:before {
+        content: "\e937";
+    }
+
+    .icon-toast-done:before {
+        content: "\e938";
+    }
+
+    .icon-toast-error:before {
+        content: "\e939";
+    }
+
+    .icon-toast-exclamation-mark:before {
+        content: "\e93a";
+    }
+
+    .icon-toast-info:before {
+        content: "\e93b";
+    }
+
     .icon-add-new:before {
         content: "\e900";
     }
 
-    .icon-arrow-down-2:before {
+    .icon-arrow-down:before {
         content: "\e901";
     }
 
-    .icon-arrow-down:before {
+    .icon-arrow-left-stylish:before {
         content: "\e902";
     }
 
-    .icon-arrow-left-stylish:before {
+    .icon-arrow-left:before {
         content: "\e903";
     }
 
-    .icon-arrow-left:before {
+    .icon-arrow-right-stylish:before {
         content: "\e904";
     }
 
-    .icon-arrow-right-stylish:before {
+    .icon-arrow-right:before {
         content: "\e905";
     }
 
-    .icon-arrow-right:before {
+    .icon-arrow-up:before {
         content: "\e906";
     }
 
-    .icon-arrow-up:before {
+    .icon-astreisk:before {
         content: "\e907";
     }
 
@@ -83,158 +111,163 @@
         content: "\e90d";
     }
 
-    .icon-check:before {
+    .icon-compare-1:before {
         content: "\e90e";
     }
 
-    .icon-compare-1:before {
+    .icon-compare:before {
         content: "\e90f";
     }
 
-    .icon-compare:before {
+    .icon-dislike:before {
         content: "\e910";
     }
 
-    .icon-dislike:before {
+    .icon-dollar-sign:before {
         content: "\e911";
     }
 
-    .icon-dollar-sign:before {
+    .icon-double-arrow:before {
         content: "\e912";
     }
 
-    .icon-double-arrow:before {
+    .icon-download:before {
         content: "\e913";
     }
 
-    .icon-download:before {
+    .icon-email:before {
         content: "\e914";
     }
 
-    .icon-email:before {
+    .icon-eye:before {
         content: "\e915";
     }
 
-    .icon-eye:before {
+    .icon-filter:before {
         content: "\e916";
     }
 
-    .icon-filter:before {
+    .icon-flate-rate:before {
         content: "\e917";
     }
 
-    .icon-flate-rate:before {
+    .icon-Free-Shipping:before {
         content: "\e918";
     }
 
-
-    .icon-Free-Shipping:before {
-        content: "\e919";
-    }
-
-    .icon-grid-view:before {
+    .icon-hamburger:before {
         content: "\e91a";
     }
 
-    .icon-hamburger:before {
+    .icon-heart-1:before {
         content: "\e91b";
     }
 
-    .icon-heart-1:before {
+    .icon-heart:before {
         content: "\e91c";
     }
 
-    .icon-heart:before {
+    .icon-left-arrow:before {
         content: "\e91d";
     }
 
-    .icon-left-arrow:before {
+    .icon-like:before {
         content: "\e91e";
     }
 
-    .icon-like:before {
+    .icon-listing:before {
         content: "\e91f";
     }
 
-    .icon-listing:before {
+    .icon-location:before {
         content: "\e920";
     }
 
-    .icon-location:before {
+    .icon-minus:before {
         content: "\e921";
     }
 
-    .icon-minus:before {
-        content: "\e922";
-    }
-
     .icon-more:before {
-        content: "\e923";
+        content: "\e922";
+        color: #7d7d7d;
     }
 
     .icon-orders:before {
-        content: "\e924";
+        content: "\e923";
     }
 
     .icon-pen:before {
-        content: "\e925";
+        content: "\e924";
     }
 
     .icon-plus:before {
-        content: "\e926";
+        content: "\e925";
     }
 
     .icon-product:before {
-        content: "\e927";
+        content: "\e926";
     }
 
     .icon-radio-select:before {
-        content: "\e928";
+        content: "\e927";
     }
 
     .icon-radio-unselect:before {
-        content: "\e929";
+        content: "\e928";
     }
 
     .icon-right-arrow:before {
-        content: "\e92a";
+        content: "\e929";
     }
 
     .icon-search:before {
-        content: "\e92b";
+        content: "\e92a";
     }
 
     .icon-share:before {
-        content: "\e92c";
+        content: "\e92b";
     }
 
     .icon-sort-by:before {
-        content: "\e92d";
+        content: "\e92c";
     }
 
     .icon-sort:before {
-        content: "\e92e";
+        content: "\e92d";
         color: #7d7d7d;
     }
 
     .icon-star-fill:before {
-        content: "\e92f";
+        content: "\e92e";
+        color: #ffb600;
     }
 
     .icon-star:before {
-        content: "\e930";
+        content: "\e92f";
     }
 
     .icon-support:before {
-        content: "\e931";
+        content: "\e930";
     }
 
     .icon-truck:before {
+        content: "\e931";
+    }
+
+    .icon-check-box:before {
         content: "\e932";
     }
 
     .icon-uncheck:before {
         content: "\e933";
+    }
+
+    .icon-box-fill:before {
+        content: "\e935";
+    }
+
+    .icon-tick:before {
+        content: "\e936";
     }
 
     .icon-users:before {
