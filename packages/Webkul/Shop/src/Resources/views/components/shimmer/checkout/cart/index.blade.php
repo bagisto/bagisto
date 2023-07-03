@@ -2,10 +2,24 @@
 
 <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
     <div class="grid gap-y-[25px] flex-1">
+        <!-- Cart Action -->
+        <div class="max-lg:hidden flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
+            <div class="flex">
+                <div class="w-[24px] h-[25px] rounded-[4px] mt-[5px] shimmer"></div>
 
+                <div class="ml-[10px] w-[215px] h-[36px] shimmer"></div>
+            </div>
+
+            <div class="w-[222px] h-[23px] shimmer"></div>
+        </div>
+
+        <!-- Cart Items -->
         @for ($i = 0;  $i < $count; $i++)
             <div class="flex justify-between gap-x-[10px] border-b-[1px] border-[#E9E9E9] pb-[18px]">
                 <div class="flex gap-x-[20px]">
+                    <div class="select-none mt-[43px]">
+                        <div class="w-[24px] h-[25px] rounded-[4px] mt-[5px] shimmer"></div>
+                    </div>
 
                     <div>
                         <div class="w-[110px] h-[110px] shimmer bg-[#E9E9E9] rounded-[12px]"></div>

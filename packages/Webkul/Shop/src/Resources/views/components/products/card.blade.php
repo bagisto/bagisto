@@ -173,13 +173,17 @@
 
             methods: {
                 addToWishlist() {
-                    this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
-                            product_id: this.product.id
-                        })
-                        .then(response => {
-                            alert(response.data.data.message);
-                        })
-                        .catch(error => {});
+                    if (this.isCustomer) {
+                        this.$axios.post(`{{ route('shop.api.customers.account.wishlist.store') }}`, {
+                                product_id: this.product.id
+                            })
+                            .then(response => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            })
+                            .catch(error => {});
+                        } else {
+                            window.location.href = "{{ route('shop.customer.session.index')}}";
+                        }
                 },
 
                 addToCompare(productId) {
@@ -191,9 +195,17 @@
                                 'product_id': productId
                             })
                             .then(response => {
-                                alert(response.data.data.message);
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                if (error.response.status === 400) {
+                                    this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.data.message });
+
+                                    return;
+                                }
+
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
+                            });
 
                         return;
                     }
@@ -209,14 +221,15 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            alert('Added product in compare.');
+                            this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
                         } else {
-                            alert('Product is already added in compare.');
+                            this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('Item is already added to compare list')' });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        alert('Added product in compare.');
+                        this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
+
                     }
                 },
 
@@ -236,9 +249,18 @@
                             'product_id': this.product.id,
                         })
                         .then(response => {
-                            alert(response.data.message);
+                            if (response.data.data.redirect_uri) {
+                                window.location.href = response.data.data.redirect_uri;
+                            }
+
+                            if (response.data.message) {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                            }
                         })
                         .catch(error => {});
+                            this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                 },
             },
         });

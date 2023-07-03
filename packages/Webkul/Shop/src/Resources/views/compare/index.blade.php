@@ -22,7 +22,9 @@
             <div>
                 <div v-if="! isLoading">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-[26px] font-medium">@lang('shop::app.compare.title')</h2>
+                        <h2 class="text-[26px] font-medium">
+                            @lang('shop::app.compare.title')
+                        </h2>
 
                         <div
                             class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
@@ -45,7 +47,9 @@
                                 v-if="attribute.code == 'product'"
                             >
                                 <div class="min-w-[304px] max-w-full max-sm:hidden">
-                                    <p class="text-[14px] font-medium">@{{ attribute.name ?? attribute.admin_name }}</p>
+                                    <p class="text-[14px] font-medium">
+                                        @{{ attribute.name ?? attribute.admin_name }}
+                                    </p>
                                 </div>
 
                                 <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
@@ -185,6 +189,8 @@
 
                             this.items = [];
 
+                            this.$emitter.emit('add-flash', { type: 'success', message:  '@lang('All items removed successfully')' });
+
                             return;
                         }
                         
@@ -193,6 +199,8 @@
                             })
                             .then(response => {
                                 this.items = [];
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
 

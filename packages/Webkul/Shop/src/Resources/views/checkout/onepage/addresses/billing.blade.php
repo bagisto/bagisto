@@ -40,7 +40,10 @@
                             <div class="flex justify-between items-center">
                                 <p class="text-[16px] font-medium">
                                     @{{ address.first_name }} @{{ address.last_name }}
-                                    <span v-if="address.company_name">(@{{ address.company_name }})</span>
+
+                                    <span v-if="address.company_name">
+                                        (@{{ address.company_name }})
+                                    </span>
                                 </p>
                             </div>
 
@@ -66,7 +69,10 @@
                     >
                         <div class="flex gap-x-[10px] items-center cursor-pointer">
                             <span class="icon-plus text-[30px] p-[10px] border border-black rounded-full"></span>
-                            <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
+
+                            <p class="text-[16px]">
+                                @lang('shop::app.checkout.onepage.addresses.billing.add-new-address')
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -418,9 +424,12 @@
                                         <label
                                             class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white  cursor-pointer"
                                             for="billing[is_save_as_address]"
-                                        ></label>
+                                        >
+                                        </label>
 
-                                        <label for="billing[is_save_as_address]">@lang('shop::app.checkout.onepage.addresses.billing.save-address')</label>
+                                        <label for="billing[is_save_as_address]">
+                                            @lang('shop::app.checkout.onepage.addresses.billing.save-address')
+                                        </label>
                                     </div>
                                 @endauth
                             </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace Webkul\SocialShare\Providers;
 
 use Illuminate\Support\Facades\Event;

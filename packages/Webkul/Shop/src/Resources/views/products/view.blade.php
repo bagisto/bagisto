@@ -12,6 +12,10 @@
 <x-shop::layouts>
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
+    <div class="flex justify-center max-lg:hidden">
+        <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
+    </div>
+
     <v-product :product-id="{{ $product->id }}">
         <x-shop::shimmer.products.view></x-shop::shimmer.products.view>
     </v-product>
@@ -83,10 +87,6 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-product-template">
-            <div class="flex justify-center max-lg:hidden">
-                <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
-            </div>
-
             <form ref="formData">
                 <input 
                     type="hidden" 
@@ -200,22 +200,13 @@
                                 </div>
 
                                 <div class="flex gap-[25px] max-sm:flex-wrap">
-                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer"><span
-                                            class="icon-share text-[24px]"></span>Share</div>
-                                    <div class="flex gap-[15px]">
-                                        <a href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Facebook"></a>
-                                        <a href="" class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Twitter"></a>
-                                        <a href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Pintrest"></a>
-                                        <a href="" class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                            aria-label="Linkdln"></a>
+                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer">
+                                        <span class="icon-share text-[24px]"></span>
+                                        Share
                                     </div>
+                                    
+                                    {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
                                 </div>
-                                <!-- Review List Section -->
-
-                                {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
                             </div>
                         </div>
                     </div>
@@ -251,9 +242,11 @@
                     },
 
                     addToWishlist() {
-                        this.$axios.post('{{ route("shop.api.customers.account.wishlist.store", $product->id) }}')
+                        this.$axios.post('{{ route('shop.api.customers.account.wishlist.store') }}', {
+                                product_id: "{{ $product->id }}"
+                            })
                             .then(response => {
-                                alert(response.data.data.message);
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
                     },
@@ -318,4 +311,3 @@
         </script>
     @endPushOnce
 </x-shop::layouts>
-larave
