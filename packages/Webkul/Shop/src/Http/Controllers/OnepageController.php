@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\Http\Controllers\Controller;
 
 class OnepageController extends Controller
 {
@@ -18,8 +17,7 @@ class OnepageController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected CustomerRepository $customerRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -53,7 +51,7 @@ class OnepageController extends Controller
         }
 
         $cart = Cart::getCart();
-        
+
         if ($cart->applied_cart_rule_ids != '') {
             session()->flash('success', trans('shop::app.checkout.cart.rule-applied'));
         }
@@ -97,7 +95,6 @@ class OnepageController extends Controller
 
         return view('shop::checkout.success', compact('order'));
     }
-
 
     /**
      * Check customer is exist or not.
@@ -148,11 +145,7 @@ class OnepageController extends Controller
             'code' => 'string|required',
         ]);
 
-        $code = request()->input('code');
-
-        $result = $this->coupon->apply($code);
-
-        if ($result) {
+        if ($result = $this->coupon->apply(request()->input('code'))) {
             Cart::collectTotals();
 
             return response()->json([
@@ -176,9 +169,7 @@ class OnepageController extends Controller
      */
     public function removeCoupon()
     {
-        $result = $this->coupon->remove();
-
-        if ($result) {
+        if ($this->coupon->remove()) {
             Cart::collectTotals();
 
             return response()->json([
