@@ -578,8 +578,12 @@ return [
     ],
 
     'response' => [
-        'cancel-success'     => ':name canceled successfully.',
-        'cancel-error'       => ':name can not be canceled.',
+        'cancel-success' => ':name canceled successfully.',
+        'cancel-error'   => ':name can not be canceled.',
+        'create-success' => ':name created successfully.',
+        'update-success' => ':name updated successfully.',
+        'delete-success' => ':name deleted successfully.',
+        'submit-success' => ':name submitted successfully.',
     ],
 
     'error' => [
@@ -1336,12 +1340,5 @@ return [
 
     'webkul' => [
         'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
-    ],
-
-    'response' => [
-        'create-success' => ':name created successfully.',
-        'update-success' => ':name updated successfully.',
-        'delete-success' => ':name deleted successfully.',
-        'submit-success' => ':name submitted successfully.',
     ],
 ];
