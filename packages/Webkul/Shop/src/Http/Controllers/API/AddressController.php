@@ -2,15 +2,15 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Shop\Http\Resources\AddressResource;
-use Webkul\Shop\Http\Requests\Customer\AddressRequest;
+use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Shop\Http\Requests\Customer\AddressRequest;
+use Webkul\Shop\Http\Resources\AddressResource;
 
 class AddressController extends APIController
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -58,7 +58,7 @@ class AddressController extends APIController
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
         return new JsonResource([
-            'message' => trans('shop::app.customers.account.addresses.create-success')
+            'message' => trans('shop::app.customers.account.addresses.create-success'),
         ]);
     }
 }

@@ -7,8 +7,10 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-coupon-template">
         <div class="flex text-right justify-between">
-            <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">@lang('shop::app.checkout.cart.coupon.discount')</p>
-            
+            <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
+                @lang('shop::app.checkout.cart.coupon.discount')
+            </p>
+
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
                 <x-shop::modal ref="couponModel">
                     <x-slot:toggle>
@@ -21,7 +23,9 @@
                     </x-slot:toggle>
 
                     <x-slot:header>
-                        <h2 class="text-[25px] font-medium max-sm:text-[22px]">@lang('Apply Coupon')</h2>
+                        <h2 class="text-[25px] font-medium max-sm:text-[22px]">
+                            @lang('Apply Coupon')
+                        </h2>
                     </x-slot:header>
 
                     <x-slot:content>
@@ -53,7 +57,10 @@
 
                                 <div class="p-[30px] bg-white mt-[20px]">
                                     <div class="flex justify-between items-center gap-[15px] flex-wrap">
-                                        <p class="text-[14px] font-medium text-[#7D7D7D]">@lang('Subtotal')</p>
+                                        <p class="text-[14px] font-medium text-[#7D7D7D]">
+                                            @lang('Subtotal')
+                                        </p>
+
                                         <div class="flex gap-[30px] items-center flex-auto flex-wrap">
                                             <p 
                                                 class="text-[30px] font-semibold max-sm:text-[22px]"
@@ -79,7 +86,9 @@
                     class="text-[12px] font-small flex justify-between items-center"
                     v-if="isCouponApplied"
                 >
-                    <p class="text-[12px] mr-2">@lang('Coupon applied')</p>
+                    <p class="text-[12px] mr-2">
+                        @lang('Coupon applied')
+                    </p>
                     
                     <p 
                         class="text-[16px] font-medium cursor-pointer text-navyBlue"
@@ -119,7 +128,7 @@
                         .then((response) => {
                             this.$parent.$parent.$refs.vCart.get();
                             
-                            alert(response.data.message)
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             this.$refs.couponModel.toggle();
                         })
@@ -132,6 +141,8 @@
                         })
                         .then((response) => {
                             this.$parent.$parent.$refs.vCart.get();
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                         })
                         .catch(error => console.log(error));
                 },

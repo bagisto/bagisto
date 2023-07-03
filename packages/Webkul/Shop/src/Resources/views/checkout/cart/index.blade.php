@@ -20,7 +20,10 @@
                 </template>
 
                 <template v-else>
-                    <div class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" v-if="cart?.items?.length">
+                    <div 
+                        class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" 
+                        v-if="cart?.items?.length"
+                    >
                         <div class="grid gap-[30px] flex-1">
                             <div 
                                 class="grid gap-y-[25px]" 
@@ -31,7 +34,8 @@
                                         <x-shop::shimmer.image
                                             class="w-[110px] h-[110px] rounded-[12px]"
                                             ::src="item.base_image.small_image_url"
-                                        ></x-shop::shimmer.image>
+                                        >
+                                        </x-shop::shimmer.image>
 
                                         <div class="grid gap-y-[10px]">
                                             <p 
@@ -119,11 +123,13 @@
                         @include('shop::checkout.cart.summary')
                     </div>
 
-                    <div 
-                        class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" 
+                    <div
+                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
                         v-else
                     >
-                        <h1>@lang('shop::app.checkout.cart.index.empty-product')</h1>
+                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                        
+                        <p class="text-[20px]">@lang('shop::app.checkout.cart.index.empty-product')</p>
                     </div>
                 </template>
             </div>

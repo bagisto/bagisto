@@ -19,7 +19,6 @@ class AddressController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
     public function __construct(
@@ -34,9 +33,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $customer = auth()->guard('customer')->user();
-
-        return view('shop::customers.account.addresses.index')->with('addresses', $customer->addresses);
+        return view('shop::customers.account.addresses.index')->with('addresses', auth()->guard('customer')->user()->addresses);
     }
 
     /**
@@ -97,7 +94,7 @@ class AddressController extends Controller
             'customer_id' => auth()->guard('customer')->id(),
         ]);
 
-        $address['defaultCountry']  =  config('app.default_country');
+        $address['defaultCountry'] = config('app.default_country');
 
         if (! $address) {
             abort(404);
@@ -153,9 +150,7 @@ class AddressController extends Controller
      */
     public function makeDefault($id)
     {
-        $customer = auth()->guard('customer')->user();
-
-        if ($default = $customer->default_address) {
+        if ($default = auth()->guard('customer')->user()->default_address) {
             $this->customerAddressRepository->find($default->id)->update(['default_address' => 0]);
         }
 
@@ -176,11 +171,9 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $customer = auth()->guard('customer')->user();
-
         $address = $this->customerAddressRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => $customer->id,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
         if (! $address) {
