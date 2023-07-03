@@ -2,7 +2,6 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
-use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Product\Repositories\SearchRepository;
 
 class HomeController extends Controller
@@ -10,7 +9,6 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Product\Repositories\SearchRepository  $searchRepository
      * @return void
      */
     public function __construct(protected SearchRepository $searchRepository)

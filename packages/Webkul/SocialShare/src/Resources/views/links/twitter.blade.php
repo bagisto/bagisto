@@ -5,10 +5,10 @@
     ]);
 @endphp
 
-<twitter-share></twitter-share>
+<v-twitter-share></v-twitter-share>
 
 @push('scripts')
-    <script type="text/x-template" id="twitter-share-link">
+    <script type="text/x-template" id="twitter-share-template">
         <li class="bb-social-share__item bb-social--twitter">
             <a 
                 href="#" 
@@ -19,9 +19,9 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('twitter-share', {
-            template: '#twitter-share-link',
+    <script type="module">
+        app.component('v-twitter-share', {
+            template: '#v-twitter-share-template',
 
             data: function () {
                 return {

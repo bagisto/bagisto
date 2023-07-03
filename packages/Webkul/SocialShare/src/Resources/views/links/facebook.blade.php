@@ -4,13 +4,13 @@
     $facebook_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
 @endphp
 
-<facebook-share></facebook-share>
+<v-facebook-share></v-facebook-share>
 
 @push('scripts')
-    <script type="text/x-template" id="facebook-share-link">
+    <script type="text/x-template" id="v-facebook-share-template">
         <li class="bb-social-share__item bb-social--facebook">
             <a 
-                href="#" 
+                href="#"
                 @click="openSharePopup"
             >
                 @include('social_share::icons.facebook')
@@ -18,9 +18,9 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('facebook-share', {
-            template: '#facebook-share-link',
+    <script type="module">
+        app.component('v-facebook-share', {
+            template: '#v-facebook-share-template',
 
             data: function () {
                 return {

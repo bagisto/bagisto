@@ -9,10 +9,10 @@
     $linkedin_url = 'https://www.linkedin.com/shareArticle?' . http_build_query($detailes);
 @endphp
 
-<linkedin-share></linkedin-share>
+<v-linkedin-share></v-linkedin-share>
 
 @push('scripts')
-    <script type="text/x-template" id="linkedin-share-link">
+    <script type="text/x-template" id="v-linkedin-share-template">
         <li class="bb-social-share__item bb-social--linkedin">
             <a 
                 href="#" 
@@ -23,9 +23,9 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('linkedin-share', {
-            template: '#linkedin-share-link',
+    <script type="module">
+        app.component('v-linkedin-share', {
+            template: '#v-linkedin-share-template',
 
             data: function () {
                 return {

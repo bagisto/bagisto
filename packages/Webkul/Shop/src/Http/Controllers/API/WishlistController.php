@@ -47,11 +47,7 @@ class WishlistController extends APIController
      */
     public function store(): JsonResource
     {
-        $customer = auth()->guard('customer')->user();
-
-        $productId = request()->input('product_id');
-
-        $product = $this->productRepository->with('parent')->find($productId);
+        $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
 
         if (! $product) {
             return new JsonResource([
@@ -61,19 +57,20 @@ class WishlistController extends APIController
 
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
-            'product_id'  => $productId,
-            'customer_id' => $customer->id,
+            'product_id'  => $product->id,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ];
 
-        if ($product->parent && $product->parent->type !== 'configurable') {
+        if (
+            $product->parent
+            && $product->parent->type !== 'configurable'
+        ) {
             $product = $product->parent;
             $data['product_id'] = $product->id;
         }
 
-        $wishlist = $this->wishlistRepository->findOneWhere($data);
-
-        if (! $wishlist) {
-            $wishlist = $this->wishlistRepository->create($data);
+        if (! $this->wishlistRepository->findOneWhere($data)) {
+            $this->wishlistRepository->create($data);
 
             return new JsonResource([
                 'message' => trans('customer::app.wishlist.success'),
@@ -96,11 +93,9 @@ class WishlistController extends APIController
      */
     public function moveToCart($id): JsonResource
     {
-        $customer = auth()->guard('customer')->user();
-
         $wishlistItem = $this->wishlistRepository->findOneWhere([
             'id'          => $id,
-            'customer_id' => $customer->id,
+            'customer_id' => auth()->guard('customer')->user()->id,
         ]);
 
         if (! $wishlistItem) {

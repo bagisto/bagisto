@@ -79,6 +79,7 @@
             "Webkul\\Shop\\": "packages/Webkul/Shop/src",
             "Webkul\\Sitemap\\": "packages/Webkul/Sitemap/src",
             "Webkul\\SocialLogin\\": "packages/Webkul/SocialLogin/src",
+            "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\Ui\\": "packages/Webkul/Ui/src",
