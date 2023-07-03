@@ -54,7 +54,7 @@ class WishlistController extends APIController
                 'message' => trans('customer::app.product-removed'),
             ]);
         }
-    
+
         $data = [
             'channel_id'  => core()->getCurrentChannel()->id,
             'product_id'  => $product->id,
@@ -76,20 +76,19 @@ class WishlistController extends APIController
                 'message' => trans('customer::app.wishlist.success'),
             ]);
         }
-    
+
         $this->wishlistRepository->findOneWhere([
             'product_id' => $data['product_id'],
         ])->delete();
-    
+
         return new JsonResource([
             'message' => trans('customer::app.wishlist.removed'),
         ]);
     }
 
-
     /**
      * Move the wishlist item to the cart.
-     * 
+     *
      * @param  int  $id
      */
     public function moveToCart($id): JsonResource
@@ -108,17 +107,21 @@ class WishlistController extends APIController
 
             if ($result) {
                 return new JsonResource([
-                    'data'     => WishlistResource::collection($this->wishlistRepository->get()),
+                    'data' => [
+                        'wishlist' => WishlistResource::collection($this->wishlistRepository->get()), 
+                        'cart'     => ['items_count'  => Cart::getCart()->items_count],
+                    ],
+
                     'message'  => trans('shop::app.components.products.item-add-to-cart'),
                 ]);
             }
-            
+
             return new JsonResource([
                 'redirect' => true,
                 'data'     => route('shop.productOrCategory.index', $wishlistItem->product->url_key),
                 'message'  => trans('shop::app.checkout.cart.integrity.missing_options'),
             ]);
-            
+
         } catch (\Exception $exception) {
             return new JsonResource([
                 'redirect' => true,
@@ -147,12 +150,12 @@ class WishlistController extends APIController
      * Method for removing all items from the wishlist.
      */
     public function destroyAll(): JsonResource
-    {  
+    {
         $success = $this->wishlistRepository->deleteWhere([
             'customer_id'  => auth()->guard('customer')->user()->id,
         ]);
 
-       if (! $success) {
+        if (! $success) {
             return new JsonResource([
                 'message'  => trans('shop::app.customers.account.wishlist.remove-fail'),
             ]);
