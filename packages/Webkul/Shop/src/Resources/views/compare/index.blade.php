@@ -146,7 +146,7 @@
                         if (! this.isCustomer) {
                             productIds = this.getStorageValue('compare_items');
                         }
-
+                        
                         this.$axios.get("{{ route('shop.api.compare.index') }}", {
                                 params: {
                                     product_ids: productIds,
@@ -173,14 +173,19 @@
 
                             return;
                         }
-                        
-                        this.$axios.delete("{{ route('shop.api.compare.destroy') }}", {
+
+                        this.$axios.post("{{ route('shop.api.compare.destroy') }}", {
+                                '_method': 'DELETE',
                                 'product_id': productId,
                             })
                             .then(response => {
                                 this.items = response.data.data;
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                             })
                             .catch(error => {});
+                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
                     },
 
                     removeAll() {
