@@ -41,16 +41,17 @@
             </div>
         </x-slot:toggle>
 
-        <x-slot:content>
-            <ul>
+        <x-slot:content class="!p-[0px]">
+            <div class="grid gap-[4px] mt-[10px] pb-[10px]">
                 @foreach (core()->getCurrentChannel()->currencies as $currency)
-                    <li class="cursor-pointer">
-                        <a href="?{{ ! empty($searchQuery) ? $searchQuery : '' }}&currency={{ $currency->code }}">
-                            {{ $currency->code }}
-                        </a>
-                    </li>
+                    <a 
+                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($currency->code == core()->getCurrentCurrencyCode()) bg-gray-100 @endif"
+                        href="?{{ ! empty($searchQuery) ? $searchQuery : '' }}&currency={{ $currency->code }}"
+                    >
+                        {{ $currency->code }}
+                    </a>
                 @endforeach
-            </ul>
+            </div>
         </x-slot:content>
     </x-shop::dropdown>
 
@@ -71,16 +72,17 @@
             </div>
         </x-slot:toggle>
     
-        <x-slot:content>
-            <ul>
+        <x-slot:content class="!p-[0px]">
+            <div class="grid gap-[4px] mt-[10px] pb-[10px]">
                 @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
-                    <li class="cursor-pointer hover:bg-gray-80">
-                        <a href="?{{ ! empty($searchQuery) ? $searchQuery : '' }}&locale={{ $locale->code }}">
-                            {{ $locale->name }}
-                        </a>
-                    </li>
+                    <a 
+                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($locale->code == app()->getLocale()) bg-gray-100 @endif"
+                        href="?{{ ! empty($searchQuery) ? $searchQuery : '' }}&locale={{ $locale->code }}"
+                    >
+                        {{ $locale->name }}
+                    </a>
                 @endforeach
-            </ul>
+            </div>
         </x-slot:content>
     </x-shop::dropdown>
 </div>
