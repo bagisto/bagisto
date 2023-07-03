@@ -20,137 +20,141 @@
                 </template>
 
                 <template v-else>
-                    <div class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" v-if="cart?.items?.length">
-                        
+                    <div 
+                        class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px]" 
+                        v-if="cart?.items?.length"
+                    >
                         <div class="grid gap-[30px] flex-1">
-                            <div class="grid gap-y-[25px]">
-                                <!-- Cart Action -->
-                                <div class="max-lg:hidden flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
-                                    <div class="select-none">
-                                        <input
-                                            type="checkbox"
-                                            id="select-all"
-                                            class="hidden peer"
-                                            v-model="allSelected"
-                                            @change="selectAll"
+                            <!-- Cart Action -->
+                            <div class="max-lg:hidden flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
+                                <div class="select-none">
+                                    <input
+                                        type="checkbox"
+                                        id="select-all"
+                                        class="hidden peer"
+                                        v-model="allSelected"
+                                        @change="selectAll"
+                                    >
+
+                                    <label
+                                        class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                                        for="select-all"
+                                    ></label>
+
+                                    <span class="text-[26px] max-sm:text-[20px] ml-[10px]">@{{ selectedItemsCount }} Items Selected</span>
+                                </div>
+
+                                <div class="">
+                                    <span
+                                        class="text-[16px] cursor-pointer" 
+                                        @click="removeSelectedItems"
+                                    >
+                                        @lang('Remove')
+                                    </span>
+
+                                    <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
+
+                                    <span
+                                        class="text-[16px] cursor-pointer" 
+                                        @click="moveToWishlistSelectedItems"
+                                    >
+                                        @lang('Move To Wishlist')
+                                    </span>
+                                </div>
+                            </div>
+                        
+                            <!-- Cart Items -->
+                            <div 
+                                class="grid gap-y-[25px]" 
+                                v-for="item in cart?.items"
+                            >
+                                <div class="flex gap-x-[10px] justify-between flex-wrap border-b-[1px] border-[#E9E9E9] pb-[18px]">
+                                    <div class="flex gap-x-[20px]">
+                                        <div class="select-none mt-[43px]">
+                                            <input
+                                                type="checkbox"
+                                                :id="'item_' + item.id"
+                                                class="hidden peer"
+                                                v-model="item.selected"
+                                                @change="updateAllSelected"
+                                            >
+
+                                            <label
+                                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                                                :for="'item_' + item.id"
+                                            ></label>
+                                        </div>
+
+                                        <x-shop::shimmer.image
+                                            class="w-[110px] h-[110px] rounded-[12px]"
+                                            ::src="item.base_image.small_image_url"
                                         >
+                                        </x-shop::shimmer.image>
 
-                                        <label
-                                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
-                                            for="select-all"
-                                        ></label>
+                                        <div class="grid gap-y-[10px]">
+                                            <p 
+                                                class="text-[16px] font-medium" 
+                                                v-text="item.name"
+                                            >
+                                            </p>
+                                    
+                                            <div
+                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                v-if="item.options.length"
+                                            >
+                                                <div class="grid gap-[8px]">
+                                                    <div v-for="option in item.options">
+                                                        <p 
+                                                            class="text-[14px] font-medium" 
+                                                            v-text="option.attribute_name + ':'"
+                                                        >
+                                                        </p>
+                                    
+                                                        <p class="text-[14px]" v-text="option.option_label"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <span class="text-[26px] max-sm:text-[20px] ml-[10px]">@{{ selectedItemsCount }} Items Selected</span>
+                                            <div class="sm:hidden">
+                                                <p 
+                                                    class="text-[18px] font-semibold" 
+                                                    v-text="item.formatted_total"
+                                                >
+                                                </p>
+                                                
+                                                <span
+                                                    class="text-[16px] text-[#4D7EA8] cursor-pointer" 
+                                                    @click="removeItem(item.id)"
+                                                >
+                                                    @lang('shop::app.checkout.cart.index.remove')
+                                                </span>
+                                            </div>
+
+                                            <x-shop::quantity-changer
+                                                name="quantity"
+                                                ::value="item?.quantity"
+                                                class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]"
+                                                @change="setItemQuantity(item.id, $event)"
+                                            >
+                                            </x-shop::quantity-changer>
+                                        </div>
                                     </div>
 
-                                    <div class="">
-                                        <span
-                                            class="text-[16px] cursor-pointer" 
-                                            @click="removeSelectedItems"
+                                    <div class="max-sm:hidden">
+                                        <p 
+                                            class="text-[18px] font-semibold" 
+                                            v-text="item.formatted_total"
                                         >
-                                            @lang('Remove')
-                                        </span>
-
-                                        <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
-
+                                        </p>
+                                        
                                         <span
-                                            class="text-[16px] cursor-pointer" 
-                                            @click="moveToWishlistSelectedItems"
+                                            class="text-[16px] text-[#4D7EA8] cursor-pointer" 
+                                            @click="removeItem(item.id)"
                                         >
-                                            @lang('Move To Wishlist')
+                                            @lang('shop::app.checkout.cart.index.remove')
                                         </span>
                                     </div>
                                 </div>
-                        
-                                <!-- Cart Items -->
-                                <template v-for="item in cart?.items">
-                                    <div class="flex gap-x-[10px] justify-between flex-wrap border-b-[1px] border-[#E9E9E9] pb-[20px]">
-                                        <div class="flex gap-x-[20px]">
-                                            <div class="select-none mt-[43px]">
-                                                <input
-                                                    type="checkbox"
-                                                    :id="'item_' + item.id"
-                                                    class="hidden peer"
-                                                    v-model="item.selected"
-                                                    @change="updateAllSelected"
-                                                >
-
-                                                <label
-                                                    class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
-                                                    :for="'item_' + item.id"
-                                                ></label>
-                                            </div>
-
-                                            <x-shop::shimmer.image
-                                                class="w-[110px] h-[110px] rounded-[12px]"
-                                                ::src="item.base_image.small_image_url"
-                                            ></x-shop::shimmer.image>
-
-                                            <div class="grid gap-y-[10px]">
-                                                <p 
-                                                    class="text-[16px] font-medium" 
-                                                    v-text="item.name"
-                                                >
-                                                </p>
-                                        
-                                                <div
-                                                    class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
-                                                    v-if="item.options.length"
-                                                >
-                                                    <div class="grid gap-[8px]">
-                                                        <div v-for="option in item.options">
-                                                            <p 
-                                                                class="text-[14px] font-medium" 
-                                                                v-text="option.attribute_name + ':'"
-                                                            >
-                                                            </p>
-                                        
-                                                            <p class="text-[14px]" v-text="option.option_label"></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="sm:hidden">
-                                                    <p 
-                                                        class="text-[18px] font-semibold" 
-                                                        v-text="item.formatted_total"
-                                                    >
-                                                    </p>
-                                                    
-                                                    <span
-                                                        class="text-[16px] text-[#0A49A7] cursor-pointer" 
-                                                        @click="removeItem(item.id)"
-                                                    >
-                                                        @lang('shop::app.checkout.cart.index.remove')
-                                                    </span>
-                                                </div>
-
-                                                <x-shop::quantity-changer
-                                                    name="quantity"
-                                                    ::value="item?.quantity"
-                                                    class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]"
-                                                    @change="setItemQuantity(item.id, $event)"
-                                                >
-                                                </x-shop::quantity-changer>
-                                            </div>
-                                        </div>
-
-                                        <div class="max-sm:hidden">
-                                            <p 
-                                                class="text-[18px] font-semibold" 
-                                                v-text="item.formatted_total"
-                                            >
-                                            </p>
-                                            
-                                            <span
-                                                class="text-[16px] text-[#0A49A7] cursor-pointer" 
-                                                @click="removeItem(item.id)"
-                                            >
-                                                @lang('shop::app.checkout.cart.index.remove')
-                                            </span>
-                                        </div>
-                                    </div>
-                                </template>
                             </div>
         
                             <div class="flex flex-wrap gap-[30px] justify-end">
@@ -173,11 +177,13 @@
                         @include('shop::checkout.cart.summary')
                     </div>
 
-                    <div 
-                        class="grid grid-cols-[1fr_auto] gap-[30px] mt-[30px]" 
+                    <div
+                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
                         v-else
                     >
-                        <h1>@lang('shop::app.checkout.cart.index.empty-product')</h1>
+                        <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
+                        
+                        <p class="text-[20px]">@lang('shop::app.checkout.cart.index.empty-product')</p>
                     </div>
                 </template>
             </div>

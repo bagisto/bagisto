@@ -31,8 +31,14 @@
             </x-slot:header>
 
             <x-slot:content>
-                <div class="grid gap-[50px] mt-[35px]" v-if="cart?.items?.length">
-                    <div class="flex gap-x-[20px]" v-for="item in cart?.items">
+                <div 
+                    class="grid gap-[50px] mt-[35px]" 
+                    v-if="cart?.items?.length"
+                >
+                    <div 
+                        class="flex gap-x-[20px]" 
+                        v-for="item in cart?.items"
+                    >
                         <div class="">
                             <img
                                 :src="item.base_image.small_image_url"

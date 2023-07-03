@@ -17,6 +17,9 @@
         @for ($i = 0;  $i < $count; $i++)
             <div class="flex justify-between gap-x-[10px] border-b-[1px] border-[#E9E9E9] pb-[18px]">
                 <div class="flex gap-x-[20px]">
+                    <div class="select-none mt-[43px]">
+                        <div class="w-[24px] h-[25px] rounded-[4px] mt-[5px] shimmer"></div>
+                    </div>
 
                     <div>
                         <div class="w-[110px] h-[110px] shimmer bg-[#E9E9E9] rounded-[12px]"></div>

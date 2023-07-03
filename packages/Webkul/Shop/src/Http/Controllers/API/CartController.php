@@ -43,11 +43,9 @@ class CartController extends APIController
     public function store(): JsonResource
     {
         try {
-            $productId = request()->input('product_id');
+            $product = $this->productRepository->with('parent')->find(request()->input('product_id'));
 
-            $product = $this->productRepository->with('parent')->find($productId);
-
-            $cart = Cart::addProduct($productId, request()->all());
+            $cart = Cart::addProduct($product->id, request()->all());
 
             /**
              * To Do (@devansh-webkul): Need to check this and improve cart facade.
@@ -64,7 +62,7 @@ class CartController extends APIController
             if ($cart) {
                 if ($customer = auth()->guard('customer')->user()) {
                     $this->wishlistRepository->deleteWhere([
-                        'product_id'  => $productId,
+                        'product_id'  => $product->id,
                         'customer_id' => $customer->id,
                     ]);
                 }
