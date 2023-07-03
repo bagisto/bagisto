@@ -6,10 +6,10 @@
     $whatsapp_url = 'whatsapp://send?' . http_build_query($text);
 @endphp
 
-<whatsapp-share></whatsapp-share>
+<v-whatsapp-share></v-whatsapp-share>
 
 @push('scripts')
-    <script type="text/x-template" id="whatsapp-share-link">
+    <script type="text/x-template" id="v-whatsapp-share-template">
         <li 
             class="bb-social-share__item bb-social--whatsapp" 
             v-if="isMobile"
@@ -24,9 +24,9 @@
         </li>
     </script>
 
-    <script type="text/javascript">
-        Vue.component('whatsapp-share', {
-            template: '#whatsapp-share-link',
+    <script type="module">
+        app.component('v-whatsapp-share', {
+            template: '#v-whatsapp-share-template',
 
             data: function () {
                 return {
