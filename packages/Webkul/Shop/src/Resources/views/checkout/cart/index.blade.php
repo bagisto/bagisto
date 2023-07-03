@@ -91,7 +91,7 @@
                                         >
                                         </x-shop::shimmer.image>
 
-                                        <div class="grid gap-y-[10px]">
+                                        <div class="grid place-content-start gap-y-[10px]">
                                             <p 
                                                 class="text-[16px] font-medium" 
                                                 v-text="item.name"
