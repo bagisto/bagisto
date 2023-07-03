@@ -6,7 +6,7 @@
     $whatsapp_url = 'whatsapp://send?' . http_build_query($text);
 @endphp
 
-<whatsapp-share></whatsapp-share>
+<v-whatsapp-share></v-whatsapp-share>
 
 @push('scripts')
     <script type="text/x-template" id="whatsapp-share-link">
@@ -22,8 +22,8 @@
     </script>
 
     <script type="module">
-        app.component('whatsapp-share', {
-            template: '#whatsapp-share-link',
+        app.component('v-whatsapp-share', {
+            template: '#v-whatsapp-share-template',
 
             data: function () {
                 return {

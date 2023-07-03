@@ -53,15 +53,21 @@ class ReviewController extends APIController
     public function store($id): JsonResource
     {
         $this->validate(request(), [
-            'title'   => 'required',
-            'comment' => 'required',
-            'rating'  => 'required|numeric|min:1|max:5',
+            'title'         => 'required',
+            'comment'       => 'required',
+            'rating'        => 'required|numeric|min:1|max:5',
+            'attachments'   => 'array',
+            'attachments.*' => 'file',
         ]);
 
-        $data = array_merge(request()->all(), [
-            'status'     => self::STATUS_PENDING,
-            'product_id' => $id,
-        ]);
+        $data = [
+            'title'       => request()->input('title'),
+            'comment'     => request()->input('comment'),
+            'rating'      => request()->input('rating'),
+            'attachments' => request()->file('attachments', []),
+            'status'      => self::STATUS_PENDING,
+            'product_id'  => $id,
+        ];
 
         if ($customer = auth()->guard('customer')->user()) {
             $data = array_merge($data, [
@@ -72,7 +78,7 @@ class ReviewController extends APIController
 
         $review = $this->productReviewRepository->create($data);
 
-        $this->productReviewAttachmentRepository->uploadImages($data, $review);
+        $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
 
         return new JsonResource([
             'message' => trans('shop::app.products.submit-success'),

@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Event::listen('bagisto.shop.customers.login_form_controls.before', function($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('sociallogin::shop.customers.session.social-links');
+            $viewRenderEventManager->addTemplate('social_login::shop.customers.session.social-links');
         });
     }
 }

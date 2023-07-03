@@ -5,46 +5,46 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-review-template">
         <div class="container mt-[60px] max-1180:px-[20px]">
-            <!-- Write Review Section -->
             <div class="w-full" v-if="canReview">
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
+                    <div class="flex justify-end gap-[15px] max-sm:flex-wrap">
+                        <div
+                            class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
+                            @click="canReview = false"
+                        >
+                            {{-- @transition --}}
+                            @lang('Back')
+                        </div>
+                    </div>
+
                     <form
                         class="rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
                         <div>
-                            {{-- <x-shop::form.control-group>
+                            <x-shop::form.control-group class="mb-4 mt-[15px]">
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    name="image"
-                                    :value="old('image')"
-                                    class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    name="attachments"
+                                    class="shadow text-[14px] appearance-none rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    :label="trans('shop::app.products.image')"
-                                    :placeholder="trans('shop::app.products.image')"
+                                    :label="trans('Attachments')"
+                                    :is-multiple="true"
                                 >
                                 </x-shop::form.control-group.control>
 
                                 <x-shop::form.control-group.error
-                                    control-name="image"
+                                    control-name="attachments"
                                 >
                                 </x-shop::form.control-group.error>
-                            </x-shop::form.control-group> --}}
-                            
+                            </x-shop::form.control-group>
                         </div>
                         
                         <div>
-                            <input 
-                                class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                type="file"
-                                name="image"
-                                @change="selectReviewImage"
-                            />
-
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
                                     @lang('shop::app.products.rating')
@@ -121,7 +121,6 @@
                 </x-shop::form>
             </div>
 
-            <!-- Review List Section -->
             <div v-if="! canReview">
                 <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
                     <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
@@ -162,17 +161,16 @@
                 </div>
 
                 <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
-                    <!-- Single card review -->
                     <div
-                        v-for='review in reviews'
                         class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap"
+                        v-for='review in reviews'
                     >
-                        <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
+                        <div>
                             <img
-                                class="rounded-[12px]"
-                                :src="review.image[0].small_image_url"
-                                title=""
-                                alt=""
+                                class="rounded-[12px] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
+                                :src="review.images[0].url"
+                                :alt="review.name"
+                                :title="review.name"
                             >
                         </div>
 
@@ -200,29 +198,37 @@
                             </p>
 
                             <p
+                                class="text-[16px] text-[#7D7D7D] font-semibold mt-[20px] max-sm:text-[12px]"
+                                v-text="review.title"
+                            >
+                            </p>
+
+                            <p
                                 class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"
                                 v-text="review.comment"
                             >
                             </p>
 
-                            <div class="flex justify-between items-center mt-[20px] flex-wrap gap-[10px]">
-                                <div class="flex gap-x-[10px]">
-                                    <p class="text-[16px] text-[#7D7D7D] max-sm:text-[12px]">
-                                        @lang('shop::app.products.was-this-helpful')
-                                    </p>
+                            <div class="flex gap-2 mt-2">
+                                <template v-for="file in review.images">
+                                    <img
+                                        class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                        :src="file.url"
+                                        :alt="review.name"
+                                        :title="review.name"
+                                        v-if="file.type == 'image'"
+                                    >
 
-                                    <div class="flex gap-[8px] text-[#7D7D7D]">
-                                        <span class="icon-like text-[24px] text-[#D1D1D1]"></span>
-
-                                        <span>0</span>
-                                    </div>
-
-                                    <div class="flex gap-[8px] text-[#7D7D7D]">
-                                        <span class="icon-dislike text-[24px] text-[#D1D1D1]"></span>
-
-                                        <span>0</span>
-                                    </div>
-                                </div>
+                                    <video
+                                        class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                        :src="file.url"
+                                        :alt="review.name"
+                                        :title="review.name"
+                                        controls
+                                        v-else
+                                    >
+                                    </video>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -256,8 +262,6 @@
                     },
 
                     meta: {},
-
-                    reviewImage: {},
                 }
             },
 
@@ -280,19 +284,18 @@
                     }
                 },
 
-                store(params) {
-                    let { title, comment, rating } = params;
-
-                    let formData = new FormData();
-
-                    formData.append('attachments[]', this.reviewImage);
-                    formData.append('title', title);
-                    formData.append('comment', comment);
-                    formData.append('rating', rating);
-                    
-                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', formData)
+                store(params, { resetForm }) {
+                    this.$axios.post('{{ route("shop.api.products.reviews.store", $product->id) }}', params, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                         .then(response => {
-                            alert(response.data.data.message);
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                            resetForm();
+
+                            this.canReview = false;
                         })
                         .catch(error => {});
                 },
@@ -300,7 +303,7 @@
                 selectReviewImage() {
                     this.reviewImage = event.target.files[0];
                 },
-            }
+            },
         });
     </script>
 @endPushOnce
