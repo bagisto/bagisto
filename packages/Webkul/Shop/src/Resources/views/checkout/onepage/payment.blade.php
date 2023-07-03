@@ -18,7 +18,9 @@
                     <x-shop::accordion>
                         <x-slot:header>
                             <div class="flex justify-between items-center">
-                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('shop::app.checkout.onepage.payment.payment-method')</h2>
+                                <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                                    @lang('shop::app.checkout.onepage.payment.payment-method')
+                                </h2>
                             </div>
                         </x-slot:header>
         
@@ -37,14 +39,30 @@
                                         @change="store(payment)"
                                     >
         
-                                    <label :for="payment.method" class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"></label>
+                                    <label 
+                                        :for="payment.method" 
+                                        class="icon-radio-unselect text-[24px] text-navyBlue absolute right-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                    >
+                                    </label>
         
-                                    <label :for="payment.method" class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full cursor-pointer">
-                                        <img class="mx-w-[55px] max-h-[45px]" src="{{ bagisto_asset('images/paypal.png') }}" :alt="payment.method_title" :title="payment.method_title">
+                                    <label 
+                                        :for="payment.method" 
+                                        class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full cursor-pointer"
+                                    >
+                                        <img 
+                                            class="mx-w-[55px] max-h-[45px]" 
+                                            src="{{ bagisto_asset('images/paypal.png') }}" 
+                                            :alt="payment.method_title" 
+                                            :title="payment.method_title"
+                                        >
                                         
-                                        <p class="text-[14px] font-semibold mt-[5px]">@{{ payment.method_title }} </p>
+                                        <p class="text-[14px] font-semibold mt-[5px]">
+                                            @{{ payment.method_title }}
+                                        </p>
                                         
-                                        <p class="text-[12px] font-medium mt-[10px]">@{{ payment.description }}</p>
+                                        <p class="text-[12px] font-medium mt-[10px]">
+                                            @{{ payment.description }}
+                                        </p>
                                     </label>
 
                                     {{-- Todo implement the additionalDetails --}}

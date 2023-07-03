@@ -17,7 +17,9 @@
                 <x-shop::accordion>
                     <x-slot:header>
                         <div class="flex justify-between items-center">
-                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">@lang('shop::app.checkout.onepage.shipping.shipping-method')</h2>
+                            <h2 class="text-[26px] font-medium max-sm:text-[20px]">
+                                @lang('shop::app.checkout.onepage.shipping.shipping-method')
+                            </h2>
                         </div>
                     </x-slot:header>
 
@@ -49,7 +51,9 @@
                                     >
                                         <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
 
-                                        <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">@{{ rate.base_formatted_price }}</p>
+                                        <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">
+                                            @{{ rate.base_formatted_price }}
+                                        </p>
                                         
                                         <p class="text-[12px] font-medium mt-[10px]">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}

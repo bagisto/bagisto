@@ -3,14 +3,13 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Shop\Http\Resources\CartResource;
-use Webkul\Shop\Http\Controllers\API\APIController;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Payment\Facades\Payment;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Checkout\Http\Requests\CustomerAddressForm;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Payment\Facades\Payment;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Shipping\Facades\Shipping;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class OnepageController extends APIController
 {
@@ -22,8 +21,7 @@ class OnepageController extends APIController
     public function __construct(
         protected OrderRepository $orderRepository,
         protected CustomerRepository $customerRepository
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -39,8 +37,6 @@ class OnepageController extends APIController
 
     /**
      * Store customer address.
-     *
-     * @param  \Webkul\Checkout\Http\Requests\CustomerAddressForm  $request
      */
     public function storeAddress(CustomerAddressForm $request): JsonResource
     {
@@ -52,13 +48,13 @@ class OnepageController extends APIController
         ) {
             return new JsonResource([
                 'redirect' => true,
-                'data'     => route('shop.customer.session.index')
+                'data'     => route('shop.customer.session.index'),
             ]);
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, $data['billing']['address1']);
-        
-        $data['shipping']['address1'] = implode(PHP_EOL, $data['shipping']['address1']); 
+
+        $data['shipping']['address1'] = implode(PHP_EOL, $data['shipping']['address1']);
 
         if (
             Cart::hasError()
@@ -66,7 +62,7 @@ class OnepageController extends APIController
         ) {
             return new JsonResource([
                 'redirect' => true,
-                'data'     => route('shop.checkout.cart.index')
+                'data'     => route('shop.checkout.cart.index'),
             ]);
         }
 
@@ -78,19 +74,19 @@ class OnepageController extends APIController
             if (! $rates = Shipping::collectRates()) {
                 return new JsonResource([
                     'redirect' => true,
-                    'data'     => route('shop.checkout.cart.index')
+                    'data'     => route('shop.checkout.cart.index'),
                 ]);
             }
 
             return new JsonResource([
                 'redirect' => false,
-                'data'     => $rates
+                'data'     => $rates,
             ]);
         }
 
         return new JsonResource([
             'redirect' => false,
-            'data'     => Payment::getSupportedPaymentMethods()
+            'data'     => Payment::getSupportedPaymentMethods(),
         ]);
     }
 
@@ -150,7 +146,7 @@ class OnepageController extends APIController
         if (Cart::hasError()) {
             return new JsonResource([
                 'redirect'     => true,
-                'redirect_url' => route('shop.checkout.cart.index')
+                'redirect_url' => route('shop.checkout.cart.index'),
             ]);
         }
 
@@ -163,7 +159,7 @@ class OnepageController extends APIController
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return new JsonResource([
                 'redirect'     => true,
-                'redirect_url' => $redirectUrl
+                'redirect_url' => $redirectUrl,
             ]);
         }
 
@@ -177,7 +173,7 @@ class OnepageController extends APIController
 
         return new JsonResource([
             'redirect'     => true,
-            'redirect_url' => route('shop.checkout.onepage.success')
+            'redirect_url' => route('shop.checkout.onepage.success'),
         ]);
     }
 
