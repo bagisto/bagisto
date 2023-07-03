@@ -148,7 +148,7 @@
                                         </p>
                                         
                                         <span
-                                            class="text-[16px] text-[#4D7EA8] cursor-pointer" 
+                                            class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                             @click="removeItem(item.id)"
                                         >
                                             @lang('shop::app.checkout.cart.index.remove')
@@ -267,13 +267,38 @@
                     },
 
                     removeSelectedItems() {
-                        const selectedItems = this.cart.items.filter(item => item.selected);
+                        const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
-                        console.log(selectedItems)
+                        this.$axios.post('{{ route('shop.api.checkout.cart.destroy_all') }}', {
+                                '_method': 'DELETE',
+                                'selectedItemsIds': selectedItemsIds,
+                            })
+                            .then(response => {
+                                this.cart = response.data.data;
+
+                                this.$emitter.emit('update-mini-cart', response.data.data );
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                            })
+                            .catch(error => {});
                     },
 
                     moveToWishlistSelectedItems() {
+                        const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
+                        this.$axios.post('{{ route('shop.api.checkout.cart.move_to_wishlist') }}', {
+                                'selectedItemsIds': selectedItemsIds,
+                            })
+                            .then(response => {
+                                this.cart = response.data.data;
+
+                                this.$emitter.emit('update-mini-cart', response.data.data );
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                            })
+                            .catch(error => {});
                     },
                 }
             });

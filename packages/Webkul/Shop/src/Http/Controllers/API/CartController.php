@@ -94,6 +94,40 @@ class CartController extends APIController
     }
 
     /**
+     * Method for remove selected items from cart
+     */
+    public function destroyAll(): JsonResource
+    {
+        foreach (request()->input('selectedItemsIds') as $selectedItemsId) {
+            $data = Cart::removeItem($selectedItemsId);
+        }
+
+        if ($data) {
+            return new JsonResource([
+                'data'     => new CartResource(Cart::getCart()) ?? null,
+                'message'  => trans('shop::app.checkout.cart.index.remove-selected-success'),
+            ]);
+        }
+    }
+
+    /**
+     * Method for move to wishlist selected items from cart
+     */
+    public function moveToWishlist(): JsonResource
+    {
+        foreach (request()->input('selectedItemsIds') as $selectedItemsId) {
+            $data = Cart::moveToWishlist($selectedItemsId);
+        }
+
+        if ($data) {
+            return new JsonResource([
+                'data'     => new CartResource(Cart::getCart()) ?? null,
+                'message'  => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
+            ]);
+        }
+    }
+
+    /**
      * Updates the quantity of the items present in the cart.
      */
     public function update(): JsonResource

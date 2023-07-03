@@ -239,7 +239,7 @@ return [
                 'missing_options'    => 'Options are missing for this product.',
                 'product-removed'    => 'Product Is No More Available As Removed By Admin',
                 'remove-all-success' => 'All the items from your wishlist have been removed',
-                'see-details'        => 'See Details'         
+                'see-details'        => 'See Details',
             ],
 
             'home'           => 'Home',
@@ -432,18 +432,20 @@ return [
             ],
 
             'index' => [
-                'home'               => 'Home',
-                'cart'               => 'Cart',
-                'view-cart'          => 'View Cart',
-                'product-name'       => 'Product Name',
-                'remove'             => 'Remove',
-                'quantity'           => 'Quantity',
-                'price'              => 'Price',
-                'tax'                => 'Tax',
-                'total'              => 'Total',
-                'continue-shopping'  => 'Continue Shopping',
-                'update-cart'        => 'Update Cart',
-                'empty-product'      => 'You don’t have a product in your cart',
+                'home'                    => 'Home',
+                'cart'                    => 'Cart',
+                'view-cart'               => 'View Cart',
+                'product-name'            => 'Product Name',
+                'remove'                  => 'Remove',
+                'quantity'                => 'Quantity',
+                'price'                   => 'Price',
+                'tax'                     => 'Tax',
+                'total'                   => 'Total',
+                'continue-shopping'       => 'Continue Shopping',
+                'update-cart'             => 'Update Cart',
+                'move-to-wishlist-success'=> 'Selected items successfully moved to wishlist.',
+                'remove-selected-success' => 'Selected items successfully removed from cart.',
+                'empty-product'           => 'You don’t have a product in your cart.',
             ],
 
             'coupon'   => [
