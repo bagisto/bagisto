@@ -3,9 +3,9 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Shop\Http\Resources\CartResource;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;

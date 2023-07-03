@@ -3,12 +3,12 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Response;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Resources\CartResource;
 use Webkul\Sales\Repositories\OrderRepository;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 
