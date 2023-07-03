@@ -12,6 +12,10 @@
 <x-shop::layouts>
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
+    <div class="flex justify-center max-lg:hidden">
+        <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
+    </div>
+
     <v-product :product-id="{{ $product->id }}">
         <x-shop::shimmer.products.view></x-shop::shimmer.products.view>
     </v-product>
@@ -83,10 +87,6 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-product-template">
-            <div class="flex justify-center max-lg:hidden">
-                <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
-            </div>
-
             <form ref="formData">
                 <input 
                     type="hidden" 
