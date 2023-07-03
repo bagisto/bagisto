@@ -32,31 +32,31 @@
     {{-- Checkout component --}}
     {{-- Todo (@suraj-webkul): need change translation of this page.  --}}
     {{-- @translations --}}
-    <v-checkout>
-        <x-shop::shimmer.checkout.onepage></x-shop::shimmer.checkout.onepage>
-    </v-checkout>
+
+    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+        <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
+
+        <v-checkout>
+            <x-shop::shimmer.checkout.onepage></x-shop::shimmer.checkout.onepage>
+        </v-checkout>
+    </div>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-checkout-template">
-            <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+            <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
+                <div    
+                    class="overflow-y-auto"
+                    ref="scrollBottom"
+                >
+                    @include('shop::checkout.onepage.addresses.index')
 
-                <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
+                    @include('shop::checkout.onepage.shipping')
 
-                <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
-                    <div    
-                        class="overflow-y-auto"
-                        ref="scrollBottom"
-                    >
-                        @include('shop::checkout.onepage.addresses.index')
+                    @include('shop::checkout.onepage.payment')
 
-                        @include('shop::checkout.onepage.shipping')
-
-                        @include('shop::checkout.onepage.payment')
-
-                    </div>
-                    
-                    @include('shop::checkout.onepage.summary')
                 </div>
+                
+                @include('shop::checkout.onepage.summary')
             </div>
         </script>
 

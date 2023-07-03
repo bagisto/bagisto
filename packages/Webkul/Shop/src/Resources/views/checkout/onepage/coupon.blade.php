@@ -131,7 +131,18 @@
 
                             this.$refs.couponModel.toggle();
                         })
-                        .catch((error) => {console.log(error);})
+                        .catch(error) => {
+                            if ([400, 422].includes(error.response.request.status)) {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+
+                                this.$refs.couponModel.toggle();
+
+                                return;
+                            }
+
+                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+
+                            this.$refs.couponModel.toggle();
                 },
 
                 destroyCoupon() {

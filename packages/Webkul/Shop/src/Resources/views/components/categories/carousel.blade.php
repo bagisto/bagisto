@@ -3,7 +3,10 @@
     title="{{ $title }}"
     navigation-link="{{ $navigationLink ?? '' }}"
 >
-    <x-shop::shimmer.categories.carousel :navigation-link="$navigationLink ?? false"></x-shop::shimmer.categories.carousel>
+    <x-shop::shimmer.categories.carousel
+        :count="7"
+        :navigation-link="$navigationLink ?? false"
+    ></x-shop::shimmer.categories.carousel>
 </v-categories-carousel>
 
 @pushOnce('scripts')
@@ -29,7 +32,12 @@
                                     v-if="category?.images?.base_url"
                                 />
                             </div>
+                        </a>
 
+                        <a
+                            :href="category.url_path"
+                            class=""
+                        >
                             <p
                                 class="text-center text-black text-[20px] font-medium"
                                 v-text="category.name"

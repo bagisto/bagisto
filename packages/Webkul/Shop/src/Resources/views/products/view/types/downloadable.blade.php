@@ -24,7 +24,7 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <h3 class="font-medium mb-[15px]">
+        <h3 class="font-medium mt-[30px] mb-[15px]">
             @lang('shop::app.products.view.type.downloadable.links')
         </h3>
 
@@ -44,7 +44,7 @@
                         </v-field>
                         
                         <label
-                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check peer-checked:bg-navyBlue peer-checked:rounded-[4px] peer-checked:text-white"
+                            class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                             for="{{ $link->id }}"
                         ></label>
                         
