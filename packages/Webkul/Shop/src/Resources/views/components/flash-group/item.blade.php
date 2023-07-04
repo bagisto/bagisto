@@ -17,6 +17,7 @@
             >
                 <span
                     class="icon-toast-done text-[24px] mr-[10px]"
+                    :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>
 
@@ -39,6 +40,16 @@
 
             data() {
                 return {
+                    iconClasses: {
+                        success: 'icon-toast-done',
+
+                        error: 'icon-toast-error',
+
+                        warning: 'icon-toast-exclamation-mark',
+
+                        info: 'icon-toast-info',
+                    },
+
                     typeStyles: {
                         success: {
                             container: 'background: #D4EDDA',
@@ -79,7 +90,7 @@
                 var self = this;
 
                 setTimeout(function() {
-                    self.remove()
+                    //self.remove()
                 }, 5000)
             },
 
