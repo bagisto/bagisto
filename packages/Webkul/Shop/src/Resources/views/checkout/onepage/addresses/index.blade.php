@@ -1,6 +1,10 @@
 {!! view_render_event('bagisto.shop.checkout.addresses.before') !!}
 
-<v-checkout-addresses ref="vCheckoutAddress"></v-checkout-addresses>
+<v-checkout-addresses 
+    ref="vCheckoutAddress"
+    :have_stockable_item="cart.haveStockableItems"
+>
+</v-checkout-addresses>
 
 {!! view_render_event('bagisto.shop.checkout.addresses.after') !!}
 
@@ -22,6 +26,8 @@
     <script type="module">
          app.component('v-checkout-addresses', {
             template: '#v-checkout-addresses-template',
+
+            props: ['have_stockable_item'],
 
             data() {
                 return  {
@@ -205,6 +211,16 @@
                 },
 
                 store() {
+                    if (this.have_stockable_item) {
+                        this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
+                        
+                        this.$parent.$refs.vShippingMethod.isShippingMethodLoading = true;
+                    } else {
+                        this.$parent.$refs.vPaymentMethod.isShowPaymentMethod = false;
+    
+                        this.$parent.$refs.vPaymentMethod.isPaymentMethodLoading = true;
+                    }
+
                     this.$axios.post('{{ route("shop.checkout.onepage.addresses.store") }}', {
                             billing: {
                                 ...this.forms.billing.address,
