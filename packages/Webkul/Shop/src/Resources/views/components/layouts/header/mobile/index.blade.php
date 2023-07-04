@@ -24,7 +24,7 @@
                 width="300"
             >
                 <x-slot:toggle>
-                    <span class="icon-hamburger text-[24px]"></span>
+                    <span class="icon-hamburger text-[24px] cursor-pointer"></span>
         
                     <a 
                         herf="" 
@@ -62,18 +62,48 @@
                     </a>
 
                     @foreach ($categories as $firstLevelCategory)
-                        <div class="flex justify-between items-center">
-                            <a
-                                href="{{ $firstLevelCategory->url }}"
-                                class="flex items-center justify-between pb-[20px] mt-[20px] border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]"
-                            >
-                                {{ $firstLevelCategory->name }}
-                            </a>
+                        <x-shop::accordion>
+                            <x-slot:header>
+                                <a 
+                                    href="{{ $firstLevelCategory->url }}"
+                                    class="flex items-center justify-between border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]"
+                                >
+                                    {{ $firstLevelCategory->name }}
+                                </a>
+                            </x-slot:header>
+            
+                            <x-slot:content>
+                                <ul class="pb-3 text-sm text-gray-700" v-else>
+                                    @if ($firstLevelCategory->children->isNotEmpty())
+                                        @foreach ($firstLevelCategory->children->chunk(2) as $pair)
+                                            @foreach ($pair as $secondLevelCategory)
+                                                <li class="text-[14px] font-medium text-[#7D7D7D]">
+                                                    <a 
+                                                        class="m-2"
+                                                        href="{{ $secondLevelCategory->url }}"
+                                                    >
+                                                        {{ $secondLevelCategory->name }}
+                                                    </a>
+                                                </li>
 
-                            @if ($firstLevelCategory->children->isNotEmpty())
-                                <span class="text-[24px] icon-arrow-down"></span>
-                            @endif
-                        </div>
+                                                @if ($secondLevelCategory->children->isNotEmpty())
+                                                    @foreach ($secondLevelCategory->children as $thirdLevelCategory)
+                                                        <li class="text-[14px] font-medium text-[#7D7D7D]">
+                                                            <a 
+                                                                class="m-2"
+                                                                href="{{ $thirdLevelCategory->url }}"
+                                                            >
+                                                                {{ $thirdLevelCategory->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </x-slot:content>
+                        </x-shop::accordion>
                     @endforeach
                 </x-slot:content>
 
