@@ -2,7 +2,7 @@
 
 <v-checkout-addresses 
     ref="vCheckoutAddress"
-    :have_stockable_item="cart.haveStockableItems"
+    :have-stockable-items="cart.haveStockableItems"
 >
 </v-checkout-addresses>
 
@@ -27,7 +27,7 @@
          app.component('v-checkout-addresses', {
             template: '#v-checkout-addresses-template',
 
-            props: ['have_stockable_item'],
+            props: ['haveStockableItems'],
 
             data() {
                 return  {
@@ -211,7 +211,7 @@
                 },
 
                 store() {
-                    if (this.have_stockable_item) {
+                    if (this.haveStockableItems) {
                         this.$parent.$refs.vShippingMethod.isShowShippingMethod = false;
                         
                         this.$parent.$refs.vShippingMethod.isShippingMethodLoading = true;
