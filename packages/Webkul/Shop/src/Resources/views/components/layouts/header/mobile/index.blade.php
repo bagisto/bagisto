@@ -1,9 +1,72 @@
+{{--
+    The category repository is injected directly here because there is no way
+    to retrieve it from the view composer, as this is an anonymous component.
+--}}
+@inject('categoryRepository', 'Webkul\Category\Repositories\CategoryRepository')
+
+{{--
+    This code needs to be refactored to reduce the amount of PHP in the Blade
+    template as much as possible.
+--}}
+@php
+    $categories = $categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
+
+    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+
+    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+@endphp
+
 <div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px] pt-[25px] gap-[15px] max-lg:mb-[15px]">
     <div class="w-full flex justify-between items-center px-[6px]">
-        <div class="flex  items-center gap-x-[5px]">
-            <span class="icon-hamburger text-[24px]"></span>
+        <div class="flex items-center gap-x-[5px]">
+            <x-shop::drawer
+                position="left"
+                width="300"
+            >
+                <x-slot:toggle>
+                    <span class="icon-hamburger text-[24px] cursor-pointer"></span>
+        
+                    <a 
+                        herf="" 
+                        class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block"
+                    >
+                    </a>
+                </x-slot:toggle>
 
-            <a herf="" class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block"></a>
+                <x-slot:header>
+                    <div class="flex justify-between p-[20px] items-center">
+                        <span class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block mb-[16px]"></span>
+                    </div>
+                </x-slot:header>
+
+                <x-slot:content>
+                    <a href="{{ route('shop.customer.session.create') }}">
+                        <div class="rounded-[12px] border border-[#f3f3f5] p-[10px] relative mb-[40px]">
+                            <div class="flex items-center gap-[15px]  max-w-[calc(100%-20px)]">
+                                <img 
+                                    class="rounded-[12px] w-[64px] h-[65px]" 
+                                    src="{{ bagisto_asset('images/thank-you.png') }}"
+                                    title="Sign up or login"
+                                    alt="Bag image"
+                                >
+
+                                <div>
+                                    <p class="text-[16px] font-medium">Sign up or Login</p>
+
+                                    <p class="text-[12px] mt-[10px]">Get UPTO 40% OFF</p>
+                                </div>
+                            </div>
+
+                            <span class="absolute right-[10px] top-[50%] -translate-y-[50%] bg-[position:-146px_-65px] bs-main-sprite w-[18px] h-[20px] inline-block cursor-pointer"></span>
+                        </div>
+                    </a>
+
+                    <v-mobile-category></v-mobile-category>
+                    
+                </x-slot:content>
+
+                <x-slot:footer></x-slot:footer>
+            </x-shop::drawer>
         </div>
 
         <div class="">
@@ -33,3 +96,59 @@
         </div>
     </form>
 </div>
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-mobile-category-template">
+        <div>
+            <template v-for="category in categories">
+                <div class="flex justify-between items-center">
+                    <a
+                        :href="category.url"
+                        class="flex items-center justify-between pb-[20px] mt-[20px]"
+                        v-text="category.name"
+                    >
+                    </a>
+
+                    <span
+                        class="text-[24px] cursor-pointer"
+                        :class="{'icon-arrow-up': category.category_show, 'icon-arrow-down': ! category.category_show}"
+                        @click="category.category_show = ! category.category_show"
+                    >
+                    </span>
+                </div>
+
+                <div 
+                    class="grid gap-[8px]"
+                    v-if="category.category_show"
+                >
+                    <ul v-if="category.children.length > 0">
+                        <li v-for="child in category.children">
+                            <div class="flex justify-between items-center">
+                                <a
+                                    :href="child.url"
+                                    class="flex items-center justify-between pb-[20px] mt-[20px]"
+                                    v-text="child.name"
+                                >
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <span v-else>@lang('No category found.')</span>
+                </div>
+            </template>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-mobile-category', {
+            template: '#v-mobile-category-template',
+
+            data() {
+                return  {
+                    categories: @JSON($categories)
+                }
+            }, 
+        });
+    </script>
+@endPushOnce
