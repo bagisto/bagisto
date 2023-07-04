@@ -93,7 +93,7 @@
 
             <div class="relative w-full">
                 <div
-                    class="icon-search text-[22px] absolute left-[12px] top-[12px] flex items-center pointer-events-none">
+                    class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none">
                 </div>
 
                 <input
@@ -105,7 +105,7 @@
 
                 <button
                     type="button"
-                    class="icon-camera text-[22px] absolute top-[12px] right-[12px] flex items-center pr-3"
+                    class="icon-camera text-[22px] absolute top-[12px] ltr:right-[12px] rtl:left-[12px] flex items-center pr-3"
                 >
                 </button>
             </div>
@@ -118,7 +118,7 @@
 
             @include('shop::checkout.cart.mini-cart')
 
-            <x-shop::dropdown position="bottom-right">
+            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
                 </x-slot:toggle>
