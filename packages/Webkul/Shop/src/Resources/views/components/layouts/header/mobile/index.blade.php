@@ -104,11 +104,12 @@
         <div>
             <template v-for="category in categories">
                 <div class="flex justify-between items-center">
-                    <p 
+                    <a
+                        :href="category.url"
                         class="flex items-center justify-between pb-[20px] mt-[20px]"
                         v-text="category.name"
                     >
-                    </p>
+                    </a>
 
                     <span
                         class="text-[24px] cursor-pointer"
@@ -116,6 +117,36 @@
                         @click="category.category_show = ! category.category_show"
                     >
                     </span>
+                </div>
+
+                <div 
+                    class="grid gap-[8px]"
+                    v-if="category.category_show"
+                >
+                    <ul v-if="category.children.length > 0">
+                        <li 
+                            class="ml-2"
+                            v-for="child in category.children"
+                        >
+                            <div class="flex justify-between items-center">
+                                <a
+                                    :href="child.url"
+                                    class="flex items-center justify-between pb-[20px] mt-[20px]"
+                                    v-text="child.name"
+                                >
+                                </a>
+            
+                                <span
+                                    class="text-[24px] cursor-pointer"
+                                    :class="{'icon-arrow-up': child.category_show, 'icon-arrow-down': ! child.category_show}"
+                                    @click="child.category_show = ! child.category_show"
+                                >
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <span v-else>@lang('No category found.')</span>
                 </div>
             </template>
         </div>
