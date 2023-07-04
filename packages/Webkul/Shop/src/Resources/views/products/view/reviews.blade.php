@@ -167,11 +167,11 @@
                     >
                         <div>
                             <div
-                                class="rounded-full min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden bg-[#E5E5E5] flex justify-center items-center"
+                                class="rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden bg-[#E5E5E5] flex justify-center items-center"
                                 :title="review.name"
                             >
                                 <span
-                                    class="font-medium"
+                                    class="font-semibold text-[24px] text-[#7D7D7D]"
                                     v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
                                 >
                                 </span>
@@ -213,7 +213,7 @@
                             >
                             </p>
 
-                            <div class="flex gap-2 mt-2">
+                            <div class="flex flex-wrap gap-2 mt-2">
                                 <template v-for="file in review.images">
                                     <a
                                         :href="file.url"
