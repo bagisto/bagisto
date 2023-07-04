@@ -1,32 +1,3 @@
-@php
-    $searchQuery = request()->input();
-
-    if (
-        $searchQuery
-        && ! empty($searchQuery)
-    ) {
-        $searchQuery = implode('&', array_map(
-            function ($v, $k) {
-                if (is_array($v)) {
-                    if (is_array($v)) {
-                        $key = array_keys($v)[0];
-
-                        return $k. "[$key]=" . implode('&' . $k . '[]=', $v);
-                    } else {
-                        return $k. '[]=' . implode('&' . $k . '[]=', $v);
-                    }
-                } else {
-                    return $k . '=' . $v;
-                }
-            },
-            $searchQuery,
-            array_keys($searchQuery)
-        ));
-    } else {
-        $searchQuery = false;
-    }
-@endphp
-
 <div class="flex justify-between items-center w-full border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[11px] px-16">
     <x-shop::dropdown>
         <x-slot:toggle>
@@ -44,7 +15,7 @@
                 @foreach (core()->getCurrentChannel()->currencies as $currency)
                     <a 
                         class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($currency->code == core()->getCurrentCurrencyCode()) bg-gray-100 @endif"
-                        href="?{{ ! empty($searchQuery) ? $searchQuery : '' }}&currency={{ $currency->code }}"
+                        href="?currency={{ $currency->code }}"
                     >
                         {{ $currency->code }}
                     </a>
@@ -85,7 +56,7 @@
                 @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
                     <a 
                         class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($locale->code == app()->getLocale()) bg-gray-100 @endif"
-                        href="?{{ ! empty($searchQuery) ? $searchQuery : '' }}&locale={{ $locale->code }}"
+                        href="?locale={{ $locale->code }}"
                     >
                         {{ $locale->name }}
                     </a>
