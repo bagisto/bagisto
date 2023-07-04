@@ -27,7 +27,7 @@
                     <x-shop::form.control-group.control
                         type="email"
                         name="subscriber_email"
-                        class="bg-[#F1EADF] w-[420px] max-w-full placeholder:text-black border-[2px] border-[#E9DECC] rounded-[12px] block px-[20px] py-[20px] text-gray-900 text-xs font-medium pr-[110px] max-1060:w-full"
+                        class="bg-[#F1EADF] w-[420px] max-w-full placeholder:text-black border-[2px] border-[#E9DECC] rounded-[12px] block px-[20px] py-[20px] text-gray-900 text-xs font-medium ltr:pr-[110px] rtl:pl-[110px] max-1060:w-full"
                         rules="required|email"
                         label="Email"
                         placeholder="email@example.com"

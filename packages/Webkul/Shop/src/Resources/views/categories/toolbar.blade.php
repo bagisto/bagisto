@@ -58,7 +58,8 @@
                     </span>
 
                     <span
-                        class="icon-grid-view text-[24px] cursor-pointer"
+                        class="text-[24px] cursor-pointer"
+                        :class="(filters.applied.mode === 'grid') ? 'icon-grid-view-fill' : 'icon-grid-view'"
                         @click="changeMode()"
                     >
                     </span>
