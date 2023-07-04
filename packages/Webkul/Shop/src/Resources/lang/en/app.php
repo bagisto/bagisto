@@ -372,6 +372,12 @@ return [
                     'name' => 'Name',
                 ],
             ],
+
+            'reviews' => [
+                'messages' => [
+                    'success' => 'Review submitted successfully.',
+                ],
+            ]
         ],
     ],
 
@@ -575,11 +581,6 @@ return [
             'verify-email'        => 'Verify your email account',
             'resend-verify-email' => 'Resend Verification Email',
         ],
-    ],
-
-    'response' => [
-        'cancel-success'     => ':name canceled successfully.',
-        'cancel-error'       => ':name can not be canceled.',
     ],
 
     'error' => [
@@ -1336,12 +1337,5 @@ return [
 
     'webkul' => [
         'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
-    ],
-
-    'response' => [
-        'create-success' => ':name created successfully.',
-        'update-success' => ':name updated successfully.',
-        'delete-success' => ':name deleted successfully.',
-        'submit-success' => ':name submitted successfully.',
     ],
 ];
