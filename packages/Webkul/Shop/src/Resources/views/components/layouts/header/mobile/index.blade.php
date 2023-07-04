@@ -35,7 +35,11 @@
 
                 <x-slot:header>
                     <div class="flex justify-between p-[20px] items-center">
-                        <span class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block mb-[16px]"></span>
+                        <a 
+                            href=""
+                            class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block mb-[16px]"
+                        >
+                        </a>
                     </div>
                 </x-slot:header>
 
@@ -51,9 +55,9 @@
                                 >
 
                                 <div>
-                                    <p class="text-[16px] font-medium">Sign up or Login</p>
+                                    <p class="text-[16px] font-medium">@lang('Sign up or Login')</p>
 
-                                    <p class="text-[12px] mt-[10px]">Get UPTO 40% OFF</p>
+                                    <p class="text-[12px] mt-[10px]">@lang('Get UPTO 40% OFF')</p>
                                 </div>
                             </div>
 
@@ -137,9 +141,111 @@
 
         <div class="">
             <div class="flex  items-center gap-x-[20px]">
-                <span class="icon-heart text-[24px] inline-block cursor-pointer"></span>
-                <span class="icon-cart text-[24px] cursor-pointer"></span>
-                <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
+                <a href="{{ route('shop.compare.index') }}">
+                    <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
+                </a>
+                
+                @include('shop::checkout.cart.mini-cart')
+
+                <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+                    <x-slot:toggle>
+                        <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
+                    </x-slot:toggle>
+    
+                    {{-- Guest Dropdown --}}
+                    @guest('customer')
+                        <x-slot:content>
+                            <div class="grid gap-[10px]">
+                                <p class="text-[20px] font-dmserif">
+                                    @lang('shop::app.components.layouts.header.welcome-guest')
+                                </p>
+    
+                                <p class="text-[14px]">
+                                    @lang('shop::app.components.layouts.header.dropdown-text')
+                                </p>
+                            </div>
+    
+                            <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+    
+                            <div class="flex gap-[16px] mt-[25px]">
+                                <a
+                                    href="{{ route('shop.customer.session.create') }}"
+                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[15px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                                >
+                                    @lang('shop::app.components.layouts.header.sign-in')
+                                </a>
+    
+                                <a
+                                    href="{{ route('shop.customers.register.index') }}"
+                                    class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                                >
+                                    @lang('shop::app.components.layouts.header.sign-up')
+                                </a>
+                            </div>
+                        </x-slot:content>
+                    @endguest
+    
+                    {{-- Customers Dropdown --}}
+                    @auth('customer')
+                        <x-slot:content class="!p-[0px]">
+                            <div class="grid gap-[10px] p-[20px] pb-0">
+                                <p class="text-[20px] font-dmserif">
+                                    @lang('shop::app.components.layouts.header.welcome')’
+                                    {{ auth()->guard('customer')->user()->first_name }}
+                                </p>
+    
+                                <p class="text-[14px]">
+                                    @lang('shop::app.components.layouts.header.dropdown-text')
+                                </p>
+                            </div>
+    
+                            <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+    
+                            <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+                                <a
+                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                    href="{{ route('shop.customers.account.profile.index') }}"
+                                >
+                                    @lang('shop::app.components.layouts.header.profile')
+                                </a>
+    
+                                <a
+                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                    href="{{ route('shop.customers.account.orders.index') }}"
+                                >
+                                    @lang('shop::app.components.layouts.header.orders')
+                                </a>
+    
+                                @if ($showWishlist)
+                                    <a
+                                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                        href="{{ route('shop.customers.account.wishlist.index') }}"
+                                    >
+                                        @lang('shop::app.components.layouts.header.wishlist')
+                                    </a>
+                                @endif
+    
+                                {{--Customers logout--}}
+                                @auth('customer')
+                                    <x-shop::form
+                                        method="DELETE"
+                                        action="{{ route('shop.customer.session.destroy') }}"
+                                        id="customerLogout"
+                                    >
+                                    </x-shop::form>
+    
+                                    <a
+                                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                        href="{{ route('shop.customer.session.destroy') }}"
+                                        onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
+                                    >
+                                        @lang('shop::app.components.layouts.header.logout')
+                                    </a>
+                                @endauth
+                            </div>
+                        </x-slot:content>
+                    @endauth
+                </x-shop::dropdown>
             </div>
         </div>
     </div>
