@@ -97,8 +97,6 @@
     </form>
 </div>
 
-
-
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mobile-category-template">
         <div>
@@ -124,10 +122,7 @@
                     v-if="category.category_show"
                 >
                     <ul v-if="category.children.length > 0">
-                        <li 
-                            class="ml-2"
-                            v-for="child in category.children"
-                        >
+                        <li v-for="child in category.children">
                             <div class="flex justify-between items-center">
                                 <a
                                     :href="child.url"
@@ -135,13 +130,6 @@
                                     v-text="child.name"
                                 >
                                 </a>
-            
-                                <span
-                                    class="text-[24px] cursor-pointer"
-                                    :class="{'icon-arrow-up': child.category_show, 'icon-arrow-down': ! child.category_show}"
-                                    @click="child.category_show = ! child.category_show"
-                                >
-                                </span>
                             </div>
                         </li>
                     </ul>
