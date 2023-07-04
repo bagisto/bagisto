@@ -61,50 +61,8 @@
                         </div>
                     </a>
 
-                    @foreach ($categories as $firstLevelCategory)
-                        <x-shop::accordion>
-                            <x-slot:header>
-                                <a 
-                                    href="{{ $firstLevelCategory->url }}"
-                                    class="flex items-center justify-between border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]"
-                                >
-                                    {{ $firstLevelCategory->name }}
-                                </a>
-                            </x-slot:header>
-            
-                            <x-slot:content>
-                                <ul class="pb-3 text-sm text-gray-700" v-else>
-                                    @if ($firstLevelCategory->children->isNotEmpty())
-                                        @foreach ($firstLevelCategory->children->chunk(2) as $pair)
-                                            @foreach ($pair as $secondLevelCategory)
-                                                <li class="text-[14px] font-medium text-[#7D7D7D]">
-                                                    <a 
-                                                        class="m-2"
-                                                        href="{{ $secondLevelCategory->url }}"
-                                                    >
-                                                        {{ $secondLevelCategory->name }}
-                                                    </a>
-                                                </li>
-
-                                                @if ($secondLevelCategory->children->isNotEmpty())
-                                                    @foreach ($secondLevelCategory->children as $thirdLevelCategory)
-                                                        <li class="text-[14px] font-medium text-[#7D7D7D]">
-                                                            <a 
-                                                                class="m-2"
-                                                                href="{{ $thirdLevelCategory->url }}"
-                                                            >
-                                                                {{ $thirdLevelCategory->name }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            </x-slot:content>
-                        </x-shop::accordion>
-                    @endforeach
+                    <v-mobile-category></v-mobile-category>
+                    
                 </x-slot:content>
 
                 <x-slot:footer></x-slot:footer>
@@ -138,3 +96,40 @@
         </div>
     </form>
 </div>
+
+
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-mobile-category-template">
+        <div>
+            <template v-for="category in categories">
+                <div class="flex justify-between items-center">
+                    <p 
+                        class="flex items-center justify-between pb-[20px] mt-[20px]"
+                        v-text="category.name"
+                    >
+                    </p>
+
+                    <span
+                        class="text-[24px] cursor-pointer"
+                        :class="{'icon-arrow-up': category.category_show, 'icon-arrow-down': ! category.category_show}"
+                        @click="category.category_show = ! category.category_show"
+                    >
+                    </span>
+                </div>
+            </template>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-mobile-category', {
+            template: '#v-mobile-category-template',
+
+            data() {
+                return  {
+                    categories: @JSON($categories)
+                }
+            }, 
+        });
+    </script>
+@endPushOnce
