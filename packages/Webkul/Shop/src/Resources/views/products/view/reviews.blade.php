@@ -166,12 +166,16 @@
                         v-for='review in reviews'
                     >
                         <div>
-                            <img
-                                class="rounded-[12px] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
-                                :src="review.images[0].url"
-                                :alt="review.name"
+                            <div
+                                class="rounded-full min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden bg-[#E5E5E5] flex justify-center items-center"
                                 :title="review.name"
                             >
+                                <span
+                                    class="font-medium"
+                                    v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
+                                >
+                                </span>
+                            </div>
                         </div>
 
                         <div class="w-full">
@@ -211,23 +215,35 @@
 
                             <div class="flex gap-2 mt-2">
                                 <template v-for="file in review.images">
-                                    <img
-                                        class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
-                                        :src="file.url"
-                                        :alt="review.name"
-                                        :title="review.name"
+                                    <a
+                                        :href="file.url"
+                                        class="h-12 w-12 flex"
+                                        target="_blank"
                                         v-if="file.type == 'image'"
                                     >
 
-                                    <video
-                                        class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
-                                        :src="file.url"
-                                        :alt="review.name"
-                                        :title="review.name"
-                                        controls
+                                        <img
+                                            class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                            :src="file.url"
+                                            :alt="review.name"
+                                            :title="review.name"
+                                        >
+                                    </a>
+
+                                    <a
+                                        :href="file.url"
+                                        class="h-12 w-12 flex"
+                                        target="_blank"
                                         v-else
                                     >
-                                    </video>
+                                        <video
+                                            class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                            :src="file.url"
+                                            :alt="review.name"
+                                            :title="review.name"
+                                        >
+                                        </video>
+                                    </a>
                                 </template>
                             </div>
                         </div>
