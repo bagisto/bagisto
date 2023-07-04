@@ -81,7 +81,7 @@ class ReviewController extends APIController
         $this->productReviewAttachmentRepository->upload($data['attachments'], $review);
 
         return new JsonResource([
-            'message' => trans('shop::app.response.submit-success', ['name' => 'Review']),
+            'message' => trans('shop::app.products.view.reviews.submit-success'),
         ]);
     }
 }

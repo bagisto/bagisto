@@ -372,6 +372,10 @@ return [
                     'name' => 'Name',
                 ],
             ],
+
+            'reviews' => [
+                'submit-success' => 'Review submitted successfully.',
+            ]
         ],
     ],
 
@@ -575,15 +579,6 @@ return [
             'verify-email'        => 'Verify your email account',
             'resend-verify-email' => 'Resend Verification Email',
         ],
-    ],
-
-    'response' => [
-        'cancel-success' => ':name canceled successfully.',
-        'cancel-error'   => ':name can not be canceled.',
-        'create-success' => ':name created successfully.',
-        'update-success' => ':name updated successfully.',
-        'delete-success' => ':name deleted successfully.',
-        'submit-success' => ':name submitted successfully.',
     ],
 
     'error' => [
