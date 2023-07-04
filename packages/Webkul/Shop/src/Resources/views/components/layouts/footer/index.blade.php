@@ -27,7 +27,7 @@
                     <x-shop::form.control-group.control
                         type="email"
                         name="subscriber_email"
-                        class="bg-[#F1EADF] w-[420px] max-w-full placeholder:text-black border-[2px] border-[#E9DECC] rounded-[12px] block px-[20px] py-[20px] text-gray-900 text-xs font-medium ltr:pr-[110px] rtl:pl-[110px] max-1060:w-full"
+                        class="bg-[#F1EADF] w-[420px] max-w-full placeholder:text-black border-[2px] border-[#E9DECC] rounded-[12px] block px-[20px] py-[20px] text-gray-900 text-xs font-medium pr-[110px] max-1060:w-full"
                         rules="required|email"
                         label="Email"
                         placeholder="email@example.com"
@@ -41,7 +41,7 @@
 
                         <button
                             type="submit"
-                            class="w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium absolute top-[8px] right-[8px] flex items-center"
+                            class="w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium absolute top-[8px] rtl:left-[8px] ltr:right-[8px] flex items-center"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>
