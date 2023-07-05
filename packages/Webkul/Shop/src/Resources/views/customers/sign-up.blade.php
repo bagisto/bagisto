@@ -37,6 +37,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="first_name"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             :value="old('last_name')"
                             rules="required"
                             label="First Name"
@@ -60,6 +61,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="last_name"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             :value="old('last_name')"
                             rules="required"
                             label="Last Name"
@@ -83,6 +85,7 @@
                         <x-shop::form.control-group.control
                             type="email"
                             name="email"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             :value="old('email')"
                             rules="required|email"
                             label="Email"
@@ -106,6 +109,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             :value="old('password')"
                             rules="required|min:6"
                             ref="password"
@@ -122,7 +126,7 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.password.after') !!}
 
-                    <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label>
                             @lang('shop::app.customers.signup-form.confirm_pass')
                         </x-shop::form.control-group.label>
@@ -130,6 +134,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password_confirmation"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             value=""
                             rules="confirmed:@password"
                             label="Password"
@@ -146,25 +151,33 @@
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.password_confirmation.after') !!}
 
 
-                    <div class="mb-[20px]">
-                        {!! Captcha::render() !!}
-                    </div>
+                    @if (core()->getConfigData('customer.captcha.credentials.status'))
+                        <div class="flex mb-[20px]">
+                            {!! Captcha::render() !!}
+                        </div>
+                    @endif
 
                     @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-                        <div class="flex justify-between">
-                                <x-shop::form.control-group>
-                                    <x-shop::form.control-group.control
-                                        type="checkbox"
-                                        name="is_subscribed"
-                                        id="checkbox2"
-                                    >
-                                    <span
-                                        class="select-none  text-[16] text-navyBlue max-sm:text-[12px]"
-                                    > 
-                                        @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
-                                    </span>
-                                    </x-shop::form.control-group.control>
-                                </x-shop::form.control-group>
+                        <div class="select-none items-center flex gap-[6px]">
+                            <input
+                                type="checkbox"
+                                name="is_subscribed"
+                                id="is-subscribed"
+                                class="hidden peer"
+                                onchange="switchVisibility()"
+                            />
+
+                            <label
+                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                for="is-subscribed"
+                            ></label>
+
+                            <label
+                                class="text-[16] text-[#7d7d7d] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                                for="is-subscribed"
+                            >
+                                @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
+                            </label>
                         </div>
                     @endif
 

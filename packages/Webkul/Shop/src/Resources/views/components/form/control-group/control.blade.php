@@ -11,7 +11,7 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes }}
+            {{ $attributes->except('class') }}
         >
             <input
                 type="{{ $type }}"
@@ -27,7 +27,7 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes }}
+            {{ $attributes->except('class') }}
         >
             <textarea
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
@@ -69,7 +69,7 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes }}
+            {{ $attributes->except('class') }}
         >
             <select
                 v-bind="field"
