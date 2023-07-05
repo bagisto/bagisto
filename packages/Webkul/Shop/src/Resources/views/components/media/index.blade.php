@@ -8,7 +8,7 @@
             >
                 <label 
                     for="dropzone-file"
-                    class="flex flex-col w-[286px] h-[286px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex flex-col w-[284px] h-[284px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
                     @drop="onDrop"
@@ -34,8 +34,8 @@
                 </label>
             </div>
 
-            <div class="flex items-center mt-2">
-                <ul class="flex gap-[10px] flex-wrap justify-left">
+            <div class="flex items-center">
+                <ul class="flex gap-[10px] flex-wrap justify-left mt-2">
                     <li 
                         v-for="(file, index) in uploadedFiles"
                         :key="index"

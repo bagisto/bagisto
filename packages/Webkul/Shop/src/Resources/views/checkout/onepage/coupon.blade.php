@@ -38,9 +38,9 @@
                                             <x-shop::form.control-group.control
                                                 type="text"
                                                 name="code"
-                                                class="text-[14px] appearance-none border rounded-[12px] w-full py-[20px] px-[25px] focus:outline-none focus:shadow-outline"
-                                                placeholder="Enter your code"
+                                                class="py-[20px] px-[25px]"
                                                 rules="required"
+                                                :placeholder="trans('shop::app.checkout.onepage.coupon.enter-your-code')"
                                                 v-model="code"
                                             >
                                             </x-shop::form.control-group.control>
