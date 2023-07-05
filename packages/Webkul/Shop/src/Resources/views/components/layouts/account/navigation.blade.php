@@ -46,7 +46,7 @@
 </div>
 @pushOnce('scripts')
     <script type="text/x-template" id="v-accordion-template">
-        <div v-if="isMobile">
+        <div class="hidden max-md:block">
             <div 
                 class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-[20px] max-md:bg-[#F5F5F5] max-md:px-[25px] max-md:py-[20px] max-md:rounded-tl-[6px] max-md:rounded-tr-[6px]"
                 @click="toggleAccordion"
@@ -85,7 +85,7 @@
                 @endforeach
             </div>
         </div>
-        <div v-else>
+        <div class="max-md:hidden">
             <div class="flex px-[25px] py-[20px] justify-between cursor-pointer">
                 <p class="text-[20px] md:font-medium">
                     @lang($menu->items['account']['name'])
@@ -124,19 +124,6 @@
                     isAccordionOpen: false,
                     isMobile: false,
                 };
-            },
-
-            mounted() {
-                const mediaQuery = window.matchMedia('(max-width: 768px)');
-      
-                const updateIsMobile = (event) => {
-                    this.isMobile = event.matches;
-                    this.isAccordionOpen = false;
-                };
-
-                mediaQuery.addEventListener('change', updateIsMobile);
-
-                updateIsMobile(mediaQuery);
             },
 
             methods: {
