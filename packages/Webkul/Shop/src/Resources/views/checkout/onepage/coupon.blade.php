@@ -143,7 +143,7 @@
                             this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
 
                             this.$refs.couponModel.toggle();
-                        })
+                        });
                 },
 
                 destroyCoupon() {

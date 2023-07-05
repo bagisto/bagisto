@@ -404,7 +404,7 @@ return [
         'empty-text'         => 'You have no items in your compare list',
         'title'              => 'Product Compare',
         'already-added'      => 'Item is already added to compare list',
-        'item-add-success'   => 'Item added successfully to the compare list',
+        'item-add-success'   => 'Item added successfully to compare list',
         'remove-success'     => 'Item removed successfully.',
         'remove-all-success' => 'All items removed successfully.',
         'remove-error'       => 'Something went wrong, please try again later.',
@@ -430,12 +430,13 @@ return [
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'suspended-account-message' => 'Your account has been suspended.',
             'quantity-update'           => 'Quantity updated successfully',
-
-            'item' => [
-                'quantity'        => 'Quantity:',
-                'success-remove'  => 'Item is successfully removed from the cart.',
-                'warning-remove'  => 'No items to remove from the cart.',
-            ],
+            'missing_fields'            => 'Some required fields missing for this product.',
+            'missing_options'           => 'Options are missing for this product.',
+            'missing_links'             => 'Downloadable links are missing for this product.',
+            'select_hourly_duration'    => 'Select a slot duration of one hour.',
+            'qty_missing'               => 'Atleast one product should have more than 1 quantity.',
+            'qty_impossible'            => 'Cannot add more than one of these products to cart.',
+            'success-remove'            => 'Item is successfully removed from the cart.',
 
             'index' => [
                 'home'               => 'Home',

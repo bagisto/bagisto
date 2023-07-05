@@ -247,13 +247,13 @@ class Bundle extends AbstractType
         $bundleQuantity = parent::handleQuantity((int) $data['quantity']);
 
         if (empty($data['bundle_options'])) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            return trans('shop::app.checkout.cart.missing_options');
         }
 
         $data['bundle_options'] = array_filter($this->validateBundleOptionForCart($data['bundle_options']));
 
         if (empty($data['bundle_options'])) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            return trans('shop::app.checkout.cart.missing_options');
         }
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
