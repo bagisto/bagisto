@@ -7,6 +7,8 @@
                 <span class="ml-2 cursor-pointer">
                     {{ core()->getCurrentCurrencyCode() }}
                 </span>
+
+                <span class="text-[24px] ml-2 icon-arrow-down"></span>
             </div>
         </x-slot:toggle>
 
@@ -39,6 +41,8 @@
                 <span class="ml-2 cursor-pointer">
                     {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                 </span>
+
+                <span class="text-[24px] ml-2 icon-arrow-down"></span>
             </div>
         </x-slot:toggle>
     
