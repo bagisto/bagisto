@@ -42,6 +42,10 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::delete('', 'destroy')->name('shop.api.checkout.cart.destroy');
 
+        Route::delete('selected', 'destroySelected')->name('shop.api.checkout.cart.destroy_selected');
+
+        Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.checkout.cart.move_to_wishlist');
+
         Route::post('coupon', 'storeCoupon')->name('shop.api.checkout.cart.coupon.apply');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
@@ -86,7 +90,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
             Route::post('{id}/move-to-cart', 'moveToCart')->name('shop.api.customers.account.wishlist.move_to_cart');
 
             Route::delete('all', 'destroyAll')->name('shop.api.customers.account.wishlist.destroy_all');
-            
+
             Route::delete('{id}', 'destroy')->name('shop.api.customers.account.wishlist.destroy');
         });
     });
