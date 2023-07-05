@@ -285,8 +285,6 @@
 
             data() {
                 return  {
-                    openIndex: -1,
-
                     categories: @JSON($categories),
                 }
             }, 
