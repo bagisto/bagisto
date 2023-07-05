@@ -4,24 +4,14 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-review-template">
-        <div class="container mt-[60px] max-1180:px-[20px]">
+        <div class="container max-1180:px-[20px]">
             <div class="w-full" v-if="canReview">
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <div class="flex justify-end gap-[15px] max-sm:flex-wrap">
-                        <div
-                            class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
-                            @click="canReview = false"
-                        >
-                            {{-- @transition --}}
-                            @lang('Back')
-                        </div>
-                    </div>
-
                     <form
-                        class="rounded my-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
+                        class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -46,7 +36,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
+                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mt-0">
                                     @lang('shop::app.products.rating')
                                 </x-shop::form.control-group.label>
 
@@ -66,7 +56,7 @@
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group class="mb-4 mt-[15px]">
-                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
+                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium">
                                     @lang('shop::app.products.title')
                                 </x-shop::form.control-group.label>
 
@@ -74,7 +64,6 @@
                                     type="text"
                                     name="title"
                                     :value="old('title')"
-                                    class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
                                     :label="trans('shop::app.products.title')"
                                     :placeholder="trans('shop::app.products.title')"
@@ -88,7 +77,7 @@
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group class="mb-4 mt-[15px]">
-                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
+                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium">
                                     @lang('shop::app.products.comment')
                                 </x-shop::form.control-group.label>
 
@@ -97,7 +86,6 @@
                                     rows="12"
                                     name="comment"
                                     :value="old('comment')"
-                                    class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
                                     :label="trans('shop::app.products.comment')"
                                     :placeholder="trans('shop::app.products.comment')"
@@ -108,14 +96,26 @@
                                     control-name="comment"
                                 >
                                 </x-shop::form.control-group.error>
-                            </x-shop::form.control-group> 
+                            </x-shop::form.control-group>
 
-                            <button
-                                class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
-                                type='submit'
-                            >
-                                @lang('shop::app.products.submit-review')
-                            </button>
+
+                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap">
+                                <button
+                                    class="w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                                    type='submit'
+                                >
+                                    @lang('shop::app.products.submit-review')
+                                </button>
+                                
+                                <button
+                                    type="button"
+                                    class="flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
+                                    @click="canReview = false"
+                                >
+                                    {{-- @transition --}}
+                                    @lang('Cancel')
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </x-shop::form>
@@ -167,7 +167,7 @@
                     >
                         <div>
                             <div
-                                class="rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden bg-[#E5E5E5] flex justify-center items-center"
+                                class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
                                 :title="review.name"
                             >
                                 <span
