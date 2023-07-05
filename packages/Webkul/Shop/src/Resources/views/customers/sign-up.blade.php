@@ -37,7 +37,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="first_name"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             :value="old('last_name')"
                             rules="required"
                             label="First Name"
@@ -61,7 +61,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             name="last_name"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             :value="old('last_name')"
                             rules="required"
                             label="Last Name"
@@ -85,7 +85,7 @@
                         <x-shop::form.control-group.control
                             type="email"
                             name="email"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             :value="old('email')"
                             rules="required|email"
                             label="Email"
@@ -109,7 +109,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             :value="old('password')"
                             rules="required|min:6"
                             ref="password"
@@ -134,7 +134,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password_confirmation"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="confirmed:@password"
                             label="Password"
