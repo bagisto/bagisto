@@ -178,7 +178,7 @@ class Booking extends Virtual
             ! isset($data['booking'])
             || ! count($data['booking'])
         ) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            return trans('shop::app.checkout.cart.missing_options');
         }
 
         $products = [];
@@ -210,7 +210,7 @@ class Booking extends Virtual
             });
 
             if (! count($filtered)) {
-                return trans('shop::app.checkout.cart.integrity.missing_options');
+                return trans('shop::app.checkout.cart.missing_options');
             }
 
             $cartProductsList = [];

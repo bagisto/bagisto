@@ -70,7 +70,7 @@ class CartController extends APIController
 
                 return new JsonResource([
                     'data'     => new CartResource(Cart::getCart()),
-                    'message'  => trans('shop::app.components.products.item-add-to-cart'),
+                    'message'  => trans('shop::app.components.cart.item-add-to-cart'),
                 ]);
             }
         } catch (\Exception $exception) {
@@ -90,7 +90,7 @@ class CartController extends APIController
 
         return new JsonResource([
             'data'    => new CartResource(Cart::getCart()),
-            'message' => trans('shop::app.checkout.cart.item.success-remove'),
+            'message' => trans('shop::app.checkout.cart.success-remove'),
         ]);
     }
 
@@ -104,7 +104,7 @@ class CartController extends APIController
 
             return new JsonResource([
                 'data'    => new CartResource(Cart::getCart()),
-                'message' => trans('shop::app.checkout.cart.quantity-update'),
+                'message' => trans('shop::app.checkout.cart.index.quantity-update'),
             ]);
         } catch (\Exception $exception) {
             return new JsonResource([

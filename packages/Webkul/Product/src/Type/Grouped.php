@@ -220,7 +220,7 @@ class Grouped extends AbstractType
             ! isset($data['qty'])
             || ! is_array($data['qty'])
         ) {
-            return trans('shop::app.checkout.cart.integrity.missing_options');
+            return trans('shop::app.checkout.cart.missing_options');
         }
 
         $cartProductsList = [];
