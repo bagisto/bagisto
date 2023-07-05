@@ -14,13 +14,13 @@
 
                 <div class="flex justify-between items-center gap-8">
                     <span
-                        class="icon-arrow-left-stylish text-[24px] inline-block cursor-pointer"
+                        class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish text-[24px] inline-block cursor-pointer"
                         @click="swipeLeft"
                     >
                     </span>
 
                     <span
-                        class="icon-arrow-right-stylish text-[24px] inline-block cursor-pointer"
+                        class="icon-arrow-right-stylish rtl:icon-arrow-left-stylish text-[24px] inline-block cursor-pointer"
                         @click="swipeRight"
                     >
                     </span>

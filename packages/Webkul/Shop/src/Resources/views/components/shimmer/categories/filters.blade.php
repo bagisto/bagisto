@@ -4,16 +4,16 @@
         <p class="w-[20%] h-[20px] bg-[#E9E9E9] shimmer"></p>
     </div>
 
-    <div class="pb-[10px] border-b-[1px] border-[#E9E9E9]">
-        <div class="flex justify-between items-center">
+
+    <div class="border-b-[1px] border-[#E9E9E9]">
+        <div class="flex pb-[10px] justify-between items-center">
             <p class="h-[27px] w-[40%] bg-[#E9E9E9] shimmer"></p>
             <span class="h-[24px] w-[24px] bg-[#E9E9E9] shimmer"></span>
         </div>
 
-        <div class="h-[21px] w-[60%] bg-[#E9E9E9] mt-[20px] shimmer">
+        <div class="z-10 bg-white rounded-lg">
+            <x-shop::shimmer.range-slider></x-shop::shimmer.range-slider>
         </div>
-
-        <div class="relative mt-[30px] mb-[24px] h-[21px] w-[60%] bg-[#E9E9E9] shimmer"></div>
     </div>
 
     <div class="border-b-[1px] border-[#E9E9E9]">

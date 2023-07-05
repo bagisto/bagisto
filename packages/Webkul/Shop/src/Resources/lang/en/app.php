@@ -372,6 +372,11 @@ return [
                     'name' => 'Name',
                 ],
             ],
+
+            'reviews' => [
+                'cancel'  => 'Cancel',
+                'success' => 'Review submitted successfully.',
+            ],
         ],
     ],
 
@@ -398,7 +403,7 @@ return [
         'empty-text'         => 'You have no items in your compare list',
         'title'              => 'Product Compare',
         'already-added'      => 'Item is already added to compare list',
-        'item-add-success'   => 'Item added successfully to the compare list',
+        'item-add-success'   => 'Item added successfully to compare list',
         'remove-success'     => 'Item removed successfully.',
         'remove-all-success' => 'All items removed successfully.',
         'remove-error'       => 'Something went wrong, please try again later.',
@@ -414,22 +419,19 @@ return [
         ],
 
         'cart' => [
-            'item-add-to-cart'          => 'Item Added To Cart Successfully',
-            'empty-cart'                => 'Your cart is empty',
-            'shopping-cart'             => 'Shopping Cart',
-            'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
+            'item-add-to-cart'          => 'Item Added Successfully',
             'return-to-shop'            => 'Return To Shop',
             'continue-to-checkout'      => 'Continue to Checkout',
             'rule-applied'              => 'Cart rule applied',
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'suspended-account-message' => 'Your account has been suspended.',
-            'quantity-update'           => 'Quantity updated successfully',
-
-            'item' => [
-                'quantity'        => 'Quantity:',
-                'success-remove'  => 'Item is successfully removed from the cart.',
-                'warning-remove'  => 'No items to remove from the cart.',
-            ],
+            'missing_fields'            => 'Some required fields missing for this product.',
+            'missing_options'           => 'Options are missing for this product.',
+            'missing_links'             => 'Downloadable links are missing for this product.',
+            'select_hourly_duration'    => 'Select a slot duration of one hour.',
+            'qty_missing'               => 'Atleast one product should have more than 1 quantity.',
+            'qty_impossible'            => 'Cannot add more than one of these products to cart.',
+            'success-remove'            => 'Item is successfully removed from the cart.',
 
             'index' => [
                 'home'                    => 'Home',
@@ -446,6 +448,7 @@ return [
                 'move-to-wishlist-success'=> 'Selected items successfully moved to wishlist.',
                 'remove-selected-success' => 'Selected items successfully removed from cart.',
                 'empty-product'           => 'You don’t have a product in your cart.',
+                'quantity-update'    => 'Quantity updated successfully',
             ],
 
             'coupon'   => [
@@ -483,7 +486,6 @@ return [
                 'proceed-to-checkout' => 'Proceed To Checkout',
 
             ],
-
         ],
 
         'onepage' => [
@@ -577,11 +579,6 @@ return [
             'verify-email'        => 'Verify your email account',
             'resend-verify-email' => 'Resend Verification Email',
         ],
-    ],
-
-    'response' => [
-        'cancel-success'     => ':name canceled successfully.',
-        'cancel-error'       => ':name can not be canceled.',
     ],
 
     'error' => [
@@ -1338,12 +1335,5 @@ return [
 
     'webkul' => [
         'copy-right' => '© Copyright :year Webkul Software, All rights reserved',
-    ],
-
-    'response' => [
-        'create-success' => ':name created successfully.',
-        'update-success' => ':name updated successfully.',
-        'delete-success' => ':name deleted successfully.',
-        'submit-success' => ':name submitted successfully.',
     ],
 ];

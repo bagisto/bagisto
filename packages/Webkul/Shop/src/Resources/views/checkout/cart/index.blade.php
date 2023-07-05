@@ -91,7 +91,7 @@
                                         >
                                         </x-shop::shimmer.image>
 
-                                        <div class="grid gap-y-[10px]">
+                                        <div class="grid place-content-start gap-y-[10px]">
                                             <p 
                                                 class="text-[16px] font-medium" 
                                                 v-text="item.name"
@@ -123,7 +123,7 @@
                                                 </p>
                                                 
                                                 <span
-                                                    class="text-[16px] text-[#4D7EA8] cursor-pointer" 
+                                                    class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                                     @click="removeItem(item.id)"
                                                 >
                                                     @lang('shop::app.checkout.cart.index.remove')

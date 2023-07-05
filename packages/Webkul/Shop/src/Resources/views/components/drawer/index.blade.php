@@ -1,6 +1,6 @@
 @props([
     'isActive' => false,
-    'position' => 'right',
+    'position' => core()->getCurrentLocale()->direction === 'rtl' ? 'left' : 'right',
     'width'    => '500',
 ])
 
@@ -69,7 +69,7 @@
                                             </slot>
                                         </div>
 
-                                        <div class="absolute top-5 right-5">
+                                        <div class="absolute top-5 ltr:right-5 rtl:left-5">
                                             <span
                                                 class="icon-cancel text-[30px] cursor-pointer"
                                                 @click="toggle"
