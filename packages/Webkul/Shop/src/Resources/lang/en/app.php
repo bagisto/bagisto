@@ -420,16 +420,12 @@ return [
         ],
 
         'cart' => [
-            'item-add-to-cart'          => 'Item Added To Cart Successfully',
-            'empty-cart'                => 'Your cart is empty',
-            'shopping-cart'             => 'Shopping Cart',
-            'offer-on-orders'           => 'Get Up To 30% OFF on your 1st order',
+            'item-add-to-cart'          => 'Item Added Successfully',
             'return-to-shop'            => 'Return To Shop',
             'continue-to-checkout'      => 'Continue to Checkout',
             'rule-applied'              => 'Cart rule applied',
             'minimum-order-message'     => 'Minimum order amount is :amount',
             'suspended-account-message' => 'Your account has been suspended.',
-            'quantity-update'           => 'Quantity updated successfully',
             'missing_fields'            => 'Some required fields missing for this product.',
             'missing_options'           => 'Options are missing for this product.',
             'missing_links'             => 'Downloadable links are missing for this product.',
@@ -451,6 +447,7 @@ return [
                 'continue-shopping'  => 'Continue Shopping',
                 'update-cart'        => 'Update Cart',
                 'empty-product'      => 'You don’t have a product in your cart',
+                'quantity-update'    => 'Quantity updated successfully',
             ],
 
             'coupon'   => [
@@ -488,7 +485,6 @@ return [
                 'proceed-to-checkout' => 'Proceed To Checkout',
 
             ],
-
         ],
 
         'onepage' => [
