@@ -11,16 +11,7 @@
         </x-slot:toggle>
 
         <x-slot:content class="!p-[0px]">
-            <div class="grid gap-[4px] mt-[10px] pb-[10px]">
-                @foreach (core()->getCurrentChannel()->currencies as $currency)
-                    <a 
-                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($currency->code == core()->getCurrentCurrencyCode()) bg-gray-100 @endif"
-                        href="?currency={{ $currency->code }}"
-                    >
-                        {{ $currency->code }}
-                    </a>
-                @endforeach
-            </div>
+            <v-currency-changer></v-currency-changer>
         </x-slot:content>
     </x-shop::dropdown>
 
@@ -52,16 +43,67 @@
         </x-slot:toggle>
     
         <x-slot:content class="!p-[0px]">
-            <div class="grid gap-[4px] mt-[10px] pb-[10px]">
-                @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
-                    <a 
-                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($locale->code == app()->getLocale()) bg-gray-100 @endif"
-                        href="?locale={{ $locale->code }}"
-                    >
-                        {{ $locale->name }}
-                    </a>
-                @endforeach
-            </div>
+            <v-language-selecter></v-language-selecter>
         </x-slot:content>
     </x-shop::dropdown>
 </div>
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-language-selecter-template">
+        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+            @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
+                <span 
+                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($locale->code == app()->getLocale()) bg-gray-100 @endif"
+                    @click="set('{{ $locale->code }}')"                    
+                >
+                    {{ $locale->name }}
+                </span>
+            @endforeach
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-language-selecter', {
+            template: '#v-language-selecter-template',
+
+            methods: {
+                set(value) {
+                    let url = new URL(window.location.href);
+
+                    url.searchParams.set('locale', value);
+
+                    window.location.href = url.href;
+                }
+            }
+        });
+    </script>
+
+    <script type="text/x-template" id="v-currency-changer-template">
+        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+            @foreach (core()->getCurrentChannel()->currencies as $currency)
+                <span 
+                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if ($currency->code == core()->getCurrentCurrencyCode()) bg-gray-100 @endif"
+                    @click="set('{{ $currency->code }}')"
+                >
+                    {{ $currency->code }}
+                </span >
+            @endforeach
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-currency-changer', {
+            template: '#v-currency-changer-template',
+
+            methods: {
+                set(value) {
+                    let url = new URL(window.location.href);
+
+                    url.searchParams.set('currency', value);
+
+                    window.location.href = url.href;
+                }
+            }
+        });
+    </script>
+@endPushOnce
