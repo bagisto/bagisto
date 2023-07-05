@@ -15,8 +15,7 @@
                             class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
                             @click="canReview = false"
                         >
-                            {{-- @transition --}}
-                            @lang('Back')
+                            @lang('shop::app.products.view.reviews.back')
                         </div>
                     </div>
 
