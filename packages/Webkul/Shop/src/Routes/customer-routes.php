@@ -11,7 +11,6 @@ use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\WishlistController;
-use Webkul\Shop\Http\Controllers\ReviewController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
  
@@ -145,17 +144,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
 
                     Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
                 });
-
-                /**
-                 * Reviews.
-                 */
-                Route::delete('reviews/delete/{id}', [ReviewController::class, 'destroy'])->defaults('_config', [
-                    'redirect' => 'shop.customer.reviews.index',
-                ])->name('shop.customer.review.delete');
-
-                Route::delete('reviews/all-delete', [ReviewController::class, 'deleteAll'])->defaults('_config', [
-                    'redirect' => 'shop.customer.reviews.index',
-                ])->name('shop.customer.review.delete_all');
             });
         });
     });

@@ -4,23 +4,14 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-review-template">
-        <div class="container mt-[60px] max-1180:px-[20px]">
+        <div class="container max-1180:px-[20px]">
             <div class="w-full" v-if="canReview">
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <div class="flex justify-end gap-[15px] max-sm:flex-wrap">
-                        <div
-                            class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
-                            @click="canReview = false"
-                        >
-                            @lang('shop::app.products.view.reviews.back')
-                        </div>
-                    </div>
-
                     <form
-                        class="rounded my-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
+                        class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -106,14 +97,25 @@
                                     control-name="comment"
                                 >
                                 </x-shop::form.control-group.error>
-                            </x-shop::form.control-group> 
+                            </x-shop::form.control-group>
 
-                            <button
-                                class="mt-4 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
-                                type='submit'
-                            >
-                                @lang('shop::app.products.submit-review')
-                            </button>
+
+                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap">
+                                <button
+                                    class="w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                                    type='submit'
+                                >
+                                    @lang('shop::app.products.submit-review')
+                                </button>
+                                
+                                <button
+                                    type="button"
+                                    class="flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
+                                    @click="canReview = false"
+                                >
+                                    @lang('shop::app.products.view.reviews.cancel')
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </x-shop::form>
@@ -165,7 +167,7 @@
                     >
                         <div>
                             <div
-                                class="rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden bg-[#E5E5E5] flex justify-center items-center"
+                                class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
                                 :title="review.name"
                             >
                                 <span
