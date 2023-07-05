@@ -205,7 +205,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mobile-category-template">
         <div>
-            <template v-for="(category, index) in categories">
+            <template v-for="(category) in categories">
                 <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                     <a
                         :href="category.url"
@@ -217,7 +217,7 @@
                     <span
                         class="text-[24px] cursor-pointer"
                         :class="{'icon-arrow-down': category.isOpen, 'icon-arrow-right': ! category.isOpen}"
-                        @click="toggleCategory(index)"
+                        @click="toggle(category)"
                     >
                     </span>
                 </div>
@@ -290,10 +290,10 @@
             }, 
 
             methods: {
-                toggleCategory(index) {
-                    this.categories = this.categories.map((item, i) => ({
-                        ...item,
-                        isOpen: i === index ? ! item.isOpen : false,
+                toggle(selectedCategory) {
+                    this.categories = this.categories.map((category) => ({
+                        ...category,
+                        isOpen: category.id === selectedCategory.id ? ! category.isOpen : false,
                     }));
                 },
             },
