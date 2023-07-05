@@ -34,12 +34,11 @@
                 </label>
             </div>
 
-            <div class="flex mt-3 items-center">
-                <ul class="grid grid-cols-3 gap-4 w-full">
+            <div class="flex items-center mt-2">
+                <ul class="flex gap-[10px] flex-wrap justify-left">
                     <li 
                         v-for="(file, index) in uploadedFiles"
                         :key="index"
-                        class="relative flex justify-center"
                     >
                         <template v-if="isImage(file)">
                             <div 

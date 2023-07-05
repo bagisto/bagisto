@@ -21,16 +21,16 @@
                     </div>
 
                     <form
-                        class="rounded mb-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
+                        class="rounded my-4 grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
-                        <div>
-                            <x-shop::form.control-group class="mb-4 mt-[15px]">
+                        <div class="max-w-[286px]">
+                            <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
                                     name="attachments"
-                                    class="shadow text-[14px] appearance-none rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    class="!p-0 !mb-0"
                                     rules="required"
                                     :label="trans('Attachments')"
                                     :is-multiple="true"
