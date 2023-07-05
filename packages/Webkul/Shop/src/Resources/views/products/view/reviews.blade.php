@@ -112,8 +112,7 @@
                                     class="flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
                                     @click="canReview = false"
                                 >
-                                    {{-- @transition --}}
-                                    @lang('Cancel')
+                                    @lang('shop::app.products.view.reviews.cancel')
                                 </button>
                             </div>
                         </div>

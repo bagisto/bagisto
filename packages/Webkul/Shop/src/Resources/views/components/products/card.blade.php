@@ -80,7 +80,7 @@
             <div class="relative overflow-hidden group max-w-[250px] max-h-[258px]"> 
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <x-shop::shimmer.image
-                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
+                        class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
                     ></x-shop::shimmer.image>
                 </a>
