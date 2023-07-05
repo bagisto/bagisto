@@ -285,7 +285,7 @@
 
             data() {
                 return  {
-                    categories: @JSON($categories),
+                    categories: @json($categories),
                 }
             }, 
 
