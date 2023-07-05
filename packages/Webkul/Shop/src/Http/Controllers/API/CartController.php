@@ -2,13 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Checkout\Facades\Cart;
-use Webkul\Shop\Http\Resources\CartResource;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
+use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Checkout\Facades\Cart;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
 {
@@ -96,6 +96,8 @@ class CartController extends APIController
 
     /**
      * Method for remove selected items from cart
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function destroySelected(): JsonResource
     {
@@ -111,6 +113,8 @@ class CartController extends APIController
 
     /**
      * Method for move to wishlist selected items from cart
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function moveToWishlist(): JsonResource
     {
