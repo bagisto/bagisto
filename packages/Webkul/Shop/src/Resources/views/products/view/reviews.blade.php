@@ -100,7 +100,7 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap">
+                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4">
                                 <button
                                     class="w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
