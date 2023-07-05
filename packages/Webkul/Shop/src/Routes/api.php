@@ -42,7 +42,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::delete('', 'destroy')->name('shop.api.checkout.cart.destroy');
 
-        Route::delete('all', 'destroyAll')->name('shop.api.checkout.cart.destroy_all');
+        Route::delete('selected', 'destroySelected')->name('shop.api.checkout.cart.destroy_selected');
 
         Route::post('move-to-wishlist', 'moveToWishlist')->name('shop.api.checkout.cart.move_to_wishlist');
 

@@ -269,9 +269,9 @@
                     removeSelectedItems() {
                         const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
-                        this.$axios.post('{{ route('shop.api.checkout.cart.destroy_all') }}', {
+                        this.$axios.post('{{ route('shop.api.checkout.cart.destroy_selected') }}', {
                                 '_method': 'DELETE',
-                                'selectedItemsIds': selectedItemsIds,
+                                'ids': selectedItemsIds,
                             })
                             .then(response => {
                                 this.cart = response.data.data;

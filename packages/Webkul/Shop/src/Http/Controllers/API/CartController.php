@@ -97,18 +97,16 @@ class CartController extends APIController
     /**
      * Method for remove selected items from cart
      */
-    public function destroyAll(): JsonResource
+    public function destroySelected(): JsonResource
     {
-        foreach (request()->input('selectedItemsIds') as $selectedItemsId) {
-            $data = Cart::removeItem($selectedItemsId);
+        foreach (request()->input('ids') as $ids) {
+            Cart::removeItem($ids);
         }
 
-        if ($data) {
-            return new JsonResource([
-                'data'     => new CartResource(Cart::getCart()) ?? null,
-                'message'  => trans('shop::app.checkout.cart.index.remove-selected-success'),
-            ]);
-        }
+        return new JsonResource([
+            'data'     => new CartResource(Cart::getCart()) ?? null,
+            'message'  => trans('shop::app.checkout.cart.index.remove-selected-success'),
+        ]);
     }
 
     /**
@@ -116,16 +114,14 @@ class CartController extends APIController
      */
     public function moveToWishlist(): JsonResource
     {
-        foreach (request()->input('selectedItemsIds') as $selectedItemsId) {
-            $data = Cart::moveToWishlist($selectedItemsId);
+        foreach (request()->input('selectedItemsIds') as $ids) {
+            Cart::moveToWishlist($ids);
         }
 
-        if ($data) {
-            return new JsonResource([
-                'data'     => new CartResource(Cart::getCart()) ?? null,
-                'message'  => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
-            ]);
-        }
+        return new JsonResource([
+            'data'     => new CartResource(Cart::getCart()) ?? null,
+            'message'  => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
+        ]);
     }
 
     /**
