@@ -26,9 +26,10 @@
     --}}
     <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
-            href="{{ route('shop.home.index') }}"
-            class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block place-self-start -mt-[4px]"
+            href="{{ route('shop.home.index') }}" 
+            class="place-self-start -mt-[4px]"
         >
+            <img src="{{ bagisto_asset('images/logo.png') }}">
         </a>
 
         <div class="flex items-center">

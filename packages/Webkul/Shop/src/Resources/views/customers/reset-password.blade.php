@@ -8,8 +8,9 @@
         <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
             <a
                 href="{{ route('shop.home.index') }}" 
-                class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block m-[0_auto_20px_auto]"
+                class="m-[0_auto_20px_auto]"
             >
+                <img src="{{ bagisto_asset('images/logo.png') }}">
             </a>
         </div>
         

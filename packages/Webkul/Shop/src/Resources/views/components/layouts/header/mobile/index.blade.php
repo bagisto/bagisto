@@ -28,8 +28,9 @@
         
                     <a 
                         herf="" 
-                        class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block"
+                        class="h-[29px] inline-block"
                     >
+                        <img src="{{ bagisto_asset('images/logo.png') }}">
                     </a>
                 </x-slot:toggle>
 
@@ -37,8 +38,9 @@
                     <div class="flex justify-between p-[20px] items-center">
                         <a 
                             href=""
-                            class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block"
+                            class=""
                         >
+                            <img src="{{ bagisto_asset('images/logo.png') }}">
                         </a>
                     </div>
                 </x-slot:header>
