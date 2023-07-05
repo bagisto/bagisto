@@ -7,7 +7,6 @@ use Webkul\Shop\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\CompareController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\ReviewController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
 
@@ -56,21 +55,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
      * Compare products
      */
     Route::get('compare', [CompareController::class, 'index'])->name('shop.compare.index');
-
-    /**
-     * Product and categories routes.
-     */
-    Route::get('reviews/{slug}', [ReviewController::class, 'show'])->defaults('_config', [
-        'view' => 'shop::products.reviews.index',
-    ])->name('shop.reviews.index');
-
-    Route::get('product/{slug}/review', [ReviewController::class, 'create'])->defaults('_config', [
-        'view' => 'shop::products.reviews.create',
-    ])->name('shop.reviews.create');
-
-    Route::post('product/{slug}/review', [ReviewController::class, 'store'])->defaults('_config', [
-        'redirect' => 'shop.home.index',
-    ])->name('shop.reviews.store');
 
     Route::get('downloadable/download-sample/{type}/{id}', [ProductController::class, 'downloadSample'])->name('shop.downloadable.download_sample');
 

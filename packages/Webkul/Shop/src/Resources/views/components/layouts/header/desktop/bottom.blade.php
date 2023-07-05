@@ -18,20 +18,20 @@
 @endphp
 
 <div
-    class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0"
+    class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-1180:px-[30px]"
 >
     {{--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
     --}}
-    <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[35px]">
+    <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
-            href="{{ route('shop.home.index') }}" 
+            href="{{ route('shop.home.index') }}"
             class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block place-self-start -mt-[4px]"
         >
         </a>
 
-        <div class="flex items-center gap-x-[45px]  max-[1180px]:gap-x-[30px]">
+        <div class="flex items-center">
             {{--
                 For active category: `text-sm border-t-0 border-b-[2px] border-l-0 border-r-0 border-navyBlue`.
             --}}
@@ -40,7 +40,7 @@
                     <span>
                         <a
                             href="{{ $firstLevelCategory->url }}"
-                            class="pb-[21px] px-[15px] inline-block"
+                            class="inline-block pb-[21px] px-[20px] uppercase"
                         >
                             {{ $firstLevelCategory->name }}
                         </a>
@@ -48,7 +48,7 @@
 
                     @if ($firstLevelCategory->children->isNotEmpty())
                         <div
-                            class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto -left-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
+                            class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto  ltr:-left-[35px] rtl:-right-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
                         >
                             <div class="flex aigns gap-x-[70px] justify-between">
                                 @foreach ($firstLevelCategory->children->chunk(2) as $pair)
@@ -93,7 +93,7 @@
 
             <div class="relative w-full">
                 <div
-                    class="icon-search text-[22px] absolute left-[12px] top-[12px] flex items-center pointer-events-none">
+                    class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none">
                 </div>
 
                 <input
@@ -105,7 +105,7 @@
 
                 <button
                     type="button"
-                    class="icon-camera text-[22px] absolute top-[12px] right-[12px] flex items-center pr-3"
+                    class="icon-camera text-[22px] absolute top-[12px] ltr:right-[12px] rtl:left-[12px] flex items-center pr-3"
                 >
                 </button>
             </div>
@@ -118,7 +118,7 @@
 
             @include('shop::checkout.cart.mini-cart')
 
-            <x-shop::dropdown position="bottom-right">
+            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
                 </x-slot:toggle>

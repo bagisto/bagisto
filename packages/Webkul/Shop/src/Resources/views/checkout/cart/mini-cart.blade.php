@@ -48,7 +48,7 @@
                             >
                         </div>
 
-                        <div class="grid gap-y-[10px] flex-1">
+                        <div class="grid place-content-start justify-stretch gap-y-[10px] flex-1">
                             <div class="flex flex-wrap justify-between">
                                 <p
                                     class="text-[16px] font-medium max-w-[80%]"

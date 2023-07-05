@@ -1,5 +1,5 @@
 <x-shop::layouts>
-    <!-- Breadcrumb -->
+    {{-- Breadcrumb --}}
     <div class="flex justify-center mt-[20px] max-lg:hidden">
 		<div class="flex gap-x-[10px] items-center">
             <x-shop::breadcrumbs name="compare"></x-shop::breadcrumbs>

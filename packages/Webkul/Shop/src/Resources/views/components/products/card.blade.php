@@ -13,7 +13,7 @@
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <x-shop::shimmer.image
-                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"
+                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
                     ></x-shop::shimmer.image>
                 </a>
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-2.5 content-start">
+            <div class="grid gap-2.5 content-start max-w-[291px]">
                 <p class="text-base" v-text="product.name"></p>
 
                 <div
@@ -80,7 +80,7 @@
             <div class="relative overflow-hidden group max-w-[250px] max-h-[258px]"> 
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <x-shop::shimmer.image
-                        class="relative after:content-[' '] after:block after:pb-[calc(100%+9px)]"
+                        class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
                         ::src="product.base_image.medium_image_url"
                     ></x-shop::shimmer.image>
                 </a>
@@ -221,14 +221,14 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
+                            this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to compare list')' });
                         } else {
                             this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('Item is already added to compare list')' });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to the compare list')' });
+                        this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to compare list')' });
 
                     }
                 },
