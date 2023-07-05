@@ -448,7 +448,7 @@ return [
                 'move-to-wishlist-success'=> 'Selected items successfully moved to wishlist.',
                 'remove-selected-success' => 'Selected items successfully removed from cart.',
                 'empty-product'           => 'You don’t have a product in your cart.',
-                'quantity-update'    => 'Quantity updated successfully',
+                'quantity-update'         => 'Quantity updated successfully',
             ],
 
             'coupon'   => [
