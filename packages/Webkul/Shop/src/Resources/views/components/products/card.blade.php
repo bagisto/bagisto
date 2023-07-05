@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-2.5 content-start">
+            <div class="grid gap-2.5 content-start max-w-[291px]">
                 <p class="text-base" v-text="product.name"></p>
 
                 <div
