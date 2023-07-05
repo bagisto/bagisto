@@ -3,8 +3,10 @@
 <v-product-review :product-id="{{ $product->id }}"></v-product-review>
 
 @pushOnce('scripts')
+    {{-- Product Review Template --}}
     <script type="text/x-template" id="v-product-review-template">
         <div class="container max-1180:px-[20px]">
+            <!-- Create Review Form Container -->
             <div class="w-full" v-if="canReview">
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -120,7 +122,8 @@
                 </x-shop::form>
             </div>
 
-            <div v-if="! canReview">
+            <!-- Product Reviews Container -->
+            <div v-else>
                 <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
                     <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
                         @lang('shop::app.products.customer-review')
@@ -160,93 +163,11 @@
                 </div>
 
                 <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
-                    <div
-                        class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap"
+                    <!-- Product Review Item Vue Component -->
+                    <v-product-review-item
                         v-for='review in reviews'
-                    >
-                        <div>
-                            <div
-                                class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
-                                :title="review.name"
-                            >
-                                <span
-                                    class="font-semibold text-[24px] text-[#7D7D7D]"
-                                    v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
-                                >
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="w-full">
-                            <div class="flex justify-between">
-                                <p
-                                    class="text-[20px] font-medium max-sm:text-[16px]"
-                                    v-text="review.name"
-                                >
-                                </p>
-
-                                <div class="flex items-center">
-                                    <x-shop::products.star-rating 
-                                        ::name="review.name" 
-                                        ::value="review.rating"
-                                    >
-                                    </x-shop::products.star-rating>
-                                </div>
-                            </div>
-
-                            <p
-                                class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]"
-                                v-text="review.created_at"
-                            >
-                            </p>
-
-                            <p
-                                class="text-[16px] text-[#7D7D7D] font-semibold mt-[20px] max-sm:text-[12px]"
-                                v-text="review.title"
-                            >
-                            </p>
-
-                            <p
-                                class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"
-                                v-text="review.comment"
-                            >
-                            </p>
-
-                            <div class="flex flex-wrap gap-2 mt-2">
-                                <template v-for="file in review.images">
-                                    <a
-                                        :href="file.url"
-                                        class="h-12 w-12 flex"
-                                        target="_blank"
-                                        v-if="file.type == 'image'"
-                                    >
-
-                                        <img
-                                            class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
-                                            :src="file.url"
-                                            :alt="review.name"
-                                            :title="review.name"
-                                        >
-                                    </a>
-
-                                    <a
-                                        :href="file.url"
-                                        class="h-12 w-12 flex"
-                                        target="_blank"
-                                        v-else
-                                    >
-                                        <video
-                                            class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
-                                            :src="file.url"
-                                            :alt="review.name"
-                                            :title="review.name"
-                                        >
-                                        </video>
-                                    </a>
-                                </template>
-                            </div>
-                        </div>
-                    </div>
+                        :review="review"
+                    ></v-product-review>
                 </div>
 
                 <button
@@ -256,6 +177,94 @@
                 >
                     @lang('shop::app.products.load-more')
                 </button>
+            </div>
+        </div>
+    </script>
+
+    {{-- Product Review Item Template --}}
+    <script type="text/x-template" id="v-product-review-item-template">
+        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
+            <div>
+                <div
+                    class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
+                    :title="review.name"
+                >
+                    <span
+                        class="font-semibold text-[24px] text-[#7D7D7D]"
+                        v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
+                    >
+                    </span>
+                </div>
+            </div>
+
+            <div class="w-full">
+                <div class="flex justify-between">
+                    <p
+                        class="text-[20px] font-medium max-sm:text-[16px]"
+                        v-text="review.name"
+                    >
+                    </p>
+
+                    <div class="flex items-center">
+                        <x-shop::products.star-rating 
+                            ::name="review.name" 
+                            ::value="review.rating"
+                        >
+                        </x-shop::products.star-rating>
+                    </div>
+                </div>
+
+                <p
+                    class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]"
+                    v-text="review.created_at"
+                >
+                </p>
+
+                <p
+                    class="text-[16px] text-[#7D7D7D] font-semibold mt-[20px] max-sm:text-[12px]"
+                    v-text="review.title"
+                >
+                </p>
+
+                <p
+                    class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"
+                    v-text="review.comment"
+                >
+                </p>
+
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <template v-for="file in review.images">
+                        <a
+                            :href="file.url"
+                            class="h-12 w-12 flex"
+                            target="_blank"
+                            v-if="file.type == 'image'"
+                        >
+
+                            <img
+                                class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                :src="file.url"
+                                :alt="review.name"
+                                :title="review.name"
+                            >
+                        </a>
+
+                        <a
+                            :href="file.url"
+                            class="h-12 w-12 flex"
+                            target="_blank"
+                            v-else
+                        >
+                            <video
+                                class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                :src="file.url"
+                                :alt="review.name"
+                                :title="review.name"
+                            >
+                            </video>
+                        </a>
+                    </template>
+                </div>
             </div>
         </div>
     </script>
@@ -319,6 +328,12 @@
                     this.reviewImage = event.target.files[0];
                 },
             },
+        });
+        
+        app.component('v-product-review-item', {
+            template: '#v-product-review-item-template',
+
+            props: ['review'],
         });
     </script>
 @endPushOnce
