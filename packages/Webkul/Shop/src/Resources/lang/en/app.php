@@ -374,8 +374,9 @@ return [
             ],
 
             'reviews' => [
-                'back'    => 'Back',
-                'success' => 'Review submitted successfully.',
+                'back'        => 'Back',
+                'success'     => 'Review submitted successfully.',
+                'attachments' => 'Attachments',
             ],
         ],
     ],
@@ -460,6 +461,8 @@ return [
                 'apply-issue'     => 'Coupon code can\'t be applied.',
                 'success-apply'   => 'Coupon code applied successfully.',
                 'already-applied' => 'Coupon code already applied.',
+                'enter-your-code' => 'Enter your code',
+                'subtotal'        => 'Subtotal',
             ],
 
             'mini-cart' => [
@@ -543,7 +546,8 @@ return [
                 'apply-issue'     => 'Coupon code can\'t be applied.',
                 'sub-total'       => 'Subtotal',
                 'save'            => 'Save',
-
+                'enter-your-code' => 'Enter your code',
+                'subtotal'        => 'Subtotal',
             ],
 
             'index' => [

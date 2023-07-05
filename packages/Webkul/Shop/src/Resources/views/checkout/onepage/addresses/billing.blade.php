@@ -22,14 +22,14 @@
                             <v-field
                                 type="radio"
                                 name="billing[address_id]"
-                                :id="'billing_address_id_' + address.id"
                                 :value="address.id"
-                                :rules="{ required: ! isTempAddress }"
-                                label="Billing Address"
-                                v-model="forms.billing.address.address_id"
+                                :id="'billing_address_id_' + address.id"
                                 class="hidden peer"
-                                @change="resetPaymentAndShippingMethod"
+                                :rules="{ required: ! isTempAddress }"
+                                label="@lang('shop::app.checkout.onepage.addresses.billing.billing-address')"
+                                v-model="forms.billing.address.address_id"
                                 :checked="address.isDefault"
+                                @change="resetPaymentAndShippingMethod"
                             />
 
                             <label 
@@ -45,6 +45,7 @@
                                 <div class="flex justify-between items-center">
                                     <p class="text-[16px] font-medium">
                                         @{{ address.first_name }} @{{ address.last_name }}
+                                        
                                         <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                     </p>
                                 </div>
@@ -71,7 +72,8 @@
                         >
                             <div class="flex gap-x-[10px] items-center cursor-pointer">
                                 <span class="icon-plus text-[30px] p-[10px] border border-black rounded-full"></span>
-                                <p class="text-[16px]">@lang('Add new address')</p>
+
+                                <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +103,7 @@
                             for="isUsedForShipping"
                             class="cursor-pointer"
                         >
-                            @lang('address is the same as my billing address')
+                            @lang('shop::app.checkout.onepage.addresses.billing.same-billing-address')
                         </label>
                     </div>
 
@@ -113,7 +115,7 @@
                                     class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                                     @click="store"
                                 >
-                                    @lang('Confirm')
+                                    @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                                 </button>
                             </div>
                         </div>
@@ -126,7 +128,7 @@
                                     type="submit"
                                     class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                                 >
-                                    @lang('Confirm')
+                                    @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                                 </button>
                             </div>
                         </div>
@@ -170,12 +172,11 @@
                                 @lang('shop::app.checkout.onepage.addresses.billing.company-name')
                             </x-shop::form.control-group.label>
                 
-
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[company_name]"
-                                label="Company name"
-                                placeholder="Company name"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.company-name')"
                                 v-model="forms.billing.address.company_name"
                             >
                             </x-shop::form.control-group.control>
@@ -196,9 +197,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[first_name]"
-                                    label="First name"
                                     rules="required"
-                                    placeholder="First name"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.first-name')"
                                     v-model="forms.billing.address.first_name"
                                 >
                                 </x-shop::form.control-group.control>
@@ -217,9 +218,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[last_name]"
-                                    label="Last name"
                                     rules="required"
-                                    placeholder="Last name"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.last-name')"
                                     v-model="forms.billing.address.last_name"
                                 >
                                 </x-shop::form.control-group.control>
@@ -240,7 +241,7 @@
                                 type="email"
                                 name="billing[email]"
                                 rules="required|email"
-                                label="Email"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.email')"
                                 placeholder="email@example.com"
                                 v-model="forms.billing.address.email"
                             >
@@ -260,10 +261,9 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[address1][]"
-                                class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                 rules="required"
-                                label="Street address"
-                                placeholder="Street address"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                 v-model="forms.billing.address.address1[0]"
                             >
                             </x-shop::form.control-group.control>
@@ -279,9 +279,8 @@
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="billing[address1][{{ $i }}]"
-                                        class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                        label="Street address"
-                                        placeholder="Street address"
+                                        :label="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
+                                        :placeholder="trans('shop::app.checkout.onepage.addresses.billing.street-address')"
                                         v-model="forms.billing.address.address1[{{$i}}]"
                                     >
                                     </x-shop::form.control-group.control>
@@ -301,10 +300,10 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[country]"
-                                    class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
+                                    class="py-2 mb-2"
                                     rules="required"
-                                    label="Country"
-                                    placeholder="Country"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.country')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     v-model="forms.billing.address.country"
                                 >
                                     @foreach (core()->countries() as $country)
@@ -326,10 +325,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[state]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    label="State"
-                                    placeholder="State"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     v-model="forms.billing.address.state"
                                     v-if="! haveStates('billing')"
                                 >
@@ -338,10 +336,10 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="billing[state]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
+                                    class="py-2 mb-2"
                                     rules="required"
-                                    label="State"
-                                    placeholder="State"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.state')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.state')"
                                     v-model="forms.billing.address.state"
                                     v-if="haveStates('billing')"
                                 >
@@ -371,10 +369,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[city]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    label="City"
-                                    placeholder="City"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.city')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.city')"
                                     v-model="forms.billing.address.city"
                                 >
                                 </x-shop::form.control-group.control>
@@ -393,10 +390,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="billing[postcode]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    label="Zip/Postcode"
-                                    placeholder="Zip/Postcode"
+                                    :label="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.billing.postcode')"
                                     v-model="forms.billing.address.postcode"
                                 >
                                 </x-shop::form.control-group.control>
@@ -417,7 +413,6 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="billing[phone]"
-                                class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                 rules="required|numeric"
                                 label="Telephone"
                                 placeholder="Telephone"

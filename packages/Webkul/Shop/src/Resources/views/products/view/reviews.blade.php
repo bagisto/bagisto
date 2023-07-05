@@ -31,12 +31,13 @@
                                     name="attachments"
                                     class="!p-0 !mb-0"
                                     rules="required"
-                                    :label="trans('Attachments')"
+                                    :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
                                 >
                                 </x-shop::form.control-group.control>
 
                                 <x-shop::form.control-group.error
+                                    class="mt-4"
                                     control-name="attachments"
                                 >
                                 </x-shop::form.control-group.error>
@@ -45,7 +46,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
+                                <x-shop::form.control-group.label>
                                     @lang('shop::app.products.rating')
                                 </x-shop::form.control-group.label>
 
@@ -64,8 +65,8 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            <x-shop::form.control-group class="mb-4 mt-[15px]">
-                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
+                            <x-shop::form.control-group>
+                                <x-shop::form.control-group.label>
                                     @lang('shop::app.products.title')
                                 </x-shop::form.control-group.label>
 
@@ -73,7 +74,6 @@
                                     type="text"
                                     name="title"
                                     :value="old('title')"
-                                    class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
                                     :label="trans('shop::app.products.title')"
                                     :placeholder="trans('shop::app.products.title')"
@@ -86,8 +86,8 @@
                                 </x-shop::form.control-group.error>
                             </x-shop::form.control-group>
 
-                            <x-shop::form.control-group class="mb-4 mt-[15px]">
-                                <x-shop::form.control-group.label class="block text-gray-700 text-[12px] font-medium mb-2">
+                            <x-shop::form.control-group>
+                                <x-shop::form.control-group.label>
                                     @lang('shop::app.products.comment')
                                 </x-shop::form.control-group.label>
 
@@ -96,7 +96,6 @@
                                     rows="12"
                                     name="comment"
                                     :value="old('comment')"
-                                    class="shadow text-[14px] appearance-none border rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     rules="required"
                                     :label="trans('shop::app.products.comment')"
                                     :placeholder="trans('shop::app.products.comment')"
@@ -110,7 +109,7 @@
                             </x-shop::form.control-group> 
 
                             <button
-                                class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                                class="mt-4 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
                                 type='submit'
                             >
                                 @lang('shop::app.products.submit-review')

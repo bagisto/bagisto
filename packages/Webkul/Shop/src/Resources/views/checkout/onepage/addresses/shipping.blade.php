@@ -26,14 +26,14 @@
                                 <v-field
                                     type="radio"
                                     name="shipping[address_id]"
-                                    :id="'shipping_address_id_' + address.id"
                                     :value="address.id"
-                                    :rules="{ required: ! isTempAddress }"
-                                    label="Shipping Address"
-                                    v-model="forms.shipping.address.address_id"
+                                    :id="'shipping_address_id_' + address.id"
                                     class="hidden peer"
-                                    @change="resetPaymentAndShippingMethod"
+                                    :rules="{ required: ! isTempAddress }"
+                                    label="@lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')"
+                                    v-model="forms.shipping.address.address_id"
                                     :checked="address.isDefault"
+                                    @change="resetPaymentAndShippingMethod"
                                 />
                                 
                                 <label 
@@ -49,6 +49,7 @@
                                     <div class="flex justify-between items-center">
                                         <p class="text-[16px] font-medium">
                                             @{{ address.first_name }} @{{ address.last_name }}
+
                                             <span v-if="address.company_name">(@{{ address.company_name }})</span>
                                         </p>
                                     </div>
@@ -74,7 +75,8 @@
                             >
                                 <div class="flex gap-x-[10px] items-center cursor-pointer">
                                     <span class="icon-plus text-[30px] p-[10px] border border-black rounded-full"></span>
-                                    <p class="text-[16px]">@lang('Add new address')</p>
+
+                                    <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.shipping.add-new-address')</p>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +95,7 @@
                                         class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                                         @click="store"
                                     >
-                                        @lang('Confirm')
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
                                 </div>
                             </div>
@@ -106,7 +108,7 @@
                                         type="submit"
                                         class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
                                     >
-                                        @lang('Confirm')
+                                        @lang('shop::app.checkout.onepage.addresses.shipping.confirm')
                                     </button>
                                 </div>
                             </div>
@@ -157,8 +159,8 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping[company_name]"
-                                label="Company name"
-                                placeholder="Company name"
+                                :label="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.company-name')"
                                 v-model="forms.shipping.address.company_name"
                             >
                             </x-shop::form.control-group.control>
@@ -178,9 +180,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[first_name]"
-                                    label="First name"
                                     rules="required"
-                                    placeholder="First name"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.first-name')"
                                     v-model="forms.shipping.address.first_name"
                                 >
                                 </x-shop::form.control-group.control>
@@ -199,9 +201,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[last_name]"
-                                    label="Last name"
                                     rules="required"
-                                    placeholder="Last name"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.last-name')"
                                     v-model="forms.shipping.address.last_name"
                                 >
                                 </x-shop::form.control-group.control>
@@ -222,7 +224,7 @@
                                 type="email"
                                 name="shipping[email]"
                                 rules="required|email"
-                                label="Email"
+                                :label="trans('shop::app.checkout.onepage.addresses.shipping.email')"
                                 placeholder="email@example.com"
                                 v-model="forms.shipping.address.email"
                             >
@@ -242,10 +244,9 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping[address1][]"
-                                class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                 rules="required"
-                                label="Street address"
-                                placeholder="Street address"
+                                :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                 v-model="forms.shipping.address.address1[0]"
                             >
                             </x-shop::form.control-group.control>
@@ -261,9 +262,8 @@
                                     <x-shop::form.control-group.control
                                         type="text"
                                         name="shipping[address1][{{ $i }}]"
-                                        class="text-[14px] shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
-                                        label="Street address"
-                                        placeholder="Street address"
+                                        :label="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
+                                        :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.street-address')"
                                         v-model="forms.shipping.address.address1[{{$i}}]"
                                     >
                                     </x-shop::form.control-group.control>
@@ -282,13 +282,14 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[country]"
-                                    class="!text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
+                                    class="py-2 mb-2"
                                     rules="required"
-                                    label="Country"
-                                    placeholder="Country"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.country')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.country')"
                                     v-model="forms.shipping.address.country"
                                 >
                                     <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-country')</option>
+
                                     @foreach (core()->countries() as $country)
                                         <option value="{{ $country->code }}">{{ $country->name }}</option>
                                     @endforeach
@@ -308,10 +309,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[state]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    label="State"
-                                    placeholder="State"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     v-model="forms.shipping.address.state"
                                     v-if="! haveStates('shipping')"
                                 >
@@ -320,10 +320,10 @@
                                 <x-shop::form.control-group.control
                                     type="select"
                                     name="shipping[state]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline mb-2"
+                                    class="py-2 mb-2"
                                     rules="required"
-                                    label="State"
-                                    placeholder="State"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.state')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.state')"
                                     v-model="forms.shipping.address.state"
                                     v-if="haveStates('shipping')"
                                 >
@@ -353,10 +353,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[city]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    label="City"
-                                    placeholder="City"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.city')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.city')"
                                     v-model="forms.shipping.address.city"
                                 >
                                 </x-shop::form.control-group.control>
@@ -375,10 +374,9 @@
                                 <x-shop::form.control-group.control
                                     type="text"
                                     name="shipping[postcode]"
-                                    class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                     rules="required"
-                                    label="Zip/Postcode"
-                                    placeholder="Zip/Postcode"
+                                    :label="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
+                                    :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.postcode')"
                                     v-model="forms.shipping.address.postcode"
                                 >
                                 </x-shop::form.control-group.control>
@@ -399,10 +397,9 @@
                             <x-shop::form.control-group.control
                                 type="text"
                                 name="shipping[phone]"
-                                class="text-[14px] bg-white border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline"
                                 rules="required|numeric"
-                                label="Telephone"
-                                placeholder="Telephone"
+                                :label="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.shipping.telephone')"
                                 v-model="forms.shipping.address.phone"
                             >
                             </x-shop::form.control-group.control>
