@@ -37,6 +37,7 @@
                         <x-shop::form.control-group.control
                             type="email"
                             name="email"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             value=""
                             rules="required|email"
                             label="Email"
@@ -50,7 +51,7 @@
                         </x-shop::form.control-group.error>
                     </x-shop::form.control-group>
 
-                    <x-shop::form.control-group class="mb-6">
+                    <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label>
                             @lang('shop::app.customers.login-form.password')
                         </x-shop::form.control-group.label>
@@ -58,6 +59,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password"
+                            class="!p-[20px_527px_20px_25px] rounded-lg"
                             value=""
                             id="password"
                             rules="required|min:6"
@@ -73,18 +75,25 @@
                     </x-shop::form.control-group>
 
                     <div class="flex justify-between">
-                        <div class="text-[##7D7D7D] flex items-center gap-[6px]">
-                            <x-shop::form.control-group>
-                                <x-shop::form.control-group.control
-                                    type="checkbox"
-                                    name="show_password"
-                                    onclick="switchVisibility()"
-                                >
-                                    <span class="select-none  text-[16] text-[#7d7d7d] max-sm:text-[12px]">
-                                        @lang('shop::app.customers.login-form.show-password')
-                                    </span>
-                                </x-shop::form.control-group.control>
-                            </x-shop::form.control-group>
+                        <div class="select-none items-center flex gap-[6px]">
+                            <input
+                                type="checkbox"
+                                id="show-password"
+                                class="hidden peer"
+                                onchange="switchVisibility()"
+                            />
+
+                            <label
+                                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                                for="show-password"
+                            ></label>
+
+                            <label
+                                class="text-[16] text-[#7d7d7d] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                                for="show-password"
+                            >
+                                @lang('shop::app.customers.login-form.show-password')
+                            </label>
                         </div>
 
                         <div class="block">
@@ -101,9 +110,11 @@
 
                     {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
 
-                    <div class="mt-[20px]">
-                        {!! Captcha::render() !!}
-                    </div>
+                    @if (core()->getConfigData('customer.captcha.credentials.status'))
+                        <div class="flex mt-[20px]">
+                            {!! Captcha::render() !!}
+                        </div>
+                    @endif
 
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
