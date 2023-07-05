@@ -11,7 +11,7 @@
         </x-slot:toggle>
 
         <x-slot:content class="!p-[0px]">
-            <v-currency-changer></v-currency-changer>
+            <v-currency-switcher></v-currency-switcher>
         </x-slot:content>
     </x-shop::dropdown>
 
@@ -43,13 +43,13 @@
         </x-slot:toggle>
     
         <x-slot:content class="!p-[0px]">
-            <v-language-selecter></v-language-selecter>
+            <v-language-switcher></v-language-switcher>
         </x-slot:content>
     </x-shop::dropdown>
 </div>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-language-selecter-template">
+    <script type="text/x-template" id="v-language-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
                 <span 
@@ -63,8 +63,8 @@
     </script>
 
     <script type="module">
-        app.component('v-language-selecter', {
-            template: '#v-language-selecter-template',
+        app.component('v-language-switcher', {
+            template: '#v-language-switcher-template',
 
             methods: {
                 set(value) {
@@ -78,7 +78,7 @@
         });
     </script>
 
-    <script type="text/x-template" id="v-currency-changer-template">
+    <script type="text/x-template" id="v-currency-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             @foreach (core()->getCurrentChannel()->currencies as $currency)
                 <span 
@@ -92,8 +92,8 @@
     </script>
 
     <script type="module">
-        app.component('v-currency-changer', {
-            template: '#v-currency-changer-template',
+        app.component('v-currency-switcher', {
+            template: '#v-currency-switcher-template',
 
             methods: {
                 set(value) {
