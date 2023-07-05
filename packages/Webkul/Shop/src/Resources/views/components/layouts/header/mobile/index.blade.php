@@ -37,7 +37,7 @@
                     <div class="flex justify-between p-[20px] items-center">
                         <a 
                             href=""
-                            class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block mb-[16px]"
+                            class="bs-logo bg-[position:-5px_-3px] bs-main-sprite w-[131px] h-[29px] inline-block"
                         >
                         </a>
                     </div>
