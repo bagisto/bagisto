@@ -40,7 +40,7 @@
                         <x-shop::form.control-group.control
                             type="email"
                             name="email"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="required|email"
                             label="Email"

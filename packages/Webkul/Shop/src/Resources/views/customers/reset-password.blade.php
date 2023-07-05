@@ -43,7 +43,7 @@
                         <x-shop::form.control-group.control
                             type="email"
                             name="email"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             :value="old('email')"
                             id="email" 
                             rules="required|email"
@@ -66,7 +66,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             value=""
                             ref="password"
                             rules="required|min:6"
@@ -89,7 +89,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password_confirmation"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="confirmed:@password"
                             label="Confirm Password"

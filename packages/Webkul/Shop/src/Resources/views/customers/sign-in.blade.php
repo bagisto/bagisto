@@ -38,7 +38,7 @@
                         <x-shop::form.control-group.control
                             type="email"
                             name="email"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="required|email"
                             label="Email"
@@ -60,7 +60,7 @@
                         <x-shop::form.control-group.control
                             type="password"
                             name="password"
-                            class="!p-[20px_527px_20px_25px] rounded-lg"
+                            class="!p-[20px_25px] rounded-lg"
                             value=""
                             id="password"
                             rules="required|min:6"

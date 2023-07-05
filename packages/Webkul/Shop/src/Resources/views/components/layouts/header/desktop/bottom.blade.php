@@ -18,13 +18,13 @@
 @endphp
 
 <div
-    class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0"
+    class="w-full flex justify-between px-[60px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-1180:px-[30px]"
 >
     {{--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
     --}}
-    <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[35px]">
+    <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
@@ -32,7 +32,7 @@
             <img src="{{ bagisto_asset('images/logo.png') }}">
         </a>
 
-        <div class="flex items-center gap-x-[45px]  max-[1180px]:gap-x-[30px]">
+        <div class="flex items-center">
             {{--
                 For active category: `text-sm border-t-0 border-b-[2px] border-l-0 border-r-0 border-navyBlue`.
             --}}
@@ -41,7 +41,7 @@
                     <span>
                         <a
                             href="{{ $firstLevelCategory->url }}"
-                            class="pb-[21px] px-[15px] inline-block"
+                            class="inline-block pb-[21px] px-[20px] uppercase"
                         >
                             {{ $firstLevelCategory->name }}
                         </a>
