@@ -99,8 +99,8 @@ class CartController extends APIController
      */
     public function destroySelected(): JsonResource
     {
-        foreach (request()->input('ids') as $ids) {
-            Cart::removeItem($ids);
+        foreach (request()->input('ids') as $id) {
+            Cart::removeItem($id);
         }
 
         return new JsonResource([
@@ -114,8 +114,8 @@ class CartController extends APIController
      */
     public function moveToWishlist(): JsonResource
     {
-        foreach (request()->input('selectedItemsIds') as $ids) {
-            Cart::moveToWishlist($ids);
+        foreach (request()->input('selectedItemsIds') as $id) {
+            Cart::moveToWishlist($id);
         }
 
         return new JsonResource([
