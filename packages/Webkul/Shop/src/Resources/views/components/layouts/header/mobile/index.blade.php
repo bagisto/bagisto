@@ -293,10 +293,10 @@
                 toggleCategory(index) {
                     this.categories = this.categories.map((item, i) => ({
                         ...item,
-                        isOpen: i === index ? ! item.isOpen : false
+                        isOpen: i === index ? ! item.isOpen : false,
                     }));
-                }
-            }
+                },
+            },
         });
     </script>
 @endPushOnce
