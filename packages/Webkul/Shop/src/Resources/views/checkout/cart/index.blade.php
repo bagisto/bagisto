@@ -288,7 +288,7 @@
                         const selectedItemsIds = this.cart.items.flatMap(item => item.selected ? item.id : []);
 
                         this.$axios.post('{{ route('shop.api.checkout.cart.move_to_wishlist') }}', {
-                                'selectedItemsIds': selectedItemsIds,
+                                'ids': selectedItemsIds,
                             })
                             .then(response => {
                                 this.cart = response.data.data;
