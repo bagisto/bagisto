@@ -4,32 +4,41 @@
     @filter-applied="setFilters('filter', $event)"
     @filter-clear="clearFilters('filter', $event)"
 >
+    <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
 </v-filters>
 
 {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-filters-template">
-        <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
-            <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
-                <p class="text-[18px] font-semibold ">
-                    @lang('shop::app.categories.filters.filters')
-                </p>
+        <!-- Filter Shimmer Effect -->
+        <template v-if="isLoading">
+            <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+        </template>
 
-                <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>
-                    @lang('shop::app.categories.filters.clear-all')
-                </p>
+        <!-- Filters Container -->
+        <template v-else>
+            <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
+                <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
+                    <p class="text-[18px] font-semibold ">
+                        @lang('shop::app.categories.filters.filters')
+                    </p>
+
+                    <p class="text-[12px] font-medium cursor-pointer" @click='clear()'>
+                        @lang('shop::app.categories.filters.clear-all')
+                    </p>
+                </div>
+
+                <v-filter-item
+                    ref="filterItemComponent"
+                    :key="filterIndex"
+                    :filter="filter"
+                    v-for='(filter, filterIndex) in filters.available'
+                    @values-applied="applyFilter(filter, $event)"
+                >
+                </v-filter-item>
             </div>
-
-            <v-filter-item
-                ref="filterItemComponent"
-                :key="filterIndex"
-                :filter="filter"
-                v-for='(filter, filterIndex) in filters.available'
-                @values-applied="applyFilter(filter, $event)"
-            >
-            </v-filter-item>
-        </div>
+        </template>
     </script>
 
     <script type="text/x-template" id="v-filter-item-template">
@@ -117,6 +126,8 @@
 
             data() {
                 return {
+                    isLoading: true,
+
                     filters: {
                         available: {},
 
@@ -135,6 +146,8 @@
                 getFilters() {
                     this.$axios.get('{{ route("shop.api.categories.attributes", $category->id) }}')
                         .then((response) => {
+                            this.isLoading = false;
+
                             this.filters.available = response.data.data;
                         })
                         .catch(error => {

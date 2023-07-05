@@ -552,7 +552,7 @@ class Configurable extends AbstractType
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
             } else {
-                return trans('shop::app.checkout.cart.integrity.missing_options');
+                return trans('shop::app.checkout.cart.missing_options');
             }
         }
 

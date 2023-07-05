@@ -1,5 +1,5 @@
 <div
-    class="flex justify-between items-center w-full border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[11px] px-16"
+    class="flex justify-between items-center w-full border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[11px] px-16 max-1180:px-[30px]"
 >
     <select
         class="font-medium px-0 text-sm text-black bg-transparent border-0 border-gray-20 focus:outline-none focus:ring-0 focus:border-gray-200 peer cursor-pointer"

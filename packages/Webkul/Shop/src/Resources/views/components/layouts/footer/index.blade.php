@@ -41,7 +41,7 @@
 
                         <button
                             type="submit"
-                            class="w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium absolute top-[8px] right-[8px] flex items-center"
+                            class="w-max px-[26px] py-[13px] bg-white rounded-[12px] text-[12px] font-medium absolute top-[8px] rtl:left-[8px] ltr:right-[8px] flex items-center"
                         >
                             @lang('shop::app.components.layouts.footer.subscribe')
                         </button>
