@@ -84,7 +84,7 @@
     </div>
 
     <div class="flex items-center gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-        <form class="flex items-center max-w-[445px]">
+        <form action="{{ route('shop.search.index') }}" class="flex items-center max-w-[445px]">
             <label
                 for="organic-search"
                 class="sr-only"
@@ -99,6 +99,7 @@
 
                 <input
                     type="text"
+                    name="query"
                     class="bg-[#F5F5F5] rounded-lg block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
                     placeholder="Search for products"
                     required

@@ -1,23 +1,13 @@
 <x-shop::layouts>
-    {{-- Hero Image --}}
-    <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
-        <div>
-            <img
-                class="rounded-[12px]"
-                src='{{ bagisto_asset("images/product-hero.png") }}'
-            >
-        </div>
-    </div>
-
     {{-- Product Listing --}}
-    <v-category>
+    <v-search>
         <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
-    </v-category>
+    </v-search>
 
     @pushOnce('scripts')
         <script 
             type="text/x-template" 
-            id="v-category-template"
+            id="v-search-template"
         >
             <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
@@ -66,7 +56,7 @@
                         <div v-else>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:grid-cols-1">
+                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                                 </div>
                             </template>
@@ -74,7 +64,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:grid-cols-1">
+                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -109,8 +99,8 @@
         </script>
 
         <script type="module">
-            app.component('v-category', {
-                template: '#v-category-template',
+            app.component('v-search', {
+                template: '#v-search-template',
 
                 data() {
                     return {
@@ -160,7 +150,7 @@
                     },
 
                     getProducts() {
-                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", { 
+                        this.$axios.get(("{{ route('shop.api.products.index', ['name' => request('query')]) }}"), { 
                             params: this.queryParams 
                         })
                             .then(response => {

@@ -124,6 +124,8 @@
         app.component('v-filters', {
             template: '#v-filters-template',
 
+            props: ['category_id'],
+
             data() {
                 return {
                     isLoading: true,
@@ -144,7 +146,9 @@
 
             methods: {
                 getFilters() {
-                    this.$axios.get('{{ route("shop.api.categories.attributes", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.attributes") }}', {
+                            category_id: this.category_id ??  null,
+                        })
                         .then((response) => {
                             this.isLoading = false;
 
@@ -263,7 +267,7 @@
         app.component('v-price-filter', {
             template: '#v-price-filter-template',
 
-            props: ['defaultPriceRange'],
+            props: ['defaultPriceRange', 'category_id'],
 
             data() {
                 return {
@@ -297,7 +301,9 @@
 
             methods: {
                 getMaxPrice() {
-                    this.$axios.get('{{ route("shop.api.categories.max_price", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.max_price") }}', {
+                            category_id: this.category_id ?? null,
+                        })
                         .then((response) => {
                             this.isLoading = false;
 

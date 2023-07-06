@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
-use Webkul\Shop\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\CompareController;
+use Webkul\Shop\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
+use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
 
@@ -32,9 +32,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Store front search.
      */
-    Route::get('search', [SearchController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::search.search',
-    ])->name('shop.search.index');
+    Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
 
     Route::post('upload-search-image', [HomeController::class, 'upload'])->name('shop.image.search.upload');
 

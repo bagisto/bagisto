@@ -13,7 +13,7 @@ use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
- 
+
     Route::prefix('customer')->group(function () {
         /**
          * Forgot password routes.
@@ -73,8 +73,8 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
             ])->name('shop.customer.session.destroy');
 
             /**
-            * Wishlist.
-            */
+             * Wishlist.
+             */
             Route::get('wishlist', [WishlistController::class, 'index'])->name('shop.customers.account.wishlist.index');
 
             /**
