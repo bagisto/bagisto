@@ -119,7 +119,7 @@
 
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
-                            class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                            class="bs-primary-button m-0 ml-[0px] block mx-auto w-full text-[16px] max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.login-form.button_title')

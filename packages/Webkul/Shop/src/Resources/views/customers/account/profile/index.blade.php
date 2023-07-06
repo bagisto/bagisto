@@ -70,7 +70,7 @@
         <x-shop::modal>
             <x-slot:toggle>
                 <div
-                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                    class="bs-primary-button m-0 ml-[0px] block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
                 >
                     @lang('shop::app.customers.account.profile.delete-profile')
                 </div>
@@ -103,7 +103,7 @@
 
                     <button
                         type="submit"
-                        class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                        class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
                     >
                         @lang('shop::app.customers.account.delete')
                     </button>

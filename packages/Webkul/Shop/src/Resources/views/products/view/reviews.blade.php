@@ -104,7 +104,7 @@
 
                             <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4">
                                 <button
-                                    class="w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                                    class="bs-primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.submit-review')
@@ -112,7 +112,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
+                                    class="bs-secondary-button flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -131,7 +131,7 @@
                     </h3>
 
                     <div
-                        class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
+                        class="bs-secondary-button flex gap-x-[15px] items-center px-[15px] py-[10px]"
                         @click="canReview = true"
                     >
                         <span class="icon-pen text-[24px]"></span>
@@ -172,7 +172,7 @@
                 </div>
 
                 <button
-                    class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                    class="bs-secondary-button block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] mt-[60px] text-center"
                     v-if="links?.next"
                     @click="get()"
                 >

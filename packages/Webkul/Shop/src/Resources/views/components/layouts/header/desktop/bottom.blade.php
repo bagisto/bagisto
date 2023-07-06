@@ -142,14 +142,14 @@
                         <div class="flex gap-[16px] mt-[25px]">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="bs-primary-button block mx-auto text-base w-max px-[29px] rounded-[18px] text-center"
+                                class="bs-primary-button m-0 ml-[0px] block mx-auto text-base w-max px-[29px] rounded-[18px] text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="bs-secondary-button block mx-auto border-2 text-base w-max py-[14px] px-[29px] rounded-[18px] text-center"
+                                class="bs-secondary-button m-0 ml-[0px] block mx-auto border-2 text-base w-max py-[14px] px-[29px] rounded-[18px] text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
