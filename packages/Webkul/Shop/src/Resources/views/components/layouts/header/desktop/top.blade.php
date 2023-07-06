@@ -19,20 +19,18 @@
 
     <x-shop::dropdown>
         <x-slot:toggle>
-            <div class="flex">
-                @if (! empty(core()->getCurrentLocale()->image_url))
+            <div class="flex items-center">
+                @if (! empty(core()->getCurrentLocale()->logo_full_path))
                     <img 
-                        src="{{ core()->getCurrentLocale()->image_url }}"
+                        class="h-[20px] w-[20px]"
+                        src="{{ core()->getCurrentLocale()->logo_full_path }}"
                         alt="Default locale"
-                        width="20"
-                        height="20"
                     />
                 @else
                     <img 
+                        class="h-[20px] w-[20px]"
                         src="{{ asset('/themes/velocity/assets/images/flags/default-locale-image.png') }}"
                         alt="Default locale" 
-                        width="20"
-                        height="20"
                     />
                 @endif
                 
@@ -52,12 +50,22 @@
     <script type="text/x-template" id="v-language-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             @foreach (core()->getCurrentChannel()->locales()->orderBy('name')->get() as $locale)
-                <span 
-                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if($locale->code == app()->getLocale()) bg-gray-100 @endif"
-                    @click="set('{{ $locale->code }}')"                    
+                <div
+                    class="flex items-center cursor-pointer hover:bg-gray-100 px-5 py-2 @if ($locale->code == app()->getLocale()) bg-gray-100 @endif"
+                    @click="set('{{ $locale->code }}')"
                 >
-                    {{ $locale->name }}
-                </span>
+                    <img 
+                        class="h-[20px] w-[20px]"
+                        src="{{ $locale->logo_full_path }}"
+                        alt="{{ $locale->code }}"
+                    >
+
+                    <span 
+                        class="text-[16px] ml-2"
+                    >
+                        {{ $locale->name }}
+                    </span>
+                </div>
             @endforeach
         </div>
     </script>

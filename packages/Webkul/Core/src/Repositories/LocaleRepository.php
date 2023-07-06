@@ -12,13 +12,6 @@ class LocaleRepository extends Repository
     use CacheableRepository;
 
     /**
-     * Storage path for locale images.
-     *
-     * @var string
-     */
-    protected $storageDir = 'settings/locale-images';
-
-    /**
      * Specify model class name.
      *
      * @return string
@@ -71,11 +64,15 @@ class LocaleRepository extends Repository
      * Delete.
      *
      * @param  int  $id
-     * @return bool
+     * @return void
      */
     public function delete($id)
     {
         Event::dispatch('core.locale.delete.before', $id);
+
+        $locale = parent::find($id);
+
+        Storage::delete((string) $locale->logo_path);
 
         parent::delete($id);
 
@@ -89,28 +86,27 @@ class LocaleRepository extends Repository
      * @param  \Webkul\Core\Models\Locale  $locale
      * @return void
      */
-    public function uploadImage($attributes, $locale)
+    public function uploadImage($localeImages, $locale)
     {
-        if (isset($attributes['locale_image'])) {
-            foreach ($attributes['locale_image'] as $imageId => $image) {
-                $file = 'locale_image' . '.' . $imageId;
-                $dir = $this->storageDir . '/' . $locale->id;
+        if (! isset($localeImages['logo_path'])) {
+            Storage::delete($locale->logo_path);
 
-                if ($locale->locale_image) {
-                    Storage::delete($locale->locale_image);
-                }
+            $locale->logo_path = '';
 
-                if (request()->hasFile($file)) {
-                    $locale->locale_image = request()->file($file)->store($dir);
-                    $locale->save();
-                }
-            }
-        } else {
-            if ($locale->locale_image) {
-                Storage::delete($locale->locale_image);
+            $locale->save();
+
+            return;
+        }
+
+        foreach ($localeImages['logo_path'] as $image) {
+            if (is_string($image)) {
+                continue;
             }
 
-            $locale->locale_image = null;
+            $fileName = $locale->code . '.' . $image->getClientOriginalExtension();
+            
+            $locale->logo_path = $image->storeAs('locale', $fileName);
+
             $locale->save();
         }
     }

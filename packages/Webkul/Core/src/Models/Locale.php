@@ -19,12 +19,12 @@ class Locale extends Model implements LocaleContract
      * @var array
      */
     protected $defaultImages = [
-        'de' => 'flags/de.png',
-        'en' => 'flags/en.png',
-        'es' => 'flags/es.png',
-        'fr' => 'flags/fr.png',
-        'nl' => 'flags/nl.png',
-        'tr' => 'flags/tr.png',
+        'de' => 'locale/de.png',
+        'en' => 'locale/en.png',
+        'es' => 'locale/es.png',
+        'fr' => 'locale/fr.png',
+        'nl' => 'locale/nl.png',
+        'tr' => 'locale/tr.png',
     ];
 
     /**
@@ -43,7 +43,7 @@ class Locale extends Model implements LocaleContract
      *
      * @var array
      */
-    protected $appends = ['image_url'];
+    protected $appends = ['logo_full_path'];
 
     /**
      * Create a new factory instance for the model.
@@ -60,9 +60,9 @@ class Locale extends Model implements LocaleContract
      *
      * @return string
      */
-    public function getImageUrlAttribute(): string
+    public function getlogoFullPathAttribute(): string
     {
-        return $this->image_url();
+        return $this->logoFullPath();
     }
 
     /**
@@ -70,13 +70,13 @@ class Locale extends Model implements LocaleContract
      *
      * @return string
      */
-    public function image_url(): string
+    public function logoFullPath(): string
     {
-        if (! $this->locale_image) {
-            return $this->getDefaultImageSource();
+        if (! $this->logo_path) {
+            return $this->getDefaultLogoSource();
         }
 
-        return Storage::url($this->locale_image);
+        return Storage::url($this->logo_path);
     }
 
     /**
@@ -84,10 +84,10 @@ class Locale extends Model implements LocaleContract
      *
      * @return string
      */
-    public function getDefaultImageSource(): string
+    public function getDefaultLogoSource(): string
     {
         return isset($this->defaultImages[$this->code]) && file_exists($this->defaultImages[$this->code])
-            ? asset($this->defaultImages[$this->code])
+            ? Storage::url($this->defaultImages[$this->code])
             : '';
     }
 }

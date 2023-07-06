@@ -56,7 +56,7 @@
                                 <label>{{ __('velocity::app.admin.general.locale_logo') }}</label>
 
                                 <image-wrapper
-                                    input-name="locale_image"
+                                    input-name="logo_path"
                                     :multiple="false"
                                     button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
                                 </image-wrapper>
