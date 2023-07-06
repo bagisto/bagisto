@@ -45,7 +45,6 @@
             computed: {
                 positionStyles() {
                     return [
-                        `display: flex`,
                         `justify-content: ${this.position}`
                     ];
                 },
