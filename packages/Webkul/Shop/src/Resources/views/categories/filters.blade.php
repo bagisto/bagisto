@@ -124,8 +124,6 @@
         app.component('v-filters', {
             template: '#v-filters-template',
 
-            props: ['category_id'],
-
             data() {
                 return {
                     isLoading: true,
@@ -147,14 +145,14 @@
             methods: {
                 getFilters() {
                     this.$axios.get('{{ route("shop.api.categories.attributes") }}', {
-                            category_id: this.category_id ??  null,
+                            category_id: "{{ request('category_id') }}",
                         })
                         .then((response) => {
                             this.isLoading = false;
 
                             this.filters.available = response.data.data;
                         })
-                        .catch(error => {
+                        .catch((error) => {
                             console.log(error);
                         });
                 },
@@ -267,7 +265,7 @@
         app.component('v-price-filter', {
             template: '#v-price-filter-template',
 
-            props: ['defaultPriceRange', 'category_id'],
+            props: ['defaultPriceRange'],
 
             data() {
                 return {
@@ -302,7 +300,7 @@
             methods: {
                 getMaxPrice() {
                     this.$axios.get('{{ route("shop.api.categories.max_price") }}', {
-                            category_id: this.category_id ?? null,
+                            category_id: "{{ request('category_id') }}",
                         })
                         .then((response) => {
                             this.isLoading = false;
@@ -315,7 +313,7 @@
 
                             ++this.refreshKey;
                         })
-                        .catch(error => {
+                        .catch((error) => {
                             console.log(error);
                         });
                 },
