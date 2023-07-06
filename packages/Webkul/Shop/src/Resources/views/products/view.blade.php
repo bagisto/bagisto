@@ -75,7 +75,7 @@
     </div>
 
     {{-- Information Section --}}
-    <div class="container mt-[60px] max-1180:px-[20px] 1180:hidden">
+    <div class="container mt-[40px] max-1180:px-[20px] 1180:hidden">
         {{-- Description Accordion --}}
         <x-shop::accordion :is-active="true">
             <x-slot:header>
