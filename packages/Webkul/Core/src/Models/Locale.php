@@ -52,6 +52,10 @@ class Locale extends Model implements LocaleContract
      */
     public function logoFullPath(): string
     {
+        if (empty($this->logo_path)) {
+            return '';
+        }
+        
         return Storage::url($this->logo_path);
     }
 }

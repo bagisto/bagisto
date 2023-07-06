@@ -72,9 +72,9 @@ class LocaleRepository extends Repository
 
         $locale = parent::find($id);
 
-        Storage::delete((string) $locale->logo_path);
+        $locale->delete($id);
 
-        parent::delete($id);
+        Storage::delete((string) $locale->logo_path);
 
         Event::dispatch('core.locale.delete.after', $id);
     }
@@ -102,10 +102,11 @@ class LocaleRepository extends Repository
             if (is_string($image)) {
                 continue;
             }
-
-            $fileName = $locale->code . '.' . $image->getClientOriginalExtension();
             
-            $locale->logo_path = $image->storeAs('locale', $fileName);
+            $locale->logo_path = $image->storeAs(
+                'locale', 
+                $locale->code . '.' . $image->getClientOriginalExtension()
+            );
 
             $locale->save();
         }
