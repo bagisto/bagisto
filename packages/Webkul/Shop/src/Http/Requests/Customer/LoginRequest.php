@@ -34,7 +34,6 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
-        routeI
         return Captcha::getValidations($this->rules);
     }
 
