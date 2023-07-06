@@ -299,9 +299,7 @@
 
             methods: {
                 getMaxPrice() {
-                    this.$axios.get('{{ route("shop.api.categories.max_price") }}', {
-                            category_id: "{{ request('category_id') }}",
-                        })
+                    this.$axios.get('{{ route("shop.api.categories.max_price", isset($category) ? $category->id : 'null') }}')
                         .then((response) => {
                             this.isLoading = false;
 

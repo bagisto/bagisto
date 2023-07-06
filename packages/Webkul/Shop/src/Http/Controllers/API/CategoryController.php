@@ -65,9 +65,9 @@ class CategoryController extends APIController
     /**
      * Get product maximum price.
      */
-    public function getProductMaxPrice(): JsonResource
+    public function getProductMaxPrice($categoryId): JsonResource
     {
-        $maxPrice = $this->productRepository->getMaxPrice(['category_id' => request('category_id')]);
+        $maxPrice = $this->productRepository->getMaxPrice(['category_id' => $categoryId]);
 
         return new JsonResource([
             'max_price' => core()->convertPrice($maxPrice),
