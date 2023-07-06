@@ -12,21 +12,7 @@ use Webkul\Core\Database\Factories\LocaleFactory;
 class Locale extends Model implements LocaleContract
 {
     use HasFactory;
-
-    /**
-     * List of all default locale images.
-     *
-     * @var array
-     */
-    protected $defaultImages = [
-        'de' => 'locale/de.png',
-        'en' => 'locale/en.png',
-        'es' => 'locale/es.png',
-        'fr' => 'locale/fr.png',
-        'nl' => 'locale/nl.png',
-        'tr' => 'locale/tr.png',
-    ];
-
+   
     /**
      * The attributes that are mass assignable.
      *
@@ -47,8 +33,6 @@ class Locale extends Model implements LocaleContract
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {
@@ -56,9 +40,7 @@ class Locale extends Model implements LocaleContract
     }
 
     /**
-     * Get image url for the logo image.
-     *
-     * @return string
+     * Get the logo full path of the locale.
      */
     public function getlogoFullPathAttribute(): string
     {
@@ -66,28 +48,10 @@ class Locale extends Model implements LocaleContract
     }
 
     /**
-     * Get image url for the logo image.
-     *
-     * @return string
+     * Get the logo full path of the locale.
      */
     public function logoFullPath(): string
     {
-        if (! $this->logo_path) {
-            return $this->getDefaultLogoSource();
-        }
-
         return Storage::url($this->logo_path);
-    }
-
-    /**
-     * Get default image source.
-     *
-     * @return string
-     */
-    public function getDefaultLogoSource(): string
-    {
-        return isset($this->defaultImages[$this->code]) && file_exists($this->defaultImages[$this->code])
-            ? Storage::url($this->defaultImages[$this->code])
-            : '';
     }
 }
