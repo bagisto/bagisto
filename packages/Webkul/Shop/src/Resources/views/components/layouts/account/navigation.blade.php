@@ -122,7 +122,6 @@
             data() {
                 return {
                     isAccordionOpen: false,
-                    isMobile: false,
                 };
             },
 
