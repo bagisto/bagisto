@@ -89,12 +89,18 @@
     <script type="text/x-template" id="v-currency-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             @foreach (core()->getCurrentChannel()->currencies as $currency)
-                <span 
-                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100 @if ($currency->code == core()->getCurrentCurrencyCode()) bg-gray-100 @endif"
+                <div
+                    class="flex items-center cursor-pointer hover:bg-gray-100 px-5 py-2 @if ($currency->code == core()->getCurrentCurrencyCode()) bg-gray-100 @endif"
                     @click="set('{{ $currency->code }}')"
                 >
-                    {{ $currency->code }}
-                </span >
+                    <span>{{ $currency->symbol }}</span>
+                 
+                    <span 
+                        class="text-[16px] ml-2"
+                    >
+                        {{ $currency->name }}
+                    </span>
+                </div>
             @endforeach
         </div>
     </script>
