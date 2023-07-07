@@ -3,7 +3,6 @@
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses"></x-shop::breadcrumbs>
     @endSection
-
     <div class="flex justify-between items-center">
         <div class="">
             <h2 class="text-[26px] font-medium">
@@ -89,7 +88,7 @@
         </div>
     @else
         {{-- Address Empty Page --}}
-        <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
             <img 
                 class="" 
                 src="{{ bagisto_asset('images/no-address.png') }}" 
