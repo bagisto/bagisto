@@ -14,43 +14,52 @@
             </div>
 
             <!-- Product Sorting Filters -->
-            <div>
-                <select
-                    class="custom-select max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px] max-md:pr-[10px] max-md:pl-[10px]  max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
-                    v-model="filters.applied.sort"
-                    @change="apply('sort', filters.applied.sort)"
-                >
-                    <option value=''>
-                        @lang('shop::app.products.sort-by.title')
-                    </option>
+            <x-shop::dropdown>
+                <x-slot:toggle>
+                    <!-- Dropdown Toggler -->
+                    <div class="flex justify-between items-center gap-[15px] max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-[14px] max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
 
-                    <option
-                        :value="sort.value"
+                        <span class="text-[24px] icon-arrow-down"></span>
+                    </div>
+                </x-slot:toggle>
+            
+                <!-- Dropdown Content -->
+                <x-slot:menu>
+                    <x-shop::dropdown.menu.item
                         v-for="(sort, key) in filters.available.sort"
-                        v-text="sort.title"
+                        ::class="{'bg-gray-100': sort.value == filters.applied.sort}"
+                        @click="apply('sort', sort.value)"
                     >
-                    </option>
-                </select>
-            </div>
+                        @{{ sort.title }}
+                    </x-shop::dropdown.menu.item>
+                </x-slot:menu>
+            </x-shop::dropdown>
 
             <!-- Product Pagination Limit -->
             <div class="flex gap-[40px] items-center max-md:hidden">
-                <select
-                    class="custom-select max-w-[120px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px] cursor-pointer"
-                    v-model="filters.applied.limit"
-                    @change="apply('limit', filters.applied.limit)"
-                >
-                    <option value=''>
-                        @lang('shop::app.categories.toolbar.show')
-                    </option>
+                <!-- Product Pagination Limit -->
+                <x-shop::dropdown position="bottom-right">
+                    <x-slot:toggle>
+                        <!-- Dropdown Toggler -->
+                        <div class="flex justify-between items-center gap-[15px] max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-[14px] max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                            @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
 
-                    <option
-                        :value="limit"
-                        v-for="limit in filters.available.limit"
-                        v-text="limit"
-                    >
-                    </option>
-                </select>
+                            <span class="text-[24px] icon-arrow-down"></span>
+                        </div>
+                    </x-slot:toggle>
+                
+                    <!-- Dropdown Content -->
+                    <x-slot:menu>
+                        <x-shop::dropdown.menu.item
+                            v-for="(limit, key) in filters.available.limit"
+                            ::class="{'bg-gray-100': limit == filters.applied.limit}"
+                            @click="apply('limit', limit)"
+                        >
+                            @{{ limit }}
+                        </x-shop::dropdown.menu.item>
+                    </x-slot:menu>
+                </x-shop::dropdown>
 
                 <!-- Listing Mode Switcher -->
                 <div class="flex items-center gap-[20px]">
@@ -99,6 +108,12 @@
 
             mounted() {
                 this.$emit('filter-applied', this.filters.applied);
+            },
+
+            computed: {
+                sortLabel() {
+                    return this.filters.available.sort.find(sort => sort.value === this.filters.applied.sort).title;
+                }
             },
 
             methods: {
