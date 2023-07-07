@@ -39,7 +39,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-black text-[20px] font-medium"
+                                class="text-center text-black text-[20px]"
                                 v-text="category.name"
                             >
                             </p>
