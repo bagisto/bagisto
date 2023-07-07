@@ -19,7 +19,7 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    {{-- Review form --}}
+                    <!-- Review Form -->
                     <form
                         class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
