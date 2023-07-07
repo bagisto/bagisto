@@ -435,6 +435,8 @@ return [
             'qty_missing'               => 'Atleast one product should have more than 1 quantity.',
             'qty_impossible'            => 'Cannot add more than one of these products to cart.',
             'success-remove'            => 'Item is successfully removed from the cart.',
+            'inventory_warning'         => 'The requested quantity is not available, please try again later.',
+            'illegal'           => 'Quantity cannot be lesser than one.',
 
             'index' => [
                 'home'                    => 'Home',
@@ -1085,7 +1087,6 @@ return [
             'quantity'                  => [
                 'quantity'          => 'Quantity',
                 'success'           => 'Cart Item(s) successfully updated.',
-                'illegal'           => 'Quantity cannot be lesser than one.',
                 'inventory_warning' => 'The requested quantity is not available, please try again later.',
                 'error'             => 'Cannot update the item(s) at the moment, please try again later.',
             ],
