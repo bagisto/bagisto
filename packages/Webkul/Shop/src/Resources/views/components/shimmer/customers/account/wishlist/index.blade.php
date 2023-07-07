@@ -11,7 +11,7 @@
 <div class="overflow-auto journal-scroll">
     @for ($i = 0;  $i < $count; $i++)
         <div>
-            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9] justify-between">
+            <div class="flex gap-[40px] py-[25px] items-center  border-[#E9E9E9] justify-between">
                 <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                     <div>
                         <div class="w-[80px] h-[80px] shimmer rounded-[12px]"></div>

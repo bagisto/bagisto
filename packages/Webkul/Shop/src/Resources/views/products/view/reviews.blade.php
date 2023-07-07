@@ -11,11 +11,15 @@
     <script type="text/x-template" id="v-product-review-template">
         <div class="container max-1180:px-[20px]">
             <!-- Create Review Form Container -->
-            <div class="w-full" v-if="canReview">
+            <div 
+                class="w-full" 
+                v-if="canReview"
+            >
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
+                    {{-- Review form --}}
                     <form
                         class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
@@ -110,7 +114,7 @@
 
                             <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4">
                                 <button
-                                    class="w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                                    class="bs-primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.submit-review')
@@ -118,7 +122,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
+                                    class="bs-secondary-button flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')

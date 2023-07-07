@@ -84,7 +84,11 @@
     </div>
 
     <div class="flex items-center gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-        <form class="flex items-center max-w-[445px]">
+        {{-- Search bar --}}
+        <form 
+            action="{{ route('shop.search.index') }}" 
+            class="flex items-center max-w-[445px]"
+        >
             <label
                 for="organic-search"
                 class="sr-only"
@@ -113,12 +117,15 @@
         </form>
 
         <div class="flex gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px] mt-[5px]">
+            {{-- Compare --}}
             <a href="{{ route('shop.compare.index') }}">
                 <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
             </a>
 
+            {{-- Mini cart --}}
             @include('shop::checkout.cart.mini-cart')
 
+            {{-- user profile --}}
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
@@ -142,14 +149,14 @@
                         <div class="flex gap-[16px] mt-[25px]">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[15px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                                class="bs-primary-button m-0 ml-[0px] block mx-auto text-base w-max px-[29px] rounded-[18px] text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                                class="bs-secondary-button m-0 ml-[0px] block mx-auto border-2 text-base w-max py-[14px] px-[29px] rounded-[18px] text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>

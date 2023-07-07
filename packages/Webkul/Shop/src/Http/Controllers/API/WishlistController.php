@@ -6,6 +6,7 @@ use Cart;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\CartResource;
 use Webkul\Shop\Http\Resources\WishlistResource;
 
 class WishlistController extends APIController
@@ -108,8 +109,8 @@ class WishlistController extends APIController
             if ($result) {
                 return new JsonResource([
                     'data' => [
-                        'wishlist' => WishlistResource::collection($this->wishlistRepository->get()), 
-                        'cart'     => ['items_count'  => Cart::getCart()->items_count],
+                        'wishlist' => WishlistResource::collection($this->wishlistRepository->get()),
+                        'cart'     => new CartResource(Cart::getCart()),
                     ],
 
                     'message'  => trans('shop::app.components.products.item-add-to-cart'),

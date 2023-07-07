@@ -20,7 +20,6 @@ class AccountController extends Controller
      */
     public function __construct()
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -30,6 +29,6 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view']);
+        return view('shop::customers.account.index');
     }
 }

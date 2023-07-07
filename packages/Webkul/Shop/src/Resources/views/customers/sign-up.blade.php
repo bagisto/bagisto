@@ -186,38 +186,14 @@
 
                     <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
                         <button
-                            class="m-0 ml-[0px] block mx-auto w-full bg-navyBlue text-white text-[16px] max-w-[374px] font-medium py-[16px] px-[43px] rounded-[18px] text-center"
+                            class="bs-primary-button m-0 ml-[0px] block mx-auto w-full text-[16px] max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button_title')
                         </button>
 
                         <div class="flex gap-[15px] flex-wrap">
-                            <a
-                                href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="Facebook"
-                            >
-                            </a>
-
-                            <a
-                                href=""
-                                class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="Twitter"
-                            >
-                            </a>
-
-                            <a
-                                href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="Pintrest"
-                            >
-                            </a>
-
-                            <a
-                                href=""
-                                class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="LinkedIn"
-                            >
-                            </a>
+                            {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
                         </div>
                     </div>
                 </x-shop::form>
