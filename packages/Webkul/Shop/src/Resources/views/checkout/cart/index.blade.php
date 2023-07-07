@@ -4,9 +4,11 @@
 >
     <div class="flex-auto">
         <div class="container px-[60px] max-lg:px-[30px]">
+            {{-- Breadcrumbs --}}
             <x-shop::breadcrumbs name="cart"></x-shop::breadcrumbs>
 
             <v-cart ref="vCart">
+                {{-- Cart Shimmer Effect --}}
                 <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
             </v-cart>
         </div>
@@ -15,18 +17,20 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-cart-template">
             <div>
+                {{-- Cart Shimmer Effect --}}
                 <template v-if="isLoading">
                     <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
                 </template>
 
+                {{-- Cart Information --}}
                 <template v-else>
                     <div 
                         class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col pb-[30px]"
                         v-if="cart?.items?.length"
                     >
                         <div class="grid gap-[30px] flex-1">
-                            <!-- Cart Action -->
-                            <div class="max-lg:hidden flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
+                            {{-- Cart Action --}}
+                            <div class="max-sm:block flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
                                 <div class="select-none">
                                     <input
                                         type="checkbox"
@@ -39,12 +43,15 @@
                                     <label
                                         class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                         for="select-all"
-                                    ></label>
+                                    >
+                                    </label>
 
-                                    <span class="text-[26px] max-sm:text-[20px] ml-[10px]">@{{ selectedItemsCount }} Items Selected</span>
+                                    <span class="text-[26px] max-md:text-[22px] max-sm:text-[26px] ml-[10px]">
+                                        @{{ selectedItemsCount }} Items Selected
+                                    </span>
                                 </div>
 
-                                <div class="">
+                                <div class="max-sm:ml-[35px] max-sm:mt-[10px]">
                                     <span
                                         class="text-[16px] cursor-pointer" 
                                         @click="removeSelectedItems"
@@ -63,7 +70,7 @@
                                 </div>
                             </div>
                         
-                            <!-- Cart Items -->
+                            {{-- Cart Items --}}
                             <div 
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
@@ -140,7 +147,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="max-sm:hidden">
+                                    <div class="max-sm:hidden text-right">
                                         <p 
                                             class="text-[18px] font-semibold" 
                                             v-text="item.formatted_total"
@@ -174,16 +181,20 @@
                             </div>
                         </div>
 
+                        {{-- Cart summary --}}
                         @include('shop::checkout.cart.summary')
                     </div>
 
+                    {{-- Cart Empty page --}}
                     <div
                         class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
                         v-else
                     >
                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                         
-                        <p class="text-[20px]">@lang('shop::app.checkout.cart.index.empty-product')</p>
+                        <p class="text-[20px]">
+                            @lang('shop::app.checkout.cart.index.empty-product')
+                        </p>
                     </div>
                 </template>
             </div>

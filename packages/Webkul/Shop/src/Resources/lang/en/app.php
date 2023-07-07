@@ -375,8 +375,8 @@ return [
             ],
 
             'reviews' => [
-                'cancel'  => 'Cancel',
-                'success' => 'Review submitted successfully.',
+                'cancel'      => 'Cancel',
+                'success'     => 'Review submitted successfully.',
                 'attachments' => 'Attachments',
             ],
         ],

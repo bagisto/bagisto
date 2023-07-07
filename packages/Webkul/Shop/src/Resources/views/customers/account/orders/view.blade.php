@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="orders.view" :entity="$order"></x-shop::breadcrumbs>
     @endSection
@@ -30,6 +31,7 @@
 
     {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
+    {{-- Order view tabs --}}
     <div>
         <x-shop::tabs class="mt-5">
             <x-shop::tabs.item

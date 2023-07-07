@@ -2,11 +2,11 @@
 
 namespace Webkul\Shop\Exceptions;
 
-use Webkul\Core\Exceptions\Handler as WebkulCoreHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use PDOException;
-use Throwable;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
+use Webkul\Core\Exceptions\Handler as WebkulCoreHandler;
 
 class Handler extends WebkulCoreHandler
 {
@@ -26,7 +26,6 @@ class Handler extends WebkulCoreHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $exception)
@@ -42,7 +41,6 @@ class Handler extends WebkulCoreHandler
      * Render custom HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
      * @return \Illuminate\Http\Response|null
      */
     private function renderCustomResponse($request, Throwable $exception)
@@ -75,6 +73,6 @@ class Handler extends WebkulCoreHandler
 
         $title = $this->jsonErrorMessages[$statusCode];
 
-        return response()->view("shop::errors.index", compact('statusCode', 'title'));
+        return response()->view('shop::errors.index', compact('statusCode', 'title'));
     }
 }

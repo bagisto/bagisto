@@ -1,4 +1,5 @@
 <div class="flex justify-between items-center w-full border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[11px] px-16">
+    {{-- currency dropdown --}}
     <x-shop::dropdown>
         <x-slot:toggle>
             <div class="flex">
@@ -19,6 +20,7 @@
 
     <p class="text-xs font-medium">Get UPTO 40% OFF on your 1st order <a href="#" class="underline">SHOP NOW</a></p>
 
+    {{-- locales dropdown --}}
     <x-shop::dropdown>
         <x-slot:toggle>
             <div class="flex">

@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
@@ -7,6 +8,7 @@
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
+    {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
         class="rounded mt-[30px]"

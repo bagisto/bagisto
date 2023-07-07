@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses.edit" :entity="$address"></x-shop::breadcrumbs>
     @endSection
@@ -8,6 +9,7 @@
         @lang('shop::app.customers.account.addresses.title')
     </h2>
 
+    {{-- Edit Address Form --}}
     <x-shop::form
         method="PUT"
         :action="route('shop.customers.account.addresses.update',  $address->id)"
