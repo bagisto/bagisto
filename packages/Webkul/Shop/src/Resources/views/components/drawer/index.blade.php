@@ -66,7 +66,7 @@
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="fixed z-[1000] bg-white overflow-hidden max-sm:w-full"
+                    class="fixed z-[1000] bg-white overflow-hidden max-sm:!w-full"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',

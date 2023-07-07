@@ -39,7 +39,7 @@
 
                     <div class="fixed inset-0 z-10 overflow-y-auto">
                         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                            <div class="w-full bg-[#F5F5F5] max-w-[595px] z-[999] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                            <div class="w-full max-md:w-[90%] bg-[#F5F5F5] max-w-[595px] z-[999] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
                                 <div>
                                     <div class="flex justify-between items-center gap-[20px] p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
                                         <slot name="header">
