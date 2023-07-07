@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
     @endSection
@@ -16,6 +17,7 @@
         </a>
     </div>
 
+    {{-- Profile Information --}}
     <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">
@@ -67,6 +69,7 @@
             </p>
         </div>
 
+        {{-- Profile Delete modal --}}
         <x-shop::modal>
             <x-slot:toggle>
                 <div

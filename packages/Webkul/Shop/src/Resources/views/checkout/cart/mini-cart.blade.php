@@ -1,3 +1,4 @@
+{{-- Mini Cart Vue Component --}}
 <v-mini-cart>
     <span class="icon-cart text-[24px] cursor-pointer"></span>
 </v-mini-cart>
@@ -5,6 +6,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-mini-cart-template">
         <x-shop::drawer>
+            <!-- Drawer Toggler -->
             <x-slot:toggle>
                 <span class="relative">
                     <span class="icon-cart text-[24px] cursor-pointer"></span>
@@ -18,6 +20,7 @@
                 </span>
             </x-slot:toggle>
 
+            <!-- Drawer Header -->
             <x-slot:header>
                 <div class="flex justify-between items-center">
                     <p class="text-[26px] font-medium">
@@ -30,7 +33,9 @@
                 </p>
             </x-slot:header>
 
+            <!-- Drawer Content -->
             <x-slot:content>
+                <!-- Cart Item Listing -->
                 <div 
                     class="grid gap-[50px] mt-[35px]" 
                     v-if="cart?.items?.length"
@@ -39,15 +44,15 @@
                         class="flex gap-x-[20px]" 
                         v-for="item in cart?.items"
                     >
+                        <!-- Cart Item Image -->
                         <div class="">
                             <img
                                 :src="item.base_image.small_image_url"
                                 class="max-w-[110px] max-h-[110px] rounded-[12px]"
-                                alt=""
-                                title=""
-                            >
+                            />
                         </div>
 
+                        <!-- Cart Item Information -->
                         <div class="grid place-content-start justify-stretch gap-y-[10px] flex-1">
                             <div class="flex flex-wrap justify-between">
                                 <p
@@ -63,10 +68,12 @@
                                 </p>
                             </div>
 
+                            <!-- Cart Item Options Container -->
                             <div
                                 class="grid gap-x-[10px] gap-y-[6px] select-none"
                                 v-if="item.options.length"
                             >
+                                <!-- Details Toggler -->
                                 <div class="">
                                     <p
                                         class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
@@ -81,6 +88,7 @@
                                     </p>
                                 </div>
 
+                                <!-- Option Details -->
                                 <div class="grid gap-[8px]" v-show="item.option_show">
                                     <div class="" v-for="option in item.options">
                                         <p class="text-[14px] font-medium">
@@ -96,6 +104,7 @@
                             </div>
 
                             <div class="flex gap-[20px] items-center flex-wrap">
+                                <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="item?.quantity"
@@ -104,6 +113,7 @@
                                 >
                                 </x-shop::quantity-changer>
 
+                                <!-- Cart Item Remove Button -->
                                 <button
                                     type="button"
                                     class="text-[#0A49A7]"
@@ -116,6 +126,7 @@
                     </div>
                 </div>
 
+                <!-- Empty Cart Section -->
                 <div
                     class="pb-[30px]"
                     v-else
@@ -130,6 +141,7 @@
                 </div>
             </x-slot:content>
 
+            <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
                     <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
@@ -144,6 +156,7 @@
                         </p>
                     </div>
 
+                    <!-- Cart Action Container -->
                     <div class="px-[25px]">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"

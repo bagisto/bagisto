@@ -84,7 +84,11 @@
     </div>
 
     <div class="flex items-center gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-        <form class="flex items-center max-w-[445px]">
+        {{-- Search bar --}}
+        <form 
+            action="{{ route('shop.search.index') }}" 
+            class="flex items-center max-w-[445px]"
+        >
             <label
                 for="organic-search"
                 class="sr-only"
@@ -113,12 +117,15 @@
         </form>
 
         <div class="flex gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px] mt-[5px]">
+            {{-- Compare --}}
             <a href="{{ route('shop.compare.index') }}">
                 <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
             </a>
 
+            {{-- Mini cart --}}
             @include('shop::checkout.cart.mini-cart')
 
+            {{-- user profile --}}
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span class="icon-users text-[24px] inline-block cursor-pointer"></span>

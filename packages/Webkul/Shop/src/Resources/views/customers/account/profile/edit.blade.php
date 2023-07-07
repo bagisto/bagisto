@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
@@ -7,10 +8,29 @@
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
+    {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
         class="rounded mt-[30px]"
+        enctype="multipart/form-data"
     >
+        <x-shop::form.control-group class="mt-[15px]">
+            <x-shop::form.control-group.control
+                type="image"
+                name="image[]"
+                class="!p-0 rounded-[12px] text-gray-700 mb-0"
+                rules="required"
+                :label="trans('Image')"
+                :is-multiple="false"
+            >
+            </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="image[]"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.first-name')

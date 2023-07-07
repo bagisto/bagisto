@@ -1,8 +1,8 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses"></x-shop::breadcrumbs>
     @endSection
-
     <div class="flex justify-between items-center">
         <div class="">
             <h2 class="text-[26px] font-medium">
@@ -19,6 +19,7 @@
     </div>
 
     @if (! $addresses->isEmpty())
+        {{-- Address Information --}}
         <div class="grid mt-[60px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
                 <div class="border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap">
@@ -37,6 +38,7 @@
                                 </div>
                             @endif
 
+                            {{-- Dropdown Actions --}}
                             <x-shop::dropdown>
                                 <x-slot:toggle>
                                     <span class="icon-more text-[24px] text-[#7D7D7D] cursor-pointer"></span>
@@ -85,7 +87,8 @@
             @endforeach
         </div>
     @else
-        <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+        {{-- Address Empty Page --}}
+        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
             <img 
                 class="" 
                 src="{{ bagisto_asset('images/no-address.png') }}" 

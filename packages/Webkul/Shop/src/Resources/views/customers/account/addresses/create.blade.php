@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses.create"></x-shop::breadcrumbs>
     @endSection
@@ -11,6 +12,7 @@
         </div>
     </div>
 
+    {{-- Create Address Form --}}
     <x-shop::form
         :action="route('shop.customers.account.addresses.store')"
         class="rounded mt-[30px]"

@@ -1,12 +1,12 @@
 <div class="grid grid-cols-[1fr_auto] gap-[30px] max-lg:grid-cols-[1fr]">
     <div>
-        {{-- Billing Address --}}
+        {{-- Billing Address Shimmer --}}
         <x-shop::shimmer.checkout.onepage.address></x-shop::shimmer.checkout.onepage.address>
 
-        {{-- Shipping method --}}
+        {{-- Shipping Method Shimmer --}}
         <x-shop::shimmer.checkout.onepage.shipping-method></x-shop::shimmer.checkout.onepage.shipping-method>
 
-        {{-- Payment method --}}
+        {{-- Payment Method Shimmer --}}
         <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
     </div>
 

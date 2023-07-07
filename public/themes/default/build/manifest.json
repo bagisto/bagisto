@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-e43233c5.css",
+    "file": "assets/app-309ead9f.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -27,6 +27,10 @@
   "src/Resources/assets/images/large-product-placeholder.png": {
     "file": "assets/large-product-placeholder-b4cf34bf.png",
     "src": "src/Resources/assets/images/large-product-placeholder.png"
+  },
+  "src/Resources/assets/images/logo.png": {
+    "file": "assets/logo-73f6d94d.png",
+    "src": "src/Resources/assets/images/logo.png"
   },
   "src/Resources/assets/images/medium-product-placeholder.png": {
     "file": "assets/medium-product-placeholder-e6cf535d.png",

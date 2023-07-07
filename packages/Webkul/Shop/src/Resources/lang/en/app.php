@@ -328,6 +328,7 @@ return [
         'write-a-review'         => 'Write a Review',
         'stars'                  => 'Stars',
         'share'                  => 'Share',
+        'empty-review'           => 'No Review found, be the first to review this product',
         'was-this-helpful'       => 'Was This Review Helpful?',
         'load-more'              => 'Load More',
         'add-image'              => 'Add Image',
@@ -375,8 +376,8 @@ return [
             ],
 
             'reviews' => [
-                'cancel'  => 'Cancel',
-                'success' => 'Review submitted successfully.',
+                'cancel'      => 'Cancel',
+                'success'     => 'Review submitted successfully.',
                 'attachments' => 'Attachments',
             ],
         ],
