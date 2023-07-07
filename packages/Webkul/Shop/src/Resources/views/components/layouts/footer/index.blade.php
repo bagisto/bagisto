@@ -6,6 +6,7 @@
             {!! Blade::render(core()->getCurrentChannel()->footer_content) !!}
         </div>
 
+        {{-- News Letter subscription --}}
         @if(core()->getConfigData('customer.settings.newsletter.subscription'))
             <div class="grid gap-[10px]">
                 <p class="text-[30px] italic max-w-[288px] leading-[45px] text-navyBlue">

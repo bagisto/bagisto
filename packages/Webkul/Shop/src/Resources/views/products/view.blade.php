@@ -183,7 +183,7 @@
 
                                 <button
                                     type="button"
-                                    class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                    class="bs-secondary-button w-full max-w-full"
                                     @click="addToCart"
                                 >
                                     @lang('shop::app.products.add-to-cart')
@@ -193,7 +193,7 @@
                             <!-- Buy Now Button -->
                             <button
                                 type="button"
-                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
+                                class="bs-primary-button w-full max-w-[470px] mt-[20px]"
                                 {{-- To Do @(suraj-webkul) handle buy now option with another endpoint/method --}}
                                 @click="addToCart"
                                 {{ ! $product->isSaleable(1) ? 'disabled' : '' }}

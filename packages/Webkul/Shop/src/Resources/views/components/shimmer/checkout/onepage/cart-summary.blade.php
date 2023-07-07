@@ -35,14 +35,17 @@
             <p class="w-[20%] h-[24px] shimmer"></p>
             <p class="w-[25%] h-[24px] shimmer"></p>
         </div>
+        
         <div class="flex text-right justify-between">
             <p class="w-[20] h-[24px] shimmer"></p>
             <p class="w-[15%] h-[24px] shimmer"></p>
         </div>
+
         <div class="flex text-right justify-between">
             <p class="w-[25%] h-[24px] shimmer"></p>
             <p class="w-[35%] h-[24px] shimmer"></p>
         </div>
+
         <div class="flex text-right justify-between">
             <p class="w-[35%] h-[24px] shimmer"></p>
             <p class="w-[30%] h-[38px] shimmer"></p>

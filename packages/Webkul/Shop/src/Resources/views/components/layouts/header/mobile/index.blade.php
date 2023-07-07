@@ -26,12 +26,7 @@
                 <x-slot:toggle>
                     <span class="icon-hamburger text-[24px] cursor-pointer"></span>
         
-                    <a 
-                        herf="" 
-                        class="h-[29px] inline-block"
-                    >
-                        <img src="{{ bagisto_asset('images/logo.png') }}">
-                    </a>
+                    
                 </x-slot:toggle>
 
                 <x-slot:header>
@@ -72,6 +67,13 @@
 
                 <x-slot:footer></x-slot:footer>
             </x-shop::drawer>
+
+            <a 
+                herf="{{ route('shop.home.index') }}" 
+                class="h-[36px] inline-block"
+            >
+                <img src="{{ bagisto_asset('images/logo.png') }}">
+            </a>
         </div>
 
         <div class="">
@@ -185,7 +187,7 @@
         </div>
     </div>
 
-    <form class="flex items-center w-full">
+    <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
         <label for="organic-search" class="sr-only">Search</label>
 
         <div class="relative w-full">
@@ -193,9 +195,14 @@
                 class="icon-search text-[25px] absolute left-[12px] top-[12px] flex items-center pointer-events-none">
             </div>
 
-            <input type="text"
+            <input 
+                type="text"
                 class=" border border-['#E3E3E3'] rounded-xl block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
-                placeholder="Search for products" required>
+                name="query"
+                value="{{ request('query') }}"
+                placeholder="Search for products" 
+                required
+            >
 
             <button type="button"
                 class="icon-camera text-[22px] absolute top-[12px] right-[12px] flex items-center pr-3">

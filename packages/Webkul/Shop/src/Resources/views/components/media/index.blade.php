@@ -15,7 +15,7 @@
                 >
                     <label 
                         for="file-input"
-                        class="m-0 block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer bg"
+                        class="bs-primary-button m-0 block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
                     >
                         @lang('Add attachments')
                     </label>

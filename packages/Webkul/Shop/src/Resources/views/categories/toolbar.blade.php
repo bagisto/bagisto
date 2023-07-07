@@ -13,9 +13,10 @@
                 @lang('shop::app.categories.toolbar.filters')
             </div>
 
+            <!-- Product Sorting Filters -->
             <div>
                 <select
-                    class="custom-select max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px]  max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                    class="custom-select max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px] max-md:pr-[10px] max-md:pl-[10px]  max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                     v-model="filters.applied.sort"
                     @change="apply('sort', filters.applied.sort)"
                 >
@@ -32,6 +33,7 @@
                 </select>
             </div>
 
+            <!-- Product Pagination Limit -->
             <div class="flex gap-[40px] items-center max-md:hidden">
                 <select
                     class="custom-select max-w-[120px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px] cursor-pointer"
@@ -50,6 +52,7 @@
                     </option>
                 </select>
 
+                <!-- Listing Mode Switcher -->
                 <div class="flex items-center gap-[20px]">
                     <span
                         class="icon-listing text-[24px] cursor-pointer"

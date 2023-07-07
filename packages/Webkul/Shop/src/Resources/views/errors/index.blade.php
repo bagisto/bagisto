@@ -9,8 +9,14 @@
     :has-feature="false"
     :has-footer="false"
 >
-    <canvas resize="true" id="canvas-wd"></canvas>
+    {{-- cursor movement canvas line --}}
+    <canvas 
+        resize="true"
+        id="canvas-wd"
+    >
+    </canvas>
 
+    {{-- Error page Information --}}
 	<div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px] absolute left-[50%] top-0 -translate-x-[50%]">
 		<div class="grid h-[100vh] w-full">
 			<div class="wrapper-404 max-868:!text-[294px] max-md:!text-[140px]">

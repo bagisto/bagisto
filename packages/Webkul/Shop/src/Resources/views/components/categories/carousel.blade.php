@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <!-- category carousel shimmer -->
+        <!-- Category Carousel Shimmer -->
         <template v-if="isLoading">
             <x-shop::shimmer.categories.carousel
                 :count="7"
@@ -87,7 +87,7 @@
 
                     categories: [],
 
-                    offset: 720,
+                    offset: 323,
                 };
             },
 

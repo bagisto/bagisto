@@ -9,11 +9,12 @@
         </div>
     </div>
 
-    {{-- Product Listing --}}
+    {{-- Category Vue Component --}}
     <v-category
         src="{{ route('shop.api.products.index', ['category_id' => $category->id]) }}"
         category-id="{{ $category->id }}"
     >
+        {{-- Category Shimmer Effect --}}
         <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
     </v-category>
 
@@ -49,6 +50,7 @@
                                     ></x-shop::products.card>
                                 </template>
 
+                                <!-- Empty Products Container -->
                                 <template v-else>
                                     <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
@@ -79,6 +81,7 @@
                                     </div>
                                 </template>
 
+                                <!-- Empty Products Container -->
                                 <template v-else>
                                     <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
@@ -91,7 +94,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                            class="bs-secondary-button block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] mt-[60px] text-center"
                             @click="loadMoreProducts()"
                             v-if="links.next"
                         >
