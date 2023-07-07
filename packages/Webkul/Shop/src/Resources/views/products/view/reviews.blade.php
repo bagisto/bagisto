@@ -5,7 +5,7 @@
 @pushOnce('scripts')
     {{-- Product Review Template --}}
     <script type="text/x-template" id="v-product-review-template">
-        <div class="container mt-[60px] max-1180:px-[20px]">
+        <div class="container max-1180:px-[20px]">
             <!-- Create Review Form Container -->
             <div 
                 class="w-full" 
