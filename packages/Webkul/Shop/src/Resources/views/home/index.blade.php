@@ -2,7 +2,10 @@
     {{-- Hero Section --}}
 	<div class="bs-hero-section">
 		<picture>
-			<img alt="" src="{{ bagisto_asset('images/hero-image.webp') }}" />
+			<img 
+                alt="" 
+                src="{{ bagisto_asset('images/hero-image.webp') }}" 
+            />
 		</picture>
 
 		<div class="">

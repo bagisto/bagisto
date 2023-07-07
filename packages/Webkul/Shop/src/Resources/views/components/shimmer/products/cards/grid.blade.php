@@ -10,6 +10,7 @@
             <p class="w-[75%] h-[24px] bg-[#E9E9E9] shimmer"></p>
             <p class="w-[55%] h-[24px] bg-[#E9E9E9] shimmer"></p>
 
+            {{-- color box shimmer --}}
             <div class="flex gap-4 mt-[12px]">
                 <span class="rounded-full w-[30px] h-[30px] block bg-[#E9E9E9] shimmer"></span>
                 <span class="rounded-full w-[30px] h-[30px] block bg-[#E9E9E9] shimmer"></span>

@@ -39,16 +39,14 @@
     </div>
 
     <div class="max-md:border max-md:border-t-0 max-md:border-r-[1px] max-md:border-l-[1px] max-md:border-b-[1px] max-md:border-[#E9E9E9] max-md:rounded-[6px]">
-
         <v-accordion></v-accordion>
-       
     </div>
 </div>
 @pushOnce('scripts')
     <script type="text/x-template" id="v-accordion-template">
         <div class="hidden max-md:block">
             <div 
-                class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-[20px] max-md:bg-[#F5F5F5] max-md:px-[25px] max-md:py-[20px] max-md:rounded-tl-[6px] max-md:rounded-tr-[6px]"
+                class="max-md:flex max-md:gap-x-[15px] max-md:justify-between max-md:items-center pb-[20px] max-md:bg-[#F5F5F5] max-md:px-[25px] max-md:py-[20px] max-md:rounded-tl-[6px] max-md:rounded-tr-[6px] cursor-pointer"
                 @click="toggleAccordion"
             >
                 <p class="text-[20px] md:font-medium">
@@ -91,9 +89,7 @@
                     @lang($menu->items['account']['name'])
                 </p>
             </div>
-            <div 
-                class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-[6px] max-md:border-none"
-            >
+            <div class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-[6px] max-md:border-none">
                 @foreach ($menu->items as $menuItem)
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">

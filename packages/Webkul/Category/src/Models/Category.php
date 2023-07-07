@@ -60,7 +60,7 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @var array
      */
-    protected $appends = ['image_url', 'banner_url', 'category_icon_url'];
+    protected $appends = ['image_url', 'banner_url', 'category_icon_url', 'url'];
 
     /**
      * The products that belong to the category.

@@ -2,13 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
-use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Webkul\Checkout\Facades\Cart;
-use Webkul\Shop\Http\Resources\CartResource;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
+use Illuminate\Http\Response;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Checkout\Facades\Cart;
+use Webkul\Customer\Repositories\WishlistRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
 {
@@ -70,7 +70,7 @@ class CartController extends APIController
 
                 return new JsonResource([
                     'data'     => new CartResource(Cart::getCart()),
-                    'message'  => trans('shop::app.components.cart.item-add-to-cart'),
+                    'message'  => trans('shop::app.components.products.card.add-to-cart'),
                 ]);
             }
         } catch (\Exception $exception) {
@@ -91,6 +91,40 @@ class CartController extends APIController
         return new JsonResource([
             'data'    => new CartResource(Cart::getCart()),
             'message' => trans('shop::app.checkout.cart.success-remove'),
+        ]);
+    }
+
+    /**
+     * Method for remove selected items from cart
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function destroySelected(): JsonResource
+    {
+        foreach (request()->input('ids') as $id) {
+            Cart::removeItem($id);
+        }
+
+        return new JsonResource([
+            'data'     => new CartResource(Cart::getCart()) ?? null,
+            'message'  => trans('shop::app.checkout.cart.index.remove-selected-success'),
+        ]);
+    }
+
+    /**
+     * Method for move to wishlist selected items from cart
+     * 
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function moveToWishlist(): JsonResource
+    {
+        foreach (request()->input('ids') as $id) {
+            Cart::moveToWishlist($id);
+        }
+
+        return new JsonResource([
+            'data'     => new CartResource(Cart::getCart()) ?? null,
+            'message'  => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
         ]);
     }
 

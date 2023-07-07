@@ -150,7 +150,7 @@
                 </p>
             
                 <div 
-                    class="bs-primary-button px-[30px] py-[10px]"
+                    class="bs-primary-button px-[30px] py-[10px] whitespace-nowrap"
                     @click="addToCart()"
                 >
                     @lang('shop::app.components.products.add-to-cart')

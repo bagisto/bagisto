@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="reviews"></x-shop::breadcrumbs>
     @endSection
@@ -10,6 +11,7 @@
             </h2>
 
             @if (! $reviews->isEmpty())
+                {{-- Review Information --}}
                 <div class="grid mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
                     @foreach($reviews as $review)
                         <a
@@ -54,6 +56,7 @@
                     @endforeach
                 </div>
             @else
+                {{-- Review Empty Page --}}
                 <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 

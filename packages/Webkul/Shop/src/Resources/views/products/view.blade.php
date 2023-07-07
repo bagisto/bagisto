@@ -12,10 +12,12 @@
 <x-shop::layouts>
     {!! view_render_event('bagisto.shop.products.view.before', ['product' => $product]) !!}
 
+    {{-- Breadcrumbs --}}
     <div class="flex justify-center max-lg:hidden">
         <x-shop::breadcrumbs name="product" :entity="$product"></x-shop::breadcrumbs>
     </div>
 
+    {{-- Product Information Vue Component --}}
     <v-product :product-id="{{ $product->id }}">
         <x-shop::shimmer.products.view></x-shop::shimmer.products.view>
     </v-product>
@@ -23,6 +25,7 @@
     {{-- Information Section --}}
     <div class="mt-[80px]">
         <x-shop::tabs position="center">
+            {{-- Description Tab --}}
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0"
                 :title="trans('shop::app.products.description')"
@@ -35,6 +38,7 @@
                 </div>
             </x-shop::tabs.item>
 
+            {{-- Additional Information Tab --}}
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0"
                 :title="trans('shop::app.products.additional-information')"
@@ -59,6 +63,7 @@
                 </div>
             </x-shop::tabs.item>
 
+            {{-- Reviews Tab --}}
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0"
                 :title="trans('shop::app.products.reviews')"
@@ -102,9 +107,10 @@
 
                 <div class="container px-[60px] max-1180:px-[0px]">
                     <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                        <!-- Gallery Blade Inclusion -->
                         @include('shop::products.view.gallery')
 
-                        {{-- Product Details --}}
+                        <!-- Details -->
                         <div class="max-w-[590px] relative max-1180:px-[20px]">
                             <div class="flex justify-between gap-[15px]">
                                 <h1 class="text-[30px] font-medium max-sm:text-[20px]">
@@ -118,6 +124,7 @@
                                 </div>
                             </div>
 
+                            <!-- Rating -->
                             <div class="flex gap-[15px] items-center mt-[15px]">
                                 <x-shop::products.star-rating 
                                     :value="$avgRatings"
@@ -132,6 +139,7 @@
                                 </div>
                             </div>
 
+                            <!-- Pricing -->
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
                             <p class="text-[24px] !font-medium flex gap-2.5 items-center mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
@@ -156,6 +164,8 @@
 
                             @include('shop::products.view.types.downloadable')
 
+
+                            <!-- Product Actions and Qunatity Box -->
                             <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
@@ -173,16 +183,17 @@
 
                                 <button
                                     type="button"
-                                    class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                    class="bs-secondary-button w-full max-w-full"
                                     @click="addToCart"
                                 >
                                     @lang('shop::app.products.add-to-cart')
                                 </button>
                             </div>
 
+                            <!-- Buy Now Button -->
                             <button
                                 type="button"
-                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
+                                class="bs-primary-button w-full max-w-[470px] mt-[20px]"
                                 {{-- To Do @(suraj-webkul) handle buy now option with another endpoint/method --}}
                                 @click="addToCart"
                                 {{ ! $product->isSaleable(1) ? 'disabled' : '' }}
@@ -190,6 +201,7 @@
                                 @lang('shop::app.products.buy-now')
                             </button>
 
+                            <!-- Share Buttons -->
                             <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
                                 <div
                                     class=" flex justify-center items-center gap-[10px] cursor-pointer"
