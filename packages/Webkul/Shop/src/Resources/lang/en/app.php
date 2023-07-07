@@ -466,6 +466,7 @@ return [
                 'already-applied' => 'Coupon code already applied.',
                 'enter-your-code' => 'Enter your code',
                 'subtotal'        => 'Subtotal',
+                'button-title'    => 'Apply',
             ],
 
             'mini-cart' => [
@@ -548,7 +549,7 @@ return [
                 'remove'          => 'Remove Coupon',
                 'apply-issue'     => 'Coupon code can\'t be applied.',
                 'sub-total'       => 'Subtotal',
-                'save'            => 'Save',
+                'button-title'    => 'Apply',
                 'enter-your-code' => 'Enter your code',
                 'subtotal'        => 'Subtotal',
             ],

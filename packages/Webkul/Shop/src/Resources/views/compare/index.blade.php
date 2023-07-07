@@ -27,7 +27,7 @@
                         </h2>
 
                         <div
-                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >
