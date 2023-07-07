@@ -70,8 +70,8 @@
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0': position == 'bottom',
-                        'inset-y-0 right-0': position == 'right',
-                        'inset-y-0 left-0': position == 'left'
+                        'inset-y-0 ltr:right-0 rtl:left-0': position == 'right',
+                        'inset-y-0 ltr:left-0 rtl:right-0': position == 'left'
                     }"
                     :style="'width:' + width + 'px'"
                     v-if="isOpen"

@@ -90,7 +90,7 @@
                 var self = this;
 
                 setTimeout(function() {
-                    //self.remove()
+                    self.remove()
                 }, 5000)
             },
 
