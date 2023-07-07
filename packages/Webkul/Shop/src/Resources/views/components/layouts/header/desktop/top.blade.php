@@ -21,7 +21,7 @@
     <p class="text-xs font-medium">Get UPTO 40% OFF on your 1st order <a href="#" class="underline">SHOP NOW</a></p>
 
     {{-- Locales Switcher --}}
-    <x-shop::dropdown>
+    <x-shop::dropdown position="bottom-right">
         <x-slot:toggle>
             <!-- Dropdown Toggler -->
             <div class="flex gap-[10px] cursor-pointer">
