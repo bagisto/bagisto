@@ -22,6 +22,8 @@
                 rules="required"
                 :label="trans('Image')"
                 :is-multiple="false"
+                accepted-types="image/*"
+                :src="$customer->image_url"
             >
             </x-shop::form.control-group.control>
 
