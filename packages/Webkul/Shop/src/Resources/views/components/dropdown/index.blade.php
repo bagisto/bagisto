@@ -70,6 +70,8 @@
 
             data() {
                 return {
+                    toggleBlockWidth: 0,
+
                     toggleBlockHeight: 0,
                     
                     isActive: false,
@@ -81,6 +83,8 @@
             },
 
             mounted() {
+                this.toggleBlockWidth = this.$refs.toggleBlock.clientWidth;
+
                 this.toggleBlockHeight = this.$refs.toggleBlock.clientHeight;
             },
 
@@ -92,19 +96,39 @@
                 positionStyles() {
                     switch (this.position) {
                         case 'bottom-left':
-                            return [`top: ${this.toggleBlockHeight}px`, 'left: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`,
+                                `top: ${this.toggleBlockHeight}px`,
+                                'left: 0',
+                            ];
 
                         case 'bottom-right':
-                            return [`top: ${this.toggleBlockHeight}px`, 'right: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`,
+                                `top: ${this.toggleBlockHeight}px`,
+                                'right: 0',
+                            ];
 
                         case 'top-left':
-                            return [`bottom: ${this.toggleBlockHeight*2}px`, 'left: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`
+                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                'left: 0',
+                            ];
 
                         case 'top-right':
-                            return [`bottom: ${this.toggleBlockHeight*2}px`, 'right: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`
+                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                'right: 0',
+                            ];
 
                         default:
-                            return [`top: ${this.toggleBlockHeight}px`, 'left: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`
+                                `top: ${this.toggleBlockHeight}px`,
+                                'left: 0',
+                            ];
                     }
                 },
             },
