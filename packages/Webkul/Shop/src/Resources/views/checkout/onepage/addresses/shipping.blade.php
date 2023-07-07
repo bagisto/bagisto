@@ -133,6 +133,7 @@
             </x-slot:header>
         
             <x-slot:content>
+                {{-- Shipping address form --}}
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"

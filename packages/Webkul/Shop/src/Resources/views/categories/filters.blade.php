@@ -16,7 +16,7 @@
             <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
         </template>
 
-        <!-- Filters Container -->
+        {{-- Filters Container --}}
         <template v-else>
             <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
                 <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
@@ -55,6 +55,7 @@
                 </x-slot:header>
 
                 <x-slot:content>
+                    {{-- Price range filter --}}
                     <ul v-if="filter.type === 'price'">
                         <li>
                             <v-price-filter
@@ -84,7 +85,8 @@
                                 <label
                                     class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                     :for="option.id"
-                                ></label>
+                                >
+                                </label>
 
                                 <label
                                     :for="option.id"
@@ -102,6 +104,8 @@
 
     <script type="text/x-template" id="v-price-filter-template">
         <div>
+
+            {{-- Price range filter shimmer --}}
             <template v-if="isLoading">
                 <x-shop::shimmer.range-slider></x-shop::shimmer.range-slider>
             </template>
@@ -205,9 +209,7 @@
         app.component('v-filter-item', {
             template: '#v-filter-item-template',
 
-            props: [
-                'filter',
-            ],
+            props: ['filter'],
 
             data() {
                 return {

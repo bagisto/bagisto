@@ -5,13 +5,17 @@
 @pushOnce('scripts')
     {{-- Product Review Template --}}
     <script type="text/x-template" id="v-product-review-template">
-        <div class="container max-1180:px-[20px]">
+        <div class="container mt-[60px] max-1180:px-[20px]">
             <!-- Create Review Form Container -->
-            <div class="w-full" v-if="canReview">
+            <div 
+                class="w-full" 
+                v-if="canReview"
+            >
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
+                    {{-- Review form --}}
                     <form
                         class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"

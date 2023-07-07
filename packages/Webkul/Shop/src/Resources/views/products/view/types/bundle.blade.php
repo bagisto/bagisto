@@ -16,8 +16,13 @@
                 </bundle-option-item>
 
                 <div class="flex justify-between items-center my-[20px]">
-                    <p class="text-[14px]">@lang('Total Amount')</p>
-                    <p class="text-[18px] font-medium">@{{ formatted_total_price }}</p>
+                    <p class="text-[14px]">
+                        @lang('Total Amount')
+                    </p>
+
+                    <p class="text-[18px] font-medium">
+                        @{{ formatted_total_price }}
+                    </p>
                 </div>
 
                 <ul class="grid gap-[10px] text-[16px]">
@@ -42,7 +47,9 @@
         <script type="text/x-template" id="bundle-option-item-template">
             <div class="mt-[30px] border-b-[1px] border-[#E9E9E9] pb-[15px]">
                 <div>
-                    <label class="block text-[16px] mb-[5px]">@{{ option.label }}</label>
+                    <label class="block text-[16px] mb-[5px]">
+                        @{{ option.label }}
+                    </label>
 
                     <div v-if="option.type == 'select'">
                         <select
@@ -108,7 +115,8 @@
                                     <label
                                         class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"
                                         :for="'bundle_options[' + option.id + '][' + index + ']'"
-                                    ></label>
+                                    >
+                                    </label>
 
                                     <label class="text-[#7D7D7D]" :for="'bundle_options[' + option.id + '][' + index + ']'">
                                         @{{ product.name }}
@@ -140,9 +148,13 @@
                                 <label
                                     class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
                                     :for="'bundle_options[' + option.id + '][' + index + ']'"
-                                ></label>
+                                >
+                                </label>
 
-                                <label class="text-[#7D7D7D]" :for="'bundle_options[' + option.id + '][' + index + ']'">
+                                <label 
+                                    class="text-[#7D7D7D]" 
+                                    :for="'bundle_options[' + option.id + '][' + index + ']'"
+                                >
                                     @{{ product.name }}
 
                                     <span class="text-[#000000]">

@@ -31,6 +31,7 @@
             </x-slot:header>
 
             <x-slot:content>
+                {{-- Cart product Listing --}}
                 <div 
                     class="grid gap-[50px] mt-[35px]" 
                     v-if="cart?.items?.length"
