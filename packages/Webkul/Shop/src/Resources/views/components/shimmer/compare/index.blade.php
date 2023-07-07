@@ -10,7 +10,7 @@
     <!-- Single row -->
     <div class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] ">
         <div class="min-w-[304px] max-w-full max-sm:hidden">
-            <p class="w-[55%] h-[21px] bg-[#E9E9E9] shimmer"></p>
+            <p class="w-[55%] h-[21px] shimmer"></p>
         </div>
 
         <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">

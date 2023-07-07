@@ -26,7 +26,7 @@
                 </video>
             </div>
             
-            {{-- Media shimmer Effect --}}
+            <!-- Media shimmer Effect -->
             <div
                 class="max-h-[609px] max-w-[560px]"
                 v-show="isMediaLoading"

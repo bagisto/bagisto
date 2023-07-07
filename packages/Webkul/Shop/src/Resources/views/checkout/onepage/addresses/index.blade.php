@@ -11,7 +11,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-checkout-addresses-template">
         <template v-if="isAddressLoading">
-            {{-- Onepage Shimmer Effect --}}
+            <!-- Onepage Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage.address></x-shop::shimmer.checkout.onepage.address>
         </template>
         
