@@ -20,17 +20,17 @@
     <x-shop::dropdown>
         <x-slot:toggle>
             <div class="flex items-center">
-                @if (! empty(core()->getCurrentLocale()->logo_full_path))
+                @if (! empty(core()->getCurrentLocale()->logo_url))
                     <img 
                         class="h-[20px] w-[20px]"
-                        src="{{ core()->getCurrentLocale()->logo_full_path }}"
-                        alt="Default locale"
+                        src="{{ core()->getCurrentLocale()->logo_url }}"
+                        alt="{{ core()->getCurrentLocale()->code }}"
                     />
                 @else
                     <img 
                         class="h-[20px] w-[20px]"
                         src="{{ asset('/themes/velocity/assets/images/flags/default-locale-image.png') }}"
-                        alt="Default locale" 
+                        alt="{{ core()->getCurrentLocale()->code }}" 
                     />
                 @endif
                 
@@ -56,7 +56,7 @@
                 >
                     <img 
                         class="h-[20px] w-[20px]"
-                        src="{{ $locale->logo_full_path }}"
+                        src="{{ $locale->logo_url }}"
                         alt="{{ $locale->code }}"
                     >
 

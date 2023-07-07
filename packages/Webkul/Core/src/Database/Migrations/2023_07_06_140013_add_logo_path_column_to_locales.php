@@ -12,6 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('locales', 'locale_image')) {
+            Schema::dropColumns('locales', 'locale_image');
+        }
+
         Schema::table('locales', function (Blueprint $table) {
             $table->string('logo_path')->after('direction')->nullable();
         });
@@ -24,8 +28,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('locales', function (Blueprint $table) {
-            $table->dropColumn('logo_path');
-        });
+        if (Schema::hasColumn('locales', 'locale_image')) {
+            Schema::dropColumns('locales', 'locale_image');
+        }
+
+        if (Schema::hasColumn('locales', 'logo_path')) {
+            Schema::dropColumns('locales', 'logo_path');
+        }
     }
 };

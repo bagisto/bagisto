@@ -29,7 +29,7 @@ class Locale extends Model implements LocaleContract
      *
      * @var array
      */
-    protected $appends = ['logo_full_path'];
+    protected $appends = ['logo_url'];
 
     /**
      * Create a new factory instance for the model.
@@ -41,19 +41,23 @@ class Locale extends Model implements LocaleContract
 
     /**
      * Get the logo full path of the locale.
+     * 
+     * @return string|null
      */
-    public function getlogoFullPathAttribute(): string
+    public function getLogoUrlAttribute()
     {
-        return $this->logoFullPath();
+        return $this->logo_url();
     }
 
     /**
      * Get the logo full path of the locale.
+     * 
+     * @return string|void
      */
-    public function logoFullPath(): string
+    public function logo_url()
     {
         if (empty($this->logo_path)) {
-            return '';
+            return;
         }
         
         return Storage::url($this->logo_path);
