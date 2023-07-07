@@ -5,12 +5,8 @@
         <div class="flex gap-10 overflow-auto scrollbar-hide">
             @for ($i = 0;  $i < $count; $i++)
                 <div class="grid grid-cols-1 justify-items-center gap-[15px] min-w-[120px]">
-                    <div class="relative overflow-hidden rounded-full w-[110px] h-[110px] bg-[#E9E9E9] shimmer">
-                        <img
-                            class="rounded-sm bg-[#F5F5F5]"
-                            src=""
-                            alt=""
-                        >
+                    <div class="relative overflow-hidden rounded-full w-[110px] h-[110px] shimmer">
+                        <img class="rounded-sm bg-[#F5F5F5]">
                     </div>
 
                     <p class="w-[90px] h-[32px] rounded-[18px] shimmer"></p>
