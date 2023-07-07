@@ -40,12 +40,14 @@
                         >
                         </a>
 
-                        <a
-                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
-                            @click="addToCompare(product.id)"
-                        >
-                        </a>
-
+                        @if(! request()->routeIs('shop.compare.index'))
+                            <a
+                                class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
+                                @click="addToCompare(product.id)"
+                            >
+                            </a>
+                        @endif
+                        
                         <a
                             class="rounded-xl bg-white text-navyBlue text-xs w-max font-medium py-[11px] px-[43px] cursor-pointer absolute bottom-[15px] left-[50%] -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             @click="addToCart()"
