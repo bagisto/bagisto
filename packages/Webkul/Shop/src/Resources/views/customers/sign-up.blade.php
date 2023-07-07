@@ -193,31 +193,7 @@
                         </button>
 
                         <div class="flex gap-[15px] flex-wrap">
-                            <a
-                                href="" class="bg-[position:0px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="Facebook"
-                            >
-                            </a>
-
-                            <a
-                                href=""
-                                class="bg-[position:-40px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="Twitter"
-                            >
-                            </a>
-
-                            <a
-                                href="" class="bg-[position:-80px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="Pintrest"
-                            >
-                            </a>
-
-                            <a
-                                href=""
-                                class="bg-[position:-120px_-274px] bs-main-sprite w-[40px] h-[40px]"
-                                aria-label="LinkedIn"
-                            >
-                            </a>
+                            {!! view_render_event('bagisto.shop.customers.login_form_controls.before') !!}
                         </div>
                     </div>
                 </x-shop::form>
