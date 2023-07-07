@@ -37,7 +37,7 @@
             </div>
 
             <div
-                class="absolute bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px] w-max z-10"
+                class="absolute bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px] w-max z-10 overflow-hidden"
                 :class="[hiddenClass]"
                 :style="positionStyles"
             >

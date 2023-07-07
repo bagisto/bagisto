@@ -97,7 +97,7 @@
                     </div>
 
                     <div
-                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
+                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
