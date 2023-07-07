@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
     @endSection
@@ -7,10 +8,29 @@
         @lang('shop::app.customers.account.profile.edit-profile')
     </h2>
 
+    {{-- Profile Edit Form --}}
     <x-shop::form
         :action="route('shop.customers.account.profile.store')"
         class="rounded mt-[30px]"
+        enctype="multipart/form-data"
     >
+        <x-shop::form.control-group class="mb-4 mt-[15px]">
+            <x-shop::form.control-group.control
+                type="image"
+                name="image[]"
+                class="shadow text-[14px] appearance-none rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                rules="required"
+                :label="trans('Image')"
+                :is-multiple="false"
+            >
+            </x-shop::form.control-group.control>
+
+            <x-shop::form.control-group.error
+                control-name="image[]"
+            >
+            </x-shop::form.control-group.error>
+        </x-shop::form.control-group>
+
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.profile.first-name')
@@ -200,7 +220,7 @@
 
         <button
             type="submit"
-            class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+            class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
         >
             @lang('shop::app.customers.account.save')
         </button>

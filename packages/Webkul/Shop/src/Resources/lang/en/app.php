@@ -302,6 +302,7 @@ return [
                 'new'                => 'New',
                 'sale'               => 'Sale',
                 'review-description' => 'Be the first to review this product',
+                'add-to-cart'        => 'Product added successfully',
             ],
 
             'carousel' => [
@@ -374,8 +375,8 @@ return [
             ],
 
             'reviews' => [
-                'cancel'  => 'Cancel',
-                'success' => 'Review submitted successfully.',
+                'cancel'      => 'Cancel',
+                'success'     => 'Review submitted successfully.',
                 'attachments' => 'Attachments',
             ],
         ],

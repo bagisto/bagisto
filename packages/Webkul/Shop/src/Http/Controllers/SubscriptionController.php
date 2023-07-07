@@ -3,15 +3,14 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
-use Webkul\Shop\Mail\SubscriptionEmail;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Shop\Mail\SubscriptionEmail;
 
 class SubscriptionController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscriptionRepository
      * @return void
      */
     public function __construct(protected SubscribersListRepository $subscriptionRepository)

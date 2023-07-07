@@ -12,6 +12,7 @@
             </p>
 
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
+                {{-- Apply coupon modal --}}
                 <x-shop::modal ref="couponModel">
                     <x-slot:toggle>
                         <span 
@@ -34,6 +35,7 @@
                             v-slot="{ meta, errors, handleSubmit }"
                             as="div"
                         >
+                            {{-- Apply coupon form --}}
                             <form @submit="handleSubmit($event, applyCoupon)">
                                 <x-shop::form.control-group>
                                     <div class="p-[30px] bg-white">

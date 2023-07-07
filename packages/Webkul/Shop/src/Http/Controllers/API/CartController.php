@@ -70,7 +70,7 @@ class CartController extends APIController
 
                 return new JsonResource([
                     'data'     => new CartResource(Cart::getCart()),
-                    'message'  => trans('shop::app.components.cart.item-add-to-cart'),
+                    'message'  => trans('shop::app.components.products.card.add-to-cart'),
                 ]);
             }
         } catch (\Exception $exception) {
