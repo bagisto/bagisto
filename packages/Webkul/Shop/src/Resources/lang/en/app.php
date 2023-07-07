@@ -302,6 +302,7 @@ return [
                 'new'                => 'New',
                 'sale'               => 'Sale',
                 'review-description' => 'Be the first to review this product',
+                'add-to-cart'        => 'Product added successfully',
             ],
 
             'carousel' => [

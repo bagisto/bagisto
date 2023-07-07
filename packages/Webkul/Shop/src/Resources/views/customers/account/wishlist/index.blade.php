@@ -107,7 +107,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
+                                    class="bs-primary-button block text-base w-max py-[11px] px-[25px] rounded-[54px] text-center whitespace-nowrap"
                                     @click="moveToCart(item.id)"
                                 >
                                     @lang('shop::app.customers.account.wishlist.move-to-cart')

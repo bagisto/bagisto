@@ -13,7 +13,7 @@
 <div class="overflow-auto journal-scroll">
     @for ($i = 0;  $i < $count; $i++)
         <div>
-            <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9] justify-between">
+            <div class="flex gap-[40px] py-[25px] items-center  border-[#E9E9E9] justify-between">
                 <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
                     <div>
                         <div class="w-[80px] h-[80px] shimmer bg-[#E9E9E9] rounded-[12px]"></div>
@@ -21,17 +21,17 @@
 
                     <div class="grid gap-y-[10px] place-content-start">
                         <p 
-                            class="break-word-custom w-[180px] h-[24px] bg-[#E9E9E9] shimmer" 
+                            class="w-[180px] h-[24px] bg-[#E9E9E9] shimmer" 
                         >
                         </p>
 
                         <p 
-                            class="break-word-custom w-[180px] h-[24px] bg-[#E9E9E9] shimmer" 
+                            class="w-[180px] h-[24px] bg-[#E9E9E9] shimmer" 
                         >
                         </p>
 
                         <a
-                            class="cursor-pointer w-[100px] h-[24px] bg-[#E9E9E9] shimmer"
+                            class="w-[100px] h-[24px] bg-[#E9E9E9] shimmer"
                         >
                         </a>
                     </div>
@@ -48,7 +48,7 @@
                 </div>
                 
                 <div
-                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[25px] rounded-[54px] text-center w-[157px] h-[46px] bg-[#E9E9E9] shimmer"
+                    class="block font-medium py-[11px] px-[25px] rounded-[54px] text-center w-[157px] h-[46px] bg-[#E9E9E9] shimmer"
                 >
                 </div>
 
