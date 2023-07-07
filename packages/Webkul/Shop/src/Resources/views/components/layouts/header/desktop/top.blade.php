@@ -23,7 +23,7 @@
     {{-- Locales Switcher --}}
     <x-shop::dropdown position="bottom-right">
         <x-slot:toggle>
-            <!-- Dropdown Toggler -->
+            {{-- Dropdown Toggler --}}
             <div class="flex gap-[10px] cursor-pointer">
                 @if (! empty(core()->getCurrentLocale()->image_url))
                     <img 
