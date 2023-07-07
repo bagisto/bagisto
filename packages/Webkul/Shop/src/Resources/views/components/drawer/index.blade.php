@@ -1,6 +1,6 @@
 @props([
     'isActive' => false,
-    'position' => core()->getCurrentLocale()->direction === 'rtl' ? 'left' : 'right',
+    'position' => 'right',
     'width'    => '500',
 ])
 
@@ -41,25 +41,43 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-drawer-template">
         <div>
+            <!-- Toggler -->
             <div @click="toggle">
                 <slot name="toggle">
                     Default Toggle
                 </slot>
             </div>
 
-            <div class="bottom-0 left-0 pointer-events-none fixed right-0 top-0 z-[9999]">
+            <!-- Overlay -->
+            <div
+                class="w-full bg-[#00000025] absolute inset-x-0 inset-y-0 z-[1]"
+                v-show="isOpen"
+            ></div>
+
+            <!-- Content -->
+            <transition
+                tag="div"
+                name="drawer"
+                :enter-from-class="enterFromLeaveToClasses"
+                enter-active-class="transform transition ease-in-out duration-200"
+                enter-to-class="translate-x-0"
+                leave-from-class="translate-x-0"
+                leave-active-class="transform transition ease-in-out duration-200"
+                :leave-to-class="enterFromLeaveToClasses"
+            >
                 <div
-                    class="bg-[#00000025] bottom-0 left-0 pointer-events-auto absolute right-0 top-0 z-[1000]"
+                    class="fixed z-[1000] bg-white overflow-hidden max-sm:w-full"
+                    :class="{
+                        'inset-x-0 top-0': position == 'top',
+                        'inset-x-0 bottom-0': position == 'bottom',
+                        'inset-y-0 right-0': position == 'right',
+                        'inset-y-0 left-0': position == 'left'
+                    }"
+                    :style="'width:' + width + 'px'"
                     v-if="isOpen"
                 >
-                </div>
-
-                <div
-                    class="absolute top-0 bottom-0 z-[1000] bg-white overflow-hidden max-sm:w-full"
-                    :style="positionStyles"
-                >
                     <div class="bg-white h-full pointer-events-auto w-full overflow-auto">
-                        <div class="flex flex-col h-full w-full ">
+                        <div class="flex flex-col h-full w-full">
                             <div class="overflow-auto flex-1 min-h-0 min-w-0">
                                 <div class="flex flex-col  h-full">
                                     <div class="grid gap-y-[10px] p-[25px] pb-[20px]">
@@ -94,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </transition>
         </div>
     </script>
 
@@ -111,29 +129,17 @@
             },
 
             computed: {
-                positionStyles() {
-                    const position = ['left', 'right'].includes(this.position)
-                        ? this.position
-                        : 'right';
-
-                    const width = this.width;
-
-                    if (this.isOpen) {
-                        return [
-                            `width: ${width}px`,
-                            `max-width: ${width}px`,
-                            `${position}: 0px`,
-                            `transition: ${position} .25s cubic-bezier(0.820, 0.085, 0.395, 0.895)`,
-                        ];
+                enterFromLeaveToClasses() {
+                    if (this.position == 'top') {
+                        return '-translate-y-full';
+                    } else if (this.position == 'bottom') {
+                        return 'translate-y-full';
+                    } else if (this.position == 'left') {
+                        return 'ltr:-translate-x-full rtl:translate-x-full';
+                    } else if (this.position == 'right') {
+                        return 'ltr:translate-x-full rtl:-translate-x-full';
                     }
-
-                    return [
-                        `width: ${width}px`,
-                        `max-width: ${width}px`,
-                        `${position}: -${width}px`,
-                        `transition: ${position} .25s cubic-bezier(0.820, 0.085, 0.395, 0.895)`
-                    ];
-                },
+                }
             },
 
             methods: {
@@ -141,7 +147,7 @@
                     this.isOpen = ! this.isOpen;
 
                     this.$emit('toggle', { isActive: this.isOpen });
-                },
+                }
             },
         });
     </script>
