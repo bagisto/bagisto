@@ -41,7 +41,7 @@
                                 </template>
 
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                                    <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                   
                                         <p class="text-[20px]">
@@ -74,7 +74,7 @@
                                 </template>
 
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                                    <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
                                         <p class="text-[20px]">
