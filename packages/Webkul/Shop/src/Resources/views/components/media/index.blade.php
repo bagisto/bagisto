@@ -1,15 +1,13 @@
 <v-media {{ $attributes }} >
     <x-shop::shimmer.image
-        class="w-[284px] h-[284px] rounded-[12px]"
+        class="w-[284px] h-[284px] rounded-[12px] mt-[30px]"
     ></x-shop::shimmer.image>
 </v-media>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-media-template">
-        <div class="flex flex-col mb-4 p-4 rounded-lg cursor-pointer">
-            <div
-                :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }"
-            >
+        <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
+            <div :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }">
                 <div
                     class="flex flex-col w-[284px] h-[284px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
                     v-if="uploadedFiles.isPicked"

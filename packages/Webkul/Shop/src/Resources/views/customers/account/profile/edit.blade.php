@@ -18,7 +18,6 @@
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
-                class="shadow text-[14px] appearance-none rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 rules="required"
                 :label="trans('Image')"
                 :is-multiple="false"
