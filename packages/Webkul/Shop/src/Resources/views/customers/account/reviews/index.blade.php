@@ -5,7 +5,7 @@
     @endSection
 
     <div class="flex-auto">
-        <div class="max-lg:hidden">
+        <div class="max-md:max-w-full">
             <h2 class="text-[26px] font-medium">
                 @lang('shop::app.customers.account.reviews.title')
             </h2>
@@ -57,7 +57,7 @@
                 </div>
             @else
                 {{-- Review Empty Page --}}
-                <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
                     <p class="text-[20px]">

@@ -5,7 +5,7 @@
     @endSection
 
     <div class="flex-auto">
-        <div class="max-lg:hidden">
+        <div class="max-md:max-w-full">
             <h2 class="text-[26px] font-medium">
                 @lang('shop::app.customers.account.downloadable-products.name')
             </h2>
@@ -127,7 +127,7 @@
                 </p>
             @else
                 {{-- Downloadable Empty page --}}
-                <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                <div class="grid items-center justify-items-center w-[100%]] m-auto h-[476px] place-content-center text-center">
                     <img
                         src="{{ bagisto_asset('images/empty-dwn-product.png')}}"
                         class=""

@@ -89,9 +89,7 @@
                     @lang($menu->items['account']['name'])
                 </p>
             </div>
-            <div 
-                class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-[6px] max-md:border-none"
-            >
+            <div class="grid border border-t-0 border-r-[1px] border-l-[1px] border-b-[1px] border-[#E9E9E9] rounded-[6px] max-md:border-none">
                 @foreach ($menu->items as $menuItem)
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
