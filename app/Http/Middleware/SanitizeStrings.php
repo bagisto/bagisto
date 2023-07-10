@@ -7,7 +7,7 @@ use Webkul\Core\Http\Middleware\SanitizeStrings as Middleware;
 class SanitizeStrings extends Middleware
 {
     /**
-     * The names of the attributes that should not be trimmed.
+     * The names of the attributes that should not be sanitized.
      *
      * @var array<int, string>
      */
