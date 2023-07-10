@@ -29,7 +29,7 @@
 
             <div
                 ref="swiperContainer"
-                class="flex gap-8 mt-[60px] overflow-auto scroll-smooth scrollbar-hide max-sm:mt-[20px]"
+                class="flex gap-8 mt-[40px] overflow-auto scroll-smooth scrollbar-hide max-sm:mt-[20px]"
             >
                 <x-shop::products.card
                     class="min-w-[291px]"
@@ -40,7 +40,7 @@
 
             <a
                 :href="navigationLink"
-                class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                class="bs-secondary-button block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] mt-[60px] text-center"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')

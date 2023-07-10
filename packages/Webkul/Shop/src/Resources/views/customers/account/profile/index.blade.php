@@ -1,9 +1,10 @@
 <x-shop::layouts.account>
+    {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile"></x-shop::breadcrumbs>
     @endSection
 
-    <div class="flex justify-between">
+    <div class="flex justify-between items-center">
         <h2 class="text-[26px] font-medium">
             @lang('shop::app.customers.account.title')
         </h2>
@@ -16,6 +17,7 @@
         </a>
     </div>
 
+    {{-- Profile Information --}}
     <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
         <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
             <p class="text-[14px] font-medium">
@@ -67,10 +69,11 @@
             </p>
         </div>
 
+        {{-- Profile Delete modal --}}
         <x-shop::modal>
             <x-slot:toggle>
                 <div
-                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                    class="bs-primary-button m-0 ml-[0px] block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
                 >
                     @lang('shop::app.customers.account.profile.delete-profile')
                 </div>
@@ -103,7 +106,7 @@
 
                     <button
                         type="submit"
-                        class="m-0 block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                        class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
                     >
                         @lang('shop::app.customers.account.delete')
                     </button>

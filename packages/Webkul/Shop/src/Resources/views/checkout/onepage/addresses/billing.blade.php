@@ -162,6 +162,7 @@
                     </a>
                 </div>
 
+                {{-- Billing address form --}}
                 <x-shop::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"

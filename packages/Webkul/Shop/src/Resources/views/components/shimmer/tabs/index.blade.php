@@ -15,15 +15,15 @@
 <div class="container mt-[60px] max-1180:px-[20px]">
     <div class="">
         <div class="flex justify-between mb-[20px] max-1180:after:content-' ' max-1180:after:bs-main-sprite max-1180:after:bg-[position:-73px_-40px] max-1180:after:w-[21px] max-1180:after:h-[20px] max-1180:after:block">
-            <p class="text-[16px] font-medium 1180:hidden"></p>
+            <p class="1180:hidden"></p>
         </div>
 
         <div class="grid gap-[10px] mt-[25px]">
-            <p class="w-[100%] h-[27px] bg-[#E9E9E9] shimmer"></p>
-            <p class="w-[100%] h-[27px] bg-[#E9E9E9] shimmer"></p>
-            <p class="w-[100%] h-[27px] bg-[#E9E9E9] shimmer"></p>
-            <p class="w-[100%] h-[27px] bg-[#E9E9E9] shimmer"></p>
-            <p class="w-[100%] h-[27px] bg-[#E9E9E9] shimmer"></p>
+            <p class="w-[100%] h-[27px] shimmer"></p>
+            <p class="w-[100%] h-[27px] shimmer"></p>
+            <p class="w-[100%] h-[27px] shimmer"></p>
+            <p class="w-[100%] h-[27px] shimmer"></p>
+            <p class="w-[100%] h-[27px] shimmer"></p>
         </div>
     </div>
 </div>

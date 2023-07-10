@@ -13,6 +13,7 @@
             
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
                 <span v-if="! isCouponApplied">
+                    <!-- Apply Coupon modal -->
                     <x-shop::modal ref="couponModel">
                         <x-slot:toggle>
                             <span class="text-[#0A49A7] cursor-pointer">
@@ -70,7 +71,7 @@
                                                     class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                                                     type="submit"
                                                 >
-                                                   @lang('shop::app.checkout.onepage.coupon.save')
+                                                   @lang('shop::app.checkout.onepage.coupon.button-title')
                                                 </button>
                                             </div>
                                         </div>

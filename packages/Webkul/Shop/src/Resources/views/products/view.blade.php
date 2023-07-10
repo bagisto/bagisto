@@ -23,11 +23,11 @@
     </v-product>
 
     {{-- Information Section --}}
-    <div class="mt-[80px]">
+    <div class="1180:mt-[80px]">
         <x-shop::tabs position="center">
             {{-- Description Tab --}}
             <x-shop::tabs.item
-                class="container mt-[60px] !p-0"
+                class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.description')"
                 :is-selected="true"
             >
@@ -40,7 +40,7 @@
 
             {{-- Additional Information Tab --}}
             <x-shop::tabs.item
-                class="container mt-[60px] !p-0"
+                class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.additional-information')"
                 :is-selected="false"
             >
@@ -65,13 +65,79 @@
 
             {{-- Reviews Tab --}}
             <x-shop::tabs.item
-                class="container mt-[60px] !p-0"
+                class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.reviews')"
                 :is-selected="false"
             >
                 @include('shop::products.view.reviews')
             </x-shop::tabs.item>
         </x-shop::tabs>
+    </div>
+
+    {{-- Information Section --}}
+    <div class="container mt-[40px] max-1180:px-[20px] 1180:hidden">
+        {{-- Description Accordion --}}
+        <x-shop::accordion :is-active="true">
+            <x-slot:header>
+                <div class="flex justify-between mb-[20px] mt-[20px]">
+                    <p class="text-[16px] font-medium 1180:hidden">
+                        @lang('shop::app.products.description')
+                    </p>
+                </div>
+            </x-slot:header>
+
+            <x-slot:content>
+                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-[20px]">
+                    {!! $product->description !!}
+                </p>
+            </x-slot:content>
+        </x-shop::accordion>
+
+        {{-- Additional Information Accordion --}}
+        <x-shop::accordion :is-active="false">
+            <x-slot:header>
+                <div class="flex justify-between mb-[20px] mt-[20px]">
+                    <p class="text-[16px] font-medium 1180:hidden">
+                        @lang('shop::app.products.additional-information')
+                    </p>
+                </div>
+            </x-slot:header>
+
+            <x-slot:content>
+                <div class="container mt-[20px] mb-[20px] max-1180:px-[20px]">
+                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                        @foreach ($customAttributeValues as $customAttributeValue)
+                            <div class="grid">
+                                <p class="text-[16px] text-black">
+                                    {{ $customAttributeValue['label'] }}
+                                </p>
+                            </div>
+
+                            <div class="grid">
+                                <p class="text-[16px] text-[#7D7D7D]">
+                                    {{ $customAttributeValue['value']??'-' }}
+                                </p>
+                            </div>
+                        @endforeach
+                    </p>
+                </div>
+            </x-slot:content>
+        </x-shop::accordion>
+
+        {{-- Reviews Accordion --}}
+        <x-shop::accordion :is-active="false">
+            <x-slot:header>
+                <div class="flex justify-between mb-[20px] mt-[20px]">
+                    <p class="text-[16px] font-medium 1180:hidden">
+                        @lang('shop::app.products.reviews')
+                    </p>
+                </div>
+            </x-slot:header>
+
+            <x-slot:content>
+                @include('shop::products.view.reviews')
+            </x-slot:content>
+        </x-shop::accordion>
     </div>
 
     {{-- Featured Products --}}
@@ -183,7 +249,7 @@
 
                                 <button
                                     type="button"
-                                    class="rounded-[12px] border border-navyBlue py-[15px] w-full max-w-full"
+                                    class="bs-secondary-button w-full max-w-full"
                                     @click="addToCart"
                                 >
                                     @lang('shop::app.products.add-to-cart')
@@ -193,7 +259,7 @@
                             <!-- Buy Now Button -->
                             <button
                                 type="button"
-                                class="rounded-[12px] border bg-navyBlue text-white border-navyBlue py-[15px] w-full max-w-[470px] mt-[20px]"
+                                class="bs-primary-button w-full max-w-[470px] mt-[20px]"
                                 {{-- To Do @(suraj-webkul) handle buy now option with another endpoint/method --}}
                                 @click="addToCart"
                                 {{ ! $product->isSaleable(1) ? 'disabled' : '' }}

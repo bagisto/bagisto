@@ -1,3 +1,4 @@
+{{-- Coupon Vue Component --}}
 <v-coupon 
     :is-coupon-applied="cart.coupon_code"
     :sub-total="cart.base_grand_total"
@@ -12,7 +13,9 @@
             </p>
 
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
+                <!-- Apply coupon modal -->
                 <x-shop::modal ref="couponModel">
+                    <!-- Modal Toggler -->
                     <x-slot:toggle>
                         <span 
                             class="text-[#0A49A7] cursor-pointer" 
@@ -22,18 +25,21 @@
                         </span>
                     </x-slot:toggle>
 
+                    <!-- Modal Header -->
                     <x-slot:header>
                         <h2 class="text-[25px] font-medium max-sm:text-[22px]">
                             @lang('shop::app.checkout.cart.coupon.apply')
                         </h2>
                     </x-slot:header>
 
+                    <!-- Modal Contentd -->
                     <x-slot:content>
-                       
+                        <!-- Apply Coupon Form -->
                         <x-shop::form
                             v-slot="{ meta, errors, handleSubmit }"
                             as="div"
                         >
+                            <!-- Apply coupon form -->
                             <form @submit="handleSubmit($event, applyCoupon)">
                                 <x-shop::form.control-group>
                                     <div class="p-[30px] bg-white">
@@ -55,6 +61,7 @@
                                     </div>
                                 </x-shop::form.control-group>
 
+                                <!-- Coupon Form Action Container -->
                                 <div class="p-[30px] bg-white mt-[20px]">
                                     <div class="flex justify-between items-center gap-[15px] flex-wrap">
                                         <p class="text-[14px] font-medium text-[#7D7D7D]">
@@ -72,7 +79,7 @@
                                                 class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                                                 type="submit"
                                             >
-                                               @lang('shop::app.customers.account.save')
+                                               @lang('shop::app.checkout.cart.coupon.button-title')
                                             </button>
                                         </div>
                                     </div>
@@ -82,6 +89,7 @@
                     </x-slot:content>
                 </x-shop::modal>
 
+                <!-- Applied Coupon Information Container -->
                 <div 
                     class="text-[12px] font-small flex justify-between items-center"
                     v-if="isCouponApplied"
