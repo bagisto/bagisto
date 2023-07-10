@@ -62,21 +62,25 @@
         <div class="grid gap-[15px] mt-[25px]">
             <div class="flex text-right justify-between">
                 <p class="w-[30%] h-[24px] shimmer"></p>
+
                 <p class="w-[30%] h-[24px] shimmer"></p>
             </div>
 
             <div class="flex text-right justify-between">
                 <p class="w-[40%] h-[24px] shimmer"></p>
+
                 <p class="w-[36%] h-[24px] shimmer"></p>
             </div>
 
             <div class="flex text-right justify-between">
                 <p class="w-[30%] h-[24px] shimmer"></p>
+
                 <p class="w-[31%] h-[24px] shimmer"></p>
             </div>
 
             <div class="flex text-right justify-between">
                 <p class="w-[33%] h-[24px] shimmer"></p>
+                
                 <p class="w-[38%] h-[24px] shimmer"></p>
             </div>
             <div class="block place-self-end mt-[15px] rounded-[18px]  w-[60%] h-[46px] shimmer"></div>
