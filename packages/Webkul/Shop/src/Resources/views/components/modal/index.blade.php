@@ -44,7 +44,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 hidden bg-gray-500 bg-opacity-50 transition-opacity md:block z-[1]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
                     v-show="isOpen"
                 ></div>
             </transition>

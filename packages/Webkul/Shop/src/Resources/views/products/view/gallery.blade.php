@@ -61,19 +61,14 @@
             </div>
         </div>
 
+        <!-- Product slider Image with shimmer -->
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
-            <img 
-                :src="image.large_image_url"
-                class="min-w-[450px] max-sm:min-w-full"
+            <x-shop::shimmer.image
+                ::src="image.large_image_url"
+                class="min-w-[450px] max-sm:min-w-full w-[490px]" 
                 v-for="image in mediaContents.images"
             >
-        </div>
-        <div class="hidden max-sm:flex gap-[30px] overflow-auto scrollbar-hide">
-            <img
-                class="rounded-[12px] min-w-[100px] max-h-[100px]" 
-                :src="image.large_image_url"
-                v-for="image in mediaContents.images"
-            />
+            </x-shop::shimmer.image>
         </div>
     </script>
 

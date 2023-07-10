@@ -80,7 +80,9 @@
             </x-slot:toggle>
 
             <x-slot:header>
-                @lang('shop::app.customers.account.enter-password')
+                <h2 class="text-[25px] font-medium max-sm:text-[22px]">
+                    @lang('shop::app.customers.account.enter-password')
+                </h2>
             </x-slot:header>
 
             <x-slot:content>
@@ -88,28 +90,29 @@
                     action="{{ route('shop.customers.account.profile.destroy') }}"
                 >
                     <x-form.control-group>
-                        <x-form.control-group.label>
-                            @lang('shop::app.customers.account.password')
-                        </x-form.control-group.label>
+                        <div class="p-[30px] bg-white">
+                            <x-form.control-group.control
+                                type="password"
+                                name="password"
+                                class="py-[20px] px-[25px]"
+                                placeholder="Enter your password"
+                            />
 
-                        <x-form.control-group.control
-                            type="password"
-                            name="password"
-                            placeholder="Enter your password"
-                        />
-
-                        <x-form.control-group.error
-                            control-name="password"
-                        >
-                        </x-form.control-group.error>
+                            <x-form.control-group.error
+                                control-name="password"
+                            >
+                            </x-form.control-group.error>
+                        </div>
                     </x-form.control-group>
 
-                    <button
-                        type="submit"
-                        class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
-                    >
-                        @lang('shop::app.customers.account.delete')
-                    </button>
+                    <div class="p-[30px] bg-white mt-[20px]">
+                        <button
+                            type="submit"
+                            class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                        >
+                            @lang('shop::app.customers.account.delete')
+                        </button>
+                    </div>
                 </x-form>
             </x-slot:content>
         </x-shop::modal>

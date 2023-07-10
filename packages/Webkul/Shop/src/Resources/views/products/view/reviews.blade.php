@@ -202,7 +202,7 @@
 
                     <template v-else>
                         <!-- Empty Review Section -->
-                        <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+                        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                             <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
                             <p class="text-[20px]">
