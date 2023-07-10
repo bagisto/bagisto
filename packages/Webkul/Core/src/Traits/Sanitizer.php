@@ -2,18 +2,36 @@
 
 namespace Webkul\Core\Traits;
 
-use enshrined\svgSanitize\Sanitizer as MainSanitizer;
+use enshrined\svgSanitize\Sanitizer as SVGSanitizer;
 use Illuminate\Support\Facades\Storage;
 
 trait Sanitizer
 {
     /**
-     * List of mime types which needs to check.
+     * Sanitize content.
      */
-    public $mimeTypes = [
-        'image/svg',
-        'image/svg+xml',
-    ];
+    public function sanitizeContent(string $dirtyContent): string
+    {
+        $allowedTags = '<div><p><b><strong><i><em><a><ul><ol><li>';
+
+        $cleanContent = strip_tags($dirtyContent, $allowedTags);
+
+        $cleanContent = $this->sanitizeBlade($cleanContent);
+
+        return $cleanContent;
+    }
+
+    /**
+     * Sanitize blade file.
+     */
+    public function sanitizeBlade(string $dirtyContent): string
+    {
+        $pattern = '/\{\{.*?\}\}|@.*?(?=\s|\(|\{)/s';
+
+        $cleanContent = preg_replace($pattern, '', $dirtyContent);
+
+        return $cleanContent;
+    }
 
     /**
      * Sanitize SVG file.
@@ -23,26 +41,13 @@ trait Sanitizer
      */
     public function sanitizeSVG($path, $mimeType)
     {
-        if ($this->checkMimeType($mimeType)) {
-            /* sanitizer instance */
-            $sanitizer = new MainSanitizer();
-
-            /* grab svg file */
+        if (in_array($mimeType, [
+            'image/svg',
+            'image/svg+xml',
+        ])) {
             $dirtySVG = Storage::get($path);
 
-            /* save sanitized svg */
-            Storage::put($path, $sanitizer->sanitize($dirtySVG));
+            Storage::put($path, (new SVGSanitizer())->sanitize($dirtySVG));
         }
-    }
-
-    /**
-     * Sanitize SVG file.
-     *
-     * @param  string  $path
-     * @return void
-     */
-    public function checkMimeType($mimeType)
-    {
-        return in_array($mimeType, $this->mimeTypes);
     }
 }

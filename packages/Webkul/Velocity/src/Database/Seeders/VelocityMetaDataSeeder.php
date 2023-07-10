@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class VelocityMetaDataSeeder extends Seeder
 {
+    /**
+     * Run seeder.
+     *
+     * @return void
+     */
     public function run()
     {
         $now = Carbon::now();
@@ -18,21 +23,16 @@ class VelocityMetaDataSeeder extends Seeder
             [
                 'id'                       => 1,
                 'locale'                   => 'en',
-
-                'header_content_count'     => "5",
-                'channel'                  => "default",
-                'home_page_content'        => "<p>@include('shop::home.advertisements.advertisement-four', ['one'=>'/page/refund-policy','two'=>'/page/privacy-policy','three'=>'/page/shipping-policy','four'=>'/page/whats-new'])@include('shop::home.featured-products') @include('shop::home.product-policy') @include('shop::home.advertisements.advertisement-three', ['one'=>'/page/refund-policy','two'=>'/page/privacy-policy','three'=>'/page/shipping-policy']) @include('shop::home.new-products') @include('shop::home.advertisements.advertisement-two', ['one'=>'/page/refund-policy','two'=>'/page/privacy-policy'])</p>",
-                'footer_left_content'      => __('velocity::app.admin.meta-data.footer-left-raw-content'),
-
-                'footer_middle_content'    => '<div class="col-lg-6 col-md-12 col-sm-12 no-padding"><ul type="none"><li><a href="{!! url(\'page/about-us\') !!}">About Us</a></li><li><a href="{!! url(\'page/cutomer-service\') !!}">Customer Service</a></li><li><a href="{!! url(\'page/whats-new\') !!}">What&rsquo;s New</a></li><li><a href="{!! url(\'page/contact-us\') !!}">Contact Us </a></li></ul></div><div class="col-lg-6 col-md-12 col-sm-12 no-padding"><ul type="none"><li><a href="{!! url(\'page/return-policy\') !!}"> Order and Returns </a></li><li><a href="{!! url(\'page/payment-policy\') !!}"> Payment Policy </a></li><li><a href="{!! url(\'page/shipping-policy\') !!}"> Shipping Policy</a></li><li><a href="{!! url(\'page/privacy-policy\') !!}"> Privacy and Cookies Policy </a></li></ul></div>',
+                'header_content_count'     => '5',
+                'channel'                  => 'default',
+                'home_page_content'        => '',
+                'footer_left_content'      => '',
+                'footer_middle_content'    => '',
                 'slider'                   => 1,
-
                 'subscription_bar_content' => '<div class="social-icons col-lg-6"><a href="https://facebook.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-facebook" title="facebook"></i> </a> <a href="https://twitter.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-twitter" title="twitter"></i> </a> <a href="https://linkedin.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-linked-in" title="linkedin"></i> </a> <a href="https://pintrest.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-pintrest" title="Pinterest"></i> </a> <a href="https://youtube.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-youtube" title="Youtube"></i> </a> <a href="https://instagram.com" target="_blank" class="unset" rel="noopener noreferrer"><i class="fs24 within-circle rango-instagram" title="instagram"></i></a></div>',
-
                 'product_policy'           => '<div class="row col-12 remove-padding-margin"><div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-van-ship fs40"></i></div> <div class="right"><span class="font-setting fs20">Free Shipping on Order $20 or More</span></div></div></div></div> <div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-exchnage fs40"></i></div> <div class="right"><span class="font-setting fs20">Product Replace &amp; Return Available </span></div></div></div></div> <div class="col-lg-4 col-sm-12 product-policy-wrapper"><div class="card"><div class="policy"><div class="left"><i class="rango-exchnage fs40"></i></div> <div class="right"><span class="font-setting fs20">Product Exchange and EMI Available </span></div></div></div></div></div>',
             ]
         );
-
 
         DB::table('core_config')->insert([
             [

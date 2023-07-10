@@ -20,6 +20,6 @@
 
 @section('content-wrapper')
     <div class="cms-page-container p-2">
-        {!! Blade::render($page->html_content) !!}
+        {!! $page->html_content !!}
     </div>
 @endsection

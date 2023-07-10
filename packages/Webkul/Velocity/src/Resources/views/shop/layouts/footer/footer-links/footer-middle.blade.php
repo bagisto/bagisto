@@ -1,8 +1,8 @@
 <div class="col-lg-4 col-md-12 col-sm-12 footer-ct-content">
 	<div class="row">
 
-        @if ($velocityMetaData)
-            {!! Blade::render($velocityMetaData->footer_middle_content) !!}
+        @if (! empty($velocityMetaData->footer_middle_content))
+            {!! $velocityMetaData->footer_middle_content !!}
         @else
             <div class="col-lg-6 col-md-12 col-sm-12 no-padding">
                 <ul type="none">
@@ -28,6 +28,7 @@
                     </li>
                 </ul>
             </div>
+            
             <div class="col-lg-6 col-md-12 col-sm-12 no-padding">
                 <ul type="none">
                     <li>
