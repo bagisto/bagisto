@@ -30,9 +30,11 @@
     </div>
 
     <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+        {{-- Breadcrumbs --}}
         <x-shop::breadcrumbs name="checkout"></x-shop::breadcrumbs>
 
         <v-checkout>
+            {{-- Shimmer Effect --}}
             <x-shop::shimmer.checkout.onepage></x-shop::shimmer.checkout.onepage>
         </v-checkout>
     </div>

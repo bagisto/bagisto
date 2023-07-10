@@ -31,6 +31,7 @@
                     isLoading: true,
                 };
             },
+            
             methods: {
                 onLoad() {
                     this.isLoading = false;

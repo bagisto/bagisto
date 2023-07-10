@@ -1,4 +1,5 @@
 <x-shop::layouts.account>
+    {{-- breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="orders"></x-shop::breadcrumbs>
     @endSection
@@ -12,6 +13,7 @@
     </div>
 
     @if (! $orders->isEmpty())
+        {{-- Orders Information --}}
         <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">
             <table class="w-full text-sm text-left">
                 <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
@@ -55,6 +57,7 @@
 
                 <tbody>
                     @foreach ($orders as $order)
+                    {{-- @dd($order) --}}
                         <tr class="bg-white border-b">
                             <th
                                 scope="row"
@@ -63,21 +66,15 @@
                                 {{ $order->id}}
                             </th>
 
-                            <td 
-                                class="px-6 py-[16px] text-black font-medium"
-                            >
+                            <td class="px-6 py-[16px] text-black font-medium">
                                 {{ $order->created_at}}
                             </td>
 
-                            <td 
-                                class="px-6 py-[16px] text-black font-medium"
-                            >
+                            <td class="px-6 py-[16px] text-black font-medium">
                                 ₹ {{ $order->grand_total}}
                             </td>
 
-                            <td 
-                                class="px-6 py-[16px] text-black font-medium"
-                            > 
+                            <td class="px-6 py-[16px] text-black font-medium"> 
                                 @switch($order->status)
                                     @case('processing')
 
@@ -110,9 +107,7 @@
                                 @endswitch
                             </td>
 
-                            <td 
-                                class="px-6 py-[16px] text-black"
-                            >
+                            <td class="px-6 py-[16px] text-black">
                                 <a 
                                     href="{{ route('shop.customers.account.orders.view', $order->id) }}" 
                                     class=" block bg-[position:-74px_-66px] bs-main-sprite w-[20px] h-[20px] font-medium" 
@@ -163,7 +158,8 @@
             </div>
         </div>
     @else
-        <div class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center">
+        {{-- Orders Empty Page --}}
+        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
             <img 
                 class="" 
                 src="{{ bagisto_asset('images/empty-dwn-product.png') }}" 
