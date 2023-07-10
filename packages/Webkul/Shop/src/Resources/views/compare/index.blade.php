@@ -195,7 +195,7 @@
 
                             this.items = [];
 
-                            this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
+                            this.$emitter.emit('add-flash', { type: 'success', message:  "{{ trans('shop::app.compare.remove-all-success') }}" });
 
                             return;
                         }

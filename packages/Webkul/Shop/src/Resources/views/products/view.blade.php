@@ -370,14 +370,14 @@
 
                                 this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.add-to-compare')" });
+                                this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.products.add-to-compare') }}" });
                             } else {
-                                this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.products.already-in-compare')" });
+                                this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('shop::app.products.already-in-compare') }}" });
                             }
                         } else {
                             this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.products.add-to-compare')" });
+                            this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.products.add-to-compare') }}" });
                         }
                     },
 
