@@ -96,11 +96,11 @@
                         },
 
                         applied: {
-                            sort: '{{ $toolbar->getOrder($params)['value'] }}',
+                            sort: '{{ $toolbar->getOrder(isset($params) ? $params : [])['value'] }}',
 
-                            limit: '{{ $toolbar->getLimit($params) }}',
+                            limit: '{{ $toolbar->getLimit(isset($params) ? $params : [] ) }}',
 
-                            mode: '{{ $toolbar->getMode($params) }}',
+                            mode: '{{ $toolbar->getMode(isset($params) ? $params : [] ) }}',
                         }
                     }
                 };

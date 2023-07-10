@@ -1,24 +1,13 @@
 <x-shop::layouts>
-    {{-- Hero Image --}}
-    <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
-        <div>
-            <img
-                class="rounded-[12px]"
-                src='{{ bagisto_asset("images/product-hero.png") }}'
-            >
-        </div>
-    </div>
-
-    {{-- Category Vue Component --}}
-    <v-category>
-        {{-- Category Shimmer Effect --}}
+    {{-- Product Listing --}}
+    <v-search>
         <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
-    </v-category>
+    </v-search>
 
     @pushOnce('scripts')
         <script 
             type="text/x-template" 
-            id="v-category-template"
+            id="v-search-template"
         >
             <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
                 <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
@@ -51,7 +40,6 @@
                                     </x-shop::products.card>
                                 </template>
 
-                                <!-- Empty Products Container -->
                                 <template v-else>
                                     <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
@@ -68,7 +56,7 @@
                         <div v-else>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:grid-cols-1">
+                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                                 </div>
                             </template>
@@ -76,7 +64,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:grid-cols-1">
+                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -85,7 +73,6 @@
                                     </div>
                                 </template>
 
-                                <!-- Empty Products Container -->
                                 <template v-else>
                                     <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
@@ -100,7 +87,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="bs-secondary-button block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] mt-[60px] text-center"
+                            class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
                             @click="loadMoreProducts"
                             v-if="links.next"
                         >
@@ -112,8 +99,8 @@
         </script>
 
         <script type="module">
-            app.component('v-category', {
-                template: '#v-category-template',
+            app.component('v-search', {
+                template: '#v-search-template',
 
                 data() {
                     return {
@@ -163,7 +150,7 @@
                     },
 
                     getProducts() {
-                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", { 
+                        this.$axios.get(("{{ route('shop.api.products.index', ['name' => request('query')]) }}"), { 
                             params: this.queryParams 
                         })
                             .then(response => {
