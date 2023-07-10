@@ -187,8 +187,6 @@ class Core
 
     /**
      * Returns default channel locale code.
-     *
-     * @return \Webkul\Core\Contracts\locale
      */
     public function getDefaultChannelLocaleCode(): string
     {
