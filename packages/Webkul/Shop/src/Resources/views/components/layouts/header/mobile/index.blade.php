@@ -24,7 +24,7 @@
                 width="300"
             >
                 <x-slot:toggle>
-                    <span class="icon-hamburger text-[24px]"></span>
+                    <span class="icon-hamburger text-[24px] cursor-pointer"></span>
                 </x-slot:toggle>
                 
                 <x-slot:header>
@@ -45,11 +45,11 @@
                 <x-slot:footer></x-slot:footer>
             </x-shop::drawer>
 
-            <a href="{{ route('shop.home.index') }}">
-                <img
-                    class="h-[40px]"
-                    src="{{ bagisto_asset('images/logo.png') }}"
-                >
+            <a 
+                href="{{ route('shop.home.index') }}" 
+                class="h-[36px] inline-block"
+            >
+                <img src="{{ bagisto_asset('images/logo.png') }}">
             </a>
         </div>
 

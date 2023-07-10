@@ -39,7 +39,7 @@
                             @endif
 
                             {{-- Dropdown Actions --}}
-                            <x-shop::dropdown>
+                            <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
                                     <span class="icon-more text-[24px] text-[#7D7D7D] cursor-pointer"></span>
                                 </x-slot:toggle>

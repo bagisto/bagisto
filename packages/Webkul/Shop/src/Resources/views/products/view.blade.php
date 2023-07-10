@@ -344,9 +344,17 @@
                                     'product_id': productId
                                 })
                                 .then(response => {
-                                    alert(response.data.data.message);
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                 })
-                                .catch(error => {});
+                                .catch(error => {
+                                    if ([400, 422].includes(error.response.status)) {
+                                        this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.data.message });
+
+                                        return;
+                                    }
+
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
+                                });
 
                             return;
                         }
@@ -362,14 +370,14 @@
 
                                 this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
 
-                                alert('Added product in compare.');
+                                this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.products.add-to-compare') }}" });
                             } else {
-                                alert('Product is already added in compare.');
+                                this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('shop::app.products.already-in-compare') }}" });
                             }
                         } else {
                             this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
 
-                            alert('Added product in compare.');
+                            this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.products.add-to-compare') }}" });
                         }
                     },
 

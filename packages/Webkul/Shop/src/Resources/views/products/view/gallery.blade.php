@@ -68,6 +68,13 @@
                 v-for="image in mediaContents.images"
             >
         </div>
+        <div class="hidden max-sm:flex gap-[30px] overflow-auto scrollbar-hide">
+            <img
+                class="rounded-[12px] min-w-[100px] max-h-[100px]" 
+                :src="image.large_image_url"
+                v-for="image in mediaContents.images"
+            />
+        </div>
     </script>
 
     <script type="module">
