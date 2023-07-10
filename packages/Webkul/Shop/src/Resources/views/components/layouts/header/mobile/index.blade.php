@@ -25,8 +25,6 @@
             >
                 <x-slot:toggle>
                     <span class="icon-hamburger text-[24px] cursor-pointer"></span>
-        
-                    
                 </x-slot:toggle>
 
                 <x-slot:header>
@@ -69,7 +67,7 @@
             </x-shop::drawer>
 
             <a 
-                herf="{{ route('shop.home.index') }}" 
+                href="{{ route('shop.home.index') }}" 
                 class="h-[36px] inline-block"
             >
                 <img src="{{ bagisto_asset('images/logo.png') }}">
