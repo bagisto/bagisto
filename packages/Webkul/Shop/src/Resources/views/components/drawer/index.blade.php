@@ -49,10 +49,21 @@
             </div>
 
             <!-- Overlay -->
-            <div
-                class="w-full bg-[#00000025] absolute inset-x-0 inset-y-0 z-[1]"
-                v-show="isOpen"
-            ></div>
+            <transition
+                tag="div"
+                name="drawer-overlay"
+                enter-class="ease-out duration-300"
+                enter-from-class="opacity-0"
+                enter-to-class="opacity-100"
+                leave-class="ease-in duration-200"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+            >
+                <div
+                    class="fixed inset-0 hidden bg-gray-500 bg-opacity-50 transition-opacity md:block z-[1]"
+                    v-show="isOpen"
+                ></div>
+            </transition>
 
             <!-- Content -->
             <transition
