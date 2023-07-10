@@ -4,8 +4,10 @@ namespace Webkul\Shop\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Webkul\Shop\Contracts\ThemeCustomization as ThemeCustomizationContract;
 
-class ThemeCustomization extends Model
+
+class ThemeCustomization extends Model implements ThemeCustomizationContract
 {
     use HasFactory;
 

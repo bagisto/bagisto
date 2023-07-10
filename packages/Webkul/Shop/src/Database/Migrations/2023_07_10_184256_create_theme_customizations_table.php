@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('theme_customizations', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->comment('Type of widget');
-            $table->string('name')->comment('Comment');
+            $table->string('type');
+            $table->string('name');
             $table->text('options');
             $table->integer('sort_order');
             $table->boolean('status');

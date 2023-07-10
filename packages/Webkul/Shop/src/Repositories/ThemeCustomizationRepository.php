@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Sales\Repositories;
+namespace Webkul\Shop\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Shop\Contracts\ThemeCustomization;
