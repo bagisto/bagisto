@@ -30,7 +30,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
 
         Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
 
-        Route::get('{id}/max-price', 'getProductMaxPrice')->name('shop.api.categories.max_price');
+        Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
