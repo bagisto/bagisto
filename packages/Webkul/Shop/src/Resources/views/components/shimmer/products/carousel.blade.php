@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="flex gap-8 mt-[60px] overflow-auto scrollbar-hide max-sm:mt-[20px]">
+    <div class="flex gap-8 mt-[40px] overflow-auto scrollbar-hide max-sm:mt-[20px]">
         <x-shop::shimmer.products.cards.grid
             class="min-w-[291px]"
             :count="4"

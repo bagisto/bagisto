@@ -70,6 +70,13 @@ class Customer extends Authenticatable implements CustomerContract
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['image_url'];
+
+    /**
      * Create a new factory instance for the model.
      *
      * @return \Webkul\Customer\Database\Factories\CustomerFactory

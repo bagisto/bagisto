@@ -25,9 +25,9 @@
         <x-slot:toggle>
             {{-- Dropdown Toggler --}}
             <div class="flex gap-[10px] cursor-pointer">
-                @if (! empty(core()->getCurrentLocale()->image_url))
+                @if (! empty(core()->getCurrentLocale()->logo_url))
                     <img 
-                        src="{{ core()->getCurrentLocale()->image_url }}"
+                        src="{{ core()->getCurrentLocale()->logo_url }}"
                         alt="Default locale"
                         width="20"
                         height="20"
@@ -79,7 +79,7 @@
                 @click="change(locale)"                  
             >
                 <img 
-                    :src="locale.image_url"
+                    :src="locale.logo_url"
                     width="20"
                     height="20"
                 />
