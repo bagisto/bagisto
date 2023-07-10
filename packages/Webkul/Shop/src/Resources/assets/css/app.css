@@ -348,6 +348,7 @@
         background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
         background-size: 1250px 100%;
     }
+
     @keyframes skeleton {
         0% {
             background-position: -1250px 0;
@@ -355,6 +356,16 @@
 
         100% {
             background-position: 1250px 0;
+        }
+    }
+
+    @keyframes on-fade {
+        0% {
+            opacity: 0;
+        }
+        
+        100% {
+            opacity: 1;
         }
     }
 

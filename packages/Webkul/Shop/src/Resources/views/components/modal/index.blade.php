@@ -33,37 +33,58 @@
                 </slot>
             </div>
 
-            <div v-if="isOpen">
-                <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <transition
+                tag="div"
+                name="modal-overlay"
+                enter-class="ease-out duration-300"
+                enter-from-class="opacity-0"
+                enter-to-class="opacity-100"
+                leave-class="ease-in duration-200"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+            >
+                <div
+                    class="fixed inset-0 hidden bg-gray-500 bg-opacity-50 transition-opacity md:block z-[1]"
+                    v-show="isOpen"
+                ></div>
+            </transition>
 
-                    <div class="fixed inset-0 z-10 overflow-y-auto">
-                        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                            <div class="w-full bg-[#F5F5F5] max-w-[595px] z-[999] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
-                                <div>
-                                    <div class="flex justify-between items-center gap-[20px] p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
-                                        <slot name="header">
-                                            Default Header
-                                        </slot>
-
-                                        <span
-                                            class="icon-cancel text-[30px] cursor-pointer"
-                                            @click="toggle"
-                                        >
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <slot name="content">
-                                        Default Content
+            <transition
+                tag="div"
+                name="modal-content"
+                enter-class="ease-out duration-300"
+                enter-from-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                enter-to-class="opacity-100 translate-y-0 md:scale-100"
+                leave-class="ease-in duration-200"
+                leave-from-class="opacity-100 translate-y-0 md:scale-100"
+                leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+            >
+                <div class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen">
+                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div class="w-full bg-[#F5F5F5] max-w-[595px] z-[999] absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]">
+                            <div>
+                                <div class="flex justify-between items-center gap-[20px] p-[30px] bg-white border-b-[1px] border-[#E9E9E9]">
+                                    <slot name="header">
+                                        Default Header
                                     </slot>
+
+                                    <span
+                                        class="icon-cancel text-[30px] cursor-pointer"
+                                        @click="toggle"
+                                    >
+                                    </span>
                                 </div>
+                            </div>
+
+                            <div>
+                                <slot name="content">
+                                    Default Content
+                                </slot>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </transition>
         </div>
     </script>
 
