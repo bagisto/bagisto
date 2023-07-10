@@ -239,6 +239,10 @@
                 },
 
                 isImage(file) {
+                    if (! file.name) {
+                        return;
+                    }
+
                     return file.name.match(/\.(jpg|jpeg|png|gif)$/i);
                 },
 
@@ -270,6 +274,10 @@
 
                         this.appliedRules = this.rules;
                         
+                        return;
+                    }
+
+                    if (typeof this.uploadedFiles == 'object') {
                         return;
                     }
 
