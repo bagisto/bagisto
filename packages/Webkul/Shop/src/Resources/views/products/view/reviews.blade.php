@@ -188,7 +188,7 @@
                             <v-product-review-item
                                 v-for='review in reviews'
                                 :review="review"
-                            ></v-product-review>
+                            ></v-product-review-item>
                         </div>
 
                         <button

@@ -79,7 +79,7 @@
                                                 class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                                                 type="submit"
                                             >
-                                               @lang('shop::app.customers.account.save')
+                                               @lang('shop::app.checkout.cart.coupon.button-title')
                                             </button>
                                         </div>
                                     </div>
