@@ -103,6 +103,8 @@
 
                 <input
                     type="text"
+                    name="query"
+                    value="{{ request('query') }}"
                     class="bg-[#F5F5F5] rounded-lg block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
                     placeholder="Search for products"
                     required

@@ -45,9 +45,15 @@ class CategoryController extends APIController
     /**
      * Get filterable attributes for category.
      */
-    public function getAttributes($categoryId): JsonResource
+    public function getAttributes(): JsonResource
     {
-        $category = $this->categoryRepository->findOrFail($categoryId);
+        if (! request('category_id')) {
+            $filterableAttributes = $this->attributeRepository->getFilterableAttributes();
+
+            return AttributeResource::collection($filterableAttributes);
+        }
+
+        $category = $this->categoryRepository->findOrFail(request('category_id'));
 
         if (empty($filterableAttributes = $category->filterableAttributes)) {
             $filterableAttributes = $this->attributeRepository->getFilterableAttributes();
@@ -59,9 +65,9 @@ class CategoryController extends APIController
     /**
      * Get product maximum price.
      */
-    public function getProductMaxPrice($categoryId): JsonResource
+    public function getProductMaxPrice($categoryId = null): JsonResource
     {
-        $maxPrice = $this->productRepository->getMaxPriceByCategory($categoryId);
+        $maxPrice = $this->productRepository->getMaxPrice(['category_id' => $categoryId]);
 
         return new JsonResource([
             'max_price' => core()->convertPrice($maxPrice),

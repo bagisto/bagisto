@@ -155,13 +155,15 @@
 
             methods: {
                 getFilters() {
-                    this.$axios.get('{{ route("shop.api.categories.attributes", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.attributes") }}', {
+                            category_id: "{{ request('category_id') }}",
+                        })
                         .then((response) => {
                             this.isLoading = false;
 
                             this.filters.available = response.data.data;
                         })
-                        .catch(error => {
+                        .catch((error) => {
                             console.log(error);
                         });
                 },
@@ -306,7 +308,7 @@
 
             methods: {
                 getMaxPrice() {
-                    this.$axios.get('{{ route("shop.api.categories.max_price", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.max_price", $category->id ?? '') }}')
                         .then((response) => {
                             this.isLoading = false;
 
@@ -318,7 +320,7 @@
 
                             ++this.refreshKey;
                         })
-                        .catch(error => {
+                        .catch((error) => {
                             console.log(error);
                         });
                 },
