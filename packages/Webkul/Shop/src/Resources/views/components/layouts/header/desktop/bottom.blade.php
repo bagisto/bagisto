@@ -49,7 +49,7 @@
 
                     @if ($firstLevelCategory->children->isNotEmpty())
                         <div
-                            class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto  ltr:-left-[35px] rtl:-right-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
+                            class="opacity-0 transition duration-300 ease-out translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto  ltr:-left-[35px] rtl:-right-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
                         >
                             <div class="flex aigns gap-x-[70px] justify-between">
                                 @foreach ($firstLevelCategory->children->chunk(2) as $pair)

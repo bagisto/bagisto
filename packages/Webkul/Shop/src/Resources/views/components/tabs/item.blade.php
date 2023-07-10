@@ -17,6 +17,7 @@
     <script type="text/x-template" id="v-tab-item-template">
         <div
             v-if="isActive"
+            class="animate-[on-fade_0.5s_ease-in-out]"
         >
             <slot></slot>
         </div>
