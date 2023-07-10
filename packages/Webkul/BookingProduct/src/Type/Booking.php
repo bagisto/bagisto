@@ -240,7 +240,7 @@ class Booking extends Virtual
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
-            return trans('shop::app.checkout.cart.quantity.inventory_warning');
+            return trans('shop::app.checkout.cart.inventory_warning');
         }
 
         $products = $typeHelper->addAdditionalPrices($products);
