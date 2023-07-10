@@ -303,6 +303,8 @@ return [
                 'sale'               => 'Sale',
                 'review-description' => 'Be the first to review this product',
                 'add-to-cart'        => 'Product added successfully',
+                'add-to-compare'     => 'Item added successfully to compare list.',
+                'already-in-compare' => 'Item is already added to compare list.',
             ],
 
             'carousel' => [
@@ -318,6 +320,8 @@ return [
     'products'  => [
         'reviews'                => 'Reviews',
         'add-to-cart'            => 'Add To Cart',
+        'add-to-compare'         => 'Product added in compare.',
+        'already-in-compare'     => 'Product is already added in compare.',
         'buy-now'                => 'Buy Now',
         'compare'                => 'Compare',
         'rating'                 => 'Rating',
