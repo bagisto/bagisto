@@ -32,113 +32,80 @@
                         </div>
                     </div>
 
-                    <div v-if="wishlist.length" class="overflow-auto journal-scroll">
-                        <div v-for="item in wishlist">
-                            <div class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col">
-                                <div class="grid gap-[30px] flex-1">
-                                    <div class="grid gap-y-[25px]">
+                    <div 
+                        v-if="wishlist.length" 
+                        v-for="item in wishlist"
+                        class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col"
+                    >
+                        <div class="grid gap-[30px] flex-1">
+                            <div class="grid gap-y-[25px]">
+                                <!-- Wishlist item -->
+                                <div class="flex gap-x-[10px] justify-between border-b-[1px] border-[#E9E9E9] pb-[18px]">
+                                    <div class="flex gap-x-[20px]">
+                                        <div class="">
+                                            <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
+                                                <!-- Wishlist Item Image -->
+                                                <x-shop::shimmer.image
+                                                    class="max-w-[110px] max-h-[110px] rounded-[12px]" 
+                                                    ::src="item.product.base_image.small_image_url"                                         
+                                                >
+                                                </x-shop::shimmer.image>
+                                            </a>
+                                        </div>
 
-                                        <!-- Wishlist item -->
-                                        <div class="flex gap-x-[10px] justify-between border-b-[1px] border-[#E9E9E9] pb-[18px]">
-                                            <div class="flex gap-x-[20px]">
-                                                <div class="">
-                                                    <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
-                                                        <!-- Wishlist Item Image -->
-                                                        <x-shop::shimmer.image
-                                                            class="max-w-[110px] max-h-[110px] rounded-[12px]" 
-                                                            ::src="item.product.base_image.small_image_url"                                         
+                                        <div class="grid gap-y-[10px]">
+                                            <p 
+                                                class="text-[16px] font-medium" 
+                                                v-text="item.product.name"
+                                            >
+                                            </p>
+
+                                            <!--Wishlist Item attributes -->
+                                            <div 
+                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                v-if="item.options.length"
+                                            >
+                                                <div class="grid gap-[8px]">
+                                                    <div class="">
+                                                        <p
+                                                            class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                                            @click="item.option_show = ! item.option_show"
                                                         >
-                                                        </x-shop::shimmer.image>
-                                                    </a>
-                                                </div>
-
-                                                <div class="grid gap-y-[10px]">
-                                                    <p 
-                                                        class="text-[16px] font-medium" 
-                                                        v-text="item.product.name"
-                                                    >
-                                                    </p>
-
-                                                    <!--Wishlist Item attributes -->
-                                                    <div 
-                                                        class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
-                                                        v-if="item.options.length"
-                                                    >
-                                                        <div class="grid gap-[8px]">
-                                                            <div class="">
-                                                                <p
-                                                                    class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
-                                                                    @click="item.option_show = ! item.option_show"
-                                                                >
-                                                                    @lang('shop::app.customers.account.wishlist.see-details')
-                
-                                                                    <span
-                                                                        class="text-[24px]"
-                                                                        :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
-                                                                    ></span>
-                                                                </p>
-                                                            </div>
-                
-                                                            <div 
-                                                                class="grid gap-[8px]" 
-                                                                v-show="item.option_show"
+                                                            @lang('shop::app.customers.account.wishlist.see-details')
+        
+                                                            <span
+                                                                class="text-[24px]"
+                                                                :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                                             >
-                                                                <div v-for="option in item.options">
-                                                                    <p class="text-[14px] font-medium">
-                                                                        @{{ option.attribute_name + ':' }}
-                                                                    </p>
-                
-                                                                    <p class="text-[14px]">
-                                                                        @{{ option.option_label }}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="sm:hidden">
-                                                        <p 
-                                                            class="text-[18px] font-semibold" 
-                                                            v-html="item.product.min_price"
-                                                        >
+                                                            </span>
                                                         </p>
-
-                                                        <!--Wishlist Item removed button-->
-                                                        <a 
-                                                            class="text-[16px] text-[#4D7EA8] cursor-pointer" 
-                                                            @click="remove(item.id)"
-                                                        >
-                                                            @lang('shop::app.customers.account.wishlist.remove')
-                                                        </a>
                                                     </div>
-
-                                                    <div class="flex gap-[20px] flex-wrap">
-                                                        <x-shop::quantity-changer
-                                                            name="quantity"
-                                                            class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[40px]"
-                                                            @change="setItemQuantity($event, item)"
-                                                        >
-                                                        </x-shop::quantity-changer>
-
-                                                        <!--Wishlist Item Move-to-cart-->
-                                                        <button
-                                                            type="button"
-                                                            class="bs-primary-button block text-base w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-center"
-                                                            @click="moveToCart(item.id)"
-                                                        >
-                                                            @lang('shop::app.customers.account.wishlist.move-to-cart')
-                                                        </button>   
+        
+                                                    <div 
+                                                        class="grid gap-[8px]" 
+                                                        v-show="item.option_show"
+                                                    >
+                                                        <div v-for="option in item.options">
+                                                            <p class="text-[14px] font-medium">
+                                                                @{{ option.attribute_name + ':' }}
+                                                            </p>
+        
+                                                            <p class="text-[14px]">
+                                                                @{{ option.option_label }}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="max-sm:hidden">
+                                            <div class="sm:hidden">
                                                 <p 
                                                     class="text-[18px] font-semibold" 
                                                     v-html="item.product.min_price"
                                                 >
                                                 </p>
 
+                                                <!--Wishlist Item removed button-->
                                                 <a 
                                                     class="text-[16px] text-[#4D7EA8] cursor-pointer" 
                                                     @click="remove(item.id)"
@@ -146,7 +113,40 @@
                                                     @lang('shop::app.customers.account.wishlist.remove')
                                                 </a>
                                             </div>
+
+                                            <div class="flex gap-[20px] flex-wrap">
+                                                <x-shop::quantity-changer
+                                                    name="quantity"
+                                                    class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[40px]"
+                                                    @change="setItemQuantity($event, item)"
+                                                >
+                                                </x-shop::quantity-changer>
+
+                                                <!--Wishlist Item Move-to-cart-->
+                                                <button
+                                                    type="button"
+                                                    class="bs-primary-button block text-base w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-center"
+                                                    @click="moveToCart(item.id)"
+                                                >
+                                                    @lang('shop::app.customers.account.wishlist.move-to-cart')
+                                                </button>   
+                                            </div>
                                         </div>
+                                    </div>
+
+                                    <div class="max-sm:hidden">
+                                        <p 
+                                            class="text-[18px] font-semibold" 
+                                            v-html="item.product.min_price"
+                                        >
+                                        </p>
+
+                                        <a 
+                                            class="text-[16px] text-[#4D7EA8] cursor-pointer" 
+                                            @click="remove(item.id)"
+                                        >
+                                            @lang('shop::app.customers.account.wishlist.remove')
+                                        </a>
                                     </div>
                                 </div>
                             </div>
