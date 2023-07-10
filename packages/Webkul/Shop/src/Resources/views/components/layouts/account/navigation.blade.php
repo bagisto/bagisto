@@ -17,6 +17,7 @@
 @endphp
 
 <div class="grid grid-cols-[1fr] panel-side max-w-[380px] gap-[30px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] max-md:max-w-full">
+    {{-- Account Profile Hero Section --}}
     <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center px-[20px] py-[25px] border border-[#E9E9E9] rounded-[12px]">
         <div class="">
             <img
@@ -32,6 +33,7 @@
         </div>
     </div>
 
+    {{-- Account Navigation Menus --}}
     @foreach ($menu->items as $menuItem)
         <div class="max-md:border max-md:border-t-0 max-md:border-r-[1px] max-md:border-l-[1px] max-md:border-b-[1px] max-md:border-[#E9E9E9]   max-md:rounded-[6px]">
             <v-account-navigation>
