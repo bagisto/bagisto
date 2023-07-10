@@ -312,7 +312,12 @@
                         .then((response) => {
                             this.isLoading = false;
 
-                            this.allowedMaxPrice = response.data.data.max_price;
+                            /**
+                             * If data is zero, then default price will be displayed.
+                             */
+                            if (response.data.data.max_price) {
+                                this.allowedMaxPrice = response.data.data.max_price;
+                            }
 
                             if (! this.defaultPriceRange) {
                                 this.priceRange = [0, this.allowedMaxPrice].join(',');

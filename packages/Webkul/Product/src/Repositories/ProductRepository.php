@@ -518,6 +518,6 @@ class ProductRepository extends Repository
             $query->where('product_categories.category_id', $params['category_id']);
         }
 
-        return $query->max('min_price');
+        return $query->max('min_price') ?? 0;
     }
 }
