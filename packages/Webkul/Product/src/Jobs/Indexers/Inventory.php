@@ -56,8 +56,6 @@ class Inventory implements ShouldQueue
                 ProductRepository::class
             )
                 ->findOrFail($product_id);
-
-            return;
         });
 
         app(Indexer::class)
