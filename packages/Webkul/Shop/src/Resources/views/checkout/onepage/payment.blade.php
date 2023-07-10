@@ -10,7 +10,7 @@
     <script type="text/x-template" id="v-payment-method-template">
         <div class="mt-[30px]  mb-[30px]">
             <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
-                {{-- Payment Method shimmer Effect --}}
+                <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
             </template>
     
@@ -66,7 +66,7 @@
                                         </p>
                                     </label>
 
-                                    {{-- Todo implement the additionalDetails --}}
+                                    <!-- Todo implement the additionalDetails -->
                                     {{-- \Webkul\Payment\Payment::getAdditionalDetails($payment['method'] --}}
                                 </div>
                             </div>

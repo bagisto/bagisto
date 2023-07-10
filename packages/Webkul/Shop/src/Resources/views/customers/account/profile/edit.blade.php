@@ -14,10 +14,11 @@
         class="rounded mt-[30px]"
         enctype="multipart/form-data"
     >
-        <x-shop::form.control-group class="mb-4 mt-[15px]">
+        <x-shop::form.control-group class="mt-[15px]">
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
+                class="!p-0 rounded-[12px] text-gray-700 mb-0"
                 rules="required"
                 :label="trans('Image')"
                 :is-multiple="false"

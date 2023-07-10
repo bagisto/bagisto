@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <!-- size -->
+            <!-- Size -->
             <div class="mt-[20px]">
                 <h3 class="w-[20%] h-[36px] mb-[15px] shimmer"></h3>
 

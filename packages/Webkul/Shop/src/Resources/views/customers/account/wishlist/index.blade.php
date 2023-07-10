@@ -10,12 +10,12 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-wishlist-products-template">
             <div>
-                {{-- Wishlist shimmer Effect --}}
+                <!-- Wishlist Shimmer Effect -->
                 <template v-if="isLoading">
                     <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
                 </template>
 
-                {{-- Wishlist Information --}}
+                <!-- Wishlist Information -->
                 <template v-else>
                     <div class="flex justify-between items-center overflow-auto journal-scroll">
                         <h2 class="text-[26px] font-medium">
@@ -37,7 +37,7 @@
                             <div class="flex gap-[40px] py-[25px] items-center border-b-[1px] border-[#E9E9E9] justify-between">
                                 <div class="flex gap-x-[15px] max-w-[276px] min-w-[276px]">
 
-                                    {{-- Wishlist product Image --}}
+                                    <!-- Wishlist Product Image -->
                                     <div class="">
                                         <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
                                             <x-shop::shimmer.image

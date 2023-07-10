@@ -68,7 +68,7 @@
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
                             <div
-                                class="flex px-[25px] py-[20px] justify-between border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-[#E9E9E9] rounded-t-[6px]' : '' }}"
+                                class="flex px-[25px] py-[20px] justify-between border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-[#E9E9E9]' : '' }}"
                             >
                                 <p class="flex gap-x-[15px] text-[18px] font-medium items-center">
                                     <span class="{{ $subMenuItem['icon'] }} bg-[position:-7px_-41px] text-[22px]"></span>
@@ -94,7 +94,7 @@
                     @foreach ($menuItem['children'] as $subMenuItem)
                         <a href="{{ $subMenuItem['url'] }}">
                             <div
-                                class="flex px-[25px] py-[20px] justify-between border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-[#E9E9E9] rounded-t-[6px]' : '' }}"
+                                class="flex px-[25px] py-[20px] justify-between border-t-[1px] border-[#E9E9E9] hover:bg-[#f3f4f682] cursor-pointer {{ request()->routeIs($subMenuItem['route']) ? 'bg-[#E9E9E9]' : '' }}"
                             >
                                 <p class="flex gap-x-[15px] text-[18px] font-medium items-center">
                                     <span class="{{ $subMenuItem['icon'] }} bg-[position:-7px_-41px] text-[22px]"></span>

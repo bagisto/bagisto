@@ -1,9 +1,11 @@
 {!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
+<!-- Filters Vue Compoment -->
 <v-filters
     @filter-applied="setFilters('filter', $event)"
     @filter-clear="clearFilters('filter', $event)"
 >
+    {{-- Category Filter Shimmer Effect --}}
     <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
 </v-filters>
 
@@ -16,9 +18,10 @@
             <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
         </template>
 
-        {{-- Filters Container --}}
+        <!-- Filters Container -->
         <template v-else>
             <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
+                <!-- Filters Header Container -->
                 <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
                     <p class="text-[18px] font-semibold ">
                         @lang('shop::app.categories.filters.filters')
@@ -29,6 +32,7 @@
                     </p>
                 </div>
 
+                <!-- Filters Items Vue Component -->
                 <v-filter-item
                     ref="filterItemComponent"
                     :key="filterIndex"
@@ -44,6 +48,7 @@
     <script type="text/x-template" id="v-filter-item-template">
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion>
+                <!-- Filter Item Header -->
                 <x-slot:header>
                     <div class="flex pb-[10px] justify-between items-center">
                         <p
@@ -54,8 +59,9 @@
                     </div>
                 </x-slot:header>
 
+                <!-- Filter Item Content -->
                 <x-slot:content>
-                    {{-- Price range filter --}}
+                    <!-- Price Range Filter -->
                     <ul v-if="filter.type === 'price'">
                         <li>
                             <v-price-filter
@@ -67,6 +73,7 @@
                         </li>
                     </ul>
 
+                    <!-- Checkbox Filter Options -->
                     <ul class="pb-3 text-sm text-gray-700" v-else>
                         <li
                             :key="option.id"
@@ -105,7 +112,7 @@
     <script type="text/x-template" id="v-price-filter-template">
         <div>
 
-            {{-- Price range filter shimmer --}}
+            <!-- Price range filter shimmer -->
             <template v-if="isLoading">
                 <x-shop::shimmer.range-slider></x-shop::shimmer.range-slider>
             </template>

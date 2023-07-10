@@ -13,7 +13,7 @@
             
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
                 <span v-if="! isCouponApplied">
-                    {{-- Apply Coupon modal --}}
+                    <!-- Apply Coupon modal -->
                     <x-shop::modal ref="couponModel">
                         <x-slot:toggle>
                             <span class="text-[#0A49A7] cursor-pointer">
