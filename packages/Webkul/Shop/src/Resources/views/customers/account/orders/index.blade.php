@@ -108,11 +108,8 @@
                             </td>
 
                             <td class="px-6 py-[16px] text-black">
-                                <a 
-                                    href="{{ route('shop.customers.account.orders.view', $order->id) }}" 
-                                    class=" block bg-[position:-74px_-66px] bs-main-sprite w-[20px] h-[20px] font-medium" 
-                                    aria-label="action"
-                                >
+                                <a href="{{ route('shop.customers.account.orders.view', $order->id) }}">
+                                    <span class="icon-eye text-[24px]"></span>
                                 </a>
                             </td>
                         </tr>
@@ -130,9 +127,9 @@
                         <li>
                             <a 
                                 href="#"
-                                class="flex items-center justify-center w-[35px] h-[37px] leading-normal text-[#7D7D7D] font-medium border border-[#E9E9E9] rounded-l-lg hover:bg-gray-100"
+                                class="flex items-center justify-center w-[35px] h-[37px] leading-normal font-medium border border-[#E9E9E9] rounded-l-lg hover:bg-gray-100"
                             >
-                                <span class="bg-[position:-32px_-41px] bs-main-sprite w-[9px] h-[20px]"></span>
+                                <span class="icon-arrow-left text-[24px]"></span>
                             </a>
                         </li>
 
@@ -148,9 +145,9 @@
                         <li>
                             <a 
                                 href="#"
-                                class="flex items-center justify-center w-[35px] h-[37px] leading-normal text-[#7D7D7D] font-medium border border-[#E9E9E9] rounded-r-lg hover:bg-gray-100"
+                                class="flex items-center justify-center w-[35px] h-[37px] leading-normal font-medium border border-[#E9E9E9] rounded-r-lg hover:bg-gray-100"
                             >
-                                <span class="bg-[position:-7px_-41px] bs-main-sprite w-[9px] h-[20px]"></span>
+                                <span class="icon-arrow-right text-[24px]"></span>
                             </a>
                         </li>
                     </ul>

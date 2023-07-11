@@ -353,11 +353,6 @@
         direction: rtl;
     }
 
-    .bs-main-sprite {
-        background-image: url('../images/bs-main-sprite.png');
-        background-repeat: no-repeat;
-    }
-
     .bs-primary-button {
         @apply  font-medium rounded-[12px] text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer;
     }

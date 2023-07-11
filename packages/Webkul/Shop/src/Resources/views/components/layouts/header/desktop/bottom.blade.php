@@ -28,7 +28,7 @@
             href="{{ route('shop.home.index') }}" 
             class="place-self-start -mt-[4px]"
         >
-            <img src="{{ bagisto_asset('images/logo.png') }}">
+            <img src="{{ bagisto_asset('images/logo.svg') }}">
         </a>
 
         <div class="flex items-center">
