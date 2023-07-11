@@ -117,7 +117,7 @@
                                             <div class="flex gap-[20px] flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
-                                                    class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[40px]"
+                                                    class="flex gap-x-[10px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-h-[40px]"
                                                     @change="setItemQuantity($event, item)"
                                                 >
                                                 </x-shop::quantity-changer>

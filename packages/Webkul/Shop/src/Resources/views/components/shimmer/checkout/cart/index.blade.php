@@ -4,10 +4,10 @@
     <div class="grid gap-y-[25px] flex-1">
         <!-- Cart Action -->
         <div class="max-sm:block flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
-            <div class="flex">
-                <div class="w-[24px] h-[25px] rounded-[4px] mt-[5px] shimmer"></div>
+            <div class="flex select-none items-center">
+                <div class="w-[24px] h-[25px] rounded-[4px] shimmer"></div>
 
-                <div class="ml-[10px] w-[215px] h-[36px] shimmer"></div>
+                <div class="ml-[10px] w-[165px] h-[28px] shimmer"></div>
             </div>
 
             <div class="max-sm:ml-[35px] max-sm:mt-[10px] w-[222px] h-[23px] shimmer"></div>

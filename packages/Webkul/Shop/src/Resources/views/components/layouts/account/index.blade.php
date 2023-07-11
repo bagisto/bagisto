@@ -5,7 +5,7 @@
         <div class="flex gap-[40px] mt-[30px] items-start max-lg:gap-[20px] max-md:grid">
             <x-shop::layouts.account.navigation />
 
-            <div class="flex-auto overflow-hidden">
+            <div class="flex-auto">
                 {{ $slot }}
             </div>
         </div>
