@@ -184,7 +184,8 @@
                                 </h1>
 
                                 <div
-                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]"
+                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition text-[24px]"
+                                    :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                     @click="addToWishlist"
                                 >
                                 </div>
@@ -302,6 +303,8 @@
 
                 data() {
                     return {
+                        isWishlist: Boolean('{{ auth()->guard()->user()?->wishlist_items->where('channel_id', core()->getCurrentChannel()->id)->where('product_id', $product->id)->count() }}'),
+
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
@@ -332,6 +335,8 @@
                                 product_id: "{{ $product->id }}"
                             })
                             .then(response => {
+                                this.isWishlist = ! this.isWishlist;
+
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});

@@ -64,7 +64,8 @@
                 <!-- Listing Mode Switcher -->
                 <div class="flex items-center gap-[20px]">
                     <span
-                        class="icon-listing text-[24px] cursor-pointer"
+                        class="text-[24px] cursor-pointer"
+                        :class="(filters.applied.mode === 'list') ? 'icon-listing-fill' : 'icon-listing'"
                         @click="changeMode('list')"
                     >
                     </span>

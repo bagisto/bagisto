@@ -27,34 +27,6 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-    .icon-grid-view-fill:before {
-        content: "\e919";
-    }
-
-    .icon-grid-view:before {
-        content: "\e93c";
-    }
-
-    .icon-error:before {
-        content: "\e937";
-    }
-
-    .icon-toast-done:before {
-        content: "\e938";
-    }
-
-    .icon-toast-error:before {
-        content: "\e939";
-    }
-
-    .icon-toast-exclamation-mark:before {
-        content: "\e93a";
-    }
-
-    .icon-toast-info:before {
-        content: "\e93b";
-    }
-
     .icon-add-new:before {
         content: "\e900";
     }
@@ -91,187 +63,241 @@
         content: "\e908";
     }
 
-    .icon-calendar:before {
+    .icon-box-fill:before {
         content: "\e909";
     }
 
-    .icon-camera-fill:before {
+    .icon-calendar:before {
         content: "\e90a";
     }
 
-    .icon-camera:before {
+    .icon-camera-fill:before {
         content: "\e90b";
     }
 
-    .icon-cancel:before {
+    .icon-camera:before {
         content: "\e90c";
     }
 
-    .icon-cart:before {
+    .icon-cancel:before {
         content: "\e90d";
     }
 
-    .icon-compare-1:before {
+    .icon-cart:before {
         content: "\e90e";
     }
 
-    .icon-compare:before {
+    .icon-check-box:before {
         content: "\e90f";
     }
 
-    .icon-dislike:before {
+    .icon-compare-1:before {
         content: "\e910";
     }
 
-    .icon-dollar-sign:before {
+    .icon-compare:before {
         content: "\e911";
     }
 
-    .icon-double-arrow:before {
+    .icon-dislike:before {
         content: "\e912";
     }
 
-    .icon-download:before {
+    .icon-dollar-sign:before {
         content: "\e913";
     }
 
-    .icon-email:before {
+    .icon-double-arrow:before {
         content: "\e914";
     }
 
-    .icon-eye:before {
+    .icon-download:before {
         content: "\e915";
     }
 
-    .icon-filter:before {
+    .icon-email:before {
         content: "\e916";
     }
 
-    .icon-flate-rate:before {
+    .icon-error:before {
         content: "\e917";
     }
 
-    .icon-Free-Shipping:before {
+    .icon-eye:before {
         content: "\e918";
     }
 
-    .icon-hamburger:before {
+    .icon-filter-1:before {
+        content: "\e919";
+    }
+
+    .icon-filter-fill:before {
         content: "\e91a";
     }
 
-    .icon-heart-1:before {
+    .icon-filter:before {
         content: "\e91b";
     }
 
-    .icon-heart:before {
+    .icon-flate-rate:before {
         content: "\e91c";
     }
 
-    .icon-left-arrow:before {
+    .icon-Free-Shipping:before {
         content: "\e91d";
     }
 
-    .icon-like:before {
+    .icon-grid-view-fill:before {
         content: "\e91e";
     }
 
-    .icon-listing:before {
+    .icon-grid-view:before {
         content: "\e91f";
     }
 
-    .icon-location:before {
+    .icon-hamburger:before {
         content: "\e920";
     }
 
-    .icon-minus:before {
+    .icon-heart-1:before {
         content: "\e921";
     }
 
-    .icon-more:before {
+    .icon-heart-2:before {
         content: "\e922";
+    }
+
+    .icon-heart-fill:before {
+        content: "\e923";
+    }
+
+    .icon-heart:before {
+        content: "\e924";
+    }
+
+    .icon-left-arrow:before {
+        content: "\e925";
+    }
+
+    .icon-like:before {
+        content: "\e926";
+    }
+
+    .icon-listing-fill:before {
+        content: "\e927";
+    }
+
+    .icon-listing:before {
+        content: "\e928";
+    }
+
+    .icon-location:before {
+        content: "\e929";
+    }
+
+    .icon-minus:before {
+        content: "\e92a";
+    }
+
+    .icon-more:before {
+        content: "\e92b";
         color: #7d7d7d;
     }
 
     .icon-orders:before {
-        content: "\e923";
-    }
-
-    .icon-pen:before {
-        content: "\e924";
-    }
-
-    .icon-plus:before {
-        content: "\e925";
-    }
-
-    .icon-product:before {
-        content: "\e926";
-    }
-
-    .icon-radio-select:before {
-        content: "\e927";
-    }
-
-    .icon-radio-unselect:before {
-        content: "\e928";
-    }
-
-    .icon-right-arrow:before {
-        content: "\e929";
-    }
-
-    .icon-search:before {
-        content: "\e92a";
-    }
-
-    .icon-share:before {
-        content: "\e92b";
-    }
-
-    .icon-sort-by:before {
         content: "\e92c";
     }
 
-    .icon-sort:before {
+    .icon-pen:before {
         content: "\e92d";
-        color: #7d7d7d;
     }
 
-    .icon-star-fill:before {
+    .icon-plus:before {
         content: "\e92e";
     }
 
-    .icon-star:before {
+    .icon-product:before {
         content: "\e92f";
     }
 
-    .icon-support:before {
+    .icon-radio-select:before {
         content: "\e930";
     }
 
-    .icon-truck:before {
+    .icon-radio-unselect:before {
         content: "\e931";
     }
 
-    .icon-check-box:before {
+    .icon-right-arrow:before {
         content: "\e932";
     }
 
-    .icon-uncheck:before {
+    .icon-search:before {
         content: "\e933";
     }
 
-    .icon-box-fill:before {
+    .icon-share:before {
+        content: "\e934";
+    }
+
+    .icon-sort-1:before {
         content: "\e935";
     }
 
-    .icon-tick:before {
+    .icon-sort-by:before {
         content: "\e936";
     }
 
-    .icon-users:before {
-        content: "\e934";
+    .icon-sort:before {
+        content: "\e937";
+    color: #7d7d7d;
     }
+
+    .icon-star-fill:before {
+        content: "\e938";
+    color: #ffb600;
+    }
+
+    .icon-star:before {
+        content: "\e939";
+    }
+
+    .icon-support:before {
+        content: "\e93a";
+    }
+
+    .icon-tick:before {
+        content: "\e93b";
+    }
+
+    .icon-toast-done:before {
+        content: "\e93c";
+    }
+
+    .icon-toast-error:before {
+        content: "\e93d";
+    }
+
+    .icon-toast-exclamation-mark:before {
+        content: "\e93e";
+    }
+
+    .icon-toast-info:before {
+        content: "\e93f";
+    }
+
+    .icon-truck:before {
+        content: "\e940";
+    }
+
+    .icon-uncheck:before {
+        content: "\e941";
+    }
+
+    .icon-users:before {
+        content: "\e942";
+    }
+      
 
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
