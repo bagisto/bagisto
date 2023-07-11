@@ -130,7 +130,7 @@
                                         @if (isset($item->additional['attributes']))
                                             <div>
                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
                                                 @endforeach
                                             </div>
                                         @endif
@@ -868,7 +868,6 @@
         </x-shop::tabs>
 
         <div class="flex gap-x-[64px] gap-y-[30px] flex-wrap justify-between pt-[26px] border-t-[1px] border-[#E9E9E9] mt-[42px]">
-
             {{-- Biiling Address --}}
             @if ($order->billing_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">

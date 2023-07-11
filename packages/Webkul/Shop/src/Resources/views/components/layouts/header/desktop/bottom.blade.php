@@ -14,7 +14,6 @@
     $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-
 @endphp
 
 <div
@@ -97,9 +96,7 @@
             </label>
 
             <div class="relative w-full">
-                <div
-                    class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none">
-                </div>
+                <div class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none"></div>
 
                 <input
                     type="text"
