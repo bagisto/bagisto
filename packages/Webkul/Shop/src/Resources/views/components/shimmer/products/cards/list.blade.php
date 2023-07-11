@@ -12,7 +12,8 @@
 
             <p class="w-[55%] h-[24px] shimmer"></p>
 
-            <div class="flex gap-4"> 
+            {{-- Needs to implement that in future --}}
+            <div class="hidden flex gap-4"> 
                 <span class="rounded-full w-[30px] h-[30px] block shimmer"></span> 
 
                 <span class="rounded-full w-[30px] h-[30px] block shimmer"></span> 

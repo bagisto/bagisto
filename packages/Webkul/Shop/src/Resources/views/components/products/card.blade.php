@@ -66,7 +66,8 @@
                 >
                 </div>
 
-                <div class="flex gap-4 mt-[8px]">
+                <!-- Needs to implement that in future -->
+                <div class="hidden flex gap-4 mt-[8px]">
                     <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]"></span>
 
                     <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#5C5C5C]"></span>
@@ -131,7 +132,8 @@
                 >   
                 </div> 
 
-                <div class="flex gap-4"> 
+                <!-- Needs to implement that in future -->
+                <div class="hidden flex gap-4"> 
                     <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]">
                     </span> 
 
