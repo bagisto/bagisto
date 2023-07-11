@@ -1,11 +1,11 @@
 @props(['position' => 'left'])
 
-{{-- <v-tabs
+<v-tabs
     position="{{ $position }}"
     {{ $attributes }}
-> --}}
+>
     <x-shop::shimmer.tabs></x-shop::shimmer.tabs>
-{{-- </v-tabs> --}}
+</v-tabs>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-tabs-template">
