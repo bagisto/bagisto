@@ -458,6 +458,7 @@ return [
                 'remove-selected-success'  => 'Selected items successfully removed from cart.',
                 'empty-product'            => 'You don’t have a product in your cart.',
                 'quantity-update'          => 'Quantity updated successfully',
+                'see-datails'              => 'See Details',
             ],
 
             'coupon'   => [
