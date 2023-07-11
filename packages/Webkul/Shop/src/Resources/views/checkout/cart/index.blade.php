@@ -46,7 +46,7 @@
                         <div class="grid gap-[30px] flex-1">
                             <!-- Cart Mass Action Container -->
                             <div class="max-sm:block flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
-                                <div class="select-none">
+                                <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
                                         id="select-all"
@@ -61,14 +61,14 @@
                                     >
                                     </label>
 
-                                    <span class="text-[26px] max-md:text-[22px] max-sm:text-[26px] ml-[10px]">
+                                    <span class="text-[20px] max-md:text-[22px] max-sm:text-[18px] ml-[10px]">
                                         @{{ selectedItemsCount }} Items Selected
                                     </span>
                                 </div>
 
                                 <div class="max-sm:ml-[35px] max-sm:mt-[10px]">
                                     <span
-                                        class="text-[16px] cursor-pointer" 
+                                        class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                         @click="removeSelectedItems"
                                     >
                                         @lang('Remove')
@@ -77,7 +77,7 @@
                                     <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
 
                                     <span
-                                        class="text-[16px] cursor-pointer" 
+                                        class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                         @click="moveToWishlistSelectedItems"
                                     >
                                         @lang('Move To Wishlist')
@@ -159,7 +159,7 @@
                                             <x-shop::quantity-changer
                                                 name="quantity"
                                                 ::value="item?.quantity"
-                                                class="flex gap-x-[20px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-[108px] max-h-[36px]"
+                                                class="flex gap-x-[10px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-w-max"
                                                 @change="setItemQuantity(item.id, $event)"
                                             >
                                             </x-shop::quantity-changer>
