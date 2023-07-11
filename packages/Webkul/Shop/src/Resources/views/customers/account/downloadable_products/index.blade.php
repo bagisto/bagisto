@@ -58,7 +58,7 @@
                                 <tr class="bg-white border-b">
                                     <th 
                                         scope="row" 
-                                        class="px-6 py-[16px] font-medium whitespace-nowrap text-black"
+                                        class="px-6 py-[16px] font-medium whitespace-nowrap text-black first:rounded-bl-[12px]"
                                     >
                                         {{ $item->order_id }}
                                     </th>
@@ -110,7 +110,7 @@
                                     </td>
 
                                     <td 
-                                        class="px-6 py-[16px] text-black font-medium "
+                                        class="px-6 py-[16px] text-black font-medium last:rounded-br-[12px]"
                                     > 
                                         {{ $item->download_bought }} - {{ $item->download_used }}
                                     </td>
