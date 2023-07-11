@@ -90,9 +90,9 @@ class Cart extends Model implements CartContract
     /**
      * Get all the attributes for the attribute groups.
      */
-    public function selected_shipping_rate(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    public function selected_shipping_rate()
     {
-        return $this->shipping_rates()
+        return $this->shipping_rates
             ->where('method', $this->shipping_method);
     }
 
@@ -102,7 +102,6 @@ class Cart extends Model implements CartContract
     public function getSelectedShippingRateAttribute()
     {
         return $this->selected_shipping_rate()
-            ->where('method', $this->shipping_method)
             ->first();
     }
 
