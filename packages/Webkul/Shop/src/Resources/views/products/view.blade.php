@@ -23,11 +23,11 @@
     </v-product>
 
     {{-- Information Section --}}
-    <div class="mt-[80px]">
+    <div class="1180:mt-[80px]">
         <x-shop::tabs position="center">
             {{-- Description Tab --}}
             <x-shop::tabs.item
-                class="container mt-[60px] !p-0"
+                class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.description')"
                 :is-selected="true"
             >
@@ -40,7 +40,7 @@
 
             {{-- Additional Information Tab --}}
             <x-shop::tabs.item
-                class="container mt-[60px] !p-0"
+                class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.additional-information')"
                 :is-selected="false"
             >
@@ -65,13 +65,79 @@
 
             {{-- Reviews Tab --}}
             <x-shop::tabs.item
-                class="container mt-[60px] !p-0"
+                class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.reviews')"
                 :is-selected="false"
             >
                 @include('shop::products.view.reviews')
             </x-shop::tabs.item>
         </x-shop::tabs>
+    </div>
+
+    {{-- Information Section --}}
+    <div class="container mt-[40px] max-1180:px-[20px] 1180:hidden">
+        {{-- Description Accordion --}}
+        <x-shop::accordion :is-active="true">
+            <x-slot:header>
+                <div class="flex justify-between mb-[20px] mt-[20px]">
+                    <p class="text-[16px] font-medium 1180:hidden">
+                        @lang('shop::app.products.description')
+                    </p>
+                </div>
+            </x-slot:header>
+
+            <x-slot:content>
+                <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px] mb-[20px]">
+                    {!! $product->description !!}
+                </p>
+            </x-slot:content>
+        </x-shop::accordion>
+
+        {{-- Additional Information Accordion --}}
+        <x-shop::accordion :is-active="false">
+            <x-slot:header>
+                <div class="flex justify-between mb-[20px] mt-[20px]">
+                    <p class="text-[16px] font-medium 1180:hidden">
+                        @lang('shop::app.products.additional-information')
+                    </p>
+                </div>
+            </x-slot:header>
+
+            <x-slot:content>
+                <div class="container mt-[20px] mb-[20px] max-1180:px-[20px]">
+                    <p class="text-[#7D7D7D] text-[18px] max-1180:text-[14px]">
+                        @foreach ($customAttributeValues as $customAttributeValue)
+                            <div class="grid">
+                                <p class="text-[16px] text-black">
+                                    {{ $customAttributeValue['label'] }}
+                                </p>
+                            </div>
+
+                            <div class="grid">
+                                <p class="text-[16px] text-[#7D7D7D]">
+                                    {{ $customAttributeValue['value']??'-' }}
+                                </p>
+                            </div>
+                        @endforeach
+                    </p>
+                </div>
+            </x-slot:content>
+        </x-shop::accordion>
+
+        {{-- Reviews Accordion --}}
+        <x-shop::accordion :is-active="false">
+            <x-slot:header>
+                <div class="flex justify-between mb-[20px] mt-[20px]">
+                    <p class="text-[16px] font-medium 1180:hidden">
+                        @lang('shop::app.products.reviews')
+                    </p>
+                </div>
+            </x-slot:header>
+
+            <x-slot:content>
+                @include('shop::products.view.reviews')
+            </x-slot:content>
+        </x-shop::accordion>
     </div>
 
     {{-- Featured Products --}}
@@ -111,14 +177,15 @@
                         @include('shop::products.view.gallery')
 
                         <!-- Details -->
-                        <div class="max-w-[590px] relative max-1180:px-[20px]">
+                        <div class="w-max max-sm:w-full relative max-1180:px-[20px]">
                             <div class="flex justify-between gap-[15px]">
                                 <h1 class="text-[30px] font-medium max-sm:text-[20px]">
                                     {{ $product->name }}
                                 </h1>
 
                                 <div
-                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition icon-heart text-[24px]"
+                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition text-[24px]"
+                                    :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                     @click="addToWishlist"
                                 >
                                 </div>
@@ -202,7 +269,7 @@
                             </button>
 
                             <!-- Share Buttons -->
-                            <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap">
+                            <div class="flex gap-[35px] mt-[40px] md:px-[35px] max-md:px-[80px] max-sm:px-[0px] max-sm:flex-wrap max-sm:justify-center">
                                 <div
                                     class=" flex justify-center items-center gap-[10px] cursor-pointer"
                                     @click="addToCompare({{ $product->id }})"
@@ -211,13 +278,15 @@
                                     @lang('shop::app.products.compare')
                                 </div>
 
-                                <div class="flex gap-[25px] max-sm:flex-wrap">
-                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer">
+                                <div class="flex gap-[25px]">
+                                    <div class="hidden max-md:flex justify-center items-center gap-[10px] cursor-pointer">
                                         <span class="icon-share text-[24px]"></span>
-                                        Share
+                                        <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . bagisto_asset($product->url_key)) }};end">Share</a>
                                     </div>
-                                    
-                                    {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+
+                                    <div class="max-md:hidden">
+                                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -234,6 +303,8 @@
 
                 data() {
                     return {
+                        isWishlist: Boolean('{{ auth()->guard()->user()?->wishlist_items->where('channel_id', core()->getCurrentChannel()->id)->where('product_id', $product->id)->count() }}'),
+
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
                     }
                 },
@@ -264,6 +335,8 @@
                                 product_id: "{{ $product->id }}"
                             })
                             .then(response => {
+                                this.isWishlist = ! this.isWishlist;
+
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
@@ -278,9 +351,17 @@
                                     'product_id': productId
                                 })
                                 .then(response => {
-                                    alert(response.data.data.message);
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                 })
-                                .catch(error => {});
+                                .catch(error => {
+                                    if ([400, 422].includes(error.response.status)) {
+                                        this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.data.message });
+
+                                        return;
+                                    }
+
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
+                                });
 
                             return;
                         }
@@ -296,14 +377,14 @@
 
                                 this.setStorageValue(this.getCompareItemsStorageKey(), existingItems);
 
-                                alert('Added product in compare.');
+                                this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.products.add-to-compare') }}" });
                             } else {
-                                alert('Product is already added in compare.');
+                                this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('shop::app.products.already-in-compare') }}" });
                             }
                         } else {
                             this.setStorageValue(this.getCompareItemsStorageKey(), [productId]);
 
-                            alert('Added product in compare.');
+                            this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.products.add-to-compare') }}" });
                         }
                     },
 

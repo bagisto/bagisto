@@ -303,6 +303,8 @@ return [
                 'sale'               => 'Sale',
                 'review-description' => 'Be the first to review this product',
                 'add-to-cart'        => 'Product added successfully',
+                'add-to-compare'     => 'Item added successfully to compare list.',
+                'already-in-compare' => 'Item is already added to compare list.',
             ],
 
             'carousel' => [
@@ -318,6 +320,8 @@ return [
     'products'  => [
         'reviews'                => 'Reviews',
         'add-to-cart'            => 'Add To Cart',
+        'add-to-compare'         => 'Product added in compare.',
+        'already-in-compare'     => 'Product is already added in compare.',
         'buy-now'                => 'Buy Now',
         'compare'                => 'Compare',
         'rating'                 => 'Rating',
@@ -328,6 +332,7 @@ return [
         'write-a-review'         => 'Write a Review',
         'stars'                  => 'Stars',
         'share'                  => 'Share',
+        'empty-review'           => 'No Review found, be the first to review this product',
         'was-this-helpful'       => 'Was This Review Helpful?',
         'load-more'              => 'Load More',
         'add-image'              => 'Add Image',
@@ -434,23 +439,26 @@ return [
             'qty_missing'               => 'Atleast one product should have more than 1 quantity.',
             'qty_impossible'            => 'Cannot add more than one of these products to cart.',
             'success-remove'            => 'Item is successfully removed from the cart.',
+            'inventory_warning'         => 'The requested quantity is not available, please try again later.',
+            'illegal'                   => 'Quantity cannot be lesser than one.',
 
-            'index' => [
-                'home'                    => 'Home',
-                'cart'                    => 'Cart',
-                'view-cart'               => 'View Cart',
-                'product-name'            => 'Product Name',
-                'remove'                  => 'Remove',
-                'quantity'                => 'Quantity',
-                'price'                   => 'Price',
-                'tax'                     => 'Tax',
-                'total'                   => 'Total',
-                'continue-shopping'       => 'Continue Shopping',
-                'update-cart'             => 'Update Cart',
-                'move-to-wishlist-success'=> 'Selected items successfully moved to wishlist.',
-                'remove-selected-success' => 'Selected items successfully removed from cart.',
-                'empty-product'           => 'You don’t have a product in your cart.',
-                'quantity-update'         => 'Quantity updated successfully',
+            'index' => [ 
+                'home'                     => 'Home',
+                'cart'                     => 'Cart',
+                'view-cart'                => 'View Cart',
+                'product-name'             => 'Product Name',
+                'remove'                   => 'Remove',
+                'quantity'                 => 'Quantity',
+                'price'                    => 'Price',
+                'tax'                      => 'Tax',
+                'total'                    => 'Total',
+                'continue-shopping'        => 'Continue Shopping',
+                'update-cart'              => 'Update Cart',
+                'move-to-wishlist-success' => 'Selected items successfully moved to wishlist.',
+                'remove-selected-success'  => 'Selected items successfully removed from cart.',
+                'empty-product'            => 'You don’t have a product in your cart.',
+                'quantity-update'          => 'Quantity updated successfully',
+                'see-datails'              => 'See Details',
             ],
 
             'coupon'   => [
@@ -466,6 +474,7 @@ return [
                 'already-applied' => 'Coupon code already applied.',
                 'enter-your-code' => 'Enter your code',
                 'subtotal'        => 'Subtotal',
+                'button-title'    => 'Apply',
             ],
 
             'mini-cart' => [
@@ -548,7 +557,7 @@ return [
                 'remove'          => 'Remove Coupon',
                 'apply-issue'     => 'Coupon code can\'t be applied.',
                 'sub-total'       => 'Subtotal',
-                'save'            => 'Save',
+                'button-title'    => 'Apply',
                 'enter-your-code' => 'Enter your code',
                 'subtotal'        => 'Subtotal',
             ],
@@ -1083,7 +1092,6 @@ return [
             'quantity'                  => [
                 'quantity'          => 'Quantity',
                 'success'           => 'Cart Item(s) successfully updated.',
-                'illegal'           => 'Quantity cannot be lesser than one.',
                 'inventory_warning' => 'The requested quantity is not available, please try again later.',
                 'error'             => 'Cannot update the item(s) at the moment, please try again later.',
             ],

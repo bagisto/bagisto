@@ -231,7 +231,11 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function getUrlAttribute()
     {
-        return url($this->translate(core()->getCurrentLocale()->code)->url_path);
+        if ($categoryTranslation = $this->translate(core()->getCurrentLocale()->code)) {
+            return url($categoryTranslation->url_path);
+        }
+        
+        return url($this->translate(core()->getDefaultChannelLocaleCode())->url_path);
     }
 
     /**

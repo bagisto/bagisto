@@ -14,7 +14,6 @@
     $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
 
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
-
 @endphp
 
 <div
@@ -49,7 +48,7 @@
 
                     @if ($firstLevelCategory->children->isNotEmpty())
                         <div
-                            class="hidden group-hover:block max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto  ltr:-left-[35px] rtl:-right-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
+                            class="pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto  ltr:-left-[35px] rtl:-right-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
                         >
                             <div class="flex aigns gap-x-[70px] justify-between">
                                 @foreach ($firstLevelCategory->children->chunk(2) as $pair)
@@ -97,12 +96,12 @@
             </label>
 
             <div class="relative w-full">
-                <div
-                    class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none">
-                </div>
+                <div class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none"></div>
 
                 <input
                     type="text"
+                    name="query"
+                    value="{{ request('query') }}"
                     class="bg-[#F5F5F5] rounded-lg block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
                     placeholder="Search for products"
                     required
@@ -156,7 +155,7 @@
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="bs-secondary-button m-0 ml-[0px] block mx-auto border-2 text-base w-max py-[14px] px-[29px] rounded-[18px] text-center"
+                                class="bs-secondary-button m-0 ml-[0px] block mx-auto border-2 text-base w-max px-[29px] rounded-[18px] text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>

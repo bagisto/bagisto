@@ -17,19 +17,19 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-cart-template">
             <div>
-                {{-- Cart Shimmer Effect --}}
+                <!-- Cart Shimmer Effect -->
                 <template v-if="isLoading">
                     <x-shop::shimmer.checkout.cart :count="3"></x-shop::shimmer.checkout.cart>
                 </template>
 
-                {{-- Cart Information --}}
+                <!-- Cart Information -->
                 <template v-else>
                     <div 
                         class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col pb-[30px]"
                         v-if="cart?.items?.length"
                     >
                         <div class="grid gap-[30px] flex-1">
-                            {{-- Cart Action --}}
+                            <!-- Cart Mass Action Container -->
                             <div class="max-sm:block flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
                                 <div class="select-none">
                                     <input
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                         
-                            {{-- Cart Items --}}
+                            <!-- Cart Item Listing Container -->
                             <div 
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
@@ -92,12 +92,14 @@
                                             ></label>
                                         </div>
 
+                                        <!-- Cart Item Image -->
                                         <x-shop::shimmer.image
-                                            class="w-[110px] h-[110px] rounded-[12px]"
+                                            class="h-[110px] min-w-[110px] max-w[110px] rounded-[12px]"
                                             ::src="item.base_image.small_image_url"
                                         >
                                         </x-shop::shimmer.image>
 
+                                        <!-- Cart Item Options Container -->
                                         <div class="grid place-content-start gap-y-[10px]">
                                             <p 
                                                 class="text-[16px] font-medium" 
@@ -105,19 +107,36 @@
                                             >
                                             </p>
                                     
+                                            <!-- Cart Item Options Container -->
                                             <div
-                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                class="grid gap-x-[10px] gap-y-[6px] select-none"
                                                 v-if="item.options.length"
                                             >
-                                                <div class="grid gap-[8px]">
-                                                    <div v-for="option in item.options">
-                                                        <p 
-                                                            class="text-[14px] font-medium" 
-                                                            v-text="option.attribute_name + ':'"
-                                                        >
+                                                <!-- Details Toggler -->
+                                                <div class="">
+                                                    <p
+                                                        class="flex gap-x-[15px] text-[16px] items-center cursor-pointer whitespace-nowrap"
+                                                        @click="item.option_show = ! item.option_show"
+                                                    >
+                                                        @lang('shop::app.checkout.cart.index.see-datails')
+
+                                                        <span
+                                                            class="text-[24px]"
+                                                            :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                                        ></span>
+                                                    </p>
+                                                </div>
+
+                                                <!-- Option Details -->
+                                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                                    <div class="" v-for="option in item.options">
+                                                        <p class="text-[14px] font-medium">
+                                                            @{{ option.attribute_name + ':' }}
                                                         </p>
-                                    
-                                                        <p class="text-[14px]" v-text="option.option_label"></p>
+
+                                                        <p class="text-[14px]">
+                                                            @{{ option.option_label }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,6 +173,7 @@
                                         >
                                         </p>
                                         
+                                        <!-- Cart Item Remove Button -->
                                         <span
                                             class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                             @click="removeItem(item.id)"
@@ -164,6 +184,7 @@
                                 </div>
                             </div>
         
+                            <!-- Cart Item Actions -->
                             <div class="flex flex-wrap gap-[30px] justify-end">
                                 <a
                                     class="bs-secondary-button rounded-[18px] max-h-[55px]"
@@ -181,13 +202,13 @@
                             </div>
                         </div>
 
-                        {{-- Cart summary --}}
+                        <!-- Cart Summary -->
                         @include('shop::checkout.cart.summary')
                     </div>
 
-                    {{-- Cart Empty page --}}
+                    <!-- Empty Cart Section -->
                     <div
-                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
+                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>

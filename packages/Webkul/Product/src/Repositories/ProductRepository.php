@@ -505,15 +505,19 @@ class ProductRepository extends Repository
      * @param  int  $categoryId
      * @return float
      */
-    public function getMaxPriceByCategory($categoryId)
+    public function getMaxPrice($params = [])
     {
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        return $this->model
+        $query = $this->model
             ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
-            ->where('product_price_indices.customer_group_id', $customerGroup->id)
-            ->where('product_categories.category_id', $categoryId)
-            ->max('min_price');
+            ->where('product_price_indices.customer_group_id', $customerGroup->id);
+
+        if (! empty($params['category_id'])) {
+            $query->where('product_categories.category_id', $params['category_id']);
+        }
+
+        return $query->max('min_price') ?? 0;
     }
 }

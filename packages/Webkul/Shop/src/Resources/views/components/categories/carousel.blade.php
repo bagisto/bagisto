@@ -39,7 +39,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-black text-[20px] font-medium"
+                                class="text-center text-black text-[20px]"
                                 v-text="category.name"
                             >
                             </p>
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <!-- category carousel shimmer -->
+        <!-- Category Carousel Shimmer -->
         <template v-if="isLoading">
             <x-shop::shimmer.categories.carousel
                 :count="7"

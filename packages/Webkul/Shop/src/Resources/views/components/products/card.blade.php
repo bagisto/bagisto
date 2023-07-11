@@ -35,7 +35,8 @@
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <a
-                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
+                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] text-[25px]"
+                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                             @click="addToWishlist()"
                         >
                         </a>
@@ -102,7 +103,8 @@
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <span 
-                            class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] icon-heart text-[25px]"
+                            class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] text-[25px]"
+                            :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                             @click="addToWishlist()"
                         >
                         </span> 
@@ -178,6 +180,8 @@
                                 product_id: this.product.id
                             })
                             .then(response => {
+                                this.product.is_wishlist = ! this.product.is_wishlist;
+                                
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {});
@@ -221,14 +225,14 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to compare list')' });
+                            this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.components.products.card.add-to-compare') }}" });
                         } else {
-                            this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('Item is already added to compare list')' });
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('shop::app.components.products.card.already-in-compare') }}" });
                         }
                     } else {
                         localStorage.setItem('compare_items', JSON.stringify([productId]));
                             
-                        this.$emitter.emit('add-flash', { type: 'success', message: '@lang('Item added successfully to compare list')' });
+                        this.$emitter.emit('add-flash', { type: 'success', message: "{{ trans('shop::app.components.products.card.add-to-compare') }}" });
 
                     }
                 },

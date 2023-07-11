@@ -27,7 +27,7 @@
                         </h2>
 
                         <div
-                            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                            class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px] whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -97,7 +97,7 @@
                     </div>
 
                     <div
-                        class="grid items-center justify-items-center w-max m-auto h-[476px] place-content-center"
+                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
                         v-else
                     >
                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
@@ -184,8 +184,9 @@
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             })
-                            .catch(error => {});
+                            .catch(error => {
                                 this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                            });
                     },
 
                     removeAll() {
@@ -194,7 +195,7 @@
 
                             this.items = [];
 
-                            this.$emitter.emit('add-flash', { type: 'success', message:  '@lang('All items removed successfully')' });
+                            this.$emitter.emit('add-flash', { type: 'success', message:  "{{ trans('shop::app.compare.remove-all-success') }}" });
 
                             return;
                         }

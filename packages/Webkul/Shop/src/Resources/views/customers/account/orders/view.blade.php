@@ -20,7 +20,7 @@
             </x-shop::form>
 
             <a
-                class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+                class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px]"
                 href="javascript:void(0);"
                 onclick="cancelOrder('@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')')"
             >
@@ -130,7 +130,7 @@
                                         @if (isset($item->additional['attributes']))
                                             <div>
                                                 @foreach ($item->additional['attributes'] as $attribute)
-                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
+                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
                                                 @endforeach
                                             </div>
                                         @endif
@@ -343,7 +343,7 @@
                                     {{ __('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
                                 </p>
                             </div>
-                            <div class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer">
+                            <div class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px]">
                                 <a href="{{ route('shop.customers.account.orders.print-invoice', $invoice->id) }}">
                                         @lang('shop::app.customers.account.orders.view.invoices.print')
                                 </a>
@@ -868,7 +868,6 @@
         </x-shop::tabs>
 
         <div class="flex gap-x-[64px] gap-y-[30px] flex-wrap justify-between pt-[26px] border-t-[1px] border-[#E9E9E9] mt-[42px]">
-
             {{-- Biiling Address --}}
             @if ($order->billing_address)
                 <div class="grid gap-[15px] max-w-[200px] max-868:w-full max-868:max-w-full max-md:max-w-[200px] max-sm:max-w-full">

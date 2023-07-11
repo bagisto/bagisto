@@ -30,21 +30,33 @@
     <script type="text/x-template" id="v-dropdown-template">
         <div>   
             <div
+                class="select-none"
                 ref="toggleBlock"
                 @click="toggle()"
             >
                 <slot name="toggle">Toggle</slot>
             </div>
 
-            <div
-                class="absolute bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px] w-max z-10"
-                :class="[hiddenClass]"
-                :style="positionStyles"
+            <transition
+                tag="div"
+                name="dropdown"
+                enter-active-class="transition ease-out duration-100"
+                enter-from-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-from-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95"
             >
-                <slot name="content"></slot>
+                <div
+                    class="absolute bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px] w-max z-10 overflow-hidden"
+                    :style="positionStyles"
+                    v-show="isActive"
+                >
+                    <slot name="content"></slot>
 
-                <slot name="menu"></slot>
-            </div>
+                    <slot name="menu"></slot>
+                </div>
+            </transition>
         </div>
     </script>
 
@@ -58,6 +70,8 @@
 
             data() {
                 return {
+                    toggleBlockWidth: 0,
+
                     toggleBlockHeight: 0,
                     
                     isActive: false,
@@ -69,6 +83,8 @@
             },
 
             mounted() {
+                this.toggleBlockWidth = this.$refs.toggleBlock.clientWidth;
+
                 this.toggleBlockHeight = this.$refs.toggleBlock.clientHeight;
             },
 
@@ -77,26 +93,42 @@
             },
 
             computed: {
-                hiddenClass() {
-                    return ! this.isActive ? 'hidden' : '';
-                },
-
                 positionStyles() {
                     switch (this.position) {
                         case 'bottom-left':
-                            return [`top: ${this.toggleBlockHeight}px`, 'left: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`,
+                                `top: ${this.toggleBlockHeight}px`,
+                                'left: 0',
+                            ];
 
                         case 'bottom-right':
-                            return [`top: ${this.toggleBlockHeight}px`, 'right: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`,
+                                `top: ${this.toggleBlockHeight}px`,
+                                'right: 0',
+                            ];
 
                         case 'top-left':
-                            return [`bottom: ${this.toggleBlockHeight*2}px`, 'left: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`
+                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                'left: 0',
+                            ];
 
                         case 'top-right':
-                            return [`bottom: ${this.toggleBlockHeight*2}px`, 'right: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`
+                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                'right: 0',
+                            ];
 
                         default:
-                            return [`top: ${this.toggleBlockHeight}px`, 'left: 0'];
+                            return [
+                                `min-width: ${this.toggleBlockWidth}px`
+                                `top: ${this.toggleBlockHeight}px`,
+                                'left: 0',
+                            ];
                     }
                 },
             },

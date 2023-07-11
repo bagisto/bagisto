@@ -68,17 +68,17 @@
 
                                 @if (
                                     isset($locale)
-                                    && $locale->locale_image
+                                    && $locale->logo_path
                                 )
                                     <image-wrapper
-                                        input-name="locale_image"
+                                        input-name="logo_path"
                                         :multiple="false"
-                                        :images='"{{ Storage:: url($locale->locale_image) }}"'
+                                        :images='"{{ Storage::url($locale->logo_path) }}"'
                                         button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
                                     </image-wrapper>
                                 @else
                                     <image-wrapper
-                                        input-name="locale_image"
+                                        input-name="logo_path"
                                         :multiple="false"
                                         button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
                                     </image-wrapper>

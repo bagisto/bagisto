@@ -14,14 +14,16 @@
         class="rounded mt-[30px]"
         enctype="multipart/form-data"
     >
-        <x-shop::form.control-group class="mb-4 mt-[15px]">
+        <x-shop::form.control-group class="mt-[15px]">
             <x-shop::form.control-group.control
                 type="image"
                 name="image[]"
-                class="shadow text-[14px] appearance-none rounded-[12px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="!p-0 rounded-[12px] text-gray-700 mb-0"
                 rules="required"
                 :label="trans('Image')"
                 :is-multiple="false"
+                accepted-types="image/*"
+                :src="$customer->image_url"
             >
             </x-shop::form.control-group.control>
 

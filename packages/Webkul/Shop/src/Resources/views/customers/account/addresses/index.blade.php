@@ -12,7 +12,7 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="flex items-center gap-x-[10px] border border-[#E9E9E9] rounded-[12px] py-[12px] px-[20px] cursor-pointer"
+            class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px]"
         >
             @lang('shop::app.customers.account.addresses.add-address') 
         </a>
@@ -39,7 +39,7 @@
                             @endif
 
                             {{-- Dropdown Actions --}}
-                            <x-shop::dropdown>
+                            <x-shop::dropdown position="bottom-right">
                                 <x-slot:toggle>
                                     <span class="icon-more text-[24px] text-[#7D7D7D] cursor-pointer"></span>
                                 </x-slot:toggle>

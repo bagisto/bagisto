@@ -4,7 +4,7 @@
 <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
     <div class="flex gap-[25px] max-lg:flex-wrap justify-center">
         <div class="flex items-center gap-[20px]">
-            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-truck text-[42px] text-navyBlue"></span>
+            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-truck text-[42px] text-navyBlue p-[10px]"></span>
 
             <div class="">
                 <h4 class="font-medium font-dmserif">Free Shipping</h4>
@@ -16,7 +16,7 @@
         </div>
 
         <div class="flex items-center gap-[20px]">
-            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-support text-[42px] text-navyBlue"></span>
+            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-support text-[42px] text-navyBlue p-[10px]"></span>
 
             <div class="">
                 <h4 class="font-medium font-dmserif">Product Replace</h4>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex items-center gap-[20px]">
-            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-dollar-sign text-[42px] text-navyBlue"></span>
+            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-dollar-sign text-[42px] text-navyBlue p-[10px]"></span>
 
             <div class="">
                 <h4 class="font-medium font-dmserif">Emi Available</h4>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="flex items-center gap-[20px]">
-            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-product text-[42px] text-navyBlue"></span>
+            <span class="flex items-center justify-center border border-black rounded-full w-[60px] h-[60px] bg-white cursor-pointer icon-product text-[42px] text-navyBlue p-[10px]"></span>
 
             <div class="">
                 <h4 class="font-medium font-dmserif">24/7 Support</h4>

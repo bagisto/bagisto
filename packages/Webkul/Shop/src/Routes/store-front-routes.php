@@ -32,9 +32,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Store front search.
      */
-    Route::get('search', [SearchController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::search.search',
-    ])->name('shop.search.index');
+    Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
 
     Route::post('upload-search-image', [HomeController::class, 'upload'])->name('shop.image.search.upload');
 

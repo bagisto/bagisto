@@ -25,15 +25,12 @@
             >
                 <x-slot:toggle>
                     <span class="icon-hamburger text-[24px] cursor-pointer"></span>
-        
-                    
                 </x-slot:toggle>
-
+                
                 <x-slot:header>
                     <div class="flex justify-between p-[20px] items-center">
                         <a 
-                            href=""
-                            class=""
+                            href="{{ route('shop.home.index') }}"
                         >
                             <img src="{{ bagisto_asset('images/logo.png') }}">
                         </a>
@@ -41,42 +38,22 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <a href="{{ route('shop.customer.session.create') }}">
-                        <div class="rounded-[12px] border border-[#f3f3f5] p-[10px] relative mb-[40px]">
-                            <div class="flex items-center gap-[15px]  max-w-[calc(100%-20px)]">
-                                <img 
-                                    class="rounded-[12px] w-[64px] h-[65px]"
-                                    src="{{ bagisto_asset('images/thank-you.png') }}"
-                                >
-
-                                <div>
-                                    <p class="text-[16px] font-medium">@lang('Sign up or Login')</p>
-
-                                    <p class="text-[12px] mt-[10px]">@lang('Get UPTO 40% OFF')</p>
-                                </div>
-                            </div>
-
-                            <span class="absolute right-[10px] top-[50%] -translate-y-[50%] bg-[position:-146px_-65px] bs-main-sprite w-[18px] h-[20px] inline-block cursor-pointer"></span>
-                        </div>
-                    </a>
-
                     {{-- Mobile category view --}}
                     <v-mobile-category></v-mobile-category>
-
                 </x-slot:content>
 
                 <x-slot:footer></x-slot:footer>
             </x-shop::drawer>
 
             <a 
-                herf="{{ route('shop.home.index') }}" 
+                href="{{ route('shop.home.index') }}" 
                 class="h-[36px] inline-block"
             >
                 <img src="{{ bagisto_asset('images/logo.png') }}">
             </a>
         </div>
 
-        <div class="">
+        <div>
             <div class="flex  items-center gap-x-[20px]">
                 <a href="{{ route('shop.compare.index') }}">
                     <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>

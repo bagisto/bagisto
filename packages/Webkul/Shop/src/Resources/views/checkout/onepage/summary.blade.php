@@ -12,7 +12,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-cart-summary-template">
         <template v-if="isCartLoading">
-            {{-- onepage summary shimmer Effect --}}
+            <!-- onepage Summary Shimmer Effect -->
             <x-shop::shimmer.checkout.onepage.cart-summary></x-shop::shimmer.checkout.onepage.cart-summary>
         </template>
 

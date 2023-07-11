@@ -11,26 +11,26 @@ use Webkul\Shop\Http\Controllers\API\ReviewController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('products', 'index')->name('shop.api.products.index');
+    Route::controller(ProductController::class)->prefix('products')->group(function () {
+        Route::get('', 'index')->name('shop.api.products.index');
 
-        Route::get('products/{id}/related', 'relatedProducts')->name('shop.api.products.related.index');
+        Route::get('{id}/related', 'relatedProducts')->name('shop.api.products.related.index');
 
-        Route::get('products/{id}/up-sell', 'upSellProducts')->name('shop.api.products.up-sell.index');
+        Route::get('{id}/up-sell', 'upSellProducts')->name('shop.api.products.up-sell.index');
     });
 
-    Route::controller(ReviewController::class)->group(function () {
-        Route::get('product/{id}/reviews', 'index')->name('shop.api.products.reviews.index');
+    Route::controller(ReviewController::class)->prefix('product/{id}')->group(function () {
+        Route::get('reviews', 'index')->name('shop.api.products.reviews.index');
 
-        Route::post('product/{id}/review', 'store')->name('shop.api.products.reviews.store');
+        Route::post('review', 'store')->name('shop.api.products.reviews.store');
     });
 
     Route::controller(CategoryController::class)->prefix('categories')->group(function () {
         Route::get('', 'index')->name('shop.api.categories.index');
 
-        Route::get('{id}/attributes', 'getAttributes')->name('shop.api.categories.attributes');
+        Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
 
-        Route::get('{id}/max-price', 'getProductMaxPrice')->name('shop.api.categories.max_price');
+        Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {

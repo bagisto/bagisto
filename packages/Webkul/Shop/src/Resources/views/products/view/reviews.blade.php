@@ -1,6 +1,10 @@
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
-<v-product-review :product-id="{{ $product->id }}"></v-product-review>
+<v-product-review :product-id="{{ $product->id }}">
+    <div class="container max-1180:px-[20px]">
+        <x-shop::shimmer.products.reviews></x-shop::shimmer.products.reviews>
+    </div>
+</v-product-review>
 
 @pushOnce('scripts')
     {{-- Product Review Template --}}
@@ -15,7 +19,7 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    {{-- Review form --}}
+                    <!-- Review Form -->
                     <form
                         class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
                         @submit="handleSubmit($event, store)"
@@ -43,7 +47,9 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label>
+                                <x-shop::form.control-group.label
+                                    class="mt-[0]"
+                                >
                                     @lang('shop::app.products.rating')
                                 </x-shop::form.control-group.label>
 
@@ -106,7 +112,7 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4">
+                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
                                 <button
                                     class="bs-primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
@@ -116,7 +122,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="bs-secondary-button flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
+                                    class="bs-secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -129,66 +135,89 @@
 
             <!-- Product Reviews Container -->
             <div v-else>
-                <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
-                    <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
-                        @lang('shop::app.products.customer-review')
-                    </h3>
+                <!-- Review Container Shimmer Effect -->
+                <template v-if="isLoading">
+                    <x-shop::shimmer.products.reviews></x-shop::shimmer.products.reviews>
+                </template>
 
-                    <div
-                        class="bs-secondary-button flex gap-x-[15px] items-center px-[15px] py-[10px]"
-                        @click="canReview = true"
-                    >
-                        <span class="icon-pen text-[24px]"></span>
+                <template v-else>
+                    <!-- Review Section Header -->
+                    <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
+                        <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
+                            @lang('shop::app.products.customer-review')
+                        </h3>
 
-                        @lang('shop::app.products.write-a-review')
+                        <div
+                            class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
+                            @click="canReview = true"
+                        >
+                            <span class="icon-pen text-[24px]"></span>
+
+                            @lang('shop::app.products.write-a-review')
+                        </div>
                     </div>
-                </div>
 
-                <div class="flex justify-between items-center gap-[15px] mt-[30px] max-w-[365px] max-sm:flex-wrap">
-                    <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
+                    <template v-if="reviews.length">
+                        <!-- Average Rating Section -->
+                        <div class="flex justify-between items-center gap-[15px] mt-[30px] max-w-[365px] max-sm:flex-wrap">
+                            <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
 
-                    <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
+                            <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
 
-                    <p class="text-[12px] text-[#858585]">
-                        (@{{ meta.total }} @lang('shop::app.products.customer-review'))
-                    </p>
-                </div>
+                            <p class="text-[12px] text-[#858585]">
+                                (@{{ meta.total }} @lang('shop::app.products.customer-review'))
+                            </p>
+                        </div>
 
-                <div class="flex gap-x-[20px] items-center">
-                    <div class="flex gap-y-[18px] max-w-[365px] mt-[10px] flex-wrap">
-                        @for ($i = 5; $i >= 1; $i--)
-                            <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
-                                <div class="text-[16px] font-medium">{{ $i }} Stars</div>
-                                <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
-                                    <div class="h-[16px] bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
-                                </div>
+                        <!-- Ratings By Individual Stars -->
+                        <div class="flex gap-x-[20px] items-center">
+                            <div class="flex gap-y-[18px] max-w-[365px] mt-[10px] flex-wrap">
+                                @for ($i = 5; $i >= 1; $i--)
+                                    <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
+                                        <div class="text-[16px] font-medium">{{ $i }} Stars</div>
+                                        <div class="h-[16px] w-[275px] max-w-full bg-[#E5E5E5] rounded-[2px]">
+                                            <div class="h-[16px] bg-[#FEA82B] rounded-[2px]" style="width: {{ $percentageRatings[$i] }}%"></div>
+                                        </div>
+                                    </div>
+                                @endfor
                             </div>
-                        @endfor
-                    </div>
-                </div>
+                        </div>
 
-                <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
-                    <!-- Product Review Item Vue Component -->
-                    <v-product-review-item
-                        v-for='review in reviews'
-                        :review="review"
-                    ></v-product-review>
-                </div>
+                        <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
+                            <!-- Product Review Item Vue Component -->
+                            <v-product-review-item
+                                v-for='review in reviews'
+                                :review="review"
+                            ></v-product-review-item>
+                        </div>
 
-                <button
-                    class="bs-secondary-button block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] mt-[60px] text-center"
-                    v-if="links?.next"
-                    @click="get()"
-                >
-                    @lang('shop::app.products.load-more')
-                </button>
+                        <button
+                            class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                            v-if="links?.next"
+                            @click="get()"
+                        >
+                            @lang('shop::app.products.load-more')
+                        </button>
+                    </template>
+
+                    <template v-else>
+                        <!-- Empty Review Section -->
+                        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                            <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
+
+                            <p class="text-[20px]">
+                                @lang('shop::app.products.empty-review')
+                            </p>
+                        </div>
+                    </template>
+                </template>
             </div>
         </div>
     </script>
 
     {{-- Product Review Item Template --}}
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
+        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap max-xl:mb-[20px]">
             <div>
                 <div
                     class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
@@ -282,6 +311,8 @@
 
             data() {
                 return {
+                    isLoading: true,
+
                     canReview: false,
 
                     reviews: [],
@@ -303,6 +334,8 @@
                     if (this.links?.next) {
                         this.$axios.get(this.links.next)
                             .then(response => {
+                                this.isLoading = false;
+
                                 this.reviews = [...this.reviews, ...response.data.data];
 
                                 this.links = response.data.links;
