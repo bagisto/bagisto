@@ -11,24 +11,14 @@ use Webkul\Core\Repositories\ExchangeRateRepository;
 class ExchangeRateController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\ExchangeRateRepository  $exchangeRateRepository
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -42,7 +32,7 @@ class ExchangeRateController extends Controller
             return app(ExchangeRatesDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::settings.exchange_rates.index');
     }
 
     /**
@@ -54,7 +44,7 @@ class ExchangeRateController extends Controller
     {
         $currencies = $this->currencyRepository->with('exchange_rate')->all();
 
-        return view($this->_config['view'], compact('currencies'));
+        return view('admin::settings.exchange_rates.create', compact('currencies'));
     }
 
     /**
@@ -77,7 +67,7 @@ class ExchangeRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.exchange_rates.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.exchange_rates.index');
     }
 
     /**
@@ -92,7 +82,7 @@ class ExchangeRateController extends Controller
 
         $exchangeRate = $this->exchangeRateRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('currencies', 'exchangeRate'));
+        return view('admin::settings.exchange_rates.edit', compact('currencies', 'exchangeRate'));
     }
 
     /**
@@ -116,7 +106,7 @@ class ExchangeRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.exchange_rates.index');
     }
 
     /**

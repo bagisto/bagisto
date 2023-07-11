@@ -14,18 +14,8 @@ use Webkul\Core\Repositories\ChannelRepository;
 class CategoryController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
@@ -33,7 +23,6 @@ class CategoryController extends Controller
         protected CategoryRepository $categoryRepository,
         protected AttributeRepository $attributeRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -47,7 +36,7 @@ class CategoryController extends Controller
             return app(CategoryDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::catalog.categories.index');
     }
 
     /**
@@ -61,13 +50,12 @@ class CategoryController extends Controller
 
         $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
-        return view($this->_config['view'], compact('categories', 'attributes'));
+        return view('admin::catalog.categories.create', compact('categories', 'attributes'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Webkul\Category\Http\Requests\CategoryRequest  $categoryRequest
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $categoryRequest)
@@ -80,7 +68,7 @@ class CategoryController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.categories.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.categories.index');
     }
 
     /**
@@ -97,7 +85,7 @@ class CategoryController extends Controller
 
         $attributes = $this->attributeRepository->findWhere(['is_filterable' => 1]);
 
-        return view($this->_config['view'], compact('category', 'categories', 'attributes'));
+        return view('admin::catalog.categories.edit', compact('category', 'categories', 'attributes'));
     }
 
     /**
@@ -116,7 +104,6 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Category\Http\Requests\CategoryRequest  $categoryRequest
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -130,7 +117,7 @@ class CategoryController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.categories.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.categories.index');
     }
 
     /**
@@ -203,7 +190,7 @@ class CategoryController extends Controller
             session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Category']));
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.categories.index');
     }
 
     /**
@@ -237,7 +224,7 @@ class CategoryController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.categories.mass-update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.categories.index');
     }
 
     /**

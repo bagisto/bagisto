@@ -2,36 +2,24 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Sales\Repositories\OrderItemRepository;
-use Webkul\Sales\Repositories\RefundRepository;
 use Webkul\Admin\DataGrids\OrderRefundDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\RefundRepository;
 
 class RefundController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderItemRepository  $orderItemRepository
-     * @param  \Webkul\Sales\Repositories\RefundRepository  $refundRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
         protected RefundRepository $refundRepository
-    )
-    {
-        $this->_config = request('_config');
+    ) {
     }
 
     /**
@@ -45,7 +33,7 @@ class RefundController extends Controller
             return app(OrderRefundDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::sales.refunds.index');
     }
 
     /**
@@ -58,7 +46,7 @@ class RefundController extends Controller
     {
         $order = $this->orderRepository->findOrFail($orderId);
 
-        return view($this->_config['view'], compact('order'));
+        return view('admin::sales.refunds.create', compact('order'));
     }
 
     /**
@@ -115,7 +103,7 @@ class RefundController extends Controller
 
         session()->flash('success', trans('admin::app.sales.refunds.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.sales.refunds.index');
     }
 
     /**
@@ -145,6 +133,6 @@ class RefundController extends Controller
     {
         $refund = $this->refundRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('refund'));
+        return view('admin::sales.refunds.view', compact('refund'));
     }
 }

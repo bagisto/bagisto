@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\InvoiceRepository;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
 use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
+use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Traits\Mails;
 use Webkul\Core\Traits\PDFHandler;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class InvoiceController extends Controller
 {
@@ -25,15 +25,12 @@ class InvoiceController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\InvoiceRepository  $invoiceRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
         $this->_config = request('_config');
     }
 
@@ -48,7 +45,7 @@ class InvoiceController extends Controller
             return app(OrderInvoicesDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::sales.invoices.index');
     }
 
     /**
@@ -76,7 +73,7 @@ class InvoiceController extends Controller
             abort(404);
         }
 
-        return view($this->_config['view'], compact('order'));
+        return view('admin::sales.invoices.create', compact('order'));
     }
 
     /**
@@ -117,7 +114,7 @@ class InvoiceController extends Controller
 
         session()->flash('success', trans('admin::app.sales.invoices.create-success'));
 
-        return redirect()->route($this->_config['redirect'], $orderId);
+        return redirect()->route('admin.sales.orders.view', $orderId);
     }
 
     /**
@@ -130,13 +127,12 @@ class InvoiceController extends Controller
     {
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('invoice'));
+        return view('admin::sales.invoices.view', compact('invoice'));
     }
 
     /**
      * Send duplicate invoice.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

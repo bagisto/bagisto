@@ -14,24 +14,14 @@ use Webkul\Customer\Rules\VatIdRule;
 class AddressController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param  \Webkul\Customer\Repositories\CustomerAddressRepository  $customerAddressRepository
      * @return void
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CustomerAddressRepository $customerAddressRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -48,7 +38,7 @@ class AddressController extends Controller
             return app(AddressDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view'], compact('customer'));
+        return view('admin::customers.addresses.index', compact('customer'));
     }
 
     /**
@@ -61,7 +51,7 @@ class AddressController extends Controller
     {
         $customer = $this->customerRepository->find($id);
 
-        return view($this->_config['view'], compact('customer'));
+        return view('admin::customers.addresses.create', compact('customer'));
     }
 
     /**
@@ -94,7 +84,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-        return redirect()->route('admin.customer.edit', ['id' => request('customer_id')]);
+        return redirect()->route('admin.customer.addresses.index', ['id' => request('customer_id')]);
     }
 
     /**
@@ -107,7 +97,7 @@ class AddressController extends Controller
     {
         $address = $this->customerAddressRepository->find($id);
 
-        return view($this->_config['view'], compact('address'));
+        return view('admin::customers.addresses.edit', compact('address'));
     }
 
     /**
@@ -184,6 +174,6 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-mass-delete'));
 
-        return redirect()->route($this->_config['redirect'], ['id' => $id]);
+        return redirect()->route('admin.customer.addresses.index', ['id' => $id]);
     }
 }

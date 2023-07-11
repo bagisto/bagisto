@@ -11,24 +11,14 @@ use Webkul\Tax\Repositories\TaxRateRepository;
 class TaxCategoryController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Tax\Repositories\TaxCategoryRepository  $taxCategoryRepository
-     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRateRepository
      * @return void
      */
     public function __construct(
         protected TaxCategoryRepository $taxCategoryRepository,
         protected TaxRateRepository $taxRateRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -42,7 +32,7 @@ class TaxCategoryController extends Controller
             return app(TaxCategoryDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::tax.tax-categories.index');
     }
 
     /**
@@ -52,7 +42,7 @@ class TaxCategoryController extends Controller
      */
     public function show()
     {
-        return view($this->_config['view'])->with('taxRates', $this->taxRateRepository->all());
+        return view('admin::tax.tax-categories.create')->with('taxRates', $this->taxRateRepository->all());
     }
 
     /**
@@ -81,7 +71,7 @@ class TaxCategoryController extends Controller
 
         session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.tax_categories.index');
     }
 
     /**
@@ -94,7 +84,7 @@ class TaxCategoryController extends Controller
     {
         $taxCategory = $this->taxCategoryRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('taxCategory'));
+        return view('admin::tax.tax-categories.edit', compact('taxCategory'));
     }
 
     /**
@@ -124,7 +114,7 @@ class TaxCategoryController extends Controller
 
         session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.tax_categories.index');
     }
 
     /**

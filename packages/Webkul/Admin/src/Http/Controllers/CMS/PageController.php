@@ -19,7 +19,6 @@ class PageController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CMS\Repositories\CmsRepository  $cmsRepository
      * @return void
      */
     public function __construct(protected CmsRepository $cmsRepository)
@@ -38,7 +37,7 @@ class PageController extends Controller
             return app(CMSPageDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::cms.index');
     }
 
     /**
@@ -48,7 +47,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::cms.create');
     }
 
     /**
@@ -73,7 +72,7 @@ class PageController extends Controller
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'page']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.cms.index');
     }
 
     /**
@@ -86,7 +85,7 @@ class PageController extends Controller
     {
         $page = $this->cmsRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('page'));
+        return view('admin::cms.edit', compact('page'));
     }
 
     /**
@@ -118,7 +117,7 @@ class PageController extends Controller
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Page']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.cms.index');
     }
 
     /**
