@@ -37,7 +37,7 @@ class ThemeCustomization extends Model implements ThemeCustomizationContract
      *
      * @var string
      */
-    public const FOOTER_LINK = 'footer_link';
+    public const FOOTER_LINKS = 'footer_links';
 
     /**
      * Static precision.

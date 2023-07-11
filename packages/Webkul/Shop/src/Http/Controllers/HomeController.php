@@ -27,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $customizations = $this->themeCustomizationRepository->all();
+        $customizations = $this->themeCustomizationRepository->orderBy('sort_order',)->findWhere([
+            'status' => 1
+        ]);
 
         return view($this->_config['view'], compact('customizations'));
     }
