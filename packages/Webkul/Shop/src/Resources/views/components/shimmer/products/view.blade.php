@@ -1,15 +1,15 @@
 <div class="container px-[60px] max-1180:px-[0px]">
     <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
 
-        <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
-
         <div class="flex gap-[30px] 1180:hidden overflow-auto scrollbar-hide">
-            <div class="min-w-[450px] min-h-[487px]  max-sm:min-w-full shimmer"></div>
-            <div class="min-w-[450px] min-h-[487px]  max-sm:min-w-full shimmer"></div>
-            <div class="min-w-[450px] min-h-[487px]  max-sm:min-w-full shimmer"></div>
-            <div class="min-w-[450px] min-h-[487px]  max-sm:min-w-full shimmer"></div>
-            <div class="min-w-[450px] min-h-[487px]  max-sm:min-w-full shimmer"></div>
+            <div class="min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px] shimmer"></div>
+            <div class="min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px] shimmer"></div>
+            <div class="min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px] shimmer"></div>
+            <div class="min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px] shimmer"></div>
+            <div class="min-w-[450px] min-h-[487px] max-sm:h-[533px] max-sm:min-w-[490px] shimmer"></div>
         </div>
+    
+        <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
 
         <div class="max-w-[590px] relative max-1180:px-[20px]">
             <div class="flex justify-between gap-[15px]">
@@ -19,14 +19,14 @@
                 </div>
             </div>
 
-            <div class="w-[30%] h-[21px] mt-[15px] shimmer"></div>
+            <div class="w-[30%] max-sm:w-[220px] h-[21px] mt-[15px] shimmer"></div>
 
             <p class="w-[35%] h-[36px] mt-[25px] shimmer"></p>
 
-            <div class="grid gap-[10px] mt-[25px]">
-                <p class="w-[100%] h-[27px] shimmer"></p>
-                <p class="w-[90%] h-[27px] shimmer"></p>
-                <p class="w-[80%] h-[27px] shimmer"></p>
+            <div class="grid gap-[10px] mt-[25px] max-sm:my-[20px] max-sm:justify-between max-sm:flex">
+                <p class="max-sm:w-[100px] max-sm:h-[21px] w-[100%] h-[27px] shimmer"></p>
+                <p class="max-sm:hidden w-[90%] h-[27px] shimmer"></p>
+                <p class="max-sm:w-[60px] max-sm:h-[21px] w-[80%] h-[27px] shimmer"></p>
             </div>
 
             <!-- Colors -->
@@ -57,11 +57,14 @@
             </div>
 
             <div class="flex gap-[15px] mt-[30px] max-w-[470px] flex-wrap">
-                <div class="w-[161px] h-[56px] rounded-[12px] shimmer"></div>
+                {{-- Quantity changer button --}}
+                <div class="max-sm:w-[124px] w-[161px] h-[56px] rounded-[12px] shimmer"></div>
 
+                {{-- Add to cart Button --}}
                 <button class="w-[279px] h-[56px] rounded-[12px] shimmer"></button>
             </div>
 
+            {{-- Buy Now Button --}}
             <button class="w-full h-[56px] rounded-[12px] mt-[20px] shimmer"></button>
 
             <div class="flex gap-[35px] mt-[40px] items-center max-sm:flex-wrap">

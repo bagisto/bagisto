@@ -177,7 +177,7 @@
                         @include('shop::products.view.gallery')
 
                         <!-- Details -->
-                        <div class="max-w-[590px] relative max-1180:px-[20px]">
+                        <div class="w-full relative max-1180:px-[20px]">
                             <div class="flex justify-between gap-[15px]">
                                 <h1 class="text-[30px] font-medium max-sm:text-[20px]">
                                     {{ $product->name }}
@@ -277,13 +277,15 @@
                                     @lang('shop::app.products.compare')
                                 </div>
 
-                                <div class="flex gap-[25px] max-sm:flex-wrap">
-                                    <div class=" flex justify-center items-center gap-[10px] cursor-pointer">
+                                <div class="flex gap-[25px]">
+                                    <div class="hidden max-md:flex justify-center items-center gap-[10px] cursor-pointer">
                                         <span class="icon-share text-[24px]"></span>
-                                        Share
+                                        <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT=Your%20shared%20content;end">Share</a>
                                     </div>
                                     
-                                    {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                                    <div class="max-md:hidden">
+                                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
