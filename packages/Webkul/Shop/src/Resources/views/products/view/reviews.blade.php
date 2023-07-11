@@ -112,7 +112,7 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4">
+                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
                                 <button
                                     class="bs-primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
@@ -122,7 +122,7 @@
                                 
                                 <button
                                     type="button"
-                                    class="bs-secondary-button flex gap-x-[15px] items-center border border-navyBlue px-[30px] py-[10px] cursor-pointer rounded-[18px]"
+                                    class="bs-secondary-button items-center px-[30px] py-[10px] rounded-[18px] max-sm:w-full max-sm:max-w-[374px]"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -217,7 +217,7 @@
 
     {{-- Product Review Item Template --}}
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
+        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap max-xl:mb-[20px]">
             <div>
                 <div
                     class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"

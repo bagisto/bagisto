@@ -107,21 +107,36 @@
                                             >
                                             </p>
                                     
-
-                                            <!-- Option Details -->
+                                            <!-- Cart Item Options Container -->
                                             <div
-                                                class="flex gap-x-[10px] gap-y-[6px] flex-wrap"
+                                                class="grid gap-x-[10px] gap-y-[6px] select-none"
                                                 v-if="item.options.length"
                                             >
-                                                <div class="grid gap-[8px]">
-                                                    <div v-for="option in item.options">
-                                                        <p 
-                                                            class="text-[14px] font-medium" 
-                                                            v-text="option.attribute_name + ':'"
-                                                        >
+                                                <!-- Details Toggler -->
+                                                <div class="">
+                                                    <p
+                                                        class="flex gap-x-[15px] text-[16px] items-center cursor-pointer whitespace-nowrap"
+                                                        @click="item.option_show = ! item.option_show"
+                                                    >
+                                                        @lang('shop::app.checkout.cart.index.see-datails')
+
+                                                        <span
+                                                            class="text-[24px]"
+                                                            :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
+                                                        ></span>
+                                                    </p>
+                                                </div>
+
+                                                <!-- Option Details -->
+                                                <div class="grid gap-[8px]" v-show="item.option_show">
+                                                    <div class="" v-for="option in item.options">
+                                                        <p class="text-[14px] font-medium">
+                                                            @{{ option.attribute_name + ':' }}
                                                         </p>
-                                    
-                                                        <p class="text-[14px]" v-text="option.option_label"></p>
+
+                                                        <p class="text-[14px]">
+                                                            @{{ option.option_label }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
