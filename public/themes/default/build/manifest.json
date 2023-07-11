@@ -1,16 +1,12 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-f04dc2f6.css",
+    "file": "assets/app-faf22c71.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/velicon.woff": {
     "file": "assets/velicon-2b79b97c.woff",
     "src": "src/Resources/assets/fonts/velicon.woff"
-  },
-  "src/Resources/assets/images/bs-main-sprite.png": {
-    "file": "assets/bs-main-sprite-52e1a41b.png",
-    "src": "src/Resources/assets/images/bs-main-sprite.png"
   },
   "src/Resources/assets/images/empty-dwn-product.png": {
     "file": "assets/empty-dwn-product-3c9202e1.png",
@@ -28,9 +24,9 @@
     "file": "assets/large-product-placeholder-b4cf34bf.png",
     "src": "src/Resources/assets/images/large-product-placeholder.png"
   },
-  "src/Resources/assets/images/logo.png": {
-    "file": "assets/logo-73f6d94d.png",
-    "src": "src/Resources/assets/images/logo.png"
+  "src/Resources/assets/images/logo.svg": {
+    "file": "assets/logo-e4dc5a7f.svg",
+    "src": "src/Resources/assets/images/logo.svg"
   },
   "src/Resources/assets/images/medium-product-placeholder.png": {
     "file": "assets/medium-product-placeholder-e6cf535d.png",

@@ -10,7 +10,7 @@
                 href="{{ route('shop.home.index') }}" 
                 class="m-[0_auto_20px_auto]"
             >
-                <img src="{{ bagisto_asset('images/logo.png') }}">
+                <img src="{{ bagisto_asset('images/logo.svg') }}">
             </a>
         </div>
         

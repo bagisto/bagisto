@@ -32,7 +32,7 @@
                         <a 
                             href="{{ route('shop.home.index') }}"
                         >
-                            <img src="{{ bagisto_asset('images/logo.png') }}">
+                            <img src="{{ bagisto_asset('images/logo.svg') }}">
                         </a>
                     </div>
                 </x-slot:header>
@@ -49,7 +49,7 @@
                 href="{{ route('shop.home.index') }}" 
                 class="h-[36px] inline-block"
             >
-                <img src="{{ bagisto_asset('images/logo.png') }}">
+                <img src="{{ bagisto_asset('images/logo.svg') }}">
             </a>
         </div>
 
