@@ -459,6 +459,7 @@ return [
                 'empty-product'            => 'You don’t have a product in your cart.',
                 'quantity-update'          => 'Quantity updated successfully',
                 'see-datails'              => 'See Details',
+                'move-to-wishlist'         => 'Move To Wishlist',
             ],
 
             'coupon'   => [
