@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-9838db41.css",
+    "file": "assets/app-cf9e5f6a.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -65,7 +65,7 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-5b740bf8.js",
+    "file": "assets/app-f946fa6e.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
