@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\SearchRepository;
+use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 
 class HomeController extends Controller
 {
@@ -11,7 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(protected SearchRepository $searchRepository)
+    public function __construct(
+        protected SearchRepository $searchRepository,
+        protected ThemeCustomizationRepository $themeCustomizationRepository,
+    )
     {
         parent::__construct();
     }
@@ -23,7 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view']);
+        $customizations = $this->themeCustomizationRepository->orderBy('sort_order',)->findWhere([
+            'status' => 1
+        ]);
+
+        return view($this->_config['view'], compact('customizations'));
     }
 
     /**

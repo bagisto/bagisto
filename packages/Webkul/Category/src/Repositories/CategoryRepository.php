@@ -53,7 +53,7 @@ class CategoryRepository extends Repository
             $queryBuilder->where('category_translations.locale', $params['locale']);
         }
 
-        return $queryBuilder->paginate();
+        return $queryBuilder->paginate($params['limit'] ?? 10);
     }
 
     /**
