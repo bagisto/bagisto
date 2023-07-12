@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Controllers\User\ForgetPasswordController;
 use Webkul\Admin\Http\Controllers\User\ResetPasswordController;
+use Webkul\Admin\Http\Controllers\User\SessionController;
 
 /**
  * Auth routes.
@@ -14,7 +15,7 @@ Route::group(['prefix' => config('app.admin_url')], function () {
      */
     Route::get('/', [Controller::class, 'redirectToLogin']);
 
-    Route::controller(SessionsController::class)->prefix('login')->group(function () {
+    Route::controller(SessionController::class)->prefix('login')->group(function () {
         /**
          * Login routes.
          */
