@@ -4,7 +4,7 @@
     </p>
 
     <div class="grid gap-[15px] mt-[25px]">
-        <div class="flex text-right justify-between">
+        <div class="flex justify-between text-right">
             <p class="text-[16px]">
                 @lang('shop::app.checkout.cart.summary.sub-total')
             </p>
@@ -17,7 +17,7 @@
         </div>
 
         <div 
-            class="flex text-right justify-between"
+            class="flex justify-between text-right"
             v-for="(amount, index) in cart.base_tax_amounts"
             v-if="parseFloat(cart.base_tax_total)"
         >
@@ -26,14 +26,14 @@
             </p>
 
             <p 
-                class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium"
+                class="text-[16px] font-medium max-sm:text-[14px] max-sm:font-medium"
                 v-text="amount"
             >
             </p>
         </div>
 
         <div 
-            class="flex text-right justify-between"
+            class="flex justify-between text-right"
             v-if="cart.base_discount_amount && parseFloat(cart.base_discount_amount) > 0"
         >
             <p class="text-[16px]">
@@ -49,7 +49,7 @@
         
         @include('shop::checkout.cart.coupon')
    
-        <div class="flex text-right justify-between">
+        <div class="flex justify-between text-right">
             <p class="text-[18px] font-semibold">
                 @lang('shop::app.checkout.cart.summary.grand-total')
             </p>
@@ -63,7 +63,7 @@
 
         <a 
             href="{{ route('shop.checkout.onepage.index') }}" 
-            class="block place-self-end bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer mt-[15px]"
+            class="block w-max place-self-end py-[11px] mt-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
         >
             @lang('shop::app.checkout.cart.summary.proceed-to-checkout')
         </a>

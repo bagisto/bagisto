@@ -11,7 +11,7 @@
 
         <a
             href="{{ route('shop.customers.account.profile.edit') }}"
-            class="bs-secondary-button font-normal border-[#E9E9E9] py-[12px] px-[20px]"
+            class="bs-secondary-button py-[12px] px-[20px] border-[#E9E9E9] font-normal"
         >
             @lang('shop::app.customers.account.profile.edit')
         </a>
@@ -19,17 +19,17 @@
 
     {{-- Profile Information --}}
     <div class="grid grid-cols-1 gap-y-[25px] mt-[30px]">
-        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.first-name')
             </p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
                 {{ $customer->first_name }}
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.last-name')
             </p>
@@ -39,32 +39,32 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.gender')
             </p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
                 {{ $customer->gender }}
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.dob')
             </p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
                 {{ $customer->date_of_birth }}
             </p>
         </div>
 
-        <div class="grid grid-cols-[2fr_3fr] border-b-[1px] border-[#E9E9E9] w-full px-[30px] py-[12px]">
+        <div class="grid grid-cols-[2fr_3fr] w-full px-[30px] py-[12px] border-b-[1px] border-[#E9E9E9]">
             <p class="text-[14px] font-medium">
                 @lang('shop::app.customers.account.profile.email')
             </p>
 
-            <p class="text-[14px] font-medium text-[#7D7D7D]">
+            <p class="text-[14px] text-[#7D7D7D] font-medium">
                 {{ $customer->email }}
             </p>
         </div>
@@ -73,7 +73,7 @@
         <x-shop::modal>
             <x-slot:toggle>
                 <div
-                    class="bs-primary-button m-0 ml-[0px] block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
+                    class="bs-primary-button block w-max m-0 ml-[0px] mx-auto py-[11px] px-[43px] rounded-[18px] text-base text-center"
                 >
                     @lang('shop::app.customers.account.profile.delete-profile')
                 </div>
@@ -108,7 +108,7 @@
                     <div class="p-[30px] bg-white mt-[20px]">
                         <button
                             type="submit"
-                            class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                            class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base text-center font-medium cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                         >
                             @lang('shop::app.customers.account.delete')
                         </button>

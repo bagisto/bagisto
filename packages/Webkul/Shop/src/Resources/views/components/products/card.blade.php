@@ -20,14 +20,14 @@
                 
                 <div class="action-items bg-black">
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px]  bg-[#E03935] inline-block absolute top-[20px] left-[20px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px]  bg-[#E03935] rounded-[44px] text-[#fff] text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-[#fff] text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -35,20 +35,20 @@
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <a
-                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] text-[25px]"
+                            class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md cursor-pointer text-[25px]"
                             :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                             @click="addToWishlist()"
                         >
                         </a>
 
                         <a
-                            class="flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
+                            class="icon-compare flex justify-center items-center w-[30px] h-[30px] absolute top-[60px] right-[20px] bg-white rounded-md cursor-pointer text-[25px]"
                             @click="addToCompare(product.id)"
                         >
                         </a>
 
                         <a
-                            class="rounded-xl bg-white text-navyBlue text-xs w-max font-medium py-[11px] px-[43px] cursor-pointer absolute bottom-[15px] left-[50%] -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
+                            class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             @click="addToCart()"
                         >
                             @lang('shop::app.components.products.add-to-cart')
@@ -61,16 +61,16 @@
                 <p class="text-base" v-text="product.name"></p>
 
                 <div
-                    class="flex font-semibold gap-2.5 text-lg"
+                    class="flex gap-2.5 font-semibold text-lg"
                     v-html="product.price_html"
                 >
                 </div>
 
                 <!-- Needs to implement that in future -->
                 <div class="hidden flex gap-4 mt-[8px]">
-                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]"></span>
+                    <span class="block w-[30px] h-[30px] bg-[#B5DCB4] rounded-full cursor-pointer"></span>
 
-                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#5C5C5C]"></span>
+                    <span class="block w-[30px] h-[30px] bg-[#5C5C5C] rounded-full cursor-pointer"></span>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
             class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap"
             v-else
         >
-            <div class="relative overflow-hidden group max-w-[250px] max-h-[258px]"> 
+            <div class="relative max-w-[250px] max-h-[258px] overflow-hidden group"> 
                 <a :href="`{{ route('shop.productOrCategory.index', '') }}/${product.url_key}`">
                     <x-shop::shimmer.image
                         class="min-w-[250px] relative after:content-[' '] after:block after:pb-[calc(100%+9px)] rounded-sm bg-[#F5F5F5] group-hover:scale-105 transition-all duration-300"
@@ -89,14 +89,14 @@
             
                 <div class="action-items bg-black"> 
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px]  bg-[#E03935] inline-block absolute top-[20px] left-[20px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-[#E03935] rounded-[44px] text-[#fff] text-[14px]"
                         v-if="product.on_sale"
                     >
                         @lang('shop::app.components.products.card.sale')
                     </p>
 
                     <p
-                        class="rounded-[44px] text-[#fff] text-[14px] px-[10px] bg-navyBlue inline-block absolute top-[20px] left-[20px]"
+                        class="inline-block absolute top-[20px] left-[20px] px-[10px] bg-navyBlue rounded-[44px] text-[#fff] text-[14px]"
                         v-else-if="product.is_new"
                     >
                         @lang('shop::app.components.products.card.new')
@@ -104,14 +104,14 @@
 
                     <div class="group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <span 
-                            class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[20px] right-[20px] text-[25px]"
+                            class="flex justify-center items-center absolute top-[20px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
                             :class="product.is_wishlist ? 'icon-heart-fill' : 'icon-heart'"
                             @click="addToWishlist()"
                         >
                         </span> 
                         
                         <span 
-                            class=" flex justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-compare text-[25px]"
+                            class="icon-compare flex justify-center items-center absolute top-[60px] right-[20px] w-[30px] h-[30px] bg-white rounded-md text-[25px] cursor-pointer"
                             @click="addToCompare(product.id)"
                         >
                         </span>
@@ -134,10 +134,10 @@
 
                 <!-- Needs to implement that in future -->
                 <div class="hidden flex gap-4"> 
-                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#B5DCB4]">
+                    <span class="block w-[30px] h-[30px] rounded-full bg-[#B5DCB4]">
                     </span> 
 
-                    <span class="rounded-full w-[30px] h-[30px] block cursor-pointer bg-[#5C5C5C]">
+                    <span class="block w-[30px] h-[30px] rounded-full bg-[#5C5C5C]">
                     </span> 
                 </div> 
                 

@@ -1,14 +1,14 @@
 <x-shop::layouts>
     {{-- Loop over the theme customization --}}
     @foreach ($customizations as $customization)
-        @php($data = json_decode($customization->options))
+        @php($data = $customization->options)
 
         {{-- Static content --}}
         @switch($customization->type)
             {{-- Image Carousel --}}
             @case($customization::IMAGE_CAROUSEL)
                 <div class="bs-hero-section">
-                    @foreach ($data->images as $image)
+                    @foreach ($data['images'] as $image)
                         <picture>
                             <img src="{{ $image }}" />
                         </picture>
@@ -21,12 +21,12 @@
                 {{-- push style --}}
                 @push('styles')
                     <style>
-                        {{ $data->css }}
+                        {{ $data['css'] }}
                     </style>
                 @endpush
 
                 {{-- render html --}}
-                {!! $data->html !!}
+                {!! $data['html'] !!}
 
                 @break
 
@@ -34,7 +34,7 @@
                 {{-- Categories carousel --}}
                 <x-shop::categories.carousel
                     :title="$customization->name"
-                    :src="route('shop.api.categories.index', json_decode($customization->options, true))"
+                    :src="route('shop.api.categories.index', $data)"
                     :navigation-link="route('shop.home.index')"
                 >
                 </x-shop::categories.carousel>
@@ -42,11 +42,11 @@
                 @break
 
             @case($customization::PRODUCT_CAROUSEL)
-                {{-- Carousel --}}
+                {{-- Product Carousel --}}
                 <x-shop::products.carousel
                     {{-- title="Men's Collections" --}}
                     :title="$customization->name"
-                    :src="route('shop.api.products.index', json_decode($customization->options, true))"
+                    :src="route('shop.api.products.index', $data)"
                     :navigation-link="route('shop.home.index')"
                 >
                 </x-shop::products.carousel>

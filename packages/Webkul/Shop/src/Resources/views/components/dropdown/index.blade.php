@@ -48,7 +48,7 @@
                 leave-to-class="transform opacity-0 scale-95"
             >
                 <div
-                    class="absolute bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px] w-max z-10 overflow-hidden"
+                    class="absolute w-max z-10 overflow-hidden bg-white shadow-[0px_10px_84px_rgba(0,0,0,0.1)] rounded-[20px]"
                     :style="positionStyles"
                     v-show="isActive"
                 >

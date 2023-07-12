@@ -11,24 +11,14 @@ use Webkul\User\Repositories\RoleRepository;
 class RoleController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
-     * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
     public function __construct(
         protected RoleRepository $roleRepository,
         protected AdminRepository $adminRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -42,7 +32,7 @@ class RoleController extends Controller
             return app(RolesDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::users.roles.index');
     }
 
     /**
@@ -52,7 +42,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::users.roles.create');
     }
 
     /**
@@ -75,7 +65,7 @@ class RoleController extends Controller
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Role']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.roles.index');
     }
 
     /**
@@ -88,7 +78,7 @@ class RoleController extends Controller
     {
         $role = $this->roleRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('role'));
+        return view('admin::users.roles.edit', compact('role'));
     }
 
     /**
@@ -115,7 +105,7 @@ class RoleController extends Controller
         ) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('admin.roles.index');
         }
 
         Event::dispatch('user.role.update.before', $id);
@@ -128,7 +118,7 @@ class RoleController extends Controller
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.roles.index');
     }
 
     /**

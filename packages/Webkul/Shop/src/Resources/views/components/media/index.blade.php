@@ -1,6 +1,6 @@
 <v-media {{ $attributes }} >
     <x-shop::shimmer.image
-        class="w-[284px] h-[284px] rounded-[12px] mt-[30px]"
+        class="w-[284px] h-[284px] mt-[30px] rounded-[12px]"
     ></x-shop::shimmer.image>
 </v-media>
 
@@ -9,11 +9,11 @@
         <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
             <div :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }">
                 <div
-                    class="flex flex-col w-[284px] h-[284px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex flex-col items-center justify-center w-[284px] h-[284px] bg-[#F5F5F5] rounded-[12px] cursor-pointer hover:bg-gray-100"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="relative group flex justify-center w-[284px] h-[284px]"
+                        class="group flex justify-center relative w-[284px] h-[284px]"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
@@ -35,7 +35,7 @@
 
                 <label 
                     for="file-input"
-                    class="flex flex-col w-[284px] h-[284px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex flex-col items-center justify-center w-[284px] h-[284px] bg-[#F5F5F5] rounded-[12px] hover:bg-gray-100 cursor-pointer"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
@@ -43,7 +43,7 @@
                 >
                     <label 
                         for="file-input"
-                        class="bs-primary-button m-0 block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
+                        class="bs-primary-button block w-max m-0 mx-auto py-[11px] px-[43px] rounded-[18px] text-base text-center"
                     >
                         @lang('Add attachments')
                     </label>
@@ -103,7 +103,7 @@
                                 <video
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="rounded-[12px] min-w-[50px] max-h-[50px]"
+                                    class="min-w-[50px] max-h-[50px] rounded-[12px]"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
                                 </video>

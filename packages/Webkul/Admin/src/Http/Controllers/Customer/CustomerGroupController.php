@@ -11,13 +11,6 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 class CustomerGroupController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository;
@@ -25,7 +18,6 @@ class CustomerGroupController extends Controller
      */
     public function __construct(protected CustomerGroupRepository $customerGroupRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -39,7 +31,7 @@ class CustomerGroupController extends Controller
             return app(CustomerGroupDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::customers.groups.index');
     }
 
     /**
@@ -49,7 +41,7 @@ class CustomerGroupController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::customers.groups.create');
     }
 
     /**
@@ -74,7 +66,7 @@ class CustomerGroupController extends Controller
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.groups.index');
     }
 
     /**
@@ -87,7 +79,7 @@ class CustomerGroupController extends Controller
     {
         $group = $this->customerGroupRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('group'));
+        return view('admin::customers.groups.edit', compact('group'));
     }
 
     /**
@@ -111,7 +103,7 @@ class CustomerGroupController extends Controller
 
         session()->flash('success', trans('admin::app.customers.groups.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.groups.index');
     }
 
     /**

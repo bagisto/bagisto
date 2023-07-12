@@ -10,7 +10,7 @@
             id="v-search-template"
         >
             <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-                <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
+                <div class="flex gap-[40px] items-start mt-[40px] max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -87,7 +87,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                            class="block w-max py-[11px] px-[43px] mx-auto mt-[60px] bg-white border rounded-[18px] border-navyBlue text-base text-navyBlue font-medium text-center"
                             @click="loadMoreProducts"
                             v-if="links.next"
                         >

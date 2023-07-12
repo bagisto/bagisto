@@ -11,12 +11,12 @@
     <script type="text/x-template" id="v-tabs-template">
         <div>
             <div
-                class="flex bg-[#F5F5F5] pt-[18px] gap-[30px] justify-center max-1180:hidden"
+                class="flex gap-[30px] justify-center pt-[18px] bg-[#F5F5F5] max-1180:hidden"
                 :style="positionStyles"
             >
                 <div
                     v-for="tab in tabs"
-                    class="text-[20px] font-medium text-[#7D7D7D] pb-[18px] px-[30px] cursor-pointer"
+                    class="pb-[18px] px-[30px] text-[20px] font-medium text-[#7D7D7D] cursor-pointer"
                     :class="{'text-black border-navyBlue border-b-[2px] transition': tab.isActive }"
                     v-text="tab.title"
                     @click="change(tab)"

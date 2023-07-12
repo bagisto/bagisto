@@ -4,18 +4,18 @@
     <div class="bs-item-carousal-wrapper relative">
         <div class="flex gap-10 overflow-auto scrollbar-hide max-sm:gap-4">
             @for ($i = 0;  $i < $count; $i++)
-                <div class="grid grid-cols-1 justify-items-center gap-[15px] min-w-[120px]">
-                    <div class="relative overflow-hidden rounded-full w-[110px] h-[110px] shimmer">
-                        <img class="rounded-sm bg-[#F5F5F5]">
+                <div class="grid grid-cols-1 gap-[15px] justify-items-center min-w-[120px]">
+                    <div class="shimmer relative w-[110px] h-[110px] overflow-hidden rounded-full">
+                        <img class="bg-[#F5F5F5] rounded-sm">
                     </div>
 
-                    <p class="w-[90px] h-[32px] rounded-[18px] shimmer"></p>
+                    <p class="shimmer w-[90px] h-[32px] rounded-[18px]"></p>
                 </div>
             @endfor
         </div>
 
-        <span class="flex rounded-full w-[50px] h-[50px] absolute top-[37px] -left-[41px] shimmer"></span>
+        <span class="shimmer flex absolute top-[37px] -left-[41px] w-[50px] h-[50px] rounded-full"></span>
 
-        <span class="flex rounded-full w-[50px] h-[50px] absolute top-[37px] -right-[22px] shimmer"></span>
+        <span class="shimmer flex absolute top-[37px] -right-[22px] w-[50px] h-[50px] rounded-full"></span>
     </div>
 </div>

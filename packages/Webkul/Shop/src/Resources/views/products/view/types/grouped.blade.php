@@ -25,7 +25,7 @@
                             <x-shop::quantity-changer
                                 name="qty[{{$groupedProduct->associated_product_id}}]"
                                 :value="$groupedProduct->qty"
-                                class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                class="gap-x-[16px] py-[15px] px-[26px] rounded-[12px]"
                                 @change="updateItem($event)"
                             >
                             </x-shop::quantity-changer>

@@ -8,7 +8,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-payment-method-template">
-        <div class="mt-[30px]  mb-[30px]">
+        <div class="mt-[30px] mb-[30px]">
             <template v-if="! isShowPaymentMethod && isPaymentMethodLoading">
                 <!-- Payment Method shimmer Effect -->
                 <x-shop::shimmer.checkout.onepage.payment-method></x-shop::shimmer.checkout.onepage.payment-method>
@@ -28,7 +28,7 @@
                         <x-slot:content>
                             <div class="flex flex-wrap gap-[29px] mt-[30px]">
                                 <div 
-                                    class="relative relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
+                                    class="relative max-sm:max-w-full max-sm:flex-auto cursor-pointer"
                                     v-for="(payment, index) in paymentMethods"
                                 >
                                     <input 
@@ -42,13 +42,13 @@
         
                                     <label 
                                         :for="payment.method" 
-                                        class="icon-radio-unselect text-[24px] text-navyBlue absolute ltr:right-[20px] rtl:left-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                        class="absolute ltr:right-[20px] rtl:left-[20px] top-[20px] icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                     >
                                     </label>
         
                                     <label 
                                         :for="payment.method" 
-                                        class="block border border-[#E9E9E9] p-[20px] rounded-[12px] w-[190px] max-sm:w-full cursor-pointer"
+                                        class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
                                     >
                                         <img 
                                             class="mx-w-[55px] max-h-[45px]" 

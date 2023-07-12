@@ -11,20 +11,12 @@ use Webkul\Sitemap\Repositories\SitemapRepository;
 class SitemapController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(public SitemapRepository $sitemapRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -38,7 +30,7 @@ class SitemapController extends Controller
             return app(SitemapDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.sitemaps.index');
     }
 
     /**
@@ -48,7 +40,7 @@ class SitemapController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::marketing.sitemaps.create');
     }
 
     /**
@@ -71,7 +63,7 @@ class SitemapController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.sitemaps.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.sitemaps.index');
     }
 
     /**
@@ -84,7 +76,7 @@ class SitemapController extends Controller
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('sitemap'));
+        return view('admin::marketing.sitemaps.edit', compact('sitemap'));
     }
 
     /**
@@ -108,7 +100,7 @@ class SitemapController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.sitemaps.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.sitemaps.index');
     }
 
     /**

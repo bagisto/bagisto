@@ -12,7 +12,7 @@
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px]"
+            class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal"
         >
             <span class="icon-location text-[24px]"></span>
 
@@ -22,9 +22,9 @@
 
     @if (! $addresses->isEmpty())
         {{-- Address Information --}}
-        <div class="grid mt-[60px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr]">
+        <div class="grid grid-cols-2 gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
-                <div class="border border-[#e5e5e5] rounded-[12px] p-[20px] max-sm:flex-wrap">
+                <div class="p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
                     <div class="flex justify-between items-center">
                         <p class="text-[16px] font-medium">
                             {{ $address->company_name }}
@@ -34,7 +34,7 @@
 
                             @if ($address->default_address)
                                 <div 
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white w-max font-medium p-[5px] rounded-[10px] text-center text-[12px]"
+                                    class="block w-max m-0 ml-[0px] mx-auto p-[5px] rounded-[10px] bg-navyBlue text-[12px] text-white font-medium text-center"
                                 >
                                     @lang('shop::app.customers.account.addresses.default-address') 
                                 </div>
@@ -90,7 +90,7 @@
         </div>
     @else
         {{-- Address Empty Page --}}
-        <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+        <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
             <img 
                 class="" 
                 src="{{ bagisto_asset('images/no-address.png') }}" 

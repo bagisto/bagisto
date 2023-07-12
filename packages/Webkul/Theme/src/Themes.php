@@ -79,7 +79,8 @@ class Themes
                 $code,
                 $data['name'] ?? '',
                 $data['assets_path'] ?? '',
-                $data['views_path'] ?? ''
+                $data['views_path'] ?? '',
+                isset($data['vite']) ? $data['vite'] : [],
             );
 
             if (! empty($data['parent'])) {
@@ -125,9 +126,10 @@ class Themes
         foreach ($themes as $code => $data) {
             $this->themes[] = new Theme(
                 $code,
-                isset($data['name']) ? $data['name'] : '',
-                isset($data['assets_path']) ? $data['assets_path'] : '',
-                isset($data['views_path']) ? $data['views_path'] : ''
+                $data['name'] ?? '',
+                $data['assets_path'] ?? '',
+                $data['views_path'] ?? '',
+                $data['vite'] ?? [],
             );
 
             if (! empty($data['parent'])) {

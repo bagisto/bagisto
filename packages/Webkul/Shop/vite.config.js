@@ -21,9 +21,9 @@ export default defineConfig(({ mode }) => {
 
         plugins: [
             laravel({
-                hotFile: "../../../public/default-vite.hot",
+                hotFile: "../../../public/shop-default-vite.hot",
                 publicDirectory: "../../../public",
-                buildDirectory: "themes/default/build",
+                buildDirectory: "themes/shop/default/build",
                 input: [
                     "src/Resources/assets/css/app.css",
                     "src/Resources/assets/js/app.js",

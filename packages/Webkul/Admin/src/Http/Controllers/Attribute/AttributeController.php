@@ -21,8 +21,6 @@ class AttributeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
      * @return void
      */
     public function __construct(
@@ -43,7 +41,7 @@ class AttributeController extends Controller
             return app(AttributeDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::catalog.attributes.index');
     }
 
     /**
@@ -53,7 +51,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::catalog.attributes.create');
     }
 
     /**
@@ -79,7 +77,7 @@ class AttributeController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.attributes.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.attributes.index');
     }
 
     /**
@@ -92,7 +90,7 @@ class AttributeController extends Controller
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('attribute'));
+        return view('admin::catalog.attributes.edit', compact('attribute'));
     }
 
     /**
@@ -130,7 +128,7 @@ class AttributeController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.attributes.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.attributes.index');
     }
 
     /**

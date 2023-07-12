@@ -9,21 +9,12 @@ use Webkul\Core\Repositories\LocaleRepository;
 class LocaleController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\LocaleRepository  $localeRepository
      * @return void
      */
     public function __construct(protected LocaleRepository $localeRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -37,7 +28,7 @@ class LocaleController extends Controller
             return app(LocalesDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::settings.locales.index');
     }
 
     /**
@@ -47,7 +38,7 @@ class LocaleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::settings.locales.create');
     }
 
     /**
@@ -67,7 +58,7 @@ class LocaleController extends Controller
 
         session()->flash('success', trans('admin::app.settings.locales.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.locales.index');
     }
 
     /**
@@ -80,7 +71,7 @@ class LocaleController extends Controller
     {
         $locale = $this->localeRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('locale'));
+        return view('admin::settings.locales.edit', compact('locale'));
     }
 
     /**
@@ -101,7 +92,7 @@ class LocaleController extends Controller
 
         session()->flash('success', trans('admin::app.settings.locales.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.locales.index');
     }
 
     /**

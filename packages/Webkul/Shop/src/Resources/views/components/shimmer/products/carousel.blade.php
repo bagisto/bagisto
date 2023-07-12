@@ -1,11 +1,11 @@
 <div class="container mt-20 max-lg:px-[30px] max-sm:mt-[30px]">
     <div class="flex justify-between">
-        <h3 class="w-[200px] h-[45px] shimmer"></h3>
+        <h3 class="shimmer w-[200px] h-[45px]"></h3>
 
-        <div class="flex justify-between items-center gap-8">
-            <span class="w-[24px] h-[24px] inline-block shimmer"></span>
+        <div class="flex gap-8 justify-between items-center">
+            <span class="shimmer inline-block w-[24px] h-[24px]"></span>
 
-            <span class="w-[24px] h-[24px] inline-block shimmer"></span>
+            <span class="shimmer inline-block w-[24px] h-[24px]"></span>
         </div>
     </div>
 
@@ -18,6 +18,6 @@
     </div>
 
     @if ($navigationLink)
-        <a class="block mx-auto w-[150.172px] h-[48px] rounded-[18px] mt-[60px] shimmer"></a>
+        <a class="shimmer block w-[150.172px] h-[48px] mt-[60px] mx-auto rounded-[18px]"></a>
     @endif
 </div>

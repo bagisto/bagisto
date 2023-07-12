@@ -1,16 +1,16 @@
 @props(['attributeCount' => 3, 'productCount' => 3])
 
 <div class="flex justify-between items-center">
-    <h2 class="w-[200px] h-[39px] shimmer"></h2>
+    <h2 class="shimmer w-[200px] h-[39px]"></h2>
 
-    <div class="w-[150px] h-[50px] shimmer rounded-[12px]"></div>
+    <div class="shimmer w-[150px] h-[50px] rounded-[12px]"></div>
 </div>
 
 <div class="grid mt-[60px] overflow-auto journal-scroll">
     <!-- Single row -->
     <div class="flex items-center max-w-full border-b-[1px] border-[#E9E9E9] ">
         <div class="min-w-[304px] max-w-full max-sm:hidden">
-            <p class="w-[55%] h-[21px] shimmer"></p>
+            <p class="shimmer w-[55%] h-[21px]"></p>
         </div>
 
         <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">

@@ -10,21 +10,12 @@ use Webkul\Marketing\Repositories\EventRepository;
 class EventController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Marketing\Repositories\EventRepository  $eventRepository
      * @return void
      */
     public function __construct(protected EventRepository $eventRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -38,7 +29,7 @@ class EventController extends Controller
             return app(EventDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.email-marketing.events.index');
     }
 
     /**
@@ -48,7 +39,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::marketing.email-marketing.events.create');
     }
 
     /**
@@ -72,7 +63,7 @@ class EventController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.events.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.events.index');
     }
 
     /**
@@ -91,7 +82,7 @@ class EventController extends Controller
 
         $event = $this->eventRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('event'));
+        return view('admin::marketing.email-marketing.events.edit', compact('event'));
     }
 
     /**
@@ -116,7 +107,7 @@ class EventController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.events.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.events.index');
     }
 
     /**

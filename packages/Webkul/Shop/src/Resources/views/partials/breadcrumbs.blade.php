@@ -6,7 +6,7 @@
                     $breadcrumb->url 
                     && ! $loop->last
                 )
-                    <p class="flex items-center gap-x-[10px] text-[16px] font-medium">
+                    <p class="flex gap-x-[10px] items-center text-[16px] font-medium">
                         <a href="{{ $breadcrumb->url }}">
                             {{ $breadcrumb->title }}
                         </a>
@@ -15,7 +15,7 @@
                     </p>
                 @else
                     <p 
-                        class="flex items-center gap-x-[10px] ml-[10px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden" 
+                        class="flex gap-x-[10px] items-center ml-[10px] text-[#7D7D7D] text-[16px] after:content-['/'] after:last:hidden" 
                         aria-current="page"
                     >
                         {{ $breadcrumb->title }}
