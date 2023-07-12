@@ -1,9 +1,40 @@
 {!! view_render_event('bagisto.shop.layout.footer.before') !!}
 
+{{--
+    The category repository is injected directly here because there is no way
+    to retrieve it from the view composer, as this is an anonymous component.
+--}}
+@inject('themeCustomizationRepository', 'Webkul\Shop\Repositories\ThemeCustomizationRepository')
+
+{{--
+    This code needs to be refactored to reduce the amount of PHP in the Blade
+    template as much as possible.
+--}}
+@php
+    $footerLinks = $themeCustomizationRepository->findOneWhere([
+        'type'   => 'footer_links',
+        'status' => 1
+    ]); 
+    
+    if ($footerLinks) {
+        $footerLinks = json_decode($footerLinks->options, true);
+    }
+@endphp
+
 <footer class=" bg-lightOrange mt-[36px] max-sm:mt-[30px]">
     <div class="flex justify-between p-[60px] gap-x-[25px] gap-y-[30px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-[15px]">
         <div class="flex gap-[85px] items-start flex-wrap max-1180:gap-[25px] max-1060:justify-between">
-            {!! Blade::render(core()->getCurrentChannel()->footer_content) !!}
+            @foreach ((array) $footerLinks as $footerLink)
+                <ul class="grid gap-[20px] text-[14px]">
+                    @foreach ($footerLink as $foterItem)
+                        <li>
+                            <a href="{{ $foterItem['url'] }}">
+                                {{ $foterItem['title'] }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>    
+            @endforeach
         </div>
 
         {{-- News Letter subscription --}}
