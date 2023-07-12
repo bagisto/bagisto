@@ -92,13 +92,10 @@ class Theme
         $url = trim($url, '/');
 
         /**
-         * Testing vite url, will refactor and give good configuration.
+         * Testing vite url, on monitoring.
          */
         $viteUrl = 'src/Resources/assets/' . $url;
 
-        /**
-         * Activated vite here. For dev and prod.
-         */
         return Vite::useHotFile($this->vite['hot_file'])
             ->useBuildDirectory($this->vite['build_directory'])
             ->asset($viteUrl);
