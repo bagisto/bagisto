@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
 	font-family: 'bagisto-admin';
 	src: url('../fonts/bagisto-admin.woff?jwnnow') format('woff');
@@ -231,7 +230,7 @@
 		content: "\e92e";
 	}
 
-	.icon-serch:before {
+	.icon-search:before {
 		content: "\e92f";
 	}
 

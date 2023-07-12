@@ -42,6 +42,23 @@ return [
         'false'           => 'False',
     ],
 
+    'components' => [
+
+        'layouts' => [
+
+            'header' => [
+                'search'        => 'Search',
+                'mega-search'   => 'Mega Search',
+                'notifications' => 'Notifications',
+                'visit-shop'    => 'Visit Shop',
+            ],
+
+            'sidebar' => [
+                'collapse' => 'Collapse',
+            ],
+        ],
+    ],
+
     'layouts' => [
         'app-version'              => 'Version : :version',
         'account-title'            => 'Account',
