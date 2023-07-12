@@ -17,7 +17,7 @@
     ]); 
     
     if ($footerLinks) {
-        $footerLinks = json_decode($footerLinks->options, true);
+        $footerLinks = $footerLinks->options;
     }
 @endphp
 
