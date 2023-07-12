@@ -40,12 +40,12 @@
                 <!-- Cart Information -->
                 <template v-else>
                     <div 
-                        class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col pb-[30px]"
+                        class="flex flex-wrap gap-[75px] mt-[30px] pb-[30px] max-1060:flex-col"
                         v-if="cart?.items?.length"
                     >
                         <div class="grid gap-[25px] flex-1">
                             <!-- Cart Mass Action Container -->
-                            <div class="flex justify-between items-center border-b-[1px] border-[#E9E9E9] max-sm:block pb-[10px]">
+                            <div class="flex justify-between items-center pb-[10px] border-b-[1px] border-[#E9E9E9] max-sm:block">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -90,7 +90,7 @@
                                 class="grid gap-y-[25px]" 
                                 v-for="item in cart?.items"
                             >
-                                <div class="flex gap-x-[10px] justify-between flex-wrap border-b-[1px] border-[#E9E9E9] pb-[18px]">
+                                <div class="flex gap-x-[10px] justify-between flex-wrap pb-[18px] border-b-[1px] border-[#E9E9E9]">
                                     <div class="flex gap-x-[20px]">
                                         <div class="select-none mt-[43px]">
                                             <input

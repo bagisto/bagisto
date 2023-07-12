@@ -89,7 +89,7 @@
                                         @switch($item->status)
                                             @case('completed')
 
-                                                <span class="px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B]text-white text-[12px]">
+                                                <span class="px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
                                                     {{ $item->status }}
                                                 </span>
                                                 @break
