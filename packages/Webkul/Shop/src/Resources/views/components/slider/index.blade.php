@@ -5,38 +5,33 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-slider-template">
         <div 
-            class="relative w-full h-[400px]"
+            class="relative w-full h-[50vh] md:flex md:h-[500px]"
             @mouseover="showNavigation = true"
             @mouseleave="showNavigation = false"
         >
             <div class="relative overflow-hidden w-full h-full">
                 <div 
-                    v-for="(image, index) in options.images"
-                    :class="getSlideClasses(index)"
+                    v-for="(image, index) in options.images" 
+                    :class="getSlideStyles(index)"
                 >
-                    <img
-                        :src="image"
-                        alt="Slider Image"
-                        class="w-full h-full"
-                    >
+                    <img :src="image" alt="Slider Image" class="h-auto object-cover max-w-full">
                 </div>
             </div>
-          
+        
             <span
-                class="bs-carousal-next flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[176px] left-[21px] cursor-pointer transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px]"
+                class="bs-carousal-next flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[221px] left-[21px] md:left-[29px] cursor-pointer transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white"
                 :class="{ 'hidden': ! showNavigation }"
                 @click="previousSlide"
             >
             </span>
-          
+        
             <span
-                class="bs-carousal-prev flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[176px] right-[23px] cursor-pointer transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px]"
+                class="bs-carousal-prev flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[221px] right-[23px] md:right-[29px] cursor-pointer transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white"
                 :class="{ 'hidden': ! showNavigation }"
                 @click="nextSlide"
             >
             </span>
-          </div>
-          
+        </div>
     </script>
 
     <script type="module">
@@ -62,7 +57,7 @@
                     this.currentIndex = (this.currentIndex + 1) % this.options.images.length;
                 },
 
-                getSlideClasses(index) {
+                getSlideStyles(index) {
                     return {
                         'opacity-100': index === this.currentIndex,
                         'opacity-0': index !== this.currentIndex,
