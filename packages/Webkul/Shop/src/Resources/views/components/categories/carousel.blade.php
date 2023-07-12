@@ -15,7 +15,7 @@
             <div class="bs-item-carousal-wrapper relative">
                 <div
                     ref="swiperContainer"
-                    class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide"
+                    class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide max-sm:gap-4"
                 >
                     <div
                         class="grid grid-cols-1 justify-items-center gap-[15px] font-medium min-w-[120px]"
@@ -39,7 +39,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-black text-[20px]"
+                                class="text-center text-black text-[20px] max-sm:font-normal"
                                 v-text="category.name"
                             >
                             </p>

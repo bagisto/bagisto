@@ -2,7 +2,7 @@
 
 <div class="container mt-[60px] max-lg:px-[30px] max-sm:mt-[20px]">
     <div class="bs-item-carousal-wrapper relative">
-        <div class="flex gap-10 overflow-auto scrollbar-hide">
+        <div class="flex gap-10 overflow-auto scrollbar-hide max-sm:gap-4">
             @for ($i = 0;  $i < $count; $i++)
                 <div class="grid grid-cols-1 justify-items-center gap-[15px] min-w-[120px]">
                     <div class="relative overflow-hidden rounded-full w-[110px] h-[110px] shimmer">
