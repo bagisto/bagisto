@@ -203,22 +203,27 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
-        <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.control
+        <div class="select-none items-center flex gap-[6px] mb-4">
+            <input
                 type="checkbox"
                 name="subscribed_to_news_letter"
-                :checked="$customer->subscribed_to_news_letter"
-            >
-                <span class="select-none text-[16] text-[#7d7d7d] max-sm:text-[12px]">
-                    @lang('shop::app.customer.signup-form.subscribe-to-newsletter')
-                </span>
-            </x-shop::form.control-group.control>
+                id="is-subscribed"
+                class="hidden peer"
+                onchange="switchVisibility()"
+            />
 
-            <x-shop::form.control-group.error
-                control-name="subscribed_to_news_letter"
+            <label
+                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                for="is-subscribed"
+            ></label>
+
+            <label
+                class="text-[16] text-[#7d7d7d] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                for="is-subscribed"
             >
-            </x-shop::form.control-group.error>
-        </x-shop::form.control-group>
+                @lang('shop::app.customers.account.profile.subscribe-to-newsletter')
+            </label>
+        </div>
 
         <button
             type="submit"
