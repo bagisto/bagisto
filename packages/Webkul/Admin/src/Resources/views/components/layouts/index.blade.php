@@ -1,9 +1,3 @@
-@props([
-    'hasHeader'  => true,
-    'hasFeature' => true,
-    'hasFooter'  => true,
-])
-
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ core()->getCurrentLocale()->direction }}">
 
@@ -51,30 +45,12 @@
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
     <div id="app">
-        {{-- Flash Message Blade Component --}}
-        <x-shop::flash-group />
-
-        {{-- Page Header Blade Component --}}
-        @if ($hasHeader)
-            <x-shop::layouts.header />
-        @endif
-
         {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
         {{-- Page Content Blade Component --}}
         {{ $slot }}
 
         {!! view_render_event('bagisto.shop.layout.content.after') !!}
-
-        {{-- Page Features Blade Component --}}
-        @if ($hasFeature)
-            <x-shop::layouts.features />
-        @endif
-
-        {{-- Page Footer Blade Component --}}
-        @if ($hasFooter)
-            <x-shop::layouts.footer />
-        @endif
     </div>
 
     {!! view_render_event('bagisto.shop.layout.body.after') !!}

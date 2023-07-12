@@ -26,7 +26,8 @@ class Theme
         public $code,
         public $name = null,
         public $assetsPath = null,
-        public $viewsPath = null
+        public $viewsPath = null,
+        public $vite = []
     ) {
         $this->assetsPath = $assetsPath === null ? $code : $assetsPath;
 
@@ -91,45 +92,25 @@ class Theme
         $url = trim($url, '/');
 
         /**
-         * Hot file for dev.
-         */
-        $hotFile = $this->code . '-vite.hot';
-
-        /**
-         * Testing vite url, will refactor and give good configuration.
+         * Testing vite url, on monitoring.
          */
         $viteUrl = 'src/Resources/assets/' . $url;
 
-        /**
-         * Testing build path, will refactor and give good configuration.
-         */
-        $buildPath = str_replace('public/', '', $this->assetsPath) . '/build';
-
-        /**
-         * Activated vite here. For dev and prod.
-         */
-        return Vite::useHotFile($hotFile)
-            ->useBuildDirectory($buildPath)
+        return Vite::useHotFile($this->vite['hot_file'])
+            ->useBuildDirectory($this->vite['build_directory'])
             ->asset($viteUrl);
     }
 
+    /**
+     * Set bagisto vite.
+     *
+     * @param  array  $entryPoints
+     * @return \Illuminate\Foundation\Vite
+     */
     public function setBagistoVite($entryPoints)
     {
-        /**
-         * Hot file for dev.
-         */
-        $hotFile = $this->code . '-vite.hot';
-
-        /**
-         * Testing build path, will refactor and give good configuration.
-         */
-        $buildPath = str_replace('public/', '', $this->assetsPath) . '/build';
-
-        /**
-         * Activated vite here. For dev and prod.
-         */
-        return Vite::useHotFile($hotFile)
-            ->useBuildDirectory($buildPath)
+        return Vite::useHotFile($this->vite['hot_file'])
+            ->useBuildDirectory($this->vite['build_directory'])
             ->withEntryPoints($entryPoints);
     }
 }
