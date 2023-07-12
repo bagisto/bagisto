@@ -1,4 +1,9 @@
 <x-shop::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.addresses.edit')
+    </x-slot>
+    
     {{-- Loop over the theme customization --}}
     @foreach ($customizations as $customization)
         @php($data = $customization->options)

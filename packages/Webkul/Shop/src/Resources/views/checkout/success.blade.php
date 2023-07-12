@@ -3,6 +3,11 @@
     :has-feature="false"
     :has-footer="false"
 >
+    {{-- Page Title --}}
+    <x-slot:title>
+		@lang('shop::app.checkout.success.thanks')
+    </x-slot>
+
 	<div class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
 		<div class="grid gap-y-[20px] place-items-center">
 			<img 

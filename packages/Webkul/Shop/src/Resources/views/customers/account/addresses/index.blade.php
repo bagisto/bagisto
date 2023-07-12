@@ -1,4 +1,9 @@
 <x-shop::layouts.account>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.addresses.add-address')
+    </x-slot>
+    
     {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses"></x-shop::breadcrumbs>
