@@ -5,7 +5,6 @@ use Webkul\Admin\Http\Controllers\Core\ChannelController;
 use Webkul\Admin\Http\Controllers\Core\CurrencyController;
 use Webkul\Admin\Http\Controllers\Core\ExchangeRateController;
 use Webkul\Admin\Http\Controllers\Core\LocaleController;
-use Webkul\Admin\Http\Controllers\Core\SliderController;
 use Webkul\Admin\Http\Controllers\Inventory\InventorySourceController;
 use Webkul\Admin\Http\Controllers\Tax\TaxCategoryController;
 use Webkul\Admin\Http\Controllers\Tax\TaxRateController;
@@ -141,25 +140,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::get('confirm/{id}', 'confirm')->name('super.users.confirm');
 
         Route::post('confirm/{id}', 'destroySelf')->name('admin.users.destroy');
-    });
-
-    /**
-     * Slider routes.
-     */
-    Route::controller(SliderController::class)->prefix('sliders')->group(function () {
-        Route::get('', 'index')->name('admin.sliders.index');
-
-        Route::get('create', 'create')->name('admin.sliders.create');
-
-        Route::post('create', 'store')->name('admin.sliders.store');
-
-        Route::get('edit/{id}', 'edit')->name('admin.sliders.edit');
-
-        Route::post('edit/{id}', 'update')->name('admin.sliders.update');
-
-        Route::post('delete/{id}', 'destroy')->name('admin.sliders.delete');
-
-        Route::post('mass-delete', 'massDestroy')->name('admin.sliders.mass_delete');
     });
 
     /**

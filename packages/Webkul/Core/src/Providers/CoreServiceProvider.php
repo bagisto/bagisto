@@ -9,8 +9,6 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Core\Core;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\Core as CoreFacade;
-use Webkul\Core\Models\SliderProxy;
-use Webkul\Core\Observers\SliderObserver;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -35,8 +33,6 @@ class CoreServiceProvider extends ServiceProvider
         ]);
 
         $this->app->bind(ExceptionHandler::class, Handler::class);
-
-        SliderProxy::observe(SliderObserver::class);
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
