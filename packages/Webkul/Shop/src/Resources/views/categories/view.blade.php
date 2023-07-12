@@ -1,4 +1,22 @@
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="description" content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"/>
+
+    <meta name="keywords" content="{{ $category->meta_keywords }}"/>
+
+    @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
+        <script type="application/ld+json">
+            {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}
+        </script>
+    @endif
+@endPush
+
 <x-shop::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
+    </x-slot>
+
     {{-- Hero Image --}}
     <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
         <div>
