@@ -10,21 +10,12 @@ use Webkul\Core\Repositories\ChannelRepository;
 class ChannelController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @return void
      */
     public function __construct(protected ChannelRepository $channelRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -38,7 +29,7 @@ class ChannelController extends Controller
             return app(ChannelDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::settings.channels.index');
     }
 
     /**
@@ -48,7 +39,7 @@ class ChannelController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::settings.channels.create');
     }
 
     /**
@@ -101,7 +92,7 @@ class ChannelController extends Controller
 
         session()->flash('success', trans('admin::app.settings.channels.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.channels.index');
     }
 
     /**
@@ -114,7 +105,7 @@ class ChannelController extends Controller
     {
         $channel = $this->channelRepository->with(['locales', 'currencies'])->findOrFail($id);
 
-        return view($this->_config['view'], compact('channel'));
+        return view('admin::settings.channels.edit', compact('channel'));
     }
 
     /**
@@ -174,7 +165,7 @@ class ChannelController extends Controller
 
         session()->flash('success', trans('admin::app.settings.channels.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.channels.index');
     }
 
     /**
@@ -208,7 +199,6 @@ class ChannelController extends Controller
     /**
      * Set the seo content and return back the updated array.
      *
-     * @param  array  $data
      * @param  string  $locale
      * @return array
      */

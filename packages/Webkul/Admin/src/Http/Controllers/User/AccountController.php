@@ -9,20 +9,12 @@ use Webkul\Admin\Http\Controllers\Controller;
 class AccountController extends Controller
 {
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -34,7 +26,7 @@ class AccountController extends Controller
     {
         $user = auth()->guard('admin')->user();
 
-        return view($this->_config['view'], compact('user'));
+        return view('admin::account.edit', compact('user'));
     }
 
     /**

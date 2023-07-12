@@ -10,21 +10,12 @@ use Webkul\Core\Repositories\SliderRepository;
 class SliderController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SliderRepository  $sliderRepository
      * @return void
      */
     public function __construct(protected SliderRepository $sliderRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -38,7 +29,7 @@ class SliderController extends Controller
             return app(SliderDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::settings.sliders.index');
     }
 
     /**
@@ -50,7 +41,7 @@ class SliderController extends Controller
     {
         $locale = core()->getRequestedLocaleCode();
 
-        return view($this->_config['view'])->with('locale', $locale);
+        return view('admin::settings.sliders.create')->with('locale', $locale);
     }
 
     /**
@@ -83,7 +74,7 @@ class SliderController extends Controller
 
         session()->flash('success', trans('admin::app.settings.sliders.created-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.sliders.index');
     }
 
     /**
@@ -95,7 +86,7 @@ class SliderController extends Controller
     {
         $slider = $this->sliderRepository->findOrFail($id);
 
-        return view($this->_config['view'])->with('slider', $slider);
+        return view('admin::settings.sliders.edit')->with('slider', $slider);
     }
 
     /**
@@ -135,7 +126,7 @@ class SliderController extends Controller
 
         session()->flash('success', trans('admin::app.settings.sliders.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.sliders.index');
     }
 
     /**

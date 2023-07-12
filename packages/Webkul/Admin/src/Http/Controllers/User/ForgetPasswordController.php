@@ -2,21 +2,11 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 use Webkul\Admin\Http\Controllers\Controller;
 
 class ForgetPasswordController extends Controller
 {
-    use SendsPasswordResetEmails;
-
-    /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -24,7 +14,6 @@ class ForgetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -45,7 +34,7 @@ class ForgetPasswordController extends Controller
 
             session()->put('url.intended', $intendedUrl);
 
-            return view($this->_config['view']);
+            return view('admin::users.forget-password.create');
         }
     }
 

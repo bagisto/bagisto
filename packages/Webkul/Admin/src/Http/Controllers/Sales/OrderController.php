@@ -3,33 +3,22 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderRepository;
-use \Webkul\Sales\Repositories\OrderCommentRepository;
 use Webkul\Admin\DataGrids\OrderDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Sales\Repositories\OrderRepository  $orderRepository
-     * @param  \Webkul\Sales\Repositories\OrderCommentRepository  $orderCommentRepository
      * @return void
      */
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderCommentRepository $orderCommentRepository
-    )
-    {
-        $this->_config = request('_config');
+    ) {
     }
 
     /**
@@ -43,7 +32,7 @@ class OrderController extends Controller
             return app(OrderDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::sales.orders.index');
     }
 
     /**
@@ -56,7 +45,7 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('order'));
+        return view('admin::sales.orders.view', compact('order'));
     }
 
     /**

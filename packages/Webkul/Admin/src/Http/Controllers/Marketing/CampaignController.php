@@ -11,24 +11,14 @@ use Webkul\Marketing\Repositories\TemplateRepository;
 class CampaignController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Marketing\Repositories\CampaignRepository  $campaignRepository
-     * @param  \Webkul\Marketing\Repositories\TemplateRepository  $templateRepository
      * @return void
      */
     public function __construct(
         protected CampaignRepository $campaignRepository,
         protected TemplateRepository $templateRepository,
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -42,7 +32,7 @@ class CampaignController extends Controller
             return app(CampaignDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.email-marketing.campaigns.index');
     }
 
     /**
@@ -54,7 +44,7 @@ class CampaignController extends Controller
     {
         $templates = $this->templateRepository->findByField('status', 'active');
 
-        return view($this->_config['view'], compact('templates'));
+        return view('admin::marketing.email-marketing.campaigns.create', compact('templates'));
     }
 
     /**
@@ -80,7 +70,7 @@ class CampaignController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.campaigns.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.campaigns.index');
     }
 
     /**
@@ -95,7 +85,7 @@ class CampaignController extends Controller
 
         $templates = $this->templateRepository->findByField('status', 'active');
 
-        return view($this->_config['view'], compact('campaign', 'templates'));
+        return view('admin::marketing.email-marketing.campaigns.edit', compact('campaign', 'templates'));
     }
 
     /**
@@ -122,7 +112,7 @@ class CampaignController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.campaigns.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.campaigns.index');
     }
 
     /**

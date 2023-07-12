@@ -9,21 +9,12 @@ use Webkul\Core\Repositories\CurrencyRepository;
 class CurrencyController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\CurrencyRepository  $currencyRepository
      * @return void
      */
     public function __construct(protected CurrencyRepository $currencyRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -37,7 +28,7 @@ class CurrencyController extends Controller
             return app(CurrencyDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::settings.currencies.index');
     }
 
     /**
@@ -47,7 +38,7 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::settings.currencies.create');
     }
 
     /**
@@ -66,7 +57,7 @@ class CurrencyController extends Controller
 
         session()->flash('success', trans('admin::app.settings.currencies.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.currencies.index');
     }
 
     /**
@@ -79,7 +70,7 @@ class CurrencyController extends Controller
     {
         $currency = $this->currencyRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('currency'));
+        return view('admin::settings.currencies.edit', compact('currency'));
     }
 
     /**
@@ -99,7 +90,7 @@ class CurrencyController extends Controller
 
         session()->flash('success', trans('admin::app.settings.currencies.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.currencies.index');
     }
 
     /**

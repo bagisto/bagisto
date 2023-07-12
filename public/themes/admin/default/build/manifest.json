@@ -1,0 +1,64 @@
+{
+  "src/Resources/assets/css/app.css": {
+    "file": "assets/app-b05bb5d3.css",
+    "isEntry": true,
+    "src": "src/Resources/assets/css/app.css"
+  },
+  "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg": {
+    "file": "assets/Accordion-Dark-Arrow-Down-3a8840fa.svg",
+    "src": "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg"
+  },
+  "src/Resources/assets/images/Accordion-Dark-Arrow-Up.svg": {
+    "file": "assets/Accordion-Dark-Arrow-Up-8b8f9f81.svg",
+    "src": "src/Resources/assets/images/Accordion-Dark-Arrow-Up.svg"
+  },
+  "src/Resources/assets/images/Checkbox-Checked.svg": {
+    "file": "assets/Checkbox-Checked-340e1127.svg",
+    "src": "src/Resources/assets/images/Checkbox-Checked.svg"
+  },
+  "src/Resources/assets/images/Icon-Calendar.svg": {
+    "file": "assets/Icon-Calendar-bc2685cb.svg",
+    "src": "src/Resources/assets/images/Icon-Calendar.svg"
+  },
+  "src/Resources/assets/images/Icon-Sortable.svg": {
+    "file": "assets/Icon-Sortable-dfbb3491.svg",
+    "src": "src/Resources/assets/images/Icon-Sortable.svg"
+  },
+  "src/Resources/assets/images/Icon-remove.svg": {
+    "file": "assets/Icon-remove-32d29b4e.svg",
+    "src": "src/Resources/assets/images/Icon-remove.svg"
+  },
+  "src/Resources/assets/images/checked-checkbox.png": {
+    "file": "assets/checked-checkbox-98f8f649.png",
+    "src": "src/Resources/assets/images/checked-checkbox.png"
+  },
+  "src/Resources/assets/images/close.svg": {
+    "file": "assets/close-d41610b9.svg",
+    "src": "src/Resources/assets/images/close.svg"
+  },
+  "src/Resources/assets/images/dark-chevron-left.svg": {
+    "file": "assets/dark-chevron-left-3b40c29a.svg",
+    "src": "src/Resources/assets/images/dark-chevron-left.svg"
+  },
+  "src/Resources/assets/images/dark-chevron-right.svg": {
+    "file": "assets/dark-chevron-right-113be50d.svg",
+    "src": "src/Resources/assets/images/dark-chevron-right.svg"
+  },
+  "src/Resources/assets/images/hamburger.svg": {
+    "file": "assets/hamburger-9b9f7edd.svg",
+    "src": "src/Resources/assets/images/hamburger.svg"
+  },
+  "src/Resources/assets/images/search.svg": {
+    "file": "assets/search-a93e6b3f.svg",
+    "src": "src/Resources/assets/images/search.svg"
+  },
+  "src/Resources/assets/images/user-owner.svg": {
+    "file": "assets/user-owner-466fac11.svg",
+    "src": "src/Resources/assets/images/user-owner.svg"
+  },
+  "src/Resources/assets/js/app.js": {
+    "file": "assets/app-1d92363a.js",
+    "isEntry": true,
+    "src": "src/Resources/assets/js/app.js"
+  }
+}

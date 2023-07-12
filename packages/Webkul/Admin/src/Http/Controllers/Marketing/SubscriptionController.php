@@ -9,21 +9,12 @@ use Webkul\Core\Repositories\SubscribersListRepository;
 class SubscriptionController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Core\Repositories\SubscribersListRepository  $subscribersListRepository
      * @return void
      */
     public function __construct(protected SubscribersListRepository $subscribersListRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -37,7 +28,7 @@ class SubscriptionController extends Controller
             return app(NewsLetterDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.email-marketing.subscribers.index');
     }
 
     /**
@@ -50,7 +41,7 @@ class SubscriptionController extends Controller
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
-        return view($this->_config['view'])->with('subscriber', $subscriber);
+        return view('admin::marketing.email-marketing.subscribers.edit')->with('subscriber', $subscriber);
     }
 
     /**
@@ -79,7 +70,7 @@ class SubscriptionController extends Controller
             session()->flash('error', trans('admin::app.customers.subscribers.update-failed'));
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.customers.subscribers.index');
     }
 
     /**

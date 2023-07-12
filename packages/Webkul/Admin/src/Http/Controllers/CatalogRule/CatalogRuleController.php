@@ -2,7 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers\CatalogRule;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -13,24 +12,14 @@ use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 class CatalogRuleController extends Controller
 {
     /**
-     * Initialize _config, a default request parameter with route.
-     *
-     * @param array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CatalogRule\Repositories\CatalogRuleRepository  $catalogRuleRepository
-     * @param  \Webkul\CatalogRule\Helpers\CatalogRuleIndex  $catalogRuleIndexHelper
      * @return void
      */
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleIndex $catalogRuleIndexHelper
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -44,7 +33,7 @@ class CatalogRuleController extends Controller
             return app(CatalogRuleDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.promotions.catalog-rules.index');
     }
 
     /**
@@ -54,13 +43,12 @@ class CatalogRuleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::marketing.promotions.catalog-rules.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Webkul\CatalogRule\Http\Requests\CatalogRuleRequest  $catalogRuleRequest
      * @return \Illuminate\Http\Response
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
@@ -75,7 +63,7 @@ class CatalogRuleController extends Controller
 
         session()->flash('success', trans('admin::app.promotions.catalog-rules.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog_rules.index');
     }
 
     /**
@@ -88,13 +76,12 @@ class CatalogRuleController extends Controller
     {
         $catalogRule = $this->catalogRuleRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('catalogRule'));
+        return view('admin::marketing.promotions.catalog-rules.edit', compact('catalogRule'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\CatalogRule\Http\Requests\CatalogRuleRequest  $catalogRuleRequest
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -112,7 +99,7 @@ class CatalogRuleController extends Controller
 
         session()->flash('success', trans('admin::app.promotions.catalog-rules.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog_rules.index');
     }
 
     /**

@@ -19,7 +19,6 @@ class TemplateController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Marketing\Repositories\TemplateRepository  $templateRepository
      * @return void
      */
     public function __construct(protected TemplateRepository $templateRepository)
@@ -38,7 +37,7 @@ class TemplateController extends Controller
             return app(EmailTemplateDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.email-marketing.templates.index');
     }
 
     /**
@@ -48,7 +47,7 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::marketing.email-marketing.templates.create');
     }
 
     /**
@@ -72,7 +71,7 @@ class TemplateController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.templates.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.email_templates.index');
     }
 
     /**
@@ -85,7 +84,7 @@ class TemplateController extends Controller
     {
         $template = $this->templateRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('template'));
+        return view('admin::marketing.email-marketing.templates.edit', compact('template'));
     }
 
     /**
@@ -110,7 +109,7 @@ class TemplateController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.templates.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.email_templates.index');
     }
 
     /**

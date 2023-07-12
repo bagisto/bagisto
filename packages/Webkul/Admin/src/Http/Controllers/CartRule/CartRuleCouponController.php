@@ -11,7 +11,6 @@ class CartRuleCouponController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      * @return void
      */
     public function __construct(protected CartRuleCouponRepository $cartRuleCouponRepository)
