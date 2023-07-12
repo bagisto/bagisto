@@ -48,6 +48,10 @@
                 };
             },
 
+            created() {
+                this.play();
+            },
+
             methods: {
                 previousSlide() {
                     this.currentIndex = (this.currentIndex - 1 + this.options.images.length) % this.options.images.length;
@@ -67,6 +71,12 @@
                         'transition-opacity': true,
                         'duration-500': true
                     };
+                },
+
+                play() {
+                    setInterval(() => {
+                        this.nextSlide();
+                    }, 5000);
                 }
             }
         });
