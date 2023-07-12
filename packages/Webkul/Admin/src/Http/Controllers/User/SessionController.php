@@ -7,20 +7,12 @@ use Webkul\Admin\Http\Controllers\Controller;
 class SessionController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -42,7 +34,7 @@ class SessionController extends Controller
 
         session()->put('url.intended', $intendedUrl);
 
-        return view($this->_config['view']);
+        return view('admin::users.sessions.create');
     }
 
     /**
@@ -73,7 +65,7 @@ class SessionController extends Controller
             return redirect()->route('admin.session.create');
         }
 
-        return redirect()->intended(route($this->_config['redirect']));
+        return redirect()->intended(route('admin.dashboard.index'));
     }
 
     /**
@@ -86,6 +78,6 @@ class SessionController extends Controller
     {
         auth()->guard('admin')->logout();
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.session.create');
     }
 }

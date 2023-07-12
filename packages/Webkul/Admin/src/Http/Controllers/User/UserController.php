@@ -14,24 +14,14 @@ use Webkul\User\Repositories\RoleRepository;
 class UserController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\User\Repositories\AdminRepository  $adminRepository
-     * @param  \Webkul\User\Repositories\RoleRepository  $roleRepository
      * @return void
      */
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -45,7 +35,7 @@ class UserController extends Controller
             return app(UserDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::users.users.index');
     }
 
     /**
@@ -57,13 +47,12 @@ class UserController extends Controller
     {
         $roles = $this->roleRepository->all();
 
-        return view($this->_config['view'], compact('roles'));
+        return view('admin::users.users.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserForm $request)
@@ -87,7 +76,7 @@ class UserController extends Controller
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -102,13 +91,12 @@ class UserController extends Controller
 
         $roles = $this->roleRepository->all();
 
-        return view($this->_config['view'], compact('user', 'roles'));
+        return view('admin::users.users.edit', compact('user', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -132,7 +120,7 @@ class UserController extends Controller
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -179,7 +167,7 @@ class UserController extends Controller
     {
         $user = $this->adminRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('user'));
+        return view('admin::customers.confirm-password', compact('user'));
     }
 
     /**
@@ -210,14 +198,13 @@ class UserController extends Controller
         } else {
             session()->flash('warning', trans('admin::app.users.users.incorrect-password'));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('admin.users.index');
         }
     }
 
     /**
      * Prepare user data.
      *
-     * @param  \Webkul\User\Http\Requests\UserForm  $request
      * @param  int  $id
      * @return array|\Illuminate\Http\RedirectResponse
      */
@@ -272,9 +259,6 @@ class UserController extends Controller
 
     /**
      * Cannot change redirect response.
-     *
-     * @param  string  $columnName
-     * @return \Illuminate\Http\RedirectResponse
      */
     private function cannotChangeRedirectResponse(string $columnName): \Illuminate\Http\RedirectResponse
     {
@@ -282,6 +266,6 @@ class UserController extends Controller
             'name' => $columnName,
         ]));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.users.index');
     }
 }

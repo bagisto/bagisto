@@ -4,10 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -15,24 +15,12 @@ use Webkul\Customer\Repositories\CustomerRepository;
 class CustomerController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
-     *
-     * @param \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
-     * @param \Webkul\Customer\Repositories\CustomerGroupRepository  $customerGroupRepository
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository
-    )
-    {
-        $this->_config = request('_config');
+    ) {
     }
 
     /**
@@ -46,7 +34,7 @@ class CustomerController extends Controller
             return app(CustomerDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::customers.index');
     }
 
     /**
@@ -58,7 +46,7 @@ class CustomerController extends Controller
     {
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view($this->_config['view'], compact('groups'));
+        return view('admin::customers.create', compact('groups'));
     }
 
     /**
@@ -80,7 +68,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.registration.before');
 
-        $customer = $this->customerRepository->create(array_merge(request()->all() , [
+        $customer = $this->customerRepository->create(array_merge(request()->all(), [
             'password'    => bcrypt($password),
             'is_verified' => 1,
         ]));
@@ -97,7 +85,7 @@ class CustomerController extends Controller
 
         session()->flash('success', trans('admin::app.customers.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.customer.index');
     }
 
     /**
@@ -112,7 +100,7 @@ class CustomerController extends Controller
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view($this->_config['view'], compact('customer', 'groups'));
+        return view('admin::customers.edit', compact('customer', 'groups'));
     }
 
     /**
@@ -132,7 +120,7 @@ class CustomerController extends Controller
         ]);
 
         Event::dispatch('customer.update.before', $id);
-        
+
         $customer = $this->customerRepository->update(array_merge(request()->all(), [
             'status'       => request()->has('status'),
             'is_suspended' => request()->has('is_suspended'),
@@ -142,7 +130,7 @@ class CustomerController extends Controller
 
         session()->flash('success', trans('admin::app.customers.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.customer.index');
     }
 
     /**
@@ -163,13 +151,13 @@ class CustomerController extends Controller
             }
 
             return response()->json(['message' => trans('admin::app.customers.order-pending')], 400);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return response()->json(['message' => trans('admin::app.customers.delete-failed')], 400);
     }
 
     /**
-     * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function loginAsCustomer($id)
@@ -178,11 +166,10 @@ class CustomerController extends Controller
 
         auth()->guard('customer')->login($customer);
 
-        session()->flash('success',trans('admin::app.customers.loginascustomer.login-message',['customer_name' => $customer->name]));
+        session()->flash('success', trans('admin::app.customers.loginascustomer.login-message', ['customer_name' => $customer->name]));
 
         return redirect(route('shop.customers.account.profile.index'));
     }
-
 
     /**
      * To load the note taking screen for the customers.
@@ -194,7 +181,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->find($id);
 
-        return view($this->_config['view'])->with('customer', $customer);
+        return view('admin::customers.note')->with('customer', $customer);
     }
 
     /**
@@ -218,7 +205,7 @@ class CustomerController extends Controller
 
         session()->flash('success', 'Note taken');
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.customer.index');
     }
 
     /**
@@ -259,7 +246,7 @@ class CustomerController extends Controller
         if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
             foreach ($customerIds as $customerId) {
                 Event::dispatch('customer.delete.before', $customerId);
-                
+
                 $this->customerRepository->delete($customerId);
 
                 Event::dispatch('customer.delete.after', $customerId);
@@ -302,6 +289,6 @@ class CustomerController extends Controller
 
         $customer = $this->customerRepository->find(request('id'));
 
-        return view($this->_config['view'], compact('customer'));
+        return view('admin::customers.orders.index', compact('customer'));
     }
 }

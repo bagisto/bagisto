@@ -22,23 +22,8 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Category\Repositories\CategoryRepository  $categoryRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Product\Repositories\ProductAttributeValueRepository  $productAttributeValueRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableLinkRepository  $productDownloadableLinkRepository
-     * @param  \Webkul\Product\Repositories\ProductDownloadableSampleRepository  $productDownloadableSampleRepository
-     * @param  \Webkul\Product\Repositories\ProductInventoryRepository  $productInventoryRepository
      * @return void
      */
     public function __construct(
@@ -51,7 +36,6 @@ class ProductController extends Controller
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductInventoryRepository $productInventoryRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -65,7 +49,7 @@ class ProductController extends Controller
             return app(ProductDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::catalog.products.index');
     }
 
     /**
@@ -83,7 +67,7 @@ class ProductController extends Controller
             $configurableFamily = $this->attributeFamilyRepository->find($familyId);
         }
 
-        return view($this->_config['view'], compact('families', 'configurableFamily'));
+        return view('admin::catalog.products.create', compact('families', 'configurableFamily'));
     }
 
     /**
@@ -127,7 +111,7 @@ class ProductController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.products.create-success'));
 
-        return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
+        return redirect()->route('admin.catalog.products.edit', ['id' => $product->id]);
     }
 
     /**
@@ -144,13 +128,12 @@ class ProductController extends Controller
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
+        return view('admin::catalog.products.edit', compact('product', 'categories', 'inventorySources'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\Product\Http\Requests\ProductForm  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -164,7 +147,7 @@ class ProductController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.products.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.products.index');
     }
 
     /**
@@ -205,7 +188,6 @@ class ProductController extends Controller
     /**
      * Copy a given Product.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function copy(int $id)
@@ -288,7 +270,7 @@ class ProductController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.products.index');
     }
 
     /**
@@ -323,7 +305,7 @@ class ProductController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.products.index');
     }
 
     /**

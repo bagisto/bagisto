@@ -8,20 +8,12 @@ use Webkul\Notification\Repositories\NotificationRepository;
 class NotificationController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct(protected NotificationRepository $notificationRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -31,7 +23,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return view($this->_config['view']);
+        return view('admin::notifications.index');
     }
 
     /**

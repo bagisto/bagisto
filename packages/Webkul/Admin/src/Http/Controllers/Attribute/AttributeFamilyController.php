@@ -12,24 +12,14 @@ use Webkul\Core\Rules\Code;
 class AttributeFamilyController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\AttributeFamilyRepository  $attributeFamilyRepository
-     * @param  \Webkul\Attribute\Repositories\AttributeRepository  $attributeRepository
      * @return void
      */
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -43,7 +33,7 @@ class AttributeFamilyController extends Controller
             return app(AttributeFamilyDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::catalog.families.index');
     }
 
     /**
@@ -57,7 +47,7 @@ class AttributeFamilyController extends Controller
 
         $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributeFamily', 'customAttributes'));
+        return view('admin::catalog.families.create', compact('attributeFamily', 'customAttributes'));
     }
 
     /**
@@ -80,7 +70,7 @@ class AttributeFamilyController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.families.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.families.index');
     }
 
     /**
@@ -95,7 +85,7 @@ class AttributeFamilyController extends Controller
 
         $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
 
-        return view($this->_config['view'], compact('attributeFamily', 'customAttributes'));
+        return view('admin::catalog.families.edit', compact('attributeFamily', 'customAttributes'));
     }
 
     /**
@@ -119,7 +109,7 @@ class AttributeFamilyController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.families.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.catalog.families.index');
     }
 
     /**

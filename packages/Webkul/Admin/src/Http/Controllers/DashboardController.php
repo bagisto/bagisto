@@ -10,20 +10,11 @@ use Webkul\Admin\Services\DashboardService;
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    protected array $_config;
-
-    /**
      * Create a controller instance.
-     *
-     * @param DashboardService $dashboardService
      */
     public function __construct(
         protected DashboardService $dashboardService
-    )
-    {
-        $this->_config = request('_config');
+    ) {
     }
 
     /**
@@ -36,10 +27,10 @@ class DashboardController extends Controller
             ->setEndDate(request()->date('end'))
             ->getStatistics();
 
-        return view($this->_config['view'], compact('statistics'))
+        return view('admin::dashboard.index', compact('statistics'))
             ->with([
                 'startDate' => $this->dashboardService->getStartDate(),
-                'endDate' => $this->dashboardService->getEndDate()
+                'endDate'   => $this->dashboardService->getEndDate(),
             ]);
     }
 }

@@ -13,21 +13,12 @@ use Webkul\Tax\Repositories\TaxRateRepository;
 class TaxRateController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Tax\Repositories\TaxRateRepository  $taxRateRepository
      * @return void
      */
     public function __construct(protected TaxRateRepository $taxRateRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -41,7 +32,7 @@ class TaxRateController extends Controller
             return app(TaxRateDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::tax.tax-rates.index');
     }
 
     /**
@@ -55,7 +46,7 @@ class TaxRateController extends Controller
             return app(TaxRateDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::tax.tax-rates.create');
     }
 
     /**
@@ -91,7 +82,7 @@ class TaxRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.tax-rates.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.tax_rates.index');
     }
 
     /**
@@ -104,7 +95,7 @@ class TaxRateController extends Controller
     {
         $taxRate = $this->taxRateRepository->findOrFail($id);
 
-        return view($this->_config['view'])->with('taxRate', $taxRate);
+        return view('admin::tax.tax-rates.edit')->with('taxRate', $taxRate);
     }
 
     /**
@@ -133,7 +124,7 @@ class TaxRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.tax_rates.index');
     }
 
     /**
@@ -297,6 +288,6 @@ class TaxRateController extends Controller
             }
         }
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.tax_rates.index');
     }
 }

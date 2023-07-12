@@ -14,20 +14,12 @@ class ResetPasswordController extends Controller
     use ResetsPasswords;
 
     /**
-     * Contains route related configuration
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -40,7 +32,7 @@ class ResetPasswordController extends Controller
      */
     public function create($token = null)
     {
-        return view($this->_config['view'])->with([
+        return view('admin::users.reset-password.create')->with([
             'token' => $token,
             'email' => request('email'),
         ]);
@@ -67,7 +59,7 @@ class ResetPasswordController extends Controller
             );
 
             if ($response == Password::PASSWORD_RESET) {
-                return redirect()->route($this->_config['redirect']);
+                return redirect()->route('admin.dashboard.index');
             }
 
             return back()

@@ -11,21 +11,12 @@ use Webkul\Inventory\Repositories\InventorySourceRepository;
 class InventorySourceController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
     public function __construct(protected InventorySourceRepository $inventorySourceRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -39,7 +30,7 @@ class InventorySourceController extends Controller
             return app(InventorySourcesDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::settings.inventory_sources.index');
     }
 
     /**
@@ -49,7 +40,7 @@ class InventorySourceController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::settings.inventory_sources.create');
     }
 
     /**
@@ -69,7 +60,7 @@ class InventorySourceController extends Controller
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.inventory_sources.index');
     }
 
     /**
@@ -82,7 +73,7 @@ class InventorySourceController extends Controller
     {
         $inventorySource = $this->inventorySourceRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('inventorySource'));
+        return view('admin::settings.inventory_sources.edit', compact('inventorySource'));
     }
 
     /**
@@ -103,7 +94,7 @@ class InventorySourceController extends Controller
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
 
-        return redirect()->route($this->_config['redirect']);
+        return redirect()->route('admin.inventory_sources.index');
     }
 
     /**

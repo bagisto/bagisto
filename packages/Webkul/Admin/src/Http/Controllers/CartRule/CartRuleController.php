@@ -14,21 +14,12 @@ use Webkul\CartRule\Repositories\CartRuleRepository;
 class CartRuleController extends Controller
 {
     /**
-     * Initialize _config, a default request parameter with route.
-     *
-     * @param array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
      * @return void
      */
     public function __construct(protected CartRuleRepository $cartRuleRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -42,7 +33,7 @@ class CartRuleController extends Controller
             return app(CartRuleDataGrid::class)->toJson();
         }
 
-        return view($this->_config['view']);
+        return view('admin::marketing.promotions.cart-rules.index');
     }
 
     /**
@@ -52,15 +43,12 @@ class CartRuleController extends Controller
      */
     public function create()
     {
-        return view($this->_config['view']);
+        return view('admin::marketing.promotions.cart-rules.create');
     }
 
     /**
      * Copy a given Cart Rule id. Always make the copy is inactive so the
      * user is able to configure it before setting it live.
-     *
-     * @param  int  $cartRuleId
-     * @return \Illuminate\View\View
      */
     public function copy(int $cartRuleId): View
     {
@@ -88,7 +76,7 @@ class CartRuleController extends Controller
             $copiedCartRule->customer_groups()->save($group);
         }
 
-        return view($this->_config['view'], [
+        return view('admin::marketing.promotions.cart-rules.edit', [
             'cartRule' => $copiedCartRule,
         ]);
     }
@@ -96,7 +84,6 @@ class CartRuleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
      * @return \Illuminate\Http\Response
      */
     public function store(CartRuleRequest $cartRuleRequest)
@@ -110,7 +97,7 @@ class CartRuleController extends Controller
 
             session()->flash('success', trans('admin::app.promotions.cart-rules.create-success'));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('admin.cart_rules.index');
         } catch (ValidationException $e) {
             if ($firstError = collect($e->errors())->first()) {
                 session()->flash('error', $firstError[0]);
@@ -130,13 +117,12 @@ class CartRuleController extends Controller
     {
         $cartRule = $this->cartRuleRepository->findOrFail($id);
 
-        return view($this->_config['view'], compact('cartRule'));
+        return view('admin::marketing.promotions.cart-rules.edit', compact('cartRule'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Webkul\CartRule\Http\Requests\CartRuleRequest  $cartRuleRequest
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -165,7 +151,7 @@ class CartRuleController extends Controller
 
             session()->flash('success', trans('admin::app.promotions.cart-rules.update-success'));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('admin.cart_rules.index');
         } catch (ValidationException $e) {
             if ($firstError = collect($e->errors())->first()) {
                 session()->flash('error', $firstError[0]);
