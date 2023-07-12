@@ -14,7 +14,10 @@
                     v-for="(image, index) in options.images" 
                     :class="getSlideStyles(index)"
                 >
-                    <img :src="image" alt="Slider Image" class="h-auto object-cover max-w-full">
+                    <img 
+                        :src="image"
+                        class="h-auto object-cover max-w-full"
+                    >
                 </div>
             </div>
         
