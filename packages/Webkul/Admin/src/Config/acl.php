@@ -701,30 +701,10 @@ return [
         'route' => 'admin.roles.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'settings.sliders',
-        'name'  => 'admin::app.acl.sliders',
-        'route' => 'admin.sliders.index',
-        'sort'  => 7,
-    ], [
-        'key'   => 'settings.sliders.create',
-        'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sliders.create',
-        'sort'  => 1,
-    ], [
-        'key'   => 'settings.sliders.edit',
-        'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.sliders.edit',
-        'sort'  => 2,
-    ], [
-        'key'   => 'settings.sliders.delete',
-        'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.sliders.delete',
-        'sort'  => 3,
-    ], [
         'key'   => 'settings.taxes',
         'name'  => 'admin::app.acl.taxes',
         'route' => 'admin.tax_categories.index',
-        'sort'  => 8,
+        'sort'  => 7,
     ], [
         'key'   => 'settings.taxes.tax-categories',
         'name'  => 'admin::app.acl.tax-categories',
