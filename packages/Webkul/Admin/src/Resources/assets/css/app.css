@@ -2,3 +2,350 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+	font-family: 'bagisto-admin';
+	src: url('../fonts/bagisto-admin.woff?jwnnow') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+@layer components {
+
+	* {
+		@apply box-border font-inter;
+	}
+
+	body {
+		@apply bg-gray-100;
+	}
+
+
+	[class^="icon-"],
+	[class*=" icon-"] {
+		/* use !important to prevent issues with browser extensions that change fonts */
+		font-family: 'bagisto-admin' !important;
+		speak: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		color: #6B7280;
+
+		/* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	.box-shadow {
+		@apply shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)];
+	}
+
+	.icon-add-customer:before {
+		content: "\e900";
+	}
+
+	.icon-arrow-down:before {
+		content: "\e901";
+	}
+
+	.icon-arrow-left:before {
+		content: "\e902";
+	}
+
+	.icon-arrow-right:before {
+		content: "\e903";
+	}
+
+	.icon-arrow-up:before {
+		content: "\e904";
+	}
+
+	.icon-attribute-block:before {
+		content: "\e905";
+	}
+
+	.icon-attribute:before {
+		content: "\e906";
+	}
+
+	.icon-calendar:before {
+		content: "\e907";
+	}
+
+	.icon-cancel-1:before {
+		content: "\e908";
+	}
+
+	.icon-cancel:before {
+		content: "\e909";
+	}
+
+	.icon-cart:before {
+		content: "\e90a";
+	}
+
+	.icon-checkbox-partical:before {
+		content: "\e90b";
+	}
+
+	.icon-checked:before {
+		content: "\e90c";
+	}
+
+	.icon-cms:before {
+		content: "\e90d";
+	}
+
+	.icon-configuration:before {
+		content: "\e90e";
+	}
+
+	.icon-cross:before {
+		content: "\e90f";
+	}
+
+	.icon-customer-2:before {
+		content: "\e910";
+	}
+
+	.icon-customer:before {
+		content: "\e911";
+	}
+
+	.icon-dashboard:before {
+		content: "\e912";
+	}
+
+	.icon-delete:before {
+		content: "\e913";
+	}
+
+	.icon-done:before {
+		content: "\e914";
+	}
+
+	.icon-dot:before {
+		content: "\e915";
+	}
+
+	.icon-dots:before {
+		content: "\e916";
+	}
+
+	.icon-down-stat:before {
+		content: "\e917";
+	}
+
+	.icon-drag:before {
+		content: "\e918";
+	}
+
+	.icon-edit-save:before {
+		content: "\e919";
+	}
+
+	.icon-edit:before {
+		content: "\e91a";
+	}
+
+	.icon-filter:before {
+		content: "\e91b";
+	}
+
+	.icon-folder-block:before {
+		content: "\e91c";
+	}
+
+	.icon-folder:before {
+		content: "\e91d";
+	}
+
+	.icon-image:before {
+		content: "\e91e";
+	}
+
+	.icon-information:before {
+		content: "\e91f";
+	}
+
+	.icon-language:before {
+		content: "\e920";
+	}
+
+	.icon-location:before {
+		content: "\e921";
+	}
+
+	.icon-mail:before {
+		content: "\e922";
+	}
+
+	.icon-menu:before {
+		content: "\e923";
+	}
+
+	.icon-notification:before {
+		content: "\e924";
+	}
+
+	.icon-order-back:before {
+		content: "\e925";
+	}
+
+	.icon-printer:before {
+		content: "\e926";
+	}
+
+	.icon-processing:before {
+		content: "\e927";
+	}
+
+	.icon-product-1:before {
+		content: "\e928";
+	}
+
+	.icon-product:before {
+		content: "\e929";
+	}
+
+	.icon-promotion:before {
+		content: "\e92a";
+	}
+
+	.icon-radio-normal:before {
+		content: "\e92b";
+	}
+
+	.icon-radio-selected:before {
+		content: "\e92c";
+	}
+
+	.icon-repeat:before {
+		content: "\e92d";
+	}
+
+	.icon-sales:before {
+		content: "\e92e";
+	}
+
+	.icon-serch:before {
+		content: "\e92f";
+	}
+
+	.icon-setting:before {
+		content: "\e930";
+	}
+
+	.icon-settings:before {
+		content: "\e931";
+	}
+
+	.icon-ship:before {
+		content: "\e932";
+	}
+
+	.icon-sort-down:before {
+		content: "\e933";
+	}
+
+	.icon-sort-left:before {
+		content: "\e934";
+	}
+
+	.icon-sort-right:before {
+		content: "\e935";
+	}
+
+	.icon-sort-up-down:before {
+		content: "\e936";
+	}
+
+	.icon-sort-up:before {
+		content: "\e937";
+	}
+
+	.icon-star:before {
+		content: "\e938";
+	}
+
+	.icon-store:before {
+		content: "\e939";
+	}
+
+	.icon-tick:before {
+		content: "\e93a";
+	}
+
+	.icon-uncheckbox:before {
+		content: "\e93b";
+	}
+
+	.icon-up-stat:before {
+		content: "\e93c";
+	}
+
+	.icon-view:before {
+		content: "\e93d";
+	}
+
+	p {
+		@apply text-[14px] leading-[17px];
+	}
+
+	.journal-scroll::-webkit-scrollbar {
+		width: 14px;
+		cursor: pointer;
+		display: none;
+	}
+
+	.journal-scroll::-webkit-scrollbar-track {
+		background-color: #fff;
+		cursor: pointer;
+		border-radius: 12px;
+		border: 1px solid #E9E9E9;
+	}
+
+	.journal-scroll::-webkit-scrollbar-thumb {
+		cursor: pointer;
+		background-color: #E9E9E9;
+		border-radius: 12px;
+		border: 3px solid transparent;
+		background-clip: content-box;
+	}
+
+	.label-pending,
+	.label-processing,
+	.label-closed,
+	.label-cancelled,
+	.label-active {
+		@apply text-[12px] text-white font-semibold py-[1px] px-[6px] max-w-max rounded-[35px];
+	}
+
+	.label-pending {
+		@apply bg-yellow-500;
+	}
+
+	.label-processing,  .label-active {
+		@apply bg-darkGreen;
+	}
+
+	.label-closed {
+		@apply bg-darkBlue;
+	}
+
+	.label-cancelled {
+		@apply bg-darkPink;
+	}
+	/* status */
+	.status-enable{
+		@apply text-green-600;
+	}
+
+	.status-disable{
+		@apply text-red-600;
+	}
+
+}

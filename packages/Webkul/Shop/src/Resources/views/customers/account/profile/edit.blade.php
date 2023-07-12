@@ -1,4 +1,9 @@
 <x-shop::layouts.account>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.profile.edit-profile')
+    </x-slot>
+
     {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="profile.edit"></x-shop::breadcrumbs>
