@@ -7,13 +7,10 @@
         @switch($customization->type)
             {{-- Image Carousel --}}
             @case($customization::IMAGE_CAROUSEL)
-                <div class="bs-hero-section">
-                    @foreach ($data['images'] as $image)
-                        <picture>
-                            <img src="{{ $image }}" />
-                        </picture>
-                    @endforeach
-                </div>
+                <x-shop::slider
+                    :options="$data"
+                >
+                </x-shop::slider>
 
             @break
 
