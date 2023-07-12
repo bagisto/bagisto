@@ -907,8 +907,6 @@ return [
             'inventory_sources'      => 'Источники запасов',
             'design'                 => 'Дизайн',
             'theme'                  => 'Тема',
-            'home_page_content'      => 'Контент домашней страницы',
-            'footer_content'         => 'Содержимое нижнего колонтитула',
             'logo'                   => 'логотип',
             'favicon'                => 'Фавикон',
             'create-success'         => 'Канал успешно создан.',

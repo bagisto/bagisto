@@ -886,8 +886,6 @@ return [
             'inventory_sources'      => 'منابع موجودی',
             'design'                 => 'طراحی',
             'theme'                  => 'پوسته',
-            'home_page_content'      => 'محتوای صفحه اصلی',
-            'footer_content'         => 'محتوای فوتر',
             'logo'                   => 'لوگو',
             'favicon'                => 'Favicon',
             'create-success'         => 'کانال با موفقیت ایجاد شد',
