@@ -45,4 +45,13 @@ class ThemeCustomization extends Model implements ThemeCustomizationContract
      * @var string
      */
     public const STATIC_CONTENT = 'static_content';
+
+    /**
+     * Castable.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'options' => 'array',
+    ];
 }
