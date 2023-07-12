@@ -1,9 +1,9 @@
-<div {{ $attributes->merge(['class' => 'panel']) }}>
-    <div {{ $header->attributes->merge(['class' => 'panel-header']) }}>
+<div {{ $attributes->merge(['class' => '']) }}>
+    <div {{ $header->attributes->merge(['class' => '']) }}>
         {{ $header }}
     </div>
 
-    <div {{ $body->attributes->merge(['class' => 'panel-body']) }}>
+    <div {{ $body->attributes->merge(['class' => '']) }}>
         {{ $body }}
     </div>
 </div>

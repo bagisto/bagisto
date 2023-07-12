@@ -43,9 +43,9 @@
                         class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col pb-[30px]"
                         v-if="cart?.items?.length"
                     >
-                        <div class="grid gap-[30px] flex-1">
+                        <div class="grid gap-[25px] flex-1">
                             <!-- Cart Mass Action Container -->
-                            <div class="max-sm:block flex justify-between items-center border-b-[1px] border-[#E9E9E9] pb-[10px]">
+                            <div class="flex justify-between items-center border-b-[1px] border-[#E9E9E9] max-sm:block pb-[10px]">
                                 <div class="flex select-none items-center">
                                     <input
                                         type="checkbox"
@@ -202,14 +202,14 @@
                             <!-- Cart Item Actions -->
                             <div class="flex flex-wrap gap-[30px] justify-end">
                                 <a
-                                    class="bs-secondary-button rounded-[18px] max-h-[55px]"
+                                    class="bs-secondary-button max-h-[55px] rounded-[18px]"
                                     href="{{ route('shop.home.index') }}"
                                 >
                                     @lang('shop::app.checkout.cart.index.continue-shopping')
                                 </a> 
 
                                 <a 
-                                    class="bs-secondary-button rounded-[18px] max-h-[55px]"
+                                    class="bs-secondary-button max-h-[55px] rounded-[18px]"
                                     @click="update()"
                                 >
                                     @lang('shop::app.checkout.cart.index.update-cart')

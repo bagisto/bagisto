@@ -14,9 +14,9 @@
 
     @if (! $orders->isEmpty())
         {{-- Orders Information --}}
-        <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">
+        <div class="relative mt-[30px] overflow-x-auto border rounded-[12px]">
             <table class="w-full text-sm text-left">
-                <thead class="text-[14px] text-black bg-[#F5F5F5] border-b-[1px] border-[#E9E9E9]  ">
+                <thead class="border-b-[1px] border-[#E9E9E9] text-[14px] text-black bg-[#F5F5F5]">
                     <tr>
                         <th 
                             scope="col" 
@@ -61,7 +61,7 @@
                         <tr class="bg-white border-b">
                             <th
                                 scope="row"
-                                class="px-6 py-[16px] font-medium whitespace-nowrap text-black"
+                                class="px-6 py-[16px] whitespace-nowrap text-black font-medium"
                             >
                                 {{ $order->id}}
                             </th>
@@ -78,28 +78,28 @@
                                 @switch($order->status)
                                     @case('processing')
 
-                                        <span class=" text-white text-[12px] px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B]">
+                                        <span class="px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
                                             {{  $order->status }}
                                         </span>        
                                         @break
 
                                     @case('completed')
 
-                                        <span class=" text-white text-[12px] px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B]">
+                                        <span class="px-[10px] py-[4px] rounded-[12px] bg-[#5BA34B] text-white text-[12px]">
                                             {{ $order->status}}
                                         </span> 
                                         @break
 
                                     @case('pending')
 
-                                        <span class=" text-white text-[12px] px-[10px] py-[4px] rounded-[12px] bg-[#FDB60C]">
+                                        <span class="px-[10px] py-[4px] rounded-[12px] bg-[#FDB60C] text-white text-[12px]">
                                             {{ $order->status }}
                                         </span> 
                                         @break
 
                                     @case('canceled')
 
-                                        <span class=" text-white text-[12px] px-[10px] py-[4px] rounded-[12px] bg-[#FDB60C]">
+                                        <span class="px-[10px] py-[4px] rounded-[12px] bg-[#FDB60C] text-white text-[12px]">
                                             {{ $order->status }}
                                         </span> 
                                         @break
@@ -127,7 +127,7 @@
                         <li>
                             <a 
                                 href="#"
-                                class="flex items-center justify-center w-[35px] h-[37px] leading-normal font-medium border border-[#E9E9E9] rounded-l-lg hover:bg-gray-100"
+                                class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-l-lg leading-normal font-medium hover:bg-gray-100"
                             >
                                 <span class="icon-arrow-left text-[24px]"></span>
                             </a>
@@ -136,7 +136,7 @@
                         <li>
                             <a 
                                 href="#"
-                                class="px-[15px] py-[6px] leading-normal text-black font-medium border border-[#E9E9E9] hover:bg-gray-100"
+                                class="px-[15px] py-[6px] border border-[#E9E9E9] leading-normal text-black font-medium hover:bg-gray-100"
                             >
                                 1
                             </a>
@@ -145,7 +145,7 @@
                         <li>
                             <a 
                                 href="#"
-                                class="flex items-center justify-center w-[35px] h-[37px] leading-normal font-medium border border-[#E9E9E9] rounded-r-lg hover:bg-gray-100"
+                                class="flex items-center justify-center w-[35px] h-[37px] border border-[#E9E9E9] rounded-r-lg leading-normal font-medium hover:bg-gray-100"
                             >
                                 <span class="icon-arrow-right text-[24px]"></span>
                             </a>

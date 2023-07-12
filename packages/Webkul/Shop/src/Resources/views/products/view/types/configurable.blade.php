@@ -16,12 +16,12 @@
                 <div v-for='(attribute, index) in childAttributes' class="attribute control-group" >
                     <span v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
                         <div class="mt-[20px]">
-                            <h3 class="text-[20px] mb-[15px] max-sm:text-[16px]" v-if="(attribute.options).length > 1" v-text="attribute.label"></h3>
+                            <h3 class="mb-[15px] text-[20px] max-sm:text-[16px]" v-if="(attribute.options).length > 1" v-text="attribute.label"></h3>
                             
                             <div v-if="attribute.code == 'color'" class="flex items-center space-x-3">   
                                 <template v-for="(option, index) in attribute.options">
                                     <label
-                                      class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none undefined"
+                                      class="relative flex -m-0.5 p-0.5 items-center justify-center rounded-full focus:outline-none undefined cursor-pointer"
                                       :class="{'ring-gray-900 ring ring-offset-1' : index == attribute.selectedIndex}"
                                       :title="option.label"
                                     >
@@ -34,7 +34,7 @@
                                             :aria-labelledby="'color-choice-' + index + '-label'"
                                             @click="configure(attribute, $event.target.value)"
                                         >
-                                        <span :style="{ 'background-color': option.label }" class="h-8 w-8 rounded-full bg-navyBlue border border-navyBlue border-opacity-10 max-sm:h-[25px] max-sm:w-[25px]"></span>
+                                        <span :style="{ 'background-color': option.label }" class="h-8 w-8 bg-navyBlue border border-navyBlue border-opacity-10 rounded-full max-sm:h-[25px] max-sm:w-[25px]"></span>
                                     </label>
                                 </template>
                             </div>
@@ -42,7 +42,7 @@
                             <div v-else-if="attribute.code == 'size'"  class="flex flex-wrap gap-[12px]">
                                 <template v-for="(option, index) in attribute.options">
                                     <label 
-                                        class="group relative flex items-center justify-center rounded-full border h-[60px] w-[60px] py-3 px-4 font-medium uppercase hover:bg-gray-50 focus:outline-none sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm  max-sm:w-[35px] max-sm:h-[35px]"
+                                        class="group relative flex items-center justify-center w-[60px] bg-white py-3 px-4 rounded-full border h-[60px] hover:bg-gray-50 focus:outline-none text-gray-900 font-medium uppercase shadow-sm max-sm:w-[35px] max-sm:h-[35px] sm:py-6 cursor-pointer"
                                         :class="{'ring-2 ring-navyBlue' : index == attribute.selectedIndex }"
                                         :title="option.label"
                                         >
@@ -58,7 +58,7 @@
                                         >
 
                                         <span class="text-[18px] max-sm:text-[14px]" v-text="option.label"></span>
-                                        <span class="pointer-events-none absolute -inset-px rounded-full"></span>
+                                        <span class="absolute -inset-px rounded-full pointer-events-none"></span>
                                     </label>
                                 </template>
                             </div>
@@ -67,7 +67,7 @@
                                 <select
                                     :name="['super_attribute[' + attribute.id + ']']"
                                     :id="['attribute_' + attribute.id]"
-                                    class="bg-gray-50 mt-5 border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="block w-full p-2.5 bg-gray-50 mt-5 border border-gray-300 rounded-lg text-black-900 text-sm focus:ring-blue-500 focus:border-blue-500 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     :disabled="attribute.disabled"
                                     :data-vv-as="'&quot;' + attribute.label + '&quot;'"
                                     @change="configure(attribute, $event.target.value)"

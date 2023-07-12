@@ -21,7 +21,7 @@
             id="v-category-template"
         >
             <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-                <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
+                <div class="flex gap-[40px] items-start mt-[40px] max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -53,7 +53,7 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                   
                                         <p class="text-[20px]">
@@ -87,7 +87,7 @@
 
                                 <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
                                         <p class="text-[20px]">
@@ -100,7 +100,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="bs-secondary-button block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] mt-[60px] text-center"
+                            class="bs-secondary-button block mx-auto w-max py-[11px] mt-[60px] px-[43px] rounded-[18px] text-base text-center"
                             @click="loadMoreProducts"
                             v-if="links.next"
                         >

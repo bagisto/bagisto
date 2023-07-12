@@ -16,10 +16,10 @@
             </div>
 
             <div class="flex relative justify-center items-center p-2 h-20 w-full mx-auto">
-                <div class="relative w-full h-[4px] rounded-2xl bg-gray-200">
+                <div class="relative w-full h-[4px] bg-gray-200 rounded-2xl">
                     <div
                         ref="progress"
-                        class="absolute left-1/4 right-0 h-full rounded-xl bg-navyBlue"
+                        class="absolute left-1/4 right-0 h-full bg-navyBlue rounded-xl"
                     >
                     </div>
 

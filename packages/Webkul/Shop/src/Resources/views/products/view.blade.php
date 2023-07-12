@@ -172,19 +172,19 @@
                 >
 
                 <div class="container px-[60px] max-1180:px-[0px]">
-                    <div class="flex mt-[48px] gap-[40px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
+                    <div class="flex gap-[40px] mt-[48px] max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-[25px]">
                         <!-- Gallery Blade Inclusion -->
                         @include('shop::products.view.gallery')
 
                         <!-- Details -->
-                        <div class="w-max max-sm:w-full relative max-1180:px-[20px]">
-                            <div class="flex justify-between gap-[15px]">
+                        <div class="w-max relative max-sm:w-full max-1180:px-[20px]">
+                            <div class="flex gap-[15px] justify-between">
                                 <h1 class="text-[30px] font-medium max-sm:text-[20px]">
                                     {{ $product->name }}
                                 </h1>
 
                                 <div
-                                    class="flex border border-black items-center justify-center rounded-full min-w-[46px] min-h-[46px] max-h-[46px] bg-white cursor-pointer transition text-[24px]"
+                                    class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full transition text-[24px] cursor-pointer"
                                     :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                     @click="addToWishlist"
                                 >
@@ -209,7 +209,7 @@
                             <!-- Pricing -->
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                            <p class="text-[24px] !font-medium flex gap-2.5 items-center mt-[25px] max-sm:mt-[15px] max-sm:text-[18px]">
+                            <p class="flex gap-2.5 items-center mt-[25px] text-[24px] !font-medium max-sm:mt-[15px] max-sm:text-[18px]">
                                 {!! $product->getTypeInstance()->getPriceHtml() !!}
                             </p>
 
@@ -217,7 +217,7 @@
 
                             {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
-                            <p class="text-[18px] text-[#7D7D7D] mt-[25px] max-sm:text-[14px] max-sm:mt-[15px]">
+                            <p class="mt-[25px] text-[18px] text-[#7D7D7D] max-sm:text-[14px] max-sm:mt-[15px]">
                                 {!! $product->short_description !!}
                             </p>
 
@@ -233,7 +233,7 @@
 
 
                             <!-- Product Actions and Qunatity Box -->
-                            <div class="flex gap-[15px] mt-[30px] max-w-[470px]">
+                            <div class="flex gap-[15px] max-w-[470px] mt-[30px]">
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -241,7 +241,7 @@
                                     <x-shop::quantity-changer
                                         name="quantity"
                                         value="1"
-                                        class="gap-x-[16px] rounded-[12px] py-[15px] px-[26px]"
+                                        class="gap-x-[16px] py-[15px] px-[26px] rounded-[12px]"
                                     >
                                     </x-shop::quantity-changer>
                                 @endif
@@ -271,7 +271,7 @@
                             <!-- Share Buttons -->
                             <div class="flex gap-[35px] mt-[40px] md:px-[35px] max-md:px-[80px] max-sm:px-[0px] max-sm:flex-wrap max-sm:justify-center">
                                 <div
-                                    class=" flex justify-center items-center gap-[10px] cursor-pointer"
+                                    class="flex gap-[10px] justify-center items-center cursor-pointer"
                                     @click="addToCompare({{ $product->id }})"
                                 >
                                     <span class="icon-compare text-[24px]"></span>
@@ -279,7 +279,7 @@
                                 </div>
 
                                 <div class="flex gap-[25px]">
-                                    <div class="hidden max-md:flex justify-center items-center gap-[10px] cursor-pointer">
+                                    <div class="hidden gap-[10px] justify-center items-center max-md:flex cursor-pointer">
                                         <span class="icon-share text-[24px]"></span>
                                         <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . bagisto_asset($product->url_key)) }};end">Share</a>
                                     </div>

@@ -68,7 +68,7 @@
                                                 </p>
     
                                                 <button
-                                                    class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                                                    class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                                                     type="submit"
                                                 >
                                                    @lang('shop::app.checkout.onepage.coupon.button-title')
@@ -83,10 +83,10 @@
                 </span>
 
                 <div 
-                    class="text-[12px] font-small flex justify-between items-center"
+                    class="flex justify-between items-center text-[12px] font-small"
                     v-else
                 >
-                    <p class="text-[12px] mr-2">
+                    <p class="mr-2 text-[12px]">
                         @lang('shop::app.checkout.onepage.coupon.applied')
                     </p>
                     

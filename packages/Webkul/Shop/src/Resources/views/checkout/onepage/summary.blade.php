@@ -17,12 +17,12 @@
         </template>
 
         <template v-else>
-            <div class="max-w-full w-[442px] pl-[30px] h-max sticky top-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0">
+            <div class="sticky top-[30px] h-max w-[442px] max-w-full pl-[30px] max-lg:w-auto max-lg:max-w-[442px] max-lg:pl-0 ">
                 <h2 class="text-[26px] font-medium max-sm:text-[20px]">
                     @lang('shop::app.checkout.onepage.summary.cart-summary')
                 </h2>
                 
-                <div class="grid border-b-[1px] border-[#E9E9E9] mt-[40px] max-sm:mt-[20px]">
+                <div class="grid mt-[40px] border-b-[1px] border-[#E9E9E9] max-sm:mt-[20px]">
                     <div 
                         class="flex gap-x-[15px] pb-[20px]"
                         v-for="item in cart.items"
@@ -36,12 +36,12 @@
 
                         <div>
                             <p 
-                                class="text-[16px] max-sm:text-[14px] max-sm:font-medium text-navyBlue" 
+                                class="text-[16px] text-navyBlue max-sm:text-[14px] max-sm:font-medium" 
                                 v-text="item.name"
                             >
                             </p>
 
-                            <p class="text-[18px] font-medium mt-[10px] max-sm:text-[14px] max-sm:font-normal">
+                            <p class="mt-[10px] text-[18px] font-medium max-sm:text-[14px] max-sm:font-normal">
                                 @{{ item.formatted_price }} X @{{ item.quantity }}
                             </p>
                         </div>
@@ -55,7 +55,7 @@
                         </p>
 
                         <p 
-                            class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium"
+                            class="text-[16px] font-medium max-sm:text-[14px]"
                             v-text="cart.base_sub_total"
                         >
                         </p>
@@ -71,7 +71,7 @@
                         </p>
 
                         <p 
-                            class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium"
+                            class="text-[16px] font-medium max-sm:text-[14px]"
                             v-text="amount"
                         >
                         </p>
@@ -132,7 +132,7 @@
                         v-else
                     >
                         <button
-                            class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
+                            class="block w-max py-[11px] px-[43px] bg-navyBlue text-white text-base font-medium rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px] max-sm:mb-[40px]"
                             @click="placeOrder"
                         >
                             @lang('shop::app.checkout.onepage.summary.place-order')    

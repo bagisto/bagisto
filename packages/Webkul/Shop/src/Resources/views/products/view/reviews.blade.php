@@ -21,7 +21,7 @@
                 >
                     <!-- Review Form -->
                     <form
-                        class="grid grid-cols-[auto_1fr] max-md:grid-cols-[1fr] gap-[40px] justify-center"
+                        class="grid grid-cols-[auto_1fr] gap-[40px] justify-center max-md:grid-cols-[1fr]"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
@@ -112,7 +112,7 @@
                             </x-shop::form.control-group>
 
 
-                            <div class="flex justify-start gap-[15px] max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
+                            <div class="flex gap-[15px] justify-start max-sm:flex-wrap mt-4 max-sm:justify-center max-sm:mb-[20px] max-xl:mb-[20px]">
                                 <button
                                     class="bs-primary-button w-full max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
                                     type='submit'
@@ -142,13 +142,13 @@
 
                 <template v-else>
                     <!-- Review Section Header -->
-                    <div class="flex items-center justify-between gap-[15px] max-sm:flex-wrap">
+                    <div class="flex gap-[15px] items-center justify-between  max-sm:flex-wrap">
                         <h3 class="font-dmserif text-[30px] max-sm:text-[22px]">
                             @lang('shop::app.products.customer-review')
                         </h3>
 
                         <div
-                            class="flex gap-x-[15px] items-center rounded-[12px] border border-navyBlue px-[15px] py-[10px] cursor-pointer"
+                            class="flex gap-x-[15px] items-center px-[15px] py-[10px] border border-navyBlue rounded-[12px] cursor-pointer"
                             @click="canReview = true"
                         >
                             <span class="icon-pen text-[24px]"></span>
@@ -159,7 +159,7 @@
 
                     <template v-if="reviews.length">
                         <!-- Average Rating Section -->
-                        <div class="flex justify-between items-center gap-[15px] mt-[30px] max-w-[365px] max-sm:flex-wrap">
+                        <div class="flex gap-[15px] justify-between items-center max-w-[365px] mt-[30px] max-sm:flex-wrap">
                             <p class="text-[30px] font-medium max-sm:text-[16px]">{{ number_format($avgRatings, 1) }}</p>
 
                             <x-shop::products.star-rating :value="$avgRatings"></x-shop::products.star-rating>
@@ -171,7 +171,7 @@
 
                         <!-- Ratings By Individual Stars -->
                         <div class="flex gap-x-[20px] items-center">
-                            <div class="flex gap-y-[18px] max-w-[365px] mt-[10px] flex-wrap">
+                            <div class="flex gap-y-[18px] flex-wrap max-w-[365px] mt-[10px]">
                                 @for ($i = 5; $i >= 1; $i--)
                                     <div class="flex gap-x-[25px] items-center max-sm:flex-wrap">
                                         <div class="text-[16px] font-medium">{{ $i }} Stars</div>
@@ -183,7 +183,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-[1fr_1fr] mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
+                        <div class="grid grid-cols-[1fr_1fr] gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
                             <!-- Product Review Item Vue Component -->
                             <v-product-review-item
                                 v-for='review in reviews'
@@ -192,7 +192,7 @@
                         </div>
 
                         <button
-                            class="block mx-auto text-navyBlue text-base w-max font-medium py-[11px] px-[43px] border rounded-[18px] border-navyBlue bg-white mt-[60px] text-center"
+                            class="block mx-auto w-max mt-[60px] py-[11px] px-[43px] bg-white border border-navyBlue rounded-[18px] text-center text-navyBlue text-base font-medium"
                             v-if="links?.next"
                             @click="get()"
                         >
@@ -217,14 +217,14 @@
 
     {{-- Product Review Item Template --}}
     <script type="text/x-template" id="v-product-review-item-template">
-        <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap max-xl:mb-[20px]">
+        <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap max-xl:mb-[20px]">
             <div>
                 <div
-                    class="flex justify-center items-center rounded-[12px] bg-[#F5F5F5] min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] max-sm:hidden"
+                    class="flex justify-center items-center min-h-[100px] max-h-[100px] min-w-[100px] max-w-[100px] rounded-[12px] bg-[#F5F5F5] max-sm:hidden"
                     :title="review.name"
                 >
                     <span
-                        class="font-semibold text-[24px] text-[#7D7D7D]"
+                        class="text-[24px] text-[#7D7D7D] font-semibold"
                         v-text="review.name.split(' ').map(name => name.charAt(0).toUpperCase()).join('')"
                     >
                     </span>
@@ -249,24 +249,24 @@
                 </div>
 
                 <p
-                    class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]"
+                    class="mt-[10px] text-[14px] font-medium max-sm:text-[12px]"
                     v-text="review.created_at"
                 >
                 </p>
 
                 <p
-                    class="text-[16px] text-[#7D7D7D] font-semibold mt-[20px] max-sm:text-[12px]"
+                    class="mt-[20px] text-[16px] text-[#7D7D7D] font-semibold max-sm:text-[12px]"
                     v-text="review.title"
                 >
                 </p>
 
                 <p
-                    class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]"
+                    class="mt-[20px] text-[16px] text-[#7D7D7D] max-sm:text-[12px]"
                     v-text="review.comment"
                 >
                 </p>
 
-                <div class="flex flex-wrap gap-2 mt-2">
+                <div class="flex gap-2 flex-wrap mt-2">
                     <template v-for="file in review.images">
                         <a
                             :href="file.url"
@@ -276,7 +276,7 @@
                         >
 
                             <img
-                                class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -285,12 +285,12 @@
 
                         <a
                             :href="file.url"
-                            class="h-12 w-12 flex"
+                            class="flex h-12 w-12"
                             target="_blank"
                             v-else
                         >
                             <video
-                                class="rounded-[12px] min-w-[50px] max-h-[50px] cursor-pointer"
+                                class="min-w-[50px] max-h-[50px] rounded-[12px] cursor-pointer"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

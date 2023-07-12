@@ -14,9 +14,9 @@
                     @submit.preventDefault 
                     v-slot="{ meta, errors }"
                 >
-                    <div class="grid mt-[30px] gap-[20px] grid-cols-2 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
+                    <div class="grid gap-[20px] grid-cols-2 mt-[30px] max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:mt-[15px]">
                         <div 
-                            class="border border-[#e5e5e5] max-w-[414px] rounded-[12px] p-[0px] max-sm:flex-wrap relative select-none cursor-pointer"
+                            class="relative max-w-[414px] p-[0px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap select-none cursor-pointer"
                             v-for="(address, index) in addresses"
                         >
                             <v-field
@@ -33,7 +33,7 @@
                             />
 
                             <label 
-                                class="icon-radio-unselect text-[24px] text-navyBlue absolute ltr:right-[20px] rtl:left-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                 :for="'billing_address_id_' + address.id"
                             >
                             </label>
@@ -50,7 +50,7 @@
                                     </p>
                                 </div>
 
-                                <p class="text-[#7D7D7D] mt-[25px] text-[14px] text-[14px]">
+                                <p class="mt-[25px] text-[14px] text-[#7D7D7D]">
                                     <template v-if="typeof address.address1 === 'string'">
                                         @{{ address.address1 }}
                                     </template>
@@ -67,11 +67,11 @@
                         </div>
 
                         <div 
-                            class="flex justify-center items-center border border-[#e5e5e5] rounded-[12px] p-[20px] max-w-[414px] max-sm:flex-wrap"
+                            class="flex justify-center items-center max-w-[414px] p-[20px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap"
                             @click="showNewBillingAddressForm"
                         >
                             <div class="flex gap-x-[10px] items-center cursor-pointer">
-                                <span class="icon-plus text-[30px] p-[10px] border border-black rounded-full"></span>
+                                <span class="icon-plus p-[10px] border border-black rounded-full text-[30px]"></span>
 
                                 <p class="text-[16px]">@lang('shop::app.checkout.onepage.addresses.billing.add-new-address')</p>
                             </div>
@@ -84,7 +84,7 @@
                     >
                     </v-error-message>
 
-                    <div class="select-none mt-[20px] text-[14px] text-[#7D7D7D] flex gap-x-[15px]">
+                    <div class="flex gap-x-[15px] mt-[20px] text-[14px] text-[#7D7D7D] select-none">
                         <input
                             type="checkbox"
                             id="isUsedForShipping"
@@ -112,7 +112,7 @@
                         <div v-if="! forms.billing.isNew && ! forms.shipping.isNew && forms.billing.isUsedForShipping">
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
-                                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                    class="block py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
                                     @click="store"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.confirm')
@@ -126,7 +126,7 @@
                             <div class="flex justify-end mt-4 mb-4">
                                 <button
                                     type="submit"
-                                    class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                    class="blockpy-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base w-max font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                                 </button>
@@ -456,7 +456,7 @@
                         <div class="flex justify-end mt-4 mb-4">
                             <button
                                 type="submit"
-                                class="block bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer"
+                                class="block py-[11px] px-[43px] bg-navyBlue text-white text-base w-max font-medium rounded-[18px] text-center cursor-pointer"
                             >
                                 @lang('shop::app.checkout.onepage.addresses.billing.confirm')
                             </button>

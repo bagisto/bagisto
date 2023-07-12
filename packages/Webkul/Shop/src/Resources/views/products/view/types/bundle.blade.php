@@ -54,7 +54,7 @@
                     <div v-if="option.type == 'select'">
                         <select
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="custom-select bg-white border border-[#E9E9E9] text-[16px] text-[#7D7D7D] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[14px] pr-[36px] max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            class="custom-select block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#7D7D7D] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
                             v-model="selected_product"
                         >
                             <option
@@ -133,7 +133,7 @@
                     <div v-if="option.type == 'checkbox'">
                         <div class="grid gap-[10px]">
                             <div
-                                class="select-none flex gap-x-[15px]"
+                                class="flex gap-x-[15px] select-none"
                                 v-for="(product, index) in option.products"
                             >
                                 <input
@@ -168,7 +168,7 @@
                     <div v-if="option.type == 'multiselect'">
                         <select
                             :name="'bundle_options[' + option.id + '][]'"
-                            class="border border-[#E9E9E9] text-[#7D7D7D] text-[16px] rounded-[2px] w-full px-[15px] py-[10px] focus:ring-2 focus:outline-none focus:ring-black overflow-y-auto overflow-x-hidden journal-scroll"
+                            class="w-full overflow-y-auto overflow-x-hidden journal-scroll px-[15px] py-[10px] border border-[#E9E9E9] rounded-[2px] text-[#7D7D7D] text-[16px] focus:ring-2 focus:outline-none focus:ring-black"
                             v-model="selected_product"
                             multiple
                         >

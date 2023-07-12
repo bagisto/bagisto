@@ -1,9 +1,12 @@
 <x-shop::layouts.account>
+    <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="wishlist"></x-shop::breadcrumbs>
     @endSection
 
+    <!-- Wishlist Vue Component -->
     <v-wishlist-products>
+        <!-- Wishlist Shimmer Effect -->
         <x-shop::shimmer.customers.account.wishlist :count="4"></x-shop::shimmer.customers.account.wishlist>
     </v-wishlist-products>
 
@@ -23,7 +26,7 @@
                         </h2>
 
                         <div
-                            class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px]"
+                            class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9]"
                             @click="removeAll"
                             v-if="wishlist.length"
                         >
@@ -35,12 +38,12 @@
                     <div 
                         v-if="wishlist.length" 
                         v-for="item in wishlist"
-                        class="flex flex-wrap gap-[75px] mt-[30px] max-1060:flex-col"
+                        class="flex gap-[75px] flex-wrap mt-[30px] max-1060:flex-col"
                     >
                         <div class="grid gap-[30px] flex-1">
                             <div class="grid gap-y-[25px]">
                                 <!-- Wishlist item -->
-                                <div class="flex gap-x-[10px] justify-between border-b-[1px] border-[#E9E9E9] pb-[18px]">
+                                <div class="flex gap-x-[10px] justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
                                     <div class="flex gap-x-[20px]">
                                         <div class="">
                                             <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
@@ -117,7 +120,7 @@
                                             <div class="flex gap-[20px] flex-wrap">
                                                 <x-shop::quantity-changer
                                                     name="quantity"
-                                                    class="flex gap-x-[10px] border rounded-[54px] border-navyBlue py-[5px] px-[14px] items-center max-h-[40px]"
+                                                    class="flex gap-x-[10px] items-center max-h-[40px] py-[5px] px-[14px] border border-navyBlue  rounded-[54px]"
                                                     @change="setItemQuantity($event, item)"
                                                 >
                                                 </x-shop::quantity-changer>
@@ -125,7 +128,7 @@
                                                 <!--Wishlist Item Move-to-cart-->
                                                 <button
                                                     type="button"
-                                                    class="bs-primary-button block text-base w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-center"
+                                                    class="bs-primary-button block w-max max-h-[40px] py-[6px] px-[25px] rounded-[18px] text-base text-center"
                                                     @click="moveToCart(item.id)"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.move-to-cart')

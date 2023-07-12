@@ -48,7 +48,7 @@
 
                     @if ($firstLevelCategory->children->isNotEmpty())
                         <div
-                            class="pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 max-h-[580px] max-w-[1260px] overflow-auto overflow-x-auto  ltr:-left-[35px] rtl:-right-[35px] w-max absolute top-[49px] bg-white p-[35px] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] z-[1] shadow-[0_6px_6px_1px_rgba(0,0,0,.3)]"
+                            class="w-max absolute top-[49px] max-h-[580px] max-w-[1260px] p-[35px] z-[1] overflow-auto overflow-x-auto bg-white shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] border border-b-0 border-l-0 border-r-0 border-t-[1px] border-[#F3F3F3] pointer-events-none opacity-0 transition duration-300 ease-out translate-y-1 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0 group-hover:ease-in group-hover:duration-200 ltr:-left-[35px] rtl:-right-[35px]"
                         >
                             <div class="flex aigns gap-x-[70px] justify-between">
                                 @foreach ($firstLevelCategory->children->chunk(2) as $pair)
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div class="flex items-center gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
+    <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
         {{-- Search bar --}}
         <form 
             action="{{ route('shop.search.index') }}" 
@@ -96,29 +96,29 @@
             </label>
 
             <div class="relative w-full">
-                <div class="icon-search text-[22px] absolute ltr:left-[12px] rtl:right-[12px] top-[12px] flex items-center pointer-events-none"></div>
+                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[12px] text-[22px] pointer-events-none"></div>
 
                 <input
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="bg-[#F5F5F5] rounded-lg block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
+                    class="block w-full px-11 py-3.5 bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium"
                     placeholder="Search for products"
                     required
                 >
 
                 <button
                     type="button"
-                    class="icon-camera text-[22px] absolute top-[12px] ltr:right-[12px] rtl:left-[12px] flex items-center pr-3"
+                    class="icon-camera flex items-center absolute top-[12px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
                 >
                 </button>
             </div>
         </form>
 
-        <div class="flex gap-x-[35px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px] mt-[5px]">
+        <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
             <a href="{{ route('shop.compare.index') }}">
-                <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
+                <span class="icon-compare inline-block text-[24px] cursor-pointer"></span>
             </a>
 
             {{-- Mini cart --}}
@@ -127,7 +127,7 @@
             {{-- user profile --}}
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
-                    <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
+                    <span class="icon-users inline-block text-[24px] cursor-pointer"></span>
                 </x-slot:toggle>
 
                 {{-- Guest Dropdown --}}
@@ -143,19 +143,19 @@
                             </p>
                         </div>
 
-                        <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+                        <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
                         <div class="flex gap-[16px] mt-[25px]">
                             <a
                                 href="{{ route('shop.customer.session.create') }}"
-                                class="bs-primary-button m-0 ml-[0px] block mx-auto text-base w-max px-[29px] rounded-[18px] text-center"
+                                class="bs-primary-button block w-max px-[29px] mx-auto m-0 ml-[0px] rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-in')
                             </a>
 
                             <a
                                 href="{{ route('shop.customers.register.index') }}"
-                                class="bs-secondary-button m-0 ml-[0px] block mx-auto border-2 text-base w-max px-[29px] rounded-[18px] text-center"
+                                class="bs-secondary-button block w-max m-0 ml-[0px] mx-auto px-[29px] border-2 rounded-[18px] text-base text-center"
                             >
                                 @lang('shop::app.components.layouts.header.sign-up')
                             </a>
@@ -177,18 +177,18 @@
                             </p>
                         </div>
 
-                        <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+                        <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
 
                         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
                             <a
-                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                 href="{{ route('shop.customers.account.profile.index') }}"
                             >
                                 @lang('shop::app.components.layouts.header.profile')
                             </a>
 
                             <a
-                                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                 href="{{ route('shop.customers.account.orders.index') }}"
                             >
                                 @lang('shop::app.components.layouts.header.orders')
@@ -196,7 +196,7 @@
 
                             @if ($showWishlist)
                                 <a
-                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                    class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.wishlist.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.wishlist')
@@ -213,7 +213,7 @@
                                 </x-shop::form>
 
                                 <a
-                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                    class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customer.session.destroy') }}"
                                     onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                                 >

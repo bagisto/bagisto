@@ -19,7 +19,7 @@
                 </div> 
             @endif
 
-            <button class="w-[171.516px] h-[48px] block mx-auto py-[11px] rounded-[18px] mt-[60px] shimmer"></button>
+            <button class="shimmer block w-[171.516px] h-[48px] mt-[60px] mx-auto py-[11px] rounded-[18px]"></button>
         </div>
     </div>
 </div>
