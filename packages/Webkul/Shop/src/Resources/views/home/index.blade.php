@@ -1,7 +1,33 @@
+@php
+    $channel = core()->getCurrentChannel();
+
+    $homeSEO = $channel->home_seo;
+
+    if (isset($homeSEO)) {
+        $homeSEO = json_decode($channel->home_seo);
+
+        $metaTitle = $homeSEO->meta_title;
+
+        $metaDescription = $homeSEO->meta_description;
+
+        $metaKeywords = $homeSEO->meta_keywords;
+    }
+@endphp
+
+
+{{-- SEO Meta Content --}}
+@push('meta')
+    <meta name="title" content="{{ $metaTitle }}" />
+
+    <meta name="description" content="{{ $metaDescription }}" />
+
+    <meta name="keywords" content="{{ $metaKeywords }}" />
+@endPush
+
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('shop::app.customers.account.addresses.edit')
+        {{ $metaTitle ?? "" }}
     </x-slot>
     
     {{-- Loop over the theme customization --}}

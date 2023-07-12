@@ -1,4 +1,9 @@
 <x-shop::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.search.page-title')
+    </x-slot>
+    
     {{-- Product Listing --}}
     <v-search>
         <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
