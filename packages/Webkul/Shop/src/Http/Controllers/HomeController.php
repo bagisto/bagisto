@@ -15,8 +15,7 @@ class HomeController extends Controller
     public function __construct(
         protected SearchRepository $searchRepository,
         protected ThemeCustomizationRepository $themeCustomizationRepository,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -27,11 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $customizations = $this->themeCustomizationRepository->orderBy('sort_order',)->findWhere([
+        $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
             'status' => 1
         ]);
 
-        return view($this->_config['view'], compact('customizations'));
+        return view('shop::home.index', compact('customizations'));
     }
 
     /**

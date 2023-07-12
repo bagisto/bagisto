@@ -15,13 +15,6 @@ use Webkul\Shop\Mail\SubscriptionEmail;
 class CustomerController extends Controller
 {
     /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -31,7 +24,6 @@ class CustomerController extends Controller
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
     ) {
-        $this->_config = request('_config');
     }
 
     /**
@@ -185,7 +177,7 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
             session()->flash('error', trans('shop::app.customers.account.profile.delete-failed'));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('shop.customers.account.profile.index');
         }
     }
 
