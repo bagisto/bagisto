@@ -11,16 +11,6 @@
 }
 
 @layer components {
-
-	* {
-		@apply box-border font-inter;
-	}
-
-	body {
-		@apply bg-gray-100;
-	}
-
-
 	[class^="icon-"],
 	[class*=" icon-"] {
 		/* use !important to prevent issues with browser extensions that change fonts */
@@ -345,6 +335,10 @@
 
 	.status-disable{
 		@apply text-red-600;
+	}
+
+	body {
+		@apply bg-gray-100;
 	}
 
 }
