@@ -16,7 +16,7 @@
     $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
 @endphp
 
-<div class="bs-mobile-menu flex-wrap hidden max-lg:flex px-[15px] pt-[25px] gap-[15px] max-lg:mb-[15px]">
+<div class="bs-mobile-menu gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
     <div class="w-full flex justify-between items-center px-[6px]">
         <div class="flex items-center gap-x-[5px]">
             <x-shop::drawer
@@ -63,7 +63,7 @@
 
                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                     <x-slot:toggle>
-                        <span class="icon-users text-[24px] inline-block cursor-pointer"></span>
+                        <span class="icon-users inline-block text-[24px] cursor-pointer"></span>
                     </x-slot:toggle>
     
                     {{-- Guest Dropdown --}}
@@ -79,19 +79,19 @@
                                 </p>
                             </div>
     
-                            <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+                            <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
     
                             <div class="flex gap-[16px] mt-[25px]">
                                 <a
                                     href="{{ route('shop.customer.session.create') }}"
-                                    class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-max font-medium py-[15px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-[0px] py-[15px] px-[29px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-in')
                                 </a>
     
                                 <a
                                     href="{{ route('shop.customers.register.index') }}"
-                                    class="m-0 ml-[0px] block mx-auto bg-white border-2 border-navyBlue text-navyBlue text-base w-max font-medium py-[14px] px-[29px] rounded-[18px] text-center cursor-pointer"
+                                    class="block w-max mx-auto m-0 ml-[0px] py-[14px] px-[29px] bg-white border-2 border-navyBlue rounded-[18px] text-navyBlue text-base font-medium  text-center cursor-pointer"
                                 >
                                     @lang('shop::app.components.layouts.header.sign-up')
                                 </a>
@@ -113,18 +113,18 @@
                                 </p>
                             </div>
     
-                            <p class="py-2px border border-[#E9E9E9] mt-[12px] w-full"></p>
+                            <p class="w-full mt-[12px] py-2px border border-[#E9E9E9]"></p>
     
                             <div class="grid gap-[4px] mt-[10px] pb-[10px]">
                                 <a
-                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                    class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.profile.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.profile')
                                 </a>
     
                                 <a
-                                    class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                    class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                     href="{{ route('shop.customers.account.orders.index') }}"
                                 >
                                     @lang('shop::app.components.layouts.header.orders')
@@ -132,7 +132,7 @@
     
                                 @if ($showWishlist)
                                     <a
-                                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                        class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                         href="{{ route('shop.customers.account.wishlist.index') }}"
                                     >
                                         @lang('shop::app.components.layouts.header.wishlist')
@@ -149,7 +149,7 @@
                                     </x-shop::form>
     
                                     <a
-                                        class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                                        class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
                                         href="{{ route('shop.customer.session.destroy') }}"
                                         onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
                                     >
@@ -169,12 +169,12 @@
 
         <div class="relative w-full">
             <div
-                class="icon-search text-[25px] absolute left-[12px] top-[12px] flex items-center pointer-events-none">
+                class="icon-search flex items-center absolute left-[12px] top-[12px] text-[25px] pointer-events-none">
             </div>
 
             <input 
                 type="text"
-                class=" border border-['#E3E3E3'] rounded-xl block w-full px-11 py-3.5 text-gray-900 text-xs font-medium"
+                class="block w-full px-11 py-3.5 border border-['#E3E3E3'] rounded-xl text-gray-900 text-xs font-medium"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="Search for products" 
@@ -182,7 +182,7 @@
             >
 
             <button type="button"
-                class="icon-camera text-[22px] absolute top-[12px] right-[12px] flex items-center pr-3">
+                class="icon-camera flex items-center absolute top-[12px] right-[12px] pr-3 text-[22px]">
             </button>
         </div>
     </form>
@@ -214,7 +214,7 @@
                 >
                     <ul v-if="category.children.length">
                         <li v-for="secondLevelCategory in category.children">
-                            <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5] ml-3">
+                            <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                 <a
                                     :href="secondLevelCategory.url"
                                     class="flex items-center justify-between pb-[20px] mt-[20px]"
@@ -233,10 +233,10 @@
                             <div v-if="secondLevelCategory.category_show">
                                 <ul v-if="secondLevelCategory.children.length">
                                     <li v-for="thirdLevelCategory in secondLevelCategory.children">
-                                        <div class="flex justify-between items-center border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5] ml-3">
+                                        <div class="flex justify-between items-center ml-3 border border-b-[1px] border-l-0 border-r-0 border-t-0 border-[#f3f3f5]">
                                             <a
                                                 :href="thirdLevelCategory.url"
-                                                class="flex items-center justify-between pb-[20px] mt-[20px] ml-3"
+                                                class="flex items-center justify-between mt-[20px] ml-3 pb-[20px]"
                                                 v-text="thirdLevelCategory.name"
                                             >
                                             </a>

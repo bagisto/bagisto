@@ -20,10 +20,10 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll pr-[26px] min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
+            <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] pr-[26px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
                 <!-- Filters Header Container -->
-                <div class="pb-[10px] border-b-[1px] border-[#E9E9E9] flex justify-between items-center h-[50px]">
-                    <p class="text-[18px] font-semibold ">
+                <div class=" flex justify-between items-center h-[50px] pb-[10px] border-b-[1px] border-[#E9E9E9]">
+                    <p class="text-[18px] font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
 
@@ -50,7 +50,7 @@
             <x-shop::accordion>
                 <!-- Filter Item Header -->
                 <x-slot:header>
-                    <div class="flex pb-[10px] justify-between items-center">
+                    <div class="flex justify-between items-center pb-[10px]">
                         <p
                             class="text-[18px] font-semibold"
                             v-text="filter.name"
@@ -79,7 +79,7 @@
                             :key="option.id"
                             v-for="(option, optionIndex) in filter.options"
                         >
-                            <div class="select-none items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100">
+                            <div class="items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
                                     :id="option.id"
@@ -97,7 +97,7 @@
 
                                 <label
                                     :for="option.id"
-                                    class="w-full text-[16px] text-gray-900 p-2 pl-0 cursor-pointer"
+                                    class="w-full p-2 pl-0 text-[16px] text-gray-900 cursor-pointer"
                                     v-text="option.name"
                                 >
                                 </label>

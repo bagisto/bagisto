@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center w-full border border-t-0 border-b-[1px] border-l-0 border-r-0 py-[11px] px-16">
+<div class="flex justify-between items-center w-full py-[11px] px-16 border border-t-0 border-b-[1px] border-l-0 border-r-0">
     {{-- Currency Switcher --}}
     <x-shop::dropdown>
         <!-- Dropdown Toggler -->
@@ -45,7 +45,7 @@
                     {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
                 </span>
 
-                <span class="text-[24px] icon-arrow-down"></span>
+                <span class="icon-arrow-down text-[24px]"></span>
             </div>
         </x-slot:toggle>
     
@@ -60,7 +60,7 @@
     <script type="text/x-template" id="v-currency-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             <span
-                class="text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                class="px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
                 v-for="currency in currencies"
                 :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
                 @click="change(currency)"
@@ -73,7 +73,7 @@
     <script type="text/x-template" id="v-locale-switcher-template">
         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
             <span
-                class="flex gap-[10px] text-[16px] px-5 py-2 cursor-pointer hover:bg-gray-100"
+                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
                 v-for="locale in locales"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 @click="change(locale)"                  

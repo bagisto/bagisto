@@ -5,7 +5,7 @@
 >
 	<div class="container mt-20 max-1180:px-[20px]">
         {{-- Company Logo --}}
-        <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
+        <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
                 href="{{ route('shop.home.index') }}" 
                 class="m-[0_auto_20px_auto]"
@@ -16,17 +16,17 @@
         
         {{-- Form Container --}}
 		<div
-			class="w-full max-w-[870px] m-auto border border-[#E9E9E9] px-[90px] py-[60px] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
+			class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
         >
 			<h1 class="text-[40px] font-dmserif max-sm:text-[25px]">
                 @lang('shop::app.customers.signup-form.page-title')
             </h1>
 
-			<p class="text-[#7D7D7D] text-[20px] mt-[15px] max-sm:text-[16px]"> 
+			<p class="mt-[15px] text-[#7D7D7D] text-[20px] max-sm:text-[16px]"> 
                 @lang('shop::app.customers.signup-form.form-signup-text')
             </p>
 
-            <div class="rounded mt-[60px] max-sm:mt-[30px]">
+            <div class="mt-[60px] rounded max-sm:mt-[30px]">
                 <x-shop::form :action="route('shop.customers.register.store')">
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
 
@@ -159,7 +159,7 @@
                     @endif
 
                     @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-                        <div class="select-none items-center flex gap-[6px]">
+                        <div class="flex gap-[6px] items-center select-none">
                             <input
                                 type="checkbox"
                                 name="is_subscribed"
@@ -174,7 +174,7 @@
                             ></label>
 
                             <label
-                                class="text-[16] text-[#7d7d7d] max-sm:text-[12px] pl-0 select-none cursor-pointer"
+                                class="pl-0 text-[16] text-[#7d7d7d] max-sm:text-[12px] select-none cursor-pointer"
                                 for="is-subscribed"
                             >
                                 @lang('shop::app.customers.signup-form.subscribe-to-newsletter')
@@ -184,9 +184,9 @@
 
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
 
-                    <div class="flex gap-[36px] flex-wrap mt-[30px] items-center">
+                    <div class="flex gap-[36px] flex-wrap items-center mt-[30px]">
                         <button
-                            class="bs-primary-button m-0 ml-[0px] block mx-auto w-full text-[16px] max-w-[374px] py-[16px] px-[43px] rounded-[18px] text-center"
+                            class="bs-primary-button block w-full max-w-[374px] py-[16px] px-[43px] mx-auto m-0 ml-[0px] rounded-[18px] text-[16px] text-center"
                             type="submit"
                         >
                             @lang('shop::app.customers.signup-form.button_title')
@@ -199,7 +199,7 @@
                 </x-shop::form>
             </div>
 
-			<p class="text-[#7D7D7D] font-medium mt-[20px]">
+			<p class="mt-[20px] text-[#7D7D7D] font-medium">
                 @lang('shop::app.customers.signup-form.account_exists')
                 
                 <a class="text-navyBlue" 
@@ -210,7 +210,7 @@
             </p>
 		</div>
 
-        <p class="mt-[30px]  mb-[15px] text-center text-[#7d7d7d] text-xs">
+        <p class="mt-[30px] mb-[15px] text-center text-[#7d7d7d] text-xs">
             @lang('shop::app.customer.signup-form.footer')
         </p>
 	</div>

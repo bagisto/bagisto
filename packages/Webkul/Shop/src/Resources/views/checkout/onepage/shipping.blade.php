@@ -28,7 +28,7 @@
                     <x-slot:content>
                         <div class="flex flex-wrap gap-[30px] mt-[30px]">
                             <div
-                                class="relative max-w-[218px] select-none max-sm:max-w-full max-sm:flex-auto"
+                                class="relative max-w-[218px] max-sm:max-w-full max-sm:flex-auto select-none"
                                 v-for="shippingMethod in shippingMethods"
                             >
                                 <div v-for="rate in shippingMethod.rates">
@@ -42,22 +42,22 @@
                                     >
 
                                     <label 
-                                        class="icon-radio-unselect text-[24px] text-navyBlue absolute ltr:right-[20px] rtl:left-[20px] top-[20px] peer-checked:icon-radio-select cursor-pointer"
+                                        class="icon-radio-unselect absolute ltr:right-[20px] rtl:left-[20px] top-[20px] text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
                                         :for="rate.method"
                                     >
                                     </label>
 
                                     <label 
-                                        class="block border border-[#E9E9E9] p-[20px] rounded-[12px] h-[190px] cursor-pointer"
+                                        class="block h-[190px] p-[20px] border border-[#E9E9E9] rounded-[12px] cursor-pointer"
                                         :for="rate.method"
                                     >
                                         <span class="icon-flate-rate text-[60px] text-navyBlue"></span>
 
-                                        <p class="text-[25px] font-semibold mt-[5px] max-sm:text-[20px]">
+                                        <p class="text-[25px] mt-[5px] font-semibold max-sm:text-[20px]">
                                             @{{ rate.base_formatted_price }}
                                         </p>
                                         
-                                        <p class="text-[12px] font-medium mt-[10px]">
+                                        <p class="text-[12px] mt-[10px] font-medium">
                                             <span class="font-medium">@{{ rate.method_title }}</span> - @{{ rate.method_description }}
                                         </p>
                                     </label>

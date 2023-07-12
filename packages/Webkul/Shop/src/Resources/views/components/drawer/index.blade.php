@@ -87,10 +87,10 @@
                     :style="'width:' + width + 'px'"
                     v-if="isOpen"
                 >
-                    <div class="bg-white h-full pointer-events-auto w-full overflow-auto">
+                    <div class="w-full h-full overflow-auto bg-white pointer-events-auto">
                         <div class="flex flex-col h-full w-full">
-                            <div class="overflow-auto flex-1 min-h-0 min-w-0">
-                                <div class="flex flex-col  h-full">
+                            <div class="flex-1 min-h-0 min-w-0 overflow-auto">
+                                <div class="flex flex-col h-full">
                                     <div class="grid gap-y-[10px] p-[25px] pb-[20px]">
                                         <div>
                                             <slot name="header">

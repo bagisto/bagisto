@@ -12,13 +12,13 @@
 
             @if (! $reviews->isEmpty())
                 {{-- Review Information --}}
-                <div class="grid mt-[60px] gap-[20px] max-1060:grid-cols-[1fr]">
+                <div class="grid gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
                     @foreach($reviews as $review)
                         <a
                             href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}"
                             id="{{ $review->product_id }}"
                         >
-                            <div class="flex gap-[20px] border border-[#e5e5e5] rounded-[12px] p-[25px] max-sm:flex-wrap">
+                            <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">
                                 @php $image = product_image()->getGalleryImages($review);@endphp
 
                                 <div class="min-h-[100px] min-w-[100px] max-sm:hidden">
@@ -43,11 +43,11 @@
                                         </div>
                                     </div>
 
-                                    <p class="text-[14px] font-medium mt-[10px] max-sm:text-[12px]">
+                                    <p class="mt-[10px] text-[14px] font-medium max-sm:text-[12px]">
                                         {{ $review->created_at }}
                                     </p>
 
-                                    <p class="text-[16px] text-[#7D7D7D] mt-[20px] max-sm:text-[12px]">
+                                    <p class="mt-[20px] text-[16px] text-[#7D7D7D] max-sm:text-[12px]">
                                         {{ $review->comment }}
                                     </p>
                                 </div>
@@ -57,7 +57,7 @@
                 </div>
             @else
                 {{-- Review Empty Page --}}
-                <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                     <img class="" src="{{ bagisto_asset('images/review.png') }}" alt="" title="">
 
                     <p class="text-[20px]">

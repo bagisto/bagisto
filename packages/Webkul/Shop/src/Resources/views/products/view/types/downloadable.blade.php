@@ -3,7 +3,7 @@
 
     @if ($product->downloadable_samples->count())
         <div class="sample-list mb-[25px] mt-[30px]">
-            <h3 class="font-medium mb-[15px]">
+            <h3 class="mb-[15px] font-medium">
                 @lang('shop::app.products.view.type.downloadable.samples')
             </h3>
 
@@ -24,7 +24,7 @@
     @endif
 
     @if ($product->downloadable_links->count())
-        <h3 class="font-medium mt-[30px] mb-[15px]">
+        <h3 class="mt-[30px] mb-[15px] font-medium">
             @lang('shop::app.products.view.type.downloadable.links')
         </h3>
 

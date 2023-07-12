@@ -18,14 +18,14 @@
                     class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide"
                 >
                     <div
-                        class="grid grid-cols-1 justify-items-center gap-[15px] font-medium min-w-[120px]"
+                        class="grid grid-cols-1 gap-[15px] justify-items-center min-w-[120px] font-medium"
                         v-for="category in categories"
                     >
                         <a
                             :href="category.url_path"
                             class=""
                         >
-                            <div class="bg-[#F5F5F5] rounded-full w-[110px] h-[110px]">
+                            <div class="w-[110px] h-[110px] bg-[#F5F5F5] rounded-full">
                                 <img
                                     class="w-[110px] h-[110px] rounded-full"
                                     :src="category.images.base_url"
@@ -39,7 +39,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-black text-[20px]"
+                                class="text-[20px] text-black text-center"
                                 v-text="category.name"
                             >
                             </p>
@@ -48,13 +48,13 @@
                 </div>
 
                 <span
-                    class="bs-carousal-next flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[37px] -left-[41px] cursor-pointer transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px]"
+                    class="bs-carousal-next flex items-center justify-center absolute top-[37px] -left-[41px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white max-lg:-left-[29px] cursor-pointer"
                     @click="swipeLeft"
                 >
                 </span>
 
                 <span
-                    class="bs-carousal-prev flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[37px] -right-[22px] cursor-pointer transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px]"
+                    class="bs-carousal-prev flex items-center justify-center absolute top-[37px] -right-[22px] w-[50px] h-[50px] bg-white border border-black rounded-full transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white max-lg:-right-[29px] cursor-pointer"
                     @click="swipeRight"
                 >
                 </span>

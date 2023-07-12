@@ -27,7 +27,7 @@
                         </h2>
 
                         <div
-                            class="bs-secondary-button font-normal flex items-center gap-x-[10px] border-[#E9E9E9] py-[12px] px-[20px] whitespace-nowrap"
+                            class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal whitespace-nowrap"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -58,7 +58,7 @@
                                         v-for="product in items"
                                     >
                                         <a
-                                            class="hidden justify-center items-center w-[30px] h-[30px] bg-white rounded-md cursor-pointer absolute top-[60px] right-[20px] icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
+                                            class="hidden absolute top-[60px] right-[20px] justify-center items-center w-[30px] h-[30px] rounded-md bg-white cursor-pointer icon-cancel text-[25px] group-hover:flex group-hover:z-[1] transition-all duration-300"
                                             @click="remove(product.id)"
                                         ></a>
 
@@ -80,7 +80,7 @@
 
                                 <div class="flex gap-[12px] border-l-[1px] border-[#E9E9E9] max-sm:border-0">
                                     <div
-                                        class="w-[311px] max-w-[311px]  pr-0 p-[20px] max-sm:pl-0"
+                                        class="w-[311px] max-w-[311px] pr-0 p-[20px] max-sm:pl-0"
                                         v-for="(product, index) in items"
                                     >
                                         <p class="hidden mb-[5px] text-[14px] font-medium max-sm:block">
@@ -97,7 +97,7 @@
                     </div>
 
                     <div
-                        class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center"
+                        class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center"
                         v-else
                     >
                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>

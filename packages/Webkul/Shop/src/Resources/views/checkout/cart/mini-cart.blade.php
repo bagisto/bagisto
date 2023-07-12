@@ -12,7 +12,7 @@
                     <span class="icon-cart text-[24px] cursor-pointer"></span>
 
                     <span
-                        class="absolute py-[5px] px-[7px] top-[-15px] left-[18px] rounded-[44px] bg-[#060C3B] text-[#fff] text-[10px] font-semibold leading-[9px]"
+                        class="absolute  px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px]"
                         v-if="cart?.items_count"
                     >
                         @{{ cart.items_count }}
@@ -53,7 +53,7 @@
                         </div>
 
                         <!-- Cart Item Information -->
-                        <div class="grid place-content-start justify-stretch gap-y-[10px] flex-1">
+                        <div class="grid flex-1 gap-y-[10px] place-content-start justify-stretch">
                             <div class="flex flex-wrap justify-between">
                                 <p
                                     class="text-[16px] font-medium max-w-[80%]"
@@ -76,7 +76,7 @@
                                 <!-- Details Toggler -->
                                 <div class="">
                                     <p
-                                        class="flex gap-x-[15px] text-[16px] items-center cursor-pointer"
+                                        class="flex gap-x-[15px] items-center text-[16px] cursor-pointer"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('shop::app.checkout.cart.mini-cart.see-datails')
@@ -108,7 +108,7 @@
                                 <x-shop::quantity-changer
                                     name="quantity"
                                     ::value="item?.quantity"
-                                    class="gap-x-[10px] rounded-[54px] py-[5px] px-[14px] max-w-[150px] max-h-[36px]"
+                                    class="gap-x-[10px] max-w-[150px] max-h-[36px] py-[5px] px-[14px] rounded-[54px]"
                                     @change="updateItem($event, item)"
                                 >
                                 </x-shop::quantity-changer>
@@ -144,7 +144,7 @@
             <!-- Drawer Footer -->
             <x-slot:footer>
                 <div v-if="cart?.items?.length">
-                    <div class="flex justify-between items-center mt-[60px] mb-[30px] pb-[8px] border-b-[1px] border-[#E9E9E9] px-[25px]">
+                    <div class="flex justify-between items-center mt-[60px] mb-[30px] px-[25px] pb-[8px] border-b-[1px] border-[#E9E9E9]">
                         <p class="text-[14px] font-medium text-[#7D7D7D]">
                             @lang('shop::app.checkout.cart.mini-cart.subtotal')
                         </p>
@@ -160,12 +160,12 @@
                     <div class="px-[25px]">
                         <a
                             href="{{ route('shop.checkout.onepage.index') }}"
-                            class="m-0 ml-[0px] block mx-auto bg-navyBlue text-white text-base w-full font-medium py-[15px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:px-[20px]"
+                            class="block w-full mx-auto m-0 ml-[0px] py-[15px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:px-[20px]"
                         >
                             @lang('shop::app.checkout.cart.mini-cart.continue-to-checkout')
                         </a>
 
-                        <div class="m-0 ml-[0px] block text-base py-[15px] text-center font-medium cursor-pointer">
+                        <div class="block m-0 ml-[0px] py-[15px] text-base text-center font-medium cursor-pointer">
                             <a href="{{ route('shop.checkout.cart.index') }}">
                                 @lang('shop::app.checkout.cart.mini-cart.view-cart')
                             </a>

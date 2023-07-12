@@ -7,12 +7,12 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-coupon-template">
-        <div class="flex text-right justify-between">
+        <div class="flex justify-between text-right">
             <p class="text-[16px] max-sm:text-[14px] max-sm:font-normal">
                 @lang('shop::app.checkout.cart.coupon.discount')
             </p>
 
-            <p class="text-[16px] max-sm:text-[14px] max-sm:font-medium font-medium">
+            <p class="text-[16px] font-medium max-sm:text-[14px]">
                 <!-- Apply coupon modal -->
                 <x-shop::modal ref="couponModel">
                     <!-- Modal Toggler -->
@@ -76,7 +76,7 @@
                                             </p>
 
                                             <button
-                                                class="block flex-auto bg-navyBlue text-white text-base w-max font-medium py-[11px] px-[43px] rounded-[18px] text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                                                class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base font-medium text-center cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                                                 type="submit"
                                             >
                                                @lang('shop::app.checkout.cart.coupon.button-title')
@@ -91,7 +91,7 @@
 
                 <!-- Applied Coupon Information Container -->
                 <div 
-                    class="text-[12px] font-small flex justify-between items-center"
+                    class="flex justify-between items-center text-[12px] font-small "
                     v-if="isCouponApplied"
                 >
                     <p class="text-[12px] mr-2">
