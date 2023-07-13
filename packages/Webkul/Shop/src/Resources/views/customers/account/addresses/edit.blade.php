@@ -245,7 +245,7 @@
             type="submit"
             class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
         >
-            @lang('shop::app.customers.account.save')
+            @lang('shop::app.customers.account.addresses.save')
         </button>
     </x-shop::form>
 </x-shop::layouts.account>
