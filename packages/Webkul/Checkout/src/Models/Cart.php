@@ -154,7 +154,7 @@ class Cart extends Model implements CartContract
     public function hasProductsWithQuantityBox(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->product->getTypeInstance()->showQuantityBox()) {
+            if ($item->getTypeInstance()->showQuantityBox()) {
                 return true;
             }
         }

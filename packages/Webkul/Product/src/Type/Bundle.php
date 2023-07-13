@@ -503,7 +503,7 @@ class Bundle extends AbstractType
         $price = 0;
 
         foreach ($item->children as $childItem) {
-            $childResult = $childItem->product->getTypeInstance()->validateCartItem($childItem);
+            $childResult = $childItem->getTypeInstance()->validateCartItem($childItem);
 
             if ($childResult->isItemInactive()) {
                 $result->itemIsInactive();

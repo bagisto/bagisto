@@ -267,7 +267,7 @@ class Downloadable extends AbstractType
             return $result;
         }
 
-        $price = $item->product->getTypeInstance()->getFinalPrice($item->quantity);
+        $price = $this->getFinalPrice($item->quantity);
 
         foreach ($item->product->downloadable_links as $link) {
             if (! in_array($link->id, $item->additional['links'])) {

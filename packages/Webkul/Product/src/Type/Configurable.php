@@ -476,7 +476,7 @@ class Configurable extends AbstractType
      */
     public function isItemHaveQuantity($cartItem)
     {
-        return $cartItem->child->product->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
+        return $cartItem->child->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
     }
 
     /**
@@ -697,7 +697,7 @@ class Configurable extends AbstractType
             return $result;
         }
 
-        $price = $item->child->product->getTypeInstance()->getFinalPrice($item->quantity);
+        $price = $item->child->getTypeInstance()->getFinalPrice($item->quantity);
 
         if ($price == $item->base_price) {
             return $result;
