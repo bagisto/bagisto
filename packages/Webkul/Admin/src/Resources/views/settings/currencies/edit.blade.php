@@ -22,24 +22,11 @@
                 </div>
             </div>
 
-            <div class="flex gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-                <div class="flex gap-x-[4px] items-center">
-                    <div class="">
-                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
-                            <span class="icon-language text-[24px]"></span> 
-                                English 
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </div>
-                        <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
-                    </div>
-                </div>
-            </div>
-            
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-                        {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+                        {!! view_render_event('bagisto.admin.settings.currencies.edit.before') !!}
 
                         <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                             @lang('General')
@@ -138,7 +125,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
+                        {!! view_render_event('bagisto.admin.settings.currencies.edit.after') !!}
                     </div>
 				</div>
 			</div>
