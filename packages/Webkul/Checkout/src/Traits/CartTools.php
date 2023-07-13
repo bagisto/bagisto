@@ -248,7 +248,7 @@ trait CartTools
                 $options = ['product_id' => $wishlistItem->product_id];
             }
 
-            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
                 $found = true;
             }
         }
