@@ -11,7 +11,7 @@
 
             <div class="flex justify-between items-center">
                 <p class="text-[20px] text-gray-800 font-bold">
-                    @lang('Add Locale')
+                    @lang('Update Locale')
                 </p>
 
                 <div class="flex gap-x-[10px] items-center">
@@ -131,24 +131,9 @@
                                 @lang('Locale Logo')
                             </label>
 
-                            <input 
-                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                type="file" 
-                                name="logo_path"
-                                value="{{ old('logo_path') }}"
-                                id="logo_path"
-                                placeholder="@lang('logo_path')"
-                                accept="image/*"
-                            >
-
-                            {{ $locale->logo_url }}
-
-                            @if (
-                                isset($locale)
-                                && $locale->logo_path
-                            )
+                            @if (! empty($locale->logo_path))
                                 <x-shop::media
-                                    name="logo_path"
+                                    name="logo_path[image_1]"
                                     class="py-3"
                                     :is-multiple="false"
                                     accepted-types="image/*"
@@ -157,11 +142,10 @@
                                 </x-shop::media>
                             @else
                                 <x-shop::media
-                                    name="logo_path"
+                                    name="logo_path[image_1]"
                                     class="py-3"
                                     :is-multiple="false"
                                     accepted-types="image/*"
-                                    :src="Storage::url($locale->logo_path)"
                                 >
                                 </x-shop::media>
                             @endif

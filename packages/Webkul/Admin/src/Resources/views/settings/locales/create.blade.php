@@ -123,7 +123,7 @@
                             </label>
 
                             <x-shop::media
-                                name="logo_path"
+                                name="logo_path[image_1]"
                                 class="py-3"
                                 :is-multiple="false"
                                 accepted-types="image/*"

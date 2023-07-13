@@ -89,7 +89,6 @@ class LocaleRepository extends Repository
     public function uploadImage($localeImages, $locale)
     {
         if (! isset($localeImages['logo_path'])) {
-            dd('if');
             Storage::delete($locale->logo_path);
 
             $locale->logo_path = null;
@@ -97,11 +96,9 @@ class LocaleRepository extends Repository
             $locale->save();
 
             return;
-        } 
+        }
 
-        dd($localeImages['logo_path']);
         foreach ($localeImages['logo_path'] as $image) {
-            dd('ddd');
             if (is_string($image)) {
                 continue;
             }
