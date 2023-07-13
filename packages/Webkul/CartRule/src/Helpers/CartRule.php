@@ -589,7 +589,5 @@ class CartRule
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
         return (boolean) $this->getCartRuleQuery()->count();
-
-        
     }
 }
