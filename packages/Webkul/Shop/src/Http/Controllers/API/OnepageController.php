@@ -105,7 +105,9 @@ class OnepageController extends APIController
             || ! $shippingMethod
             || ! Cart::saveShippingMethod($shippingMethod)
         ) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], Response::HTTP_FORBIDDEN);
+            return response()->json([
+                'redirect_url' => route('shop.checkout.cart.index'),
+            ], Response::HTTP_FORBIDDEN);
         }
 
         Cart::collectTotals();
@@ -127,7 +129,9 @@ class OnepageController extends APIController
             || ! $payment
             || ! Cart::savePaymentMethod($payment)
         ) {
-            return response()->json(['redirect_url' => route('shop.checkout.cart.index')], Response::HTTP_FORBIDDEN);
+            return response()->json([
+                'redirect_url' => route('shop.checkout.cart.index'),
+            ], Response::HTTP_FORBIDDEN);
         }
 
         Cart::collectTotals();
@@ -191,7 +195,11 @@ class OnepageController extends APIController
 
         return response()->json([
             'status'  => ! $status ? false : true,
-            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
+            'message' => ! $status
+                ? trans('shop::app.checkout.cart.minimum-order-message', [
+                    'amount' => core()->currency($minimumOrderAmount),
+                ])
+                : 'Success',
         ]);
     }
 

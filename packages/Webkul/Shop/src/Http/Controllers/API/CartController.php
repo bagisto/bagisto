@@ -31,11 +31,15 @@ class CartController extends APIController
     {
         Cart::collectTotals();
 
-        $cart = Cart::getCart();
+        $response = [
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null
+        ];
 
-        return new JsonResource([
-            'data' => $cart ? new CartResource($cart) : null,
-        ]);
+        if (session()->has('info')) {
+            $response['message'] = session()->get('info');
+        }
+
+        return new JsonResource($response);
     }
 
     /**
@@ -87,6 +91,8 @@ class CartController extends APIController
     public function destroy(): JsonResource
     {
         Cart::removeItem(request()->input('cart_item_id'));
+
+        Cart::collectTotals();
 
         return new JsonResource([
             'data'    => new CartResource(Cart::getCart()),

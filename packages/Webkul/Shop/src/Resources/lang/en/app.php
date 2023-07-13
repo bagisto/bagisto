@@ -2,7 +2,6 @@
 
 return [
     'customers' => [
-
         'forgot-password' => [
             'title'                => 'Recover Password',
             'email'                => 'Email',
@@ -65,26 +64,24 @@ return [
         ],
 
         'account' => [
-
-        'profile'   => [      
-            'first-name'              => 'First Name',
-            'last-name'               => 'Last Name',
-            'gender'                  => 'Gender',
-            'dob'                     => 'Date of Birth',
-            'email'                   => 'Email',
-            'delete-profile'          => 'Delete Profile',
-            'edit-profile'            => 'Edit Profile',
-            'edit'                    => 'Edit',
-            'phone'                   => 'Phone',
-            'current-password'        => 'Current Password',
-            'new-password'            => 'New Password',
-            'confirm-password'        => 'Confirm Password',
-            'delete-success'          => 'Customer deleted successfully',
-            'wrong-password'          => 'Wrong Password !',
-            'delete-failed'           => 'Error encountered while deleting customer.',
-            'order-pending'           => 'Cannot delete customer account because some Order(s) are pending or processing state.',
-            'subscribe-to-newsletter' => 'Subscribe to newsletter',
-                
+            'profile'   => [      
+                'first-name'              => 'First Name',
+                'last-name'               => 'Last Name',
+                'gender'                  => 'Gender',
+                'dob'                     => 'Date of Birth',
+                'email'                   => 'Email',
+                'delete-profile'          => 'Delete Profile',
+                'edit-profile'            => 'Edit Profile',
+                'edit'                    => 'Edit',
+                'phone'                   => 'Phone',
+                'current-password'        => 'Current Password',
+                'new-password'            => 'New Password',
+                'confirm-password'        => 'Confirm Password',
+                'delete-success'          => 'Customer deleted successfully',
+                'wrong-password'          => 'Wrong Password !',
+                'delete-failed'           => 'Error encountered while deleting customer.',
+                'order-pending'           => 'Cannot delete customer account because some Order(s) are pending or processing state.',
+                'subscribe-to-newsletter' => 'Subscribe to newsletter',
             ],
 
             'addresses' => [
@@ -419,7 +416,6 @@ return [
     ],
 
     'checkout' => [
-
         'success' => [
             'title'         => 'Order successfully placed',
             'thanks'        => 'Thank you for your order!',
@@ -438,11 +434,12 @@ return [
             'missing_options'           => 'Options are missing for this product.',
             'missing_links'             => 'Downloadable links are missing for this product.',
             'select_hourly_duration'    => 'Select a slot duration of one hour.',
-            'qty_missing'               => 'Atleast one product should have more than 1 quantity.',
+            'qty_missing'               => 'At least one product should have more than 1 quantity.',
             'qty_impossible'            => 'Cannot add more than one of these products to cart.',
             'success-remove'            => 'Item is successfully removed from the cart.',
             'inventory_warning'         => 'The requested quantity is not available, please try again later.',
             'illegal'                   => 'Quantity cannot be lesser than one.',
+            'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
 
             'index' => [ 
                 'home'                     => 'Home',

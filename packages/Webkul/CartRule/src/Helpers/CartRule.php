@@ -57,7 +57,10 @@ class CartRule
         /**
          * If cart rules are not available then don't process further.
          */
-        if (! $this->haveCartRules()) {
+        if (
+            ! $this->haveCartRules()
+            && ! $cart->base_discount_amount
+        ) {
             return;
         }
 

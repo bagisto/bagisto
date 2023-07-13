@@ -265,7 +265,7 @@
 
                 computed: {
                     selectedItemsCount() {
-                        return  this.cart.items.filter(item => item.selected).length;
+                        return this.cart.items.filter(item => item.selected).length;
                     }
                 },
 
@@ -276,6 +276,10 @@
                                 this.isLoading = false;
 
                                 this.cart = response.data.data;
+
+                                if (response.data.message) {
+                                    this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
+                                }
                             })
                             .catch(error => {});     
                     },
