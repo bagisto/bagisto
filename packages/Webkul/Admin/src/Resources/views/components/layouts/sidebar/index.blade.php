@@ -39,6 +39,7 @@
             </div>
         </nav>
     </div>
+
     <div class="bg-white mt-[60px] fixed w-full max-w-[221px] bottom-0">
         <div class="flex gap-[10px] p-[6px] items-center">
             <span class="icon-arrow-right text-[24px]"></span>

@@ -43,9 +43,7 @@ return [
     ],
 
     'components' => [
-
         'layouts' => [
-
             'header' => [
                 'search'        => 'Search',
                 'mega-search'   => 'Mega Search',
