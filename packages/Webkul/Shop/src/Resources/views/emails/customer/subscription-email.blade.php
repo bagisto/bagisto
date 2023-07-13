@@ -16,7 +16,7 @@
         </div>
 
         <div  style="margin-top: 40px; text-align: center">
-            <a href="{{ route('shop.unsubscribe', $data['token']) }}" style="font-size: 16px;
+            <a href="{{ route('shop.subscription.destroy', $data['token']) }}" style="font-size: 16px;
             color: #FFFFFF; text-align: center; background: #0031F0; padding: 10px 100px;text-decoration: none;">
                 {!! __('shop::app.mail.customer.subscription.unsubscribe') !!}
             </a>

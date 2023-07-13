@@ -5,12 +5,11 @@ namespace Webkul\Shop\Http\Controllers\Customer;
 use Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
-use Webkul\Shop\Mail\SubscriptionEmail;
 
 class CustomerController extends Controller
 {
@@ -23,7 +22,8 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -113,14 +113,6 @@ class CustomerController extends Controller
                         'is_subscribed' => 1,
                         'token'         => $token = uniqid(),
                     ]);
-
-                    try {
-                        Mail::queue(new SubscriptionEmail([
-                            'email' => $data['email'],
-                            'token' => $token,
-                        ]));
-                    } catch (\Exception $e) {
-                    }
                 }
             } else {
                 $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);

@@ -4,10 +4,10 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Webkul\CartRule\Repositories\CartRuleCouponRepository;
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
@@ -21,7 +21,8 @@ class CartController extends APIController
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {
+    )
+    {
     }
 
     /**

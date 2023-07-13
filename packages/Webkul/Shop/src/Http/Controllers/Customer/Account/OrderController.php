@@ -2,10 +2,10 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
-use Webkul\Core\Traits\PDFHandler;
+use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Core\Traits\PDFHandler;
 
 class OrderController extends Controller
 {
@@ -19,8 +19,8 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    ) {
-        parent::__construct();
+    )
+    {
     }
 
     /**
@@ -61,9 +61,12 @@ class OrderController extends Controller
      */
     public function printInvoice($id)
     {
-        $invoice = $this->invoiceRepository->findOrFail($id);
+        $invoice = $this->invoiceRepository->findOneWhere([
+            'id'          => $id,
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
 
-        if ($invoice->order->customer_id !== auth()->guard('customer')->id()) {
+        if (! $invoice) {
             abort(404);
         }
 
