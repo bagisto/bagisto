@@ -7,9 +7,11 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <span class="text-gray-600 leading-[24px]">
-                    @lang('admin::app.settings.inventory_sources.create.cancel')
-                </span>
+                <a href="{{ route('admin.inventory_sources.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.settings.inventory_sources.create.cancel')
+                    </span>
+                </a>
 
                 <button 
                     type="submit" 
@@ -20,38 +22,8 @@
             </div>
         </div>
 
-        {{-- Filter row --}}
-        <div class="flex gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
-                <div class="">
-                    <div class="inline-flex gap-x-[8px] items-center justify-between w-full px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600 max-w-max">
-                        <span class="icon-store text-[24px]"></span>
-
-                        @lang('Default Store')
-
-                        <span class="icon-sort-down text-[24px]"></span>
-                    </div>
-
-                    <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
-                </div>
-
-                {{-- Language changer --}}
-                <div class="">
-                    <div class="inline-flex gap-x-[4px] items-center justify-between w-full px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600 max-w-max">
-                        <span class="icon-language text-[24px] "></span>
-
-                        English
-
-                        <span class="icon-sort-down text-[24px]"></span>
-                    </div>
-
-                    <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
-                </div>
-            </div>
-        </div>
-
         {{-- Informations --}}
-        <div class="flex gap-[10px] mt-[14px] mb-2">
+        <div class="flex gap-[10px] mt-[28px] mb-2">
             <div class="flex flex-col gap-[8px] flex-1">
                 <div class="p-[16px] bg-white box-shadow rounded-[4px]">
                     <h1 class="mb-3">
