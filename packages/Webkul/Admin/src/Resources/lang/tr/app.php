@@ -913,8 +913,6 @@ return [
             'inventory_sources'      => 'Envanter Kaynakları',
             'design'                 => 'Tasarım',
             'theme'                  => 'Tema',
-            'home_page_content'      => 'Ana Sayfa İçeriği',
-            'footer_content'         => 'Altbilgi İçeriği',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Kanal başarıyla oluşturuldu.',

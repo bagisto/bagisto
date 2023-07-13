@@ -3,6 +3,11 @@
     :has-feature="false"
     :has-footer="false"
 >
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.checkout.onepage.index.checkout')
+    </x-slot>
+
     {{-- Page Header --}}
     <div class="bs-dekstop-menu flex flex-wrap">
         <div class="w-full flex justify-between px-[60px] py-[17px] border border-t-0 border-b-[1px] border-l-0 border-r-0 max-lg:px-[30px] max-sm:px-[15px]">

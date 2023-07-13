@@ -38,25 +38,6 @@ return [
         'name' => 'admin::app.admin.system.content',
         'sort' => 2,
     ], [
-        'key'    => 'general.content.footer',
-        'name'   => 'admin::app.admin.system.footer',
-        'sort'   => 1,
-        'fields' => [
-            [
-                'name'          => 'footer_content',
-                'title'         => 'admin::app.admin.system.footer-content',
-                'type'          => 'text',
-                'channel_based' => true,
-                'locale_based'  => true,
-            ], [
-                'name'          => 'footer_toggle',
-                'title'         => 'admin::app.admin.system.footer-toggle',
-                'type'          => 'boolean',
-                'locale_based'  => true,
-                'channel_based' => true,
-            ],
-        ],
-    ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.admin.system.custom-scripts',
         'sort'   => 1,

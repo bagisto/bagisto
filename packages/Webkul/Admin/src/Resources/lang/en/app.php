@@ -42,6 +42,21 @@ return [
         'false'           => 'False',
     ],
 
+    'components' => [
+        'layouts' => [
+            'header' => [
+                'search'        => 'Search',
+                'mega-search'   => 'Mega Search',
+                'notifications' => 'Notifications',
+                'visit-shop'    => 'Visit Shop',
+            ],
+
+            'sidebar' => [
+                'collapse' => 'Collapse',
+            ],
+        ],
+    ],
+
     'layouts' => [
         'app-version'              => 'Version : :version',
         'account-title'            => 'Account',
@@ -935,8 +950,6 @@ return [
             'inventory_sources'      => 'Inventory Sources',
             'design'                 => 'Design',
             'theme'                  => 'Theme',
-            'home_page_content'      => 'Home Page Content',
-            'footer_content'         => 'Footer Content',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Channel created successfully.',

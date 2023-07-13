@@ -898,8 +898,6 @@ return [
             'inventory_sources'      => 'Magazzini',
             'design'                 => 'Design',
             'theme'                  => 'Theme',
-            'home_page_content'      => 'Contenuto Home Page',
-            'footer_content'         => 'Contenuto Footer',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Canale creato con successo.',

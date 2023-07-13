@@ -1,4 +1,9 @@
 <x-shop::layouts.account>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.downloadable-products.name')
+    </x-slot>
+
     {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="downloadable-products"></x-shop::breadcrumbs>

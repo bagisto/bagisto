@@ -198,22 +198,6 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="home_page_content">
-                                    {{ __('admin::app.settings.channels.home_page_content') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <textarea class="control" id="home_page_content" name="{{$locale}}[home_page_content]">{{ old($locale)['home_page_content'] ?? ($channel->translate($locale)['home_page_content'] ?? $channel->home_page_content) }}</textarea>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="footer_content">
-                                    {{ __('admin::app.settings.channels.footer_content') }}
-                                    <span class="locale">[{{ $locale }}]</span>
-                                </label>
-                                <textarea class="control" id="footer_content" name="{{$locale}}[footer_content]">{{ old($locale)['footer_content'] ?? ($channel->translate($locale)['footer_content'] ?? $channel->footer_content) }}</textarea>
-                            </div>
-
-                            <div class="control-group">
                                 <label>{{ __('admin::app.settings.channels.logo') }}</label>
 
                                 <image-wrapper button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}" input-name="logo" :multiple="false" :images='"{{ $channel->logo_url }}"'></image-wrapper>
@@ -308,21 +292,3 @@
         </form>
     </div>
 @stop
-
-@push('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea#home_page_content,textarea#footer_content',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-                valid_elements : '*[*]',
-            });
-        });
-    </script>
-@endpush

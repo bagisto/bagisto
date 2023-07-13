@@ -888,8 +888,6 @@ return [
             'inventory_sources'      => 'Źródła zapasów',
             'design'                 => 'Projekt',
             'theme'                  => 'Motyw',
-            'home_page_content'      => 'Treść strony głównej',
-            'footer_content'         => 'Treść stopki',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Kanał utworzony pomyślnie.',
