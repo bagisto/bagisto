@@ -284,6 +284,10 @@
 		@apply text-[14px] leading-[17px];
 	}
 
+	input{
+		@apply outline-none;
+	}
+
 	.journal-scroll::-webkit-scrollbar {
 		width: 14px;
 		cursor: pointer;

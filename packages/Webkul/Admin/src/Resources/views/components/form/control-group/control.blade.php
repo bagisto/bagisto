@@ -17,7 +17,7 @@
                 type="{{ $type }}"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'border rounded-[6px] py-2 px-3 text-[14px] text-gray-600 appearance-none w-full transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
         </v-field>
 
@@ -32,7 +32,7 @@
             <textarea
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'text-[14px] shadow appearance-none border rounded w-full mb-3 py-2 px-3 focus:outline-none focus:shadow-outline']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow appearance-none text-[14px] border rounded focus:outline-none focus:shadow-outline']) }}
             >
             </textarea>
         </v-field>
@@ -74,7 +74,7 @@
             <select
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                {{ $attributes->except(['value'])->merge(['class' => 'border rounded-[6px] w-full py-2 px-3 text-[14px] text-gray-600 appearance-none transition-all hover:border-gray-400 custom-select']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'custom-select w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
                 {{ $slot }}
             </select>
