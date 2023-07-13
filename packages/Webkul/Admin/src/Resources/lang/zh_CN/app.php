@@ -886,8 +886,6 @@ return [
             'inventory_sources'      => '货源列表',
             'design'                 => '设计',
             'theme'                  => '主题',
-            'home_page_content'      => '主页内容',
-            'footer_content'         => '页脚内容',
             'logo'                   => '标志',
             'favicon'                => '网站图标',
             'create-success'         => '渠道创建成功.',

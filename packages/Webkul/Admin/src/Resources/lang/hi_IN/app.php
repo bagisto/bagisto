@@ -904,8 +904,6 @@ return [
             'inventory_sources'      => 'इन्वेंट्री स्रोत',
             'design'                 => 'डिज़ाइन',
             'theme'                  => 'थीम',
-            'home_page_content'      => 'होम पेज कंटेंट',
-            'footer_content'         => 'पाद सामग्री',
             'logo'                   => 'प्रतीक चिन्ह',
             'favicon'                => 'फेविकॉन',
             'create-success'         => 'चैनल सफलतापूर्वक बनाया गया।',

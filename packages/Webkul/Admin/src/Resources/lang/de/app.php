@@ -903,8 +903,6 @@ return [
             'inventory_sources'      => 'Inventar-Quellen',
             'design'                 => 'Design',
             'theme'                  => 'Theme',
-            'home_page_content'      => 'Startseite Inhalt',
-            'footer_content'         => 'Fußzeile Inhalt',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Kanal erfolgreich erstellt.',
