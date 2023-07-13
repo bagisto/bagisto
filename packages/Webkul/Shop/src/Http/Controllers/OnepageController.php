@@ -30,6 +30,9 @@ class OnepageController extends Controller
     {
         Event::dispatch('checkout.load.index');
 
+        /**
+         * If guest checkout is not allowed then redirect back to the cart page
+         */
         if (
             ! auth()->guard('customer')->check()
             && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
@@ -37,49 +40,52 @@ class OnepageController extends Controller
             return redirect()->route('shop.customer.session.index');
         }
 
-        if (
-            auth()->guard('customer')->check()
-            && auth()->guard('customer')->user()->is_suspended
-        ) {
+        /**
+         * If user is suspended then redirect back to the cart page
+         */
+        if (auth()->guard('customer')->user()?->is_suspended) {
             session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
 
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        /**
+         * If cart has errors then redirect back to the cart page
+         */
         if (Cart::hasError()) {
             return redirect()->route('shop.checkout.cart.index');
         }
 
         $cart = Cart::getCart();
 
-        if ($cart->applied_cart_rule_ids != '') {
-            session()->flash('success', trans('shop::app.checkout.cart.rule-applied'));
-        }
-
+        /**
+         * If cart is has downloadable items and customer is not logged in
+         * then redirect back to the cart page
+         */
         if (
-            (
-                ! auth()->guard('customer')->check()
-                && $cart->hasDownloadableItems()
-            )
-            || (
-                ! auth()->guard('customer')->check()
-                && ! $cart->hasGuestCheckoutItems()
+            ! auth()->guard('customer')->check()
+            && (
+                $cart->hasDownloadableItems()
+                || ! $cart->hasGuestCheckoutItems()
             )
         ) {
             return redirect()->route('shop.customer.session.index');
         }
 
+        /**
+         * If cart minimum order amount is not satisfied then redirect back to the cart page
+         */
         $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?: 0;
 
         if (! $cart->checkMinimumOrder()) {
-            session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
+            session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', [
+                'amount' => core()->currency($minimumOrderAmount)
+            ]));
 
             return redirect()->back();
         }
 
-        Cart::collectTotals();
-
-        return view('shop::checkout.onepage.index', compact('cart'));
+        return view('shop::checkout.onepage.index');
     }
 
     /**
