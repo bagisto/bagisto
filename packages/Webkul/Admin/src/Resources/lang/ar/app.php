@@ -929,8 +929,6 @@ return [
             'inventory_sources'      => 'مصادر المخزون',
             'design'                 => 'التصميم',
             'theme'                  => 'السمة',
-            'home_page_content'      => 'محتوى الصفحة الرئيسية',
-            'footer_content'         => 'المحتويات',
             'logo'                   => 'الشعار',
             'favicon'                => 'فافيكون',
             'create-success'         => 'تم إنشاء القناة بنجاح',

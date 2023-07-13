@@ -95,17 +95,6 @@
 
                     {!! view_render_event('bagisto.admin.layout.content.after') !!}
 
-                    @if (core()->getConfigData('general.content.footer.footer_toggle'))
-                        <div class="footer">
-                            <p style="text-align: center;">
-                                @if (core()->getConfigData('general.content.footer.footer_content'))
-                                    {{ core()->getConfigData('general.content.footer.footer_content') }}
-                                @else
-                                    {!! trans('admin::app.footer.copy-right') !!}
-                                @endif
-                            </p>
-                        </div>
-                    @endif
                 </div>
 
             </div>

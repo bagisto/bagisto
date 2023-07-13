@@ -897,8 +897,6 @@ return [
             'inventory_sources'      => 'Standaard bron',
             'design'                 => 'Ontwerp',
             'theme'                  => 'Thema',
-            'home_page_content'      => 'Startpagina-inhoud',
-            'footer_content'         => 'Onderschrift inhoud',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Het kanaal is succesvol toegevoegd.',

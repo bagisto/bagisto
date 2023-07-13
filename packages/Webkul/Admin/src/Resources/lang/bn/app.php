@@ -908,8 +908,6 @@ return [
             'inventory_sources'      => 'ইনভেন্টরি উত্স',
             'design'                 => 'ডিজাইন',
             'theme'                  => 'থিম',
-            'home_page_content'      => 'হোম পেজ বিষয়বস্তু',
-            'footer_content'         => 'ফুটার সামগ্রী',
             'logo'                   => 'লোগো',
             'favicon'                => 'ফেভিকন',
             'create-success'         => 'চ্যানেল সফলভাবে তৈরি করা হয়েছে।',

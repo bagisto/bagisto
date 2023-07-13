@@ -887,8 +887,6 @@ return [
             'inventory_sources'      => 'Origem do Estoque',
             'design'                 => 'Design',
             'theme'                  => 'Tema',
-            'home_page_content'      => 'Conteúdo da Página Inicial',
-            'footer_content'         => 'Conteúdo do Rodapé',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Canal criado com sucesso.',

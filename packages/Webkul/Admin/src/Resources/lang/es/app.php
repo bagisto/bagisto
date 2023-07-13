@@ -924,8 +924,6 @@ return [
             'inventory_sources'      => 'Fuentes de inventario',
             'design'                 => 'Diseño',
             'theme'                  => 'Tema',
-            'home_page_content'      => 'Contenido página de inicio',
-            'footer_content'         => 'Contenido pie de página',
             'logo'                   => 'Logo',
             'favicon'                => 'Favicon',
             'create-success'         => 'Canal creado con éxito.',
