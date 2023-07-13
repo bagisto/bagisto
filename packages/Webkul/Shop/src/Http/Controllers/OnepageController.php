@@ -4,23 +4,9 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Sales\Repositories\OrderRepository;
 
 class OnepageController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(
-        protected OrderRepository $orderRepository,
-        protected CustomerRepository $customerRepository
-    ) {
-        parent::__construct();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -100,97 +86,5 @@ class OnepageController extends Controller
         }
 
         return view('shop::checkout.success', compact('order'));
-    }
-
-    /**
-     * Check customer is exist or not.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function checkExistCustomer()
-    {
-        $customer = $this->customerRepository->findOneWhere([
-            'email' => request()->email,
-        ]);
-
-        if (! is_null($customer)) {
-            return 'true';
-        }
-
-        return 'false';
-    }
-
-    /**
-     * Login for checkout.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function loginForCheckout()
-    {
-        $this->validate(request(), [
-            'email' => 'required|email',
-        ]);
-
-        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
-            return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
-        }
-
-        Cart::mergeCart();
-
-        return response()->json(['success' => 'Login successfully']);
-    }
-
-    /**
-     * To apply couponable rule requested.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function applyCoupon()
-    {
-        $this->validate(request(), [
-            'code' => 'string|required',
-        ]);
-
-        if ($result = $this->coupon->apply(request()->input('code'))) {
-            Cart::collectTotals();
-
-            return response()->json([
-                'success' => true,
-                'message' => trans('shop::app.checkout.total.coupon-applied'),
-                'result'  => $result,
-            ]);
-        }
-
-        return response()->json([
-            'success' => false,
-            'message' => trans('shop::app.checkout.total.cannot-apply-coupon'),
-            'result'  => null,
-        ], 422);
-    }
-
-    /**
-     * Initiates the removal of couponable cart rule.
-     *
-     * @return array
-     */
-    public function removeCoupon()
-    {
-        if ($this->coupon->remove()) {
-            Cart::collectTotals();
-
-            return response()->json([
-                'success' => true,
-                'message' => trans('admin::app.promotion.status.coupon-removed'),
-                'data'    => [
-                    'grand_total' => core()->currency(Cart::getCart()->grand_total),
-                ],
-            ]);
-        }
-
-        return response()->json([
-            'success' => false,
-            'message' => trans('admin::app.promotion.status.coupon-remove-failed'),
-            'data'    => null,
-        ], 422);
     }
 }

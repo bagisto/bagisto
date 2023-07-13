@@ -5,7 +5,6 @@ use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
 use Webkul\Shop\Http\Controllers\Customer\Account\WishlistController;
-use Webkul\Shop\Http\Controllers\Customer\AccountController;
 use Webkul\Shop\Http\Controllers\Customer\CustomerController;
 use Webkul\Shop\Http\Controllers\Customer\ForgotPasswordController;
 use Webkul\Shop\Http\Controllers\Customer\RegistrationController;
@@ -82,11 +81,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
              * customer account details.
              */
             Route::prefix('account')->group(function () {
-                /**
-                 * Dashboard.
-                 */
-                Route::get('index', [AccountController::class, 'index'])->name('shop.customer.account.index');
-
                 /**
                  * Profile.
                  */

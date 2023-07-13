@@ -143,7 +143,7 @@
 
                 @foreach (core()->countries() as $country)
                     <option 
-                        {{ $country->code === $address->defaultCountry ? 'selected' : '' }}  
+                        {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
                         value="{{ $country->code }}"
                     >
                         {{ $country->name }}

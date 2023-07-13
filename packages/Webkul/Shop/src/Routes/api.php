@@ -1,16 +1,31 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Shop\Http\Controllers\API\AddressController;
-use Webkul\Shop\Http\Controllers\API\CartController;
+use Webkul\Shop\Http\Controllers\API\CoreController;
 use Webkul\Shop\Http\Controllers\API\CategoryController;
-use Webkul\Shop\Http\Controllers\API\CompareController;
-use Webkul\Shop\Http\Controllers\API\OnepageController;
 use Webkul\Shop\Http\Controllers\API\ProductController;
 use Webkul\Shop\Http\Controllers\API\ReviewController;
+use Webkul\Shop\Http\Controllers\API\CompareController;
+use Webkul\Shop\Http\Controllers\API\CartController;
+use Webkul\Shop\Http\Controllers\API\OnepageController;
+use Webkul\Shop\Http\Controllers\API\AddressController;
 use Webkul\Shop\Http\Controllers\API\WishlistController;
 
 Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'], function () {
+    Route::controller(CoreController::class)->prefix('core')->group(function () {
+        Route::get('countries', 'getCountries')->name('shop.api.core.countries');
+
+        Route::get('states', 'getStates')->name('shop.api.core.states');
+    });
+
+    Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+        Route::get('', 'index')->name('shop.api.categories.index');
+
+        Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
+
+        Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
+    });
+
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('shop.api.products.index');
 
@@ -25,12 +40,14 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('review', 'store')->name('shop.api.products.reviews.store');
     });
 
-    Route::controller(CategoryController::class)->prefix('categories')->group(function () {
-        Route::get('', 'index')->name('shop.api.categories.index');
+    Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
+        Route::get('', 'index')->name('shop.api.compare.index');
 
-        Route::get('attributes', 'getAttributes')->name('shop.api.categories.attributes');
+        Route::post('', 'store')->name('shop.api.compare.store');
 
-        Route::get('max-price/{id?}', 'getProductMaxPrice')->name('shop.api.categories.max_price');
+        Route::delete('', 'destroy')->name('shop.api.compare.destroy');
+
+        Route::delete('all', 'destroyAll')->name('shop.api.compare.destroy_all');
     });
 
     Route::controller(CartController::class)->prefix('checkout/cart')->group(function () {
@@ -49,16 +66,6 @@ Route::group(['middleware' => ['locale', 'theme', 'currency'], 'prefix' => 'api'
         Route::post('coupon', 'storeCoupon')->name('shop.api.checkout.cart.coupon.apply');
 
         Route::delete('coupon', 'destroyCoupon')->name('shop.api.checkout.cart.coupon.remove');
-    });
-
-    Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
-        Route::get('', 'index')->name('shop.api.compare.index');
-
-        Route::post('', 'store')->name('shop.api.compare.store');
-
-        Route::delete('', 'destroy')->name('shop.api.compare.destroy');
-
-        Route::delete('all', 'destroyAll')->name('shop.api.compare.destroy_all');
     });
 
     Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(function () {

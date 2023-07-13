@@ -3,27 +3,18 @@
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Shop\Http\Requests\Customer\AddressRequest;
 
 class AddressController extends Controller
 {
     /**
-     * Current customer.
-     *
-     * @var \Webkul\Customer\Models\Customer
-     */
-    protected $customer;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(
-        protected CustomerAddressRepository $customerAddressRepository
-    ) {
+    public function __construct(protected CustomerAddressRepository $customerAddressRepository) {
     }
 
     /**
@@ -43,9 +34,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view('shop::customers.account.addresses.create', [
-            'defaultCountry' => config('app.default_country'),
-        ]);
+        return view('shop::customers.account.addresses.create');
     }
 
     /**
@@ -93,8 +82,6 @@ class AddressController extends Controller
             'id'          => $id,
             'customer_id' => auth()->guard('customer')->id(),
         ]);
-
-        $address['defaultCountry'] = config('app.default_country');
 
         if (! $address) {
             abort(404);

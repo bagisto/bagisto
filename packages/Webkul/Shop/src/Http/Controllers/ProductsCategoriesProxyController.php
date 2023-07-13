@@ -16,8 +16,8 @@ class ProductsCategoriesProxyController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
-    ) {
-        parent::__construct();
+    )
+    {
     }
 
     /**

@@ -53,7 +53,6 @@ return [
             'button_title'                => 'Register',
             'account_exists'              => 'Already have an account ?',
             'footer'                      => '© Copyright 2010 - 2022, Webkul Software (Registered in India). All rights reserved.',
-            'failed'                      => 'Error! Can not create your account, please try again later.',
             'success-verify'              => 'Account created successfully, an e-mail has been sent for verification.',
             'success-verify-email-unsent' => 'Account created successfully, but verification e-mail unsent.',
             'success'                     => 'Account created successfully.',
@@ -606,4 +605,10 @@ return [
         'orders'                => 'Orders',
         'downloadable-products' => 'Downloadable Products',
     ],
+
+    'subscription' => [
+        'already'             => 'You are already subscribed to our newsletter.',
+        'subscribe-success'   => 'You have successfully subscribed to our newsletter.',
+        'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
+    ]
 ];

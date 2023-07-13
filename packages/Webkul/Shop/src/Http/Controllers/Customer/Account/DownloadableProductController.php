@@ -14,10 +14,8 @@ class DownloadableProductController extends Controller
      * @param  \Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository  $downloadableLinkPurchasedRepository
      * @return void
      */
-    public function __construct(
-        protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository
-    ) {
-        parent::__construct();
+    public function __construct(protected DownloadableLinkPurchasedRepository $downloadableLinkPurchasedRepository)
+    {
     }
 
     /**
