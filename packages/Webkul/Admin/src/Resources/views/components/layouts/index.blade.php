@@ -48,7 +48,14 @@
         {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
         {{-- Page Content Blade Component --}}
-        {{ $slot }}
+        <x-admin::layouts.header/>
+
+        <div class="flex gap-[16px]">
+            <x-admin::layouts.sidebar/>
+    
+            {{ $slot }}
+        
+        </div>
 
         {!! view_render_event('bagisto.shop.layout.content.after') !!}
     </div>

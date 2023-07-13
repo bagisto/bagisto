@@ -1,97 +1,176 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+        <form 
+            method="POST" 
+            action="{{ route('admin.locales.update', $locale->id) }}" 
+            enctype="multipart/form-data"
+        >
+            @csrf
 
-@section('page_title')
-    {{ __('admin::app.settings.locales.edit-title') }}
-@stop
+            @method('PUT')
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.locales.update', $locale->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.locales.index') }}'"></i>
+            <div class="flex justify-between items-center">
+                <p class="text-[20px] text-gray-800 font-bold">
+                    @lang('Add Locale')
+                </p>
 
-                        {{ __('admin::app.settings.locales.edit-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.locales.save-btn-title') }}
+                <div class="flex gap-x-[10px] items-center">
+                    <button 
+                        type="submit" 
+                        class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    >
+                        @lang('Save Locale')
                     </button>
                 </div>
             </div>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+            {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
-                    {!! view_render_event('bagisto.admin.settings.locale.edit.before', ['locale' => $locale]) !!}
+            <div class="flex gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
+                <div class="flex gap-x-[4px] items-center">
+                    <div>
+                        <div class="inline-flex gap-x-[8px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                            <span class="icon-store text-[24px]"></span>
 
-                    <input name="_method" type="hidden" value="PUT">
+                            @lang('Default Store')
 
-                    <accordian title="{{ __('admin::app.settings.locales.general') }}" :active="true">
-                        <div slot="body">
-
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
-
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ old('code') ?: $locale->code }}" disabled="disabled"/>
-
-                                <input type="hidden" name="code" value="{{ $locale->code }}"/>
-
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.locales.name') }}</label>
-
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.locales.name') }}&quot;" value="{{ old('name') ?: $locale->name }}"/>
-
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('direction') ? 'has-error' : '']">
-                                <label for="direction" class="required">{{ __('admin::app.settings.locales.direction') }}</label>
-
-                                <select v-validate="'required'" class="control" id="direction" name="direction" data-vv-as="&quot;{{ __('admin::app.settings.locales.direction') }}&quot;">
-                                    <option value="ltr" {{ (old('direction') ?: $locale->direction) == 'ltr' ? 'selected' : '' }}>LTR</option>
-                                    <option value="rtl" {{ (old('direction') ?: $locale->direction) == 'rtl' ? 'selected' : '' }}>RTL</option>
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label>{{ __('velocity::app.admin.general.locale_logo') }}</label>
-
-                                @if (
-                                    isset($locale)
-                                    && $locale->logo_path
-                                )
-                                    <image-wrapper
-                                        input-name="logo_path"
-                                        :multiple="false"
-                                        :images='"{{ Storage::url($locale->logo_path) }}"'
-                                        button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
-                                    </image-wrapper>
-                                @else
-                                    <image-wrapper
-                                        input-name="logo_path"
-                                        :multiple="false"
-                                        button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
-                                    </image-wrapper>
-                                @endif
-
-                                <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-locale-resolution') }}</span>
-                            </div>
+                            <span class="icon-sort-down text-[24px]"></span>
                         </div>
-                    </accordian>
 
-                    {!! view_render_event('bagisto.admin.settings.locale.edit.after', ['locale' => $locale]) !!}
+                        <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
+                    </div>
+
+                    <div>
+                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                            <span class="icon-language text-[24px] "></span>
+
+                            English
+
+                            <span class="icon-sort-down text-[24px]"></span>
+                        </div>
+
+                        <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
+                    </div>
                 </div>
             </div>
+
+            <div class="flex gap-[10px] mt-[14px]">
+                <div class=" flex flex-col gap-[8px] flex-1">
+                    <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                            @lang('General')
+                        </p>
+
+                        <div class="mb-[10px]">
+                            <label 
+                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                for="code"
+                            >
+                                @lang('Code')
+                            </label>
+
+                            <input 
+                                type="hidden"
+                                name="code"
+                                value="{{ $locale->code }}"
+                            />
+
+                            <input 
+                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                type="text" 
+                                name="code"
+                                value="{{ old('code') ?? $locale->code}}"
+                                id="code"
+                                placeholder="@lang('Code')"
+                                disabled="disabled"
+                            >
+                        </div>
+
+                        <div class="mb-[10px]">
+                            <label 
+                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                for="name"
+                            >
+                                @lang('Name')
+                            </label>
+
+                            <input 
+                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                type="text" 
+                                name="name"
+                                value="{{ old('name') ?? $locale->name }}"
+                                id="name"
+                                placeholder="@lang('name')"
+                            >
+                        </div>
+
+                        <div class="mb-[10px]">
+                            <label 
+                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                for="direction"
+                            >
+                                @lang('Direction')
+                            </label>
+
+                            <select 
+                                name="direction"
+                                id="direction"
+                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                            >
+                                <option value="ltr" {{ (old('direction') ?? $locale->direction) == 'ltr' ? 'selected' : '' }}>LTR</option>
+
+                                <option value="rtl" {{ (old('direction') ?? $locale->direction) == 'rtl' ? 'selected' : '' }}>RTL</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-[10px]">
+                            <label 
+                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                for="logo_path"
+                            >
+                                @lang('Locale Logo')
+                            </label>
+
+                            <input 
+                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                type="file" 
+                                name="logo_path"
+                                value="{{ old('logo_path') }}"
+                                id="logo_path"
+                                placeholder="@lang('logo_path')"
+                                accept="image/*"
+                            >
+
+                            {{ $locale->logo_url }}
+
+                            @if (
+                                isset($locale)
+                                && $locale->logo_path
+                            )
+                                <x-shop::media
+                                    name="logo_path"
+                                    class="py-3"
+                                    :is-multiple="false"
+                                    accepted-types="image/*"
+                                    :src="Storage::url($locale->logo_path)"
+                                >
+                                </x-shop::media>
+                            @else
+                                <x-shop::media
+                                    name="logo_path"
+                                    class="py-3"
+                                    :is-multiple="false"
+                                    accepted-types="image/*"
+                                    :src="Storage::url($locale->logo_path)"
+                                >
+                                </x-shop::media>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
         </form>
     </div>
-@stop
+</x-admin::layouts>
