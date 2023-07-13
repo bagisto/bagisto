@@ -561,18 +561,15 @@ class Cart
             } else {
                 $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
 
-                if ($price == $item->base_price) {
-                    continue;
-                }
-
+                /**
+                 * Handles exchange rate for cart item price.
+                 */
                 $this->cartItemRepository->update([
                     'price'      => core()->convertPrice($price),
                     'base_price' => $price,
                     'total'      => core()->convertPrice($price * $item->quantity),
                     'base_total' => $price * $item->quantity,
                 ], $item->id);
-
-                $isInvalid = true;
             }
 
             $isInvalid |= $validationResult->isCartInvalid();
