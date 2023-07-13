@@ -929,7 +929,7 @@ abstract class AbstractType
         $data = $this->getQtyRequest($data);
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.inventory_warning');
+            return trans('shop::app.checkout.cart.inventory-warning');
         }
 
         $price = $this->getFinalPrice();

@@ -24,7 +24,7 @@
     >
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                @lang('shop::app.customers.account.addresses.comapny-name')
+                @lang('shop::app.customers.account.addresses.company-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
