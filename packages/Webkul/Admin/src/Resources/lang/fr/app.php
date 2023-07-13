@@ -932,8 +932,6 @@ return [
             'inventory_sources'      => 'Sources d\'inventaire',
             'design'                 => 'Conception',
             'theme'                  => 'Thème',
-            'home_page_content'      => 'Contenu de la page d\'accueil',
-            'footer_content'         => 'Contenu du pied de page',
             'logo'                   => 'Logo',
             'favicon'                => 'Icône de favori',
             'create-success'         => 'Chaîne créée avec succès.',
