@@ -25,9 +25,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Store front home.
      */
-    Route::get('/', [HomeController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::home.index',
-    ])->name('shop.home.index');
+    Route::get('/', [HomeController::class, 'index'])->name('shop.home.index');
 
     /**
      * Store front search.

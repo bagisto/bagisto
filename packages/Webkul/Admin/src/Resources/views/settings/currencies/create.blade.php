@@ -1,17 +1,15 @@
 <x-admin::layouts>
     <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
-        <form 
-            method="POST" 
-            action="{{ route('admin.currencies.store') }}" 
+        
+        <x-shop::form 
+            :action="route('admin.currencies.store')"
             enctype="multipart/form-data"
         >
-            @csrf
-
             <div class="flex justify-between items-center">
                 <p class="text-[20px] text-gray-800 font-bold">
                     @lang('Add Currency')
                 </p>
-
+            
                 <div class="flex gap-x-[10px] items-center">
                     <button 
                         type="submit" 
@@ -21,100 +19,111 @@
                     </button>
                 </div>
             </div>
+            
+            <div class="flex gap-[10px] mt-[14px]">
+                <div class=" flex flex-col gap-[8px] flex-1">
+                    {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-            {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+                    <x-admin::accordion :is-active="true">
+                        <x-slot:header>
+                            <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                @lang('General')
+                            </p>
+                        </x-slot:header>
 
-            <x-admin::accordion 
-                :is-active="true"
-                class="mt-[14px]"
-            >
-                <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                        @lang('General')
-                    </p>
-                </x-slot:header>
+                        <x-slot:content>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    Code
+                                </x-admin::form.control-group.label>
 
-                <x-slot:content>
-                    <div class=" flex flex-col gap-[8px] flex-1">
-                        <div class="p-[16px] ">
-                            <div class="mb-[10px]">
-                                <label 
-                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                    for="code"
-                                >
-                                    @lang('Code')
-                                </label>
-
-                                <input 
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                    type="text" 
+                                <x-admin::form.control-group.control
+                                    type="text"
                                     name="code"
-                                    value="{{ old('code') }}"
+                                    :value="old('code')"
                                     id="code"
-                                    placeholder="@lang('Code')"
+                                    rules="required"
+                                    label="Code"
+                                    :placeholder="trans('Code')"
                                 >
-                            </div>
-    
-                            <div class="mb-[10px]">
-                                <label 
-                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                    for="name"
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="code"
                                 >
-                                    @lang('Name')
-                                </label>
-    
-                                <input 
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                    type="text" 
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    Name
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
                                     name="name"
-                                    value="{{ old('name') }}"
+                                    :value="old('name')"
                                     id="name"
-                                    placeholder="@lang('Name')"
+                                    rules="required"
+                                    label="name"
+                                    :placeholder="trans('Name')"
                                 >
-                            </div>
+                                </x-admin::form.control-group.control>
 
-                            <div class="mb-[10px]">
-                                <label 
-                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                    for="symbol"
+                                <x-admin::form.control-group.error
+                                    control-name="name"
                                 >
-                                    @lang('Symbol')
-                                </label>
-    
-                                <input 
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                    type="text" 
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    Symbol
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
                                     name="symbol"
-                                    value="{{ old('symbol') }}"
+                                    :value="old('symbol')"
                                     id="symbol"
-                                    placeholder="@lang('Symbol')"
+                                    label="symbol"
+                                    :placeholder="trans('Symbol')"
                                 >
-                            </div>
+                                </x-admin::form.control-group.control>
 
-                            <div class="mb-[10px]">
-                                <label 
-                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                    for="decimal"
+                                <x-admin::form.control-group.error
+                                    control-name="symbol"
                                 >
-                                    @lang('Decimal')
-                                </label>
-    
-                                <input 
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                    type="text" 
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    Decimal
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
                                     name="decimal"
-                                    value="{{ old('decimal') }}"
+                                    :value="old('decimal')"
                                     id="decimal"
-                                    placeholder="@lang('Decimal')"
+                                    label="decimal"
+                                    :placeholder="trans('Decimal')"
                                 >
-                            </div>
-                        </div>
-                    </div>
-                </x-slot:content>
-            </x-admin::accordion>
+                                </x-admin::form.control-group.control>
 
-            {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
-        </form>
+                                <x-admin::form.control-group.error
+                                    control-name="decimal"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                
+                        </x-slot:content>
+                    </x-admin::accordion>
+
+                    {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
+                </div>
+            </div>
+        </x-admin::form>
     </div>
- 
 </x-admin::layouts>

@@ -215,7 +215,11 @@
 
                     this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty })
                         .then(response => {
-                            this.cart = response.data.data;
+                            if (response.data.message) {
+                                this.cart = response.data.data;
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                            }
                         })
                         .catch(error => {});
                 },

@@ -66,23 +66,25 @@ return [
 
         'account' => [
 
-            'profile'   => [
-                'first-name'        => 'First Name',
-                'last-name'         => 'Last Name',
-                'gender'            => 'Gender',
-                'dob'               => 'Date of Birth',
-                'email'             => 'Email',
-                'delete-profile'    => 'Delete Profile',
-                'edit-profile'      => 'Edit Profile',
-                'edit'              => 'Edit',
-                'phone'             => 'Phone',
-                'current-password'  => 'Current Password',
-                'new-password'      => 'New Password',
-                'confirm-password'  => 'Confirm Password',
-                'delete-success'    => 'Customer deleted successfully',
-                'wrong-password'    => 'Wrong Password !',
-                'delete-failed'     => 'Error encountered while deleting customer.',
-                'order-pending'     => 'Cannot delete customer account because some Order(s) are pending or processing state.',
+        'profile'   => [      
+            'first-name'              => 'First Name',
+            'last-name'               => 'Last Name',
+            'gender'                  => 'Gender',
+            'dob'                     => 'Date of Birth',
+            'email'                   => 'Email',
+            'delete-profile'          => 'Delete Profile',
+            'edit-profile'            => 'Edit Profile',
+            'edit'                    => 'Edit',
+            'phone'                   => 'Phone',
+            'current-password'        => 'Current Password',
+            'new-password'            => 'New Password',
+            'confirm-password'        => 'Confirm Password',
+            'delete-success'          => 'Customer deleted successfully',
+            'wrong-password'          => 'Wrong Password !',
+            'delete-failed'           => 'Error encountered while deleting customer.',
+            'order-pending'           => 'Cannot delete customer account because some Order(s) are pending or processing state.',
+            'subscribe-to-newsletter' => 'Subscribe to newsletter',
+                
             ],
 
             'addresses' => [
@@ -459,6 +461,7 @@ return [
                 'empty-product'            => 'You don’t have a product in your cart.',
                 'quantity-update'          => 'Quantity updated successfully',
                 'see-datails'              => 'See Details',
+                'move-to-wishlist'         => 'Move To Wishlist',
             ],
 
             'coupon'   => [

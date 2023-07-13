@@ -12,7 +12,7 @@
             <div class="flex justify-between">
                 <h3 class="text-[30px] font-dmserif max-sm:text-[25px]" v-text="title"></h3>
 
-                <div class="flex gap- justify-between items-center8">
+                <div class="flex gap-8 justify-between items-center">
                     <span
                         class="icon-arrow-left-stylish rtl:icon-arrow-right-stylish inline-block text-[24px] cursor-pointer"
                         @click="swipeLeft"

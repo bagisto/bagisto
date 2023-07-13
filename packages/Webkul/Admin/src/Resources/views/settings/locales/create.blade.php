@@ -20,111 +20,108 @@
                 </div>
             </div>
             
-            {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
-            
             <div class="flex gap-[10px] mt-[14px]">
                 <div class=" flex flex-col gap-[8px] flex-1">
-                    <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                            @lang('General')
-                        </p>
-            
-                        <div class="mb-[10px]">
-                            {{-- <label 
-                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                for="code"
-                            >
-                                @lang('Code')
-                            </label>
-            
-                            <input 
-                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                type="text" 
-                                name="code"
-                                value="{{ old('name') }}"
-                                id="code"
-                                placeholder="@lang('Code')"
-                            > --}}
+                    {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
+
+                    <x-admin::accordion :is-active="true">
+                        <x-slot:header>
+                            <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                @lang('General')
+                            </p>
+                        </x-slot:header>
+
+                        <x-slot:content>
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Email
+                                    Code
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    rules="required|email"
-                                    label="Email"
-                                    placeholder="email@example.com"
+                                    type="text"
+                                    name="code"
+                                    id="code"
+                                    rules="required"
+                                    label="Code"
+                                    :placeholder="trans('Code')"
                                 >
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="email"
+                                    control-name="code"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
-                        </div>
-            
-                        <div class="mb-[10px]">
-                            <label 
-                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                for="name"
-                            >
-                                @lang('Name')
-                            </label>
-            
-                            <input 
-                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                                type="text" 
-                                name="name"
-                                value="{{ old('name') }}"
-                                id="name"
-                                placeholder="@lang('name')"
-                            >
-                        </div>
-            
-                        <div class="mb-[10px]">
-                            <label 
-                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                for="direction"
-                            >
-                                @lang('Direction')
-                            </label>
-            
-                            <select 
-                                name="direction"
-                                id="direction"
-                                class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
-                            >
-                                <option value="ltr" selected title="Text direction left to right">LTR</option>
-            
-                                <option value="rtl" title="Text direction right to left">RTL</option>
-                            </select>
-                        </div>
-            
-                        <div class="mb-[10px]">
-                            <label 
-                                class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
-                                for="logo_path"
-                            >
-                                @lang('Locale Logo')
-                            </label>
-            
-                            <x-shop::media
-                                name="logo_path[image_1]"
-                                class="py-3"
-                                :is-multiple="false"
-                                accepted-types="image/*"
-                            >
-                            </x-shop::media>
-                        </div>
-                    </div>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    Name
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    rules="required"
+                                    label="name"
+                                    :placeholder="trans('Name')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    Direction
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="direction"
+                                    id="direction"
+                                    rules="required"
+                                    label="direction"
+                                >
+                                    <option value="ltr" selected title="Text direction left to right">LTR</option>
+                
+                                    <option value="rtl" title="Text direction right to left">RTL</option>
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="direction"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('Locale Logo')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="image"
+                                    name="logo_path[image_1]"
+                                    id="direction"
+                                    :label="trans('Logo Path')"
+                                    accepted-types="image/*"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="logo_path[image_1]"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </x-slot:content>
+                    </x-admin::accordion>
+
+                    {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                 </div>
             </div>
-        
         </x-admin::form>
-        {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
     </div>
 </x-admin::layouts>

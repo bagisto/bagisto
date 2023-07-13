@@ -35,7 +35,7 @@
                 <span :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
             </div>
 
-            <div class="z-10 bg-white rounded-lg" v-if="isOpen">
+            <div class="px-[16px] pb-[16px]" v-if="isOpen">
                 <slot name="content">
                     Default Content
                 </slot>
