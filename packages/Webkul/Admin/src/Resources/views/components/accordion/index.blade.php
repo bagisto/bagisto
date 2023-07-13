@@ -1,109 +1,69 @@
-@props(['title', 'header', 'body'])
+@props([
+    'isActive' => true,
+])
 
-<accordion title="{{ $title }}">
-    <div slot="header">
-        {{ $header }}
-    </div>
+<v-accordion
+    is-active="{{ $isActive }}"
+    {{ $attributes }}
+>
+    @isset($header)
+        <template v-slot:header>
+            {{ $header }}
+        </template>
+    @endisset
 
-    <div slot="body">
-        {{ $body }}
-    </div>
-</accordion>
+    @isset($content)
+        <template v-slot:content>
+            <div>
+                {{ $content }}
+            </div>
+        </template>
+    @endisset
+</v-accordion>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="accordion-template">
-        <div
-            :class="[
-                'accordion',
-                isActive ? 'active' : '',
-                className,
-                ! isActive && hasError ? 'error' : ''
-            ]"
-            :id="id"
-        >
-            <div {{ $header->attributes->merge(['class' => 'accordion-header']) }} @click="toggle">
+    <script type="text/x-template" id="v-accordion-template">
+        <div {{ $attributes->merge(['class' => 'bg-white rounded-[4px] box-shadow']) }}>
+            <div
+                :class="`flex items-center justify-between p-[6px] ${isOpen ? 'active' : ''}`"
+                @click="toggle"
+            >
                 <slot name="header">
-                    @{{ title }}
-                    <i :class="['icon', iconClass]"></i>
+                    Default Header
                 </slot>
+
+                <span :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
             </div>
 
-            <div {{ $body->attributes->merge(['class' => 'accordion-content']) }} ref="controls">
-                <slot name="body"></slot>
+            <div class="z-10 bg-white rounded-lg" v-if="isOpen">
+                <slot name="content">
+                    Default Content
+                </slot>
             </div>
         </div>
     </script>
 
-    <script>
-        Vue.component('accordion', {
-            template: '#accordion-template',
+    <script type="module">
+        app.component('v-accordion', {
+            template: '#v-accordion-template',
 
-            inject: ['$validator'],
-
-            props: {
-                title: String,
-
-                id: String,
-
-                className: String,
-
-                active: Boolean,
-
-                downIconClass: {
-                    type: String,
-                    default: "accordion-down-icon"
-                },
-
-                upIconClass: {
-                    type: String,
-                    default: "accordion-up-icon"
-                }
-            },
+            props: [
+                'isActive',
+            ],
 
             data() {
                 return {
-                    isActive: false,
-
-                    hasError: false
+                    isOpen: this.isActive,
                 };
-            },
-
-            mounted() {
-                this.addHasErrorClass();
-
-                eventBus.$on("onFormError", this.addHasErrorClass);
-
-                this.isActive = this.active;
             },
 
             methods: {
                 toggle() {
-                    this.isActive = ! this.isActive;
+                    this.isOpen = ! this.isOpen;
+
+                    this.$emit('toggle', { isActive: this.isOpen });
                 },
-
-                addHasErrorClass() {
-                    let self = this;
-
-                    setTimeout(function() {
-                        $(self.$el)
-                            .find(".control-group")
-                            .each(function(element) {
-                                if ($(element).hasClass("has-error")) {
-                                    self.hasError = true;
-                                }
-                            });
-                    }, 0);
-                }
             },
-
-            computed: {
-                iconClass() {
-                    return {
-                        [this.downIconClass]: ! this.isActive,
-                        [this.upIconClass]: this.isActive
-                    };
-                }
-            }
         });
     </script>
 @endPushOnce

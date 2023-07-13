@@ -1,67 +1,128 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+        <form 
+            method="POST" 
+            action="{{ route('admin.currencies.update', $currency->id) }}" 
+            enctype="multipart/form-data"
+        >
+            @csrf
 
-@section('page_title')
-    {{ __('admin::app.settings.currencies.edit-title') }}
-@stop
+            @method('PUT')
 
-@section('content')
-    <div class="content">
+            <div class="flex justify-between items-center">
+                <p class="text-[20px] text-gray-800 font-bold">
+                    @lang('Add Currency')
+                </p>
 
-        <form method="POST" action="{{ route('admin.currencies.update', $currency->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.currencies.index') }}'"></i>
-
-                        {{ __('admin::app.settings.currencies.edit-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.currencies.save-btn-title') }}
+                <div class="flex gap-x-[10px] items-center">
+                    <button 
+                        type="submit" 
+                        class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    >
+                        @lang('Save Currency')
                     </button>
                 </div>
             </div>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-                    <input name="_method" type="hidden" value="PUT">
+            {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                    {!! view_render_event('bagisto.admin.settings.currencies.edit.before') !!}
+            <x-admin::accordion 
+                :is-active="true"
+                class="mt-[14px]"
+            >
+                <x-slot:header>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        @lang('General')
+                    </p>
+                </x-slot:header>
 
-                    <accordian title="{{ __('admin::app.settings.currencies.general') }}" :active="true">
-                        <div slot="body">
+                <x-slot:content>
+                    <div class=" flex flex-col gap-[8px] flex-1">
+                        <div class="p-[16px] ">
+                            <div class="mb-[10px]">
+                                <label 
+                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                    for="code"
+                                >
+                                    @lang('Code')
+                                </label>
+    
+                                <input 
+                                    type="hidden"
+                                    name="code"
+                                    value="{{ $currency->code }}"
+                                />
 
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.currencies.code') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.currencies.code') }}&quot;" value="{{ old('code') ?: $currency->code }}" disabled="disabled"/>
-                                <input type="hidden" name="code" value="{{ $currency->code }}"/>
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                <input 
+                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                    type="text" 
+                                    name="code"
+                                    value="{{ old('code') ?? $currency->code }}"
+                                    id="code"
+                                    placeholder="@lang('Code')"
+                                    disabled="disabled"
+                                >
+                            </div>
+    
+                            <div class="mb-[10px]">
+                                <label 
+                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                    for="name"
+                                >
+                                    @lang('Name')
+                                </label>
+    
+                                <input 
+                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                    type="text" 
+                                    name="name"
+                                    value="{{ old('name') ?? $currency->name }}"
+                                    id="name"
+                                    placeholder="@lang('Name')"
+                                >
                             </div>
 
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.currencies.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.currencies.name') }}&quot;" value="{{ old('name') ?: $currency->name }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                            <div class="mb-[10px]">
+                                <label 
+                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                    for="symbol"
+                                >
+                                    @lang('Symbol')
+                                </label>
+    
+                                <input 
+                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                    type="text" 
+                                    name="symbol"
+                                    value="{{ old('symbol') ?? $currency->symbol }}"
+                                    id="symbol"
+                                    placeholder="@lang('Symbol')"
+                                >
                             </div>
 
-                            <div class="control-group">
-                                <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
-                                <input class="control" id="symbol" name="symbol" value="{{ old('symbol') ?: $currency->symbol }}"/>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="decimal">{{ __('admin::app.settings.currencies.decimal') }}</label>
-                                <input class="control" id="decimal" name="decimal" value="{{ old('decimal') ?: $currency->decimal }}"/>
+                            <div class="mb-[10px]">
+                                <label 
+                                    class="block text-[12px]  text-gray-800 font-medium leading-[24px]" 
+                                    for="decimal"
+                                >
+                                    @lang('Decimal')
+                                </label>
+    
+                                <input 
+                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" 
+                                    type="text" 
+                                    name="decimal"
+                                    value="{{ old('decimal') ?? $currency->decimal }}"
+                                    id="decimal"
+                                    placeholder="@lang('Decimal')"
+                                >
                             </div>
                         </div>
-                    </accordian>
+                    </div>
+                </x-slot:content>
+            </x-admin::accordion>
 
-                    {!! view_render_event('bagisto.admin.settings.currencies.edit.after') !!}
-                </div>
-            </div>
+            {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
         </form>
     </div>
-@stop
+</x-admin::layouts>
