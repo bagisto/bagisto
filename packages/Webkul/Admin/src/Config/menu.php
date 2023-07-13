@@ -167,12 +167,6 @@ return [
         'sort'       => 2,
         'icon'       => '',
     ], [
-        'key'        => 'settings.sliders',
-        'name'       => 'admin::app.layouts.sliders',
-        'route'      => 'admin.sliders.index',
-        'sort'       => 7,
-        'icon'       => '',
-    ], [
         'key'        => 'settings.taxes',
         'name'       => 'admin::app.layouts.taxes',
         'route'      => 'admin.tax_categories.index',

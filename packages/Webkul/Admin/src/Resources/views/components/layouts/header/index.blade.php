@@ -66,5 +66,4 @@
             </div>
         @endif
     </div>
-    
 </header>
