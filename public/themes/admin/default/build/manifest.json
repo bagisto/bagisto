@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-9a932e1b.css",
+    "file": "assets/app-fff34661.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -51,6 +51,10 @@
   "src/Resources/assets/images/hamburger.svg": {
     "file": "assets/hamburger-9b9f7edd.svg",
     "src": "src/Resources/assets/images/hamburger.svg"
+  },
+  "src/Resources/assets/images/img.png": {
+    "file": "assets/img-4aa33a76.png",
+    "src": "src/Resources/assets/images/img.png"
   },
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",

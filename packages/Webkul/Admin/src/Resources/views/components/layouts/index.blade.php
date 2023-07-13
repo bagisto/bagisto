@@ -46,9 +46,20 @@
 
     <div id="app">
         {!! view_render_event('bagisto.shop.layout.content.before') !!}
+        
+        {{-- Page Header Blade Component --}}
+        <x-admin::layouts.header />
 
-        {{-- Page Content Blade Component --}}
-        {{ $slot }}
+        <div class="flex gap-[16px]">
+
+            {{-- Page Sidebar Blade Component --}}
+            <x-admin::layouts.sidebar />
+
+            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+                {{-- Page Content Blade Component --}}
+                {{ $slot }}
+            </div>
+        </div>
 
         {!! view_render_event('bagisto.shop.layout.content.after') !!}
     </div>
