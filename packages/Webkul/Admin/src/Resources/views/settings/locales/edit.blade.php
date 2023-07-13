@@ -9,7 +9,7 @@
 
             <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
 				<p class="text-[20px] text-gray-800 font-bold">
-                    @lang('Edit Locale')
+                    @lang('admin::app.settings.locales.edit-title')
                 </p>
 
 				<div class="flex gap-x-[10px] items-center">
@@ -17,7 +17,7 @@
                         type="submit"
                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                     >
-                        @lang('Save Locale')
+                        @lang('admin::app.settings.locales.save-btn-title')
                     </button>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
                         {!! view_render_event('bagisto.admin.settings.locale.edit.before', ['locale' => $locale]) !!}
                         
                         <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                            @lang('General')
+                            @lang('admin::app.settings.locales.general')
                         </p>
 
                         <x-admin::form.control-group.control
@@ -41,7 +41,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                Code
+                                @lang('admin::app.settings.locales.code')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -50,8 +50,8 @@
                                 :value="old('code') ?? $locale->code"
                                 id="code"
                                 rules="required"
-                                label="Code"
-                                :placeholder="trans('Code')"
+                                :label="trans('admin::app.settings.locales.code')"
+                                :placeholder="trans('admin::app.settings.locales.code')"
                                 disabled="disabled"
                             >
                             </x-admin::form.control-group.control>
@@ -64,7 +64,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                Name
+                                @lang('admin::app.settings.locales.name')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -73,8 +73,8 @@
                                 :value="old('name') ?? $locale->name"
                                 id="name"
                                 rules="required"
-                                label="name"
-                                :placeholder="trans('Name')"
+                                :label="trans('admin::app.settings.locales.name')"
+                                :placeholder="trans('admin::app.settings.locales.name')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -86,7 +86,7 @@
             
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                Direction
+                                @lang('admin::app.settings.locales.direction')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -95,7 +95,7 @@
                                 :value="old('direction') ?? $locale->direction"
                                 id="direction"
                                 rules="required"
-                                label="direction"
+                                :label="trans('admin::app.settings.locales.direction')"
                             >
                                 <option 
                                     value="ltr"
@@ -122,7 +122,7 @@
             
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Locale Logo')
+                                @lang('admin::app.settings.locales.locale-logo')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
