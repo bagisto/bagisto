@@ -1,4 +1,9 @@
 <x-shop::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.compare.title')
+    </x-slot>
+
     {{-- Breadcrumb --}}
     <div class="flex justify-center mt-[20px] max-lg:hidden">
 		<div class="flex gap-x-[10px] items-center">

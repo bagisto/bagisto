@@ -1,4 +1,11 @@
 <x-shop::layouts.account>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('shop::app.customers.account.orders.title')
+
+        #{{ $order->id }}
+    </x-slot>
+    
     {{-- Breadcrumbs --}}
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="orders.view" :entity="$order"></x-shop::breadcrumbs>

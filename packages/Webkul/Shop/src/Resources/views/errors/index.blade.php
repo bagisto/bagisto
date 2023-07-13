@@ -9,6 +9,11 @@
     :has-feature="false"
     :has-footer="false"
 >
+    {{-- Page Title --}}
+    <x-slot:title>
+        {{ $title }}
+    </x-slot>
+
     {{-- cursor movement canvas line --}}
     <canvas 
         resize="true"
