@@ -46,7 +46,7 @@
                 @foreach ($menu->items as $menuItem)
                     <div class="nav-item {{ $menu->getActive($menuItem) }}">
                         <a class="nav-tab-name" href="{{ $menuItem['key'] == 'dashboard' ? $menuItem['url'] : '#' }}">
-                            <span class="icon-menu icon {{ $menuItem['icon-class'] }}"
+                            <span class="icon-menu icon {{ $menuItem['icon'] }}"
                             style="margin-right:10px; display: inline-block;vertical-align: middle;transform: scale(0.8);"></span>
 
                             <span class="menu-label">{{ trans($menuItem['name']) }}</span>
