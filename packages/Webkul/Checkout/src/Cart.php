@@ -2,24 +2,22 @@
 
 namespace Webkul\Checkout;
 
-use Webkul\Tax\Repositories\TaxCategoryRepository;
-use Webkul\Tax\Helpers\Tax;
-use Webkul\Shipping\Facades\Shipping;
-use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Customer\Repositories\WishlistRepository;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Arr;
 use Webkul\Checkout\Traits\CartValidators;
 use Webkul\Checkout\Traits\CartTools;
 use Webkul\Checkout\Traits\CartCoupons;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Checkout\Repositories\CartItemRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Checkout\Repositories\CartAddressRepository;
+use Webkul\Shipping\Facades\Shipping;
 use Webkul\Checkout\Models\CartPayment;
 use Webkul\Checkout\Models\CartAddress;
-use Webkul\Checkout\Models\Cart as CartModel;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Arr;
-use Exception;
+use Webkul\Tax\Helpers\Tax;
 
 class Cart
 {
@@ -217,7 +215,7 @@ class Cart
                 $this->collectTotals();
             }
 
-            throw new Exception($cartProducts);
+            throw new \Exception($cartProducts);
         } else {
             $parentCartItem = null;
 
@@ -321,19 +319,19 @@ class Cart
             }
 
             if (! $item->product->status) {
-                throw new Exception(__('shop::app.checkout.cart.item.inactive'));
+                throw new \Exception(__('shop::app.checkout.cart.item.inactive'));
             }
 
             if ($quantity <= 0) {
                 $this->removeItem($itemId);
 
-                throw new Exception(__('shop::app.checkout.cart.illegal'));
+                throw new \Exception(__('shop::app.checkout.cart.illegal'));
             }
 
             $item->quantity = $quantity;
 
             if (! $this->isItemHaveQuantity($item)) {
-                throw new Exception(__('shop::app.checkout.cart.inventory_warning'));
+                throw new \Exception(__('shop::app.checkout.cart.inventory_warning'));
             }
 
             Event::dispatch('checkout.cart.update.before', $item);
