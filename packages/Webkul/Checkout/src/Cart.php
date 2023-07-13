@@ -63,10 +63,6 @@ class Cart
     public function initCart()
     {
         $this->getCart();
-
-        if ($this->cart) {
-            $this->removeInactiveItems();
-        }
     }
 
     /**
@@ -81,12 +77,42 @@ class Cart
         }
 
         if (auth()->guard()->check()) {
-            $this->cart = $this->cartRepository->findOneWhere([
-                'customer_id' => auth()->guard()->user()->id,
-                'is_active'   => 1,
-            ]);
+            $this->cart = $this->cartRepository
+                ->with([
+                    'items',
+                    'items.product',
+                    'items.product.attribute_values',
+                    'items.product.images',
+                    'items.children',
+                    'items.children.product',
+                    'items.children.product.attribute_values',
+                    'items.children.product.images',
+                    'items.child',
+                    'items.child.product',
+                    'items.child.product.attribute_values',
+                    'items.child.product.images'
+                ])
+                ->findOneWhere([
+                    'customer_id' => auth()->guard()->user()->id,
+                    'is_active'   => 1,
+                ]);
         } elseif (session()->has('cart')) {
-            $this->cart = $this->cartRepository->find(session()->get('cart')->id);
+            $this->cart = $this->cartRepository
+                ->with([
+                    'items',
+                    'items.product',
+                    'items.product.attribute_values',
+                    'items.product.images',
+                    'items.children',
+                    'items.children.product',
+                    'items.children.product.attribute_values',
+                    'items.children.product.images',
+                    'items.child',
+                    'items.child.product',
+                    'items.child.product.attribute_values',
+                    'items.child.product.images'
+                ])
+                ->find(session()->get('cart')->id);
         }
 
         return $this->cart;
@@ -125,12 +151,12 @@ class Cart
         $items = $this->getCart()->all_items;
 
         foreach ($items as $item) {
-            if ($item->product->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
+            if ($item->getTypeInstance()->compareOptions($item->additional, $data['additional'])) {
                 if (! isset($data['additional']['parent_id'])) {
                     return $item;
                 }
 
-                if ($item->parent->product->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
+                if ($item->parent->getTypeInstance()->compareOptions($item->parent->additional, $parentData ?: request()->all())) {
                     return $item;
                 }
             }
@@ -372,28 +398,6 @@ class Cart
     }
 
     /**
-     * Remove cart items, whose product is inactive.
-     *
-     * @return void
-     */
-    public function removeInactiveItems()
-    {
-        $cart = $this->getCart();
-
-        foreach ($cart->items as $item) {
-            if ($this->isCartItemInactive($item)) {
-                $this->cartItemRepository->delete($item->id);
-
-                if (! $cart->items->count()) {
-                    $this->removeCart($cart);
-                }
-
-                session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
-            }
-        }
-    }
-
-    /**
      * Save customer address.
      *
      * @param  array  $data
@@ -556,6 +560,55 @@ class Cart
     }
 
     /**
+     * To validate if the product information is changed by admin and the items have been added to the cart before it.
+     *
+     * @return bool
+     */
+    public function validateItems(): bool
+    {
+        if (! $cart = $this->getCart()) {
+            return false;
+        }
+
+        if (! $cart->items->count()) {
+            $this->removeCart($cart);
+
+            return false;
+        }
+
+        $isInvalid = false;
+
+        foreach ($cart->items as $item) {
+            $validationResult = $item->getTypeInstance()->validateCartItem($item);
+
+            if ($validationResult->isItemInactive()) {
+                $this->removeItem($item->id);
+
+                $isInvalid = true;
+
+                session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
+            } else {
+                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
+
+                if ($price == $item->base_price) {
+                    continue;
+                }
+
+                $this->cartItemRepository->update([
+                    'price'      => core()->convertPrice($price),
+                    'base_price' => $price,
+                    'total'      => core()->convertPrice($price * $item->quantity),
+                    'base_total' => $price * $item->quantity,
+                ], $item->id);
+            }
+
+            $isInvalid |= $validationResult->isCartInvalid();
+        }
+
+        return ! $isInvalid;
+    }
+
+    /**
      * Calculates cart items tax.
      *
      * @return void
@@ -568,14 +621,24 @@ class Cart
 
         Event::dispatch('checkout.cart.calculate.items.tax.before', $cart);
 
-        foreach ($cart->items as $item) {
-            $taxCategory = $this->taxCategoryRepository->find($item->product->tax_category_id);
+        $taxCategories = [];
 
-            if (! $taxCategory) {
+        foreach ($cart->items as $item) {
+            $taxCategoryId = $item->product->tax_category_id;
+
+            if (empty($taxCategoryId)) {
+                continue;
+            }
+            
+            if (! isset($taxCategories[$taxCategoryId])) {
+                $taxCategories[$taxCategoryId] = $this->taxCategoryRepository->find($taxCategoryId);
+            }
+
+            if (! $taxCategories[$taxCategoryId]) {
                 continue;
             }
 
-            if ($item->product->getTypeInstance()->isStockable()) {
+            if ($item->getTypeInstance()->isStockable()) {
                 $address = $cart->shipping_address;
             } else {
                 $address = $cart->billing_address;
@@ -592,7 +655,7 @@ class Cart
 
             $item->tax_percent = $item->tax_amount = $item->base_tax_amount = 0;
 
-            Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use ($cart, $item) {
+            Tax::isTaxApplicableInCurrentAddress($taxCategories[$taxCategoryId], $address, function ($rate) use ($cart, $item) {
                 $item->tax_percent = $rate->tax_rate;
 
                 $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
@@ -604,53 +667,6 @@ class Cart
         }
 
         Event::dispatch('checkout.cart.calculate.items.tax.after', $cart);
-    }
-
-    /**
-     * To validate if the product information is changed by admin and the items have been added to the cart before it.
-     *
-     * @return bool
-     */
-    public function validateItems(): bool
-    {
-        if (! $cart = $this->getCart()) {
-            return false;
-        }
-
-        $cartItems = $cart->items()->get();
-
-        if (! count($cartItems)) {
-            $this->removeCart($cart);
-
-            return false;
-        }
-
-        $isInvalid = false;
-
-        foreach ($cartItems as $item) {
-            $validationResult = $item->product->getTypeInstance()->validateCartItem($item);
-
-            if ($validationResult->isItemInactive()) {
-                $this->removeItem($item->id);
-
-                $isInvalid = true;
-
-                session()->flash('info', __('shop::app.checkout.cart.item.inactive'));
-            } else {
-                $price = ! is_null($item->custom_price) ? $item->custom_price : $item->base_price;
-
-                $this->cartItemRepository->update([
-                    'price'      => core()->convertPrice($price),
-                    'base_price' => $price,
-                    'total'      => core()->convertPrice($price * $item->quantity),
-                    'base_total' => $price * $item->quantity,
-                ], $item->id);
-            }
-
-            $isInvalid |= $validationResult->isCartInvalid();
-        }
-
-        return ! $isInvalid;
     }
 
     /**
@@ -789,23 +805,6 @@ class Cart
         $data['items'] = $cart->items()->with('children')->get()->toArray();
 
         return $data;
-    }
-
-    /**
-     * Returns true, if cart item is inactive.
-     *
-     * @param \Webkul\Checkout\Contracts\CartItem $item
-     * @return bool
-     */
-    private function isCartItemInactive(\Webkul\Checkout\Contracts\CartItem $item): bool
-    {
-        static $loadedCartItem = [];
-
-        if (array_key_exists($item->product_id, $loadedCartItem)) {
-            return $loadedCartItem[$item->product_id];
-        }
-
-        return $loadedCartItem[$item->product_id] = $item->product->getTypeInstance()->isCartItemInactive($item);
     }
 
     /**

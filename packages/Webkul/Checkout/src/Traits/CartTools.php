@@ -193,7 +193,7 @@ trait CartTools
      */
     public function moveToCart($wishlistItem)
     {
-        if (! $wishlistItem->product->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
+        if (! $wishlistItem->getTypeInstance()->canBeMovedFromWishlistToCart($wishlistItem)) {
             return false;
         }
 
@@ -248,7 +248,7 @@ trait CartTools
                 $options = ['product_id' => $wishlistItem->product_id];
             }
 
-            if ($cartItem->product->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
+            if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
                 $found = true;
             }
         }

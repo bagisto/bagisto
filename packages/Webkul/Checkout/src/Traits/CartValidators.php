@@ -77,7 +77,7 @@ trait CartValidators
      */
     public function isItemHaveQuantity($item): bool
     {
-        return $item->product->getTypeInstance()->isItemHaveQuantity($item);
+        return $item->getTypeInstance()->isItemHaveQuantity($item);
     }
 
     /**
