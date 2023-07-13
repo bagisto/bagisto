@@ -176,7 +176,7 @@ return [
         'key'        => 'settings.taxes',
         'name'       => 'admin::app.layouts.taxes',
         'route'      => 'admin.tax_categories.index',
-        'sort'       => 8,
+        'sort'       => 7,
         'icon'       => '',
     ], [
         'key'        => 'settings.taxes.tax-categories',
