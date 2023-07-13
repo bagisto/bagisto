@@ -552,7 +552,7 @@ class Configurable extends AbstractType
             if ($this->getDefaultVariantId()) {
                 $data['selected_configurable_option'] = $this->getDefaultVariantId();
             } else {
-                return trans('shop::app.checkout.cart.missing_options');
+                return trans('shop::app.checkout.cart.missing-options');
             }
         }
 
@@ -561,7 +561,7 @@ class Configurable extends AbstractType
         $childProduct = $this->productRepository->find($data['selected_configurable_option']);
 
         if (! $childProduct->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.inventory_warning');
+            return trans('shop::app.checkout.cart.inventory-warning');
         }
 
         $price = $childProduct->getTypeInstance()->getFinalPrice();

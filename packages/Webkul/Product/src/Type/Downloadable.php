@@ -178,7 +178,7 @@ class Downloadable extends AbstractType
     public function prepareForCart($data)
     {
         if (empty($data['links'])) {
-            return trans('shop::app.checkout.cart.integrity.missing_links');
+            return trans('shop::app.checkout.cart.integrity.missing-links');
         }
 
         $products = parent::prepareForCart($data);

@@ -23,7 +23,7 @@
     >
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
-                @lang('shop::app.customers.account.addresses.comapny-name')
+                @lang('shop::app.customers.account.addresses.company-name')
             </x-shop::form.control-group.label>
 
             <x-shop::form.control-group.control
@@ -245,7 +245,7 @@
             type="submit"
             class="bs-primary-button m-0 block text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
         >
-            @lang('shop::app.customers.account.save')
+            @lang('shop::app.customers.account.addresses.save')
         </button>
     </x-shop::form>
 </x-shop::layouts.account>

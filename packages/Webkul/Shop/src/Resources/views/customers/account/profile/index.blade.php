@@ -1,7 +1,7 @@
 <x-shop::layouts.account>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('shop::app.customers.account.title')
+        @lang('shop::app.customers.account.profile.title')
     </x-slot>
 
     {{-- Breadcrumbs --}}
@@ -11,7 +11,7 @@
 
     <div class="flex justify-between items-center">
         <h2 class="text-[26px] font-medium">
-            @lang('shop::app.customers.account.title')
+            @lang('shop::app.customers.account.profile.title')
         </h2>
 
         <a
@@ -86,7 +86,7 @@
 
             <x-slot:header>
                 <h2 class="text-[25px] font-medium max-sm:text-[22px]">
-                    @lang('shop::app.customers.account.enter-password')
+                    @lang('shop::app.customers.account.profile.enter-password')
                 </h2>
             </x-slot:header>
 
@@ -115,7 +115,7 @@
                             type="submit"
                             class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base text-center font-medium cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
                         >
-                            @lang('shop::app.customers.account.delete')
+                            @lang('shop::app.customers.account.profile.delete')
                         </button>
                     </div>
                 </x-form>
