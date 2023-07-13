@@ -294,19 +294,13 @@ return [
         ],
 
         'products'   => [
-            'add-to-cart'              => 'Add To Cart',
-            'already-added'            => 'Item already added to compare list',
-            'item-add-to-cart'         => 'Item added successfully',
-            'check-product-visibility' => 'Check the Product status or visibility',
-            'compare-add'              => 'Item successfully added to compare list',
-
             'card' => [
                 'new'                => 'New',
                 'sale'               => 'Sale',
                 'review-description' => 'Be the first to review this product',
-                'add-to-cart'        => 'Product added successfully',
                 'add-to-compare'     => 'Item added successfully to compare list.',
                 'already-in-compare' => 'Item is already added to compare list.',
+                'add-to-cart'        => 'Add To Cart',
             ],
 
             'carousel' => [
