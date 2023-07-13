@@ -242,7 +242,7 @@
                                 })
                                 .then(response => {
                                     if (response.data.redirect) {
-                                        //window.location.href = response.data.data;
+                                        window.location.href = response.data.data;
 
                                         this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
                                     } else {
