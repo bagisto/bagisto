@@ -114,7 +114,12 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.update.before', $id);
 
-        $page = $this->cmsRepository->update(request()->all(), $id);
+        $data = [
+            'en'       => request()->input('en'),
+            'channels' => request()->input('channels'),
+        ];
+
+        $page = $this->cmsRepository->update($data, $id);
 
         Event::dispatch('cms.pages.update.after', $page);
 
@@ -131,18 +136,13 @@ class PageController extends Controller
      */
     public function delete($id)
     {
-        try {
-            Event::dispatch('cms.pages.delete.before', $id);
+        Event::dispatch('cms.pages.delete.before', $id);
 
-            $this->cmsRepository->delete($id);
+        $this->cmsRepository->delete($id);
 
-            Event::dispatch('cms.pages.delete.after', $id);
+        Event::dispatch('cms.pages.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
-        } catch (\Exception $e) {
-        }
-
-        return response()->json(['message' => trans('admin::app.cms.pages.delete-failure')], 500);
+        return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
     }
 
     /**
@@ -152,7 +152,7 @@ class PageController extends Controller
      */
     public function massDelete()
     {
-        if (request()->isMethod('post')) {
+        if (request()->input('mass-action-type') == 'delete') {
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $index) {
@@ -163,12 +163,12 @@ class PageController extends Controller
                 Event::dispatch('cms.pages.delete.after', $index);
             }
 
-            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', [
-                'resource' => 'CMS Pages',
-            ]));
-        } else {
-            session()->flash('warning', trans('admin::app.datagrid.mass-ops.no-resource'));
+            session()->flash('success', trans('admin::app.cms.index.delete-success'));
+
+            return redirect()->route('admin.cms.index');
         }
+
+        session()->flash('success', trans('admin::app.cms.index.no-resource'));
 
         return redirect()->route('admin.cms.index');
     }

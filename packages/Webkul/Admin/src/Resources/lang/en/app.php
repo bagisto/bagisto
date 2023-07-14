@@ -3,10 +3,12 @@
 return [
     'cms' => [
         'index' => [
-            'pages'    => 'Pages',
-            'export'   => 'Export',
-            'add_page' => 'Add Page',
-            'download' => 'Download'
+            'pages'          => 'Pages',
+            'export'         => 'Export',
+            'add_page'       => 'Add Page',
+            'download'       => 'Download',
+            'delete-success' => 'Selected pages were successfully deleted',
+            'no-resource'    => 'The resource provided for insufficient for the action',
         ],
 
         'create' => [
