@@ -12,7 +12,7 @@
             <div class="relative overflow-hidden w-full h-full">
                 <div 
                     v-for="(image, index) in options.images" 
-                    :class="getSlideStyles(index)"
+                    :class="getSliderStyles(index)"
                 >
                     <img 
                         :src="image"
@@ -64,7 +64,7 @@
                     this.currentIndex = (this.currentIndex + 1) % this.options.images.length;
                 },
 
-                getSlideStyles(index) {
+                getSliderStyles(index) {
                     return {
                         'opacity-100': index === this.currentIndex,
                         'opacity-0': index !== this.currentIndex,
