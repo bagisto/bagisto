@@ -22,12 +22,6 @@
                 <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-                        {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
-
-                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                            @lang('General')
-                        </p>
-
                         {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
                         <x-admin::form.control-group class="mb-[10px]">
@@ -169,6 +163,8 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.date_of_birth.after') !!}
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
