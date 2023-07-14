@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex items-center gap-[20px]">
-            <span class="icon-dollar-sign flex items rounded-full w-[60px] h-[60px] p-[10px]-center justify-center border border-black bg-white text-[42px] text-navyBlue cursor-pointer"></span>
+            <span class="icon-dollar-sign flex items-center rounded-full w-[60px] h-[60px] p-[10px] justify-center border border-black bg-white text-[42px] text-navyBlue cursor-pointer"></span>
 
             <div class="">
                 <h4 class="font-medium font-dmserif">Emi Available</h4>

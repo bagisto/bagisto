@@ -23,6 +23,7 @@
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
     --}}
+    {{-- Left Nagivation Section --}}
     <div class="flex items-center gap-x-[40px] pt-[28px] max-[1180px]:gap-x-[20px]">
         <a
             href="{{ route('shop.home.index') }}" 
@@ -82,8 +83,9 @@
         </div>
     </div>
 
+    {{-- Right Nagivation Section --}}
     <div class="flex gap-x-[35px] items-center max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
-        {{-- Search bar --}}
+        {{-- Search Bar Container --}}
         <form 
             action="{{ route('shop.search.index') }}" 
             class="flex items-center max-w-[445px]"
@@ -96,25 +98,26 @@
             </label>
 
             <div class="relative w-full">
-                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[12px] text-[22px] pointer-events-none"></div>
+                <div class="icon-search flex items-center  absolute ltr:left-[12px] rtl:right-[12px] top-[10px] text-[22px] pointer-events-none"></div>
 
                 <input
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full px-11 py-3.5 bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium"
+                    class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400"
                     placeholder="Search for products"
                     required
                 >
 
                 <button
                     type="button"
-                    class="icon-camera flex items-center absolute top-[12px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
+                    class="icon-camera flex items-center absolute top-[10px] ltr:right-[12px] rtl:left-[12px] pr-3 text-[22px]"
                 >
                 </button>
             </div>
         </form>
 
+        {{-- Right Navigation Links --}}
         <div class="flex gap-x-[35px] mt-[5px] max-lg:gap-x-[30px] max-[1100px]:gap-x-[25px]">
             {{-- Compare --}}
             <a href="{{ route('shop.compare.index') }}">

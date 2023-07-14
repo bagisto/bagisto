@@ -6,6 +6,8 @@
     </div>
 </v-product-review>
 
+{!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
+
 @pushOnce('scripts')
     {{-- Product Review Template --}}
     <script type="text/x-template" id="v-product-review-template">
@@ -375,5 +377,3 @@
         });
     </script>
 @endPushOnce
-
-{!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
