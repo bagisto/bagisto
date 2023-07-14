@@ -50,7 +50,7 @@ class CMSPageDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.cms.datagrid.id'),
             'type'       => 'number',
             'searchable' => false,
             'sortable'   => true,
@@ -59,7 +59,7 @@ class CMSPageDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'page_title',
-            'label'      => trans('admin::app.cms.pages.page-title'),
+            'label'      => trans('admin::app.cms.datagrid.page_title'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -68,7 +68,7 @@ class CMSPageDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'url_key',
-            'label'      => trans('admin::app.datagrid.url-key'),
+            'label'      => trans('admin::app.cms.datagrid.url_key'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -84,7 +84,7 @@ class CMSPageDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('admin::app.datagrid.view'),
+            'title'  => trans('admin::app.cms.datagrid.view'),
             'method' => 'GET',
             'route'  => 'shop.cms.page',
             'index'  => 'url_key',
@@ -93,14 +93,14 @@ class CMSPageDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.cms.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.cms.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
 
         $this->addAction([
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.cms.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.cms.delete',
             'icon'   => 'icon trash-icon',
@@ -116,7 +116,7 @@ class CMSPageDataGrid extends DataGrid
     {
         $this->addMassAction([
             'type'   => 'delete',
-            'label'  => trans('admin::app.datagrid.delete'),
+            'label'  => trans('admin::app.cms.datagrid.delete'),
             'action' => route('admin.cms.mass_delete'),
             'method' => 'POST',
         ]);

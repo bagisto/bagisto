@@ -11,6 +11,19 @@ return [
             'no-resource'    => 'The resource provided for insufficient for the action',
         ],
 
+        'datagrid' => [
+            'id'         => 'Id',
+            'page_title' => 'Page Title',
+            'url_key'    => 'Url Key',
+            'delete'     => 'Delete',
+            'view'       => 'View',
+            'edit'       => 'Edit',
+        ],
+
+        'sidebar' => [
+            'title' => 'Pages'
+        ],
+
         'create' => [
             'add'              => 'Add Page',
             'save'             => 'Save Page',
