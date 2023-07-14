@@ -3,19 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\CMS;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CMSPageDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\Admin\DataGrids\CMSPageDataGrid;
+
 
 class PageController extends Controller
 {
-    /**
-     * To hold the request variables from route file.
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -23,7 +17,6 @@ class PageController extends Controller
      */
     public function __construct(protected CmsRepository $cmsRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -66,11 +59,21 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.create.before');
 
-        $page = $this->cmsRepository->create(request()->all());
+        $data = [
+            'page_title'       => request()->input('page_title'),
+            'channels'         => request()->input('channels'),
+            'html_content'     => request()->input('html_content'),
+            'meta_title'       => request()->input('meta_title'),
+            'url_key'          => request()->input('url_key'),
+            'meta_keywords'    => request()->input('meta_keywords'),
+            'meta_description' => request()->input('meta_description'),
+        ];
+
+        $page = $this->cmsRepository->create($data);
 
         Event::dispatch('cms.pages.create.after', $page);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'page']));
+        session()->flash('success', trans('admin::app.cms.create.create-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -115,7 +118,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.update.after', $page);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Page']));
+        session()->flash('success', trans('admin::app.cms.edit.edit-success'));
 
         return redirect()->route('admin.cms.index');
     }

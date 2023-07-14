@@ -83,15 +83,25 @@
         @break
 
     @case('image')
-        <x-shop::media
+        <x-admin::media
             name="{{ $name }}"
             ::class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
             {{ $attributes }}
         >
-        </x-shop::media>
+        </x-admin::media>
 
         @break
 
+    @case('tinymce')
+        <x-admin::tinymce
+            name="{{ $name }}"
+            {{ $attributes }}
+        >
+            {{ $slot }}
+        </x-admin::tinymce>
+
+        @break
+        
     @case('custom')
         <v-field {{ $attributes }}>
             {{ $slot }}

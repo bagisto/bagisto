@@ -1,6 +1,46 @@
 <?php
 
 return [
+    'cms' => [
+        'index' => [
+            'pages'    => 'Pages',
+            'export'   => 'Export',
+            'add_page' => 'Add Page',
+            'download' => 'Download'
+        ],
+
+        'create' => [
+            'add'              => 'Add Page',
+            'save'             => 'Save Page',
+            'general'          => 'General',
+            'page'             => 'Page Title',
+            'channels'         => 'Channels',
+            'content'          => 'Content',
+            'seo'              => 'SEO',
+            'meta_title'       => 'Meta Title',
+            'url_key'          => 'URL Key',
+            'meta_keywords'    => 'Meta Keywords',
+            'meta_description' => 'Meta Description',
+            'create-success'   => 'Page created successfully',
+        ],
+
+        'edit' => [
+            'edit'             => 'Edit Page',
+            'preview'          => 'Page preview',
+            'save'             => 'Save Page',
+            'general'          => 'General',
+            'page'             => 'Page Title',
+            'channels'         => 'Channels',
+            'content'          => 'Content',
+            'seo'              => 'SEO',
+            'meta_title'       => 'Meta Title',
+            'url_key'          => 'URL Key',
+            'meta_keywords'    => 'Meta Keywords',
+            'meta_description' => 'Meta Description',
+            'edit-success'     => 'Page updated successfully',
+        ],
+    ],
+
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -1436,7 +1476,8 @@ return [
         'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
     ],
 
-    'cms' => [
+    // Need to remove
+    'cms-old' => [
         'pages' => [
             'general'          => 'General',
             'seo'              => 'SEO',
