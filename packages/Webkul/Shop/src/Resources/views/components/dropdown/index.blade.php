@@ -1,4 +1,4 @@
-@props(['position' => 'bottom-left'])
+@props(['position' => 'bottom-right'])
 
 <v-dropdown position="{{ $position }}" {{ $attributes->merge(['class' => 'relative']) }}>
     @isset($toggle)
@@ -111,21 +111,21 @@
 
                         case 'top-left':
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`
-                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                `min-width: ${this.toggleBlockWidth}px`,
+                                `bottom: ${this.toggleBlockHeight}px`,
                                 'left: 0',
                             ];
 
                         case 'top-right':
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`
-                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                `min-width: ${this.toggleBlockWidth}px`,
+                                `bottom: ${this.toggleBlockHeight}px`,
                                 'right: 0',
                             ];
 
                         default:
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`
+                                `min-width: ${this.toggleBlockWidth}px`,
                                 `top: ${this.toggleBlockHeight}px`,
                                 'left: 0',
                             ];

@@ -17,11 +17,11 @@
             <x-shop::dropdown>
                 <x-slot:toggle>
                     <!-- Dropdown Toggler -->
-                    <div class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
                         @{{ sortLabel ?? "@lang('shop::app.products.sort-by.title')" }}
 
                         <span class="icon-arrow-down text-[24px]"></span>
-                    </div>
+                    </button>
                 </x-slot:toggle>
             
                 <!-- Dropdown Content -->
@@ -42,11 +42,11 @@
                 <x-shop::dropdown position="bottom-right">
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
-                        <div class="flex gap-[15px] justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-[14px] max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <button class="flex gap-[15px] justify-between items-center max-w-[200px] bg-white border border-[#E9E9E9] text-[16px] rounded-lg w-full p-[14px] max-md:pr-[10px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
                             @{{ filters.applied.limit ?? "@lang('shop::app.categories.toolbar.show')" }}
 
                             <span class="text-[24px] icon-arrow-down"></span>
-                        </div>
+                        </button>
                     </x-slot:toggle>
                 
                     <!-- Dropdown Content -->

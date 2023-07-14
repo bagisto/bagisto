@@ -20,7 +20,7 @@ return [
                 'type'  => 'boolean',
             ], [
                 'name'  => 'pinterest',
-                'title' => 'social_share::app.config.system.enable-share-pintrest',
+                'title' => 'social_share::app.config.system.enable-share-pinterest',
                 'type'  => 'boolean',
             ], [
                 'name'  => 'whatsapp',

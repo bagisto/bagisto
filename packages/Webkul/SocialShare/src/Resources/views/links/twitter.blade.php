@@ -1,5 +1,5 @@
 @php
-    $twitter_url = 'https://twitter.com/intent/tweet?' . http_build_query([
+    $twitterURL = 'https://twitter.com/intent/tweet?' . http_build_query([
         'url'  => route('shop.productOrCategory.index', $product->url_key),
         'text' => $message,
     ]);
@@ -9,7 +9,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="twitter-share-template">
-        <li class="bb-social-share__item bb-social--twitter">
+        <li>
             <a 
                 href="#" 
                 @click="openSharePopup"
@@ -25,7 +25,7 @@
 
             data: function () {
                 return {
-                    shareUrl: '{{ $twitter_url }}'
+                    shareUrl: '{{ $twitterURL }}'
                 }
             },
 
