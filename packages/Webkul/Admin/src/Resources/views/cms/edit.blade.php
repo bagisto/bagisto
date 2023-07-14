@@ -4,7 +4,6 @@
     $locale = core()->getRequestedLocaleCode();
 
     $selectedOptionIds = old('inventory_sources') ?? $page->channels->pluck('id')->toArray();
-    
 @endphp
 
 <x-admin::layouts>
@@ -234,7 +233,7 @@
         @include('admin::layouts.tinymce')
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 tinyMCEHelper.initTinyMCE({
                     selector: 'textarea#content',
                     height: 200,

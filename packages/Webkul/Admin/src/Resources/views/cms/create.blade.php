@@ -212,22 +212,16 @@
         </x-admin::form>
     </div>
 
-    @pushOnce('scripts')
+  
+    @pushOnce('scripts')    
         @include('admin::layouts.tinymce')
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                tinyMCEHelper.initTinyMCE({
-                    selector: 'textarea#content',
-                    height: 200,
-                    width: "100%",
-                    plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
-                    image_advtab: true,
-                    valid_elements : '*[*]',
+            window.addEventListener("load", function (event) {
+                tinymce.init({
+                    selector: 'textarea#content'
                 });
             });
         </script>
     @endPushOnce
-
 </x-admin::layouts>
