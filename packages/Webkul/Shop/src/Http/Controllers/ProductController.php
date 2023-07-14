@@ -3,11 +3,10 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Product\Repositories\ProductAttributeValueRepository;
-use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
-use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\ProductAttributeValueRepository;
+use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
+use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 
 class ProductController extends Controller
 {
@@ -20,9 +19,9 @@ class ProductController extends Controller
         protected ProductRepository $productRepository,
         protected ProductAttributeValueRepository $productAttributeValueRepository,
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
-        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        protected CategoryRepository $categoryRepository,
-    ) {
+        protected ProductDownloadableLinkRepository $productDownloadableLinkRepository
+    )
+    {
 
     }
 

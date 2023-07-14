@@ -5,22 +5,14 @@ namespace Webkul\Shop\Http\Controllers\Customer;
 use Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
-use Webkul\Shop\Mail\SubscriptionEmail;
 
 class CustomerController extends Controller
 {
-    /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -30,8 +22,8 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected ProductReviewRepository $productReviewRepository,
         protected SubscribersListRepository $subscriptionRepository
-    ) {
-        $this->_config = request('_config');
+    )
+    {
     }
 
     /**
@@ -121,14 +113,6 @@ class CustomerController extends Controller
                         'is_subscribed' => 1,
                         'token'         => $token = uniqid(),
                     ]);
-
-                    try {
-                        Mail::queue(new SubscriptionEmail([
-                            'email' => $data['email'],
-                            'token' => $token,
-                        ]));
-                    } catch (\Exception $e) {
-                    }
                 }
             } else {
                 $subscription = $this->subscriptionRepository->findOneWhere(['email' => $data['email']]);
@@ -185,7 +169,7 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
             session()->flash('error', trans('shop::app.customers.account.profile.delete-failed'));
 
-            return redirect()->route($this->_config['redirect']);
+            return redirect()->route('shop.customers.account.profile.index');
         }
     }
 

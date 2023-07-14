@@ -610,7 +610,7 @@ abstract class AbstractType
      */
     public function isItemHaveQuantity($cartItem)
     {
-        return $cartItem->product->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
+        return $cartItem->getTypeInstance()->haveSufficientQuantity($cartItem->quantity);
     }
 
     /**
@@ -929,7 +929,7 @@ abstract class AbstractType
         $data = $this->getQtyRequest($data);
 
         if (! $this->haveSufficientQuantity($data['quantity'])) {
-            return trans('shop::app.checkout.cart.inventory_warning');
+            return trans('shop::app.checkout.cart.inventory-warning');
         }
 
         $price = $this->getFinalPrice();
@@ -1063,7 +1063,7 @@ abstract class AbstractType
             return $result;
         }
 
-        $price = round($item->product->getTypeInstance()->getFinalPrice($item->quantity), 4);
+        $price = round($this->getFinalPrice($item->quantity), 4);
 
         if ($price == $item->base_price) {
             return $result;
@@ -1099,6 +1099,7 @@ abstract class AbstractType
                         return true;
                     }
                 }
+                
                 break;
 
             case 'configurable':
@@ -1108,6 +1109,7 @@ abstract class AbstractType
                 ) {
                     return true;
                 }
+
                 break;
         }
 

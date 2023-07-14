@@ -12,6 +12,7 @@
 {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
 @pushOnce('scripts')
+    {{-- Filters Vue template --}}
     <script type="text/x-template" id="v-filters-template">
         <!-- Filter Shimmer Effect -->
         <template v-if="isLoading">
@@ -45,6 +46,7 @@
         </template>
     </script>
 
+    {{-- Filter Item Vue template --}}
     <script type="text/x-template" id="v-filter-item-template">
         <template v-if="filter.type === 'price' || filter.options.length">
             <x-shop::accordion>

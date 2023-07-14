@@ -45,7 +45,7 @@
                 </p>
 
                 <x-shop::form
-                    :action="route('shop.subscribe')"
+                    :action="route('shop.subscription.store')"
                     class="mt-[10px] rounded max-sm:mt-[30px]"
                 >
                     <label for="organic-search" class="sr-only">Search</label>
@@ -54,7 +54,7 @@
 
                     <x-shop::form.control-group.control
                         type="email"
-                        name="subscriber_email"
+                        name="email"
                         class=" blockw-[420px] max-w-full px-[20px] py-[20px] pr-[110px] bg-[#F1EADF] border-[2px] border-[#E9DECC] rounded-[12px] text-xs font-medium max-1060:w-full"
                         rules="required|email"
                         label="Email"
@@ -63,7 +63,7 @@
                     </x-shop::form.control-group.control>
 
                     <x-shop::form.control-group.error
-                        control-name="subscriber_email"
+                        control-name="email"
                     >
                     </x-shop::form.control-group.error>
 

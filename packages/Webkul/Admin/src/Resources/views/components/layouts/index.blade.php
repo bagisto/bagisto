@@ -46,7 +46,7 @@
 
     <div id="app">
         {!! view_render_event('bagisto.shop.layout.content.before') !!}
-        
+
         {{-- Page Header Blade Component --}}
         <x-admin::layouts.header />
 

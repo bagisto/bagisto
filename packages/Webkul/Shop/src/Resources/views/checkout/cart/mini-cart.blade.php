@@ -79,7 +79,7 @@
                                         class="flex gap-x-[15px] items-center text-[16px] cursor-pointer"
                                         @click="item.option_show = ! item.option_show"
                                     >
-                                        @lang('shop::app.checkout.cart.mini-cart.see-datails')
+                                        @lang('shop::app.checkout.cart.mini-cart.see-details')
 
                                         <span
                                             class="text-[24px]"

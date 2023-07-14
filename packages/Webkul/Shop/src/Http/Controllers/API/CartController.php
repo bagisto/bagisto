@@ -4,10 +4,10 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Webkul\CartRule\Repositories\CartRuleCouponRepository;
-use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Checkout\Facades\Cart;
 use Webkul\Shop\Http\Resources\CartResource;
 
 class CartController extends APIController
@@ -21,7 +21,8 @@ class CartController extends APIController
         protected WishlistRepository $wishlistRepository,
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -31,11 +32,15 @@ class CartController extends APIController
     {
         Cart::collectTotals();
 
-        $cart = Cart::getCart();
+        $response = [
+            'data' => ($cart = Cart::getCart()) ? new CartResource($cart) : null
+        ];
 
-        return new JsonResource([
-            'data' => $cart ? new CartResource($cart) : null,
-        ]);
+        if (session()->has('info')) {
+            $response['message'] = session()->get('info');
+        }
+
+        return new JsonResource($response);
     }
 
     /**
@@ -70,7 +75,7 @@ class CartController extends APIController
 
                 return new JsonResource([
                     'data'     => new CartResource(Cart::getCart()),
-                    'message'  => trans('shop::app.components.products.card.add-to-cart'),
+                    'message'  => trans('shop::app.checkout.cart.item-add-to-cart'),
                 ]);
             }
         } catch (\Exception $exception) {
@@ -87,6 +92,8 @@ class CartController extends APIController
     public function destroy(): JsonResource
     {
         Cart::removeItem(request()->input('cart_item_id'));
+
+        Cart::collectTotals();
 
         return new JsonResource([
             'data'    => new CartResource(Cart::getCart()),

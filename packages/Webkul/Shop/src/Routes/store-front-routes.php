@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\CMS\PagePresenterController;
 use Webkul\Shop\Http\Controllers\CompareController;
-use Webkul\Shop\Http\Controllers\CountryStateController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
@@ -25,33 +24,22 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     /**
      * Store front home.
      */
-    Route::get('/', [HomeController::class, 'index'])->defaults('_config', [
-        'view' => 'shop::home.index',
-    ])->name('shop.home.index');
+    Route::get('/', [HomeController::class, 'index'])->name('shop.home.index');
 
     /**
      * Store front search.
      */
     Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
 
-    Route::post('upload-search-image', [HomeController::class, 'upload'])->name('shop.image.search.upload');
-
-    /**
-     * Countries and states.
-     */
-    Route::controller(CountryStateController::class)->prefix('countries')->group(function () {
-        Route::get('', 'getCountries')->name('shop.countries');
-
-        Route::get('states', 'getStates')->name('shop.countries.states');
-    });
+    Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
 
     /**
      * Subscription routes.
      */
     Route::controller(SubscriptionController::class)->group(function () {
-        Route::post('subscribe', 'subscribe')->name('shop.subscribe');
+        Route::post('subscription', 'store')->name('shop.subscription.store');
 
-        Route::get('unsubscribe/{token}', 'unsubscribe')->name('shop.unsubscribe');
+        Route::get('subscription/{token}', 'destroy')->name('shop.subscription.destroy');
     });
 
     /**
@@ -60,7 +48,7 @@ Route::group(['middleware' => ['locale', 'theme', 'currency']], function () {
     Route::get('compare', [CompareController::class, 'index'])->name('shop.compare.index');
 
     /**
-     * Downloable products
+     * Downloadable products
      */
     Route::controller(ProductController::class)->group(function () {
         Route::get('downloadable/download-sample/{type}/{id}', 'downloadSample')->name('shop.downloadable.download_sample');

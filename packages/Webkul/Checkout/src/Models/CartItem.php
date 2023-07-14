@@ -5,6 +5,7 @@ namespace Webkul\Checkout\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Product\Models\ProductProxy;
+use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,6 +29,28 @@ class CartItem extends Model implements CartItemContract
         'created_at',
         'updated_at',
     ];
+
+    protected $typeInstance;
+
+    /**
+     * Retrieve type instance
+     *
+     * @return AbstractType
+     */
+    public function getTypeInstance(): AbstractType
+    {
+        if ($this->typeInstance) {
+            return $this->typeInstance;
+        }
+
+        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
+
+        if ($this->product) {
+            $this->typeInstance->setProduct($this->product);
+        }
+
+        return $this->typeInstance;
+    }
 
     public function product(): HasOne
     {

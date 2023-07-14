@@ -136,13 +136,7 @@ class Cart extends Model implements CartContract
      */
     public function hasDownloadableItems(): bool
     {
-        foreach ($this->items as $item) {
-            if (stristr($item->type, 'downloadable') !== false) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->items->pluck('type')->contains('downloadable');
     }
 
     /**
@@ -154,7 +148,7 @@ class Cart extends Model implements CartContract
     public function hasProductsWithQuantityBox(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->product->getTypeInstance()->showQuantityBox()) {
+            if ($item->getTypeInstance()->showQuantityBox()) {
                 return true;
             }
         }
@@ -191,7 +185,6 @@ class Cart extends Model implements CartContract
 
         return $cartBaseSubTotal >= $minimumOrderAmount;
     }
-
 
     /**
      * Create a new factory instance for the model

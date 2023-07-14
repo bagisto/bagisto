@@ -138,7 +138,7 @@
                                                         class="flex gap-x-[15px] text-[16px] items-center cursor-pointer whitespace-nowrap"
                                                         @click="item.option_show = ! item.option_show"
                                                     >
-                                                        @lang('shop::app.checkout.cart.index.see-datails')
+                                                        @lang('shop::app.checkout.cart.index.see-details')
 
                                                         <span
                                                             class="text-[24px]"
@@ -265,7 +265,7 @@
 
                 computed: {
                     selectedItemsCount() {
-                        return  this.cart.items.filter(item => item.selected).length;
+                        return this.cart.items.filter(item => item.selected).length;
                     }
                 },
 
@@ -276,6 +276,10 @@
                                 this.isLoading = false;
 
                                 this.cart = response.data.data;
+
+                                if (response.data.message) {
+                                    this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
+                                }
                             })
                             .catch(error => {});     
                     },
