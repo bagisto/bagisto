@@ -7,8 +7,8 @@
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
-                <form @submit="handleSubmit($event, createCustomer)">
-                    <x-admin::modal>
+                <form @submit="handleSubmit($event, create)">
+                    <x-admin::modal ref="customerCreateModal">
                         <x-slot:toggle>
                             <button 
                                 type="button"
@@ -189,7 +189,7 @@
                                     <div class="w-full mb-[6px]">
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label>
-                                                Customer Group
+                                                @lang('admin::app.customers.create.customer-group')
                                             </x-admin::form.control-group.label>
                 
                                             <x-admin::form.control-group.control
@@ -235,12 +235,13 @@
             template: '#v-create-customer-template',
 
             methods: {
-                createCustomer(params) {
+                create(params, { resetForm }) {
+                    this.$refs.customerCreateModal.toggle();
+
                     this.$axios.post("{{ route('admin.customer.store') }}", params)
                         .then((response) => {
-                            console.log(response);
+                            resetForm();
                         })
-
                         .catch(error => {});
                 }
             }

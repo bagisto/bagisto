@@ -20,7 +20,8 @@ class CustomerController extends Controller
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository
-    ) {
+    ) 
+    {
     }
 
     /**
@@ -34,19 +35,9 @@ class CustomerController extends Controller
             return app(CustomerDataGrid::class)->toJson();
         }
 
-        return view('admin::customers.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::customers.create', compact('groups'));
+        return view('admin::customers.index', compact('groups'));
     }
 
     /**
