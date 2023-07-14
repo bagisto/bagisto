@@ -1,169 +1,251 @@
-@extends('admin::layouts.content')
+@inject('channels', 'Webkul\Core\Repositories\ChannelRepository')
 
-@section('page_title')
-    {{ __('admin::app.cms.pages.edit-title') }}
-@stop
+@php
+    $locale = core()->getRequestedLocaleCode();
 
-@push('css')
-    <style>
-    @media only screen and (max-width: 768px){
-        .content-container .content .page-header .page-action button {
-            position: relative;
-            right: 0px !important;
-            top: 0px !important;
-        }
+    $selectedOptionIds = old('inventory_sources') ?? $page->channels->pluck('id')->toArray();
+    
+@endphp
 
-        .content-container .content .page-header .page-title .control-group {
-            margin-top: 20px!important;
-            width: 100%!important;
-            margin-left: 0!important;
-        }
-    }
-    </style>
-@endpush
+<x-admin::layouts>
+    <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+        
+        <x-shop::form 
+            :action="route('admin.cms.store')"
+            enctype="multipart/form-data"
+        >
+            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                <p class="text-[20px] text-gray-800 font-bold">
+                    Edit Page
+                </p>
 
-@section('content')
-    <div class="content">
-        @php
-            $locale = core()->getRequestedLocaleCode();
-        @endphp
+                <div class="flex gap-x-[10px] items-center">
+                    <a 
+                        href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}" 
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        target="_blank"
+                    >
+                        Preview
+                    </a>
 
-        <form method="POST" id="page-form" action="" @submit.prevent="onSubmit">
-
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.cms.index') }}'"></i>
-
-                        {{ __('admin::app.cms.pages.edit-title') }}
-                    </h1>
-
-                    <div class="control-group">
-                        <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
-                            @foreach (core()->getAllLocales() as $localeModel)
-
-                                <option value="{{ route('admin.cms.edit', $page->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                    {{ $localeModel->name }}
-                                </option>
-
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="page-action">
-                    @if ($page->translate($locale))
-                        <a href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}" class="btn btn-lg btn-primary" target="_blank">
-                            {{ __('admin::app.cms.pages.preview') }}
-                        </a>
-                    @endif
-
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.cms.pages.edit-btn-title') }}
+                    <button 
+                        type="submit"
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    >
+                        Save Page
                     </button>
-                </div>
+				</div>
             </div>
 
-            <div class="page-content">
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-                <div class="form-container">
-                    @csrf()
+                        {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.before') !!}
+                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                            @lang('General')
+                        </p>
 
-                    <accordian title="{{ __('admin::app.cms.pages.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('{{$locale}}[page_title]') ? 'has-error' : '']">
-                                <label for="page_title" class="required">{{ __('admin::app.cms.pages.page-title') }}</label>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Page Title
+                            </x-admin::form.control-group.label>
 
-                                <input type="text" class="control" name="{{$locale}}[page_title]" v-validate="'required'" value="{{ old($locale)['page_title'] ?? ($page->translate($locale)['page_title'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.page-title') }}&quot;">
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="{{ $locale }}[page_title]"
+                                value="{{ old($locale)['page_title'] ?? ($page->translate($locale)['page_title'] ?? '') }}"
+                                id="{{ $locale }}[page_title]"
+                                rules="required"
+                                label="Page Title"
+                                :placeholder="trans('Page Title')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <span class="control-error" v-if="errors.has('{{$locale}}[page_title]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
-                            </div>
+                            <x-admin::form.control-group.error
+                                control-name="{{ $locale }}[page_title]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                            <div class="control-group multi-select" :class="[errors.has('channels[]') ? 'has-error' : '']">
-                                <label for="url-key" class="required">{{ __('admin::app.cms.pages.channel') }}</label>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Channels
+                            </x-admin::form.control-group.label>
 
-                                @php $selectedOptionIds = old('inventory_sources') ?: $page->channels->pluck('id')->toArray() @endphp
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="channels[]"
+                                :value="old('channels[]')"
+                                id="channels[]"
+                                rules="required"
+                                label="Channels"
+                                :placeholder="trans('Channels')"
+                                multiple="multiple"
+                            >
+                                @foreach($channels->all() as $channel)
+                                    <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
+                                        {{ core()->getChannelName($channel) }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
 
-                                <select type="text" class="control" name="channels[]" v-validate="'required'" value="{{ old('channel[]') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.channel') }}&quot;" multiple="multiple">
-                                    @foreach(app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
-                                        <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                            {{ core()->getChannelName($channel) }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <x-admin::form.control-group.error
+                                control-name="channels[]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                                <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
-                            </div>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Page Title
+                            </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('{{$locale}}[html_content]') ? 'has-error' : '']">
-                                <label for="html_content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="{{ $locale }}[html_content]"
+                                :value="old('html_content')"
+                                id="content"
+                                rules="required"
+                                label="Content"
+                                :placeholder="trans('Content')"
+                            >
+                                {{ old($locale)['html_content'] ?? ($page->translate($locale)['html_content'] ?? '') }}
+                            </x-admin::form.control-group.control>
 
-                                <textarea type="text" class="control" id="content" name="{{$locale}}[html_content]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;">{{ old($locale)['html_content'] ?? ($page->translate($locale)['html_content'] ?? '') }}</textarea>
+                            <x-admin::form.control-group.error
+                                control-name="{{ $locale }}[html_content]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                                <span class="control-error" v-if="errors.has('{{$locale}}[html_content]')">@{{ errors.first('{!!$locale!!}[html_content]') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
+                        {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
+                    </div>
+				</div>
+			</div>
 
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.after') !!}
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.before') !!}
+                        {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                    <accordian title="{{ __('admin::app.cms.pages.seo') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="meta_title">{{ __('admin::app.cms.pages.meta_title') }}</label>
+                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                            @lang('Seo')
+                        </p>
 
-                                <input type="text" class="control" name="{{$locale}}[meta_title]" value="{{ old($locale)['meta_title'] ?? ($page->translate($locale)['meta_title'] ?? '') }}">
-                            </div>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Meta Title
+                            </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('{{$locale}}[url_key]') ? 'has-error' : '']">
-                                <label for="url-key" class="required">{{ __('admin::app.cms.pages.url-key') }}</label>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="meta_title"
+                                :value="old('meta_title')"
+                                id="meta_title"
+                                rules="required"
+                                label="Meta Title"
+                                :placeholder="trans('Meta Title')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <input type="text" class="control" name="{{$locale}}[url_key]" v-validate="'required'" value="{{ old($locale)['url_key'] ?? ($page->translate($locale)['url_key'] ?? '') }}" data-vv-as="&quot;{{ __('admin::app.cms.pages.url-key') }}&quot;">
+                            <x-admin::form.control-group.error
+                                control-name="meta_title"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                                <span class="control-error" v-if="errors.has('{{$locale}}[url_key]')">@{{ errors.first('{!!$locale!!}[url_key]') }}</span>
-                            </div>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Url Key
+                            </x-admin::form.control-group.label>
 
-                            <div class="control-group">
-                                <label for="meta_keywords">{{ __('admin::app.cms.pages.meta_keywords') }}</label>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="url_key"
+                                :value="old('url_key')"
+                                id="url_key"
+                                rules="required"
+                                label="Url Key"
+                                :placeholder="trans('Url Key')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <textarea type="text" class="control" name="{{$locale}}[meta_keywords]">{{ old($locale)['meta_keywords'] ?? ($page->translate($locale)['meta_keywords'] ?? '') }}</textarea>
+                            <x-admin::form.control-group.error
+                                control-name="url_key"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                        
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Meta Keywords
+                            </x-admin::form.control-group.label>
 
-                            </div>
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="meta_keywords"
+                                :value="old('meta_keywords')"
+                                id="meta_keywords"
+                                rules="required"
+                                label="Meta Keywords"
+                                :placeholder="trans('Meta Keywords')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                            <div class="control-group">
-                                <label for="meta_description">{{ __('admin::app.cms.pages.meta_description') }}</label>
+                            <x-admin::form.control-group.error
+                                control-name="meta_keywords"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
-                                <textarea type="text" class="control" name="{{$locale}}[meta_description]">{{ old($locale)['meta_description'] ?? ($page->translate($locale)['meta_description'] ?? '') }}</textarea>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Meta Description
+                            </x-admin::form.control-group.label>
 
-                            </div>
-                        </div>
-                    </accordian>
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="meta_description"
+                                :value="old('meta_description')"
+                                id="meta_description"
+                                rules="required"
+                                label="Meta Description"
+                                :placeholder="trans('Meta Description')"
+                            >
+                            </x-admin::form.control-group.control>
 
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.after') !!}
-                </div>
-            </div>
-        </form>
+                            <x-admin::form.control-group.error
+                                control-name="meta_description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
+                    </div>
+				</div>
+			</div>
+        </x-admin::form>
     </div>
-@stop
 
-@push('scripts')
-    @include('admin::layouts.tinymce')
+    @pushOnce('scripts')
+        @include('admin::layouts.tinymce')
 
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea#content',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-                valid_elements : '*[*]',
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                tinyMCEHelper.initTinyMCE({
+                    selector: 'textarea#content',
+                    height: 200,
+                    width: "100%",
+                    plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
+                    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
+                    image_advtab: true,
+                    valid_elements : '*[*]',
+                });
             });
-        });
-    </script>
-@endpush
+        </script>
+    @endPushOnce
+
+</x-admin::layouts>
