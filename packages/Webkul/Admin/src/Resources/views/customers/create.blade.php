@@ -1,116 +1,203 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+        <x-shop::form 
+            :action="route('admin.customer.store')"
+        >
+            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                <p class="text-[20px] text-gray-800 font-bold">
+                    @lang('Add Customer')
+                </p>
 
-@section('page_title')
-    {{ __('admin::app.customers.customers.add-title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.customer.store') }}" @submit.prevent="onSubmit">
-
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.index') }}'"></i>
-
-                        {{ __('admin::app.customers.customers.title') }}
-
-                        {{ Config::get('carrier.social.facebook.url') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.customers.customers.save-btn-title') }}
+                <div class="flex gap-x-[10px] items-center">
+                    <button 
+                        type="submit"
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    >
+                        @lang('Save customer')
                     </button>
                 </div>
             </div>
+            
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-            <div class="page-content">
+                        {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                <div class="form-container">
-                    @csrf()
+                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                            @lang('General')
+                        </p>
 
-                    {!! view_render_event('bagisto.admin.customers.create.before') !!}
+                        {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
-                    <div class="control-group" :class="[errors.has('first_name') ? 'has-error' : '']">
-                        <label for="first_name" class="required">{{ __('admin::app.customers.customers.first_name') }}</label>
-                        <input type="text" class="control" id="first_name" name="first_name" v-validate="'required'" value="{{ old('first_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.firstname') }}&quot;">
-                        <span class="control-error" v-if="errors.has('first_name')">@{{ errors.first('first_name') }}</span>
-                    </div>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                First Name
+                            </x-admin::form.control-group.label>
 
-                    {!! view_render_event('bagisto.admin.customers.create.first_name.after') !!}
-
-                    <div class="control-group" :class="[errors.has('last_name') ? 'has-error' : '']">
-                        <label for="last_name" class="required">{{ __('admin::app.customers.customers.last_name') }}</label>
-                        <input type="text" class="control" id="last_name" name="last_name" v-validate="'required'" value="{{ old('last_name') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.lastname') }}&quot;">
-                        <span class="control-error" v-if="errors.has('last_name')">@{{ errors.first('last_name') }}</span>
-                    </div>
-
-                    {!! view_render_event('bagisto.admin.customers.create.last_name.after') !!}
-
-                    <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                        <label for="email" class="required">{{ __('shop::app.customer.signup-form.email') }}</label>
-                        <input type="email" class="control" id="email" name="email" v-validate="'required|email'" value="{{ old('email') }}" data-vv-as="&quot;{{ __('shop::app.customer.signup-form.email') }}&quot;">
-                        <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
-                    </div>
-
-                    {!! view_render_event('bagisto.admin.customers.create.email.after') !!}
-
-                    <div class="control-group" :class="[errors.has('gender') ? 'has-error' : '']">
-                        <label for="gender" class="required">{{ __('admin::app.customers.customers.gender') }}</label>
-                        <select name="gender" class="control" id="gender" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.customers.customers.gender') }}&quot;">
-                            <option value="">{{ __('admin::app.customers.customers.select-gender') }}</option>
-                            <option value="{{ __('admin::app.customers.customers.male') }}">{{ __('admin::app.customers.customers.male') }}</option>
-                            <option value="{{ __('admin::app.customers.customers.female') }}">{{ __('admin::app.customers.customers.female') }}</option>
-                            <option value="{{ __('admin::app.customers.customers.other') }}">{{ __('admin::app.customers.customers.other') }}</option>
-                        </select>
-                        <span class="control-error" v-if="errors.has('gender')">@{{ errors.first('gender') }}</span>
-                    </div>
-
-                    {!! view_render_event('bagisto.admin.customers.create.gender.after') !!}
-
-                    <div class="control-group date" :class="[errors.has('date_of_birth') ? 'has-error' : '']">
-                        <label for="dob">{{ __('admin::app.customers.customers.date_of_birth') }}</label>
-                        
-                        <date>
-                            <input 
-                                type="date" 
-                                class="control" 
-                                id="dob" 
-                                name="date_of_birth" 
-                                value="{{ old('date_of_birth') }}" 
-                                v-validate="" 
-                                data-vv-as="&quot;{{ __('admin::app.customers.customers.date_of_birth') }}&quot;"
-                                placeholder="{{ __('admin::app.customers.customers.date_of_birth_placeholder') }}" 
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="first_name" 
+                                id="first_name" 
+                                :value="old('first_name')"
+                                rules="required"
+                                label="First Name"
+                                placeholder="name"
                             >
-                        </date>
+                            </x-admin::form.control-group.control>
 
-                        <span class="control-error" v-if="errors.has('date_of_birth')">@{{ errors.first('date_of_birth') }}</span>
+                            <x-admin::form.control-group.error
+                                control-name="first_name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.first_name.after') !!}
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Last Name
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="last_name" 
+                                id="last_name"
+                                :value="old('last_name')"
+                                rules="required"
+                                label="Last Name"
+                                placeholder="name"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="last_name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.last_name.after') !!}
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Email
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="email"
+                                name="email"
+                                id="email"
+                                :value="old('name')"
+                                rules="required|email"
+                                label="Email"
+                                placeholder="email@example.com"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="email"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.email.after') !!}
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Contact Number
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="phone"
+                                id="phone"
+                                :value="old('phone')"
+                                label="Phone"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="phone"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.phone.after') !!}
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Gender
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="gender"
+                                id="gender"
+                                rules="required"
+                                label="Gender"
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="Other">Other</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="gender"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.gender.after') !!}
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Date of Birth
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="date_of_birth" 
+                                id="dob"
+                                :value="old('date_of_birth')"
+                                placeholder="Date of Birth"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="date_of_birth"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                Customer Group
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="customer_group_id"
+                                id="customerGroup"
+                                label="Customer Group"
+                            >
+                                <option value="">Select Customer Group</option>
+                            
+                                @foreach ($groups as $group)
+                                    <option value="{{ $group->id }}"> {{ $group->name}} </>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="customer_group_id"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {!! view_render_event('bagisto.admin.customers.create.after') !!}
                     </div>
-
-                    {!! view_render_event('bagisto.admin.customers.create.date_of_birth.after') !!}
-
-                    <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
-                        <label for="phone">{{ __('admin::app.customers.customers.phone') }}</label>
-                        <input type="text" class="control" id="phone" name="phone" value="{{ old('phone') }}" v-validate="'numeric'" data-vv-as="&quot;{{ __('admin::app.customers.customers.phone') }}&quot;">
-                        <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
-                    </div>
-
-                    {!! view_render_event('bagisto.admin.customers.create.phone.after') !!}
-
-                    <div class="control-group">
-                        <label for="customerGroup" >{{ __('admin::app.customers.customers.customer_group') }}</label>
-                        <select  class="control" id="customerGroup" name="customer_group_id">
-                        @foreach ($groups as $group)
-                            <option value="{{ $group->id }}"> {{ $group->name}} </>
-                        @endforeach
-                        </select>
-                    </div>
-
-                    {!! view_render_event('bagisto.admin.customers.create.after') !!}
-                </div>
-            </div>
-        </form>
+				</div>
+			</div>
+        </x-admin::form>
     </div>
-@stop
+</x-admin::layouts>
