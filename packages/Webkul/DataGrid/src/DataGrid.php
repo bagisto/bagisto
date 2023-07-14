@@ -2,23 +2,14 @@
 
 namespace Webkul\DataGrid;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Str;
-use Webkul\DataGrid\Traits\ProvideBouncer;
-use Webkul\DataGrid\Traits\ProvideCollection;
-use Webkul\DataGrid\Traits\ProvideDataGridPlus;
-use Webkul\DataGrid\Traits\ProvideExceptionHandler;
-
 abstract class DataGrid
 {
-    use ProvideBouncer, ProvideCollection, ProvideDataGridPlus, ProvideExceptionHandler;
-
     /**
-     * Set index columns, ex: id.
+     * Primary column.
      *
      * @var string
      */
-    protected $index = 'id';
+    protected $primaryColumn = 'id';
 
     /**
      * Default sort order of datagrid.
@@ -28,144 +19,62 @@ abstract class DataGrid
     protected $sortOrder = 'desc';
 
     /**
-     * Situation handling property when working with custom columns in datagrid, helps abstaining
-     * aliases on custom column.
-     *
-     * @var bool
-     */
-    protected $enableFilterMap = false;
-
-    /**
-     * This is array where aliases and custom column's name are passed.
-     *
-     * @var array
-     */
-    protected $filterMap = [];
-
-    /**
-     * Array to hold all the columns which will be displayed on frontend.
-     *
-     * @var array
-     */
-    protected $columns = [];
-
-    /**
-     * Complete column details.
-     *
-     * @var array
-     */
-    protected $completeColumnDetails = [];
-
-    /**
-     * Hold query builder instance of the query prepared by executing datagrid
-     * class method `setQueryBuilder`.
-     *
-     * @var object
-     */
-    protected $queryBuilder;
-
-    /**
-     * Final result of the datagrid program that is collection object.
-     *
-     * @var array
-     */
-    protected $collection = [];
-
-    /**
-     * Set of handly click tools which you could be using for various operations.
-     * ex: dyanmic and static redirects, deleting, etc.
-     *
-     * @var array
-     */
-    protected $actions = [];
-
-    /**
-     * Works on selection of values index column as comma separated list as response
-     * to your endpoint set as route.
-     *
-     * @var array
-     */
-    protected $massActions = [];
-
-    /**
-     * To show mass action or not.
-     *
-     * @var bool
-     */
-    protected $enableMassAction = false;
-
-    /**
-     * To enable actions or not.
-     */
-    protected $enableAction = false;
-
-    /**
-     * Paginate the collection or not.
-     *
-     * @var bool
-     */
-    protected $paginate = true;
-
-    /**
-     * If paginated then value of pagination.
+     * Default items per page.
      *
      * @var int
      */
     protected $itemsPerPage = 10;
 
     /**
-     * Operators mapping.
+     * Columns.
      *
      * @var array
      */
-    protected $operators = [
-        'eq'       => '=',
-        'lt'       => '<',
-        'gt'       => '>',
-        'lte'      => '<=',
-        'gte'      => '>=',
-        'neqs'     => '<>',
-        'neqn'     => '!=',
-        'eqo'      => '<=>',
-        'like'     => 'like',
-        'blike'    => 'like binary',
-        'nlike'    => 'not like',
-        'ilike'    => 'ilike',
-        'and'      => '&',
-        'bor'      => '|',
-        'regex'    => 'regexp',
-        'notregex' => 'not regexp',
-    ];
+    protected $columns = [];
 
     /**
-     * Contains the keys for which extra filters to show.
+     * Actions.
      *
-     * @var string[]
+     * @var array
      */
-    protected $extraFilters = [];
+    protected $actions = [];
 
     /**
-     * Abstract method.
+     * Mass action.
+     *
+     * @var array
+     */
+    protected $massActions = [];
+
+    /**
+     * Query builder instance.
+     *
+     * @var object
+     */
+    protected $queryBuilder;
+
+    /**
+     * Prepare query builder.
      */
     abstract public function prepareQueryBuilder();
 
     /**
-     * Abstract method.
+     * Prepare columns.
      */
-    abstract public function addColumns();
+    abstract public function prepareColumns();
 
     /**
-     * Add the index as alias of the column and use the column to make things happen.
-     *
-     * @param  string  $alias
-     * @param  string  $column
-     * @return void
+     * Prepare actions.
      */
-    public function addFilter($alias, $column)
+    public function prepareActions()
     {
-        $this->filterMap[$alias] = $column;
+    }
 
-        $this->enableFilterMap = true;
+    /**
+     * Prepare mass actions.
+     */
+    public function prepareMassActions()
+    {
     }
 
     /**
@@ -176,43 +85,11 @@ abstract class DataGrid
      */
     public function addColumn($column)
     {
-        $this->checkRequiredColumnKeys($column);
-
-        $this->fireEvent('add.column.before.' . $column['index']);
-
         $this->columns[] = $column;
-
-        $this->setCompleteColumnDetails($column);
-
-        $this->fireEvent('add.column.after.' . $column['index']);
     }
 
     /**
-     * Set complete column details.
-     *
-     * @param  array  $column
-     * @return void
-     */
-    public function setCompleteColumnDetails($column)
-    {
-        $this->completeColumnDetails[] = $column;
-    }
-
-    /**
-     * Set query builder.
-     *
-     * @param  \Illuminate\Database\Query\Builder  $queryBuilder
-     * @return void
-     */
-    public function setQueryBuilder($queryBuilder)
-    {
-        $this->queryBuilder = $queryBuilder;
-    }
-
-    /**
-     * Add action. Some datagrids are used in shops also. So extra
-     * parameters is their. If needs to give an access just pass true
-     * in second param.
+     * Add action.
      *
      * @param  array  $action
      * @param  bool  $specialPermission
@@ -220,17 +97,8 @@ abstract class DataGrid
      */
     public function addAction($action, $specialPermission = false)
     {
-        $this->checkRequiredActionKeys($action);
-
-        $this->checkPermissions($action, $specialPermission, function ($action, $eventName) {
-            $this->fireEvent('action.before.' . $eventName);
-
-            $action['key'] = Str::slug($action['title'], '_', app()->getLocale());
-
+        $this->checkPermissions($action, $specialPermission, function ($action) {
             $this->actions[] = $action;
-            $this->enableAction = true;
-
-            $this->fireEvent('action.after.' . $eventName);
         });
     }
 
@@ -247,149 +115,156 @@ abstract class DataGrid
     {
         $massAction['route'] = $this->getRouteNameFromUrl($massAction['action'], $massAction['method']);
 
-        $this->checkPermissions($massAction, $specialPermission, function ($action, $eventName) {
-            $this->fireEvent('mass.action.before.' . $eventName);
-
+        $this->checkPermissions($massAction, $specialPermission, function ($action) {
             $this->massActions[] = $action;
-            $this->enableMassAction = true;
-
-            $this->fireEvent('mass.action.after.' . $eventName);
         }, 'label');
     }
 
     /**
-     * Prepare mass actions.
+     * Check permissions.
      *
+     * @param  array  $action
+     * @param  bool  $specialPermission
+     * @param  \Closure  $operation
      * @return void
      */
-    public function prepareMassActions()
+    private function checkPermissions($action, $specialPermission, $operation)
     {
+        $currentRouteACL = $this->fetchCurrentRouteACL($action);
+
+        if (
+            bouncer()->hasPermission($currentRouteACL['key'] ?? null)
+            || $specialPermission
+        ) {
+            $operation($action);
+        }
     }
 
     /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
-    {
-    }
-
-    /**
-     * Render view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function render()
-    {
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return view('ui::datagrid.table')->with('results', $this->prepareViewData());
-    }
-
-    /**
-     * Export.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function export()
-    {
-        $this->paginate = false;
-
-        $this->addColumns();
-
-        $this->prepareActions();
-
-        $this->prepareMassActions();
-
-        $this->prepareQueryBuilder();
-
-        return $this->getCollection();
-    }
-
-    /**
-     * Prepare view data.
+     * Fetch current route acl. As no access to acl key, this will fetch acl by route name.
      *
      * @return array
      */
-    public function prepareViewData()
+    private function fetchCurrentRouteACL($action)
     {
-        return [
-            'index'             => $this->index,
-            'records'           => $this->getCollection(),
-            'columns'           => $this->completeColumnDetails,
-            'actions'           => $this->actions,
-            'enableActions'     => $this->enableAction,
-            'massactions'       => $this->massActions,
-            'enableMassActions' => $this->enableMassAction,
-            'paginated'         => $this->paginate,
-            'itemsPerPage'      => $this->itemsPerPage,
-            'norecords'         => __('ui::app.datagrid.no-records'),
-            'extraFilters'      => $this->getNecessaryExtraFilters(),
-        ];
+        return collect(config('acl'))->filter(function ($acl) use ($action) {
+            return $acl['route'] === $action['route'];
+        })->first();
     }
 
     /**
-     * Trigger event.
-     *
-     * @param  string  $name
-     * @return void
-     */
-    protected function fireEvent($name)
-    {
-        $className = strtolower(class_basename($this));
-
-        Event::dispatch($className . '.' . $name, $this);
-    }
-
-    /**
-     * Get necessary extra details.
+     * Fetch route name from full url, not the current one.
      *
      * @return array
      */
-    protected function getNecessaryExtraFilters()
+    private function getRouteNameFromUrl($action, $method)
     {
-        $necessaryExtraFilters = [];
+        return app('router')->getRoutes()
+            ->match(app('request')->create(str_replace(url('/'), '', $action), $method))
+            ->getName();
+    }
 
-        $checks = [
-            'channels'        => core()->getAllChannels(),
-            'locales'         => core()->getAllLocales(),
-            'customer_groups' => core()->getAllCustomerGroups(),
-        ];
+    /**
+     * Prepare data for json response.
+     *
+     * @return array
+     */
+    public function prepareData()
+    {
+        // dd(request()->all());
+        // refactor
+        $queryBuilder = $this->queryBuilder;
 
-        foreach ($checks as $key => $val) {
-            if (in_array($key, $this->extraFilters)) {
-                $necessaryExtraFilters[$key] = $val;
+        $filters = request('filters', []);
+
+        foreach ($filters as $column => $values) {
+            if ($column === 'all') {
+                $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
+                    foreach ($values as $value) {
+                        collect($this->columns)
+                            ->filter(fn ($column) => $column['searchable'] && $column['type'] !== 'boolean')
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column['index'], $value));
+                    }
+                });
+            } else {
+                $foundColumn = collect($this->columns)->first(fn($c) => $c['index'] === $column);
+
+                switch ($foundColumn['type']) {
+                    case'date_range':
+                    case'datetime_range':
+                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
+                            foreach ($values as $value) {
+                                if (! empty($value[0])) {
+                                    $scopeQueryBuilder->whereDate($column, $value[0]);
+                                }
+
+                                if (! empty($value[0])) {
+                                    $scopeQueryBuilder->whereDate($column, $value[1]);
+                                }
+                            }
+                        });
+                        break;
+
+                    default:
+                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
+                            foreach ($values as $value) {
+                                $scopeQueryBuilder->orWhere($column, $value);
+                            }
+                        });
+                        break;
+                }
             }
         }
 
-        return $necessaryExtraFilters;
+        $queryBuilder->orderBy(request('sort_by', $this->primaryColumn), request('sort_order', $this->sortOrder));
+
+        $paginator = $queryBuilder->paginate($this->itemsPerPage)->toArray();
+
+        // refactor
+        return [
+            'columns' => $this->columns,
+
+            'actions' => $this->actions,
+
+            'mass_actions' => $this->massActions,
+
+            'records' => $paginator['data'],
+
+            'links' => [
+                'first'    => $paginator['first_page_url'],
+                'last'     => $paginator['last_page_url'],
+                'previous' => $paginator['prev_page_url'],
+                'next'     => $paginator['next_page_url'],
+            ],
+
+            'meta' => [
+                'from'             => $paginator['from'],
+                'to'               => $paginator['to'],
+                'total'            => $paginator['total'],
+                'per_page_options' => [10, 20, 30, 40, 50],
+                'per_page'         => $paginator['per_page'],
+                'current_page'     => $paginator['current_page'],
+                'last_page'        => $paginator['last_page'],
+                'links'            => $paginator['links'],
+            ],
+        ];
     }
 
     /**
-     * Get column details by name. You can minimize the details by
-     * setting the key also.
+     * Get json data.
      *
-     * @param  string  $columnName
-     * @param  string  $key
-     * @return array
+     * @return \Illuminate\Http\JsonResponse
      */
-    protected function getColumnByName($columnName, $key = null)
+    public function toJson()
     {
-        $column = collect($this->columns)
-            ->filter(fn ($column) => $column['index'] === $columnName)
-            ->first();
+        $this->prepareColumns();
 
-        if ($key && isset($column[$key])) {
-            return $column[$key];
-        }
+        $this->prepareActions();
 
-        return $column;
+        $this->prepareMassActions();
+
+        $this->queryBuilder = $this->prepareQueryBuilder();
+
+        return response()->json($this->prepareData());
     }
 }

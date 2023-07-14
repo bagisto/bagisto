@@ -8,20 +8,6 @@ use Webkul\DataGrid\DataGrid;
 class AttributeDataGrid extends DataGrid
 {
     /**
-     * Set index columns, ex: id.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Default sort order of datagrid.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
      * @return void
@@ -30,13 +16,9 @@ class AttributeDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('attributes')
             ->select('id')
-            ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel');
+            ->addSelect('id', 'code', 'admin_name', 'type', 'is_required', 'is_unique', 'value_per_locale', 'value_per_channel', 'created_at');
 
-        $this->addFilter('is_unique', 'is_unique');
-        $this->addFilter('value_per_locale', 'value_per_locale');
-        $this->addFilter('value_per_channel', 'value_per_channel');
-
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -44,15 +26,15 @@ class AttributeDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
-            'searchable' => false,
-            'sortable'   => true,
+            'type'       => 'integer',
+            'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -60,8 +42,8 @@ class AttributeDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -69,80 +51,71 @@ class AttributeDataGrid extends DataGrid
             'label'      => trans('admin::app.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'type',
             'label'      => trans('admin::app.type'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'is_required',
             'label'      => trans('admin::app.required'),
             'type'       => 'boolean',
+            'searchable' => true,
+            'filterable' => true,
             'sortable'   => true,
-            'searchable' => false,
-            'closure'    => function ($value) {
-                if ($value->is_required) {
-                    return trans('admin::app.datagrid.true');
-                }
-
-                return trans('admin::app.datagrid.false');
-            },
         ]);
 
         $this->addColumn([
             'index'      => 'is_unique',
             'label'      => trans('admin::app.unique'),
             'type'       => 'boolean',
-            'sortable'   => true,
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->is_unique) {
-                    return trans('admin::app.datagrid.true');
-                }
-
-                return trans('admin::app.datagrid.false');
-            },
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'value_per_locale',
             'label'      => trans('admin::app.locale-based'),
             'type'       => 'boolean',
-            'sortable'   => true,
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->value_per_locale) {
-                    return trans('admin::app.datagrid.true');
-                }
-
-                return trans('admin::app.datagrid.false');
-            },
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'value_per_channel',
             'label'      => trans('admin::app.channel-based'),
             'type'       => 'boolean',
-            'sortable'   => true,
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
-            'closure'    => function ($value) {
-                if ($value->value_per_channel) {
-                    return trans('admin::app.datagrid.true');
-                }
+            'sortable'   => true,
+        ]);
 
-                return trans('admin::app.datagrid.false');
-            },
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('Created At'),
+            'type'       => 'date_range',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'created_at',
+            'label'      => trans('Created At'),
+            'type'       => 'datetime_range',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
