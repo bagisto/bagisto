@@ -136,9 +136,9 @@
                 label="Gender"
             >
                 <option value="">@lang('Select Gender')</option>
-                <option value="Other">@lang('shop::app.customer.account.profile.other')</option>
-                <option value="Male">@lang('shop::app.customer.account.profile.male')</option>
-                <option value="Female">@lang('shop::app.customer.account.profile.female')</option>
+                <option value="Other">@lang('shop::app.customers.account.profile.other')</option>
+                <option value="Male">@lang('shop::app.customers.account.profile.male')</option>
+                <option value="Female">@lang('shop::app.customers.account.profile.female')</option>
             </x-shop::form.control-group.control>
 
             <x-shop::form.control-group.error
@@ -233,7 +233,7 @@
             type="submit"
             class="bs-primary-button block m-0 w-max py-[11px] px-[43px] rounded-[18px] text-base text-center"
         >
-            @lang('shop::app.customers.account.save')
+            @lang('shop::app.customers.account.profile.save')
         </button>
     </x-shop::form>
 </x-shop::layouts.account>

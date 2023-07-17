@@ -51,7 +51,7 @@
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             @click="addToCart()"
                         >
-                            @lang('shop::app.components.products.add-to-cart')
+                            @lang('shop::app.components.products.card.add-to-cart')
                         </a>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                     class="bs-primary-button px-[30px] py-[10px] whitespace-nowrap"
                     @click="addToCart()"
                 >
-                    @lang('shop::app.components.products.add-to-cart')
+                    @lang('shop::app.components.products.card.add-to-cart')
                 </div> 
             </div> 
         </div>

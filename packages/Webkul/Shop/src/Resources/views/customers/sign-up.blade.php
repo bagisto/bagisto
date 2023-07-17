@@ -37,7 +37,7 @@
 
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label>
-                            @lang('shop::app.customers.signup-form.firstname')
+                            @lang('shop::app.customers.signup-form.first-name')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control
@@ -61,7 +61,7 @@
 
                     <x-shop::form.control-group class="mb-4">
                         <x-shop::form.control-group.label>
-                            @lang('shop::app.customers.signup-form.lastname')
+                            @lang('shop::app.customers.signup-form.last-name')
                         </x-shop::form.control-group.label>
 
                         <x-shop::form.control-group.control

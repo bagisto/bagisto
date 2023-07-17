@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Repositories\SearchRepository;
 
 class SearchController extends Controller
 {
@@ -11,9 +12,11 @@ class SearchController extends Controller
      *
      * @return void
      */
-    public function __construct(protected productRepository $productRepository)
+    public function __construct(
+        protected ProductRepository $productRepository,
+        protected SearchRepository $searchRepository
+    )
     {
-        parent::__construct();
     }
 
     /**
@@ -34,5 +37,15 @@ class SearchController extends Controller
         $results = $this->productRepository->getAll();
 
         return view('shop::search.index')->with('results', $results->count() ? $results : null);
+    }
+
+    /**
+     * Upload image for product search with machine learning.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function upload()
+    {
+        return $this->searchRepository->uploadSearchImage(request()->all());
     }
 }

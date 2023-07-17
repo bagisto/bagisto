@@ -5,6 +5,7 @@ namespace Webkul\CartRule\Helpers;
 use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\CartRule\Repositories\CartRuleRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
@@ -24,6 +25,7 @@ class CartRule
      * Create a new helper instance.
      *
      * @param  \Webkul\Customer\Repositories\CustomerRepository  $customerRepository
+     * @param  \Webkul\Checkout\Repositories\CartRepository  $cartRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleRepository  $cartRuleRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCouponRepository  $cartRuleCouponRepository
      * @param  \Webkul\CartRule\Repositories\CartRuleCustomerRepository  $cartRuleCustomerRepository
@@ -34,6 +36,7 @@ class CartRule
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
+        protected CartRepository $cartRepository,
         protected CartRuleRepository $cartRuleRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
         protected CartRuleCustomerRepository $cartRuleCustomerRepository,
@@ -51,6 +54,16 @@ class CartRule
      */
     public function collect($cart)
     {
+        /**
+         * If cart rules are not available then don't process further.
+         */
+        if (
+            ! $this->haveCartRules()
+            && ! $cart->base_discount_amount
+        ) {
+            return;
+        }
+
         $appliedCartRuleIds = [];
 
         $this->calculateCartItemTotals($cart);
@@ -62,15 +75,15 @@ class CartRule
 
             if (
                 $item->children()->count()
-                && $item->product->getTypeInstance()->isChildrenCalculated()
+                && $item->getTypeInstance()->isChildrenCalculated()
             ) {
                 $this->divideDiscount($item);
             }
         }
 
-        $cart->applied_cart_rule_ids = implode(',', array_unique($appliedCartRuleIds, SORT_REGULAR));
-        $cart->save();
-        $cart->refresh();
+        $cart = $this->cartRepository->update([
+            'applied_cart_rule_ids' => implode(',', array_unique($appliedCartRuleIds, SORT_REGULAR)),
+        ], $cart->id);
 
         $this->processShippingDiscount($cart);
 
@@ -103,9 +116,13 @@ class CartRule
 
         $staticCartRules::$cartID = $cart->id;
 
-        $customerGroup = $this->customerRepository->getCurrentGroup();
-
-        $cartRules = $this->getCartRuleQuery($customerGroup->id, core()->getCurrentChannel()->id);
+        $cartRules = $this->getCartRuleQuery()
+            ->with([
+                'cart_rule_customer_groups',
+                'cart_rule_channels',
+                'cart_rule_coupon'
+            ])
+            ->get();
 
         $staticCartRules::$cartRules = $cartRules;
         
@@ -381,9 +398,9 @@ class CartRule
 
         $cartAppliedCartRuleIds = array_unique($cartAppliedCartRuleIds);
 
-        $cart->applied_cart_rule_ids = implode(',', $cartAppliedCartRuleIds);
-
-        $cart->save();
+        $cart = $this->cartRepository->update([
+            'applied_cart_rule_ids' => implode(',', $cartAppliedCartRuleIds),
+        ], $cart->id);
 
         return $this;
     }
@@ -446,7 +463,9 @@ class CartRule
 
         $cart->applied_cart_rule_ids = join(',', $cartAppliedCartRuleIds);
 
-        $cart->save();
+        $cart = $this->cartRepository->update([
+            'applied_cart_rule_ids' => join(',', $cartAppliedCartRuleIds),
+        ], $cart->id);
     }
 
     /**
@@ -534,35 +553,41 @@ class CartRule
     }
 
     /**
-     * @param  integer  $customerGroupId
-     * @param  integer  $channelId
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Builder
      */
-    public function getCartRuleQuery($customerGroupId, $channelId): \Illuminate\Database\Eloquent\Collection
+    public function getCartRuleQuery()
     {
-        return $this->cartRuleRepository->scopeQuery(function ($query) use ($customerGroupId, $channelId) {
-            /** @var Builder $query */
-            return $query->leftJoin('cart_rule_customer_groups', 'cart_rules.id', '=',
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        return $this->cartRuleRepository
+            ->leftJoin('cart_rule_customer_groups', 'cart_rules.id', '=',
                 'cart_rule_customer_groups.cart_rule_id')
-                ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
-                ->where('cart_rule_customer_groups.customer_group_id', $customerGroupId)
-                ->where('cart_rule_channels.channel_id', $channelId)
-                ->where(function ($query1) {
-                    /** @var Builder $query1 */
-                    $query1->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d H:m:s'))
-                        ->orWhereNull('cart_rules.starts_from');
-                })
-                ->where(function ($query2) {
-                    /** @var Builder $query2 */
-                    $query2->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d H:m:s'))
-                        ->orWhereNull('cart_rules.ends_till');
-                })
-                ->with([
-                    'cart_rule_customer_groups',
-                    'cart_rule_channels',
-                    'cart_rule_coupon'
-                ])
-                ->orderBy('sort_order', 'asc');
-        })->findWhere(['status' => 1]);
+            ->leftJoin('cart_rule_channels', 'cart_rules.id', '=', 'cart_rule_channels.cart_rule_id')
+            ->where('cart_rule_customer_groups.customer_group_id', $customerGroup->id)
+            ->where('cart_rule_channels.channel_id', core()->getCurrentChannel()->id)
+            ->where(function ($query) {
+                /** @var Builder $query1 */
+                $query->where('cart_rules.starts_from', '<=', Carbon::now()->format('Y-m-d H:m:s'))
+                    ->orWhereNull('cart_rules.starts_from');
+            })
+            ->where(function ($query) {
+                /** @var Builder $query2 */
+                $query->where('cart_rules.ends_till', '>=', Carbon::now()->format('Y-m-d H:m:s'))
+                    ->orWhereNull('cart_rules.ends_till');
+            })
+            ->where('status', 1)
+            ->orderBy('sort_order', 'asc');
+    }
+
+    /**
+     * Check if cart rules are available or not for current customer group and channel
+     * 
+     * @return boolean
+     */
+    public function haveCartRules(): bool
+    {
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        return (boolean) $this->getCartRuleQuery()->count();
     }
 }

@@ -67,6 +67,8 @@
     <div class="1180:mt-[80px]">
         <x-shop::tabs position="center">
             {{-- Description Tab --}}
+            {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
+
             <x-shop::tabs.item
                 class="container mt-[60px] !p-0 max-1180:hidden"
                 :title="trans('shop::app.products.description')"
@@ -78,6 +80,9 @@
                     </p>
                 </div>
             </x-shop::tabs.item>
+
+            {!! view_render_event('bagisto.shop.products.view.description.after', ['product' => $product]) !!}
+
 
             {{-- Additional Information Tab --}}
             <x-shop::tabs.item
@@ -218,7 +223,9 @@
                         @include('shop::products.view.gallery')
 
                         <!-- Details -->
-                        <div class="w-max relative max-sm:w-full max-1180:px-[20px]">
+                        <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-[20px]">
+                            {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
+
                             <div class="flex gap-[15px] justify-between">
                                 <h1 class="text-[30px] font-medium max-sm:text-[20px]">
                                     {{ $product->name }}
@@ -232,7 +239,11 @@
                                 </div>
                             </div>
 
+                            {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
+
                             <!-- Rating -->
+                            {!! view_render_event('bagisto.shop.products.rating.before', ['product' => $product]) !!}
+
                             <div class="flex gap-[15px] items-center mt-[15px]">
                                 <x-shop::products.star-rating 
                                     :value="$avgRatings"
@@ -246,6 +257,8 @@
                                     </p>
                                 </div>
                             </div>
+
+                            {!! view_render_event('bagisto.shop.products.rating.after', ['product' => $product]) !!}
 
                             <!-- Pricing -->
                             {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
@@ -289,16 +302,25 @@
 
                                 {!! view_render_event('bagisto.shop.products.view.quantity.after', ['product' => $product]) !!}
 
+
+                                <!-- Add To Cart Button -->
+                                {!! view_render_event('bagisto.shop.products.view.add_to_cart.before', ['product' => $product]) !!}
+
                                 <button
                                     type="button"
-                                    class="bs-secondary-button w-full max-w-full"
+                                    class="bs-secondary-button w-full max-w-full hover:border-navyBlue"
                                     @click="addToCart"
                                 >
                                     @lang('shop::app.products.add-to-cart')
                                 </button>
+
+                                {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
                             </div>
 
+
                             <!-- Buy Now Button -->
+                            {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
+
                             <button
                                 type="button"
                                 class="bs-primary-button w-full max-w-[470px] mt-[20px]"
@@ -309,8 +331,12 @@
                                 @lang('shop::app.products.buy-now')
                             </button>
 
+                            {!! view_render_event('bagisto.shop.products.view.buy_now.after', ['product' => $product]) !!}
+
                             <!-- Share Buttons -->
-                            <div class="flex gap-[35px] mt-[40px] md:px-[35px] max-md:px-[80px] max-sm:px-[0px] max-sm:flex-wrap max-sm:justify-center">
+                            <div class="flex gap-[35px] mt-[40px] max-sm:flex-wrap max-sm:justify-center">
+                                {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
+
                                 <div
                                     class="flex gap-[10px] justify-center items-center cursor-pointer"
                                     @click="addToCompare({{ $product->id }})"
@@ -319,16 +345,7 @@
                                     @lang('shop::app.products.compare')
                                 </div>
 
-                                <div class="flex gap-[25px]">
-                                    <div class="hidden gap-[10px] justify-center items-center max-md:flex cursor-pointer">
-                                        <span class="icon-share text-[24px]"></span>
-                                        <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . bagisto_asset($product->url_key)) }};end">Share</a>
-                                    </div>
-
-                                    <div class="max-md:hidden">
-                                        {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
-                                    </div>
-                                </div>
+                                {!! view_render_event('bagisto.shop.products.view.compare.after', ['product' => $product]) !!}
                             </div>
                         </div>
                     </div>

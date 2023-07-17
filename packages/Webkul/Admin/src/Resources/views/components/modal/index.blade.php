@@ -68,28 +68,24 @@
             >
                 <div class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen">
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="w-full max-w-[595px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
-                            <div>
-                                <div class="flex gap-[20px] justify-between items-center p-[16px] rounded-t-lg bg-white border-b-[1px] border-[#E9E9E9]">
-                                    <slot name="header">
-                                        Default Header
-                                    </slot>
-
-                                    <span
-                                        class="icon-cancel text-[30px] cursor-pointer"
-                                        @click="toggle"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <slot name="content">
-                                    Default Content
+                        <div class="w-full max-w-[568px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
+                            <div class="flex gap-[20px] justify-between items-center h-[58px] p-[16px] rounded-t-lg bg-white border-b-[1px] border-[#E9E9E9]">
+                                <slot name="header">
+                                    Default Header
                                 </slot>
+
+                                <span
+                                    class="icon-cancel-1 text-[30px] cursor-pointer"
+                                    @click="toggle"
+                                >
+                                </span>
                             </div>
 
-                            <div class="flex gap-[20px] justify-end p-[16px] rounded-b-lg bg-white border-t-[1px] border-[#E9E9E9]">
+                            <slot name="content">
+                                Default Content
+                            </slot>
+                            
+                            <div class="flex gap-[20px] justify-end max-w-[568px] h-[58px] p-[10px] rounded-b-lg bg-white border-t-[1px] border-[#E9E9E9]">
                                 <slot name="footer">
                                     Default footer
                                 </slot>

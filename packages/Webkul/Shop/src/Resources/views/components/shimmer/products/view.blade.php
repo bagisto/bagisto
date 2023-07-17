@@ -11,7 +11,7 @@
     
         <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
 
-        <div class="relative max-w-[590px] max-1180:px-[20px]">
+        <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-[20px]">
             <div class="flex justify-between gap-[15px]">
                 <h1 class="shimmer w-[50%] h-[46px]"></h1>
 

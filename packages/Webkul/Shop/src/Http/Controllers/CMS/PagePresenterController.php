@@ -2,8 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers\CMS;
 
-use Webkul\CMS\Repositories\CmsRepository;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\CMS\Repositories\CmsRepository;
 
 class PagePresenterController extends Controller
 {

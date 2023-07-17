@@ -1,23 +1,9 @@
 <?php
 
-namespace Webkul\Shop\Http\Controllers;
+namespace Webkul\Shop\Http\Controllers\API;
 
-use Webkul\Core\Repositories\CountryRepository;
-use Webkul\Core\Repositories\CountryStateRepository;
-
-class CountryStateController extends Controller
+class CoreController extends APIController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(
-        protected CountryRepository $countryRepository,
-        protected CountryStateRepository $countryStateRepository
-    ) {
-    }
-
     /**
      * Get countries.
      *

@@ -6,14 +6,14 @@
         'summary' => $message
     ];
 
-    $linkedin_url = 'https://www.linkedin.com/shareArticle?' . http_build_query($detailes);
+    $linkedinURL = 'https://www.linkedin.com/shareArticle?' . http_build_query($detailes);
 @endphp
 
 <v-linkedin-share></v-linkedin-share>
 
 @push('scripts')
     <script type="text/x-template" id="v-linkedin-share-template">
-        <li class="bb-social-share__item bb-social--linkedin">
+        <li>
             <a 
                 href="#" 
                 @click="openSharePopup"
@@ -29,7 +29,7 @@
 
             data: function () {
                 return {
-                    shareUrl: '{{ $linkedin_url }}'
+                    shareUrl: '{{ $linkedinURL }}'
                 }
             },
 

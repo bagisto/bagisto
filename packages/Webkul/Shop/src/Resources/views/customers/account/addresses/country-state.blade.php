@@ -19,7 +19,7 @@
                     <option value=""></option>
 
                     @foreach (core()->countries() as $country)
-                        <option {{ $country->code === $defaultCountry ? 'selected' : '' }}  value="{{ $country->code }}">{{ $country->name }}</option>
+                        <option {{ $country->code === config('app.default_country') ? 'selected' : '' }}  value="{{ $country->code }}">{{ $country->name }}</option>
                     @endforeach
                 </select>
 
@@ -75,7 +75,7 @@
 
             data() {
                 return {
-                    country: "{{ $countryCode ?? $defaultCountry }}",
+                    country: "{{ $countryCode ?? config('app.default_country') }}",
 
                     state: "{{ $stateCode }}",
 

@@ -1,14 +1,14 @@
 @php
     $url = urlencode(route('shop.productOrCategory.index', $product->url_key));
 
-    $facebook_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
+    $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' . $url;
 @endphp
 
 <v-facebook-share></v-facebook-share>
 
 @push('scripts')
     <script type="text/x-template" id="v-facebook-share-template">
-        <li class="bb-social-share__item bb-social--facebook">
+        <li>
             <a 
                 href="#"
                 @click="openSharePopup"
@@ -24,7 +24,7 @@
 
             data: function () {
                 return {
-                    shareUrl: '{{ $facebook_url }}'
+                    shareUrl: '{{ $facebookURL }}'
                 }
             },
 
