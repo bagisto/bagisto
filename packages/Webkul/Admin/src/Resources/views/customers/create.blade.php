@@ -134,7 +134,7 @@
                                     </x-admin::form.control-group.label>
         
                                     <x-admin::form.control-group.control
-                                        type="text"
+                                        type="date"
                                         name="date_of_birth" 
                                         id="dob"
                                         :value="old('date_of_birth')"
@@ -241,14 +241,18 @@
             template: '#v-create-customer-template',
 
             methods: {
-                create(params, { resetForm }) {
+                create(params, { resetForm, setErrors }) {
                     this.$refs.customerCreateModal.toggle();
-
+                   
                     this.$axios.post("{{ route('admin.customer.store') }}", params)
                         .then((response) => {
                             resetForm();
                         })
-                        .catch(error => {});
+                        .catch(error => {
+                            if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                 }
             }
         })
