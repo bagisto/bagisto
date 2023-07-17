@@ -104,7 +104,7 @@
                     type="text"
                     name="query"
                     value="{{ request('query') }}"
-                    class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400"
+                    class="block w-full px-[44px] py-[13px] bg-[#F5F5F5] rounded-lg text-gray-900 text-xs font-medium transition-all border border-transparent hover:border-gray-400 focus:border-gray-400"
                     placeholder="Search for products"
                     required
                 >

@@ -4,12 +4,12 @@
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.before', ['product' => $product]) !!}
 
-    <v-product-options></v-product-options>
+    <v-product-configurable-options></v-product-configurable-options>
 
     {!! view_render_event('bagisto.shop.products.view.configurable-options.after', ['product' => $product]) !!}
 
     @push('scripts')
-        <script type="text/x-template" id="v-product-options-template">
+        <script type="text/x-template" id="v-product-configurable-options-template">
             <div class="attributes">
                 <input type="hidden" id="selected_configurable_option" ref="selected_configurable_option" name="selected_configurable_option" :value="selectedProductId">
 
@@ -21,7 +21,7 @@
                             <div v-if="attribute.code == 'color'" class="flex items-center space-x-3">   
                                 <template v-for="(option, index) in attribute.options">
                                     <label
-                                      class="relative flex -m-0.5 p-0.5 items-center justify-center rounded-full focus:outline-none undefined cursor-pointer"
+                                      class="relative flex -m-0.5 p-0.5 items-center justify-center rounded-full focus:outline-none cursor-pointer"
                                       :class="{'ring-gray-900 ring ring-offset-1' : index == attribute.selectedIndex}"
                                       :title="option.label"
                                     >
@@ -125,8 +125,8 @@
         <script type="module">
             let galleryImages = @json($galleryImages);
 
-            app.component('v-product-options', {
-                template: '#v-product-options-template',
+            app.component('v-product-configurable-options', {
+                template: '#v-product-configurable-options-template',
 
                 data() {
                     return {
@@ -380,7 +380,7 @@
                         });
 
                         if (galleryImages.length) {
-                            this.$parent.$root.$refs.gallery.mediaContents.images =  { ...galleryImages };
+                            this.$parent.$refs.gallery.mediaContents.images =  { ...galleryImages };
                         }
                     },
                 }

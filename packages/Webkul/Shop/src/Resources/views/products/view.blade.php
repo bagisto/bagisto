@@ -232,7 +232,7 @@
                                 </h1>
 
                                 <div
-                                    class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full transition text-[24px] cursor-pointer"
+                                    class="flex items-center justify-center min-w-[46px] min-h-[46px] max-h-[46px] bg-white border border-black rounded-full text-[24px] transition-all hover:opacity-[0.8] cursor-pointer"
                                     :class="isWishlist ? 'icon-heart-fill' : 'icon-heart'"
                                     @click="addToWishlist"
                                 >
@@ -308,7 +308,7 @@
 
                                 <button
                                     type="button"
-                                    class="bs-secondary-button w-full max-w-full hover:border-navyBlue"
+                                    class="bs-secondary-button w-full max-w-full"
                                     @click="addToCart"
                                 >
                                     @lang('shop::app.products.add-to-cart')
