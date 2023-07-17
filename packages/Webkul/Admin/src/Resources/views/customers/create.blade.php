@@ -19,9 +19,9 @@
                         </x-slot:toggle>
         
                         <x-slot:header>
-                            <div class="font-bold">
+                            <p class="text-[18px] text-gray-800 font-bold">
                                 @lang('admin::app.customers.create.create-customer')
-                            </div>    
+                            </p>    
                         </x-slot:header>
         
                         <x-slot:content>
