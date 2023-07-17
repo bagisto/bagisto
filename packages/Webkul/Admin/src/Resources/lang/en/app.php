@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'marketing' => [
         'sitemaps' => [
             'create'  => [

@@ -72,6 +72,7 @@
                                     </x-admin::form.control-group.control>
         
                                     <x-admin::form.control-group.error
+                                        class="mt-[4px]"
                                         control-name="path"
                                     >
                                     </x-admin::form.control-group.error>
