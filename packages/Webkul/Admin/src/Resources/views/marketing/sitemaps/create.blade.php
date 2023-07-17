@@ -1,58 +1,115 @@
-@extends('admin::layouts.content')
+<v-sitemaps />
 
-@section('page_title')
-    {{ __('admin::app.marketing.sitemaps.add-title') }}
-@stop
-
-@section('content')
-    <div class="content">
-
-        <form method="POST" action="{{ route('admin.sitemaps.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sitemaps.index') }}'"></i>
-
-                        {{ __('admin::app.marketing.sitemaps.add-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.sitemaps.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.before') !!}
-
-                    <accordian title="{{ __('admin::app.marketing.sitemaps.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('file_name') ? 'has-error' : '']">
-                                <label for="file_name" class="required">{{ __('admin::app.marketing.sitemaps.file-name') }}</label>
-                                <input v-validate="'required'" class="control" id="file_name" name="file_name" value="{{ old('file_name') }}" data-vv-as="&quot;{{ __('admin::app.marketing.sitemaps.file-name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('file_name')">@{{ errors.first('file_name') }}</span>
-                                <span class="control-info">{{ __('admin::app.marketing.sitemaps.file-name-info') }}</span>
+@pushOnce('scripts')
+    <script 
+        type="text/x-template" 
+        id="v-sitemaps-template"
+    >
+        <div>
+            <x-shop::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <!-- Create Sitemap form -->
+                <form @submit="handleSubmit($event, createSitemap)">
+                    <x-admin::modal ref="sitemap">
+                        <x-slot:toggle>
+                            <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                @lang('admin::app.marketing.sitemaps.create.title')
                             </div>
+                        </x-slot:toggle>
 
-                            <div class="control-group" :class="[errors.has('path') ? 'has-error' : '']">
-                                <label for="path" class="required">{{ __('admin::app.marketing.sitemaps.path') }}</label>
-                                <input v-validate="'required'" class="control" id="path" name="path" value="{{ old('path') }}" data-vv-as="&quot;{{ __('admin::app.marketing.sitemaps.path') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('path')">@{{ errors.first('path') }}</span>
-                                <span class="control-info">{{ __('admin::app.marketing.sitemaps.path-info') }}</span>
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.marketing.sitemaps.create.general')
+                            </p>
+                        </x-slot:header>
+
+                        <x-slot:content>
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <!-- File Name -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="!mt-0">
+                                        @lang('admin::app.marketing.sitemaps.create.file-name')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="file_name"
+                                        :value="old('file_name')"
+                                        rules="required"
+                                        label="{{ trans('admin::app.marketing.sitemaps.create.file-name') }}"
+                                        placeholder="{{ trans('admin::app.marketing.sitemaps.create.file-name') }}"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        class="mt-[4px]"
+                                        control-name="file_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+
+                                    <p class="mt-[8px] ml-[4px] text-[12px] text-gray-600 font-medium">
+                                        @lang('admin::app.marketing.sitemaps.create.file-name-info')
+                                    </p>
+
+                                </x-admin::form.control-group>
+        
+                                <!---- File Path -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.marketing.sitemaps.create.path')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="path"
+                                        :value="old('path')"
+                                        rules="required"
+                                        label="{{ trans('admin::app.marketing.sitemaps.create.path') }}"
+                                        placeholder="{{ trans('admin::app.marketing.sitemaps.create.path') }}"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="path"
+                                    >
+                                    </x-admin::form.control-group.error>
+
+                                    <p class="mt-[8px] ml-[4px] text-[12px] text-gray-600 font-medium">
+                                        @lang('admin::app.marketing.sitemaps.create.path-info')
+                                    </p>
+                                </x-admin::form.control-group>
                             </div>
+                        </x-slot:content>
+                        
+                        <x-slot:footer>
+                            <!-- Save Button -->
+                            <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                @lang('admin::app.marketing.sitemaps.create.save')
+                            </button>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-shop::form>
+        </div>
+    </script>
 
-                        </div>
-                    </accordian>
+    <script type="module">
+        app.component('v-sitemaps', {
+            template: '#v-sitemaps-template',
 
-                    {!! view_render_event('bagisto.admin.marketing.sitemaps.create.after') !!}
+            methods: {
+                createSitemap(params, { resetForm }) {
+                    this.$axios.post("{{ route('admin.sitemaps.store') }}", params )
+                        .then((response) => {
+                            this.$refs.sitemap.toggle();
 
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+                            resetForm();
+                        })
+                        .catch(error => console.log(error));
+                },
+            }
+        })
+    </script>
+@endPushOnce

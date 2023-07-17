@@ -1,6 +1,21 @@
 <?php
 
 return [
+
+    'marketing' => [
+        'sitemaps' => [
+            'create'  => [
+                'file-name'      => 'File Name',
+                'file-name-info' => 'Example: sitemap.xml',
+                'general'        => 'General',
+                'path'           => 'Path',
+                'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                'save'           => 'Save',
+                'title'          => 'Add Sitemap',
+            ],
+        ],
+    ],
+
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -1304,7 +1319,7 @@ return [
         ],
     ],
 
-    'marketing' => [
+    'marketing-old' => [
         'templates' => [
             'title'          => 'Email Templates',
             'add-title'      => 'Add Email Template',

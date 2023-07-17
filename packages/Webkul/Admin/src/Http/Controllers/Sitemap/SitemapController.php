@@ -4,9 +4,9 @@ namespace Webkul\Admin\Http\Controllers\Sitemap;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\DataGrids\SitemapDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sitemap\Repositories\SitemapRepository;
+use Webkul\Admin\DataGrids\SitemapDataGrid;
 
 class SitemapController extends Controller
 {
@@ -57,7 +57,10 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.create.before');
 
-        $sitemap = $this->sitemapRepository->create(request()->all());
+        $sitemap = $this->sitemapRepository->create([
+            'file_name'  => request()->input('file_name'),
+            'path'       => request()->input('path'),
+        ]);
 
         Event::dispatch('marketing.sitemaps.create.after', $sitemap);
 
@@ -94,7 +97,10 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.update.before', $id);
 
-        $sitemap = $this->sitemapRepository->update(request()->all(), $id);
+        $sitemap = $this->sitemapRepository->update([
+            'file_name'  => request()->input('file_name'),
+            'path'       => request()->input('path'),
+        ], $id);
 
         Event::dispatch('marketing.sitemaps.update.after', $sitemap);
 
