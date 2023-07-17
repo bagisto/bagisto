@@ -1,27 +1,17 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.settings.currencies.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.settings.currencies.title') }}
-@stop
+    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.settings.currencies.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.settings.currencies.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('settings.currencies.create'))
-                    <a href="{{ route('admin.currencies.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.currencies.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.currencies.index') }}"></datagrid-plus>
+        <div class="flex gap-x-[10px] items-center">
+            @include('admin::settings.currencies.create')
         </div>
     </div>
-@stop
+    
+    {{-- datagrid will be here --}}
+</x-admin::layouts>
