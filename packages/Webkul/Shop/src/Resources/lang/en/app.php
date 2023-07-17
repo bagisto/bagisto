@@ -345,6 +345,7 @@ return [
         'starting-at'            => 'Starting at',
         'name'                   => 'Name',
         'qty'                    => 'Qty',
+
         'sort-by'                => [
             'title'   => 'Sort By',
             'options' => [
@@ -359,6 +360,11 @@ return [
 
         'view' => [
             'type' => [
+                'configurable' => [
+                    'select-options'       => 'Please select an option',
+                    'select-above-options' => 'Please select above options'
+                ],
+                
                 'bundle' => [
                     'none' => 'None',
                 ],
