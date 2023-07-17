@@ -17,7 +17,7 @@
                 type="{{ $type }}"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow appearance-none border rounded text-[14px] focus:ring-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
         </v-field>
 
@@ -32,7 +32,7 @@
             <textarea
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow appearance-none border rounded text-[14px] focus:ring-gray-500 focus:border-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow border rounded text-[14px] transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
             </textarea>
         </v-field>
@@ -74,7 +74,7 @@
             <select
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                {{ $attributes->except(['value'])->merge(['class' => 'custom-select block w-full py-2 px-3 shadow appearance-none bg-white border border-[#E9E9E9] rounded-lg text-[16px] focus:ring-gray-500 focus:border-gray-500 focus:outline-none focus:shadow-outline']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'custom-select block w-full py-2 px-3 shadow bg-white border border-[#E9E9E9] rounded-lg text-[16px] transition-all hover:border-gray-400 focus:border-gray-400']) }}
             >
                 {{ $slot }}
             </select>

@@ -11,6 +11,10 @@
 }
 
 @layer components {
+    input{
+        @apply outline-none;
+    }
+
     [class^="icon-"],
     [class*=" icon-"] {
         /* use !important to prevent issues with browser extensions that change fonts */
@@ -201,7 +205,6 @@
 
     .icon-more:before {
         content: "\e92b";
-        color: #7d7d7d;
     }
 
     .icon-orders:before {
@@ -354,10 +357,11 @@
     }
 
     .bs-primary-button {
-        @apply  font-medium rounded-[12px] text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer;
+        @apply font-medium rounded-[12px] text-white bg-navyBlue border border-navyBlue px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:opacity-[0.9];
     }
+    
     .bs-secondary-button {
-        @apply  font-medium rounded-[12px] bg-white text-navyBlue border border-navyBlue  px-[30px] py-[15px] max-w-max cursor-pointer;
+        @apply font-medium rounded-[12px] bg-white text-navyBlue border border-navyBlue  px-[30px] py-[15px] max-w-max cursor-pointer transition-all hover:bg-[#050e3a0d];
     }
 
     .shimmer {

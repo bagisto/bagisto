@@ -78,7 +78,7 @@
         <x-shop::modal>
             <x-slot:toggle>
                 <div
-                    class="bs-primary-button block w-max m-0 ml-[0px] mx-auto py-[11px] px-[43px] rounded-[18px] text-base text-center"
+                    class="bs-primary-button py-[11px] px-[43px] rounded-[18px]"
                 >
                     @lang('shop::app.customers.account.profile.delete-profile')
                 </div>
@@ -91,34 +91,34 @@
             </x-slot:header>
 
             <x-slot:content>
-                <x-form
+                <x-shop::form
                     action="{{ route('shop.customers.account.profile.destroy') }}"
                 >
-                    <x-form.control-group>
+                    <x-shop::form.control-group>
                         <div class="p-[30px] bg-white">
-                            <x-form.control-group.control
+                            <x-shop::form.control-group.control
                                 type="password"
                                 name="password"
                                 class="py-[20px] px-[25px]"
                                 placeholder="Enter your password"
                             />
 
-                            <x-form.control-group.error
+                            <x-shop::form.control-group.error
                                 control-name="password"
                             >
-                            </x-form.control-group.error>
+                            </x-shop::form.control-group.error>
                         </div>
-                    </x-form.control-group>
+                    </x-shop::form.control-group>
 
                     <div class="p-[30px] bg-white mt-[20px]">
                         <button
                             type="submit"
-                            class="block flex-auto w-max py-[11px] px-[43px] bg-navyBlue rounded-[18px] text-white text-base text-center font-medium cursor-pointer max-sm:text-[14px] max-sm:px-[25px]"
+                            class="bs-primary-button flex py-[11px] px-[43px] rounded-[18px] max-sm:text-[14px] max-sm:px-[25px]"
                         >
                             @lang('shop::app.customers.account.profile.delete')
                         </button>
                     </div>
-                </x-form>
+                </x-shop::form>
             </x-slot:content>
         </x-shop::modal>
     </div>
