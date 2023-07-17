@@ -10,17 +10,6 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-template">
             <div>
-                 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <x-admin::form 
                     :action="route('admin.inventory_sources.store')"
                     enctype="multipart/form-data"
@@ -43,6 +32,7 @@
 
                     {!! view_render_event('bagisto.admin.settings.inventory.create.before') !!}
 
+                    {{-- General --}}
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
@@ -205,6 +195,7 @@
                         </div>
                     </div>
 
+                    {{-- Contact Information --}}
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
@@ -303,6 +294,7 @@
                         </div>
                     </div>
 
+                    {{-- Source Address --}}
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
