@@ -29,11 +29,10 @@ return [
             ],
 
             'create' => [
-                'add-group'  => 'Add Group',
+                'add-group'  => 'Add New Group',
                 'code'       => 'Code',
                 'name'       => 'Name',
                 'save-group' => 'Save Group'
-
             ],
         ],
     ],
