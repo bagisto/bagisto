@@ -16,7 +16,7 @@
 
 
 {{-- SEO Meta Content --}}
-@push('meta')
+@push ('meta')
     <meta name="title" content="{{ $metaTitle }}" />
 
     <meta name="description" content="{{ $metaDescription }}" />
@@ -32,22 +32,19 @@
     
     {{-- Loop over the theme customization --}}
     @foreach ($customizations as $customization)
-        @php($data = $customization->options)
+        @php ($data = $customization->options)
 
         {{-- Static content --}}
-        @switch($customization->type)
+        @switch ($customization->type)
             {{-- Image Carousel --}}
-            @case($customization::IMAGE_CAROUSEL)
-                <x-shop::slider
-                    :options="$data"
-                >
-                </x-shop::slider>
+            @case ($customization::IMAGE_CAROUSEL)
+                <x-shop::slider :options="$data"></x-shop::slider>
 
-            @break
+                @break
 
-            @case($customization::STATIC_CONTENT)
+            @case ($customization::STATIC_CONTENT)
                 {{-- push style --}}
-                @push('styles')
+                @push ('styles')
                     <style>
                         {{ $data['css'] }}
                     </style>
@@ -58,7 +55,7 @@
 
                 @break
 
-            @case($customization::CATEGORY_CAROUSEL)
+            @case ($customization::CATEGORY_CAROUSEL)
                 {{-- Categories carousel --}}
                 <x-shop::categories.carousel
                     :title="$customization->name"
@@ -69,7 +66,7 @@
 
                 @break
 
-            @case($customization::PRODUCT_CAROUSEL)
+            @case ($customization::PRODUCT_CAROUSEL)
                 {{-- Product Carousel --}}
                 <x-shop::products.carousel
                     {{-- title="Men's Collections" --}}
