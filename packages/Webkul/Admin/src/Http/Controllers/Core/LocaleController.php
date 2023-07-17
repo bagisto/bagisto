@@ -2,10 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Core;
 
-use Webkul\Admin\DataGrids\LocalesDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\LocaleRepository;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Admin\DataGrids\LocalesDataGrid;
 
 class LocaleController extends Controller
 {
@@ -30,16 +30,6 @@ class LocaleController extends Controller
         }
 
         return view('admin::settings.locales.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::settings.locales.create');
     }
 
     /**
