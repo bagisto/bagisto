@@ -94,16 +94,24 @@
     </x-slot:control>
 </x-form.control>
 
+<x-admin::modal>
+    <x-slot:toggle>
+        Modal Toggle
+    </x-slot:toggle>
 
-<button @click="$root.showModal('testModal')">Open Modal</button>
+    <x-slot:header>
+        Modal Header
+    </x-slot:header>
 
+    <x-slot:content>
+        Modal Content
 
-<x-modal id="testModal" is-open="$root.modalIds.testModal">
-    <x-slot:header>Modal Title</x-slot:header>
+    </x-slot:content>
 
-    <x-slot:body>Modal Body</x-slot:body>
-</x-modal>
-
+    <x-slot:footer>
+        Modal Footer
+    </x-slot:footer>
+</x-admin::modal>
 
 <x-flash-group></x-flash-group>
 
