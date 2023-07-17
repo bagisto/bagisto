@@ -9,7 +9,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="twitter-share-template">
-        <li>
+        <li class="transition-all hover:opacity-[0.8]">
             <a 
                 href="#" 
                 @click="openSharePopup"

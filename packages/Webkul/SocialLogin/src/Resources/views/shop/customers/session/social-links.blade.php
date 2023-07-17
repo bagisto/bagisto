@@ -8,7 +8,10 @@
             $icon = explode('_', $social); 
         @endphp
 
-        <a href="{{ route('customer.social-login.index', $icon[1]) }}">
+        <a
+            href="{{ route('customer.social-login.index', $icon[1]) }}"
+            class="transition-all hover:opacity-[0.8]"
+        >
             @include('social_login::icons.' . $icon[1])
         </a>
     @endforeach

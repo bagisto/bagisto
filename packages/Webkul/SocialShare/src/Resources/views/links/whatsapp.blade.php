@@ -10,7 +10,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="whatsapp-share-link">
-        <li>
+        <li class="transition-all hover:opacity-[0.8]">
             <a 
                 :href="shareUrl" 
                 data-action="share/whatsapp/share" 
