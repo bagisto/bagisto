@@ -4,13 +4,14 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\NewCustomerNotification;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 
 class CustomerController extends Controller
 {
@@ -43,7 +44,7 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function store()
     {
@@ -74,9 +75,9 @@ class CustomerController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.customers.create-success'));
-
-        return redirect()->route('admin.customer.index');
+        return new JsonResource([
+            'message' => trans('admin::app.customers.create-success'),
+        ]);
     }
 
     /**

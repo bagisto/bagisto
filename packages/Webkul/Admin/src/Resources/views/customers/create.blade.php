@@ -8,24 +8,29 @@
                 as="div"
             >
                 <form @submit="handleSubmit($event, create)">
+                    <!-- Customer Create Modal -->
                     <x-admin::modal ref="customerCreateModal">
                         <x-slot:toggle>
-                            <button 
-                                type="button"
-                                class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                            >
-                                @lang('admin::app.customers.create.add-new-customer')
-                            </button>
+                            <!-- Customer Create Button -->
+                            @if (bouncer()->hasPermission('customers.customers.create'))
+                                <button 
+                                    type="button"
+                                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                                >
+                                    @lang('admin::app.customers.create.add-new-customer')
+                                </button>
+                            @endif
                         </x-slot:toggle>
         
                         <x-slot:header>
+                            <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
                                 @lang('admin::app.customers.create.create-customer')
                             </p>    
                         </x-slot:header>
         
                         <x-slot:content>
-        
+                            <!-- Modal Content -->
                             {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
                             <div class="px-[16px] py-[10px]">
@@ -215,6 +220,7 @@
                         </x-slot:content>
         
                         <x-slot:footer>
+                            <!-- Modal Submission -->
                             <div class="flex gap-x-[10px] items-center">
                                 <button 
                                     type="submit"
