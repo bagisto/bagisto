@@ -1,27 +1,9 @@
-@extends('admin::layouts.content')
+<div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <p class="text-[20px] text-gray-800 font-bold">
+        @lang('admin::app.marketing.email-marketing.templates.events')
+    </p>
 
-@section('page_title')
-    {{ __('admin::app.marketing.events.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.marketing.events.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('marketing.email-marketing.events.create'))
-                    <a href="{{ route('admin.events.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.events.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.events.index') }}"></datagrid-plus>
-        </div>
+    <div class="flex gap-x-[10px] items-center">
+       @include('admin::marketing.email-marketing.events.create')
     </div>
-@stop
+</div>

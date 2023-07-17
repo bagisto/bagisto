@@ -1,64 +1,130 @@
-@extends('admin::layouts.content')
+<v-email-events />
 
-@section('page_title')
-    {{ __('admin::app.marketing.events.add-title') }}
-@stop
-
-@section('content')
-    <div class="content">
-
-        <form method="POST" action="{{ route('admin.events.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.events.index') }}'"></i>
-
-                        {{ __('admin::app.marketing.events.add-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.events.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    {!! view_render_event('bagisto.admin.marketing.events.create.before') !!}
-
-                    <accordian title="{{ __('admin::app.marketing.events.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.marketing.events.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.marketing.events.name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+@pushOnce('scripts')
+    <script 
+        type="text/x-template" 
+        id="v-email-events-template"
+    >
+        <div>
+            <x-shop::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <!-- Email Events form -->
+                <form @submit="handleSubmit($event, createEmailEvents)">
+                    <x-admin::modal ref="emailEvents">
+                        <x-slot:toggle>
+                            <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                @lang('admin::app.marketing.email-marketing.events.create.add-title')
                             </div>
+                        </x-slot:toggle>
 
-                            <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                                <label for="description" class="required">{{ __('admin::app.marketing.events.description') }}</label>
-                                <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.marketing.events.description') }}&quot;">{{ old('description') }}</textarea>
-                                <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.marketing.email-marketing.events.create.general')
+                            </p>
+                        </x-slot:header>
+
+                        <x-slot:content>
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <!-- Event Name -->
+                                <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group.label class="!mt-0">
+                                        @lang('admin::app.marketing.email-marketing.events.create.name')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        rules="required"
+                                        class="!mb-1"
+                                        label="{{ trans('admin::app.marketing.email-marketing.events.create.name') }}"
+                                        placeholder="{{ trans('admin::app.marketing.email-marketing.events.create.name') }}"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+        
+                                <!-- Event Description -->
+                                <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.marketing.email-marketing.events.create.description')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="description"
+                                        value="{{ old('description') }}"
+                                        rules="required"
+                                        id="description"
+                                        class="!mb-1 h-[100px]"
+                                        label="{{ trans('admin::app.marketing.email-marketing.events.create.description')}}"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error 
+                                        control-name="description"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <!-- Event Date -->
+                                <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group.label class="!mt-0">
+                                        @lang('admin::app.marketing.email-marketing.events.create.date')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="date"
+                                        :value="old('date')"
+                                        rules="required"
+                                        label="{{ trans('date') }}"
+                                        class="!mb-1"
+                                        placeholder="{{ trans('admin::app.marketing.email-marketing.events.create.date') }}"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="date"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
+                        </x-slot:content>
+                        
+                        <x-slot:footer>
+                            <!-- Save Button -->
+                            <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                @lang('admin::app.marketing.email-marketing.events.create.save')
+                            </button>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-shop::form>
+        </div>
+    </script>
 
-                            <div class="control-group date" :class="[errors.has('date') ? 'has-error' : '']">
-                                <label for="date" class="required">{{ __('admin::app.marketing.events.date') }}</label>
-                                <date>
-                                    <input type="text" name="date" class="control" v-validate="'required'" value="{{ old('date') }}" data-vv-as="&quot;{{ __('admin::app.marketing.events.date') }}&quot;">
-                                </date>
-                                <span class="control-error" v-if="errors.has('date')">@{{ errors.first('date') }}</span>
-                            </div>
+    <script type="module">
+        app.component('v-email-events', {
+            template: '#v-email-events-template',
 
-                        </div>
-                    </accordian>
+            methods: {
+                createEmailEvents(params, { resetForm }) {
+                    this.$axios.post("{{ route('admin.events.store') }}", params )
+                        .then((response) => {
+                            this.$refs.emailEvents.toggle();
 
-                    {!! view_render_event('bagisto.admin.marketing.events.create.after') !!}
-
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+                            resetForm();
+                        })
+                        .catch(error => console.log(error));
+                },
+            }
+        })
+    </script>
+@endPushOnce

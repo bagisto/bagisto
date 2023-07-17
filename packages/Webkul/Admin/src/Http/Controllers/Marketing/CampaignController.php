@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CampaignDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Marketing\Repositories\TemplateRepository;
+use Webkul\Admin\DataGrids\CampaignDataGrid;
 
 class CampaignController extends Controller
 {
@@ -18,7 +18,8 @@ class CampaignController extends Controller
     public function __construct(
         protected CampaignRepository $campaignRepository,
         protected TemplateRepository $templateRepository,
-    ) {
+    )
+    {
     }
 
     /**
@@ -64,13 +65,21 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.create.before');
 
-        $campaign = $this->campaignRepository->create(request()->all());
+        $campaign = $this->campaignRepository->create([
+            'name'                  => request()->input('name'),
+            'subject'               => request()->input('subject'),
+            'marketing_event_id'    => request()->input('marketing_event_id'),
+            'marketing_template_id' => request()->input('marketing_template_id'),
+            'status'                => request()->input('status'),
+            'channel_id'            => request()->input('channel_id'),
+            'customer_group_id'     => request()->input('customer_group_id'),
+        ]);
 
         Event::dispatch('marketing.campaigns.create.after', $campaign);
 
         session()->flash('success', trans('admin::app.marketing.campaigns.create-success'));
 
-        return redirect()->route('admin.campaigns.index');
+        return redirect()->route('admin.email_templates.index');
     }
 
     /**
@@ -106,7 +115,15 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.update.before', $id);
 
-        $campaign = $this->campaignRepository->update(request()->all(), $id);
+        $campaign = $this->campaignRepository->update([
+            'name'                  => request()->input('name'),
+            'subject'               => request()->input('subject'),
+            'marketing_event_id'    => request()->input('marketing_event_id'),
+            'marketing_template_id' => request()->input('marketing_template_id'),
+            'status'                => request()->input('status'),
+            'channel_id'            => request()->input('channel_id'),
+            'customer_group_id'     => request()->input('customer_group_id'),
+        ], $id);
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
 
