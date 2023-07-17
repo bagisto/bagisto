@@ -2,6 +2,10 @@
 
 return [
     'customers' => [
+        'index'  => [
+            'title' => 'Customers',
+        ],
+
         'create' => [
             'add-new-customer'      => 'Add New Customer',
             'create-customer'       => 'Create Customer',
@@ -17,6 +21,20 @@ return [
             'female'                => 'female',
             'date-of-birth'         => 'Date of Birth',
             'customer-group'        => 'Customer Group',
+        ],
+
+        'groups' => [
+            'index' => [
+                'title' => 'Groups'
+            ],
+
+            'create' => [
+                'add-group'  => 'Add Group',
+                'code'       => 'Code',
+                'name'       => 'Name',
+                'save-group' => 'Save Group'
+
+            ],
         ],
     ],
 

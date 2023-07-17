@@ -34,7 +34,7 @@
                             {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
                             <div class="px-[16px] py-[10px]">
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.create.first-name')
                                     </x-admin::form.control-group.label>
@@ -58,7 +58,7 @@
         
                                 {!! view_render_event('bagisto.admin.customers.create.first_name.after') !!}
         
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.create.last-name')
                                     </x-admin::form.control-group.label>
@@ -82,7 +82,7 @@
         
                                 {!! view_render_event('bagisto.admin.customers.create.last_name.after') !!}
         
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.create.email')
                                     </x-admin::form.control-group.label>
@@ -106,7 +106,7 @@
         
                                 {!! view_render_event('bagisto.admin.customers.create.email.after') !!}
         
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.create.contact-number')
                                     </x-admin::form.control-group.label>
@@ -128,7 +128,7 @@
         
                                 {!! view_render_event('bagisto.admin.customers.create.phone.after') !!}
             
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.create.date-of-birth')
                                     </x-admin::form.control-group.label>

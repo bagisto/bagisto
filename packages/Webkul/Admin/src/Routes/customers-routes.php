@@ -85,8 +85,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(CustomerGroupController::class)->prefix('groups')->group(function () {
         Route::get('', 'index')->name('admin.groups.index');
 
-        Route::get('create', 'create')->name('admin.groups.create');
-
         Route::post('create', 'store')->name('admin.groups.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.groups.edit');

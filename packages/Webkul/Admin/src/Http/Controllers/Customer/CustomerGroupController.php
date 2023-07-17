@@ -3,10 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Core\Rules\Code;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Admin\DataGrids\CustomerGroupDataGrid;
+use Webkul\Core\Rules\Code;
 
 class CustomerGroupController extends Controller
 {
@@ -35,16 +36,6 @@ class CustomerGroupController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::customers.groups.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\Response
@@ -64,9 +55,9 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Customer Group']));
-
-        return redirect()->route('admin.groups.index');
+        return new JsonResource([
+            'message' => trans('admin::app.response.create-success'),
+        ]);
     }
 
     /**
