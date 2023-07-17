@@ -1,6 +1,45 @@
 <?php
 
 return [
+    'settings' => [
+        'locales'           => [
+            'title'             => 'Locales',
+            'add-title'         => 'Add Locale',
+            'edit-title'        => 'Edit Locale',
+            'save-btn-title'    => 'Save Locale',
+            'general'           => 'General',
+            'code'              => 'Code',
+            'name'              => 'Name',
+            'direction'         => 'Direction',
+            'locale-logo'              => 'Locale Logo',
+            'create-success'    => 'Locale created successfully.',
+            'update-success'    => 'Locale updated successfully.',
+            'delete-success'    => 'Locale deleted successfully.',
+            'last-delete-error' => 'At least one Locale is required.',
+        ],
+        'currencies'        => [
+            'title'              => 'Currencies',
+            'add-title'          => 'Add Currency',
+            'edit-title'         => 'Edit Currency',
+            'save-btn-title'     => 'Save Currency',
+            'general'            => 'General',
+            'code'               => 'Code',
+            'name'               => 'Name',
+            'symbol'             => 'Symbol',
+            'decimal'            => 'Decimal',
+            'create-success'     => 'Currency created successfully.',
+            'update-success'     => 'Currency updated successfully.',
+            'delete-success'     => 'Currency deleted successfully.',
+            'last-delete-error'  => 'At least one Currency is required.',
+        ],
+    ],
+    
+
+
+
+
+
+
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -845,7 +884,7 @@ return [
         ],
     ],
 
-    'settings' => [
+    'settings-old' => [
         'locales'           => [
             'title'             => 'Locales',
             'add-title'         => 'Add Locale',
