@@ -1,4 +1,4 @@
-<div class="flex justify-between max-md:items-center">
+<div class="flex justify-between max-md:items-center max-md:hidden">
     <div class="hidden max-md:block"></div>
 
     <div class="shimmer w-[143px] h-[54px] rounded-lg"></div>

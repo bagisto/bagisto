@@ -1,97 +1,147 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-shop::form 
+        :action="route('admin.locales.update', $locale->id)"
+        enctype="multipart/form-data"
+    >
+        @method('PUT')
 
-@section('page_title')
-    {{ __('admin::app.settings.locales.edit-title') }}
-@stop
+        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.locales.edit-title')
+            </p>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.locales.update', $locale->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.locales.index') }}'"></i>
-
-                        {{ __('admin::app.settings.locales.edit-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.locales.save-btn-title') }}
-                    </button>
-                </div>
+            <div class="flex gap-x-[10px] items-center">
+                <button 
+                    type="submit"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.settings.locales.save-btn-title')
+                </button>
             </div>
+        </div>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
                     {!! view_render_event('bagisto.admin.settings.locale.edit.before', ['locale' => $locale]) !!}
+                    
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.settings.locales.general')
+                    </p>
 
-                    <input name="_method" type="hidden" value="PUT">
+                    <x-admin::form.control-group.control
+                        type="hidden"
+                        name="code"
+                        :value="old('code') ?? $locale->code"
+                    >
+                    </x-admin::form.control-group.control>
 
-                    <accordian title="{{ __('admin::app.settings.locales.general') }}" :active="true">
-                        <div slot="body">
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.locales.code')
+                        </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
+                        <x-admin::form.control-group.control
+                            type="text"
+                            name="code"
+                            :value="old('code') ?? $locale->code"
+                            id="code"
+                            rules="required"
+                            :label="trans('admin::app.settings.locales.code')"
+                            :placeholder="trans('admin::app.settings.locales.code')"
+                            disabled="disabled"
+                        >
+                        </x-admin::form.control-group.control>
 
-                                <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" value="{{ old('code') ?: $locale->code }}" disabled="disabled"/>
+                        <x-admin::form.control-group.error
+                            control-name="code"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
 
-                                <input type="hidden" name="code" value="{{ $locale->code }}"/>
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.locales.name')
+                        </x-admin::form.control-group.label>
 
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                            </div>
+                        <x-admin::form.control-group.control
+                            type="text"
+                            name="name"
+                            :value="old('name') ?? $locale->name"
+                            id="name"
+                            rules="required"
+                            :label="trans('admin::app.settings.locales.name')"
+                            :placeholder="trans('admin::app.settings.locales.name')"
+                        >
+                        </x-admin::form.control-group.control>
 
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.locales.name') }}</label>
+                        <x-admin::form.control-group.error
+                            control-name="name"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
+        
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.locales.direction')
+                        </x-admin::form.control-group.label>
 
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.locales.name') }}&quot;" value="{{ old('name') ?: $locale->name }}"/>
+                        <x-admin::form.control-group.control
+                            type="select"
+                            name="direction"
+                            :value="old('direction') ?? $locale->direction"
+                            id="direction"
+                            rules="required"
+                            :label="trans('admin::app.settings.locales.direction')"
+                        >
+                            <option 
+                                value="ltr"
+                                title="Text direction left to right"
+                                {{ (old('direction') ?? $locale->direction) == 'ltr' ? 'selected' : '' }}
+                            >
+                                LTR
+                            </option>
+        
+                            <option 
+                                value="rtl"
+                                title="Text direction right to left"
+                                {{ (old('direction') ?: $locale->direction) == 'rtl' ? 'selected' : '' }}
+                            >
+                                RTL
+                            </option>
+                        </x-admin::form.control-group.control>
 
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
+                        <x-admin::form.control-group.error
+                            control-name="direction"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
+        
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.locales.locale-logo')
+                        </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('direction') ? 'has-error' : '']">
-                                <label for="direction" class="required">{{ __('admin::app.settings.locales.direction') }}</label>
+                        <x-admin::form.control-group.control
+                            type="image"
+                            name="logo_path[image_1]"
+                            id="direction"
+                            :label="trans('Logo Path')"
+                            :src="$locale->logo_url"
+                            accepted-types="image/*"
+                        >
+                        </x-admin::form.control-group.control>
 
-                                <select v-validate="'required'" class="control" id="direction" name="direction" data-vv-as="&quot;{{ __('admin::app.settings.locales.direction') }}&quot;">
-                                    <option value="ltr" {{ (old('direction') ?: $locale->direction) == 'ltr' ? 'selected' : '' }}>LTR</option>
-                                    <option value="rtl" {{ (old('direction') ?: $locale->direction) == 'rtl' ? 'selected' : '' }}>RTL</option>
-                                </select>
-
-                                <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label>{{ __('velocity::app.admin.general.locale_logo') }}</label>
-
-                                @if (
-                                    isset($locale)
-                                    && $locale->logo_path
-                                )
-                                    <image-wrapper
-                                        input-name="logo_path"
-                                        :multiple="false"
-                                        :images='"{{ Storage::url($locale->logo_path) }}"'
-                                        button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
-                                    </image-wrapper>
-                                @else
-                                    <image-wrapper
-                                        input-name="logo_path"
-                                        :multiple="false"
-                                        button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
-                                    </image-wrapper>
-                                @endif
-
-                                <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-locale-resolution') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
+                        <x-admin::form.control-group.error
+                            control-name="logo_path[image_1]"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
 
                     {!! view_render_event('bagisto.admin.settings.locale.edit.after', ['locale' => $locale]) !!}
                 </div>
             </div>
-        </form>
-    </div>
-@stop
+        </div>
+    </x-admin::form>
+</x-admin::layouts>

@@ -2,9 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Core;
 
-use Webkul\Admin\DataGrids\LocalesDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\LocaleRepository;
+use Webkul\Admin\DataGrids\LocalesDataGrid;
 
 class LocaleController extends Controller
 {
@@ -32,19 +33,9 @@ class LocaleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::settings.locales.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function store()
     {
@@ -56,9 +47,9 @@ class LocaleController extends Controller
 
         $this->localeRepository->create(request()->all());
 
-        session()->flash('success', trans('admin::app.settings.locales.create-success'));
-
-        return redirect()->route('admin.locales.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.locales.create-success'),
+        ]);
     }
 
     /**
