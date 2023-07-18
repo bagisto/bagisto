@@ -1,7 +1,7 @@
-<v-create-customer></v-create-customer>
+<v-create-customer-form></v-create-customer-form>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-create-customer-template">
+    <script type="text/x-template" id="v-create-customer-form-template">
         <div>
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -237,15 +237,16 @@
     </script>
 
     <script type="module">
-        app.component('v-create-customer', {
-            template: '#v-create-customer-template',
+        app.component('v-create-customer-form', {
+            template: '#v-create-customer-form-template',
 
             methods: {
                 create(params, { resetForm, setErrors }) {
-                    this.$refs.customerCreateModal.toggle();
                    
                     this.$axios.post("{{ route('admin.customer.store') }}", params)
                         .then((response) => {
+                            this.$refs.customerCreateModal.toggle();
+
                             resetForm();
                         })
                         .catch(error => {

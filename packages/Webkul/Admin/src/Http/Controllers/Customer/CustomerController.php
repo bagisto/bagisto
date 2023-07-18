@@ -54,6 +54,7 @@ class CustomerController extends Controller
             'gender'        => 'required',
             'email'         => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today',
+            'phone'         => 'unique:customers,phone',
         ]);
 
         $password = rand(100000, 10000000);
@@ -109,6 +110,7 @@ class CustomerController extends Controller
             'gender'        => 'required',
             'email'         => 'required|unique:customers,email,' . $id,
             'date_of_birth' => 'date|before:today',
+            'phone'         => 'unique:customers,phone,' . $id,
         ]);
 
         Event::dispatch('customer.update.before', $id);

@@ -101,14 +101,18 @@
             template: '#v-create-group-template',
 
             methods: {
-                create(params, { resetForm }) {
+                create(params, { resetForm, setErrors  }) {
                     this.$axios.post("{{ route('admin.groups.store') }}", params)
                         .then((response) => {
                             this.$refs.groupCreateModal.toggle();
 
                             resetForm();
                         })
-                        .catch(error => {});
+                        .catch(error => {
+                            if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                 }
             }
         })
