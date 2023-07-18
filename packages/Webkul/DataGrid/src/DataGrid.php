@@ -85,6 +85,92 @@ abstract class DataGrid
      */
     public function addColumn($column)
     {
+        if ($column['type'] === 'date_range') {
+            $column['options'] = [
+                'today' => [
+                    'from' => now()->today()->format('Y-m-d'),
+                    'to' => now()->today()->format('Y-m-d'),
+                ],
+
+                'yesterday' => [
+                    'from' => now()->yesterday()->format('Y-m-d'),
+                    'to' => now()->yesterday()->format('Y-m-d'),
+                ],
+
+                'this_week' => [
+                    'from' => now()->startOfWeek()->format('Y-m-d'),
+                    'to' => now()->endOfWeek()->format('Y-m-d'),
+                ],
+
+                'this_month' => [
+                    'from' => now()->startOfMonth()->format('Y-m-d'),
+                    'to' => now()->endOfMonth()->format('Y-m-d'),
+                ],
+
+                'last_month' => [
+                    'from' => now()->subMonth(1)->startOfMonth()->format('Y-m-d'),
+                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
+                ],
+
+                'last_three_months' => [
+                    'from' => now()->subMonth(3)->startOfMonth()->format('Y-m-d'),
+                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
+                ],
+
+                'last_six_months' => [
+                    'from' => now()->subMonth(6)->startOfMonth()->format('Y-m-d'),
+                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
+                ],
+
+                'this_year' => [
+                    'from' => now()->startOfYear()->format('Y-m-d'),
+                    'to' => now()->endOfYear()->format('Y-m-d'),
+                ],
+            ];
+        } elseif ($column['type'] === 'datetime_range') {
+            $column['options'] = [
+                'today' => [
+                    'from' => now()->today()->startOfDay()->format('Y-m-d H:i:s'),
+                    'to' => now()->today()->endOfDay()->format('Y-m-d H:i:s'),
+                ],
+
+                'yesterday' => [
+                    'from' => now()->yesterday()->startOfDay()->format('Y-m-d H:i:s'),
+                    'to' => now()->yesterday()->endOfDay()->format('Y-m-d H:i:s'),
+                ],
+
+                'this_week' => [
+                    'from' => now()->startOfWeek()->format('Y-m-d H:i:s'),
+                    'to' => now()->endOfWeek()->format('Y-m-d H:i:s'),
+                ],
+
+                'this_month' => [
+                    'from' => now()->startOfMonth()->format('Y-m-d H:i:s'),
+                    'to' => now()->endOfMonth()->format('Y-m-d H:i:s'),
+                ],
+
+                'last_month' => [
+                    'from' => now()->subMonth(1)->startOfMonth()->format('Y-m-d H:i:s'),
+                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
+                ],
+
+                'last_three_months' => [
+                    'from' => now()->subMonth(3)->startOfMonth()->format('Y-m-d H:i:s'),
+                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
+                ],
+
+                'last_six_months' => [
+                    'from' => now()->subMonth(6)->startOfMonth()->format('Y-m-d H:i:s'),
+                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
+                ],
+
+                'this_year' => [
+                    'from' => now()->startOfYear()->format('Y-m-d H:i:s'),
+                    'to' => now()->endOfYear()->format('Y-m-d H:i:s'),
+                ],
+            ];
+        }
+
         $this->columns[] = $column;
     }
 
@@ -194,13 +280,7 @@ abstract class DataGrid
                     case'datetime_range':
                         $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
                             foreach ($values as $value) {
-                                if (! empty($value[0])) {
-                                    $scopeQueryBuilder->whereDate($column, $value[0]);
-                                }
-
-                                if (! empty($value[0])) {
-                                    $scopeQueryBuilder->whereDate($column, $value[1]);
-                                }
+                                $scopeQueryBuilder->whereBetween($column, [$value[0] ?? '', $value[1] ?? '']);
                             }
                         });
                         break;

@@ -175,35 +175,59 @@
                             </div>
 
                             <div class="grid grid-cols-2 my-[16px] gap-[5px]">
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'today' }  })"
+                                >
                                     Today
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'yesterday' } })"
+                                >
                                     Yesterday
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'this_week' } })"
+                                >
                                     This Week
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'this_month' } })"
+                                >
                                     This Month
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'last_month' } })"
+                                >
                                     Last Month
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'last_three_months' } })"
+                                >
                                     Last 3 Months
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'last_six_months' } })"
+                                >
                                     Last 6 Months
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'this_year' } })"
+                                >
                                     This Year
                                 </p>
 
@@ -213,7 +237,8 @@
                                         :name="`${column.index}[from]`"
                                         value=""
                                         :placeholder="column.label"
-                                        @change="filterPage($event, column, { range: { name: 'from' } })"
+                                        :ref="`${column.index}[from]`"
+                                        @change="filterPage($event, column, { range: { name: 'from' }, quickFilter: { isEnabled: false, value: '' } })"
                                     />
                                 </div>
 
@@ -223,7 +248,8 @@
                                         :name="`${column.index}[to]`"
                                         value=""
                                         :placeholder="column.label"
-                                        @change="filterPage($event, column, { range: { name: 'to' } })"
+                                        :ref="`${column.index}[from]`"
+                                        @change="filterPage($event, column, { range: { name: 'to' }, quickFilter: { isEnabled: false, value: '' } })"
                                     />
                                 </div>
                             </div>
@@ -247,35 +273,59 @@
                             </div>
 
                             <div class="grid grid-cols-2 my-[16px] gap-[5px]">
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'today' }  })"
+                                >
                                     Today
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'yesterday' }  })"
+                                >
                                     Yesterday
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'this_week' }  })"
+                                >
                                     This Week
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'this_month' }  })"
+                                >
                                     This Month
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'last_month' }  })"
+                                >
                                     Last Month
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'last_three_months' }  })"
+                                >
                                     Last 3 Months
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'last_six_months' }  })"
+                                >
                                     Last 6 Months
                                 </p>
 
-                                <p class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px]">
+                                <p
+                                    class="text-gray-600 font-medium text-center leading-[24px] px-[8px] py-[6px] border border-gray-300 rounded-[6px] cursor-pointer"
+                                    @click="filterPage($event, column, { quickFilter: { isEnabled: true, value: 'this_year' }  })"
+                                >
                                     This Year
                                 </p>
 
@@ -285,7 +335,8 @@
                                         :name="`${column.index}[from]`"
                                         value=""
                                         :placeholder="column.label"
-                                        @change="filterPage($event, column, { range: { name: 'from' } })"
+                                        :ref="`${column.index}[from]`"
+                                        @change="filterPage($event, column, { range: { name: 'from' }, quickFilter: { isEnabled: false, value: '' } })"
                                     />
                                 </div>
 
@@ -295,7 +346,8 @@
                                         :name="`${column.index}[to]`"
                                         value=""
                                         :placeholder="column.label"
-                                        @change="filterPage($event, column, { range: { name: 'to' } })"
+                                        :ref="`${column.index}[from]`"
+                                        @change="filterPage($event, column, { range: { name: 'to' }, quickFilter: { isEnabled: false, value: '' } })"
                                     />
                                 </div>
                             </div>
@@ -463,9 +515,7 @@
                     }
                 },
 
-                filterPage($event, column = null, additional = {}) {
-                    let requestedValue = $event.target.value;
-
+                applyFilter(column, requestedValue, additional = {}) {
                     let appliedColumn = this.findAppliedColumn(column?.index);
 
                     if (
@@ -518,6 +568,7 @@
                                         value: [appliedRanges]
                                     });
                                 }
+
                                 break;
 
                             default:
@@ -529,8 +580,34 @@
                                         value: [requestedValue]
                                     });
                                 }
+
                                 break;
                         }
+                    }
+                },
+
+                filterPage($event, column = null, additional = {}) {
+                    let quickFilter = additional?.quickFilter;
+
+                    if (quickFilter?.isEnabled) {
+                        let options = column.options[quickFilter.value];
+
+                        switch (column.type) {
+                            case 'date_range':
+                            case 'datetime_range':
+                                this.$refs[`${column.index}[from]`].value = options.from;
+                                this.applyFilter(column, options.from, { range: { name: 'from' } });
+
+                                this.$refs[`${column.index}[from]`].value = options.to;
+                                this.applyFilter(column, options.to, { range: { name: 'to' } });
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    } else {
+                        this.applyFilter(column, $event.target.value, additional);
                     }
 
                     let params = {
