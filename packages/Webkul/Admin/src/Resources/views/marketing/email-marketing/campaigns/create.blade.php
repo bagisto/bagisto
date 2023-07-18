@@ -51,6 +51,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error 
+                                class="mt-1"
                                 control-name="name"
                             >
                             </x-admin::form.control-group.error>
@@ -74,6 +75,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="subject"
                             >
                             </x-admin::form.control-group.error>
@@ -107,6 +109,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="marketing_event_id"
                             >
                             </x-admin::form.control-group.error>
@@ -140,6 +143,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="marketing_template_id"
                             >
                             </x-admin::form.control-group.error>
@@ -172,6 +176,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="status"
                             >
                             </x-admin::form.control-group.error>
@@ -214,6 +219,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="channel_id"
                             >
                             </x-admin::form.control-group.error>
@@ -247,6 +253,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="customer_group_id"
                             >
                             </x-admin::form.control-group.error>

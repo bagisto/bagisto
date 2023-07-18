@@ -1,19 +1,9 @@
-@extends('admin::layouts.content')
+<div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <p class="text-[20px] text-gray-800 font-bold">
+        @lang('admin::app.marketing.email-marketing.newsletters.title')
+    </p>
+</div>
 
-@section('page_title')
-    {{ __('admin::app.customers.subscribers.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.customers.subscribers.title') }}</h1>
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.customers.subscribers.index') }}"></datagrid-plus>
-        </div>
-    </div>
-@stop
+<div class="page-content">
+    <datagrid-plus src="{{ route('admin.customers.subscribers.index') }}"></datagrid-plus>
+</div>

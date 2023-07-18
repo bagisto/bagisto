@@ -51,6 +51,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="name"
                             >
                             </x-admin::form.control-group.error>
@@ -96,6 +97,7 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="status"
                             >
                             </x-admin::form.control-group.error>
@@ -118,7 +120,8 @@
                             >
                             </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error 
+                            <x-admin::form.control-group.error
+                                class="mt-1"
                                 control-name="content"
                             >
                             </x-admin::form.control-group.error>

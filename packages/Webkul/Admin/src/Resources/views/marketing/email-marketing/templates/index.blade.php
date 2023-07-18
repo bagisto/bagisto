@@ -48,11 +48,7 @@
             :title="trans('admin::app.marketing.email-marketing.newsletters.title')"
             :is-selected="false"
         >
-            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-                <p class="text-[20px] text-gray-800 font-bold">
-                    @lang('admin::app.marketing.email-marketing.newsletters.title')
-                </p>
-            </div>
+            @include('admin::marketing.email-marketing.subscribers.index')
         </x-admin::tabs.item>
     </x-admin::tabs>
 
