@@ -1,9 +1,17 @@
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('shop::app.search.page-title')
+        @lang('shop::app.search.title', ['query' => request()->query('query')])
     </x-slot>
-    
+
+    <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
+        <div class="flex justify-between items-center mt-[30px]">
+            <h2 class="text-[26px] font-medium">
+                @lang('shop::app.search.title', ['query' => request()->query('query')])
+            </h2>
+        </div>
+    </div>
+        
     {{-- Product Listing --}}
     <v-search>
         <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
@@ -15,15 +23,16 @@
             id="v-search-template"
         >
             <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-                <div class="flex gap-[40px] items-start mt-[40px] max-lg:gap-[20px]">
+                <div class="flex gap-[40px] items-start md:mt-[40px] max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
                     <!-- Product Listing Container -->
                     <div class="flex-1">
-                        <!-- Product Listing Toolbar -->
-                        @include('shop::categories.toolbar')
-
+                        <!-- Desktop Product Listing Toolbar -->
+                        <div class="max-md:hidden">
+                            @include('shop::categories.toolbar')
+                        </div>
 
                         <!-- Product List Card Container -->
                         <div
@@ -45,8 +54,9 @@
                                     </x-shop::products.card>
                                 </template>
 
+                                <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                   
                                         <p class="text-[20px]">
@@ -61,7 +71,7 @@
                         <div v-else>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
+                                <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-[16px]">
                                     <x-shop::shimmer.products.cards.grid count="12"></x-shop::shimmer.products.cards.grid>
                                 </div>
                             </template>
@@ -69,7 +79,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-868:grid-cols-1 max-sm:justify-items-center">
+                                    <div class="grid grid-cols-3 gap-8 mt-[30px] max-sm:mt-[20px] max-1060:grid-cols-2 max-sm:justify-items-center max-sm:gap-[16px]">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"
@@ -78,8 +88,9 @@
                                     </div>
                                 </template>
 
+                                <!-- Empty Products Container -->
                                 <template v-else>
-                                    <div class="grid items-center justify-items-center w-[100%] m-auto h-[476px] place-content-center text-center">
+                                    <div class="grid items-center justify-items-center place-content-center w-[100%] m-auto h-[476px] text-center">
                                         <img src="{{ bagisto_asset('images/thank-you.png') }}"/>
                                         
                                         <p class="text-[20px]">
@@ -92,7 +103,7 @@
 
                         <!-- Load More Button -->
                         <button
-                            class="block w-max py-[11px] px-[43px] mx-auto mt-[60px] bg-white border rounded-[18px] border-navyBlue text-base text-navyBlue font-medium text-center"
+                            class="bs-secondary-button block mx-auto w-max py-[11px] mt-[60px] px-[43px] rounded-[18px] text-base text-center"
                             @click="loadMoreProducts"
                             v-if="links.next"
                         >
@@ -101,7 +112,7 @@
                     </div>
                 </div>
             </div>
-        </script>
+    </script>
 
         <script type="module">
             app.component('v-search', {
@@ -109,7 +120,15 @@
 
                 data() {
                     return {
+                        isMobile: window.innerWidth <= 767,
+
                         isLoading: true,
+
+                        isDrawerActive: {
+                            toolbar: false,
+                            
+                            filter: false,
+                        },
 
                         filters: {
                             toolbar: {},
@@ -155,6 +174,12 @@
                     },
 
                     getProducts() {
+                        this.isDrawerActive = {
+                            toolbar: false,
+                            
+                            filter: false,
+                        };
+
                         this.$axios.get(("{{ route('shop.api.products.index', ['name' => request('query')]) }}"), { 
                             params: this.queryParams 
                         })
