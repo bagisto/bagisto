@@ -146,9 +146,10 @@
                                     </x-admin::form.control-group.label>
         
                                     <x-admin::form.control-group.control
-                                        type="checkbox"
+                                        type="switch"
                                         name="status"
-                                        :value="old('status') ? 'checked' : '' "
+                                        :value="1"
+                                        :checked="old('status')"
                                     >
                                     </x-admin::form.control-group.control>
         
