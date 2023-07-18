@@ -391,11 +391,12 @@ return [
     'categories' => [
         'filters' => [
             'filters'   => 'Filters:',
+            'filter'    => 'Filter',
+            'sort'      => 'Sort',
             'clear-all' => 'Clear All',
         ],
 
         'toolbar' => [
-            'filters' => 'Filters:',
             'show'    => 'Show',
         ],
 
