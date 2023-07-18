@@ -47,7 +47,7 @@ return [
             'code'              => 'Code',
             'name'              => 'Name',
             'direction'         => 'Direction',
-            'locale-logo'              => 'Locale Logo',
+            'locale-logo'       => 'Locale Logo',
             'create-success'    => 'Locale created successfully.',
             'update-success'    => 'Locale updated successfully.',
             'delete-success'    => 'Locale deleted successfully.',

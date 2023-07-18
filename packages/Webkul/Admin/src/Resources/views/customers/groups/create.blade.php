@@ -41,9 +41,9 @@
                                         type="text"
                                         name="code"
                                         id="code"
-                                        label="Code"
                                         rules="required"
-                                        placeholder="Code"
+                                        :label="trans('admin::app.customers.groups.create.code')"
+                                        :placeholder="trans('admin::app.customers.groups.create.code')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -65,9 +65,9 @@
                                         name="name"
                                         id="last_name"
                                         :value="old('name')"
-                                        label="Name"
                                         rules="required"
-                                        placeholder="Name"
+                                        :label="trans('admin::app.customers.groups.create.name')"
+                                        :placeholder="trans('admin::app.customers.groups.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
         
