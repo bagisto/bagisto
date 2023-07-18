@@ -406,6 +406,10 @@ return [
         ],
     ],
 
+    'search' => [
+        'title' => 'Search results for : :query',
+    ],
+
     'compare'  => [
         'product-compare'    => 'Product Compare',
         'delete-all'         => 'Delete All',
