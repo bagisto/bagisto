@@ -102,6 +102,26 @@
 
         @break
 
+    @case('switch')
+        <label class="relative inline-flex items-center cursor-pointer">
+            <v-field
+                name="{{ $name }}"
+                v-slot="{ field }"
+                {{ $attributes->except('class') }}
+            >
+                <input
+                    type="checkbox"
+                    :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                    v-bind="field"
+                    {{ $attributes->except(['value'])->merge(['class' => 'sr-only peer']) }}
+                >
+            </v-field>
+
+            <div class="rounded-full w-11 h-6 bg-gray-200 peer-focus:ring-blue-300 after:bg-white after:border-gray-300  dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-focus:ring-blue-800 peer dark:bg-gray-500 peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none peer-focus:ring-4 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+        </label>
+
+        @break
+
     @case('custom')
         <v-field {{ $attributes }}>
             {{ $slot }}

@@ -4,34 +4,28 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-slider-template">
-        <div 
-            class="relative w-full h-[50vh] md:flex md:h-[500px]"
-            @mouseover="showNavigation = true"
-            @mouseleave="showNavigation = false"
-        >
-            <div class="relative overflow-hidden w-full h-full">
-                <div 
-                    v-for="(image, index) in options.images" 
-                    :class="getSliderStyles(index)"
-                >
-                    <img 
-                        :src="image"
-                        class="h-auto object-cover max-w-full"
-                    >
-                </div>
+        <div class="w-full relative m-auto group">
+            <div
+                class="fade"
+                v-for="(image, index) in images"
+                ref="slides"
+                :key="index"
+            >
+                <img
+                    :src="image"
+                    class="w-full"
+                />
             </div>
-        
+
             <span
-                class="bs-carousal-next flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[221px] left-[21px] md:left-[29px] cursor-pointer transition icon-arrow-left-stylish text-[25px] hover:bg-black hover:text-white"
-                :class="{ 'hidden': ! showNavigation }"
-                @click="previousSlide"
+                class="invisible icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[16px] pl-[10px] absolute top-1/2 bg-[rgba(0,0,0,0.8)] rounded-r-md cursor-pointer group-hover:visible"
+                @click="navigate(currentIndex -= 1)"
             >
             </span>
-        
+
             <span
-                class="bs-carousal-prev flex border border-black items-center justify-center rounded-full w-[50px] h-[50px] bg-white absolute top-[221px] right-[23px] md:right-[29px] cursor-pointer transition icon-arrow-right-stylish text-[25px] hover:bg-black hover:text-white"
-                :class="{ 'hidden': ! showNavigation }"
-                @click="nextSlide"
+                class="invisible icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[16px] pr-[10px] absolute top-1/2 right-0 bg-[rgba(0,0,0,0.8)] rounded-l-md cursor-pointer group-hover:visible"
+                @click="navigate(currentIndex += 1)"
             >
             </span>
         </div>
@@ -43,45 +37,74 @@
 
             data() {
                 return {
-                    currentIndex: 0,
+                    currentIndex: 1,
 
-                    showNavigation: false,
-
-                    options: @json($options),
+                    images: @json($options['images']),
                 };
             },
 
-            created() {
+            mounted() {
+                this.navigate(this.currentIndex);
+
                 this.play();
             },
 
             methods: {
-                previousSlide() {
-                    this.currentIndex = (this.currentIndex - 1 + this.options.images.length) % this.options.images.length;
-                },
+                navigate(index) {
+                    if (index > this.images.length) {
+                        this.currentIndex = 1;
+                    }
 
-                nextSlide() {
-                    this.currentIndex = (this.currentIndex + 1) % this.options.images.length;
-                },
+                    if (index < 1) {
+                        this.currentIndex = this.images.length;
+                    }
 
-                getSliderStyles(index) {
-                    return {
-                        'opacity-100': index === this.currentIndex,
-                        'opacity-0': index !== this.currentIndex,
-                        'absolute': true,
-                        'h-full': true,
-                        'w-full': true,
-                        'transition-opacity': true,
-                        'duration-500': true
-                    };
+                    let slides = this.$refs.slides;
+
+                    for (let i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                    }
+
+                    slides[this.currentIndex - 1].style.display = "block";
                 },
 
                 play() {
+                    let self = this;
+
                     setInterval(() => {
-                        this.nextSlide();
+                        this.navigate(this.currentIndex += 1);
                     }, 5000);
                 }
             }
         });
     </script>
+
+    <style>
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+    </style>
 @endpushOnce

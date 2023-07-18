@@ -4,8 +4,9 @@ namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Eloquent\Repository;
+use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Contracts\Locale;
 
 class LocaleRepository extends Repository
 {
@@ -18,7 +19,7 @@ class LocaleRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\Locale';
+        return Locale::class;
     }
 
     /**
