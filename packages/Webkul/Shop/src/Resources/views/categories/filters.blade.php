@@ -1,13 +1,105 @@
 {!!view_render_event('bagisto.shop.categories.view.filters.before') !!}
 
-<!-- Filters Vue Compoment -->
-<v-filters
-    @filter-applied="setFilters('filter', $event)"
-    @filter-clear="clearFilters('filter', $event)"
+<!-- Desktop Filters Naviation -->
+<div v-if="! isMobile">
+    <!-- Filters Vue Compoment -->
+    <v-filters
+        @filter-applied="setFilters('filter', $event)"
+        @filter-clear="clearFilters('filter', $event)"
+    >
+        {{-- Category Filter Shimmer Effect --}}
+        <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+    </v-filters>
+</div>
+
+<!-- Mobile Filters Naviation -->
+<div
+    class="grid grid-cols-[1fr_auto_1fr] justify-items-center items-center w-full max-w-full fixed bottom-0 left-0 px-[20px] bg-white border-t-[1px] border-[#E9E9E9] z-50"
+    v-if="isMobile"
 >
-    {{-- Category Filter Shimmer Effect --}}
-    <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
-</v-filters>
+    <!-- Filter Drawer -->
+    <x-shop::drawer
+        position="left"
+        width="100%"
+        ::is-active="isDrawerActive.filter"
+    >
+        <!-- Drawer Toggler -->
+        <x-slot:toggle>
+            <div
+                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                @click="isDrawerActive.filter = true"
+            >
+                <span class="icon-filter-1 text-[24px]"></span>
+
+                @lang('shop::app.categories.filters.filter')
+            </div>
+        </x-slot:toggle>
+
+        <!-- Drawer Header -->
+        <x-slot:header>
+            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
+                <p class="text-[18px] font-semibold">
+                    @lang('shop::app.categories.filters.filters')
+                </p>
+
+                <p
+                    class="mr-[50px] text-[12px] font-medium cursor-pointer"
+                    @click="clearFilters('filter', '')"
+                >
+                    @lang('shop::app.categories.filters.clear-all')
+                </p>
+            </div>
+        </x-slot:header>
+
+        <!-- Drawer Content -->
+        <x-slot:content>
+            <!-- Filters Vue Compoment -->
+            <v-filters
+                @filter-applied="setFilters('filter', $event)"
+                @filter-clear="clearFilters('filter', $event)"
+            >
+                {{-- Category Filter Shimmer Effect --}}
+                <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+            </v-filters>
+        </x-slot:content>
+    </x-shop::drawer>
+
+    <!-- Seperator -->
+    <span class="h-[20px] w-[2px] bg-[#E9E9E9]"></span>
+
+    <!-- Sort Drawer -->
+    <x-shop::drawer
+        position="bottom"
+        width="100%"
+        ::is-active="isDrawerActive.toolbar"
+    >
+        <!-- Drawer Toggler -->
+        <x-slot:toggle>
+            <div
+                class="flex items-center gap-x-[10px] px-[10px] py-[14px] text-[16px] font-medium uppercase cursor-pointer"
+                @click="isDrawerActive.toolbar = true"
+            >
+                <span class="icon-sort-1 text-[24px]"></span>
+
+                @lang('shop::app.categories.filters.sort')
+            </div>
+        </x-slot:toggle>
+
+        <!-- Drawer Header -->
+        <x-slot:header>
+            <div class="flex justify-between items-center pb-[20px] border-b-[1px] border-[#E9E9E9]">
+                <p class="text-[18px] font-semibold">
+                    @lang('shop::app.categories.filters.sort')
+                </p>
+            </div>
+        </x-slot:header>
+
+        <!-- Drawer Content -->
+        <x-slot:content>
+            @include('shop::categories.toolbar')
+        </x-slot:content>
+    </x-shop::drawer>
+</div>
 
 {!!view_render_event('bagisto.shop.categories.view.filters.after') !!}
 
@@ -21,9 +113,9 @@
 
         <!-- Filters Container -->
         <template v-else>
-            <div class="grid grid-cols-[1fr] panel-side max-w-[400px] gap-[20px] max-h-[1320px] pr-[26px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] max-md:hidden">
+            <div class="grid grid-cols-[1fr] panel-side gap-[20px] max-h-[1320px] overflow-y-auto overflow-x-hidden journal-scroll min-w-[342px] max-xl:min-w-[270px] md:max-w-[400px] md:pr-[26px]">
                 <!-- Filters Header Container -->
-                <div class=" flex justify-between items-center h-[50px] pb-[10px] border-b-[1px] border-[#E9E9E9]">
+                <div class=" flex justify-between items-center h-[50px] pb-[10px] border-b-[1px] border-[#E9E9E9] max-md:hidden">
                     <p class="text-[18px] font-semibold">
                         @lang('shop::app.categories.filters.filters')
                     </p>
@@ -84,7 +176,7 @@
                             <div class="items-center flex gap-x-[15px] pl-2 rounded hover:bg-gray-100 select-none">
                                 <input
                                     type="checkbox"
-                                    :id="option.id"
+                                    :id="'option_' + option.id"
                                     class="hidden peer"
                                     :value="option.id"
                                     v-model="appliedValues"
@@ -93,12 +185,12 @@
 
                                 <label
                                     class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
-                                    :for="option.id"
+                                    :for="'option_' + option.id"
                                 >
                                 </label>
 
                                 <label
-                                    :for="option.id"
+                                    :for="'option_' + option.id"
                                     class="w-full p-2 pl-0 text-[16px] text-gray-900 cursor-pointer"
                                     v-text="option.name"
                                 >
