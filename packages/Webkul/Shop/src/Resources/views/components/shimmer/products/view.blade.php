@@ -11,7 +11,7 @@
     
         <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
 
-        <div class="relative max-w-[590px] max-1180:px-[20px]">
+        <div class="max-w-[590px] relative max-1180:w-full max-1180:max-w-full max-1180:px-[20px]">
             <div class="flex justify-between gap-[15px]">
                 <h1 class="shimmer w-[50%] h-[46px]"></h1>
 
@@ -58,14 +58,14 @@
 
             <div class="flex gap-[15px] mt-[30px] max-w-[470px] flex-wrap">
                 {{-- Quantity changer button --}}
-                <div class="w-[161px] h-[56px] rounded-[12px] max-sm:w-[124px]"></div>
+                <div class="shimmer w-[161px] h-[56px] rounded-[12px] max-sm:w-[124px]"></div>
 
                 {{-- Add to cart Button --}}
                 <button class="shimmer w-[279px] h-[56px] rounded-[12px]"></button>
             </div>
 
             {{-- Buy Now Button --}}
-            <button class="w-full h-[56px] mt-[20px] rounded-[12px]"></button>
+            <button class="shimmer w-full h-[56px] mt-[20px] rounded-[12px]"></button>
 
             <div class="flex gap-[35px] items-center mt-[40px] max-sm:flex-wrap">
                 <div class="shimmer w-[80px] h-[24px]"></div>

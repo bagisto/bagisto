@@ -45,8 +45,8 @@
                                         id="first_name" 
                                         :value="old('first_name')"
                                         rules="required"
-                                        label="First Name"
-                                        placeholder="First Name"
+                                        :label="trans('admin::app.customers.create.first-name')"
+                                        :placeholder="trans('admin::app.customers.create.first-name')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -69,8 +69,8 @@
                                         id="last_name"
                                         :value="old('last_name')"
                                         rules="required"
-                                        label="Last Name"
-                                        placeholder="Last Name"
+                                        :label="trans('admin::app.customers.create.last-name')"
+                                        :placeholder="trans('admin::app.customers.create.last-name')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -93,7 +93,7 @@
                                         id="email"
                                         :value="old('name')"
                                         rules="required|email"
-                                        label="Email"
+                                        :label="trans('admin::app.customers.create.email')"
                                         placeholder="email@example.com"
                                     >
                                     </x-admin::form.control-group.control>
@@ -116,7 +116,9 @@
                                         name="phone"
                                         id="phone"
                                         :value="old('phone')"
-                                        label="Phone"
+                                        rules="required|integer"
+                                        :label="trans('admin::app.customers.create.contact-number')"
+                                        :placeholder="trans('admin::app.customers.create.contact-number')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -138,8 +140,8 @@
                                         name="date_of_birth" 
                                         id="dob"
                                         :value="old('date_of_birth')"
-                                        label="Date of Birth"
-                                        placeholder="Date of Birth"
+                                        :label="trans('admin::app.customers.create.date-of-birth')"
+                                        :placeholder="trans('admin::app.customers.create.date-of-birth')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -163,22 +165,18 @@
                                                 name="gender"
                                                 id="gender"
                                                 rules="required"
-                                                label="Gender"
+                                                :label="trans('admin::app.customers.create.gender')"
                                             >
-                                                <option value="">
-                                                    @lang('admin::app.customers.create.select-gender')
-                                                </option>
-
-                                                <option value="Other">
-                                                    @lang('admin::app.customers.create.other')
-                                                </option>
-
                                                 <option value="Male">
                                                     @lang('admin::app.customers.create.male')
                                                 </option>
                                                 
                                                 <option value="Female">
                                                     @lang('admin::app.customers.create.female')
+                                                </option>
+
+                                                <option value="Other">
+                                                    @lang('admin::app.customers.create.other')
                                                 </option>
                                             </x-admin::form.control-group.control>
                 
@@ -201,7 +199,7 @@
                                                 type="select"
                                                 name="customer_group_id"
                                                 id="customerGroup"
-                                                label="Customer Group"
+                                                :label="trans('admin::app.customers.create.customer-group')"
                                             >
                                                 @foreach ($groups as $group)
                                                     <option value="{{ $group->id }}"> {{ $group->name}} </option>

@@ -60,6 +60,10 @@
 		content: "\e906";
 	}
 
+	.icon-bin:before {
+        content: "\e908";
+    }
+
 	.icon-calendar:before {
 		content: "\e907";
 	}
