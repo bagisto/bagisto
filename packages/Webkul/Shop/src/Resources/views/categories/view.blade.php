@@ -39,15 +39,16 @@
             id="v-category-template"
         >
             <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-                <div class="flex gap-[40px] items-start mt-[40px] max-lg:gap-[20px]">
+                <div class="flex gap-[40px] items-start md:mt-[40px] max-lg:gap-[20px]">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
                     <!-- Product Listing Container -->
                     <div class="flex-1">
-                        <!-- Product Listing Toolbar -->
-                        @include('shop::categories.toolbar')
-
+                        <!-- Desktop Product Listing Toolbar -->
+                        <div class="max-md:hidden">
+                            @include('shop::categories.toolbar')
+                        </div>
 
                         <!-- Product List Card Container -->
                         <div
@@ -135,7 +136,15 @@
 
                 data() {
                     return {
+                        isMobile: window.innerWidth <= 767,
+
                         isLoading: true,
+
+                        isDrawerActive: {
+                            toolbar: false,
+                            
+                            filter: false,
+                        },
 
                         filters: {
                             toolbar: {},
@@ -181,7 +190,13 @@
                     },
 
                     getProducts() {
-                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", { 
+                        this.isDrawerActive = {
+                            toolbar: false,
+                            
+                            filter: false,
+                        };
+
+                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
                             params: this.queryParams 
                         })
                             .then(response => {

@@ -38,7 +38,7 @@
         @switch ($customization->type)
             {{-- Image Carousel --}}
             @case ($customization::IMAGE_CAROUSEL)
-                <x-shop::slider :options="$data"></x-shop::slider>
+                <x-shop::carousel :options="$data"></x-shop::carousel>
 
                 @break
 
