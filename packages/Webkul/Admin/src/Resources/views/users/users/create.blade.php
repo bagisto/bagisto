@@ -12,7 +12,7 @@
                     <x-admin::modal ref="customerCreateModal">
                         <x-slot:toggle>
                             <!-- User Create Button -->
-                            @if (bouncer()->hasPermission('customers.customers.create'))
+                            @if (bouncer()->hasPermission('settings.users.users.create')) 
                                 <button 
                                     type="button"
                                     class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
@@ -42,8 +42,8 @@
                                         name="name"
                                         id="name"
                                         rules="required"
-                                        label="Name"
-                                        placeholder="Name"
+                                        :label="trans('admin::app.users.users.create.name')" 
+                                        :placeholder="trans('admin::app.users.users.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -84,9 +84,9 @@
                                         name="password"
                                         id="password" 
                                         ref="password"
-                                        label="Password"
                                         rules="required|min:6"
-                                        placeholder="Password"
+                                        :label="trans('admin::app.users.users.create.password')"
+                                        :placeholder="trans('admin::app.users.users.create.password')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -106,8 +106,8 @@
                                         name="password_confirmation"
                                         id="password_confirmation" 
                                         rules="confirmed:@password"
-                                        label="Password"
-                                        placeholder="Confirm Password"
+                                        :label="trans('admin::app.users.users.create.password')"
+                                        :placeholder="trans('admin::app.users.users.create.confirm-password')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -126,7 +126,8 @@
                                         type="select"
                                         name="role_id"
                                         rules="required"
-                                        label="Role"
+                                        :label="trans('admin::app.users.users.create.role')"
+                                        :placeholder="trans('admin::app.users.users.create.role')"
                                     >
                                         @foreach ($roles as $role)
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>
