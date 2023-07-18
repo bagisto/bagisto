@@ -1,7 +1,7 @@
-<v-create></v-create>
+<v-locale-form></v-locale-form>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-create-template">
+    <script type="text/x-template" id="v-locale-form-template">
         <div>
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -19,13 +19,15 @@
                         </x-slot:toggle>
 
                         <x-slot:header>
-                            @lang('admin::app.settings.locales.add-title')
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.settings.locales.add-title')
+                            </p>
                         </x-slot:header>
 
                         <x-slot:content>
                             <div class="flex gap-[10px] max-xl:flex-wrap">
                                 <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                                    <div class="p-[16px] rounded-[4px]">
+                                    <div class="px-[16px] py-[10px]">
                                         {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
                                         <x-admin::form.control-group class="mb-[10px]">
@@ -104,6 +106,7 @@
                                                 id="direction"
                                                 :label="trans('Logo Path')"
                                                 accepted-types="image/*"
+                                                ref="image"
                                             >
                                             </x-admin::form.control-group.control>
 
@@ -136,10 +139,11 @@
     </script>
 
     <script type="module">
-        app.component('v-create', {
-            template: '#v-create-template',
+        app.component('v-locale-form', {
+            template: '#v-locale-form-template',
+
             methods: {
-                store(params, { resetForm }) {
+                store(params, { resetForm, setErrors }) {
                     this.$axios.post('{{ route('admin.locales.store') }}', params , {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
@@ -149,9 +153,16 @@
                             alert(response.data.data.message);
 
                             this.$refs.localeModal.toggle();
-
+                            
                             resetForm();
-                        }).catch((error) => console.log(error));
+                            
+                            // Reset media uploadfile.
+                            this.$refs.image.uploadedFiles = [];
+                        }).catch((error) => {
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                 },
             },
         });
