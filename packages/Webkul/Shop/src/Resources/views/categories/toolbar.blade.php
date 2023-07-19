@@ -12,7 +12,7 @@
             <!-- Desktop Toolbar -->
             <div class="flex justify-between max-md:hidden">
                 <!-- Product Sorting Filters -->
-                <x-shop::dropdown>
+                <x-shop::dropdown position="bottom-left">
                     <x-slot:toggle>
                         <!-- Dropdown Toggler -->
                         <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
