@@ -21,6 +21,7 @@ return [
             'female'                => 'female',
             'date-of-birth'         => 'Date of Birth',
             'customer-group'        => 'Customer Group',
+            'select-customer-group' => 'Select Customer Group',
         ],
 
         'groups' => [

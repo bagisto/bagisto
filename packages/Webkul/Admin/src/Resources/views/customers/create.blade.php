@@ -136,7 +136,7 @@
                                     </x-admin::form.control-group.label>
         
                                     <x-admin::form.control-group.control
-                                        type="date"
+                                        type="text"
                                         name="date_of_birth" 
                                         id="dob"
                                         :value="old('date_of_birth')"
@@ -167,6 +167,10 @@
                                                 rules="required"
                                                 :label="trans('admin::app.customers.create.gender')"
                                             >
+                                                <option value="">
+                                                    @lang('admin::app.customers.create.select-gender')
+                                                </option>
+
                                                 <option value="Male">
                                                     @lang('admin::app.customers.create.male')
                                                 </option>
@@ -201,6 +205,9 @@
                                                 id="customerGroup"
                                                 :label="trans('admin::app.customers.create.customer-group')"
                                             >
+                                                <option value="">
+                                                    @lang('admin::app.customers.create.select-customer-group')
+                                                </option>
                                                 @foreach ($groups as $group)
                                                     <option value="{{ $group->id }}"> {{ $group->name}} </option>
                                                 @endforeach

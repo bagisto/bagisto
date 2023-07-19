@@ -61,10 +61,18 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.registration.before');
 
-        $customer = $this->customerRepository->create(array_merge(request()->all(), [
-            'password'    => bcrypt($password),
-            'is_verified' => 1,
-        ]));
+        $customer = $this->customerRepository->create([
+            'id'                => request()->input('id'),
+            'first_name'        => request()->input('first_name'),
+            'last_name'         => request()->input('last_name'),
+            'gender'            => request()->input('gender'),
+            'email'             => request()->input('email'),
+            'date_of_birth'     => request()->input('date_of_birth'),
+            'phone'             => request()->input('phone'),
+            'customer_group_id' => request()->input('customer_group_id'),
+            'password'          => bcrypt($password),
+            'is_verified'       => 1,
+        ]);
 
         Event::dispatch('customer.registration.after', $customer);
 

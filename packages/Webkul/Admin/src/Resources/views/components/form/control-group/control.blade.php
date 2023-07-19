@@ -72,7 +72,7 @@
             {{ $attributes->except('class') }}
         >
             <select
-                name="{{ $name }}"
+                v-bind="field"          
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 {{ $attributes->except(['value'])->merge(['class' => 'custom-select w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
