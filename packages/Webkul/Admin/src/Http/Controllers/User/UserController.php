@@ -2,14 +2,15 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Webkul\Admin\DataGrids\UserDataGrid;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\User\Http\Requests\UserForm;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
+use Webkul\User\Http\Requests\UserForm;
+use Webkul\Admin\DataGrids\UserDataGrid;
 
 class UserController extends Controller
 {
@@ -21,7 +22,8 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    ) {
+    ) 
+    {
     }
 
     /**
@@ -35,25 +37,15 @@ class UserController extends Controller
             return app(UserDataGrid::class)->toJson();
         }
 
-        return view('admin::users.users.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
         $roles = $this->roleRepository->all();
 
-        return view('admin::users.users.create', compact('roles'));
+        return view('admin::users.users.index', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function store(UserForm $request)
     {
@@ -74,9 +66,9 @@ class UserController extends Controller
 
         Event::dispatch('user.admin.create.after', $admin);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'User']));
-
-        return redirect()->route('admin.users.index');
+        return new JsonResource([
+            'message' => trans('admin::app.response.create-success'),
+        ]);
     }
 
     /**
