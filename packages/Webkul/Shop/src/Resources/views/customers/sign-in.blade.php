@@ -46,7 +46,7 @@
                             class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="required|email"
-                            label="Email"
+                            :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
                         >
                         </x-shop::form.control-group.control>
@@ -69,8 +69,8 @@
                             value=""
                             id="password"
                             rules="required|min:6"
-                            label="Password"
-                            placeholder="Password"
+                            :label="trans('shop::app.customers.login-form.password')"
+                            :placeholder="trans('shop::app.customers.login-form.password')"
                         >
                         </x-shop::form.control-group.control>
 
