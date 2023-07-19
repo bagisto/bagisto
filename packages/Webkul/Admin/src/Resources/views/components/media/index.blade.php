@@ -37,7 +37,7 @@
                 </div>
 
                 <label 
-                    for="file-input"
+                    :for="name"
                     class="flex flex-col justify-center items-center w-[100px] h-[100px] rounded-[12px] bg-[#F5F5F5] cursor-pointer hover:bg-gray-100"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
@@ -46,14 +46,14 @@
                 >
                     <img
                         src="{{ bagisto_asset('images/media-image.png')}}"
-                        for="file-input"
+                        :for="name"
                         class="block text-base text-center cursor-pointer"
                     />
 
                     <v-field
                         type="file"
                         :name="name"
-                        id="file-input"
+                        :id="name"
                         class="hidden"
                         :accept="acceptedTypes"
                         :rules="appliedRules"
