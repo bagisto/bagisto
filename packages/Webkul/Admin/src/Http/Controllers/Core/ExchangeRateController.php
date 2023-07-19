@@ -3,10 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Core;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\ExchangeRatesDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
+use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\Admin\DataGrids\ExchangeRatesDataGrid;
 
 class ExchangeRateController extends Controller
 {
@@ -18,7 +19,8 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -32,25 +34,15 @@ class ExchangeRateController extends Controller
             return app(ExchangeRatesDataGrid::class)->toJson();
         }
 
-        return view('admin::settings.exchange_rates.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
         $currencies = $this->currencyRepository->with('exchange_rate')->all();
 
-        return view('admin::settings.exchange_rates.create', compact('currencies'));
+        return view('admin::settings.exchange_rates.index', compact('currencies'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function store()
     {
@@ -61,13 +53,17 @@ class ExchangeRateController extends Controller
 
         Event::dispatch('core.exchange_rate.create.before');
 
-        $exchangeRate = $this->exchangeRateRepository->create(request()->all());
+        $exchangeRate = $this->exchangeRateRepository->create([
+            'id'              => request()->input('id'),
+            'target_currency' => request()->input('target_currency'),
+            'rate'            => request()->input('rate'),
+        ]);
 
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 
-        session()->flash('success', trans('admin::app.settings.exchange_rates.create-success'));
-
-        return redirect()->route('admin.exchange_rates.index');
+        return new JsonResource([
+            'message' => trans('admin::admin::app.settings.exchange_rates.create-success'),
+        ]);
     }
 
     /**
