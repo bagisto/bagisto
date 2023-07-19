@@ -5,10 +5,10 @@
     </x-slot:title>
 
     {{-- Create Inventory --}}
-    <v-create></v-create>
+    <v-inventory-create-form></v-inventory-create-form>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-template">
+        <script type="text/x-template" id="v-inventory-create-form-template">
             <div>
                 <x-admin::form 
                     :action="route('admin.inventory_sources.store')"
@@ -454,8 +454,8 @@
         </script>
 
         <script type="module">
-            app.component('v-create', {
-                template: '#v-create-template',
+            app.component('v-inventory-create-form', {
+                template: '#v-inventory-create-form-template',
 
                 data: function () {
                     return {
