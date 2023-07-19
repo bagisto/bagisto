@@ -1,13 +1,17 @@
 <div class="container px-[60px] max-lg:px-[30px] max-sm:px-[15px]">
-    <div class="flex gap-[40px] mt-[40px] items-start max-lg:gap-[20px]">
-
-        {{-- Filter Shimmer Effect --}}
-        <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+    <div class="flex gap-[40px] md:mt-[40px] items-start max-lg:gap-[20px]">
+        {{-- Desktop Filter Shimmer Effect --}}
+        <div class="max-md:hidden">
+            <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+        </div>
 
         <div class="flex-1">
-            {{-- Toolbar Shimmer Effect --}}
-            <x-shop::shimmer.categories.toolbar></x-shop::shimmer.categories.toolbar>
+            {{-- Desktop Toolbar Shimmer Effect --}}
+            <div class="max-md:hidden">
+                <x-shop::shimmer.categories.toolbar></x-shop::shimmer.categories.toolbar>
+            </div>
 
+            {{-- Product Card Container --}}
             @if(request()->query('mode') =='list')
                 <div class="grid grid-cols-1 gap-[25px] mt-[30px]">
                     <x-shop::shimmer.products.cards.list count="12"></x-shop::shimmer.products.cards.list>

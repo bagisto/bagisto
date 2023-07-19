@@ -48,7 +48,7 @@
                             class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="required|email"
-                            label="Email"
+                            :label="trans('shop::app.customers.login-form.email')"
                             placeholder="email@example.com"
                         >
                         </x-shop::form.control-group.control>

@@ -1,27 +1,13 @@
-@extends('admin::layouts.content')
+<div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <p class="text-[20px] text-gray-800 font-bold">
+        @lang('admin::app.marketing.email-marketing.campaigns.title')
+    </p>
 
-@section('page_title')
-    {{ __('admin::app.marketing.campaigns.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.marketing.campaigns.title') }}</h1>
+    <div class="flex gap-x-[10px] items-center">
+        <a href="{{ route('admin.campaigns.create') }}">
+            <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                @lang('admin::app.marketing.email-marketing.campaigns.create.title')
             </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('marketing.email-marketing.campaigns.create'))
-                    <a href="{{ route('admin.campaigns.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.campaigns.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.campaigns.index') }}"></datagrid-plus>
-        </div>
+        </a>
     </div>
-@stop
+</div>
