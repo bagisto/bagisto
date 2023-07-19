@@ -72,6 +72,7 @@ return [
                 'save'             => 'Save',
             ],
         ],
+    ],
 
     'marketing' => [
         'email-marketing' => [
