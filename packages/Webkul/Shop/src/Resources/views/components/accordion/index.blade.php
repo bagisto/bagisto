@@ -35,7 +35,7 @@
                 <span :class="`text-[24px] ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
             </div>
 
-            <div class="z-10 bg-white rounded-lg" v-if="isOpen">
+            <div class="z-10 bg-white rounded-lg" v-show="isOpen">
                 <slot name="content">
                     Default Content
                 </slot>

@@ -8,7 +8,7 @@
     <script type="text/x-template" id="v-product-card-template">
         <!-- Grid Card -->
         <div
-            class='grid gap-2.5 content-start w-full relative {{ $attributes["class"] }}'
+            class='grid gap-2.5 content-start w-full relative'
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">

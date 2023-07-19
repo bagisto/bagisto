@@ -14,7 +14,7 @@
             <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
                 <a
                     href="{{ route('shop.home.index') }}"
-                    class="min-h-[40px]"
+                    class="flex min-h-[30px]"
                 >
                     <img src="{{ bagisto_asset('images/logo.svg') }}">
                 </a>
