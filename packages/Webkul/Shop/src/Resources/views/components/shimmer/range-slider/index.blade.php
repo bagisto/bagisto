@@ -9,8 +9,8 @@
     <div class="flex justify-center relative items-center w-full h-20 mx-auto p-2">
 
         <div class="shimmer relative w-full h-[4px] bg-gray-200 rounded-2xl">
-            <div class="shimmer absolute -top-[10px] left-0 w-[24px] h-[24px] rounded-full"></div>
-            <div class="shimmer absolute -top-[10px] right-0 w-[24px] h-[24px] rounded-full"></div>
+            <div class="shimmer absolute -top-[10px] -left-[4px] w-[24px] h-[24px] rounded-full"></div>
+            <div class="shimmer absolute -top-[10px] -right-[4px] w-[24px] h-[24px] rounded-full"></div>
         </div>
 
     </div>

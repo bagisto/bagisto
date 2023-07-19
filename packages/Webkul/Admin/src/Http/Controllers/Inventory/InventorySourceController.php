@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Inventory;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\InventorySourcesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Admin\DataGrids\InventorySourcesDataGrid;
+use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 
 class InventorySourceController extends Controller
 {
@@ -52,9 +52,26 @@ class InventorySourceController extends Controller
     {
         Event::dispatch('inventory.inventory_source.create.before');
 
-        $inventorySource = $this->inventorySourceRepository->create(array_merge($inventorySourceRequest->all(), [
-            'status' => request()->has('status'),
-        ]));
+        $data = [
+            'code'           => $inventorySourceRequest->input('code'),
+            'name'           => $inventorySourceRequest->input('name'),
+            'description'    => $inventorySourceRequest->input('description'),
+            'latitude'       => $inventorySourceRequest->input('latitude'),
+            'longitude'      => $inventorySourceRequest->input('longitude'),
+            'priority'       => $inventorySourceRequest->input('priority'),
+            'contact_name'   => $inventorySourceRequest->input('contact_name'),
+            'contact_email'  => $inventorySourceRequest->input('contact_email'),
+            'contact_number' => $inventorySourceRequest->input('contact_number'),
+            'contact_fax'    => $inventorySourceRequest->input('contact_fax'),
+            'country'        => $inventorySourceRequest->input('country'),
+            'state'          => $inventorySourceRequest->input('state'),
+            'city'           => $inventorySourceRequest->input('city'),
+            'street'         => $inventorySourceRequest->input('street'),
+            'postcode'       => $inventorySourceRequest->input('postcode'),
+            'status'         => $inventorySourceRequest->has('status'),
+        ];
+
+        $inventorySource = $this->inventorySourceRepository->create($data);
 
         Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 
@@ -86,9 +103,26 @@ class InventorySourceController extends Controller
     {
         Event::dispatch('inventory.inventory_source.update.before', $id);
 
-        $inventorySource = $this->inventorySourceRepository->update(array_merge($inventorySourceRequest->all(), [
-            'status' => request()->has('status'),
-        ]), $id);
+        $data = [
+            'code'           => $inventorySourceRequest->input('code'),
+            'name'           => $inventorySourceRequest->input('name'),
+            'description'    => $inventorySourceRequest->input('description'),
+            'latitude'       => $inventorySourceRequest->input('latitude'),
+            'longitude'      =>$inventorySourceRequest->input('longitude'),
+            'priority'       => $inventorySourceRequest->input('priority'),
+            'contact_name'   => $inventorySourceRequest->input('contact_name'),
+            'contact_email'  => $inventorySourceRequest->input('contact_email'),
+            'contact_number' => $inventorySourceRequest->input('contact_number'),
+            'contact_fax'    => $inventorySourceRequest->input('contact_fax'),
+            'country'        => $inventorySourceRequest->input('country'),
+            'state'          => $inventorySourceRequest->input('state'),
+            'city'           => $inventorySourceRequest->input('city'),
+            'street'         => $inventorySourceRequest->input('street'),
+            'postcode'       => $inventorySourceRequest->input('postcode'),
+            'status'         => $inventorySourceRequest->has('status'),
+        ];
+
+        $inventorySource = $this->inventorySourceRepository->update($data, $id);
 
         Event::dispatch('inventory.inventory_source.update.after', $inventorySource);
 

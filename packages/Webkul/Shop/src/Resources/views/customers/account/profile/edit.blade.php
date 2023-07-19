@@ -48,8 +48,8 @@
                 name="first_name"
                 :value="old('first_name') ?? $customer->first_name"
                 rules="required"
-                label="First Name"
-                placeholder="First Name"
+                :label="trans('shop::app.customers.account.profile.first-name')"
+                :placeholder="trans('shop::app.customers.account.profile.first-name')"
             >
             </x-shop::form.control-group.control>
 
@@ -69,8 +69,8 @@
                 name="last_name"
                 :value="old('last_name') ?? $customer->last_name"
                 rules="required"
-                label="Last Name"
-                placeholder="Last Name"
+                :label="trans('shop::app.customers.account.profile.last-name')"
+                :placeholder="trans('shop::app.customers.account.profile.last-name')"
             >
             </x-shop::form.control-group.control>
 
@@ -90,8 +90,8 @@
                 name="email"
                 :value="old('email') ?? $customer->email"
                 rules="required|email"
-                label="Email"
-                placeholder="Email"
+                :label="trans('shop::app.customers.account.profile.email')"
+                :placeholder="trans('shop::app.customers.account.profile.email')"
             >
             </x-shop::form.control-group.control>
 
@@ -111,8 +111,8 @@
                 name="phone"
                 :value="old('phone') ?? $customer->phone"
                 rules="required|phone"
-                label="Phone"
-                placeholder="Phone"
+                :label="trans('shop::app.customers.account.profile.phone')"
+                :placeholder="trans('shop::app.customers.account.profile.phone')"
             >
             </x-shop::form.control-group.control>
 
@@ -133,7 +133,7 @@
                 :value="old('gender') ?? $customer->gender"
                 class="mb-4"
                 rules="required"
-                label="Gender"
+                :label="trans('shop::app.customers.account.profile.gender')"
             >
                 <option value="">@lang('Select Gender')</option>
                 <option value="Other">@lang('shop::app.customers.account.profile.other')</option>
@@ -156,8 +156,8 @@
                 type="password"
                 name="current_password"
                 value=""
-                label="Current Password"
-                placeholder="Current Password"
+                :label="trans('shop::app.customers.account.profile.current-password')"
+                :placeholder="trans('shop::app.customers.account.profile.current-password')"
             >
             </x-shop::form.control-group.control>
 
@@ -176,8 +176,8 @@
                 type="password"
                 name="new_password"
                 value=""
-                label="New Password"
-                placeholder="New Password"
+                :label="trans('shop::app.customers.account.profile.new-password')"
+                :placeholder="trans('shop::app.customers.account.profile.new-password')"
             >
             </x-shop::form.control-group.control>
 
@@ -197,8 +197,8 @@
                 name="new_password_confirmation"
                 value=""
                 rules="confirmed:@new_password"
-                label="Confirm Password"
-                placeholder="Confirm Password"
+                :label="trans('shop::app.customers.account.profile.confirm-password')"
+                :placeholder="trans('shop::app.customers.account.profile.confirm-password')"
             >
             </x-shop::form.control-group.control>
 

@@ -80,23 +80,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         });
 
         /**
-         * Emails templates routes.
-         */
-        Route::controller(TemplateController::class)->prefix('email-templates')->group(function () {
-            Route::get('', 'index')->name('admin.email_templates.index');
-
-            Route::get('create', 'create')->name('admin.email_templates.create');
-
-            Route::post('create', 'store')->name('admin.email_templates.store');
-
-            Route::get('edit/{id}', 'edit')->name('admin.email_templates.edit');
-
-            Route::post('edit/{id}', 'update')->name('admin.email_templates.update');
-
-            Route::post('delete/{id}', 'destroy')->name('admin.email_templates.delete');
-        });
-
-        /**
          * Events routes.
          */
         Route::controller(EventController::class)->prefix('events')->group(function () {
@@ -124,6 +107,23 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::put('update/{id}', 'update')->name('admin.customers.subscribers.update');
 
             Route::post('delete/{id}', 'destroy')->name('admin.customers.subscribers.delete');
+        });
+
+        /**
+         * Emails templates routes.
+         */
+        Route::controller(TemplateController::class)->prefix('email-templates')->group(function () {
+            Route::get('', 'index')->name('admin.email_templates.index');
+
+            Route::get('create', 'create')->name('admin.email_templates.create');
+
+            Route::post('create', 'store')->name('admin.email_templates.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.email_templates.edit');
+
+            Route::post('edit/{id}', 'update')->name('admin.email_templates.update');
+
+            Route::post('delete/{id}', 'destroy')->name('admin.email_templates.delete');
         });
 
         /**
