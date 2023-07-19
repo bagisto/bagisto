@@ -94,7 +94,7 @@ class DownloadableProductController extends Controller
                 ? $privateDisk->download($downloadableLinkPurchased->file)
                 : abort(404);
         } else {
-            $fileName = $name = substr($downloadableLinkPurchased->url, strrpos($downloadableLinkPurchased->url, '/') + 1);;
+            $fileName = $name = substr($downloadableLinkPurchased->url, strrpos($downloadableLinkPurchased->url, '/') + 1);
 
             $tempImage = tempnam(sys_get_temp_dir(), $fileName);
 
