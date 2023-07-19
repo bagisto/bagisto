@@ -291,9 +291,12 @@
                                 >
                                     <option value="">@lang('shop::app.checkout.onepage.addresses.shipping.select-country')</option>
 
-                                    @foreach (core()->countries() as $country)
-                                        <option value="{{ $country->code }}">{{ $country->name }}</option>
-                                    @endforeach
+                                    <option
+                                        v-for="country in countries"
+                                        :value="country.code"
+                                        v-text="country.name"
+                                    >
+                                    </option>
                                 </x-shop::form.control-group.control>
                             
                                 <x-shop::form.control-group.error

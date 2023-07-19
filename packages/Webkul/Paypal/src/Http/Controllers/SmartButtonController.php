@@ -172,7 +172,7 @@ class SmartButtonController extends Controller
                 'quantity'    => $item->quantity,
                 'name'        => $item->name,
                 'sku'         => $item->sku,
-                'category'    => $item->product->getTypeInstance()->isStockable() ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS',
+                'category'    => $item->getTypeInstance()->isStockable() ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS',
             ];
         }
 

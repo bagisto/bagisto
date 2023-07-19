@@ -4,13 +4,14 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Mail\NewCustomerNotification;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 
 class CustomerController extends Controller
 {
@@ -20,7 +21,8 @@ class CustomerController extends Controller
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository
-    ) {
+    ) 
+    {
     }
 
     /**
@@ -34,25 +36,15 @@ class CustomerController extends Controller
             return app(CustomerDataGrid::class)->toJson();
         }
 
-        return view('admin::customers.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::customers.create', compact('groups'));
+        return view('admin::customers.index', compact('groups'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function store()
     {
@@ -62,16 +54,25 @@ class CustomerController extends Controller
             'gender'        => 'required',
             'email'         => 'required|unique:customers,email',
             'date_of_birth' => 'date|before:today',
+            'phone'         => 'unique:customers,phone',
         ]);
 
         $password = rand(100000, 10000000);
 
         Event::dispatch('customer.registration.before');
 
-        $customer = $this->customerRepository->create(array_merge(request()->all(), [
-            'password'    => bcrypt($password),
-            'is_verified' => 1,
-        ]));
+        $customer = $this->customerRepository->create([
+            'id'                => request()->input('id'),
+            'first_name'        => request()->input('first_name'),
+            'last_name'         => request()->input('last_name'),
+            'gender'            => request()->input('gender'),
+            'email'             => request()->input('email'),
+            'date_of_birth'     => request()->input('date_of_birth'),
+            'phone'             => request()->input('phone'),
+            'customer_group_id' => request()->input('customer_group_id'),
+            'password'          => bcrypt($password),
+            'is_verified'       => 1,
+        ]);
 
         Event::dispatch('customer.registration.after', $customer);
 
@@ -83,9 +84,9 @@ class CustomerController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.customers.create-success'));
-
-        return redirect()->route('admin.customer.index');
+        return new JsonResource([
+            'message' => trans('admin::app.customers.create-success'),
+        ]);
     }
 
     /**
@@ -117,6 +118,7 @@ class CustomerController extends Controller
             'gender'        => 'required',
             'email'         => 'required|unique:customers,email,' . $id,
             'date_of_birth' => 'date|before:today',
+            'phone'         => 'unique:customers,phone,' . $id,
         ]);
 
         Event::dispatch('customer.update.before', $id);

@@ -4,7 +4,7 @@
     navigation-link="{{ $navigationLink ?? '' }}"
 >
     <x-shop::shimmer.categories.carousel
-        :count="7"
+        :count="8"
         :navigation-link="$navigationLink ?? false"
     ></x-shop::shimmer.categories.carousel>
 </v-categories-carousel>
@@ -15,10 +15,10 @@
             <div class="bs-item-carousal-wrapper relative">
                 <div
                     ref="swiperContainer"
-                    class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide"
+                    class="flex gap-10 overflow-auto scroll-smooth scrollbar-hide max-sm:gap-4"
                 >
                     <div
-                        class="grid grid-cols-1 gap-[15px] justify-items-center min-w-[120px] font-medium"
+                        class="grid grid-cols-1 gap-[15px] justify-items-center min-w-[120px] max-w-[120px] font-medium"
                         v-for="category in categories"
                     >
                         <a
@@ -39,7 +39,7 @@
                             class=""
                         >
                             <p
-                                class="text-[20px] text-black text-center"
+                                class="text-center text-black text-[20px] max-sm:font-normal"
                                 v-text="category.name"
                             >
                             </p>
@@ -64,7 +64,7 @@
         <!-- Category Carousel Shimmer -->
         <template v-if="isLoading">
             <x-shop::shimmer.categories.carousel
-                :count="7"
+                :count="8"
                 :navigation-link="$navigationLink ?? false"
             >
             </x-shop::shimmer.categories.carousel>

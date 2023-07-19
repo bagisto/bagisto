@@ -3,14 +3,14 @@
 namespace Webkul\Sales\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Webkul\Product\Type\AbstractType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Webkul\Sales\Database\Factories\OrderItemFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Webkul\Sales\Database\Factories\OrderItemFactory;
+use Webkul\Product\Type\AbstractType;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
 
 class OrderItem extends Model implements OrderItemContract
@@ -45,7 +45,7 @@ class OrderItem extends Model implements OrderItemContract
         $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
         if ($this->product) {
-            $this->typeInstance->setProduct($this);
+            $this->typeInstance->setProduct($this->product);
         }
 
         return $this->typeInstance;

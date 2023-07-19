@@ -307,9 +307,12 @@
                                     :placeholder="trans('shop::app.checkout.onepage.addresses.billing.country')"
                                     v-model="forms.billing.address.country"
                                 >
-                                    @foreach (core()->countries() as $country)
-                                        <option value="{{ $country->code }}">{{ $country->name }}</option>
-                                    @endforeach
+                                    <option
+                                        v-for="country in countries"
+                                        :value="country.code"
+                                        v-text="country.name"
+                                    >
+                                    </option>
                                 </x-shop::form.control-group.control>
         
                                 <x-shop::form.control-group.error
@@ -415,8 +418,8 @@
                                 type="text"
                                 name="billing[phone]"
                                 rules="required|numeric"
-                                label="Telephone"
-                                placeholder="Telephone"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
                                 v-model="forms.billing.address.phone"
                             >
                             </x-shop::form.control-group.control>

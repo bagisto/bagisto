@@ -14,7 +14,7 @@
             <div class="flex items-center gap-x-[54px] max-[1180px]:gap-x-[35px]">
                 <a
                     href="{{ route('shop.home.index') }}"
-                    class="min-h-[40px]"
+                    class="flex min-h-[30px]"
                 >
                     <img src="{{ bagisto_asset('images/logo.svg') }}">
                 </a>
@@ -76,7 +76,7 @@
                                         class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                         @click="removeSelectedItems"
                                     >
-                                        @lang('Remove')
+                                        @lang('shop::app.checkout.cart.index.remove')
                                     </span>
 
                                     <span class="mx-[10px] border-r-[2px] border-[#E9E9E9]"></span>
@@ -85,7 +85,7 @@
                                         class="text-[16px] text-[#0A49A7] cursor-pointer" 
                                         @click="moveToWishlistSelectedItems"
                                     >
-                                        @lang('Move To Wishlist')
+                                        @lang('shop::app.checkout.cart.index.move-to-wishlist')
                                     </span>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                                                         class="flex gap-x-[15px] text-[16px] items-center cursor-pointer whitespace-nowrap"
                                                         @click="item.option_show = ! item.option_show"
                                                     >
-                                                        @lang('shop::app.checkout.cart.index.see-datails')
+                                                        @lang('shop::app.checkout.cart.index.see-details')
 
                                                         <span
                                                             class="text-[24px]"
@@ -265,7 +265,7 @@
 
                 computed: {
                     selectedItemsCount() {
-                        return  this.cart.items.filter(item => item.selected).length;
+                        return this.cart.items.filter(item => item.selected).length;
                     }
                 },
 
@@ -276,6 +276,10 @@
                                 this.isLoading = false;
 
                                 this.cart = response.data.data;
+
+                                if (response.data.message) {
+                                    this.$emitter.emit('add-flash', { type: 'info', message: response.data.message });
+                                }
                             })
                             .catch(error => {});     
                     },

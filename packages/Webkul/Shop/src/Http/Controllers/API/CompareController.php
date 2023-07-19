@@ -4,9 +4,9 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Customer\Repositories\CompareItemRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\CompareItemResource;
-use Webkul\Customer\Repositories\CompareItemRepository;
 
 class CompareController extends APIController
 {
@@ -18,7 +18,8 @@ class CompareController extends APIController
     public function __construct(
         protected CompareItemRepository $compareItemRepository,
         protected ProductRepository $productRepository
-    ) {
+    )
+    {
     }
 
     /**

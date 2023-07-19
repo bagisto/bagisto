@@ -130,7 +130,7 @@
                 },
 
                 getCountries() {
-                    this.$axios.get("{{ route('shop.countries') }}")
+                    this.$axios.get("{{ route('shop.api.core.countries') }}")
                         .then(response => {
                             this.countries = response.data.data;
                         })
@@ -138,7 +138,7 @@
                 },
 
                 getCountryStates() {
-                    this.$axios.get("{{ route('shop.countries.states') }}")
+                    this.$axios.get("{{ route('shop.api.core.states') }}")
                         .then(response => {
                             this.states = response.data.data;
                         })

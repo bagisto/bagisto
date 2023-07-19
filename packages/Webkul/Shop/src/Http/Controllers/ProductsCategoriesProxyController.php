@@ -4,7 +4,6 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
 class ProductsCategoriesProxyController extends Controller
@@ -17,9 +16,8 @@ class ProductsCategoriesProxyController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
-        protected SliderRepository $sliderRepository
-    ) {
-        parent::__construct();
+    )
+    {
     }
 
     /**
@@ -35,9 +33,8 @@ class ProductsCategoriesProxyController extends Controller
          * Support url for chinese, japanese, arabic and english with numbers.
          */
         if (! preg_match('/^([\x{0621}-\x{064A}\x{4e00}-\x{9fa5}\x{3402}-\x{FA6D}\x{3041}-\x{30A0}\x{30A0}-\x{31FF}_a-z0-9-]+\/?)+$/u', $slugOrPath)) {
-            $sliders = $this->sliderRepository->getActiveSliders();
 
-            return view('shop::home.index', compact('sliders'));
+            return view('shop::home.index');
         }
 
         $category = $this->categoryRepository->findByPath($slugOrPath);

@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\EventDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\EventRepository;
+use Webkul\Admin\DataGrids\EventDataGrid;
 
 class EventController extends Controller
 {

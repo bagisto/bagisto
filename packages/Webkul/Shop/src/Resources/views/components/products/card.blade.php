@@ -6,8 +6,9 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-card-template">
+        <!-- Grid Card -->
         <div
-            class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'
+            class='grid gap-2.5 content-start w-full relative'
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
@@ -51,7 +52,7 @@
                             class="absolute bottom-[15px] left-[50%] py-[11px] px-[43px] bg-white rounded-xl text-navyBlue text-xs w-max font-medium cursor-pointer -translate-x-[50%] translate-y-[54px] group-hover:translate-y-0 transition-all duration-300"
                             @click="addToCart()"
                         >
-                            @lang('shop::app.components.products.add-to-cart')
+                            @lang('shop::app.components.products.card.add-to-cart')
                         </a>
                     </div>
                 </div>
@@ -75,6 +76,7 @@
             </div>
         </div>
 
+        <!-- List Card -->
         <div
             class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap"
             v-else
@@ -157,7 +159,7 @@
                     class="bs-primary-button px-[30px] py-[10px] whitespace-nowrap"
                     @click="addToCart()"
                 >
-                    @lang('shop::app.components.products.add-to-cart')
+                    @lang('shop::app.components.products.card.add-to-cart')
                 </div> 
             </div> 
         </div>

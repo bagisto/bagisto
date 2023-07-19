@@ -178,7 +178,7 @@ class Booking extends Virtual
             ! isset($data['booking'])
             || ! count($data['booking'])
         ) {
-            return trans('shop::app.checkout.cart.missing_options');
+            return trans('shop::app.checkout.cart.missing-options');
         }
 
         $products = [];
@@ -192,7 +192,7 @@ class Booking extends Virtual
                 $hours = floor($time / 60) / 60;
 
                 if ($hours > 1) {
-                    return trans('shop::app.checkout.cart.integrity.select_hourly_duration');
+                    return trans('shop::app.checkout.cart.integrity.select-hourly-duration');
                 }
             }
 
@@ -210,7 +210,7 @@ class Booking extends Virtual
             });
 
             if (! count($filtered)) {
-                return trans('shop::app.checkout.cart.missing_options');
+                return trans('shop::app.checkout.cart.missing-options');
             }
 
             $cartProductsList = [];
@@ -240,7 +240,7 @@ class Booking extends Virtual
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
-            return trans('shop::app.checkout.cart.inventory_warning');
+            return trans('shop::app.checkout.cart.inventory-warning');
         }
 
         $products = $typeHelper->addAdditionalPrices($products);

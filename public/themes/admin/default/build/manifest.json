@@ -1,8 +1,12 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-b05bb5d3.css",
+    "file": "assets/app-d8ed7b58.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
+  },
+  "src/Resources/assets/fonts/bagisto-admin.woff": {
+    "file": "assets/bagisto-admin-ae816848.woff",
+    "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg": {
     "file": "assets/Accordion-Dark-Arrow-Down-3a8840fa.svg",
@@ -47,6 +51,14 @@
   "src/Resources/assets/images/hamburger.svg": {
     "file": "assets/hamburger-9b9f7edd.svg",
     "src": "src/Resources/assets/images/hamburger.svg"
+  },
+  "src/Resources/assets/images/logo.png": {
+    "file": "assets/logo-013cd27b.png",
+    "src": "src/Resources/assets/images/logo.png"
+  },
+  "src/Resources/assets/images/media-image.png": {
+    "file": "assets/media-image-4aa33a76.png",
+    "src": "src/Resources/assets/images/media-image.png"
   },
   "src/Resources/assets/images/search.svg": {
     "file": "assets/search-a93e6b3f.svg",

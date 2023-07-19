@@ -25,7 +25,7 @@
     <script type="text/x-template" id="v-accordion-template">
         <div {{ $attributes->merge(['class' => 'border-b-[1px] border-[#E9E9E9]']) }}>
             <div
-                :class="`flex justify-between items-center cursor-pointer select-none ${isOpen ? 'active' : ''}`"
+                :class="`flex justify-between items-center py-[10px] cursor-pointer select-none ${isOpen ? 'active' : ''}`"
                 @click="toggle"
             >
                 <slot name="header">
@@ -35,7 +35,7 @@
                 <span :class="`text-[24px] ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
             </div>
 
-            <div class="z-10 bg-white rounded-lg" v-if="isOpen">
+            <div class="z-10 bg-white rounded-lg" v-show="isOpen">
                 <slot name="content">
                     Default Content
                 </slot>

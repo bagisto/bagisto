@@ -15,9 +15,8 @@ class AddressController extends APIController
      *
      * @return void
      */
-    public function __construct(
-        protected CustomerAddressRepository $customerAddressRepository
-    ) {
+    public function __construct(protected CustomerAddressRepository $customerAddressRepository)
+    {
     }
 
     /**

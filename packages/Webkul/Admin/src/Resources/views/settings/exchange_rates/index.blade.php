@@ -1,30 +1,12 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <div class="flex justify-between items-center">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.settings.exchange-rates.index.title')
+        </p>
 
-@section('page_title')
-    {{ __('admin::app.settings.exchange_rates.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.settings.exchange_rates.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                <a href="{{ route('admin.exchange_rates.update_rates') }}" class="btn btn-lg btn-primary">
-                    {{ __('admin::app.settings.exchange_rates.update-rates') }}
-                </a>
-                @if (bouncer()->hasPermission('settings.exchange_rates.create'))
-                    <a href="{{ route('admin.exchange_rates.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.exchange_rates.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.exchange_rates.index') }}"></datagrid-plus>
+        <div class="flex gap-x-[10px] items-center">
+            <!-- Create new Exchange Rates -->
+            @include('admin::settings.exchange_rates.create')
         </div>
     </div>
-@stop
+</x-admin::layouts>

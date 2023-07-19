@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
 	font-family: 'bagisto-admin';
 	src: url('../fonts/bagisto-admin.woff?jwnnow') format('woff');
@@ -12,16 +11,6 @@
 }
 
 @layer components {
-
-	* {
-		@apply box-border font-inter;
-	}
-
-	body {
-		@apply bg-gray-100;
-	}
-
-
 	[class^="icon-"],
 	[class*=" icon-"] {
 		/* use !important to prevent issues with browser extensions that change fonts */
@@ -70,6 +59,10 @@
 	.icon-attribute:before {
 		content: "\e906";
 	}
+
+	.icon-bin:before {
+        content: "\e908";
+    }
 
 	.icon-calendar:before {
 		content: "\e907";
@@ -231,7 +224,7 @@
 		content: "\e92e";
 	}
 
-	.icon-serch:before {
+	.icon-search:before {
 		content: "\e92f";
 	}
 
@@ -295,6 +288,10 @@
 		@apply text-[14px] leading-[17px];
 	}
 
+	input{
+		@apply outline-none;
+	}
+
 	.journal-scroll::-webkit-scrollbar {
 		width: 14px;
 		cursor: pointer;
@@ -315,6 +312,16 @@
 		border: 3px solid transparent;
 		background-clip: content-box;
 	}
+
+	.custom-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: transparent;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 10px);
+        background-position-y: 50%;
+    }
 
 	.label-pending,
 	.label-processing,
@@ -346,6 +353,10 @@
 
 	.status-disable{
 		@apply text-red-600;
+	}
+
+	body {
+		@apply bg-gray-100;
 	}
 
 }

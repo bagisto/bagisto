@@ -242,16 +242,16 @@
                                 })
                                 .then(response => {
                                     if (response.data.redirect) {
-                                        window.location.href = response.data.data;
-
                                         this.$emitter.emit('add-flash', { type: 'warning', message: response.data.message });
+
+                                        window.location.href = response.data.data;
                                     } else {
+                                        this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
+
                                         this.$emitter.emit('update-mini-cart', response.data.data.cart);
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                     }
-
-                                    this.wishlist = this.wishlist.filter(wishlist => wishlist.id != id);
                                 })
                                 .catch(error => {});
                         }
