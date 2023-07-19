@@ -17,7 +17,7 @@
 @endphp
 
 <div class="bs-mobile-menu gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
-    <div class="w-full flex justify-between items-center px-[6px]">
+    <div class="w-full flex justify-between items-center">
         {{-- Left Navigation --}}
         <div class="flex items-center gap-x-[5px]">
             <x-shop::drawer
