@@ -1,7 +1,7 @@
-<v-create></v-create>
+<v-create-currencies-form></v-create-currencies-form>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-create-template">
+    <script type="text/x-template" id="v-create-currencies-form-template">
         <div>
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -19,19 +19,16 @@
                         </x-slot:toggle>
 
                         <x-slot:header>
-                            @lang('admin::app.settings.currencies.add-title')
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.settings.currencies.add-title')
+                            </p>
                         </x-slot:header>
 
                         <x-slot:content>
-                          <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                          <div class="flex gap-[10px] max-xl:flex-wrap">
                             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                                <div class="p-[16px] rounded-[4px]">
-
+                                <div class="px-[16px] py-[10px]">
                                     {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
-
-                                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                        @lang('General')
-                                    </p>
 
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
@@ -142,10 +139,11 @@
     </script>
 
     <script type="module">
-        app.component('v-create', {
-            template: '#v-create-template',
+        app.component('v-create-currencies-form', {
+            template: '#v-create-currencies-form-template',
+            
             methods: {
-                store(params, { resetForm }) {
+                store(params, { resetForm, setErrors }) {
                     this.$axios.post('{{ route('admin.currencies.store') }}', params)
                         .then((response) => {
                             alert(response.data.data.message);
@@ -153,7 +151,11 @@
                             this.$refs.currencyModal.toggle();
 
                             resetForm();
-                        }).catch((error) => console.log(error));
+                        }).catch((error) =>{
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                 },
             },
         });
