@@ -3,19 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\EmailTemplateDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\TemplateRepository;
+use Webkul\Admin\DataGrids\EmailTemplateDataGrid;
 
 class TemplateController extends Controller
 {
-    /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -23,7 +16,6 @@ class TemplateController extends Controller
      */
     public function __construct(protected TemplateRepository $templateRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**

@@ -32,6 +32,22 @@ return [
             'delete-success'     => 'Currency deleted successfully.',
             'last-delete-error'  => 'At least one Currency is required.',
         ],
+
+        'exchange-rates'  => [
+            'index' => [
+                'title' => 'Exchange Rates'
+            ],
+
+            'create' => [   
+                'title'            => 'Create Exchange Rate',
+                'button-title'     => 'Add Exchange Rate',
+                'source-currency'  => 'Source Currency',
+                'target-currency'  => 'Target Currency',
+                'rate'             => 'Rate',
+                'save'             => 'Save',
+            ],
+        ],
+
         'tax-rates'   => [
             'create'  => [
                 'title'          => 'Create Tax Rate',
@@ -53,11 +69,69 @@ return [
     ],
     
 
-
-
-
-
-
+    'marketing' => [
+        'email-marketing' => [
+            'templates' => [
+                'create' => [
+                    'title'          => 'Add Template',
+                    'active'         => 'Active',
+                    'content'        => 'Content*',
+                    'cancel'         => 'Cancel',
+                    'draft'          => 'Draft',
+                    'general'        => 'General',
+                    'inactive'       => 'Inactive',
+                    'name'           => 'Name',
+                    'save'           => 'Save',
+                    'status'         => 'Status',
+                    'select-status'  => 'Select Status',
+                    'save-btn-title' => 'Save',
+                ],
+    
+                'title'          => 'Email Templates',
+                'events'         => 'Events',
+            ],
+    
+            'campaigns' => [
+                'create'    => [
+                    'active'          => 'Active',
+                    'title'           => 'Add Campaign',
+                    'audience'        => 'Audience',
+                    'cancel'          => 'Cancel',
+                    'customer-group'  => 'Customer Group',
+                    'channel'         => 'Channel',
+                    'email-template'  => 'Email Template',
+                    'event'           => 'Event',
+                    'save'            => 'Save',
+                    'general'         => 'General',
+                    'inactive'        => 'Inactive',
+                    'name'            => 'Name',
+                    'status'          => 'Status',
+                    'select-template' => 'Select Template',
+                    'select-event'    => 'Select Event',
+                    'select-status'   => 'Select Status',
+                    'subject'         => 'Subject',
+                ],
+    
+                'title'          => 'Campaigns',
+            ],
+    
+            'events' => [
+                'create'   => [
+                    'title'          => 'Events',
+                    'add-title'      => 'Add Event',
+                    'general'        => 'General',
+                    'name'           => 'Name',
+                    'description'    => 'Description',
+                    'date'           => 'Date',
+                    'save'           => 'Save',
+                ],
+            ],
+    
+            'newsletters' => [
+                'title' => 'Newsletter Subscriptions',
+            ],
+        ],
+    ],
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -1397,7 +1471,7 @@ return [
         ],
     ],
 
-    'marketing' => [
+    'marketing-old' => [
         'templates' => [
             'title'          => 'Email Templates',
             'add-title'      => 'Add Email Template',

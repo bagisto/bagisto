@@ -1,5 +1,5 @@
 <div class="mt-[30px]">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center py-[10px]">
         <h2 class="shimmer w-[193px] h-[39px]"></h2>
         
         <span class="shimmer w-[24px] h-[24px]"></span>
@@ -17,7 +17,8 @@
                         <div class="shimmer block w-[24px] h-[24px] m-0 ml-[0px] rounded-[10px]"></div>
                     </div>
                 </div>
-                <p class="shimmer w-[100%] h-[24px] mt-[25px]"></p>
+
+                <p class="shimmer w-[100%] h-[21px] mt-[25px]"></p>
             </div>
 
             {{-- Single card addredd --}}

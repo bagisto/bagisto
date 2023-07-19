@@ -1,449 +1,483 @@
 <x-admin::layouts>
-    {{-- Input Form --}}
-    <x-admin::form :action="route('admin.inventory_sources.store')">
-        <div class="flex justify-between items-center">
-            <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.settings.inventory_sources.create.add-title')
-            </p>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.settings.inventory_sources.add-title')
+    </x-slot:title>
 
-            <div class="flex gap-x-[10px] items-center">
-                <span class="text-gray-600 leading-[24px]">
-                    @lang('admin::app.settings.inventory_sources.create.cancel')
-                </span>
+    {{-- Create Inventory --}}
+    <v-inventory-create-form></v-inventory-create-form>
 
-                <button 
-                    type="submit" 
-                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-inventory-create-form-template">
+            <div>
+                <x-admin::form 
+                    :action="route('admin.inventory_sources.store')"
+                    enctype="multipart/form-data"
                 >
-                    @lang('admin::app.settings.inventory_sources.create.save')
-                </button>
-            </div>
-        </div>
+                    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                        <p class="text-[20px] text-gray-800 font-bold">
+                            @lang('admin::app.settings.inventory_sources.add-title')
+                        </p>
 
-        {{-- Filter row --}}
-        <div class="flex gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
-            <div class="flex gap-x-[4px] items-center">
-                <div class="">
-                    <div class="inline-flex gap-x-[8px] items-center justify-between w-full px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600 max-w-max">
-                        <span class="icon-store text-[24px]"></span>
+                        {{-- Save Inventory --}}
+                        <div class="flex gap-x-[10px] items-center">
+                            <button 
+                                type="submit"
+                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            >
+                                @lang('admin::app.settings.inventory_sources.save-btn-title')
+                            </button>
+                        </div>
+                    </div>
 
                         @lang('Default Store')
 
-                        <span class="icon-sort-down text-[24px]"></span>
+                    {{-- General --}}
+                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+
+                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                    @lang('admin::app.settings.inventory_sources.general')
+                                </p>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Code')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        :value="old('code')"
+                                        id="code"
+                                        rules="required"
+                                        :label="trans('Code')"
+                                        :placeholder="trans('Code')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Name')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        id="name"
+                                        rules="required"
+                                        :label="trans('name')"
+                                        :placeholder="trans('Name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Description')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="textarea"
+                                        name="description"
+                                        :value="old('description')"
+                                        id="description"
+                                        class="text-gray-600 "
+                                        :label="trans('Description')"
+                                        :placeholder="trans('Description')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="description"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Latitude')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="latitude"
+                                        :value="old('latitude')"
+                                        id="latitude"
+                                        :label="trans('Latitude')"
+                                        :placeholder="trans('Latitude')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="latitude"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Longitude')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="longitude"
+                                        :value="old('longitude')"
+                                        id="longitude"
+                                        :label="trans('Longitude')"
+                                        :placeholder="trans('Longitude')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="longitude"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Priority')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="priority"
+                                        :value="old('priority')"
+                                        id="priority"
+                                        :label="trans('Priority')"
+                                        :placeholder="trans('Priority')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="priority"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Status')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="switch"
+                                        name="status"
+                                        value="1"
+                                        id="status"
+                                        :label="trans('Status')"
+                                        :placeholder="trans('Status')"
+                                        :checked="old('status') ?? false"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="status"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
-                </div>
+                    {{-- Contact Information --}}
+                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-                {{-- Language changer --}}
-                <div class="">
-                    <div class="inline-flex gap-x-[4px] items-center justify-between w-full px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600 max-w-max">
-                        <span class="icon-language text-[24px] "></span>
+                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                    @lang('Contact Information')
+                                </p>
 
-                        English
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Name')
+                                    </x-admin::form.control-group.label>
 
-                        <span class="icon-sort-down text-[24px]"></span>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="contact_name"
+                                        :value="old('contact_name')"
+                                        id="contact_name"
+                                        rules="required"
+                                        :label="trans('Contact name')"
+                                        :placeholder="trans('Contact name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="contact_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Email')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="email"
+                                        name="contact_email"
+                                        :value="old('contact_email')"
+                                        id="contact_email"
+                                        rules="required|email"
+                                        :label="trans('Email')"
+                                        :placeholder="trans('Email')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="contact_email"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Contact Number')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="contact_number"
+                                        :value="old('contact_number')"
+                                        id="contact_number"
+                                        rules="required"
+                                        :label="trans('Contact Number')"
+                                        :placeholder="trans('Contact Number')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="contact_number"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Fax')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="contact_fax"
+                                        :value="old('contact_fax')"
+                                        id="contact_fax"
+                                        :label="trans('Fax')"
+                                        :placeholder="trans('Fax')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="contact_fax"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow"></div>
-                </div>
-            </div>
-        </div>
+                    {{-- Source Address --}}
+                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
-        {{-- Informations --}}
-        <div class="flex gap-[10px] mt-[14px] mb-2">
-            <div class="flex flex-col gap-[8px] flex-1">
-                <div class="p-[16px] bg-white box-shadow rounded-[4px]">
-                    <h1 class="mb-3">
-                        @lang('admin::app.settings.inventory_sources.create.general')
-                    </h1>
+                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                    @lang('Source Address') 
+                                </p>
 
-                    <div class="mb-[10px]">
-                        {{-- Code --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.code')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="code"
-                                value="{{ old('code') }}"
-                                rules="required"
-                                label="Code"
-                                placeholder="Code"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error 
-                                control-name="code"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Name --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.name')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="name"
-                                value="{{ old('name') }}"
-                                rules="required"
-                                label="Name"
-                                placeholder="Name"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Description --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.description')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="description"
-                                value="{{ old('description') }}"
-                                label="Description"
-                                placeholder="Description"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="description"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Latitute --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.latitude')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="latitute"
-                                value="{{ old('latitute') }}"
-                                label="Latitute"
-                                placeholder="Latitute"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="latitute"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Longitute --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.longitude')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="longitute"
-                                value="{{ old('longitute') }}"
-                                label="Longitute"
-                                placeholder="Longitute"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="longitute"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Priority --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.priority')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="priority"
-                                value="{{ old('priority') }}"
-                                rules="numeric"
-                                label="Priority"
-                                placeholder="Priority"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="priority"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Status --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.status')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="status"
-                                value="{{ old('status') }}"
-                                rules="numeric"
-                                label="Status"
-                                placeholder="Status"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="flex gap-[10px] mt-[14px] mb-2">
-            <div class=" flex flex-col gap-[8px] flex-1">
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <h1 class="mb-3">
-                        @lang('admin::app.settings.inventory_sources.create.contact-information')
-                    </h1>
-
-                    <div class="mb-[10px]">
-                        {{-- Contact Name --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.contact-name')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="contact_name"
-                                value="{{ old('contact_name') }}"
-                                rules="required"
-                                label="Name"
-                                placeholder="Name"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="contact_name"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Contact Email --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.contact-email')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="email"
-                                name="contact_email"
-                                value="{{ old('contact_email') }}"
-                                rules="required"
-                                label="Email"
-                                placeholder="Email"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="contact_email"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Contact Number --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.contact-number')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="contact_number"
-                                value="{{ old('contact_number') }}"
-                                label="Contact Number"
-                                placeholder="Contact Number"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="contact_number"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Contact Fax --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.contact-fax')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="contact_fax"
-                                value="{{ old('contact_fax') }}"
-                                label="Fax"
-                                placeholder="Fax"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="contact_fax"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="flex gap-[10px] mt-[14px] mb-2">
-            <div class=" flex flex-col gap-[8px] flex-1">
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <h1 class="mb-3">
-                        @lang('admin::app.settings.inventory_sources.create.source-address')
-                    </h1>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Country')
+                                    </x-admin::form.control-group.label>
                     
-                    <div class="mb-[10px]">
-                        {{-- Country --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.country')
-                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="country"
+                                        id="country"
+                                        rules="required"
+                                        :label="trans('country')"
+                                        :placeholder="trans('country')"
+                                        v-model="country"
+                                    >
+                                        <option value=""></option>
+                    
+                                        @foreach (core()->countries() as $country)
+                    
+                                            <option value="{{ $country->code }}">{{ $country->name }}</option>
+                    
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+                    
+                                    <x-admin::form.control-group.error
+                                        control-name="country"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                                        
+                                <x-admin::form.control-group 
+                                    class="mb-[10px]"
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('State')
+                                    </x-admin::form.control-group.label>
+                    
+                                    <template v-if="haveStates()">
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="state"
+                                            id="state"
+                                            rules="required"
+                                            :label="trans('State')"
+                                            :placeholder="trans('State')"
+                                        >
+                                            <option value="">@lang('admin::app.customers.customers.select-state')</option>
 
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="country"
-                                class="cursor-pointer"
-                                rules="required"
-                                label="Country"
-                            >
-                                <option value="" readonly>
-                                    @lang('Select Country')
-                                </option>
+                                            <option 
+                                                v-for='(state, index) in countryStates[country]'
+                                                :value="state.code"
+                                                v-text="state.default_name"
+                                            >
+                                            </option>
+                                        </x-admin::form.control-group.control>
+                                    </template>
+                    
+                                    <template v-else>
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="state"
+                                            :value="old('state')"
+                                            id="state"
+                                            rules="required"
+                                            :label="trans('State')"
+                                            :placeholder="trans('State')"
+                                            v-model="state"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </template>
 
-                                @foreach (core()->countries() as $country)
-                                    <option value="{{ $country->code }}">
-                                        {{ $country->name }}
-                                    </option>
-                                @endforeach
-                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.error
+                                        control-name="state"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                            <x-admin::form.control-group.error
-                                control-name="country"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('City')
+                                    </x-admin::form.control-group.label>
 
-                        {{-- State --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.contact-name')
-                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="city"
+                                        :value="old('city')"
+                                        id="city"
+                                        rules="required"
+                                        :label="trans('City')"
+                                        :placeholder="trans('City')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="state"
-                                value="{{ old('state') }}"
-                                rules="required"
-                                label="State"
-                                placeholder="State"
-                            >
-                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.error
+                                        control-name="city"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                            <x-admin::form.control-group.error
-                                control-name="state"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Street')
+                                    </x-admin::form.control-group.label>
 
-                        {{-- City --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.city')
-                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="street"
+                                        :value="old('street')"
+                                        id="street"
+                                        rules="required"
+                                        :label="trans('Street')"
+                                        :placeholder="trans('Street')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="city"
-                                value="{{ old('city') }}"
-                                rules="required"
-                                label="City"
-                                placeholder="City"
-                            >
-                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.error
+                                        control-name="street"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                            <x-admin::form.control-group.error
-                                control-name="city"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('Postcode')
+                                    </x-admin::form.control-group.label>
 
-                        {{-- Street --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.street')
-                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="postcode"
+                                        :value="old('postcode')"
+                                        id="postcode"
+                                        rules="required"
+                                        :label="trans('Postcode')"
+                                        :placeholder="trans('Postcode')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="street"
-                                value="{{ old('street') }}"
-                                rules="required"
-                                label="Street"
-                                placeholder="Street"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="street"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        {{-- Pincode --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.inventory_sources.create.postcode')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="postcode"
-                                value="{{ old('postcode') }}"
-                                rules="required"
-                                label="Postcode"
-                                placeholder="Postcode"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="Postcode"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="postcode"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    {!! view_render_event('bagisto.admin.settings.inventory.create.after') !!}
+                </x-admin::form>
             </div>
-        </div>
+        </script>
 
-    </x-admin::form>
+        <script type="module">
+            app.component('v-inventory-create-form', {
+                template: '#v-inventory-create-form-template',
+
+                data: function () {
+                    return {
+                        country: "{{ old('country') }}",
+
+                        state: "{{ old('state')  }}",
+
+                        countryStates: @json(core()->groupedStatesByCountries())
+                    }
+                },
+
+                methods: {
+                    haveStates: function () {
+                        if (this.countryStates[this.country] && this.countryStates[this.country].length) {
+                            return true;
+                        }
+
+                        return false;
+                    },
+                }
+            })
+        </script>
+    @endpushOnce
+
 </x-admin::layouts>

@@ -5,6 +5,7 @@
     </div>
 
 
+    <!-- Price Range Filter Shimmer -->
     <div class="border-b-[1px] border-[#E9E9E9]">
         <div class="flex py-[10px] justify-between items-center">
             <p class="shimmer h-[27px] w-[40%]"></p>
@@ -16,37 +17,103 @@
         </div>
     </div>
 
+    <!-- Checkbox Filter Shimmer -->
     <div class="border-b-[1px] border-[#E9E9E9]">
         <div class="flex py-[10px] justify-between items-center">
             <p class="shimmer w-[40%] h-[27px]"></p>
             <span class="shimmer h-[24px] w-[24px]"></span>
         </div>
 
-        <div class="z-10 bg-white rounded-lg">
-            <ul class="pb-3 grid gap-[12px]">
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%] mb-[12px]"></li>
-            </ul>
+        <div class="grid pb-3 z-10 bg-white rounded-lg">
+            <div class="flex items-center gap-x-[15px] pl-2 ">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+                
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Checkbox Filter Shimmer -->
     <div class="border-b-[1px] border-[#E9E9E9]">
         <div class="flex py-[10px] justify-between items-center">
-            <p class="shimmer h-[27px] w-[40%]"></p>
+            <p class="shimmer w-[40%] h-[27px]"></p>
             <span class="shimmer h-[24px] w-[24px]"></span>
         </div>
 
-        <div class="z-10 bg-white rounded-lg">
-            <ul class="pb-3 grid gap-[12px]">
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%]"></li>
-                <li class="shimmer h-[24px] w-[60%] mb-[12px]"></li>
-            </ul>
+        <div class="grid pb-3 z-10 bg-white rounded-lg">
+            <div class="flex items-center gap-x-[15px] pl-2 ">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+                
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-x-[15px] pl-2 rounded">
+                <div class="shimmer w-[20px] h-[20px] rounded"></div>
+
+                <div class="p-2 pl-0">
+                    <div class="shimmer w-[100px] h-[20px]"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

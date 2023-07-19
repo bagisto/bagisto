@@ -52,7 +52,7 @@
                             :value="old('email')"
                             id="email" 
                             rules="required|email"
-                            label="Email"
+                            :label="trans('shop::app.customers.reset-password.email')"
                             placeholder="email@example.com"
                         >
                         </x-shop::form.control-group.control>
@@ -75,8 +75,8 @@
                             value=""
                             ref="password"
                             rules="required|min:6"
-                            label="Password"
-                            placeholder="Password"
+                            :label="trans('shop::app.customers.reset-password.password')"
+                            :placeholder="trans('shop::app.customers.reset-password.password')""
                         >
                         </x-shop::form.control-group.control>
 
@@ -97,8 +97,8 @@
                             class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="confirmed:@password"
-                            label="Confirm Password"
-                            placeholder="Confirm Password"
+                            :label="trans('shop::app.customers.reset-password.confirm-password')"
+                            :placeholder="trans('shop::app.customers.reset-password.confirm-password')"
                         >
                         </x-shop::form.control-group.control>
 
