@@ -32,7 +32,7 @@
                 href="javascript:void(0);"
                 onclick="cancelOrder('@lang('shop::app.customers.account.orders.view.cancel-confirm-msg')')"
             >
-                @lang('shop::app.customer.account.order.view.cancel-btn-title')
+                @lang('shop::app.customers.account.orders.view.cancel-btn-title')
             </a>
         @endif
     </div>

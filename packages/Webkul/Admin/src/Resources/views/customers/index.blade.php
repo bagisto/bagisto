@@ -1,46 +1,12 @@
-@extends('admin::layouts.content')
-
-@section('page_title')
-    {{ __('admin::app.customers.customers.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.customers.customers.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                <div class="export-import" @click="showModal('downloadDataGrid')">
-                    <i class="export-icon"></i>
-
-                    <span>
-                        {{ __('admin::app.export.export') }}
-                    </span>
-                </div>
-                @if (bouncer()->hasPermission('customers.customers.create'))
-                    <a href="{{ route('admin.customer.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.customers.customers.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.customer.index') }}"></datagrid-plus>
+<x-admin::layouts>
+    <div class="flex justify-between items-center">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.customers.index.title')
+        </p>
+        
+        <div class="flex gap-x-[10px] items-center">
+            <!-- Create a new Customer -->
+            @include('admin::customers.create')
         </div>
     </div>
-
-    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-        <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
-
-        <div slot="body">
-            <export-form></export-form>
-        </div>
-    </modal>
-@stop
-
-@push('scripts')
-    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\CustomerDataGrid')])
-@endpush
+</x-admin::layouts>

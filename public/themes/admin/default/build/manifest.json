@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-33089315.css",
+    "file": "assets/app-d8ed7b58.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -55,6 +55,10 @@
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",
     "src": "src/Resources/assets/images/logo.png"
+  },
+  "src/Resources/assets/images/media-image.png": {
+    "file": "assets/media-image-4aa33a76.png",
+    "src": "src/Resources/assets/images/media-image.png"
   },
   "src/Resources/assets/images/search.svg": {
     "file": "assets/search-a93e6b3f.svg",

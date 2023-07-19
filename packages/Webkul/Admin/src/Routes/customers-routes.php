@@ -16,8 +16,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(CustomerController::class)->prefix('customers')->group(function () {
         Route::get('', 'index')->name('admin.customer.index');
 
-        Route::get('create', 'create')->name('admin.customer.create');
-
         Route::post('create', 'store')->name('admin.customer.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.customer.edit');
@@ -86,8 +84,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      */
     Route::controller(CustomerGroupController::class)->prefix('groups')->group(function () {
         Route::get('', 'index')->name('admin.groups.index');
-
-        Route::get('create', 'create')->name('admin.groups.create');
 
         Route::post('create', 'store')->name('admin.groups.store');
 
