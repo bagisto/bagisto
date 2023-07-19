@@ -32,6 +32,21 @@ return [
             'delete-success'     => 'Currency deleted successfully.',
             'last-delete-error'  => 'At least one Currency is required.',
         ],
+
+        'exchange-rates'  => [
+            'index' => [
+                'title' => 'Exchange Rates'
+            ],
+    
+            'create' => [   
+                'title'            => 'Create Exchange Rate',
+                'button-title'     => 'Add Exchange Rate',
+                'source-currency'  => 'Source Currency',
+                'target-currency'  => 'Target Currency',
+                'rate'             => 'Rate',
+                'save'             => 'Save',
+            ],
+        ],
     ],
 
     'users' => [
@@ -58,21 +73,7 @@ return [
 
 
 
-        'exchange-rates'  => [
-            'index' => [
-                'title' => 'Exchange Rates'
-            ],
-
-            'create' => [   
-                'title'            => 'Create Exchange Rate',
-                'button-title'     => 'Add Exchange Rate',
-                'source-currency'  => 'Source Currency',
-                'target-currency'  => 'Target Currency',
-                'rate'             => 'Rate',
-                'save'             => 'Save',
-            ],
-        ],
-    ],
+ 
 
     'marketing' => [
         'email-marketing' => [
