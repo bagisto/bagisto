@@ -38,7 +38,7 @@ class CustomerGroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function store()
     {
@@ -49,9 +49,12 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.create.before');
 
-        $customerGroup = $this->customerGroupRepository->create(array_merge(request()->all(), [
+        $customerGroup = $this->customerGroupRepository->create([
+            'id'              => request()->input('id'),
+            'code'            => request()->input('code'),
+            'name'            => request()->input('name'),
             'is_user_defined' => 1,
-        ]));
+        ]);
 
         Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
