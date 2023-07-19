@@ -74,7 +74,7 @@
             <select
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                {{ $attributes->except(['value'])->merge(['class' => 'custom-select w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'custom-select inline-flex gap-x-[4px] justify-between items-center w-full py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400']) }}
             >
                 {{ $slot }}
             </select>
@@ -83,12 +83,22 @@
         @break
 
     @case('image')
-        <x-shop::media
+        <x-admin::media
             name="{{ $name }}"
             ::class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
             {{ $attributes }}
         >
-        </x-shop::media>
+        </x-admin::media>
+
+        @break
+
+    @case('tinymce')
+        <x-admin::tinymce
+            name="{{ $name }}"
+            {{ $attributes }}
+        >
+            {{ $slot }}
+        </x-admin::tinymce>
 
         @break
 

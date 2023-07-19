@@ -51,7 +51,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10]"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -69,7 +69,7 @@
                 <div class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen">
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
                         <div class="w-full max-w-[568px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
-                            <div class="flex gap-[20px] justify-between items-center h-[58px] p-[16px] rounded-t-lg bg-white border-b-[1px] border-[#E9E9E9]">
+                            <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">
                                 <slot name="header">
                                     Default Header
                                 </slot>
@@ -85,7 +85,7 @@
                                 Default Content
                             </slot>
                             
-                            <div class="flex gap-[20px] justify-end max-w-[568px] h-[58px] p-[10px] rounded-b-lg bg-white border-t-[1px] border-[#E9E9E9]">
+                            <div class="flex justify-end px-[16px] py-[10px]">
                                 <slot name="footer">
                                     Default footer
                                 </slot>

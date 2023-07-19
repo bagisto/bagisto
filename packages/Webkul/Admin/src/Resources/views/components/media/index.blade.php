@@ -1,19 +1,22 @@
 <v-media {{ $attributes }} >
-    <x-shop::shimmer.image
-        class="w-[284px] h-[284px] rounded-[12px] mt-[30px]"
-    ></x-shop::shimmer.image>
+    <x-admin::shimmer.image
+        class="w-[100px] h-[100px] mt-[30px] rounded-[12px]"
+    ></x-admin::shimmer.image>
 </v-media>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-media-template">
+    <script 
+        type="text/x-template" 
+        id="v-media-template"
+    >
         <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
             <div :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }">
                 <div
-                    class="flex flex-col w-[284px] h-[284px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex flex-col justify-center items-center w-[100px] h-[100px] rounded-[12px] bg-[#F5F5F5] cursor-pointer hover:bg-gray-100"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="relative group flex justify-center w-[284px] h-[284px]"
+                        class="relative group flex justify-center w-[100px] h-[100px]"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
@@ -25,7 +28,7 @@
 
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                             <span 
-                                class="icon-bin text-[24px] text-black cursor-pointer"
+                                class="icon-cancel text-[24px] text-black cursor-pointer"
                                 @click="removeFile"
                             >
                             </span>
@@ -35,18 +38,17 @@
 
                 <label 
                     for="file-input"
-                    class="flex flex-col w-[284px] h-[284px] items-center justify-center rounded-[12px] cursor-pointer bg-[#F5F5F5] hover:bg-gray-100"
+                    class="flex flex-col justify-center items-center w-[100px] h-[100px] rounded-[12px] bg-[#F5F5F5] cursor-pointer hover:bg-gray-100"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
                     @dragleave="onDragLeave"
                     @drop="onDrop"
                 >
-                    <label 
+                    <img
+                        src="{{ bagisto_asset('images/media-image.png')}}"
                         for="file-input"
-                        class="bs-primary-button m-0 block mx-auto text-base w-max py-[11px] px-[43px] rounded-[18px] text-center"
-                    >
-                        @lang('Add attachments')
-                    </label>
+                        class="block text-base text-center cursor-pointer"
+                    />
 
                     <v-field
                         type="file"
@@ -86,7 +88,7 @@
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span 
-                                        class="icon-bin text-[24px] text-black cursor-pointer"
+                                        class="icon-cancel text-[24px] text-black cursor-pointer"
                                         @click="removeFile(index)"
                                     >
                                     </span>
@@ -110,7 +112,7 @@
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <span 
-                                        class="icon-bin text-[24px] text-black cursor-pointer"
+                                        class="icon-cancel text-[24px] text-black cursor-pointer"
                                         @click="removeFile(index)"
                                     >
                                     </span>
