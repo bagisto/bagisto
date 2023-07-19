@@ -6,8 +6,9 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-card-template">
+        <!-- Grid Card -->
         <div
-            class='grid gap-2.5 content-start relative {{ $attributes["class"] }}'
+            class='grid gap-2.5 content-start w-full relative'
             v-if="mode != 'list'"
         >
             <div class="relative overflow-hidden group max-w-[291px] max-h-[300px]">
@@ -75,6 +76,7 @@
             </div>
         </div>
 
+        <!-- List Card -->
         <div
             class="flex gap-[15px] grid-cols-2 max-w-max relative max-sm:flex-wrap"
             v-else

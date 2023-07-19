@@ -8,7 +8,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="v-facebook-share-template">
-        <li>
+        <li class="transition-all hover:opacity-[0.8]">
             <a 
                 href="#"
                 @click="openSharePopup"

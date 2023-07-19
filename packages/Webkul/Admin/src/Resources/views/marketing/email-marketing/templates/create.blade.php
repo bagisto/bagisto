@@ -1,89 +1,134 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Input Form --}}
+    <x-admin::form :action="route('admin.email_templates.store')">
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.marketing.email-marketing.templates.create.title')
+            </p>
 
-@section('page_title')
-    {{ __('admin::app.marketing.templates.add-title') }}
-@stop
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.email_templates.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.marketing.email-marketing.campaigns.create.cancel')
+                    </span>
+                </a>
 
-@section('content')
-    <div class="content">
+                {{-- Save Button --}}
+                <button 
+                    type="submit" 
+                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.marketing.email-marketing.templates.create.save')
+                </button>
+            </div>
+        </div>
 
-        <form method="POST" action="{{ route('admin.email_templates.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.email_templates.index') }}'"></i>
+        {{-- Informations --}}
+        <div class="flex gap-[10px] mt-[28px] mb-2">
+            <div class="flex flex-col gap-[8px] flex-1">
+                {{-- General Section --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.marketing.email-marketing.templates.create.general')
+                    </p>
 
-                        {{ __('admin::app.marketing.templates.add-title') }}
-                    </h1>
-                </div>
+                    <div class="mb-[10px]">
+                        {{-- Template Name --}}
+                        <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group.label class="!mt-0">
+                                @lang('admin::app.marketing.email-marketing.templates.create.name')
+                            </x-admin::form.control-group.label>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.templates.save-btn-title') }}
-                    </button>
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="name"
+                                :value="old('name')"
+                                rules="required"
+                                label="{{ trans('admin::app.marketing.email-marketing.templates.create.name') }}"
+                                placeholder="{{ trans('admin::app.marketing.email-marketing.templates.create.name') }}"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                class="mt-1"
+                                control-name="name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {{-- Template Status --}}
+                        <x-admin::form.control-group class="w-full mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.marketing.email-marketing.templates.create.status')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="status"
+                                class="cursor-pointer mb-1"
+                                rules="required"
+                                label="{{ trans('admin::app.marketing.email-marketing.templates.create.status') }}"
+                            >
+                                <option value="">
+                                    @lang('admin::app.marketing.email-marketing.templates.create.select-status')
+                                </option>
+
+                                <option 
+                                    value="active" 
+                                    {{ old('status') == 'active' ? 'selected' : '' }}
+                                >
+                                    @lang('admin::app.marketing.email-marketing.templates.create.active')
+                                </option>
+
+                                <option 
+                                    value="inactive" 
+                                    {{ old('status') == 'inactive' ? 'selected' : '' }}
+                                >
+                                    @lang('admin::app.marketing.email-marketing.templates.create.inactive')
+                                </option>
+
+                                <option 
+                                    value="draft" 
+                                    {{ old('status') == 'draft' ? 'selected' : '' }}
+                                >
+                                    @lang('admin::app.marketing.email-marketing.templates.create.draft')
+                                </option>
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                class="mt-1"
+                                control-name="status"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {{-- Template Textarea --}}
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.marketing.email-marketing.templates.create.content')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="tinymce"
+                                name="content"
+                                :value="old('content')"
+                                rules="required"
+                                id="content"
+                                :label="trans('admin::app.marketing.email-marketing.templates.create.content')"
+                                :placeholder="trans('admin::app.marketing.email-marketing.templates.create.content')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                class="mt-1"
+                                control-name="content"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
             </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    {!! view_render_event('bagisto.admin.marketing.templates.create.before') !!}
-
-                    <accordian title="{{ __('admin::app.marketing.templates.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.marketing.templates.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.marketing.templates.name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('status') ? 'has-error' : '']">
-                                <label for="status" class="required">{{ __('admin::app.marketing.templates.status') }}</label>
-                                <select class="control" v-validate="'required'" id="status" name="status" data-vv-as="&quot;{{ __('admin::app.marketing.templates.display-mode') }}&quot;">
-                                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>
-                                        {{ __('admin::app.marketing.templates.active') }}
-                                    </option>
-                                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>
-                                        {{ __('admin::app.marketing.templates.inactive') }}
-                                    </option>
-                                    <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>
-                                        {{ __('admin::app.marketing.templates.draft') }}
-                                    </option>
-                                </select>
-                                <span class="control-error" v-if="errors.has('status')">@{{ errors.first('status') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('content') ? 'has-error' : '']">
-                                <label for="content" class="required">{{ __('admin::app.marketing.templates.content') }}</label>
-                                <textarea v-validate="'required'" class="control" id="content" name="content" data-vv-as="&quot;{{ __('admin::app.marketing.templates.content') }}&quot;">{{ old('content') }}</textarea>
-                                <span class="control-error" v-if="errors.has('content')">@{{ errors.first('content') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    {!! view_render_event('bagisto.admin.marketing.templates.create.after') !!}
-
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
-
-@push('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea#content',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-            });
-        });
-    </script>
-
-@endpush
+        </div>
+    </x-admin::form>
+</x-admin::layouts>

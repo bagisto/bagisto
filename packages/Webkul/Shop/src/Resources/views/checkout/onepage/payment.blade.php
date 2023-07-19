@@ -51,8 +51,10 @@
                                         class="w-[190px] p-[20px] block border border-[#E9E9E9] rounded-[12px] max-sm:w-full cursor-pointer"
                                     >
                                         <img 
-                                            class="mx-w-[55px] max-h-[45px]" 
-                                            src="{{ bagisto_asset('images/paypal.png') }}" 
+                                            class="max-w-[55px] max-h-[45px]" 
+                                            src="{{ bagisto_asset('images/paypal.png') }}"
+                                            width="55"
+                                            height="55"
                                             :alt="payment.method_title" 
                                             :title="payment.method_title"
                                         >

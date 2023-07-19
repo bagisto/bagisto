@@ -1,51 +1,120 @@
-@extends('admin::layouts.content')
+<v-create-group></v-create-group>
 
-@section('page_title')
-    {{ __('admin::app.customers.groups.add-title') }}
-@stop
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-create-group-template">
+        <div>
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, create)">
+                    <!--  Create Group Modal -->
+                    <x-admin::modal ref="groupCreateModal">
+                        <x-slot:toggle>
+                            <!-- Group Create Button -->
+                            @if (bouncer()->hasPermission('customers.groups.create'))
+                                <button 
+                                    type="button"
+                                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                                >
+                                   @lang('admin::app.customers.groups.create.add-group')
+                                </button>
+                            @endif
+                        </x-slot:toggle>
+        
+                        <x-slot:header>
+                            <!-- Modal Header -->
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.customers.groups.create.add-group')
+                            </p>    
+                        </x-slot:header>
+        
+                        <x-slot:content>
+                            <!-- Modal Content -->
+                            <div class="px-[16px] py-[10px]">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.customers.groups.create.code')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        id="code"
+                                        rules="required"
+                                        :label="trans('admin::app.customers.groups.create.code')"
+                                        :placeholder="trans('admin::app.customers.groups.create.code')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+        
+                                {!! view_render_event('bagisto.admin.customers.create.first_name.after') !!}
+        
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.customers.groups.create.name')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        id="last_name"
+                                        :value="old('name')"
+                                        rules="required"
+                                        :label="trans('admin::app.customers.groups.create.name')"
+                                        :placeholder="trans('admin::app.customers.groups.create.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </x-slot:content>
+        
+                        <x-slot:footer>
+                            <!-- Modal Submission -->
+                            <div class="flex gap-x-[10px] items-center">
+                                <button 
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.customers.groups.create.save-group')
+                                </button>
+                            </div>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
+    </script>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.groups.store') }}" @submit.prevent="onSubmit">
+    <script type="module">
+        app.component('v-create-group', {
+            template: '#v-create-group-template',
 
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.groups.index') }}'"></i>
+            methods: {
+                create(params, { resetForm, setErrors  }) {
+                    this.$axios.post("{{ route('admin.groups.store') }}", params)
+                        .then((response) => {
+                            this.$refs.groupCreateModal.toggle();
 
-                        {{ __('admin::app.customers.groups.add-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.customers.groups.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-
-                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                        <label for="code" class="required">{{ __('admin::app.customers.groups.code') }}</label>
-                        <input v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.customers.groups.code') }}&quot;" v-code/>
-                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                        <label for="name" class="required">
-                            {{ __('admin::app.customers.groups.name') }}
-                        </label>
-                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') }}" data-vv-as="&quot;{{ __('admin::app.customers.groups.name') }}&quot;">
-                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                    </div>
-
-                </div>
-            </div>
-
-        </form>
-    </div>
-@stop
+                            resetForm();
+                        })
+                        .catch(error => {
+                            if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                }
+            }
+        })
+    </script>
+@endPushOnce

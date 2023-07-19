@@ -74,8 +74,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(ExchangeRateController::class)->prefix('exchange-rates')->group(function () {
         Route::get('', 'index')->name('admin.exchange_rates.index');
 
-        Route::get('create', 'create')->name('admin.exchange_rates.create');
-
         Route::post('create', 'store')->name('admin.exchange_rates.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.exchange_rates.edit');

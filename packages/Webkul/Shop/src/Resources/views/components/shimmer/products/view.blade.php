@@ -58,14 +58,14 @@
 
             <div class="flex gap-[15px] mt-[30px] max-w-[470px] flex-wrap">
                 {{-- Quantity changer button --}}
-                <div class="w-[161px] h-[56px] rounded-[12px] max-sm:w-[124px]"></div>
+                <div class="shimmer w-[161px] h-[56px] rounded-[12px] max-sm:w-[124px]"></div>
 
                 {{-- Add to cart Button --}}
                 <button class="shimmer w-[279px] h-[56px] rounded-[12px]"></button>
             </div>
 
             {{-- Buy Now Button --}}
-            <button class="w-full h-[56px] mt-[20px] rounded-[12px]"></button>
+            <button class="shimmer w-full h-[56px] mt-[20px] rounded-[12px]"></button>
 
             <div class="flex gap-[35px] items-center mt-[40px] max-sm:flex-wrap">
                 <div class="shimmer w-[80px] h-[24px]"></div>

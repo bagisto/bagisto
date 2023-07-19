@@ -1,27 +1,12 @@
-@extends('admin::layouts.content')
-
-@section('page_title')
-    {{ __('admin::app.customers.groups.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.customers.groups.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('customers.groups.create'))
-                    <a href="{{ route('admin.groups.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.customers.groups.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.groups.index') }}"></datagrid-plus>
+<x-admin::layouts>
+    <div class="flex justify-between items-center">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.customers.groups.index.title')
+        </p>
+        
+        <div class="flex gap-x-[10px] items-center">
+            <!-- Create a new Group -->
+            @include('admin::customers.groups.create')
         </div>
     </div>
-@stop
+</x-admin::layouts>
