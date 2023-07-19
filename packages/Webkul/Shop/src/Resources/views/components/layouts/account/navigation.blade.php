@@ -22,7 +22,7 @@
         <div class="">
             <img
                 src="{{ $customer->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                class="w-[60px] h-[60px] bg-navyBlue rounded-full"
+                class="w-[60px] h-[60px] rounded-full"
             >
         </div>
 

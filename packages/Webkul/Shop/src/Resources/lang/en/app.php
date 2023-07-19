@@ -104,6 +104,7 @@ return [
                 'address-2'        => 'Address 2',
                 'city'             => 'City',
                 'state'            => 'State',
+                'select-country'   => "Select Country",
                 'country'          => 'Country',
                 'default-address'  => 'Default Address',
                 'first-name'       => 'First Name',
@@ -404,6 +405,10 @@ return [
             'empty'     => 'No products available in this category',
             'load-more' => 'Load More',
         ],
+    ],
+
+    'search' => [
+        'title' => 'Search results for : :query',
     ],
 
     'compare'  => [
