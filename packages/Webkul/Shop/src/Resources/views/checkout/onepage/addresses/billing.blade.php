@@ -418,8 +418,8 @@
                                 type="text"
                                 name="billing[phone]"
                                 rules="required|numeric"
-                                label="Telephone"
-                                placeholder="Telephone"
+                                :label="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
+                                :placeholder="trans('shop::app.checkout.onepage.addresses.billing.telephone')"
                                 v-model="forms.billing.address.phone"
                             >
                             </x-shop::form.control-group.control>
