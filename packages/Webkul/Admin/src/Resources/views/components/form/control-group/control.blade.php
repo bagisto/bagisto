@@ -122,6 +122,16 @@
 
         @break
 
+    @case('tinymce')
+        <x-admin::tinymce
+            name="{{ $name }}"
+            {{ $attributes }}
+        >
+            {{ $slot }}
+        </x-admin::tinymce>
+
+        @break
+        
     @case('custom')
         <v-field {{ $attributes }}>
             {{ $slot }}

@@ -1652,7 +1652,8 @@ return [
         'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
     ],
 
-    'cms' => [
+    // Need to remove
+    'cms-old' => [
         'pages' => [
             'general'          => 'General',
             'seo'              => 'SEO',
