@@ -2,7 +2,7 @@
     $isConfigurationIndex = request()->route()->getName() === 'admin.configuration.index';
 @endphp
 
-<div class="tabs">
+<div class="tabs mb-[15px]">
     @php
         $items = $isConfigurationIndex
             ? \Illuminate\Support\Arr::get($config->items, request()->route('slug') . '.children')
