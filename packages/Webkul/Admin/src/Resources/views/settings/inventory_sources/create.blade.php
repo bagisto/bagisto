@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    {!! view_render_event('bagisto.admin.settings.inventory.create.before') !!}
+                        @lang('Default Store')
 
                     <!-- General -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">

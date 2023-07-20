@@ -1,7 +1,8 @@
 <v-media {{ $attributes }} >
     <x-admin::shimmer.image
         class="w-[100px] h-[100px] mt-[30px] rounded-[12px]"
-    ></x-admin::shimmer.image>
+    >
+    </x-admin::shimmer.image>
 </v-media>
 
 @pushOnce('scripts')
@@ -12,7 +13,7 @@
         <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
             <div :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }">
                 <div
-                    class="flex flex-col justify-center items-center w-[100px] h-[100px] rounded-[12px] bg-[#F5F5F5] cursor-pointer hover:bg-gray-100"
+                    class="flex flex-col items-center justify-center w-[100px] h-[100px] bg-[#F5F5F5] rounded-[12px] cursor-pointer hover:bg-gray-100"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 

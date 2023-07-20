@@ -5,10 +5,10 @@ namespace Webkul\Admin\Http\Controllers\Tax;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
-use Webkul\Admin\DataGrids\TaxRateDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\Imports\DataGridImport;
 use Webkul\Tax\Repositories\TaxRateRepository;
+use Webkul\Admin\Imports\DataGridImport;
+use Webkul\Admin\DataGrids\TaxRateDataGrid;
 
 class TaxRateController extends Controller
 {
@@ -68,10 +68,12 @@ class TaxRateController extends Controller
 
         $data = request()->all();
 
-        if (isset($data['is_zip'])) {
+        if (isset($data['is_zip']) && ! empty($data['is_zip'])) {
             $data['is_zip'] = 1;
 
             unset($data['zip_code']);
+        } else {
+            unset($data['is_zip']);
         }
 
         Event::dispatch('tax.tax_rate.create.before');
