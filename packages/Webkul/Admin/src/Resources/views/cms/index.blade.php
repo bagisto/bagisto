@@ -1,14 +1,14 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.cms.pages.title') }}
+    @lang('admin::app.cms.index.pages')
 @stop
 
 @section('content')
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.cms.pages.pages') }}</h1>
+                <h1>@lang('admin::app.cms.index.pages')</h1>
             </div>
 
             <div class="page-action">
@@ -16,12 +16,12 @@
                     <i class="export-icon"></i>
 
                     <span>
-                        {{ __('admin::app.export.export') }}
+                        @lang('admin::app.cms.index.export')
                     </span>
                 </div>
                 @if (bouncer()->hasPermission('cms.pages.create'))
                     <a href="{{ route('admin.cms.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.cms.pages.add-title') }}
+                        @lang('admin::app.cms.index.add_page')
                     </a>
                 @endif
             </div>
@@ -33,7 +33,7 @@
     </div>
 
     <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-        <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+        <h3 slot="header">{{ __('admin::app.cms.index.add_page') }}</h3>
 
         <div slot="body">
             <export-form></export-form>

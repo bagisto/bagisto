@@ -3,19 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\CMS;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CMSPageDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\Admin\DataGrids\CMSPageDataGrid;
+
 
 class PageController extends Controller
 {
-    /**
-     * To hold the request variables from route file.
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -23,7 +17,6 @@ class PageController extends Controller
      */
     public function __construct(protected CmsRepository $cmsRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -66,11 +59,21 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.create.before');
 
-        $page = $this->cmsRepository->create(request()->all());
+        $data = [
+            'page_title'       => request()->input('page_title'),
+            'channels'         => request()->input('channels'),
+            'html_content'     => request()->input('html_content'),
+            'meta_title'       => request()->input('meta_title'),
+            'url_key'          => request()->input('url_key'),
+            'meta_keywords'    => request()->input('meta_keywords'),
+            'meta_description' => request()->input('meta_description'),
+        ];
+
+        $page = $this->cmsRepository->create($data);
 
         Event::dispatch('cms.pages.create.after', $page);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'page']));
+        session()->flash('success', trans('admin::app.cms.create.create-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -111,11 +114,16 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.update.before', $id);
 
-        $page = $this->cmsRepository->update(request()->all(), $id);
+        $data = [
+            'en'       => request()->input('en'),
+            'channels' => request()->input('channels'),
+        ];
+
+        $page = $this->cmsRepository->update($data, $id);
 
         Event::dispatch('cms.pages.update.after', $page);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Page']));
+        session()->flash('success', trans('admin::app.cms.edit.edit-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -128,18 +136,13 @@ class PageController extends Controller
      */
     public function delete($id)
     {
-        try {
-            Event::dispatch('cms.pages.delete.before', $id);
+        Event::dispatch('cms.pages.delete.before', $id);
 
-            $this->cmsRepository->delete($id);
+        $this->cmsRepository->delete($id);
 
-            Event::dispatch('cms.pages.delete.after', $id);
+        Event::dispatch('cms.pages.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
-        } catch (\Exception $e) {
-        }
-
-        return response()->json(['message' => trans('admin::app.cms.pages.delete-failure')], 500);
+        return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
     }
 
     /**
@@ -149,7 +152,7 @@ class PageController extends Controller
      */
     public function massDelete()
     {
-        if (request()->isMethod('post')) {
+        if (request()->input('mass-action-type') == 'delete') {
             $indexes = explode(',', request()->input('indexes'));
 
             foreach ($indexes as $index) {
@@ -160,12 +163,12 @@ class PageController extends Controller
                 Event::dispatch('cms.pages.delete.after', $index);
             }
 
-            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', [
-                'resource' => 'CMS Pages',
-            ]));
-        } else {
-            session()->flash('warning', trans('admin::app.datagrid.mass-ops.no-resource'));
+            session()->flash('success', trans('admin::app.cms.index.delete-success'));
+
+            return redirect()->route('admin.cms.index');
         }
+
+        session()->flash('success', trans('admin::app.cms.index.no-resource'));
 
         return redirect()->route('admin.cms.index');
     }

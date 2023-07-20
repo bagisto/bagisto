@@ -203,7 +203,20 @@ return [
                 'title' => 'Newsletter Subscriptions',
             ],
         ],
+
+        'sitemaps' => [
+            'create'  => [
+                'file-name'      => 'File Name',
+                'file-name-info' => 'Example: sitemap.xml',
+                'general'        => 'General',
+                'path'           => 'Path',
+                'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                'save'           => 'Save',
+                'title'          => 'Add Sitemap',
+            ],
+        ],
     ],
+
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -1639,7 +1652,8 @@ return [
         'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
     ],
 
-    'cms' => [
+    // Need to remove
+    'cms-old' => [
         'pages' => [
             'general'          => 'General',
             'seo'              => 'SEO',
