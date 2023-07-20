@@ -1,5 +1,5 @@
 @php
-    $url = route('shop.productOrCategory.index', $product->url_key);
+    $url = route('shop.product_or_category.index', $product->url_key);
 
     $message = empty($message) ? $product->name : $message;
 

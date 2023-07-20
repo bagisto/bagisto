@@ -113,14 +113,14 @@ class WishlistController extends APIController
 
             return new JsonResource([
                 'redirect' => true,
-                'data'     => route('shop.productOrCategory.index', $wishlistItem->product->url_key),
+                'data'     => route('shop.product_or_category.index', $wishlistItem->product->url_key),
                 'message'  => trans('shop::app.checkout.cart.missing-options'),
             ]);
 
         } catch (\Exception $exception) {
             return new JsonResource([
                 'redirect' => true,
-                'data'     => route('shop.productOrCategory.index', $wishlistItem->product->url_key),
+                'data'     => route('shop.product_or_category.index', $wishlistItem->product->url_key),
                 'message'  => $exception->getMessage(),
             ]);
         }
