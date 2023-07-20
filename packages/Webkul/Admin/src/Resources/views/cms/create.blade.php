@@ -1,19 +1,22 @@
 @inject('channels', 'Webkul\Core\Repositories\ChannelRepository')
 
 <x-admin::layouts>
+    <!--Page title -->
     <x-slot:title>
         @lang('admin::app.cms.create.add')
     </x-slot:title>
 
+    <!--Create Page Form -->
     <x-shop::form 
         :action="route('admin.cms.store')"
         enctype="multipart/form-data"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.cms.create.add')
+                @lang('admin::app.cms.create.add-title')
             </p>
-
+            
+            <!--Save Form -->
             <div class="flex gap-x-[10px] items-center">
                 <button 
                     type="submit"
@@ -36,7 +39,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.page')
+                            @lang('admin::app.cms.create.page-title')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -45,8 +48,8 @@
                             :value="old('page_title')"
                             id="page_title"
                             rules="required"
-                            :label="trans('admin::app.cms.create.page')"
-                            :placeholder="trans('admin::app.cms.create.page')"
+                            :label="trans('admin::app.cms.create.page-title')"
+                            :placeholder="trans('admin::app.cms.create.page-title')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -58,7 +61,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.channels')
+                            @lang('admin::app.cms.create.channel')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -67,8 +70,8 @@
                             :value="old('channels[]')"
                             id="channels[]"
                             rules="required"
-                            :label="trans('admin::app.cms.create.channels')"
-                            :placeholder="trans('admin::app.cms.create.channels')"
+                            :label="trans('admin::app.cms.create.channel')"
+                            :placeholder="trans('admin::app.cms.create.channel')"
                             multiple="multiple"
                         >
                             @foreach($channels->all() as $channel)
@@ -121,7 +124,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.meta_title')
+                            @lang('admin::app.cms.create.meta-title')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -130,8 +133,8 @@
                             :value="old('meta_title')"
                             id="meta_title"
                             rules="required"
-                            :label="trans('admin::app.cms.create.meta_title')"
-                            :placeholder="trans('admin::app.cms.create.meta_title')"
+                            :label="trans('admin::app.cms.create.meta-title')"
+                            :placeholder="trans('admin::app.cms.create.meta-title')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -143,7 +146,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.url_key')
+                            @lang('admin::app.cms.create.url-key')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -152,8 +155,8 @@
                             :value="old('url_key')"
                             id="url_key"
                             rules="required"
-                            :label="trans('admin::app.cms.create.url_key')"
-                            :placeholder="trans('Url Key')"
+                            :label="trans('admin::app.cms.create.url-key')"
+                            :placeholder="trans('admin::app.cms.create.url-key')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -165,7 +168,7 @@
                     
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.meta_keywords')
+                            @lang('admin::app.cms.create.meta-keywords')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -174,8 +177,8 @@
                             :value="old('meta_keywords')"
                             id="meta_keywords"
                             rules="required"
-                            label="Meta Keywords"
-                            :placeholder="trans('Meta Keywords')"
+                            :label="trans('admin::app.cms.create.meta-keywords')"
+                            :placeholder="trans('admin::app.cms.create.meta-keywords')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -185,9 +188,9 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
 
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.meta_description')
+                            @lang('admin::app.cms.create.meta-description')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -196,8 +199,8 @@
                             :value="old('meta_description')"
                             id="meta_description"
                             rules="required"
-                            :label="trans('admin::app.cms.create.meta_description')"
-                            :placeholder="trans('admin::app.cms.create.meta_description')"
+                            :label="trans('admin::app.cms.create.meta-description')"
+                            :placeholder="trans('admin::app.cms.create.meta-description')"
                         >
                         </x-admin::form.control-group.control>
 

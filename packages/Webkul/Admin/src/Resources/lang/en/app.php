@@ -155,12 +155,6 @@ return [
         ],
     ],
     
-
-
-
-
- 
-
     'marketing' => [
         'email-marketing' => [
             'templates' => [
@@ -234,6 +228,27 @@ return [
                 'save'           => 'Save',
                 'title'          => 'Add Sitemap',
             ],
+        ],
+    ],
+
+    'cms' => [
+        'index' => [
+            'title'         => 'Pages',
+            'add-title'     => 'Add Page',
+        ],
+
+        'create' => [
+            'add-title'         => 'Add Page',
+            'general'           => 'General',
+            'page-title'        => 'Page Title',
+            'channel'           => 'Channels',
+            'content'           => 'Content',
+            'meta-keywords'     => 'Meta Keywords',
+            'meta-description'  => 'Meta Description',
+            'meta-title'        => 'Meta Title',
+            'seo'               => 'SEO',
+            'url-key'           => 'URL Key',
+            'save'              => 'Save',
         ],
     ],
 
