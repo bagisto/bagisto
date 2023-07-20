@@ -1,46 +1,24 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.cms.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    @lang('admin::app.cms.index.pages')
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>@lang('admin::app.cms.index.pages')</h1>
-            </div>
-
-            <div class="page-action">
-                <div class="export-import" @click="showModal('downloadDataGrid')">
-                    <i class="export-icon"></i>
-
-                    <span>
-                        @lang('admin::app.cms.index.export')
-                    </span>
-                </div>
-                @if (bouncer()->hasPermission('cms.pages.create'))
-                    <a href="{{ route('admin.cms.create') }}" class="btn btn-lg btn-primary">
-                        @lang('admin::app.cms.index.add_page')
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.cms.index') }}"></datagrid-plus>
+    <div class="flex justify-between items-center">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.cms.index.title')
+        </p>
+        
+        <div class="flex gap-x-[10px] items-center">
+            {{-- Create New Pages Button --}}
+            @if (bouncer()->hasPermission('cms.pages.create'))
+                <a 
+                    href="{{ route('admin.cms.create') }}" 
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.cms.index.add-title')
+                </a>
+            @endif
         </div>
     </div>
-
-    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-        <h3 slot="header">{{ __('admin::app.cms.index.add_page') }}</h3>
-
-        <div slot="body">
-            <export-form></export-form>
-        </div>
-    </modal>
-@stop
-
-@push('scripts')
-    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\CMSPageDataGrid')])
-@endpush
+</x-admin::layouts>

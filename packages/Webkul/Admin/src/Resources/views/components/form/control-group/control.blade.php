@@ -32,7 +32,7 @@
             <textarea
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full mb-3 py-2 px-3 shadow appearance-none text-[14px] border rounded focus:outline-none focus:shadow-outline']) }}
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full py-2 px-3 shadow appearance-none text-[14px] border rounded focus:outline-none focus:shadow-outline']) }}
             >
             </textarea>
         </v-field>
