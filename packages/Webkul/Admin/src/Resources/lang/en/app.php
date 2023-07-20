@@ -175,24 +175,50 @@ return [
             ],
         ],
 
-        'tax-rates'   => [
-            'create'  => [
-                'title'          => 'Create Tax Rate',
-                'save'           => 'Save',
-                'select-country' => 'Select Country',
-                'select-state'   => 'Select State',
-                'cancel'         => 'Cancel',
-                'identifier'     => 'Identifier',
-                'is_zip'         => 'Enable Zip Range',
-                'zip_code'       => 'Zip Code',
-                'zip_from'       => 'Zip From',
-                'zip_to'         => 'Zip To',
-                'country'        => 'Country',
-                'state'          => 'State',
-                'tax_rate'       => 'Rate',
-                'basic-settings' => 'Basic Settings',
+        'taxes' => [
+            'tax-categories' => [
+                'index' => [
+                    'title'           => 'Tax Categories',
+                ],
+                 
+                'create' => [
+                    'title'            => 'Tax Categories',
+                    'code'             => 'Code',
+                    'add-title'        => 'Create Tax Category',
+                    'save-btn-title'   => 'Save Tax Category',
+                    'general'          => 'Tax Category',
+                    'name'             => 'Name',
+                    'description'      => 'Description',
+                    'select-tax-rates' => 'Select Tax Rates',
+                ],
+            ],
+
+            'tax-rates'   => [
+                'index' => [
+                    'title'        => 'Tax Rates',
+                    'button-title' => 'Create Tax Rates'
+                ],
+
+                'create'  => [
+                    'title'          => 'Create Tax Rate',
+                    'save'           => 'Save',
+                    'select-country' => 'Select Country',
+                    'select-state'   => 'Select State',
+                    'cancel'         => 'Cancel',
+                    'identifier'     => 'Identifier',
+                    'is_zip'         => 'Enable Zip Range',
+                    'zip_code'       => 'Zip Code',
+                    'zip_from'       => 'Zip From',
+                    'zip_to'         => 'Zip To',
+                    'country'        => 'Country',
+                    'state'          => 'State',
+                    'tax_rate'       => 'Rate',
+                    'basic-settings' => 'Basic Settings',
+                ],
             ],
         ],
+         
+       
     ],
     
 
