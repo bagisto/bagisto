@@ -25,100 +25,96 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                            <div class="flex gap-[10px] max-xl:flex-wrap">
-                                <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                                    <div class="px-[16px] py-[10px]">
-                                        {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.settings.locales.code')
-                                            </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.code')
+                                    </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="code"
-                                                id="code"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.locales.code')"
-                                                :placeholder="trans('admin::app.settings.locales.code')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        id="code"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.locales.code')"
+                                        :placeholder="trans('admin::app.settings.locales.code')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="code"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.settings.locales.name')
-                                            </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.name')
+                                    </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="name"
-                                                id="name"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.locales.name')"
-                                                :placeholder="trans('admin::app.settings.locales.name')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.locales.name')"
+                                        :placeholder="trans('admin::app.settings.locales.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="name"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                            
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.settings.locales.direction')
-                                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.direction')
+                                    </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="select"
-                                                name="direction"
-                                                id="direction"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.locales.direction')"
-                                            >
-                                                <option value="ltr" selected title="Text direction left to right">LTR</option>
-                            
-                                                <option value="rtl" title="Text direction right to left">RTL</option>
-                                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="direction"
+                                        id="direction"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.locales.direction')"
+                                    >
+                                        <option value="ltr" selected title="Text direction left to right">LTR</option>
+                    
+                                        <option value="rtl" title="Text direction right to left">RTL</option>
+                                    </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="direction"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                            
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.settings.locales.locale-logo')
-                                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.error
+                                        control-name="direction"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.locale-logo')
+                                    </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="image"
-                                                name="logo_path[image_1]"
-                                                id="direction"
-                                                :label="trans('Logo Path')"
-                                                accepted-types="image/*"
-                                                ref="image"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="image"
+                                        name="logo_path[image_1]"
+                                        id="direction"
+                                        :label="trans('Logo Path')"
+                                        accepted-types="image/*"
+                                        ref="image"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="logo_path[image_1]"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="logo_path[image_1]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                        {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
-                                    </div>
-                                </div>
+                                {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                             </div>
                         </x-slot:content>
 
