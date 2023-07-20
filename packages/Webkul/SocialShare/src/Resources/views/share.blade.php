@@ -8,7 +8,7 @@
 
         <div class="hidden gap-[10px] justify-center items-center max-md:flex cursor-pointer">
             <span class="icon-share text-[24px]"></span>
-            <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . bagisto_asset($product->url_key)) }};end">Share</a>
+            <a href="intent://share/#Intent;action=android.intent.action.SEND;type=text/plain;S.android.intent.extra.TEXT={{ rawurlencode($product->name . ' ' . route('shop.home.index') . '/' . $product->url_key) }};end">Share</a>
         </div>
 
         <div class="max-md:hidden">
