@@ -1,6 +1,52 @@
 <?php
 
 return [
+    'sales'=> [
+        'orders' => [
+            'index' => [
+                'title' => 'Orders'
+            ],
+        ],
+
+        'shipments' => [
+            'index' => [
+                'title' => 'Shipments'
+            ],
+        ],
+
+        'invoices' => [
+            'index' => [
+                'title' => 'Invoices'
+            ],
+        ],
+
+        'refunds' => [
+            'index' => [
+                'title' => 'Refunds'
+            ],
+        ],
+
+        'transactions' => [
+            'index' => [
+                'title' => 'Transactions'
+            ],
+
+            'create' => [
+                'add' => 'Add transaction'
+            ]
+        ]
+
+    ],
+
+    'catalog' => [
+        'products' => [
+            'index' => [
+                'title' => 'Products',
+                'add'   => 'Add Product'
+            ]   
+        ]
+    ],
+
     'customers' => [
         'index'  => [
             'title' => 'Customers',
@@ -36,6 +82,16 @@ return [
                 'save-group' => 'Save Group'
             ],
         ],
+
+        'reviews' => [
+            'index' => [
+                'title' => 'Reviews'
+            ],
+
+            'edit' => [
+
+            ]
+        ]
     ],
     
     'settings' => [
@@ -601,7 +657,7 @@ return [
     //     ],
     // ],
 
-    'sales' => [
+    'sales-old' => [
         'orders' => [
             'title'                        => 'Orders',
             'view-title'                   => 'Order #:order_id',
@@ -785,7 +841,8 @@ return [
         ],
     ],
 
-    'catalog' => [
+    // need to remove after translation done of product page.
+    'catalog-old' => [
         'products' => [
             'title'                 => 'Products',
             'add-product-btn-title' => 'Add Product',

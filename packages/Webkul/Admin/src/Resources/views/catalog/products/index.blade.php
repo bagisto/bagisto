@@ -1,100 +1,33 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.catalog.products.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.catalog.products.title') }}
-@stop
+    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.catalog.products.index.title')
+        </p>
 
-@section('content')
-    <div class="content" style="height: 100%;">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.catalog.products.title') }}</h1>
-            </div>
+        <div class="flex gap-x-[10px] items-center">
+            {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
-            <div class="page-action">
-                <div class="export-import" @click="showModal('downloadDataGrid')">
-                    <i class="export-icon"></i>
+            @if (bouncer()->hasPermission('catalog.products.create'))
+                <a
+                    href="{{ route('admin.catalog.products.create') }}"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.catalog.products.index.add')
+                </a>
+            @endif
 
-                    <span>
-                        {{ __('admin::app.export.export') }}
-                    </span>
-                </div>
-                
-                {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
-
-                @if (bouncer()->hasPermission('catalog.products.create'))
-                    <a href="{{ route('admin.catalog.products.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.catalog.products.add-product-btn-title') }}
-                    </a>
-                @endif
-
-                {!! view_render_event('bagisto.admin.catalog.products.create.after') !!}
-            </div>
+            {!! view_render_event('bagisto.admin.catalog.products.create.after') !!}
         </div>
-
-        {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.catalog.products.index') }}"></datagrid-plus>
-        </div>
-
-        {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
     </div>
+    
+    {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
-    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-        <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
+    {{-- datagrid will be here --}}
 
-        <div slot="body">
-            <export-form></export-form>
-        </div>
-    </modal>
-@stop
+    {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 
-@push('scripts')
-    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\ProductDataGrid')])
-
-    <script>
-        function reloadPage(getVar, getVal) {
-            let url = new URL(window.location.href);
-
-            url.searchParams.set(getVar, getVal);
-
-            window.location.href = url.href;
-        }
-
-        function showEditQuantityForm(productId) {
-            $(`#product-${productId}-quantity`).hide();
-
-            $(`#edit-product-${productId}-quantity-form-block`).show();
-        }
-
-        function cancelEditQuantityForm(productId) {
-            $(`#edit-product-${productId}-quantity-form-block`).hide();
-
-            $(`#product-${productId}-quantity`).show();
-        }
-
-        function saveEditQuantityForm(updateSource, productId) {
-            let quantityFormData = $(`#edit-product-${productId}-quantity-form`).serialize();
-
-            axios
-                .post(updateSource, quantityFormData)
-                .then(function (response) {
-                    let data = response.data;
-
-                    $(`#inventoryErrors${productId}`).text('');
-
-                    $(`#edit-product-${productId}-quantity-form-block`).hide();
-
-                    $(`#product-${productId}-quantity-anchor`).text(data.updatedTotal);
-
-                    $(`#product-${productId}-quantity`).show();
-                })
-                .catch(function ({ response }) {
-                    let { data } = response;
-
-                    $(`#inventoryErrors${productId}`).text(data.message);
-                });
-        }
-    </script>
-@endpush
+</x-admin::layouts>
