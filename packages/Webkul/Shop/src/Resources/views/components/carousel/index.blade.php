@@ -6,7 +6,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-carousel-template">
-        <div class="w-full relative m-auto group">
+        <div class="w-full relative m-auto">
             <div
                 class="fade"
                 v-for="(image, index) in images"
@@ -20,13 +20,13 @@
             </div>
 
             <span
-                class="invisible icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[16px] pl-[10px] absolute top-1/2 bg-[rgba(0,0,0,0.8)] rounded-r-md cursor-pointer group-hover:visible"
+                class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 @click="navigate(currentIndex -= 1)"
             >
             </span>
 
             <span
-                class="invisible icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[16px] pr-[10px] absolute top-1/2 right-0 bg-[rgba(0,0,0,0.8)] rounded-l-md cursor-pointer group-hover:visible"
+                class="icon-arrow-right text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 right-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"
                 @click="navigate(currentIndex += 1)"
             >
             </span>
