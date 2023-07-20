@@ -7,9 +7,11 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <span class="text-gray-600 leading-[24px]">
-                    @lang('admin::app.catalog.categories.create.cancel')
-                </span>
+                <a href="{{ route('admin.catalog.categories.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.catalog.categories.create.cancel')
+                    </span>
+                </a>
 
                 <button 
                     type="submit" 

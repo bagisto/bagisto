@@ -5,6 +5,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-gallery-template">
         <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
+            <!-- Product Image Slider -->
             <div class="flex-24 place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
                 <img 
                     :class="`min-w-[100px] max-h-[100px] rounded-[12px] ${ hover ? 'cursor-pointer' : '' }`" 
