@@ -20,7 +20,7 @@
                 <div class="grid gap-[20px] mt-[60px] max-1060:grid-cols-[1fr]">
                     @foreach($reviews as $review)
                         <a
-                            href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}"
+                            href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"
                             id="{{ $review->product_id }}"
                         >
                             <div class="flex gap-[20px] p-[25px] border border-[#e5e5e5] rounded-[12px] max-sm:flex-wrap">

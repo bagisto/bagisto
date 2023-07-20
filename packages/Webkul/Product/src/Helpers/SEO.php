@@ -19,7 +19,7 @@ class SEO
             '@type'       => 'Product',
             'name'        => $product->name,
             'description' => $product->description,
-            'url'         => route('shop.productOrCategory.index', $product->url_key),
+            'url'         => route('shop.product_or_category.index', $product->url_key),
         ];
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_sku')) {

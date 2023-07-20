@@ -1,7 +1,7 @@
 @php
     $detailes = [
         'mini'    => 'true',
-        'url'     => route('shop.productOrCategory.index', $product->url_key),
+        'url'     => route('shop.product_or_category.index', $product->url_key),
         'title'   => $product->name,
         'summary' => $message
     ];
