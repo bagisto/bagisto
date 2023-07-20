@@ -31,7 +31,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px]">
+                            <div class="px-[16px] py-[10px]  border-b-[1px] border-gray-300">
                                 {!! view_render_event('bagisto.admin.settings.exchangerate.create.before') !!}
 
                                 <div class="block leading-[24px] text-[12px] text-gray-800 font-medium mb-[10px]">

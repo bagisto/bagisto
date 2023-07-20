@@ -25,101 +25,97 @@
                         </x-slot:header>
 
                         <x-slot:content>
-                          <div class="flex gap-[10px] max-xl:flex-wrap">
-                            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                                <div class="px-[16px] py-[10px]">
-                                    {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            Code
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Code
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="code"
-                                            :value="old('code')"
-                                            id="code"
-                                            rules="required"
-                                            label="Code"
-                                            :placeholder="trans('Code')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        :value="old('code')"
+                                        id="code"
+                                        rules="required"
+                                        label="Code"
+                                        :placeholder="trans('Code')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="code"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            Name
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Name
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            :value="old('name')"
-                                            id="name"
-                                            rules="required"
-                                            label="name"
-                                            :placeholder="trans('Name')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        id="name"
+                                        rules="required"
+                                        label="name"
+                                        :placeholder="trans('Name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="name"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            Symbol
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Symbol
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="symbol"
-                                            :value="old('symbol')"
-                                            id="symbol"
-                                            label="symbol"
-                                            :placeholder="trans('Symbol')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="symbol"
+                                        :value="old('symbol')"
+                                        id="symbol"
+                                        label="symbol"
+                                        :placeholder="trans('Symbol')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="symbol"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="symbol"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            Decimal
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Decimal
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="decimal"
-                                            :value="old('decimal')"
-                                            id="decimal"
-                                            label="decimal"
-                                            :placeholder="trans('Decimal')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="decimal"
+                                        :value="old('decimal')"
+                                        id="decimal"
+                                        label="decimal"
+                                        :placeholder="trans('Decimal')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="decimal"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                                    <x-admin::form.control-group.error
+                                        control-name="decimal"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
-                                </div>
+                                {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                             </div>
-                        </div>
                         </x-slot:content>
 
                         <x-slot:footer>
