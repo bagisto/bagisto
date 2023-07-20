@@ -2,7 +2,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-template">
-        <div>
+        <div class=>
             <!-- Toolbar -->
             <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
                 <!-- Left Toolbar -->

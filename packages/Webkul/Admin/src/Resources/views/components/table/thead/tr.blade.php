@@ -1,3 +1,3 @@
-<tr {{ $attributes->merge(['scope' => 'row', 'class' => 'bg-white border-b']) }}>
+<tr {{ $attributes->merge(['scope' => 'row', 'class' => 'border-b']) }}>
     {{ $slot }}
 </tr>
