@@ -38,15 +38,6 @@ return [
 
     ],
 
-    'catalog' => [
-        'products' => [
-            'index' => [
-                'title' => 'Products',
-                'add'   => 'Add Product'
-            ]   
-        ]
-    ],
-
     'customers' => [
         'index'  => [
             'title' => 'Customers',
@@ -217,6 +208,13 @@ return [
     ],
     
     'catalog' => [
+        'products' => [
+            'index' => [
+                'title' => 'Products',
+                'add'   => 'Add Product'
+            ]   
+            ],
+
         'attributes' => [
             'index' =>  [
                 'title'  => 'Attributes',
