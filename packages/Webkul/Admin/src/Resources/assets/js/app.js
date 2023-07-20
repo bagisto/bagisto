@@ -12,7 +12,7 @@ import { createApp } from "vue/dist/vue.esm-bundler";
  * We are defining all the global rules here and configuring
  * all the `vee-validate` settings.
  */
-import { configure, defineRule, Field, Form, ErrorMessage } from "vee-validate";
+import { configure, defineRule } from "vee-validate";
 import { localize } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
 import AllRules from "@vee-validate/rules";
@@ -89,6 +89,8 @@ import Emitter from "./plugins/emitter";
 /**
  * Global components registration;
  */
+import { Field, Form, ErrorMessage } from "vee-validate";
+
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);

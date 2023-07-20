@@ -254,7 +254,7 @@ return [
         'icon-class' => 'cms-icon',
     ], [
         'key'        => 'cms.pages',
-        'name'       => 'admin::app.cms.pages.pages',
+        'name'       => 'admin::app.cms.sidebar.title',
         'route'      => 'admin.cms.index',
         'sort'       => 1,
         'icon'       => '',

@@ -100,10 +100,10 @@ class Tree {
 		$url = trim($item['url'], '/');
 
 		if (
-			(strpos($this->current, $url) !== false)
+			strpos($this->current, $url) !== false
 			|| (strpos($this->currentKey, $item['key']) === 0)
 		) {
-			return 'active';
+			return true;
 		}
 	}
 }

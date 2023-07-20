@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.settings.inventory_sources.add-title')
+        @lang('admin::app.settings.inventory-sources.create.add-title')
     </x-slot:title>
 
     {{-- Create Inventory --}}
@@ -16,34 +16,34 @@
                 >
                     <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            @lang('admin::app.settings.inventory_sources.add-title')
+                            @lang('admin::app.settings.inventory-sources.create.add-title')
                         </p>
 
-                        {{-- Save Inventory --}}
+                        <!-- Save Inventory -->
                         <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.settings.inventory_sources.save-btn-title')
+                                @lang('admin::app.settings.inventory-sources.create.save-btn-title')
                             </button>
                         </div>
                     </div>
 
                         @lang('Default Store')
 
-                    {{-- General --}}
+                    <!-- General -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                    @lang('admin::app.settings.inventory_sources.general')
+                                    @lang('admin::app.settings.inventory-sources.create.general')
                                 </p>
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Code')
+                                        @lang('admin::app.settings.inventory-sources.create.code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -52,8 +52,8 @@
                                         :value="old('code')"
                                         id="code"
                                         rules="required"
-                                        :label="trans('Code')"
-                                        :placeholder="trans('Code')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.code')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.code')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -65,7 +65,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Name')
+                                        @lang('admin::app.settings.inventory-sources.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -74,8 +74,8 @@
                                         :value="old('name')"
                                         id="name"
                                         rules="required"
-                                        :label="trans('name')"
-                                        :placeholder="trans('Name')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.name')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -87,7 +87,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Description')
+                                        @lang('admin::app.settings.inventory-sources.create.description')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -95,9 +95,9 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
-                                        class="text-gray-600 "
-                                        :label="trans('Description')"
-                                        :placeholder="trans('Description')"
+                                        class="text-gray-600 !mb-[0px]"
+                                        :label="trans('admin::app.settings.inventory-sources.create.description')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.description')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -109,7 +109,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Latitude')
+                                        @lang('admin::app.settings.inventory-sources.create.latitude')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -117,8 +117,8 @@
                                         name="latitude"
                                         :value="old('latitude')"
                                         id="latitude"
-                                        :label="trans('Latitude')"
-                                        :placeholder="trans('Latitude')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.latitude')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.latitude')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -130,7 +130,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Longitude')
+                                        @lang('admin::app.settings.inventory-sources.create.longitude')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -138,8 +138,8 @@
                                         name="longitude"
                                         :value="old('longitude')"
                                         id="longitude"
-                                        :label="trans('Longitude')"
-                                        :placeholder="trans('Longitude')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.longitude')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.longitude')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -151,7 +151,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Priority')
+                                        @lang('admin::app.settings.inventory-sources.create.priority')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -159,8 +159,8 @@
                                         name="priority"
                                         :value="old('priority')"
                                         id="priority"
-                                        :label="trans('Priority')"
-                                        :placeholder="trans('Priority')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.priority')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.priority')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -172,7 +172,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Status')
+                                        @lang('admin::app.settings.inventory-sources.create.status')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -180,8 +180,8 @@
                                         name="status"
                                         value="1"
                                         id="status"
-                                        :label="trans('Status')"
-                                        :placeholder="trans('Status')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.status')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.status')"
                                         :checked="old('status') ?? false"
                                     >
                                     </x-admin::form.control-group.control>
@@ -195,18 +195,18 @@
                         </div>
                     </div>
 
-                    {{-- Contact Information --}}
+                    <!-- Contact Information -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                    @lang('Contact Information')
+                                    @lang('admin::app.settings.inventory-sources.create.contact-info')
                                 </p>
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Name')
+                                        @lang('admin::app.settings.inventory-sources.create.contact-name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -215,8 +215,8 @@
                                         :value="old('contact_name')"
                                         id="contact_name"
                                         rules="required"
-                                        :label="trans('Contact name')"
-                                        :placeholder="trans('Contact name')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.contact-name')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.contact-name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -228,7 +228,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Email')
+                                        @lang('admin::app.settings.inventory-sources.create.contact-email')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -237,8 +237,8 @@
                                         :value="old('contact_email')"
                                         id="contact_email"
                                         rules="required|email"
-                                        :label="trans('Email')"
-                                        :placeholder="trans('Email')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.contact-email')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.contact-email')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -250,7 +250,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Contact Number')
+                                        @lang('admin::app.settings.inventory-sources.create.contact-number')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -259,8 +259,8 @@
                                         :value="old('contact_number')"
                                         id="contact_number"
                                         rules="required"
-                                        :label="trans('Contact Number')"
-                                        :placeholder="trans('Contact Number')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.contact-number')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.contact-number')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -272,7 +272,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Fax')
+                                        @lang('admin::app.settings.inventory-sources.create.contact-fax')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -280,8 +280,8 @@
                                         name="contact_fax"
                                         :value="old('contact_fax')"
                                         id="contact_fax"
-                                        :label="trans('Fax')"
-                                        :placeholder="trans('Fax')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.contact-fax')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.contact-fax')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -294,18 +294,18 @@
                         </div>
                     </div>
 
-                    {{-- Source Address --}}
+                    <!-- Source Address -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                    @lang('Source Address') 
+                                    @lang('admin::app.settings.inventory-sources.create.address')
                                 </p>
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Country')
+                                        @lang('admin::app.settings.inventory-sources.create.country')
                                     </x-admin::form.control-group.label>
                     
                                     <x-admin::form.control-group.control
@@ -313,11 +313,11 @@
                                         name="country"
                                         id="country"
                                         rules="required"
-                                        :label="trans('country')"
-                                        :placeholder="trans('country')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.country')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.country')"
                                         v-model="country"
                                     >
-                                        <option value=""></option>
+                                        <option value="">@lang('admin::app.settings.inventory-sources.create.select-country')</option>
                     
                                         @foreach (core()->countries() as $country)
                     
@@ -332,11 +332,9 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                                         
-                                <x-admin::form.control-group 
-                                    class="mb-[10px]"
-                                >
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('State')
+                                        @lang('admin::app.settings.inventory-sources.create.state')
                                     </x-admin::form.control-group.label>
                     
                                     <template v-if="haveStates()">
@@ -345,10 +343,12 @@
                                             name="state"
                                             id="state"
                                             rules="required"
-                                            :label="trans('State')"
-                                            :placeholder="trans('State')"
+                                            :label="trans('admin::app.settings.inventory-sources.create.state')"
+                                            :placeholder="trans('admin::app.settings.inventory-sources.create.state')"
                                         >
-                                            <option value="">@lang('admin::app.customers.customers.select-state')</option>
+                                            <option value="">
+                                                @lang('admin::app.settings.inventory-sources.create.select-state')
+                                            </option>
 
                                             <option 
                                                 v-for='(state, index) in countryStates[country]'
@@ -366,8 +366,8 @@
                                             :value="old('state')"
                                             id="state"
                                             rules="required"
-                                            :label="trans('State')"
-                                            :placeholder="trans('State')"
+                                            :label="trans('admin::app.settings.inventory-sources.create.state')"
+                                            :placeholder="trans('admin::app.settings.inventory-sources.create.state')"
                                             v-model="state"
                                         >
                                         </x-admin::form.control-group.control>
@@ -381,7 +381,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('City')
+                                        @lang('admin::app.settings.inventory-sources.create.city')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -390,8 +390,8 @@
                                         :value="old('city')"
                                         id="city"
                                         rules="required"
-                                        :label="trans('City')"
-                                        :placeholder="trans('City')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.city')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.city')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -403,7 +403,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Street')
+                                        @lang('admin::app.settings.inventory-sources.create.street')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -412,8 +412,8 @@
                                         :value="old('street')"
                                         id="street"
                                         rules="required"
-                                        :label="trans('Street')"
-                                        :placeholder="trans('Street')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.street')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.street')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -425,7 +425,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Postcode')
+                                        @lang('admin::app.settings.inventory-sources.create.postcode')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -434,8 +434,8 @@
                                         :value="old('postcode')"
                                         id="postcode"
                                         rules="required"
-                                        :label="trans('Postcode')"
-                                        :placeholder="trans('Postcode')"
+                                        :label="trans('admin::app.settings.inventory-sources.create.postcode')"
+                                        :placeholder="trans('admin::app.settings.inventory-sources.create.postcode')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -469,15 +469,15 @@
 
                 methods: {
                     haveStates: function () {
-                        if (this.countryStates[this.country] && this.countryStates[this.country].length) {
-                            return true;
-                        }
-
-                        return false;
+                        /*
+                        * The double negation operator is used to convert the value to a boolean.
+                        * It ensures that the final result is a boolean value,
+                        * true if the array has a length greater than 0, and otherwise false.
+                        */
+                        return !!this.countryStates[this.country]?.length;
                     },
                 }
             })
         </script>
     @endpushOnce
-
 </x-admin::layouts>

@@ -85,6 +85,35 @@ return [
             ],
         ],
 
+        'inventory-sources' => [
+            'create' => [
+                'add-title'         => 'Add Inventory Source',
+                'title'             => 'Inventory Sources',
+                'general'           => 'General',
+                'save-btn-title'    => 'Save',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'description'       => 'Description',
+                'latitude'          => 'Latitude',
+                'longitude'         => 'Longitude',
+                'priority'          => 'Priority',
+                'status'            => 'Status',
+                'contact-info'      => 'Contact Information',
+                'contact-name'      => 'Name',
+                'contact-email'     => 'Email',
+                'contact-number'    => 'Contact Number',
+                'contact-fax'       => 'Fax',
+                'address'           => 'Source Address',
+                'country'           => 'Country',
+                'select-country'    => 'Select Country',
+                'state'             => 'State',
+                'select-state'      => 'Select State',
+                'city'              => 'City',
+                'street'            => 'Street',
+                'postcode'          => 'Postcode',
+            ],
+        ],
+
         'tax-rates'   => [
             'create'  => [
                 'title'          => 'Create Tax Rate',
@@ -113,8 +142,8 @@ return [
             ],
             
             'create' => [
-                'add-new-user'     => 'Add new User',
-                'create-user'      => 'Create new User',
+                'add-new-user'     => 'Add User',
+                'create-user'      => 'Create New User',
                 'name'             => 'Name',
                 'email'            => 'Email',
                 'password'         => 'Password',
@@ -194,7 +223,20 @@ return [
                 'title' => 'Newsletter Subscriptions',
             ],
         ],
+
+        'sitemaps' => [
+            'create'  => [
+                'file-name'      => 'File Name',
+                'file-name-info' => 'Example: sitemap.xml',
+                'general'        => 'General',
+                'path'           => 'Path',
+                'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                'save'           => 'Save',
+                'title'          => 'Add Sitemap',
+            ],
+        ],
     ],
+
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -1666,7 +1708,8 @@ return [
         'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
     ],
 
-    'cms' => [
+    // Need to remove
+    'cms-old' => [
         'pages' => [
             'general'          => 'General',
             'seo'              => 'SEO',

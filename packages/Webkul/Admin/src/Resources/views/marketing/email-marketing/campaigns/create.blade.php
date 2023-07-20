@@ -8,7 +8,7 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.email_templates.index') }}">
+                <a href="{{ route('admin.campaigns.index') }}">
                     <span class="text-gray-600 leading-[24px]">
                         @lang('admin::app.marketing.email-marketing.campaigns.create.cancel')
                     </span>

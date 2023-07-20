@@ -67,6 +67,7 @@
             "Webkul\\CMS\\": "packages/Webkul/CMS/src",
             "Webkul\\Core\\": "packages/Webkul/Core/src",
             "Webkul\\Customer\\": "packages/Webkul/Customer/src",
+            "Webkul\\DataGrid\\": "packages/Webkul/DataGrid/src",
             "Webkul\\DebugBar\\": "packages/Webkul/DebugBar/src",
             "Webkul\\Inventory\\": "packages/Webkul/Inventory/src",
             "Webkul\\Marketing\\": "packages/Webkul/Marketing/src",
@@ -91,6 +92,7 @@
         "psr-4": {
             "Tests\\": "tests/",
             "Webkul\\Admin\\Tests\\": "packages/Webkul/Admin/tests",
+            "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
             "Webkul\\Shop\\Tests\\": "packages/Webkul/Shop/tests"
         }
     },

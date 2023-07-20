@@ -31,7 +31,7 @@
         
                         <x-slot:content>
                             <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px]">
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.groups.create.code')
