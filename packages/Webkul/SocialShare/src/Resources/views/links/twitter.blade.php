@@ -1,6 +1,6 @@
 @php
     $twitterURL = 'https://twitter.com/intent/tweet?' . http_build_query([
-        'url'  => route('shop.productOrCategory.index', $product->url_key),
+        'url'  => route('shop.product_or_category.index', $product->url_key),
         'text' => $message,
     ]);
 @endphp

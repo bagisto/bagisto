@@ -51,7 +51,7 @@
                                 <div class="flex gap-x-[10px] justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
                                     <div class="flex gap-x-[20px]">
                                         <div class="">
-                                            <a :href="`{{ route('shop.productOrCategory.index', '') }}/${item.product.url_key}`">
+                                            <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product.url_key}`">
                                                 <!-- Wishlist Item Image -->
                                                 <x-shop::shimmer.image
                                                     class="max-w-[110px] max-h-[110px] min-w-[110px] w-[110px] h-[110px] rounded-[12px]" 

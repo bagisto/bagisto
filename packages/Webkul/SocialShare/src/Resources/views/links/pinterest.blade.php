@@ -2,7 +2,7 @@
     $productBaseImage = product_image()->getProductBaseImage($product);
 
     $detailes = [
-        'url'         => route('shop.productOrCategory.index', $product->url_key),
+        'url'         => route('shop.product_or_category.index', $product->url_key),
         'media'       => $productBaseImage['medium_image_url'] ?: asset('vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png'),
         'description' => $message,
     ];
