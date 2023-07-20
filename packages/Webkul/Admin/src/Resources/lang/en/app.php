@@ -86,6 +86,11 @@ return [
         ],
 
         'inventory-sources' => [
+            'index'  => [
+                'title'             => 'Inventory Sources',
+                'add'               => 'Add',
+            ],
+
             'create' => [
                 'add-title'         => 'Add Inventory Source',
                 'title'             => 'Inventory Sources',
@@ -155,6 +160,46 @@ return [
         ],
     ],
     
+    'catalog' => [
+        'attributes' => [
+            'index' =>  [
+                'title'  => 'Attributes',
+                'add'    => 'Add',
+            ],
+        ],
+
+        'categories'  =>  [
+            'index' =>  [
+                'title' => 'Categories',
+                'add' => 'Add',
+            ],
+
+            'create' => [
+                'add-new-category'        => 'Add New Category',
+                'cancel'                  => 'Cancel',
+                'create-order'            => 'Create Order',
+                'general'                 => 'General',
+                'company-name'            => 'Category Name*',
+                'select-parent-category'  => 'Select Parent Category*',
+                'display-mode'            => 'Display Mode*',
+                'filterable-attributes'   => 'Filterable Attributes',
+                'basic-settings'          => 'Basic Settings',
+                'visible-in-menu'         => 'Visible In Menu',
+                'position'                => 'Position*',
+                'enter-position'          => 'Enter Position',
+                'description-and-images'  => 'Description and Images',
+                'category-logo'           => 'Category Logo',
+                'image'                   => 'Image',
+            ],
+        ],
+
+        'families'   => [
+            'index' => [
+                'title'  => 'Families',
+                'add'    => 'Add',
+            ],
+        ],
+    ],
 
 
 
@@ -785,7 +830,7 @@ return [
         ],
     ],
 
-    'catalog' => [
+    'catalog-old' => [
         'products' => [
             'title'                 => 'Products',
             'add-product-btn-title' => 'Add Product',

@@ -1,27 +1,13 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.settings.inventory-sources.index.title')
+        </p>
 
-@section('page_title')
-    {{ __('admin::app.settings.inventory_sources.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.settings.inventory_sources.title') }}</h1>
+        <a href="{{ route('admin.inventory_sources.create') }}">
+            <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                @lang('admin::app.settings.inventory-sources.index.add')
             </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('settings.inventory_sources.create'))
-                    <a href="{{ route('admin.inventory_sources.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.inventory_sources.add') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.inventory_sources.index') }}"></datagrid-plus>
-        </div>
+        </a>
     </div>
-@stop
+</x-admin::layouts>
