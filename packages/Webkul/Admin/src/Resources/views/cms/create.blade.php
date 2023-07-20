@@ -3,7 +3,7 @@
 <x-admin::layouts>
     <!--Page title -->
     <x-slot:title>
-        @lang('admin::app.cms.create.add')
+        @lang('admin::app.cms.create.add-title')
     </x-slot:title>
 
     <!--Create Page Form -->
