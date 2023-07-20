@@ -1,74 +1,166 @@
-@extends('admin::layouts.content')
+<v-tax-categories-form></v-tax-categories-form>
 
-@section('page_title')
-    {{ __('admin::app.settings.tax-categories.add-title') }}
-@stop
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-tax-categories-form-template">
+        <div>
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, store)">
+                    <x-admin::modal ref="currencyModal">
+                        <x-slot:toggle>
+                            <button 
+                                type="button"
+                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            >
+                                @lang('admin::app.settings.taxes.tax-categories.create.add-title')
+                            </button>
+                        </x-slot:toggle>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.tax_categories.store') }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.tax_categories.index') }}'"></i>
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.settings.taxes.tax-categories.create.add-title')
+                            </p>
+                        </x-slot:header>
 
-                        {{ __('admin::app.settings.tax-categories.add-title') }}
-                    </h1>
-                </div>
+                        <x-slot:content>
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-categories.create.code')
+                                    </x-admin::form.control-group.label>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.tax-categories.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        :value="old('code')"
+                                        id="code"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.taxes.tax-categories.create.code')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.create.code')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                        <label for="code" class="required">{{ __('admin::app.configuration.tax-categories.code') }}</label>
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                        <input v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.code') }}&quot;" value="{{ old('code') }}"/>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-categories.create.name')
+                                    </x-admin::form.control-group.label>
 
-                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                    </div>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        id="name"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.taxes.tax-categories.create.name')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.create.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                    <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                        <label for="name" class="required">{{ __('admin::app.configuration.tax-categories.name') }}</label>
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                        <input v-validate="'required'" class="control" id="name" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.name') }}&quot;" name="name" value="{{ old('name') }}"/>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-categories.create.description')
+                                    </x-admin::form.control-group.label>
 
-                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                    </div>
+                                    <x-admin::form.control-group.control
+                                        type="textarea"
+                                        name="description"
+                                        :value="old('description')"
+                                        id="description"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.taxes.tax-categories.create.description')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.create.description')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                    <div class="control-group" :class="[errors.has('description') ? 'has-error' : '']">
-                        <label for="description" class="required">{{ __('admin::app.configuration.tax-categories.description') }}</label>
+                                    <x-admin::form.control-group.error
+                                        control-name="description"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                        <textarea v-validate="'required'" class="control" id="description" name="description" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.description') }}&quot;" value="{{ old('description') }}"></textarea>
+                                @php 
+                                    $selectedOptions = old('taxrates') ?: [] 
+                                @endphp
 
-                        <span class="control-error" v-if="errors.has('description')">@{{ errors.first('description') }}</span>
-                    </div>
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-categories.create.select-tax-rates')
+                                    </x-admin::form.control-group.label>
 
-                    @php $selectedOptions = old('taxrates') ?: [] @endphp
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="taxrates" 
+                                        id="taxrates"
+                                        :label="trans('admin::app.settings.taxes.tax-categories.create.select-tax-rates')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.create.select-tax-rates')"
+                                        multiple
+                                    >
+                                        @foreach ($taxRates as $taxRate)
+                                            <option value="{{ $taxRate->id }}" {{ in_array($taxRate['id'], $selectedOptions) ? 'selected' : '' }}>
+                                                {{ $taxRate['identifier'] }}
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
 
-                    <div class="control-group multi-select" :class="[errors.has('taxrates[]') ? 'has-error' : '']">
-                        <label for="taxrates" class="required">{{ __('admin::app.configuration.tax-categories.select-taxrates') }}</label>
+                                    <x-admin::form.control-group.error
+                                        control-name="taxrates"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                        <select multiple="multiple" v-validate="'required'" class="control" id="taxrates" name="taxrates[]" data-vv-as="&quot;{{ __('admin::app.configuration.tax-categories.select-taxrates') }}&quot;">
-                            @foreach ($taxRates as $taxRate)
-                                <option value="{{ $taxRate->id }}" {{ in_array($taxRate['id'], $selectedOptions) ? 'selected' : '' }}>
-                                    {{ $taxRate['identifier'] }}
-                                </option>
-                            @endforeach
-                        </select>
+                            </div>
+                        </x-slot:content>
 
-                        <span class="control-error" v-if="errors.first('taxrates[]')">@{{ errors.first('taxrates[]') }}</span>
-                    </div>
+                        <x-slot:footer>
+                            <div class="flex gap-x-[10px] items-center">
+                               <button 
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.settings.taxes.tax-categories.create.save-btn-title')
+                                </button>
+                            </div>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
+    </script>
 
-                </div>
-            </div>
+    <script type="module">
+        app.component('v-tax-categories-form', {
+            template: '#v-tax-categories-form-template',
+            
+            methods: {
+                store(params, { resetForm, setErrors }) {
+                   
+                    this.$axios.post('{{ route('admin.tax_categories.store') }}', params)
+                        .then((response) => {
+                            this.$refs.currencyModal.toggle();
 
-        </form>
-    </div>
-@stop
+                            resetForm();
+                        })
+                        .catch((error) =>{
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                },
+            },
+        });
+    </script>
+@endPushOnce

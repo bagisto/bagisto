@@ -146,9 +146,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
         Route::get('', 'index')->name('admin.tax_categories.index');
 
-        Route::get('create', 'show')->name('admin.tax_categories.create');
-
-        Route::post('create', 'create')->name('admin.tax_categories.store');
+        Route::post('', 'store')->name('admin.tax_categories.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.tax_categories.edit');
 
