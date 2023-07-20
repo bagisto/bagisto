@@ -19,8 +19,15 @@
                             @lang('admin::app.settings.inventory-sources.create.add-title')
                         </p>
 
-                        <!-- Save Inventory -->
                         <div class="flex gap-x-[10px] items-center">
+                            <!-- Cancel Button -->
+                            <a href="{{ route('admin.inventory_sources.index') }}">
+                                <span class="text-gray-600 leading-[24px]">
+                                    @lang('admin::app.marketing.email-marketing.campaigns.create.cancel')
+                                </span>
+                            </a>
+            
+                            <!-- Save Inventory -->
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -29,8 +36,6 @@
                             </button>
                         </div>
                     </div>
-
-                        @lang('Default Store')
 
                     <!-- General -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">

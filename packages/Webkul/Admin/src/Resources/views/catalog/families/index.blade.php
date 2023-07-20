@@ -1,32 +1,13 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.catalog.families.index.title')
+        </p>
 
-@section('page_title')
-    {{ __('admin::app.catalog.families.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.catalog.families.title') }}</h1>
+        <a href="{{ route('admin.catalog.families.create') }}">
+            <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                @lang('admin::app.catalog.families.index.add')
             </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('catalog.families.create'))
-                    <a href="{{ route('admin.catalog.families.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.catalog.families.add-family-btn-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        {!! view_render_event('bagisto.admin.catalog.families.list.before') !!}
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.catalog.families.index') }}"></datagrid-plus>
-        </div>
-
-        {!! view_render_event('bagisto.admin.catalog.families.list.after') !!}
-
+        </a>
     </div>
-@stop
+</x-admin::layouts>
