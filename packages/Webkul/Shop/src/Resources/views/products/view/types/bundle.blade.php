@@ -1,19 +1,19 @@
 @if ($product->type == 'bundle')
     {!! view_render_event('bagisto.shop.products.view.bundle-options.before', ['product' => $product]) !!}
 
-    <v-bundle-option-list></v-bundle-option-list>
+    <v-product-bundle-options></v-product-bundle-options>
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.after', ['product' => $product]) !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-bundle-option-list-template">
+        <script type="text/x-template" id="v-product-bundle-options-template">
             <div class="mt-[30px]">
-                <bundle-option-item
+                <v-product-bundle-option-item
                     v-for="(option, index) in options"
                     :option="option"
                     :key="index"
                     @onProductSelected="productSelected(option, $event)">
-                </bundle-option-item>
+                </v-product-bundle-option-item>
 
                 <div class="flex justify-between items-center my-[20px]">
                     <p class="text-[14px]">
@@ -44,7 +44,7 @@
             </div>
         </script>
 
-        <script type="text/x-template" id="bundle-option-item-template">
+        <script type="text/x-template" id="v-product-bundle-option-item-template">
             <div class="mt-[30px] border-b-[1px] border-[#E9E9E9] pb-[15px]">
                 <div>
                     <label class="block text-[16px] mb-[5px]">
@@ -206,8 +206,8 @@
         </script>
 
         <script type="module">
-            app.component('v-bundle-option-list', {
-                template: '#v-bundle-option-list-template',
+            app.component('v-product-bundle-options', {
+                template: '#v-product-bundle-options-template',
 
                 data: function() {
                     return {
@@ -252,8 +252,8 @@
                 }
             });
 
-            app.component('bundle-option-item', {
-                template: '#bundle-option-item-template',
+            app.component('v-product-bundle-option-item', {
+                template: '#v-product-bundle-option-item-template',
 
                 props: ['option'],
 

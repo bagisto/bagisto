@@ -17,27 +17,55 @@
 @endphp
 
 <div class="bs-mobile-menu gap-[15px] flex-wrap px-[15px] pt-[25px] hidden max-lg:flex max-lg:mb-[15px]">
-    <div class="w-full flex justify-between items-center px-[6px]">
+    <div class="w-full flex justify-between items-center">
+        {{-- Left Navigation --}}
         <div class="flex items-center gap-x-[5px]">
             <x-shop::drawer
                 position="left"
-                width="300"
+                width="80%"
             >
                 <x-slot:toggle>
                     <span class="icon-hamburger text-[24px] cursor-pointer"></span>
                 </x-slot:toggle>
                 
                 <x-slot:header>
-                    <div class="flex justify-between p-[20px] items-center">
-                        <a 
-                            href="{{ route('shop.home.index') }}"
-                        >
+                    <div class="flex justify-between items-center">
+                        <a href="{{ route('shop.home.index') }}">
                             <img src="{{ bagisto_asset('images/logo.svg') }}">
                         </a>
                     </div>
                 </x-slot:header>
 
                 <x-slot:content>
+                    {{-- Account Profile Hero Section --}}
+                    <div class="grid grid-cols-[auto_1fr] gap-[15px] items-center mb-[30px] p-[10px] border border-[#E9E9E9] rounded-[12px]">
+                        <div class="">
+                            <img
+                                src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
+                                class="w-[60px] h-[60px] rounded-full"
+                            >
+                        </div>
+
+                        @guest('customer')
+                            <a
+                                href="{{ route('shop.customer.session.create') }}"
+                                class="flex text-[16px] font-medium"
+                            >
+                                @lang('Sign up or Login')
+
+                                <i class="icon-double-arrow text-[24px] ml-[10px]"></i>
+                            </a>
+                        @endguest
+
+                        @auth('customer')
+                            <div class="flex flex-col gap-[10px] justify-between">
+                                <p class="text-[25px] font-mediums">Hello! {{ auth()->user()?->first_name }}</p>
+
+                                <p class="text-[#7D7D7D] ">{{ auth()->user()?->email }}</p>
+                            </div>
+                        @endauth
+                    </div>
+
                     {{-- Mobile category view --}}
                     <v-mobile-category></v-mobile-category>
                 </x-slot:content>
@@ -47,23 +75,24 @@
 
             <a 
                 href="{{ route('shop.home.index') }}" 
-                class="h-[36px] inline-block"
+                class="max-h-[30px]"
             >
                 <img src="{{ bagisto_asset('images/logo.svg') }}">
             </a>
         </div>
 
+        {{-- Right Navigation --}}
         <div>
             <div class="flex  items-center gap-x-[20px]">
                 <a href="{{ route('shop.compare.index') }}">
-                    <span class="icon-compare text-[24px] inline-block cursor-pointer"></span>
+                    <span class="icon-compare text-[24px] cursor-pointer"></span>
                 </a>
                 
                 @include('shop::checkout.cart.mini-cart')
 
                 <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                     <x-slot:toggle>
-                        <span class="icon-users inline-block text-[24px] cursor-pointer"></span>
+                        <span class="icon-users text-[24px] cursor-pointer"></span>
                     </x-slot:toggle>
     
                     {{-- Guest Dropdown --}}
@@ -164,6 +193,7 @@
         </div>
     </div>
 
+    {{-- Serach Catalog Form --}}
     <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
         <label for="organic-search" class="sr-only">Search</label>
 

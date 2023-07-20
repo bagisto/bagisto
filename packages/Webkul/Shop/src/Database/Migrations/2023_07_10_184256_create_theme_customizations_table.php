@@ -28,7 +28,7 @@ return new class extends Migration
         DB::unprepared(
 <<<SQL
             INSERT INTO `theme_customizations` (`id`, `type`, `name`, `options`, `sort_order`, `status`, `created_at`, `updated_at`) VALUES
-            (1,	'image_carousel',	'Image carousel',	'{\"images\": [\"storage/theme/1/1.webp\"]}',	1,	1,	'2023-07-11 03:02:00',	'2023-07-11 03:02:00'),
+            (1,	'image_carousel',	'Image carousel',	'{\"images\": [\"storage/theme/1/1.png\", \"storage/theme/1/2.png\", \"storage/theme/1/3.png\", \"storage/theme/1/4.png\"]}',	1,	1,	'2023-07-11 03:02:00',	'2023-07-11 03:02:00'),
             (2,	'static_content',	'Static Content Title\r\n',	'{\"css\": \".home-offer a {display: block;font-weight: 500;text-align: center;font-size: 22px;font-family: DM Serif Display;background-color: #E8EDFE;padding-top: 20px;padding-bottom: 20px;}\", \"html\": \"<div class=\'home-offer\'><a href=\'javascript:void(0);\'> Get UPTO 40% OFF on your 1st order SHOP NOW </a></div>\"}',	2,	1,	'2023-07-10 23:24:58',	'2023-07-10 23:24:58'),
             (3,	'category_carousel',	'Categories Collections',	'{\"limit\": \"8\", \"status\": true, \"only_children\": true}',	3,	1,	'2023-07-11 04:01:13',	'2023-07-11 04:01:13'),
             (4,	'product_carousel',	'Men\'s Collections',	'{\"sort\": \"name-asc\", \"limit\": \"12\", \"status\": true}',	4,	1,	'2023-07-11 05:14:20',	'2023-07-11 05:14:20'),

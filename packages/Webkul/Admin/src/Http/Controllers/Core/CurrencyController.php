@@ -2,9 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\Core;
 
-use Webkul\Admin\DataGrids\CurrencyDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CurrencyRepository;
+use Webkul\Admin\DataGrids\CurrencyDataGrid;
 
 class CurrencyController extends Controller
 {
@@ -32,19 +33,9 @@ class CurrencyController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::settings.currencies.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function store()
     {
@@ -57,7 +48,9 @@ class CurrencyController extends Controller
 
         session()->flash('success', trans('admin::app.settings.currencies.create-success'));
 
-        return redirect()->route('admin.currencies.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.currencies.create-success'),
+        ]);
     }
 
     /**

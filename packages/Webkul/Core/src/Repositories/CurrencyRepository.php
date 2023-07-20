@@ -3,8 +3,9 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Facades\Event;
-use Prettus\Repository\Traits\CacheableRepository;
 use Webkul\Core\Eloquent\Repository;
+use Prettus\Repository\Traits\CacheableRepository;
+use Webkul\Core\Contracts\Currency;
 
 class CurrencyRepository extends Repository
 {
@@ -17,7 +18,7 @@ class CurrencyRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\Currency';
+        return Currency::class;
     }
 
     /**

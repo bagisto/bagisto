@@ -1,65 +1,159 @@
-@extends('admin::layouts.content')
+<v-create-currencies-form></v-create-currencies-form>
 
-@section('page_title')
-    {{ __('admin::app.settings.currencies.add-title') }}
-@stop
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-create-currencies-form-template">
+        <div>
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, store)">
+                    <x-admin::modal ref="currencyModal">
+                        <x-slot:toggle>
+                            <button 
+                                type="button"
+                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            >
+                                @lang('admin::app.settings.currencies.add-title')
+                            </button>
+                        </x-slot:toggle>
 
-@section('content')
-    <div class="content">
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.settings.currencies.add-title')
+                            </p>
+                        </x-slot:header>
 
-        <form method="POST" action="{{ route('admin.currencies.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.currencies.index') }}'"></i>
+                        <x-slot:content>
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
-                        {{ __('admin::app.settings.currencies.add-title') }}
-                    </h1>
-                </div>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Code
+                                    </x-admin::form.control-group.label>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.currencies.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        :value="old('code')"
+                                        id="code"
+                                        rules="required"
+                                        label="Code"
+                                        :placeholder="trans('Code')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                    {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Name
+                                    </x-admin::form.control-group.label>
 
-                    <accordian title="{{ __('admin::app.settings.currencies.general') }}" :active="true">
-                        <div slot="body">
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        id="name"
+                                        rules="required"
+                                        label="name"
+                                        :placeholder="trans('Name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.currencies.code') }}</label>
-                                <input v-validate="'required|min:3|max:3'" class="control" id="code" name="code" value="{{ old('code') }}" data-vv-as="&quot;{{ __('admin::app.settings.currencies.code') }}&quot;" style="text-transform:uppercase" v-code/>
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Symbol
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="symbol"
+                                        :value="old('symbol')"
+                                        id="symbol"
+                                        label="symbol"
+                                        :placeholder="trans('Symbol')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="symbol"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        Decimal
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="decimal"
+                                        :value="old('decimal')"
+                                        id="decimal"
+                                        label="decimal"
+                                        :placeholder="trans('Decimal')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="decimal"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
                             </div>
+                        </x-slot:content>
 
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.currencies.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.currencies.name') }}&quot;" value="{{ old('name') }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                        <x-slot:footer>
+                            <div class="flex gap-x-[10px] items-center">
+                               <button 
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('Save Currency')
+                                </button>
                             </div>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
+    </script>
 
-                            <div class="control-group">
-                                <label for="symbol">{{ __('admin::app.settings.currencies.symbol') }}</label>
-                                <input class="control" id="symbol" name="symbol" value="{{ old('symbol') }}"/>
-                            </div>
+    <script type="module">
+        app.component('v-create-currencies-form', {
+            template: '#v-create-currencies-form-template',
+            
+            methods: {
+                store(params, { resetForm, setErrors }) {
+                    this.$axios.post('{{ route('admin.currencies.store') }}', params)
+                        .then((response) => {
+                            alert(response.data.data.message);
 
-                            <div class="control-group">
-                                <label for="decimal">{{ __('admin::app.settings.currencies.decimal') }}</label>
-                                <input class="control" id="decimal" name="decimal" value="{{ old('decimal') }}"/>
-                            </div>
-                        </div>
-                    </accordian>
+                            this.$refs.currencyModal.toggle();
 
-                    {!! view_render_event('bagisto.admin.settings.currencies.create.after') !!}
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+                            resetForm();
+                        }).catch((error) =>{
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                },
+            },
+        });
+    </script>
+@endPushOnce

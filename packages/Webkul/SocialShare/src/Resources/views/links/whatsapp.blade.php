@@ -3,14 +3,14 @@
         'text' => $message . ' ' . route('shop.productOrCategory.index', $product->url_key),
     ];
 
-    $whatsapp_url = 'whatsapp://send?' . http_build_query($text);
+    $whatsappURL = 'whatsapp://send?' . http_build_query($text);
 @endphp
 
 <v-whatsapp-share></v-whatsapp-share>
 
 @push('scripts')
     <script type="text/x-template" id="whatsapp-share-link">
-        <li class="bb-social-share__item bb-social--whatsapp">
+        <li class="transition-all hover:opacity-[0.8]">
             <a 
                 :href="shareUrl" 
                 data-action="share/whatsapp/share" 
@@ -27,7 +27,7 @@
 
             data: function () {
                 return {
-                    shareUrl: '{{ $whatsapp_url }}'
+                    shareUrl: '{{ $whatsappURL }}'
                 }
             },
         });

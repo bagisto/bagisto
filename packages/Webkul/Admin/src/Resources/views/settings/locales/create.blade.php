@@ -1,75 +1,166 @@
-@extends('admin::layouts.content')
+<v-locale-form></v-locale-form>
 
-@section('page_title')
-    {{ __('admin::app.settings.locales.add-title') }}
-@stop
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-locale-form-template">
+        <div>
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, store)">
+                    <x-admin::modal ref="localeModal">
+                        <x-slot:toggle>
+                            <button 
+                                type="button"
+                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            >
+                                @lang('admin::app.settings.locales.add-title')
+                            </button>
+                        </x-slot:toggle>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.locales.store') }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.locales.index') }}'"></i>
+                        <x-slot:header>
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.settings.locales.add-title')
+                            </p>
+                        </x-slot:header>
 
-                        {{ __('admin::app.settings.locales.add-title') }}
-                    </h1>
-                </div>
+                        <x-slot:content>
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.locales.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.code')
+                                    </x-admin::form.control-group.label>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="code"
+                                        id="code"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.locales.code')"
+                                        :placeholder="trans('admin::app.settings.locales.code')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                    {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
+                                    <x-admin::form.control-group.error
+                                        control-name="code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                    <accordian title="{{ __('admin::app.settings.locales.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                                <label for="code" class="required">{{ __('admin::app.settings.locales.code') }}</label>
-                                <input v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.settings.locales.code') }}&quot;" v-code/>
-                                <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.name')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.locales.name')"
+                                        :placeholder="trans('admin::app.settings.locales.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.direction')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="direction"
+                                        id="direction"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.locales.direction')"
+                                    >
+                                        <option value="ltr" selected title="Text direction left to right">LTR</option>
+                    
+                                        <option value="rtl" title="Text direction right to left">RTL</option>
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="direction"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.locales.locale-logo')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="image"
+                                        name="logo_path[image_1]"
+                                        id="direction"
+                                        :label="trans('Logo Path')"
+                                        accepted-types="image/*"
+                                        ref="image"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="logo_path[image_1]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
                             </div>
+                        </x-slot:content>
 
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.settings.locales.name') }}</label>
-                                <input v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.settings.locales.name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                        <x-slot:footer>
+                            <div class="flex gap-x-[10px] items-center">
+                                <button 
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.settings.locales.save-btn-title')
+                                </button>
                             </div>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
+    </script>
 
-                            <div class="control-group" :class="[errors.has('direction') ? 'has-error' : '']">
-                                <label for="direction" class="required">{{ __('admin::app.settings.locales.direction') }}</label>
-                                <select v-validate="'required'" class="control" id="direction" name="direction" data-vv-as="&quot;{{ __('admin::app.settings.locales.direction') }}&quot;">
-                                    <option value="ltr" selected title="Text direction left to right">LTR</option>
-                                    <option value="rtl" title="Text direction right to left">RTL</option>
-                                </select>
-                                <span class="control-error" v-if="errors.has('direction')">@{{ errors.first('direction') }}</span>
-                            </div>
+    <script type="module">
+        app.component('v-locale-form', {
+            template: '#v-locale-form-template',
 
-                            <div class="control-group">
-                                <label>{{ __('velocity::app.admin.general.locale_logo') }}</label>
+            methods: {
+                store(params, { resetForm, setErrors }) {
+                    this.$axios.post('{{ route('admin.locales.store') }}', params , {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((response) => {
+                            alert(response.data.data.message);
 
-                                <image-wrapper
-                                    input-name="logo_path"
-                                    :multiple="false"
-                                    button-label="{{ __('admin::app.catalog.products.add-image-btn-title') }}">
-                                </image-wrapper>
-
-                                <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-locale-resolution') }}</span>
-                            </div>
-
-                            {!! view_render_event('bagisto.admin.settings.locale.create.after') !!}
-                        </div>
-                    </accordian>
-
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+                            this.$refs.localeModal.toggle();
+                            
+                            resetForm();
+                            
+                            // Reset media uploadfile.
+                            this.$refs.image.uploadedFiles = [];
+                        }).catch((error) => {
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                },
+            },
+        });
+    </script>
+@endPushOnce

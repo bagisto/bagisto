@@ -1,9 +1,9 @@
-<v-gallery ref="gallery">
+<v-product-gallery ref="gallery">
     <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
-</v-gallery>
+</v-product-gallery>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-gallery-template">
+    <script type="text/x-template" id="v-product-gallery-template">
         <div class="flex gap-[30px] h-max sticky top-[30px] max-1180:hidden">
             <div class="flex-24 place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
                 <img 
@@ -17,7 +17,7 @@
                 <video 
                     class="min-w-[100px] rounded-[12px]"
                     v-for="video in mediaContents.videos"
-                    @mouseover="change(video)""
+                    @mouseover="change(video)"
                 >
                     <source 
                         :src="video.video_url" 
@@ -73,8 +73,8 @@
     </script>
 
     <script type="module">
-        app.component('v-gallery', {
-            template: '#v-gallery-template',
+        app.component('v-product-gallery', {
+            template: '#v-product-gallery-template',
 
             data() {
                 return {

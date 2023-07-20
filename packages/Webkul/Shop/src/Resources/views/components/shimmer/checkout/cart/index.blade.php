@@ -7,7 +7,7 @@
             <div class="flex select-none items-center">
                 <div class="shimmer w-[24px] h-[25px] rounded-[4px]"></div>
 
-                <div class="shimmer ml-[10px] w-[165px] h-[28px]"></div>
+                <div class="shimmer ml-[10px] w-[165px] h-[30px]"></div>
             </div>
 
             <div class="shimmer w-[222px] h-[23px] max-sm:ml-[35px] max-sm:mt-[10px]"></div>
@@ -18,7 +18,7 @@
             <div class="flex gap-x-[10px] justify-between pb-[18px] border-b-[1px] border-[#E9E9E9]">
                 <div class="flex gap-x-[20px]">
                     <div class="select-none mt-[43px]">
-                        <div class="shimmer w-[24px] h-[25px] mt-[5px] rounded-[4px]"></div>
+                        <div class="shimmer w-[24px] h-[25px] rounded-[4px]"></div>
                     </div>
 
                     <div>
@@ -26,14 +26,14 @@
                     </div>
 
                     <div class="grid gap-y-[10px]">
-                        <div class="shimmer w-[200px] h-[21px]"></div>
+                        <div class="shimmer w-[200px] h-[24px]"></div>
 
-                        <div class="shimmer w-[100px] h-[21px]"></div>
+                        <div class="shimmer w-[100px] h-[24px]"></div>
 
                         <div class="hidden gap-[10px] place-content-start max-sm:grid">
-                            <div class="shimmer w-[100px] h-[21px]"></div>
+                            <div class="shimmer w-[100px] h-[27px]"></div>
 
-                            <div class="shimmer w-[100px] h-[21px]"></div>
+                            <div class="shimmer w-[100px] h-[23px]"></div>
                         </div>
 
                         <div class="shimmer w-[108px] h-[36px] rounded-[54px]"></div>

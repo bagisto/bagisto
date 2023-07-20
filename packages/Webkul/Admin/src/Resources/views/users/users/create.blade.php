@@ -1,88 +1,204 @@
-@extends('admin::layouts.content')
+<v-create-user-form></v-create-user-form>
 
-@section('page_title')
-    {{ __('admin::app.users.users.add-user-title') }}
-@stop
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-create-user-form-template">
+        <div>
+            <x-admin::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                <form @submit="handleSubmit($event, create)">
+                    <!-- User Create Modal -->
+                    <x-admin::modal ref="customerCreateModal">
+                        <x-slot:toggle>
+                            <!-- User Create Button -->
+                            @if (bouncer()->hasPermission('settings.users.users.create')) 
+                                <button 
+                                    type="button"
+                                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                                >
+                                    @lang('admin::app.users.users.create.add-new-user')
+                                </button>
+                            @endif
+                        </x-slot:toggle>
+        
+                        <x-slot:header>
+                            <!-- Modal Header -->
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.users.users.create.create-user')
+                            </p>    
+                        </x-slot:header>
+        
+                        <x-slot:content>
+                            <!-- Modal Content -->
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.create.name')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        rules="required"
+                                        :label="trans('admin::app.users.users.create.name')" 
+                                        :placeholder="trans('admin::app.users.users.create.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+        
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.create.email')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        rules="required|email"
+                                        label="Email"
+                                        placeholder="email@example.com"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="email"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+        
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.create.password')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="password"
+                                        name="password"
+                                        id="password" 
+                                        ref="password"
+                                        rules="required|min:6"
+                                        :label="trans('admin::app.users.users.create.password')"
+                                        :placeholder="trans('admin::app.users.users.create.password')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="password"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.users.store') }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.users.index') }}'"></i>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.create.confirm-password')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="password"
+                                        name="password_confirmation"
+                                        id="password_confirmation" 
+                                        rules="confirmed:@password"
+                                        :label="trans('admin::app.users.users.create.password')"
+                                        :placeholder="trans('admin::app.users.users.create.confirm-password')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="password_confirmation"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+        
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.create.role')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="role_id"
+                                        rules="required"
+                                        :label="trans('admin::app.users.users.create.role')"
+                                        :placeholder="trans('admin::app.users.users.create.role')"
+                                    >
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="role_id"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                        {{ __('admin::app.users.users.add-user-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.users.users.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    <accordian title="{{ __('admin::app.users.users.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.users.users.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.users.users.name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                                <!-- Need to improve by @shivendra -->
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.create.status')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="switch"
+                                        name="status"
+                                        :value="1"
+                                        :checked="old('status')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="status"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
-
-                            <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                                <label for="email" class="required">{{ __('admin::app.users.users.email') }}</label>
-                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.users.email') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
+                        </x-slot:content>
+        
+                        <x-slot:footer>
+                            <!-- Modal Submission -->
+                            <div class="flex gap-x-[10px] items-center">
+                                <button 
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.users.users.create.save-user')
+                                </button>
                             </div>
-                        </div>
-                    </accordian>
+                        </x-slot:footer>
+                    </x-admin::modal>
+                </form>
+            </x-admin::form>
+        </div>
+    </script>
 
-                    <accordian title="{{ __('Password') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                                <label for="password">{{ __('admin::app.users.users.password') }}</label>
-                                <input type="password" v-validate="'min:6|max:18'" class="control" id="password" name="password" ref="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
-                            </div>
+    <script type="module">
+        app.component('v-create-user-form', {
+            template: '#v-create-user-form-template',
 
-                            <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
-                                <label for="password_confirmation">{{ __('admin::app.users.users.confirm-password') }}</label>
-                                <input type="password" v-validate="'min:6|max:18|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation" data-vv-as="&quot;{{ __('admin::app.users.users.confirm-password') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
+            methods: {
+                create(params, { resetForm, setErrors }) {
+                   
+                    this.$axios.post("{{ route('admin.users.store') }}", params)
+                        .then((response) => {
+                            this.$refs.customerCreateModal.toggle();
 
-                    <accordian title="{{ __('admin::app.users.users.status-and-role') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('role_id') ? 'has-error' : '']">
-                                <label for="role" class="required">{{ __('admin::app.users.users.role') }}</label>
-                                <select v-validate="'required'" class="control" name="role_id" data-vv-as="&quot;{{ __('admin::app.users.users.role') }}&quot;">
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('role_id')">@{{ errors.first('role_id') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="status">{{ __('admin::app.users.users.status') }}</label>
-
-                                <label class="switch">
-                                    <input type="checkbox" id="status" name="status" value="1" {{ old('status') ? 'checked' : '' }}>
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </accordian>
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+                            resetForm();
+                        })
+                        .catch(error => {
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                }
+            }
+        })
+    </script>
+@endPushOnce

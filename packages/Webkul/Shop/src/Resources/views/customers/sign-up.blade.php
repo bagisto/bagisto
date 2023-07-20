@@ -46,8 +46,8 @@
                             class="!p-[20px_25px] rounded-lg"
                             :value="old('last_name')"
                             rules="required"
-                            label="First Name"
-                            placeholder="First Name"
+                            :label="trans('shop::app.customers.signup-form.first-name')"
+                            :placeholder="trans('shop::app.customers.signup-form.first-name')"
                         >
                         </x-shop::form.control-group.control>
 
@@ -70,8 +70,8 @@
                             class="!p-[20px_25px] rounded-lg"
                             :value="old('last_name')"
                             rules="required"
-                            label="Last Name"
-                            placeholder="Last Name"
+                            :label="trans('shop::app.customers.signup-form.last-name')"
+                            :placeholder="trans('shop::app.customers.signup-form.last-name')"
                         >
                         </x-shop::form.control-group.control>
 
@@ -94,7 +94,7 @@
                             class="!p-[20px_25px] rounded-lg"
                             :value="old('email')"
                             rules="required|email"
-                            label="Email"
+                            :label="trans('shop::app.customers.signup-form.email')"
                             placeholder="email@example.com"
                         >
                         </x-shop::form.control-group.control>
@@ -119,8 +119,8 @@
                             :value="old('password')"
                             rules="required|min:6"
                             ref="password"
-                            label="Password"
-                            placeholder="Password"
+                            :label="trans('shop::app.customers.signup-form.password')"
+                            :placeholder="trans('shop::app.customers.signup-form.password')"
                         >
                         </x-shop::form.control-group.control>
 
@@ -143,8 +143,8 @@
                             class="!p-[20px_25px] rounded-lg"
                             value=""
                             rules="confirmed:@password"
-                            label="Password"
-                            placeholder="Confirm Password"
+                            :label="trans('shop::app.customers.signup-form.password')"
+                            :placeholder="trans('shop::app.customers.signup-form.confirm_pass')"
                         >
                         </x-shop::form.control-group.control>
 
