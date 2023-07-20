@@ -17,7 +17,7 @@
                 <video 
                     class="min-w-[100px] rounded-[12px]"
                     v-for="video in mediaContents.videos"
-                    @mouseover="change(video)""
+                    @mouseover="change(video)"
                 >
                     <source 
                         :src="video.video_url" 
