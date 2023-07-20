@@ -14,6 +14,14 @@
             <directory suffix="Test.php">./packages/Webkul/Admin/tests/Feature</directory>
         </testsuite>
 
+        <!-- DataGrid package testsuites. -->
+        <testsuite name="DataGrid Unit Test">
+            <directory suffix="Test.php">./packages/Webkul/DataGrid/tests/Unit</directory>
+        </testsuite>
+        <testsuite name="DataGrid Feature Test">
+            <directory suffix="Test.php">./packages/Webkul/DataGrid/tests/Feature</directory>
+        </testsuite>
+
         <!-- Shop package testsuites. -->
         <testsuite name="Shop Unit Test">
             <directory suffix="Test.php">./packages/Webkul/Shop/tests/Unit</directory>
