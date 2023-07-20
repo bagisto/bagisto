@@ -1,56 +1,13 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('bookingproduct::app.admin.sales.bookings.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('bookingproduct::app.admin.sales.bookings.title') }}
-@stop
-
-@push('css')
-    <link rel="stylesheet" href="{{ asset('vendor/webkul/booking-product/assets/css/admin-booking.css') }}">
-
-    <style>
-        .grid-container .datagrid-filters .filter-right {
-            grid-template-columns: auto auto auto;
-        }
-
-        @media only screen and (max-width: 768px) {
-            .vuecal__no-event {
-                padding-top: 0rem !important;
-            }
-        }
-    </style>
-@endpush
-
-@push('scripts')
-    <script type="text/javascript" src="{{ asset('vendor/webkul/booking-product/assets/js/admin-booking.js') }}"></script>
-@endpush
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('bookingproduct::app.admin.sales.bookings.title') }}</h1>
-            </div>
-        </div>
-
-        <div class="page-content">
-
-            @php
-                $viewType = request()->view_type ?? "table";
-            @endphp
-
-            @if ($viewType == "table")
-
-                <datagrid-plus src="{{ route('admin.sales.bookings.get') }}">
-                    <template v-slot:extra-filters>
-                        @include('bookingproduct::admin.sales.bookings.index.view-swither')
-                    </template>
-                </datagrid-plus>
-
-            @else
-
-                @include('bookingproduct::admin.sales.bookings.index.calendar')
-
-            @endif
-        </div>
+    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="py-[11px] text-[20px] text-gray-800 font-bold">
+            @lang('bookingproduct::app.admin.sales.bookings.index.title')
+        </p>
     </div>
-@stop
+    
+    {{-- datagrid will be here --}}
+</x-admin::layouts>

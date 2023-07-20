@@ -1,21 +1,14 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.customers.reviews.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.customers.reviews.title') }}
-@stop
+    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="py-[11px] text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.customers.reviews.index.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.customers.reviews.title') }}</h1>
-            </div>
-
-            <div class="page-action"></div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.customer.review.index') }}"></datagrid-plus>
-        </div>
     </div>
-@stop
+    
+    {{-- datagrid will be here --}}
+</x-admin::layouts>

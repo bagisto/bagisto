@@ -70,9 +70,9 @@ return [
 
         'sales' => [
             'bookings' => [
-                'title' => 'Bookings',
-                'table-view' => "Table View",
-                'calender-view' => "Calender View",
+                'index' => [
+                    'title' => 'Bookings',
+                ]
             ]
         ],
 

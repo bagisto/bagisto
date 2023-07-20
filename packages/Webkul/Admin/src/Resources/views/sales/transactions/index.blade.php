@@ -1,43 +1,22 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.sales.transactions.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.sales.transactions.title') }}
-@stop
+    <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.sales.transactions.index.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.sales.transactions.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                <div class="export-import" @click="showModal('downloadDataGrid')">
-                    <i class="export-icon"></i>
-
-                    <span>
-                        {{ __('admin::app.export.export') }}
-                    </span>
-                </div>
-
-                <a href="{{ route('admin.sales.transactions.create') }}" class="btn btn-lg btn-primary">{{ __('admin::app.sales.transactions.create-title') }}</a>
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.sales.transactions.index') }}"></datagrid-plus>
+        <div class="flex gap-x-[10px] items-center">
+            <a 
+                href="{{ route('admin.sales.transactions.create') }}"
+                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+            >
+                @lang('admin::app.sales.transactions.create.add')
+            </a>
         </div>
     </div>
-
-    <modal id="downloadDataGrid" :is-open="modalIds.downloadDataGrid">
-        <h3 slot="header">{{ __('admin::app.export.download') }}</h3>
-
-        <div slot="body">
-            <export-form></export-form>
-        </div>
-    </modal>
-@stop
-
-@push('scripts')
-    @include('admin::export.export', ['gridName' => app('Webkul\Admin\DataGrids\OrderTransactionsDataGrid')])
-@endpush
+    
+    {{-- datagrid will be here --}}
+</x-admin::layouts>
