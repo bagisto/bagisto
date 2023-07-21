@@ -95,6 +95,8 @@ app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
 
+app.config.globalProperties.$h = h;
+
 /**
  * Load event, the purpose of using the event is to mount the application
  * after all of our `Vue` components which is present in blade file have
@@ -102,7 +104,5 @@ app.component("VErrorMessage", ErrorMessage);
  * called in the last.
  */
 window.addEventListener("load", function (event) {
-    app.config.globalProperties.$h = h;
-    
     app.mount("#app");
 });

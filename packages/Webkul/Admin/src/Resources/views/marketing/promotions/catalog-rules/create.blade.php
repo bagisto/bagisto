@@ -435,6 +435,7 @@
     @endpushOnce
 
     @pushOnce('scripts')
+        {{-- catalog condition template --}}
         <script type="text/x-template" id="v-catalog-rule-condition-item-template">
             <div class="flex gap-[16px] justify-between mt-[15px]">
                 <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
@@ -480,9 +481,9 @@
                             :name="['conditions[' + index + '][attribute_type]']"
                             v-model="matchedAttribute.type"
                         >
-    
+
                         <div v-if="matchedAttribute.key == 'product|category_ids'">
-                            <tree-view
+                            <v-tree-view 
                                 value-field="id"
                                 id-field="id"
                                 :name-field="'conditions[' + index + '][value]'"
@@ -490,9 +491,10 @@
                                 :items='matchedAttribute.options'
                                 :behavior="'no'"
                                 fallback-locale="{{ config('app.fallback_locale') }}"
-                            ></tree-view>
+                            >
+                            </v-tree-view>
                         </div>
-    
+
                         <div v-else>
                             <div 
                                 class="control-group"
@@ -503,7 +505,7 @@
                                     data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.conditions') }}&quot;"
                                 />
                             </div>
-    
+
                             <div
                                 class="control-group date"
                                 v-if="matchedAttribute.type == 'date'"
@@ -514,7 +516,7 @@
                                     v-model="condition.value"
                                 />
                             </div>
-    
+
                             <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">
                                 <input 
                                     type="datetime"
@@ -522,7 +524,7 @@
                                     v-model="condition.value"
                                 />
                             </div>
-    
+
                             <div
                                 class="control-group" 
                                 v-if="matchedAttribute.type == 'boolean'"
@@ -535,7 +537,7 @@
                                     <option value="0">@lang('admin::app.promotions.catalog-rules.no')</option>
                                 </select>
                             </div>
-    
+
                             <div 
                                 class="control-group"
                                 v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'"
@@ -552,7 +554,7 @@
                                     >
                                     </option>
                                 </select>
-    
+
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
                                     
@@ -572,7 +574,7 @@
                                     </optgroup>
                                 </select>
                             </div>
-    
+
                             <div 
                                 class="control-group multi-select"
                                 v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'"
@@ -601,6 +603,7 @@
             </div>
         </script>
 
+        {{-- catalog condition component --}}
         <script type="module">
             app.component('v-catalog-rule-condition-item', {
                 template: "#v-catalog-rule-condition-item-template",
@@ -791,6 +794,643 @@
                     },
                 }
             });
+        </script>
+
+        {{-- checkbox template --}}
+        <script type="text/x-template" id="tree-checkbox-template">
+            <div>
+                <span class="checkbox">
+                    <input 
+                        type="checkbox"
+                        :id="id"
+                        :name="[nameField + '[]']"
+                        :value="modelValue"
+                        @change="inputChanged()"
+                        :checked="isActive"
+                    >
+
+                    <label
+                        class="checkbox-view"
+                        :for="id"
+                    >
+                    </label>
+
+                    <span 
+                        class=""
+                        :for="id"
+                        :text="label"
+                    >
+                    </span>
+                </span>
+            </div>
+        </script>
+
+        {{-- checkbox component --}}
+        <script type="module">
+            app.component('tree-checkbox', {
+                template: '#tree-checkbox-template',
+
+                name: 'tree-checkbox',
+
+                data: vm => ({
+                    lazyValue: vm.inputValue
+                }),
+
+                props: ['id', 'label', 'nameField', 'modelValue', 'inputValue', 'value'],
+
+                computed: {
+                    isMultiple () {
+                        return Array.isArray(this.internalValue)
+                    },
+
+                    isActive () {
+                        const value = this.value
+                        const input = this.internalValue
+
+                        if (this.isMultiple) {
+                            return input.some(item => this.valueComparator(item, value))
+                        }
+
+                        return value ? this.valueComparator(value, input) : Boolean(input)
+                    },
+
+                    internalValue: {
+                        get () {
+                            return this.lazyValue
+                        },
+
+                        set (val) {
+                            this.lazyValue = val
+                            this.$emit('input', val)
+                        }
+                    }
+                },
+
+                watch: {
+                    inputValue (val) {
+                        this.internalValue = val
+                    }
+                },
+
+                methods: {
+                    inputChanged () {
+                        const value = this.value
+                        let input = this.internalValue
+
+                        if (this.isMultiple) {
+                            const length = input.length
+
+                            input = input.filter(item => !this.valueComparator(item, value))
+
+                            if (input.length === length) {
+                                input.push(value)
+                            }
+                        } else {
+                            input = !input
+                        }
+
+                        this.$emit('change', input)
+                    },
+
+                    valueComparator (a, b) {
+                        if (a === b) 
+                            return true
+
+                        if (a !== Object(a) || b !== Object(b)) {
+                            return false
+                        }
+
+                        const props = Object.keys(a)
+
+                        if (props.length !== Object.keys(b).length) {
+                            return false
+                        }
+
+                        return props.every(p => this.valueComparator(a[p], b[p]))
+                    }
+                },
+
+                created() {
+                    console.log('creator a simple created');
+                    console.log(this);
+                }
+            });
+        </script>
+
+        {{-- tree radio template --}}
+        <script type="text/x-template" id="tree-radio">
+            <span class="radio">
+                <input 
+                    type="radio" 
+                    :id="id"
+                    :name="nameField"
+                    :value="modelValue"
+                    :checked="isActive"
+                >
+        
+                <label
+                    class="radio-view"
+                    :for="id"
+                >
+                </label>
+        
+                <span 
+                    class=""
+                    :for="id"
+                    :text="label"
+                >
+                </span>
+            </span>
+        </script>
+        
+        {{-- tree-radio component --}}
+        <script type="module">
+            app.component('tree-radio', {
+                name: 'tree-radio',
+        
+                props: ['id', 'label', 'nameField', 'modelValue', 'value'],
+        
+                computed: {
+                    isActive () {
+                        if(this.value.length) {
+                            return this.value[0] == this.modelValue ? true : false;
+                        }
+        
+                        return false
+                    }
+                }
+            })
+        </script>
+
+        {{-- tree view --}}
+        <script type="module">
+            app.component('v-tree-view', {
+                name: 'v-tree-view',
+
+                inheritAttrs: false,
+
+                props: {
+                    inputType: {
+                        type: String,
+                        required: false,
+                        default: 'checkbox'
+                    },
+
+                    nameField: {
+                        type: String,
+                        required: false,
+                        default: 'permissions'
+                    },
+
+                    idField: {
+                        type: String,
+                        required: false,
+                        default: 'id'
+                    },
+
+                    valueField: {
+                        type: String,
+                        required: false,
+                        default: 'value'
+                    },
+
+                    captionField: {
+                        type: String,
+                        required: false,
+                        default: 'name'
+                    },
+
+                    childrenField: {
+                        type: String,
+                        required: false,
+                        default: 'children'
+                    },
+
+                    items: {
+                        type: [Array, String, Object],
+                        required: false,
+                        default: () => ([])
+                    },
+
+                    behavior: {
+                        type: String,
+                        required: false,
+                        default: 'reactive'
+                    },
+
+                    value: {
+                        type: [Array, String, Object],
+                        required: false,
+                        default: () => ([])
+                    },
+
+                    fallbackLocale: {
+                        type: String,
+                        required: false
+                    },
+                },
+
+                data() {
+                    return {
+                        finalValues: []
+                    }
+                },
+
+                computed: {
+                    savedValues () {
+                        if(! this.value)
+                            return [];
+
+                        if(this.inputType == 'radio')
+                            return [this.value];
+
+                        return (typeof this.value == 'string') ? JSON.parse(this.value) : this.value;
+                    }
+                },
+
+
+                methods: {
+                    generateChildren () {
+                        let childElements = [];
+
+                        let items = (typeof this.items == 'string') ? JSON.parse(this.items) : this.items;
+
+                        for(let key in items) {
+                            childElements.push(this.generateTreeItem(items[key]));
+                        }
+
+                        return childElements;
+                    },
+
+                    generateTreeItem(item) {
+                        return h('tree-item', {
+                                props: {
+                                    items: item,
+                                    value: this.finalValues,
+                                    savedValues: this.savedValues,
+                                    nameField: this.nameField,
+                                    inputType: this.inputType,
+                                    captionField: this.captionField,
+                                    childrenField: this.childrenField,
+                                    valueField: this.valueField,
+                                    idField: this.idField,
+                                    behavior: this.behavior,
+                                    fallbackLocale: this.fallbackLocale
+                                },
+                                on: {
+                                    input: selection => {
+                                        this.finalValues = selection;
+                                    }
+                                },
+                            })
+                    }
+                },
+
+                render (h) {
+                    console.log(this.generateChildren(), this.$h('div', {
+                        class: [
+                            'tree-container',
+                        ]
+                    }));
+
+                    return this.$h('div', {
+                            class: [
+                                'tree-container',
+                            ]
+                        }, [...this.generateChildren()]
+                    )
+                }
+            });
+        </script>
+   
+        {{-- tree item --}}
+        <script type="module">
+            app.component('tree-item', {
+                name: 'tree-item',
+
+                inheritAttrs: false,
+
+                props: {
+                    inputType: {
+                        type: String,
+                    },
+
+                    nameField: {
+                        type: String,
+                    },
+
+                    idField: {
+                        type: String,
+                    },
+
+                    captionField: {
+                        type: String,
+                    },
+
+                    childrenField: {
+                        type: String,
+                    },
+
+                    valueField: {
+                        type: String,
+                    },
+
+                    items: {
+                        type: [Array, String, Object],
+                        required: false,
+                        default: null,
+                    },
+
+                    value: {
+                        type: Array,
+                        required: false,
+                        default: null,
+                    },
+
+                    behavior: {
+                        type: String,
+                        required: false,
+                        default: 'reactive',
+                    },
+
+                    savedValues: {
+                        type: Array,
+                        required: false,
+                        default: null,
+                    },
+
+                    fallbackLocale: {
+                        type: String,
+                        required: false,
+                    },
+                },
+
+                created() {
+                    console.log('view tree');
+                    if (!this.savedValues) return;
+
+                    let found = this.savedValues.filter(
+                        (value) => value == this.items[this.valueField]
+                    );
+
+                    if (found.length) {
+                        this.value.push(this.items);
+                    }
+                },
+
+                computed: {
+                    caption() {
+
+                        return 'caption-suraj-now';
+                        // return this.items[this.captionField]
+                        //     ? this.items[this.captionField]
+                        //     : this.items.translations.filter(
+                        //         (translation) =>
+                        //             translation.locale === this.fallbackLocale
+                        //     )[0][this.captionField];
+                    },
+
+                    allChildren() {
+                        let leafs = [];
+
+                        let searchTree = (items) => {
+                            if (
+                                !!items[this.childrenField] &&
+                                this.getLength(items[this.childrenField]) > 0
+                            ) {
+                                if (typeof items[this.childrenField] == 'object') {
+                                    for (let key in items[this.childrenField]) {
+                                        searchTree(items[this.childrenField][key]);
+                                    }
+                                } else {
+                                    items[this.childrenField].forEach((child) =>
+                                        searchTree(child)
+                                    );
+                                }
+                            } else {
+                                leafs.push(items);
+                            }
+                        };
+
+                        searchTree(this.items);
+
+                        return leafs;
+                    },
+
+                    hasChildren() {
+                        return (
+                            !!this.items[this.childrenField] &&
+                            this.getLength(this.items[this.childrenField]) > 0
+                        );
+                    },
+
+                    hasSelection() {
+                        return !!this.value && this.value.length > 0;
+                    },
+
+                    isAllChildrenSelected() {
+                        return (
+                            this.hasChildren &&
+                            this.hasSelection &&
+                            this.allChildren.every((leaf) =>
+                                this.value.some(
+                                    (sel) => sel[this.idField] === leaf[this.idField]
+                                )
+                            )
+                        );
+                    },
+
+                    isSomeChildrenSelected() {
+                        return (
+                            this.hasChildren &&
+                            this.hasSelection &&
+                            this.allChildren.some((leaf) =>
+                                this.value.some(
+                                    (sel) => sel[this.idField] === leaf[this.idField]
+                                )
+                            )
+                        );
+                    },
+                },
+
+                methods: {
+                    getLength(items) {
+                        return typeof items == 'object'
+                            ? Object.keys(items).length
+                            : items.length;
+                    },
+
+                    generateRoot() {
+                        if (this.inputType == 'checkbox') {
+                            if (this.behavior == 'reactive') {
+                                console.log('checkbox if condition is');
+                                return this.$h('tree-checkbox', {
+                                    props: {
+                                        id: this.items[this.idField],
+                                        label: this.caption,
+                                        nameField: this.nameField,
+                                        modelValue: this.items[this.valueField],
+                                        inputValue: this.hasChildren
+                                            ? this.isSomeChildrenSelected
+                                            : this.value,
+                                        value: this.hasChildren
+                                            ? this.isAllChildrenSelected
+                                            : this.items,
+                                    },
+                                    on: {
+                                        change: (selection) => {
+                                            if (this.hasChildren) {
+                                                if (this.isAllChildrenSelected) {
+                                                    this.resetChildren();
+                                                } else {
+                                                    if (!selection) {
+                                                        this.allChildren.forEach((leaf) => {
+                                                            this.value.forEach((item, index) => {
+                                                                if (item[this.idField] == leaf[this.idField]) {
+                                                                    this.value.splice(index, 1);
+                                                                }
+                                                            });
+                                                        });
+                                                    } else {
+                                                        this.allChildren.forEach((leaf) => {
+                                                            let exists = false;
+
+                                                            this.value.forEach((item) => {
+                                                                if (item[this.idField] == leaf[this.idField]) {
+                                                                    exists = true;
+                                                                }
+                                                            });
+
+                                                            if (!exists) {
+                                                                this.value.push(leaf);
+                                                            }
+                                                        });
+                                                    }
+                                                }
+
+                                                this.$emit('input', this.value);
+                                            } else {
+                                                this.$emit('input', selection);
+                                            }
+                                        },
+                                    },
+                                });
+                            } else {
+                                console.log('else tree checkbox');
+
+                                return this.$h('tree-checkbox');
+                            }
+                        } else if (this.inputType == 'radio') {
+
+                            console.log('radio input');
+
+                            return this.$h('tree-radio', {
+                                props: {
+                                    id: this.items[this.idField],
+                                    label: this.caption,
+                                    nameField: this.nameField,
+                                    modelValue: this.items[this.valueField],
+                                    value: this.savedValues,
+                                },
+                            });
+                        }
+                    },
+
+                    generateChild(child) {
+                        return this.$h('tree-item', {
+                            on: {
+                                input: (selection) => {
+                                    this.$emit('input', selection);
+                                },
+                            },
+
+                            props: {
+                                items: child,
+                                value: this.value,
+                                savedValues: this.savedValues,
+                                nameField: this.nameField,
+                                inputType: this.inputType,
+                                captionField: this.captionField,
+                                childrenField: this.childrenField,
+                                valueField: this.valueField,
+                                idField: this.idField,
+                                behavior: this.behavior,
+                                fallbackLocale: this.fallbackLocale,
+                            },
+                        });
+                    },
+
+                    generateChildren() {
+                        let childElements = [];
+
+                        if (this.items[this.childrenField]) {
+                            if (typeof this.items[this.childrenField] == 'object') {
+                                for (let key in this.items[this.childrenField]) {
+                                    childElements.push(
+                                        this.generateChild(
+                                            this.items[this.childrenField][key]
+                                        )
+                                    );
+                                }
+                            } else {
+                                this.items[this.childrenField].forEach((child) => {
+                                    childElements.push(this.generateChild(child));
+                                });
+                            }
+                        }
+
+                        return childElements;
+                    },
+
+                    generateIcon() {
+                        return this.$h('i', {
+                            class: ['expand-icon'],
+                            on: {
+                                click: (selection) => {
+                                    this.$el.classList.toggle('active');
+                                },
+                            },
+                        });
+                    },
+
+                    generateFolderIcon() {
+                        return this.$h('i', {
+                            class: ['icon', 'folder-icon'],
+                        });
+                    },
+
+                    resetChildren() {
+                        if (this.inputType == 'checkbox') {
+                            this.allChildren.forEach((leaf) => {
+                                let index = this.value.findIndex(
+                                    (item) => item[this.idField] === leaf[this.idField]
+                                );
+
+                                this.value.splice(index, 1);
+                            });
+                        }
+                    },
+                },
+
+                render(h) {
+                    return this.$h(
+                        'div',
+                        {
+                            class: [
+                                'tree-item',
+                                'active',
+                                this.hasChildren ? 'has-children' : '',
+                            ],
+                        },
+                        [
+                            this.generateIcon(),
+                            this.generateFolderIcon(),
+                            this.generateRoot(),
+                            ...this.generateChildren(),
+                        ]
+                    );
+                },
+            })
         </script>
     @endPushOnce
 </x-admin::layouts>

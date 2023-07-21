@@ -18,7 +18,7 @@
             },
 
             isActive () {
-                const value = this.value
+                const value = this.valuez
                 const input = this.internalValue
 
                 if (this.isMultiple) {
