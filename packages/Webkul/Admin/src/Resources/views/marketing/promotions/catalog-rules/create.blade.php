@@ -137,7 +137,10 @@
                                             multiple
                                         >
                                             @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                                <option value="{{ $customerGroup->id }}" {{ old('customer_groups') && in_array($customerGroup->id, old('customer_groups')) ? 'selected' : '' }}>
+                                                <option 
+                                                    value="{{ $customerGroup->id }}" 
+                                                    {{ old('customer_groups') && in_array($customerGroup->id, old('customer_groups')) ? 'selected' : '' }}
+                                                >
                                                     {{ $customerGroup->name }}
                                                 </option>
                                             @endforeach
@@ -193,28 +196,6 @@
                                     :index="index"
                                     @onRemoveCondition="removeCondition($event)"
                                 >
-                                    <template 
-                                        v-slot:default="{ removeCondition }"
-                                    >
-                                        <div class="flex gap-[16px] justify-between mt-[15px]">
-                                            <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
-                                                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-[196px] text-[14px] text-gray-400 py-[6px] px-[8px] text-center  bg-white border border-gray-300 rounded-[6px] cursor-pointer transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full">
-                                                    Subtotal<span class="icon-sort-down text-[24px]"></span>
-                                                </div>
-                                                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-[196px] text-[14px] text-gray-400 py-[6px] px-[8px] text-center  bg-white border border-gray-300 rounded-[6px] cursor-pointer transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full">
-                                                    Is above<span class="icon-sort-down text-[24px]"></span>
-                                                </div>
-                
-                                                <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full max-w-[196px] py-[6px] px-[8px] transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full" type="text" placeholder="Anie">
-                                            </div>
-                
-                                            <span 
-                                                class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                                @click="removeCondition"
-                                            >
-                                            </span>
-                                        </div>
-                                    </template>
                                 </v-catalog-rule-condition-item>
                       
                                 <div 
@@ -455,10 +436,168 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-catalog-rule-condition-item-template">
-            <div>
-                <slot
-                    :removeCondition="removeCondition"
-                ></slot>
+            <div class="flex gap-[16px] justify-between mt-[15px]">
+                <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
+                    <select
+                        :name="['conditions[' + index + '][attribute]']"
+                        :id="['conditions[' + index + '][attribute]']"
+                        class="inline-flex gap-x-[4px] justify-between items-center max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400
+                        "
+                        v-model="condition.attribute"
+                    >
+                        <option value="">@lang('admin::app.promotions.catalog-rules.choose-condition-to-add')</option>
+
+                        <optgroup 
+                            v-for='(conditionAttribute, index) in conditionAttributes'
+                            :label="conditionAttribute.label"
+                        >
+                            <option 
+                                v-for='(childAttribute, index) in conditionAttribute.children'
+                                :value="childAttribute.key"
+                                :text="childAttribute.label"
+                            >
+                            </option>
+                        </optgroup>
+                    </select>
+
+                    <select 
+                        :name="['conditions[' + index + '][operator]']"
+                        class="inline-flex gap-x-[4px] justify-between items-center max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                        v-model="condition.operator"
+                        v-if="matchedAttribute"
+                    >
+                        <option 
+                            v-for='operator in conditionOperators[matchedAttribute.type]'
+                            :value="operator.operator"
+                            :text="operator.label"
+                        >
+                        </option>
+                    </select>
+
+                    <div v-if="matchedAttribute">
+                        <input 
+                            type="hidden"
+                            :name="['conditions[' + index + '][attribute_type]']"
+                            v-model="matchedAttribute.type"
+                        >
+    
+                        <div v-if="matchedAttribute.key == 'product|category_ids'">
+                            <tree-view
+                                value-field="id"
+                                id-field="id"
+                                :name-field="'conditions[' + index + '][value]'"
+                                input-type="checkbox"
+                                :items='matchedAttribute.options'
+                                :behavior="'no'"
+                                fallback-locale="{{ config('app.fallback_locale') }}"
+                            ></tree-view>
+                        </div>
+    
+                        <div v-else>
+                            <div 
+                                class="control-group"
+                                v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'"
+                            >
+                                <input 
+                                    v-model="condition.value"
+                                    data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.conditions') }}&quot;"
+                                />
+                            </div>
+    
+                            <div
+                                class="control-group date"
+                                v-if="matchedAttribute.type == 'date'"
+                            >
+                                <input 
+                                    type="date"
+                                    :name="['conditions[' + index + '][value]']"
+                                    v-model="condition.value"
+                                />
+                            </div>
+    
+                            <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">
+                                <input 
+                                    type="datetime"
+                                    :name="['conditions[' + index + '][value]']"
+                                    v-model="condition.value"
+                                />
+                            </div>
+    
+                            <div
+                                class="control-group" 
+                                v-if="matchedAttribute.type == 'boolean'"
+                            >
+                                <select 
+                                    :name="['conditions[' + index + '][value]']"
+                                    v-model="condition.value"
+                                >
+                                    <option value="1">@lang('admin::app.promotions.catalog-rules.yes')</option>
+                                    <option value="0">@lang('admin::app.promotions.catalog-rules.no')</option>
+                                </select>
+                            </div>
+    
+                            <div 
+                                class="control-group"
+                                v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'"
+                            >
+                                <select
+                                    :name="['conditions[' + index + '][value]']"
+                                    v-model="condition.value"
+                                    v-if="matchedAttribute.key != 'catalog|state'"
+                                >
+                                    <option
+                                        v-for='option in matchedAttribute.options'
+                                        :value="option.id"
+                                        :text="option.admin_name"
+                                    >
+                                    </option>
+                                </select>
+    
+                                <select 
+                                    :name="['conditions[' + index + '][value]']"
+                                    
+                                    v-model="condition.value" 
+                                    v-else
+                                >
+                                    <optgroup
+                                        v-for='option in matchedAttribute.options'
+                                        :label="option.admin_name"
+                                    >
+                                        <option
+                                            v-for='state in option.states'
+                                            :value="state.code"
+                                            :text="state.admin_name"
+                                        >
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </div>
+    
+                            <div 
+                                class="control-group multi-select"
+                                v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'"
+                            >
+                                <select 
+                                    :name="['conditions[' + index + '][value][]']"
+                                    v-model="condition.value" multiple
+                                >
+                                    <option
+                                        v-for='option in matchedAttribute.options'
+                                        :value="option.id"
+                                        :text="option.admin_name"
+                                    >
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <span 
+                    class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                    @click="removeCondition"
+                >
+                </span>
             </div>
         </script>
 
@@ -468,12 +607,190 @@
 
                 props: ['index', 'condition'],
 
+                data() {
+                    return {
+                        conditionAttributes: @json(app('\Webkul\CatalogRule\Repositories\CatalogRuleRepository')->getConditionAttributes()),
+
+                        attributeTypeIndexes: {
+                            'product': 0
+                        },
+
+                        conditionOperators: {
+                            'price': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }, {
+                                    'operator': '>=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-greater-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-less-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.greater-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.less-than') }}'
+                                }],
+                            'decimal': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }, {
+                                    'operator': '>=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-greater-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-less-than') }}'
+                                }, {
+                                    'operator': '>',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.greater-than') }}'
+                                }, {
+                                    'operator': '<',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.less-than') }}'
+                                }],
+                            'integer': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }, {
+                                    'operator': '>=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-greater-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-less-than') }}'
+                                }, {
+                                    'operator': '>',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.greater-than') }}'
+                                }, {
+                                    'operator': '<',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.less-than') }}'
+                                }],
+                            'text': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }, {
+                                    'operator': '{}',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.contain') }}'
+                                }, {
+                                    'operator': '!{}',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.does-not-contain') }}'
+                                }],
+                            'boolean': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }],
+                            'date': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }, {
+                                    'operator': '>=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-greater-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-less-than') }}'
+                                }, {
+                                    'operator': '>',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.greater-than') }}'
+                                }, {
+                                    'operator': '<',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.less-than') }}'
+                                }],
+                            'datetime': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }, {
+                                    'operator': '>=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-greater-than') }}'
+                                }, {
+                                    'operator': '<=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.equals-or-less-than') }}'
+                                }, {
+                                    'operator': '>',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.greater-than') }}'
+                                }, {
+                                    'operator': '<',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.less-than') }}'
+                                }],
+                            'select': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }],
+                            'radio': [{
+                                    'operator': '==',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-equal-to') }}'
+                                }, {
+                                    'operator': '!=',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.is-not-equal-to') }}'
+                                }],
+                            'multiselect': [{
+                                    'operator': '{}',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.contains') }}'
+                                }, {
+                                    'operator': '!{}',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.does-not-contain') }}'
+                                }],
+                            'checkbox': [{
+                                    'operator': '{}',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.contains') }}'
+                                }, {
+                                    'operator': '!{}',
+                                    'label': '{{ __('admin::app.promotions.catalog-rules.does-not-contain') }}'
+                                }]
+                        }
+                    }
+                },
+
+                computed: {
+                    matchedAttribute() {
+                        if (this.condition.attribute == '')
+                            return;
+
+
+                        let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
+
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter((attribute) => {
+                            return attribute.key == this.condition.attribute;
+                        });
+
+                        if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                            this.condition.operator = '{}';
+
+                            this.condition.value = [];
+                        }
+
+                        return matchedAttribute[0];
+                    }
+                },
+
                 methods: {
                     removeCondition() {
                         this.$emit('onRemoveCondition', this.condition)
-                    }
+                    },
                 }
-            })
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>
