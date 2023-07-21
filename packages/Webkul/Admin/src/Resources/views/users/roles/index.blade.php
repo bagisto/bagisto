@@ -1,11 +1,13 @@
 <x-admin::layouts>
+
+    {{-- Page Title --}}
     <x-slot:title>
-        @lang('Roles')
+        @lang('admin::app.users.roles.index.title')
     </x-slot:title>
 
     <div class="flex justify-between items-center">
         <p class="text-[20px] text-gray-800 font-bold">
-            @lang('Roles')
+            @lang('admin::app.users.roles.index.title')
         </p>
         
         <div class="flex gap-x-[10px] items-center">
@@ -15,7 +17,7 @@
                     href="{{ route('admin.roles.create') }}"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('Add Role')
+                    @lang('admin::app.users.roles.index.add-button-title')
                 </a>
             @endif
         </div>

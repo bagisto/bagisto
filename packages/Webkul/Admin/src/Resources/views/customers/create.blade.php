@@ -136,7 +136,7 @@
                                     </x-admin::form.control-group.label>
         
                                     <x-admin::form.control-group.control
-                                        type="text"
+                                        type="date"
                                         name="date_of_birth" 
                                         id="dob"
                                         :value="old('date_of_birth')"
