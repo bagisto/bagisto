@@ -10,12 +10,14 @@
                 <form @submit="handleSubmit($event, store)">
                     <x-admin::modal ref="currencyModal">
                         <x-slot:toggle>
-                            <button 
-                                type="button"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
-                            >
-                                @lang('admin::app.settings.taxes.tax-categories.create.add-title')
-                            </button>
+                            @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
+                                <button 
+                                    type="button"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.settings.taxes.tax-categories.create.add-title')
+                                </button>
+                            @endif
                         </x-slot:toggle>
 
                         <x-slot:header>

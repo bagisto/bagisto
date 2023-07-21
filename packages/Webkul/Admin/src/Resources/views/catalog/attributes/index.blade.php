@@ -4,7 +4,7 @@
             @lang('admin::app.catalog.attributes.index.title')
         </p>
 
-        <a href="{{ route('admin.inventory_sources.create') }}">
+        <a href="{{ route('admin.catalog.attributes.create') }}">
             <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
                 @lang('admin::app.catalog.attributes.index.add')
             </div>

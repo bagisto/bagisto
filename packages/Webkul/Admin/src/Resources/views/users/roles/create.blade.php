@@ -1,80 +1,134 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-admin::form :action="route('admin.roles.store')">
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                Create Role
+            </p>
 
-@section('page_title')
-    {{ __('admin::app.users.roles.add-role-title') }}
-@stop
+            <div class="flex gap-x-[10px] items-center">
+                <a href="{{ route('admin.roles.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('cancel')
+                    </span>
+                </a>
 
-@section('content')
-    <div class="content">
+                <button 
+                    type="submit" 
+                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('save')
+                </button>
+            </div>
+        </div>
 
-        <form method="POST" action="{{ route('admin.roles.store') }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.roles.index') }}'"></i>
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('General')
+                    </p>
 
-                        {{ __('admin::app.users.roles.add-role-title') }}
-                    </h1>
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('Name' )
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                id="name"
+                                rules="required"
+                                :label="trans('name')"
+                                :placeholder="trans('name')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="description"
+                                :value="old('description')"
+                                id="description"
+                                rules="required"
+                                :label="trans('description')"
+                                :placeholder="trans('description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="description"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.users.roles.save-btn-title') }}
-                    </button>
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('Access Control')
+                    </p>
+
+                    <div class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('permissions')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="permission_type" 
+                                id="permission_type"
+                                :label="trans('permission')"
+                                :placeholder="trans('permission')"
+                                v-model="permission_type"
+                            >
+                                <option value="custom">Custom</option>
+                                <option value="all">All</option>
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="permission_type"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
+
+                    <div class="mb-[10px]">
+                        <tree-view value-field="key" id-field="key" items='@json($acl->items)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
+                    </div>
+                    @{{permission_type}}
+
                 </div>
             </div>
+        </div>
+    </x-admin::form>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    <accordian title="{{ __('admin::app.users.roles.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.users.roles.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="email" name="name" data-vv-as="&quot;{{ __('admin::app.users.roles.name') }}&quot;" value="{{ old('name') }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
-
-                            <div class="control-group">
-                                <label for="description">{{ __('admin::app.users.roles.description') }}</label>
-                                <textarea class="control" id="description" name="description">{{ old('description') }}</textarea>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    <accordian title="{{ __('admin::app.users.roles.access-control') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="permission_type">{{ __('admin::app.users.roles.permissions') }}</label>
-                                <select class="control" name="permission_type" id="permission_type">
-                                    <option value="custom">{{ __('admin::app.users.roles.custom') }}</option>
-                                    <option value="all">{{ __('admin::app.users.roles.all') }}</option>
-                                </select>
-                            </div>
-
-                            <div class="control-group">
-                                <tree-view value-field="key" id-field="key" items='@json($acl->items)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
-                            </div>
-                        </div>
-                    </accordian>
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
-
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-            $('#permission_type').on('change', function(e) {
-                if ($(e.target).val() == 'custom') {
-                    $('.tree-container').removeClass('hide')
-                } else {
-                    $('.tree-container').addClass('hide')
-                }
-
-            })
-        });
-    </script>
-@endpush
+    @pushOnce('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let permissionTypeSelect = document.getElementById('permission_type');
+                let treeContainer = document.querySelector('.tree-container');
+        
+                permissionTypeSelect.addEventListener('change', function (e) {
+                    if (e.target.value === 'custom') {
+                        treeContainer.classList.remove('hide');
+                    } else {
+                        treeContainer.classList.add('hide');
+                    }
+                });
+            });
+        </script>
+    @endPushOnce
+</x-admin::layouts>
