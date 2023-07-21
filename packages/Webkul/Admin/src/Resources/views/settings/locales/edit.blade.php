@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <x-shop::form 
+    <x-admin::form 
         :action="route('admin.locales.update', $locale->id)"
         enctype="multipart/form-data"
     >

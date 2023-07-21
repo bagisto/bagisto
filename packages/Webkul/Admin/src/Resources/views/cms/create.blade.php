@@ -7,7 +7,7 @@
     </x-slot:title>
 
     <!--Create Page Form -->
-    <x-shop::form 
+    <x-admin::form 
         :action="route('admin.cms.store')"
         enctype="multipart/form-data"
     >
