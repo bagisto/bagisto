@@ -11,6 +11,7 @@ class AttributeGroup extends Model implements AttributeGroupContract
 
     protected $fillable = [
         'name',
+        'column',
         'position',
         'is_user_defined',
     ];

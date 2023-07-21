@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <x-shop::form 
+    <x-admin::form 
         :action="route('admin.currencies.update', $currency->id)"
         enctype="multipart/form-data"
     >
