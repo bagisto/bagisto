@@ -1,27 +1,21 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.settings.taxes.tax-categories.index.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.settings.tax-categories.title') }}
-@stop
-
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.settings.tax-categories.title') }}</h1>
+    <div class="flex justify-between items-center">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.settings.taxes.tax-categories.index.title')
+        </p>
+        
+        <div class="flex gap-x-[10px] items-center">
+            {{-- Create Tax Category Button --}}
+            <div class="flex gap-x-[10px] items-center">
+                @include('admin::tax.tax-categories.create')
             </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
-                    <a href="{{ route('admin.tax_categories.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.tax-categories.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.tax_categories.index') }}"></datagrid-plus>
         </div>
     </div>
-@stop
+    
+    {{-- datagrid will be here --}}
+</x-admin::layouts>
