@@ -40,6 +40,7 @@
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
 
+                                {{-- General Form --}}
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                                     General
                                 </p>
@@ -156,7 +157,7 @@
 
                             </div>
         
-                            <!-- Condition -->
+                            {{-- Conditions --}}
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
         
                                 <div class="flex gap-[16px] items-center justify-between">
@@ -208,7 +209,7 @@
         
                             </div>
         
-                            <!-- Action -->
+                            {{-- Actions --}}
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                                 <div class="grid gap-[6px]">
                                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">Actions</p>
@@ -266,7 +267,7 @@
                             </div>
                         </div>
 
-                        {{-- Right sub component --}}
+                        {{-- Rightsub components --}}
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                             {{-- Settings --}}
                             <x-admin::accordion>
@@ -402,50 +403,7 @@
             </div>
         </script>
 
-        {{-- v catalog rule create form component --}}
-        <script type="module">
-            app.component('v-catalog-rule-create-form', {
-                template: '#v-catalog-rule-create-form-template',
-                
-                data() {
-                    return {
-                        condition_type: 1,
-
-                        conditions: []
-                    }
-                },
-
-                methods: {
-                    addCondition() {
-                        this.conditions.push({
-                            'attribute': '',
-                            'operator': '==',
-                            'value': '',
-                        });
-                    },
-
-                    removeCondition(condition) {
-                        let index = this.conditions.indexOf(condition)
-
-                        this.conditions.splice(index, 1)
-                    },
-
-                    onSubmit(e) {
-                        this.$root.onSubmit(e)
-                    },
-
-                    onSubmit(e) {
-                        this.$root.onSubmit(e)
-                    },
-
-                    redirectBack(fallbackUrl) {
-                        this.$root.redirectBack(fallbackUrl)
-                    }
-                }
-            })
-        </script>
-   
-        {{-- v catalog rule condition item template --}}
+        {{-- v catalog rule condition item form template --}}
         <script type="text/x-template" id="v-catalog-rule-condition-item-template">
             <div class="flex gap-[16px] justify-between mt-[15px]">
                 <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
@@ -605,6 +563,49 @@
                 >
                 </span>
             </div>
+        </script>
+
+         {{-- v catalog rule create form component --}}
+        <script type="module">
+            app.component('v-catalog-rule-create-form', {
+                template: '#v-catalog-rule-create-form-template',
+                
+                data() {
+                    return {
+                        condition_type: 1,
+
+                        conditions: []
+                    }
+                },
+
+                methods: {
+                    addCondition() {
+                        this.conditions.push({
+                            'attribute': '',
+                            'operator': '==',
+                            'value': '',
+                        });
+                    },
+
+                    removeCondition(condition) {
+                        let index = this.conditions.indexOf(condition)
+
+                        this.conditions.splice(index, 1)
+                    },
+
+                    onSubmit(e) {
+                        this.$root.onSubmit(e)
+                    },
+
+                    onSubmit(e) {
+                        this.$root.onSubmit(e)
+                    },
+
+                    redirectBack(fallbackUrl) {
+                        this.$root.redirectBack(fallbackUrl)
+                    }
+                }
+            })
         </script>
 
         {{-- v catalog rule condition item component --}}
