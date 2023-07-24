@@ -56,7 +56,7 @@
                                 class="!w-[284px]"
                                 value="{{ old('code') }}"
                                 rules="required"
-                                label="code"
+                                :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-code')"
                             >
                             </x-admin::form.control-group.control>
@@ -78,7 +78,7 @@
                                 class="!w-[284px]"
                                 value="{{ old('name') }}"
                                 rules="required"
-                                label="name"
+                                :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.create.enter-name')"
                             >
                             </x-admin::form.control-group.control>
@@ -219,7 +219,8 @@
                                         :list="getGroupAttributes(element)"
                                         item-key="id"
                                         group="attributes"
-                                        :mpve="onMove"
+                                        :move="onMove"
+                                        @end="onEnd"
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
@@ -274,12 +275,12 @@
 
                         <!-- Draggable Unassigned Attributes -->
                         <draggable
+                            id="unassigned-attributes"
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto"
                             ghost-class="draggable-ghost"
                             :list="unassignedAttributes"
                             item-key="id"
                             group="attributes"
-                            @add="onAdd"
                         >
                             <template #item="{ element }">
                                 <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
@@ -391,6 +392,8 @@
                         columnGroups: @json($attributeFamily->attribute_groups->groupBy('column')),
 
                         customAttributes: @json($customAttributes),
+
+                        dropReverted: false,
                     }
                 },
 
@@ -408,20 +411,23 @@
                 },
 
                 methods: {
-                    onAdd: function(e) {
-                        window.console.log(e);
-                        {{-- window.console.log(e.draggedContext); --}}
-                        {{-- window.console.log(e.draggedContext.futureIndex); --}}
+                    onMove: function(e) {
+                        if (
+                            e.to.id === 'unassigned-attributes'
+                            && ! e.draggedContext.element.is_user_defined
+                        ) {
+                            this.dropReverted = true;
 
-                        return false
+                            return false;
+                        } else {
+                            this.dropReverted = false;
+                        }
                     },
 
-                    onMove: function(e) {
-                        window.console.log(e);
-                        window.console.log(e.draggedContext);
-                        window.console.log(e.draggedContext.futureIndex);
-
-                        {{-- return false --}}
+                    onEnd: function(e) {
+                        if (this.dropReverted) {
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('admin::app.catalog.families.create.removal-not-possible') }}" });
+                        }
                     },
 
                     getGroupAttributes(group) {
