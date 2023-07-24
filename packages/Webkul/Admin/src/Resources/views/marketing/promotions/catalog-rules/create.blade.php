@@ -1207,7 +1207,7 @@
                     },
 
                     generateIcon() {
-                        return this.$h('div', {
+                        return this.$h('i', {
                             class: ['icon-sort-right text-[24px]'],
                             
                             onClick: (selection) => {
@@ -1218,7 +1218,7 @@
 
                     generateFolderIcon() {
                         return this.$h('i', {
-                            class: ['icon', 'folder-icon'],
+                            class: ['icon-folder  text-[24px]'],
                         });
                     },
 
@@ -1239,7 +1239,7 @@
                     return this.$h(
                         'div', {
                             class: [
-                                'v-tree-item',
+                                'pl-[30px]',
                                 'active',
                                 this.hasChildren ? 'has-children' : '',
                             ],
@@ -1256,32 +1256,34 @@
 
         {{-- v-tree-checkbox template--}}
         <script type="text/x-template" id="v-tree-checkbox-template">
-            <label
-                :for="id"
-                class="flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
-            >
-                <input
-                    type="checkbox"
-                    :name="[nameField + '[]']"
-                    :value="modelValue"
-                    :id="id"
-                    class="hidden peer"
-                    @change="inputChanged()"
-                    :checked="isActive"
-                >
-
-                <label 
-                    class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+            <span class="inline-block">
+                <label
                     :for="id"
+                    class="flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
                 >
-                </label>
+                    <input
+                        type="checkbox"
+                        :name="[nameField + '[]']"
+                        :value="modelValue"
+                        :id="id"
+                        class="hidden peer"
+                        @change="inputChanged()"
+                        :checked="isActive"
+                    >
 
-                <div
-                    class="text-[14px] text-gray-600 font-semibold cursor-pointer"
-                    v-text="label"
-                >
-                </div>
-            </label>
+                    <label 
+                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+                        :for="id"
+                    >
+                    </label>
+
+                    <div
+                        class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                        v-text="label"
+                    >
+                    </div>
+                </label>
+            </span>
         </script>
 
         {{-- v-tree-checkbox component --}}
