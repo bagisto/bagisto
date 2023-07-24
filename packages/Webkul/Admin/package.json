@@ -19,6 +19,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "mitt": "^3.0.1",
     "vee-validate": "^4.9.1",
-    "vue-flatpickr": "^2.3.0"
+    "vue-flatpickr": "^2.3.0",
+    "vuedraggable": "^4.1.0"
   }
 }

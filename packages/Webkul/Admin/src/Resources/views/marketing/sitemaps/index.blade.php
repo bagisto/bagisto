@@ -14,7 +14,7 @@
                     </p>
             
                     <div class="flex gap-x-[10px] items-center">
-                        <x-shop::form
+                        <x-admin::form
                             v-slot="{ meta, errors, handleSubmit }"
                             as="div"
                         >
@@ -102,7 +102,7 @@
                                     </x-slot:footer>
                                 </x-admin::modal>
                             </form>
-                        </x-shop::form>                      
+                        </x-admin::form>                      
                     </div>
                 </div>
             </div>

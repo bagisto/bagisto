@@ -11,6 +11,15 @@
 }
 
 @layer components {
+	body {
+		@apply bg-gray-50;
+	}
+
+	.draggable-ghost {
+		opacity: 0.5;
+		background: #e0e7ff;
+	}
+
 	[class^="icon-"],
 	[class*=" icon-"] {
 		/* use !important to prevent issues with browser extensions that change fonts */
@@ -354,9 +363,4 @@
 	.status-disable{
 		@apply text-red-600;
 	}
-
-	body {
-		@apply bg-gray-100;
-	}
-
 }

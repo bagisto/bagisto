@@ -20,7 +20,7 @@
             id="v-create-email-events-template"
         >
             <div>
-                <x-shop::form
+                <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
@@ -120,7 +120,7 @@
                             </x-slot:footer>
                         </x-admin::modal>
                     </form>
-                </x-shop::form>
+                </x-admin::form>
             </div>
         </script>
 
