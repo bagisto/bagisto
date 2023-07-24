@@ -57,8 +57,6 @@
 
             <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
                 {{-- Page Content Blade Component --}}
-                @include('admin::layouts.tabs')
-
                 {{ $slot }}
             </div>
         </div>
