@@ -2,12 +2,12 @@
 
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('Channels')
+        @lang('admin::app.settings.channels.index.title')
     </x-slot:title>
 
     <div class="flex justify-between items-center">
         <p class="text-[20px] text-gray-800 font-bold">
-            @lang('Channels')
+            @lang('admin::app.settings.channels.index.title')
         </p>
         
         <div class="flex gap-x-[10px] items-center">
@@ -17,7 +17,7 @@
                     href="{{ route('admin.channels.create') }}"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('Add Channel')
+                    @lang('admin::app.settings.channels.index.add-title')
                 </a>
             @endif
         </div>

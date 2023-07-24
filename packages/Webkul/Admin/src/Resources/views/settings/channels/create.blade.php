@@ -1,18 +1,19 @@
 <x-admin::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('Add Channels')
+        @lang('admin::app.settings.channels.create.add-title')
     </x-slot:title>
+
     <x-admin::form  action="{{ route('admin.channels.store') }}" enctype="multipart/form-data">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('Add Channel')
+                @lang('admin::app.settings.channels.create.add-title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
                 <a href="{{ route('admin.channels.index') }}">
                     <span class="text-gray-600 leading-[24px]">
-                        @lang('admin::app.catalog.categories.create.cancel')
+                        @lang('admin::app.settings.channels.create.cancel')
                     </span>
                 </a>
 
@@ -20,7 +21,7 @@
                     type="submit" 
                     class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                 >
-                    @lang('Save Channel')
+                    @lang('admin::app.settings.channels.create.save-btn-title')
                 </button>
             </div>
         </div>
@@ -28,15 +29,15 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left sub-component --}}
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    {{-- General Information --}}
+                {{-- General Information --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('General')
+                        @lang('admin::app.settings.channels.create.general')
                     </p>
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Code')
+                                @lang('admin::app.settings.channels.create.code')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -45,8 +46,8 @@
                                 :value="old('code')"
                                 id="code"
                                 rules="required"
-                                :label="trans('Code')"
-                                :placeholder="trans('Code')"
+                                :label="trans('admin::app.settings.channels.create.code')"
+                                :placeholder="trans('admin::app.settings.channels.create.code')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -58,7 +59,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Name')
+                                @lang('admin::app.settings.channels.create.name')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -67,8 +68,8 @@
                                 :value="old('name')"
                                 id="name"
                                 rules="required"
-                                :label="trans('Name')"
-                                :placeholder="trans('Name')"
+                                :label="trans('admin::app.settings.channels.create.name')"
+                                :placeholder="trans('admin::app.settings.channels.create.name')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -80,7 +81,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Description')
+                                @lang('admin::app.settings.channels.create.description')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -88,8 +89,8 @@
                                 name="description"
                                 :value="old('description')"
                                 id="description"
-                                :label="trans('Description')"
-                                :placeholder="trans('Description')"
+                                :label="trans('admin::app.settings.channels.create.description')"
+                                :placeholder="trans('admin::app.settings.channels.create.description')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -100,7 +101,7 @@
                         </x-admin::form.control-group>
 
                         <div class="mb-[10px]">
-                            <p class="block leading-[24px] text-[12px] text-gray-800 font-medium">@lang('Inventory Sources')</p>
+                            <p class="block leading-[24px] text-[12px] text-gray-800 font-medium">@lang('admin::app.settings.channels.create.inventory-sources')</p>
                     
                             @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
                                 <label 
@@ -127,17 +128,15 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Root Category')
+                                @lang('admin::app.settings.channels.create.root-category')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="root_category_id"
-                                :value="old('name')"
                                 id="root_category_id"
                                 rules="required"
-                                :label="trans('Root Category')"
-                                :placeholder="trans('Root Category')"
+                                :label="trans('admin::app.settings.channels.create.root-category')"
                             >
                                 @foreach (app('Webkul\Category\Repositories\CategoryRepository')->getRootCategories() as $category)
                                     <option value="{{ $category->id }}" {{ old('root_category_id') == $category->id ? 'selected' : '' }}>
@@ -154,7 +153,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Host Name')
+                                @lang('admin::app.settings.channels.create.hostname')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -162,8 +161,8 @@
                                 name="hostname"
                                 :value="old('hostname')"
                                 id="hostname"
-                                :label="trans('Host Name')"
-                                :placeholder="trans('https://www.example.com (Don\'t add slash in the end.)')"
+                                :label="trans('admin::app.settings.channels.create.hostname')"
+                                :placeholder="trans('admin::app.settings.channels.create.hostname-placeholder')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -178,20 +177,20 @@
                 {{-- Logo and Design --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('Design')
+                        @lang('admin::app.settings.channels.create.design')
                     </p>
 
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Theme')
+                                @lang('admin::app.settings.channels.create.theme')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="theme"
                                 id="theme"
-                                :label="trans('Theme')"
+                                :label="trans('admin::app.settings.channels.create.theme')"
                             >
                                 @foreach (config('themes.themes') as $themeCode => $theme)
                                     <option value="{{ $themeCode }}" {{ old('theme') == $themeCode ? 'selected' : '' }}>
@@ -210,14 +209,14 @@
                             <div class="flex flex-col w-[40%]">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Logo')
+                                        @lang('admin::app.settings.channels.create.logo')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.control
                                             type="image"
                                             name="logo[image_1]"
-                                            :label="trans('Logo')"
+                                            :label="trans('admin::app.settings.channels.create.logo')"
                                             :is-multiple="false"
                                             accepted-types="image/*"
                                         >
@@ -230,31 +229,34 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-                                <p class="text-[12px] text-gray-600">Image resolution should be like 192px X 50px</p>
+                                <p class="text-[12px] text-gray-600">
+                                    @lang('admin::app.settings.channels.create.logo-size')
+                                </p>
                             </div>
 
                             <div class="flex flex-col w-[40%]">
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        @lang('Favicon')
+                                        @lang('admin::app.settings.channels.create.favicon')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="image"
-                                        name="fevicon[image_1]"
-                                        :label="trans('Favicon')"
+                                        name="favicon[image_1]"
+                                        :label="trans('admin::app.settings.channels.create.favicon')"
                                         :is-multiple="false"
                                         accepted-types="image/*"
-                                        :src="isset($customer) ? $customer->image_url : ''"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="fevicon[image_1]"
+                                        control-name="favicon[image_1]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-                                <p class="text-[12px] text-gray-600">Image resolution should be like 16px X 16px</p>
+                                <p class="text-[12px] text-gray-600">
+                                    @lang('admin::app.settings.channels.create.favicon-size')
+                                </p>
                             </div>
                         </div>
                     </div>    
@@ -263,13 +265,13 @@
                 {{-- Home Page SEO --}} 
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('Home page SEO ')
+                        @lang('admin::app.settings.channels.create.seo')
                     </p>
 
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Meta title')
+                                @lang('admin::app.settings.channels.create.seo-title')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -278,8 +280,8 @@
                                 :value="old('seo_title')"
                                 id="seo_title"
                                 rules="required"
-                                :label="trans('Meta title')"
-                                :placeholder="trans('Meta title')"
+                                :label="trans('admin::app.settings.channels.create.seo-title')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-title')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -291,7 +293,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Meta description')
+                                @lang('admin::app.settings.channels.create.seo-description')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -300,8 +302,8 @@
                                 :value="old('seo_description')"
                                 id="seo_description"
                                 rules="required"
-                                :label="trans('Meta description')"
-                                :placeholder="trans('Meta description')"
+                                :label="trans('admin::app.settings.channels.create.seo-description')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-description')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -313,7 +315,7 @@
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('Meta keywords')
+                                @lang('admin::app.settings.channels.create.seo-keywords')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -321,8 +323,8 @@
                                 name="seo_keywords"
                                 :value="old('seo_keywords') "
                                 id="seo_keywords"
-                                :label="trans('Meta keywords')"
-                                :placeholder="trans('Meta keywords')"
+                                :label="trans('admin::app.settings.channels.create.seo-keywords')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-keywords')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -342,7 +344,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between p-[6px]">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('Currencies and Locales ')
+                                    @lang('admin::app.settings.channels.create.currencies-and-locales')
                                 </p>
                             </div>
                         </x-slot:header>
@@ -352,7 +354,7 @@
                             <div class="mb-[10px]">
                                 <div class="mb-[10px]">
                                     <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('Locales')
+                                        @lang('admin::app.settings.channels.create.locales')
                                     </p>
                                 
                                     @foreach (core()->getAllLocales() as $locale)
@@ -380,7 +382,7 @@
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Default Locale')
+                                        @lang('admin::app.settings.channels.create.default-locale')
                                     </x-admin::form.control-group.label>
     
                                     <x-admin::form.control-group.control
@@ -388,7 +390,7 @@
                                         name="default_locale_id"
                                         id="default_locale_id"
                                         rules="required"
-                                        label="Default Locale"
+                                        :label="trans('admin::app.settings.channels.create.default-locale')"
                                     >
                                         @foreach (core()->getAllLocales() as $locale)
                                             <option value="{{ $locale->id }}" {{ old('default_locale_id') == $locale->id ? 'selected' : '' }}>
@@ -405,7 +407,7 @@
     
                                 <div class="mb-[10px]">
                                     <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('Currencies')
+                                        @lang('admin::app.settings.channels.create.currencies')
                                     </p>
                                 
                                     @foreach (core()->getAllCurrencies() as $currency)
@@ -433,7 +435,7 @@
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('Default Currency')
+                                        @lang('admin::app.settings.channels.create.default-currency')
                                     </x-admin::form.control-group.label>
     
                                     <x-admin::form.control-group.control
@@ -441,7 +443,7 @@
                                         name="base_currency_id"
                                         id="base_currency_id"
                                         rules="required"
-                                        label="Default Currency"
+                                        :label="trans('admin::app.settings.channels.create.default-currency')"
                                     >
                                         @foreach (core()->getAllCurrencies() as $currency)
                                             <option value="{{ $currency->id }}" {{ old('base_currency_id') == $currency->id ? 'selected' : '' }}>
@@ -466,7 +468,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between p-[6px]">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('Maintenance Mode')
+                                    @lang('admin::app.settings.channels.create.settings')
                                 </p>
                             </div>
                         </x-slot:header>
@@ -476,9 +478,49 @@
                             <div class="mb-[10px]">
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('status')
+                                        @lang('admin::app.settings.channels.create.maintenance-mode-text')
                                     </x-admin::form.control-group.label>
-    
+                                    
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="maintenance_mode_text"
+                                        id="maintenance-mode-text"
+                                        :label="trans('admin::app.settings.channels.create.maintenance-mode-text')"
+                                        :placeholder="trans('admin::app.settings.channels.create.maintenance-mode-text')"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                
+                                    <x-admin::form.control-group.error
+                                        control-name="maintenance_mode_text"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                        
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="!text-gray-800">
+                                        @lang('admin::app.settings.channels.create.allowed-ips')
+                                    </x-admin::form.control-group.label>
+                                    
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="allowed_ips"
+                                        id="allowed-ips"
+                                        :label="trans('admin::app.settings.channels.create.allowed-ips')"
+                                        :placeholder="trans('admin::app.settings.channels.create.allowed-ips')"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                    
+                                    <x-admin::form.control-group.error
+                                        control-name="allowed_ips"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.channels.create.status')
+                                    </x-admin::form.control-group.label>
+        
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="is_maintenance_on"
@@ -486,49 +528,9 @@
                                         id="maintenance-mode-status"
                                     >
                                     </x-admin::form.control-group.control>
-    
+        
                                     <x-admin::form.control-group.error
                                         control-name="is_maintenance_on"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-    
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('Message')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="maintenance_mode_text"
-                                        id="maintenance-mode-text"
-                                        label="Message"
-                                        placeholder="Message"
-                                    >
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="maintenance_mode_text"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-    
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="!text-gray-800">
-                                        @lang('Allowed IPs')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="allowed_ips"
-                                        id="allowed-ips"
-                                        label="Allowed IPs"
-                                        placeholder="Allowed IPs"
-                                    >
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="allowed_ips[]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>

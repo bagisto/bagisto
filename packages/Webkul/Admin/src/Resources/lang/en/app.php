@@ -209,15 +209,56 @@ return [
             ],
         ],
          
-       
-    ],
-    
-
-    'users' => [
-        'users' => [
+        'channels' => [
             'index' => [
-                'title' => 'Users',
+                'title'           => 'Channels',
+                'add-title'       => 'Add Channel',
+
             ],
+
+            'create' => [   
+                'add-title'                 => 'Add Channel',
+                'cancel'                    => 'Cancel',
+                'save-btn-title'            => 'Save Channel',
+                'general'                   => 'General',
+                'code'                      => 'Code',
+                'name'                      => 'Name',
+                'description'               => 'Description',
+                'inventory-sources'         => 'Inventory Sources',
+                'root-category'             => 'Root Category',
+                'hostname'                  => 'Hostname',
+                'hostname-placeholder'      => 'https://www.example.com (Don\'t add slash in the end.)',
+                'design'                    => 'Design',
+                'theme'                     => 'Theme',
+                'logo'                      => 'Logo',
+                'allowed-ips'               => 'Allowed IPs',
+                'logo-size'                 => 'Image resolution should be like 192px X 50px',
+                'favicon'                   => 'Favicon',
+                'favicon-size'              => 'Image resolution should be like 16px X 16px',
+                'seo'                       => 'Home page SEO',
+                'seo-title'                 => 'Meta title',
+                'seo-description'           => 'Meta description',
+                'seo-keywords'              => 'Meta keywords',
+                'currencies-and-locales'    => 'Currencies and Locales',
+                'locales'                   => 'Locales',
+                'default-locale'            => 'Default Locale',
+                'currencies'                => 'Currencies',
+                'default-currency'          => 'Default Currency',
+                'last-delete-error'         => 'At least one Channel is required.',
+                'settings'                  => 'Settings',
+                'status'                    => 'Status',
+                'maintenance-mode-text'     => 'Message',
+                'allowed-ips'               => 'Allowed IPs',
+            ],  
+        ],  
+        
+    ],  
+    
+    'users' => [    
+        'users' => [    
+            'index' => [    
+                'title' => 'Users', 
+            ],  
             
             'create' => [
                 'add-new-user'     => 'Add User',
