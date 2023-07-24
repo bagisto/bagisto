@@ -920,7 +920,7 @@
                 render () {
                     return this.$h('div', {
                             class: [
-                                'tree-container',
+                                'v-tree-container',
                             ]
                         }, [this.generateChildren()]
                     )
@@ -1239,7 +1239,7 @@
                     return this.$h(
                         'div', {
                             class: [
-                                'pl-[30px]',
+                                'v-tree-item pl-[30px]',
                                 'active',
                                 this.hasChildren ? 'has-children' : '',
                             ],
@@ -1410,5 +1410,23 @@
                 }
             });
         </script>
-      @endPushOnce
+    @endPushOnce
+
+    @pushOnce('styles')
+        <style>
+            .v-tree-container .v-tree-item.active>.v-tree-item {
+                display: inline-block;
+            }
+
+            .v-tree-container .v-tree-item>.v-tree-item {
+                display: none;
+            }
+
+            .v-tree-container .v-tree-item {
+                padding-left: 30px;
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+    @endPushOnce
 </x-admin::layouts>
