@@ -8,7 +8,7 @@ use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 class CategoryRequest extends FormRequest
 {
     /**
-     * Determine if the Configuraion is authorized to make this request.
+     * Determine if the Configuration is authorized to make this request.
      *
      * @return bool
      */

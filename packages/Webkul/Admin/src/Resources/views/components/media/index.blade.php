@@ -1,6 +1,6 @@
 <v-media {{ $attributes }} >
     <x-admin::shimmer.image
-        class="w-[100px] h-[100px] mt-[30px] rounded-[12px]"
+        class="w-[100px] h-[100px] mt-[30px] rounded-[4px]"
     >
     </x-admin::shimmer.image>
 </v-media>
@@ -10,119 +10,125 @@
         type="text/x-template" 
         id="v-media-template"
     >
-        <div class="flex flex-col mb-4 rounded-lg cursor-pointer">
-            <div :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }">
-                <div
-                    class="flex flex-col items-center justify-center w-[100px] h-[100px] bg-[#F5F5F5] rounded-[12px] cursor-pointer hover:bg-gray-100"
-                    v-if="uploadedFiles.isPicked"
-                >
-                    <div 
-                        class="relative group flex justify-center w-[100px] h-[100px]"
-                        @mouseenter="uploadedFiles.showDeleteButton = true"
-                        @mouseleave="uploadedFiles.showDeleteButton = false"
-                    >
-                        <img
-                            class="rounded-[12px] object-cover"
-                            :src="uploadedFiles.url"
-                            :class="{'opacity-25' : uploadedFiles.showDeleteButton}"
-                        >
-
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span 
-                                class="icon-cancel text-[24px] text-black cursor-pointer"
-                                @click="removeFile"
-                            >
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <label 
-                    :for="name"
-                    class="flex flex-col justify-center items-center w-[100px] h-[100px] rounded-[12px] bg-[#F5F5F5] cursor-pointer hover:bg-gray-100"
-                    v-show="! uploadedFiles.isPicked"
-                    @dragover="onDragOver"
-                    @dragleave="onDragLeave"
-                    @drop="onDrop"
-                >
-                    <img
-                        src="{{ bagisto_asset('images/media-image.png')}}"
-                        :for="name"
-                        class="block text-base text-center cursor-pointer"
-                    />
-
-                    <v-field
-                        type="file"
-                        :name="name"
-                        :id="name"
-                        class="hidden"
-                        :accept="acceptedTypes"
-                        :rules="appliedRules"
-                        :multiple="isMultiple"
-                        @change="onFileChange"
-                    >
-                    </v-field>
-                </label>
-            </div>
-
+        <div
+            class="flex flex-col items-center justify-center bg-[#F5F5F5] rounded-[4px] cursor-pointer hover:bg-gray-100"
+            :class="{'border border-dashed border-gray-300 rounded-[18px]': isDragOver }"
+            :style="{'max-width': + this.width + 'px', 'max-height': + this.height + 'px'}"
+            v-if="uploadedFiles.isPicked"
+        >
             <div 
-                class="flex items-center"
-                v-if="isMultiple"
+                class="relative group flex justify-center"
+                :style="{'width': + this.width + 'px', 'height': + this.height + 'px'}"
+                @mouseenter="uploadedFiles.showDeleteButton = true"
+                @mouseleave="uploadedFiles.showDeleteButton = false"
             >
-                <ul class="flex gap-[10px] flex-wrap justify-left mt-2">
-                    <li 
-                        v-for="(file, index) in uploadedFiles"
-                        :key="index"
+                <img
+                    class="rounded-[4px] object-cover"
+                    :src="uploadedFiles.url"
+                    :class="{'opacity-25' : uploadedFiles.showDeleteButton}"
+                >
+
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span 
+                        class="icon-cancel text-[24px] text-black cursor-pointer"
+                        @click="removeFile"
                     >
-                        <template v-if="isImage(file)">
-                            <div 
-                                class="relative group flex justify-center h-12 w-12"
-                                @mouseenter="file.showDeleteButton = true"
-                                @mouseleave="file.showDeleteButton = false"
-                            >
-                                <img
-                                    :src="file.url"
-                                    :alt="file.name"
-                                    class="rounded-[12px] min-w-[48px] max-h-[48px]"
-                                    :class="{'opacity-25' : file.showDeleteButton}"
-                                >
-
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span 
-                                        class="icon-cancel text-[24px] text-black cursor-pointer"
-                                        @click="removeFile(index)"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
-                        </template>
-
-                        <template v-else>
-                            <div
-                                class="relative group flex justify-center h-12 w-12"
-                                @mouseenter="file.showDeleteButton = true"
-                                @mouseleave="file.showDeleteButton = false"
-                            >
-                                <video
-                                    :src="file.url"
-                                    :alt="file.name"
-                                    class="rounded-[12px] min-w-[50px] max-h-[50px]"
-                                    :class="{'opacity-25' : file.showDeleteButton}"
-                                >
-                                </video>
-
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span 
-                                        class="icon-cancel text-[24px] text-black cursor-pointer"
-                                        @click="removeFile(index)"
-                                    >
-                                    </span>
-                                </div>
-                            </div>
-                        </template>
-                    </li>
-                </ul>
+                    </span>
+                </div>
             </div>
+        </div>
+
+        <label 
+            :for="name"
+            class="flex flex-col justify-center items-center cursor-pointer hover:bg-gray-100"
+            :style="{'max-width': + this.width + 'px', 'max-height': + this.height + 'px'}"
+            v-show="! uploadedFiles.isPicked"
+            @dragover="onDragOver"
+            @dragleave="onDragLeave"
+            @drop="onDrop"
+        >
+            <div 
+                class="grid justify-items-center items-center w-full h-[120px] border border-dashed border-gray-300 rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
+                :style="{'max-width': + this.width + 'px', 'max-height': + this.height + 'px'}"
+            >
+                <div class="flex flex-col items-center">
+                    <span class="icon-image text-[24px]"></span>
+                    <p class="grid text-[14px] text-gray-600 font-semibold text-center">
+                        @{{ this.label }}<span class="text-[12px]">png, jpeg, jpg</span>
+                    </p>
+                </div>
+            </div>
+
+            <v-field
+                type="file"
+                :name="name"
+                :id="name"
+                class="hidden"
+                :accept="acceptedTypes"
+                :rules="appliedRules"
+                :multiple="isMultiple"
+                @change="onFileChange"
+            >
+            </v-field>
+        </label>
+
+        <div 
+            class="flex items-center"
+            v-if="isMultiple"
+        >
+            <ul class="flex gap-[10px] flex-wrap justify-left mt-2">
+                <li 
+                    v-for="(file, index) in uploadedFiles"
+                    :key="index"
+                >
+                    <template v-if="isImage(file)">
+                        <div 
+                            class="relative group flex justify-center h-12 w-12"
+                            @mouseenter="file.showDeleteButton = true"
+                            @mouseleave="file.showDeleteButton = false"
+                        >
+                            <img
+                                :src="file.url"
+                                :alt="file.name"
+                                class="rounded-[4px] min-w-[48px] max-h-[48px]"
+                                :class="{'opacity-25' : file.showDeleteButton}"
+                            >
+
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span 
+                                    class="icon-cancel text-[24px] text-black cursor-pointer"
+                                    @click="removeFile(index)"
+                                >
+                                </span>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template v-else>
+                        <div
+                            class="relative group flex justify-center h-12 w-12"
+                            @mouseenter="file.showDeleteButton = true"
+                            @mouseleave="file.showDeleteButton = false"
+                        >
+                            <video
+                                :src="file.url"
+                                :alt="file.name"
+                                class="rounded-[4px] min-w-[50px] max-h-[50px]"
+                                :class="{'opacity-25' : file.showDeleteButton}"
+                            >
+                            </video>
+
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span 
+                                    class="icon-cancel text-[24px] text-black cursor-pointer"
+                                    @click="removeFile(index)"
+                                >
+                                </span>
+                            </div>
+                        </div>
+                    </template>
+                </li>
+            </ul>
         </div>
     </script>
 
@@ -158,7 +164,17 @@
                 src: {
                     type: String,
                     default: ''
-                }
+                },
+
+                width: {
+                    type: Number,
+                    default: 110,
+                },
+
+                height: {
+                    type: Number,
+                    default: 110,
+                },
             },
 
             data() {
