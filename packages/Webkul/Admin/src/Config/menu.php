@@ -199,7 +199,7 @@ return [
         'icon'       => '',
     ], [
         'key'        => 'marketing.promotions.catalog-rules',
-        'name'       => 'admin::app.promotions.catalog-rules.title',
+        'name'       => 'admin::app.promotions.catalog-rules.create.title',
         'route'      => 'admin.catalog_rules.index',
         'sort'       => 1,
         'icon'       => '',

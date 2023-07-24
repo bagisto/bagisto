@@ -3,11 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\CatalogRule;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
-use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
+use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
+use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
 
 class CatalogRuleController extends Controller
 {
@@ -19,13 +19,14 @@ class CatalogRuleController extends Controller
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleIndex $catalogRuleIndexHelper
-    ) {
+    ) 
+    {
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -39,7 +40,7 @@ class CatalogRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -53,6 +54,8 @@ class CatalogRuleController extends Controller
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
     {
+        dd($catalogRuleRequest->all());
+        
         Event::dispatch('promotions.catalog_rule.create.before');
 
         $catalogRule = $this->catalogRuleRepository->create($catalogRuleRequest->all());

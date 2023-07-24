@@ -1,6 +1,53 @@
 <?php
 
 return [
+
+    'promotions' => [
+        'catalog-rules' => [
+            'create' => [
+                'title' => 'Catalog Rules',
+                'add-title' => 'Add Catalog Rule',
+                'save-btn-title' => 'Save Cart Rule',
+                'name' => 'Name',
+                'description' => 'Description',
+                'channels'=>'Channels',
+                'customer-groups' => 'Customer Groups',
+                'conditions'=>'Conditions',
+                'condition-type' => 'Condition Type',
+                'all-conditions-true' => 'All Conditions are true',
+                'any-conditions-true' => 'Any Conditions are true',
+                'add-condition' => 'Add Condition',
+                'actions' => 'Actions',
+                'percentage-product-price'       => 'Percentage of Product Price',
+                'fixed-amount' => 'Fixed Amount',
+                'discount-amount' => 'Discount Amount',
+                'end-other-rules' => 'End other rules',
+                'yes' => 'Yes',
+                'no' => 'No',
+                'settings' => 'Settings',
+                'status' => 'Status',   
+                'priority' => 'Priority',
+                'marketing-time'=> 'Marketing Time',
+                'from' => 'From',
+                'to' => 'To',
+                'choose-condition-to-add'=> 'Choose Condition To Add',
+                'is-equal-to'                  => 'Is equal to',
+                'is-not-equal-to'              => 'Is not equal to',
+                'equals-or-greater-than'       => 'Equals or greater than',
+                'equals-or-less-than'          => 'Equals or less than',
+                'greater-than'                 => 'Greater than',
+                'less-than'                    => 'Less than',
+                'contain'                      => 'Contain',
+                'contains'                     => 'Contains',
+                'does-not-contain'             => 'Does not contain',
+                'categories' => 'Categories',
+                'attribute_family' => 'Attribute Family',
+                'product-attribute' => 'Product attribute',
+            ]
+        ],
+    ],
+
+
     'sales'=> [
         'orders' => [
             'index' => [
@@ -1550,7 +1597,7 @@ return [
     //     'delete-failed'  => 'Error encountered while deleting customer.',
     // ],
 
-    'promotions' => [
+    'promotions-old' => [
         'cart-rules' => [
             'title'                          => 'Cart Rules',
             'add-title'                      => 'Add Cart Rule',
