@@ -5,13 +5,13 @@
         <transition-group
             tag='div'
             name="flash-group"
-            enter-from-class="translate-y-full"
+            enter-from-class="translate-x-full"
             enter-active-class="transform transition ease-in-out duration-200"
-            enter-to-class="translate-y-0"
-            leave-from-class="translate-y-0"
+            enter-to-class="translate-x-0"
+            leave-from-class="translate-x-0"
             leave-active-class="transform transition ease-in-out duration-200"
-            leave-to-class="translate-y-full"
-            class='grid gap-[10px] absolute left-[50%] -translate-x-[50%]  bottom-[20px] z-[1] justify-items-end'
+            leave-to-class="translate-x-full"
+            class='grid gap-[10px] fixed top-[20px] right-[20px] z-[100] justify-items-end'
         >
             <x-admin::flash-group.item></x-admin::flash-group.item>
         </transition-group>

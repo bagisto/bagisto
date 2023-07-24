@@ -280,7 +280,8 @@ return [
                 'add-group-btn'                    => 'Add Group',
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
-                'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.'
+                'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
             ],
 
             'edit' => [
@@ -308,7 +309,8 @@ return [
                 'add-group-btn'                    => 'Add Group',
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
-                'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.'
+                'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
             ]
         ],
     ],
