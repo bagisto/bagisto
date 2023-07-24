@@ -35,52 +35,48 @@
                                     General
                                 </p>
 
-                                <div class="mb-[10px]">
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.promotions.catalog-rules.create.name')
-                                        </x-admin::form.control-group.label>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.promotions.catalog-rules.create.name')
+                                    </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            :value="old('name')"
-                                            id="name"
-                                            rules="required"
-                                            :label="trans('admin::app.promotions.catalog-rules.create.name')"
-                                            :placeholder="trans('admin::app.promotions.catalog-rules.create.name')"
-                                        >
-                                        </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="name"
+                                        :value="old('name')"
+                                        id="name"
+                                        rules="required"
+                                        :label="trans('admin::app.promotions.catalog-rules.create.name')"
+                                        :placeholder="trans('admin::app.promotions.catalog-rules.create.name')"
+                                    >
+                                    </x-admin::form.control-group.control>
 
-                                        <x-admin::form.control-group.error
-                                            control-name="name"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
-                                <div class="mb-[10px]">
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.promotions.catalog-rules.create.description')
-                                        </x-admin::form.control-group.label>
-    
-                                        <x-admin::form.control-group.control
-                                            type="textarea"
-                                            name="description"
-                                            :value="old('description')"
-                                            id="description"
-                                            :label="trans('admin::app.promotions.catalog-rules.create.description')"
-                                            :placeholder="trans('admin::app.promotions.catalog-rules.create.description')"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                        <x-admin::form.control-group.error
-                                            control-name="description"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.promotions.catalog-rules.create.description')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="textarea"
+                                        name="description"
+                                        :value="old('description')"
+                                        id="description"
+                                        :label="trans('admin::app.promotions.catalog-rules.create.description')"
+                                        :placeholder="trans('admin::app.promotions.catalog-rules.create.description')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="description"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
 
                                 <div class="mb-[10px]">
                                     <div class="mb-[10px]">
@@ -205,7 +201,7 @@
         
                                     <div class="flex  gap-[16px]  max-sm:flex-wrap">
                                         <div class="w-full mb-[10px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
                                                     Action Type
                                                 </x-admin::form.control-group.label>
@@ -242,7 +238,7 @@
                                         </div>
 
                                         <div class="w-full mb-[10px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.promotions.catalog-rules.create.discount-amount')
                                                 </x-admin::form.control-group.label>
@@ -265,7 +261,7 @@
                                         </div>
 
                                         <div class="w-full mb-[10px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.promotions.catalog-rules.create.end-other-rules')
                                                 </x-admin::form.control-group.label>
@@ -337,31 +333,28 @@
                                         >
                                             @lang('admin::app.promotions.catalog-rules.create.status')
                                         </div>
-
                                     </label>
 
-                                    <div class="mb-[10px]">
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                @lang('admin::app.promotions.catalog-rules.create.priority')
-                                            </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.catalog-rules.create.priority')
+                                        </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="sort_order"
-                                                :value="old('sort_order')"
-                                                id="sort_order"
-                                                :label="trans('admin::app.promotions.catalog-rules.create.priority')"
-                                                :placeholder="trans('admin::app.promotions.catalog-rules.create.priority')"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            :value="old('sort_order')"
+                                            id="sort_order"
+                                            :label="trans('admin::app.promotions.catalog-rules.create.priority')"
+                                            :placeholder="trans('admin::app.promotions.catalog-rules.create.priority')"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.error
-                                                control-name="sort_order"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                                    </div>
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
                                 </x-slot:content>
                             </x-admin::accordion>
                                 
@@ -429,6 +422,49 @@
                     </div>
                 </x-admin::form>
             </div>
+        </script>
+
+        {{-- v catalog rule create form component --}}
+        <script type="module">
+            app.component('v-catalog-rule-create-form', {
+                template: '#v-catalog-rule-create-form-template',
+                
+                data() {
+                    return {
+                        condition_type: 1,
+
+                        conditions: []
+                    }
+                },
+
+                methods: {
+                    addCondition() {
+                        this.conditions.push({
+                            'attribute': '',
+                            'operator': '==',
+                            'value': '',
+                        });
+                    },
+
+                    removeCondition(condition) {
+                        let index = this.conditions.indexOf(condition)
+
+                        this.conditions.splice(index, 1)
+                    },
+
+                    onSubmit(e) {
+                        this.$root.onSubmit(e)
+                    },
+
+                    onSubmit(e) {
+                        this.$root.onSubmit(e)
+                    },
+
+                    redirectBack(fallbackUrl) {
+                        this.$root.redirectBack(fallbackUrl)
+                    }
+                }
+            })
         </script>
 
         {{-- v catalog rule condition item form template --}}
@@ -618,49 +654,6 @@
                 >
                 </span>
             </div>
-        </script>
-
-         {{-- v catalog rule create form component --}}
-        <script type="module">
-            app.component('v-catalog-rule-create-form', {
-                template: '#v-catalog-rule-create-form-template',
-                
-                data() {
-                    return {
-                        condition_type: 1,
-
-                        conditions: []
-                    }
-                },
-
-                methods: {
-                    addCondition() {
-                        this.conditions.push({
-                            'attribute': '',
-                            'operator': '==',
-                            'value': '',
-                        });
-                    },
-
-                    removeCondition(condition) {
-                        let index = this.conditions.indexOf(condition)
-
-                        this.conditions.splice(index, 1)
-                    },
-
-                    onSubmit(e) {
-                        this.$root.onSubmit(e)
-                    },
-
-                    onSubmit(e) {
-                        this.$root.onSubmit(e)
-                    },
-
-                    redirectBack(fallbackUrl) {
-                        this.$root.redirectBack(fallbackUrl)
-                    }
-                }
-            })
         </script>
 
         {{-- v catalog rule condition item component --}}

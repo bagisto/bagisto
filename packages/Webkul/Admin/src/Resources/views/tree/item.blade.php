@@ -279,7 +279,7 @@
 
             generateIcon() {
                 return this.$h('i', {
-                    class: [this.isActive ? 'icon-sort-down' : 'icon-sort-right', 'text-[24px]'],
+                    class: [this.isActive ? 'icon-sort-down' : 'icon-sort-right', 'text-[24px] cursor-pointer'],
                     
                     onClick: (selection) => {
                         this.$el.classList.toggle('active');
@@ -293,7 +293,7 @@
 
             generateFolderIcon() {
                 return this.$h('i', {
-                    class: ['icon-folder text-[24px]'],
+                    class: ['icon-folder text-[24px] cursor-pointer'],
                 });
             },
 
