@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-976daa4e.css",
+    "file": "assets/app-f51eb40f.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -73,7 +73,7 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-fc25c1db.js",
+    "file": "assets/app-539450a0.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
