@@ -63,14 +63,14 @@ return [
        
         'groups' => [
             'index' => [
-                'title' => 'Groups'
-            ],
+                'title' => 'Groups',
 
-            'create' => [
-                'add-group'  => 'Add New Group',
-                'code'       => 'Code',
-                'name'       => 'Name',
-                'save-group' => 'Save Group'
+                'create-form' => [
+                    'add-group'  => 'Add New Group',
+                    'code'       => 'Code',
+                    'name'       => 'Name',
+                    'save-group' => 'Save Group',
+                ],
             ],
         ],
 
