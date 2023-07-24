@@ -7,7 +7,7 @@ return [
             'create' => [
                 'title' => 'Catalog Rules',
                 'add-title' => 'Add Catalog Rule',
-                'save-btn-title' => 'Save Cart Rule',
+                'save-btn-title' => 'Save Catalog Rule',
                 'name' => 'Name',
                 'description' => 'Description',
                 'channels'=>'Channels',
