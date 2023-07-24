@@ -3,7 +3,7 @@
     <x-slot:title>
         @lang('Add Channels')
     </x-slot:title>
-    <x-admin::form  action="{{ route('admin.channels.store') }}">
+    <x-admin::form  action="{{ route('admin.channels.store') }}" enctype="multipart/form-data">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('Add Channel')
@@ -99,35 +99,31 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Need to Change in multiple select to select box  --}}
-                        <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
-                                @lang('Inventory Sources')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="inventory_sources[]"
-                                :value="old('description')"
-                                id="inventory_sources"
-                                rules="required"
-                                :label="trans('Inventory Sources')"
-                                :placeholder="trans('Inventory Sources')"
-                                multiple
-                            >
-
+                        <div class="mb-[10px]">
+                            <p class="block leading-[24px] text-[12px] text-gray-800 font-medium">@lang('Inventory Sources')</p>
+                    
                             @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                                <option value="{{ $inventorySource->id }}" {{ old('inventory_sources') && in_array($inventorySource->id, old('inventory_sources')) ? 'selected' : '' }}>
-                                    {{ $inventorySource->name }}
-                                </option>
+                                <label 
+                                    class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
+                                    for="inventory_sources_{{ $inventorySource->id }}"
+                                >
+                                    <input 
+                                        type="checkbox" 
+                                        name="inventory_sources[]"
+                                        id="inventory_sources_{{ $inventorySource->id }}"
+                                        value="{{ $inventorySource->id }}"
+                                        {{ in_array($inventorySource->id, old('inventory_sources', [])) ? 'checked' : '' }}
+                                        class="hidden peer"
+                                    >
+                    
+                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                    
+                                    <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
+                                        {{ $inventorySource->name }}
+                                    </div>
+                                </label>
                             @endforeach
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="inventory_sources"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                        </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
@@ -210,39 +206,42 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <div class="flex">
-                            <div class="flex flex-col gap-[8px] w-[40%]">
-                                <x-admin::form.control-group class="mb-[10px]">
+                        <div class="flex justify-between">
+                            <div class="flex flex-col w-[40%]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('Logo')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
-                                        name="log"
-                                        :label="trans('Logo')"
-                                        :is-multiple="false"
-                                        accepted-types="image/*"
-                                        :src="isset($customer) ? $customer->image_url : ''"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.control
+                                            type="image"
+                                            name="logo[image_1]"
+                                            :label="trans('Logo')"
+                                            :is-multiple="false"
+                                            accepted-types="image/*"
+                                        >
+                                        </x-admin::form.control-group.control>
+    
+                                    </x-admin::form.control-group>
 
                                     <x-admin::form.control-group.error
-                                        control-name="logo"
+                                        control-name="logo[image_1]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                                <p class="text-[12px] text-gray-600">Image resolution should be like 192px X 50px</p>
                             </div>
 
-                            <div class="flex flex-col gap-[8px] w-[40%]">
-                                <x-admin::form.control-group class="mb-[10px]">
+                            <div class="flex flex-col w-[40%]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
                                         @lang('Favicon')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="image"
-                                        name="fevicon"
+                                        name="fevicon[image_1]"
                                         :label="trans('Favicon')"
                                         :is-multiple="false"
                                         accepted-types="image/*"
@@ -251,10 +250,11 @@
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="logo"
+                                        control-name="fevicon[image_1]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+                                <p class="text-[12px] text-gray-600">Image resolution should be like 16px X 16px</p>
                             </div>
                         </div>
                     </div>    
@@ -350,31 +350,33 @@
                         <x-slot:content>
                             {{-- Locale  --}}
                             <div class="mb-[10px]">
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                <div class="mb-[10px]">
+                                    <p class="block leading-[24px] text-gray-800 font-medium">
                                         @lang('Locales')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="locales[]"
-                                        id="locales" 
-                                        rules="required"
-                                        label="Locales"
-                                        multiple
-                                    >
-                                        @foreach (core()->getAllLocales() as $locale)
-                                            <option value="{{ $locale->id }}" {{ old('locales') && in_array($locale->id, old('locales')) ? 'selected' : '' }}>
-                                                {{ $locale->name }}
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="locales[]"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                    </p>
+                                
+                                    @foreach (core()->getAllLocales() as $locale)
+                                        <label 
+                                            class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
+                                            for="locales_{{ $locale->id }}"
+                                        >
+                                            <input 
+                                                type="checkbox" 
+                                                name="locales[]"
+                                                id="locales_{{ $locale->id }}" 
+                                                value="{{ $locale->id }}"
+                                                {{ in_array($locale->id, old('locales', [])) ? 'checked' : '' }}
+                                                class="hidden peer"
+                                            >
+                                
+                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                
+                                            <p class="text-gray-600 font-semibold cursor-pointer">
+                                                {{ $locale->name }} 
+                                            </p>
+                                        </label>
+                                    @endforeach
+                                </div>
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
@@ -401,31 +403,33 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
     
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                <div class="mb-[10px]">
+                                    <p class="block leading-[24px] text-gray-800 font-medium">
                                         @lang('Currencies')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="currencies[]" 
-                                        id="currencies"
-                                        rules="required"
-                                        label="Currencies"
-                                        multiple
-                                    >
-                                        @foreach (core()->getAllCurrencies() as $currency)
-                                            <option value="{{ $currency->id }}" {{ old('currencies') && in_array($currency->id, old('currencies')) ? 'selected' : '' }}>
-                                                {{ $currency->name }}
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="currencies[]"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                    </p>
+                                
+                                    @foreach (core()->getAllCurrencies() as $currency)
+                                        <label 
+                                            class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
+                                            for="{{ $currency->id }}"
+                                        >
+                                            <input 
+                                                type="checkbox" 
+                                                name="currencies[]" 
+                                                id="{{ $currency->id }}" 
+                                                value="{{ $currency->id }}"
+                                                {{ in_array($currency->id, old('currencies', [])) ? 'checked' : '' }}
+                                                class="hidden peer"
+                                            >
+                                
+                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                
+                                            <p class="text-gray-600 font-semibold cursor-pointer">
+                                                {{ $currency->name }} 
+                                            </p>
+                                        </label>
+                                    @endforeach
+                                </div>
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
