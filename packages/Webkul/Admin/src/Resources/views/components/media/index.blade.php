@@ -1,8 +1,5 @@
 <v-media {{ $attributes }} >
-    <x-admin::shimmer.image
-        class="w-[100px] h-[100px] mt-[30px] rounded-[4px]"
-    >
-    </x-admin::shimmer.image>
+    <x-admin::shimmer.image class="w-[110px] h-[110px] rounded-[4px]"></x-admin::shimmer.image>
 </v-media>
 
 @pushOnce('scripts')

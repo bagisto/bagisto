@@ -1,14 +1,19 @@
-<v-tinymce 
+<v-tinymce
     {{ $attributes }}
     data="{{ $slot }}"
 >
+    <x-admin::shimmer.tinymce class="w-[660px] h-[343px]"></x-admin::shimmer.tinymce>
 </v-tinymce>
 
 @pushOnce('scripts')
     @include('admin::layouts.tinymce')
 
     <script type="text/x-template" id="v-tinymce-template">
-        <div>
+        <template v-if="isLoading">
+            <x-admin::shimmer.tinymce class="w-[660px] h-[343px]"></x-admin::shimmer.tinymce>
+        </template>
+
+        <div v-show="! isLoading">
             <v-field
                 type="text"
                 :name="name"
@@ -31,11 +36,15 @@
             data() {
                 return {
                     content: this.value ?? this.data,
+
+                    isLoading: true,
                 }
             },
 
             mounted() {
                 this.initTinyMCE();
+
+                this.isLoading = false;
             },
 
             methods: {
