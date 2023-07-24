@@ -287,14 +287,15 @@ return [
 
         'families'   => [
             'index' => [
-                'title'         => 'Families',
-                'add-btn-title' => 'Create Attribute Family',
+                'title'  => 'Families',
+                'add'    => 'Create Attribute Family',
             ],
 
             'create' => [
                 'title'                            => 'Create Attribute Family',
                 'save-btn'                         => 'Save Attribute Family',
                 'cancel-btn'                       => 'Cancel',
+                'general'                          => 'General',
                 'groups'                           => 'Groups',
                 'groups-info'                      => 'Manage attribute family groups',
                 'delete-group-btn'                 => 'Delete Group',
