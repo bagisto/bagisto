@@ -407,25 +407,6 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-                        {{-- <label 
-                            for="checkbox" 
-                            class="flex gap-[10px] w-max items-center mb-[10px] p-[6px] cursor-pointer select-none"
-                        >
-                            <input 
-                                type="checkbox" 
-                                class="hidden peer"
-                                id="checkbox" 
-                                name="status" 
-                                value="1"
-                                required
-                            >
-
-                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:text-blue-600 peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                            <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
-                                @lang('admin::app.catalog.categories.create.visible-in-menu')
-                            </div>
-                        </label> --}}
                     </x-slot:content>
                 </x-admin::accordion>
 
