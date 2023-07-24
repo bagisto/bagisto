@@ -2,7 +2,6 @@
 
 namespace Webkul\Category\Repositories;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Category\Contracts\Category;
@@ -29,28 +28,27 @@ class CategoryRepository extends Repository
         $queryBuilder = $this->query()
             ->leftJoin('category_translations', 'category_translations.category_id', '=', 'categories.id');
 
-        if (isset($params['name'])) {
-            $queryBuilder->where('category_translations.name', 'like', '%' . urldecode($params['name']) . '%');
-        }
-
-        if (isset($params['description'])) {
-            $queryBuilder->where('category_translations.description', 'like', '%' . urldecode($params['description']) . '%');
-        }
-
-        if (isset($params['status'])) {
-            $queryBuilder->where('categories.status', $params['status']);
-        }
-
-        if (isset($params['only_children'])) {
-            $queryBuilder->whereNotNull('categories.parent_id');
-        }
-
-        if (isset($params['parent_id'])) {
-            $queryBuilder->where('categories.parent_id', $params['parent_id']);
-        }
-
-        if (isset($params['locale'])) {
-            $queryBuilder->where('category_translations.locale', $params['locale']);
+        foreach ($params as $key => $value) {
+            switch ($key) {
+                case 'name':
+                    $queryBuilder->where('category_translations.name', 'like', '%' . urldecode($value) . '%');
+                    break;
+                case 'description':
+                    $queryBuilder->where('category_translations.description', 'like', '%' . urldecode($value) . '%');
+                    break;
+                case 'status':
+                    $queryBuilder->where('categories.status', $value);
+                    break;
+                case 'only_children':
+                    $queryBuilder->whereNotNull('categories.parent_id');
+                    break;
+                case 'parent_id':
+                    $queryBuilder->where('categories.parent_id', $value);
+                    break;
+                case 'locale':
+                    $queryBuilder->where('category_translations.locale', $value);
+                    break;
+            }
         }
 
         return $queryBuilder->paginate($params['limit'] ?? 10);
@@ -83,7 +81,7 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
-        $this->uploadImages($data, $category, 'category_banner');
+        $this->uploadImages($data, $category, 'banner_path');
 
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
@@ -208,9 +206,7 @@ class CategoryRepository extends Repository
      */
     public function findBySlug($slug)
     {
-        $category = $this->model->whereTranslation('slug', $slug)->first();
-
-        if ($category) {
+        if ($category = $this->model->whereTranslation('slug', $slug)->first()) {
             return $category;
         }
     }
@@ -223,15 +219,7 @@ class CategoryRepository extends Repository
      */
     public function findBySlugOrFail($slug)
     {
-        $category = $this->model->whereTranslation('slug', $slug)->first();
-
-        if ($category) {
-            return $category;
-        }
-
-        throw (new ModelNotFoundException)->setModel(
-            get_class($this->model), $slug
-        );
+        return $this->model->whereTranslation('slug', $slug)->firstOrFail();
     }
 
     /**
@@ -252,22 +240,19 @@ class CategoryRepository extends Repository
      * @param  string  $type
      * @return void
      */
-    public function uploadImages($data, $category, $type = 'image')
+    public function uploadImages($data, $category, $type = 'logo_path')
     {
-
         if (isset($data[$type])) {
-            $request = request();
-
             foreach ($data[$type] as $imageId => $image) {
                 $file = $type . '.' . $imageId;
                 $dir = 'category/' . $category->id;
 
-                if ($request->hasFile($file)) {
+                if (request()->hasFile($file)) {
                     if ($category->{$type}) {
                         Storage::delete($category->{$type});
                     }
 
-                    $category->{$type} = $request->file($file)->store($dir);
+                    $category->{$type} = request()->file($file)->store($dir);
 
                     $category->save();
                 }
@@ -296,10 +281,7 @@ class CategoryRepository extends Repository
         $trimmed = [];
 
         foreach ($categories as $key => $category) {
-            if (
-                $category->name != null
-                || $category->name != ''
-            ) {
+            if (! empty($category->name)) {
                 $trimmed[$key] = [
                     'id'   => $category->id,
                     'name' => $category->name,
@@ -331,9 +313,7 @@ class CategoryRepository extends Repository
                 if ($requestedLocale == $locale->code) {
                     foreach ($model->translatedAttributes as $attribute) {
                         if ($attribute === $attributeName) {
-                            $data[$locale->code][$attribute] = isset($data[$requestedLocale][$attribute])
-                                ? $data[$requestedLocale][$attribute]
-                                : $data[$data['locale']][$attribute];
+                            $data[$locale->code][$attribute] = $data[$requestedLocale][$attribute] ?? $data[$data['locale']][$attribute];
                         }
                     }
                 }

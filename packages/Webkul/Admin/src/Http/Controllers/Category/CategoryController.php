@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Category;
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Category\Http\Requests\CategoryRequest;
+use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Admin\DataGrids\CategoryDataGrid;
 use Webkul\Admin\DataGrids\CategoryProductDataGrid;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Category\Http\Requests\CategoryRequest;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Repositories\ChannelRepository;
 
 class CategoryController extends Controller
 {
@@ -62,7 +62,22 @@ class CategoryController extends Controller
     {
         Event::dispatch('catalog.category.create.before');
 
-        $category = $this->categoryRepository->create($categoryRequest->all());
+        $category = $this->categoryRepository->create([
+            'locale'            => request()->input('locale'),
+            'name'              => request()->input('name'),
+            'parent_id'         => request()->input('parent_id'),
+            'description'       => request()->input('description'),
+            'slug'              => request()->input('slug'),
+            'meta_title'        => request()->input('meta_title'),
+            'meta_keywords'     => request()->input('meta_keywords'),
+            'meta_description'  => request()->input('meta_description'),
+            'status'            => request()->input('status'),
+            'position'          => request()->input('position'),
+            'display_mode'      => request()->input('display_mode'),
+            'attributes'        => request()->input('attributes'),
+            'logo_path'         => request('logo_path'),
+            'banner_path'       => request('banner_path'), 
+        ]);
 
         Event::dispatch('catalog.category.create.after', $category);
 

@@ -208,8 +208,6 @@ return [
                 ],
             ],
         ],
-         
-       
     ],
     
 
@@ -238,8 +236,8 @@ return [
             'index' => [
                 'title' => 'Products',
                 'add'   => 'Add Product'
-            ]   
-            ],
+            ]
+        ],
 
         'attributes' => [
             'index' =>  [
@@ -247,29 +245,42 @@ return [
                 'add'    => 'Add',
             ],
         ],
-
-        'categories'  =>  [
+        'categories'  => [
             'index' =>  [
                 'title' => 'Categories',
                 'add' => 'Add',
             ],
 
             'create' => [
-                'add-new-category'        => 'Add New Category',
-                'cancel'                  => 'Cancel',
-                'create-order'            => 'Create Order',
-                'general'                 => 'General',
-                'company-name'            => 'Category Name*',
-                'select-parent-category'  => 'Select Parent Category*',
-                'display-mode'            => 'Display Mode*',
-                'filterable-attributes'   => 'Filterable Attributes',
-                'basic-settings'          => 'Basic Settings',
-                'visible-in-menu'         => 'Visible In Menu',
-                'position'                => 'Position*',
-                'enter-position'          => 'Enter Position',
-                'description-and-images'  => 'Description and Images',
-                'category-logo'           => 'Category Logo',
-                'image'                   => 'Image',
+                'add-new-category'         => 'Add New Category',
+                'add-logo'                 => 'Add Logo',
+                'add-banner'               => 'Add Banner',
+                'banner'                   => 'Banner',
+                'banner-size'              => 'Banner aspect ration (1320px X 300px)',
+                'cancel'                   => 'Cancel',
+                'company-name'             => 'Name*',
+                'create-order'             => 'Create Order',
+                'description'              => 'Description',
+                'description-and-images'   => 'Description and Images',
+                'description-only'         => 'Description Only',
+                'display-mode'             => 'Display Mode',
+                'enter-position'           => 'Enter Position',
+                'filterable-attributes'    => 'Filterable Attributes',
+                'general'                  => 'General',
+                'logo'                     => 'Logo',
+                'logo-size'                => 'Logo resolution should be (110px X 110px)',
+                'meta-description'         => 'Meta Description',
+                'meta-keywords'            => 'Meta Keywords',
+                'meta-title'               => 'Meta Title',
+                'position'                 => 'Position*',
+                'products-and-description' => 'Products and Description',
+                'products-only'            => 'Products Only',
+                'slug'                     => 'Slug',
+                'settings'                 => 'Settings',
+                'seo-details'              => 'SEO Details',
+                'select-parent-category'   => 'Select Parent Category*',
+                'select-display-mode'      => 'Select Display Mode',
+                'visible-in-menu'          => 'Visible In Menu',
             ],
         ],
 
