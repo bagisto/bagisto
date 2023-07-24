@@ -6,7 +6,7 @@ import.meta.glob(["../images/**", "../fonts/**"]);
 /**
  * Main vue bundler.
  */
-import { createApp, h } from "vue/dist/vue.esm-bundler";
+import { createApp, h, resolveComponent } from "vue/dist/vue.esm-bundler";
 
 /**
  * We are defining all the global rules here and configuring
@@ -94,8 +94,8 @@ import { Field, Form, ErrorMessage } from "vee-validate";
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
-
 app.config.globalProperties.$h = h;
+app.config.globalProperties.$resolveComponent = resolveComponent;
 
 /**
  * Load event, the purpose of using the event is to mount the application
