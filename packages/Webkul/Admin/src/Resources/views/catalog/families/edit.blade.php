@@ -60,7 +60,7 @@
                                 value="{{ old('code') ?? $attributeFamily->code }}"
                                 disabled="disabled"
                                 rules="required"
-                                label="code"
+                                :label="trans('admin::app.catalog.families.create.code')"
                                 :placeholder="trans('admin::app.catalog.families.edit.enter-code')"
                             >
                             </x-admin::form.control-group.control>
@@ -84,7 +84,7 @@
                                 class="!w-[284px]"
                                 value="{{ old('name') ?? $attributeFamily->name }}"
                                 rules="required"
-                                label="name"
+                                :label="trans('admin::app.catalog.families.create.name')"
                                 :placeholder="trans('admin::app.catalog.families.edit.enter-name')"
                             >
                             </x-admin::form.control-group.control>
@@ -225,6 +225,8 @@
                                         :list="getGroupAttributes(element)"
                                         item-key="id"
                                         group="attributes"
+                                        :move="onMove"
+                                        @end="onEnd"
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
@@ -395,6 +397,8 @@
                         columnGroups: @json($attributeFamily->attribute_groups->groupBy('column')),
 
                         customAttributes: @json($customAttributes),
+
+                        dropReverted: false,
                     }
                 },
 
@@ -412,6 +416,25 @@
                 },
 
                 methods: {
+                    onMove: function(e) {
+                        if (
+                            e.to.id === 'unassigned-attributes'
+                            && ! e.draggedContext.element.is_user_defined
+                        ) {
+                            this.dropReverted = true;
+
+                            return false;
+                        } else {
+                            this.dropReverted = false;
+                        }
+                    },
+
+                    onEnd: function(e) {
+                        if (this.dropReverted) {
+                            this.$emitter.emit('add-flash', { type: 'warning', message: "{{ trans('admin::app.catalog.families.create.removal-not-possible') }}" });
+                        }
+                    },
+
                     getGroupAttributes(group) {
                         group.custom_attributes.forEach((attribute, index) => {
                             attribute.group_id = group.id;
