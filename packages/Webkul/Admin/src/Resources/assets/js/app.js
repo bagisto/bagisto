@@ -6,7 +6,7 @@ import.meta.glob(["../images/**", "../fonts/**"]);
 /**
  * Main vue bundler.
  */
-import { createApp, h, resolveComponent } from "vue/dist/vue.esm-bundler";
+import { createApp } from "vue/dist/vue.esm-bundler";
 
 /**
  * We are defining all the global rules here and configuring
