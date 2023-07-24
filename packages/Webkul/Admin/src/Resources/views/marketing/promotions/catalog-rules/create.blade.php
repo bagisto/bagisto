@@ -215,177 +215,187 @@
         
                                     <div class="flex  gap-[16px]  max-sm:flex-wrap">
                                         <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Discount Type* </label>
-                                            <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="Percentage of Product Price">
-                                        </div>
-                                        <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Discount Type* </label>
-                                            <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="Percentage of Product Price">
-                                        </div>
-                                    </div>
-                                    <div class="flex  gap-[16px]  max-sm:flex-wrap">
-                                        <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Maximum quantity allowed to be discounted*
-                                            </label>
-                                            <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="0">
-                                        </div>
-                                        <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Buy X Quantity*
-                                            </label>
-                                            <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="0">
-                                        </div>
-                                    </div>
+                                            <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">Action Type</label>
+
+                                            <select 
+                                                name="action_type"
+                                                id="action_type"
+                                                class="inline-flex gap-x-[4px] justify-between items-center w-full max-h-[40px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                            >
+                                                <option value="by_percent" {{ old('action_type') == 'by_percent' ? 'selected' : '' }}>
+                                                    @lang('admin::app.promotions.catalog-rules.percentage-product-price')
+                                                </option>
         
-                                    <div class="flex  gap-[16px]  max-sm:flex-wrap">
-                                        <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Apply to shipping* </label>
-                                            <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center w-full bg-white border border-gray-300 rounded-[6px] cursor-pointertransition-all hover:border-gray-400">
-                                                No<span class="icon-sort-down text-[24px]"></span>
-                                            </div>
+                                                <option value="by_fixed" {{ old('action_type') == 'by_fixed' ? 'selected' : '' }}>
+                                                    @lang('admin::app.promotions.catalog-rules.fixed-amount')
+                                                </option>
+                                            </select>
                                         </div>
+
                                         <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Free Shipping* </label>
-                                            <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center w-full bg-white border border-gray-300 rounded-[6px] cursor-pointertransition-all hover:border-gray-400">
-                                                6<span class="icon-sort-down text-[24px]"></span>
-                                            </div>
+                                            <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">Discount Amount</label>
+
+                                            <input 
+                                                type="number"
+                                                name="discount_amount"
+                                                id="discount_amount"
+                                                class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                                value="{{ old('discount_amount') ?? 0 }}"
+                                            />
+                                        </div>
+
+                                        <div class="w-full mb-[10px]">
+                                            <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">End Other Rules</label>
+
+                                            <select 
+                                                name="action_type"
+                                                id="action_type"
+                                                class="inline-flex gap-x-[4px] justify-between items-center w-full max-h-[40px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                            >
+                                                <option value="by_percent" {{ old('action_type') == 'by_percent' ? 'selected' : '' }}>
+                                                    @lang('admin::app.promotions.catalog-rules.percentage-product-price')
+                                                </option>
+        
+                                                <option value="by_fixed" {{ old('action_type') == 'by_fixed' ? 'selected' : '' }}>
+                                                    @lang('admin::app.promotions.catalog-rules.fixed-amount')
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
-        
-                                    <div class="flex  gap-[16px] justify-between max-sm:flex-wrap">
-                                        <div class="w-full mb-[10px]">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Apply to shipping*
-                                            </label>
-                                            <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center w-1/2 bg-white border border-gray-300 rounded-[6px] cursor-pointertransition-all hover:border-gray-400 max-sm:w-full">
-                                                No<span class="icon-sort-down text-[24px]"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-        
                                 </div>
                             </div>
-        
-        
                         </div>
-                        <!-- Right sub-component -->
+
+                        {{-- Right sub component --}}
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                            <!-- component 1 -->
-                            <div class="bg-white rounded-[4px] box-shadow">
-                                <div class="flex items-center justify-between p-[6px]">
-                                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Settings</p>
-                                    <span class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                                </div>
-                                <div class="px-[16px] pb-[16px]">
-
-                                    <label
-                                        for="checkbox"
-                                        class="flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            class="hidden peer"
-                                            id="checkbox"
-                                            name="status"
-                                            value="1"
-                                            required
-                                        >
-
-                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                        <div
-                                            {{-- for="checkbox" --}}
-                                            class="text-[14px] text-gray-600 font-semibold cursor-pointer"
-                                        >
-                                            @lang('Status')
-                                        </div>
-
-                                    </label>
-
-                                    <div class="mb-[10px]">
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                Priority
-                                            </x-admin::form.control-group.label>
-
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="sort_order"
-                                                :value="old('sort_order')"
-                                                id="sort_order"
-                                                :label="trans('Priority')"
-                                                :placeholder="trans('Priority')"
-                                            >
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.error
-                                                control-name="sort_order"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
+                            {{-- Settings --}}
+                            <x-admin::accordion>
+                                <x-slot:header>
+                                    <div class="flex items-center justify-between p-[6px]">
+                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                            Settings
+                                        </p>
                                     </div>
-                                    <div class="">
-                                        <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Uses Per Customer*
+                                </x-slot:header>
+                            
+                                <x-slot:content>
+                                    <div class="px-[16px] pb-[16px]">
+
+                                        <label
+                                            for="checkbox"
+                                            class="flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                class="hidden peer"
+                                                id="checkbox"
+                                                name="status"
+                                                value="1"
+                                                required
+                                            >
+
+                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+
+                                            <div
+                                                {{-- for="checkbox" --}}
+                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                            >
+                                                @lang('Status')
+                                            </div>
+
                                         </label>
-                                        <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="0">
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <!-- component 2 -->
-                            <div class="bg-white rounded-[4px] box-shadow">
-                                <div class="flex items-center justify-between p-[6px]">
-                                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Marketing Time</p>
-                                    <span class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                                </div>
-        
-                                <div class="px-[16px] pb-[16px]">
-                                    <div class="flex gap-[16px]">
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                From
-                                            </x-admin::form.control-group.label>
-        
-                                            <x-admin::form.control-group.control
-                                                type="date"
-                                                name="starts_from"
-                                                :value="old('starts_from')"
-                                                id="starts_from"
-                                                rules="required"
-                                                :label="trans('From')"
-                                                :placeholder="trans('From')"
-                                            >
-                                            </x-admin::form.control-group.control>
-        
-                                            <x-admin::form.control-group.error
-                                                control-name="starts_from"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label>
-                                                To
-                                            </x-admin::form.control-group.label>
-        
-                                            <x-admin::form.control-group.control
-                                                type="date"
-                                                name="ends_till"
-                                                :value="old('ends_till')"
-                                                id="ends_till"
-                                                rules="required"
-                                                :label="trans('ends_till')"
-                                                :placeholder="trans('ends_till')"
-                                            >
-                                            </x-admin::form.control-group.control>
-        
-                                            <x-admin::form.control-group.error
-                                                control-name="ends_till"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
+                                        <div class="mb-[10px]">
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label>
+                                                    Priority
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="sort_order"
+                                                    :value="old('sort_order')"
+                                                    id="sort_order"
+                                                    :label="trans('Priority')"
+                                                    :placeholder="trans('Priority')"
+                                                >
+                                                </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="sort_order"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        </div>
+                                        <div class="">
+                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Uses Per Customer*
+                                            </label>
+                                            <input class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="0">
+                                        </div>
                                     </div>
-                                </div>
-        
-                            </div>
+                                </x-slot:content>
+                            </x-admin::accordion>
+                                
+                            {{-- Marketing --}}
+                            <x-admin::accordion>
+                                <x-slot:header>
+                                    <div class="flex items-center justify-between p-[6px]">
+                                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                                            Marketing Time
+                                        </p>
+                                    </div>
+                                </x-slot:header>
+                            
+                                <x-slot:content>
+                                    <div class="px-[16px] pb-[16px]">
+                                        <div class="flex gap-[16px]">
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label>
+                                                    From
+                                                </x-admin::form.control-group.label>
+            
+                                                <x-admin::form.control-group.control
+                                                    type="date"
+                                                    name="starts_from"
+                                                    :value="old('starts_from')"
+                                                    id="starts_from"
+                                                    rules="required"
+                                                    :label="trans('From')"
+                                                    :placeholder="trans('From')"
+                                                >
+                                                </x-admin::form.control-group.control>
+            
+                                                <x-admin::form.control-group.error
+                                                    control-name="starts_from"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label>
+                                                    To
+                                                </x-admin::form.control-group.label>
+            
+                                                <x-admin::form.control-group.control
+                                                    type="date"
+                                                    name="ends_till"
+                                                    :value="old('ends_till')"
+                                                    id="ends_till"
+                                                    rules="required"
+                                                    :label="trans('ends_till')"
+                                                    :placeholder="trans('ends_till')"
+                                                >
+                                                </x-admin::form.control-group.control>
+            
+                                                <x-admin::form.control-group.error
+                                                    control-name="ends_till"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        </div>
+                                    </div>
+                                </x-slot:content>
+                            </x-admin::accordion>
                         </div>
                     </div>
                 </x-admin::form>
@@ -442,7 +452,7 @@
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.promotions.catalog-rules.choose-condition-to-add')</option>
@@ -495,41 +505,40 @@
                         </div>
 
                         <div v-else>
-                            <div 
-                                class="control-group"
-                                v-if="matchedAttribute.type == 'text' || matchedAttribute.type == 'price' || matchedAttribute.type == 'decimal' || matchedAttribute.type == 'integer'"
+                            <div
+                                v-if="matchedAttribute.type == 'text' 
+                                    || matchedAttribute.type == 'price'
+                                    || matchedAttribute.type == 'decimal'
+                                    || matchedAttribute.type == 'integer'"
                             >
                                 <input 
+                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                     v-model="condition.value"
-                                    data-vv-as="&quot;{{ __('admin::app.promotions.catalog-rules.conditions') }}&quot;"
                                 />
                             </div>
 
-                            <div
-                                class="control-group date"
-                                v-if="matchedAttribute.type == 'date'"
-                            >
+                            <div v-if="matchedAttribute.type == 'date'">
                                 <input 
                                     type="date"
                                     :name="['conditions[' + index + '][value]']"
+                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
 
-                            <div class="control-group date" v-if="matchedAttribute.type == 'datetime'">
+                            <div v-if="matchedAttribute.type == 'datetime'">
                                 <input 
                                     type="datetime"
                                     :name="['conditions[' + index + '][value]']"
+                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
 
-                            <div
-                                class="control-group" 
-                                v-if="matchedAttribute.type == 'boolean'"
-                            >
+                            <div v-if="matchedAttribute.type == 'boolean'">
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">@lang('admin::app.promotions.catalog-rules.yes')</option>
@@ -537,14 +546,12 @@
                                 </select>
                             </div>
 
-                            <div 
-                                class="control-group"
-                                v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'"
-                            >
+                            <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    v-model="condition.value"
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-if="matchedAttribute.key != 'catalog|state'"
+                                    v-model="condition.value"
                                 >
                                     <option
                                         v-for='option in matchedAttribute.options'
@@ -556,7 +563,7 @@
 
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
-                                    
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value" 
                                     v-else
                                 >
@@ -574,12 +581,10 @@
                                 </select>
                             </div>
 
-                            <div 
-                                class="control-group multi-select"
-                                v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'"
-                            >
+                            <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select 
                                     :name="['conditions[' + index + '][value][]']"
+                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value" multiple
                                 >
                                     <option
@@ -595,7 +600,7 @@
                 </div>
 
                 <span 
-                    class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                    class="icon-delete max-h-[36px] max-w-[36px] text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
                     @click="removeCondition"
                 >
                 </span>
