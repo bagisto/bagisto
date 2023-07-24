@@ -163,6 +163,7 @@ return [
                 'city'              => 'City',
                 'street'            => 'Street',
                 'postcode'          => 'Postcode',
+                'settings'          => 'Settings',
             ],
         ],
 
