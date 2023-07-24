@@ -83,8 +83,9 @@ window.app = createApp({
  * Global plugins registration.
  */
 import Axios from "./plugins/axios";
+import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
-[Axios, Emitter].forEach((plugin) => app.use(plugin));
+[Axios, CreateElement, Emitter].forEach((plugin) => app.use(plugin));
 
 /**
  * Global components registration;
@@ -94,8 +95,6 @@ import { Field, Form, ErrorMessage } from "vee-validate";
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
-app.config.globalProperties.$h = h;
-app.config.globalProperties.$resolveComponent = resolveComponent;
 
 /**
  * Load event, the purpose of using the event is to mount the application

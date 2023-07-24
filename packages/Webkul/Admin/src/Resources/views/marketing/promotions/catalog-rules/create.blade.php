@@ -289,7 +289,7 @@
                                             required
                                         >
 
-                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:text-blue-600 peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
 
                                         <div
                                             {{-- for="checkbox" --}}
@@ -908,10 +908,8 @@
                                 idField: this.idField,
                                 behavior: this.behavior,
                                 fallbackLocale: this.fallbackLocale,
-                                on: {
-                                    input: selection => {
-                                        this.finalValues = selection;
-                                    }
+                                onInput(selection) {
+                                    this.finalValues = selection;
                                 },
                             })
                     }
@@ -988,8 +986,10 @@
                     },
                 },
 
-                mounted(){
-                    console.log(this);
+                data() {
+                    return {
+                        isActive: false,
+                    }
                 },
 
                 created() {
@@ -1101,43 +1101,42 @@
                                         ? this.isAllChildrenSelected
                                         : this.items,
                                     
-                                    // on listner 
-                                    on: {
-                                        change: (selection) => {
-                                            if (this.hasChildren) {
-                                                if (this.isAllChildrenSelected) {
-                                                    this.resetChildren();
-                                                } else {
-                                                    if (!selection) {
-                                                        this.allChildren.forEach((leaf) => {
-                                                            this.value.forEach((item, index) => {
-                                                                if (item[this.idField] == leaf[this.idField]) {
-                                                                    this.value.splice(index, 1);
-                                                                }
-                                                            });
-                                                        });
-                                                    } else {
-                                                        this.allChildren.forEach((leaf) => {
-                                                            let exists = false;
-
-                                                            this.value.forEach((item) => {
-                                                                if (item[this.idField] == leaf[this.idField]) {
-                                                                    exists = true;
-                                                                }
-                                                            });
-
-                                                            if (!exists) {
-                                                                this.value.push(leaf);
+                                    onChange: (selection) => {
+                                        console.log(selection);
+                                        
+                                        if (this.hasChildren) {
+                                            if (this.isAllChildrenSelected) {
+                                                this.resetChildren();
+                                            } else {
+                                                if (! selection) {
+                                                    this.allChildren.forEach((leaf) => {
+                                                        this.value.forEach((item, index) => {
+                                                            if (item[this.idField] == leaf[this.idField]) {
+                                                                this.value.splice(index, 1);
                                                             }
                                                         });
-                                                    }
-                                                }
+                                                    });
+                                                } else {
+                                                    this.allChildren.forEach((leaf) => {
+                                                        let exists = false;
 
-                                                this.$emit('input', this.value);
-                                            } else {
-                                                this.$emit('input', selection);
+                                                        this.value.forEach((item) => {
+                                                            if (item[this.idField] == leaf[this.idField]) {
+                                                                exists = true;
+                                                            }
+                                                        });
+
+                                                        if (!exists) {
+                                                            this.value.push(leaf);
+                                                        }
+                                                    });
+                                                }
                                             }
-                                        },
+
+                                            this.$emit('input', this.value);
+                                        } else {
+                                            this.$emit('input', selection);
+                                        }
                                     },
                                 });
                             } else {
@@ -1208,17 +1207,21 @@
 
                     generateIcon() {
                         return this.$h('i', {
-                            class: ['icon-sort-right text-[24px]'],
+                            class: [this.isActive ? 'icon-sort-down' : 'icon-sort-right', 'text-[24px]'],
                             
                             onClick: (selection) => {
                                 this.$el.classList.toggle('active');
+
+                                if (this.$el.classList.contains('has-children')) {
+                                    this.isActive = ! this.isActive;
+                                }
                             },
                         });
                     },
 
                     generateFolderIcon() {
                         return this.$h('i', {
-                            class: ['icon-folder  text-[24px]'],
+                            class: ['icon-folder text-[24px]'],
                         });
                     },
 
@@ -1256,34 +1259,32 @@
 
         {{-- v-tree-checkbox template--}}
         <script type="text/x-template" id="v-tree-checkbox-template">
-            <span class="inline-block">
-                <label
-                    :for="id"
-                    class="flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
+            <label
+                :for="id"
+                class="inline-flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
+            >
+                <input
+                    type="checkbox"
+                    :name="[nameField + '[]']"
+                    :value="modelValue"
+                    :id="id"
+                    class="hidden peer"
+                    @change="inputChanged()"
+                    :checked="isActive"
                 >
-                    <input
-                        type="checkbox"
-                        :name="[nameField + '[]']"
-                        :value="modelValue"
-                        :id="id"
-                        class="hidden peer"
-                        @change="inputChanged()"
-                        :checked="isActive"
-                    >
 
-                    <label 
-                        class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
-                        :for="id"
-                    >
-                    </label>
-
-                    <div
-                        class="text-[14px] text-gray-600 font-semibold cursor-pointer"
-                        v-text="label"
-                    >
-                    </div>
+                <label 
+                    class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+                    :for="id"
+                >
                 </label>
-            </span>
+
+                <div
+                    class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                    v-text="label"
+                >
+                </div>
+            </label>
         </script>
 
         {{-- v-tree-checkbox component --}}
@@ -1291,7 +1292,7 @@
             app.component('v-tree-checkbox', {
                 template: '#v-tree-checkbox-template',
 
-                name: 'tree-checkbox',
+                name: 'v-tree-checkbox',
 
                 props: ['id', 'label', 'nameField', 'modelValue', 'inputValue', 'value'],
 
@@ -1301,8 +1302,8 @@
                     },
 
                     isActive () {
-                        const value = this.value
-                        const input = this.internalValue
+                        let value = this.value
+                        let input = this.internalValue
 
                         if (this.isMultiple) {
                             return input.some(item => this.valueComparator(item, value))
@@ -1335,11 +1336,11 @@
 
                 methods: {
                     inputChanged () {
-                        const value = this.value
+                        let value = this.value
                         let input = this.internalValue
 
                         if (this.isMultiple) {
-                            const length = input.length
+                            let length = input.length
 
                             input = input.filter(item => !this.valueComparator(item, value))
 
@@ -1361,7 +1362,7 @@
                             return false
                         }
 
-                        const props = Object.keys(a)
+                        let props = Object.keys(a)
 
                         if (props.length !== Object.keys(b).length) {
                             return false
@@ -1375,19 +1376,27 @@
 
         {{-- v-tree-radio-component template --}}
         <script type="text/x-template" id="v-tree-radio-template">
-            <span class="radio">
-                <input 
+            <label
+                :for="id"
+                class="inline-flex items-center w-max px-[4px] text-gray-600 cursor-pointer select-none"
+            >
+                <input
                     type="radio"
-                    :id="id"
                     :name="nameField"
                     :value="modelValue"
+                    :id="id"
+                    class="hidden peer"
                     :checked="isActive"
                 >
-                
-                <label class="radio-view" :for="id"></label>
-                
-                <span class="" :for="id" v-text="label"></span>
-            </span>
+
+                <span class="icon-radio-normal mr-[4px] text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-radio-selected peer-checked:text-navyBlue"></span>
+
+                <div 
+                    class="text-[14px] cursor-pointer"
+                    v-text="label"
+                >
+                </div>
+            </label>
         </script>
 
         {{-- v-tree-radio component --}}
@@ -1395,7 +1404,7 @@
             app.component('v-tree-radio', {
                 template: '#v-tree-radio-template',
 
-                name: 'tree-radio',
+                name: 'v-tree-radio',
 
                 props: ['id', 'label', 'nameField', 'modelValue', 'value'],
 
