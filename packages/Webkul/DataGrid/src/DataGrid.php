@@ -86,85 +86,107 @@ abstract class DataGrid
     public function addColumn($column)
     {
         if ($column['type'] === 'date_range') {
+            $column['input_type'] = 'date';
+
             $column['options'] = [
-                'today' => [
+                [
+                    'name' => 'today',
+                    'label' => 'Today',
                     'from' => now()->today()->format('Y-m-d'),
                     'to' => now()->today()->format('Y-m-d'),
                 ],
-
-                'yesterday' => [
+                [
+                    'name' => 'yesterday',
+                    'label' => 'Yesterday',
                     'from' => now()->yesterday()->format('Y-m-d'),
                     'to' => now()->yesterday()->format('Y-m-d'),
                 ],
-
-                'this_week' => [
+                [
+                    'name' => 'this_week',
+                    'label' => 'This Week',
                     'from' => now()->startOfWeek()->format('Y-m-d'),
                     'to' => now()->endOfWeek()->format('Y-m-d'),
                 ],
-
-                'this_month' => [
+                [
+                    'name' => 'this_month',
+                    'label' => 'This Month',
                     'from' => now()->startOfMonth()->format('Y-m-d'),
                     'to' => now()->endOfMonth()->format('Y-m-d'),
                 ],
-
-                'last_month' => [
+                [
+                    'name' => 'last_month',
+                    'label' => 'Last Month',
                     'from' => now()->subMonth(1)->startOfMonth()->format('Y-m-d'),
                     'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
                 ],
-
-                'last_three_months' => [
+                [
+                    'name' => 'last_three_months',
+                    'label' => 'Last 3 Months',
                     'from' => now()->subMonth(3)->startOfMonth()->format('Y-m-d'),
                     'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
                 ],
-
-                'last_six_months' => [
+                [
+                    'name' => 'last_six_months',
+                    'label' => 'Last 6 Months',
                     'from' => now()->subMonth(6)->startOfMonth()->format('Y-m-d'),
                     'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
                 ],
-
-                'this_year' => [
+                [
+                    'name' => 'this_year',
+                    'label' => 'This Year',
                     'from' => now()->startOfYear()->format('Y-m-d'),
                     'to' => now()->endOfYear()->format('Y-m-d'),
                 ],
             ];
         } elseif ($column['type'] === 'datetime_range') {
+            $column['input_type'] = 'datetime-local';
+
             $column['options'] = [
-                'today' => [
-                    'from' => now()->today()->startOfDay()->format('Y-m-d H:i:s'),
-                    'to' => now()->today()->endOfDay()->format('Y-m-d H:i:s'),
+                [
+                    'name' => 'today',
+                    'label' => 'Today',
+                    'from' => now()->today()->format('Y-m-d H:i:s'),
+                    'to' => now()->today()->format('Y-m-d H:i:s'),
                 ],
-
-                'yesterday' => [
-                    'from' => now()->yesterday()->startOfDay()->format('Y-m-d H:i:s'),
-                    'to' => now()->yesterday()->endOfDay()->format('Y-m-d H:i:s'),
+                [
+                    'name' => 'yesterday',
+                    'label' => 'Yesterday',
+                    'from' => now()->yesterday()->format('Y-m-d H:i:s'),
+                    'to' => now()->yesterday()->format('Y-m-d H:i:s'),
                 ],
-
-                'this_week' => [
+                [
+                    'name' => 'this_week',
+                    'label' => 'This Week',
                     'from' => now()->startOfWeek()->format('Y-m-d H:i:s'),
                     'to' => now()->endOfWeek()->format('Y-m-d H:i:s'),
                 ],
-
-                'this_month' => [
+                [
+                    'name' => 'this_month',
+                    'label' => 'This Month',
                     'from' => now()->startOfMonth()->format('Y-m-d H:i:s'),
                     'to' => now()->endOfMonth()->format('Y-m-d H:i:s'),
                 ],
-
-                'last_month' => [
+                [
+                    'name' => 'last_month',
+                    'label' => 'Last Month',
                     'from' => now()->subMonth(1)->startOfMonth()->format('Y-m-d H:i:s'),
                     'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
                 ],
-
-                'last_three_months' => [
+                [
+                    'name' => 'last_three_months',
+                    'label' => 'Last 3 Months',
                     'from' => now()->subMonth(3)->startOfMonth()->format('Y-m-d H:i:s'),
                     'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
                 ],
-
-                'last_six_months' => [
+                [
+                    'name' => 'last_six_months',
+                    'label' => 'Last 6 Months',
                     'from' => now()->subMonth(6)->startOfMonth()->format('Y-m-d H:i:s'),
                     'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
                 ],
-
-                'this_year' => [
+                [
+                    'name' => 'this_year',
+                    'label' => 'This Year',
                     'from' => now()->startOfYear()->format('Y-m-d H:i:s'),
                     'to' => now()->endOfYear()->format('Y-m-d H:i:s'),
                 ],
@@ -296,7 +318,7 @@ abstract class DataGrid
             }
         }
 
-        $queryBuilder->orderBy(request('sort_by', $this->primaryColumn), request('sort_order', $this->sortOrder));
+        $queryBuilder->orderBy(request('sort.column', $this->primaryColumn), request('sort.order', $this->sortOrder));
 
         $paginator = $queryBuilder->paginate($this->itemsPerPage)->toArray();
 
@@ -310,13 +332,6 @@ abstract class DataGrid
 
             'records' => $paginator['data'],
 
-            'links' => [
-                'first'    => $paginator['first_page_url'],
-                'last'     => $paginator['last_page_url'],
-                'previous' => $paginator['prev_page_url'],
-                'next'     => $paginator['next_page_url'],
-            ],
-
             'meta' => [
                 'from'             => $paginator['from'],
                 'to'               => $paginator['to'],
@@ -325,7 +340,6 @@ abstract class DataGrid
                 'per_page'         => $paginator['per_page'],
                 'current_page'     => $paginator['current_page'],
                 'last_page'        => $paginator['last_page'],
-                'links'            => $paginator['links'],
             ],
         ];
     }

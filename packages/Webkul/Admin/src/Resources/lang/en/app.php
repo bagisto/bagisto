@@ -85,15 +85,6 @@ return [
 
     ],
 
-    'catalog' => [
-        'products' => [
-            'index' => [
-                'title' => 'Products',
-                'add'   => 'Add Product'
-            ]   
-        ]
-    ],
-
     'customers' => [
         'index'  => [
             'title' => 'Customers',
@@ -219,25 +210,50 @@ return [
                 'city'              => 'City',
                 'street'            => 'Street',
                 'postcode'          => 'Postcode',
+                'settings'          => 'Settings',
             ],
         ],
 
-        'tax-rates'   => [
-            'create'  => [
-                'title'          => 'Create Tax Rate',
-                'save'           => 'Save',
-                'select-country' => 'Select Country',
-                'select-state'   => 'Select State',
-                'cancel'         => 'Cancel',
-                'identifier'     => 'Identifier',
-                'is_zip'         => 'Enable Zip Range',
-                'zip_code'       => 'Zip Code',
-                'zip_from'       => 'Zip From',
-                'zip_to'         => 'Zip To',
-                'country'        => 'Country',
-                'state'          => 'State',
-                'tax_rate'       => 'Rate',
-                'basic-settings' => 'Basic Settings',
+        'taxes' => [
+            'tax-categories' => [
+                'index' => [
+                    'title'           => 'Tax Categories',
+                ],
+                 
+                'create' => [
+                    'title'            => 'Tax Categories',
+                    'code'             => 'Code',
+                    'add-title'        => 'Create Tax Category',
+                    'save-btn-title'   => 'Save Tax Category',
+                    'general'          => 'Tax Category',
+                    'name'             => 'Name',
+                    'description'      => 'Description',
+                    'select-tax-rates' => 'Select Tax Rates',
+                ],
+            ],
+
+            'tax-rates'   => [
+                'index' => [
+                    'title'        => 'Tax Rates',
+                    'button-title' => 'Create Tax Rates'
+                ],
+
+                'create'  => [
+                    'title'          => 'Create Tax Rate',
+                    'save'           => 'Save',
+                    'select-country' => 'Select Country',
+                    'select-state'   => 'Select State',
+                    'cancel'         => 'Cancel',
+                    'identifier'     => 'Identifier',
+                    'is_zip'         => 'Enable Zip Range',
+                    'zip_code'       => 'Zip Code',
+                    'zip_from'       => 'Zip From',
+                    'zip_to'         => 'Zip To',
+                    'country'        => 'Country',
+                    'state'          => 'State',
+                    'tax_rate'       => 'Rate',
+                    'basic-settings' => 'Basic Settings',
+                ],
             ],
         ],
     ],
@@ -264,43 +280,121 @@ return [
     ],
     
     'catalog' => [
+        'products' => [
+            'index' => [
+                'title' => 'Products',
+                'add'   => 'Add Product'
+            ]
+        ],
+
         'attributes' => [
             'index' =>  [
                 'title'  => 'Attributes',
                 'add'    => 'Add',
             ],
         ],
-
-        'categories'  =>  [
+        'categories'  => [
             'index' =>  [
                 'title' => 'Categories',
                 'add' => 'Add',
             ],
 
             'create' => [
-                'add-new-category'        => 'Add New Category',
-                'cancel'                  => 'Cancel',
-                'create-order'            => 'Create Order',
-                'general'                 => 'General',
-                'company-name'            => 'Category Name*',
-                'select-parent-category'  => 'Select Parent Category*',
-                'display-mode'            => 'Display Mode*',
-                'filterable-attributes'   => 'Filterable Attributes',
-                'basic-settings'          => 'Basic Settings',
-                'visible-in-menu'         => 'Visible In Menu',
-                'position'                => 'Position*',
-                'enter-position'          => 'Enter Position',
-                'description-and-images'  => 'Description and Images',
-                'category-logo'           => 'Category Logo',
-                'image'                   => 'Image',
+                'add-new-category'         => 'Add New Category',
+                'add-logo'                 => 'Add Logo',
+                'add-banner'               => 'Add Banner',
+                'banner'                   => 'Banner',
+                'banner-size'              => 'Banner aspect ration (1320px X 300px)',
+                'cancel'                   => 'Cancel',
+                'company-name'             => 'Name*',
+                'create-order'             => 'Create Order',
+                'description'              => 'Description',
+                'description-and-images'   => 'Description and Images',
+                'description-only'         => 'Description Only',
+                'display-mode'             => 'Display Mode',
+                'enter-position'           => 'Enter Position',
+                'filterable-attributes'    => 'Filterable Attributes',
+                'general'                  => 'General',
+                'logo'                     => 'Logo',
+                'logo-size'                => 'Logo resolution should be (110px X 110px)',
+                'meta-description'         => 'Meta Description',
+                'meta-keywords'            => 'Meta Keywords',
+                'meta-title'               => 'Meta Title',
+                'position'                 => 'Position*',
+                'products-and-description' => 'Products and Description',
+                'products-only'            => 'Products Only',
+                'slug'                     => 'Slug',
+                'settings'                 => 'Settings',
+                'seo-details'              => 'SEO Details',
+                'select-parent-category'   => 'Select Parent Category*',
+                'select-display-mode'      => 'Select Display Mode',
+                'visible-in-menu'          => 'Visible In Menu',
             ],
         ],
 
         'families'   => [
             'index' => [
-                'title'  => 'Families',
-                'add'    => 'Add',
+                'title'         => 'Families',
+                'add-btn-title' => 'Create Attribute Family',
             ],
+
+            'create' => [
+                'title'                            => 'Create Attribute Family',
+                'save-btn'                         => 'Save Attribute Family',
+                'cancel-btn'                       => 'Cancel',
+                'groups'                           => 'Groups',
+                'groups-info'                      => 'Manage attribute family groups',
+                'delete-group-btn'                 => 'Delete Group',
+                'add-group-btn'                    => 'Add Group',
+                'edit-group-info'                  => 'Double Click to edit Group',
+                'main-column'                      => 'Main Column',
+                'right-column'                     => 'Right Side Column',
+                'unassigned-attributes'            => 'Unassigned Attributes',
+                'unassigned-attributes-info'       => 'Drag these attribute to add into columns or groups.',
+                'general'                          => 'General',
+                'code'                             => 'Code',
+                'name'                             => 'Name',
+                'enter-code'                       => 'Enter Code',
+                'enter-name'                       => 'Enter Name',
+                'column'                           => 'Column',
+                'main-column'                      => 'Main Column',
+                'right-column'                     => 'Right Column',
+                'add-group-title'                  => 'Add New Group',
+                'add-group-btn'                    => 'Add Group',
+                'group-already-exists'             => 'An attribute group name already exists.',
+                'select-group'                     => 'Please select an attribute group.',
+                'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
+            ],
+
+            'edit' => [
+                'title'                            => 'Edit Attribute Family',
+                'save-btn'                         => 'Save Attribute Family',
+                'cancel-btn'                       => 'Cancel',
+                'groups'                           => 'Groups',
+                'groups-info'                      => 'Manage attribute family groups',
+                'delete-group-btn'                 => 'Delete Group',
+                'add-group-btn'                    => 'Add Group',
+                'edit-group-info'                  => 'Double Click to edit Group',
+                'main-column'                      => 'Main Column',
+                'right-column'                     => 'Right Side Column',
+                'unassigned-attributes'            => 'Unassigned Attributes',
+                'unassigned-attributes-info'       => 'Drag these attribute to add into columns or groups.',
+                'general'                          => 'General',
+                'code'                             => 'Code',
+                'name'                             => 'Name',
+                'enter-code'                       => 'Enter Code',
+                'enter-name'                       => 'Enter Name',
+                'column'                           => 'Column',
+                'main-column'                      => 'Main Column',
+                'right-column'                     => 'Right Column',
+                'add-group-title'                  => 'Add New Group',
+                'add-group-btn'                    => 'Add Group',
+                'group-already-exists'             => 'An attribute group name already exists.',
+                'select-group'                     => 'Please select an attribute group.',
+                'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
+            ]
         ],
     ],
 

@@ -1,20 +1,16 @@
 <x-admin::layouts>
-    @include ('admin::layouts.tabs')
-
     {{-- Title of the page --}}
     <x-slot:title>
         @lang('admin::app.marketing.email-marketing.templates.events')
     </x-slot:title>
 
-    <div class="mt-5">
-        <div class="flex gap-[16px] justify-between max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.marketing.email-marketing.templates.events')
-            </p>
-    
-            <div class="flex gap-x-[10px] items-center">
-                <v-create-email-events><v-create-email-events/>
-            </div>
+    <div class="flex gap-[16px] justify-between max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.marketing.email-marketing.templates.events')
+        </p>
+
+        <div class="flex gap-x-[10px] items-center">
+            <v-create-email-events><v-create-email-events/>
         </div>
     </div>
 
@@ -24,7 +20,7 @@
             id="v-create-email-events-template"
         >
             <div>
-                <x-shop::form
+                <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
@@ -124,7 +120,7 @@
                             </x-slot:footer>
                         </x-admin::modal>
                     </form>
-                </x-shop::form>
+                </x-admin::form>
             </div>
         </script>
 

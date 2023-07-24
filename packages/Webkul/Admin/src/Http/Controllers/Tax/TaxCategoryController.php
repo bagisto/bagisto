@@ -3,10 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Tax;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
+use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class TaxCategoryController extends Controller
 {
@@ -32,17 +33,7 @@ class TaxCategoryController extends Controller
             return app(TaxCategoryDataGrid::class)->toJson();
         }
 
-        return view('admin::tax.tax-categories.index');
-    }
-
-    /**
-     * Function to show the tax category form.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show()
-    {
-        return view('admin::tax.tax-categories.create')->with('taxRates', $this->taxRateRepository->all());
+        return view('admin::tax.tax-categories.index')->with('taxRates', $this->taxRateRepository->all());;
     }
 
     /**
@@ -50,7 +41,7 @@ class TaxCategoryController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function store()
     {
         $data = request()->input();
 
@@ -69,9 +60,9 @@ class TaxCategoryController extends Controller
 
         Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
-        session()->flash('success', trans('admin::app.settings.tax-categories.create-success'));
-
-        return redirect()->route('admin.tax_categories.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.tax-categories.create-success'),
+        ]);
     }
 
     /**

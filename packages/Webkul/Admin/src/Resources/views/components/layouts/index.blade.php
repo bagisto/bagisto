@@ -45,6 +45,9 @@
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
     <div id="app">
+        {{-- Flash Message Blade Component --}}
+        <x-admin::flash-group />
+
         {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
         {{-- Page Header Blade Component --}}
@@ -56,6 +59,8 @@
             <x-admin::layouts.sidebar />
 
             <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+                {{-- Added dynamic tabs for third level menus  --}}
+                @include ('admin::layouts.tabs')
                 {{-- Page Content Blade Component --}}
                 {{ $slot }}
             </div>
