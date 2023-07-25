@@ -1,24 +1,31 @@
 <x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.catalog.categories.create.add-new-category')
+    </x-slot:title>
+
     {{-- Input Form --}}
     <x-admin::form 
         :action="route('admin.catalog.categories.store')"
         enctype="multipart/form-data"
     >
-        <div class="flex justify-between items-center">
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.catalog.categories.create.add-new-category')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
+                <!-- Cancel Button -->
                 <a href="{{ route('admin.catalog.categories.index') }}">
-                    <span class="text-gray-600 leading-[24px]">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.catalog.categories.create.cancel')
                     </span>
                 </a>
 
+                <!-- Save Button -->
                 <button 
                     type="submit" 
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.catalog.categories.create.create-order')
                 </button>
@@ -26,25 +33,26 @@
         </div>
 
         {{-- Full Pannel --}}
-        <div class="flex gap-[10px] mt-[14px]">
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left Section --}}
-            <div class=" flex flex-col gap-[8px] flex-1">
+            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <!-- General -->
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
 
-                    {{-- Locales --}}
-                    <x-admin::form.control-group.control
-                        type="hidden"
-                        name="locale"
-                        value="all"
-                    >
-                    </x-admin::form.control-group.control>
-
                     {{-- Name --}}
                     <div class="mb-[10px]">
-                        <x-admin::form.control-group class="mb-4">
+                        {{-- Locales --}}
+                        <x-admin::form.control-group.control
+                            type="hidden"
+                            name="locale"
+                            value="all"
+                        >
+                        </x-admin::form.control-group.control>
+
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.company-name')
                             </x-admin::form.control-group.label>
@@ -53,21 +61,14 @@
                                 type="text"
                                 name="name"
                                 value="{{ old('name') }}"
-                                rules="required"
+                                class="w-full"
                                 label="Category Name"
                                 placeholder="Category Name"
                             >
                             </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-                    </div>
 
-                    {{-- Parent category --}}
-                    <div class="mb-[10px]">
+                        {{-- Parent category --}}
                         <label
                             class="block mb-[10px] text-[12px] text-gray-800 font-medium leading-[24px]"
                             for="username"
@@ -109,6 +110,10 @@
                     </p>
 
                     <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.catalog.categories.create.description')
+                        </x-admin::form.control-group.label>
+
                         <x-admin::form.control-group.control
                             type="tinymce"
                             name="description"
@@ -189,24 +194,30 @@
                 </div>
 
                 {{-- SEO Deatils --}}
-                <div class="p-[16px] bg-white rounded box-shadow">
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 
                     <div class="flex flex-col gap-[3px]">
-                        <p class="text-[#161B9D]">
-                            @{{ metaTitle }}
+                        <p 
+                            class="text-[#161B9D]"
+                            v-text="metaTitle"
+                        >
                         </p>
 
                         {{-- Get Meta Title From v-model and convet in lower case also replace space with (-) --}}
-                        <p class="text-[#135F29]">
-                            {{ URL::to('/') }}/@{{ metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '' }}
+                        <p 
+                            class="text-[#135F29]"
+                            v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
+                        >
                         </p>
 
                         {{-- Get Meta Description From v-model --}}
-                        <p class="text-gray-600">
-                            @{{ metaDescription }}
+                        <p 
+                            class="text-gray-600"
+                            v-text="metaDescription"
+                        >
                         </p>
                     </div>
 
@@ -307,7 +318,7 @@
             {{-- Right Section --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- Settings --}}
-                <x-accordion>
+                <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
                             @lang('admin::app.catalog.categories.create.settings')
@@ -315,27 +326,6 @@
                     </x-slot:header>
                 
                     <x-slot:content>
-                        {{-- Visible in menu --}}
-                        <label 
-                            for="checkbox" 
-                            class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
-                        >
-                            <input 
-                                type="checkbox" 
-                                class="hidden peer"
-                                id="checkbox" 
-                                name="status" 
-                                value="1"
-                                required
-                            >
-
-                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:text-blue-600 peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                            <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
-                                @lang('admin::app.catalog.categories.create.visible-in-menu')
-                            </div>
-                        </label>
-
                         {{-- Position --}}
                         <div class="mb-[10px]">
                             <x-admin::form.control-group class="mb-4">
@@ -361,47 +351,67 @@
                         </div>
 
                         {{-- Display Mode  --}}
-                        <div class="">
-                            <x-admin::form.control-group class="mb-4">
-                                <x-admin::form.control-group.label class="!text-gray-800 font-medium">
-                                    @lang('admin::app.catalog.categories.create.display-mode')
-                                </x-admin::form.control-group.label>
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                @lang('admin::app.catalog.categories.create.display-mode')
+                            </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="display_mode"
-                                    class="cursor-pointer"
-                                    rules="required"
-                                    label="{{ trans('admin::app.catalog.categories.create.display-mode') }}"
-                                >
-                                    <option value="" readonly>
-                                        @lang('admin::app.catalog.categories.create.select-display-mode')
-                                    </option>
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="display_mode"
+                                class="cursor-pointer"
+                                rules="required"
+                                label="{{ trans('admin::app.catalog.categories.create.display-mode') }}"
+                            >
+                                <option value="" readonly>
+                                    @lang('admin::app.catalog.categories.create.select-display-mode')
+                                </option>
 
-                                    <option value="products_and_description">
-                                        @lang('admin::app.catalog.categories.create.products-and-description')
-                                    </option>
+                                <option value="products_and_description">
+                                    @lang('admin::app.catalog.categories.create.products-and-description')
+                                </option>
 
-                                    <option value="products_only">
-                                        @lang('admin::app.catalog.categories.create.products-only')
-                                    </option>
+                                <option value="products_only">
+                                    @lang('admin::app.catalog.categories.create.products-only')
+                                </option>
 
-                                    <option value="description_only">
-                                        @lang('admin::app.catalog.categories.create.description-only')
-                                    </option>
-                                </x-admin::form.control-group.control>
+                                <option value="description_only">
+                                    @lang('admin::app.catalog.categories.create.description-only')
+                                </option>
+                            </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="display_mode"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                        </div>
+                            <x-admin::form.control-group.error
+                                control-name="display_mode"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {{-- Visible in menu --}}
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                @lang('admin::app.catalog.categories.create.visible-in-menu')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="switch"
+                                name="status"
+                                class="cursor-pointer"
+                                rules="required"
+                                value="1"
+                                label="{{ trans('admin::app.catalog.categories.create.display-mode') }}"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="status"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
                     </x-slot:content>
-                </x-accordion>
+                </x-admin::accordion>
 
                 {{-- Filterable Attributes --}}
-                <x-accordion>
+                <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
                             @lang('admin::app.catalog.categories.create.filterable-attributes')
@@ -430,7 +440,7 @@
                             </label>
                         @endforeach
                     </x-slot:content>
-                </x-accordion>
+                </x-admin::accordion>
             </div>
         </div>
     </x-admin::form>
