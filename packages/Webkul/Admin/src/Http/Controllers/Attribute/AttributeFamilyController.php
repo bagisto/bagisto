@@ -4,8 +4,8 @@ namespace Webkul\Admin\Http\Controllers\Attribute;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
 use Webkul\Core\Rules\Code;
 
@@ -64,7 +64,11 @@ class AttributeFamilyController extends Controller
 
         Event::dispatch('catalog.attribute_family.create.before');
 
-        $attributeFamily = $this->attributeFamilyRepository->create(request()->all());
+        $attributeFamily = $this->attributeFamilyRepository->create([
+            'attribute_groups' => request('attribute_groups'),
+            'code'             => request('code'),
+            'name'             => request('name'),
+        ]);
 
         Event::dispatch('catalog.attribute_family.create.after', $attributeFamily);
 
@@ -103,7 +107,11 @@ class AttributeFamilyController extends Controller
 
         Event::dispatch('catalog.attribute_family.update.before', $id);
 
-        $attributeFamily = $this->attributeFamilyRepository->update(request()->all(), $id);
+        $attributeFamily = $this->attributeFamilyRepository->update([
+            'attribute_groups' => request('attribute_groups'),
+            'code'             => request('code'),
+            'name'             => request('name'),
+        ], $id);
 
         Event::dispatch('catalog.attribute_family.update.after', $attributeFamily);
 
@@ -149,7 +157,7 @@ class AttributeFamilyController extends Controller
         }
 
         return response()->json([
-            'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'Family']),
+            'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'admin::app.catalog.families.family']),
         ], 500);
     }
 
@@ -183,7 +191,7 @@ class AttributeFamilyController extends Controller
             if (! $suppressFlash) {
                 session()->flash('success', ('admin::app.datagrid.mass-ops.delete-success'));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Attribute Family']));
+                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => trans('admin::app.catalog.families.attribute-family')]));
             }
 
             return redirect()->back();

@@ -348,7 +348,17 @@ return [
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
                 'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
-            ]
+            ],
+
+            'family'                    => 'Family',
+            'attribute-family'          => 'Attribute Family',
+            'create-success'            => 'Family created successfully.',
+            'update-success'            => 'Family updated successfully.',
+            'delete-success'            => 'Family deleted successfully.',
+            'delete-failed'             => 'Error encountered while deleting Family.',
+            'user-define-error'         => 'Can not delete system Attribute family',
+            'last-delete-error'         => 'At least one family is required.',
+            'attribute-product-error'   => 'family is used in products.',
         ],
     ],
 
