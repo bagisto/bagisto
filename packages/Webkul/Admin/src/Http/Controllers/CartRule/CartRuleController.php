@@ -5,11 +5,10 @@ namespace Webkul\Admin\Http\Controllers\CartRule;
 use Exception;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
-use Webkul\Admin\DataGrids\CartRuleDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\CartRule\Http\Requests\CartRuleRequest;
 use Webkul\CartRule\Repositories\CartRuleRepository;
+use Webkul\Admin\DataGrids\CartRuleDataGrid;
+use Webkul\CartRule\Http\Requests\CartRuleRequest;
 
 class CartRuleController extends Controller
 {
@@ -25,7 +24,7 @@ class CartRuleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -39,7 +38,7 @@ class CartRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -49,19 +48,15 @@ class CartRuleController extends Controller
     /**
      * Copy a given Cart Rule id. Always make the copy is inactive so the
      * user is able to configure it before setting it live.
+     * 
+     * @param int $cartRuleId
+     * @return \Illuminate\View\View
      */
-    public function copy(int $cartRuleId): View
+    public function copy(int $cartRuleId)
     {
-        $cartRule = $this->cartRuleRepository
-            ->with([
-                'channels',
-                'customer_groups',
-            ])
-            ->findOrFail($cartRuleId);
+        $cartRule = $this->cartRuleRepository->with(['channels','customer_groups',])->findOrFail($cartRuleId);
 
-        $copiedCartRule = $cartRule
-            ->replicate()
-            ->fill([
+        $copiedCartRule = $cartRule->replicate()->fill([
                 'status' => 0,
                 'name'   => trans('admin::app.copy-of', ['value' => $cartRule->name]),
             ]);
@@ -95,7 +90,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.promotions.cart-rules.create-success'));
+            session()->flash('success', trans('admin::app.promotions.cart-rules.create.create-success'));
 
             return redirect()->route('admin.cart_rules.index');
         } catch (ValidationException $e) {
@@ -111,7 +106,7 @@ class CartRuleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
