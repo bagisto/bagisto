@@ -283,7 +283,7 @@
                                                     id="end_other_rules"
                                                     class="h-[39px]"
                                                     rules="required"
-                                                    :label="trans('End Other Rules')"
+                                                    :label="trans('admin::app.promotions.catalog-rules.edit.end-other-rules')"
                                                 >
                                                     <option
                                                         value="0"
@@ -301,7 +301,7 @@
                                                 </x-admin::form.control-group.control>
         
                                                 <x-admin::form.control-group.error
-                                                    control-name="action_type"
+                                                    control-name="end_other_rules"
                                                 >
                                                 </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>

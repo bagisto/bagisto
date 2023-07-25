@@ -210,11 +210,11 @@
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="action_type"
-                                                    :value="old('action_type')"
+                                                    :value="old('action_type') ?? 'by_percent'"
                                                     id="action_type"
                                                     class="h-[39px]"
                                                     rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.create.action-type')"
+                                                    :label="trans('admin:create:app.promotions.catalog-rules.create.action-type')"
                                                 >
                                                     <option
                                                         value="by_percent" 
@@ -250,7 +250,7 @@
                                                     :value="old('discount_amount') ?? 0"
                                                     id="discount_amount"
                                                     rules="required"
-                                                    :label="trans('Action Type')"
+                                                    :label="trans('admin::app.promotions.catalog-rules.create.discount-amount')"
                                                 >
                                                 </x-admin::form.control-group.control>
         
@@ -270,11 +270,11 @@
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="end_other_rules"
-                                                    :value="old('end_other_rules')"
+                                                    :value="old('end_other_rules') ?? 0"
                                                     id="end_other_rules"
                                                     class="h-[39px]"
                                                     rules="required"
-                                                    :label="trans('End Other Rules')"
+                                                    :label="trans('admin::app.promotions.catalog-rules.create.end-other-rules')"
                                                 >
                                                     <option
                                                         value="0"
@@ -292,7 +292,7 @@
                                                 </x-admin::form.control-group.control>
         
                                                 <x-admin::form.control-group.error
-                                                    control-name="action_type"
+                                                    control-name="end_other_rules"
                                                 >
                                                 </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
