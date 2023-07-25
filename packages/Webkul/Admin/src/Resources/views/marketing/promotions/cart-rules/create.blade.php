@@ -18,7 +18,7 @@
                     enctype="multipart/form-data"
                 >
                     <div class="grid">
-                        <div class="flex justify-end items-center pt-[11px] cursor-pointer">
+                        <div class="flex justify-end items-center pt-[11px]">
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
