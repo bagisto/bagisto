@@ -235,8 +235,29 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
-                'title' => 'Products',
-                'add'   => 'Add Product'
+                'title'  => 'Products',
+                'add'    => 'Add Product',
+                'create' => [
+                    'title'                   => 'Create New Product',
+                    'configurable-attributes' => 'Configurable Attributes',
+                    'create-btn'              => 'Create Product',
+                    'save-btn'                => 'Save Product',
+                    'back-btn'                => 'Back',
+                    'type'                    => 'Type',
+                    'simple'                  => 'Simple',
+                    'configurable'            => 'Configurable',
+                    'virtual'                 => 'Virtual',
+                    'downloadable'            => 'Downloadable',
+                    'grouped'                 => 'Grouped',
+                    'bundle'                  => 'Bundle',
+                    'booking'                 => 'Booking',
+                    'family'                  => 'Family',
+                    'sku'                     => 'SKU',
+                ]
+            ],
+
+            'edit' => [
+                'title' => 'Edit Product',
             ]
         ],
 

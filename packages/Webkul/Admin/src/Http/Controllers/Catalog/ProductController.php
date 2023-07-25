@@ -1,9 +1,11 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Product;
+namespace Webkul\Admin\Http\Controllers\Catalog;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
@@ -18,6 +20,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\Http\Resources\AttributeResource;
 
 class ProductController extends Controller
 {
@@ -49,7 +52,9 @@ class ProductController extends Controller
             return app(ProductDataGrid::class)->toJson();
         }
 
-        return view('admin::catalog.products.index');
+        $families = $this->attributeFamilyRepository->all();
+
+        return view('admin::catalog.products.index', compact('families'));
     }
 
     /**
@@ -77,31 +82,25 @@ class ProductController extends Controller
      */
     public function store()
     {
-        if (
-            ! request()->get('family')
-            && ProductType::hasVariants(request()->input('type'))
-            && request()->input('sku') != ''
-        ) {
-            return redirect(url()->current() . '?type=' . request()->input('type') . '&family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
-        }
-
-        if (
-            ProductType::hasVariants(request()->input('type'))
-            && (
-                ! request()->has('super_attributes')
-                || ! count(request()->get('super_attributes'))
-            )
-        ) {
-            session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
-
-            return back();
-        }
-
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
             'sku'                 => ['required', 'unique:products,sku', new Slug],
+            'super_attributes'    => 'array|min:1',
+            'super_attributes.*'  => 'array|min:1',
         ]);
+
+        if (
+            ProductType::hasVariants(request()->input('type'))
+            && ! request()->has('super_attributes')
+        ) {
+            $configurableFamily = $this->attributeFamilyRepository
+                ->find(request()->input('attribute_family_id'));
+
+            return new JsonResource([
+                'attributes' => AttributeResource::collection($configurableFamily->configurable_attributes),
+            ]);
+        }
 
         Event::dispatch('catalog.product.create.before');
 
@@ -111,7 +110,9 @@ class ProductController extends Controller
 
         session()->flash('success', trans('admin::app.catalog.products.create-success'));
 
-        return redirect()->route('admin.catalog.products.edit', ['id' => $product->id]);
+        return new JsonResource([
+            'redirect_url' => route('admin.catalog.products.edit', $product->id),
+        ]);
     }
 
     /**
