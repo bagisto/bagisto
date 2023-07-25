@@ -51,7 +51,7 @@
                 </div>
                 <div class="table-responsive grid w-full">
                     @foreach ($orders as $order)
-                   
+                
                         <div class="flex justify-between items-center px-[16px] py-[16px]">
                             <div class="row grid grid-cols-3 w-full">
                                 <div class="">
@@ -68,12 +68,12 @@
                                     <div class="flex flex-col gap-[6px]">
                                         <p class="text-[16px] text-gray-800 font-semibold">{{ core()->currency($order->grand_total ) }}</p>
                                         <p class="text-gray-600">Pay by - {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}</p>
-                                        <p class="text-gray-600">Online Store</p>
+                                        <p class="text-gray-600">{{ $order->channel->code }}</p>
                                     </div>
                                 </div>
                                 <div class="">
                                     <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-800">{{ $order->billingAddress->name  }}</p>
+                                        <p class="text-[16px] text-gray-800">{{ $order->billingAddress->name }}</p>
                                         <p class="text-gray-600">{{ $order->billingAddress->email }}</p>
                                         <p class="text-gray-600">{{ $order->billingAddress->address1 }},{{ $order->billingAddress->city }},{{ $order->billingAddress->state }}</p>
                                     </div>
@@ -91,32 +91,32 @@
             </div>
 
             <!-- Invoice row -->
-                <div class="bg-white rounded box-shadow">
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Invoice (3)</p>
-                    <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left min-w-[800px]">
-                            <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200  ">
-                                <tr>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Id  </th>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Date </th>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Amount </th>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Order ID </th>
+            <div class="bg-white rounded box-shadow">
+                <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Invoice (3)</p>
+                <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left min-w-[800px]">
+                        <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200  ">
+                            <tr>
+                                <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Id  </th>
+                                <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Date </th>
+                                <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Amount </th>
+                                <th scope="col" class="px-6 py-[16px] font-semibold"> Order ID </th>
+                            </tr>
+                        </thead>
+                        @foreach ($invoices as $invoice)
+                            <tbody>
+                                <tr class="bg-white border-b ">
+                                    <td class="px-6 py-[16px] text-gray-600">{{ $invoice->id }}</td>
+                                    <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">{{ $invoice->created_at }}</td>
+                                    <td scope="row" class="px-6 py-[16px] text-gray-600">{{ core()->currency($invoice->grand_total) }}</td>
+                                    <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->order_id }}</td>
                                 </tr>
-                            </thead>
-                            @foreach ($invoices as $invoice)
-                                <tbody>
-                                    <tr class="bg-white border-b ">
-                                        <td class="px-6 py-[16px] text-gray-600">{{ $invoice->id }}</td>
-                                        <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">{{ $invoice->created_at }}</td>
-                                        <td scope="row" class="px-6 py-[16px] text-gray-600">{{ core()->currency($invoice->grand_total) }}</td>
-                                        <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->order_id }}</td>
-                                    </tr>
-                                </tbody>
-                            @endforeach
-                        </table>
-                    </div>
+                            </tbody>
+                        @endforeach
+                    </table>
                 </div>
-           
+            </div>
+        
             <!-- Review -->
             <div class="bg-white rounded box-shadow">
                 <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Review (3)</p>
@@ -126,7 +126,7 @@
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-[6px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">{{ $review->name }}</p>
-                                    <p class="text-gray-600">{{ $review->created_at }}</p>
+                                    <p class="text-gray-600">{{ $review->product->name }}</p>
                                     <p class="label-pending">{{ $review->status }}</p>
                                 </div>
                                 <div class="flex flex-col gap-[6px]">
@@ -137,7 +137,7 @@
                                         <span class="icon-star text-[18px] text-amber-500"></span>
                                         <span class="icon-star text-[18px] text-gray-300"></span>
                                     </div>
-                                    <p class="text-gray-600">{{ $review->updated_at }}</p>
+                                    <p class="text-gray-600">{{ $review->created_at }}</p>
                                     <p class="text-gray-600">ID - {{ $review->id }}</p>
                                 </div>
                             </div>
@@ -154,9 +154,9 @@
                 @endforeach    
             </div>
 
-            <!-- Invoice row -->
+            <!-- comment -->
             <div class="bg-white rounded box-shadow">
-                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">Comments</p>
+                <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold"> Add Note </p>
                 <x-admin::form 
                     action="{{ route('admin.sales.orders.comment', $order->id) }}"
                 >
@@ -224,97 +224,135 @@
                     </div>
                 @endforeach
             </div>
-
         </div>
         <!-- Right sub-component -->
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
             <!-- component 1 -->
-            <div class="bg-white rounded-[4px] box-shadow">
-                <div class="flex items-center justify-between p-[6px]">
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Customer</p>
-                    <div class="flex gap-[6px] items-center">
-                        <p class="text-blue-600">Edit</p>
-                        <span class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                    </div>
-                </div>
-                <div class="grid gap-y-[10px] px-[16px] pb-[16px]">
-                    <div class="">
-                        <p class="text-gray-800 font-semibold">John Doe</p>
-                        <p class="text-gray-600">test@driver.com</p>
-                        <p class="text-gray-600">No Contact Number</p>
-                    </div>
-                    <div class="">
-                        <p class="text-gray-600">Gender : Male</p>
-                        <p class="text-gray-600">DOB : 25 Nov, 1988</p>
-                    </div>
-                    <div class="">
-                        <p class="text-gray-600">General Group</p>
-                    </div>
-                </div>
-            </div>
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                            Customer
+                        </p>
+
+                        <div class="flex gap-[6px] items-center justify-between">
+                            <p class="text-blue-600 ">Edit</p>
+                        </div>
+                    </x-slot:header>
+    
+                    <x-slot:content>
+                        <div class="grid gap-y-[10px]">
+                            <div class="">
+                                <p class="text-gray-800 font-semibold">{{ $customer->first_name . " " . $customer->last_name }}</p>
+                                <p class="text-gray-600">Email- {{ $customer->email }}</p>
+                                <p class="text-gray-600">Phone - {{ $customer->phone }}</p>
+                            </div>
+                            <div class="">
+                                <p class="text-gray-600">Gender : {{ $customer->gender }}</p>
+                                <p class="text-gray-600">DOB : {{ $customer->date_of_birth }}</p>
+                            </div>
+                            <div class="">
+                                <p class="text-gray-600">Group- {{ $customer->group->code }}</p>
+                            </div>
+                        </div>
+                    </x-slot:content>
+                </x-admin::accordion>    
+               
             <!-- component 2 -->
-            <div class="bg-white rounded-[4px] box-shadow">
-                <div class="flex items-center justify-between p-[6px]">
+            <x-admin::accordion>
+                <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Active Status</p>
                     <div class="flex gap-[6px] items-center">
                         <p class="text-blue-600">Edit</p>
-                        <span class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                     </div>
-                </div>
-                <div class="grid gap-y-[10px] px-[16px] pb-[16px]">
-                    <div class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
-                        <span class="icon-checked text-[24px] text-blue-600 rounded-[6px] cursor-pointer"></span>
-                        <p class="text-gray-600 font-semibold">Customer Status</p>
+                </x-slot:header>
+
+                <x-slot:content>
+                        <div class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
+                            <label 
+                                class="flex gap-[10px] w-max items-center cursor-pointer select-none"
+                                for="status" 
+                            >
+                                <input 
+                                    type="checkbox" 
+                                    name="status"
+                                    id="status"
+                                    value="{{ $customer->status }}" {{ $customer->status ? 'checked' : '' }}
+                                    class="hidden peer"
+                                >
+                    
+                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                    
+                                <p class="text-gray-600 font-semibold cursor-pointer">
+                                    Customer Status
+                                </p>
+                            </label>
+                        </div>
+                         
+                        <div class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
+                            <label 
+                                class="flex gap-[10px] w-max items-center cursor-pointer select-none"
+                                for="isSuspended"
+                            >
+                                <input 
+                                    type="checkbox" 
+                                    name="is_suspended"
+                                    id="isSuspended"
+                                    value="{{ $customer->is_suspended }}" {{ $customer->is_suspended ? 'checked' : '' }}
+                                    class="hidden peer"
+                                >
+                    
+                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                    
+                                <p class="text-gray-600 font-semibold cursor-pointer">
+                                    Suspend
+                                </p>
+                            </label>
+                        </div>
                     </div>
-                    <div class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
-                        <span class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer"></span>
-                        <p class="text-gray-600 font-semibold">Suspend</p>
-                    </div>
-                </div>
-            </div>
+                </x-slot:content>
+            </x-admin::accordion>    
+         
             <!-- component 3 -->
-            <div class="bg-white rounded-[4px] box-shadow">
-                <div class="flex items-center justify-between p-[6px]">
+            <x-admin::accordion>
+                <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Address (2)</p>
                     <div class="flex gap-[6px] items-center">
-                        <p class="text-blue-600">Edit</p>
-                        <span class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                     </div>
-                </div>
-                <div class="grid gap-y-[10px] px-[16px] pb-[16px]">
-                    <p class="label-pending">Default Address</p>
-                    <div class="">
-                        <p class="text-gray-800 font-semibold">Emel John</p>
-                        <p class="text-gray-600">Emel JohnFirs Cottage</p>
-                        <p class="text-gray-600">Kirk Langley,DE6 4LW</p>
-                    </div>
-                    <div class="">
-                        <p class="text-gray-600">M : 3698741254</p>
-                    </div>
-                    <div class="flex gap-[10px]">
-                        <p class="text-blue-600">Edit</p>
-                        <p class="text-blue-600">Delete</p>
-                    </div>
-                </div>
-                <span class="block w-full mb-[16px] border-b-[1px] border-gray-300"></span>
-                <div class="grid gap-y-[10px] px-[16px] pb-[16px]">
-                    <div class="">
-                        <p class="text-gray-800 font-semibold">John Doe</p>
-                        <p class="text-gray-600">test@driver.com</p>
-                        <p class="text-gray-600">No Contact Number</p>
-                    </div>
-                    <div class="">
-                        <p class="text-gray-600">Gender : Male</p>
-                        <p class="text-gray-600">DOB : 25 Nov, 1988</p>
-                    </div>
-                    <div class="flex gap-[10px]">
-                        <p class="text-blue-600">Edit</p>
-                        <p class="text-blue-600">Delete</p>
-                        <p class="text-blue-600">Set as Defualt</p>
-                    </div>
-                </div>
-            </div>
+                </x-slot:header>
 
+                <x-slot:content>
+                    @foreach($addresses as $address)
+                        <div class="grid gap-y-[10px] pb-[16px]">
+                            @if($address->default_address)
+                                <p class="label-pending">Default Address</p>
+                            @endif
+
+                            <div class="">
+                                <p class="text-gray-800 font-semibold">{{ $address->name }}</p>
+                                <p class="text-gray-600">
+                                    {{ $address->address1 }} {{ $address->address2 }},
+                                    {{ $address->city }}, 
+                                    {{ $address->state }}, 
+                                    {{ $address->country }}, 
+                                    {{ $address->postcode }}
+                                </p>
+                            </div>
+                            <div class="">
+                                <p class="text-gray-600">Phone : {{ $address->phone }}</p>
+                            </div>
+                            <div class="flex gap-[10px]">
+                                <p class="text-blue-600">Edit</p>
+                                <p class="text-blue-600">Delete</p>
+                                @if(! $address->default_address)
+                                    <p class="text-blue-600">Set as Default</p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <span class="block w-full border-b-[1px] mb-[20px] border-gray-300"></span>
+                    @endforeach
+                </x-slot:content>
+            </x-admin::accordion> 
         </div>
     </div>
 </x-admin::layouts>
