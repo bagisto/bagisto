@@ -64,7 +64,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.promotions.catalog-rules.create-success'));
+        session()->flash('success', trans('admin::app.promotions.catalog-rules.create.create-success'));
 
         return redirect()->route('admin.catalog_rules.index');
     }
@@ -73,7 +73,7 @@ class CatalogRuleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -100,7 +100,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.promotions.catalog-rules.update-success'));
+        session()->flash('success', trans('admin::app.promotions.catalog-rules.edit.update-success'));
 
         return redirect()->route('admin.catalog_rules.index');
     }

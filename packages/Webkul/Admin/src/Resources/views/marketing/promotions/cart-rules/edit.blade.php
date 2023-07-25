@@ -7,7 +7,7 @@
     <v-cart-rule-edit-form></v-cart-rule-edit-form>
 
     @pushOnce('scripts')
-        {{-- v cart rules create form template --}}
+        {{-- v cart rules edit form template --}}
         <script
             type="text/x-template"
             id="v-cart-rule-edit-form-template"
@@ -70,6 +70,7 @@
                                         name="description"
                                         :value="old('description') ?? $cartRule->description"
                                         id="description"
+                                        class="text-gray-600"
                                         rules="required"
                                         :label="trans('admin::app.promotions.cart-rules.edit.description')"
                                         :placeholder="trans('admin::app.promotions.cart-rules.edit.description')"
@@ -717,6 +718,7 @@
            </div>
         </script>
 
+        {{-- v cart rule edit form component --}}
         <script type="module">
             app.component('v-cart-rule-edit-form', {
                 template: '#v-cart-rule-edit-form-template',
@@ -778,7 +780,7 @@
                         class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
                         v-model="condition.attribute"
                     >
-                        <option value="">@lang('admin::app.promotions.catalog-rules.create.choose-condition-to-add')</option>
+                        <option value="">@lang('admin::app.promotions.cart-rules.edit.choose-condition-to-add')</option>
 
                         <optgroup 
                             v-for='(conditionAttribute, index) in conditionAttributes'

@@ -67,6 +67,7 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
+                                        class="text-gray-600"
                                         :label="trans('admin::app.promotions.catalog-rules.create.description')"
                                         :placeholder="trans('admin::app.promotions.catalog-rules.create.description')"
                                     >
@@ -203,7 +204,7 @@
                                         <div class="w-full mb-[10px]">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
-                                                    Action Type
+                                                    @lang('admin::app.promotions.catalog-rules.create.action-type')
                                                 </x-admin::form.control-group.label>
         
                                                 <x-admin::form.control-group.control
@@ -213,7 +214,7 @@
                                                     id="action_type"
                                                     class="h-[39px]"
                                                     rules="required"
-                                                    :label="trans('Action Type')"
+                                                    :label="trans('admin::app.promotions.catalog-rules.create.action-type')"
                                                 >
                                                     <option
                                                         value="by_percent" 

@@ -70,6 +70,7 @@
                                         name="description"
                                         :value="old('description')"
                                         id="description"
+                                        class="text-gray-600"
                                         rules="required"
                                         :label="trans('admin::app.promotions.cart-rules.create.description')"
                                         :placeholder="trans('admin::app.promotions.cart-rules.create.description')"
