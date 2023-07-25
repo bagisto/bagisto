@@ -1,13 +1,10 @@
 @php
-    $menu = \Webkul\Core\Tree::create();
 
-    foreach (config('menu.admin') as $item) {
-        $menu->add($item, 'menu');
+    $tree = \Webkul\Core\Tree::create();
+
+    foreach (config('core') as $item) {
+        $tree->add($item);
     }
-
-    $menu->items = core()->sortItems($menu->items);
-
-    $allLocales = core()->getAllLocales()->pluck('name', 'code');
 @endphp
 
 <div class="fixed top-[57px] h-full bg-white px-[16px] pt-[8px] max-w-[269px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] max-lg:hidden">
@@ -26,15 +23,29 @@
                     </a>
 
                     {{-- Sub Navigation Content --}}
-                    <div class="grid pb-[7px]">
-                        @foreach ($menuItem['children'] as $subMenuItem)
-                            <a href="{{ $subMenuItem['url'] }}">
-                                <p class=" text-gray-600 px-[40px] py-[4px]">
-                                    @lang($subMenuItem['name'])
-                                </p>
-                            </a>
-                        @endforeach
-                    </div>
+                    @if ($menuItem['key'] != 'configuration')
+                        <div class="grid pb-[7px]">
+                            @foreach ($menuItem['children'] as $subMenuItem)
+                                <a href="{{ $subMenuItem['url'] }}">
+                                    <p class=" text-gray-600 px-[40px] py-[4px]">
+                                        @lang($subMenuItem['name'])
+                                    </p>
+                                </a>
+                            @endforeach
+                        </div>
+                    @else 
+                    {{-- Navigation for configurations --}}
+                        <div class="grid pb-[7px]">
+                            @foreach (core()->sortItems($tree->items) as $key => $item)
+                                <a href="{{ route('admin.configuration.index', $item['key']) }}">
+                                    <p class=" text-gray-600 px-[40px] py-[4px]">
+                                        {{ trans($item['name']) ?? '' }}
+                                    </p>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
+
                 @endforeach
             </div>
         </nav>
