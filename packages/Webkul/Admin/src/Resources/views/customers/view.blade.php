@@ -73,9 +73,9 @@
                                 </div>
                                 <div class="">
                                     <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-800">{{ $customer->first_name . " " . $customer->last_name }}</p>
-                                        <p class="text-gray-600">john@deo.com</p>
-                                        <p class="text-gray-600">Broadway, New York</p>
+                                        <p class="text-[16px] text-gray-800">{{ $order->billingAddress->name  }}</p>
+                                        <p class="text-gray-600">{{ $order->billingAddress->email }}</p>
+                                        <p class="text-gray-600">{{ $order->billingAddress->address1 }},{{ $order->billingAddress->city }},{{ $order->billingAddress->state }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,137 +91,138 @@
             </div>
 
             <!-- Invoice row -->
-            <div class="bg-white rounded box-shadow">
-                <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Invoice (3)</p>
-                <div class="relative overflow-x-auto">
+                <div class="bg-white rounded box-shadow">
+                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Invoice (3)</p>
+                    <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left min-w-[800px]">
-                        <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200  ">
-                            <tr>
-                                <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice ID </th>
-                                <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Date </th>
-                                <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Amount </th>
-                                <th scope="col" class="px-6 py-[16px] font-semibold"> Order ID </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b ">
-                                <td class="px-6 py-[16px] text-gray-600">#274778</td>
-                                <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap"> 23 Mar 2023, 01:00:00</td>
-                                <td scope="row" class="px-6 py-[16px] text-gray-600"> $ 25.00 </td>
-                                <td class="px-6 py-[16px] text-gray-600">#02153</td>
-                            </tr>
-                            <tr class="bg-white border-b ">
-                                <td class="px-6 py-[16px] text-gray-600">#274778</td>
-                                <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap"> 23 Mar 2023, 01:00:00</td>
-                                <td scope="row" class="px-6 py-[16px] text-gray-600"> $ 25.00 </td>
-                                <td class="px-6 py-[16px] text-gray-600">#02153</td>
-                            </tr>
-                            <tr class="bg-white border-b ">
-                                <td class="px-6 py-[16px] text-gray-600">#274778</td>
-                                <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap"> 23 Mar 2023, 01:00:00</td>
-                                <td scope="row" class="px-6 py-[16px] text-gray-600"> $ 25.00 </td>
-                                <td class="px-6 py-[16px] text-gray-600">#02153</td>
-                            </tr>
-                            <tr class="bg-white border-b ">
-                                <td class="px-6 py-[16px] text-gray-600">#274778</td>
-                                <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap"> 23 Mar 2023, 01:00:00</td>
-                                <td scope="row" class="px-6 py-[16px] text-gray-600"> $ 25.00 </td>
-                                <td class="px-6 py-[16px] text-gray-600">#02153</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200  ">
+                                <tr>
+                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Id  </th>
+                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Date </th>
+                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Amount </th>
+                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Order ID </th>
+                                </tr>
+                            </thead>
+                            @foreach ($invoices as $invoice)
+                                <tbody>
+                                    <tr class="bg-white border-b ">
+                                        <td class="px-6 py-[16px] text-gray-600">{{ $invoice->id }}</td>
+                                        <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">{{ $invoice->created_at }}</td>
+                                        <td scope="row" class="px-6 py-[16px] text-gray-600">{{ core()->currency($invoice->grand_total) }}</td>
+                                        <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->order_id }}</td>
+                                    </tr>
+                                </tbody>
+                            @endforeach
+                        </table>
+                    </div>
                 </div>
-            </div>
-
+           
             <!-- Review -->
             <div class="bg-white rounded box-shadow">
                 <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Review (3)</p>
-                <div class="">
-                    <div class="grid gap-y-[16px] p-[16px]">
-                        <div class="flex justify-start [&amp;>*]:flex-1">
-                            <div class="flex flex-col gap-[6px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">John Doe</p>
-                                <p class="text-gray-600">23 Mar 2023, 01:00:00</p>
-                                <p class="label-pending">Pending</p>
-                            </div>
-                            <div class="flex flex-col gap-[6px]">
-                                <div class="flex">
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-gray-300"></span>
+                @foreach($reviews as $review)
+                    <div class="">
+                        <div class="grid gap-y-[16px] p-[16px]">
+                            <div class="flex justify-start [&amp;>*]:flex-1">
+                                <div class="flex flex-col gap-[6px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">{{ $review->name }}</p>
+                                    <p class="text-gray-600">{{ $review->created_at }}</p>
+                                    <p class="label-pending">{{ $review->status }}</p>
                                 </div>
-                                <p class="text-gray-600">23 Mar 2023, 01:00:00</p>
-                                <p class="text-gray-600">ID - 25498</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-x-[16px] items-center">
-                            <div class="flex flex-col gap-[6px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">John Doe</p>
-                                <p class="text-gray-600">I really like the design of these shoes. They're very stylish and true to size, but they're also super affordable. These are definitely the shoes for me.</p>
-                            </div>
-                            <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
-                        </div>
-                    </div>
-                    <span class="block w-full border-b-[1px] border-gray-300"></span>
-                    <div class="grid gap-y-[16px] p-[16px]">
-                        <div class="flex justify-start [&amp;>*]:flex-1">
-                            <div class="flex flex-col gap-[6px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">John Doe</p>
-                                <p class="text-gray-600">23 Mar 2023, 01:00:00</p>
-                                <p class="label-pending">Pending</p>
-                            </div>
-                            <div class="flex flex-col gap-[6px]">
-                                <div class="flex">
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-amber-500"></span>
-                                    <span class="icon-star text-[18px] text-gray-300"></span>
+                                <div class="flex flex-col gap-[6px]">
+                                    <div class="flex">
+                                        <span class="icon-star text-[18px] text-amber-500"></span>
+                                        <span class="icon-star text-[18px] text-amber-500"></span>
+                                        <span class="icon-star text-[18px] text-amber-500"></span>
+                                        <span class="icon-star text-[18px] text-amber-500"></span>
+                                        <span class="icon-star text-[18px] text-gray-300"></span>
+                                    </div>
+                                    <p class="text-gray-600">{{ $review->updated_at }}</p>
+                                    <p class="text-gray-600">ID - {{ $review->id }}</p>
                                 </div>
-                                <p class="text-gray-600">23 Mar 2023, 01:00:00</p>
-                                <p class="text-gray-600">ID - 25498</p>
+                            </div>
+                            <div class="flex gap-x-[16px] items-center">
+                                <div class="flex flex-col gap-[6px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">{{ $review->title }}</p>
+                                    <p class="text-gray-600">{{ $review->comment }}</p>
+                                </div>
+                                <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
                             </div>
                         </div>
-                        <div class="flex gap-x-[16px] items-center">
-                            <div class="flex flex-col gap-[6px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">John Doe</p>
-                                <p class="text-gray-600">I really like the design of these shoes. They're very stylish and true to size, but
-                                    they're also super affordable. These are definitely the shoes for me.</p>
-                            </div>
-                            <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
-                        </div>
+                        <span class="block w-full border-b-[1px] border-gray-300"></span>
                     </div>
-                </div>
+                @endforeach    
             </div>
 
             <!-- Invoice row -->
             <div class="bg-white rounded box-shadow">
                 <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">Comments</p>
+                <x-admin::form 
+                    action="{{ route('admin.sales.orders.comment', $order->id) }}"
+                >
+                    <div class="p-[16px]">
+                        <div class="mb-[10px]">
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="comment" 
+                                    id="comment"
+                                    rules="required"
+                                    label="Comment"
+                                    placeholder="Comment"
+                                >
+                                </x-admin::form.control-group.control>
 
-                <div class="p-[16px]">
-                    <div class="mb-[10px]">
-                        <textarea class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400" type="text" placeholder="Write your comment"></textarea>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <p class="flex gap-x-[4px] items-center"><span class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer"></span>Notify Customer</p>
-                        <div class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer">
-                        Submit Comment</div>
-                    </div>
-                </div>
-                <span class="block w-full border-b-[1px] border-gray-300"></span>
-                <div class="grid gap-[6px] p-[16px]">
-                    <p class="text-[16px] text-gray-800">The product you order some are available some are not, then can I go wor partial shipment.</p>
-                    <p class="text-gray-600">2023-03-24 19:36:38 | Customer Not Notified</p>
-                </div>
-                <span class="block w-full border-b-[1px] border-gray-300"></span>
-                <div class="grid gap-[6px] p-[16px]">
-                    <p class="text-[16px] text-gray-800">The product you order some are available some are not, then can I go wor
-                        partial shipment.</p>
-                    <p class="text-gray-600">2023-03-24 19:36:38 | Customer Not Notified</p>
-                </div>
+                                <x-admin::form.control-group.error
+                                    control-name="comment"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </div>
 
+                        <div class="flex justify-between items-center">
+                            <label 
+                                class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                                for="customer-notified"
+                            >
+                                <input 
+                                    type="checkbox" 
+                                    name="customer_notified"
+                                    id="customer-notified"
+                                    value=""
+                                    class="hidden peer"
+                                >
+                    
+                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                    
+                                <p class="flex gap-x-[4px] items-center cursor-pointer">
+                                    Notify Customer
+                                </p>
+                            </label>
+                    
+                            <button
+                                type="submit"
+                                class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
+                            >
+                                Submit Comment
+                            </button>
+                        </div>
+                    </div>
+                </x-admin::form> 
+
+                <span class="block w-full border-b-[1px] border-gray-300"></span>
+                @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
+                    <div class="grid gap-[6px] p-[16px]">
+                        <p class="text-[16px] text-gray-800">{{ $comment->comment }}</p>
+                        <p class="text-gray-600">  
+                            @if ($comment->customer_notified)
+                                {{$comment->created_at}} | Customer Notified
+                            @else
+                                {{$comment->created_at}} | Customer Not-Notified
+                            @endif
+                        </p>
+                    </div>
+                @endforeach
             </div>
 
         </div>
