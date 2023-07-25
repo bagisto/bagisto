@@ -100,9 +100,9 @@
             type="text/x-template" 
             id="v-testing-template"
         >
-            <div class="">
+            <div>
                 <!-- Panel Header -->
-                <div class="flex gap-[10px] justify-between flex-wrap mb-[10px] p-[16px]">
+                <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
                     <!-- Panel Header -->
                     <div class="flex flex-col gap-[8px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
