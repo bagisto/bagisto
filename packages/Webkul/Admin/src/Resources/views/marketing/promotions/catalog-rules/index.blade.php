@@ -13,7 +13,7 @@
                 href="{{ route('admin.catalog_rules.create') }}"
                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
             >
-                @lang('admin::app.promotions.catalog-rules.create.add-title')
+                @lang('admin::app.promotions.catalog-rules.index.add-title')
             </a>
             
         </div>

@@ -205,7 +205,7 @@ return [
         'icon'       => '',
     ], [
         'key'        => 'marketing.promotions.cart-rules',
-        'name'       => 'admin::app.promotions.cart-rules.title',
+        'name'       => 'admin::app.promotions.cart-rules.index.title',
         'route'      => 'admin.cart_rules.index',
         'sort'       => 2,
         'icon'       => '',
