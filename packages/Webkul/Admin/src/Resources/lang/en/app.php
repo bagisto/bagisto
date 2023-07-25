@@ -150,6 +150,7 @@ return [
                 'attribute-family'                          => 'Attribute Family',
                 'attribute-name-children-only'              => 'Attribute name children only',
                 'attribute-name-parent-only'                => 'Attribute name parent only',
+                'update-success'                            => 'Cart rule updated successfully',
             ] 
         ],
 

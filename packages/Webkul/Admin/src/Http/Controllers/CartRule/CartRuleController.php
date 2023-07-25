@@ -144,7 +144,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.promotions.cart-rules.update-success'));
+            session()->flash('success', trans('admin::app.promotions.cart-rules.edit.update-success'));
 
             return redirect()->route('admin.cart_rules.index');
         } catch (ValidationException $e) {

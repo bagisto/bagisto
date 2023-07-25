@@ -14,7 +14,7 @@
         >
             <div>
                 <x-admin::form 
-                    :action="route('admin.cart_rules.store')"
+                    :action="route('admin.cart_rules.update', $cartRule->id)"
                     enctype="multipart/form-data"
                 >
                     <div class="grid">
@@ -327,7 +327,7 @@
                                     :condition="condition"
                                     :key="index"
                                     :index="index"
-                                    @onRemoveCondition="removeCondition($event)"
+                                    {{-- @onRemoveCondition="removeCondition($event)" --}}
                                 >
                                 </v-cart-rule-condition-item>
                       
@@ -608,14 +608,14 @@
                             
                                 <x-slot:content>
                                     <label
-                                        for="checkbox"
+                                        for="status"
                                         class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
                                     >
                                         <input
                                             type="checkbox"
                                             name="status"
                                             value="{{ old('status') ?? $cartRule->status }}" 
-                                            id="checkbox"
+                                            id="status"
                                             class="hidden peer"
                                             {{ $cartRule->status ? 'checked' : '' }}
                                         >
@@ -770,7 +770,6 @@
             type="text/x-template"
             id="v-cart-rule-condition-item-template"
         >
-            @{{ condition.value }}
             <div class="flex gap-[16px] justify-between mt-[15px]">
                 <div class="flex gap-[16px] flex-1 max-sm:flex-wrap max-sm:flex-1">
                     <select
@@ -840,30 +839,12 @@
                                     || matchedAttribute.type == 'decimal'
                                     || matchedAttribute.type == 'integer'"
                             >
-                                <v-field 
-                                    :name="`['conditions[${index}][value]']`"
-                                    v-slot="{ field, errorMessage }"
-                                    :id="`['conditions[${index}][value]']`"
-                                    :rules="
-                                        matchedAttribute.type == 'price' ? 'regex:^[0-9]+\.[0-9]{2}$' : ''
-                                        || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+\.[0-9]{2}$' : ''
-                                        || matchedAttribute.type == 'integer' ? 'regex:^[0-9]+\.[0-9]{2}$' : ''
-                                        || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''"
-                                    label="Conditions"
+                                <input 
+                                    type="text"
+                                    :name="['conditions[' + index + '][value]']"
+                                    :id="['conditions[' + index + '][value]']"
+                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                     v-model="condition.value"
-                                >
-                                    <input 
-                                        type="text"
-                                        v-bind="field"
-                                        :class="{ 'border border-red-500': errorMessage }"
-                                        class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
-                                    />
-                                </v-field>
-                                
-                                <v-error-message
-                                    :name="`['conditions[${index}][value]']`"
-                                    class="mt-1 text-red-500 text-xs italic"
-                                    as="p"
                                 />
                             </div>
 
@@ -969,10 +950,6 @@
                 template: "#v-cart-rule-condition-item-template",
 
                 props: ['index', 'condition'],
-
-                mounted() {
-                    console.log(this.condition);
-                },
 
                 data() {
                     return {
@@ -1134,33 +1111,37 @@
                     }
                 },
 
-            computed: {
-                matchedAttribute() {
-                    if (this.condition.attribute == '')
-                        return;
+                computed: {
+                    matchedAttribute: function () {
+                        if (this.condition.attribute == '')
+                            return;
 
-                    let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
+                        let self = this;
 
-                    let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter((attribute) => {
-                        return attribute.key == this.condition.attribute;
-                    });
+                        let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
-                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] ==
-                        'checkbox') {
-                        this.condition.operator = '{}';
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter(function (attribute) {
+                            return attribute.key == self.condition.attribute;
+                        });
 
-                        this.condition.value = [];
+                        if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] == 'checkbox') {
+                            this.condition.operator = '{}';
+
+                            this.condition.value = this.condition.value == '' && this.condition.value != undefined
+                                    ? []
+                                    : Array.isArray(this.condition.value) ? this.condition.value : [];
+                        }
+
+                        return matchedAttribute[0];
                     }
+                },
 
-                    return matchedAttribute[0];
-                }
-            },
 
-            methods: {
-                removeCondition: function() {
-                    this.$emit('onRemoveCondition', this.condition)
+                methods: {
+                    removeCondition: function() {
+                        this.$emit('onRemoveCondition', this.condition)
+                    }
                 }
-            }
             });
         </script>
 
