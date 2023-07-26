@@ -8,6 +8,7 @@
     @case('text')
     @case('email')
     @case('password')
+    @case('date')
     @case('number')
         <v-field
             name="{{ $name }}"

@@ -60,7 +60,7 @@
 
             <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
                 {{-- Added dynamic tabs for third level menus  --}}
-                @include ('admin::layouts.tabs')
+                {{-- @include ('admin::layouts.tabs') --}}
                 {{-- Page Content Blade Component --}}
                 {{ $slot }}
             </div>
