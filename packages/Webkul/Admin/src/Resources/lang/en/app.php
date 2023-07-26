@@ -312,6 +312,7 @@ return [
         'groups' => [
             'index' => [
                 'title' => 'Groups',
+            ],
 
             'create' => [
                 'add-group'  => 'Add New Group',
