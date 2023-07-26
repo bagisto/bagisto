@@ -68,7 +68,7 @@
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.exchange-rates.create.rate')
-                                    </x-shop::form.control-group.label>
+                                    </x-admin::form.control-group.label>
             
                                     <x-admin::form.control-group.control
                                         type="text"

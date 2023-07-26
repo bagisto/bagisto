@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-5521bf42.css",
+    "file": "assets/app-e291707f.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -54,14 +54,14 @@
   },
   "src/Resources/assets/images/img.png": {
     "file": "assets/img-4aa33a76.png",
-    "src": "src/Resources/assets/images/img.png"
+    "src": "src/Resources/assets/images/media-image.png"
   },
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",
     "src": "src/Resources/assets/images/logo.png"
   },
   "src/Resources/assets/images/media-image.png": {
-    "file": "assets/media-image-4aa33a76.png",
+    "file": "assets/img-4aa33a76.png",
     "src": "src/Resources/assets/images/media-image.png"
   },
   "src/Resources/assets/images/search.svg": {
@@ -73,7 +73,7 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-28914628.js",
+    "file": "assets/app-478951f7.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
