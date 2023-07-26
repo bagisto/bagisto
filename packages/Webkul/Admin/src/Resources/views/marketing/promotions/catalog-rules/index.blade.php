@@ -1,27 +1,24 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.promotions.catalog-rules.create.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.promotions.catalog-rules.title') }}
-@stop
+    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.promotions.catalog-rules.create.title')
+        </p>
 
-@section('content')
-    <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>{{ __('admin::app.promotions.catalog-rules.title') }}</h1>
-            </div>
-
-            <div class="page-action">
-                @if (bouncer()->hasPermission('marketing.promotions.catalog-rules'))
-                    <a href="{{ route('admin.catalog_rules.create') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.promotions.catalog-rules.add-title') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        <div class="page-content">
-            <datagrid-plus src="{{ route('admin.catalog_rules.index') }}"></datagrid-plus>
+        <div class="flex gap-x-[10px] items-center">
+            <a 
+                href="{{ route('admin.catalog_rules.create') }}"
+                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+            >
+                @lang('admin::app.promotions.catalog-rules.index.add-title')
+            </a>
+            
         </div>
     </div>
-@endsection
+
+    
+    {{-- datagrid will be here --}}
+</x-admin::layouts>
