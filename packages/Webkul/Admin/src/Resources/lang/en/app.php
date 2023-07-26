@@ -41,36 +41,36 @@ return [
     'customers' => [
         'index'  => [
             'title' => 'Customers',
-        ],
 
-        'create' => [
-            'add-new-customer'      => 'Add New Customer',
-            'create-customer'       => 'Create Customer',
-            'save-customer'         => 'Save customer',
-            'first-name'            => 'First Name',
-            'last-name'             => 'Last Name',
-            'email'                 => 'Email',
-            'contact-number'        => 'Contact Number',
-            'gender'                => 'Gender',
-            'select-gender'         => 'Select Gender',
-            'other'                 => 'Other',
-            'male'                  => 'male',
-            'female'                => 'female',
-            'date-of-birth'         => 'Date of Birth',
-            'customer-group'        => 'Customer Group',
-            'select-customer-group' => 'Select Customer Group',
+            'create-form' => [
+                'add-new-customer'      => 'Add New Customer',
+                'create-customer'       => 'Create Customer',
+                'save-customer'         => 'Save customer',
+                'first-name'            => 'First Name',
+                'last-name'             => 'Last Name',
+                'email'                 => 'Email',
+                'contact-number'        => 'Contact Number',
+                'gender'                => 'Gender',
+                'select-gender'         => 'Select Gender',
+                'other'                 => 'Other',
+                'male'                  => 'male',
+                'female'                => 'female',
+                'date-of-birth'         => 'Date of Birth',
+                'customer-group'        => 'Customer Group',
+                'select-customer-group' => 'Select Customer Group',
+            ],
         ],
-
+       
         'groups' => [
             'index' => [
-                'title' => 'Groups'
-            ],
+                'title' => 'Groups',
 
-            'create' => [
-                'add-group'  => 'Add New Group',
-                'code'       => 'Code',
-                'name'       => 'Name',
-                'save-group' => 'Save Group'
+                'create-form' => [
+                    'add-group'  => 'Add New Group',
+                    'code'       => 'Code',
+                    'name'       => 'Name',
+                    'save-group' => 'Save Group',
+                ],
             ],
         ],
 
