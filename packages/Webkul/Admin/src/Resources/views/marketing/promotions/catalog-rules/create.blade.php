@@ -538,10 +538,9 @@
                                     :name="`['conditions[${index}][value]']`"
                                     v-slot="{ field, errorMessage }"
                                     :id="`['conditions[${index}][value]']`"
-                                    :rules="
-                                        matchedAttribute.type == 'price' ? 'decimal:2' : ''
-                                        || matchedAttribute.type == 'decimal' ? 'decimal:2' : ''
-                                        || matchedAttribute.type == 'integer' ? 'decimal:2' : ''
+                                    :rules="matchedAttribute.type == 'price' ? 'regex:^[0-9]+\.[0-9]{2}$' : ''
+                                        || matchedAttribute.type == 'decimal' ? 'regex:^[0-9]+\.[0-9]{2}$' : ''
+                                        || matchedAttribute.type == 'integer' ? 'regex:^[0-9]+\.[0-9]{2}$' : ''
                                         || matchedAttribute.type == 'text' ? 'regex:^([A-Za-z0-9_ \'\-]+)$' : ''"
                                     label="Conditions"
                                     v-model="condition.value"
