@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('customer_id')->unsigned()->nullable();
             $table->text('note');
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->boolean('customer_notified')->default(0);
             $table->timestamps();
+            
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

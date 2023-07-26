@@ -16,15 +16,15 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(CustomerController::class)->prefix('customers')->group(function () {
         Route::get('', 'index')->name('admin.customer.index');
 
+        Route::get('view/{id}', 'show')->name('admin.customer.view');
+
         Route::post('create', 'store')->name('admin.customer.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.customer.edit');
 
         Route::get('loginascustomer/{id}', 'loginAsCustomer')->name('admin.customer.loginascustomer');
 
-        Route::get('note/{id}', 'createNote')->name('admin.customer.note.create');
-
-        Route::put('note/{id}', 'storeNote')->name('admin.customer.note.store');
+        Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 
         Route::put('edit/{id}', 'update')->name('admin.customer.update');
 
@@ -58,7 +58,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.customer.addresses.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
         });
     });
 

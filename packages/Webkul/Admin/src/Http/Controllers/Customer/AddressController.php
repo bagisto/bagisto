@@ -32,13 +32,12 @@ class AddressController extends Controller
      */
     public function index($id)
     {
-        $customer = $this->customerRepository->find($id);
 
-        if (request()->ajax()) {
-            return app(AddressDataGrid::class)->toJson();
-        }
+        $addresses = $this->customerAddressRepository->findWhere(['customer_id' => $id]);
 
-        return view('admin::customers.addresses.index', compact('customer'));
+        return response()->json([
+            'addresses' => $addresses,
+        ]);
     }
 
     /**
