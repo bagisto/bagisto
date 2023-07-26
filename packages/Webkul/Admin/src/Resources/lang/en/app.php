@@ -159,7 +159,7 @@ return [
         'catalog-rules' => [
             'index' => [
                 'title'     => 'Catalog Rules',
-                'add-title' => 'Add Catalog Rule',
+                'create-btn' => 'Create Catalog Rule',
             ],
 
             'create' => [

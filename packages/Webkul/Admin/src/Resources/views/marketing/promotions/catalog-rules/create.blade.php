@@ -15,17 +15,21 @@
                     :action="route('admin.catalog_rules.store')"
                     enctype="multipart/form-data"
                 >
-                    <div class="grid">
-                        <div class="flex justify-end items-center pt-[11px]">
-                            <button 
-                                type="submit"
+                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                        <p class="text-[20px] text-gray-800 font-bold">
+                            @lang('admin::app.promotions.catalog-rules.create.title')
+                        </p>
+                
+                        <div class="flex gap-x-[10px] items-center">
+                            <a 
+                                href="{{ route('admin.catalog_rules.create') }}"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
                                 @lang('admin::app.promotions.catalog-rules.create.save-btn-title')
-                            </button>
+                            </a>
                         </div>
                     </div>
-        
+    
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
