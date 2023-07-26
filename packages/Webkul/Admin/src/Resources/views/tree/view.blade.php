@@ -91,14 +91,15 @@
 
                 let items = (typeof this.items == 'string') ? JSON.parse(this.items) : this.items;
 
-                items.forEach((item) => {
-                    childElements.push(this.generateTreeItem(item));
-                })
+                for (let key in items) {
+                    childElements.push(this.generateTreeItem(items[key]));
+                }
 
                 return childElements;
             },
 
             generateTreeItem(item) {
+                let self = this;
                 return this.$h(this.$resolveComponent('v-tree-item'), {
                         items: item,
                         value: this.finalValues,
@@ -112,7 +113,8 @@
                         behavior: this.behavior,
                         fallbackLocale: this.fallbackLocale,
                         onInput(selection) {
-                            this.finalValues = selection;
+                            console.log(selection);
+                            self.finalValues = selection;
                         },
                     })
             }
