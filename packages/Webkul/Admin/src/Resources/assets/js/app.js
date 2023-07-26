@@ -17,6 +17,8 @@ import { localize } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
 import AllRules from "@vee-validate/rules";
 import draggable from 'vuedraggable';
+import Flatpickr from "flatpickr";
+import 'flatpickr/dist/flatpickr.css';
 
 /**
  * Registration of all global validators.
@@ -96,6 +98,8 @@ app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
 app.component("draggable", draggable);
+
+window.Flatpickr = Flatpickr;
 
 /**
  * Load event, the purpose of using the event is to mount the application

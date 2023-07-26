@@ -124,7 +124,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         }
 
         if ($this->validation == 'regex') {
-            $validations[] = 'regex:' . $this->regex;
+            // $validations[] = 'regex:' . $this->regex;
         } else {
             $validations[] = $this->validation;
         }

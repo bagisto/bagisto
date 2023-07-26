@@ -11,8 +11,11 @@
             <div class="grid gap-[10px]">
                 <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                     <div class="grid gap-[6px]">
-                        <p class="text-[20px] text-gray-800 font-bold leading-[24px]">Add New Product</p>
+                        <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+                            @lang('admin::app.catalog.products.edit.title')
+                        </p>
                     </div>
+                    
                     <div class="flex gap-x-[10px] items-center">
                         <span class="text-gray-600 leading-[24px]"> Cancel</span>
                         <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
@@ -60,6 +63,10 @@
                                     </p>
 
                                     @foreach ($customAttributes as $attribute)
+                                        @if (in_array($attribute->code, ['special_price_from', 'length']))
+                                            <div class="flex gap-[16px]">
+                                        @endif
+
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label>
                                                 {{ $attribute->admin_name }}
@@ -72,6 +79,11 @@
                 
                                             <x-admin::form.control-group.error :control-name="$attribute->code"></x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
+
+
+                                        @if (in_array($attribute->code, ['special_price_to', 'height']))
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             @endif

@@ -297,7 +297,7 @@
 		@apply text-[14px] leading-[17px];
 	}
 
-	input{
+	input, textarea, select {
 		@apply outline-none;
 	}
 
