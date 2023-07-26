@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.catalogs.attributes.create.title')
+        @lang('admin::app.catalog.attributes.create.title')
     </x-slot:title>
 
     {{-- Input Form --}}
@@ -11,13 +11,14 @@
     >
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.catalogs.attributes.create.title')
+                @lang('admin::app.catalog.attributes.create.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
+                {{-- Canvel Button --}}
                 <a href="{{ route('admin.catalog.attributes.index') }}">
                     <span class="text-gray-600 leading-[24px]">
-                        @lang('admin::app.catalogs.attributes.create.cancel')
+                        @lang('admin::app.catalog.attributes.create.cancel-btn')
                     </span>
                 </a>
 
@@ -25,7 +26,7 @@
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.catalogs.attributes.create.save')
+                    @lang('admin::app.catalog.attributes.create.save-btn')
                 </button>
             </div>
         </div>
@@ -36,13 +37,13 @@
                 <!-- Label -->
                 <div class="p-[16px] bg-white box-shadow rounded-[4px]">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.catalogs.attributes.create.attribute-label')
+                        @lang('admin::app.catalog.attributes.create.label')
                     </p>
 
                     {{-- Admin name --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.catalogs.attributes.create.admin')
+                            @lang('admin::app.catalog.attributes.create.admin')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -50,8 +51,8 @@
                             name="admin_name"
                             value="{{ old('admin_name') }}"
                             rules="required"
-                            label="{{ trans('admin::app.catalogs.attributes.create.admin') }}"
-                            placeholder="{{ trans('admin::app.catalogs.attributes.create.admin') }}"
+                            label="{{ trans('admin::app.catalog.attributes.create.admin') }}"
+                            placeholder="{{ trans('admin::app.catalog.attributes.create.admin') }}"
                         >
                         </x-admin::form.control-group.control>
 
@@ -102,7 +103,7 @@
                 <div class="bg-white box-shadow rounded-[4px]">
                     <div class="flex justify-between items-center p-[6px]">
                         <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.catalogs.attributes.create.general')
+                            @lang('admin::app.catalog.attributes.create.general')
                         </p>
                     </div>
 
@@ -110,7 +111,7 @@
                         {{-- Attribute Code --}}
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('admin::app.catalogs.attributes.create.general')
+                                @lang('admin::app.catalog.attributes.create.general')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -119,8 +120,8 @@
                                 value="{{ old('code') }}"
                                 class="!w-[284px]"
                                 rules="required"
-                                label="{{ trans('admin::app.catalogs.attributes.create.code') }}"
-                                placeholder="{{ trans('admin::app.catalogs.attributes.create.code') }}"
+                                label="{{ trans('admin::app.catalog.attributes.create.code') }}"
+                                placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
                             >
                             </x-admin::form.control-group.control>
 
@@ -133,7 +134,7 @@
                         {{-- Attribute Type --}}
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('admin::app.catalogs.attributes.create.type')
+                                @lang('admin::app.catalog.attributes.create.type')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -143,14 +144,14 @@
                                 value="{{ old('type') }}"
                                 id="type"
                                 class="!w-[284px] cursor-pointer"
-                                label="{{ trans('admin::app.catalogs.attributes.create.type') }}"
+                                label="{{ trans('admin::app.catalog.attributes.create.type') }}"
                                 v-model="attribute_type"
                                 @change="swatch_attribute=true"
                             >
                                 {{-- Here! All Needed types are defined --}}
                                 @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
                                     <option value="{{ $type }}">
-                                        @lang('admin::app.catalogs.attributes.create.'. $type)
+                                        @lang('admin::app.catalog.attributes.create.'. $type)
                                     </option>
                                 @endforeach
                             </x-admin::form.control-group.control>
@@ -162,9 +163,9 @@
                         </x-admin::form.control-group>
 
                         {{-- Textarea Switcher --}}
-                        <x-admin::form.control-group v-if="swatch_attribute && (attribute_type == 'textarea')">
+                        <x-admin::form.control-group v-show="swatch_attribute && (attribute_type == 'textarea')">
                             <x-admin::form.control-group.label>
-                                @lang('admin::app.catalogs.attributes.create.enable-wysiwyg')
+                                @lang('admin::app.catalog.attributes.create.enable-wysiwyg')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -173,7 +174,7 @@
                                 id="enable_wysiwyg"
                                 class="cursor-pointer"
                                 value="1"
-                                label="{{ trans('admin::app.catalogs.attributes.create.enable-wysiwyg') }}"
+                                label="{{ trans('admin::app.catalog.attributes.create.enable-wysiwyg') }}"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -184,7 +185,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.catalogs.attributes.create.validations')
+                            @lang('admin::app.catalog.attributes.create.validations')
                         </p>
                     </x-slot:header>
                 
@@ -206,7 +207,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
     
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.is_required')
+                                @lang('admin::app.catalog.attributes.create.is_required')
                             </div>
                         </label>
     
@@ -227,7 +228,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
 
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.is_unique')
+                                @lang('admin::app.catalog.attributes.create.is_unique')
                             </div>
                         </label>
                     </x-slot:content>
@@ -237,7 +238,7 @@
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.catalogs.attributes.create.configuration')
+                            @lang('admin::app.catalog.attributes.create.configuration')
                         </p>
                     </x-slot:header>
                 
@@ -259,7 +260,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
 
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.value_per_locale')
+                                @lang('admin::app.catalog.attributes.create.value_per_locale')
                             </div>
                         </label>
 
@@ -280,7 +281,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
 
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.value_per_channel')
+                                @lang('admin::app.catalog.attributes.create.value_per_channel')
                             </div>
                         </label>
 
@@ -301,7 +302,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
     
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.is_filterable')
+                                @lang('admin::app.catalog.attributes.create.is_filterable')
                             </div>
                         </label>
 
@@ -322,7 +323,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
     
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.is_configurable')
+                                @lang('admin::app.catalog.attributes.create.is_configurable')
                             </div>
                         </label>
 
@@ -343,7 +344,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
     
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.is_visible_on_front')
+                                @lang('admin::app.catalog.attributes.create.is_visible_on_front')
                             </div>
                         </label>
 
@@ -364,7 +365,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
     
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.use_in_flat')
+                                @lang('admin::app.catalog.attributes.create.use_in_flat')
                             </div>
                         </label>
 
@@ -385,7 +386,7 @@
                             <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
     
                             <div class="text-[14px] text-gray-600 cursor-pointer">
-                                @lang('admin::app.catalogs.attributes.create.is_comparable')
+                                @lang('admin::app.catalog.attributes.create.is_comparable')
                             </div>
                         </label>
                     </x-slot:content>
@@ -399,7 +400,7 @@
             <div>              
                 <div class="flex justify-between items-center mb-3">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.catalogs.attributes.create.title')
+                        @lang('admin::app.catalog.attributes.create.title')
                     </p>
 
                     <x-admin::form
@@ -411,13 +412,13 @@
                             <x-admin::modal ref="addOptionsRow">
                                 <x-slot:toggle>
                                     <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                        @lang('admin::app.catalogs.attributes.create.add-row')
+                                        @lang('admin::app.catalog.attributes.create.add-row')
                                     </div>
                                 </x-slot:toggle>
 
                                 <x-slot:header>
                                     <p class="text-[18px] text-gray-800 font-bold">
-                                        @lang('admin::app.catalogs.attributes.create.add-option')
+                                        @lang('admin::app.catalog.attributes.create.add-option')
                                     </p>
                                 </x-slot:header>
 
@@ -426,13 +427,13 @@
                                         <!-- Image Input -->
                                         <x-admin::form.control-group class="w-full" v-if="swatch_type == 'image'">
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.catalogs.attributes.create.image')
+                                                @lang('admin::app.catalog.attributes.create.image')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="image"
                                                 name="swatch_value"
-                                                placeholder="{{ trans('admin::app.catalogs.attributes.create.image') }}"
+                                                placeholder="{{ trans('admin::app.catalog.attributes.create.image') }}"
                                             >
                                             </x-admin::form.control-group.control>
 
@@ -445,13 +446,13 @@
                                         <!-- Color Input -->
                                         <x-admin::form.control-group class="w-full" v-if="swatch_type == 'color'">
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.catalogs.attributes.create.color')
+                                                @lang('admin::app.catalog.attributes.create.color')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="color"
                                                 name="swatch_value"
-                                                placeholder="{{ trans('admin::app.catalogs.attributes.create.color') }}"
+                                                placeholder="{{ trans('admin::app.catalog.attributes.create.color') }}"
                                             >
                                             </x-admin::form.control-group.control>
 
@@ -473,15 +474,15 @@
                                         <!-- Admin Input -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.catalogs.attributes.create.admin')
+                                                @lang('admin::app.catalog.attributes.create.admin')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="admin"
                                                 rules="required"
-                                                label="{{ trans('admin::app.catalogs.attributes.create.admin') }}"
-                                                placeholder="{{ trans('admin::app.catalogs.attributes.create.admin') }}"
+                                                label="{{ trans('admin::app.catalog.attributes.create.admin') }}"
+                                                placeholder="{{ trans('admin::app.catalog.attributes.create.admin') }}"
                                             >
                                             </x-admin::form.control-group.control>
                 
@@ -517,15 +518,15 @@
                                         <!-- Position Input -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.catalogs.attributes.create.position')
+                                                @lang('admin::app.catalog.attributes.create.position')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="number"
                                                 name="sort_order"
                                                 rules="required"
-                                                label="{{ trans('admin::app.catalogs.attributes.create.position') }}"
-                                                placeholder="{{ trans('admin::app.catalogs.attributes.create.position') }}"
+                                                label="{{ trans('admin::app.catalog.attributes.create.position') }}"
+                                                placeholder="{{ trans('admin::app.catalog.attributes.create.position') }}"
                                             >
                                             </x-admin::form.control-group.control>
                 
@@ -555,7 +556,7 @@
                     <div class="flex gap-[16px] max-sm:flex-wrap">
                         <x-admin::form.control-group class="w-full mb-[10px]">
                             <x-admin::form.control-group.label>
-                                @lang('admin::app.catalogs.attributes.create.input-options')
+                                @lang('admin::app.catalog.attributes.create.input-options')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
@@ -567,19 +568,19 @@
                                 @change="show_swatch=true"
                             >
                                 <option value="dropdown">
-                                    @lang('admin::app.catalogs.attributes.create.dropdown')
+                                    @lang('admin::app.catalog.attributes.create.dropdown')
                                 </option>
             
                                 <option value="color">
-                                    @lang('admin::app.catalogs.attributes.create.color-swatch')
+                                    @lang('admin::app.catalog.attributes.create.color-swatch')
                                 </option>
             
                                 <option value="image">
-                                    @lang('admin::app.catalogs.attributes.create.image-swatch')
+                                    @lang('admin::app.catalog.attributes.create.image-swatch')
                                 </option>
             
                                 <option value="text">
-                                    @lang('admin::app.catalogs.attributes.create.text-swatch')
+                                    @lang('admin::app.catalog.attributes.create.text-swatch')
                                 </option>
                             </x-admin::form.control-group.control>
 
@@ -593,7 +594,7 @@
                         <div class="w-full mb-[10px]">
                             <!-- checkbox -->
                             <x-admin::form.control-group.label class="invisible">
-                                @lang('admin::app.catalogs.attributes.create.input-options')
+                                @lang('admin::app.catalog.attributes.create.input-options')
                             </x-admin::form.control-group.label>
 
                             <label
@@ -612,7 +613,7 @@
                                 <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
         
                                 <div class="text-[14px] text-gray-600 cursor-pointer">
-                                    @lang('admin::app.catalogs.attributes.create.create-empty-option')
+                                    @lang('admin::app.catalog.attributes.create.create-empty-option')
                                 </div>
                             </label>
                         </div>
@@ -628,12 +629,12 @@
 
                                 <!-- Swatch Select -->
                                 <x-admin::table.th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
-                                    @lang('admin::app.catalogs.attributes.create.swatch')
+                                    @lang('admin::app.catalog.attributes.create.swatch')
                                 </x-admin::table.th>
 
                                 <!-- Admin tables heading -->
                                 <x-admin::table.th>
-                                    @lang('admin::app.catalogs.attributes.create.admin_name')
+                                    @lang('admin::app.catalog.attributes.create.admin_name')
                                 </x-admin::table.th>
 
                                 <!-- Loacles tables heading -->
@@ -645,7 +646,7 @@
 
                                 <!-- Positions tables heading -->
                                 <x-admin::table.th>
-                                    @lang('admin::app.catalogs.attributes.create.position')
+                                    @lang('admin::app.catalog.attributes.create.position')
                                 </x-admin::table.th>
 
                                 <!-- Action tables heading -->
@@ -795,7 +796,7 @@
 
                         show_swatch: false,
 
-                        attribute_type: '',
+                        attribute_type: false,
 
                         swatch_attribute: false,
 

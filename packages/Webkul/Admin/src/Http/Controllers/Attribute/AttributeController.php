@@ -62,28 +62,23 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create([
-            'code'                => request('code'),
-            'type'                => request('type'),
-            'admin_name'          => request('admin_name'),
-            'en'                  => request('en'),
-            'fr'                  => request('fr'),
-            'nl'                  => request('nl'),
-            'tr'                  => request('tr'),
-            'es'                  => request('es'),
-            'options'             => request('options'),
-            'is_required'         => request('is_required') ?? 0,
-            'is_unique'           => request('is_unique') ?? 0,
-            'validation'          => request('validation') ?? 0,
-            'value_per_locale'    => request('value_per_locale') ?? 0,
-            'value_per_channel'   => request('value_per_channel') ?? 0,
-            'is_filterable'       => request('is_filterable') ?? 0,
-            'is_configurable'     => request('is_configurable') ?? 0,
-            'is_visible_on_front' => request('is_visible_on_front') ?? 0,
-            'use_in_flat'         => request('use_in_flat') ?? 0,
-            'is_comparable'       => request('is_comparable') ?? 0,
-            'is_user_defined'     => 1,
-        ]);
+        $attribute = $this->attributeRepository->create(request()->only([
+            'code',
+            'type',
+            'admin_name',
+            'options',
+            'is_required',
+            'is_unique',
+            'validation',
+            'value_per_locale',
+            'value_per_channel',
+            'is_filterable',
+            'is_configurable',
+            'is_visible_on_front',
+            'use_in_flat',
+            'is_comparable',
+            'is_user_defined' => 1
+        ]));
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
