@@ -1,14 +1,19 @@
-<v-tinymce 
+<v-tinymce
     {{ $attributes }}
     data="{{ $slot }}"
 >
+    <x-admin::shimmer.tinymce class="w-full h-[311px]"></x-admin::shimmer.tinymce>
 </v-tinymce>
 
 @pushOnce('scripts')
     @include('admin::layouts.tinymce')
 
     <script type="text/x-template" id="v-tinymce-template">
-        <div>
+        <template v-if="isLoading">
+            <x-admin::shimmer.tinymce class="w-full h-[311px]"></x-admin::shimmer.tinymce>
+        </template>
+
+        <div v-show="! isLoading">
             <v-field
                 type="text"
                 :name="name"
@@ -31,6 +36,8 @@
             data() {
                 return {
                     content: this.value ?? this.data,
+
+                    isLoading: true,
                 }
             },
 
@@ -48,11 +55,16 @@
                         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
                         image_advtab: true,
                         valid_elements : '*[*]',
+
                         setup: editor => {
                             editor.on('keyup', () => {
                                 this.content = editor.getContent();
                             });
                         },
+
+                        init_instance_callback: editor => {
+                            this.isLoading = false;
+                        }
                     });
                 }
             }

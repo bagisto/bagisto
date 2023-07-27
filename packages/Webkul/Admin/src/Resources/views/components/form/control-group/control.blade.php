@@ -11,14 +11,14 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', ':rules', 'label', ':label']) }}
         >
             <input
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                {{ $attributes->except(['value', 'rules', 'label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
         </v-field>
 
@@ -28,14 +28,14 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <textarea
                 type="{{ $type }}"
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                {{ $attributes->except(['value', 'rules', 'label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
             </textarea>
         </v-field>
@@ -46,14 +46,14 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <x-admin::flat-picker.date>
                 <input
                     name="{{ $name }}"
                     v-bind="field"
                     :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    {{ $attributes->except(['value', 'rules', 'label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
                     autocomplete="off"
                 >
             </x-admin::flat-picker.date>
@@ -65,14 +65,14 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <x-admin::flat-picker.datetime>
                 <input
                     name="{{ $name }}"
                     v-bind="field"
                     :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                    {{ $attributes->except(['value', 'rules', 'label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
                     autocomplete="off"
                 >
             </x-admin::flat-picker.datetime>
@@ -83,13 +83,13 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <select
                 name="{{ $name }}"
                 v-bind="field"
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                {{ $attributes->except(['value', 'rules', 'label'])->merge(['class' => 'custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             >
                 {{ $slot }}
             </select>
@@ -102,7 +102,7 @@
             as="select"
             name="{{ $name }}"
             :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-            {{ $attributes->except(['value', 'rules', 'label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             multiple
         >
             {{ $slot }}
@@ -116,20 +116,20 @@
             name="{{ $name }}"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
                 type="checkbox"
                 name="{{ $name }}"
                 v-bind="field"
                 class="sr-only peer"
-                {{ $attributes->except(['rules', 'label']) }}
+                {{ $attributes->except(['rules', 'label', ':label']) }}
             />
         </v-field>
 
         <label
             class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
-            {{ $attributes->except(['value', 'rules', 'label']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>
 
@@ -141,20 +141,20 @@
             name="{{ $name }}"
             class="hidden"
             v-slot="{ field }"
-            {{ $attributes->only(['value', 'rules', 'label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
                 type="radio"
                 name="{{ $name }}"
                 v-bind="field"
                 class="sr-only peer"
-                {{ $attributes->except(['rules', 'label']) }}
+                {{ $attributes->except(['rules', 'label', ':label']) }}
             />
         </v-field>
 
         <label
             class="icon-radio-normal text-[24px] peer-checked:icon-radio-selected peer-checked:text-blue-600 cursor-pointer"
-            {{ $attributes->except(['value', 'rules', 'label']) }}
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>
 
@@ -167,7 +167,7 @@
                 name="{{ $name }}"
                 class="hidden"
                 v-slot="{ field }"
-                {{ $attributes->only(['value', 'rules', 'label']) }}
+                {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             >
                 <input
                     type="checkbox"
@@ -175,12 +175,12 @@
                     id="{{ $name }}"
                     class="sr-only peer"
                     v-bind="field"
-                    {{ $attributes->except(['value', 'rules', 'label']) }}
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
                 />
             </v-field>
 
             <label
-                class="rounded-full w-11 h-6 bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-blue-600 peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-blue-600 peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
                 for="{{ $name }}"
             ></label>
         </label>

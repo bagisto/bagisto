@@ -1,6 +1,4 @@
-@props([
-    'controlName' => '',
-])
+@props(['controlName' => ''])
 
 @if (! empty($controlName))
     <v-error-message

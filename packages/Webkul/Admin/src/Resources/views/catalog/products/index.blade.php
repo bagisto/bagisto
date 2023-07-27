@@ -42,7 +42,7 @@
                                     type="button"
                                     class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                                 >
-                                    @lang('admin::app.catalog.products.index.create.create-btn')
+                                    @lang('admin::app.catalog.products.index.create-btn')
                                 </button>
                             @endif
                         </x-slot:toggle>

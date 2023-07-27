@@ -47,6 +47,33 @@ defineRule("phone", (value) => {
     return true;
 });
 
+defineRule("decimal", (value, { decimals = '*', separator = '.' } = {}) => {
+    if (value === null || value === undefined || value === '') {
+        return true;
+    }
+
+    if (Number(decimals) === 0) {
+        return /^-?\d*$/.test(value);
+    }
+
+    const regexPart = decimals === '*' ? '+' : `{1,${decimals}}`;
+    const regex = new RegExp(`^[-+]?\\d*(\\${separator}\\d${regexPart})?([eE]{1}[-]?\\d+)?$`);
+
+    return regex.test(value);
+});
+
+defineRule("phone", (value) => {
+    if (!value || !value.length) {
+        return true;
+    }
+
+    if (!/^\+?\d+$/.test(value)) {
+        return false;
+    }
+
+    return true;
+});
+
 configure({
     /**
      * Built-in error messages and custom error messages are available. Multiple
@@ -86,8 +113,9 @@ window.app = createApp({
  * Global plugins registration.
  */
 import Axios from "./plugins/axios";
+import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
-[Axios, Emitter].forEach((plugin) => app.use(plugin));
+[Axios, CreateElement, Emitter].forEach((plugin) => app.use(plugin));
 
 /**
  * Global components registration;

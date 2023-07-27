@@ -6,6 +6,8 @@
     is-active="{{ $isActive }}"
     {{ $attributes }}
 >
+    <x-admin::shimmer.accordion class="w-[360px] h-[267px]"></x-admin::shimmer.accordion>
+
     @isset($header)
         <template v-slot:header>
             {{ $header }}
@@ -24,15 +26,15 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-accordion-template">
         <div {{ $attributes->merge(['class' => 'bg-white rounded-[4px] box-shadow']) }}>
-            <div
-                :class="`flex items-center justify-between p-[6px] ${isOpen ? 'active' : ''}`"
-                @click="toggle"
-            >
+            <div :class="`flex items-center justify-between p-[6px] ${isOpen ? 'active' : ''}`">
                 <slot name="header">
                     Default Header
                 </slot>
 
-                <span :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"></span>
+                <span 
+                    :class="`text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 ${isOpen ? 'icon-arrow-up' : 'icon-arrow-down'}`"
+                    @click="toggle"
+                ></span>
             </div>
 
             <div class="px-[16px] pb-[16px]" v-if="isOpen">
