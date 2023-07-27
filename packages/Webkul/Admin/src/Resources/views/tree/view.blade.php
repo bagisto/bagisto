@@ -91,9 +91,9 @@
 
                 let items = (typeof this.items == 'string') ? JSON.parse(this.items) : this.items;
 
-                items.forEach((item) => {
-                    childElements.push(this.generateTreeItem(item));
-                })
+                for (let key in items) {
+                    childElements.push(this.generateTreeItem(items[key]));
+                }
 
                 return childElements;
             },
