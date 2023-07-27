@@ -3,15 +3,7 @@
     <x-slot:title>
         @lang('admin::app.promotions.catalog-rules.edit.title')
     </x-slot:title>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+
     {{-- edit Catalog form --}}
     <v-catalog-rule-edit-form></v-catalog-rule-edit-form>
 
@@ -381,7 +373,7 @@
                                 </x-slot:content>
                             </x-admin::accordion>
                                 
-                            {{-- Marketing --}}
+                            {{-- Marketing Time --}}
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
@@ -392,52 +384,50 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="px-[16px] pb-[16px]">
-                                        <div class="flex gap-[16px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.edit.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="starts_from"
-                                                    :value="old('starts_from') ?? $catalogRule->starts_from"
-                                                    id="starts_from"
-                                                    rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.edit.from')"
-                                                    :placeholder="trans('admin::app.promotions.catalog-rules.edit.from')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="starts_from"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
+                                    <div class="flex gap-[16px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.catalog-rules.edit.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="starts_from"
+                                                :value="old('starts_from') ?? $catalogRule->starts_from"
+                                                id="starts_from"
+                                                rules="required"
+                                                :label="trans('admin::app.promotions.catalog-rules.edit.from')"
+                                                :placeholder="trans('admin::app.promotions.catalog-rules.edit.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="starts_from"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.edit.to')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="ends_till"
-                                                    :value="old('ends_till') ?? $catalogRule->ends_till"
-                                                    id="ends_till"
-                                                    rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.edit.to')"
-                                                    :placeholder="trans('admin::app.promotions.catalog-rules.edit.to')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="ends_till"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.catalog-rules.edit.to')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="ends_till"
+                                                :value="old('ends_till') ?? $catalogRule->ends_till"
+                                                id="ends_till"
+                                                rules="required"
+                                                :label="trans('admin::app.promotions.catalog-rules.edit.to')"
+                                                :placeholder="trans('admin::app.promotions.catalog-rules.edit.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="ends_till"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>

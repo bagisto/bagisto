@@ -3,16 +3,6 @@
     <x-slot:title>
         @lang('admin::app.promotions.cart-rules.create.title')
     </x-slot:title>
-    
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <v-cart-rule-create-form></v-cart-rule-create-form>
 
@@ -667,50 +657,48 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="px-[16px] pb-[16px]">
-                                        <div class="flex gap-[16px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.cart-rules.create.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="starts_from"
-                                                    :value="old('starts_from')"
-                                                    id="starts_from"
-                                                    :label="trans('admin::app.promotions.cart-rules.create.from')"
-                                                    :placeholder="trans('admin::app.promotions.cart-rules.create.from')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="starts_from"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
+                                    <div class="flex gap-[16px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.cart-rules.create.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="starts_from"
+                                                :value="old('starts_from')"
+                                                id="starts_from"
+                                                :label="trans('admin::app.promotions.cart-rules.create.from')"
+                                                :placeholder="trans('admin::app.promotions.cart-rules.create.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="starts_from"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.cart-rules.create.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="ends_till"
-                                                    :value="old('ends_till')"
-                                                    id="ends_till"
-                                                    :label="trans('admin::app.promotions.cart-rules.create.to')"
-                                                    :placeholder="trans('admin::app.promotions.cart-rules.create.to')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="ends_till"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.cart-rules.create.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="ends_till"
+                                                :value="old('ends_till')"
+                                                id="ends_till"
+                                                :label="trans('admin::app.promotions.cart-rules.create.to')"
+                                                :placeholder="trans('admin::app.promotions.cart-rules.create.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="ends_till"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
