@@ -61,20 +61,19 @@ class ReviewController extends APIController
             'attachments.*' => 'file',
         ]);
 
-        $data = [
-            'title'       => request()->input('title'),
-            'comment'     => request()->input('comment'),
-            'rating'      => request()->input('rating'),
-            'attachments' => request()->file('attachments', []),
+        $data = array_merge(request()->only([
+            'title',
+            'comment',
+            'rating',
+        ]), [
+            'attachments' => request()->file('attachments') ?? [],
             'status'      => self::STATUS_PENDING,
             'product_id'  => $id,
-        ];
+        ]);
 
         if ($customer = auth()->guard('customer')->user()) {
-            $data = array_merge($data, [
-                'name'        => $customer->name,
-                'customer_id' => $customer->id,
-            ]);
+            $data['name']        = $customer->name;
+            $data['customer_id'] = $customer->id;
         }
 
         $review = $this->productReviewRepository->create($data);
