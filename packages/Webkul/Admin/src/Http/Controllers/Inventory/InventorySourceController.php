@@ -52,24 +52,24 @@ class InventorySourceController extends Controller
     {
         Event::dispatch('inventory.inventory_source.create.before');
 
-        $data = [
-            'code'           => $inventorySourceRequest->input('code'),
-            'name'           => $inventorySourceRequest->input('name'),
-            'description'    => $inventorySourceRequest->input('description'),
-            'latitude'       => $inventorySourceRequest->input('latitude'),
-            'longitude'      => $inventorySourceRequest->input('longitude'),
-            'priority'       => $inventorySourceRequest->input('priority'),
-            'contact_name'   => $inventorySourceRequest->input('contact_name'),
-            'contact_email'  => $inventorySourceRequest->input('contact_email'),
-            'contact_number' => $inventorySourceRequest->input('contact_number'),
-            'contact_fax'    => $inventorySourceRequest->input('contact_fax'),
-            'country'        => $inventorySourceRequest->input('country'),
-            'state'          => $inventorySourceRequest->input('state'),
-            'city'           => $inventorySourceRequest->input('city'),
-            'street'         => $inventorySourceRequest->input('street'),
-            'postcode'       => $inventorySourceRequest->input('postcode'),
-            'status'         => $inventorySourceRequest->has('status'),
-        ];
+        $data = request()->only([
+            'code',
+            'name',
+            'description',
+            'latitude',
+            'longitude',
+            'priority',
+            'contact_name',
+            'contact_email',
+            'contact_number',
+            'contact_fax',
+            'country',
+            'state',
+            'city',
+            'street',
+            'postcode',
+            'status',
+        ]);
 
         $inventorySource = $this->inventorySourceRepository->create($data);
 
@@ -103,24 +103,24 @@ class InventorySourceController extends Controller
     {
         Event::dispatch('inventory.inventory_source.update.before', $id);
 
-        $data = [
-            'code'           => $inventorySourceRequest->input('code'),
-            'name'           => $inventorySourceRequest->input('name'),
-            'description'    => $inventorySourceRequest->input('description'),
-            'latitude'       => $inventorySourceRequest->input('latitude'),
-            'longitude'      =>$inventorySourceRequest->input('longitude'),
-            'priority'       => $inventorySourceRequest->input('priority'),
-            'contact_name'   => $inventorySourceRequest->input('contact_name'),
-            'contact_email'  => $inventorySourceRequest->input('contact_email'),
-            'contact_number' => $inventorySourceRequest->input('contact_number'),
-            'contact_fax'    => $inventorySourceRequest->input('contact_fax'),
-            'country'        => $inventorySourceRequest->input('country'),
-            'state'          => $inventorySourceRequest->input('state'),
-            'city'           => $inventorySourceRequest->input('city'),
-            'street'         => $inventorySourceRequest->input('street'),
-            'postcode'       => $inventorySourceRequest->input('postcode'),
-            'status'         => $inventorySourceRequest->has('status'),
-        ];
+        $data = $inventorySourceRequest->only([
+            'code',
+            'name',
+            'description',
+            'latitude',
+            'longitude',
+            'priority',
+            'contact_name',
+            'contact_email',
+            'contact_number',
+            'contact_fax',
+            'country',
+            'state',
+            'city',
+            'street',
+            'postcode',
+            'status',
+        ]);
 
         $inventorySource = $this->inventorySourceRepository->update($data, $id);
 

@@ -8,15 +8,6 @@ use Webkul\Admin\Http\Controllers\Controller;
 class ForgetPasswordController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View

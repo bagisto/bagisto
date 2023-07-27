@@ -48,7 +48,7 @@ class AccountController extends Controller
 
         $data = request()->input();
 
-        if (! Hash::check($data['current_password'], auth()->guard('admin')->user()->password)) {
+        if (! Hash::check($data['current_password'], $user->password)) {
             session()->flash('warning', trans('admin::app.users.users.password-match'));
 
             return redirect()->back();

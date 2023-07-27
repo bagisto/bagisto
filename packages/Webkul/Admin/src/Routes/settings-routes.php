@@ -16,37 +16,20 @@ use Webkul\Admin\Http\Controllers\User\UserController;
  */
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     /**
-     * Roles routes.
+     * Channels routes.
      */
-    Route::controller(RoleController::class)->prefix('roles')->group(function () {
-        Route::get('', 'index')->name('admin.roles.index');
+    Route::controller(ChannelController::class)->prefix('channels')->group(function () {
+        Route::get('', 'index')->name('admin.channels.index');
 
-        Route::get('create', 'create')->name('admin.roles.create');
+        Route::get('create', 'create')->name('admin.channels.create');
 
-        Route::post('create', 'store')->name('admin.roles.store');
+        Route::post('create', 'store')->name('admin.channels.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.roles.edit');
+        Route::get('edit/{id}', 'edit')->name('admin.channels.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.roles.update');
+        Route::put('edit/{id}', 'update')->name('admin.channels.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.roles.delete');
-    });
-
-    /**
-     * Locales routes.
-     */
-    Route::controller(LocaleController::class)->prefix('locales')->group(function () {
-        Route::get('', 'index')->name('admin.locales.index');
-
-        Route::get('create', 'create')->name('admin.locales.create');
-
-        Route::post('create', 'store')->name('admin.locales.store');
-
-        Route::get('edit/{id}', 'edit')->name('admin.locales.edit');
-
-        Route::put('edit/{id}', 'update')->name('admin.locales.update');
-
-        Route::post('delete/{id}', 'destroy')->name('admin.locales.delete');
+        Route::post('delete/{id}', 'destroy')->name('admin.channels.delete');
     });
 
     /**
@@ -86,6 +69,23 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     });
 
     /**
+     * Locales routes.
+     */
+    Route::controller(LocaleController::class)->prefix('locales')->group(function () {
+        Route::get('', 'index')->name('admin.locales.index');
+
+        Route::get('create', 'create')->name('admin.locales.create');
+
+        Route::post('create', 'store')->name('admin.locales.store');
+
+        Route::get('edit/{id}', 'edit')->name('admin.locales.edit');
+
+        Route::put('edit/{id}', 'update')->name('admin.locales.update');
+
+        Route::post('delete/{id}', 'destroy')->name('admin.locales.delete');
+    });
+
+    /**
      * Inventory sources routes.
      */
     Route::controller(InventorySourceController::class)->prefix('inventory-sources')->group(function () {
@@ -100,44 +100,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::put('edit/{id}', 'update')->name('admin.inventory_sources.update');
 
         Route::post('delete/{id}', 'destroy')->name('admin.inventory_sources.delete');
-    });
-
-    /**
-     * Channels routes.
-     */
-    Route::controller(ChannelController::class)->prefix('channels')->group(function () {
-        Route::get('', 'index')->name('admin.channels.index');
-
-        Route::get('create', 'create')->name('admin.channels.create');
-
-        Route::post('create', 'store')->name('admin.channels.store');
-
-        Route::get('edit/{id}', 'edit')->name('admin.channels.edit');
-
-        Route::put('edit/{id}', 'update')->name('admin.channels.update');
-
-        Route::post('delete/{id}', 'destroy')->name('admin.channels.delete');
-    });
-
-    /**
-     * Users routes.
-     */
-    Route::controller(UserController::class)->prefix('users')->group(function () {
-        Route::get('', 'index')->name('admin.users.index');
-
-        Route::get('create', 'create')->name('admin.users.create');
-
-        Route::post('create', 'store')->name('admin.users.store');
-
-        Route::get('edit/{id}', 'edit')->name('admin.users.edit');
-
-        Route::put('edit/{id}', 'update')->name('admin.users.update');
-
-        Route::post('delete/{id}', 'destroy')->name('admin.users.delete');
-
-        Route::get('confirm/{id}', 'confirm')->name('super.users.confirm');
-
-        Route::post('confirm/{id}', 'destroySelf')->name('admin.users.destroy');
     });
 
     /**
@@ -172,5 +134,43 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::post('delete/{id}', 'destroy')->name('admin.tax_rates.delete');
 
         Route::post('import', 'import')->name('admin.tax_rates.import');
+    });
+
+    /**
+     * Roles routes.
+     */
+    Route::controller(RoleController::class)->prefix('roles')->group(function () {
+        Route::get('', 'index')->name('admin.roles.index');
+
+        Route::get('create', 'create')->name('admin.roles.create');
+
+        Route::post('create', 'store')->name('admin.roles.store');
+
+        Route::get('edit/{id}', 'edit')->name('admin.roles.edit');
+
+        Route::put('edit/{id}', 'update')->name('admin.roles.update');
+
+        Route::post('delete/{id}', 'destroy')->name('admin.roles.delete');
+    });
+
+    /**
+     * Users routes.
+     */
+    Route::controller(UserController::class)->prefix('users')->group(function () {
+        Route::get('', 'index')->name('admin.users.index');
+
+        Route::get('create', 'create')->name('admin.users.create');
+
+        Route::post('create', 'store')->name('admin.users.store');
+
+        Route::get('edit/{id}', 'edit')->name('admin.users.edit');
+
+        Route::put('edit/{id}', 'update')->name('admin.users.update');
+
+        Route::post('delete/{id}', 'destroy')->name('admin.users.delete');
+
+        Route::get('confirm/{id}', 'confirm')->name('super.users.confirm');
+
+        Route::post('confirm/{id}', 'destroySelf')->name('admin.users.destroy');
     });
 });

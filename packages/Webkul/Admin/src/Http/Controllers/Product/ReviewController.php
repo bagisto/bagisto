@@ -3,19 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Product;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
 
 class ReviewController extends Controller
 {
-    /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -24,7 +17,6 @@ class ReviewController extends Controller
      */
     public function __construct(protected ProductReviewRepository $productReviewRepository)
     {
-        $this->_config = request('_config');
     }
 
     /**
@@ -64,7 +56,7 @@ class ReviewController extends Controller
     {
         Event::dispatch('customer.review.update.before', $id);
 
-        $review = $this->productReviewRepository->update(request()->all(), $id);
+        $review = $this->productReviewRepository->update(request()->only(['status']), $id);
 
         Event::dispatch('customer.review.update.after', $review);
 

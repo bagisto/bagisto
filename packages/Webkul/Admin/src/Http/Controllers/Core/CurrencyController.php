@@ -44,7 +44,14 @@ class CurrencyController extends Controller
             'name' => 'required',
         ]);
 
-        $this->currencyRepository->create(request()->all());
+        $data = request()->only([
+            'code',
+            'name',
+            'symbol',
+            'decimal'
+        ]);
+
+        $this->currencyRepository->create($data);
 
         session()->flash('success', trans('admin::app.settings.currencies.create-success'));
 
@@ -79,7 +86,14 @@ class CurrencyController extends Controller
             'name' => 'required',
         ]);
 
-        $this->currencyRepository->update(request()->all(), $id);
+        $data = request()->only([
+            'code',
+            'name',
+            'symbol',
+            'decimal'
+        ]);
+
+        $this->currencyRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.settings.currencies.update-success'));
 

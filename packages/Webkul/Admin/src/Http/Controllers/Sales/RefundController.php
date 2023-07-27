@@ -4,8 +4,8 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Webkul\Admin\DataGrids\OrderRefundDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\RefundRepository;
 
 class RefundController extends Controller
@@ -19,7 +19,8 @@ class RefundController extends Controller
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
         protected RefundRepository $refundRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -114,7 +115,7 @@ class RefundController extends Controller
      */
     public function updateQty($orderId)
     {
-        $data = $this->refundRepository->getOrderItemsRefundSummary(request()->all(), $orderId);
+        $data = $this->refundRepository->getOrderItemsRefundSummary(request()->input(), $orderId);
 
         if (! $data) {
             return response('');
