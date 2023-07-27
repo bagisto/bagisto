@@ -2,7 +2,7 @@
     {{ $attributes }}
     data="{{ $slot }}"
 >
-    <x-admin::shimmer.tinymce class="w-[660px] h-[343px]"></x-admin::shimmer.tinymce>
+    <x-admin::shimmer.tinymce class="w-full h-[311px]"></x-admin::shimmer.tinymce>
 </v-tinymce>
 
 @pushOnce('scripts')
@@ -10,7 +10,7 @@
 
     <script type="text/x-template" id="v-tinymce-template">
         <template v-if="isLoading">
-            <x-admin::shimmer.tinymce class="w-[660px] h-[343px]"></x-admin::shimmer.tinymce>
+            <x-admin::shimmer.tinymce class="w-full h-[311px]"></x-admin::shimmer.tinymce>
         </template>
 
         <div v-show="! isLoading">
@@ -43,8 +43,6 @@
 
             mounted() {
                 this.initTinyMCE();
-
-                this.isLoading = false;
             },
 
             methods: {
@@ -57,11 +55,16 @@
                         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table',
                         image_advtab: true,
                         valid_elements : '*[*]',
+
                         setup: editor => {
                             editor.on('keyup', () => {
                                 this.content = editor.getContent();
                             });
                         },
+
+                        init_instance_callback: editor => {
+                            this.isLoading = false;
+                        }
                     });
                 }
             }

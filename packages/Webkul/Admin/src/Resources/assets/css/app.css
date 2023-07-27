@@ -297,7 +297,7 @@
 		@apply text-[14px] leading-[17px];
 	}
 
-	input{
+	input, textarea, select {
 		@apply outline-none;
 	}
 
@@ -363,4 +363,24 @@
 	.status-disable{
 		@apply text-red-600;
 	}
+
+    .shimmer {
+        animation-duration: 2.2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: skeleton;
+        animation-timing-function: linear;
+        background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+        background-size: 1250px 100%;
+    }
+
+    @keyframes skeleton {
+        0% {
+            background-position: -1250px 0;
+        }
+
+        100% {
+            background-position: 1250px 0;
+        }
+    }
 }

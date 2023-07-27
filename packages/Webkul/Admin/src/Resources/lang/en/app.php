@@ -543,9 +543,62 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
-                'title' => 'Products',
-                'add'   => 'Add Product',
+                'title'      => 'Products',
+                'create-btn' => 'Create Product',
+                'create' => [
+                    'title'                   => 'Create New Product',
+                    'configurable-attributes' => 'Configurable Attributes',
+                    'create-btn'              => 'Create Product',
+                    'save-btn'                => 'Save Product',
+                    'back-btn'                => 'Back',
+                    'type'                    => 'Type',
+                    'simple'                  => 'Simple',
+                    'configurable'            => 'Configurable',
+                    'virtual'                 => 'Virtual',
+                    'downloadable'            => 'Downloadable',
+                    'grouped'                 => 'Grouped',
+                    'bundle'                  => 'Bundle',
+                    'booking'                 => 'Booking',
+                    'family'                  => 'Family',
+                    'sku'                     => 'SKU',
+                ]
             ],
+
+            'edit' => [
+                'title'       => 'Edit Product',
+                
+                'inventories' => [
+                    'title'                    => 'Inventories',
+                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
+                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
+                ],
+
+                'price' => [
+                    'group' => [
+                        'title'                     => 'Customer Group Price',
+                        'create-btn'                => 'Add New',
+                        'edit-btn'                  => 'Edit',
+                        'add-group-price'           => 'Add Group Price',
+                        'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
+                        'discount-group-price-info' => 'For qty Qty at discount of :price',
+                        'empty-info'                => 'Special pricing for customers belonging to a specific group.',
+
+
+                        'create' => [
+                            'create-title'   => 'Create Customer Group Price',
+                            'update-title'   => 'Update Customer Group Price',
+                            'customer-group' => 'Customer Group',
+                            'qty'            => 'Qty',
+                            'price-type'     => 'Price Type',
+                            'fixed'          => 'Fixed',
+                            'discount'       => 'Discount',
+                            'price'          => 'Price',
+                            'delete-btn'     => 'Delete',
+                            'save-btn'       => 'Save',
+                        ]
+                    ]
+                ]
+            ]
         ],
 
         'attributes' => [

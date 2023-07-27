@@ -52,13 +52,6 @@ abstract class AbstractType
     protected $showQuantityBox = false;
 
     /**
-     * Allow multiple qty.
-     *
-     * @var bool
-     */
-    protected $allowMultipleQty = true;
-
-    /**
      * Is product have sufficient quantity.
      *
      * @var bool
@@ -590,16 +583,6 @@ abstract class AbstractType
     public function showQuantityBox()
     {
         return $this->showQuantityBox;
-    }
-
-    /**
-     * Return true if more than one qty can be added to cart.
-     *
-     * @return bool
-     */
-    public function isMultipleQtyAllowed()
-    {
-        return $this->allowMultipleQty;
     }
 
     /**
