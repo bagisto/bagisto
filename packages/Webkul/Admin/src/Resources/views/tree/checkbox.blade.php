@@ -1,21 +1,39 @@
-<template>
-    <span class="checkbox">
+{{-- v-tree-checkbox template--}}
+<script type="text/x-template" id="v-tree-checkbox-template">
+    <label
+        :for="id"
+        class="inline-flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
+    >
         <input
             type="checkbox"
-            :id="id"
             :name="[nameField + '[]']"
             :value="modelValue"
+            :id="id"
+            class="hidden peer"
             @change="inputChanged()"
             :checked="isActive"
         >
-        <label class="checkbox-view" :for="id"></label>
-        <span class="" :for="id">{{ label }}</span>
-    </span>
-</template>
 
-<script>
-    export default {
-        name: 'tree-checkbox',
+        <label 
+            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+            :for="id"
+        >
+        </label>
+
+        <div
+            class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+            v-text="label"
+        >
+        </div>
+    </label>
+</script>
+
+{{-- v-tree-checkbox component --}}
+<script type="module">
+    app.component('v-tree-checkbox', {
+        template: '#v-tree-checkbox-template',
+
+        name: 'v-tree-checkbox',
 
         props: ['id', 'label', 'nameField', 'modelValue', 'inputValue', 'value'],
 
@@ -25,8 +43,8 @@
             },
 
             isActive () {
-                const value = this.valuez
-                const input = this.internalValue
+                let value = this.value
+                let input = this.internalValue
 
                 if (this.isMultiple) {
                     return input.some(item => this.valueComparator(item, value))
@@ -59,11 +77,11 @@
 
         methods: {
             inputChanged () {
-                const value = this.value
+                let value = this.value
                 let input = this.internalValue
 
                 if (this.isMultiple) {
-                    const length = input.length
+                    let length = input.length
 
                     input = input.filter(item => !this.valueComparator(item, value))
 
@@ -85,7 +103,7 @@
                     return false
                 }
 
-                const props = Object.keys(a)
+                let props = Object.keys(a)
 
                 if (props.length !== Object.keys(b).length) {
                     return false
@@ -94,5 +112,5 @@
                 return props.every(p => this.valueComparator(a[p], b[p]))
             }
         }
-    }
+    });
 </script>

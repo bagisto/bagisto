@@ -9,14 +9,14 @@
 
             <div class="flex gap-x-[10px] items-center">
                 <a href="{{ route('admin.catalog.families.index') }}">
-                    <button class="text-gray-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.catalog.families.create.cancel-btn')
-                    </button>
+                    </span>
                 </a>
 
-                <button 
-                    type="submit" 
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                <button
+                    type="submit"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.catalog.families.create.save-btn')
                 </button>
@@ -33,80 +33,83 @@
             {{-- Right Container --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
                 {{-- General Pannel --}}
-                <div class="bg-white rounded-[4px] box-shadow">
-                    {{-- Panel Header --}}
-                    <div class="flex items-center justify-between p-[6px]">
-                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                            @lang('General')
-                        </p>
+                <div class="bg-white box-shadow rounded-[4px]">
+                    {{-- Settings --}}
+                    <x-admin::accordion>
+                        {{-- Panel Header --}}
+                        <x-slot:header>
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.catalog.families.create.general')
+                            </p>
+                        </x-slot:header>
+                    
+                        {{-- Panel Content --}}
+                        <x-slot:content>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="!text-gray-800">
+                                    @lang('admin::app.catalog.families.create.code')
+                                </x-admin::form.control-group.label>
 
-                        <span class="icon-arrow-up p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                    </div>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="code"
+                                    class="!w-[284px]"
+                                    value="{{ old('code') }}"
+                                    rules="required"
+                                    :label="trans('admin::app.catalog.families.create.code')"
+                                    :placeholder="trans('admin::app.catalog.families.create.enter-code')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                    {{-- Panel Content --}}
-                    <div class="px-[16px] pb-[16px]">
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label class="!text-gray-800">
-                                @lang('admin::app.catalog.families.create.code')
-                            </x-admin::form.control-group.label>
+                                <x-admin::form.control-group.error
+                                    control-name="code"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="code"
-                                class="!w-[284px]"
-                                value="{{ old('code') }}"
-                                rules="required"
-                                :label="trans('admin::app.catalog.families.create.code')"
-                                :placeholder="trans('admin::app.catalog.families.create.enter-code')"
-                            >
-                            </x-admin::form.control-group.control>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="!text-gray-800">
+                                    @lang('admin::app.catalog.families.create.name')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.error
-                                control-name="code"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.control
+                                    type="text"
+                                    name="name"
+                                    class="!w-[284px]"
+                                    value="{{ old('name') }}"
+                                    rules="required"
+                                    :label="trans('admin::app.catalog.families.create.name')"
+                                    :placeholder="trans('admin::app.catalog.families.create.enter-name')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label class="!text-gray-800">
-                                @lang('admin::app.catalog.families.create.name')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="name"
-                                class="!w-[284px]"
-                                value="{{ old('name') }}"
-                                rules="required"
-                                :label="trans('admin::app.catalog.families.create.name')"
-                                :placeholder="trans('admin::app.catalog.families.create.enter-name')"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="name"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-                    </div>
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </x-slot:content>
+                    </x-admin::accordion>
                 </div>
             </div>
         </div>
     </x-admin::form>
 
-
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-testing-template">
-            <div class="">
+        <script 
+            type="text/x-template" 
+            id="v-testing-template"
+        >
+            <div>
                 <!-- Panel Header -->
-                <div class="flex gap-[10px] justify-between flex-wrap mb-[10px] p-[16px]">
+                <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
                     <!-- Panel Header -->
                     <div class="flex flex-col gap-[8px]">
-                        <p class=" text-[16px] text-gray-800 font-semibold">
+                        <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.catalog.families.create.groups')
                         </p>
 
-                        <p class=" text-[12px] text-gray-500 font-medium">
+                        <p class="text-[12px] text-gray-500 font-medium">
                             @lang('admin::app.catalog.families.create.groups-info')
                         </p>
                     </div>
@@ -115,7 +118,7 @@
                     <div class="flex gap-x-[4px] items-center">
                         <!-- Delete Group Button -->
                         <div
-                            class="text-red-600 font-semibold whitespace-nowrap px-[12px] py-[5px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer"
+                            class="px-[12px] py-[5px] border-[2px] border-transparent rounded-[6px] text-red-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer"
                             @click="deleteGroup"
                         >
                             @lang('admin::app.catalog.families.create.delete-group-btn')
@@ -123,7 +126,7 @@
 
                         <!-- Add Group Button -->
                         <div
-                            class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
+                            class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                             @click="$refs.addGroupModal.toggle()"
                         >
                             @lang('admin::app.catalog.families.create.add-group-btn')
@@ -145,7 +148,7 @@
                                 }}
                             </p>
                             
-                            <p class="text-[12px] text-gray-800 font-medium ">
+                            <p class="text-[12px] text-gray-800 font-medium">
                                 @lang('admin::app.catalog.families.create.edit-group-info')
                             </p>
                         </div>
@@ -166,7 +169,8 @@
                                         <i
                                             class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"
                                             @click="element.hide = ! element.hide"
-                                        ></i>
+                                        >
+                                        </i>
 
                                         <!-- Group Name -->
                                         <div
@@ -179,13 +183,14 @@
                                             <i
                                                 class="text-[20px] text-inherit transition-all pointer-events-none"
                                                 :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
-                                            ></i>
+                                            >
+                                            </i>
 
                                             <span
                                                 class="text-[14px] text-inherit font-regular transition-all pointer-events-none"
                                                 v-show="editableGroup.id != element.id"
+                                                v-text="element.name"
                                             >
-                                                @{{ element.name }}
                                             </span>
 
                                             <input
@@ -230,11 +235,14 @@
                                                 <i
                                                     class="text-[20px] transition-all group-hover:text-gray-700"
                                                     :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
-                                                ></i>
+                                                >
+                                                </i>
                                                 
 
-                                                <span class="text-[14px] font-regular transition-all group-hover:text-gray-800 max-xl:text-[12px]">
-                                                    @{{ element.admin_name }}
+                                                <span 
+                                                    class="text-[14px] font-regular transition-all group-hover:text-gray-800 max-xl:text-[12px]"
+                                                    v-text="element.admin_name"
+                                                >
                                                 </span>
 
                                                 <input
@@ -263,8 +271,6 @@
                         <!-- Unassigned Attributes Header -->
                         <div class="flex flex-col mb-[16px]">
                             <p class="text-gray-600 font-semibold leading-[24px]">
-                                Unassigned Attribues
-
                                 @lang('admin::app.catalog.families.create.unassigned-attributes')
                             </p>
 
@@ -289,11 +295,14 @@
                                     <i
                                         class="text-[20px] transition-all group-hover:text-gray-700"
                                         :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
-                                    ></i>
+                                    >
+                                    </i>
                                     
 
-                                    <span class="text-[14px] font-regular transition-all group-hover:text-gray-800 max-xl:text-[12px]">
-                                        @{{ element.admin_name }}
+                                    <span 
+                                        class="text-[14px] font-regular transition-all group-hover:text-gray-800 max-xl:text-[12px]"
+                                        v-text="element.admin_name"    
+                                    >
                                     </span>
                                 </div>
                             </template>
@@ -306,15 +315,19 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, addGroup)">
+                        <!-- Model Form -->
                         <x-admin::modal ref="addGroupModal">
+                            <!-- Model Header -->
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.catalog.families.create.add-group-title')
                                 </p>
                             </x-slot:header>
 
+                            <!--Model Content -->
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <!-- Group Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.catalog.families.create.name')
@@ -332,6 +345,7 @@
                                         <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
+                                    <!-- Select Group Type -->
                                     <x-admin::form.control-group class="mb-4">
                                         <x-admin::form.control-group.label class="!text-gray-800 font-medium">
                                             @lang('admin::app.catalog.families.create.column')
@@ -357,8 +371,10 @@
                                 </div>
                             </x-slot:content>
 
+                            <!-- Model Footer -->
                             <x-slot:footer>
                                 <div class="flex gap-x-[10px] items-center">
+                                    <!-- Add Group Button -->
                                     <button 
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -452,10 +468,16 @@
                     },
 
                     addGroup(params, { resetForm, setErrors }) {
+                        console.log(this.isGroupAlreadyExists(params.name));
                         if (this.isGroupAlreadyExists(params.name)) {
                             setErrors({'name': ["{{ trans('admin::app.catalog.families.create.group-already-exists') }}"]});
 
                             return;
+                        }
+
+                        // Check if params.column exists or create a new array for it
+                        if (!this.columnGroups.hasOwnProperty(params.column)) {
+                            this.columnGroups[params.column] = [];
                         }
 
                         this.columnGroups[params.column].push({
@@ -471,7 +493,7 @@
                     },
                     
                     isGroupAlreadyExists(name) {
-                        return this.columnGroups[1].find(group => group.name == name) || this.columnGroups[2].find(group => group.name == name);
+                        return this.columnGroups[1].find(group => group.name == name) || this.columnGroups[2]?.find(group => group.name == name);
                     },
                     
                     isGroupContainsSystemAttributes(group) {

@@ -3,11 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\CatalogRule;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
-use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
+use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
+use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
 
 class CatalogRuleController extends Controller
 {
@@ -19,13 +19,14 @@ class CatalogRuleController extends Controller
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleIndex $catalogRuleIndexHelper
-    ) {
+    ) 
+    {
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -39,7 +40,7 @@ class CatalogRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -53,6 +54,8 @@ class CatalogRuleController extends Controller
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
     {
+        dd($catalogRuleRequest->all());
+        
         Event::dispatch('promotions.catalog_rule.create.before');
 
         $catalogRule = $this->catalogRuleRepository->create($catalogRuleRequest->all());
@@ -61,7 +64,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.promotions.catalog-rules.create-success'));
+        session()->flash('success', trans('admin::app.promotions.catalog-rules.create.create-success'));
 
         return redirect()->route('admin.catalog_rules.index');
     }
@@ -70,7 +73,7 @@ class CatalogRuleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -97,7 +100,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.promotions.catalog-rules.update-success'));
+        session()->flash('success', trans('admin::app.promotions.catalog-rules.edit.update-success'));
 
         return redirect()->route('admin.catalog_rules.index');
     }

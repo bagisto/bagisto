@@ -84,8 +84,9 @@ window.app = createApp({
  * Global plugins registration.
  */
 import Axios from "./plugins/axios";
+import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
-[Axios, Emitter].forEach((plugin) => app.use(plugin));
+[Axios, CreateElement, Emitter].forEach((plugin) => app.use(plugin));
 
 /**
  * Global components registration;
