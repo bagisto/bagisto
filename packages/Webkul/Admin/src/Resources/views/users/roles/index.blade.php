@@ -17,7 +17,7 @@
                     href="{{ route('admin.roles.create') }}"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.users.roles.index.add-button-title')
+                    @lang('admin::app.users.roles.index.add-btn-title')
                 </a>
             @endif
         </div>

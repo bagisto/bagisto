@@ -524,14 +524,14 @@ return [
 
         'roles' => [
             'index' => [
-                'title'           => 'Roles',
-                'add-button-title'  => 'Add Role',
+                'title'             => 'Roles',
+                'add-btn-title'     => 'Create Role',
             ],
 
             'create' => [
-                'title'             => 'Add Role',
-                'cancel'            => 'Cancel',
-                'save-btn-title'    => 'Save Role',
+                'title'           => 'Create Role',
+                'save-btn-title'  => 'Save Role',
+                'cancel-btn'      => 'Cancel',
                 'general'         => 'General',
                 'name'            => 'Name',
                 'description'     => 'Description',

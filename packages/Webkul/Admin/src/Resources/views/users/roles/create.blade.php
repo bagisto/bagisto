@@ -20,7 +20,7 @@
                         <div class="flex gap-x-[10px] items-center">
                             <a href="{{ route('admin.roles.index') }}">
                                 <span class="text-gray-600 leading-[24px]">
-                                    @lang('admin::app.users.roles.create.cancel')
+                                    @lang('admin::app.users.roles.create.cancel-btn')
                                 </span>
                             </a>
 
