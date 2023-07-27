@@ -4,6 +4,16 @@
         @lang('admin::app.promotions.catalog-rules.create.title')
     </x-slot:title>
 
+     
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     {{-- Create Catalog form --}}
     <v-catalog-rule-create-form></v-catalog-rule-create-form>
 
@@ -21,12 +31,12 @@
                         </p>
                 
                         <div class="flex gap-x-[10px] items-center">
-                            <a 
-                                href="{{ route('admin.catalog_rules.create') }}"
+                            <button 
+                                type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.promotions.catalog-rules.create.save-btn-title')
-                            </a>
+                                @lang('admin::app.promotions.catalog-rules.create.save-btn')
+                            </button>
                         </div>
                     </div>
     

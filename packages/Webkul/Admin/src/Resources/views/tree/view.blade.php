@@ -86,7 +86,7 @@
 
 
         methods: {
-            generateChildren () {
+            generateChildren() {
                 let childElements = [];
 
                 let items = (typeof this.items == 'string') ? JSON.parse(this.items) : this.items;

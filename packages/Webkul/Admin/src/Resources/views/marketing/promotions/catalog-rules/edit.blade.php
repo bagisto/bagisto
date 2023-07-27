@@ -3,7 +3,15 @@
     <x-slot:title>
         @lang('admin::app.promotions.catalog-rules.edit.title')
     </x-slot:title>
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     {{-- edit Catalog form --}}
     <v-catalog-rule-edit-form></v-catalog-rule-edit-form>
 
@@ -15,13 +23,17 @@
                     :action="route('admin.catalog_rules.update', $catalogRule->id)"
                     enctype="multipart/form-data"
                 >
-                    <div class="grid">
-                        <div class="flex justify-end items-center pt-[11px] cursor-pointer">
+                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                        <p class="text-[20px] text-gray-800 font-bold">
+                            @lang('admin::app.promotions.catalog-rules.edit.title')
+                        </p>
+                
+                        <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.promotions.catalog-rules.edit.save-btn-title')
+                                @lang('admin::app.promotions.catalog-rules.edit.save-btn')
                             </button>
                         </div>
                     </div>
@@ -32,7 +44,7 @@
 
                                 {{-- General Form --}}
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                    General
+                                    @lang('admin::app.promotions.catalog-rules.edit.general')
                                 </p>
 
                                 <x-admin::form.control-group class="mb-[10px]">
