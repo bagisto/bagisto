@@ -7,6 +7,10 @@ use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 class HomeController extends Controller
 {
     /**
+     * Using const variable for status
+     */
+    const STATUS = 1;
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -23,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
-            'status' => 1
+            'status' => self::STATUS
         ]);
 
         return view('shop::home.index', compact('customizations'));
