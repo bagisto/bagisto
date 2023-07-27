@@ -269,37 +269,37 @@ return [
     'sales'=> [
         'orders' => [
             'index' => [
-                'title' => 'Orders'
+                'title' => 'Orders',
             ],
         ],
 
         'shipments' => [
             'index' => [
-                'title' => 'Shipments'
+                'title' => 'Shipments',
             ],
         ],
 
         'invoices' => [
             'index' => [
-                'title' => 'Invoices'
+                'title' => 'Invoices',
             ],
         ],
 
         'refunds' => [
             'index' => [
-                'title' => 'Refunds'
+                'title' => 'Refunds',
             ],
         ],
 
         'transactions' => [
             'index' => [
-                'title' => 'Transactions'
+                'title' => 'Transactions',
             ],
 
             'create' => [
-                'add' => 'Add transaction'
-            ]
-        ]
+                'add' => 'Add transaction',
+            ],
+        ],
 
     ],
 
@@ -329,27 +329,27 @@ return [
         'groups' => [
             'index' => [
                 'title' => 'Groups',
+            ],
 
-                'create-form' => [
-                    'add-group'  => 'Add New Group',
-                    'code'       => 'Code',
-                    'name'       => 'Name',
-                    'save-group' => 'Save Group',
-                ],
+            'create' => [
+                'add-group'  => 'Add New Group',
+                'code'       => 'Code',
+                'name'       => 'Name',
+                'save-group' => 'Save Group',
             ],
         ],
 
         'reviews' => [
             'index' => [
-                'title' => 'Reviews'
+                'title' => 'Reviews',
             ],
 
             'edit' => [
 
-            ]
-        ]
+            ],
+        ],
     ],
-    
+
     'settings' => [
         'locales'           => [
             'title'             => 'Locales',
@@ -384,10 +384,10 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'title' => 'Exchange Rates'
+                'title' => 'Exchange Rates',
             ],
-    
-            'create' => [   
+
+            'create' => [
                 'title'            => 'Create Exchange Rate',
                 'button-title'     => 'Add Exchange Rate',
                 'source-currency'  => 'Source Currency',
@@ -437,7 +437,7 @@ return [
                 'index' => [
                     'title'           => 'Tax Categories',
                 ],
-                 
+
                 'create' => [
                     'title'            => 'Tax Categories',
                     'code'             => 'Code',
@@ -453,7 +453,7 @@ return [
             'tax-rates'   => [
                 'index' => [
                     'title'        => 'Tax Rates',
-                    'button-title' => 'Create Tax Rates'
+                    'button-title' => 'Create Tax Rates',
                 ],
 
                 'create'  => [
@@ -539,25 +539,84 @@ return [
             ],
         ],
     ],
-    
+
     'catalog' => [
         'products' => [
             'index' => [
                 'title' => 'Products',
-                'add'   => 'Add Product'
-            ]
+                'add'   => 'Add Product',
+            ],
         ],
 
         'attributes' => [
-            'index' =>  [
-                'title'  => 'Attributes',
-                'add'    => 'Add',
+            'index' => [
+                'title'      => 'Attributes',
+                'create-btn' => 'Create Attributes',
+            ],
+
+            'create'  => [
+                'admin'                       => 'Admin',
+                'add-row'                     => 'Add Row',
+                'add-option'                  => 'Add Option',
+                'admin_name'                  => 'Admin Name',
+                'boolean'                     => 'Boolean',
+                'cancel-btn'                  => 'Cancel',
+                'code'                        => 'Attribute Code',
+                'checkbox'                    => 'Checkbox',
+                'color'                       => 'Color',
+                'configuration'               => 'Configuration',
+                'color-swatch'                => 'Color Swatch',
+                'create-empty-option'         => 'Create default empty option',
+                'default_null_option'         => 'Create default empty option',
+                'dropdown'                    => 'Dropdown',
+                'datetime'                    => 'Datetime',
+                'date'                        => 'Date',
+                'decimal'                     => 'Decimal',
+                'email'                       => 'Email',
+                'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
+                'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
+                'file'                        => 'File',
+                'general'                     => 'General',
+                'is_required'                 => 'Is Required',
+                'input_validation'            => 'Input Validation',
+                'image'                       => 'Image',
+                'image-swatch'                => 'Image Swatch',
+                'is_unique'                   => 'Is Unique',
+                'is_filterable'               => 'Use in Layered Navigation',
+                'is_configurable'             => 'Use To Create Configurable Product',
+                'is_visible_on_front'         => 'Visible on Product View Page on Front-end',
+                'input-options'               => 'Input Options',
+                'is_comparable'               => 'Attribute is comparable',
+                'label'                       => 'Label',
+                'multiselect'                 => 'Multiselect',
+                'no'                          => 'No',
+                'number'                      => 'Number',
+                'price'                       => 'Price',
+                'position'                    => 'Position',
+                'select'                      => 'Select',
+                'select-type'                 => 'Select Attribute Type',
+                'save-btn'                    => 'Save Attribute',
+                'swatch_type'                 => 'Swatch Type',
+                'select'                      => 'Select',
+                'swatch'                      => 'Swatch',
+                'title'                       => 'Add Attribute',
+                'type'                        => 'Attribute Type',
+                'text'                        => 'Text',
+                'text-swatch'                 => 'Text Swatch',
+                'textarea'                    => 'Textarea',
+                'url'                         => 'URL',
+                'use_in_flat'                 => 'Create in Product Flat Table',
+                'validations'                 => 'Validations',
+                'value_per_locale'            => 'Value Per Locale',
+                'value_per_channel'           => 'Value Per Channel',
+                'yes'                         => 'Yes',
             ],
         ],
+
         'categories'  => [
-            'index' =>  [
+            'index' => [
                 'title' => 'Categories',
-                'add' => 'Add',
+                'add'   => 'Add',
             ],
 
             'create' => [
@@ -626,7 +685,7 @@ return [
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
-                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.',
             ],
 
             'edit' => [
@@ -655,7 +714,7 @@ return [
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
-                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.',
             ],
 
             'family'                    => 'Family',
@@ -669,11 +728,6 @@ return [
             'attribute-product-error'   => 'family is used in products.',
         ],
     ],
-
-
-
-
- 
 
     'marketing' => [
         'email-marketing' => [
@@ -692,11 +746,11 @@ return [
                     'select-status'  => 'Select Status',
                     'save-btn-title' => 'Save',
                 ],
-    
+
                 'title'          => 'Email Templates',
                 'events'         => 'Events',
             ],
-    
+
             'campaigns' => [
                 'create'    => [
                     'active'          => 'Active',
@@ -717,10 +771,10 @@ return [
                     'select-status'   => 'Select Status',
                     'subject'         => 'Subject',
                 ],
-    
+
                 'title'          => 'Campaigns',
             ],
-    
+
             'events' => [
                 'create'   => [
                     'title'          => 'Events',
@@ -732,7 +786,7 @@ return [
                     'save'           => 'Save',
                 ],
             ],
-    
+
             'newsletters' => [
                 'title' => 'Newsletter Subscriptions',
             ],

@@ -27,7 +27,6 @@
                     <span
                         class="icon arrow-icon {{ $menu->getActive($menuItem) == 'active' ? 'rotate-arrow-icon' : '' }} {{ ( core()->getCurrentLocale() && core()->getCurrentLocale()->direction == 'rtl' ) ? 'arrow-icon-right' :'arrow-icon-left' }}"
                         ></span>
-
                 @endif
             </a>
             @if ($menuItem['key'] != 'configuration')

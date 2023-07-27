@@ -66,16 +66,22 @@ class TaxRateController extends Controller
             'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
-        $data = request()->all();
+        $data = request()->only([
+            'identifier',
+            'country',
+            'state',
+            'tax_rate',
+            'zip_code',
+            'is_zip',
+            'zip_from',
+            'zip_to',
+        ]);
 
-        if (isset($data['is_zip']) && ! empty($data['is_zip'])) {
+        
+        if ($data['is_zip'] ?? false) {
             $data['is_zip'] = 1;
-
-            unset($data['zip_code']);
-        } else {
-            unset($data['is_zip']);
         }
-
+        
         Event::dispatch('tax.tax_rate.create.before');
 
         $taxRate = $this->taxRateRepository->create($data);
@@ -120,7 +126,18 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.tax_rate.update.before', $id);
 
-        $taxRate = $this->taxRateRepository->update(request()->input(), $id);
+        $data = request()->only([
+            'identifier',
+            'country',
+            'state',
+            'tax_rate',
+            'zip_code',
+            'is_zip',
+            'zip_from',
+            'zip_to',
+        ]);
+
+        $taxRate = $this->taxRateRepository->update($data, $id);
 
         Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
@@ -218,20 +235,35 @@ class TaxRateController extends Controller
 
                     if (isset($failedRules)) {
                         foreach ($failedRules as $column => $fail) {
-                            if ($fail->first('identifier')) {
-                                $errorMsg[$column] = $fail->first('identifier');
-                            } elseif ($fail->first('tax_rate')) {
-                                $errorMsg[$column] = $fail->first('tax_rate');
-                            } elseif ($fail->first('country')) {
-                                $errorMsg[$column] = $fail->first('country');
-                            } elseif ($fail->first('state')) {
-                                $errorMsg[$column] = $fail->first('state');
-                            } elseif ($fail->first('zip_code')) {
-                                $errorMsg[$column] = $fail->first('zip_code');
-                            } elseif ($fail->first('zip_from')) {
-                                $errorMsg[$column] = $fail->first('zip_from');
-                            } elseif ($fail->first('zip_to')) {
-                                $errorMsg[$column] = $fail->first('zip_to');
+                            switch ($column) {
+                                case 'identifier':
+                                    $errorMsg[$column] = $fail->first('identifier');
+                                    break;
+
+                                case 'tax_rate':
+                                    $errorMsg[$column] = $fail->first('tax_rate');
+                                    break;
+
+                                case 'country':
+                                    $errorMsg[$column] = $fail->first('country');
+                                    break;
+
+                                case 'state':
+                                    $errorMsg[$column] = $fail->first('state');
+                                    break;
+
+                                case 'zip_code':
+                                    $errorMsg[$column] = $fail->first('zip_code');
+                                    break;
+
+                                case 'zip_from':
+                                    $errorMsg[$column] = $fail->first('zip_from');
+                                    break;
+
+                                case 'zip_to':
+                                    $errorMsg[$column] = $fail->first('zip_to');
+                                    break;
+
                             }
                         }
 

@@ -57,7 +57,11 @@ class EventController extends Controller
 
         Event::dispatch('marketing.events.create.before');
 
-        $event = $this->eventRepository->create(request()->all());
+        $event = $this->eventRepository->create(request()->only([
+            'name',
+            'description',
+            'date'
+        ]));
 
         Event::dispatch('marketing.events.create.after', $event);
 
@@ -101,7 +105,11 @@ class EventController extends Controller
 
         Event::dispatch('marketing.events.update.before', $id);
 
-        $event = $this->eventRepository->update(request()->all(), $id);
+        $event = $this->eventRepository->update(request()->only([
+            'name',
+            'description',
+            'date'
+        ]), $id);
 
         Event::dispatch('marketing.events.update.after', $event);
 

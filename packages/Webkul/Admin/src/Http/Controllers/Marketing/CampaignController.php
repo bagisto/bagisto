@@ -65,15 +65,15 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.create.before');
 
-        $campaign = $this->campaignRepository->create([
-            'name'                  => request()->input('name'),
-            'subject'               => request()->input('subject'),
-            'marketing_event_id'    => request()->input('marketing_event_id'),
-            'marketing_template_id' => request()->input('marketing_template_id'),
-            'status'                => request()->input('status'),
-            'channel_id'            => request()->input('channel_id'),
-            'customer_group_id'     => request()->input('customer_group_id'),
-        ]);
+        $campaign = $this->campaignRepository->create( request()->only([
+            'name',
+            'subject',
+            'marketing_event_id',
+            'marketing_template_id',
+            'status',
+            'channel_id',
+            'customer_group_id',
+        ]));
 
         Event::dispatch('marketing.campaigns.create.after', $campaign);
 
@@ -115,15 +115,15 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.update.before', $id);
 
-        $campaign = $this->campaignRepository->update([
-            'name'                  => request()->input('name'),
-            'subject'               => request()->input('subject'),
-            'marketing_event_id'    => request()->input('marketing_event_id'),
-            'marketing_template_id' => request()->input('marketing_template_id'),
-            'status'                => request()->input('status'),
-            'channel_id'            => request()->input('channel_id'),
-            'customer_group_id'     => request()->input('customer_group_id'),
-        ], $id);
+        $campaign = $this->campaignRepository->update(request()->only([
+            'name',
+            'subject',
+            'marketing_event_id',
+            'marketing_template_id',
+            'status',
+            'channel_id',
+            'customer_group_id'
+        ]), $id);
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
 

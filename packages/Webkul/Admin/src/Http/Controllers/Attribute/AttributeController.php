@@ -3,21 +3,14 @@
 namespace Webkul\Admin\Http\Controllers\Attribute;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Rules\Code;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\DataGrids\AttributeDataGrid;
 
 class AttributeController extends Controller
 {
-    /**
-     * Contains route related configuration.
-     *
-     * @var array
-     */
-    protected $_config;
-
     /**
      * Create a new controller instance.
      *
@@ -26,8 +19,8 @@ class AttributeController extends Controller
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository
-    ) {
-        $this->_config = request('_config');
+    )
+    {
     }
 
     /**
@@ -69,8 +62,22 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create(array_merge(request()->all(), [
-            'is_user_defined' => 1,
+        $attribute = $this->attributeRepository->create(request()->only([
+            'code',
+            'type',
+            'admin_name',
+            'options',
+            'is_required',
+            'is_unique',
+            'validation',
+            'value_per_locale',
+            'value_per_channel',
+            'is_filterable',
+            'is_configurable',
+            'is_visible_on_front',
+            'use_in_flat',
+            'is_comparable',
+            'is_user_defined' => 1
         ]));
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
