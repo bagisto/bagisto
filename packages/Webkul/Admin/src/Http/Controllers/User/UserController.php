@@ -49,12 +49,16 @@ class UserController extends Controller
      */
     public function store(UserForm $request)
     {
-        $data = $request->all();
+        $data = $request->only([
+            'name',
+            'email',
+            'password',
+            'password_confirmation',
+            'role_id',
+            'status'
+        ]);
 
-        if (
-            isset($data['password'])
-            && $data['password']
-        ) {
+        if ($data['password'] ?? null) {
             $data['password'] = bcrypt($data['password']);
 
             $data['api_token'] = Str::random(80);
@@ -123,8 +127,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $this->adminRepository->findOrFail($id);
-
         if ($this->adminRepository->count() == 1) {
             return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'Admin'])], 400);
         }

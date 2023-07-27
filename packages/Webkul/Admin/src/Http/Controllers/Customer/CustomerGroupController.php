@@ -49,12 +49,14 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.create.before');
 
-        $customerGroup = $this->customerGroupRepository->create([
-            'id'              => request()->input('id'),
-            'code'            => request()->input('code'),
-            'name'            => request()->input('name'),
+        $data = array_merge(request()->only([
+            'code',
+            'name'
+        ]), [
             'is_user_defined' => 1,
         ]);
+
+        $customerGroup = $this->customerGroupRepository->create($data);
 
         Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
@@ -91,7 +93,12 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.update.before', $id);
 
-        $customerGroup = $this->customerGroupRepository->update(request()->all(), $id);
+        $data = request()->only([
+            'code',
+            'name'
+        ]);
+
+        $customerGroup = $this->customerGroupRepository->update($data, $id);
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 

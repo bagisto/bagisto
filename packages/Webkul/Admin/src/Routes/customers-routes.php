@@ -11,6 +11,29 @@ use Webkul\Admin\Http\Controllers\Product\ReviewController;
  */
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     /**
+     * Customer's addresses routes.
+     */
+    Route::controller(AddressController::class)->prefix('customers')->group(function () {
+        Route::prefix('{id}/addresses')->group(function () {
+            Route::get('', 'index')->name('admin.customer.addresses.index');
+
+            Route::get('create', 'create')->name('admin.customer.addresses.create');
+
+            Route::post('create', 'store')->name('admin.customer.addresses.store');
+
+            Route::post('', 'massDestroy')->name('admin.customer.addresses.mass_delete');
+        });
+
+        Route::prefix('addresses')->group(function () {
+            Route::get('edit/{id}', 'edit')->name('admin.customer.addresses.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.customer.addresses.update');
+
+            Route::post('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
+        });
+    });
+
+    /**
      * Customer management routes.
      */
     Route::controller(CustomerController::class)->prefix('customers')->group(function () {
@@ -40,26 +63,18 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     });
 
     /**
-     * Customer's addresses routes.
+     * Customer groups routes.
      */
-    Route::controller(AddressController::class)->prefix('customers')->group(function () {
-        Route::prefix('{id}/addresses')->group(function () {
-            Route::get('', 'index')->name('admin.customer.addresses.index');
+    Route::controller(CustomerGroupController::class)->prefix('groups')->group(function () {
+        Route::get('', 'index')->name('admin.groups.index');
 
-            Route::get('create', 'create')->name('admin.customer.addresses.create');
+        Route::post('create', 'store')->name('admin.groups.store');
 
-            Route::post('create', 'store')->name('admin.customer.addresses.store');
+        Route::get('edit/{id}', 'edit')->name('admin.groups.edit');
 
-            Route::post('', 'massDestroy')->name('admin.customer.addresses.mass_delete');
-        });
+        Route::put('edit/{id}', 'update')->name('admin.groups.update');
 
-        Route::prefix('addresses')->group(function () {
-            Route::get('edit/{id}', 'edit')->name('admin.customer.addresses.edit');
-
-            Route::put('edit/{id}', 'update')->name('admin.customer.addresses.update');
-
-            Route::post('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
-        });
+        Route::post('delete/{id}', 'destroy')->name('admin.groups.delete');
     });
 
     /**
@@ -77,20 +92,5 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::post('mass-delete', 'massDestroy')->name('admin.customer.review.mass_delete');
 
         Route::post('mass-update', 'massUpdate')->name('admin.customer.review.mass_update');
-    });
-
-    /**
-     * Customer groups routes.
-     */
-    Route::controller(CustomerGroupController::class)->prefix('groups')->group(function () {
-        Route::get('', 'index')->name('admin.groups.index');
-
-        Route::post('create', 'store')->name('admin.groups.store');
-
-        Route::get('edit/{id}', 'edit')->name('admin.groups.edit');
-
-        Route::put('edit/{id}', 'update')->name('admin.groups.update');
-
-        Route::post('delete/{id}', 'destroy')->name('admin.groups.delete');
     });
 });

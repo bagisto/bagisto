@@ -57,10 +57,10 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.create.before');
 
-        $sitemap = $this->sitemapRepository->create([
-            'file_name'  => request()->input('file_name'),
-            'path'       => request()->input('path'),
-        ]);
+        $sitemap = $this->sitemapRepository->create(request()->only([
+            'file_name',
+            'path'
+        ]));
 
         Event::dispatch('marketing.sitemaps.create.after', $sitemap);
 
@@ -97,10 +97,10 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.update.before', $id);
 
-        $sitemap = $this->sitemapRepository->update([
-            'file_name'  => request()->input('file_name'),
-            'path'       => request()->input('path'),
-        ], $id);
+        $sitemap = $this->sitemapRepository->update(request()->only([
+            'file_name',
+            'path'
+        ]), $id);
 
         Event::dispatch('marketing.sitemaps.update.after', $sitemap);
 

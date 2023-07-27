@@ -4,23 +4,29 @@ namespace Webkul\Admin\Http\Controllers\Product;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Attribute\Repositories\AttributeFamilyRepository;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Core\Rules\Slug;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Http\Requests\InventoryRequest;
 use Webkul\Product\Http\Requests\ProductForm;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
-use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\DataGrids\ProductDataGrid;
+use Webkul\Core\Rules\Slug;
+use Webkul\Product\Helpers\ProductType;
 
 class ProductController extends Controller
 {
+
+    /*
+    * Using const variable for status 
+    */
+    const STATUS = 1;
+
     /**
      * Create a new controller instance.
      *
@@ -35,7 +41,8 @@ class ProductController extends Controller
         protected ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         protected ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         protected ProductInventoryRepository $productInventoryRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -105,7 +112,15 @@ class ProductController extends Controller
 
         Event::dispatch('catalog.product.create.before');
 
-        $product = $this->productRepository->create(request()->all());
+        $data = request()->only([
+            'type',
+            'attribute_family_id',
+            'sku',
+            'super_attributes',
+            'family'
+        ]);
+
+        $product = $this->productRepository->create($data);
 
         Event::dispatch('catalog.product.create.after', $product);
 
@@ -126,7 +141,7 @@ class ProductController extends Controller
 
         $categories = $this->categoryRepository->getCategoryTree();
 
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => self::STATUS]);
 
         return view('admin::catalog.products.edit', compact('product', 'categories', 'inventorySources'));
     }
