@@ -59,15 +59,15 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.create.before');
 
-        $data = [
-            'page_title'       => request()->input('page_title'),
-            'channels'         => request()->input('channels'),
-            'html_content'     => request()->input('html_content'),
-            'meta_title'       => request()->input('meta_title'),
-            'url_key'          => request()->input('url_key'),
-            'meta_keywords'    => request()->input('meta_keywords'),
-            'meta_description' => request()->input('meta_description'),
-        ];
+        $data = request()->only([
+            'page_title',
+            'channels',
+            'html_content',
+            'meta_title',
+            'url_key',
+            'meta_keywords',
+            'meta_description',
+        ]);
 
         $page = $this->cmsRepository->create($data);
 

@@ -3,13 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\AddressDataGrid;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Rules\AlphaNumericSpace;
 use Webkul\Core\Rules\PhoneNumber;
-use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Rules\VatIdRule;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerAddressRepository;
+use Webkul\Admin\DataGrids\AddressDataGrid;
 
 class AddressController extends Controller
 {
@@ -72,13 +72,26 @@ class AddressController extends Controller
             'vat_id'       => [new VatIdRule()],
         ]);
 
-        request()->merge([
+        $data = array_merge(request()->only([
+            'customer_id',
+            'company_name',
+            'vat_id',
+            'first_name',
+            'last_name',
+            'address1',
+            'city',
+            'country',
+            'state',
+            'postcode',
+            'phone',
+            'default_address',
+        ]), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
         ]);
 
         Event::dispatch('customer.addresses.create.before');
 
-        $customerAddress = $this->customerAddressRepository->create(request()->all());
+        $customerAddress = $this->customerAddressRepository->create($data);
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 
@@ -119,13 +132,26 @@ class AddressController extends Controller
             'vat_id'       => [new VatIdRule()],
         ]);
 
-        request()->merge([
+        $data = array_merge(request()->only([
+            'customer_id',
+            'company_name',
+            'vat_id',
+            'first_name',
+            'last_name',
+            'address1',
+            'city',
+            'country',
+            'state',
+            'postcode',
+            'phone',
+            'default_address',
+        ]), [
             'address1' => implode(PHP_EOL, array_filter(request()->input('address1'))),
         ]);
 
         Event::dispatch('customer.addresses.update.before', $id);
 
-        $customerAddress = $this->customerAddressRepository->update(request()->all(), $id);
+        $customerAddress = $this->customerAddressRepository->update($data, $id);
 
         Event::dispatch('customer.addresses.update.after', $customerAddress);
 

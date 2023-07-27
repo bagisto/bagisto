@@ -13,19 +13,6 @@ use Webkul\Admin\Http\Controllers\Sales\TransactionController;
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('sales')->group(function () {
         /**
-         * Orders routes.
-         */
-        Route::controller(OrderController::class)->prefix('orders')->group(function () {
-            Route::get('', 'index')->name('admin.sales.orders.index');
-
-            Route::get('view/{id}', 'view')->name('admin.sales.orders.view');
-
-            Route::get('cancel/{id}', 'cancel')->name('admin.sales.orders.cancel');
-
-            Route::post('create/{order_id}', 'comment')->name('admin.sales.orders.comment');
-        });
-
-        /**
          * Invoices routes.
          */
         Route::controller(InvoiceController::class)->prefix('invoices')->group(function () {
@@ -45,16 +32,16 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         });
 
         /**
-         * Shipments routes.
+         * Orders routes.
          */
-        Route::controller(ShipmentController::class)->prefix('shipments')->group(function () {
-            Route::get('', 'index')->name('admin.sales.shipments.index');
+        Route::controller(OrderController::class)->prefix('orders')->group(function () {
+            Route::get('', 'index')->name('admin.sales.orders.index');
 
-            Route::get('create/{order_id}', 'create')->name('admin.sales.shipments.create');
+            Route::get('view/{id}', 'view')->name('admin.sales.orders.view');
 
-            Route::post('create/{order_id}', 'store')->name('admin.sales.shipments.store');
+            Route::get('cancel/{id}', 'cancel')->name('admin.sales.orders.cancel');
 
-            Route::get('view/{id}', 'view')->name('admin.sales.shipments.view');
+            Route::post('create/{order_id}', 'comment')->name('admin.sales.orders.comment');
         });
 
         /**
@@ -70,6 +57,19 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('update-qty/{order_id}', 'updateQty')->name('admin.sales.refunds.update_qty');
 
             Route::get('view/{id}', 'view')->name('admin.sales.refunds.view');
+        });
+
+        /**
+         * Shipments routes.
+         */
+        Route::controller(ShipmentController::class)->prefix('shipments')->group(function () {
+            Route::get('', 'index')->name('admin.sales.shipments.index');
+
+            Route::get('create/{order_id}', 'create')->name('admin.sales.shipments.create');
+
+            Route::post('create/{order_id}', 'store')->name('admin.sales.shipments.store');
+
+            Route::get('view/{id}', 'view')->name('admin.sales.shipments.view');
         });
 
         /**

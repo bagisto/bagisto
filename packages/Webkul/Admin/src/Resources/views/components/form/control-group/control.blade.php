@@ -8,6 +8,7 @@
     @case('text')
     @case('email')
     @case('password')
+    @case('number')
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
@@ -22,6 +23,21 @@
             >
         </v-field>
 
+        @break
+
+    @case('color')
+        <v-field
+            name="{{ $name }}"
+            v-slot="{ field }"
+            {{ $attributes->except('class') }}
+        >
+            <input
+                type="{{ $type }}"
+                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                v-bind="field"
+                {{ $attributes->except(['value'])->merge(['class' => 'w-full appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+            >
+        </v-field>
         @break
 
     @case('textarea')
@@ -91,6 +107,7 @@
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
                 {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             >
+                <option value="" selected disabled>Select</option>
                 {{ $slot }}
             </select>
         </v-field>

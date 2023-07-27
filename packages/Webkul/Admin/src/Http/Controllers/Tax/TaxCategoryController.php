@@ -5,9 +5,9 @@ namespace Webkul\Admin\Http\Controllers\Tax;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
 use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
-use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class TaxCategoryController extends Controller
 {
@@ -43,8 +43,6 @@ class TaxCategoryController extends Controller
      */
     public function store()
     {
-        $data = request()->input();
-
         $this->validate(request(), [
             'code'        => 'required|string|unique:tax_categories,code',
             'name'        => 'required|string',
@@ -53,6 +51,13 @@ class TaxCategoryController extends Controller
         ]);
 
         Event::dispatch('tax.tax_category.create.before');
+
+        $data = request()->only([
+            'code',
+            'name',
+            'description',
+            'taxrates'
+        ]);
 
         $taxCategory = $this->taxCategoryRepository->create($data);
 
@@ -93,9 +98,14 @@ class TaxCategoryController extends Controller
             'taxrates'    => 'array|required',
         ]);
 
-        $data = request()->input();
-
         Event::dispatch('tax.tax_category.update.before', $id);
+
+        $data = request()->only([
+            'code',
+            'name',
+            'description',
+            'taxrates'
+        ]);
 
         $taxCategory = $this->taxCategoryRepository->update($data, $id);
 

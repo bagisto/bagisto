@@ -1,16 +1,83 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\Product\ProductController;
+use Webkul\Admin\Http\Controllers\Category\CategoryController;
 use Webkul\Admin\Http\Controllers\Attribute\AttributeController;
 use Webkul\Admin\Http\Controllers\Attribute\AttributeFamilyController;
-use Webkul\Admin\Http\Controllers\Category\CategoryController;
-use Webkul\Admin\Http\Controllers\Catalog\ProductController;
 
 /**
  * Catalog routes.
  */
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     Route::prefix('catalog')->group(function () {
+        /**
+         * Attributes routes.
+         */
+        Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
+            Route::get('', 'index')->name('admin.catalog.attributes.index');
+
+            Route::get('{id}/options', 'getAttributeOptions')->defaults('_config', [
+                'view' => 'admin::catalog.attributes.options',
+            ])->name('admin.catalog.attributes.options');
+
+            Route::get('create', 'create')->name('admin.catalog.attributes.create');
+
+            Route::post('create', 'store')->name('admin.catalog.attributes.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.catalog.attributes.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.catalog.attributes.update');
+
+            Route::post('delete/{id}', 'destroy')->name('admin.catalog.attributes.delete');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.catalog.attributes.mass_delete');
+
+            Route::get('products/{productId}/super-attributes', 'productSuperAttributes')->name('admin.catalog.product.super-attributes');
+        });
+
+        /**
+         * Attribute families routes.
+         */
+        Route::controller(AttributeFamilyController::class)->prefix('families')->group(function () {
+            Route::get('', 'index')->name('admin.catalog.families.index');
+
+            Route::get('create', 'create')->name('admin.catalog.families.create');
+
+            Route::post('create', 'store')->name('admin.catalog.families.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.catalog.families.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.catalog.families.update');
+
+            Route::post('delete/{id}', 'destroy')->name('admin.catalog.families.delete');
+        });
+
+        /**
+         * Categories routes.
+         */
+        Route::controller(CategoryController::class)->prefix('categories')->group(function () {
+            Route::get('', 'index')->name('admin.catalog.categories.index');
+
+            Route::get('create', 'create')->name('admin.catalog.categories.create');
+
+            Route::post('create', 'store')->name('admin.catalog.categories.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.catalog.categories.edit');
+
+            Route::put('edit/{id}', 'update')->name('admin.catalog.categories.update');
+
+            Route::get('products/{id}', 'products')->name('admin.catalog.categories.products');
+
+            Route::post('delete/{id}', 'destroy')->name('admin.catalog.categories.delete');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.catalog.categories.mass_delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.catalog.categories.mass_update');
+
+            Route::post('product/count', 'categoryProductCount')->name('admin.catalog.categories.product.count');
+        });
+
         /**
          * Sync route.
          */
@@ -53,73 +120,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::get('{id}/{attribute_id}', 'download')->defaults('_config', [
                 'view' => 'admin.catalog.products.edit',
             ])->name('admin.catalog.products.file.download');
-        });
-
-        /**
-         * Categories routes.
-         */
-        Route::controller(CategoryController::class)->prefix('categories')->group(function () {
-            Route::get('', 'index')->name('admin.catalog.categories.index');
-
-            Route::get('create', 'create')->name('admin.catalog.categories.create');
-
-            Route::post('create', 'store')->name('admin.catalog.categories.store');
-
-            Route::get('edit/{id}', 'edit')->name('admin.catalog.categories.edit');
-
-            Route::put('edit/{id}', 'update')->name('admin.catalog.categories.update');
-
-            Route::get('products/{id}', 'products')->name('admin.catalog.categories.products');
-
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.categories.delete');
-
-            Route::post('mass-delete', 'massDestroy')->name('admin.catalog.categories.mass_delete');
-
-            Route::post('mass-update', 'massUpdate')->name('admin.catalog.categories.mass_update');
-
-            Route::post('product/count', 'categoryProductCount')->name('admin.catalog.categories.product.count');
-        });
-
-        /**
-         * Attributes routes.
-         */
-        Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
-            Route::get('', 'index')->name('admin.catalog.attributes.index');
-
-            Route::get('{id}/options', 'getAttributeOptions')->defaults('_config', [
-                'view' => 'admin::catalog.attributes.options',
-            ])->name('admin.catalog.attributes.options');
-
-            Route::get('create', 'create')->name('admin.catalog.attributes.create');
-
-            Route::post('create', 'store')->name('admin.catalog.attributes.store');
-
-            Route::get('edit/{id}', 'edit')->name('admin.catalog.attributes.edit');
-
-            Route::put('edit/{id}', 'update')->name('admin.catalog.attributes.update');
-
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.attributes.delete');
-
-            Route::post('mass-delete', 'massDestroy')->name('admin.catalog.attributes.mass_delete');
-
-            Route::get('products/{productId}/super-attributes', 'productSuperAttributes')->name('admin.catalog.product.super-attributes');
-        });
-
-        /**
-         * Attribute families routes.
-         */
-        Route::controller(AttributeFamilyController::class)->prefix('families')->group(function () {
-            Route::get('', 'index')->name('admin.catalog.families.index');
-
-            Route::get('create', 'create')->name('admin.catalog.families.create');
-
-            Route::post('create', 'store')->name('admin.catalog.families.store');
-
-            Route::get('edit/{id}', 'edit')->name('admin.catalog.families.edit');
-
-            Route::put('edit/{id}', 'update')->name('admin.catalog.families.update');
-
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.families.delete');
         });
     });
 });

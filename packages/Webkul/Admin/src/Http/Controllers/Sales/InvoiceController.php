@@ -3,24 +3,17 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\Request;
-use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
-use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
+use Webkul\Admin\DataGrids\OrderInvoicesDataGrid;
+use Webkul\Admin\DataGrids\InvoicesTransactionsDatagrid;
 use Webkul\Admin\Traits\Mails;
 use Webkul\Core\Traits\PDFHandler;
-use Webkul\Sales\Repositories\InvoiceRepository;
-use Webkul\Sales\Repositories\OrderRepository;
 
 class InvoiceController extends Controller
 {
     use Mails, PDFHandler;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return array
-     */
-    protected $_config;
 
     /**
      * Create a new controller instance.
@@ -30,8 +23,8 @@ class InvoiceController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    ) {
-        $this->_config = request('_config');
+    )
+    {
     }
 
     /**
