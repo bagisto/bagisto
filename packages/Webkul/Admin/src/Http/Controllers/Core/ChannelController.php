@@ -3,9 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Core;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\ChannelDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Admin\DataGrids\ChannelDataGrid;
 
 class ChannelController extends Controller
 {

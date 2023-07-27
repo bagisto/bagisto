@@ -12,14 +12,20 @@ use Webkul\Admin\Http\Controllers\User\SessionController;
  */
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
     /**
+     * Dashboard routes.
+     */
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+
+    /**
+     * DataGrid export.
+     */
+    Route::post('export', [ExportController::class, 'export'])->name('admin.datagrid.export');
+
+    /**
      * Tinymce file upload handler.
      */
     Route::post('tinymce/upload', [TinyMCEController::class, 'upload'])->name('admin.tinymce.upload');
 
-    /**
-     * Dashboard routes.
-     */
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
     /**
      * Admin profile routes.
@@ -32,8 +38,5 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
     Route::get('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');
 
-    /**
-     * DataGrid export.
-     */
-    Route::post('export', [ExportController::class, 'export'])->name('admin.datagrid.export');
+
 });

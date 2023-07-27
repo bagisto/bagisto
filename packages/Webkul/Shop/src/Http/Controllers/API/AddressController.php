@@ -38,21 +38,22 @@ class AddressController extends APIController
 
         Event::dispatch('customer.addresses.create.before');
 
-        $customerAddress = $this->customerAddressRepository->create([
-            'company_name'    => $request->input('company_name'),
-            'first_name'      => $request->input('first_name'),
-            'last_name'       => $request->input('last_name'),
-            'vat_id'          => $request->input('vat_id'),
-            'address1'        => $request->input('address1'),
-            'country'         => $request->input('country'),
-            'state'           => $request->input('state'),
-            'city'            => $request->input('city'),
-            'postcode'        => $request->input('postcode'),
-            'phone'           => $request->input('phone'),
+        $data = array_merge(request()->only([
+            'company_name',
+            'first_name',
+            'last_name',
+            'vat_id',
+            'address1',
+            'country',
+            'state',
+            'city',
+            'postcode',
+        ]), [
             'customer_id'     => $customer->id,
             'address1'        => implode(PHP_EOL, array_filter($request->input('address1'))),
-            'default_address' => ! $customer->addresses->count(),
         ]);
+
+        $customerAddress = $this->customerAddressRepository->create($data);
 
         Event::dispatch('customer.addresses.create.after', $customerAddress);
 

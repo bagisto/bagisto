@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\RolesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
+use Webkul\User\Repositories\AdminRepository;
+use Webkul\Admin\DataGrids\RolesDataGrid;
 
 class RoleController extends Controller
 {
@@ -59,7 +59,14 @@ class RoleController extends Controller
 
         Event::dispatch('user.role.create.before');
 
-        $role = $this->roleRepository->create(request()->all());
+        $data = request()->only([
+            "name",
+            "description",
+            "permission_type",
+            "permissions"
+         ]);
+
+        $role = $this->roleRepository->create($data);
 
         Event::dispatch('user.role.create.after', $role);
 
@@ -108,11 +115,17 @@ class RoleController extends Controller
             return redirect()->route('admin.roles.index');
         }
 
+        $data = array_merge(request()->only([
+            "name",
+            "description",
+            "permission_type",
+         ]), [
+            'permissions' => request()->has('permissions') ? request('permissions') : [],
+         ]);
+
         Event::dispatch('user.role.update.before', $id);
 
-        $role = $this->roleRepository->update(array_merge(request()->all(), [
-            'permissions' => request()->has('permissions') ? request('permissions') : [],
-        ]), $id);
+        $role = $this->roleRepository->update($data, $id);
 
         Event::dispatch('user.role.update.after', $role);
 

@@ -3,10 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Sales\Repositories\OrderCommentRepository;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\OrderCommentRepository;
+use Webkul\Admin\DataGrids\OrderDataGrid;
 
 class OrderController extends Controller
 {
@@ -18,7 +18,8 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected OrderCommentRepository $orderCommentRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -77,10 +78,15 @@ class OrderController extends Controller
     {
         Event::dispatch('sales.order.comment.create.before');
 
-        $comment = $this->orderCommentRepository->create(array_merge(request()->all(), [
+        $data = array_merge(request()->only([
+            'comment',
+            'customer_notified'
+        ]), [
             'order_id'          => $id,
             'customer_notified' => request()->has('customer_notified'),
-        ]));
+        ]);
+
+        $comment = $this->orderCommentRepository->create($data);
 
         Event::dispatch('sales.order.comment.create.after', $comment);
 

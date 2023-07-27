@@ -60,8 +60,62 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <!-- Country State Vue Component -->
-                            <v-country-state></v-country-state>
+                            <!-- Country -->
+                            <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.taxes.tax-rates.create.country')
+                                </x-admin::form.control-group.label>
+                
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="country"
+                                    value="{{ old('country') }}"
+                                    rules="required"
+                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.country') }}"
+                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.country') }}"
+                                    v-model="country"
+                                >
+                                    <option value="">
+                                        @lang('admin::app.settings.taxes.tax-rates.create.select-country')
+                                    </option>
+                
+                                    @foreach (core()->countries() as $country)
+                                        <option value="{{ $country->code }}">
+                                            {{ $country->name }}
+                                        </option>
+                                    @endforeach
+                                </x-admin::form.control-group.control>
+                
+                                <x-admin::form.control-group.error
+                                    class="mt-1"
+                                    control-name="country"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                
+                            <!-- State -->
+                            <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.taxes.tax-rates.create.state')
+                                </x-admin::form.control-group.label>
+                
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="state"
+                                    value="{{ old('state') }}"
+                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.state') }}"
+                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.state') }}"
+                                    v-model="state"
+                                >
+                                    <option value="">
+                                        @lang('admin::app.settings.taxes.tax-rates.create.select-state')
+                                    </option>
+                
+                                    <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                                        @{{ state.default_name }}
+                                    </option>
+                                </x-admin::form.control-group.control>
+                            </x-admin::form.control-group>
 
                             <!-- Tax Rate -->
                             <x-admin::form.control-group class="mb-4">
@@ -201,86 +255,14 @@
         </x-admin::form>
     </script>
 
-    <script type="text/x-template" id="v-country-state-template">
-        <x-admin::form>
-            <!-- Country -->
-            <x-admin::form.control-group class="mb-4">
-                <x-admin::form.control-group.label>
-                    @lang('admin::app.settings.taxes.tax-rates.create.country')
-                </x-admin::form.control-group.label>
-
-                <x-admin::form.control-group.control
-                    type="select"
-                    name="country"
-                    value="{{ old('country') }}"
-                    rules="required"
-                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.country') }}"
-                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.country') }}"
-                    v-model="country"
-                >
-                    <option value="">
-                        @lang('admin::app.settings.taxes.tax-rates.create.select-country')
-                    </option>
-
-                    @foreach (core()->countries() as $country)
-                        <option value="{{ $country->code }}">
-                            {{ $country->name }}
-                        </option>
-                    @endforeach
-                </x-admin::form.control-group.control>
-
-                <x-admin::form.control-group.error
-                    class="mt-1"
-                    control-name="country"
-                >
-                </x-admin::form.control-group.error>
-            </x-admin::form.control-group>
-
-            <!-- State -->
-            <x-admin::form.control-group class="mb-4">
-                <x-admin::form.control-group.label>
-                    @lang('admin::app.settings.taxes.tax-rates.create.state')
-                </x-admin::form.control-group.label>
-
-                <x-admin::form.control-group.control
-                    type="select"
-                    name="state"
-                    value="{{ old('state') }}"
-                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.state') }}"
-                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.state') }}"
-                    v-model="state"
-                >
-                    <option value="">
-                        @lang('admin::app.settings.taxes.tax-rates.create.select-state')
-                    </option>
-
-                    <option v-for='(state, index) in countryStates[country]' :value="state.code">
-                        @{{ state.default_name }}
-                    </option>
-                </x-admin::form.control-group.control>
-            </x-admin::form.control-group>
-        </x-admin::form>
-    </script>
-
     <script type="module">
         app.component('v-create-taxrate', {
             template: '#v-create-taxrate-template',
 
-
             data() {
                 return {
-                    is_zip: false
-                }
-            },
-        });
-    </script>
+                    is_zip: false,
 
-    <script type="module">
-        app.component('v-country-state', {
-            template: '#v-country-state-template',
-
-            data: function () {
-                return {
                     country: "{{ old('country')  }}",
 
                     state: "{{ old('state')  }}",
