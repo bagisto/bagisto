@@ -3,15 +3,20 @@
 return [
 
     'promotions' => [
+        'tab' => [
+            'catalog-rule-title' => 'Catalog Rules',
+            'cart-rule-title'    => 'Cart Rules',
+        ],
+
         'cart-rules' => [
             'index' => [
-                'title'     => 'Cart Rules',
-                'add-title' => 'Add Cart Rule',
+                'title'      => 'Cart Rules',
+                'create-btn' => 'Create Cart Rule',
             ],
 
             'create' => [
-                'title'                                     => 'Cart Rules',
-                'save'                                      => 'Save Cart Rules',
+                'title'                                     => 'Create Cart Rule',
+                'save-btn'                                  => 'Save Cart Rule',
                 'general'                                   => 'General',
                 'name'                                      => 'Name',
                 'description'                               => 'Description',
@@ -26,6 +31,7 @@ return [
                 'coupon-code'                               => 'Coupon Code',
                 'uses-per-coupon'                           => 'Uses Per Coupon',
                 'uses-per-customer'                         => 'Uses Per Customer',
+                'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                 'conditions'                                => 'Conditions',
                 'condition-type'                            =>'Condition Type',
                 'all-conditions-true'                       => 'All Conditions Are True',
@@ -83,8 +89,8 @@ return [
             ],
 
             'edit' => [
-                'title'                                     => 'Edit Cart Rules',
-                'save'                                      => 'Save Cart Rules',
+                'title'                                     => 'Edit Cart Rule',
+                'save-btn'                                  => 'Save Cart Rule',
                 'general'                                   => 'General',
                 'name'                                      => 'Name',
                 'description'                               => 'Description',
@@ -99,6 +105,7 @@ return [
                 'coupon-code'                               => 'Coupon Code',
                 'uses-per-coupon'                           => 'Uses Per Coupon',
                 'uses-per-customer'                         => 'Uses Per Customer',
+                'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                 'conditions'                                => 'Conditions',
                 'condition-type'                            =>'Condition Type',
                 'all-conditions-true'                       => 'All Conditions Are True',
@@ -153,18 +160,27 @@ return [
                 'attribute-name-parent-only'                => 'Attribute name parent only',
                 'update-success'                            => 'Cart rule updated successfully',
                 'choose-condition-to-add'                   => 'Choose condition to add',
+                'coupon-qty'                                => 'Coupon Quantity',
+                'coupon-length'                             => 'Coupon Length',
+                'code-format'                               => 'Code Format',
+                'alphanumeric'                              => 'Alphanumeric',
+                'alphabetical'                              => 'Alphabetical',
+                'numeric'                                   => 'Numeric',
+                'code-suffix'                               => 'Code Suffix',
+                'code-prefix'                               => 'Code Prefix',
+                'generate'                                  => 'Generate'
             ] 
         ],
 
         'catalog-rules' => [
             'index' => [
                 'title'     => 'Catalog Rules',
-                'add-title' => 'Add Catalog Rule',
+                'create-btn' => 'Create Catalog Rule',
             ],
 
             'create' => [
-                'title'                    => 'Catalog Rules',
-                'save-btn-title'           => 'Save Catalog Rule',
+                'title'                    => 'Create Catalog Rule',
+                'save-btn'                 => 'Save Catalog Rule',
                 'name'                     => 'Name',
                 'description'              => 'Description',
                 'channels'                 => 'Channels',
@@ -205,8 +221,9 @@ return [
             ],
 
             'edit' => [
-                'title'                    => 'Edit Catalog Rules',
-                'save-btn-title'           => 'Save Catalog Rule',
+                'title'                    => 'Edit Catalog Rule',
+                'save-btn'                 => 'Save Catalog Rule',
+                'general'                  => 'General',
                 'name'                     => 'Name',
                 'description'              => 'Description',
                 'channels'                 => 'Channels',
@@ -544,9 +561,62 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
-                'title' => 'Products',
-                'add'   => 'Add Product',
+                'title'      => 'Products',
+                'create-btn' => 'Create Product',
+                'create' => [
+                    'title'                   => 'Create New Product',
+                    'configurable-attributes' => 'Configurable Attributes',
+                    'create-btn'              => 'Create Product',
+                    'save-btn'                => 'Save Product',
+                    'back-btn'                => 'Back',
+                    'type'                    => 'Type',
+                    'simple'                  => 'Simple',
+                    'configurable'            => 'Configurable',
+                    'virtual'                 => 'Virtual',
+                    'downloadable'            => 'Downloadable',
+                    'grouped'                 => 'Grouped',
+                    'bundle'                  => 'Bundle',
+                    'booking'                 => 'Booking',
+                    'family'                  => 'Family',
+                    'sku'                     => 'SKU',
+                ]
             ],
+
+            'edit' => [
+                'title'       => 'Edit Product',
+                
+                'inventories' => [
+                    'title'                    => 'Inventories',
+                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
+                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
+                ],
+
+                'price' => [
+                    'group' => [
+                        'title'                     => 'Customer Group Price',
+                        'create-btn'                => 'Add New',
+                        'edit-btn'                  => 'Edit',
+                        'add-group-price'           => 'Add Group Price',
+                        'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
+                        'discount-group-price-info' => 'For qty Qty at discount of :price',
+                        'empty-info'                => 'Special pricing for customers belonging to a specific group.',
+
+
+                        'create' => [
+                            'create-title'   => 'Create Customer Group Price',
+                            'update-title'   => 'Update Customer Group Price',
+                            'customer-group' => 'Customer Group',
+                            'qty'            => 'Qty',
+                            'price-type'     => 'Price Type',
+                            'fixed'          => 'Fixed',
+                            'discount'       => 'Discount',
+                            'price'          => 'Price',
+                            'delete-btn'     => 'Delete',
+                            'save-btn'       => 'Save',
+                        ]
+                    ]
+                ]
+            ]
         ],
 
         'attributes' => [

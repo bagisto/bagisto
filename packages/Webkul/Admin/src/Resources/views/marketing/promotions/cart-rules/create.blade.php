@@ -17,17 +17,21 @@
                     :action="route('admin.cart_rules.store')"
                     enctype="multipart/form-data"
                 >
-                    <div class="grid">
-                        <div class="flex justify-end items-center pt-[11px]">
+                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                        <p class="text-[20px] text-gray-800 font-bold">
+                            @lang('admin::app.promotions.cart-rules.create.title')
+                        </p>
+                
+                        <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.promotions.cart-rules.create.save')
+                                @lang('admin::app.promotions.cart-rules.create.save-btn')
                             </button>
                         </div>
                     </div>
-                
+
                     {{-- body content  --}}
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         {{-- Left sub-component --}}
@@ -243,6 +247,7 @@
                                             type="text"
                                             name="uses_per_coupon"
                                             id="uses_per_coupon"
+                                            rules="numeric"
                                             :label="trans('admin::app.promotions.cart-rules.create.uses-per-coupon')"
                                             :placeholder="trans('admin::app.promotions.cart-rules.create.uses-per-coupon')"
                                         >
@@ -275,7 +280,9 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                
+                                <p class="text-sm text-gray-500">
+                                    @lang('admin::app.promotions.cart-rules.create.uses-per-customer-control-info')
+                                </p>
                             </div>
                 
                             {{-- Conditions --}}
@@ -650,50 +657,48 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="px-[16px] pb-[16px]">
-                                        <div class="flex gap-[16px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.cart-rules.create.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="starts_from"
-                                                    :value="old('starts_from')"
-                                                    id="starts_from"
-                                                    :label="trans('admin::app.promotions.cart-rules.create.from')"
-                                                    :placeholder="trans('admin::app.promotions.cart-rules.create.from')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="starts_from"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
+                                    <div class="flex gap-[16px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.cart-rules.create.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="starts_from"
+                                                :value="old('starts_from')"
+                                                id="starts_from"
+                                                :label="trans('admin::app.promotions.cart-rules.create.from')"
+                                                :placeholder="trans('admin::app.promotions.cart-rules.create.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="starts_from"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.cart-rules.create.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="ends_till"
-                                                    :value="old('ends_till')"
-                                                    id="ends_till"
-                                                    :label="trans('admin::app.promotions.cart-rules.create.to')"
-                                                    :placeholder="trans('admin::app.promotions.cart-rules.create.to')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="ends_till"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.cart-rules.create.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="ends_till"
+                                                :value="old('ends_till')"
+                                                id="ends_till"
+                                                :label="trans('admin::app.promotions.cart-rules.create.to')"
+                                                :placeholder="trans('admin::app.promotions.cart-rules.create.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="ends_till"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
@@ -707,7 +712,7 @@
             app.component('v-cart-rule-create-form', {
                 template: '#v-cart-rule-create-form-template',
 
-                data: function() {
+                data() {
                     return {
                         coupon_type: 0,
 
@@ -717,12 +722,12 @@
 
                         conditions: [],
 
-                        action_type: "{{ old('action_type') ?: 'by_percent' }}"
+                        action_type: "{{ old('action_type') ?: 'by_percent' }}",
                     }
                 },
 
                 methods: {
-                    addCondition: function() {
+                    addCondition() {
                         this.conditions.push({
                             'attribute': '',
                             'operator': '==',
@@ -730,25 +735,25 @@
                         });
                     },
 
-                    removeCondition: function(condition) {
-                        let index = this.conditions.indexOf(condition)
+                    removeCondition(condition) {
+                        let index = this.conditions.indexOf(condition);
 
-                        this.conditions.splice(index, 1)
+                        this.conditions.splice(index, 1);
                     },
 
-                    onSubmit: function(e) {
-                        this.$root.onSubmit(e)
+                    onSubmit(e) {
+                        this.$root.onSubmit(e);
                     },
 
-                    onSubmit: function(e) {
-                        this.$root.onSubmit(e)
+                    onSubmit(e) {
+                        this.$root.onSubmit(e);
                     },
 
-                    redirectBack: function(fallbackUrl) {
-                        this.$root.redirectBack(fallbackUrl)
-                    }
-                }
-            })
+                    redirectBack(fallbackUrl) {
+                        this.$root.redirectBack(fallbackUrl);
+                    },
+                },
+            });
         </script>
 
         {{-- v catalog rule condition item form template --}}
@@ -1114,33 +1119,33 @@
                     }
                 },
 
-            computed: {
-                matchedAttribute() {
-                    if (this.condition.attribute == '')
-                        return;
+                computed: {
+                    matchedAttribute() {
+                        if (this.condition.attribute == '')
+                            return;
 
-                    let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
+                        let attributeIndex = this.attributeTypeIndexes[this.condition.attribute.split("|")[0]];
 
-                    let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter((attribute) => {
-                        return attribute.key == this.condition.attribute;
-                    });
+                        let matchedAttribute = this.conditionAttributes[attributeIndex]['children'].filter((attribute) => {
+                            return attribute.key == this.condition.attribute;
+                        });
 
-                    if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] ==
-                        'checkbox') {
-                        this.condition.operator = '{}';
+                        if (matchedAttribute[0]['type'] == 'multiselect' || matchedAttribute[0]['type'] ==
+                            'checkbox') {
+                            this.condition.operator = '{}';
 
-                        this.condition.value = [];
+                            this.condition.value = [];
+                        }
+
+                        return matchedAttribute[0];
                     }
+                },
 
-                    return matchedAttribute[0];
-                }
-            },
-
-            methods: {
-                removeCondition: function() {
-                    this.$emit('onRemoveCondition', this.condition)
-                }
-            }
+                methods: {
+                    removeCondition() {
+                        this.$emit('onRemoveCondition', this.condition);
+                    },
+                },
             });
         </script>
 

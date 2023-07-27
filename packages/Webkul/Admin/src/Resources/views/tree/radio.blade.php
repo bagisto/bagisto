@@ -33,7 +33,7 @@
         props: ['id', 'label', 'nameField', 'modelValue', 'value'],
 
         computed: {
-            isActive () {
+            isActive() {
                 if(this.value.length) {
                     return this.value[0] == this.modelValue ? true : false;
                 }

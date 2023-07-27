@@ -8,18 +8,18 @@
     @case('text')
     @case('email')
     @case('password')
-    @case('date')
     @case('number')
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->except('class') }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', ':rules', 'label', ':label']) }}
         >
             <input
                 type="{{ $type }}"
-                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                name="{{ $name }}"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
         </v-field>
 
@@ -44,55 +44,68 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->except('class') }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <textarea
-                :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+                type="{{ $type }}"
+                name="{{ $name }}"
                 v-bind="field"
-                {{ $attributes->except(['value'])->merge(['class' => 'w-full py-2 px-3 shadow appearance-none text-[14px] border rounded focus:outline-none focus:shadow-outline']) }}
+                :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
             >
             </textarea>
         </v-field>
 
         @break
 
-    @case('checkbox')
-        <span class="">
-            <input
-                type="checkbox"
-                name="{{ $name }}"
-                {{ $attributes }}
-            >
-
-            {{ $slot }}
-        </span>
+    @case('date')
+        <v-field
+            name="{{ $name }}"
+            v-slot="{ field }"
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+            <x-admin::flat-picker.date>
+                <input
+                    name="{{ $name }}"
+                    v-bind="field"
+                    :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                    autocomplete="off"
+                >
+            </x-admin::flat-picker.date>
+        </v-field>
 
         @break
 
-    @case('radio')
-        <span class="">
-            <input
-                type="radio"
-                name="{{ $name }}"
-                {{ $attributes }}
-            >
-
-            {{ $slot }}
-        </span>
-
+    @case('datetime')
+        <v-field
+            name="{{ $name }}"
+            v-slot="{ field }"
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+            <x-admin::flat-picker.datetime>
+                <input
+                    name="{{ $name }}"
+                    v-bind="field"
+                    :class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400']) }}
+                    autocomplete="off"
+                >
+            </x-admin::flat-picker.datetime>
+        </v-field>
         @break
 
     @case('select')
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->except('class') }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <select
+                name="{{ $name }}"
                 v-bind="field"
-                v-model="selectedOption: '' "
                 :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                {{ $attributes->except(['value'])->merge(['class' => 'custom-select inline-flex gap-x-[4px] justify-between items-center w-full py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400']) }}
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
             >
                 <option value="" selected disabled>Select</option>
                 {{ $slot }}
@@ -101,10 +114,100 @@
 
         @break
 
+    @case('multiselect')
+        <v-field
+            as="select"
+            name="{{ $name }}"
+            :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex flex-col w-full min-h-[82px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400']) }}
+            multiple
+        >
+            {{ $slot }}
+        </v-field>
+
+        @break
+
+    @case('checkbox')
+        <v-field
+            type="checkbox"
+            name="{{ $name }}"
+            class="hidden"
+            v-slot="{ field }"
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+            <input
+                type="checkbox"
+                name="{{ $name }}"
+                v-bind="field"
+                class="sr-only peer"
+                {{ $attributes->except(['rules', 'label', ':label']) }}
+            />
+        </v-field>
+
+        <label
+            class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+        </label>
+
+        @break
+
+    @case('radio')
+        <v-field
+            type="radio"
+            name="{{ $name }}"
+            class="hidden"
+            v-slot="{ field }"
+            {{ $attributes->only(['value', ':value', 'v-model', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+            <input
+                type="radio"
+                name="{{ $name }}"
+                v-bind="field"
+                class="sr-only peer"
+                {{ $attributes->except(['rules', 'label', ':label']) }}
+            />
+        </v-field>
+
+        <label
+            class="icon-radio-normal text-[24px] peer-checked:icon-radio-selected peer-checked:text-blue-600 cursor-pointer"
+            {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+        >
+        </label>
+
+        @break
+    
+    @case('switch')
+        <label class="relative inline-flex items-center cursor-pointer">
+            <v-field
+                type="checkbox"
+                name="{{ $name }}"
+                class="hidden"
+                v-slot="{ field }"
+                {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            >
+                <input
+                    type="checkbox"
+                    name="{{ $name }}"
+                    id="{{ $name }}"
+                    class="sr-only peer"
+                    v-bind="field"
+                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+                />
+            </v-field>
+
+            <label
+                class="rounded-full w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-blue-600 peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                for="{{ $name }}"
+            ></label>
+        </label>
+
+        @break
+
     @case('image')
         <x-admin::media
             name="{{ $name }}"
-            ::class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
+            ::class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
             {{ $attributes }}
         >
         </x-admin::media>
@@ -118,26 +221,6 @@
         >
             {{ $slot }}
         </x-admin::tinymce>
-
-        @break
-
-    @case('switch')
-        <label class="relative inline-flex items-center cursor-pointer">
-            <v-field
-                name="{{ $name }}"
-                v-slot="{ field }"
-                {{ $attributes->except('class') }}
-            >
-                <input
-                    type="checkbox"
-                    :class="[errors['{{ $name }}'] ? 'border border-red-500' : '']"
-                    v-bind="field"
-                    {{ $attributes->except(['value'])->merge(['class' => 'sr-only peer']) }}
-                >
-            </v-field>
-
-            <div class="rounded-full w-11 h-6 bg-gray-200 peer-focus:ring-blue-300 after:bg-white after:border-gray-300  dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-focus:ring-blue-800 peer dark:bg-gray-500 peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none peer-focus:ring-4 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-        </label>
 
         @break
 

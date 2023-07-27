@@ -66,7 +66,10 @@
                 leave-from-class="opacity-100 translate-y-0 md:scale-100"
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
-                <div class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen">
+                <div
+                    class="fixed inset-0 z-10 transform transition overflow-y-auto"
+                    v-if="isOpen"
+                >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
                         <div class="w-full max-w-[568px] z-[999] absolute left-[50%] top-[50%] rounded-lg bg-white box-shadow max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
                             <div class="flex justify-between items-center gap-[10px] px-[16px] py-[11px] border-b-[1px] border-gray-300">

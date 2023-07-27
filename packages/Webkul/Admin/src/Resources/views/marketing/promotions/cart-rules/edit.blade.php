@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <v-cart-rule-edit-form></v-cart-rule-edit-form>
-
+    
     @pushOnce('scripts')
         {{-- v cart rules edit form template --}}
         <script
@@ -17,13 +17,17 @@
                     :action="route('admin.cart_rules.update', $cartRule->id)"
                     enctype="multipart/form-data"
                 >
-                    <div class="grid">
-                        <div class="flex justify-end items-center pt-[11px] cursor-pointer">
+                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                        <p class="text-[20px] text-gray-800 font-bold">
+                            @lang('admin::app.promotions.cart-rules.edit.title')
+                        </p>
+                
+                        <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.promotions.cart-rules.edit.save')
+                                @lang('admin::app.promotions.cart-rules.edit.save-btn')
                             </button>
                         </div>
                     </div>
@@ -283,9 +287,14 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                
+                                <p class="text-sm text-gray-500">
+                                    @lang('admin::app.promotions.cart-rules.create.uses-per-customer-control-info')
+                                </p>
                             </div>
                 
+                            {{-- component for auto generate coupon code --}}
+                            <v-create-coupon-form v-if="parseInt(use_auto_generation) && parseInt(coupon_type)"></v-create-coupon-form>
+
                             {{-- Conditions --}}
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                                 <div class="flex gap-[16px] items-center justify-between">
@@ -476,6 +485,7 @@
                                     <div class="flex  gap-[16px]  max-sm:flex-wrap">
                                         <div class="w-full mb-[10px]">
                                             @php($selectedOption = old('apply_to_shipping') ?? $cartRule->apply_to_shipping)
+
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.promotions.cart-rules.edit.apply-to-shipping')
@@ -484,7 +494,7 @@
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="apply_to_shipping"
-                                                    :value="old('apply_to_shipping') ?? 0"
+                                                    :value="old('apply_to_shipping') ?? $cartRule->apply_to_shipping"
                                                     id="apply_to_shipping"
                                                     :label="trans('admin::app.promotions.cart-rules.edit.apply-to-shipping')"
                                                     :placeholder="trans('admin::app.promotions.cart-rules.edit.apply-to-shipping')"
@@ -523,7 +533,7 @@
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="free_shipping"
-                                                    :value="old('free_shipping') ?? 0"
+                                                    :value="old('free_shipping') ?? $cartRule->free_shipping"
                                                     id="free_shipping"
                                                     :label="trans('admin::app.promotions.cart-rules.edit.free-shipping')"
                                                     :placeholder="trans('admin::app.promotions.cart-rules.edit.free-shipping')"
@@ -551,7 +561,7 @@
                                         </div>
                                     </div>
                 
-                                    <div class="flex  gap-[16px] justify-between max-sm:flex-wrap">
+                                    <div class="flex gap-[16px] justify-between max-sm:flex-wrap">
                                         <div class="w-full mb-[10px]">
                                             @php($selectedOption = old('end_other_rules') ?? $cartRule->end_other_rules)
 
@@ -563,7 +573,7 @@
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="end_other_rules"
-                                                    :value="old('end_other_rules') ?? 0"
+                                                    :value="old('end_other_rules') ?? $cartRule->end_other_rules"
                                                     id="end_other_rules"
                                                     class="!w-1/2 max-sm:!w-full" 
                                                     :label="trans('admin::app.promotions.cart-rules.edit.end-of-other-rules')"
@@ -665,50 +675,48 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="px-[16px] pb-[16px]">
-                                        <div class="flex gap-[16px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.cart-rules.edit.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    name="starts_from"
-                                                    :value="old('starts_from') ?? $cartRule->starts_from"
-                                                    id="starts_from"
-                                                    :label="trans('admin::app.promotions.cart-rules.edit.from')"
-                                                    :placeholder="trans('admin::app.promotions.cart-rules.edit.from')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="starts_from"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
+                                    <div class="flex gap-[16px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.cart-rules.edit.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="starts_from"
+                                                :value="old('starts_from') ?? $cartRule->starts_from"
+                                                id="starts_from"
+                                                :label="trans('admin::app.promotions.cart-rules.edit.from')"
+                                                :placeholder="trans('admin::app.promotions.cart-rules.edit.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="starts_from"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.cart-rules.edit.to')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    name="ends_till"
-                                                    :value="old('ends_till') ?? $cartRule->ends_till"
-                                                    id="ends_till"
-                                                    :label="trans('admin::app.promotions.cart-rules.edit.to')"
-                                                    :placeholder="trans('admin::app.promotions.cart-rules.edit.to')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="ends_till"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.cart-rules.edit.to')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="ends_till"
+                                                :value="old('ends_till') ?? $cartRule->ends_till"
+                                                id="ends_till"
+                                                :label="trans('admin::app.promotions.cart-rules.edit.to')"
+                                                :placeholder="trans('admin::app.promotions.cart-rules.edit.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="ends_till"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
@@ -723,7 +731,7 @@
             app.component('v-cart-rule-edit-form', {
                 template: '#v-cart-rule-edit-form-template',
 
-                data: function() {
+                data() {
                     return {
                         coupon_type: {{ old('coupon_type') ?? $cartRule->coupon_type }},
 
@@ -733,12 +741,12 @@
 
                         conditions: @json($cartRule->conditions ?? []),
 
-                        action_type: "{{ old('action_type') ?? $cartRule->action_type }}"
+                        action_type: "{{ old('action_type') ?? $cartRule->action_type }}",
                     }
                 },
 
                 methods: {
-                    addCondition: function() {
+                    addCondition() {
                         this.conditions.push({
                             'attribute': '',
                             'operator': '==',
@@ -746,25 +754,25 @@
                         });
                     },
 
-                    removeCondition: function(condition) {
-                        let index = this.conditions.indexOf(condition)
+                    removeCondition(condition) {
+                        let index = this.conditions.indexOf(condition);
 
-                        this.conditions.splice(index, 1)
+                        this.conditions.splice(index, 1);
                     },
 
-                    onSubmit: function(e) {
-                        this.$root.onSubmit(e)
+                    onSubmit(e) {
+                        this.$root.onSubmit(e);
                     },
 
-                    onSubmit: function(e) {
-                        this.$root.onSubmit(e)
+                    onSubmit(e) {
+                        this.$root.onSubmit(e);
                     },
 
-                    redirectBack: function(fallbackUrl) {
-                        this.$root.redirectBack(fallbackUrl)
+                    redirectBack(fallbackUrl) {
+                        this.$root.redirectBack(fallbackUrl);
                     }
-                }
-            })
+                },
+            });
         </script>
 
         {{-- v catalog rule condition item form template --}}
@@ -1109,12 +1117,12 @@
                                 'operator': '!{}',
                                 'label': '{{ __('admin::app.promotions.cart-rules.edit.does-not-contain') }}'
                             }]
-                        }
+                        },
                     }
                 },
 
                 computed: {
-                    matchedAttribute: function () {
+                    matchedAttribute() {
                         if (this.condition.attribute == '')
                             return;
 
@@ -1135,15 +1143,225 @@
                         }
 
                         return matchedAttribute[0];
-                    }
+                    },
                 },
 
+                methods: {
+                    removeCondition() {
+                        this.$emit('onRemoveCondition', this.condition)
+                    },
+                },
+            });
+        </script>
+
+        {{-- v create coupon form --}}
+        <script 
+            type="text/x-template"
+            id="v-create-coupon-form-template"
+        >
+            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                <div class="grid gap-[6px]">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.promotions.cart-rules.edit.coupon-code')
+                    </p>
+
+                    <x-admin::form
+                        v-slot="{ meta, errors, handleSubmit }"
+                        as="div"
+                    >
+                        <form @submit="handleSubmit($event, store)">
+                            <div class="flex gap-[16px]  max-sm:flex-wrap">
+                                <div class="w-full mb-[10px]">
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.cart-rules.edit.coupon-qty')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="coupon_qty"
+                                            id="coupon_qty"
+                                            rules="required|min_value:1"
+                                            :label="trans('admin::app.promotions.cart-rules.edit.coupon-qty')"
+                                            :placeholder="trans('admin::app.promotions.cart-rules.edit.coupon-qty')"
+                                            v-model="coupon_format.coupon_qty"
+                                        >
+                                        </x-admin::form.control-group.control>
+                        
+                                        <x-admin::form.control-group.error
+                                            control-name="coupon_qty"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+
+                                <div class="w-full mb-[10px]">
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.cart-rules.edit.coupon-length')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="code_length"
+                                            id="code_length"
+                                            rules="required|min_value:1"
+                                            :label="trans('admin::app.promotions.cart-rules.edit.coupon-length')"
+                                            :placeholder="trans('admin::app.promotions.cart-rules.edit.coupon-length')"
+                                            v-model="coupon_format.code_length"
+                                        >
+                                        </x-admin::form.control-group.control>
+                        
+                                        <x-admin::form.control-group.error
+                                            control-name="code_length"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="flex  gap-[16px]  max-sm:flex-wrap">
+                                <div class="w-full mb-[10px]">
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.cart-rules.edit.code-format')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="code_format"
+                                            id="code_format"
+                                            rules="required"
+                                            class="pr-[40px]"
+                                            :label="trans('admin::app.promotions.cart-rules.edit.code-format')"
+                                            :placeholder="trans('admin::app.promotions.cart-rules.edit.code-format')"
+                                            v-model="coupon_format.code_format"
+                                        >
+                                            <option 
+                                                value="alphanumeric"
+                                            >
+                                                @lang('admin::app.promotions.cart-rules.edit.alphanumeric')
+                                            </option>
+
+                                            <option
+                                                value="alphabetical"
+                                            >
+                                                @lang('admin::app.promotions.cart-rules.edit.alphabetical')
+                                            </option>
+
+                                            <option 
+                                                value="numeric"
+                                            >
+                                                @lang('admin::app.promotions.cart-rules.edit.numeric')
+                                            </option>
+                                        </x-admin::form.control-group.control>
+                        
+                                        <x-admin::form.control-group.error
+                                            control-name="code_format"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.cart-rules.edit.code-prefix')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="code_prefix"
+                                            id="code_prefix"
+                                            rules="required"
+                                            :label="trans('admin::app.promotions.cart-rules.edit.code-prefix')"
+                                            :placeholder="trans('admin::app.promotions.cart-rules.edit.code-prefix')"
+                                            v-model="coupon_format.code_prefix"
+                                        >
+                                        </x-admin::form.control-group.control>
+                        
+                                        <x-admin::form.control-group.error
+                                            control-name="code_prefix"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+
+                                <div class="w-full mb-[10px]">
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.cart-rules.edit.code-suffix')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="code_suffix"
+                                            id="code_suffix"
+                                            rules="required"
+                                            :label="trans('admin::app.promotions.cart-rules.edit.code-suffix')"
+                                            :placeholder="trans('admin::app.promotions.cart-rules.edit.code-suffix')"
+                                            v-model="coupon_format.code_suffix"
+                                        >
+                                        </x-admin::form.control-group.control>
+                        
+                                        <x-admin::form.control-group.error
+                                            control-name="code_suffix"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </div>
+
+                            <button 
+                                type="submit"
+                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            >
+                                @lang('admin::app.promotions.cart-rules.edit.generate')
+                            </button>
+                        </form>
+                    </x-admin::form>
+
+                    {{-- Todo (@suraj-webkul) --}}
+                    {{-- datagrid will be here --}}
+                </div>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-create-coupon-form', {
+                template: '#v-create-coupon-form-template',
+
+                data() {
+                    return {
+                        coupon_format: {
+                            code_length: 12,
+
+                            code_format: 'alphanumeric',
+
+                            coupon_qty: '',
+
+                            code_prefix: '',
+
+                            code_suffix: ''
+                        }
+                    };
+                },
 
                 methods: {
-                    removeCondition: function() {
-                        this.$emit('onRemoveCondition', this.condition)
-                    }
-                }
+                    store(params, { resetForm, setErrors }) {
+                        this.$axios.post('{{ route('admin.cart_rules.coupons.store', $cartRule->id) }}', params)
+                            .then((response) => {
+                                alert(response.data.message);
+
+                                resetForm();
+                            })
+                            .catch((error) => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    },
+                },
             });
         </script>
 

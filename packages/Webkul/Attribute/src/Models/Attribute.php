@@ -94,4 +94,43 @@ class Attribute extends TranslatableModel implements AttributeContract
     {
         return $this->attributeTypeFields[$this->type];
     }
+
+    /**
+     * Returns attribute validation rules
+     *
+     * @return string
+     */
+    protected function getValidationsAttribute()
+    {
+        $validations = [];
+        if ($this->is_required) {
+            $validations[] = 'required';
+        }
+
+        if ($this->type == 'price') {
+            $validations[] = 'decimal';
+        }
+
+        if ($this->type == 'file') {
+            $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
+
+            $validations[] = 'size:' . $retVal;
+        }
+
+        if ($this->type == 'image') {
+            $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
+
+            $validations[] = 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp';
+        }
+
+        if ($this->validation == 'regex') {
+            // $validations[] = 'regex:' . $this->regex;
+        } else {
+            $validations[] = $this->validation;
+        }
+
+        $validations = implode('|', array_filter($validations));
+
+        return $validations;
+    }
 }
