@@ -3,15 +3,20 @@
 return [
 
     'promotions' => [
+        'tab' => [
+            'catalog-rule-title' => 'Catalog Rules',
+            'cart-rule-title'    => 'Cart Rules',
+        ],
+
         'cart-rules' => [
             'index' => [
-                'title'     => 'Cart Rules',
-                'add-title' => 'Add Cart Rule',
+                'title'      => 'Cart Rules',
+                'create-btn' => 'Create Cart Rule',
             ],
 
             'create' => [
-                'title'                                     => 'Cart Rules',
-                'save'                                      => 'Save Cart Rules',
+                'title'                                     => 'Create Cart Rule',
+                'save-btn'                                  => 'Save Cart Rule',
                 'general'                                   => 'General',
                 'name'                                      => 'Name',
                 'description'                               => 'Description',
@@ -26,6 +31,7 @@ return [
                 'coupon-code'                               => 'Coupon Code',
                 'uses-per-coupon'                           => 'Uses Per Coupon',
                 'uses-per-customer'                         => 'Uses Per Customer',
+                'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                 'conditions'                                => 'Conditions',
                 'condition-type'                            =>'Condition Type',
                 'all-conditions-true'                       => 'All Conditions Are True',
@@ -83,8 +89,8 @@ return [
             ],
 
             'edit' => [
-                'title'                                     => 'Edit Cart Rules',
-                'save'                                      => 'Save Cart Rules',
+                'title'                                     => 'Edit Cart Rule',
+                'save-btn'                                  => 'Save Cart Rule',
                 'general'                                   => 'General',
                 'name'                                      => 'Name',
                 'description'                               => 'Description',
@@ -99,6 +105,7 @@ return [
                 'coupon-code'                               => 'Coupon Code',
                 'uses-per-coupon'                           => 'Uses Per Coupon',
                 'uses-per-customer'                         => 'Uses Per Customer',
+                'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                 'conditions'                                => 'Conditions',
                 'condition-type'                            =>'Condition Type',
                 'all-conditions-true'                       => 'All Conditions Are True',
@@ -153,18 +160,27 @@ return [
                 'attribute-name-parent-only'                => 'Attribute name parent only',
                 'update-success'                            => 'Cart rule updated successfully',
                 'choose-condition-to-add'                   => 'Choose condition to add',
+                'coupon-qty'                                => 'Coupon Quantity',
+                'coupon-length'                             => 'Coupon Length',
+                'code-format'                               => 'Code Format',
+                'alphanumeric'                              => 'Alphanumeric',
+                'alphabetical'                              => 'Alphabetical',
+                'numeric'                                   => 'Numeric',
+                'code-suffix'                               => 'Code Suffix',
+                'code-prefix'                               => 'Code Prefix',
+                'generate'                                  => 'Generate'
             ] 
         ],
 
         'catalog-rules' => [
             'index' => [
                 'title'     => 'Catalog Rules',
-                'add-title' => 'Add Catalog Rule',
+                'create-btn' => 'Create Catalog Rule',
             ],
 
             'create' => [
-                'title'                    => 'Catalog Rules',
-                'save-btn-title'           => 'Save Catalog Rule',
+                'title'                    => 'Create Catalog Rule',
+                'save-btn'                 => 'Save Catalog Rule',
                 'name'                     => 'Name',
                 'description'              => 'Description',
                 'channels'                 => 'Channels',
@@ -205,8 +221,9 @@ return [
             ],
 
             'edit' => [
-                'title'                    => 'Edit Catalog Rules',
-                'save-btn-title'           => 'Save Catalog Rule',
+                'title'                    => 'Edit Catalog Rule',
+                'save-btn'                 => 'Save Catalog Rule',
+                'general'                  => 'General',
                 'name'                     => 'Name',
                 'description'              => 'Description',
                 'channels'                 => 'Channels',
