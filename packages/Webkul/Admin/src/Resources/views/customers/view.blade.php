@@ -358,7 +358,7 @@
                             <div class="flex gap-[10px]">
                                 <p class="text-blue-600">Edit</p>
                                 <p class="text-blue-600">Delete</p>
-                                @if(!$address->default_address )
+                                @if(! $address->default_address )
                                     <p 
                                         class="text-blue-600 cursor-pointer"
                                         onclick="event.preventDefault();

@@ -203,26 +203,23 @@ class CustomerController extends Controller
             'note' => 'string|required',
         ]);
 
-        $data = request()->only([
+        $this->customerNoteRepository->create([
+            'customer_id'       => $id,
             'note'              => request()->input('note'),
             'customer_notified' => request()->input('customer_notified', 0),
         ]);
 
-        $data['customer_id'] = $id;
-
-        $this->customerNoteRepository->create($data);
-
-        $customer = $this->customerRepository->find(0);
+        $customer = $this->customerRepository->find($id);
 
         if (request()->has('customer_notified')) {
             try {
-                Mail::queue(new CustomerNoteNotification($customer, request()->input('note')));
+                Mail::send(new CustomerNoteNotification($customer, request()->input('note', 'email')));
             } catch(\Exception$e) {
                 session()->flash('warning', $e->getMessage());
             }
         }
 
-        session()->flash('success', trans('admin::app.sales.orders.comment-added-success'));
+        session()->flash('success', trans('Note created successfully'));
 
         return redirect()->back();
     }
