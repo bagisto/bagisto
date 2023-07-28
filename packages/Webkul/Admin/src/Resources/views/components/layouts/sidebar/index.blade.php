@@ -53,7 +53,7 @@
         <div class="flex gap-[10px] p-[6px] items-center">
             <span class="icon-arrow-right text-[24px]"></span>
 
-            <p class="text-gray-600 font-semibold">
+            <p class="text-gray-600 font-semibold cursor-pointer">
                 @lang('admin::app.components.layouts.sidebar.collapse')
             </p>
         </div>
