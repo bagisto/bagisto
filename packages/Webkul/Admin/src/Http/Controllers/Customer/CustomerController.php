@@ -12,6 +12,8 @@ use Webkul\Admin\DataGrids\CustomerDataGrid;
 use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
 use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
 use Webkul\Admin\Mail\NewCustomerNotification;
+use Webkul\Admin\Mail\CustomerNoteNotification;
+use Webkul\Customer\Repositories\CustomerNoteRepository;
 
 class CustomerController extends Controller
 {
@@ -20,7 +22,8 @@ class CustomerController extends Controller
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected CustomerGroupRepository $customerGroupRepository
+        protected CustomerGroupRepository $customerGroupRepository,
+        protected CustomerNoteRepository $customerNoteRepository
     ) 
     {
     }
@@ -160,7 +163,10 @@ class CustomerController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * Login as customer
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function loginAsCustomer($id)
     {
@@ -173,41 +179,40 @@ class CustomerController extends Controller
         return redirect(route('shop.customers.account.profile.index'));
     }
 
-    /**
-     * To load the note taking screen for the customers.
+      /**
+     * To store the response of the note.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\View
      */
-    public function createNote($id)
-    {
-        $customer = $this->customerRepository->find($id);
-
-        return view('admin::customers.note')->with('customer', $customer);
-    }
-
-    /**
-     * To store the response of the note in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function storeNote()
+    public function storeNotes($id)
     {
         $this->validate(request(), [
-            'notes' => 'string|nullable',
+            'note' => 'string|required',
         ]);
 
-        Event::dispatch('customer.update.before', request()->input('_customer'));
+        $data = request()->only([
+            'note'              => request()->input('note'),
+            'customer_notified' => request()->input('customer_notified', 0),
+        ]);
 
-        $customer = $this->customerRepository->update([
-            'notes' => request()->input('notes'),
-        ], request()->input('_customer'));
+        $data['customer_id'] = $id;
 
-        Event::dispatch('customer.update.after', $customer);
+        $this->customerNoteRepository->create($data);
 
-        session()->flash('success', 'Note taken');
+        $customer = $this->customerRepository->find(0);
 
-        return redirect()->route('admin.customer.index');
+        if (request()->has('customer_notified')) {
+            try {
+                Mail::queue(new CustomerNoteNotification($customer, request()->input('note')));
+            } catch(\Exception$e) {
+                session()->flash('warning', $e->getMessage());
+            }
+        }
+
+        session()->flash('success', trans('admin::app.sales.orders.comment-added-success'));
+
+        return redirect()->back();
     }
 
     /**
@@ -292,5 +297,18 @@ class CustomerController extends Controller
         $customer = $this->customerRepository->find(request('id'));
 
         return view('admin::customers.orders.index', compact('customer'));
+    }
+
+    /**
+     * View all details of customer.
+     *
+     * @param  int  $id
+     * @return
+     */
+    public function show($id)
+    {
+        $customer = $this->customerRepository->with(['orders', 'reviews','notes', 'addresses'])->findOrFail($id);
+
+        return view('admin::customers.view', compact('customer'));
     }
 }

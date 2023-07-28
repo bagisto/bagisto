@@ -44,7 +44,7 @@ class CustomerRepository extends Repository
      */
     public function checkIfCustomerHasOrderPendingOrProcessing($customer)
     {
-        return $customer->all_orders->pluck('status')->contains(function ($val) {
+        return $customer->orders->pluck('status')->contains(function ($val) {
             return $val === 'pending' || $val === 'processing';
         });
     }

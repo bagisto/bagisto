@@ -134,6 +134,30 @@ class AddressController extends Controller
     }
 
     /**
+     * To change the default address or make the default address,
+     * by default when first address is created will be the default address.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function makeDefault($id)
+    {
+        if ($default = $this->customerAddressRepository->findOneWhere(['customer_id' => $id, 'default_address' => 1])) {
+            $default->update(['default_address' => 0]);
+        }
+        
+        if ($address = $this->customerAddressRepository->findOneWhere([
+            'id'              => request('set_as_default'),
+            'customer_id'     => $id
+        ])) {
+            $address->update(['default_address' => 1]);
+
+            session()->flash('success', trans('Default Address Updated'));
+        } 
+
+        return redirect()->back();
+    } 
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
