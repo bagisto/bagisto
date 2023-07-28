@@ -35,7 +35,7 @@
                         <div class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : '' }} pb-[7px]">
                             @foreach (core()->sortItems($tree->items) as $key => $item)
                                 <a href="{{ route('admin.configuration.index', $item['key']) }}">
-                                    <p class="text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
+                                    <p class="text-{{ $item['key'] == request()->route('slug') ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
                                         {{ trans($item['name']) ?? '' }}
                                     </p>
                                 </a>
