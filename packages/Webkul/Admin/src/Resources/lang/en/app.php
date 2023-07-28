@@ -611,6 +611,8 @@ return [
                 'admin'                       => 'Admin',
                 'add-row'                     => 'Add Row',
                 'add-option'                  => 'Add Option',
+                'add-attribute-options'       => 'Add Attribute Options',
+                'add-options-info'            => 'To create various combination of Attribute Option on a go.',
                 'admin_name'                  => 'Admin Name',
                 'boolean'                     => 'Boolean',
                 'cancel-btn'                  => 'Cancel',
