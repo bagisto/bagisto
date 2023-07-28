@@ -2,13 +2,12 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Shop\Http\Requests\Customer\ProfileRequest;
 
 class CustomerController extends Controller

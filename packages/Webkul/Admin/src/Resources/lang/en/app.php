@@ -3,15 +3,20 @@
 return [
 
     'promotions' => [
+        'tab' => [
+            'catalog-rule-title' => 'Catalog Rules',
+            'cart-rule-title'    => 'Cart Rules',
+        ],
+
         'cart-rules' => [
             'index' => [
-                'title'     => 'Cart Rules',
-                'add-title' => 'Add Cart Rule',
+                'title'      => 'Cart Rules',
+                'create-btn' => 'Create Cart Rule',
             ],
 
             'create' => [
-                'title'                                     => 'Cart Rules',
-                'save'                                      => 'Save Cart Rules',
+                'title'                                     => 'Create Cart Rule',
+                'save-btn'                                  => 'Save Cart Rule',
                 'general'                                   => 'General',
                 'name'                                      => 'Name',
                 'description'                               => 'Description',
@@ -26,6 +31,7 @@ return [
                 'coupon-code'                               => 'Coupon Code',
                 'uses-per-coupon'                           => 'Uses Per Coupon',
                 'uses-per-customer'                         => 'Uses Per Customer',
+                'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                 'conditions'                                => 'Conditions',
                 'condition-type'                            =>'Condition Type',
                 'all-conditions-true'                       => 'All Conditions Are True',
@@ -83,8 +89,8 @@ return [
             ],
 
             'edit' => [
-                'title'                                     => 'Edit Cart Rules',
-                'save'                                      => 'Save Cart Rules',
+                'title'                                     => 'Edit Cart Rule',
+                'save-btn'                                  => 'Save Cart Rule',
                 'general'                                   => 'General',
                 'name'                                      => 'Name',
                 'description'                               => 'Description',
@@ -99,6 +105,7 @@ return [
                 'coupon-code'                               => 'Coupon Code',
                 'uses-per-coupon'                           => 'Uses Per Coupon',
                 'uses-per-customer'                         => 'Uses Per Customer',
+                'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                 'conditions'                                => 'Conditions',
                 'condition-type'                            =>'Condition Type',
                 'all-conditions-true'                       => 'All Conditions Are True',
@@ -153,18 +160,27 @@ return [
                 'attribute-name-parent-only'                => 'Attribute name parent only',
                 'update-success'                            => 'Cart rule updated successfully',
                 'choose-condition-to-add'                   => 'Choose condition to add',
+                'coupon-qty'                                => 'Coupon Quantity',
+                'coupon-length'                             => 'Coupon Length',
+                'code-format'                               => 'Code Format',
+                'alphanumeric'                              => 'Alphanumeric',
+                'alphabetical'                              => 'Alphabetical',
+                'numeric'                                   => 'Numeric',
+                'code-suffix'                               => 'Code Suffix',
+                'code-prefix'                               => 'Code Prefix',
+                'generate'                                  => 'Generate'
             ] 
         ],
 
         'catalog-rules' => [
             'index' => [
                 'title'     => 'Catalog Rules',
-                'add-title' => 'Add Catalog Rule',
+                'create-btn' => 'Create Catalog Rule',
             ],
 
             'create' => [
-                'title'                    => 'Catalog Rules',
-                'save-btn-title'           => 'Save Catalog Rule',
+                'title'                    => 'Create Catalog Rule',
+                'save-btn'                 => 'Save Catalog Rule',
                 'name'                     => 'Name',
                 'description'              => 'Description',
                 'channels'                 => 'Channels',
@@ -205,8 +221,9 @@ return [
             ],
 
             'edit' => [
-                'title'                    => 'Edit Catalog Rules',
-                'save-btn-title'           => 'Save Catalog Rule',
+                'title'                    => 'Edit Catalog Rule',
+                'save-btn'                 => 'Save Catalog Rule',
+                'general'                  => 'General',
                 'name'                     => 'Name',
                 'description'              => 'Description',
                 'channels'                 => 'Channels',
@@ -252,37 +269,37 @@ return [
     'sales'=> [
         'orders' => [
             'index' => [
-                'title' => 'Orders'
+                'title' => 'Orders',
             ],
         ],
 
         'shipments' => [
             'index' => [
-                'title' => 'Shipments'
+                'title' => 'Shipments',
             ],
         ],
 
         'invoices' => [
             'index' => [
-                'title' => 'Invoices'
+                'title' => 'Invoices',
             ],
         ],
 
         'refunds' => [
             'index' => [
-                'title' => 'Refunds'
+                'title' => 'Refunds',
             ],
         ],
 
         'transactions' => [
             'index' => [
-                'title' => 'Transactions'
+                'title' => 'Transactions',
             ],
 
             'create' => [
-                'add' => 'Add transaction'
-            ]
-        ]
+                'add' => 'Add transaction',
+            ],
+        ],
 
     ],
 
@@ -312,27 +329,27 @@ return [
         'groups' => [
             'index' => [
                 'title' => 'Groups',
+            ],
 
-                'create-form' => [
-                    'add-group'  => 'Add New Group',
-                    'code'       => 'Code',
-                    'name'       => 'Name',
-                    'save-group' => 'Save Group',
-                ],
+            'create' => [
+                'add-group'  => 'Add New Group',
+                'code'       => 'Code',
+                'name'       => 'Name',
+                'save-group' => 'Save Group',
             ],
         ],
 
         'reviews' => [
             'index' => [
-                'title' => 'Reviews'
+                'title' => 'Reviews',
             ],
 
             'edit' => [
 
-            ]
-        ]
+            ],
+        ],
     ],
-    
+
     'settings' => [
         'locales'           => [
             'title'             => 'Locales',
@@ -367,10 +384,10 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'title' => 'Exchange Rates'
+                'title' => 'Exchange Rates',
             ],
-    
-            'create' => [   
+
+            'create' => [
                 'title'            => 'Create Exchange Rate',
                 'button-title'     => 'Add Exchange Rate',
                 'source-currency'  => 'Source Currency',
@@ -420,7 +437,7 @@ return [
                 'index' => [
                     'title'           => 'Tax Categories',
                 ],
-                 
+
                 'create' => [
                     'title'            => 'Tax Categories',
                     'code'             => 'Code',
@@ -436,7 +453,7 @@ return [
             'tax-rates'   => [
                 'index' => [
                     'title'        => 'Tax Rates',
-                    'button-title' => 'Create Tax Rates'
+                    'button-title' => 'Create Tax Rates',
                 ],
 
                 'create'  => [
@@ -522,25 +539,137 @@ return [
             ],
         ],
     ],
-    
+
     'catalog' => [
         'products' => [
             'index' => [
-                'title' => 'Products',
-                'add'   => 'Add Product'
+                'title'      => 'Products',
+                'create-btn' => 'Create Product',
+                'create' => [
+                    'title'                   => 'Create New Product',
+                    'configurable-attributes' => 'Configurable Attributes',
+                    'create-btn'              => 'Create Product',
+                    'save-btn'                => 'Save Product',
+                    'back-btn'                => 'Back',
+                    'type'                    => 'Type',
+                    'simple'                  => 'Simple',
+                    'configurable'            => 'Configurable',
+                    'virtual'                 => 'Virtual',
+                    'downloadable'            => 'Downloadable',
+                    'grouped'                 => 'Grouped',
+                    'bundle'                  => 'Bundle',
+                    'booking'                 => 'Booking',
+                    'family'                  => 'Family',
+                    'sku'                     => 'SKU',
+                ]
+            ],
+
+            'edit' => [
+                'title'       => 'Edit Product',
+                
+                'inventories' => [
+                    'title'                    => 'Inventories',
+                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
+                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
+                ],
+
+                'price' => [
+                    'group' => [
+                        'title'                     => 'Customer Group Price',
+                        'create-btn'                => 'Add New',
+                        'edit-btn'                  => 'Edit',
+                        'add-group-price'           => 'Add Group Price',
+                        'fixed-group-price-info'    => 'For :qty Qty at fixed price of :price',
+                        'discount-group-price-info' => 'For qty Qty at discount of :price',
+                        'empty-info'                => 'Special pricing for customers belonging to a specific group.',
+
+
+                        'create' => [
+                            'create-title'   => 'Create Customer Group Price',
+                            'update-title'   => 'Update Customer Group Price',
+                            'customer-group' => 'Customer Group',
+                            'qty'            => 'Qty',
+                            'price-type'     => 'Price Type',
+                            'fixed'          => 'Fixed',
+                            'discount'       => 'Discount',
+                            'price'          => 'Price',
+                            'delete-btn'     => 'Delete',
+                            'save-btn'       => 'Save',
+                        ]
+                    ]
+                ]
             ]
         ],
 
         'attributes' => [
-            'index' =>  [
-                'title'  => 'Attributes',
-                'add'    => 'Add',
+            'index' => [
+                'title'      => 'Attributes',
+                'create-btn' => 'Create Attributes',
+            ],
+
+            'create'  => [
+                'admin'                       => 'Admin',
+                'add-row'                     => 'Add Row',
+                'add-option'                  => 'Add Option',
+                'admin_name'                  => 'Admin Name',
+                'boolean'                     => 'Boolean',
+                'cancel-btn'                  => 'Cancel',
+                'code'                        => 'Attribute Code',
+                'checkbox'                    => 'Checkbox',
+                'color'                       => 'Color',
+                'configuration'               => 'Configuration',
+                'color-swatch'                => 'Color Swatch',
+                'create-empty-option'         => 'Create default empty option',
+                'default_null_option'         => 'Create default empty option',
+                'dropdown'                    => 'Dropdown',
+                'datetime'                    => 'Datetime',
+                'date'                        => 'Date',
+                'decimal'                     => 'Decimal',
+                'email'                       => 'Email',
+                'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
+                'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
+                'file'                        => 'File',
+                'general'                     => 'General',
+                'is_required'                 => 'Is Required',
+                'input_validation'            => 'Input Validation',
+                'image'                       => 'Image',
+                'image-swatch'                => 'Image Swatch',
+                'is_unique'                   => 'Is Unique',
+                'is_filterable'               => 'Use in Layered Navigation',
+                'is_configurable'             => 'Use To Create Configurable Product',
+                'is_visible_on_front'         => 'Visible on Product View Page on Front-end',
+                'input-options'               => 'Input Options',
+                'is_comparable'               => 'Attribute is comparable',
+                'label'                       => 'Label',
+                'multiselect'                 => 'Multiselect',
+                'no'                          => 'No',
+                'number'                      => 'Number',
+                'price'                       => 'Price',
+                'position'                    => 'Position',
+                'select'                      => 'Select',
+                'select-type'                 => 'Select Attribute Type',
+                'save-btn'                    => 'Save Attribute',
+                'swatch_type'                 => 'Swatch Type',
+                'select'                      => 'Select',
+                'swatch'                      => 'Swatch',
+                'title'                       => 'Add Attribute',
+                'type'                        => 'Attribute Type',
+                'text'                        => 'Text',
+                'text-swatch'                 => 'Text Swatch',
+                'textarea'                    => 'Textarea',
+                'url'                         => 'URL',
+                'use_in_flat'                 => 'Create in Product Flat Table',
+                'validations'                 => 'Validations',
+                'value_per_locale'            => 'Value Per Locale',
+                'value_per_channel'           => 'Value Per Channel',
+                'yes'                         => 'Yes',
             ],
         ],
+
         'categories'  => [
-            'index' =>  [
+            'index' => [
                 'title' => 'Categories',
-                'add' => 'Add',
+                'add'   => 'Add',
             ],
 
             'create' => [
@@ -609,7 +738,7 @@ return [
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
-                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.',
             ],
 
             'edit' => [
@@ -638,7 +767,7 @@ return [
                 'group-already-exists'             => 'An attribute group name already exists.',
                 'select-group'                     => 'Please select an attribute group.',
                 'group-contains-system-attributes' => 'This group contains system attributes. First move system attributes to another group and try again.',
-                'removal-not-possible'             => 'You can not remove system attributes from attribute family.'
+                'removal-not-possible'             => 'You can not remove system attributes from attribute family.',
             ],
 
             'family'                    => 'Family',
@@ -652,11 +781,6 @@ return [
             'attribute-product-error'   => 'family is used in products.',
         ],
     ],
-
-
-
-
- 
 
     'marketing' => [
         'email-marketing' => [
@@ -675,11 +799,11 @@ return [
                     'select-status'  => 'Select Status',
                     'save-btn-title' => 'Save',
                 ],
-    
+
                 'title'          => 'Email Templates',
                 'events'         => 'Events',
             ],
-    
+
             'campaigns' => [
                 'create'    => [
                     'active'          => 'Active',
@@ -700,10 +824,10 @@ return [
                     'select-status'   => 'Select Status',
                     'subject'         => 'Subject',
                 ],
-    
+
                 'title'          => 'Campaigns',
             ],
-    
+
             'events' => [
                 'create'   => [
                     'title'          => 'Events',
@@ -715,7 +839,7 @@ return [
                     'save'           => 'Save',
                 ],
             ],
-    
+
             'newsletters' => [
                 'title' => 'Newsletter Subscriptions',
             ],

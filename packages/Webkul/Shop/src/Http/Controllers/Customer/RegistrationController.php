@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Cookie;
 use Webkul\Shop\Http\Controllers\Controller;
-use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
 use Webkul\Shop\Mail\RegistrationEmail;
@@ -47,7 +47,13 @@ class RegistrationController extends Controller
      */
     public function store(RegistrationRequest $registrationRequest)
     {
-        $data = array_merge(request()->input(), [
+        $data = array_merge(request()->only([
+            'first_name',
+            'last_name',
+            'email',
+            'password_confirmation',
+            'is_subscribed',
+        ]), [
             'password'                  => bcrypt(request()->input('password')),
             'api_token'                 => Str::random(80),
             'is_verified'               => ! core()->getConfigData('customer.settings.email.verification'),

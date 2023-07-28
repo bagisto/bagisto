@@ -85,7 +85,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function composeView()
     {
-        view()->composer(['admin::layouts.nav-left','admin::layouts.tabs','admin::layouts.mobile-nav'], function ($view) {
+        view()->composer(['admin::layouts.nav-left', 'admin::components.layouts.sidebar.index','admin::layouts.tabs','admin::layouts.mobile-nav'], function ($view) {
             $tree = Tree::create();
 
             $permissionType = auth()->guard('admin')->user()->role->permission_type;
@@ -132,20 +132,6 @@ class AdminServiceProvider extends ServiceProvider
 
         view()->composer(['admin::users.roles.create', 'admin::users.roles.edit'], function ($view) {
             $view->with('acl', $this->createACL());
-        });
-
-        view()->composer(['admin::catalog.products.create'], function ($view) {
-            $items = array();
-
-            foreach (config('product_types') as $item) {
-                $item['children'] = [];
-
-                array_push($items, $item);
-            }
-
-            $types = core()->sortItems($items);
-
-            $view->with('productTypes', $types);
         });
     }
 

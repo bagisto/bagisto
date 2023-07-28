@@ -64,18 +64,20 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.registration.before');
 
-        $customer = $this->customerRepository->create([
-            'id'                => request()->input('id'),
-            'first_name'        => request()->input('first_name'),
-            'last_name'         => request()->input('last_name'),
-            'gender'            => request()->input('gender'),
-            'email'             => request()->input('email'),
-            'date_of_birth'     => request()->input('date_of_birth'),
-            'phone'             => request()->input('phone'),
-            'customer_group_id' => request()->input('customer_group_id'),
-            'password'          => bcrypt($password),
-            'is_verified'       => 1,
+        $data = array_merge(request()->only([
+            'first_name',
+            'last_name',
+            'gender',
+            'email',
+            'date_of_birth',
+            'phone',
+            'customer_group_id',
+        ]), [
+            'password'    => bcrypt($password),
+            'is_verified' => 1,
         ]);
+
+        $customer = $this->customerRepository->create($data);
 
         Event::dispatch('customer.registration.after', $customer);
 
@@ -126,10 +128,20 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.before', $id);
 
-        $customer = $this->customerRepository->update(array_merge(request()->all(), [
+        $data = array_merge(request()->only([
+            'first_name',
+            'last_name',
+            'gender',
+            'email',
+            'date_of_birth',
+            'phone',
+            'customer_group_id',
+        ]), [
             'status'       => request()->has('status'),
             'is_suspended' => request()->has('is_suspended'),
-        ]), $id);
+        ]);
+
+        $customer = $this->customerRepository->update($data, $id);
 
         Event::dispatch('customer.update.after', $customer);
 

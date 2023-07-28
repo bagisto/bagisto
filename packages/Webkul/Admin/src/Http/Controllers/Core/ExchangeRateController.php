@@ -53,11 +53,10 @@ class ExchangeRateController extends Controller
 
         Event::dispatch('core.exchange_rate.create.before');
 
-        $exchangeRate = $this->exchangeRateRepository->create([
-            'id'              => request()->input('id'),
-            'target_currency' => request()->input('target_currency'),
-            'rate'            => request()->input('rate'),
-        ]);
+        $exchangeRate = $this->exchangeRateRepository->create(request()->only([
+            'target_currency',
+            'rate'
+        ]));
 
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 
@@ -96,7 +95,10 @@ class ExchangeRateController extends Controller
 
         Event::dispatch('core.exchange_rate.update.before', $id);
 
-        $exchangeRate = $this->exchangeRateRepository->update(request()->all(), $id);
+        $exchangeRate = $this->exchangeRateRepository->update(request()->only([
+            'target_currency',
+            'rate'
+        ]), $id);
 
         Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
 

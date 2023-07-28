@@ -57,7 +57,11 @@ class TemplateController extends Controller
 
         Event::dispatch('marketing.templates.create.before');
 
-        $template = $this->templateRepository->create(request()->all());
+        $template = $this->templateRepository->create(request()->only([
+            'name',
+            'status',
+            'content'
+        ]));
 
         Event::dispatch('marketing.templates.create.after', $template);
 
@@ -95,7 +99,11 @@ class TemplateController extends Controller
 
         Event::dispatch('marketing.templates.update.before', $id);
 
-        $template = $this->templateRepository->update(request()->all(), $id);
+        $template = $this->templateRepository->update(request()->only([
+            'name',
+            'status',
+            'content'
+        ]), $id);
 
         Event::dispatch('marketing.templates.update.after', $template);
 

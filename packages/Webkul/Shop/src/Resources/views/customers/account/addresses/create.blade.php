@@ -22,6 +22,7 @@
         :action="route('shop.customers.account.addresses.store')"
         class="rounded mt-[30px]"
     >
+        {{-- Name --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.company-name')
@@ -42,6 +43,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- First Name --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.first-name')
@@ -63,6 +65,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- Last Name  --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.last-name')
@@ -84,6 +87,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- Vat Id --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.vat-id')
@@ -104,6 +108,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- Street Address --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.street-address')
@@ -125,6 +130,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- Country --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.country')
@@ -156,6 +162,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- State --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.state')
@@ -177,6 +184,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- City --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.city')
@@ -198,6 +206,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- Post Code --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.post-code')
@@ -219,6 +228,7 @@
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
 
+        {{-- Contact --}}
         <x-shop::form.control-group class="mb-4">
             <x-shop::form.control-group.label>
                 @lang('shop::app.customers.account.addresses.phone')
@@ -239,6 +249,30 @@
             >
             </x-shop::form.control-group.error>
         </x-shop::form.control-group>
+
+        {{-- Set As Default --}}
+        <div class="flex gap-x-[15px] mb-4 select-none">
+            <input
+                type="checkbox"
+                name="default_address"
+                value="1"
+                id="default_address"
+                class="hidden peer cursor-pointer"
+            >
+
+            <label
+                class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
+                for="default_address"
+            >
+            </label>
+
+            <label 
+                class="block text-[16px] cursor-pointer"
+                for="default_address"
+            >
+                @lang('shop::app.customers.account.addresses.set-as-default')
+            </label>
+        </div>
 
         <button
             type="submit"

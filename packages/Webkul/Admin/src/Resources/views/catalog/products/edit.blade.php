@@ -1,257 +1,161 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.catalog.products.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.catalog.products.edit-title') }}
-@stop
 
-@push('css')
-    <style>
-       @media only screen and (max-width: 728px){
-            .content-container .content .page-header .page-title{
-                width: 100%;
-            }
-            
-            .content-container .content .page-header .page-title .control-group {
-                margin-top: 20px!important;
-                width: 100%!important;
-                margin-left: 0!important;
-            }
+    {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
-            .content-container .content .page-header .page-action {
-                margin-top: 10px!important;
-                float: left;
-            }
-       }        
-    </style>
-@endpush
+    <x-admin::form
+        v-slot="{ meta, errors, handleSubmit }"
+        as="div"
+    >
+        <form @submit="handleSubmit($event, create)">
+            {!! view_render_event('bagisto.admin.catalog.product.edit.actions.before', ['product' => $product]) !!}
 
-@section('content')
-    <div class="content">
-        @php
-            $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-
-            $channel = core()->getRequestedChannelCode();
-
-            $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
-        @endphp
-
-        {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
-
-        <form method="POST" action="" @submit.prevent="onSubmit" enctype="multipart/form-data">
-
-            <div class="page-header">
-
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link"
-                           onclick="window.location = '{{ route('admin.catalog.products.index') }}'"></i>
-
-                        {{ __('admin::app.catalog.products.edit-title') }}
-                    </h1>
-
-                    <div class="control-group">
-                        <select class="control" id="channel-switcher" name="channel">
-                            @foreach (core()->getAllChannels() as $channelModel)
-
-                                <option
-                                    value="{{ $channelModel->code }}" {{ ($channelModel->code) == $channel ? 'selected' : '' }}>
-                                    {{ core()->getChannelName($channelModel) }}
-                                </option>
-
-                            @endforeach
-                        </select>
+            <div class="grid gap-[10px]">
+                <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+                    <div class="grid gap-[6px]">
+                        <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
+                            @lang('admin::app.catalog.products.edit.title')
+                        </p>
                     </div>
-
-                    <div class="control-group">
-                        <select class="control" id="locale-switcher" name="locale">
-                            @foreach ($channelLocales as $localeModel)
-
-                                <option
-                                    value="{{ $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
-                                    {{ $localeModel->name }}
-                                </option>
-
-                            @endforeach
-                        </select>
+                    
+                    <div class="flex gap-x-[10px] items-center">
+                        <span class="text-gray-600 leading-[24px]"> Cancel</span>
+                        <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                            Save Product</div>
                     </div>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.catalog.products.save-btn-title') }}
-                    </button>
                 </div>
             </div>
 
-            <div class="page-content">
-                @csrf()
+            <!-- Filter row -->
+            <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
+                <div class="flex gap-x-[4px] items-center">
+                    <div class="">
+                        <div class="inline-flex gap-x-[8px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                            <span class="icon-store text-[24px] "></span>Default Store<span class="icon-sort-down text-[24px]"></span>
+                        </div>
+                        <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                            <span class="icon-language text-[24px] "></span> English <span class="icon-sort-down text-[24px]"></span>
+                        </div>
+                        <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <input name="_method" type="hidden" value="PUT">
+            {!! view_render_event('bagisto.admin.catalog.product.edit.actions.after', ['product' => $product]) !!}
 
-                @foreach ($product->attribute_family->attribute_groups as $index => $attributeGroup)
-                    @php
-                        $customAttributes = $product->getEditableAttributes($attributeGroup);
-                    @endphp
+            <!-- body content -->
+            {!! view_render_event('bagisto.admin.catalog.product.edit.form.before', ['product' => $product]) !!}
 
-                    @if (count($customAttributes))
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
+                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
 
-                        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.before', ['product' => $product]) !!}
+                    <div
+                        @if ($column == 1) class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto" @endif
+                        @if ($column == 2) class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full" @endif
+                    >
+                        @foreach ($groups as $group)
+                            @php
+                                $customAttributes = $product->getEditableAttributes($group);
+                            @endphp
 
-                        <accordian title="{{ __($attributeGroup->name) }}"
-                                   :active="{{$index == 0 ? 'true' : 'false'}}">
-                            <div slot="body">
-                                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.before', ['product' => $product]) !!}
+                            @if (count($customAttributes))
+                                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.before', ['product' => $product]) !!}
 
-                                @foreach ($customAttributes as $attribute)
+                                <div class="relative p-[16px] bg-white rounded-[4px] box-shadow">
+                                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                        {{ $group->name }}
+                                    </p>
 
-                                    @php
-                                        if (
-                                            $attribute->code == 'guest_checkout'
-                                            && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')
-                                        ) {
-                                            continue;
-                                        }
+                                    @if ($group->name == 'Meta Description')
+                                        <div class="flex flex-col gap-[3px] mb-[30px]">
+                                            <p 
+                                                class="text-[#161B9D]"
+                                                v-text="meta_title"
+                                            >
+                                            </p>
 
-                                        $validations = [];
+                                            {{-- SEO Meta Title --}}
+                                            <p 
+                                                class="text-[#135F29]"
+                                                v-text="'{{ URL::to('/') }}/' + (meta_title ? meta_title.toLowerCase().replace(/\s+/g, '-') : '')"
+                                            >
+                                            </p>
 
-                                        if ($attribute->is_required) {
-                                            array_push($validations, 'required');
-                                        }
-
-                                        if ($attribute->type == 'price') {
-                                            array_push($validations, 'decimal');
-                                        }
-
-                                        if ($attribute->type == 'file') {
-                                            $retVal = core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') ?? '2048';
-
-                                            array_push($validations, 'size:' . $retVal);
-                                        }
-
-                                        if ($attribute->type == 'image') {
-                                            $retVal = core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') ?? '2048';
-
-                                            array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
-                                        }
-
-                                        array_push($validations, $attribute->validation);
-
-                                        $validations = implode('|', array_filter($validations));
-                                    @endphp
-
-                                    @if (view()->exists($typeView = 'admin::catalog.products.field-types.' . $attribute->type))
-
-                                        <div class="control-group {{ $attribute->type }} {{ $attribute->enable_wysiwyg ? 'have-wysiwyg' : '' }}"
-                                             @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
-                                             @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
-
-                                            <label
-                                                for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
-                                                {{ $attribute->admin_name }}
-
-                                                @if ($attribute->type == 'price')
-                                                    <span class="currency-code">({{ core()->currencySymbol(core()->getBaseCurrencyCode()) }})</span>
-                                                @endif
-
-                                                @php
-                                                    $channel_locale = [];
-
-                                                    if ($attribute->value_per_channel) {
-                                                        array_push($channel_locale, $channel);
-                                                    }
-
-                                                    if ($attribute->value_per_locale) {
-                                                        array_push($channel_locale, $locale);
-                                                    }
-                                                @endphp
-
-                                                @if (count($channel_locale))
-                                                    <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
-                                                @endif
-                                            </label>
-
-                                            @include ($typeView)
-
-                                            <span class="control-error"
-                                                @if ($attribute->type == 'multiselect') v-if="errors.has('{{ $attribute->code }}[]')"
-                                                @else  v-if="errors.has('{{ $attribute->code }}')"  @endif>
-                                                @if ($attribute->type == 'multiselect')
-                                                    @{{ errors.first('{!! $attribute->code !!}[]') }}
-                                                @else
-                                                    @{{ errors.first('{!! $attribute->code !!}') }}
-                                                @endif
-                                            </span>
+                                            {{-- SEP Meta Description --}}
+                                            <p 
+                                                class="text-gray-600"
+                                                v-text="meta_description"
+                                            >
+                                            </p>
                                         </div>
-
                                     @endif
 
-                                @endforeach
+                                    @foreach ($customAttributes as $attribute)
+                                        {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.controls.before', ['product' => $product]) !!}
 
-                                @if ($attributeGroup->name == 'Price')
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label>
+                                                {{ $attribute->admin_name . ($attribute->is_required ? '*' : '') }}
+                                            </x-admin::form.control-group.label>
 
-                                    @include ('admin::catalog.products.accordians.customer-group-price')
+                                            @include ('admin::catalog.products.edit.controls', [
+                                                'attribute' => $attribute,
+                                                'product'   => $product,
+                                            ])
+                
+                                            <x-admin::form.control-group.error :control-name="$attribute->code"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                @endif
+                                        {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    @endforeach
 
-                                {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.controls.after', ['product' => $product]) !!}
-                            </div>
-                        </accordian>
+                                    @includeWhen($group->name == 'Price', 'admin::catalog.products.edit.price.group')
+                                </div>
 
-                        {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name . '.after', ['product' => $product]) !!}
+                                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.after', ['product' => $product]) !!}
+                            @endif
+                        @endforeach
 
-                    @endif
+                        @if ($column == 1)
+                            {{-- Media View Blade File --}}
+                            @include('admin::catalog.products.edit.media')
 
+                            {{-- Product Type View Blade File --}}
+                            @includeIf('admin::catalog.products.edit.types.' . $product->type)
+
+                            {{-- Related, Cross Sells, Up Sells View Blade File --}}
+                            @include('admin::catalog.products.edit.product-links')
+
+                            {{-- Include Product Type Additional Blade Files If Any --}}
+                            @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
+                                @includeIf($view)
+                            @endforeach
+                        @else
+                            {{-- Inventory View Blade File --}}
+                            @includeWhen(! $product->getTypeInstance()->isComposite(), 'admin::catalog.products.edit.inventory')
+
+                            {{-- Categories View Blade File --}}
+                            @include('admin::catalog.products.edit.categories')
+                        @endif
+                    </div>
+
+                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.after', ['product' => $product]) !!}
                 @endforeach
-
-                {!! view_render_event(
-                  'bagisto.admin.catalog.product.edit_form_accordian.additional_views.before',
-                   ['product' => $product])
-                !!}
-                @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
-
-                    @include ($view)
-
-                @endforeach
-
-                {!! view_render_event(
-                  'bagisto.admin.catalog.product.edit_form_accordian.additional_views.after',
-                   ['product' => $product])
-                !!}
             </div>
 
+            {!! view_render_event('bagisto.admin.catalog.product.edit.form.after', ['product' => $product]) !!}
         </form>
+    </x-admin::form>
 
-        {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
-    </div>
-@stop
-
-@push('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            $('#channel-switcher, #locale-switcher').on('change', function (e) {
-                $('#channel-switcher').val()
-
-                if (event.target.id == 'channel-switcher') {
-                    let locale = "{{ app('Webkul\Core\Repositories\ChannelRepository')->findOneByField('code', $channel)->locales->first()->code }}";
-
-                    $('#locale-switcher').val(locale);
-                }
-
-                var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher').val();
-
-                window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
-            });
-
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea.enable-wysiwyg, textarea.enable-wysiwyg',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-            });
-        });
-    </script>
-@endpush
+    {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
+        
+</x-admin::layouts>

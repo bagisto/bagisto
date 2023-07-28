@@ -45,7 +45,14 @@ class LocaleController extends Controller
             'direction' => 'in:ltr,rtl',
         ]);
 
-        $this->localeRepository->create(request()->all());
+        $data = request()->only([
+            'code',
+            'name',
+            'direction',
+            'logo_path'
+        ]);
+
+        $this->localeRepository->create($data);
 
         return new JsonResource([
             'message' => trans('admin::app.settings.locales.create-success'),
@@ -79,7 +86,14 @@ class LocaleController extends Controller
             'direction' => 'in:ltr,rtl',
         ]);
 
-        $this->localeRepository->update(request()->all(), $id);
+        $data = request()->only([
+            'code',
+            'name',
+            'direction',
+            'logo_path'
+        ]);
+
+        $this->localeRepository->update($data, $id);
 
         session()->flash('success', trans('admin::app.settings.locales.update-success'));
 

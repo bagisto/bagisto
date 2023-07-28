@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-e291707f.css",
+    "file": "assets/app-3ab35c17.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -52,6 +52,10 @@
     "file": "assets/hamburger-9b9f7edd.svg",
     "src": "src/Resources/assets/images/hamburger.svg"
   },
+  "src/Resources/assets/images/icon-discount.svg": {
+    "file": "assets/icon-discount-e37d1aed.svg",
+    "src": "src/Resources/assets/images/icon-discount.svg"
+  },
   "src/Resources/assets/images/img.png": {
     "file": "assets/img-4aa33a76.png",
     "src": "src/Resources/assets/images/media-image.png"
@@ -72,8 +76,15 @@
     "file": "assets/user-owner-466fac11.svg",
     "src": "src/Resources/assets/images/user-owner.svg"
   },
+  "src/Resources/assets/js/app.css": {
+    "file": "assets/app-c04ede37.css",
+    "src": "src/Resources/assets/js/app.css"
+  },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-478951f7.js",
+    "css": [
+      "assets/app-c04ede37.css"
+    ],
+    "file": "assets/app-c73409a4.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }
