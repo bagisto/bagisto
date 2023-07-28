@@ -173,10 +173,12 @@ class AddressController extends Controller
             $default->update(['default_address' => 0]);
         }
         
-        if ($address = $this->customerAddressRepository->findOneWhere([
+        $address = $this->customerAddressRepository->findOneWhere([
             'id'              => request('set_as_default'),
             'customer_id'     => $id
-        ])) {
+        ]);
+
+        if ($address) {
             $address->update(['default_address' => 1]);
 
             session()->flash('success', trans('Default Address Updated'));
@@ -199,10 +201,9 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        return response()->json([
-            'redirect' => false,
-            'message'  => trans('admin::app.customers.addresses.success-delete'),
-        ]);
+        session()->flash('success', trans('Address Deleted Successfully'));
+
+        return redirect()->back();
     }
 
     /**

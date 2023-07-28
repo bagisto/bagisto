@@ -7,15 +7,15 @@
 
     <div style="padding: 30px;">
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            Dear {{ $customer->name }}
+            @lang('shop::app.email.customer.note.dear') {{ $customer->name }}
         </p>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            Title
+            @lang('shop::app.email.customer.note.subject')  
         </p>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            {{ $note }}
+            @lang('shop::app.email.customer.note.description') : {{ $note }}
         </p>
     </div>
 @endcomponent

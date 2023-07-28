@@ -60,7 +60,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('default/{id}', 'makeDefault')->name('admin.customer.addresses.set_default');
 
-            Route::delete('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
+            Route::post('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
         });
     });
 

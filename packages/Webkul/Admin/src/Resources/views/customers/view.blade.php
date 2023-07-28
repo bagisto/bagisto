@@ -9,6 +9,15 @@
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
                 {{ $customer->first_name . " " . $customer->last_name }}
+
+                    @if($customer->status == 1)
+                        <span class="label-pending text-[14px] mx-[5px]">Active</span>
+                    @endif
+
+                    @if($customer->is_suspended == 1)
+                        <span class="label-pending text-[14px]">Suspended</span>
+                    @endif
+            </p>   
             <div class="flex gap-x-[10px] items-center">
                 <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all hover:bg-gray-200">
                     <span class="icon-arrow-right text-[24px]"></span>
@@ -273,63 +282,7 @@
                 </x-slot:content>
             </x-admin::accordion> 
 
-            <!-- component 2 -->
-            <x-admin::accordion>
-                <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Active Status</p>
-                    <div class="flex gap-[6px] items-center">
-                        <p class="text-blue-600">Edit</p>
-                    </div>
-                </x-slot:header>
-
-                <x-slot:content>
-                        <div class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
-                            <label 
-                                class="flex gap-[10px] w-max items-center cursor-pointer select-none"
-                                for="status" 
-                            >
-                                <input 
-                                    type="checkbox" 
-                                    name="status"
-                                    id="status"
-                                    value="{{ $customer->status }}" {{ $customer->status ? 'checked' : '' }}
-                                    class="hidden peer"
-                                >
-                    
-                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                    
-                                <p class="text-gray-600 font-semibold cursor-pointer">
-                                    Customer Status
-                                </p>
-                            </label>
-                        </div>
-                         
-                        <div class="flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
-                            <label 
-                                class="flex gap-[10px] w-max items-center cursor-pointer select-none"
-                                for="isSuspended"
-                            >
-                                <input 
-                                    type="checkbox" 
-                                    name="is_suspended"
-                                    id="isSuspended"
-                                    value="{{ $customer->is_suspended }}" {{ $customer->is_suspended ? 'checked' : '' }}
-                                    class="hidden peer"
-                                >
-                    
-                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                    
-                                <p class="text-gray-600 font-semibold cursor-pointer">
-                                    Suspend
-                                </p>
-                            </label>
-                        </div>
-                </x-slot:content>
-            </x-admin::accordion>
-
-            <!-- component 3 -->
-            {!! view_render_event('bagisto.admin.customer.addresses.list.before') !!}
-            
+            {{-- component 3 --}}
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
@@ -357,24 +310,47 @@
                             </div>
                             <div class="flex gap-[10px]">
                                 <p class="text-blue-600">Edit</p>
-                                <p class="text-blue-600">Delete</p>
+
+                                {{-- Delete Address --}}
+                                <p 
+                                    class="text-blue-600 cursor-pointer"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('delete-address{{ $address->id }}').submit();"
+                                >
+                                    Delete
+                                </p>
+
+                                <form 
+                                    method="post"
+                                    action="{{ route('admin.customer.addresses.delete', $address->id) }}" 
+                                    id="delete-address{{ $address->id }}" 
+                                >
+                                    @csrf
+                                </form>
+
+                                {{-- Set Default Address --}}
                                 @if(! $address->default_address )
                                     <p 
                                         class="text-blue-600 cursor-pointer"
                                         onclick="event.preventDefault();
-                                        document.getElementById('default-address').submit();"
+                                        document.getElementById('default-address{{ $address->id }}').submit();"
                                     >
-                                        Set as Default
+                                        Set Default
                                     </p>
 
                                     <form 
                                         class="hidden"
                                         method="post"
                                         action="{{ route('admin.customer.addresses.set_default', $customer->id) }}" 
-                                        id="default-address" 
+                                        id="default-address{{ $address->id }}" 
                                     >
                                         @csrf
-                                        <input type="text" name="set_as_default" value="{{ $address->id }}">
+
+                                        <input
+                                            type="text"
+                                            name="set_as_default"
+                                            value="{{ $address->id }}"
+                                        >
                                     </form>
                                 @endif
                             </div>
@@ -383,8 +359,6 @@
                     @endforeach
                 </x-slot:content>
             </x-admin::accordion>
-
-            {!! view_render_event('bagisto.admin.customer.addresses.list.after') !!}
         </div>
     </div>
 
@@ -396,7 +370,10 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, create)">
+                    <form 
+                        @submit="handleSubmit($event, create)"
+                        ref="addressForm"
+                    >
                         <!-- Address Create Modal -->
                         <x-admin::modal ref="addressCreateModal">
                             <x-slot:toggle>
@@ -689,25 +666,29 @@
                                                 </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         </div>
+                                        
                                         <div class="w-full">
-                                            <label 
-                                                class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none mt-[10px]"
-                                                for="default_address"
-                                            >
-                                                <input 
-                                                    type="checkbox" 
-                                                    name="default_address" 
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label >
+                                                    Default Adderss
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="default_address"
+                                                    :value="1"
                                                     id="default_address"
-                                                    value="1"
-                                                    class="hidden peer"
+                                                    for="default_address"
+                                                    label="Default Address"
+                                                    :checked="0"
                                                 >
-                                    
-                                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                    
-                                                <p class="flex gap-x-[4px] items-center cursor-pointer">
-                                                    Default Address
-                                                </p>
-                                            </label>
+                                                </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="default_address"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
                                         </div>
                                     </div>
                                 </div>
@@ -738,14 +719,15 @@
 
                 props: {
                     addressLines: {
-                    type: Number,
-                    default: 0, // Default to 0 if no data is provided
+                        type: Number,
+                        default: 0, // Default to 0 if no data is provided
                     }
                 },
 
                 methods: {
 
                     create(params, { resetForm, setErrors }) {
+                        console.log(params);
                         this.$axios.post('{{ route("admin.customer.addresses.store", $customer->id) }}', params,
                             {
                                 headers: {
