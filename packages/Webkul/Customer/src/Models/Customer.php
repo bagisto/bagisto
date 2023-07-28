@@ -14,6 +14,7 @@ use Webkul\Customer\Database\Factories\CustomerFactory;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\OrderProxy;
+use Webkul\Customer\Models\CustomerNoteProxy;
 
 class Customer extends Authenticatable implements CustomerContract
 {
@@ -247,7 +248,7 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all_orders()
+    public function orders()
     {
         return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
     }
@@ -257,9 +258,19 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all_reviews()
+    public function reviews()
     {
         return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get all notes of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes()
+    {
+        return $this->hasMany(CustomerNoteProxy::modelClass(), 'customer_id');
     }
 
     /**

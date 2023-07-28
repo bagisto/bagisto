@@ -10,7 +10,7 @@ class CustomerNote extends Model implements CustomerNoteContract
     protected $fillable = [
         'note',
         'customer_id',
-        'customer_notified,',
+        'customer_notified',
     ];
 
     /**
