@@ -64,7 +64,6 @@ class ChannelRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-
         $channel = parent::update($data, $id, $attribute);
 
         $channel->locales()->sync($data['locales']);
@@ -104,14 +103,6 @@ class ChannelRepository extends Repository
                     $channel->save();
                 }
             }
-        } else {
-            if ($channel->{$type}) {
-                Storage::delete($channel->{$type});
-            }
-
-            $channel->{$type} = null;
-
-            $channel->save();
         }
     }
 }
