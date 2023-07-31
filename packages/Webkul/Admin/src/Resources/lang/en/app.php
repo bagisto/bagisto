@@ -797,27 +797,40 @@ return [
                     'general'        => 'General',
                     'inactive'       => 'Inactive',
                     'name'           => 'Name',
-                    'save'           => 'Save',
+                    'save-btn'       => 'Save',
                     'status'         => 'Status',
                     'select-status'  => 'Select Status',
-                    'save-btn-title' => 'Save',
                 ],
 
-                'title'          => 'Email Templates',
-                'events'         => 'Events',
+                'edit' => [
+                    'title'          => 'Edit Template',
+                    'active'         => 'Active',
+                    'content'        => 'Content*',
+                    'cancel'         => 'Cancel',
+                    'draft'          => 'Draft',
+                    'general'        => 'General',
+                    'inactive'       => 'Inactive',
+                    'name'           => 'Name',
+                    'save-btn'       => 'Save',
+                    'status'         => 'Status',
+                ],
+
+                'index' => [
+                    'title'          => 'Email Templates',
+                    'create-btn'     => 'Create Template',
+                ],
             ],
 
             'campaigns' => [
                 'create'    => [
                     'active'          => 'Active',
-                    'title'           => 'Add Campaign',
                     'audience'        => 'Audience',
-                    'cancel'          => 'Cancel',
+                    'cancel-btn'      => 'Cancel',
                     'customer-group'  => 'Customer Group',
                     'channel'         => 'Channel',
                     'email-template'  => 'Email Template',
                     'event'           => 'Event',
-                    'save'            => 'Save',
+                    'save-btn'        => 'Save',
                     'general'         => 'General',
                     'inactive'        => 'Inactive',
                     'name'            => 'Name',
@@ -826,9 +839,33 @@ return [
                     'select-event'    => 'Select Event',
                     'select-status'   => 'Select Status',
                     'subject'         => 'Subject',
+                    'title'           => 'Create Campaign',
                 ],
 
-                'title'          => 'Campaigns',
+                'edit'    => [
+                    'active'          => 'Active',
+                    'audience'        => 'Audience',
+                    'cancel-btn'      => 'Cancel',
+                    'customer-group'  => 'Customer Group',
+                    'channel'         => 'Channel',
+                    'email-template'  => 'Email Template',
+                    'event'           => 'Event',
+                    'general'         => 'General',
+                    'inactive'        => 'Inactive',
+                    'name'            => 'Name',
+                    'save-btn'        => 'Save',
+                    'status'          => 'Status',
+                    'select-template' => 'Select Template',
+                    'select-event'    => 'Select Event',
+                    'select-status'   => 'Select Status',
+                    'subject'         => 'Subject',
+                    'title'           => 'Edit Campaign',
+                ],
+
+                'index' =>  [
+                    'title'          => 'Campaigns',
+                    'create-btn'     => 'Create Campaign',
+                ],
             ],
 
             'events' => [
@@ -841,10 +878,25 @@ return [
                     'date'           => 'Date',
                     'save'           => 'Save',
                 ],
+
+                'index'  =>  [
+                    'title'    => 'Events',
+                    'create-btn'  => 'Create Event',
+                ],
             ],
 
             'newsletters' => [
                 'title' => 'Newsletter Subscriptions',
+
+                'edit'  => [
+                    'title'       => 'Edit Newsletter Subscriber',
+                    'cancel-btn'  => 'Cancel',
+                    'save-btn'    => 'Save Subscriber',
+                    'email'       => 'Email',
+                    'subscribed'  => 'Subscribed',
+                    'true'        => 'True',
+                    'false'       => 'False',
+                ]
             ],
         ],
 
@@ -855,8 +907,20 @@ return [
                 'general'        => 'General',
                 'path'           => 'Path',
                 'path-info'      => 'Example: "/sitemap/" or "/" for base path',
-                'save'           => 'Save',
+                'save-btn'       => 'Save',
                 'title'          => 'Add Sitemap',
+                'create-btn'     => 'Create Sitemap',
+            ],
+
+            'edit'  => [
+                'cancel-btn'     => 'Cancel',
+                'file-name'      => 'File Name',
+                'file-name-info' => 'Example: sitemap.xml',
+                'general'        => 'General',
+                'path'           => 'Path',
+                'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                'save-btn'       => 'Save',
+                'title'          => 'Edit Sitemap',
             ],
         ],
     ],
