@@ -14,6 +14,8 @@ use Webkul\Customer\Database\Factories\CustomerFactory;
 use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\OrderProxy;
+use Webkul\Customer\Models\CustomerNoteProxy;
+use Webkul\Sales\Models\InvoiceProxy;
 
 class Customer extends Authenticatable implements CustomerContract
 {
@@ -55,7 +57,6 @@ class Customer extends Authenticatable implements CustomerContract
         'status',
         'is_verified',
         'is_suspended',
-        'notes',
     ];
 
     /**
@@ -179,6 +180,15 @@ class Customer extends Authenticatable implements CustomerContract
             ->where('default_address', 1);
     }
 
+     /**
+     * Customer's relation with invoice .
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
+     */
+    public function invoices() {
+        return $this->hasManyThrough(InvoiceProxy::modelClass(), OrderProxy::modelClass());
+    }
+
     /**
      * Customer's relation with wishlist items.
      *
@@ -248,7 +258,7 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all_orders()
+    public function orders()
     {
         return $this->hasMany(OrderProxy::modelClass(), 'customer_id');
     }
@@ -258,9 +268,19 @@ class Customer extends Authenticatable implements CustomerContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all_reviews()
+    public function reviews()
     {
         return $this->hasMany(ProductReviewProxy::modelClass(), 'customer_id');
+    }
+
+    /**
+     * Get all notes of a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes()
+    {
+        return $this->hasMany(CustomerNoteProxy::modelClass(), 'customer_id');
     }
 
     /**

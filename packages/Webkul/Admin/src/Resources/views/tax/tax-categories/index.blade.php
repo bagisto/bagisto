@@ -23,13 +23,15 @@
         <script type="text/x-template" id="v-create-tax-category-template">
             <div>
                 <!-- Create Tax Category Button -->
-                <button 
-                    type="button"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
-                    @click="$refs.taxCategory.toggle()"
-                >
-                    @lang('admin::app.settings.taxes.tax-categories.create.add-title')
-                </button>
+                @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
+                    <button
+                        type="button"
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        @click="$refs.taxCategory.toggle()"
+                    >
+                        @lang('admin::app.settings.taxes.tax-categories.create.add-title')
+                    </button>
+                @endif
 
                 <!-- Model Form -->
                 <x-admin::form
