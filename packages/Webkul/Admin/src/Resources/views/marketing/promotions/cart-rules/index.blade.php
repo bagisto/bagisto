@@ -14,7 +14,7 @@
                     href="{{ route('admin.cart_rules.create') }}"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.promotions.cart-rules.index.add-title')
+                    @lang('admin::app.promotions.cart-rules.index.create-btn')
                 </a>
             @endif
         </div>

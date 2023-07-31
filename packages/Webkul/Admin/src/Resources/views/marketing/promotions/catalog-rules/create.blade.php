@@ -15,17 +15,21 @@
                     :action="route('admin.catalog_rules.store')"
                     enctype="multipart/form-data"
                 >
-                    <div class="grid">
-                        <div class="flex justify-end items-center pt-[11px]">
+                    <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
+                        <p class="text-[20px] text-gray-800 font-bold">
+                            @lang('admin::app.promotions.catalog-rules.create.title')
+                        </p>
+                
+                        <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.promotions.catalog-rules.create.save-btn-title')
+                                @lang('admin::app.promotions.catalog-rules.create.save-btn')
                             </button>
                         </div>
                     </div>
-        
+    
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
@@ -359,7 +363,7 @@
                                 </x-slot:content>
                             </x-admin::accordion>
                                 
-                            {{-- Marketing --}}
+                            {{-- Marketing Time--}}
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
@@ -370,52 +374,50 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <div class="px-[16px] pb-[16px]">
-                                        <div class="flex gap-[16px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.create.from')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="starts_from"
-                                                    :value="old('starts_from')"
-                                                    id="starts_from"
-                                                    rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.create.from')"
-                                                    :placeholder="trans('admin::app.promotions.catalog-rules.create.from')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="starts_from"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
+                                    <div class="flex gap-[16px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.catalog-rules.create.from')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="starts_from"
+                                                :value="old('starts_from')"
+                                                id="starts_from"
+                                                rules="required"
+                                                :label="trans('admin::app.promotions.catalog-rules.create.from')"
+                                                :placeholder="trans('admin::app.promotions.catalog-rules.create.from')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="starts_from"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.create.to')
-                                                </x-admin::form.control-group.label>
-            
-                                                <x-admin::form.control-group.control
-                                                    type="date"
-                                                    name="ends_till"
-                                                    :value="old('ends_till')"
-                                                    id="ends_till"
-                                                    rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.create.to')"
-                                                    :placeholder="trans('admin::app.promotions.catalog-rules.create.to')"
-                                                >
-                                                </x-admin::form.control-group.control>
-            
-                                                <x-admin::form.control-group.error
-                                                    control-name="ends_till"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.promotions.catalog-rules.create.to')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="date"
+                                                name="ends_till"
+                                                :value="old('ends_till')"
+                                                id="ends_till"
+                                                rules="required"
+                                                :label="trans('admin::app.promotions.catalog-rules.create.to')"
+                                                :placeholder="trans('admin::app.promotions.catalog-rules.create.to')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="ends_till"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
                                     </div>
                                 </x-slot:content>
                             </x-admin::accordion>
