@@ -11,11 +11,15 @@
                 {{ $customer->first_name . " " . $customer->last_name }}
 
                     @if($customer->status == 1)
-                        <span class="label-pending text-[14px] mx-[5px]">Active</span>
+                        <span class="label-pending text-[14px] mx-[5px]">
+                            @lang('admin::app.customers.view.active')
+                        </span>
                     @endif
 
                     @if($customer->is_suspended == 1)
-                        <span class="label-pending text-[14px]">Suspended</span>
+                        <span class="label-pending text-[14px]">
+                            @lang('admin::app.customers.view.suspended')
+                        </span>
                     @endif
             </p>   
             <div class="flex gap-x-[10px] items-center">
@@ -56,54 +60,85 @@
             @if($totalOrderCount = count($customer->orders))
                 <div class=" bg-white rounded-[4px] box-shadow">
                     <div class=" p-[16px] flex justify-between">
-                        <p class="text-[16px] text-gray-800 font-semibold">Orders</p>
-                        <p class="text-[16px] text-gray-800 font-semibold">Total Revenue - {{ core()->currency($customer->orders->sum('grand_total')) }}</p>
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.customers.view.orders')
+                        </p>
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.customers.view.total-revenue')- {{ core()->currency($customer->orders->sum('grand_total')) }}
+                        </p>
                     </div>
+
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
-                    
                             <div class="flex justify-between items-center px-[16px] py-[16px]">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="">
                                         <div class="flex gap-[10px]">
                                             <span class="icon-uncheckbox text-[24px]"></span>
+
                                             <div class="flex flex-col gap-[6px]">
-                                                <p class="text-[16px] text-gray-800 font-semibold">#{{ $order->id }}</p>
-                                                <p class="text-gray-600">{{ $order->created_at }}</p>
-                                                <p class="label-pending">{{ $order->status }}</p>
+                                                <p class="text-[16px] text-gray-800 font-semibold">
+                                                    #{{ $order->id }}
+                                                </p>
+
+                                                <p class="text-gray-600">
+                                                    {{ $order->created_at }}
+                                                </p>
+
+                                                <p class="label-pending">
+                                                    {{ $order->status }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="">
                                         <div class="flex flex-col gap-[6px]">
-                                            <p class="text-[16px] text-gray-800 font-semibold">{{ core()->currency($order->grand_total ) }}</p>
-                                            <p class="text-gray-600">Pay by - {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}</p>
-                                            <p class="text-gray-600">{{ $order->channel->code }}</p>
+                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                                {{ core()->currency($order->grand_total ) }}
+                                            </p>
+
+                                            <p class="text-gray-600">
+                                                @lang('admin::app.customers.view.pay-by') - {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                                            </p>
+
+                                            <p class="text-gray-600">
+                                                {{ $order->channel->code }}
+                                            </p>
                                         </div>
                                     </div>
+
                                     <div class="">
                                         <div class="flex flex-col gap-[6px]">
-                                            <p class="text-[16px] text-gray-800">{{ $order->billingAddress->name }}</p>
-                                            <p class="text-gray-600">{{ $order->billingAddress->email }}</p>
-                                            <p class="text-gray-600">{{ $order->billingAddress->address1 }},{{ $order->billingAddress->city }},{{ $order->billingAddress->state }}</p>
+                                            <p class="text-[16px] text-gray-800">
+                                                {{ $order->billingAddress->name }}
+                                            </p>
+
+                                            <p class="text-gray-600">
+                                                {{ $order->billingAddress->email }}
+                                            </p>
+
+                                            <p class="text-gray-600">
+                                                {{ $order->billingAddress->address1 }},
+                                                {{ $order->billingAddress->city }},
+                                                {{ $order->billingAddress->state }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                                 <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
                             </div>
                         @endforeach
-                        <!-- Body -->
-                        <!-- single row -->
-                    
-                        <span class="border-b-[1px] border-gray-300"></span>
 
+                        {{-- single row --}}
+                        <span class="border-b-[1px] border-gray-300"></span>
                     </div>
                 </div>
             @endif
 
             
             {{-- Invoices --}}
-            {{-- @if($totalInvoiceCount = count($invoices))
+            @if($totalInvoiceCount = count($customer->invoices))
                 <div class="bg-white rounded box-shadow">
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Invoice ({{ $totalInvoiceCount }})</p>
                     <div class="relative overflow-x-auto">
@@ -116,7 +151,7 @@
                                     <th scope="col" class="px-6 py-[16px] font-semibold"> Order ID </th>
                                 </tr>
                             </thead>
-                            @foreach ($invoices as $invoice)
+                            @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     <tr class="bg-white border-b ">
                                         <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->id }}</td>
@@ -129,24 +164,36 @@
                         </table>
                     </div>
                 </div>
-            @endif --}}
+            @endif
 
             {{-- Reviews --}}
             @if($totalReviewsCount = count($customer->reviews) )
                 <div class="bg-white rounded box-shadow">
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Review ({{ $totalReviewsCount }})</p>
+                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.customers.view.reviews')({{ $totalReviewsCount }})
+                    </p>
+
                     @foreach($customer->reviews as $review)
                         <div class="">
                             <div class="grid gap-y-[16px] p-[16px]">
                                 <div class="flex justify-start [&amp;>*]:flex-1">
                                     <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-800 font-semibold">{{ $review->name }}</p>
-                                        <p class="text-gray-600">{{ $review->product->name }}</p>
-                                        <p class="label-pending">{{ $review->status }}</p>
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            {{ $review->name }}
+                                        </p>
+
+                                        <p class="text-gray-600">
+                                            {{ $review->product->name }}
+                                        </p>
+                                        
+                                        <p class="label-pending">
+                                            {{ $review->status }}
+                                        </p>
                                     </div>
+
                                     <div class="flex flex-col gap-[6px]">
 
-                                        <!--need to update @shivendra -->
+                                        {{--need to update shivendra-webkul --}}
                                         <div class="flex">
                                             <span class="icon-star text-[18px] text-amber-500"></span>
                                             <span class="icon-star text-[18px] text-amber-500"></span>
@@ -154,15 +201,28 @@
                                             <span class="icon-star text-[18px] text-amber-500"></span>
                                             <span class="icon-star text-[18px] text-gray-300"></span>
                                         </div>
-                                        <p class="text-gray-600">{{ $review->created_at }}</p>
-                                        <p class="text-gray-600">ID - {{ $review->id }}</p>
+
+                                        <p class="text-gray-600">
+                                            {{ $review->created_at }}
+                                        </p>
+
+                                        <p class="text-gray-600">
+                                            @lang('admin::app.customers.view.id') - {{ $review->id }}
+                                        </p>
                                     </div>
                                 </div>
+
                                 <div class="flex gap-x-[16px] items-center">
                                     <div class="flex flex-col gap-[6px]">
-                                        <p class="text-[16px] text-gray-800 font-semibold">{{ $review->title }}</p>
-                                        <p class="text-gray-600">{{ $review->comment }}</p>
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            {{ $review->title }}
+                                        </p>
+
+                                        <p class="text-gray-600">
+                                            {{ $review->comment }}
+                                        </p>
                                     </div>
+
                                     <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
                                 </div>
                             </div>
@@ -172,11 +232,10 @@
                 </div>
             @endif
           
-
             {{-- Notes Form --}}
             <div class="bg-white rounded box-shadow">
                 <p class=" p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">
-                    Add Note 
+                    @lang('admin::app.customers.view.add-note')
                 </p>
 
                 <x-admin::form 
@@ -219,18 +278,17 @@
                                 <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
                     
                                 <p class="flex gap-x-[4px] items-center cursor-pointer">
-                                    Notify Customer
+                                    @lang('admin::app.customers.view.notify-customer')
                                 </p>
                             </label>
                             
+                            {{--Note Submit Button --}}
                             <button
                                 type="submit"
                                 class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
                             >
-                                Submit Note
+                                @lang('admin::app.customers.view.submit-btn-title')
                             </button>
-
-                            
                         </div>
                     </div>
                 </x-admin::form> 
@@ -240,15 +298,22 @@
 
                 @foreach ($customer->notes as $note)
                     <div class="grid gap-[6px] p-[16px]">
-                        <p class="text-[16px] text-gray-800">{{$note->note}}</p>
+                        <p class="text-[16px] text-gray-800">
+                            {{$note->note}}
+                        </p>
+
                         <p class="text-gray-600">  
-                            {{$note->created_at}}
+                            @if ($note->customer_notified)
+                                @lang('admin::app.customers.view.customer-notified') | {{$note->created_at}}
+                            @else
+                                @lang('admin::app.customers.view.customer-not-notified') | {{$note->created_at}}
+                            @endif
                         </p>
                     </div>
+
                     <span class="block w-full border-b-[1px] border-gray-300"></span>
                 @endforeach
             </div>
-
         </div>
 
         {{-- Information --}}
@@ -256,27 +321,42 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                        Customer
+                        @lang('admin::app.customers.view.customer')
                     </p>
 
-                    <div class="flex gap-[6px] items-center justify-between">
-                        <p class="text-blue-600 ">Edit</p>
-                    </div>
+                   @include('admin::customers.edit')
                 </x-slot:header>
 
                 <x-slot:content>
                     <div class="grid gap-y-[10px]">
                         <div class="">
-                            <p class="text-gray-800 font-semibold">{{ $customer->first_name . " " . $customer->last_name }}</p>
-                            <p class="text-gray-600">Email- {{ $customer->email }}</p>
-                            <p class="text-gray-600">Phone - {{ $customer->phone }}</p>
+                            <p class="text-gray-800 font-semibold">
+                                {{ $customer->first_name . " " . $customer->last_name }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.customers.view.email') - {{ $customer->email }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.customers.view.phone') - {{ $customer->phone }}
+                            </p>
                         </div>
+
                         <div class="">
-                            <p class="text-gray-600">Gender : {{ $customer->gender }}</p>
-                            <p class="text-gray-600">DOB : {{ $customer->date_of_birth }}</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.customers.view.gender') - {{ $customer->gender }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.customers.view.date-of-birth') - {{ $customer->date_of_birth }}
+                            </p>
                         </div>
+
                         <div class="">
-                            <p class="text-gray-600">Group- {{ $customer->group->code }}</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.customers.view.group')- {{ $customer->group->code }}
+                            </p>
                         </div>
                     </div>
                 </x-slot:content>
@@ -294,10 +374,16 @@
                     @foreach ($customer->addresses as $address)
                         <div class="grid gap-y-[10px]">
                             @if( $address->default_address )
-                                <p class="label-pending">Default Address</p>
-                            @endif    
+                                <p class="label-pending">
+                                    @lang('admin::app.customers.view.default-address')
+                                </p>
+                            @endif
+
                             <div class="">
-                                <p class="text-gray-800 font-semibold">{{$address->name}}</p>
+                                <p class="text-gray-800 font-semibold">
+                                    {{$address->name}}
+                                </p>
+
                                 <p class="text-gray-600">
                                     {{$address->address1}}
                                     {{$address->city}} 
@@ -305,11 +391,18 @@
                                     {{$address->country}}
                                 </p>
                             </div>
+
                             <div class="">
-                                <p class="text-gray-600">Mobile : {{$address->phone}}</p>
+                                <p class="text-gray-600">
+                                    @lang('admin::app.customers.view.phone') : {{$address->phone}}
+                                </p>
                             </div>
+
                             <div class="flex gap-[10px]">
-                                <p class="text-blue-600">Edit</p>
+                                {{-- Edit Address --}}
+                                <p class="text-blue-600">
+                                    @lang('admin::app.customers.view.edit')
+                                </p>
 
                                 {{-- Delete Address --}}
                                 <p 
@@ -317,7 +410,7 @@
                                     onclick="event.preventDefault();
                                     document.getElementById('delete-address{{ $address->id }}').submit();"
                                 >
-                                    Delete
+                                    @lang('admin::app.customers.view.delete')
                                 </p>
 
                                 <form 
@@ -335,7 +428,7 @@
                                         onclick="event.preventDefault();
                                         document.getElementById('default-address{{ $address->id }}').submit();"
                                     >
-                                        Set Default
+                                        @lang('admin::app.customers.view.set-as-default')
                                     </p>
 
                                     <form 
@@ -380,8 +473,8 @@
                                 <!-- Address Create Button -->
                                 @if (bouncer()->hasPermission('customers.addresses.create '))
                                     <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                                        <span class="icon-location text-[24px] "></span>
-                                        Add New Address
+                                        <span class="icon-location text-[24px]"></span>
+                                        @lang('admin::app.customers.view.create-address.create-address-btn')
                                     </div>
                                 @endif
                             </x-slot:toggle>
@@ -389,7 +482,7 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    Create Customer's Address
+                                    @lang('admin::app.customers.view.create-address.title')
                                 </p>    
                             </x-slot:header>
             
@@ -411,14 +504,14 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                        @lang('shop::app.customers.account.addresses.company-name')
+                                                        @lang('admin::app.customers.view.create-address.company-name')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="company_name"
-                                                    :label="trans('shop::app.customers.account.addresses.company-name')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.company-name')"
+                                                    :label="trans('admin::app.customers.view.create-address.company-name')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.company-name')"
                                                 >
                                                 </x-admin::form.control-group.control>
 
@@ -431,14 +524,14 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.vat-id')
+                                                    @lang('admin::app.customers.view.create-address.vat-id')
                                                 </x-admin::form.control-group.label>
             
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="vat_id"
-                                                    :label="trans('shop::app.customers.account.addresses.vat-id')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.vat-id')"
+                                                    :label="trans('admin::app.customers.view.create-address.vat-id')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.vat-id')"
                                                 >
                                                 </x-admin::form.control-group.control>
             
@@ -454,15 +547,15 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.first-name')
+                                                    @lang('admin::app.customers.view.create-address.first-name')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="first_name"
                                                     rules="required"
-                                                    :label="trans('shop::app.customers.account.addresses.first-name')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.first-name')"
+                                                    :label="trans('admin::app.customers.view.create-address.first-name')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.first-name')"
                                                 >
                                                 </x-admin::form.control-group.control>
 
@@ -475,15 +568,15 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.last-name')
+                                                    @lang('admin::app.customers.view.create-address.last-name')
                                                 </x-admin::form.control-group.label>
             
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="last_name"
                                                     rules="required"
-                                                    :label="trans('shop::app.customers.account.addresses.last-name')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.last-name')"
+                                                    :label="trans('admin::app.customers.view.create-address.last-name')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.last-name')"
                                                 >
                                                 </x-admin::form.control-group.control>
             
@@ -497,7 +590,7 @@
 
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('shop::app.customers.account.addresses.street-address')
+                                            @lang('admin::app.customers.view.create-address.street-address')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -505,8 +598,8 @@
                                             name="address1[]"
                                             id="address_0"
                                             rules="required"
-                                            :label="trans('shop::app.customers.account.addresses.street-address')"
-                                            :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                                            :label="trans('admin::app.customers.view.create-address.street-address')"
+                                            :placeholder="trans('admin::app.customers.view.create-address.street-address')"
                                         >
                                         </x-admin::form.control-group.control>
 
@@ -524,7 +617,7 @@
                                         <div v-for="(address, index) in addressLines" :key="index">
                                             <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
-                                                @lang('shop::app.customers.account.addresses.street-address')
+                                                @lang('admin::app.customers.view.create-address.street-address')
                                             </x-admin::form.control-group.label>
                                     
                                             <x-admin::form.control-group.control
@@ -532,8 +625,8 @@
                                                 :name="'address1[' + index + ']'"
                                                 :id="'address_' + index"
                                                 rules="required"
-                                                :label="trans('shop::app.customers.account.addresses.street-address')"
-                                                :placeholder="trans('shop::app.customers.account.addresses.street-address')"
+                                                :label="trans('admin::app.customers.view.create-address.street-address')"
+                                                :placeholder="trans('admin::app.customers.view.create-address.street-address')"
                                             >
                                             </x-admin::form.control-group.control>
                                     
@@ -549,15 +642,15 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.city')
+                                                    @lang('admin::app.customers.view.create-address.city')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="city"
                                                     rules="required"
-                                                    :label="trans('shop::app.customers.account.addresses.city')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.city')"
+                                                    :label="trans('admin::app.customers.view.create-address.city')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.city')"
                                                 >
                                                 </x-admin::form.control-group.control>
 
@@ -570,15 +663,15 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.post-code')
+                                                    @lang('admin::app.customers.view.create-address.post-code')
                                                 </x-admin::form.control-group.label>
             
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="postcode"
                                                     rules="required|integer"
-                                                    :label="trans('shop::app.customers.account.addresses.post-code')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.post-code')"
+                                                    :label="trans('admin::app.customers.view.create-address.post-code')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.post-code')"
                                                 >
                                                 </x-admin::form.control-group.control>
             
@@ -594,14 +687,14 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.country')
+                                                    @lang('admin::app.customers.view.create-address.country')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="country"
                                                     rules="required"
-                                                    :label="trans('shop::app.customers.account.addresses.country')"
+                                                    :label="trans('admin::app.customers.view.create-address.country')"
                                                 >
                                                     <option value="">@lang('Select Country')</option>
 
@@ -624,15 +717,15 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.state')
+                                                    @lang('admin::app.customers.view.create-address.state')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="state"
                                                     rules="required"
-                                                    :label="trans('shop::app.customers.account.addresses.state')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.state')"
+                                                    :label="trans('admin::app.customers.view.create-address.state')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.state')"
                                                 >
                                                 </x-admin::form.control-group.control>
 
@@ -648,15 +741,15 @@
                                         <div class="w-full">
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
-                                                    @lang('shop::app.customers.account.addresses.phone')
+                                                    @lang('admin::app.customers.view.create-address.phone')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
                                                     name="phone"
                                                     rules="required|integer"
-                                                    :label="trans('shop::app.customers.account.addresses.phone')"
-                                                    :placeholder="trans('shop::app.customers.account.addresses.phone')"
+                                                    :label="trans('admin::app.customers.view.create-address.phone')"
+                                                    :placeholder="trans('admin::app.customers.view.create-address.phone')"
                                                 >
                                                 </x-admin::form.control-group.control>
 
@@ -703,7 +796,7 @@
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        @lang('Save Address')
+                                        @lang('admin::app.customers.view.create-address.save-btn-title') 
                                     </button>
                                 </div>
                             </x-slot:footer>
@@ -727,7 +820,6 @@
                 methods: {
 
                     create(params, { resetForm, setErrors }) {
-                        console.log(params);
                         this.$axios.post('{{ route("admin.customer.addresses.store", $customer->id) }}', params,
                             {
                                 headers: {

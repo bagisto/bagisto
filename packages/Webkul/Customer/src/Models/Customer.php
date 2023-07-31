@@ -15,6 +15,7 @@ use Webkul\Customer\Notifications\CustomerResetPassword;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\OrderProxy;
 use Webkul\Customer\Models\CustomerNoteProxy;
+use Webkul\Sales\Models\InvoiceProxy;
 
 class Customer extends Authenticatable implements CustomerContract
 {
@@ -177,6 +178,15 @@ class Customer extends Authenticatable implements CustomerContract
     {
         return $this->hasOne(CustomerAddressProxy::modelClass(), 'customer_id')
             ->where('default_address', 1);
+    }
+
+     /**
+     * Customer's relation with invoice .
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
+     */
+    public function invoices() {
+        return $this->hasManyThrough(InvoiceProxy::modelClass(), OrderProxy::modelClass());
     }
 
     /**
