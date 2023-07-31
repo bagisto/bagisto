@@ -307,10 +307,10 @@ return [
         'index'  => [
             'title' => 'Customers',
 
-            'create-form' => [
-                'add-new-customer'      => 'Add New Customer',
-                'create-customer'       => 'Create Customer',
-                'save-customer'         => 'Save customer',
+            'create' => [
+                'title'                 => 'Create New Customer',
+                'create-btn'            => 'Create Customer',
+                'save-btn'              => 'Save customer',
                 'first-name'            => 'First Name',
                 'last-name'             => 'Last Name',
                 'email'                 => 'Email',
