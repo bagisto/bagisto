@@ -53,10 +53,8 @@ class CurrencyController extends Controller
 
         $this->currencyRepository->create($data);
 
-        session()->flash('success', trans('admin::app.settings.currencies.create-success'));
-
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.create-success'),
+            'message' => trans('admin::app.settings.currencies.create.create-success'),
         ]);
     }
 

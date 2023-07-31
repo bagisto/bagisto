@@ -440,19 +440,25 @@ return [
             ],
         ],
         'currencies'        => [
-            'title'              => 'Currencies',
-            'add-title'          => 'Add Currency',
-            'edit-title'         => 'Edit Currency',
-            'save-btn-title'     => 'Save Currency',
-            'general'            => 'General',
-            'code'               => 'Code',
-            'name'               => 'Name',
-            'symbol'             => 'Symbol',
-            'decimal'            => 'Decimal',
-            'create-success'     => 'Currency created successfully.',
-            'update-success'     => 'Currency updated successfully.',
-            'delete-success'     => 'Currency deleted successfully.',
-            'last-delete-error'  => 'At least one Currency is required.',
+            'index' => [
+                'title'      => 'Currencies',
+                'create-btn' => 'Create Currency'
+            ],
+
+            'create' => [
+                'title'              => 'Create New Currency', 
+                'create-btn'         => 'Create Currency',
+                'save-btn'           => 'Create Currency',
+                'general'            => 'General',
+                'code'               => 'Code',
+                'name'               => 'Name',
+                'symbol'             => 'Symbol',
+                'decimal'            => 'Decimal',
+                'create-success'     => 'Currency created successfully.',
+                'update-success'     => 'Currency updated successfully.',
+                'delete-success'     => 'Currency deleted successfully.',
+                'last-delete-error'  => 'At least one Currency is required.',
+            ],
         ],
 
         'exchange-rates'  => [
@@ -461,12 +467,12 @@ return [
             ],
 
             'create' => [
-                'title'            => 'Create Exchange Rate',
-                'button-title'     => 'Add Exchange Rate',
+                'title'            => 'Create New Exchange Rate',
+                'create-btn'       => 'Create Exchange Rate',
                 'source-currency'  => 'Source Currency',
                 'target-currency'  => 'Target Currency',
                 'rate'             => 'Rate',
-                'save'             => 'Save',
+                'save-btn'         => 'Save Exchange Rate',
             ],
         ],
 
@@ -720,7 +726,6 @@ return [
                 'decimal'                     => 'Decimal',
                 'email'                       => 'Email',
                 'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
-                'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
                 'file'                        => 'File',
                 'general'                     => 'General',
                 'is_required'                 => 'Is Required',
@@ -743,7 +748,6 @@ return [
                 'select-type'                 => 'Select Attribute Type',
                 'save-btn'                    => 'Save Attribute',
                 'swatch_type'                 => 'Swatch Type',
-                'select'                      => 'Select',
                 'swatch'                      => 'Swatch',
                 'title'                       => 'Add Attribute',
                 'type'                        => 'Attribute Type',
