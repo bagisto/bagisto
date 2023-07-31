@@ -14,13 +14,13 @@
                                 type="button"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.settings.locales.add-title')
+                                @lang('admin::app.settings.locales.index.create-btn')
                             </button>
                         </x-slot:toggle>
 
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
-                                @lang('admin::app.settings.locales.add-title')
+                                @lang('admin::app.settings.locales.index.create-btn')
                             </p>
                         </x-slot:header>
 
@@ -30,7 +30,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.locales.code')
+                                        @lang('admin::app.settings.locales.index.code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -38,8 +38,8 @@
                                         name="code"
                                         id="code"
                                         rules="required"
-                                        :label="trans('admin::app.settings.locales.code')"
-                                        :placeholder="trans('admin::app.settings.locales.code')"
+                                        :label="trans('admin::app.settings.locales.index.code')"
+                                        :placeholder="trans('admin::app.settings.locales.index.code')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -51,7 +51,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.locales.name')
+                                        @lang('admin::app.settings.locales.index.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -59,8 +59,8 @@
                                         name="name"
                                         id="name"
                                         rules="required"
-                                        :label="trans('admin::app.settings.locales.name')"
-                                        :placeholder="trans('admin::app.settings.locales.name')"
+                                        :label="trans('admin::app.settings.locales.index.name')"
+                                        :placeholder="trans('admin::app.settings.locales.index.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -72,7 +72,7 @@
                     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.locales.direction')
+                                        @lang('admin::app.settings.locales.index.direction')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -80,7 +80,7 @@
                                         name="direction"
                                         id="direction"
                                         rules="required"
-                                        :label="trans('admin::app.settings.locales.direction')"
+                                        :label="trans('admin::app.settings.locales.index.direction')"
                                     >
                                         <option value="ltr" selected title="Text direction left to right">LTR</option>
                     
@@ -95,7 +95,7 @@
                     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.locales.locale-logo')
+                                        @lang('admin::app.settings.locales.index.locale-logo')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -124,7 +124,7 @@
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                 >
-                                    @lang('admin::app.settings.locales.save-btn-title')
+                                    @lang('admin::app.settings.locales.index.save-btn-title')
                                 </button>
                             </div>
                         </x-slot:footer>
