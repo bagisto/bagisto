@@ -64,7 +64,6 @@ class ChannelRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-
         $channel = parent::update($data, $id, $attribute);
 
         $channel->locales()->sync($data['locales']);
