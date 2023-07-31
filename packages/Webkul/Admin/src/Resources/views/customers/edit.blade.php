@@ -224,13 +224,15 @@
                                                 name="status"
                                                 :value="$customer->status"
                                                 id="status"
-                                                for="status"
                                                 label="Status"
                                                 :checked="(bool)$customer->status"
                                             >
                                             </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.label class="text-gray-600 font-semibold cursor-pointer">
+                                            <x-admin::form.control-group.label 
+                                                for="status"
+                                                class="text-gray-600 font-semibold cursor-pointer"
+                                            >
                                                 @lang('admin::app.customers.edit.status')
                                             </x-admin::form.control-group.label>
 
@@ -247,13 +249,15 @@
                                                 name="is_suspended"
                                                 :value="$customer->is_suspended"
                                                 id="isSuspended"
-                                                for="isSuspended"
                                                 label="Suspended"
                                                 :checked="(bool)$customer->is_suspended"
                                             >
                                             </x-admin::form.control-group.control>
 
-                                            <x-admin::form.control-group.label class="text-gray-600 font-semibold cursor-pointer">
+                                            <x-admin::form.control-group.label 
+                                                for="isSuspended"
+                                                class="text-gray-600 font-semibold cursor-pointer"
+                                            >
                                                 @lang('admin::app.customers.edit.suspended')
                                             </x-admin::form.control-group.label>
 

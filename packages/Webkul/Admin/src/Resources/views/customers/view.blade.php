@@ -772,13 +772,15 @@
                                                     name="default_address"
                                                     :value="1"
                                                     id="default_address"
-                                                    for="default_address"
                                                     :label="trans('admin::app.customers.view.create-address.default-address')"
                                                     :checked="false"
                                                 >
                                                 </x-admin::form.control-group.control>
 
-                                                <x-admin::form.control-group.label class="text-gray-600 font-semibold cursor-pointer" >
+                                                <x-admin::form.control-group.label 
+                                                    for="default_address"
+                                                    class="text-gray-600 font-semibold cursor-pointer" 
+                                                >
                                                     @lang('admin::app.customers.view.create-address.default-address')
                                                 </x-admin::form.control-group.label>
 
