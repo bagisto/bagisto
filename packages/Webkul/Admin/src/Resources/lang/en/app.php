@@ -329,13 +329,24 @@ return [
         'groups' => [
             'index' => [
                 'title' => 'Groups',
+
+                'modal' => [
+                    'create' =>  [
+                        'title'      => 'Add New Group',
+                        'code'       => 'Code',
+                        'name'       => 'Name', 
+                        'save-btn'   => 'Save Group',   
+                    ],
+                ],
             ],
 
-            'create' => [
-                'add-group'  => 'Add New Group',
-                'code'       => 'Code',
-                'name'       => 'Name',
-                'save-group' => 'Save Group',
+            'edit'  =>  [
+                'title'       => 'Edit Group',
+                'cancel-btn'  => 'Cancel',
+                'save-btn'    => 'Save Group',
+                'general'     => 'General',
+                'code'        => 'Code',
+                'name'        => 'Name',
             ],
         ],
 
@@ -442,15 +453,31 @@ return [
                 ],
 
                 'create' => [
-                    'title'            => 'Tax Categories',
-                    'code'             => 'Code',
                     'add-title'        => 'Create Tax Category',
-                    'save-btn-title'   => 'Save Tax Category',
+                    'cancel-btn'       => 'Cancel',
+                    'code'             => 'Code',
+                    'description'      => 'Description',
                     'general'          => 'Tax Category',
                     'name'             => 'Name',
-                    'description'      => 'Description',
+                    'save-btn-title'   => 'Save Tax Category',
                     'select-tax-rates' => 'Select Tax Rates',
+                    'title'            => 'Tax Categories',
                 ],
+
+                'edit' => [
+                    'add-title'        => 'Create Tax Category',
+                    'cancel-btn'       => 'Cancel',
+                    'code'             => 'Code',
+                    'description'      => 'Description',
+                    'general'          => 'Tax Category',
+                    'name'             => 'Name',
+                    'save-btn'         => 'Save Tax Category',
+                    'select-tax-rates' => 'Select Tax Rates',
+                    'title'            => 'Edit Tax Categories',
+                ],
+
+                'create-success'  => 'New Tax Category Created',
+                'update-success'  => 'Successfully Updated Tax Category',
             ],
 
             'tax-rates'   => [
@@ -460,20 +487,37 @@ return [
                 ],
 
                 'create'  => [
-                    'title'          => 'Create Tax Rate',
-                    'save'           => 'Save',
+                    'basic-settings' => 'Basic Settings',
+                    'country'        => 'Country',
+                    'cancel-btn'     => 'Cancel',
+                    'is_zip'         => 'Enable Zip Range',
+                    'identifier'     => 'Identifier',
                     'select-country' => 'Select Country',
                     'select-state'   => 'Select State',
-                    'cancel'         => 'Cancel',
-                    'identifier'     => 'Identifier',
-                    'is_zip'         => 'Enable Zip Range',
+                    'save-btn'       => 'Save Tax Rate',
+                    'state'          => 'State',
+                    'title'          => 'Create Tax Rate',
+                    'tax_rate'       => 'Rate',
                     'zip_code'       => 'Zip Code',
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
-                    'country'        => 'Country',
-                    'state'          => 'State',
-                    'tax_rate'       => 'Rate',
+                ],
+
+                'edit'  =>  [
                     'basic-settings' => 'Basic Settings',
+                    'country'        => 'Country',
+                    'cancel-btn'     => 'Cancel',
+                    'is_zip'         => 'Enable Zip Range',
+                    'identifier'     => 'Identifier',
+                    'select-country' => 'Select Country',
+                    'select-state'   => 'Select State',
+                    'save-btn'       => 'Save Tax Rate',
+                    'state'          => 'State',
+                    'title'          => 'Edit Tax Rate',
+                    'tax_rate'       => 'Rate',
+                    'zip_code'       => 'Zip Code',
+                    'zip_from'       => 'Zip From',
+                    'zip_to'         => 'Zip To',
                 ],
             ],
         ],
@@ -526,19 +570,33 @@ return [
     'users' => [    
         'users' => [    
             'index' => [    
-                'title' => 'Users', 
-            ],  
-            
-            'create' => [
-                'add-new-user'     => 'Add User',
-                'create-user'      => 'Create New User',
+                'title' => 'Users',
+
+                'modal'  =>  [
+                    'create'  =>  [
+                        'title'           => 'Create New User',
+                        'name'             => 'Name',
+                        'email'            => 'Email',
+                        'password'         => 'Password',
+                        'confirm-password' => 'Confirm Password',
+                        'role'             => 'Role',
+                        'status'           => 'Status',
+                        'save-btn'         => 'Save User',        
+                    ],
+                ],
+            ],
+
+            'edit'  =>  [
+                'title'            => 'Edit User',
+                'general'          => 'General',
+                'cancel-btn'       => 'Cancel',
                 'name'             => 'Name',
                 'email'            => 'Email',
                 'password'         => 'Password',
                 'confirm-password' => 'Confirm Password',
                 'role'             => 'Role',
                 'status'           => 'Status',
-                'save-user'        => 'Save User',
+                'save-btn'         => 'Save User',        
             ],
         ],
     ],
