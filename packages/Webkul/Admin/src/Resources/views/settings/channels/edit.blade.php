@@ -137,7 +137,6 @@
                                         :value="$inventorySource->id" 
                                         :id="'inventory_sources_' . $inventorySource->id"
                                         :for="'inventory_sources_' . $inventorySource->id"
-                                        rules="required"
                                         :label="trans('admin::app.settings.channels.edit.inventory-sources')"
                                         :checked="in_array($inventorySource->id, old('inventory_sources') ?? $channel->inventory_sources->pluck('id')->toArray())"
                                     >
@@ -252,7 +251,6 @@
                                             type="image"
                                             name="logo[image_1]"
                                             :src="$channel->logo_url"
-                                            id="logo[image_1]"
                                             :label="trans('admin::app.settings.channels.edit.logo')"
                                             :is-multiple="false"
                                             accepted-types="image/*"
@@ -282,7 +280,6 @@
                                         type="image"
                                         name="favicon[image_1]"
                                         :src="$channel->favicon_url"
-                                        id="favicon[image_1]"
                                         :label="trans('admin::app.settings.channels.edit.favicon')"
                                         :is-multiple="false"
                                         accepted-types="image/*"
@@ -410,7 +407,6 @@
                                                 :id="'locales_' . $locale->id" 
                                                 :for="'locales_' . $locale->id" 
                                                 :checked="in_array($locale->id, $selectedLocalesId)"
-                                                rules="required"
                                                 :label="trans('admin::app.settings.channels.edit.locales')"
                                             >
                                             </x-admin::form.control-group.control>
@@ -473,7 +469,6 @@
                                                 :value="$currency->id" 
                                                 :id="'currencies_' . $currency->id"
                                                 :for="'currencies_' . $currency->id"
-                                                rules="required"
                                                 :checked="in_array($currency->id, $selectedCurrenciesId)"
                                             >
                                             </x-admin::form.control-group.control>

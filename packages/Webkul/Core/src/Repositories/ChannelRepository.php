@@ -103,14 +103,6 @@ class ChannelRepository extends Repository
                     $channel->save();
                 }
             }
-        } else {
-            if ($channel->{$type}) {
-                Storage::delete($channel->{$type});
-            }
-
-            $channel->{$type} = null;
-
-            $channel->save();
         }
     }
 }
