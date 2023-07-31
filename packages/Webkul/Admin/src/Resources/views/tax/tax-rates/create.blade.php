@@ -14,7 +14,7 @@
                 <div class="flex gap-x-[10px] items-center">
                     <a href="{{ route('admin.tax_rates.index') }}">
                         <span class="text-gray-600 leading-[24px]">
-                            @lang('admin::app.settings.taxes.tax-rates.create.cancel')
+                            @lang('admin::app.settings.taxes.tax-rates.create.cancel-btn')
                         </span>
                     </a>
 
@@ -22,7 +22,7 @@
                         type="submit" 
                         class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                     >
-                        @lang('admin::app.settings.taxes.tax-rates.create.save')
+                        @lang('admin::app.settings.taxes.tax-rates.create.save-btn')
                     </button>
                 </div>
             </div>

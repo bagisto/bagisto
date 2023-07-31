@@ -66,7 +66,7 @@ class TaxCategoryController extends Controller
         Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.tax-categories.create-success'),
+            'message' => trans('admin::app.settings.taxes.tax-categories.create-success'),
         ]);
     }
 
@@ -113,7 +113,7 @@ class TaxCategoryController extends Controller
 
         Event::dispatch('tax.tax_category.update.after', $taxCategory);
 
-        session()->flash('success', trans('admin::app.settings.tax-categories.update-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.tax-categories.update-success'));
 
         return redirect()->route('admin.tax_categories.index');
     }
