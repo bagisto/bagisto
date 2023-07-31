@@ -26,7 +26,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 
-        Route::put('edit/{id}', 'update')->name('admin.customer.update');
+        Route::post('edit/{id}', 'update')->name('admin.customer.update');
 
         Route::post('delete/{id}', 'destroy')->name('admin.customer.delete');
 

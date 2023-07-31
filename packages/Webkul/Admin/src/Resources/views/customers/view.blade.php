@@ -14,6 +14,10 @@
                         <span class="label-pending text-[14px] mx-[5px]">
                             @lang('admin::app.customers.view.active')
                         </span>
+                    @else    
+                        <span class="label-pending text-[14px] mx-[5px]">
+                            @lang('admin::app.customers.view.inactive')
+                        </span>
                     @endif
 
                     @if($customer->is_suspended == 1)
@@ -324,7 +328,7 @@
                         @lang('admin::app.customers.view.customer')
                     </p>
 
-                   @include('admin::customers.edit')
+                   @include('admin::customers.edit', ['groups' => $groups])
                 </x-slot:header>
 
                 <x-slot:content>
@@ -455,6 +459,7 @@
         </div>
     </div>
 
+    {{-- Customer Address Modal --}}
     @pushOnce('scripts')
         <!-- Customer Address Form -->
         <script type="text/x-template" id="v-create-customer-address-template">
@@ -761,21 +766,21 @@
                                         </div>
                                         
                                         <div class="w-full">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label >
-                                                    Default Adderss
-                                                </x-admin::form.control-group.label>
-
+                                            <x-admin::form.control-group class="flex gap-[10px] mt-[20px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="default_address"
                                                     :value="1"
                                                     id="default_address"
                                                     for="default_address"
-                                                    label="Default Address"
-                                                    :checked="0"
+                                                    :label="trans('admin::app.customers.view.create-address.default-address')"
+                                                    :checked="false"
                                                 >
                                                 </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.label class="text-gray-600 font-semibold cursor-pointer" >
+                                                    @lang('admin::app.customers.view.create-address.default-address')
+                                                </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.error
                                                     control-name="default_address"

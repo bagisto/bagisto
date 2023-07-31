@@ -316,8 +316,10 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses'])->findOrFail($id);
+        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses', 'group'])->findOrFail($id);
 
-        return view('admin::customers.view', compact('customer'));
+        $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
+
+        return view('admin::customers.view', compact('customer', 'groups'));
     }
 }
