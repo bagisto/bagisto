@@ -1,60 +1,99 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.marketing.sitemaps.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.marketing.sitemaps.edit-title') }}
-@stop
+    {{-- Input Form --}}
+    <x-admin::form :action="route('admin.sitemaps.update', $sitemap->id)">
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.marketing.sitemaps.edit.title')
+            </p>
 
-@section('content')
-    <div class="content">
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.sitemaps.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.marketing.sitemaps.edit.cancel-btn')
+                    </span>
+                </a>
 
-        <form method="POST" action="{{ route('admin.sitemaps.update', $sitemap->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.sitemaps.index') }}'"></i>
+                {{-- Save Button --}}
+                <button 
+                    type="submit" 
+                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.marketing.sitemaps.edit.save-btn')
+                </button>
+            </div>
+        </div>
 
-                        {{ __('admin::app.marketing.sitemaps.edit-title') }}
-                    </h1>
-                </div>
+        {{-- Informations --}}
+        <div class="flex gap-[10px] mt-[28px] mb-2">
+            <div class="flex flex-col gap-[8px] flex-1">
+                {{-- General Section --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.marketing.sitemaps.edit.general')
+                    </p>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.marketing.sitemaps.save-btn-title') }}
-                    </button>
+                    <div class="mb-[10px]">
+                        <!-- File Name -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="!mt-0">
+                                @lang('admin::app.marketing.sitemaps.edit.file-name')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="file_name"
+                                value="{{ old('file_name') ?: $sitemap->file_name }}"
+                                rules="required"
+                                label="{{ trans('admin::app.marketing.sitemaps.edit.file-name') }}"
+                                placeholder="{{ trans('admin::app.marketing.sitemaps.edit.file-name') }}"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="file_name"
+                            >
+                            </x-admin::form.control-group.error>
+
+                            <p class="mt-[8px] ml-[4px] text-[12px] text-gray-600 font-medium">
+                                @lang('admin::app.marketing.sitemaps.edit.file-name-info')
+                            </p>
+
+                        </x-admin::form.control-group>
+
+                        <!---- File Path -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.marketing.sitemaps.edit.path')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="path"
+                                value="{{ old('path') ?: $sitemap->path }}"
+                                rules="required"
+                                label="{{ trans('admin::app.marketing.sitemaps.edit.path') }}"
+                                placeholder="{{ trans('admin::app.marketing.sitemaps.edit.path') }}"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="path"
+                            >
+                            </x-admin::form.control-group.error>
+
+                            <p class="mt-[8px] ml-[4px] text-[12px] text-gray-600 font-medium">
+                                @lang('admin::app.marketing.sitemaps.edit.path-info')
+                            </p>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
             </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-
-                    <input name="_method" type="hidden" value="PUT">
-
-                    {!! view_render_event('bagisto.admin.marketing.sitemaps.update.before') !!}
-
-                    <accordian title="{{ __('admin::app.marketing.sitemaps.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('file_name') ? 'has-error' : '']">
-                                <label for="file_name" class="required">{{ __('admin::app.marketing.sitemaps.file-name') }}</label>
-                                <input v-validate="'required'" class="control" id="file_name" name="file_name" value="{{ old('file_name') ?: $sitemap->file_name }}" data-vv-as="&quot;{{ __('admin::app.marketing.sitemaps.file-name') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('file_name')">@{{ errors.first('file_name') }}</span>
-                                <span class="control-info">{{ __('admin::app.marketing.sitemaps.file-name-info') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('path') ? 'has-error' : '']">
-                                <label for="path" class="required">{{ __('admin::app.marketing.sitemaps.path') }}</label>
-                                <input v-validate="'required'" class="control" id="path" name="path" value="{{ old('path') ?: $sitemap->path }}" data-vv-as="&quot;{{ __('admin::app.marketing.sitemaps.path') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('path')">@{{ errors.first('path') }}</span>
-                                <span class="control-info">{{ __('admin::app.marketing.sitemaps.path-info') }}</span>
-                            </div>
-
-                        </div>
-                    </accordian>
-
-                    {!! view_render_event('bagisto.admin.marketing.sitemaps.update.after') !!}
-
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+        </div>
+    </x-admin::form>
+</x-admin::layouts>

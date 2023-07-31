@@ -622,5 +622,15 @@ return [
         'already'             => 'You are already subscribed to our newsletter.',
         'subscribe-success'   => 'You have successfully subscribed to our newsletter.',
         'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
-    ]
+    ],
+
+    'email' => [
+        'customer' => [
+            'note' =>[
+                'dear'          => 'Dear',
+                'subject'       => 'You Added a Note',
+                'description'   => 'Your note is',
+            ],
+        ],
+    ],
 ];

@@ -87,7 +87,7 @@ class OrderController extends Controller
         $customer = auth()->guard('customer')->user();
 
         /* find by order id in customer's order */
-        $order = $customer->all_orders()->find($id);
+        $order = $customer->orders()->find($id);
 
         /* if order id not found then process should be aborted with 404 page */
         if (! $order) {

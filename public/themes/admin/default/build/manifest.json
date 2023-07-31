@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-3ab35c17.css",
+    "file": "assets/app-aca07e42.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -32,6 +32,10 @@
     "file": "assets/Icon-remove-32d29b4e.svg",
     "src": "src/Resources/assets/images/Icon-remove.svg"
   },
+  "src/Resources/assets/images/add-product-to-store.png": {
+    "file": "assets/add-product-to-store-9c48f721.png",
+    "src": "src/Resources/assets/images/add-product-to-store.png"
+  },
   "src/Resources/assets/images/checked-checkbox.png": {
     "file": "assets/checked-checkbox-98f8f649.png",
     "src": "src/Resources/assets/images/checked-checkbox.png"
@@ -56,16 +60,12 @@
     "file": "assets/icon-discount-e37d1aed.svg",
     "src": "src/Resources/assets/images/icon-discount.svg"
   },
-  "src/Resources/assets/images/img.png": {
-    "file": "assets/img-4aa33a76.png",
-    "src": "src/Resources/assets/images/media-image.png"
-  },
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",
     "src": "src/Resources/assets/images/logo.png"
   },
   "src/Resources/assets/images/media-image.png": {
-    "file": "assets/img-4aa33a76.png",
+    "file": "assets/media-image-4aa33a76.png",
     "src": "src/Resources/assets/images/media-image.png"
   },
   "src/Resources/assets/images/search.svg": {
@@ -77,14 +77,14 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-c04ede37.css",
+    "file": "assets/app-05f8acf7.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-c04ede37.css"
+      "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-c73409a4.js",
+    "file": "assets/app-56b51392.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

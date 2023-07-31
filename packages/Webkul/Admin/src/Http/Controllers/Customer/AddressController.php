@@ -32,6 +32,7 @@ class AddressController extends Controller
      */
     public function index($id)
     {
+
         $customer = $this->customerRepository->find($id);
 
         if (request()->ajax()) {
@@ -161,6 +162,32 @@ class AddressController extends Controller
     }
 
     /**
+     * To change the default address or make the default address,
+     * by default when first address is created will be the default address.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function makeDefault($id)
+    {
+        if ($default = $this->customerAddressRepository->findOneWhere(['customer_id' => $id, 'default_address' => 1])) {
+            $default->update(['default_address' => 0]);
+        }
+        
+        $address = $this->customerAddressRepository->findOneWhere([
+            'id'              => request('set_as_default'),
+            'customer_id'     => $id
+        ]);
+
+        if ($address) {
+            $address->update(['default_address' => 1]);
+
+            session()->flash('success', trans('Default Address Updated'));
+        } 
+
+        return redirect()->back();
+    } 
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -174,10 +201,9 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        return response()->json([
-            'redirect' => false,
-            'message'  => trans('admin::app.customers.addresses.success-delete'),
-        ]);
+        session()->flash('success', trans('Address Deleted Successfully'));
+
+        return redirect()->back();
     }
 
     /**
