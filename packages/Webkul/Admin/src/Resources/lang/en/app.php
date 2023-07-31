@@ -611,6 +611,24 @@ return [
                 'save-user'        => 'Save User',
             ],
         ],
+
+        'roles' => [
+            'index' => [
+                'title'             => 'Roles',
+                'add-btn-title'     => 'Create Role',
+            ],
+
+            'create' => [
+                'title'           => 'Create Role',
+                'save-btn-title'  => 'Save Role',
+                'cancel-btn'      => 'Cancel',
+                'general'         => 'General',
+                'name'            => 'Name',
+                'description'     => 'Description',
+                'access-control'  => 'Access Control',
+                'permissions'     => 'Permissions',
+            ],
+        ],
     ],
 
     'catalog' => [
