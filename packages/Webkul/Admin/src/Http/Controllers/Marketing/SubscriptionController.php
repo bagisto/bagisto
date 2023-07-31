@@ -2,9 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
-use Webkul\Admin\DataGrids\NewsLetterDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
+use Webkul\Admin\DataGrids\NewsLetterDataGrid;
 
 class SubscriptionController extends Controller
 {
@@ -62,7 +62,7 @@ class SubscriptionController extends Controller
             $customer->save();
         }
 
-        $result = $subscriber->update(request()->all());
+        $result = $subscriber->update(request()->only(['status']));
 
         if ($result) {
             session()->flash('success', trans('admin::app.customers.subscribers.update-success'));

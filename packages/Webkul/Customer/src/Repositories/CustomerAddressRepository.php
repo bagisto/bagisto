@@ -29,7 +29,7 @@ class CustomerAddressRepository extends Repository
             ->first();
 
         if (
-            isset($default_address->id)
+            $default_address
             && $data['default_address']
         ) {
             $default_address->update(['default_address' => 0]);

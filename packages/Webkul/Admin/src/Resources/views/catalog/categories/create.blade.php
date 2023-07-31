@@ -27,7 +27,7 @@
                     type="submit" 
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.catalog.categories.create.create-order')
+                    @lang('admin::app.catalog.categories.create.create-btn')
                 </button>
             </div>
         </div>
@@ -42,32 +42,32 @@
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
 
+                    {{-- Locales --}}
+                    <x-admin::form.control-group.control
+                        type="hidden"
+                        name="locale"
+                        value="all"
+                    >
+                    </x-admin::form.control-group.control>
+
                     {{-- Name --}}
-                    <div class="mb-[10px]">
-                        {{-- Locales --}}
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.catalog.categories.create.company-name')
+                        </x-admin::form.control-group.label>
+
                         <x-admin::form.control-group.control
-                            type="hidden"
-                            name="locale"
-                            value="all"
+                            type="text"
+                            name="name"
+                            value="{{ old('name') }}"
+                            class="w-full"
+                            label="Category Name"
+                            placeholder="Category Name"
                         >
                         </x-admin::form.control-group.control>
+                    </x-admin::form.control-group>
 
-                        <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.catalog.categories.create.company-name')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="text"
-                                name="name"
-                                value="{{ old('name') }}"
-                                class="w-full"
-                                label="Category Name"
-                                placeholder="Category Name"
-                            >
-                            </x-admin::form.control-group.control>
-                        </x-admin::form.control-group>
-
+                    <div class="mb-[10px]">
                         {{-- Parent category --}}
                         <label
                             class="block mb-[10px] text-[12px] text-gray-800 font-medium leading-[24px]"
@@ -109,7 +109,7 @@
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
 
-                    <x-admin::form.control-group class="mb-4">
+                    <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.catalog.categories.create.description')
                         </x-admin::form.control-group.label>
@@ -118,7 +118,7 @@
                             type="tinymce"
                             name="description"
                             id="description"
-                            class="description mt-3"
+                            class="description"
                             value="{{ old('description') }}"
                             rules="required"
                             label="{{ trans('admin::app.catalog.categories.create.description') }}"
@@ -200,21 +200,21 @@
                     </p>
 
                     <div class="flex flex-col gap-[3px]">
-                        <p 
+                        <p
                             class="text-[#161B9D]"
                             v-text="metaTitle"
                         >
                         </p>
 
                         {{-- Get Meta Title From v-model and convet in lower case also replace space with (-) --}}
-                        <p 
+                        <p
                             class="text-[#135F29]"
                             v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
                         >
                         </p>
 
                         {{-- Get Meta Description From v-model --}}
-                        <p 
+                        <p
                             class="text-gray-600"
                             v-text="metaDescription"
                         >
@@ -223,7 +223,7 @@
 
                     <div class="mt-[30px]">
                         {{-- Meta Title --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.meta-title')
                             </x-admin::form.control-group.label>
@@ -232,21 +232,15 @@
                                 type="text"
                                 name="meta_title"
                                 value="{{ old('meta_title') }}"
-                                rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.meta-title') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.meta-title') }}"
                                 v-model="metaTitle"
                             >
                             </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="meta_title"
-                            >
-                            </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
                         {{-- Slug --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.slug')
                             </x-admin::form.control-group.label>
@@ -256,8 +250,8 @@
                                 name="slug"
                                 value="{{ old('slug') }}"
                                 rules="required"
-                                label="{{ trans('admin::app.catalog.categories.create.meta-title') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.meta-title') }}"
+                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
                             >
                             </x-admin::form.control-group.control>
 
@@ -268,7 +262,7 @@
                         </x-admin::form.control-group>
 
                         {{-- Meta Keywords --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.meta-keywords')
                             </x-admin::form.control-group.label>
@@ -277,20 +271,14 @@
                                 type="text"
                                 name="meta_keywords"
                                 value="{{ old('meta_keywords') }}"
-                                rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.meta-keywords') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.meta-keywords') }}"
                             >
                             </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="meta_keywords"
-                            >
-                            </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
                         {{-- Meta Description --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.create.meta-description')
                             </x-admin::form.control-group.label>
@@ -299,17 +287,11 @@
                                 type="textarea"
                                 name="meta_description"
                                 value="{{ old('meta_description') }}"
-                                rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.meta-description') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.meta-description') }}"
                                 v-model="metaDescription"
                             >
                             </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="meta_description"
-                            >
-                            </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
                     </div>
                 </div>
@@ -328,7 +310,7 @@
                     <x-slot:content>
                         {{-- Position --}}
                         <div class="mb-[10px]">
-                            <x-admin::form.control-group class="mb-4">
+                            <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label class="!text-gray-800">
                                     @lang('admin::app.catalog.categories.create.position')
                                 </x-admin::form.control-group.label>
@@ -363,21 +345,11 @@
                                 rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.display-mode') }}"
                             >
-                                <option value="" readonly>
-                                    @lang('admin::app.catalog.categories.create.select-display-mode')
-                                </option>
-
-                                <option value="products_and_description">
-                                    @lang('admin::app.catalog.categories.create.products-and-description')
-                                </option>
-
-                                <option value="products_only">
-                                    @lang('admin::app.catalog.categories.create.products-only')
-                                </option>
-
-                                <option value="description_only">
-                                    @lang('admin::app.catalog.categories.create.description-only')
-                                </option>
+                                @foreach (['products_and_description', 'products_only', 'description_only'] as $item)
+                                    <option value="{{ $item }}">
+                                        @lang('admin::app.catalog.categories.create.' . $item)
+                                    </option>    
+                                @endforeach
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
@@ -396,16 +368,10 @@
                                 type="switch"
                                 name="status"
                                 class="cursor-pointer"
-                                rules="required"
                                 value="1"
-                                label="{{ trans('admin::app.catalog.categories.create.display-mode') }}"
+                                label="{{ trans('admin::app.catalog.categories.create.visible-in-menu') }}"
                             >
                             </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
                     </x-slot:content>
                 </x-admin::accordion>
@@ -420,11 +386,11 @@
                 
                     <x-slot:content class="pointer-events-none">
                         @foreach ($attributes as $attribute)
-                            <label 
+                            <label
                                 class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
                                 for="{{ $attribute->name ?? $attribute->admin_name }}"
                             >
-                                <input 
+                                <input
                                     type="checkbox" 
                                     id="{{ $attribute->name ?? $attribute->admin_name }}"
                                     value="{{ $attribute->id }}"
@@ -432,7 +398,7 @@
                                     class="hidden peer"
                                 >
 
-                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:text-blue-600 peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointe peer-checked:icon-checked peer-checked:text-navyBlue"></span>
 
                                 <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
                                     {{ $attribute->name ?? $attribute->admin_name }}

@@ -3,7 +3,7 @@
 <x-admin::layouts>
     <!--Page title -->
     <x-slot:title>
-        @lang('admin::app.cms.create.add-title')
+        @lang('admin::app.cms.create.title')
     </x-slot:title>
 
     <!--Create Page Form -->
@@ -13,7 +13,7 @@
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.cms.create.add-title')
+                @lang('admin::app.cms.create.title')
             </p>
             
             <!--Save Form -->
@@ -22,7 +22,7 @@
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.cms.create.save')
+                    @lang('admin::app.cms.create.save-btn')
                 </button>
             </div>
         </div>
@@ -61,7 +61,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.create.channel')
+                            @lang('admin::app.cms.create.channels')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -70,8 +70,8 @@
                             :value="old('channels[]')"
                             id="channels[]"
                             rules="required"
-                            :label="trans('admin::app.cms.create.channel')"
-                            :placeholder="trans('admin::app.cms.create.channel')"
+                            :label="trans('admin::app.cms.create.channels')"
+                            :placeholder="trans('admin::app.cms.create.channels')"
                             multiple="multiple"
                         >
                             @foreach($channels->all() as $channel)

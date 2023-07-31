@@ -13,6 +13,15 @@
             <!-- Create a new Customer -->
             <v-create-customer-form></v-create-customer-form>
         </div>
+
+        <div class="flex gap-x-[10px] items-center">
+            <a href="{{ route('admin.customer.view', 1) }}">
+                <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                    @lang('Customer View')
+                </div>
+            </a>
+            
+        </div>
     </div>
 
     @pushOnce('scripts')
@@ -32,7 +41,7 @@
                                         type="button"
                                         class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                                     >
-                                        @lang('admin::app.customers.index.create-form.add-new-customer')
+                                        @lang('admin::app.customers.index.create.create-btn')
                                     </button>
                                 @endif
                             </x-slot:toggle>
@@ -40,7 +49,7 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.customers.index.create-form.create-customer')
+                                    @lang('admin::app.customers.index.create.title')
                                 </p>    
                             </x-slot:header>
             
@@ -49,51 +58,57 @@
                                 {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <div class="flex gap-[16px] max-sm:flex-wrap">
+                                        <div class="w-full">
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label>
+                                                    @lang('admin::app.customers.index.create.first-name')
+                                                </x-admin::form.control-group.label>
+                    
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="first_name" 
+                                                    id="first_name" 
+                                                    rules="required"
+                                                    :label="trans('admin::app.customers.index.create.first-name')"
+                                                    :placeholder="trans('admin::app.customers.index.create.first-name')"
+                                                >
+                                                </x-admin::form.control-group.control>
+                    
+                                                <x-admin::form.control-group.error
+                                                    control-name="first_name"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        </div>
+            
+                                        <div class="w-full mb-[6px]">
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label>
+                                                    @lang('admin::app.customers.index.create.last-name')
+                                                </x-admin::form.control-group.label>
+                    
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="last_name" 
+                                                    id="last_name"
+                                                    rules="required"
+                                                    :label="trans('admin::app.customers.index.create.last-name')"
+                                                    :placeholder="trans('admin::app.customers.index.create.last-name')"
+                                                >
+                                                </x-admin::form.control-group.control>
+                    
+                                                <x-admin::form.control-group.error
+                                                    control-name="last_name"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        </div>
+                                    </div>
+                                    
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.index.create-form.first-name')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="first_name" 
-                                            id="first_name" 
-                                            rules="required"
-                                            :label="trans('admin::app.customers.index.create-form.first-name')"
-                                            :placeholder="trans('admin::app.customers.index.create-form.first-name')"
-                                        >
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error
-                                            control-name="first_name"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-            
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.index.create-form.last-name')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="last_name" 
-                                            id="last_name"
-                                            rules="required"
-                                            :label="trans('admin::app.customers.index.create-form.last-name')"
-                                            :placeholder="trans('admin::app.customers.index.create-form.last-name')"
-                                        >
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error
-                                            control-name="last_name"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-            
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.index.create-form.email')
+                                            @lang('admin::app.customers.index.create.email')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -101,7 +116,7 @@
                                             name="email"
                                             id="email"
                                             rules="required|email"
-                                            :label="trans('admin::app.customers.index.create-form.email')"
+                                            :label="trans('admin::app.customers.index.create.email')"
                                             placeholder="email@example.com"
                                         >
                                         </x-admin::form.control-group.control>
@@ -114,7 +129,7 @@
             
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.index.create-form.contact-number')
+                                            @lang('admin::app.customers.index.create.contact-number')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -122,8 +137,8 @@
                                             name="phone"
                                             id="phone"
                                             rules="required|integer"
-                                            :label="trans('admin::app.customers.index.create-form.contact-number')"
-                                            :placeholder="trans('admin::app.customers.index.create-form.contact-number')"
+                                            :label="trans('admin::app.customers.index.create.contact-number')"
+                                            :placeholder="trans('admin::app.customers.index.create.contact-number')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -135,15 +150,15 @@
             
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.index.create-form.date-of-birth')
+                                            @lang('admin::app.customers.index.create.date-of-birth')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
                                             type="date"
                                             name="date_of_birth" 
                                             id="dob"
-                                            :label="trans('admin::app.customers.index.create-form.date-of-birth')"
-                                            :placeholder="trans('admin::app.customers.index.create-form.date-of-birth')"
+                                            :label="trans('admin::app.customers.index.create.date-of-birth')"
+                                            :placeholder="trans('admin::app.customers.index.create.date-of-birth')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -157,7 +172,7 @@
                                         <div class="w-full mb-[6px]">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
-                                                    @lang('admin::app.customers.index.create-form.gender')
+                                                    @lang('admin::app.customers.index.create.gender')
                                                 </x-admin::form.control-group.label>
                     
                                                 <x-admin::form.control-group.control
@@ -165,22 +180,22 @@
                                                     name="gender"
                                                     id="gender"
                                                     rules="required"
-                                                    :label="trans('admin::app.customers.index.create-form.gender')"
+                                                    :label="trans('admin::app.customers.index.create.gender')"
                                                 >
                                                     <option value="">
-                                                        @lang('admin::app.customers.index.create-form.select-gender')
+                                                        @lang('admin::app.customers.index.create.select-gender')
                                                     </option>
 
                                                     <option value="Male">
-                                                        @lang('admin::app.customers.index.create-form.male')
+                                                        @lang('admin::app.customers.index.create.male')
                                                     </option>
                                                     
                                                     <option value="Female">
-                                                        @lang('admin::app.customers.index.create-form.female')
+                                                        @lang('admin::app.customers.index.create.female')
                                                     </option>
 
                                                     <option value="Other">
-                                                        @lang('admin::app.customers.index.create-form.other')
+                                                        @lang('admin::app.customers.index.create.other')
                                                     </option>
                                                 </x-admin::form.control-group.control>
                     
@@ -194,17 +209,17 @@
                                         <div class="w-full mb-[6px]">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
-                                                    @lang('admin::app.customers.index.create-form.customer-group')
+                                                    @lang('admin::app.customers.index.create.customer-group')
                                                 </x-admin::form.control-group.label>
                     
                                                 <x-admin::form.control-group.control
                                                     type="select"
                                                     name="customer_group_id"
                                                     id="customerGroup"
-                                                    :label="trans('admin::app.customers.index.create-form.customer-group')"
+                                                    :label="trans('admin::app.customers.index.create.customer-group')"
                                                 >
                                                     <option value="">
-                                                        @lang('admin::app.customers.index.create-form.select-customer-group')
+                                                        @lang('admin::app.customers.index.create.select-customer-group')
                                                     </option>
                                                     @foreach ($groups as $group)
                                                         <option value="{{ $group->id }}"> {{ $group->name}} </option>
@@ -229,7 +244,7 @@
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        @lang('admin::app.customers.index.create-form.save-customer')
+                                        @lang('admin::app.customers.index.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>
