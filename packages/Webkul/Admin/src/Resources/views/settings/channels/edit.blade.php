@@ -10,6 +10,18 @@
         @lang('admin::app.settings.channels.edit.title')
     </x-slot:title>
 
+    <h1>Create Post</h1>
+    
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+ 
     {{-- Channeld Edit Form --}}
     <x-admin::form  
         :action="route('admin.channels.update', ['id' => $channel->id, 'locale' => $locale])"
@@ -48,7 +60,7 @@
                     </p>
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.code')
                             </x-admin::form.control-group.label>
 
@@ -70,7 +82,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.name')
                             </x-admin::form.control-group.label>
 
@@ -125,6 +137,8 @@
                                         :value="$inventorySource->id" 
                                         :id="'inventory_sources_' . $inventorySource->id"
                                         :for="'inventory_sources_' . $inventorySource->id"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.channels.edit.inventory-sources')"
                                         :checked="in_array($inventorySource->id, old('inventory_sources') ?? $channel->inventory_sources->pluck('id')->toArray())"
                                     >
                                     </x-admin::form.control-group.control>
@@ -136,12 +150,12 @@
                                             {{ $inventorySource->name }}
                                         </span>
                                     </x-admin::form.control-group.label>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="inventory_sources[]"
-                                    >
-                                    </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
+
+                                <x-admin::form.control-group.error
+                                    control-name="inventory_sources[]"
+                                >
+                                </x-admin::form.control-group.error>
                             @endforeach
                         </div>
 
@@ -379,12 +393,14 @@
                         <x-slot:content>
                             <div class="mb-[10px]">
                                 <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('admin::app.settings.channels.edit.locales')
-                                    </p>
+                                    <x-admin::form.control-group.label
+                                        class="required"
+                                    >
+                                        @lang('admin::app.settings.channels.edit.locales') 
+                                    </x-admin::form.control-group.label>
 
                                     @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
-                                
+                                    
                                     @foreach (core()->getAllLocales() as $locale)
                                         <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
                                             <x-admin::form.control-group.control
@@ -394,6 +410,8 @@
                                                 :id="'locales_' . $locale->id" 
                                                 :for="'locales_' . $locale->id" 
                                                 :checked="in_array($locale->id, $selectedLocalesId)"
+                                                rules="required"
+                                                :label="trans('admin::app.settings.channels.edit.locales')"
                                             >
                                             </x-admin::form.control-group.control>
 
@@ -404,12 +422,13 @@
                                                     {{ $locale->name }} 
                                                 </span>
                                             </x-admin::form.control-group.label>
-                
-                                            <x-admin::form.control-group.error
-                                                :control-name="'locales_' . $locale->id" 
-                                            >
-                                            </x-admin::form.control-group.error>
+                                           
                                         </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="locales[]" 
+                                        >
+                                        </x-admin::form.control-group.error>
                                     @endforeach
                                 </div>
     
@@ -454,6 +473,7 @@
                                                 :value="$currency->id" 
                                                 :id="'currencies_' . $currency->id"
                                                 :for="'currencies_' . $currency->id"
+                                                rules="required"
                                                 :checked="in_array($currency->id, $selectedCurrenciesId)"
                                             >
                                             </x-admin::form.control-group.control>
