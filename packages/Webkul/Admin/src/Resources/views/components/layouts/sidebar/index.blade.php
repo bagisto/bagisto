@@ -13,29 +13,29 @@
                 {{-- Navigation Menu --}}
                 @foreach ($menu->items as $menuItem)
                     <a href="{{ $menuItem['url'] }}">
-                        <div class="accordian-toggle flex gap-[10px] p-[6px] items-center cursor-pointer hover:bg-gray-100 hover:rounded-[8px]">
-                            <span class="{{ $menuItem['icon'] }}  text-[24px]"></span>
-                            <p class="text-gray-600 font-semibold">
+                        <div class="accordian-toggle flex gap-[10px] p-[6px] items-center cursor-pointer hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100' }}">
+                            <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
+                            <p class="text-gray-600 font-semibold {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
                                 @lang($menuItem['name']) 
                             </p>
                         </div>
                     </a>
 
                     @if ($menuItem['key'] != 'configuration')
-                        <div class="grid pb-[7px]">
+                        <div class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : '' }} pb-[7px]">
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a href="{{ $subMenuItem['url'] }}">
-                                    <p class=" text-gray-600 px-[40px] py-[4px]">
+                                    <p class="text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
                                         @lang($subMenuItem['name'])
                                     </p>
                                 </a>
                             @endforeach
                         </div>
                     @else 
-                        <div class="grid pb-[7px]">
+                        <div class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : '' }} pb-[7px]">
                             @foreach (core()->sortItems($tree->items) as $key => $item)
                                 <a href="{{ route('admin.configuration.index', $item['key']) }}">
-                                    <p class=" text-gray-600 px-[40px] py-[4px]">
+                                    <p class="text-{{ $item['key'] == request()->route('slug') ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
                                         {{ trans($item['name']) ?? '' }}
                                     </p>
                                 </a>
@@ -53,7 +53,7 @@
         <div class="flex gap-[10px] p-[6px] items-center">
             <span class="icon-arrow-right text-[24px]"></span>
 
-            <p class="text-gray-600 font-semibold">
+            <p class="text-gray-600 font-semibold cursor-pointer">
                 @lang('admin::app.components.layouts.sidebar.collapse')
             </p>
         </div>

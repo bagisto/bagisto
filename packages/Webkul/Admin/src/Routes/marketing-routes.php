@@ -100,11 +100,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          * subscribers routes.
          */
         Route::controller(SubscriptionController::class)->prefix('subscribers')->group(function () {
-            Route::get('subscribers', 'index')->name('admin.customers.subscribers.index');
+            Route::get('', 'index')->name('admin.customers.subscribers.index');
 
             Route::get('edit/{id}', 'edit')->name('admin.customers.subscribers.edit');
 
-            Route::put('update/{id}', 'update')->name('admin.customers.subscribers.update');
+            Route::post('edit/{id}', 'update')->name('admin.customers.subscribers.update');
 
             Route::post('delete/{id}', 'destroy')->name('admin.customers.subscribers.delete');
         });
@@ -138,7 +138,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.sitemaps.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.sitemaps.update');
+            Route::post('edit/{id}', 'update')->name('admin.sitemaps.update');
 
             Route::post('delete/{id}', 'destroy')->name('admin.sitemaps.delete');
         });

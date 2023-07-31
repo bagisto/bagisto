@@ -1,4 +1,9 @@
 <x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.marketing.email-marketing.campaigns.create.title')
+    </x-slot:title>
+    
     {{-- Input Form --}}
     <x-admin::form :action="route('admin.campaigns.store')">
         <div class="flex justify-between items-center">
@@ -10,7 +15,7 @@
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.campaigns.index') }}">
                     <span class="text-gray-600 leading-[24px]">
-                        @lang('admin::app.marketing.email-marketing.campaigns.create.cancel')
+                        @lang('admin::app.marketing.email-marketing.campaigns.create.cancel-btn')
                     </span>
                 </a>
 
@@ -19,7 +24,7 @@
                     type="submit" 
                     class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.marketing.email-marketing.campaigns.create.save')
+                    @lang('admin::app.marketing.email-marketing.campaigns.create.save-btn')
                 </button>
             </div>
         </div>
@@ -51,7 +56,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error 
-                                class="mt-1"
                                 control-name="name"
                             >
                             </x-admin::form.control-group.error>
@@ -75,7 +79,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                class="mt-1"
                                 control-name="subject"
                             >
                             </x-admin::form.control-group.error>
@@ -94,10 +97,6 @@
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.create.event') }}"
                             >
-                                <option value="">
-                                    @lang('admin::app.marketing.email-marketing.campaigns.create.select-event')
-                                </option>
-
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
                                     <option 
                                         value="{{ $event->id }}" 
@@ -109,7 +108,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                class="mt-1"
                                 control-name="marketing_event_id"
                             >
                             </x-admin::form.control-group.error>
@@ -128,10 +126,6 @@
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.create.email-template') }}"
                             >
-                                <option value="">
-                                    @lang('admin::app.marketing.email-marketing.campaigns.create.select-template')
-                                </option>
-
                                 @foreach ($templates as $template)
                                     <option 
                                         value="{{ $template->id }}" 
@@ -143,7 +137,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                class="mt-1"
                                 control-name="marketing_template_id"
                             >
                             </x-admin::form.control-group.error>
@@ -162,10 +155,6 @@
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.create.status') }}"
                             >
-                                <option value="">
-                                    @lang('admin::app.marketing.email-marketing.campaigns.create.select-status')
-                                </option>
-
                                 <option value="0">
                                     @lang('admin::app.marketing.email-marketing.campaigns.create.inactive')
                                 </option>
@@ -176,7 +165,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                class="mt-1"
                                 control-name="status"
                             >
                             </x-admin::form.control-group.error>
@@ -204,10 +192,6 @@
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.create.channel') }}"
                             >
-                                <option value="">
-                                    @lang('admin::app.marketing.email-marketing.campaigns.create.select-status')
-                                </option>
-
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option 
                                         value="{{ $channel->id }}" 
@@ -219,7 +203,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                class="mt-1"
                                 control-name="channel_id"
                             >
                             </x-admin::form.control-group.error>
@@ -238,10 +221,6 @@
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.create.customer-group') }}"
                             >
-                                <option value="">
-                                    @lang('admin::app.marketing.email-marketing.campaigns.create.customer-group')
-                                </option>
-
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                     <option 
                                         value="{{ $customerGroup->id }}" 
@@ -253,7 +232,6 @@
                             </x-admin::form.control-group.control>
 
                             <x-admin::form.control-group.error
-                                class="mt-1"
                                 control-name="customer_group_id"
                             >
                             </x-admin::form.control-group.error>

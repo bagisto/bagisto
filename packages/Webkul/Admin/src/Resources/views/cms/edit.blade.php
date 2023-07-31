@@ -8,7 +8,7 @@
 
 <x-admin::layouts>
     <x-slot:title>
-        @lang('admin::app.cms.edit.edit')
+        @lang('admin::app.cms.edit.title')
     </x-slot:title>
 
     <x-admin::form 
@@ -17,7 +17,7 @@
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.cms.edit.edit')
+                @lang('admin::app.cms.edit.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
@@ -27,7 +27,7 @@
                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                         target="_blank"
                     >
-                        @lang('admin::app.cms.edit.preview')
+                        @lang('admin::app.cms.edit.preview-btn')
                     </a>
                 @endif
 
@@ -35,7 +35,7 @@
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.cms.edit.save')
+                    @lang('admin::app.cms.edit.save-btn')
                 </button>
             </div>
         </div>
@@ -61,7 +61,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.page')
+                            @lang('admin::app.cms.edit.page-title')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -70,8 +70,8 @@
                             value="{{ old($locale)['page_title'] ?? ($page->translate($locale)['page_title'] ?? '') }}"
                             id="{{ $locale }}[page_title]"
                             rules="required"
-                            :label="trans('admin::app.cms.edit.page')"
-                            :placeholder="trans('admin::app.cms.edit.page')"
+                            :label="trans('admin::app.cms.edit.page-title')"
+                            :placeholder="trans('admin::app.cms.edit.page-title')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -143,13 +143,9 @@
 
                     {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.before') !!}
 
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('admin::app.cms.edit.seo')
-                    </p>
-
-                    <x-admin::form.control-group class="mb-[10px]">
+                    <x-admin::form.control-group class="mb-[30px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.meta_title')
+                            @lang('admin::app.cms.edit.meta-title')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -158,8 +154,8 @@
                             :value="old($locale)['meta_title'] ?? ($page->translate($locale)['meta_title'] ?? '') "
                             id="meta_title"
                             rules="required"
-                            :label="trans('admin::app.cms.edit.meta_title')"
-                            :placeholder="trans('admin::app.cms.edit.meta_title')"
+                            :label="trans('admin::app.cms.edit.meta-title')"
+                            :placeholder="trans('admin::app.cms.edit.meta-title')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -171,7 +167,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.url_key')
+                            @lang('admin::app.cms.edit.url-key')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -180,8 +176,8 @@
                             :value="old($locale)['url_key'] ?? ($page->translate($locale)['url_key'] ?? '')"
                             id="url_key"
                             rules="required"
-                            :label="trans('admin::app.cms.edit.url_key')"
-                            :placeholder="trans('admin::app.cms.edit.url_key')"
+                            :label="trans('admin::app.cms.edit.url-key')"
+                            :placeholder="trans('admin::app.cms.edit.url-key')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -193,7 +189,7 @@
                     
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.meta_keywords')
+                            @lang('admin::app.cms.edit.meta-keywords')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -203,8 +199,8 @@
                             id="meta_keywords"
                             class="text-gray-600"
                             rules="required"
-                            :label="trans('admin::app.cms.edit.meta_keywords')"
-                            :placeholder="trans('admin::app.cms.edit.meta_keywords')"
+                            :label="trans('admin::app.cms.edit.meta-keywords')"
+                            :placeholder="trans('admin::app.cms.edit.meta-keywords')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -216,7 +212,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.meta_description')
+                            @lang('admin::app.cms.edit.meta-description')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -226,8 +222,8 @@
                             id="meta_description"
                             class="text-gray-600"
                             rules="required"
-                            :label="trans('admin::app.cms.edit.meta_description')"
-                            :placeholder="trans('admin::app.cms.edit.meta_description')"
+                            :label="trans('admin::app.cms.edit.meta-description')"
+                            :placeholder="trans('admin::app.cms.edit.meta-description')"
                         >
                         </x-admin::form.control-group.control>
 
