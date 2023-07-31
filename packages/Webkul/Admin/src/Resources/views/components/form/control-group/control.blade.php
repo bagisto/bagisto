@@ -192,7 +192,7 @@
                     id="{{ $name }}"
                     class="sr-only peer"
                     v-bind="field"
-                    {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+                    {{ $attributes->except(['v-model', 'rules', ':rules', 'label', ':label']) }}
                 />
             </v-field>
 
