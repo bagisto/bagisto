@@ -343,10 +343,10 @@
 	.label-pending {
 		@apply bg-yellow-500;
 	}
-/* 
+
 	.label-processing,  .label-active {
 		@apply bg-darkGreen;
-	} */
+	}
 
 	.label-closed {
 		@apply bg-darkBlue;
@@ -364,6 +364,20 @@
 		@apply text-red-600;
 	}
 
+	.icon-star-fill:before {
+        content: "\e938";
+    color: #ffb600;
+    }
+
+	.icon-sort:before {
+        content: "\e937";
+    color: #7d7d7d;
+    }
+
+	.icon-star:before {
+        content: "\e939";
+    }
+	
     .shimmer {
         animation-duration: 2.2s;
         animation-fill-mode: forwards;

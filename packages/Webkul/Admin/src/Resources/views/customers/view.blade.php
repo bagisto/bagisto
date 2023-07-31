@@ -1,11 +1,5 @@
 <x-admin::layouts>
     <div class="grid">
-        <div class="flex items-center cursor-pointer">
-            <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 text-center w-full max-w-max rounded-[6px]">
-                <span class="icon-sort-left text-[24px]"></span>
-            </div>
-            <p class="text-gray-600">Customers</p>
-        </div>
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
                 {{ $customer->first_name . " " . $customer->last_name }}
@@ -26,14 +20,6 @@
                         </span>
                     @endif
             </p>   
-            <div class="flex gap-x-[10px] items-center">
-                <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all hover:bg-gray-200">
-                    <span class="icon-arrow-right text-[24px]"></span>
-                </div>
-                <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all hover:bg-gray-200">
-                    <span class="icon-arrow-left text-[24px]"></span>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -65,7 +51,7 @@
                 <div class=" bg-white rounded-[4px] box-shadow">
                     <div class=" p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders')
+                            @lang('admin::app.customers.view.orders')({{ $totalOrderCount }})
                         </p>
                         <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.customers.view.total-revenue')- {{ core()->currency($customer->orders->sum('grand_total')) }}
@@ -197,13 +183,13 @@
 
                                     <div class="flex flex-col gap-[6px]">
 
-                                        {{--need to update shivendra-webkul --}}
+                                        {{-- need to update shivendra-webkul --}}
                                         <div class="flex">
-                                            <span class="icon-star text-[18px] text-amber-500"></span>
-                                            <span class="icon-star text-[18px] text-amber-500"></span>
-                                            <span class="icon-star text-[18px] text-amber-500"></span>
-                                            <span class="icon-star text-[18px] text-amber-500"></span>
-                                            <span class="icon-star text-[18px] text-gray-300"></span>
+                                            <x-admin::star-rating 
+                                                :is-editable="false"
+                                                :value="$review->rating"
+                                            >
+                                            </x-admin::star-rating>
                                         </div>
 
                                         <p class="text-gray-600">
@@ -366,7 +352,6 @@
                 </x-slot:content>
             </x-admin::accordion> 
 
-            {{-- component 3 --}}
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
@@ -375,85 +360,107 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    @foreach ($customer->addresses as $address)
-                        <div class="grid gap-y-[10px]">
-                            @if( $address->default_address )
-                                <p class="label-pending">
-                                    @lang('admin::app.customers.view.default-address')
-                                </p>
-                            @endif
+                    @if(count($customer->addresses))
+                        @foreach ($customer->addresses as $address)
+                            <div class="grid gap-y-[10px]">
+                                @if( $address->default_address )
+                                    <p class="label-pending">
+                                        @lang('admin::app.customers.view.default-address')
+                                    </p>
+                                @endif
 
-                            <div class="">
-                                <p class="text-gray-800 font-semibold">
-                                    {{$address->name}}
-                                </p>
+                                <div class="">
+                                    <p class="text-gray-800 font-semibold">
+                                        {{$address->name}}
+                                    </p>
 
-                                <p class="text-gray-600">
-                                    {{$address->address1}}
-                                    {{$address->city}} 
-                                    {{$address->state}} 
-                                    {{$address->country}}
-                                </p>
-                            </div>
+                                    <p class="text-gray-600">
+                                        {{$address->address1}}
+                                        {{$address->city}} 
+                                        {{$address->state}} 
+                                        {{$address->country}}
+                                    </p>
+                                </div>
 
-                            <div class="">
-                                <p class="text-gray-600">
-                                    @lang('admin::app.customers.view.phone') : {{$address->phone}}
-                                </p>
-                            </div>
+                                <div class="">
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.customers.view.phone') : {{$address->phone}}
+                                    </p>
+                                </div>
 
-                            <div class="flex gap-[10px]">
-                                {{-- Edit Address --}}
-                                <p class="text-blue-600">
-                                    @lang('admin::app.customers.view.edit')
-                                </p>
+                                <div class="flex gap-[10px]">
+                                    {{-- Edit Address --}}
+                                    <p class="text-blue-600">
+                                        @lang('admin::app.customers.view.edit')
+                                    </p>
 
-                                {{-- Delete Address --}}
-                                <p 
-                                    class="text-blue-600 cursor-pointer"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('delete-address{{ $address->id }}').submit();"
-                                >
-                                    @lang('admin::app.customers.view.delete')
-                                </p>
-
-                                <form 
-                                    method="post"
-                                    action="{{ route('admin.customer.addresses.delete', $address->id) }}" 
-                                    id="delete-address{{ $address->id }}" 
-                                >
-                                    @csrf
-                                </form>
-
-                                {{-- Set Default Address --}}
-                                @if(! $address->default_address )
+                                    {{-- Delete Address --}}
                                     <p 
                                         class="text-blue-600 cursor-pointer"
                                         onclick="event.preventDefault();
-                                        document.getElementById('default-address{{ $address->id }}').submit();"
+                                        document.getElementById('delete-address{{ $address->id }}').submit();"
                                     >
-                                        @lang('admin::app.customers.view.set-as-default')
+                                        @lang('admin::app.customers.view.delete')
                                     </p>
 
                                     <form 
-                                        class="hidden"
                                         method="post"
-                                        action="{{ route('admin.customer.addresses.set_default', $customer->id) }}" 
-                                        id="default-address{{ $address->id }}" 
+                                        action="{{ route('admin.customer.addresses.delete', $address->id) }}" 
+                                        id="delete-address{{ $address->id }}" 
                                     >
                                         @csrf
-
-                                        <input
-                                            type="text"
-                                            name="set_as_default"
-                                            value="{{ $address->id }}"
-                                        >
                                     </form>
-                                @endif
+
+                                    {{-- Set Default Address --}}
+                                    @if(! $address->default_address )
+                                        <p 
+                                            class="text-blue-600 cursor-pointer"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('default-address{{ $address->id }}').submit();"
+                                        >
+                                            @lang('admin::app.customers.view.set-as-default')
+                                        </p>
+
+                                        <form 
+                                            class="hidden"
+                                            method="post"
+                                            action="{{ route('admin.customer.addresses.set_default', $customer->id) }}" 
+                                            id="default-address{{ $address->id }}" 
+                                        >
+                                            @csrf
+
+                                            <input
+                                                type="text"
+                                                name="set_as_default"
+                                                value="{{ $address->id }}"
+                                            >
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                            <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                        @endforeach
+                    @else    
+                        {{-- Empty Container --}}
+                        <div
+                            class="flex gap-[20px] items-center py-[10px]"
+                        >
+                            <img
+                                src="{{ bagisto_asset('images/icon-discount.svg') }}"
+                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                            />
+
+                            <div class="flex flex-col gap-[6px]">
+                                <p class="text-[16px] text-gray-400 font-semibold">
+                                    @lang('Add Customer Address')
+                                </p>
+
+                                <p class="text-gray-400">
+                                    @lang('Create New Addresses for Customer Address')
+                                </p>
                             </div>
                         </div>
-                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
-                    @endforeach
+                    @endif
                 </x-slot:content>
             </x-admin::accordion>
         </div>
