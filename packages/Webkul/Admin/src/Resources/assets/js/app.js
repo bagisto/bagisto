@@ -99,13 +99,23 @@ configure({
  */
 window.app = createApp({
     data() {
-        return {};
+        return {
+            isOpen: localStorage.getItem('bagisto-sidebar') == 'true',
+            
+            isVisible: false,
+        };
     },
 
     methods: {
         onSubmit() {},
 
         onInvalidSubmit() {},
+
+        toggleMenu() {
+            this.isOpen = ! this.isOpen;
+
+            localStorage.setItem('bagisto-sidebar', this.isOpen);
+        },
     },
 });
 
