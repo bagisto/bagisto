@@ -79,7 +79,7 @@ class CampaignController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.campaigns.create-success'));
 
-        return redirect()->route('admin.email_templates.index');
+        return redirect()->route('admin.campaigns.index');
     }
 
     /**

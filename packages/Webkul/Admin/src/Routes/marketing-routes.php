@@ -91,7 +91,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.events.edit');
 
-            Route::post('edit/{id}', 'update')->name('admin.events.update');
+            Route::put('edit/{id}', 'update')->name('admin.events.update');
 
             Route::post('delete/{id}', 'destroy')->name('admin.events.delete');
         });

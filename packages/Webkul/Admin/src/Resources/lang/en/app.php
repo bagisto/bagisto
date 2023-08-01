@@ -1,6 +1,22 @@
 <?php
 
 return [
+    'account' => [
+        'edit' => [
+            'title'                => 'My Account',
+            'save-btn'             => 'Save Account',
+            'cancel-btn'           => 'cancel',
+            'general'              => 'General',
+            'profile-image'        => 'Profile Image',
+            'upload-image-info'    => 'Upload a Profile Image (100px X 100px) in PNG or JPG Format',
+            'name'                 => 'Name',
+            'email'                => 'Email',
+            'password'             => 'Password',
+            'confirm-password'     => 'Confirm Password',
+            'change-password'      => 'Change Account Password',
+            'current-password'     => 'Current Password',
+        ],
+    ],
 
     'promotions' => [
         'tab' => [
@@ -265,7 +281,6 @@ return [
         ],
     ],
 
-
     'sales'=> [
         'orders' => [
             'index' => [
@@ -468,16 +483,27 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'title' => 'Exchange Rates',
+                'create-btn'  => 'Create Exchange Rate',
+                'title'       => 'Exchange Rates',
+
+                'modal'  =>  [
+                    'create' => [
+                        'rate'             => 'Rate',
+                        'save-btn'         => 'Save',
+                        'source-currency'  => 'Source Currency',
+                        'target-currency'  => 'Target Currency',
+                        'title'            => 'Create Exchange Rate',
+                    ],
+                ],
             ],
 
-            'create' => [
-                'title'            => 'Create Exchange Rate',
-                'button-title'     => 'Add Exchange Rate',
-                'source-currency'  => 'Source Currency',
-                'target-currency'  => 'Target Currency',
+            'edit'  =>  [
+                'cancel-btn'       => 'Cancel',
                 'rate'             => 'Rate',
-                'save'             => 'Save',
+                'source-currency'  => 'Source Currency',
+                'save-btn'         => 'Save Exchange Rate',
+                'title'            => 'Edit Exchange Rates',
+                'target-currency'  => 'Target Currency',
             ],
         ],
 
@@ -1053,17 +1079,26 @@ return [
             'events' => [
                 'create'   => [
                     'title'          => 'Events',
-                    'add-title'      => 'Add Event',
                     'general'        => 'General',
                     'name'           => 'Name',
                     'description'    => 'Description',
                     'date'           => 'Date',
-                    'save'           => 'Save',
+                    'save-btn'       => 'Save',
                 ],
 
                 'index'  =>  [
                     'title'    => 'Events',
                     'create-btn'  => 'Create Event',
+                ],
+
+                'edit'  =>  [
+                    'title'        => 'Edit Events',
+                    'cancel-btn'   => 'Cancel',
+                    'general'      => 'General',
+                    'name'         => 'Name',
+                    'description'  => 'Description',
+                    'date'         => 'Date',
+                    'save-btn'     => 'Save Events',
                 ],
             ],
 
@@ -1417,21 +1452,6 @@ return [
         'file-name'        => 'File Name',
         'path'             => 'Path',
         'link-for-google'  => 'Link For Google',
-    ],
-
-    'account' => [
-        'title'                => 'My Account',
-        'save-btn-title'       => 'Save',
-        'general'              => 'General',
-        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
-        'remove-image'         => 'Remove Image',
-        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
-        'name'                 => 'Name',
-        'email'                => 'Email',
-        'password'             => 'Password',
-        'confirm-password'     => 'Confirm Password',
-        'change-password'      => 'Change Account Password',
-        'current-password'     => 'Current Password',
     ],
 
     // 'users' => [

@@ -1,86 +1,107 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.settings.exchange-rates.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.settings.exchange_rates.edit-title') }}
-@stop
+    <x-admin::form 
+        :action="route('admin.exchange_rates.update', $exchangeRate->id)"
+        enctype="multipart/form-data"
+        method="PUT"
+    >
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.exchange-rates.edit.title')
+            </p>
 
-@section('content')
-    <div class="content">
-
-        <form method="POST" action="{{ route('admin.exchange_rates.update', $exchangeRate->id) }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.exchange_rates.index') }}'"></i>
-
-                        {{ __('admin::app.settings.exchange_rates.edit-title') }}
-                    </h1>
-                </div>
-
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.exchange_rates.save-btn-title') }}
+            <div class="flex gap-x-[10px] items-center">
+                <!-- Cancel Button -->
+                <a href="{{ route('admin.exchange_rates.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.settings.exchange-rates.edit.cancel-btn')
+                    </span>
+                </a>
+                    
+                <!-- Save Button -->
+                <div class="flex gap-x-[10px] items-center">
+                    <button 
+                        type="submit"
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    >
+                        @lang('admin::app.settings.exchange-rates.edit.save-btn')
                     </button>
                 </div>
             </div>
+        </div>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-                    <input name="_method" type="hidden" value="PUT">
-
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        {{ __('admin::app.settings.exchange_rates.source_currency') }}
-                                    </th>
-                                    <th>
-                                        {{ __('admin::app.settings.exchange_rates.target_currency') }}
-                                    </th>
-                                    <th>
-                                        {{ __('admin::app.settings.exchange_rates.rate') }}
-                                    </th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    {!! view_render_event('bagisto.admin.settings.exchangerate.edit.before') !!}
-
-                                    <td>
-                                        {{ core()->getBaseCurrencyCode() }}
-                                    </td>
-
-                                    <td>
-                                        <div class="control-group" :class="[errors.has('target_currency') ? 'has-error' : '']">
-                                            <select v-validate="'required'" class="control" name="target_currency" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.target_currency') }}&quot;">
-                                                @foreach ($currencies as $currency)
-                                                    <option value="{{ $currency->id }}" {{ $exchangeRate->target_currency == $currency->id ? 'selected' : '' }}>
-                                                        {{ $currency->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span class="control-error" v-if="errors.has('target_currency')">@{{ errors.first('target_currency') }}</span>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <div class="control-group" :class="[errors.has('rate') ? 'has-error' : '']">
-                                            <input v-validate="'required'" class="control" id="rate" name="rate" data-vv-as="&quot;{{ __('admin::app.settings.exchange_rates.rate') }}&quot;" value="{{ old('rate') ?: $exchangeRate->rate }}"/>
-                                            <span class="control-error" v-if="errors.has('rate')">@{{ errors.first('rate') }}</span>
-                                        </div>
-                                    </td>
-
-                                    {!! view_render_event('bagisto.admin.settings.exchangerate.edit.after') !!}
-                                <tr>
-                            </tbody>
-                        </table>
+        {!! view_render_event('bagisto.admin.settings.exchangerate.edit.before') !!}
+    
+        <!-- Full Pannel -->
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                    <div class="block mb-[10px] leading-[24px] text-[12px] text-gray-800 font-medium">
+                        @lang('admin::app.settings.exchange-rates.edit.source-currency')
+    
+                        <p class="text-[14px] text-gray-500 font-medium">
+                            {{ core()->getBaseCurrencyCode() }}
+                        </p>
                     </div>
-
+    
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.exchange-rates.edit.target-currency')
+                        </x-admin::form.control-group.label>
+                        
+                        <x-admin::form.control-group.control
+                            type="select"
+                            name="target_currency"
+                            rules="required"
+                            label="{{ trans('admin::app.settings.exchange-rates.edit.target-currency') }}"
+                        >
+                            @foreach ($currencies as $currency)
+                                @if (is_null($currency->exchange_rate))
+                                    <option
+                                        value="{{ $currency->id }}"
+                                        {{ $exchangeRate->target_currency == $currency->id ? 'selected' : '' }}
+                                    >
+                                        {{ $currency->name }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </x-admin::form.control-group.control>
+    
+                        <x-admin::form.control-group.error
+                            control-name="target_currency"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
+    
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.exchange-rates.edit.rate')
+                        </x-admin::form.control-group.label>
+    
+                        <x-admin::form.control-group.control
+                            type="text"
+                            name="rate"
+                            id="rate"
+                            value="{{ old('rate') ?: $exchangeRate->rate }}"
+                            rules="required"
+                            label="{{ trans('admin::app.settings.exchange-rates.edit.rate') }}"
+                            placeholder="{{ trans('admin::app.settings.exchange-rates.edit.rate') }}"
+                        >
+                        </x-admin::form.control-group.control>
+    
+                        <x-admin::form.control-group.error
+                            control-name="rate"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
                 </div>
             </div>
-        </form>
-    </div>
-@stop
+        </div>
+
+        {!! view_render_event('bagisto.admin.settings.exchangerate.edit.after') !!}
+    </x-admin::form>
+</x-admin::layouts>

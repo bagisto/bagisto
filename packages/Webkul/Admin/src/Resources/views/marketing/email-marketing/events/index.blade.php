@@ -96,7 +96,7 @@
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
-                                            type="text"
+                                            type="date"
                                             name="date"
                                             :value="old('date')"
                                             rules="required"
@@ -117,7 +117,7 @@
                             <x-slot:footer>
                                 <!-- Save Button -->
                                 <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
-                                    @lang('admin::app.marketing.email-marketing.events.create.save')
+                                    @lang('admin::app.marketing.email-marketing.events.create.save-btn')
                                 </button>
                             </x-slot:footer>
                         </x-admin::modal>
