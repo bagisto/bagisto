@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
+    {{-- Title of the page --}}
     <x-slot:title>
         @lang('admin::app.customers.groups.index.title')
     </x-slot:title>
@@ -10,7 +10,7 @@
         </p>
         
         <div class="flex gap-x-[10px] items-center">
-            <!-- Create a new Group -->
+            {{-- Create a new Group --}}
             <v-create-group></v-create-group>
         </div>
     </div>
@@ -24,7 +24,7 @@
                         class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                         @click="$refs.groupCreateModal.toggle()"
                     >
-                    @lang('admin::app.customers.groups.index.modal.create.title')
+                        @lang('admin::app.customers.groups.index.modal.create.create-btn')
                     </button>
                 @endif
 
@@ -33,17 +33,17 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, create)">
-                        <!--  Create Group Modal -->
+                        {{-- Create Group Modal --}}
                         <x-admin::modal ref="groupCreateModal">          
                             <x-slot:header>
-                                <!-- Modal Header -->
+                                {{-- Modal Header --}}
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.customers.groups.index.modal.create.title')
                                 </p>    
                             </x-slot:header>
             
                             <x-slot:content>
-                                <!-- Modal Content -->
+                                {{-- Modal Content --}}
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
@@ -90,7 +90,7 @@
                             </x-slot:content>
             
                             <x-slot:footer>
-                                <!-- Modal Submission -->
+                                {{-- Modal Submission --}}
                                 <div class="flex gap-x-[10px] items-center">
                                     <button 
                                         type="submit"
@@ -115,6 +115,8 @@
                         this.$axios.post("{{ route('admin.groups.store') }}", params)
                             .then((response) => {
                                 this.$refs.groupCreateModal.toggle();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();
                             })

@@ -1,4 +1,8 @@
 <x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.marketing.email-marketing.templates.create.title')
+    </x-slot:title>
+
     {{-- Input Form --}}
     <x-admin::form :action="route('admin.email_templates.store')">
         <div class="flex justify-between items-center">
@@ -10,7 +14,7 @@
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.email_templates.index') }}">
                     <span class="text-gray-600 leading-[24px]">
-                        @lang('admin::app.marketing.email-marketing.campaigns.create.cancel')
+                        @lang('admin::app.marketing.email-marketing.templates.create.cancel')
                     </span>
                 </a>
 

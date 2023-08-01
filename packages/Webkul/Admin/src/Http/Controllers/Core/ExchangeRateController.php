@@ -61,7 +61,7 @@ class ExchangeRateController extends Controller
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 
         return new JsonResource([
-            'message' => trans('admin::admin::app.settings.exchange_rates.create-success'),
+            'message' => trans('admin::app.settings.exchange-rates.create.create-success'),
         ]);
     }
 
@@ -102,7 +102,7 @@ class ExchangeRateController extends Controller
 
         Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
 
-        session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
+        session()->flash('success', trans('admin::app.settings.exchange-rates.edit.update-success'));
 
         return redirect()->route('admin.exchange_rates.index');
     }
@@ -117,7 +117,7 @@ class ExchangeRateController extends Controller
         try {
             app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
 
-            session()->flash('success', trans('admin::app.settings.exchange_rates.update-success'));
+            session()->flash('success', trans('admin::app.settings.exchange-rates.edit.update-success'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
@@ -142,7 +142,7 @@ class ExchangeRateController extends Controller
 
             Event::dispatch('core.exchange_rate.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.exchange_rates.delete-success')]);
+            return response()->json(['message' => trans('admin::app.settings.exchange-rates.edit.delete-success')]);
         } catch (\Exception $e) {
             report($e);
         }

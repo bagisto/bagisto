@@ -179,6 +179,8 @@
                             .then((response) => {
                                 this.$refs.taxCategory.toggle();
 
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
                                 resetForm();
                             })
                             .catch((error) =>{
