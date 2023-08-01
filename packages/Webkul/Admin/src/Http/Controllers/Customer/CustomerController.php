@@ -35,9 +35,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()) {
-            return app(CustomerDataGrid::class)->toJson();
-        }
+        // if (request()->ajax()) {
+        //     return app(CustomerDataGrid::class)->toJson();
+        // }
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 

@@ -507,26 +507,25 @@
         <!-- Customer Address Form -->
         <script type="text/x-template" id="v-create-customer-address-template">
             <div>
+                <!-- Address Create Button -->
+                @if (bouncer()->hasPermission('customers.addresses.create '))
+                    <div 
+                        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+                        @click="$refs.CustomerAddress.toggle()"
+                    >
+                        <span class="icon-location text-[24px]"></span>
+                        @lang('admin::app.customers.view.create-address.create-address-btn')
+                    </div>
+                @endif
+
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form 
-                        @submit="handleSubmit($event, create)"
-                        ref="addressForm"
-                    >
+                    <form @submit="handleSubmit($event, create)">
                         <!-- Address Create Modal -->
-                        <x-admin::modal ref="addressCreateModal">
-                            <x-slot:toggle>
-                                <!-- Address Create Button -->
-                                @if (bouncer()->hasPermission('customers.addresses.create '))
-                                    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                                        <span class="icon-location text-[24px]"></span>
-                                        @lang('admin::app.customers.view.create-address.create-address-btn')
-                                    </div>
-                                @endif
-                            </x-slot:toggle>
-            
+                        <x-admin::modal ref="CustomerAddress">
+                        
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
@@ -890,7 +889,7 @@
                             )
                         
                             .then((response) => {
-                                this.$refs.addressCreateModal.toggle();
+                                this.$refs.CustomerAddress.toggle();
 
                                 resetForm();
                             })

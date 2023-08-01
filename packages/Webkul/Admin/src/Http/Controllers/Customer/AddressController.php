@@ -35,9 +35,9 @@ class AddressController extends Controller
 
         $customer = $this->customerRepository->find($id);
 
-        if (request()->ajax()) {
-            return app(AddressDataGrid::class)->toJson();
-        }
+        // if (request()->ajax()) {
+        //     return app(AddressDataGrid::class)->toJson();
+        // }
 
         return view('admin::customers.addresses.index', compact('customer'));
     }
