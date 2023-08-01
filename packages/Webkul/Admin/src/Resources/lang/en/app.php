@@ -853,8 +853,8 @@ return [
 
         'categories'  => [
             'index' => [
-                'title' => 'Categories',
-                'add'   => 'Add',
+                'title'    => 'Categories',
+                'add-btn'  => 'Create Category',
             ],
 
             'create' => [
