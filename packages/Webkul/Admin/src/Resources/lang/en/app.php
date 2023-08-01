@@ -348,6 +348,7 @@ return [
         ],
 
         'view' => [
+            'title'                 => 'Customer View',         
             'customer'              => 'Customer',
             'active'                => 'Active',
             'inactive'              => 'Inactive',
@@ -373,7 +374,16 @@ return [
             'edit'                  => 'Edit',
             'delete'                => 'Delete',
             'set-as-default'        => 'Set as Default',
-
+            'address'               => 'Address',
+            'invoice-id'            => 'Invoice ID',
+            'invoice-date'          => 'Invoice Date',
+            'invoice-amount'        => 'Invoice Amount',
+            'order-id'              => 'Order ID', 
+            'empty-title'           => 'Add Customer Address',
+            'empty-description'     => 'Create New Addresses for Customer',
+            'invoice'               => 'Invoice',
+            'note'                  => 'note',
+            
             'create-address' => [
                 'title'              => 'Create Customer\'s Address',
                 'create-address-btn' => 'Add New Address',

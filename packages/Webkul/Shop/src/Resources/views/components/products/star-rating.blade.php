@@ -22,14 +22,16 @@
                 v-if="! disabled"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 @click="change(rating)"
-            ></span>
+            >
+            </span>
 
             <span
                 class="icon-star-fill text-[24px]"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 v-else
-            ></span>
+            >
+            </span>
 
             <v-field
                 type="hidden"

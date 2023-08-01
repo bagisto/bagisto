@@ -1,24 +1,31 @@
 <x-admin::layouts>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.customers.view.title')
+    </x-slot:title>
+
     <div class="grid">
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
                 {{ $customer->first_name . " " . $customer->last_name }}
 
-                    @if($customer->status == 1)
-                        <span class="label-pending text-[14px] mx-[5px]">
-                            @lang('admin::app.customers.view.active')
-                        </span>
-                    @else    
-                        <span class="label-pending text-[14px] mx-[5px]">
-                            @lang('admin::app.customers.view.inactive')
-                        </span>
-                    @endif
+                {{-- Customer Status --}}
+                @if($customer->status == 1)
+                    <span class="label-pending text-[14px] mx-[5px]">
+                        @lang('admin::app.customers.view.active')
+                    </span>
+                @else    
+                    <span class="label-pending text-[14px] mx-[5px]">
+                        @lang('admin::app.customers.view.inactive')
+                    </span>
+                @endif
 
-                    @if($customer->is_suspended == 1)
-                        <span class="label-pending text-[14px]">
-                            @lang('admin::app.customers.view.suspended')
-                        </span>
-                    @endif
+                {{-- Customer Suspended Status --}}
+                @if($customer->is_suspended == 1)
+                    <span class="label-pending text-[14px]">
+                        @lang('admin::app.customers.view.suspended')
+                    </span>
+                @endif
             </p>   
         </div>
     </div>
@@ -32,6 +39,7 @@
             <span class="icon-mail text-[24px] "></span> Email
         </div>
         
+        {{--Address Create component --}}
         <v-create-customer-address></v-create-customer-address>
        
         <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
@@ -50,6 +58,7 @@
             @if($totalOrderCount = count($customer->orders))
                 <div class=" bg-white rounded-[4px] box-shadow">
                     <div class=" p-[16px] flex justify-between">
+                        {{-- Total Order Count --}}
                         <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.customers.view.orders')({{ $totalOrderCount }})
                         </p>
@@ -58,6 +67,7 @@
                         </p>
                     </div>
 
+                    {{-- Order Details --}}
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
                             <div class="flex justify-between items-center px-[16px] py-[16px]">
@@ -84,20 +94,24 @@
 
                                     <div class="">
                                         <div class="flex flex-col gap-[6px]">
+                                            {{-- Grand Total --}}
                                             <p class="text-[16px] text-gray-800 font-semibold">
                                                 {{ core()->currency($order->grand_total ) }}
                                             </p>
 
+                                            {{-- Payment methods --}}   
                                             <p class="text-gray-600">
                                                 @lang('admin::app.customers.view.pay-by') - {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
                                             </p>
 
+                                            {{-- Channel Code --}}
                                             <p class="text-gray-600">
                                                 {{ $order->channel->code }}
                                             </p>
                                         </div>
                                     </div>
 
+                                    {{-- Order Address Details --}}
                                     <div class="">
                                         <div class="flex flex-col gap-[6px]">
                                             <p class="text-[16px] text-gray-800">
@@ -126,23 +140,38 @@
                 </div>
             @endif
 
-            
             {{-- Invoices --}}
             @if($totalInvoiceCount = count($customer->invoices))
                 <div class="bg-white rounded box-shadow">
-                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">Invoice ({{ $totalInvoiceCount }})</p>
+                    {{--Invoice Count --}}
+                    <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
+                    </p>
+                    {{-- Invoice Table --}}
                     <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left min-w-[800px]">
+                        <table class="w-full text-sm text-left min-w-[800px]">
                             <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200  ">
                                 <tr>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Id  </th>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Date </th>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Invoice Amount </th>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> Order ID </th>
+                                    <th scope="col" class="px-6 py-[16px] font-semibold"> 
+                                        @lang('admin::app.customers.view.invoice-id')  
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-[16px] font-semibold"> 
+                                        @lang('admin::app.customers.view.invoice-date')  
+                                    </th>
+                                    
+                                    <th scope="col" class="px-6 py-[16px] font-semibold">
+                                        @lang('admin::app.customers.view.invoice-amount') 
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-[16px] font-semibold">
+                                        @lang('admin::app.customers.view.order-id')  
+                                    </th>
                                 </tr>
                             </thead>
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
+                                    {{-- Invoice Details --}}
                                     <tr class="bg-white border-b ">
                                         <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->id }}</td>
                                         <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">{{ $invoice->created_at }}</td>
@@ -159,11 +188,13 @@
             {{-- Reviews --}}
             @if($totalReviewsCount = count($customer->reviews) )
                 <div class="bg-white rounded box-shadow">
+                    {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.customers.view.reviews')({{ $totalReviewsCount }})
                     </p>
 
                     @foreach($customer->reviews as $review)
+                        {{-- Reviews Details --}}
                         <div class="">
                             <div class="grid gap-y-[16px] p-[16px]">
                                 <div class="flex justify-start [&amp;>*]:flex-1">
@@ -239,7 +270,7 @@
                                     name="note" 
                                     id="note"
                                     rules="required"
-                                    label="Note"
+                                    :label="trans('admin::app.customers.view.note')"
                                     placeholder="Note"
                                 >
                                 </x-admin::form.control-group.control>
@@ -292,6 +323,7 @@
                             {{$note->note}}
                         </p>
 
+                        {{-- Notes List Title and Time --}}
                         <p class="text-gray-600">  
                             @if ($note->customer_notified)
                                 @lang('admin::app.customers.view.customer-notified') | {{$note->created_at}}
@@ -314,6 +346,7 @@
                         @lang('admin::app.customers.view.customer')
                     </p>
 
+                    {{--Customer Edit Component --}}
                    @include('admin::customers.edit', ['groups' => $groups])
                 </x-slot:header>
 
@@ -355,7 +388,10 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Address ({{ count($customer->addresses) }})</p>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                            @lang('admin::app.customers.view.address')
+                            ({{ count($customer->addresses) }})
+                        </p>
                     </div>
                 </x-slot:header>
 
@@ -441,7 +477,7 @@
                             <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
                         @endforeach
                     @else    
-                        {{-- Empty Container --}}
+                        {{-- Empty Address Container --}}
                         <div
                             class="flex gap-[20px] items-center py-[10px]"
                         >
@@ -452,11 +488,11 @@
 
                             <div class="flex flex-col gap-[6px]">
                                 <p class="text-[16px] text-gray-400 font-semibold">
-                                    @lang('Add Customer Address')
+                                    @lang('admin::app.customers.view.empty-title')
                                 </p>
 
                                 <p class="text-gray-400">
-                                    @lang('Create New Addresses for Customer Address')
+                                    @lang('admin::app.customers.view.empty-description')
                                 </p>
                             </div>
                         </div>
@@ -514,6 +550,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <div class="w-full">
+                                            <!-- Company Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                         @lang('admin::app.customers.view.create-address.company-name')
@@ -534,6 +571,7 @@
                                             </x-admin::form.control-group>
                                         </div>
                                         <div class="w-full">
+                                            <!-- Vat Id -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.vat-id')
@@ -557,6 +595,7 @@
 
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <div class="w-full">
+                                            <!-- First Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.first-name')
@@ -578,6 +617,7 @@
                                             </x-admin::form.control-group>
                                         </div>
                                         <div class="w-full">
+                                            <!-- Last Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.last-name')
@@ -600,6 +640,7 @@
                                         </div>
                                     </div>
 
+                                    <!-- Street Address -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.customers.view.create-address.street-address')
@@ -652,6 +693,7 @@
 
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <div class="w-full">
+                                            <!-- City -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.city')
@@ -673,6 +715,7 @@
                                             </x-admin::form.control-group>
                                         </div>
                                         <div class="w-full">
+                                            <!-- PostCode -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.post-code')
@@ -697,6 +740,7 @@
 
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <div class="w-full">
+                                            <!-- Country Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.country')
@@ -727,6 +771,7 @@
                                             </x-admin::form.control-group>
                                         </div>
                                         <div class="w-full">
+                                            <!-- State Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.state')
@@ -751,6 +796,7 @@
 
                                     <div class="flex gap-[16px] max-sm:flex-wrap items-center">
                                         <div class="w-full">
+                                            <!--Phone number -->
                                             <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.label>
                                                     @lang('admin::app.customers.view.create-address.phone')
@@ -773,6 +819,7 @@
                                         </div>
                                         
                                         <div class="w-full">
+                                            <!-- Default Address -->
                                             <x-admin::form.control-group class="flex gap-[10px] mt-[20px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
