@@ -727,8 +727,15 @@ return [
             'email'                      => 'Email',
             'password'                   => 'Password',
             'forget-password-link'       => 'Forget Password ?',
-            'remember-me'                => 'Remember Me',
             'submit-btn'                 => 'Sign In',
+        ],
+
+        'forget-password' => [
+            'page-title'                 => 'Forget Password',
+            'title'                      => 'Recover Password',
+            'email'                      => 'Registered Email',
+            'sign-in-link'               => 'Back to Sign In ?',
+            'submit-btn'                 => 'Reset Password',
         ],
     ],
 
