@@ -721,6 +721,15 @@ return [
                 'permissions'     => 'Permissions',
             ],
         ],
+
+        'sessions' => [
+            'title'                      => 'Sign In',
+            'email'                      => 'Email',
+            'password'                   => 'Password',
+            'forget-password-link'       => 'Forget Password ?',
+            'remember-me'                => 'Remember Me',
+            'submit-btn'                 => 'Sign In',
+        ],
     ],
 
     'catalog' => [
