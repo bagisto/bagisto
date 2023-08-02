@@ -758,6 +758,31 @@ return [
                 'permissions'     => 'Permissions',
             ],
         ],
+
+        'sessions' => [
+            'title'                      => 'Sign In',
+            'email'                      => 'Email',
+            'password'                   => 'Password',
+            'forget-password-link'       => 'Forget Password ?',
+            'submit-btn'                 => 'Sign In',
+        ],
+
+        'forget-password' => [
+            'page-title'                 => 'Forget Password',
+            'title'                      => 'Recover Password',
+            'email'                      => 'Registered Email',
+            'sign-in-link'               => 'Back to Sign In ?',
+            'submit-btn'                 => 'Reset Password',
+        ],
+
+        'reset-password' => [
+            'title'            => 'Reset Password',
+            'email'            => 'Registered Email',
+            'password'         => 'Password',
+            'confirm-password' => 'Confirm Password',
+            'back-link-title'  => 'Back to Sign In ?',
+            'submit-btn'       => 'Reset Password',
+        ],
     ],
 
     'catalog' => [
