@@ -225,7 +225,7 @@
                             id: this.items[this.idField],
                             label: this.caption,
                             nameField: this.nameField,
-                            modelValue: this.items[this.valueField],
+                            modelValue: this.items.id,
                             value: this.savedValues,
                         });
                     }
