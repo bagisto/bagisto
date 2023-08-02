@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.catalog.categories.create.add-new-category')
+        @lang('admin::app.catalog.categories.create.title')
     </x-slot:title>
 
     {{-- Input Form --}}
@@ -11,14 +11,14 @@
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.catalog.categories.create.add-new-category')
+                @lang('admin::app.catalog.categories.create.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Cancel Button -->
                 <a href="{{ route('admin.catalog.categories.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.catalog.categories.create.cancel')
+                        @lang('admin::app.catalog.categories.create.cancel-btn')
                     </span>
                 </a>
 
@@ -61,8 +61,8 @@
                             name="name"
                             value="{{ old('name') }}"
                             class="w-full"
-                            label="Category Name"
-                            placeholder="Category Name"
+                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
+                            placeholder="{{ trans('admin::app.catalog.categories.create.company-name') }}"
                         >
                         </x-admin::form.control-group.control>
                     </x-admin::form.control-group>

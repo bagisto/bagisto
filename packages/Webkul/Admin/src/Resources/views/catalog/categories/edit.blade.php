@@ -62,14 +62,6 @@
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
 
-                    {{-- Locales --}}
-                    <x-admin::form.control-group.control
-                        type="hidden"
-                        name="locale"
-                        value="all"
-                    >
-                    </x-admin::form.control-group.control>
-
                     {{-- Name --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
@@ -78,7 +70,7 @@
 
                         <x-admin::form.control-group.control
                             type="text"
-                            name="name"
+                            name="{{$locale}}[name]"
                             value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}"
                             class="w-full"
                             label="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
@@ -156,14 +148,16 @@
                             </p>
 
                             <x-admin::form.control-group>
-                                @php $logo = bagisto_asset($category->logo_path); dd($logo); @endphp
+
+                                @php $logo = $category->logo_path ? Storage::url($category->logo_path) : ''; @endphp
+
                                 <x-admin::form.control-group.control
                                     type="image"
                                     name="logo_path[image_1]"
                                     class="mb-0 !p-0 rounded-[12px] text-gray-700"
                                     :label="trans('admin::app.catalog.categories.edit.add-logo')"
                                     :is-multiple="false"
-                                    src="{{ bagisto_asset($category->logo_path) }}"
+                                    :src="$logo"
                                     accepted-types="image/*"
                                 >
                                 </x-admin::form.control-group.control>
@@ -186,6 +180,9 @@
                             </p>
 
                             <x-admin::form.control-group>
+
+                                @php $banner = $category->banner_path ? Storage::url($category->banner_path) : ''; @endphp
+
                                 <x-admin::form.control-group.control
                                     type="image"
                                     name="banner_path[]"
@@ -195,7 +192,7 @@
                                     :label="trans('admin::app.catalog.categories.edit.add-banner')"
                                     :is-multiple="false"
                                     accepted-types="image/*"
-                                    :src="isset($category) ? $category->banner_path : ''"
+                                    :src="$banner"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -248,8 +245,8 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="meta_title"
-                                value="{{ old($locale)['meta_title'] ?? ($category->translate($locale)['meta_title'] ?? '') }}"
+                                name="{{$locale}}[meta_title]"
+                                :value="old($locale)['meta_title'] ?? ($category->translate($locale)['meta_title'] ?? '')"
                                 label="{{ trans('admin::app.catalog.categories.edit.meta-title') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.meta-title') }}"
                                 v-model="metaTitle"
@@ -265,7 +262,7 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="slug"
+                                name="{{$locale}}[slug]"
                                 :value="old($locale)['slug'] ?? ($category->translate($locale)['slug'] ?? '')"
                                 rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.slug') }}"
@@ -287,7 +284,7 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="meta_keywords"
+                                name="{{$locale}}[meta_keywords]"
                                 :value="old($locale)['meta_keywords'] ?? ($category->translate($locale)['meta_keywords'] ?? '')"
                                 label="{{ trans('admin::app.catalog.categories.edit.meta-keywords') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.meta-keywords') }}"
@@ -303,7 +300,7 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="meta_description"
+                                name="{{$locale}}[meta_description]"
                                 :value="old($locale)['meta_description'] ?? ($category->translate($locale)['meta_description'] ?? '')"
                                 label="{{ trans('admin::app.catalog.categories.edit.meta-description') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.meta-description') }}"

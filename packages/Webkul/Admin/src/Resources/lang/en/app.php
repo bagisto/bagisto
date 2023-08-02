@@ -858,12 +858,11 @@ return [
             ],
 
             'create' => [
-                'add-new-category'         => 'Add New Category',
                 'add-logo'                 => 'Add Logo',
                 'add-banner'               => 'Add Banner',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
-                'cancel'                   => 'Cancel',
+                'cancel-btn'               => 'Cancel',
                 'company-name'             => 'Name*',
                 'create-btn'               => 'Create Category',
                 'description'              => 'Description',
@@ -886,6 +885,7 @@ return [
                 'seo-details'              => 'SEO Details',
                 'select-parent-category'   => 'Select Parent Category*',
                 'select-display-mode'      => 'Select Display Mode',
+                'title'                    => 'Add New Category',
                 'visible-in-menu'          => 'Visible In Menu',
             ],
 
@@ -920,6 +920,10 @@ return [
                 'title'                    => 'Edit Category', 
                 'visible-in-menu'          => 'Visible In Menu',
             ],
+
+            'create-success'           => 'category created successfully.',
+            'update-success'           => 'category updated successfully.',
+            'delete-success'           => 'The category has been successfully deleted.',
         ],
 
         'families'   => [
