@@ -1,5 +1,5 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
+    {{-- Title of the page --}}
     <x-slot:title>
         @lang('admin::app.customers.index.title')
     </x-slot:title>
@@ -10,13 +10,14 @@
         </p>
         
         <div class="flex gap-x-[10px] items-center">
-            <!-- Create a new Customer -->
+            {{-- Create a new Customer --}}
             <v-create-customer-form></v-create-customer-form>
         </div>
 
         <div class="flex gap-x-[10px] items-center">
             <a href="{{ route('admin.customer.view', 1) }}">
                 <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                    {{-- Will change when datagrid apply --}}
                     @lang('Customer View')
                 </div>
             </a>
@@ -32,10 +33,10 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, create)">
-                        <!-- Customer Create Modal -->
+                        {{-- Customer Create Modal --}}
                         <x-admin::modal ref="customerCreateModal">
                             <x-slot:toggle>
-                                <!-- Customer Create Button -->
+                                {{-- Customer Create Button --}}
                                 @if (bouncer()->hasPermission('customers.customers.create'))
                                     <button 
                                         type="button"
@@ -47,14 +48,14 @@
                             </x-slot:toggle>
             
                             <x-slot:header>
-                                <!-- Modal Header -->
+                                {{-- Modal Header --}}
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.customers.index.create.title')
                                 </p>    
                             </x-slot:header>
             
                             <x-slot:content>
-                                <!-- Modal Content -->
+                                {{-- Modal Content --}}
                                 {!! view_render_event('bagisto.admin.customers.create.before') !!}
 
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
@@ -182,10 +183,6 @@
                                                     rules="required"
                                                     :label="trans('admin::app.customers.index.create.gender')"
                                                 >
-                                                    <option value="">
-                                                        @lang('admin::app.customers.index.create.select-gender')
-                                                    </option>
-
                                                     <option value="Male">
                                                         @lang('admin::app.customers.index.create.male')
                                                     </option>
@@ -218,9 +215,6 @@
                                                     id="customerGroup"
                                                     :label="trans('admin::app.customers.index.create.customer-group')"
                                                 >
-                                                    <option value="">
-                                                        @lang('admin::app.customers.index.create.select-customer-group')
-                                                    </option>
                                                     @foreach ($groups as $group)
                                                         <option value="{{ $group->id }}"> {{ $group->name}} </option>
                                                     @endforeach
@@ -238,7 +232,7 @@
                             </x-slot:content>
             
                             <x-slot:footer>
-                                <!-- Modal Submission -->
+                                {{-- Modal Submission --}}
                                 <div class="flex gap-x-[10px] items-center">
                                     <button 
                                         type="submit"
@@ -264,6 +258,8 @@
                         this.$axios.post("{{ route('admin.customer.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.toggle();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();
                             })

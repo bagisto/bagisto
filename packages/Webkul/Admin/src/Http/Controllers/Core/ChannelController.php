@@ -88,7 +88,7 @@ class ChannelController extends Controller
 
         Event::dispatch('core.channel.create.after', $channel);
 
-        session()->flash('success', trans('admin::app.settings.channels.create-success'));
+        session()->flash('success', trans('admin::app.settings.channels.create.create-success'));
 
         return redirect()->route('admin.channels.index');
     }
