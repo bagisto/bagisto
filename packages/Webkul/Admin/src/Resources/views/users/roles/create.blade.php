@@ -40,7 +40,7 @@
                                     @lang('admin::app.users.roles.create.general')
                                 </p>
 
-                                {{-- General Input Fields --}}
+                                <!-- General Input Fields -->
                                 <div class="mb-[10px]">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
 
-                            {{-- Access Control Input Fields --}}
+                            <!-- Access Control Input Fields -->
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                                     @lang('admin::app.users.roles.create.access-control')
