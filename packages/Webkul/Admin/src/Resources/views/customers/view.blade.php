@@ -11,11 +11,11 @@
 
                 {{-- Customer Status --}}
                 @if($customer->status == 1)
-                    <span class="label-pending text-[14px] mx-[5px]">
+                    <span class="label-active text-[14px] mx-[5px]">
                         @lang('admin::app.customers.view.active')
                     </span>
                 @else    
-                    <span class="label-pending text-[14px] mx-[5px]">
+                    <span class="label-cancelled text-[14px] mx-[5px]">
                         @lang('admin::app.customers.view.inactive')
                     </span>
                 @endif
@@ -85,9 +85,23 @@
                                                     {{ $order->created_at }}
                                                 </p>
 
-                                                <p class="label-pending">
-                                                    {{ $order->status }}
-                                                </p>
+                                                @switch($order->status)
+                                                    @case('processing')
+                                                        <p class="label-processing">
+                                                            {{ $order->status }}
+                                                        </p>
+                                                        @break
+                                                    @case('completed')
+                                                        <p class="label-closed">
+                                                            {{ $order->status }}
+                                                        </p>
+                                                        @break
+                                                    @case('pending')
+                                                        <p class="label-pending">
+                                                            {{ $order->status }}
+                                                        </p>
+                                                        @break
+                                                @endswitch
                                             </div>
                                         </div>
                                     </div>
@@ -207,9 +221,23 @@
                                             {{ $review->product->name }}
                                         </p>
                                         
-                                        <p class="label-pending">
-                                            {{ $review->status }}
-                                        </p>
+                                        @switch($review->status)
+                                            @case('approved')
+                                                <p class="label-active">
+                                                    {{ $review->status }}
+                                                </p>
+                                                @break
+                                            @case('pending')
+                                                <p class="label-pending">
+                                                    {{ $review->status }}
+                                                </p>
+                                                @break
+                                            @case('disapproved')
+                                                <p class="label-cancelled">
+                                                    {{ $review->status }}
+                                                </p>
+                                                @break
+                                        @endswitch
                                     </div>
 
                                     <div class="flex flex-col gap-[6px]">

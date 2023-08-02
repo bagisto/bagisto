@@ -384,9 +384,8 @@ return [
             'invoice'                 => 'Invoice',
             'note'                    => 'Note',
             'set-default-success'     => 'Default Address Updated Successfully',
-            'address-delete-success'  => 'Address Deleted Successfully', 
-
-            
+            'address-delete-success'  => 'Address Deleted Successfully',
+            'note-created-success'    => 'Note Created Successfully',
         ],
        
         'groups' => [

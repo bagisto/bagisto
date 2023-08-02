@@ -339,7 +339,7 @@
                                                         id="default_address"
                                                         v-model="address_data.default_address"
                                                         :label="trans('admin::app.customers.addresses.edit.default-address')"
-                                                        :checked="(bool)$address->default_address"
+                                                        ::checked="address_data.default_address"
                                                     >
                                                     </x-admin::form.control-group.control>
 
@@ -405,6 +405,7 @@
 
                     update(params, {resetForm, setErrors,}) {
                         let addressId = params.address_id;
+
                         this.$axios.post(`{{ route('admin.customer.addresses.update', '') }}/${addressId}`, params, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
