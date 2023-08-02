@@ -15,11 +15,8 @@
                 :checked="isActive"
             >
 
-            <label 
-                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
-                :for="id"
-            >
-            </label>
+            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue">
+            </span>
 
             <div
                 class="text-[14px] text-gray-600 font-semibold cursor-pointer"
