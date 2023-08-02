@@ -720,6 +720,17 @@ return [
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
             ],
+
+            'edit' => [
+                'title'           => 'Edit Role',
+                'save-btn-title'  => 'Save Role',
+                'cancel-btn'      => 'Cancel',
+                'general'         => 'General',
+                'name'            => 'Name',
+                'description'     => 'Description',
+                'access-control'  => 'Access Control',
+                'permissions'     => 'Permissions',
+            ],
         ],
     ],
 
