@@ -1,69 +1,92 @@
-@extends('admin::layouts.anonymous-master')
+<x-admin::layouts.anonymous>
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.users.sessions.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.users.sessions.title') }}
-@stop
+    <div class="flex justify-center items-center h-[100vh]">
+        <div class="flex flex-col gap-[20px] items-center">
+            {{-- Logo --}}
+            <img 
+                class="w-max" 
+                src="{{ bagisto_asset('images/logo.png') }}" 
+                alt="Bagisto Logo"
+            >
 
-@section('content')
-
-    <div class="panel">
-
-        <div class="panel-content">
-
-            <div class="form-container" style="text-align: left">
-
-                <h1>{{ __('admin::app.users.sessions.title') }}</h1>
-
-                <form method="POST" action="{{ route('admin.session.store') }}" @submit.prevent="onSubmit">
-                    @csrf
-
-                    <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                        <label for="email">{{ __('admin::app.users.sessions.email') }}</label>
-                        <input type="text" v-validate="'required|email'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.sessions.email') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
+            <div class="flex flex-col bg-white border border-gray-300 rounded-[6px] box-shadow">
+                {{-- Login Form --}}
+                <x-shop::form :action="route('admin.session.store')">
+                    <div class="p-[16px]  ">
+                        <p class="text-[20px] text-gray-800 font-bold ">
+                            @lang('admin::app.users.sessions.title')
+                        </p>
                     </div>
 
-                    <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                        <label for="password">{{ __('admin::app.users.sessions.password') }}</label>
-                        <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value=""/>
+                    <div class="p-[16px] border-t-[1px] border-b-[1px] border-gray-300">
+                        <div class="mb-[10px]">
+                            {{-- Email --}}
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.users.sessions.email')
+                                </x-admin::form.control-group.label>
 
-                        <i refer="#password" class="rango-eye-visible toggle-password-icon" style="margin-left: -30px; cursor: pointer; vertical-align: sub;"></i>
+                                <x-admin::form.control-group.control
+                                    type="email"
+                                    name="email" 
+                                    id="email"
+                                    class="w-[252px] max-w-full" 
+                                    rules="required|email" 
+                                    :label="trans('admin::app.users.sessions.email')"
+                                    :placeholder="trans('admin::app.users.sessions.email')"
+                                >
+                                </x-admin::form.control-group.control>
 
-                        <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
+                                <x-admin::form.control-group.error
+                                    control-name="email"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </div>
+                        <div class="mb-[10px]">
+                            {{-- Password --}}
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.users.sessions.password')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="password"
+                                    name="password" 
+                                    id="password"
+                                    class="w-[252px] max-w-full" 
+                                    rules="required|min:6" 
+                                    :label="trans('admin::app.users.sessions.password')"
+                                    :placeholder="trans('admin::app.users.sessions.password')"
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="password"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </div>
                     </div>
-
-                    <div class="control-group">
-                        <a href="{{ route('admin.forget_password.create') }}">{{ __('admin::app.users.sessions.forget-password-link-title') }}</a>
+                    <div class="flex justify-between items-center p-[16px]">
+                        {{-- Forgot Password Link --}}
+                        <a 
+                            class="text-[12px] text-blue-600 font-semibold leading-[24px] cursor-pointer"
+                            href="{{ route('admin.forget_password.create') }}"
+                        >
+                            @lang('admin::app.users.sessions.forget-password-link')
+                        </a>
+                        <button 
+                            class="px-[14px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                            @lang('admin::app.users.sessions.submit-btn')
+                        </button>
                     </div>
-
-                    <div class="button-group">
-                        <button class="btn btn-xl btn-primary">{{ __('admin::app.users.sessions.submit-btn-title') }}</button>
-                    </div>
-                </form>
-
+                </x-shop::form>
             </div>
-
         </div>
-
     </div>
-
-@stop
-
-@push('javascript')
-    <script>
-        $(document).ready(function(){
-            $(".toggle-password-icon").click(function() {
-                $(this).toggleClass("rango-eye-visible rango-eye-hide");
-
-                var input = $($(this).attr("refer"));
-
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
-            $(":input[name=email]").focus();
-        });
-    </script>
-@endpush
+</x-admin::layouts.anonymous>

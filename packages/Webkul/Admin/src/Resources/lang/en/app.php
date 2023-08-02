@@ -1,6 +1,22 @@
 <?php
 
 return [
+    'account' => [
+        'edit' => [
+            'title'                => 'My Account',
+            'save-btn'             => 'Save Account',
+            'cancel-btn'           => 'cancel',
+            'general'              => 'General',
+            'profile-image'        => 'Profile Image',
+            'upload-image-info'    => 'Upload a Profile Image (100px X 100px) in PNG or JPG Format',
+            'name'                 => 'Name',
+            'email'                => 'Email',
+            'password'             => 'Password',
+            'confirm-password'     => 'Confirm Password',
+            'change-password'      => 'Change Account Password',
+            'current-password'     => 'Current Password',
+        ],
+    ],
 
     'promotions' => [
         'tab' => [
@@ -265,7 +281,6 @@ return [
         ],
     ],
 
-
     'sales'=> [
         'orders' => [
             'index' => [
@@ -469,16 +484,27 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'title' => 'Exchange Rates',
+                'create-btn'  => 'Create Exchange Rate',
+                'title'       => 'Exchange Rates',
+
+                'modal'  =>  [
+                    'create' => [
+                        'rate'             => 'Rate',
+                        'save-btn'         => 'Save',
+                        'source-currency'  => 'Source Currency',
+                        'target-currency'  => 'Target Currency',
+                        'title'            => 'Create Exchange Rate',
+                    ],
+                ],
             ],
 
-            'create' => [
-                'title'            => 'Create Exchange Rate',
-                'button-title'     => 'Add Exchange Rate',
-                'source-currency'  => 'Source Currency',
-                'target-currency'  => 'Target Currency',
+            'edit'  =>  [
+                'cancel-btn'       => 'Cancel',
                 'rate'             => 'Rate',
-                'save'             => 'Save',
+                'source-currency'  => 'Source Currency',
+                'save-btn'         => 'Save Exchange Rate',
+                'title'            => 'Edit Exchange Rates',
+                'target-currency'  => 'Target Currency',
             ],
         ],
 
@@ -721,6 +747,42 @@ return [
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
             ],
+
+            'edit' => [
+                'title'           => 'Edit Role',
+                'save-btn-title'  => 'Save Role',
+                'cancel-btn'      => 'Cancel',
+                'general'         => 'General',
+                'name'            => 'Name',
+                'description'     => 'Description',
+                'access-control'  => 'Access Control',
+                'permissions'     => 'Permissions',
+            ],
+        ],
+
+        'sessions' => [
+            'title'                      => 'Sign In',
+            'email'                      => 'Email',
+            'password'                   => 'Password',
+            'forget-password-link'       => 'Forget Password ?',
+            'submit-btn'                 => 'Sign In',
+        ],
+
+        'forget-password' => [
+            'page-title'                 => 'Forget Password',
+            'title'                      => 'Recover Password',
+            'email'                      => 'Registered Email',
+            'sign-in-link'               => 'Back to Sign In ?',
+            'submit-btn'                 => 'Reset Password',
+        ],
+
+        'reset-password' => [
+            'title'            => 'Reset Password',
+            'email'            => 'Registered Email',
+            'password'         => 'Password',
+            'confirm-password' => 'Confirm Password',
+            'back-link-title'  => 'Back to Sign In ?',
+            'submit-btn'       => 'Reset Password',
         ],
     ],
 
@@ -854,17 +916,16 @@ return [
 
         'categories'  => [
             'index' => [
-                'title' => 'Categories',
-                'add'   => 'Add',
+                'title'    => 'Categories',
+                'add-btn'  => 'Create Category',
             ],
 
             'create' => [
-                'add-new-category'         => 'Add New Category',
                 'add-logo'                 => 'Add Logo',
                 'add-banner'               => 'Add Banner',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
-                'cancel'                   => 'Cancel',
+                'cancel-btn'               => 'Cancel',
                 'company-name'             => 'Name*',
                 'create-btn'               => 'Create Category',
                 'description'              => 'Description',
@@ -887,8 +948,45 @@ return [
                 'seo-details'              => 'SEO Details',
                 'select-parent-category'   => 'Select Parent Category*',
                 'select-display-mode'      => 'Select Display Mode',
+                'title'                    => 'Add New Category',
                 'visible-in-menu'          => 'Visible In Menu',
             ],
+
+            'edit'  =>  [
+                'add-logo'                 => 'Add Logo',
+                'add-banner'               => 'Add Banner',
+                'banner'                   => 'Banner',
+                'banner-size'              => 'Banner aspect ration (1320px X 300px)',
+                'cancel-btn'               => 'Cancel',
+                'company-name'             => 'Name*',
+                'description'              => 'Description',
+                'description-and-images'   => 'Description and Images',
+                'description_only'         => 'Description Only',
+                'display-mode'             => 'Display Mode',
+                'enter-position'           => 'Enter Position',
+                'filterable-attributes'    => 'Filterable Attributes',
+                'general'                  => 'General',
+                'logo'                     => 'Logo',
+                'logo-size'                => 'Logo resolution should be (110px X 110px)',
+                'meta-description'         => 'Meta Description',
+                'meta-keywords'            => 'Meta Keywords',
+                'meta-title'               => 'Meta Title',
+                'position'                 => 'Position*',
+                'products_and_description' => 'Products and Description',
+                'products_only'            => 'Products Only',
+                'save-btn'                 => 'Save Category',
+                'slug'                     => 'Slug',
+                'settings'                 => 'Settings',
+                'seo-details'              => 'SEO Details',
+                'select-parent-category'   => 'Select Parent Category*',
+                'select-display-mode'      => 'Select Display Mode',
+                'title'                    => 'Edit Category', 
+                'visible-in-menu'          => 'Visible In Menu',
+            ],
+
+            'create-success'           => 'category created successfully.',
+            'update-success'           => 'category updated successfully.',
+            'delete-success'           => 'The category has been successfully deleted.',
         ],
 
         'families'   => [
@@ -1055,7 +1153,6 @@ return [
             'events' => [
                 'create'   => [
                     'title'          => 'Events',
-                    'add-title'      => 'Add Event',
                     'general'        => 'General',
                     'name'           => 'Name',
                     'description'    => 'Description',
@@ -1066,6 +1163,16 @@ return [
                 'index'  =>  [
                     'title'    => 'Events',
                     'create-btn'  => 'Create Event',
+                ],
+
+                'edit'  =>  [
+                    'title'        => 'Edit Events',
+                    'cancel-btn'   => 'Cancel',
+                    'general'      => 'General',
+                    'name'         => 'Name',
+                    'description'  => 'Description',
+                    'date'         => 'Date',
+                    'save-btn'     => 'Save Events',
                 ],
             ],
 
@@ -1421,21 +1528,6 @@ return [
         'file-name'        => 'File Name',
         'path'             => 'Path',
         'link-for-google'  => 'Link For Google',
-    ],
-
-    'account' => [
-        'title'                => 'My Account',
-        'save-btn-title'       => 'Save',
-        'general'              => 'General',
-        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
-        'remove-image'         => 'Remove Image',
-        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
-        'name'                 => 'Name',
-        'email'                => 'Email',
-        'password'             => 'Password',
-        'confirm-password'     => 'Confirm Password',
-        'change-password'      => 'Change Account Password',
-        'current-password'     => 'Current Password',
     ],
 
     // 'users' => [

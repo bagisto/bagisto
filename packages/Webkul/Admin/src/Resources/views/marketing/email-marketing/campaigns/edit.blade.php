@@ -48,7 +48,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                value="{{ old('name') ?: $campaign->name }}"
+                                :value="old('name') ?: $campaign->name"
                                 rules="required"
                                 class="mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.name') }}"
@@ -71,7 +71,7 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="subject"
-                                value="{{ old('subject') ?: $campaign->subject }}"
+                                :value="old('subject') ?: $campaign->subject"
                                 rules="required"
                                 class="mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.subject') }}"
@@ -98,6 +98,7 @@
                                 type="select"
                                 name="marketing_event_id"
                                 rules="required"
+                                :value="$selectedOption"
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.event') }}"
                             >
@@ -123,12 +124,13 @@
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.email-template')
                             </x-admin::form.control-group.label>
 
-                            @php $selectedOption = old('marketing_template_id') ?: $campaign->marketing_template_id @endphp
+                            @php $selectedOption = old('marketing_template_id') ?: $campaign->marketing_template_id; @endphp
 
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="marketing_template_id"
                                 rules="required"
+                                :value="$campaign->marketing_template_id"
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.email-template') }}"
                             >
@@ -160,6 +162,7 @@
                                 type="select"
                                 name="status"
                                 rules="required"
+                                :value="$campaign->status"
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.status') }}"
                             >
@@ -194,12 +197,13 @@
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.channel')
                             </x-admin::form.control-group.label>
 
-                            @php $selectedOption = old('channel_id') ?: $campaign->channel_id @endphp
+                            @php $selectedOption = old('channel_id') ?: $campaign->channel_id; @endphp
 
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="channel_id"
                                 rules="required"
+                                :value="$campaign->channel_id"
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.channel') }}"
                             >
@@ -219,7 +223,7 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        {{-- Email Template --}}
+                        {{-- Customer Group --}}
                         <x-admin::form.control-group class="mb-4">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.customer-group')
@@ -231,12 +235,13 @@
                                 type="select"
                                 name="customer_group_id"
                                 rules="required"
+                                :value="$campaign->customer_group_id"
                                 class="cursor-pointer mb-1"
                                 label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.customer-group') }}"
                             >
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                    <option 
-                                        value="{{ $customerGroup->id }}" 
+                                    <option
+                                        value="{{ $customerGroup->id }}"
                                         {{ $selectedOption == $customerGroup->id ? 'selected' : '' }}
                                     >
                                         {{ $customerGroup->name }}

@@ -96,7 +96,7 @@
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
-                                            type="text"
+                                            type="date"
                                             name="date"
                                             :value="old('date')"
                                             rules="required"

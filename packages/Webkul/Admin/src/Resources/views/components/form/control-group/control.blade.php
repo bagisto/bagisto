@@ -145,7 +145,7 @@
         </v-field>
 
         <label
-            class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-blue-600 cursor-pointer"
+            class="icon-uncheckbox text-[24px] peer-checked:icon-checked peer-checked:text-navyBlue cursor-pointer"
             {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
         </label>
@@ -211,16 +211,6 @@
             {{ $attributes }}
         >
         </x-admin::media>
-
-        @break
-
-    @case('tinymce')
-        <x-admin::tinymce
-            name="{{ $name }}"
-            {{ $attributes }}
-        >
-            {{ $slot }}
-        </x-admin::tinymce>
 
         @break
 

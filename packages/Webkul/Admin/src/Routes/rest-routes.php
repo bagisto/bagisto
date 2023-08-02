@@ -36,7 +36,5 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::put('', 'update')->name('admin.account.update');
     });
 
-    Route::get('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');
-
-
+    Route::delete('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');
 });
