@@ -115,7 +115,7 @@
                    
                     this.$axios.post("{{ route('admin.exchange_rates.store')  }}", params)
                         .then((response) => {
-                            this.$refs.customerCreateModal.toggle();
+                            this.$refs.customerCreateModal.close();
 
                             resetForm();
                         })

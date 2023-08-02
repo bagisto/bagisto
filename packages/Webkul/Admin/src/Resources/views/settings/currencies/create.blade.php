@@ -144,7 +144,7 @@
                         .then((response) => {
                             alert(response.data.data.message);
 
-                            this.$refs.currencyModal.toggle();
+                            this.$refs.currencyModal.close();
 
                             resetForm();
                         }).catch((error) =>{

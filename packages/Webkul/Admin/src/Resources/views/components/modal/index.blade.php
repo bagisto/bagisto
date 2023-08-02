@@ -36,7 +36,7 @@
     <script type="text/x-template" id="v-modal-template">
         <div>
             <div @click="toggle">
-                <slot name="toggle">
+                <slot name="close">
                 </slot>
             </div>
 
@@ -116,8 +116,30 @@
                 toggle() {
                     this.isOpen = ! this.isOpen;
 
+                    if (this.isOpen) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow ='scroll';
+                    }
+
                     this.$emit('toggle', { isActive: this.isOpen });
                 },
+
+                open() {
+                    this.isOpen = true;
+
+                    document.body.style.overflow = 'hidden';
+
+                    this.$emit('open', { isActive: this.isOpen });
+                },
+
+                close() {
+                    this.isOpen = false;
+
+                    document.body.style.overflow = 'auto';
+
+                    this.$emit('close', { isActive: this.isOpen });
+                }
             }
         });
     </script>

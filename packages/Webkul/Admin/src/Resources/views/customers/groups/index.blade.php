@@ -22,7 +22,7 @@
                     <button 
                         type="button"
                         class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                        @click="$refs.groupCreateModal.toggle()"
+                        @click="$refs.groupCreateModal.open()"
                     >
                     @lang('admin::app.customers.groups.index.modal.create.title')
                     </button>
@@ -114,7 +114,7 @@
                     create(params, { resetForm, setErrors  }) {
                         this.$axios.post("{{ route('admin.groups.store') }}", params)
                             .then((response) => {
-                                this.$refs.groupCreateModal.toggle();
+                                this.$refs.groupCreateModal.close();
 
                                 resetForm();
                             })

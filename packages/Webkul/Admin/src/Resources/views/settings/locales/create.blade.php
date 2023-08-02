@@ -148,7 +148,7 @@
                         .then((response) => {
                             alert(response.data.data.message);
 
-                            this.$refs.localeModal.toggle();
+                            this.$refs.localeModal.close();
                             
                             resetForm();
                             

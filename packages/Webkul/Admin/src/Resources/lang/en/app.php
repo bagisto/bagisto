@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'promotions' => [
         'tab' => [
             'catalog-rule-title' => 'Catalog Rules',
@@ -728,6 +727,7 @@ return [
             'index' => [
                 'title'      => 'Products',
                 'create-btn' => 'Create Product',
+
                 'create' => [
                     'title'                   => 'Create New Product',
                     'configurable-attributes' => 'Configurable Attributes',
@@ -766,7 +766,6 @@ return [
                         'discount-group-price-info' => 'For qty Qty at discount of :price',
                         'empty-info'                => 'Special pricing for customers belonging to a specific group.',
 
-
                         'create' => [
                             'create-title'   => 'Create Customer Group Price',
                             'update-title'   => 'Update Customer Group Price',
@@ -778,6 +777,58 @@ return [
                             'price'          => 'Price',
                             'delete-btn'     => 'Delete',
                             'save-btn'       => 'Save',
+                        ]
+                    ]
+                ],
+
+                'links' => [
+                    'related-title' => 'Related Products',
+                    'cross-title'   => 'Cross Sell Products',
+                    'upsell-title'  => 'Up Sell Products',
+                    'add-btn'       => 'Add Product',
+
+                    'search' => [
+                        'title'       => 'Select Products',
+                        'add-btn'     => 'Add Selected Product',
+                        'empty-title' => 'No products found',
+                        'empty-info'  => 'No products available for search term.',
+                    ]
+                ],
+
+                'types' => [
+                    'configurable' => [
+                        'title'             => 'Variations',
+                        'add-btn'           => 'Add Variant',
+                        'info'              => 'Variation products are depend on all possible combination of attribute.',
+                        'empty-title'       => 'Add Variant',
+                        'empty-info'        => 'To create various combination of product on a go.',
+                        'image-placeholder' => 'Product Image',
+                        'sku'               => 'SKU - :sku',
+                        'qty'               => ':qty Qty',
+                        'delete-btn'        => 'Delete',
+                        'edit-btn'          => 'Edit',
+
+                        'create'  => [
+                            'title'                  => 'Add Variant',
+                            'name'                   => 'Name',
+                            'description'            => 'Description',
+                            'save-btn'               => 'Add',
+                            'variant-already-exists' => 'This variant already exists'
+                        ],
+
+                        'edit' => [
+                            'title'           => 'Product',
+                            'save-btn'        => 'Save',
+                            'name'            => 'Name',
+                            'sku'             => 'SKU',
+                            'price'           => 'Price',
+                            'status'          => 'Status',
+                            'enabled'         => 'Enabled',
+                            'disabled'        => 'Disabled',
+                            'weight'          => 'Weight',
+                            'quantities'      => 'Quantities',
+                            'edit-info'       => 'If you want to update product information in detail, then go to the',
+                            'edit-link-title' => 'Product Details Page'
                         ]
                     ]
                 ]
