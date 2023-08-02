@@ -8,7 +8,10 @@
     <v-create-attributes></v-create-attributes>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-attributes-template">
+        <script
+            type="text/x-template"
+            id="v-create-attributes-template"
+        >
             <!-- Input Form -->
             <x-admin::form
                 :action="route('admin.catalog.attributes.store')"
@@ -35,6 +38,7 @@
                         </button>
                     </div>
                 </div>
+
                 <!-- body content -->
                 <div class="flex gap-[10px] mt-[14px]">
                     <!-- Left sub Component -->
@@ -101,7 +105,7 @@
                                 </p>
 
                                 <!-- Add Row Button -->
-                                <div 
+                                <div
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.addOptionsRow.toggle()"
                                 >
@@ -223,7 +227,12 @@
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0">
                                                         <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
-                                                        <input type="hidden" :name="'options[' + element.id + '][position]'" :value="index"/>
+
+                                                        <input
+                                                            type="hidden"
+                                                            :name="'options[' + element.id + '][position]'"
+                                                            :value="index"
+                                                        />
                                                     </x-admin::table.td>
 
                                                     <!-- Swatch Type Image / Color -->
@@ -241,10 +250,11 @@
 
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatch_type == 'color'">
-                                                            <div 
-                                                                class="w-[25px] h-[25px] mx-auto rounded-[5px]" 
+                                                            <div
+                                                                class="w-[25px] h-[25px] mx-auto rounded-[5px]"
                                                                 :style="{ background: element.params.swatch_value }"
-                                                            ></div>
+                                                            >
+                                                            </div>
                     
                                                             <input
                                                                 type="hidden"
@@ -336,7 +346,8 @@
                                                         <span
                                                             class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
                                                             @click="editModal(element.id)"
-                                                        ></span> 
+                                                        >
+                                                        </span> 
                                                     </x-admin::table.td>
                                                 </x-admin::table.tr>
                                             </template>
@@ -347,12 +358,12 @@
 
                             <!-- For Empty Attribute Options -->
                             <template v-else>
-                                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                                <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                     <!-- Attribute Option Image -->
                                     <img 
                                         class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
                                         src="{{ bagisto_asset('images/add-product-to-store.png') }}" 
-                                        alt="Add Attribute Oprions"
+                                        alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
                                     >
                                     <!-- Add Attribute Options Information -->
                                     <div class="flex flex-col items-center">
@@ -489,7 +500,7 @@
                                         @lang('admin::app.catalog.attributes.create.is_required')
                                     </div>
                                 </label>
-            
+
                                 <!-- Is Unique -->
                                 <label
                                     for="is_unique" 
