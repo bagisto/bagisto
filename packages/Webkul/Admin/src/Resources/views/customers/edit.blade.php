@@ -9,7 +9,7 @@
             >
                 <form @submit="handleSubmit($event, update)">
                     <!-- Customer Edit Modal -->
-                    <x-admin::modal ref="customerCreateModal">
+                    <x-admin::modal ref="customerEditModal">
                         <x-slot:toggle>
                             <!-- Customer Edit Button -->
                             @if (bouncer()->hasPermission('customers.customers.edit'))
@@ -37,6 +37,7 @@
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <div class="w-full">
+                                        <!--First Name -->
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.customers.edit.first-name')
@@ -60,6 +61,7 @@
                                         </x-admin::form.control-group>
                                     </div>
                                     <div class="w-full">
+                                        <!--Last Name -->
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.customers.edit.last-name')
@@ -83,7 +85,8 @@
                                         </x-admin::form.control-group>
                                     </div>
                                 </div>
-                                
+
+                                <!-- Email -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.edit.email')
@@ -105,7 +108,8 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-        
+
+                                <!-- Phone -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.edit.contact-number')
@@ -128,6 +132,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
         
+                                <!-- Date -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.edit.date-of-birth')
@@ -151,6 +156,7 @@
         
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <div class="w-full mb-[6px]">
+                                        <!-- Gender -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.customers.edit.gender')
@@ -188,7 +194,7 @@
                                         @php
                                             $selectedCustomerOption = !is_null($customer->customer_group_id) ? $customer->group->id : '';
                                         @endphp
-
+                                        <!-- Customer Group -->
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label>
                                                 @lang('admin::app.customers.edit.customer-group')
@@ -218,6 +224,7 @@
 
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <div class="w-full">
+                                        <!-- Customer Status -->
                                         <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
                                             <x-admin::form.control-group.control
                                                 type="checkbox"
@@ -243,6 +250,7 @@
                                         </x-admin::form.control-group>
                                     </div>
                                     <div class="w-full">
+                                        <!-- Customer Suspended Status -->
                                         <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
                                             <x-admin::form.control-group.control
                                                 type="checkbox"
@@ -298,7 +306,9 @@
                 
                     this.$axios.post("{{ route('admin.customer.update', $customer->id) }}", params)
                         .then((response) => {
-                            this.$refs.customerCreateModal.toggle();
+                            this.$refs.customerEditModal.toggle();
+
+                            window.location.reload();
 
                             resetForm();
                         })
