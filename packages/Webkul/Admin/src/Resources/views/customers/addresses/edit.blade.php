@@ -404,6 +404,10 @@
                 methods: {
 
                     update(params, {resetForm, setErrors,}) {
+                        if(! params.default_address) {
+                            delete params.default_address;
+                        }
+                   
                         let addressId = params.address_id;
 
                         this.$axios.post(`{{ route('admin.customer.addresses.update', '') }}/${addressId}`, params, {
