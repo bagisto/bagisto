@@ -825,18 +825,15 @@
                 },
 
                 methods: {
-
                     create(params, { resetForm, setErrors }) {
                         this.$axios.post('{{ route("admin.customer.addresses.store", $customer->id) }}', params,
                             {
                                 headers: {
                                 'Content-Type': 'multipart/form-data'
                                 }
-                            }
-                            )
-                        
+                            })
                             .then((response) => {
-                                this.$refs.addressCreateModal.toggle();
+                                this.$refs.addressCreateModal.close();
 
                                 resetForm();
                             })

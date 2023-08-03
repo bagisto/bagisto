@@ -1,52 +1,103 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    <!-- Title of the page -->
+    <x-slot:title>
+        @lang('admin::app.customers.groups.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.customers.groups.edit-title') }}
-@stop
+    {{-- Input Form --}}
+    <x-admin::form 
+        :action="route('admin.groups.update', $group->id)"
+        method="PUT"
+    >
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.customers.groups.edit.title')
+            </p>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.groups.update', $group->id) }}">
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.groups.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.customers.groups.edit.cancel-btn')
+                    </span>
+                </a>
 
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.groups.index') }}'"></i>
+                {{-- Save Button --}}
+                <button 
+                    type="submit" 
+                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.customers.groups.edit.save-btn')
+                </button>
+            </div>
+        </div>
 
-                        {{ __('admin::app.customers.groups.edit-title') }}
-                    </h1>
-                </div>
+        {{-- Informations --}}
+        <div class="flex gap-[10px] mt-[28px] mb-2">
+            <div class="flex flex-col gap-[8px] flex-1">
+                {{-- General Section --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.customers.groups.edit.general')
+                    </p>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.customers.groups.save-btn-title') }}
-                    </button>
+                    <div class="mb-[10px]">
+                        {{-- Code --}}
+                        <x-admin::form.control-group class="mb-4">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.customers.groups.edit.code')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="code"
+                                value="{{ old('code') ?: $group->code }}"
+                                rules="required"
+                                class="mb-1"
+                                label="{{ trans('admin::app.customers.groups.edit.code') }}"
+                                placeholder="{{ trans('admin::app.customers.groups.edit.code') }}"
+                                disabled
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="code"
+                                value="{{ $group->code }}"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error 
+                                control-name="code"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        {{-- Name --}}
+                        <x-admin::form.control-group class="mb-4">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.customers.groups.edit.name')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="name"
+                                value="{{ old('name') ?: $group->name }}"
+                                rules="required"
+                                class="mb-1"
+                                label="{{ trans('admin::app.customers.groups.edit.name') }}"
+                                placeholder="{{ trans('admin::app.customers.groups.edit.name') }}"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </div>
                 </div>
             </div>
-
-            <div class="page-content">
-
-                <div class="form-container">
-                    @csrf()
-
-                    <input name="_method" type="hidden" value="PUT">
-
-                    <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
-                        <label for="code" class="required">{{ __('admin::app.customers.groups.code') }}</label>
-                        <input type="text" v-validate="'required'" class="control" id="code" name="code" data-vv-as="&quot;{{ __('admin::app.customers.groups.code') }}&quot;" value="{{ old('code') ?: $group->code }}" disabled="disabled"/>
-                        <input type="hidden" name="code" value="{{ $group->code }}"/>
-                        <span class="control-error" v-if="errors.has('code')">@{{ errors.first('code') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                        <label for="name" class="required">
-                            {{ __('admin::app.customers.groups.name') }}
-                        </label>
-                        <input type="text" class="control" name="name" v-validate="'required'" value="{{ old('name') ?: $group->name }}" data-vv-as="&quot;{{ __('admin::app.customers.groups.name') }}&quot;">
-                        <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+        </div>
+    </x-admin::form>
+</x-admin::layouts>

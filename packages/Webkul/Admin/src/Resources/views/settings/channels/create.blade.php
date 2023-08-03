@@ -1,13 +1,13 @@
 <x-admin::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('admin::app.settings.channels.create.add-title')
+        @lang('admin::app.settings.channels.create.title')
     </x-slot:title>
 
     <x-admin::form  action="{{ route('admin.channels.store') }}" enctype="multipart/form-data">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.settings.channels.create.add-title')
+                @lang('admin::app.settings.channels.create.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
@@ -21,7 +21,7 @@
                     type="submit" 
                     class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                 >
-                    @lang('admin::app.settings.channels.create.save-btn-title')
+                    @lang('admin::app.settings.channels.create.save-btn')
                 </button>
             </div>
         </div>
@@ -134,6 +134,7 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="root_category_id"
+                                :value="old('root_category_id')"
                                 id="root_category_id"
                                 rules="required"
                                 :label="trans('admin::app.settings.channels.create.root-category')"
@@ -189,6 +190,7 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="theme"
+                                :value="old('theme')"
                                 id="theme"
                                 :label="trans('admin::app.settings.channels.create.theme')"
                             >
@@ -323,6 +325,7 @@
                                 name="seo_keywords"
                                 :value="old('seo_keywords') "
                                 id="seo_keywords"
+                                rules="required"
                                 :label="trans('admin::app.settings.channels.create.seo-keywords')"
                                 :placeholder="trans('admin::app.settings.channels.create.seo-keywords')"
                             >
@@ -388,6 +391,7 @@
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="default_locale_id"
+                                        :value="old('default_locale_id')"
                                         id="default_locale_id"
                                         rules="required"
                                         :label="trans('admin::app.settings.channels.create.default-locale')"
@@ -441,6 +445,7 @@
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="base_currency_id"
+                                        :value="old('base_currency_id')"
                                         id="base_currency_id"
                                         rules="required"
                                         :label="trans('admin::app.settings.channels.create.default-currency')"
@@ -484,6 +489,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="maintenance_mode_text"
+                                        :value="old('maintenance_mode_text')"
                                         id="maintenance-mode-text"
                                         :label="trans('admin::app.settings.channels.create.maintenance-mode-text')"
                                         :placeholder="trans('admin::app.settings.channels.create.maintenance-mode-text')"
@@ -504,6 +510,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="allowed_ips"
+                                        :value="old('allowed_ips')"
                                         id="allowed-ips"
                                         :label="trans('admin::app.settings.channels.create.allowed-ips')"
                                         :placeholder="trans('admin::app.settings.channels.create.allowed-ips')"
@@ -524,8 +531,9 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="is_maintenance_on"
-                                        value="1"
+                                        :value="1"
                                         id="maintenance-mode-status"
+                                        :checked="true"
                                     >
                                     </x-admin::form.control-group.control>
         

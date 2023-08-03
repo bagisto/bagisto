@@ -142,9 +142,9 @@
                 store(params, { resetForm, setErrors }) {
                     this.$axios.post('{{ route('admin.currencies.store') }}', params)
                         .then((response) => {
-                            alert(response.data.data.message);
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                            this.$refs.currencyModal.toggle();
+                            this.$refs.currencyModal.close();
 
                             resetForm();
                         }).catch((error) =>{

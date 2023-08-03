@@ -65,7 +65,7 @@ class TemplateController extends Controller
 
         Event::dispatch('marketing.templates.create.after', $template);
 
-        session()->flash('success', trans('admin::app.marketing.templates.create-success'));
+        session()->flash('success', trans('admin::app.marketing.email-marketing.templates.create.create-success'));
 
         return redirect()->route('admin.email_templates.index');
     }

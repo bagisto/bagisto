@@ -9,15 +9,6 @@ use Webkul\Admin\Http\Controllers\Controller;
 class AccountController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
@@ -44,9 +35,17 @@ class AccountController extends Controller
             'email'            => 'email|unique:admins,email,' . $user->id,
             'password'         => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
+            'image.*'          => 'nullable|mimes:bmp,jpeg,jpg,png,webp'
         ]);
 
-        $data = request()->input();
+        $data = request()->only([
+            'name',
+            'email',
+            'password',
+            'password_confirmation',
+            'current_password',
+            'image'
+        ]);
 
         if (! Hash::check($data['current_password'], $user->password)) {
             session()->flash('warning', trans('admin::app.users.users.password-match'));

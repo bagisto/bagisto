@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.catalog.categories.create.add-new-category')
+        @lang('admin::app.catalog.categories.create.title')
     </x-slot:title>
 
     {{-- Input Form --}}
@@ -11,14 +11,14 @@
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.catalog.categories.create.add-new-category')
+                @lang('admin::app.catalog.categories.create.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Cancel Button -->
                 <a href="{{ route('admin.catalog.categories.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.catalog.categories.create.cancel')
+                        @lang('admin::app.catalog.categories.create.cancel-btn')
                     </span>
                 </a>
 
@@ -61,44 +61,30 @@
                             name="name"
                             value="{{ old('name') }}"
                             class="w-full"
-                            label="Category Name"
-                            placeholder="Category Name"
+                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
+                            placeholder="{{ trans('admin::app.catalog.categories.create.company-name') }}"
                         >
                         </x-admin::form.control-group.control>
                     </x-admin::form.control-group>
 
                     <div class="mb-[10px]">
                         {{-- Parent category --}}
-                        <label
-                            class="block mb-[10px] text-[12px] text-gray-800 font-medium leading-[24px]"
-                            for="username"
-                        >
+                        <label class="block mb-[10px] text-[12px] text-gray-800 font-medium leading-[24px]">
                             @lang('admin::app.catalog.categories.create.select-parent-category')
                         </label>
 
                         {{-- Radio select button --}}
                         <div class="flex flex-col gap-[12px]">
-                            @foreach ($categories as $category)
-                                <label
-                                    for="{{ $category->id }}"
-                                    class="inline-flex items-center w-max px-[4px] text-gray-600 cursor-pointer select-none"
-                                >
-                                    <span class="icon-sort-right text-[24px]"></span>
-                                    <input
-                                        type="radio"
-                                        name="parent_id"
-                                        id="{{ $category->id }}"
-                                        class="hidden peer"
-                                        value="{{ old('parent_id')  ?? $category->id }}"
-                                    >
-
-                                    <span class="icon-radio-normal mr-[4px] text-[24px] rounded-[6px] cursor-pointer peer-checked:text-blue-600 peer-checked:icon-radio-selected peer-checked:text-navyBlue"></span>
-
-                                    <div class="text-[14px] cursor-pointer">
-                                        {{ $category->name }}
-                                    </div>
-                                </label>
-                            @endforeach
+                            <v-tree-view
+                                input-type="radio"
+                                name-field="parent_id"
+                                value-field="key"
+                                id-field="key"
+                                model-value='@json($categories)'
+                                items='@json($categories)'
+                                fallback-locale="{{ config('app.fallback_locale') }}"
+                            >
+                            </v-tree-view>
                         </div>
                     </div>
                 </div>
@@ -109,6 +95,7 @@
                         @lang('admin::app.catalog.categories.create.description-and-images')
                     </p>
 
+                    <!-- Description -->
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.catalog.categories.create.description')
@@ -410,4 +397,12 @@
             </div>
         </div>
     </x-admin::form>
+    {{-- v tree view --}}
+    @include('admin::tree.view')
+
+    {{-- v tree item --}}
+    @include('admin::tree.item')
+    
+    {{-- v tree radio --}}
+    @include('admin::tree.radio')
 </x-admin::layouts>

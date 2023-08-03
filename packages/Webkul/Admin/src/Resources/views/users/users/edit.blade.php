@@ -1,93 +1,194 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.users.users.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.users.users.edit-user-title') }}
-@stop
+    {{-- Input Form --}}
+    <x-admin::form :action="route('admin.users.update', $user->id)">
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.users.users.edit.title')
+            </p>
 
-@section('content')
-    <div class="content">
-        <form method="POST" action="{{ route('admin.users.update', $user->id) }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.users.index') }}'"></i>
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.users.index') }}">
+                    <span class="text-gray-600 leading-[24px]">
+                        @lang('admin::app.users.users.edit.cancel-btn')
+                    </span>
+                </a>
 
-                        {{ __('admin::app.users.users.edit-user-title') }}
-                    </h1>
-                </div>
+                {{-- Save Button --}}
+                <button 
+                    type="submit" 
+                    class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.users.users.edit.save-btn')
+                </button>
+            </div>
+        </div>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.users.users.save-btn-title') }}
-                    </button>
+        {{-- Informations --}}
+        <div class="flex gap-[10px] mt-[28px] mb-2">
+            <div class="flex flex-col gap-[8px] flex-1">
+                {{-- General Section --}}
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.users.users.edit.general')
+                    </p>
+
+                    <div class="mb-[10px]">
+                        <!-- Name -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.users.users.edit.name')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="text"
+                                name="name"
+                                id="name"
+                                value="{{ old('name') ?: $user->name }}"
+                                rules="required"
+                                :label="trans('admin::app.users.users.edit.name')" 
+                                :placeholder="trans('admin::app.users.users.edit.name')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="name"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <!-- Email -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.users.users.edit.email')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="email"
+                                name="email"
+                                id="email"
+                                value="{{ old('email') ?: $user->email }}"
+                                rules="required|email"
+                                label="{{ trans('admin::app.users.users.edit.email') }}"
+                                placeholder="email@example.com"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="email"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <!-- Password -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.users.users.edit.password')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="password"
+                                name="password"
+                                id="password"
+                                ref="password"
+                                rules="required|min:6"
+                                :label="trans('admin::app.users.users.edit.password')"
+                                :placeholder="trans('admin::app.users.users.edit.password')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="password"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <!-- Confirm Password -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.users.users.edit.confirm-password')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="password"
+                                name="password_confirmation"
+                                id="password_confirmation"
+                                rules="confirmed:@password"
+                                :label="trans('admin::app.users.users.edit.password')"
+                                :placeholder="trans('admin::app.users.users.edit.confirm-password')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="password_confirmation"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <!-- Role -->
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.users.users.edit.role')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="role_id"
+                                rules="required"
+                                :label="trans('admin::app.users.users.edit.role')"
+                                :placeholder="trans('admin::app.users.users.edit.role')"
+                            >
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                        {{ $role->name }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="role_id"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <!-- Status -->
+                        @if (auth()->guard('admin')->user()->id !== $user->id)
+                            <x-admin::form.control-group class="!mb-[0px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.users.users.edit.status')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="switch"
+                                    name="status"
+                                    value="{{ $user->status }}"
+                                    checked="{{ $user->status ? 'checked' : '' }}"
+                                    :checked="old('status') ?: $user->status"
+                                    
+                                >
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="status"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        @else
+                            <x-admin::form.control-group.control
+                                type="hidden"
+                                name="status"
+                                value="{{ $user->status }}"
+                            >
+                            </x-admin::form.control-group.control>
+                        @endif
+                    </div>
                 </div>
             </div>
-
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
-                    <input name="_method" type="hidden" value="PUT">
-
-                    <accordian title="{{ __('admin::app.users.users.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.users.users.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.users.users.name') }}&quot;" value="{{ $user->name }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                                <label for="email" class="required">{{ __('admin::app.users.users.email') }}</label>
-                                <input type="text" v-validate="'required|email'" class="control" id="email" name="email" data-vv-as="&quot;{{ __('admin::app.users.users.email') }}&quot;" value="{{ $user->email }}"/>
-                                <span class="control-error" v-if="errors.has('email')">@{{ errors.first('email') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    <accordian title="{{ __('admin::app.users.users.password') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                                <label for="password">{{ __('admin::app.users.users.password') }}</label>
-                                <input type="password" v-validate="'min:6|max:18'" class="control" id="password" name="password" ref="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
-                            </div>
-
-                            <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
-                                <label for="password_confirmation">{{ __('admin::app.users.users.confirm-password') }}</label>
-                                <input type="password" v-validate="'min:6|max:18|confirmed:password'" class="control" id="password_confirmation" name="password_confirmation" data-vv-as="&quot;{{ __('admin::app.users.users.confirm-password') }}&quot;"/>
-                                <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
-                            </div>
-                        </div>
-                    </accordian>
-
-                    <accordian title="{{ __('admin::app.users.users.status-and-role') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('role_id') ? 'has-error' : '']">
-                                <label for="role" class="required">{{ __('admin::app.users.users.role') }}</label>
-                                <select v-validate="'required'" class="control" name="role_id" data-vv-as="&quot;{{ __('admin::app.users.users.role') }}&quot;">
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                                <span class="control-error" v-if="errors.has('role_id')">@{{ errors.first('role_id') }}</span>
-                            </div>
-
-                            @if (auth()->guard('admin')->user()->id !== $user->id)
-                                <div class="control-group">
-                                    <label for="status">{{ __('admin::app.users.users.status') }}</label>
-
-                                    <label class="switch">
-                                        <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                            @else
-                                <input type="hidden" name="status" value="{{ $user->status }}">
-                            @endif
-                        </div>
-                    </accordian>
-                </div>
-            </div>
-        </form>
-    </div>
-@stop
+        </div>
+    </x-admin::form>
+</x-admin::layouts>

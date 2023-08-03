@@ -28,67 +28,16 @@
                                 type="submit" 
                                 class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.users.roles.create.save-btn-title')
+                                @lang('admin::app.users.roles.create.save-btn')
                             </button>
                         </div>
                     </div>
 
+                    <!-- body content -->
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                        <!-- Left sub-component -->
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                    @lang('admin::app.users.roles.create.general')
-                                </p>
-
-                                {{-- General Input Fields --}}
-                                <div class="mb-[10px]">
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.roles.create.name')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            value="{{ old('name') }}"
-                                            id="name"
-                                            rules="required"
-                                            :label="trans('admin::app.users.roles.create.name')"
-                                            :placeholder="trans('admin::app.users.roles.create.name')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="name"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.roles.create.description')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="textarea"
-                                            name="description"
-                                            :value="old('description')"
-                                            id="description"
-                                            rules="required"
-                                            :label="trans('admin::app.users.roles.create.description')"
-                                            :placeholder="trans('admin::app.users.roles.create.description')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="description"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </div>
-
-                            {{-- Access Control Input Fields --}}
+                            <!-- Access Control Input Fields -->
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                                     @lang('admin::app.users.roles.create.access-control')
@@ -108,8 +57,8 @@
                                             :placeholder="trans('admin::app.users.roles.create.permissions')"
                                             v-model="permission_type"
                                         >
-                                            <option value="custom">Custom</option>
-                                            <option value="all">All</option>
+                                            <option value="custom">@lang('admin::app.users.roles.create.custom')</option>
+                                            <option value="all">@lang('admin::app.users.roles.create.all')</option>
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
@@ -131,7 +80,68 @@
                                     >
                                     </v-tree-view>
                                 </div>
-
+                            </div>
+                        </div>
+                        <!-- Right sub-component -->
+                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                            <div class="bg-white rounded-[4px] box-shadow">
+                                <x-admin::accordion>
+                                    <x-slot:header>
+                                        <div class="flex items-center justify-between p-[6px]">
+                                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                                @lang('admin::app.users.roles.create.general')
+                                            </p>
+                                        </div>
+                                    </x-slot:header>
+                            
+                                    <x-slot:content>
+                                        <div class="mb-[10px]">
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label class="required">
+                                                    @lang('admin::app.users.roles.create.name')
+                                                </x-admin::form.control-group.label>
+        
+                                                <x-admin::form.control-group.control
+                                                    type="text"
+                                                    name="name"
+                                                    value="{{ old('name') }}"
+                                                    id="name"
+                                                    rules="required"
+                                                    :label="trans('admin::app.users.roles.create.name')"
+                                                    :placeholder="trans('admin::app.users.roles.create.name')"
+                                                >
+                                                </x-admin::form.control-group.control>
+        
+                                                <x-admin::form.control-group.error
+                                                    control-name="name"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        
+                                            <x-admin::form.control-group class="mb-[10px]">
+                                                <x-admin::form.control-group.label class="required">
+                                                    @lang('admin::app.users.roles.create.description')
+                                                </x-admin::form.control-group.label>
+        
+                                                <x-admin::form.control-group.control
+                                                    type="textarea"
+                                                    name="description"
+                                                    :value="old('description')"
+                                                    id="description"
+                                                    rules="required"
+                                                    :label="trans('admin::app.users.roles.create.description')"
+                                                    :placeholder="trans('admin::app.users.roles.create.description')"
+                                                >
+                                                </x-admin::form.control-group.control>
+        
+                                                <x-admin::form.control-group.error
+                                                    control-name="description"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        </div>
+                                    </x-slot:content>
+                                </x-admin::accordion>
                             </div>
                         </div>
                     </div>

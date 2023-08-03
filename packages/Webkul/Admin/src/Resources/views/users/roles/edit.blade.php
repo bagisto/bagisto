@@ -1,82 +1,183 @@
-@extends('admin::layouts.content')
+<x-admin::layouts>
 
-@section('page_title')
-    {{ __('admin::app.users.roles.edit-role-title') }}
-@stop
+    {{-- Page Title --}}
+    <x-slot:title>
+        @lang('admin::app.users.roles.edit.title')
+    </x-slot:title>
+    
+    {{-- Edit Role for  --}}
+    <v-edit-user-role></v-edit-user-role>
 
-@section('content')
-    <div class="content">
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-edit-user-role-template">
+            <div>
+                <x-admin::form 
+                    method="PUT" 
+                    :action="route('admin.roles.update', $role->id)"
+                >
+                <div class="flex justify-between items-center">
+                    <p class="text-[20px] text-gray-800 font-bold">
+                        @lang('admin::app.users.roles.edit.title')
+                    </p>
 
-        <form method="POST" action="{{ route('admin.roles.update', $role->id) }}" @submit.prevent="onSubmit">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.roles.index') }}'"></i>
+                    <div class="flex gap-x-[10px] items-center">
+                        <a href="{{ route('admin.roles.index') }}">
+                            <span class="text-gray-600 leading-[24px]">
+                                @lang('admin::app.users.roles.edit.cancel-btn')
+                            </span>
+                        </a>
 
-                        {{ __('admin::app.users.roles.edit-role-title') }}
-                    </h1>
+                        <button 
+                            type="submit" 
+                            class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        >
+                            @lang('admin::app.users.roles.edit.save-btn')
+                        </button>
+                    </div>
                 </div>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.users.roles.save-btn-title') }}
-                    </button>
-                </div>
-            </div>
+                <!-- body content -->
+                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                    <!-- Left sub-component -->
+                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                        <!-- Access Control Input Fields -->
+                        <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                            <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                @lang('admin::app.users.roles.edit.access-control')
+                            </p>
 
-            <div class="page-content">
-                <div class="form-container">
-                    @csrf()
+                            <div class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.roles.edit.permissions')
+                                    </x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="permission_type" 
+                                        id="permission_type"
+                                        :label="trans('admin::app.users.roles.edit.permissions')"
+                                        :placeholder="trans('admin::app.users.roles.edit.permissions')"
+                                        v-model="permission_type"
+                                    >
+                                        <option value="custom">@lang('admin::app.users.roles.edit.custom')</option>
+                                        <option value="all">@lang('admin::app.users.roles.edit.all')</option>
+                                    </x-admin::form.control-group.control>
 
-                    <input name="_method" type="hidden" value="PUT">
-
-                    <accordian title="{{ __('admin::app.users.roles.general') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
-                                <label for="name" class="required">{{ __('admin::app.users.roles.name') }}</label>
-                                <input type="text" v-validate="'required'" class="control" id="name" name="name" data-vv-as="&quot;{{ __('admin::app.users.roles.name') }}&quot;" value="{{ old('name') ?: $role->name }}"/>
-                                <span class="control-error" v-if="errors.has('name')">@{{ errors.first('name') }}</span>
+                                    <x-admin::form.control-group.error
+                                        control-name="permission_type"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
                             </div>
-
-                            <div class="control-group">
-                                <label for="description">{{ __('admin::app.users.roles.description') }}</label>
-                                <textarea class="control" id="description" name="description">{{ old('description') ?: $role->description }}</textarea>
+                            
+                            <!-- Tree structure -->
+                            <div 
+                                class="mb-[10px]"
+                                v-if="permission_type == 'custom'"
+                            >
+                                <v-tree-view 
+                                    value-field="key"
+                                    id-field="key"
+                                    items='@json($acl->items)'
+                                    value='@json($role->permissions)' 
+                                    fallback-locale="{{ config('app.fallback_locale') }}"
+                                >
+                                </v-tree-view>
                             </div>
                         </div>
-                    </accordian>
-
-                    <accordian title="{{ __('admin::app.users.roles.access-control') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group">
-                                <label for="permission_type">{{ __('admin::app.users.roles.permissions') }}</label>
-                                <select class="control" name="permission_type" id="permission_type">
-                                    <option value="custom" {{ $role->permission_type == 'custom' ? 'selected' : '' }}>{{ __('admin::app.users.roles.custom') }}</option>
-                                    <option value="all" {{ $role->permission_type == 'all' ? 'selected' : '' }}>{{ __('admin::app.users.roles.all') }}</option>
-                                </select>
-                            </div>
-
-                            <div class="control-group tree-wrapper {{ $role->permission_type == 'all' ? 'hide' : '' }}">
-                                <tree-view value-field="key" id-field="key" items='@json($acl->items)' value='@json($role->permissions)' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
-                            </div>
+                    </div>
+                    <!-- Right sub-component -->
+                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                        <div class="bg-white rounded-[4px] box-shadow">
+                            <x-admin::accordion>
+                                <x-slot:header>
+                                    <div class="flex items-center justify-between p-[6px]">
+                                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                            @lang('admin::app.users.roles.edit.general')
+                                        </p>
+                                    </div>
+                                </x-slot:header>
+                        
+                                <x-slot:content>
+                                    <div class="mb-[10px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.users.roles.edit.name')
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="name"
+                                                value="{{ old('name') ?: $role->name }}"
+                                                id="name"
+                                                rules="required"
+                                                :label="trans('admin::app.users.roles.edit.name')"
+                                                :placeholder="trans('admin::app.users.roles.edit.name')"
+                                            >
+                                            </x-admin::form.control-group.control>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="name"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.users.roles.edit.description')
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.control
+                                                type="textarea"
+                                                name="description"
+                                                value="{{ old('description') ?: $role->description }}"
+                                                id="description"
+                                                rules="required"
+                                                :label="trans('admin::app.users.roles.edit.description')"
+                                                :placeholder="trans('admin::app.users.roles.edit.description')"
+                                            >
+                                            </x-admin::form.control-group.control>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="description"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                </x-slot:content>
+                            </x-admin::accordion>
                         </div>
-                    </accordian>
+                    </div>
                 </div>
+                </x-admin::form>
             </div>
-        </form>
-    </div>
-@stop
+        </script>
 
-@push('scripts')
-    <script>
-        $(document).ready(function () {
-            $('#permission_type').on('change', function(e) {
-                if ($(e.target).val() == 'custom') {
-                    $('.tree-wrapper').removeClass('hide')
-                } else {
-                    $('.tree-wrapper').addClass('hide')
+        <script type="module">
+            app.component('v-edit-user-role', {
+                template: '#v-edit-user-role-template',
+
+                data() {
+                    return {
+                        permission_type: "{{ $role->permission_type }}"
+                    };
                 }
-
             })
-        });
-    </script>
-@endpush
+        </script>
+
+        {{-- v tree view --}}
+        @include('admin::tree.view')
+
+        {{-- v tree item --}}
+        @include('admin::tree.item')
+
+        {{-- v tree checkbox --}}
+        @include('admin::tree.item')
+
+        {{-- v tree checkbox --}}
+        @include('admin::tree.checkbox')
+
+        {{-- v tree radio --}}
+        @include('admin::tree.radio')
+    @endPushOnce
+</x-admin::layouts>

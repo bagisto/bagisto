@@ -6,7 +6,7 @@
 
         <a href="{{ route('admin.catalog.categories.create') }}">
             <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
-                @lang('admin::app.catalog.categories.index.add')
+                @lang('admin::app.catalog.categories.index.add-btn')
             </div>
         </a>
     </div>

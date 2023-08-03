@@ -61,7 +61,7 @@ class CustomerGroupController extends Controller
         Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
         return new JsonResource([
-            'message' => trans('admin::app.response.create-success'),
+            'message' => trans('admin::app.customers.groups.index.modal.create.create-success'),
         ]);
     }
 

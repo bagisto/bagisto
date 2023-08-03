@@ -1,10 +1,11 @@
 @props([
     'isActive' => false,
     'position' => 'right',
-    'width'    => '500',
+    'width'    => '500px',
 ])
 
 <v-drawer
+    {{ $attributes }}
     is-active="{{ $isActive }}"
     position="{{ $position }}"
     width="{{ $width }}"
@@ -23,7 +24,7 @@
 
     @isset($content)
         <template v-slot:content>
-            <div>
+            <div {{ $content->attributes->merge(['class' => 'p-[11px] overflow-auto flex-1 max-sm:px-[15px]']) }}>
                 {{ $content }}
             </div>
         </template>
@@ -31,7 +32,7 @@
 
     @isset($footer)
         <template v-slot:footer>
-            <div>
+            <div {{ $footer->attributes->merge(['class' => 'pb-[30px]']) }}>
                 {{ $footer }}
             </div>
         </template>
@@ -42,9 +43,8 @@
     <script type="text/x-template" id="v-drawer-template">
         <div>
             <!-- Toggler -->
-            <div @click="toggle">
+            <div @click="open">
                 <slot name="toggle">
-                    Default Toggle
                 </slot>
             </div>
 
@@ -60,7 +60,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 hidden bg-gray-500 bg-opacity-50 transition-opacity md:block z-[1]"
+                    class="fixed inset-0  bg-gray-500 bg-opacity-50 transition-opacity z-[10]"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -84,40 +84,31 @@
                         'inset-y-0 ltr:right-0 rtl:left-0': position == 'right',
                         'inset-y-0 ltr:left-0 rtl:right-0': position == 'left'
                     }"
-                    :style="'width:' + width + 'px'"
+                    :style="'width:' + width"
                     v-if="isOpen"
                 >
-                    <div class="bg-white h-full pointer-events-auto w-full overflow-auto">
+                    <div class="w-full h-full overflow-auto bg-white pointer-events-auto">
                         <div class="flex flex-col h-full w-full">
-                            <div class="overflow-auto flex-1 min-h-0 min-w-0">
-                                <div class="flex flex-col  h-full">
-                                    <div class="grid gap-y-[10px] p-[25px] pb-[20px]">
-                                        <div>
-                                            <slot name="header">
-                                                Default Header
-                                            </slot>
-                                        </div>
+                            <div class="flex-1 min-h-0 min-w-0 overflow-auto">
+                                <div class="flex flex-col h-full">
+                                    <div class="grid gap-y-[10px] p-[12px]  border-b-[1px] border-gray-300 max-sm:px-[15px]">
+                                        <!-- Content Slot -->
+                                        <slot name="header"></slot>
 
-                                        <div class="absolute top-5 ltr:right-5 rtl:left-5">
+                                        <div class="absolute top-4 ltr:right-3 rtl:left-3">
                                             <span
-                                                class="icon-cancel text-[30px] cursor-pointer"
-                                                @click="toggle"
+                                                class="icon-cross text-[30px] cursor-pointer"
+                                                @click="close"
                                             >
                                             </span>
                                         </div>
                                     </div>
 
-                                    <div class="px-[25px] overflow-auto flex-1">
-                                        <slot name="content">
-                                            Default Content
-                                        </slot>
-                                    </div>
+                                    <!-- Content Slot -->
+                                    <slot name="content"></slot>
 
-                                    <div class="pb-[30px]">
-                                        <slot name="footer">
-                                            Default Footer
-                                        </slot>
-                                    </div>
+                                    <!-- Footer Slot -->
+                                    <slot name="footer"></slot>
                                 </div>
                             </div>
                         </div>
@@ -131,12 +122,22 @@
         app.component('v-drawer', {
             template: '#v-drawer-template',
 
-            props: ['isActive', 'position', 'width'],
+            props: [
+                'isActive',
+                'position',
+                'width'
+            ],
 
             data() {
                 return {
                     isOpen: this.isActive,
                 };
+            },
+
+            watch: {
+                isActive: function(newVal, oldVal) {
+                    this.isOpen = newVal;
+                }
             },
 
             computed: {
@@ -157,7 +158,29 @@
                 toggle() {
                     this.isOpen = ! this.isOpen;
 
+                    if (this.isOpen) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow ='scroll';
+                    }
+
                     this.$emit('toggle', { isActive: this.isOpen });
+                },
+
+                open() {
+                    this.isOpen = true;
+
+                    document.body.style.overflow = 'hidden';
+
+                    this.$emit('open', { isActive: this.isOpen });
+                },
+
+                close() {
+                    this.isOpen = false;
+
+                    document.body.style.overflow = 'auto';
+
+                    this.$emit('close', { isActive: this.isOpen });
                 }
             },
         });

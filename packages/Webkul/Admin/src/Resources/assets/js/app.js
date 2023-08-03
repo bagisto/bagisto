@@ -115,7 +115,17 @@ window.app = createApp({
 import Axios from "./plugins/axios";
 import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
-[Axios, CreateElement, Emitter].forEach((plugin) => app.use(plugin));
+import Admin from "./plugins/admin";
+import debounce from "./plugins/debounce";
+
+window.debounce = debounce;
+[
+    Axios,
+    CreateElement,
+    Emitter,
+    Admin,
+    debounce
+].forEach((plugin) => app.use(plugin));
 
 /**
  * Global components registration;
