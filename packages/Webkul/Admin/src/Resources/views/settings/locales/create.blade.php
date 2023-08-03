@@ -146,13 +146,12 @@
                             }
                         })
                         .then((response) => {
-                            alert(response.data.data.message);
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                             this.$refs.localeModal.close();
                             
                             resetForm();
                             
-                            // Reset media uploadfile.
                             this.$refs.image.uploadedFiles = [];
                         }).catch((error) => {
                             if (error.response.status == 422) {

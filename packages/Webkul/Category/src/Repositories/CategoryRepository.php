@@ -106,7 +106,7 @@ class CategoryRepository extends Repository
         $category->update($data);
 
         $this->uploadImages($data, $category);
-        $this->uploadImages($data, $category, 'category_banner');
+        $this->uploadImages($data, $category, 'banner_path');
 
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);

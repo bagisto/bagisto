@@ -25,7 +25,7 @@
                         class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                         @click="$refs.customerCreateModal.open()"
                     >
-                        @lang('admin::app.users.users.index.modal.create.title')
+                        @lang('admin::app.users.users.index.create.title')
                     </button>
                 @endif
 
@@ -39,7 +39,7 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.users.users.index.modal.create.title')
+                                    @lang('admin::app.users.users.index.create.title')
                                 </p>    
                             </x-slot:header>
             
@@ -49,7 +49,7 @@
                                     <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.users.index.modal.create.name')
+                                            @lang('admin::app.users.users.index.create.name')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -57,8 +57,8 @@
                                             name="name"
                                             id="name"
                                             rules="required"
-                                            :label="trans('admin::app.users.users.index.modal.create.name')" 
-                                            :placeholder="trans('admin::app.users.users.index.modal.create.name')"
+                                            :label="trans('admin::app.users.users.index.create.name')" 
+                                            :placeholder="trans('admin::app.users.users.index.create.name')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -71,7 +71,7 @@
                                     <!-- Email -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.users.index.modal.create.email')
+                                            @lang('admin::app.users.users.index.create.email')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -79,7 +79,7 @@
                                             name="email"
                                             id="email"
                                             rules="required|email"
-                                            label="{{ trans('admin::app.users.users.index.modal.create.email') }}"
+                                            label="{{ trans('admin::app.users.users.index.create.email') }}"
                                             placeholder="email@example.com"
                                         >
                                         </x-admin::form.control-group.control>
@@ -93,7 +93,7 @@
                                     <!-- Password -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.users.index.modal.create.password')
+                                            @lang('admin::app.users.users.index.create.password')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -102,8 +102,8 @@
                                             id="password" 
                                             ref="password"
                                             rules="required|min:6"
-                                            :label="trans('admin::app.users.users.index.modal.create.password')"
-                                            :placeholder="trans('admin::app.users.users.index.modal.create.password')"
+                                            :label="trans('admin::app.users.users.index.create.password')"
+                                            :placeholder="trans('admin::app.users.users.index.create.password')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -116,7 +116,7 @@
                                     <!-- Confirm Password -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.users.index.modal.create.confirm-password')
+                                            @lang('admin::app.users.users.index.create.confirm-password')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -124,8 +124,8 @@
                                             name="password_confirmation"
                                             id="password_confirmation" 
                                             rules="confirmed:@password"
-                                            :label="trans('admin::app.users.users.index.modal.create.password')"
-                                            :placeholder="trans('admin::app.users.users.index.modal.create.confirm-password')"
+                                            :label="trans('admin::app.users.users.index.create.password')"
+                                            :placeholder="trans('admin::app.users.users.index.create.confirm-password')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -138,15 +138,15 @@
                                     <!-- Role -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.users.index.modal.create.role')
+                                            @lang('admin::app.users.users.index.create.role')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="role_id"
                                             rules="required"
-                                            :label="trans('admin::app.users.users.index.modal.create.role')"
-                                            :placeholder="trans('admin::app.users.users.index.modal.create.role')"
+                                            :label="trans('admin::app.users.users.index.create.role')"
+                                            :placeholder="trans('admin::app.users.users.index.create.role')"
                                         >
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}">
@@ -164,7 +164,7 @@
                                     <!-- Status -->
                                     <x-admin::form.control-group class="!mb-[0px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.users.users.index.modal.create.status')
+                                            @lang('admin::app.users.users.index.create.status')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -190,7 +190,7 @@
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        @lang('admin::app.users.users.index.modal.create.save-btn')
+                                        @lang('admin::app.users.users.index.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>
@@ -206,10 +206,11 @@
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
-                    
                         this.$axios.post("{{ route('admin.users.store') }}", params)
                             .then((response) => {
-                                this.$refs.customerCreateModal.open();
+                                this.$refs.customerCreateModal.close();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();
                             })

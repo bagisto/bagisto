@@ -359,13 +359,12 @@ class ProductController extends Controller
 
         foreach ($this->productRepository->getAll() as $product) {
             $results[] = [
-                'id'              => $product->id,
-                'sku'             => $product->sku,
-                'name'            => $product->name,
-                'price'           => $price = $product->getTypeInstance()->getFinalPrice(),
-                'formatted_price' => core()->currency($price),
-                'images'          => $product->images,
-                'inventories'     => $product->inventories,
+                'id'          => $product->id,
+                'sku'         => $product->sku,
+                'name'        => $product->name,
+                'price'       => $product->price,
+                'images'      => $product->images,
+                'inventories' => $product->inventories,
             ];
         }
 
