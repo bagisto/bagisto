@@ -59,7 +59,9 @@
                 leave-from-class="opacity-100 translate-y-0 md:scale-100"
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
-                <div class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen">
+                <div
+                    class="fixed inset-0 z-10 transform transition overflow-y-auto" v-show="isOpen"
+                >
                     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div class="w-full max-w-[595px] z-[999] absolute left-[50%] top-[50%] bg-[#F5F5F5] max-md:w-[90%] -translate-x-[50%] -translate-y-[50%]">
                             <div>
@@ -104,8 +106,26 @@
                 toggle() {
                     this.isOpen = ! this.isOpen;
 
+                    if (this.isOpen) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow ='scroll';
+                    }
+
                     this.$emit('toggle', { isActive: this.isOpen });
                 },
+
+                open() {
+                    this.isOpen = true;
+
+                    this.$emit('open', { isActive: this.isOpen });
+                },
+
+                close() {
+                    this.isOpen = false;
+
+                    this.$emit('close', { isActive: this.isOpen });
+                }
             }
         });
     </script>

@@ -3,6 +3,7 @@
 namespace Webkul\Product\Type;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 use Webkul\Admin\Validations\ConfigurableUniqueSku;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
 use Webkul\Product\DataTypes\CartItemValidationResult;
@@ -129,17 +130,17 @@ class Configurable extends AbstractType
             return $product;
         }
 
-        $super_attributes = [];
+        $superAttributes = [];
 
         foreach ($data['super_attributes'] as $attributeCode => $attributeOptions) {
             $attribute = $this->getAttributeByCode($attributeCode);
 
-            $super_attributes[$attribute->id] = $attributeOptions;
+            $superAttributes[$attribute->id] = $attributeOptions;
 
             $product->super_attributes()->attach($attribute->id);
         }
 
-        foreach (array_permutation($super_attributes) as $permutation) {
+        foreach (array_permutation($superAttributes) as $permutation) {
             $this->createVariant($product, $permutation);
         }
 
@@ -185,7 +186,7 @@ class Configurable extends AbstractType
 
                     $variantData['locale'] = $data['locale'];
 
-                    $variantData['tax_category_id'] = $data['tax_category_id'];
+                    $variantData['tax_category_id'] = $data['tax_category_id'] ?? null;
 
                     $this->updateVariant($variantData, $variantId);
                 }
@@ -209,19 +210,18 @@ class Configurable extends AbstractType
      */
     public function createVariant($product, $permutation, $data = [])
     {
-        if (! count($data)) {
-            $data = [
-                'sku'             => $product->sku . '-variant-' . implode('-', $permutation),
-                'name'            => '',
-                'inventories'     => [],
-                'price'           => 0,
-                'weight'          => 0,
-                'status'          => 1,
-                'tax_category_id' => '',
-            ];
-        }
-
-        $data = $this->fillRequiredFields($data);
+        $data = array_merge([
+            'sku'               => $sku = $product->sku . '-variant-' . implode('-', $permutation),
+            'name'              => 'Variant ' . implode(' ', $permutation),
+            'inventories'       => [],
+            'price'             => 0,
+            'weight'            => 0,
+            'status'            => 1,
+            'tax_category_id'   => '',
+            'url_key'           => $sku,
+            'short_description' => $sku,
+            'description'       => $sku,
+        ], $data);
 
         $typeOfVariants = 'simple';
 
@@ -423,25 +423,6 @@ class Configurable extends AbstractType
 
             $newVariant->save();
         }
-    }
-
-    /**
-     * Fill required fields.
-     *
-     * @param  array  $data
-     * @param  int  $id
-     * @return \Webkul\Product\Contracts\Product
-     */
-    public function fillRequiredFields(array $data): array
-    {
-        /**
-         * Name field is not present when variant is created so adding sku.
-         */
-        return array_merge($data, [
-            'url_key'           => $data['sku'],
-            'short_description' => $data['sku'],
-            'description'       => $data['sku'],
-        ]);
     }
 
     /**

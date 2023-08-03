@@ -527,6 +527,5 @@
             </x-admin::accordion>
         </div>
     </div>
-
 </x-admin::layouts>
     

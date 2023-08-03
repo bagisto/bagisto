@@ -7,20 +7,25 @@
     <v-create-taxrate></v-create-taxrate>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-taxrate-template">
+        <script
+            type="text/x-template"
+            id="v-create-taxrate-template"
+        >
             <x-admin::form :action="route('admin.tax_rates.store')">
                 <div class="flex justify-between items-center">
                     <p class="text-[20px] text-gray-800 font-bold">
                         @lang('admin::app.settings.taxes.tax-rates.create.title')
                     </p>
 
+                    <!-- Cancel Button -->
                     <div class="flex gap-x-[10px] items-center">
                         <a href="{{ route('admin.tax_rates.index') }}">
-                            <span class="text-gray-600 leading-[24px]">
+                            <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                 @lang('admin::app.settings.taxes.tax-rates.create.cancel-btn')
                             </span>
                         </a>
 
+                        <!-- Save Button -->
                         <button 
                             type="submit" 
                             class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -30,19 +35,20 @@
                     </div>
                 </div>
 
-                {{-- Tax Rates Informations --}}
+                <!-- Tax Rates Informations -->
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                    <!-- Left Component -->
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                         <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                             <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                @lang('admin::app.settings.taxes.tax-rates.create.title')
+                                @lang('admin::app.settings.taxes.tax-rates.create.general')
                             </p>
 
                             <div class="mb-[10px]">
-                                {{-- Identifier --}}
-                                <x-admin::form.control-group class="mb-4">
+                                <!-- Identifier -->
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.taxes.tax-rates.create.identifier')*
+                                        @lang('admin::app.settings.taxes.tax-rates.create.identifier')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -56,14 +62,13 @@
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        class="mt-1"
                                         control-name="identifier"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                {{-- Country --}}
-                                <x-admin::form.control-group class="mb-4">
+                                <!-- Country -->
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.tax-rates.create.country')
                                     </x-admin::form.control-group.label>
@@ -85,15 +90,14 @@
                                     </x-admin::form.control-group.control>
                     
                                     <x-admin::form.control-group.error
-                                        class="mt-1"
                                         control-name="country"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                     
-                                {{-- State --}}
+                                <!-- State -->
                                 <template v-if="haveStates()">
-                                    <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.taxes.tax-rates.create.state')
                                         </x-admin::form.control-group.label>
@@ -114,7 +118,7 @@
                                 </template>
 
                                 <template v-if="! haveStates()">
-                                    <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.taxes.tax-rates.create.state')
                                         </x-admin::form.control-group.label>
@@ -131,10 +135,10 @@
                                     </x-admin::form.control-group>
                                 </template>
 
-                                {{-- Tax Rate --}}
-                                <x-admin::form.control-group class="mb-4">
+                                <!-- Tax Rate -->
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.taxes.tax-rates.create.tax_rate')*
+                                        @lang('admin::app.settings.taxes.tax-rates.create.tax_rate')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -148,7 +152,6 @@
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        class="mt-1"
                                         control-name="tax_rate"
                                     >
                                     </x-admin::form.control-group.error>
@@ -156,20 +159,19 @@
                             </div>
                         </div>
                     </div>
-                
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                        <div class="bg-white rounded-[4px] box-shadow">
-                            <div class="flex items-center justify-between p-[6px]">
+
+                    <!-- Right Component -->
+                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
+                        <x-admin::accordion>
+                            <x-slot:header>
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.taxes.tax-rates.create.basic-settings')
+                                    @lang('admin::app.settings.taxes.tax-rates.create.settings')
                                 </p>
-
-                                <span class="icon-arrow-up p-[6px] text-[24px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                            </div>
-
-                            <div class="px-[16px] pb-[16px]">
-                                {{-- Enable Zip Range --}}
-                                <x-admin::form.control-group class="mb-4">
+                            </x-slot:header>
+                        
+                            <x-slot:content>
+                                <!-- Enable Zip Range -->
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.tax-rates.create.is_zip')
                                     </x-admin::form.control-group.label>
@@ -177,7 +179,7 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="is_zip"
-                                        :value="old('is_zip')"
+                                        :value="1"
                                         :label="trans('admin::app.settings.taxes.tax-rates.create.is_zip')"
                                         :placeholder="trans('admin::app.settings.taxes.tax-rates.create.is_zip')"
                                         v-model="is_zip"
@@ -190,10 +192,10 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                {{-- Zip Code --}}
+                                <!-- Zip Code -->
                                 <x-admin::form.control-group 
                                     v-if="! is_zip"
-                                    class="mb-4" 
+                                    class="mb-[10px]" 
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.taxes.tax-rates.create.zip_code')
@@ -215,10 +217,10 @@
                                 </x-admin::form.control-group>
 
                                 <div v-if="is_zip">
-                                    {{-- Zip From --}}
-                                    <x-admin::form.control-group class="mb-4">
+                                    <!-- Zip From -->
+                                    <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.taxes.tax-rates.create.zip_from')*
+                                            @lang('admin::app.settings.taxes.tax-rates.create.zip_from')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -232,16 +234,15 @@
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
-                                            class="mt-1"
                                             control-name="zip_from"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    {{-- Zip To --}}
-                                    <x-admin::form.control-group class="mb-4">
+                                    <!-- Zip To -->
+                                    <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.taxes.tax-rates.create.zip_to')*
+                                            @lang('admin::app.settings.taxes.tax-rates.create.zip_to')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -255,14 +256,13 @@
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
-                                            class="mt-1"
                                             control-name="zip_to"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
                                 </div>
-                            </div>
-                        </div>
+                            </x-slot:content>
+                        </x-admin::accordion>
                     </div>
                 </div>
             </x-admin::form>

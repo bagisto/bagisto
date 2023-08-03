@@ -21,6 +21,7 @@ use Webkul\Admin\Http\Resources\AttributeResource;
 use Webkul\Admin\DataGrids\ProductDataGrid;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Helpers\ProductType;
+use Webkul\Product\Facades\ProductImage;
 
 class ProductController extends Controller
 {
@@ -143,6 +144,11 @@ class ProductController extends Controller
         $categories = $this->categoryRepository->getCategoryTree();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => self::STATUS]);
+
+
+        if (request()->has('old')) {
+            return view('admin::catalog.products.edit_old', compact('product', 'categories', 'inventorySources'));
+        }
 
         return view('admin::catalog.products.edit', compact('product', 'categories', 'inventorySources'));
     }
@@ -353,9 +359,12 @@ class ProductController extends Controller
 
         foreach ($this->productRepository->getAll() as $product) {
             $results[] = [
-                'id'   => $product->id,
-                'sku'  => $product->sku,
-                'name' => $product->name,
+                'id'          => $product->id,
+                'sku'         => $product->sku,
+                'name'        => $product->name,
+                'price'       => $product->price,
+                'images'      => $product->images,
+                'inventories' => $product->inventories,
             ];
         }
 

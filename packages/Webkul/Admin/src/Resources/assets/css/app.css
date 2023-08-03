@@ -397,4 +397,8 @@
             background-position: 1250px 0;
         }
     }
+
+	.required:after {
+		content: '*';
+	}
 }
