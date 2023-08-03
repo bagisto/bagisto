@@ -1106,16 +1106,16 @@ return [
             'campaigns' => [
                 'create'    => [
                     'active'          => 'Active',
-                    'audience'        => 'Audience',
                     'cancel-btn'      => 'Cancel',
                     'customer-group'  => 'Customer Group',
                     'channel'         => 'Channel',
                     'email-template'  => 'Email Template',
                     'event'           => 'Event',
-                    'save-btn'        => 'Save',
                     'general'         => 'General',
                     'inactive'        => 'Inactive',
                     'name'            => 'Name',
+                    'save-btn'        => 'Save Campaign',
+                    'setting'         => 'Setting',
                     'status'          => 'Status',
                     'select-template' => 'Select Template',
                     'select-event'    => 'Select Event',
@@ -1135,7 +1135,7 @@ return [
                     'general'         => 'General',
                     'inactive'        => 'Inactive',
                     'name'            => 'Name',
-                    'save-btn'        => 'Save',
+                    'save-btn'        => 'Save Campaign',
                     'status'          => 'Status',
                     'select-template' => 'Select Template',
                     'select-event'    => 'Select Event',
@@ -1148,6 +1148,10 @@ return [
                     'title'          => 'Campaigns',
                     'create-btn'     => 'Create Campaign',
                 ],
+
+                'create-success' => 'Campaign created successfully.',
+                'update-success' => 'Campaign updated successfully.',
+                'delete-success' => 'Campaign deleted successfully',
             ],
 
             'events' => [

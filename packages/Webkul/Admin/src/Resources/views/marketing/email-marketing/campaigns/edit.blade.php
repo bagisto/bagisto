@@ -5,7 +5,7 @@
     </x-slot:title>
 
     {{-- Input Form --}}
-    <x-admin::form :action="route('admin.campaigns.store')">
+    <x-admin::form :action="route('admin.campaigns.update', $campaign->id)">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.marketing.email-marketing.campaigns.edit.title')
@@ -14,7 +14,7 @@
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.campaigns.index') }}">
-                    <span class="text-gray-600 leading-[24px]">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.marketing.email-marketing.campaigns.edit.cancel-btn')
                     </span>
                 </a>
@@ -31,7 +31,8 @@
 
         {{-- Informations --}}
         <div class="flex gap-[10px] mt-[28px] mb-2">
-            <div class="flex flex-col gap-[8px] flex-1">
+            {{-- Left Section --}}
+            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{-- General Section --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
@@ -40,7 +41,7 @@
 
                     <div class="mb-[10px]">
                         {{-- Name --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.name')
                             </x-admin::form.control-group.label>
@@ -50,9 +51,8 @@
                                 name="name"
                                 :value="old('name') ?: $campaign->name"
                                 rules="required"
-                                class="mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.name') }}"
-                                placeholder="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.name') }}"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.name')"
+                                :placeholder="trans('admin::app.marketing.email-marketing.campaigns.edit.name')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -63,7 +63,7 @@
                         </x-admin::form.control-group>
 
                         {{-- Subject --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.subject')
                             </x-admin::form.control-group.label>
@@ -73,9 +73,8 @@
                                 name="subject"
                                 :value="old('subject') ?: $campaign->subject"
                                 rules="required"
-                                class="mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.subject') }}"
-                                placeholder="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.subject') }}"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.subject')"
+                                :placeholder="trans('admin::app.marketing.email-marketing.campaigns.edit.subject')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -86,8 +85,7 @@
                         </x-admin::form.control-group>
 
                          {{-- Event --}}
-                         
-                         <x-admin::form.control-group class="mb-4">
+                         <x-admin::form.control-group class="mb-[10px]">
                              <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.event')
                             </x-admin::form.control-group.label>
@@ -100,7 +98,7 @@
                                 rules="required"
                                 :value="$selectedOption"
                                 class="cursor-pointer mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.event') }}"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.event')"
                             >
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
                                     <option 
@@ -119,7 +117,7 @@
                         </x-admin::form.control-group>
 
                         {{-- Email Template --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.email-template')
                             </x-admin::form.control-group.label>
@@ -130,9 +128,9 @@
                                 type="select"
                                 name="marketing_template_id"
                                 rules="required"
-                                :value="$campaign->marketing_template_id"
-                                class="cursor-pointer mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.email-template') }}"
+                                :value="$selectedOption"
+                                class="cursor-pointer"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.email-template')"
                             >
                                 @foreach ($templates as $template)
                                     <option 
@@ -149,50 +147,23 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-
-                        {{-- Status --}}
-                        <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.marketing.email-marketing.campaigns.edit.status')
-                            </x-admin::form.control-group.label>
-
-                            @php $selectedOption = old('status') ?: ($campaign->status == 1 ? 'true' : 'false')  @endphp
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="status"
-                                rules="required"
-                                :value="$campaign->status"
-                                class="cursor-pointer mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.status') }}"
-                            >
-                                @foreach (['active','inactive'] as $item)
-                                    <option
-                                        value="{{ $item == 'active' ? 1 : 0 }}"
-                                        {{ $selectedOption == $item ? "selected" : '' }}
-                                    >
-                                        @lang('admin::app.marketing.email-marketing.campaigns.edit.' . $item)
-                                    </option>
-                                @endforeach
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="status"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
                     </div>
                 </div>
+            </div>
 
-                {{-- Audience section --}}
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.marketing.email-marketing.campaigns.edit.audience')
-                    </p>
-
-                    <div class="mb-[10px]">
+             {{-- Right Section --}}
+             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-md:w-full">
+                {{-- Setting --}}
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                            @lang('admin::app.marketing.email-marketing.campaigns.create.setting')
+                        </p>
+                    </x-slot:header>
+                
+                    <x-slot:content>
                          {{-- Channel --}}
-                         <x-admin::form.control-group class="mb-4">
+                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.channel')
                             </x-admin::form.control-group.label>
@@ -203,9 +174,9 @@
                                 type="select"
                                 name="channel_id"
                                 rules="required"
-                                :value="$campaign->channel_id"
+                                :value="$selectedOption"
                                 class="cursor-pointer mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.channel') }}"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.channel')"
                             >
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
                                     <option
@@ -224,7 +195,7 @@
                         </x-admin::form.control-group>
 
                         {{-- Customer Group --}}
-                        <x-admin::form.control-group class="mb-4">
+                        <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.customer-group')
                             </x-admin::form.control-group.label>
@@ -237,7 +208,7 @@
                                 rules="required"
                                 :value="$campaign->customer_group_id"
                                 class="cursor-pointer mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.campaigns.edit.customer-group') }}"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.customer-group')"
                             >
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
                                     <option
@@ -254,8 +225,31 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-                    </div>
-                </div>
+
+                        {{-- Status --}}
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.marketing.email-marketing.campaigns.edit.status')
+                            </x-admin::form.control-group.label>
+
+                            @php $selectedOption = old('status') ?: $campaign->status; @endphp
+
+                            <x-admin::form.control-group.control
+                                type="switch"
+                                name="status"
+                                :value="1"
+                                :checked="(boolean) $selectedOption"
+                                :label="trans('admin::app.marketing.email-marketing.campaigns.edit.status')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="status"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+                    </x-slot:content>
+                </x-admin::accordion>
             </div>
         </div>
     </x-admin::form>
