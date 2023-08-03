@@ -97,7 +97,7 @@
                                     <x-slot:content>
                                         <div class="mb-[10px]">
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.users.roles.create.name')
                                                 </x-admin::form.control-group.label>
         
@@ -119,7 +119,7 @@
                                             </x-admin::form.control-group>
                                         
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.users.roles.create.description')
                                                 </x-admin::form.control-group.label>
         
