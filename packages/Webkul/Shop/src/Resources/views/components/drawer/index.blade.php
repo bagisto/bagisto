@@ -156,16 +156,28 @@
             },
 
             methods: {
+                toggle() {
+                    this.isOpen = ! this.isOpen;
+
+                    if (this.isOpen) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow ='scroll';
+                    }
+
+                    this.$emit('toggle', { isActive: this.isOpen });
+                },
+
                 open() {
                     this.isOpen = true;
 
-                    this.$emit('toggle', { isActive: this.isOpen });
+                    this.$emit('open', { isActive: this.isOpen });
                 },
 
                 close() {
                     this.isOpen = false;
 
-                    this.$emit('toggle', { isActive: this.isOpen });
+                    this.$emit('close', { isActive: this.isOpen });
                 }
             },
         });

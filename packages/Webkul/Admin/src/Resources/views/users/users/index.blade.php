@@ -23,7 +23,7 @@
                     <button
                         type="button"
                         class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                        @click="$refs.customerCreateModal.toggle()"
+                        @click="$refs.customerCreateModal.open()"
                     >
                         @lang('admin::app.users.users.index.create.title')
                     </button>
@@ -206,12 +206,11 @@
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
-                    
                         this.$axios.post("{{ route('admin.users.store') }}", params)
                             .then((response) => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$refs.customerCreateModal.close();
 
-                                this.$refs.customerCreateModal.toggle();
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();
                             })

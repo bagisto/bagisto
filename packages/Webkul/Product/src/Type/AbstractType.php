@@ -266,9 +266,9 @@ abstract class AbstractType
 
         $product->categories()->sync($data['categories']);
 
-        $product->up_sells()->sync($data['up_sell'] ?? []);
+        $product->up_sells()->sync($data['up_sells'] ?? []);
 
-        $product->cross_sells()->sync($data['cross_sell'] ?? []);
+        $product->cross_sells()->sync($data['cross_sells'] ?? []);
 
         $product->related_products()->sync($data['related_products'] ?? []);
 

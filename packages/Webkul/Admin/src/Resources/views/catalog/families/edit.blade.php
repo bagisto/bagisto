@@ -130,7 +130,7 @@
                         <!-- Add Group Button -->
                         <div
                             class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
-                            @click="$refs.addGroupModal.toggle()"
+                            @click="$refs.addGroupModal.open()"
                         >
                             @lang('admin::app.catalog.families.edit.add-group-btn')
                         </div>
@@ -472,7 +472,7 @@
 
                         resetForm();
 
-                        this.$refs.addGroupModal.toggle();
+                        this.$refs.addGroupModal.close();
                     },
                     
                     isGroupAlreadyExists(name) {
