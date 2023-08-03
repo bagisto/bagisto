@@ -16,26 +16,26 @@
             <div>
                 {{-- Navigation Menu --}}
                 @foreach ($menu->items as $menuItem)
-                  <div  class="group relative">
-                    <a href="{{ $menuItem['url'] }}" >
-                        <div class="flex justify-between p-[6px] my-[6px] hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100' }}">
-                            <div class="flex gap-[10px] items-center justify-center">
-                                <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
-                            
-                                <p class="text-gray-600 font-semibold {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
-                                    @lang($menuItem['name']) 
-                                </p>
-                            </div>
+                    <div  class="group relative">
+                        <a href="{{ $menuItem['url'] }}" >
+                            <div class="flex justify-between p-[6px] my-[6px] hover:rounded-[8px] {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100' }}">
+                                <div class="flex gap-[10px] items-center justify-center">
+                                    <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
+                                
+                                    <p class="text-gray-600 font-semibold {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
+                                        @lang($menuItem['name']) 
+                                    </p>
+                                </div>
 
-                            @if (count($menuItem['children']) || $menuItem['key'] == 'configuration' )
-                                <span
-                                    class="float-right {{ $menu->getActive($menuItem) == 'active' ? 'icon-sort-up text-white' : 'icon-sort-down text-gray' }}  text-[25px]"
-                                >
-                                </span>
-                            @endif
-                        </div>
-                    </a>
-                  </div>
+                                @if (count($menuItem['children']) || $menuItem['key'] == 'configuration' )
+                                    <span
+                                        class="float-right {{ $menu->getActive($menuItem) == 'active' ? 'icon-sort-up text-white' : 'icon-sort-down text-gray' }}  text-[25px]"
+                                    >
+                                    </span>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
 
                     @if ($menuItem['key'] != 'configuration')
                         <div 
