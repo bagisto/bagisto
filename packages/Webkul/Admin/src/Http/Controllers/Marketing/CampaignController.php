@@ -58,12 +58,13 @@ class CampaignController extends Controller
         $this->validate(request(), [
             'name'                  => 'required',
             'subject'               => 'required',
-            'status'                => 'required',
             'marketing_template_id' => 'required',
             'marketing_event_id'    => 'required_if:schedule_type,event',
         ]);
 
         Event::dispatch('marketing.campaigns.create.before');
+
+        request()['status'] = request()->input('status') ? request()->input('status') : 0;
 
         $campaign = $this->campaignRepository->create( request()->only([
             'name',
@@ -77,7 +78,7 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.create.after', $campaign);
 
-        session()->flash('success', trans('admin::app.marketing.campaigns.create-success'));
+        session()->flash('success', trans('admin::app.marketing.email-marketing.campaigns.create-success'));
 
         return redirect()->route('admin.campaigns.index');
     }
@@ -108,12 +109,13 @@ class CampaignController extends Controller
         $this->validate(request(), [
             'name'                  => 'required',
             'subject'               => 'required',
-            'status'                => 'required',
             'marketing_template_id' => 'required',
             'marketing_event_id'    => 'required_if:schedule_type,event',
         ]);
 
         Event::dispatch('marketing.campaigns.update.before', $id);
+
+        request()['status'] = request()->input('status') ? request()->input('status') : 0;
 
         $campaign = $this->campaignRepository->update(request()->only([
             'name',
@@ -127,7 +129,7 @@ class CampaignController extends Controller
 
         Event::dispatch('marketing.campaigns.update.after', $campaign);
 
-        session()->flash('success', trans('admin::app.marketing.campaigns.update-success'));
+        session()->flash('success', trans('admin::app.marketing.email-marketing.campaigns.update-success'));
 
         return redirect()->route('admin.campaigns.index');
     }
@@ -149,7 +151,7 @@ class CampaignController extends Controller
 
             Event::dispatch('marketing.campaigns.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.marketing.campaigns.delete-success')]);
+            return response()->json(['message' => trans('admin::app.marketing.email-marketing.campaigns.delete-success')]);
         } catch (\Exception $e) {
         }
 
