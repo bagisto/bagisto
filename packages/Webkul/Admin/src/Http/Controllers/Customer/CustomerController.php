@@ -90,7 +90,7 @@ class CustomerController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.customers.create-success'),
+            'message' => trans('admin::app.customers.index.create.create-success'),
         ]);
     }
 
@@ -145,7 +145,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.after', $customer);
 
-        session()->flash('success', trans('admin::app.customers.create-success'));
+        session()->flash('success', trans('admin::app.customers.index.edit.edit-success'));
 
         return redirect()->route('admin.customer.index');
     }

@@ -1,224 +1,196 @@
-@extends('admin::layouts.master')
+<x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.account.edit.title')
+    </x-slot:title>
 
-@section('page_title')
-    {{ __('admin::app.account.title') }}
-@stop
+    <x-admin::form 
+        :action="route('admin.account.update')"
+        enctype="multipart/form-data"
+        method="PUT"
+    >
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.account.edit.title')
+            </p>
 
-@section('content-wrapper')
-    <div class="content full-page">
-        <form
-            method="POST"
-            action=""
-            enctype="multipart/form-data"
-            @submit.prevent="onSubmit"
-        >
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>
-                        {{ __('admin::app.account.title') }}
-                    </h1>
-                </div>
+            <div class="flex gap-x-[10px] items-center">
+                 <!-- Cancel Button -->
+                 <a href="{{ route('admin.dashboard.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.account.edit.cancel-btn')
+                    </span>
+                </a>
 
-                <div class="page-action">
-                    <button type="submit" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.save') }}
+                <!-- Save Button -->
+                <div class="flex gap-x-[10px] items-center">
+                    <button 
+                        type="submit"
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    >
+                        {{-- @lang('admin::app.marketing.email-marketing.events.edit.save-btn') --}}
+                        @lang('admin::app.account.edit.save-btn')
                     </button>
                 </div>
             </div>
+        </div>
 
-            <div class="page-content">
+        <!-- Full Pannel -->
+        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <!-- General -->
+                <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.account.edit.general')
+                    </p>
 
-                <div class="form-container">
-                    @csrf()
+                    {{-- Image --}}
+                    <x-admin::form.control-group>
+                        <x-admin::form.control-group.control
+                            type="image"
+                            name="image"
+                            class="mb-0 !p-0 rounded-[12px] text-gray-700"
+                            :width="100"
+                            :height="100"
+                            :label="trans('admin::app.account.edit.profile-image')"
+                            :is-multiple="false"
+                            accepted-types="image/*"
+                            :src="isset($user) ? $user->image_url : ''"
+                        >
+                        </x-admin::form.control-group.control>
 
-                    <input name="_method" type="hidden" value="PUT">
+                        <x-admin::form.control-group.error
+                            control-name="image"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
 
-                    <accordian title="{{ __('admin::app.account.general') }}" :active="true">
-                        <div slot="body">
-                            <upload-profile-image></upload-profile-image>
+                    <p class="my-5 text-[14px] text-gray-400">
+                        @lang('admin::app.account.edit.upload-image-info')
+                    </p>
 
-                            <div
-                                class="control-group"
-                                :class="[errors.has('name') ? 'has-error' : '']"
-                            >
-                                <label for="name" class="required">
-                                    {{ __('admin::app.account.name') }}
-                                </label>
-                                
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="control"
-                                    id="name"
-                                    value="{{ old('name') ?: $user->name }}"
-                                    v-validate="'required'"
-                                    data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"
-                                />
+                    <!-- Name -->
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label class="!mt-0">
+                            @lang('admin::app.account.edit.name')
+                        </x-admin::form.control-group.label>
 
-                                <span class="control-error" v-if="errors.has('name')">
-                                    @{{ errors.first('name') }}
-                                </span>
-                            </div>
+                        <x-admin::form.control-group.control
+                            type="text"
+                            name="name"
+                            value="{{ old('name') ?: $user->name }}"
+                            rules="required"
+                            label="{{ trans('admin::app.account.edit.name') }}"
+                            placeholder="{{ trans('admin::app.account.edit.name') }}"
+                        >
+                        </x-admin::form.control-group.control>
 
-                            <div class="control-group" :class="[errors.has('email') ? 'has-error' : '']">
-                                <label for="email" class="required">
-                                    {{ __('admin::app.account.email') }}
-                                </label>
+                        <x-admin::form.control-group.error
+                            control-name="name"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
 
-                                <input
-                                    type="text"
-                                    name="email"
-                                    class="control"
-                                    id="email"
-                                    value="{{ old('email') ?: $user->email }}"
-                                    v-validate="'required|email'"
-                                    data-vv-as="&quot;{{ __('admin::app.account.email') }}&quot;"
-                                />
+                    <!-- Email -->
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.account.edit.email')
+                        </x-admin::form.control-group.label>
 
-                                <span class="control-error" v-if="errors.has('email')">
-                                    @{{ errors.first('email') }}
-                                </span>
-                            </div>
-                        </div>
-                    </accordian>
+                        <x-admin::form.control-group.control
+                            type="email"
+                            name="email"
+                            value="{{ old('email') ?: $user->email }}"
+                            rules="required"
+                            id="email"
+                            label="{{ trans('admin::app.account.edit.email') }}"
+                        >
+                        </x-admin::form.control-group.control>
 
-                    <accordian title="{{ __('admin::app.account.change-password') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                                <label for="password">
-                                    {{ __('admin::app.account.password') }}
-                                </label>
+                        <x-admin::form.control-group.error 
+                            control-name="email"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
+                </div>
 
-                                <input
-                                    type="password"
-                                    name="password"
-                                    class="control"
-                                    id="password"
-                                    ref="password"
-                                    v-validate="'min:6'"
-                                    data-vv-as="&quot;{{ __('admin::app.account.password') }}&quot;"
-                                />
+                <!-- Change Account Password -->
+                <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.account.edit.change-password')
+                    </p>
 
-                                <span class="control-error" v-if="errors.has('password')">
-                                    @{{ errors.first('password') }}
-                                </span>
-                            </div>
+                    <!-- Password -->
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label class="!mt-0">
+                            @lang('admin::app.account.edit.password')
+                        </x-admin::form.control-group.label>
 
-                            <div class="control-group" :class="[errors.has('password_confirmation') ? 'has-error' : '']">
-                                <label for="password_confirmation">
-                                    {{ __('admin::app.account.confirm-password') }}
-                                </label>
+                        <x-admin::form.control-group.control
+                            type="password"
+                            name="password"
+                            rules="min:6"
+                            ref="password"
+                            placeholder="{{ trans('admin::app.account.edit.password') }}"
+                        >
+                        </x-admin::form.control-group.control>
 
-                                <input
-                                    type="password"
-                                    name="password_confirmation"
-                                    class="control"
-                                    id="password_confirmation"
-                                    v-validate="'min:6|confirmed:password'"
-                                    data-vv-as="&quot;{{ __('admin::app.account.confirm-password') }}&quot;"
-                                />
+                        <x-admin::form.control-group.error
+                            control-name="password"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
 
-                                <span class="control-error" v-if="errors.has('password_confirmation')">
-                                    @{{ errors.first('password_confirmation') }}
-                                </span>
-                            </div>
-                        </div>
-                    </accordian>
+                    <!-- Confirm Password -->
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.account.edit.confirm-password')
+                        </x-admin::form.control-group.label>
 
-                    <accordian title="{{ __('admin::app.account.current-password') }}" :active="true">
-                        <div slot="body">
-                            <div class="control-group" :class="[errors.has('current_password') ? 'has-error' : '']">
-                                <label for="current_password" class="required">
-                                    {{ __('admin::app.account.current-password') }}
-                                </label>
+                        <x-admin::form.control-group.control
+                            type="password"
+                            name="password_confirmation"
+                            rules="confirmed:@password"
+                            label="{{ trans('admin::app.account.edit.confirm-password') }}"
+                            placeholder="{{ trans('admin::app.account.edit.confirm-password') }}"
+                        >
+                        </x-admin::form.control-group.control>
 
-                                <input
-                                    type="password"
-                                    name="current_password"
-                                    class="control"
-                                    id="current_password"
-                                    v-validate="'required|min:6'"
-                                    data-vv-as="&quot;{{ __('admin::app.account.current-password') }}&quot;"
-                                />
+                        <x-admin::form.control-group.error 
+                            control-name="password_confirmation"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
+                </div>
 
-                                <span class="control-error" v-if="errors.has('current_password')">
-                                    @{{ errors.first('current_password') }}
-                                </span>
-                            </div>
-                        </div>
-                    </accordian>
+                <!-- Current Password -->
+                <div class="p-[16px] bg-white box-shadow rounded-[4px]">
+                    <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
+                        @lang('admin::app.account.edit.current-password')
+                    </p>
+
+                    <!-- Current Password -->
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label class="!mt-0">
+                            @lang('admin::app.account.edit.current-password')
+                        </x-admin::form.control-group.label>
+
+                        <x-admin::form.control-group.control
+                            type="password"
+                            name="current_password"
+                            rules="required|min:6"
+                            label="{{ trans('admin::app.account.edit.current-password') }}"
+                            placeholder="{{ trans('admin::app.account.edit.current-password') }}"
+                        >
+                        </x-admin::form.control-group.control>
+
+                        <x-admin::form.control-group.error
+                            control-name="current_password"
+                        >
+                        </x-admin::form.control-group.error>
+                    </x-admin::form.control-group>
                 </div>
             </div>
-        </form>
-    </div>
-@stop
-
-@push('scripts')
-    <script type="text/x-template" id="upload-profile-image-template">
-        <div class="form-group" style="margin-bottom: 40px;">
-            <div class="image-upload-brick">
-                <input
-                    type="file"
-                    name="image"
-                    id="upload-profile"
-                    ref="imageInput"
-                    @change="addImageView($event)"
-                />
-
-                <i class="icon upload-icon"></i>
-
-                <img class="preview" :src="imageData" v-if="imageData.length > 0">
-            </div>
-
-            <div class="image-info-brick">
-                <span class="field-info">
-                    {{ __('admin::app.account.upload-image-info') }}
-                </span>
-            </div>
-
-            @if ($user->image_url)
-                <div style="margin-top: 10px;">
-                    <input type="checkbox" name="remove_image"/>
-
-                    <label for="remove" class="">
-                        {{ __('admin::app.account.remove-image') }}
-                    </label>
-                </div>      
-            @endif
         </div>
-    </script>
-
-    <script>
-        Vue.component('upload-profile-image', {
-            template: '#upload-profile-image-template',
-
-            data: function() {
-                return {
-                    imageData: "{{ $user->image_url }}",
-                }
-            },
-
-            methods: {
-                addImageView () {
-                    var imageInput = this.$refs.imageInput;
-
-                    if (imageInput.files && imageInput.files[0]) {
-                        if (imageInput.files[0].type.includes('image/')) {
-                            var reader = new FileReader();
-
-                            reader.onload = (e) => {
-                                this.imageData = e.target.result;
-                            }
-
-                            reader.readAsDataURL(imageInput.files[0]);
-                        } else {
-                            imageInput.value = '';
-
-                            alert('{{ __('admin::app.account.image-upload-message') }}');
-                        }
-                    }
-                }
-            }
-        });
-    </script>
-@endpush
+    </x-admin::form>
+</x-admin::layouts>
