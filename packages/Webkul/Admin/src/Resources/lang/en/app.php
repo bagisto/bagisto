@@ -550,14 +550,14 @@ return [
                 ],
 
                 'create' => [
-                    'add-title'        => 'Create Tax Category',
+                    'create-title'     => 'Create Tax Category',
                     'cancel-btn'       => 'Cancel',
                     'code'             => 'Code',
                     'description'      => 'Description',
                     'general'          => 'Tax Category',
                     'name'             => 'Name',
-                    'save-btn-title'   => 'Save Tax Category',
-                    'select-tax-rates' => 'Select Tax Rates',
+                    'save-btn'         => 'Save Tax Category',
+                    'tax-rates'        => 'Tax Rates',
                     'title'            => 'Tax Categories',
                 ],
 
@@ -712,7 +712,7 @@ return [
                     'confirm-password' => 'Confirm Password',
                     'role'             => 'Role',
                     'status'           => 'Status',
-                    'save-btn'         => 'Save User',  
+                    'save-btn'         => 'Save User',
                     'create-success'   => 'User created successfully.',
                 ],
             ],
@@ -727,7 +727,7 @@ return [
                 'confirm-password' => 'Confirm Password',
                 'role'             => 'Role',
                 'status'           => 'Status',
-                'save-btn'         => 'Save User',        
+                'save-btn'         => 'Save User',    
                 'update-success'   => 'User updated successfully.',
             ],
         ],
@@ -747,6 +747,8 @@ return [
                 'description'     => 'Description',
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
+                'custom'          => 'Custom',
+                'all'             => 'All', 
             ],
 
             'edit' => [
@@ -758,6 +760,8 @@ return [
                 'description'     => 'Description',
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
+                'custom'          => 'Custom',
+                'all'             => 'All',     
             ],
         ],
 

@@ -57,8 +57,8 @@
                                             :placeholder="trans('admin::app.users.roles.create.permissions')"
                                             v-model="permission_type"
                                         >
-                                            <option value="custom">Custom</option>
-                                            <option value="all">All</option>
+                                            <option value="custom">@lang('admin::app.users.roles.create.custom')</option>
+                                            <option value="all">@lang('admin::app.users.roles.create.all')</option>
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
