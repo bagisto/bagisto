@@ -703,8 +703,9 @@ return [
         'users' => [    
             'index' => [    
                 'title' => 'Users',
+
                 'create'  =>  [
-                    'title'            => 'Create New User',
+                    'title'            => 'Create User',
                     'name'             => 'Name',
                     'email'            => 'Email',
                     'password'         => 'Password',
@@ -734,12 +735,12 @@ return [
         'roles' => [
             'index' => [
                 'title'             => 'Roles',
-                'add-btn-title'     => 'Create Role',
+                'create-btn'        => 'Create Role',
             ],
 
             'create' => [
                 'title'           => 'Create Role',
-                'save-btn-title'  => 'Save Role',
+                'save-btn'        => 'Save Role',
                 'cancel-btn'      => 'Cancel',
                 'general'         => 'General',
                 'name'            => 'Name',
@@ -750,7 +751,7 @@ return [
 
             'edit' => [
                 'title'           => 'Edit Role',
-                'save-btn-title'  => 'Save Role',
+                'save-btn'        => 'Save Role',
                 'cancel-btn'      => 'Cancel',
                 'general'         => 'General',
                 'name'            => 'Name',
