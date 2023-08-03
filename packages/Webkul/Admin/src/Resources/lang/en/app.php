@@ -584,14 +584,15 @@ return [
                 ],
 
                 'create'  => [
-                    'basic-settings' => 'Basic Settings',
                     'country'        => 'Country',
                     'cancel-btn'     => 'Cancel',
+                    'general'        => 'General',
                     'is_zip'         => 'Enable Zip Range',
                     'identifier'     => 'Identifier',
                     'select-country' => 'Select Country',
                     'select-state'   => 'Select State',
                     'save-btn'       => 'Save Tax Rate',
+                    'settings'       => 'Settings',
                     'state'          => 'State',
                     'title'          => 'Create Tax Rate',
                     'tax_rate'       => 'Rate',
