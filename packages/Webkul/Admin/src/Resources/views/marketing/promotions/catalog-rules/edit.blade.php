@@ -82,68 +82,6 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
-                                <div class="mb-[10px]">
-                                    <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
-                                            @lang('admin::app.promotions.catalog-rules.edit.channels')
-                                        </p>
-                                        
-                                        @php($selectedOptionIds = old('channels') ?: $catalogRule->channels->pluck('id')->toArray())
-                                        
-                                        @foreach(core()->getAllChannels() as $channel)
-                                            <label
-                                                class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                                for="channel_{{ $channel->id }}"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    name="channels[]"
-                                                    value="{{ $channel->id }}"
-                                                    id="channel_{{ $channel->id }}"
-                                                    class="hidden peer"
-                                                    {{ in_array($channel->id, $selectedOptionIds) ? 'checked' : '' }}
-                                                >
-                                                
-                                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                                
-                                                <p class="text-gray-600 font-semibold cursor-pointer">
-                                                    {{ core()->getChannelName($channel) }}
-                                                </p>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('admin::app.promotions.catalog-rules.edit.customer-groups')
-                                    </p>
-                                    
-                                    @php($selectedOptionIds = old('customer_groups') ?: $catalogRule->customer_groups->pluck('id')->toArray())
-
-                                    @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                        <label
-                                            class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                            for="customer_group_{{ $customerGroup->id }}"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                name="customer_groups[]"
-                                                id="customer_group_{{ $customerGroup->id }}"
-                                                value="{{ $customerGroup->id }}"
-                                                {{ in_array($customerGroup->id, $selectedOptionIds) ? 'checked' : '' }}
-                                                class="hidden peer"
-                                            >
-                                            
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                            
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
-                                                {{ $customerGroup->name }}
-                                            </p>
-                                        </label>
-                                    @endforeach
-                                </div>
                             </div>
         
                             {{-- Conditions --}}
@@ -328,6 +266,89 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.promotions.catalog-rules.edit.priority')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            :value="old('sort_order') ?? $catalogRule->sort_order"
+                                            id="sort_order"
+                                            :label="trans('admin::app.promotions.catalog-rules.edit.priority')"
+                                            :placeholder="trans('admin::app.promotions.catalog-rules.edit.priority')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <div class="mb-[10px]">
+                                        <div class="mb-[10px]">
+                                            <p class="block leading-[24px] text-gray-800 font-medium">
+                                                @lang('admin::app.promotions.catalog-rules.edit.channels')
+                                            </p>
+                                            
+                                            @php($selectedOptionIds = old('channels') ?: $catalogRule->channels->pluck('id')->toArray())
+                                            
+                                            @foreach(core()->getAllChannels() as $channel)
+                                                <label
+                                                    class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
+                                                    for="channel_{{ $channel->id }}"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        name="channels[]"
+                                                        value="{{ $channel->id }}"
+                                                        id="channel_{{ $channel->id }}"
+                                                        class="hidden peer"
+                                                        {{ in_array($channel->id, $selectedOptionIds) ? 'checked' : '' }}
+                                                    >
+                                                    
+                                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                                    
+                                                    <p class="text-gray-600 font-semibold cursor-pointer">
+                                                        {{ core()->getChannelName($channel) }}
+                                                    </p>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.catalog-rules.edit.customer-groups')
+                                        </p>
+                                        
+                                        @php($selectedOptionIds = old('customer_groups') ?: $catalogRule->customer_groups->pluck('id')->toArray())
+
+                                        @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                            <label
+                                                class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
+                                                for="customer_group_{{ $customerGroup->id }}"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    name="customer_groups[]"
+                                                    id="customer_group_{{ $customerGroup->id }}"
+                                                    value="{{ $customerGroup->id }}"
+                                                    {{ in_array($customerGroup->id, $selectedOptionIds) ? 'checked' : '' }}
+                                                    class="hidden peer"
+                                                >
+                                                
+                                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                                
+                                                <p class="text-gray-600 font-semibold cursor-pointer">
+                                                    {{ $customerGroup->name }}
+                                                </p>
+                                            </label>
+                                        @endforeach
+                                    </div>
+
                                     <label
                                         for="status"
                                         class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
@@ -349,27 +370,6 @@
                                             @lang('admin::app.promotions.catalog-rules.edit.status')
                                         </div>
                                     </label>
-
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.promotions.catalog-rules.edit.priority')
-                                        </x-admin::form.control-group.label>
-
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="sort_order"
-                                            :value="old('sort_order') ?? $catalogRule->sort_order"
-                                            id="sort_order"
-                                            :label="trans('admin::app.promotions.catalog-rules.edit.priority')"
-                                            :placeholder="trans('admin::app.promotions.catalog-rules.edit.priority')"
-                                        >
-                                        </x-admin::form.control-group.control>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="sort_order"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
                                 </x-slot:content>
                             </x-admin::accordion>
                                 

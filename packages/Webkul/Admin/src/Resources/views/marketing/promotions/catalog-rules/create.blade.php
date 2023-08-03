@@ -83,63 +83,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="mb-[10px]">
-                                    <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
-                                            @lang('admin::app.promotions.catalog-rules.create.channels')
-                                        </p>
-                                        
-                                        @foreach(core()->getAllChannels() as $channel)
-                                            <label
-                                                class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                                for="channel_{{ $channel->id }}"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    name="channels[]"
-                                                    id="channel_{{ $channel->id }}"
-                                                    value="{{ $channel->id }}"
-                                                    {{ in_array($channel->id, old('channels[]', [])) ? 'checked' : '' }}
-                                                    class="hidden peer"
-                                                >
-                                                
-                                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                                
-                                                <p class="text-gray-600 font-semibold cursor-pointer">
-                                                    {{ core()->getChannelName($channel) }}
-                                                </p>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('admin::app.promotions.catalog-rules.create.customer-groups')
-                                    </p>
-                                    
-                                    @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                        <label
-                                            class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                            for="customer_group_{{ $customerGroup->id }}"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                name="customer_groups[]"
-                                                id="customer_group_{{ $customerGroup->id }}"
-                                                value="{{ $customerGroup->id }}"
-                                                {{ in_array($customerGroup->id, old('customer_groups[]', [])) ? 'checked' : '' }}
-                                                class="hidden peer"
-                                            >
-                                            
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                            
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
-                                                {{ $customerGroup->name }}
-                                            </p>
-                                        </label>
-                                    @endforeach
-                                </div>
+                          
                             </div>
         
                             {{-- Conditions --}}
@@ -319,27 +263,6 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <label
-                                        for="checkbox"
-                                        class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            class="hidden peer"
-                                            id="checkbox"
-                                            name="status"
-                                            value="1"
-                                        >
-
-                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                        <div
-                                            class="text-[14px] text-gray-600 font-semibold cursor-pointer"
-                                        >
-                                            @lang('admin::app.promotions.catalog-rules.create.status')
-                                        </div>
-                                    </label>
-
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.promotions.catalog-rules.create.priority')
@@ -360,6 +283,85 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
+
+                                    <div class="mb-[10px]">
+                                        <div class="mb-[10px]">
+                                            <p class="block leading-[24px] text-gray-800 font-medium">
+                                                @lang('admin::app.promotions.catalog-rules.create.channels')
+                                            </p>
+                                            
+                                            @foreach(core()->getAllChannels() as $channel)
+                                                <label
+                                                    class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
+                                                    for="channel_{{ $channel->id }}"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        name="channels[]"
+                                                        id="channel_{{ $channel->id }}"
+                                                        value="{{ $channel->id }}"
+                                                        {{ in_array($channel->id, old('channels[]', [])) ? 'checked' : '' }}
+                                                        class="hidden peer"
+                                                    >
+                                                    
+                                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                                    
+                                                    <p class="text-gray-600 font-semibold cursor-pointer">
+                                                        {{ core()->getChannelName($channel) }}
+                                                    </p>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+    
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.catalog-rules.create.customer-groups')
+                                        </p>
+                                        
+                                        @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                            <label
+                                                class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
+                                                for="customer_group_{{ $customerGroup->id }}"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    name="customer_groups[]"
+                                                    id="customer_group_{{ $customerGroup->id }}"
+                                                    value="{{ $customerGroup->id }}"
+                                                    {{ in_array($customerGroup->id, old('customer_groups[]', [])) ? 'checked' : '' }}
+                                                    class="hidden peer"
+                                                >
+                                                
+                                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                                
+                                                <p class="text-gray-600 font-semibold cursor-pointer">
+                                                    {{ $customerGroup->name }}
+                                                </p>
+                                            </label>
+                                        @endforeach
+                                    </div>
+
+                                    <label
+                                        for="checkbox"
+                                        class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            class="hidden peer"
+                                            id="checkbox"
+                                            name="status"
+                                            value="1"
+                                        >
+
+                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+
+                                        <div
+                                            class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            @lang('admin::app.promotions.catalog-rules.create.status')
+                                        </div>
+                                    </label>
                                 </x-slot:content>
                             </x-admin::accordion>
                                 
