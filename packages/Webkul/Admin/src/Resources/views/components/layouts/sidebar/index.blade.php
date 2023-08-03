@@ -70,7 +70,7 @@
     </div>
 
     {{-- Collapse menu --}}
-    <v-sidebar-slider :is-toggled="isOpen"/>
+    <v-sidebar-slider :is-open="isOpen"/>
 </div>
 
 @pushOnce('scripts')
@@ -78,16 +78,16 @@
         <div class="bg-white mt-[60px] fixed w-full max-w-[221px] bottom-0">
             <div 
                 class="flex gap-[10px] p-[6px] items-center cursor-pointer"
-                @click="toggle"
+                @click="$root.toggleMenu()"
             >
                 <span
                     class="text-[24px]"
-                    :class="isToggled ? 'icon-arrow-left' : 'icon-arrow-right'"
+                    :class="isOpen ? 'icon-arrow-left' : 'icon-arrow-right'"
                 ></span>
     
                 <p 
                     class="text-gray-600 font-semibold"
-                    :class="{'hidden' : isToggled}"
+                    :class="{'hidden' : isOpen}"
                 >
                     @lang('admin::app.components.layouts.sidebar.collapse')
                 </p>
@@ -99,13 +99,7 @@
         app.component('v-sidebar-slider', {
             template: '#v-sidebar-slider-template',
 
-            props: ['isToggled'],
-
-            methods: {
-                toggle() {
-                    this.$root.toggleMenu();
-                }
-            }
+            props: ['isOpen'],
         })
     </script>
 @endPushOnce
