@@ -1,6 +1,22 @@
 <?php
 
 return [
+    'account' => [
+        'edit' => [
+            'title'                => 'My Account',
+            'save-btn'             => 'Save Account',
+            'cancel-btn'           => 'cancel',
+            'general'              => 'General',
+            'profile-image'        => 'Profile Image',
+            'upload-image-info'    => 'Upload a Profile Image (100px X 100px) in PNG or JPG Format',
+            'name'                 => 'Name',
+            'email'                => 'Email',
+            'password'             => 'Password',
+            'confirm-password'     => 'Confirm Password',
+            'change-password'      => 'Change Account Password',
+            'current-password'     => 'Current Password',
+        ],
+    ],
 
     'promotions' => [
         'tab' => [
@@ -265,7 +281,6 @@ return [
         ],
     ],
 
-
     'sales'=> [
         'orders' => [
             'index' => [
@@ -323,6 +338,7 @@ return [
                 'date-of-birth'         => 'Date of Birth',
                 'customer-group'        => 'Customer Group',
                 'select-customer-group' => 'Select Customer Group',
+                'create-success'        => 'Customer created successfully',
             ],
         ],
 
@@ -370,7 +386,6 @@ return [
             'group'                 => 'Group',
             'default-address'       => 'Default Address',
             'mobile'                => 'Mobile',
-            'edit'                  => 'Edit',
             'delete'                => 'Delete',
             'set-as-default'        => 'Set as Default',
 
@@ -391,7 +406,6 @@ return [
                 'phone'              => 'Phone',
                 'street-address'     => 'Street Address',
                 'post-code'          => 'Post Code',
-                'default-address'    => 'Default Address', 
                 'save-btn-title'     => 'Save Address',
             ],
         ],
@@ -402,10 +416,12 @@ return [
 
                 'modal' => [
                     'create' =>  [
-                        'title'      => 'Add New Group',
-                        'code'       => 'Code',
-                        'name'       => 'Name', 
-                        'save-btn'   => 'Save Group',   
+                        'title'          => 'Create new Group',
+                        'create-btn'     => 'Create Group',
+                        'code'           => 'Code',
+                        'name'           => 'Name', 
+                        'save-btn'       => 'Save Group',   
+                        'create-success' => 'Group created successfully',
                     ],
                 ],
             ],
@@ -432,7 +448,7 @@ return [
     ],
 
     'settings' => [
-        'locales'           => [
+        'locales' => [
             'index' => [
                 'title'             => 'Locales',
                 'create-btn'        => 'Create Locale',
@@ -469,16 +485,27 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'title' => 'Exchange Rates',
+                'create-btn'  => 'Create Exchange Rate',
+                'title'       => 'Exchange Rates',
+
+                'modal'  =>  [
+                    'create' => [
+                        'rate'             => 'Rate',
+                        'save-btn'         => 'Save',
+                        'source-currency'  => 'Source Currency',
+                        'target-currency'  => 'Target Currency',
+                        'title'            => 'Create Exchange Rate',
+                    ],
+                ],
             ],
 
-            'create' => [
-                'title'            => 'Create Exchange Rate',
-                'button-title'     => 'Add Exchange Rate',
-                'source-currency'  => 'Source Currency',
-                'target-currency'  => 'Target Currency',
+            'edit'  =>  [
+                'cancel-btn'       => 'Cancel',
                 'rate'             => 'Rate',
-                'save'             => 'Save',
+                'source-currency'  => 'Source Currency',
+                'save-btn'         => 'Save Exchange Rate',
+                'title'            => 'Edit Exchange Rates',
+                'target-currency'  => 'Target Currency',
             ],
         ],
 
@@ -602,6 +629,7 @@ return [
                     'zip_code'       => 'Zip Code',
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
+                    'create-success' => 'Tax rate created successfully.',
                 ],
 
                 'edit'  =>  [
@@ -661,7 +689,7 @@ return [
                 'settings'                  => 'Settings',
                 'status'                    => 'Status',
                 'maintenance-mode-text'     => 'Message',
-                'allowed-ips'               => 'Allowed IPs',
+                'create-success'            => 'Channel created successfully.',
             ],  
 
             'edit' => [   
@@ -696,7 +724,7 @@ return [
                 'settings'                  => 'Settings',
                 'status'                    => 'Status',
                 'maintenance-mode-text'     => 'Message',
-                'allowed-ips'               => 'Allowed IPs',
+                'update-success'            => 'Channel updated successfully.',
             ],  
         ],  
         
@@ -732,6 +760,7 @@ return [
                 'role'             => 'Role',
                 'status'           => 'Status',
                 'save-btn'         => 'Save User',        
+                'update-success'   => 'User updated successfully.',
             ],
         ],
 
@@ -751,6 +780,42 @@ return [
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
             ],
+
+            'edit' => [
+                'title'           => 'Edit Role',
+                'save-btn-title'  => 'Save Role',
+                'cancel-btn'      => 'Cancel',
+                'general'         => 'General',
+                'name'            => 'Name',
+                'description'     => 'Description',
+                'access-control'  => 'Access Control',
+                'permissions'     => 'Permissions',
+            ],
+        ],
+
+        'sessions' => [
+            'title'                      => 'Sign In',
+            'email'                      => 'Email',
+            'password'                   => 'Password',
+            'forget-password-link'       => 'Forget Password ?',
+            'submit-btn'                 => 'Sign In',
+        ],
+
+        'forget-password' => [
+            'page-title'                 => 'Forget Password',
+            'title'                      => 'Recover Password',
+            'email'                      => 'Registered Email',
+            'sign-in-link'               => 'Back to Sign In ?',
+            'submit-btn'                 => 'Reset Password',
+        ],
+
+        'reset-password' => [
+            'title'            => 'Reset Password',
+            'email'            => 'Registered Email',
+            'password'         => 'Password',
+            'confirm-password' => 'Confirm Password',
+            'back-link-title'  => 'Back to Sign In ?',
+            'submit-btn'       => 'Reset Password',
         ],
     ],
 
@@ -884,17 +949,16 @@ return [
 
         'categories'  => [
             'index' => [
-                'title' => 'Categories',
-                'add'   => 'Add',
+                'title'    => 'Categories',
+                'add-btn'  => 'Create Category',
             ],
 
             'create' => [
-                'add-new-category'         => 'Add New Category',
                 'add-logo'                 => 'Add Logo',
                 'add-banner'               => 'Add Banner',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
-                'cancel'                   => 'Cancel',
+                'cancel-btn'               => 'Cancel',
                 'company-name'             => 'Name*',
                 'create-btn'               => 'Create Category',
                 'description'              => 'Description',
@@ -917,8 +981,45 @@ return [
                 'seo-details'              => 'SEO Details',
                 'select-parent-category'   => 'Select Parent Category*',
                 'select-display-mode'      => 'Select Display Mode',
+                'title'                    => 'Add New Category',
                 'visible-in-menu'          => 'Visible In Menu',
             ],
+
+            'edit'  =>  [
+                'add-logo'                 => 'Add Logo',
+                'add-banner'               => 'Add Banner',
+                'banner'                   => 'Banner',
+                'banner-size'              => 'Banner aspect ration (1320px X 300px)',
+                'cancel-btn'               => 'Cancel',
+                'company-name'             => 'Name*',
+                'description'              => 'Description',
+                'description-and-images'   => 'Description and Images',
+                'description_only'         => 'Description Only',
+                'display-mode'             => 'Display Mode',
+                'enter-position'           => 'Enter Position',
+                'filterable-attributes'    => 'Filterable Attributes',
+                'general'                  => 'General',
+                'logo'                     => 'Logo',
+                'logo-size'                => 'Logo resolution should be (110px X 110px)',
+                'meta-description'         => 'Meta Description',
+                'meta-keywords'            => 'Meta Keywords',
+                'meta-title'               => 'Meta Title',
+                'position'                 => 'Position*',
+                'products_and_description' => 'Products and Description',
+                'products_only'            => 'Products Only',
+                'save-btn'                 => 'Save Category',
+                'slug'                     => 'Slug',
+                'settings'                 => 'Settings',
+                'seo-details'              => 'SEO Details',
+                'select-parent-category'   => 'Select Parent Category*',
+                'select-display-mode'      => 'Select Display Mode',
+                'title'                    => 'Edit Category', 
+                'visible-in-menu'          => 'Visible In Menu',
+            ],
+
+            'create-success'           => 'category created successfully.',
+            'update-success'           => 'category updated successfully.',
+            'delete-success'           => 'The category has been successfully deleted.',
         ],
 
         'families'   => [
@@ -1002,7 +1103,7 @@ return [
         'email-marketing' => [
             'templates' => [
                 'create' => [
-                    'title'          => 'Add Template',
+                    'title'          => 'Create Template',
                     'active'         => 'Active',
                     'content'        => 'Content*',
                     'cancel'         => 'Cancel',
@@ -1010,9 +1111,10 @@ return [
                     'general'        => 'General',
                     'inactive'       => 'Inactive',
                     'name'           => 'Name',
-                    'save-btn'       => 'Save',
+                    'save-btn'       => 'Save Template',
                     'status'         => 'Status',
                     'select-status'  => 'Select Status',
+                    'create-success' => 'Email template created successfully.',
                 ],
 
                 'edit' => [
@@ -1084,17 +1186,26 @@ return [
             'events' => [
                 'create'   => [
                     'title'          => 'Events',
-                    'add-title'      => 'Add Event',
                     'general'        => 'General',
                     'name'           => 'Name',
                     'description'    => 'Description',
                     'date'           => 'Date',
-                    'save'           => 'Save',
+                    'save-btn'       => 'Save Event',
                 ],
 
                 'index'  =>  [
                     'title'    => 'Events',
                     'create-btn'  => 'Create Event',
+                ],
+
+                'edit'  =>  [
+                    'title'        => 'Edit Events',
+                    'cancel-btn'   => 'Cancel',
+                    'general'      => 'General',
+                    'name'         => 'Name',
+                    'description'  => 'Description',
+                    'date'         => 'Date',
+                    'save-btn'     => 'Save Events',
                 ],
             ],
 
@@ -1156,6 +1267,7 @@ return [
             'meta-title'       => 'Meta Title',
             'seo'              => 'SEO',
             'url-key'          => 'URL Key',
+            'create-success'    => 'Cms created successfully.',
         ],
 
         'edit' => [
@@ -1171,6 +1283,7 @@ return [
             'meta-description' => 'Meta Description',
             'meta-title'       => 'Meta Title',
             'url-key'          => 'URL Key',
+            'update-success'   => 'Cms updated successfully.',
         ],
     ],
 
@@ -1448,21 +1561,6 @@ return [
         'file-name'        => 'File Name',
         'path'             => 'Path',
         'link-for-google'  => 'Link For Google',
-    ],
-
-    'account' => [
-        'title'                => 'My Account',
-        'save-btn-title'       => 'Save',
-        'general'              => 'General',
-        'upload-image-info'    => 'Upload a Profile Image (100px x 100px) in PNG or JPG Format',
-        'remove-image'         => 'Remove Image',
-        'image-upload-message' => 'Only images (.jpeg, .jpg, .png, ..) are allowed.',
-        'name'                 => 'Name',
-        'email'                => 'Email',
-        'password'             => 'Password',
-        'confirm-password'     => 'Confirm Password',
-        'change-password'      => 'Change Account Password',
-        'current-password'     => 'Current Password',
     ],
 
     // 'users' => [
@@ -2076,22 +2174,6 @@ return [
             'delete-success'     => 'Currency deleted successfully.',
             'last-delete-error'  => 'At least one Currency is required.',
         ],
-        'exchange_rates'    => [
-            'title'                    => 'Exchange Rates',
-            'add-title'                => 'Add',
-            'edit-title'               => 'Edit Exchange Rate',
-            'save-btn-title'           => 'Save',
-            'general'                  => 'General',
-            'source_currency'          => 'Source Currency',
-            'target_currency'          => 'Target Currency',
-            'rate'                     => 'Rate',
-            'exchange-class-not-found' => ':service exchange rate class not found',
-            'update-rates'             => 'Update Rates',
-            'create-success'           => 'Exchange Rate created successfully.',
-            'update-success'           => 'Exchange Rate updated successfully.',
-            'delete-success'           => 'Exchange Rate deleted successfully.',
-            'last-delete-error'        => 'At least one Exchange Rate is required.',
-        ],
 
         'inventory_sources' => [
             'create' => [
@@ -2231,139 +2313,6 @@ return [
             'title' => 'Development',
         ],
     ],
-
-    // 'customers' => [
-    //     'groups' => [
-    //         'add-title'                 => 'Add Group',
-    //         'edit-title'                => 'Edit Group',
-    //         'save-btn-title'            => 'Save Group',
-    //         'title'                     => 'Groups',
-    //         'code'                      => 'Code',
-    //         'name'                      => 'Name',
-    //         'is_user_defined'           => 'User Defined',
-    //         'yes'                       => 'Yes',
-    //         'create-success'            => 'Customer Group created successfully',
-    //         'update-success'            => 'Customer Group updated successfully',
-    //         'delete-success'            => 'Customer Group deleted successfully',
-    //         'delete-failed'             => 'Error! Customer Group cannot be deleted',
-    //         'customer-associate'        => 'Customer can not be deleted because customer is associated with this group.',
-    //     ],
-
-    //     'addresses' => [
-    //         'title'               => ':customer_name\'s Addresses List',
-    //         'vat_id'              => 'Vat ID',
-    //         'create-title'        => 'Create Customer\'s Address',
-    //         'edit-title'          => 'Update Customer\'s Address',
-    //         'title-orders'        => ':customer_name\'s Orders List',
-    //         'address-list'        => 'Address\'s List',
-    //         'order-list'          => 'Order\'s List',
-    //         'address-id'          => 'Address ID',
-    //         'company-name'        => 'Company Name',
-    //         'address-1'           => 'Address 1',
-    //         'city'                => 'City',
-    //         'state-name'          => 'State',
-    //         'country-name'        => 'Country',
-    //         'postcode'            => 'Post Code',
-    //         'default-address'     => 'Default Address',
-    //         'yes'                 => 'Yes',
-    //         'not-approved'        => 'Not Approved',
-    //         'no'                  => 'No',
-    //         'dash'                => '-',
-    //         'delete'              => 'Delete',
-    //         'create-btn-title'    => 'Add Address',
-    //         'save-btn-title'      => 'Save Address',
-    //         'general'             => 'General',
-    //         'success-create'      => 'Customer address created successfully.',
-    //         'success-update'      => 'Customer address updated successfully.',
-    //         'success-delete'      => 'Customer address deleted successfully.',
-    //         'success-mass-delete' => 'Selected addresses deleted successfully.',
-    //         'error-create'        => 'Customer address not created.',
-    //     ],
-
-    //     'loginascustomer' => [
-    //         'grid-title'    => 'login as customer',
-    //         'login-message' => 'you logged in as :customer_name',
-    //     ],
-
-    //     'note' => [
-    //         'title'      => 'Add Note',
-    //         'save-note'  => 'Save Note',
-    //         'enter-note' => 'Enter Note',
-    //         'help-title' => 'Add Note On This Customer',
-    //     ],
-
-    //     'customers' => [
-    //         'add-title'                 => 'Add Customer',
-    //         'edit-title'                => 'Edit Customer',
-    //         'title'                     => 'Customers',
-    //         'first_name'                => 'First Name',
-    //         'last_name'                 => 'Last Name',
-    //         'select-gender'             => 'Select Gender',
-    //         'gender'                    => 'Gender',
-    //         'email'                     => 'Email',
-    //         'date_of_birth'             => 'Date of Birth',
-    //         'date_of_birth_placeholder' => 'yyyy-mm-dd',
-    //         'phone'                     => 'Phone',
-    //         'customer_group'            => 'Customer Group',
-    //         'save-btn-title'            => 'Save Customer',
-    //         'channel_name'              => 'Channel Name',
-    //         'state'                     => 'State',
-    //         'select-state'              => 'Select a region, state or province.',
-    //         'country'                   => 'Country',
-    //         'other'                     => 'Other',
-    //         'male'                      => 'Male',
-    //         'female'                    => 'Female',
-    //         'group-default'             => 'Cannot delete the default group.',
-    //         'edit-help-title'           => 'Edit Customer',
-    //         'delete-help-title'         => 'Delete Customer',
-    //         'addresses'                 => 'Addresses',
-    //         'mass-destroy-success'      => 'Customers deleted successfully',
-    //         'mass-update-success'       => 'Customers updated successfully',
-    //         'status'                    => 'Status',
-    //         'active'                    => 'Active',
-    //         'inactive'                  => 'Inactive',
-    //         'is-suspended'              => 'Is Suspended',
-    //         'suspend'                   => 'Suspend',
-    //         'suspended'                 => 'Suspended',
-    //     ],
-
-    //     'reviews' => [
-    //         'title'          => 'Reviews',
-    //         'edit-title'     => 'Edit Review',
-    //         'rating'         => 'Rating',
-    //         'status'         => 'Status',
-    //         'comment'        => 'Comment',
-    //         'pending'        => 'Pending',
-    //         'approved'       => 'Approve',
-    //         'disapproved'    => 'Disapprove',
-    //         'update-success' => 'Review updated successfully',
-    //         'delete-success' => 'Review deleted successfully',
-    //     ],
-
-    //     'subscribers' => [
-    //         'title'          => 'Newsletter Subscribers',
-    //         'title-edit'     => 'Edit Newsletter Subscriber',
-    //         'email'          => 'Email',
-    //         'is_subscribed'  => 'Subscribed',
-    //         'edit-btn-title' => 'Update Subscriber',
-    //         'update-success' => 'Subscriber was successfully updated',
-    //         'update-failed'  => 'Error! You cannot unsubscribe the subscriber',
-    //         'delete'         => 'Subscriber was successfully deleted',
-    //         'delete-failed'  => 'Error! Subscriber cannot be deleted',
-    //         'update-failed'  => 'Error! You cannot unsubscribe the subscriber',
-    //         'delete'         => 'Subscriber was successfully deleted',
-    //     ],
-
-    //     'orders' => [
-    //         'list'  => ':customer_name\'s orders List',
-    //         'title' => 'Orders',
-    //     ],
-    //     'create-success' => 'Customer created successfully',
-    //     'update-success' => 'Customer updated successfully',
-    //     'delete-success' => 'Customer deleted successfully',
-    //     'order-pending'  => 'Cannot delete customer account because some Order(s) are pending or processing state.',
-    //     'delete-failed'  => 'Error encountered while deleting customer.',
-    // ],
 
     'promotions-old' => [
         'cart-rules' => [

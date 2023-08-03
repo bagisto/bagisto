@@ -54,16 +54,64 @@
         >
         </span>
 
-        @if ($admin->image)
-            <div class="profile-info-icon">
-                <img src="{{ $admin->image_url }}"/>
-            </div>
-        @else
-            <div class="profile-info-icon">
-                <span class="px-[8px] py-[6px] bg-blue-400 rounded-full text-white font-semibold cursor-pointer leading-6">
-                    {{ substr($admin->name, 0, 1) }}
-                </span>
-            </div>
-        @endif
+         {{-- Admin profile --}}
+         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+            <x-slot:toggle>
+                @if ($admin->image)
+                    <div class="profile-info-icon">
+                        <img
+                            src="{{ $admin->image_url }}"
+                            class="max-w-[35px]"
+                        />
+                    </div>
+                @else
+                    <div class="profile-info-icon">
+                        <span class="px-[8px] py-[6px] bg-blue-400 rounded-full text-white font-semibold cursor-pointer leading-6">
+                            {{ substr($admin->name, 0, 1) }}
+                        </span>
+                    </div>
+                @endif
+            </x-slot:toggle>
+
+            {{-- Admin Dropdown --}}
+            <x-slot:content class="!p-[0px]">
+                <div class="grid gap-[10px] p-[20px] pb-0">
+                    {{-- Version --}}
+                    <p class="text-gray-400">
+                        @lang('admin::app.layouts.app-version', ['version' => 'v' . core()->version()])
+                    </p>
+
+                    {{-- Title --}}
+                    <p class="py-1 text-[16px] text-gray-500">
+                        @lang('admin::app.layouts.account-title')
+                    </p>
+                </div>
+
+                <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+                    <a
+                        class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"
+                        href="{{ route('admin.account.edit') }}"
+                    >
+                        @lang('admin::app.layouts.my-account')
+                    </a>
+
+                    {{--Admin logout--}}
+                    <x-shop::form
+                        method="DELETE"
+                        action="{{ route('admin.session.destroy') }}"
+                        id="adminLogout"
+                    >
+                    </x-shop::form>
+
+                    <a
+                        class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"
+                        href="{{ route('admin.session.destroy') }}"
+                        onclick="event.preventDefault(); document.getElementById('adminLogout').submit();"
+                    >
+                        @lang('admin::app.layouts.logout')
+                    </a>
+                </div>
+            </x-slot:content>
+        </x-admin::dropdown>
     </div>
 </header>

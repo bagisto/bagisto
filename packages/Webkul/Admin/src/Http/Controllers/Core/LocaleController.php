@@ -55,7 +55,7 @@ class LocaleController extends Controller
         $this->localeRepository->create($data);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.locales.create-success'),
+            'message' => trans('admin::app.settings.locales.index.create-success'),
         ]);
     }
 

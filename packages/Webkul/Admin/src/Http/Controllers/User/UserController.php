@@ -71,7 +71,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.response.create-success'),
+            'message' => trans('admin::app.users.users.index.create.create-success'),
         ]);
     }
 
@@ -114,7 +114,7 @@ class UserController extends Controller
 
         Event::dispatch('user.admin.update.after', $admin);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'User']));
+        session()->flash('success', trans('admin::app.users.users.index.create.update-success', ['name' => 'User']));
 
         return redirect()->route('admin.users.index');
     }

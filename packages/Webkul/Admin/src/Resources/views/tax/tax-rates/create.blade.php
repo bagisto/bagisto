@@ -1,289 +1,301 @@
 <x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.settings.taxes.tax-rates.create.title')
+    </x-slot:title>
 
-<v-create-taxrate></v-create-taxrate>
+    <v-create-taxrate></v-create-taxrate>
 
-@pushOnce('scripts')
-    <script type="text/x-template" id="v-create-taxrate-template">
-        <!-- Input Form -->
-        <x-admin::form :action="route('admin.tax_rates.store')">
-            <div class="flex justify-between items-center">
-                <p class="text-[20px] text-gray-800 font-bold">
-                    @lang('admin::app.settings.taxes.tax-rates.create.title')
-                </p>
+    @pushOnce('scripts')
+        <script type="text/x-template" id="v-create-taxrate-template">
+            <x-admin::form :action="route('admin.tax_rates.store')">
+                <div class="flex justify-between items-center">
+                    <p class="text-[20px] text-gray-800 font-bold">
+                        @lang('admin::app.settings.taxes.tax-rates.create.title')
+                    </p>
 
-                <div class="flex gap-x-[10px] items-center">
-                    <a href="{{ route('admin.tax_rates.index') }}">
-                        <span class="text-gray-600 leading-[24px]">
-                            @lang('admin::app.settings.taxes.tax-rates.create.cancel-btn')
-                        </span>
-                    </a>
+                    <div class="flex gap-x-[10px] items-center">
+                        <a href="{{ route('admin.tax_rates.index') }}">
+                            <span class="text-gray-600 leading-[24px]">
+                                @lang('admin::app.settings.taxes.tax-rates.create.cancel-btn')
+                            </span>
+                        </a>
 
-                    <button 
-                        type="submit" 
-                        class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
-                    >
-                        @lang('admin::app.settings.taxes.tax-rates.create.save-btn')
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tax Rates Informations -->
-            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <!-- Left component -->
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                        <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                            @lang('admin::app.settings.taxes.tax-rates.create.title')
-                        </p>
-
-                        <div class="mb-[10px]">
-                            <!-- Identifier -->
-                            <x-admin::form.control-group class="mb-4">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.taxes.tax-rates.create.identifier')*
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="identifier"
-                                    value="{{ old('identifier') }}"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.taxes.tax-rates.create.identifier')"
-                                    :placeholder="trans('admin::app.settings.taxes.tax-rates.create.identifier')"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    class="mt-1"
-                                    control-name="identifier"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
-                            <!-- Country -->
-                            <x-admin::form.control-group class="mb-4">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.taxes.tax-rates.create.country')
-                                </x-admin::form.control-group.label>
-                
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="country"
-                                    value="{{ old('country') }}"
-                                    rules="required"
-                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.country') }}"
-                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.country') }}"
-                                    v-model="country"
-                                >
-                                    <option value="">
-                                        @lang('admin::app.settings.taxes.tax-rates.create.select-country')
-                                    </option>
-                
-                                    @foreach (core()->countries() as $country)
-                                        <option value="{{ $country->code }}">
-                                            {{ $country->name }}
-                                        </option>
-                                    @endforeach
-                                </x-admin::form.control-group.control>
-                
-                                <x-admin::form.control-group.error
-                                    class="mt-1"
-                                    control-name="country"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                
-                            <!-- State -->
-                            <x-admin::form.control-group class="mb-4">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.taxes.tax-rates.create.state')
-                                </x-admin::form.control-group.label>
-                
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="state"
-                                    value="{{ old('state') }}"
-                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.state') }}"
-                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.state') }}"
-                                    v-model="state"
-                                >
-                                    <option value="">
-                                        @lang('admin::app.settings.taxes.tax-rates.create.select-state')
-                                    </option>
-                
-                                    <option v-for='(state, index) in countryStates[country]' :value="state.code">
-                                        @{{ state.default_name }}
-                                    </option>
-                                </x-admin::form.control-group.control>
-                            </x-admin::form.control-group>
-
-                            <!-- Tax Rate -->
-                            <x-admin::form.control-group class="mb-4">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.taxes.tax-rates.create.tax_rate')*
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="tax_rate"
-                                    value="{{ old('tax_rate') }}"
-                                    rules="required"
-                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.tax_rate') }}"
-                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.tax_rate') }}"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    class="mt-1"
-                                    control-name="tax_rate"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                        </div>
+                        <button 
+                            type="submit" 
+                            class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        >
+                            @lang('admin::app.settings.taxes.tax-rates.create.save-btn')
+                        </button>
                     </div>
                 </div>
-            
-                <!-- Right sub-component -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                    <div class="bg-white rounded-[4px] box-shadow">
-                        <div class="flex items-center justify-between p-[6px]">
-                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                @lang('admin::app.settings.taxes.tax-rates.create.basic-settings')
+
+                {{-- Tax Rates Informations --}}
+                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                        <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+                            <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                                @lang('admin::app.settings.taxes.tax-rates.create.title')
                             </p>
 
-                            <span class="icon-arrow-up p-[6px] text-[24px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                        </div>
-
-                        <div class="px-[16px] pb-[16px]">
-                            <!-- Enable Zip Range -->
-                            <x-admin::form.control-group class="mb-4">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.taxes.tax-rates.create.is_zip')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="switch"
-                                    name="is_zip"
-                                    value="{{ old('is_zip') }}"
-                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.is_zip') }}"
-                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.is_zip') }}"
-                                    v-model="is_zip"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="is_zip"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
-                            <!-- Zip Code -->
-                            <x-admin::form.control-group 
-                                v-if="! is_zip"
-                                class="mb-4" 
-                            >
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.taxes.tax-rates.create.zip_code')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="zip_code"
-                                    value="{{ old('zip_code') }}"
-                                    label="{{ trans('admin::app.settings.taxes.tax-rates.create.zip_code') }}"
-                                    placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.zip_code') }}"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="zip_code"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
-                            <div v-if="is_zip">
-                                <!-- Zip From -->
+                            <div class="mb-[10px]">
+                                {{-- Identifier --}}
                                 <x-admin::form.control-group class="mb-4">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.taxes.tax-rates.create.zip_from')*
+                                        @lang('admin::app.settings.taxes.tax-rates.create.identifier')*
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="zip_from"
-                                        value="{{ old('zip_from') }}"
+                                        name="identifier"
+                                        :value="old('identifier')"
                                         rules="required"
-                                        label="{{ trans('admin::app.settings.taxes.tax-rates.create.zip_from') }}"
-                                        placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.zip_from') }}"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.create.identifier')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.create.identifier')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
                                         class="mt-1"
-                                        control-name="zip_from"
+                                        control-name="identifier"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- Zip To -->
+                                {{-- Country --}}
                                 <x-admin::form.control-group class="mb-4">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.taxes.tax-rates.create.zip_to')*
+                                        @lang('admin::app.settings.taxes.tax-rates.create.country')
+                                    </x-admin::form.control-group.label>
+                    
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="country"
+                                        :value="old('country')"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.create.country')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.create.country')"
+                                        v-model="country"
+                                    >
+                                        @foreach (core()->countries() as $country)
+                                            <option value="{{ $country->code }}">
+                                                {{ $country->name }}
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+                    
+                                    <x-admin::form.control-group.error
+                                        class="mt-1"
+                                        control-name="country"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                    
+                                {{-- State --}}
+                                <template v-if="haveStates()">
+                                    <x-admin::form.control-group class="mb-4">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.taxes.tax-rates.create.state')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="state"
+                                            :value="old('state')"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.create.state')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.create.state')"
+                                            v-model="state"
+                                        >
+                                            <option v-for='(state, index) in countryStates[country]' :value="state.code">
+                                                @{{ state.default_name }}
+                                            </option>
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                <template v-if="! haveStates()">
+                                    <x-admin::form.control-group class="mb-4">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.taxes.tax-rates.create.state')
+                                        </x-admin::form.control-group.label>
+                        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="state"
+                                            :value="old('state')"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.create.state')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.create.state')"
+                                            v-model="state"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+                                </template>
+
+                                {{-- Tax Rate --}}
+                                <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-rates.create.tax_rate')*
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="zip_to"
-                                        value="{{ old('zip_to') }}"
+                                        name="tax_rate"
+                                        :value="old('tax_rate')"
                                         rules="required"
-                                        label="{{ trans('admin::app.settings.taxes.tax-rates.create.zip_to') }}"
-                                        placeholder="{{ trans('admin::app.settings.taxes.tax-rates.create.zip_to') }}"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.create.tax_rate')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.create.tax_rate')"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
                                         class="mt-1"
-                                        control-name="zip_to"
+                                        control-name="tax_rate"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
                         </div>
                     </div>
+                
+                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                        <div class="bg-white rounded-[4px] box-shadow">
+                            <div class="flex items-center justify-between p-[6px]">
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.settings.taxes.tax-rates.create.basic-settings')
+                                </p>
+
+                                <span class="icon-arrow-up p-[6px] text-[24px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                            </div>
+
+                            <div class="px-[16px] pb-[16px]">
+                                {{-- Enable Zip Range --}}
+                                <x-admin::form.control-group class="mb-4">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-rates.create.is_zip')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="switch"
+                                        name="is_zip"
+                                        :value="old('is_zip')"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.create.is_zip')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.create.is_zip')"
+                                        v-model="is_zip"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="is_zip"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                {{-- Zip Code --}}
+                                <x-admin::form.control-group 
+                                    v-if="! is_zip"
+                                    class="mb-4" 
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.taxes.tax-rates.create.zip_code')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="zip_code"
+                                        :value="old('zip_code')"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.create.zip_code')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.create.zip_code')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="zip_code"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <div v-if="is_zip">
+                                    {{-- Zip From --}}
+                                    <x-admin::form.control-group class="mb-4">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.taxes.tax-rates.create.zip_from')*
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="zip_from"
+                                            :value="old('zip_from')"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.create.zip_from')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.create.zip_from')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            class="mt-1"
+                                            control-name="zip_from"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    {{-- Zip To --}}
+                                    <x-admin::form.control-group class="mb-4">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.taxes.tax-rates.create.zip_to')*
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="zip_to"
+                                            :value="old('zip_to')"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.create.zip_to')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.create.zip_to')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            class="mt-1"
+                                            control-name="zip_to"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </x-admin::form>
-    </script>
+            </x-admin::form>
+        </script>
 
-    <script type="module">
-        app.component('v-create-taxrate', {
-            template: '#v-create-taxrate-template',
+        <script type="module">
+            app.component('v-create-taxrate', {
+                template: '#v-create-taxrate-template',
 
-            data() {
-                return {
-                    is_zip: false,
+                data() {
+                    return {
+                        is_zip: false,
 
-                    country: "{{ old('country')  }}",
+                        country: "{{ old('country')  }}",
 
-                    state: "{{ old('state')  }}",
+                        state: "{{ old('state')  }}",
 
-                    countryStates: @json(core()->groupedStatesByCountries())
-                }
-            },
-
-            methods: {
-                haveStates: function () {
-                    /*
-                    * The double negation operator is used to convert the value to a boolean. 
-                    * It ensures that the final result is a boolean value, 
-                    * true if the array has a length greater than 0, and otherwise false.
-                    */
-                    return !!this.countryStates[this.country]?.length;
-
+                        countryStates: @json(core()->groupedStatesByCountries())
+                    }
                 },
-            }
-        });
-    </script>
-@endPushOnce
-    
+
+                methods: {
+                    haveStates: function () {
+                        /*
+                        * The double negation operator is used to convert the value to a boolean. 
+                        * It ensures that the final result is a boolean value, 
+                        * true if the array has a length greater than 0, and otherwise false.
+                        */
+                        return !!this.countryStates[this.country]?.length;
+
+                    },
+                }
+            });
+        </script>
+    @endPushOnce
 </x-admin::layouts>
