@@ -550,14 +550,14 @@ return [
                 ],
 
                 'create' => [
-                    'add-title'        => 'Create Tax Category',
+                    'create-title'     => 'Create Tax Category',
                     'cancel-btn'       => 'Cancel',
                     'code'             => 'Code',
                     'description'      => 'Description',
                     'general'          => 'Tax Category',
                     'name'             => 'Name',
-                    'save-btn-title'   => 'Save Tax Category',
-                    'select-tax-rates' => 'Select Tax Rates',
+                    'save-btn'         => 'Save Tax Category',
+                    'tax-rates'        => 'Tax Rates',
                     'title'            => 'Tax Categories',
                 ],
 
@@ -704,15 +704,16 @@ return [
         'users' => [    
             'index' => [    
                 'title' => 'Users',
+
                 'create'  =>  [
-                    'title'            => 'Create New User',
+                    'title'            => 'Create User',
                     'name'             => 'Name',
                     'email'            => 'Email',
                     'password'         => 'Password',
                     'confirm-password' => 'Confirm Password',
                     'role'             => 'Role',
                     'status'           => 'Status',
-                    'save-btn'         => 'Save User',  
+                    'save-btn'         => 'Save User',
                     'create-success'   => 'User created successfully.',
                 ],
             ],
@@ -727,7 +728,7 @@ return [
                 'confirm-password' => 'Confirm Password',
                 'role'             => 'Role',
                 'status'           => 'Status',
-                'save-btn'         => 'Save User',        
+                'save-btn'         => 'Save User',    
                 'update-success'   => 'User updated successfully.',
             ],
         ],
@@ -735,29 +736,33 @@ return [
         'roles' => [
             'index' => [
                 'title'             => 'Roles',
-                'add-btn-title'     => 'Create Role',
+                'create-btn'        => 'Create Role',
             ],
 
             'create' => [
                 'title'           => 'Create Role',
-                'save-btn-title'  => 'Save Role',
+                'save-btn'        => 'Save Role',
                 'cancel-btn'      => 'Cancel',
                 'general'         => 'General',
                 'name'            => 'Name',
                 'description'     => 'Description',
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
+                'custom'          => 'Custom',
+                'all'             => 'All', 
             ],
 
             'edit' => [
                 'title'           => 'Edit Role',
-                'save-btn-title'  => 'Save Role',
+                'save-btn'        => 'Save Role',
                 'cancel-btn'      => 'Cancel',
                 'general'         => 'General',
                 'name'            => 'Name',
                 'description'     => 'Description',
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
+                'custom'          => 'Custom',
+                'all'             => 'All',     
             ],
         ],
 
