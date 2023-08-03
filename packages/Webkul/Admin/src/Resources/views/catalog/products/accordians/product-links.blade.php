@@ -14,7 +14,6 @@
 
 <script type="text/x-template" id="linked-products-template">
     <div>
-
         <div class="control-group" v-for='(key) in linkedProducts'>
             <label for="up-selling" v-if="(key == 'up_sells')">
                 {{ __('admin::app.catalog.products.up-selling') }}

@@ -791,6 +791,7 @@ return [
             'index' => [
                 'title'      => 'Products',
                 'create-btn' => 'Create Product',
+
                 'create' => [
                     'title'                   => 'Create New Product',
                     'configurable-attributes' => 'Configurable Attributes',
@@ -829,7 +830,6 @@ return [
                         'discount-group-price-info' => 'For qty Qty at discount of :price',
                         'empty-info'                => 'Special pricing for customers belonging to a specific group.',
 
-
                         'create' => [
                             'create-title'   => 'Create Customer Group Price',
                             'update-title'   => 'Update Customer Group Price',
@@ -841,6 +841,79 @@ return [
                             'price'          => 'Price',
                             'delete-btn'     => 'Delete',
                             'save-btn'       => 'Save',
+                        ]
+                    ]
+                ],
+
+                'links' => [
+                    'related-products' => [
+                        'title'      => 'Related Products',
+                        'info'       => 'In addition to the product the customer is viewing, they are presented with related products.',
+                        'empty-info' => 'To add related products on a go.'
+                    ],
+
+                    'up-sells' => [
+                        'title'      => 'Up-Sell Products',
+                        'info'       => 'The customer is presented with an up-sell products, which serves as a premium or higher-quality alternative to the product they are currently viewing.',
+                        'empty-info' => 'To add up sells products on a go.'
+                    ],
+
+                    'cross-sells' => [
+                        'title'      => 'Cross-Sell Products',
+                        'info'       => 'Adjacent to the shopping cart, you\'ll find these \"impulse-buy\" products positioned as cross-sells to complement the items already added to your cart.',
+                        'empty-info' => 'To add cross sells products on a go.'
+                    ],
+
+                    'add-btn'     => 'Add Product',
+                    'empty-title' => 'Add Product',
+                    'empty-info'  => 'To add :type products on a go.',
+                    'sku'         => 'SKU - :sku',
+                    'delete'      => 'Delete',
+
+                    'search' => [
+                        'title'       => 'Select Products',
+                        'add-btn'     => 'Add Selected Product',
+                        'empty-title' => 'No products found',
+                        'empty-info'  => 'No products available for search term.',
+                        'sku'         => 'SKU - :sku',
+                        'qty'         => ':qty Available',
+                    ]
+                ],
+
+                'types' => [
+                    'configurable' => [
+                        'title'             => 'Variations',
+                        'add-btn'           => 'Add Variant',
+                        'info'              => 'Variation products are depend on all possible combination of attribute.',
+                        'empty-title'       => 'Add Variant',
+                        'empty-info'        => 'To create various combination of product on a go.',
+                        'image-placeholder' => 'Product Image',
+                        'sku'               => 'SKU - :sku',
+                        'qty'               => ':qty Qty',
+                        'delete-btn'        => 'Delete',
+                        'edit-btn'          => 'Edit',
+
+                        'create'  => [
+                            'title'                  => 'Add Variant',
+                            'name'                   => 'Name',
+                            'description'            => 'Description',
+                            'save-btn'               => 'Add',
+                            'variant-already-exists' => 'This variant already exists'
+                        ],
+
+                        'edit' => [
+                            'title'           => 'Product',
+                            'save-btn'        => 'Save',
+                            'name'            => 'Name',
+                            'sku'             => 'SKU',
+                            'price'           => 'Price',
+                            'status'          => 'Status',
+                            'enabled'         => 'Enabled',
+                            'disabled'        => 'Disabled',
+                            'weight'          => 'Weight',
+                            'quantities'      => 'Quantities',
+                            'edit-info'       => 'If you want to update product information in detail, then go to the',
+                            'edit-link-title' => 'Product Details Page'
                         ]
                     ]
                 ]

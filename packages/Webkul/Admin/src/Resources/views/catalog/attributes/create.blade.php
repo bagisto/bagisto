@@ -351,7 +351,7 @@
                                     <!-- Attribute Option Image -->
                                     <img 
                                         class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
-                                        src="{{ bagisto_asset('images/add-product-to-store.png') }}" 
+                                        src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="Add Attribute Oprions"
                                     >
                                     <!-- Add Attribute Options Information -->

@@ -16,7 +16,7 @@
 
                 <p
                     class="text-blue-600 cursor-pointer"
-                    @click="resetForm(); $refs.groupPriceCreateModal.toggle()"
+                    @click="resetForm(); $refs.groupPriceCreateModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.price.group.create-btn')
                 </p>
@@ -61,7 +61,7 @@
 
                         <p
                             class="text-blue-600 cursor-pointer"
-                            @click="selectedPrice = item; $refs.groupPriceCreateModal.toggle()"
+                            @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
                         </p>
@@ -286,7 +286,7 @@
 
                     this.resetForm();
 
-                    this.$refs.groupPriceCreateModal.toggle();
+                    this.$refs.groupPriceCreateModal.close();
                 },
 
                 resetForm() {
@@ -305,7 +305,7 @@
 
                     this.resetForm();
 
-                    this.$refs.groupPriceCreateModal.toggle();
+                    this.$refs.groupPriceCreateModal.close();
                 }
             }
         });

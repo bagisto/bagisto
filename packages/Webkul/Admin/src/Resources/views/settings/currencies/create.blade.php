@@ -144,7 +144,7 @@
                         .then((response) => {
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                            this.$refs.currencyModal.toggle();
+                            this.$refs.currencyModal.close();
 
                             resetForm();
                         }).catch((error) =>{

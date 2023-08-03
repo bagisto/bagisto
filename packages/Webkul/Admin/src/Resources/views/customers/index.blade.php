@@ -257,7 +257,7 @@
                     
                         this.$axios.post("{{ route('admin.customer.store') }}", params)
                             .then((response) => {
-                                this.$refs.customerCreateModal.toggle();
+                                this.$refs.customerCreateModal.close();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
