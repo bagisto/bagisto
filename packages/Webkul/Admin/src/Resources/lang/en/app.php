@@ -13,7 +13,7 @@ return [
             'email'                => 'Email',
             'password'             => 'Password',
             'confirm-password'     => 'Confirm Password',
-            'change-password'      => 'Change Account Password',
+            'change-password'      => 'Change Password',
             'current-password'     => 'Current Password',
         ],
     ],
