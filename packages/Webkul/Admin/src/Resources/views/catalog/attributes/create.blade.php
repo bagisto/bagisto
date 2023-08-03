@@ -837,8 +837,6 @@
                     return {
                         optionRowCount: 1,
 
-                        show_swatch: false,
-
                         attribute_type: false,
 
                         swatch_attribute: false,
