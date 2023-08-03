@@ -39,8 +39,8 @@
 
                     @if ($menuItem['key'] != 'configuration')
                         <div 
-                            class="bg-gray-100 grid min-w-[200px] absolute top-[36px] left-0 shadow-md hidden group-hover:block rounded-[8px]{{ $menu->getActive($menuItem) ? 'bg-gray-100' : 'hidden' }}"
-                            :class="{'grid min-w-[200px] absolute top-0 left-[67px] bg-white shadow-md' : isOpen}"
+                            class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : 'hidden' }}"
+                            :class="{'hidden' : isOpen}"
                         >
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a href="{{ $subMenuItem['url'] }}">
@@ -53,6 +53,7 @@
                     @else 
                         <div 
                             class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : 'hidden' }}"
+                            :class="{'hidden' : isOpen}"
                         >
                             @foreach (core()->sortItems($tree->items) as $key => $item)
                                 <a href="{{ route('admin.configuration.index', $item['key']) }}">
