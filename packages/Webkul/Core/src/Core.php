@@ -196,6 +196,22 @@ class Core
     /**
      * Get channel code from request.
      *
+     * @return string
+     */
+    public function getRequestedChannel()
+    {
+        $code = request()->query('channel');
+
+        if ($code) {
+            return $this->channelRepository->findOneByField('code', $code);
+        }
+
+        return $this->getCurrentChannel();
+    }
+
+    /**
+     * Get channel code from request.
+     *
      * @param  bool  $fallback  optional
      * @return string
      */
@@ -218,6 +234,22 @@ class Core
     public function getChannelName($channel): string
     {
         return $channel->name ?? $channel->translate(app()->getLocale())->name ?? $channel->translate(config('app.fallback_locale'))->name;
+    }
+
+    /**
+     * Get locale from request.
+     *
+     * @return string
+     */
+    public function getRequestedLocale()
+    {
+        $code = request()->query('locale');
+
+        if ($code) {
+            return $this->localeRepository->findOneByField('code', $code);
+        }
+
+        return $this->getCurrentLocale();
     }
 
     /**

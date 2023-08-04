@@ -148,7 +148,7 @@
                         .then((response) => {
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                            this.$refs.localeModal.toggle();
+                            this.$refs.localeModal.close();
                             
                             resetForm();
                             

@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-aca07e42.css",
+    "file": "assets/app-3c5ef892.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -32,10 +32,6 @@
     "file": "assets/Icon-remove-32d29b4e.svg",
     "src": "src/Resources/assets/images/Icon-remove.svg"
   },
-  "src/Resources/assets/images/add-product-to-store.png": {
-    "file": "assets/add-product-to-store-9c48f721.png",
-    "src": "src/Resources/assets/images/add-product-to-store.png"
-  },
   "src/Resources/assets/images/checked-checkbox.png": {
     "file": "assets/checked-checkbox-98f8f649.png",
     "src": "src/Resources/assets/images/checked-checkbox.png"
@@ -56,6 +52,10 @@
     "file": "assets/hamburger-9b9f7edd.svg",
     "src": "src/Resources/assets/images/hamburger.svg"
   },
+  "src/Resources/assets/images/icon-add-product.svg": {
+    "file": "assets/icon-add-product-e3232d62.svg",
+    "src": "src/Resources/assets/images/icon-add-product.svg"
+  },
   "src/Resources/assets/images/icon-discount.svg": {
     "file": "assets/icon-discount-e37d1aed.svg",
     "src": "src/Resources/assets/images/icon-discount.svg"
@@ -68,6 +68,10 @@
     "file": "assets/media-image-4aa33a76.png",
     "src": "src/Resources/assets/images/media-image.png"
   },
+  "src/Resources/assets/images/product-placeholders/top-angle.svg": {
+    "file": "assets/top-angle-a5454c50.svg",
+    "src": "src/Resources/assets/images/product-placeholders/top-angle.svg"
+  },
   "src/Resources/assets/images/search.svg": {
     "file": "assets/search-a93e6b3f.svg",
     "src": "src/Resources/assets/images/search.svg"
@@ -77,14 +81,14 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-05f8acf7.css",
+    "file": "assets/app-c04ede37.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-05f8acf7.css"
+      "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-56b51392.js",
+    "file": "assets/app-48940b44.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

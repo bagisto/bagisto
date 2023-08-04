@@ -83,63 +83,7 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="mb-[10px]">
-                                    <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
-                                            @lang('admin::app.promotions.catalog-rules.create.channels')
-                                        </p>
-                                        
-                                        @foreach(core()->getAllChannels() as $channel)
-                                            <label
-                                                class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                                for="channel_{{ $channel->id }}"
-                                            >
-                                                <input
-                                                    type="checkbox"
-                                                    name="channels[]"
-                                                    id="channel_{{ $channel->id }}"
-                                                    value="{{ $channel->id }}"
-                                                    {{ in_array($channel->id, old('channels[]', [])) ? 'checked' : '' }}
-                                                    class="hidden peer"
-                                                >
-                                                
-                                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                                
-                                                <p class="text-gray-600 font-semibold cursor-pointer">
-                                                    {{ core()->getChannelName($channel) }}
-                                                </p>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('admin::app.promotions.catalog-rules.create.customer-groups')
-                                    </p>
-                                    
-                                    @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                        <label
-                                            class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                            for="customer_group_{{ $customerGroup->id }}"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                name="customer_groups[]"
-                                                id="customer_group_{{ $customerGroup->id }}"
-                                                value="{{ $customerGroup->id }}"
-                                                {{ in_array($customerGroup->id, old('customer_groups[]', [])) ? 'checked' : '' }}
-                                                class="hidden peer"
-                                            >
-                                            
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                            
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
-                                                {{ $customerGroup->name }}
-                                            </p>
-                                        </label>
-                                    @endforeach
-                                </div>
+                          
                             </div>
         
                             {{-- Conditions --}}
@@ -149,11 +93,7 @@
                                         @lang('admin::app.promotions.catalog-rules.create.conditions')
                                     </p>
 
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.promotions.catalog-rules.create.condition-type')
-                                        </x-admin::form.control-group.label>
-
+                                    <x-admin::form.control-group class="!mb-0">
                                         <x-admin::form.control-group.control
                                             type="select"
                                             name="condition_type"
@@ -319,27 +259,6 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <label
-                                        for="checkbox"
-                                        class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            class="hidden peer"
-                                            id="checkbox"
-                                            name="status"
-                                            value="1"
-                                        >
-
-                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                        <div
-                                            class="text-[14px] text-gray-600 font-semibold cursor-pointer"
-                                        >
-                                            @lang('admin::app.promotions.catalog-rules.create.status')
-                                        </div>
-                                    </label>
-
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.promotions.catalog-rules.create.priority')
@@ -360,6 +279,104 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
+
+                                    <div class="mb-[10px]">
+                                        <div class="mb-[10px]">
+                                            <p class="block leading-[24px] text-gray-800 font-medium">
+                                                @lang('admin::app.promotions.catalog-rules.create.channels')
+                                            </p>
+                                            
+                                            @foreach(core()->getAllChannels() as $channel)
+                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                    <x-admin::form.control-group.control
+                                                        type="checkbox"
+                                                        name="channel[]"
+                                                        :value="$channel->id"
+                                                        :id="'channel_' . '_' . $channel->id"
+                                                        :for="'channel_' . '_' . $channel->id"
+                                                        :label="$channel->name"
+                                                        :checked="in_array($channel->id, old('channel[]', []))"
+                                                    >
+                                                    </x-admin::form.control-group.control>
+                                    
+                                                    <x-admin::form.control-group.label
+                                                        :for="'channel_' . '_' . $channel->id"
+                                                        class="cursor-pointer"
+                                                    >
+                                                        {{ core()->getChannelName($channel) }}
+                                                    </x-admin::form.control-group.label>
+    
+                                                    <x-admin::form.control-group.error
+                                                        control-name="channel[]"
+                                                    >
+                                                    </x-admin::form.control-group.error>
+                                                </x-admin::form.control-group>
+                                            @endforeach
+                                        </div>
+                                    </div>
+    
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.catalog-rules.create.customer-groups')
+                                        </p>
+                                        
+                                        @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="customer_groups[]"
+                                                    :value="$customerGroup->id"
+                                                    :id="'customer_group_' . '_' . $customerGroup->id"
+                                                    :for="'customer_group_' . '_' . $customerGroup->id"
+                                                    :label="$customerGroup->name"
+                                                    :checked="in_array($customerGroup->id, old('customer_groups[]', []))"
+                                                >
+                                                </x-admin::form.control-group.control>
+                                
+                                                <x-admin::form.control-group.label
+                                                    :for="'customer_group_' . '_' . $customerGroup->id"
+                                                    class="cursor-pointer"
+                                                >
+                                                    {{ $customerGroup->name }}
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="customer_groups[]"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.catalog-rules.create.status')
+                                        </p>
+    
+                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                            <x-admin::form.control-group.control
+                                                type="checkbox"
+                                                name="status"
+                                                value="1"
+                                                id="status"
+                                                for="status"
+                                                label="status"
+                                            >
+                                            </x-admin::form.control-group.control>
+                            
+                                            <x-admin::form.control-group.label
+                                                for="status"
+                                                class="cursor-pointer"
+                                            >
+                                                @lang('admin::app.promotions.catalog-rules.create.status')
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="status"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>  
+                                    </div>
                                 </x-slot:content>
                             </x-admin::accordion>
                                 
@@ -477,7 +494,7 @@
                     <select
                         :name="['conditions[' + index + '][attribute]']"
                         :id="['conditions[' + index + '][attribute]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:flex-auto max-sm:max-w-full"
+                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                         v-model="condition.attribute"
                     >
                         <option value="">@lang('admin::app.promotions.catalog-rules.create.choose-condition-to-add')</option>
@@ -497,7 +514,7 @@
 
                     <select 
                         :name="['conditions[' + index + '][operator]']"
-                        class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                        class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                         v-model="condition.operator"
                         v-if="matchedAttribute"
                     >
@@ -551,7 +568,7 @@
                                         type="text"
                                         v-bind="field"
                                         :class="{ 'border border-red-500': errorMessage }"
-                                        class="w-full py-2 px-3 appearance-none border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                        class="flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                                     />
                                 </v-field>
                                 
@@ -566,7 +583,7 @@
                                 <input 
                                     type="date"
                                     :name="['conditions[' + index + '][value]']"
-                                    class="border w-full py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                    class="border w-[289px] py-2 px-3 appearance-none rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 />
                             </div>
@@ -583,7 +600,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select inline-flex gap-x-[4px] justify-between items-center h-[40px] w-[196px] max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -599,7 +616,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -613,7 +630,7 @@
 
                                 <select 
                                     :name="['conditions[' + index + '][value]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                                     v-model="condition.value" 
                                     v-else
                                 >
@@ -634,7 +651,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select 
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="inline-flex gap-x-[4px] justify-between items-center max-h-[40px] w-full max-w-[196px] py-[6px] pl-[12px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400"
+                                    class="custom-select flex w-[289px] min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                                     v-model="condition.value"
                                     multiple
                                 >
