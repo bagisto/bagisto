@@ -6,7 +6,9 @@
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex gap-2 mt-[30px]">
-                <x-admin::datagrid.filters></x-admin::datagrid.filters>
+                <div v-if="showFilters">
+                    <x-admin::datagrid.filters></x-admin::datagrid.filters>
+                </div>
 
                 <x-admin::datagrid.table></x-admin::datagrid.table>
             </div>
@@ -21,6 +23,8 @@
 
             data() {
                 return {
+                    showFilters: false,
+
                     available: {
                         actions: [],
 
@@ -370,6 +374,10 @@
 
                             break;
                     }
+                },
+
+                toggleFilters() {
+                    this.showFilters = ! this.showFilters;
                 },
             },
         });

@@ -2,7 +2,10 @@
     <!-- Left Toolbar -->
     <div class="flex gap-x-[4px] items-center w-full">
         <!-- Filters Activation Button -->
-        <div class="">
+        <div
+            class=""
+            @click="toggleFilters"
+        >
             <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600 transition-all hover:border-gray-400">
                 <span class="icon-filter text-[24px]"></span>
 
