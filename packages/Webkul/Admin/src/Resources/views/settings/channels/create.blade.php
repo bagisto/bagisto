@@ -36,7 +36,7 @@
                     </p>
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.code')
                             </x-admin::form.control-group.label>
 
@@ -58,7 +58,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.name')
                             </x-admin::form.control-group.label>
 
@@ -101,33 +101,40 @@
                         </x-admin::form.control-group>
 
                         <div class="mb-[10px]">
-                            <p class="block leading-[24px] text-[12px] text-gray-800 font-medium">@lang('admin::app.settings.channels.create.inventory-sources')</p>
-                    
+                            <p class="required block leading-[24px] text-[12px] text-gray-800 font-medium">
+                                @lang('admin::app.settings.channels.create.inventory-sources')
+                            </p>
+
                             @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                                <label 
-                                    class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
-                                    for="inventory_sources_{{ $inventorySource->id }}"
-                                >
-                                    <input 
-                                        type="checkbox" 
+                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
                                         name="inventory_sources[]"
-                                        id="inventory_sources_{{ $inventorySource->id }}"
-                                        value="{{ $inventorySource->id }}"
-                                        {{ in_array($inventorySource->id, old('inventory_sources', [])) ? 'checked' : '' }}
-                                        class="hidden peer"
+                                        :value="$inventorySource->id "
+                                        :id="'inventory_sources_' . $inventorySource->id"
+                                        :for="'inventory_sources_' . $inventorySource->id"
+                                        rules="required"
+                                        :label="trans('admin::app.settings.channels.create.inventory-sources')"
                                     >
-                    
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                    
-                                    <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
+                                    </x-admin::form.control-group.control>
+                                        
+                                    <x-admin::form.control-group.label 
+                                        :for="'inventory_sources_' . $inventorySource->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                    >
                                         {{ $inventorySource->name }}
-                                    </div>
-                                </label>
-                            @endforeach
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="inventory_sources[]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            @endforeach 
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.root-category')
                             </x-admin::form.control-group.label>
 
@@ -272,7 +279,7 @@
 
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.seo-title')
                             </x-admin::form.control-group.label>
 
@@ -294,7 +301,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.seo-description')
                             </x-admin::form.control-group.label>
 
@@ -316,7 +323,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.seo-keywords')
                             </x-admin::form.control-group.label>
 
@@ -356,35 +363,40 @@
                             {{-- Locale  --}}
                             <div class="mb-[10px]">
                                 <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
+                                    <p class="required block leading-[24px] text-gray-800 font-medium">
                                         @lang('admin::app.settings.channels.create.locales')
                                     </p>
                                 
                                     @foreach (core()->getAllLocales() as $locale)
-                                        <label 
-                                            class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
-                                            for="locales_{{ $locale->id }}"
-                                        >
-                                            <input 
-                                                type="checkbox" 
+                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                            <x-admin::form.control-group.control
+                                                type="checkbox"
                                                 name="locales[]"
-                                                id="locales_{{ $locale->id }}" 
-                                                value="{{ $locale->id }}"
-                                                {{ in_array($locale->id, old('locales', [])) ? 'checked' : '' }}
-                                                class="hidden peer"
+                                                :value="$locale->id"
+                                                :id="'locales_' . $locale->id"
+                                                :for="'locales_' . $locale->id"
+                                                rules="required"
+                                                :label="trans('admin::app.settings.channels.create.locales')"
                                             >
-                                
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
+                                            </x-admin::form.control-group.control>
+                                                
+                                            <x-admin::form.control-group.label 
+                                                :for="'locales_' . $locale->id"
+                                                class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                            >
                                                 {{ $locale->name }} 
-                                            </p>
-                                        </label>
-                                    @endforeach
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="locales[]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    @endforeach 
                                 </div>
     
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.channels.create.default-locale')
                                     </x-admin::form.control-group.label>
     
@@ -410,35 +422,40 @@
                                 </x-admin::form.control-group>
     
                                 <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
+                                    <p class="required block leading-[24px] text-gray-800 font-medium">
                                         @lang('admin::app.settings.channels.create.currencies')
                                     </p>
                                 
                                     @foreach (core()->getAllCurrencies() as $currency)
-                                        <label 
-                                            class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
-                                            for="{{ $currency->id }}"
-                                        >
-                                            <input 
-                                                type="checkbox" 
+                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                            <x-admin::form.control-group.control
+                                                type="checkbox"
                                                 name="currencies[]" 
-                                                id="{{ $currency->id }}" 
-                                                value="{{ $currency->id }}"
-                                                {{ in_array($currency->id, old('currencies', [])) ? 'checked' : '' }}
-                                                class="hidden peer"
+                                                :value="$currency->id"
+                                                :id="'currencies_' . $currency->id"
+                                                :for="'currencies_' . $currency->id"
+                                                rules="required"
+                                                :label="trans('admin::app.settings.channels.create.currencies')"
                                             >
-                                
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
-                                                {{ $currency->name }} 
-                                            </p>
-                                        </label>
-                                    @endforeach
+                                            </x-admin::form.control-group.control>
+                                                
+                                            <x-admin::form.control-group.label 
+                                                :for="'currencies_' . $currency->id"
+                                                class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                            >
+                                                {{ $currency->name }}  
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="currencies[]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    @endforeach 
                                 </div>
     
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.channels.create.default-currency')
                                     </x-admin::form.control-group.label>
     
@@ -527,13 +544,12 @@
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.channels.create.status')
                                     </x-admin::form.control-group.label>
-        
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="is_maintenance_on"
                                         :value="1"
                                         id="maintenance-mode-status"
-                                        :checked="true"
+                                        :checked="false"
                                     >
                                     </x-admin::form.control-group.control>
         

@@ -44,7 +44,7 @@
                     <div class="mb-[10px]">
                         {{-- Code --}}
                         <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.customers.groups.edit.code')
                             </x-admin::form.control-group.label>
 
@@ -75,7 +75,7 @@
 
                         {{-- Name --}}
                         <x-admin::form.control-group class="mb-4">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.customers.groups.edit.name')
                             </x-admin::form.control-group.label>
 

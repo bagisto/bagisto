@@ -36,7 +36,7 @@
     <script type="text/x-template" id="v-modal-template">
         <div>
             <div @click="toggle">
-                <slot name="close">
+                <slot name="toggle">
                 </slot>
             </div>
 
