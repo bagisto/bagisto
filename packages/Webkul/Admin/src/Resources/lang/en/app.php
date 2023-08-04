@@ -414,25 +414,24 @@ return [
             'index' => [
                 'title' => 'Groups',
 
-                'modal' => [
-                    'create' =>  [
-                        'title'          => 'Create new Group',
-                        'create-btn'     => 'Create Group',
-                        'code'           => 'Code',
-                        'name'           => 'Name', 
-                        'save-btn'       => 'Save Group',   
-                        'create-success' => 'Group created successfully',
-                    ],
+                'create' =>  [
+                    'title'          => 'Create new Group',
+                    'create-btn'     => 'Create Group',
+                    'code'           => 'Code',
+                    'name'           => 'Name', 
+                    'save-btn'       => 'Save Group',   
+                    'create-success' => 'Group created successfully',
                 ],
             ],
 
             'edit'  =>  [
-                'title'       => 'Edit Group',
-                'cancel-btn'  => 'Cancel',
-                'save-btn'    => 'Save Group',
-                'general'     => 'General',
-                'code'        => 'Code',
-                'name'        => 'Name',
+                'title'             => 'Edit Group',
+                'cancel-btn'        => 'Cancel',
+                'save-btn'          => 'Save Group',
+                'general'           => 'General',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'update-success'    => 'Group Updated Successfully',
             ],
         ],
 
@@ -484,17 +483,15 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'create-btn'  => 'Create Exchange Rate',
                 'title'       => 'Exchange Rates',
+                'create-btn'  => 'Create Exchange Rate',
 
-                'modal'  =>  [
-                    'create' => [
-                        'rate'             => 'Rate',
-                        'save-btn'         => 'Save',
-                        'source-currency'  => 'Source Currency',
-                        'target-currency'  => 'Target Currency',
-                        'title'            => 'Create Exchange Rate',
-                    ],
+                'create' => [
+                    'title'            => 'Create Exchange Rate',
+                    'rate'             => 'Rate',
+                    'save-btn'         => 'Save Exchange Rate',
+                    'source-currency'  => 'Source Currency',
+                    'target-currency'  => 'Target Currency',
                 ],
             ],
 
@@ -1370,7 +1367,7 @@ return [
             'title'            => 'Create Page',
             'save-btn'         => 'Save Page',
             'general'          => 'General',
-            'page-title'       => 'Page Title',
+            'page-title'       => 'Title',
             'channels'          => 'Channels',
             'content'          => 'Content',
             'meta-keywords'    => 'Meta Keywords',

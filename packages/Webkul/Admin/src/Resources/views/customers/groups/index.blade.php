@@ -24,7 +24,7 @@
                         class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
                         @click="$refs.groupCreateModal.open()"
                     >
-                        @lang('admin::app.customers.groups.index.modal.create.create-btn')
+                        @lang('admin::app.customers.groups.index.create.create-btn')
                     </button>
                 @endif
 
@@ -33,21 +33,21 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, create)">
-                        {{-- Create Group Modal --}}
+                        <!-- Create Group Modal -->
                         <x-admin::modal ref="groupCreateModal">          
                             <x-slot:header>
-                                {{-- Modal Header --}}
+                                <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.customers.groups.index.modal.create.title')
+                                    @lang('admin::app.customers.groups.index.create.title')
                                 </p>    
                             </x-slot:header>
             
                             <x-slot:content>
-                                {{-- Modal Content --}}
+                                <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.groups.index.modal.create.code')
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.customers.groups.index.create.code')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -55,8 +55,8 @@
                                             name="code"
                                             id="code"
                                             rules="required"
-                                            :label="trans('admin::app.customers.groups.index.modal.create.code')"
-                                            :placeholder="trans('admin::app.customers.groups.index.modal.create.code')"
+                                            :label="trans('admin::app.customers.groups.index.create.code')"
+                                            :placeholder="trans('admin::app.customers.groups.index.create.code')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -67,8 +67,8 @@
                                     </x-admin::form.control-group>
             
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.customers.groups.index.modal.create.name')
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.customers.groups.index.create.name')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -76,8 +76,8 @@
                                             name="name"
                                             id="last_name"
                                             rules="required"
-                                            :label="trans('admin::app.customers.groups.index.modal.create.name')"
-                                            :placeholder="trans('admin::app.customers.groups.index.modal.create.name')"
+                                            :label="trans('admin::app.customers.groups.index.create.name')"
+                                            :placeholder="trans('admin::app.customers.groups.index.create.name')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -90,13 +90,13 @@
                             </x-slot:content>
             
                             <x-slot:footer>
-                                {{-- Modal Submission --}}
+                                <!-- Modal Submission -->
                                 <div class="flex gap-x-[10px] items-center">
                                     <button 
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        @lang('admin::app.customers.groups.index.modal.create.save-btn')
+                                        @lang('admin::app.customers.groups.index.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>
