@@ -1,12 +1,15 @@
-{!! view_render_event('bagisto.admin.catalog.product.edit.form.column_2.inventories.before', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.before', ['product' => $product]) !!}
 
+{{-- Panel --}}
 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
+    {{-- Panel Header --}}
     <p class="flex justify-between text-[16px] text-gray-800 font-semibold mb-[16px]">
         @lang('admin::app.catalog.products.edit.inventories.title')
     </p>
 
-    {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_2.inventories.controls.before', ['product' => $product]) !!}
+    {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.before', ['product' => $product]) !!}
 
+    {{-- Panel Content --}}
     <div class="mb-[20px] text-[14px] text-gray-600">
         <div class="flex  items-center relative mb-[10px]">
             <span class="inline-block mr-[5px] p-[5px] bg-yellow-500 rounded-full"></span>
@@ -48,7 +51,7 @@
     
     @endforeach
 
-    {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_2.inventories.controls.after', ['product' => $product]) !!}
+    {!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.controls.after', ['product' => $product]) !!}
 </div>
 
-{!! view_render_event('bagisto.admin.catalog.product.edit.form.column_2.inventories.after', ['product' => $product]) !!}
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.inventories.after', ['product' => $product]) !!}
