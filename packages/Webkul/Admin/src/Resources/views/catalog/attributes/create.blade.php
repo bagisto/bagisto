@@ -51,17 +51,17 @@
 
                             <!-- Admin name -->
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.create.admin')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="admin_name"
-                                    value="{{ old('admin_name') }}"
+                                    :value="old('admin_name')"
                                     rules="required"
-                                    label="{{ trans('admin::app.catalog.attributes.create.admin') }}"
-                                    placeholder="{{ trans('admin::app.catalog.attributes.create.admin') }}"
+                                    :label="trans('admin::app.catalog.attributes.create.admin')"
+                                    :placeholder="trans('admin::app.catalog.attributes.create.admin')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -81,8 +81,8 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="{{ $locale->code }}[name]"
-                                        value="{{ old($locale->code)['name'] ?? '' }}"
-                                        placeholder="{{ $locale->name }}"
+                                        :value="old($locale->code)['name'] ?? ''"
+                                        :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -125,25 +125,15 @@
                                             type="select"
                                             name="swatch_type"
                                             id="swatch_type"
-                                            value="{{ old('swatch_type') }}"
+                                            :value="old('swatch_type')"
                                             v-model="swatch_type"
                                             @change="show_swatch=true"
                                         >
-                                            <option value="dropdown">
-                                                @lang('admin::app.catalog.attributes.create.dropdown')
-                                            </option>
-                        
-                                            <option value="color">
-                                                @lang('admin::app.catalog.attributes.create.color-swatch')
-                                            </option>
-                        
-                                            <option value="image">
-                                                @lang('admin::app.catalog.attributes.create.image-swatch')
-                                            </option>
-                        
-                                            <option value="text">
-                                                @lang('admin::app.catalog.attributes.create.text-swatch')
-                                            </option>
+                                            @foreach (['dropdown', 'color', 'image', 'text'] as $type)
+                                                <option value="{{ $type }}">
+                                                    @lang('admin::app.catalog.attributes.create.option.' . $type)
+                                                </option>
+                                            @endforeach
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
@@ -159,25 +149,23 @@
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <label
-                                            for="empty_option"
-                                            class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                        >
-                                            <input
+                                        <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <x-admin::form.control-group.control
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
-                                                class="hidden peer"
                                                 value="1"
-                                                v-model="isNullOptionChecked"
+                                                @click="isNullOptionChecked=true"
                                             >
-                    
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                    
-                                            <div class="text-[14px] text-gray-600 cursor-pointer">
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.label
+                                                for="empty_option"
+                                                class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                            >
                                                 @lang('admin::app.catalog.attributes.create.create-empty-option')
-                                            </div>
-                                        </label>
+                                            </x-admin::form.control-group.label>
+                                        </x-admin::form.control-group>
                                     </div>
                                 </div>
 
@@ -401,18 +389,17 @@
                             <div class="px-[16px] pb-[16px]">
                                 <!-- Attribute Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.create.general')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="code"
-                                        value="{{ old('code') }}"
-                                        class="!w-[284px]"
+                                        :value="old('code')"
                                         rules="required"
-                                        label="{{ trans('admin::app.catalog.attributes.create.code') }}"
-                                        placeholder="{{ trans('admin::app.catalog.attributes.create.code') }}"
+                                        :label="trans('admin::app.catalog.attributes.create.code')"
+                                        :placeholder="trans('admin::app.catalog.attributes.create.code')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -424,7 +411,7 @@
 
                                 <!-- Attribute Type -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.create.type')
                                     </x-admin::form.control-group.label>
 
@@ -432,10 +419,10 @@
                                         type="select"
                                         name="type"
                                         rules="required"
-                                        value="{{ old('type') }}"
+                                        :value="old('type')"
                                         id="type"
-                                        class="!w-[284px] cursor-pointer"
-                                        label="{{ trans('admin::app.catalog.attributes.create.type') }}"
+                                        class="cursor-pointer"
+                                        :label="trans('admin::app.catalog.attributes.create.type')"
                                         v-model="attribute_type"
                                         @change="swatch_attribute=true"
                                     >
@@ -464,7 +451,7 @@
                                         name="enable_wysiwyg"
                                         class="cursor-pointer"
                                         value="1"
-                                        label="{{ trans('admin::app.catalog.attributes.create.enable-wysiwyg') }}"
+                                        :label="trans('admin::app.catalog.attributes.create.enable-wysiwyg')"
                                     >
                                     </x-admin::form.control-group.control>
                                 </x-admin::form.control-group>
@@ -480,47 +467,28 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <!-- Is Required -->
-                                <label
-                                    for="is_required"
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        id="is_required"
-                                        name="is_required"
-                                        class="hidden peer"
-                                        required
-                                        value="1"
-                                    >
-            
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-            
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.is_required')
-                                    </div>
-                                </label>
+                                <!-- All Types Define In The Loop -->
+                                @foreach (['is_required', 'is_unique'] as $item)
+                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            :id="$item"
+                                            :name="$item"
+                                            class="cursor-pointer"
+                                            :for="$item"
+                                            value="1"
+                                            required
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                <!-- Is Unique -->
-                                <label
-                                    for="is_unique" 
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input 
-                                        type="checkbox" 
-                                        id="is_unique" 
-                                        name="is_unique" 
-                                        class="hidden peer"
-                                        required
-                                        value="1"
-                                    >
-
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.is_unique')
-                                    </div>
-                                </label>
+                                        <x-admin::form.control-group.label
+                                            :for="$item"
+                                            class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        >
+                                            @lang('admin::app.catalog.attributes.create.' . $item)
+                                        </x-admin::form.control-group.label>
+                                    </x-admin::form.control-group>
+                                @endforeach
                             </x-slot:content>
                         </x-admin::accordion>
 
@@ -533,47 +501,28 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <!-- value_per_locale -->
-                                <label
-                                    for="value_per_locale"
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="value_per_locale"
-                                        name="value_per_locale"
-                                        value="1"
-                                        required
-                                    >
+                                <!-- All Types Define In The Loop -->
+                                @foreach (['value_per_locale', 'value_per_channel', 'is_configurable', 'is_visible_on_front', 'use_in_flat','is_comparable'] as $item)
+                                    <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            :id="$item"
+                                            :name="$item"
+                                            class="cursor-pointer"
+                                            :for="$item"
+                                            value="1"
+                                            required
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.value_per_locale')
-                                    </div>
-                                </label>
-
-                                <!-- value_per_channel -->
-                                <label
-                                    for="value_per_channel"
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="value_per_channel"
-                                        name="value_per_channel"
-                                        value="1"
-                                        required
-                                    >
-
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.value_per_channel')
-                                    </div>
-                                </label>
+                                        <x-admin::form.control-group.label
+                                            :for="$item"
+                                            class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                        >
+                                            @lang('admin::app.catalog.attributes.create.' .  $item)
+                                        </x-admin::form.control-group.label>
+                                    </x-admin::form.control-group>
+                                @endforeach
 
                                 <!-- Use in Layered -->
                                 <label
@@ -590,93 +539,9 @@
                                     >
             
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-            
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
+
+                                    <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
                                         @lang('admin::app.catalog.attributes.create.is_filterable')
-                                    </div>
-                                </label>
-
-                                <!-- is_configurable -->
-                                <label
-                                    for="is_configurable"
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="is_configurable"
-                                        name="is_configurable"
-                                        value="1"
-                                        required
-                                    >
-            
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-            
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.is_configurable')
-                                    </div>
-                                </label>
-
-                                <!-- is_visible_on_front -->
-                                <label
-                                    for="is_visible_on_front" 
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="is_visible_on_front"
-                                        name="is_visible_on_front"
-                                        value="1"
-                                        required
-                                    >
-            
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-            
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.is_visible_on_front')
-                                    </div>
-                                </label>
-
-                                <!-- use_in_flat -->
-                                <label
-                                    for="use_in_flat" 
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="use_in_flat"
-                                        name="use_in_flat"
-                                        value="1"
-                                        required
-                                    >
-            
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-            
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.use_in_flat')
-                                    </div>
-                                </label>
-
-                                <!-- is_comparable -->
-                                <label
-                                    for="is_comparable"
-                                    class="flex gap-[10px] items-center w-max p-[6px] cursor-pointer select-none"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        class="hidden peer"
-                                        id="is_comparable"
-                                        name="is_comparable"
-                                        value="1"
-                                        required
-                                    >
-            
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-            
-                                    <div class="text-[14px] text-gray-600 cursor-pointer">
-                                        @lang('admin::app.catalog.attributes.create.is_comparable')
                                     </div>
                                 </label>
                             </x-slot:content>
@@ -702,7 +567,10 @@
                         <x-slot:content>
                             <div class="grid grid-cols-3 px-[16px] py-[10px]">
                                 <!-- Image Input -->
-                                <x-admin::form.control-group class="w-full" v-if="swatch_type == 'image'">
+                                <x-admin::form.control-group
+                                    class="w-full"
+                                    v-if="swatch_type == 'image'"
+                                >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.image')
                                     </x-admin::form.control-group.label>
@@ -710,7 +578,7 @@
                                     <x-admin::form.control-group.control
                                         type="image"
                                         name="swatch_value"
-                                        placeholder="{{ trans('admin::app.catalog.attributes.create.image') }}"
+                                        :placeholder="trans('admin::app.catalog.attributes.create.image')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -721,7 +589,10 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Color Input -->
-                                <x-admin::form.control-group class="w-full" v-if="swatch_type == 'color'">
+                                <x-admin::form.control-group
+                                    class="w-full"
+                                    v-if="swatch_type == 'color'"
+                                >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.color')
                                     </x-admin::form.control-group.label>
@@ -729,7 +600,7 @@
                                     <x-admin::form.control-group.control
                                         type="color"
                                         name="swatch_value"
-                                        placeholder="{{ trans('admin::app.catalog.attributes.create.color') }}"
+                                        :placeholder="trans('admin::app.catalog.attributes.create.color')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -758,8 +629,8 @@
                                         type="text"
                                         name="admin"
                                         rules="required"
-                                        label="{{ trans('admin::app.catalog.attributes.create.admin') }}"
-                                        placeholder="{{ trans('admin::app.catalog.attributes.create.admin') }}"
+                                        :label="trans('admin::app.catalog.attributes.create.admin')"
+                                        :placeholder="trans('admin::app.catalog.attributes.create.admin')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -778,15 +649,15 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="{{ $locale->code }}"
-                                            rules="{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}"
-                                            label="{{ $locale->name }}"
-                                            placeholder="{{ $locale->name }}"
+                                            :name="$locale->code"
+                                            :rules="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''"
+                                            :label="$locale->name"
+                                            :placeholder="$locale->name"
                                         >
                                         </x-admin::form.control-group.control>
             
                                         <x-admin::form.control-group.error
-                                            control-name="{{ $locale->code }}"
+                                            :control-name="$locale->code"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -802,8 +673,8 @@
                                         type="number"
                                         name="sort_order"
                                         rules="required"
-                                        label="{{ trans('admin::app.catalog.attributes.create.position') }}"
-                                        placeholder="{{ trans('admin::app.catalog.attributes.create.position') }}"
+                                        :label="trans('admin::app.catalog.attributes.create.position')"
+                                        :placeholder="trans('admin::app.catalog.attributes.create.position')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -821,7 +692,7 @@
                                 type="submit" 
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.marketing.email-marketing.events.create.save')
+                                @lang('admin::app.catalog.attributes.create.option.save-btn')
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>

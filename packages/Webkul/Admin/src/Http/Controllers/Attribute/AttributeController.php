@@ -62,7 +62,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create(request()->only([
+        $data = request()->only([
             'code',
             'type',
             'admin_name',
@@ -78,7 +78,9 @@ class AttributeController extends Controller
             'use_in_flat',
             'is_comparable',
             'is_user_defined' => 1
-        ]));
+        ]);
+
+        $attribute = $this->attributeRepository->create($data);
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
