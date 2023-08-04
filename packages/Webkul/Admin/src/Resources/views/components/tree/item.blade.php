@@ -278,7 +278,11 @@
 
                 generateIcon() {
                     return this.$h('i', {
-                        class: [this.isActive ? 'icon-sort-down' : 'icon-sort-right', 'text-[24px] cursor-pointer'],
+                        class: [
+                            this.isActive ? 'icon-sort-down' : 
+                            this.hasChildren ? 'icon-sort-right' : '',
+                            'text-[24px] cursor-pointer'
+                        ],
                         
                         onClick: (selection) => {
                             this.$el.classList.toggle('active');
@@ -292,7 +296,10 @@
 
                 generateFolderIcon() {
                     return this.$h('i', {
-                        class: [this.hasChildren ? 'icon-folder': 'icon-attribute', 'text-[24px] cursor-pointer'],
+                        class: [
+                            this.hasChildren ? 'icon-folder': 'icon-attribute',
+                            'text-[24px] cursor-pointer'
+                        ],
                     });
                 },
 
