@@ -292,7 +292,7 @@
                                             @php($selectedOptionIds = old('channels') ?: $catalogRule->channels->pluck('id')->toArray())
                                             
                                             @foreach(core()->getAllChannels() as $channel)
-                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                                     <x-admin::form.control-group.control
                                                         type="checkbox"
                                                         name="channels[]"
@@ -300,7 +300,7 @@
                                                         :id="'channel_' . '_' . $channel->id"
                                                         :for="'channel_' . '_' . $channel->id"
                                                         :label="$channel->name"
-                                                        :checked="in_array($channel->id, old('channel[]') ?? $selectedOptionIds)"
+                                                        :checked="in_array($channel->id, $selectedOptionIds)"
                                                     >
                                                     </x-admin::form.control-group.control>
                                     
@@ -336,7 +336,7 @@
                                                     :id="'customer_group_' . '_' . $customerGroup->id"
                                                     :for="'customer_group_' . '_' . $customerGroup->id"
                                                     :label="$customerGroup->name"
-                                                    :checked="in_array($customerGroup->id, old('customer_groups[]') ?? $selectedOptionIds)"
+                                                    :checked="in_array($customerGroup->id, $selectedOptionIds)"
                                                 >
                                                 </x-admin::form.control-group.control>
                                 

@@ -281,38 +281,36 @@
                                     </x-admin::form.control-group>
 
                                     <div class="mb-[10px]">
-                                        <div class="mb-[10px]">
-                                            <p class="block leading-[24px] text-gray-800 font-medium">
-                                                @lang('admin::app.promotions.catalog-rules.create.channels')
-                                            </p>
-                                            
-                                            @foreach(core()->getAllChannels() as $channel)
-                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
-                                                    <x-admin::form.control-group.control
-                                                        type="checkbox"
-                                                        name="channel[]"
-                                                        :value="$channel->id"
-                                                        :id="'channel_' . '_' . $channel->id"
-                                                        :for="'channel_' . '_' . $channel->id"
-                                                        :label="$channel->name"
-                                                        :checked="in_array($channel->id, old('channel[]', []))"
-                                                    >
-                                                    </x-admin::form.control-group.control>
-                                    
-                                                    <x-admin::form.control-group.label
-                                                        :for="'channel_' . '_' . $channel->id"
-                                                        class="cursor-pointer"
-                                                    >
-                                                        {{ core()->getChannelName($channel) }}
-                                                    </x-admin::form.control-group.label>
-    
-                                                    <x-admin::form.control-group.error
-                                                        control-name="channel[]"
-                                                    >
-                                                    </x-admin::form.control-group.error>
-                                                </x-admin::form.control-group>
-                                            @endforeach
-                                        </div>
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.catalog-rules.create.channels')
+                                        </p>
+                                        
+                                        @foreach(core()->getAllChannels() as $channel)
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="channels[]"
+                                                    :value="$channel->id"
+                                                    :id="'channel_' . '_' . $channel->id"
+                                                    :for="'channel_' . '_' . $channel->id"
+                                                    :label="$channel->name"
+                                                    :checked="in_array($channel->id, old('channels[]', []))"
+                                                >
+                                                </x-admin::form.control-group.control>
+                                
+                                                <x-admin::form.control-group.label
+                                                    :for="'channel_' . '_' . $channel->id"
+                                                    class="cursor-pointer"
+                                                >
+                                                    {{ core()->getChannelName($channel) }}
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="channels[]"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        @endforeach
                                     </div>
     
                                     <div class="mb-[10px]">
@@ -321,7 +319,7 @@
                                         </p>
                                         
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="customer_groups[]"
@@ -451,7 +449,7 @@
                 
                 data() {
                     return {
-                        condition_type: 1,
+                        condition_type: "{{ old('condition_type', 0) }}",
 
                         conditions: []
                     }
@@ -534,16 +532,16 @@
                         >
 
                         <div v-if="matchedAttribute.key == 'product|category_ids'">
-                            <v-tree-view 
+                            <x-admin::tree.view
                                 value-field="id"
                                 id-field="id"
-                                :name-field="'conditions[' + index + '][value]'"
+                                ::name-field="'conditions[' + index + '][value]'"
                                 input-type="checkbox"
-                                :items='matchedAttribute.options'
-                                :behavior="'no'"
-                                fallback-locale="{{ config('app.fallback_locale') }}"
+                                ::items='matchedAttribute.options'
+                                behavior="no"
+                                :fallback-locale="config('app.fallback_locale')"
                             >
-                            </v-tree-view>
+                            </x-admin::tree.view>
                         </div>
 
                         <div v-else>
@@ -867,19 +865,10 @@
             });
         </script>
 
-        {{-- v tree view --}}
-        @include('admin::tree.view')
-
-        {{-- v tree item --}}
-        @include('admin::tree.item')
+        {{-- v tree checkbox --}}
+        <x-admin::tree.item></x-admin::tree.item>
 
         {{-- v tree checkbox --}}
-        @include('admin::tree.item')
-
-        {{-- v tree checkbox --}}
-        @include('admin::tree.checkbox')
-
-        {{-- v tree radio --}}
-        @include('admin::tree.radio')
+        <x-admin::tree.checkbox></x-admin::tree.checkbox>
     @endPushOnce
 </x-admin::layouts>

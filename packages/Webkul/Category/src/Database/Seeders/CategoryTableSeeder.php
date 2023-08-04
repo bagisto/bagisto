@@ -23,15 +23,16 @@ class CategoryTableSeeder extends Seeder
 
         DB::table('categories')->insert([
             [
-                'id'         => '1',
-                'position'   => '1',
-                'image'      => NULL,
-                'status'     => '1',
-                '_lft'       => '1',
-                '_rgt'       => '14',
-                'parent_id'  => NULL,
-                'created_at' => $now,
-                'updated_at' => $now,
+                'id'          => '1',
+                'position'    => '1',
+                'logo_path'   => NULL,
+                'status'      => '1',
+                '_lft'        => '1',
+                '_rgt'        => '14',
+                'parent_id'   => NULL,
+                'banner_path' => NULL,
+                'created_at'  => $now,
+                'updated_at'  => $now,
             ]
         ]);
 

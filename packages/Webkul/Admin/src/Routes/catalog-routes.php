@@ -113,9 +113,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
 
-            Route::get('search', 'productLinkSearch')->name('admin.catalog.products.product_link_search');
-
-            Route::get('search-simple-products', 'searchSimpleProducts')->name('admin.catalog.products.search_simple_product');
+            Route::get('search', 'search')->name('admin.catalog.products.search');
 
             Route::get('{id}/{attribute_id}', 'download')->defaults('_config', [
                 'view' => 'admin.catalog.products.edit',

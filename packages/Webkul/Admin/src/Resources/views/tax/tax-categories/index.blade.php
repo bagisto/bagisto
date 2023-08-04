@@ -50,7 +50,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Code -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-categories.create.code')
                                         </x-admin::form.control-group.label>
 
@@ -73,7 +73,7 @@
 
                                     <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-categories.create.name')
                                         </x-admin::form.control-group.label>
 
@@ -96,7 +96,7 @@
 
                                     <!-- Description -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-categories.create.description')
                                         </x-admin::form.control-group.label>
 
@@ -122,12 +122,12 @@
                                     @endphp
 
                                     <!-- Select Tax Rates -->
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
+                                    <p class="required block leading-[24px] text-gray-800 font-medium">
                                         @lang('admin::app.settings.taxes.tax-categories.create.tax-rates')
                                     </p>
 
                                     @foreach ($taxRates as $taxRate)
-                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                             <x-admin::form.control-group.control
                                                 type="checkbox"
                                                 name="taxrates" 
@@ -142,7 +142,7 @@
                                                 
                                             <x-admin::form.control-group.label 
                                                 :for="'taxrates_' . $taxRate->id"
-                                                class="cursor-pointer"
+                                                class="!text-[14px] !text-gray-600 cursor-pointer"
                                             >
                                                 {{ $taxRate->identifier }}
                                             </x-admin::form.control-group.label>
