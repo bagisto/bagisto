@@ -484,17 +484,15 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'create-btn'  => 'Create Exchange Rate',
                 'title'       => 'Exchange Rates',
+                'create-btn'  => 'Create Exchange Rate',
 
-                'modal'  =>  [
-                    'create' => [
-                        'rate'             => 'Rate',
-                        'save-btn'         => 'Save',
-                        'source-currency'  => 'Source Currency',
-                        'target-currency'  => 'Target Currency',
-                        'title'            => 'Create Exchange Rate',
-                    ],
+                'create' => [
+                    'title'            => 'Create Exchange Rate',
+                    'rate'             => 'Rate',
+                    'save-btn'         => 'Save Exchange Rate',
+                    'source-currency'  => 'Source Currency',
+                    'target-currency'  => 'Target Currency',
                 ],
             ],
 
