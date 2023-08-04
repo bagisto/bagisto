@@ -50,7 +50,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Code -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-categories.create.code')
                                         </x-admin::form.control-group.label>
 
@@ -73,7 +73,7 @@
 
                                     <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-categories.create.name')
                                         </x-admin::form.control-group.label>
 
@@ -96,7 +96,7 @@
 
                                     <!-- Description -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-categories.create.description')
                                         </x-admin::form.control-group.label>
 
@@ -122,7 +122,7 @@
                                     @endphp
 
                                     <!-- Select Tax Rates -->
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
+                                    <p class="required block leading-[24px] text-gray-800 font-medium">
                                         @lang('admin::app.settings.taxes.tax-categories.create.tax-rates')
                                     </p>
 
