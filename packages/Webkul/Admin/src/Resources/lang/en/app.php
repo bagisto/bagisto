@@ -344,8 +344,8 @@ return [
 
         'edit' => [
             'title'                 => 'Edit Customer',
-            'edit-btn-title'        => 'Edit',
-            'save-btn-title'        => 'Save customer',
+            'edit-btn'              => 'Edit',
+            'save-btn'              => 'Save customer',
             'first-name'            => 'First Name',
             'last-name'             => 'Last Name',
             'email'                 => 'Email',

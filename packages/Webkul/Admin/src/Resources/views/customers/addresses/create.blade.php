@@ -94,7 +94,7 @@
                                         <div class="w-full">
                                             <!-- First Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.first-name')
                                                 </x-admin::form.control-group.label>
 
@@ -116,7 +116,7 @@
                                         <div class="w-full">
                                             <!-- Last Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.last-name')
                                                 </x-admin::form.control-group.label>
             
@@ -139,7 +139,7 @@
 
                                     <!-- Street Address -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.addresses.create.street-address')
                                         </x-admin::form.control-group.label>
 
@@ -192,7 +192,7 @@
                                         <div class="w-full">
                                             <!-- City -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.city')
                                                 </x-admin::form.control-group.label>
 
@@ -214,7 +214,7 @@
                                         <div class="w-full">
                                             <!-- PostCode -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.post-code')
                                                 </x-admin::form.control-group.label>
             
@@ -239,7 +239,7 @@
                                         <div class="w-full">
                                             <!-- Country Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.country')
                                                 </x-admin::form.control-group.label>
 
@@ -248,16 +248,10 @@
                                                     name="country"
                                                     rules="required"
                                                     :label="trans('admin::app.customers.addresses.create.country')"
+                                                    v-model="country"
                                                 >
-                                                    <option value="">@lang('Select Country')</option>
-
                                                     @foreach (core()->countries() as $country)
-                                                        <option 
-                                                            {{ $country->code === config('app.default_country') ? 'selected' : '' }}  
-                                                            value="{{ $country->code }}"
-                                                        >
-                                                            {{ $country->name }}
-                                                        </option>
+                                                        <option value="{{ $country->code }}">{{ $country->name }}</option>
                                                     @endforeach
                                                 </x-admin::form.control-group.control>
 
@@ -270,18 +264,39 @@
                                         <div class="w-full">
                                             <!-- State Name -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.state')
                                                 </x-admin::form.control-group.label>
 
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    name="state"
-                                                    rules="required"
-                                                    :label="trans('admin::app.customers.addresses.create.state')"
-                                                    :placeholder="trans('admin::app.customers.addresses.create.state')"
-                                                >
-                                                </x-admin::form.control-group.control>
+                                                <template v-if="haveStates()">
+                                                    <x-admin::form.control-group.control
+                                                        type="select"
+                                                        name="state"
+                                                        id="state"
+                                                        rules="required"
+                                                        :label="trans('admin::app.customers.addresses.create.state')"
+                                                        :placeholder="trans('admin::app.customers.addresses.create.state')"
+                                                        v-model="state"
+                                                    >
+                                                        <option 
+                                                            v-for='(state, index) in countryStates[country]'
+                                                            :value="state.code"
+                                                            v-text="state.default_name"
+                                                        >
+                                                        </option>
+                                                    </x-admin::form.control-group.control>
+                                                </template>
+
+                                                <template v-else>
+                                                    <x-admin::form.control-group.control
+                                                        type="text"
+                                                        name="state"
+                                                        rules="required"
+                                                        :label="trans('admin::app.customers.addresses.create.state')"
+                                                        :placeholder="trans('admin::app.customers.addresses.create.state')"
+                                                    >
+                                                    </x-admin::form.control-group.control>
+                                                </template>
 
                                                 <x-admin::form.control-group.error
                                                     control-name="state"
@@ -295,7 +310,7 @@
                                         <div class="w-full">
                                             <!--Phone number -->
                                             <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
+                                                <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.customers.addresses.create.phone')
                                                 </x-admin::form.control-group.label>
 
@@ -323,6 +338,7 @@
                                                     name="default_address"
                                                     :value="1"
                                                     id="default_address"
+                                                    for="default_address"
                                                     :label="trans('admin::app.customers.addresses.create.default-address')"
                                                     :checked="false"
                                                 >
@@ -375,6 +391,16 @@
                     }
                 },
 
+                data: function () {
+                    return {
+                        country: "",
+
+                        state: "",
+
+                        countryStates: @json(core()->groupedStatesByCountries())
+                    }
+                },
+
                 methods: {
 
                     create(params, { resetForm, setErrors }) {
@@ -398,7 +424,16 @@
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                    }
+                    },
+
+                    haveStates: function () {
+                        /*
+                        * The double negation operator is used to convert the value to a boolean.
+                        * It ensures that the final result is a boolean value,
+                        * true if the array has a length greater than 0, and otherwise false.
+                        */
+                        return !!this.countryStates[this.country]?.length;
+                    },
                 }
             })
         </script>

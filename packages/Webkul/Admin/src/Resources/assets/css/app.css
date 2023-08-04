@@ -368,15 +368,6 @@
         content: "\e938";
     color: #ffb600;
     }
-
-	.icon-sort:before {
-        content: "\e937";
-    color: #7d7d7d;
-    }
-
-	.icon-star:before {
-        content: "\e939";
-    }
 	
     .shimmer {
         animation-duration: 2.2s;
