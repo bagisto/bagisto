@@ -292,7 +292,7 @@
 
                 generateFolderIcon() {
                     return this.$h('i', {
-                        class: ['icon-folder text-[24px] cursor-pointer'],
+                        class: [this.hasChildren ? 'icon-folder': 'icon-attribute', 'text-[24px] cursor-pointer'],
                     });
                 },
 
@@ -313,8 +313,7 @@
                 return this.$h(
                     'div', {
                         class: [
-                            'v-tree-item pl-[30px]',
-                            'active',
+                            'v-tree-item active pl-[30px]',
                             this.hasChildren ? 'has-children' : '',
                         ],
                     }, [
