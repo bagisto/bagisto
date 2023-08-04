@@ -127,7 +127,7 @@
                                     </p>
 
                                     @foreach ($taxRates as $taxRate)
-                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                             <x-admin::form.control-group.control
                                                 type="checkbox"
                                                 name="taxrates" 

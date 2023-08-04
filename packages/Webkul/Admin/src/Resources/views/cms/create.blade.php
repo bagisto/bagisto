@@ -198,7 +198,7 @@
                                 </p>
 
                                 @foreach($channels->all() as $channel)
-                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             name="channels[]"
@@ -212,7 +212,7 @@
                                             
                                         <x-admin::form.control-group.label 
                                             :for="'channels_' . $channel->id"
-                                            class="cursor-pointer"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointercursor-pointer"
                                         >
                                             {{ core()->getChannelName($channel) }}
                                         </x-admin::form.control-group.label>

@@ -287,7 +287,7 @@
                                             </p>
                                             
                                             @foreach(core()->getAllChannels() as $channel)
-                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                                     <x-admin::form.control-group.control
                                                         type="checkbox"
                                                         name="channel[]"
@@ -321,7 +321,7 @@
                                         </p>
                                         
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="customer_groups[]"
