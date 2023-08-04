@@ -1,18 +1,14 @@
-<div class="relative p-[16px] bg-white rounded-[4px] box-shadow">
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.before', ['product' => $product]) !!}
 
-    
-    {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.before', ['product' => $product]) !!}
-    
-    <v-variations></v-variations>
+<v-product-variations></v-product-variations>
 
-    {!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
-</div>
+{!! view_render_event('bagisto.admin.catalog.product.edit.form.types.configurable.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-variations-template">
-        <div>
+    <script type="text/x-template" id="v-product-variations-template">
+        <div class="relative bg-white rounded-[4px] box-shadow">
             <!-- Panel Header -->
-            <div class="flex flex-wrap gap-[10px] justify-between mb-[10px]">
+            <div class="flex flex-wrap gap-[10px] justify-between mb-[10px] p-[16px]">
                 <div class="flex flex-col gap-[8px]">
                     <p class="text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.title')
@@ -36,7 +32,7 @@
 
             <!-- Panel Content -->
             <div class="grid">
-                <v-variation-item
+                <v-product-variation-item
                     v-for='(variant, index) in variants'
                     :key="index"
                     :index="index"
@@ -44,7 +40,7 @@
                     :attributes="superAttributes"
                     @onRemoved="removeVariant"
                     @onUpdated="updateVariant"
-                ></v-variation-item>
+                ></v-product-variation-item>
             </div>
 
             <!-- For Empty Variations -->
@@ -151,7 +147,7 @@
     </script>
 
     {{-- Variation Item Template --}}
-    <script type="text/x-template" id="v-variation-item-template">
+    <script type="text/x-template" id="v-product-variation-item-template">
         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
             <!-- Information -->
             <div class="flex gap-[10px]">
@@ -219,7 +215,7 @@
             </div>
 
             <!-- Actions -->
-            <div class="grid gap-[4px] place-content-start">
+            <div class="grid gap-[4px] place-content-start text-right">
                 <p class="text-gray-800 font-semibold">
                     $120.00
                 </p>
@@ -435,8 +431,8 @@
     </script>
 
     <script type="module">
-        app.component('v-variations', {
-            template: '#v-variations-template',
+        app.component('v-product-variations', {
+            template: '#v-product-variations-template',
 
             data: function () {
                 return {
@@ -519,8 +515,8 @@
         });
 
 
-        app.component('v-variation-item', {
-            template: '#v-variation-item-template',
+        app.component('v-product-variation-item', {
+            template: '#v-product-variation-item-template',
 
             props: [
                 'variant',

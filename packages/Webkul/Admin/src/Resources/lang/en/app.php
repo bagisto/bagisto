@@ -819,12 +819,6 @@ return [
 
             'edit' => [
                 'title'       => 'Edit Product',
-                
-                'inventories' => [
-                    'title'                    => 'Inventories',
-                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
-                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
-                ],
 
                 'price' => [
                     'group' => [
@@ -849,6 +843,16 @@ return [
                             'save-btn'       => 'Save',
                         ]
                     ]
+                ],
+                
+                'inventories' => [
+                    'title'                    => 'Inventories',
+                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
+                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
+                ],
+
+                'categories' => [
+                    'title' => 'Categories',
                 ],
 
                 'links' => [
@@ -875,15 +879,6 @@ return [
                     'empty-info'  => 'To add :type products on a go.',
                     'sku'         => 'SKU - :sku',
                     'delete'      => 'Delete',
-
-                    'search' => [
-                        'title'       => 'Select Products',
-                        'add-btn'     => 'Add Selected Product',
-                        'empty-title' => 'No products found',
-                        'empty-info'  => 'No products available for search term.',
-                        'sku'         => 'SKU - :sku',
-                        'qty'         => ':qty Available',
-                    ]
                 ],
 
                 'types' => [
@@ -920,6 +915,72 @@ return [
                             'quantities'      => 'Quantities',
                             'edit-info'       => 'If you want to update product information in detail, then go to the',
                             'edit-link-title' => 'Product Details Page'
+                        ]
+                    ],
+
+                    'grouped' => [
+                        'title'       => 'Group Products',
+                        'add-btn'     => 'Add Product',
+                        'info'        => 'A grouped product comprises standalone items presented as a set, allowing variations or coordination by season or theme. Each product can be bought individually or as part of the group.',
+                        'empty-title' => 'Add Product',
+                        'empty-info'  => 'To create various combination of product on a go.',
+                        'sku'         => 'SKU - :sku',
+                        'default-qty' => 'Default Qty',
+                        'delete'      => 'Delete',
+                    ],
+
+                    'bundle' => [
+                        'title'       => 'Bundle Items',
+                        'add-btn'     => 'Add Option',
+                        'info'        => 'A bundle product is a package of multiple items or services sold together at a special price, providing value and convenience to customers.',
+                        'empty-title' => 'Add Option',
+                        'empty-info'  => 'To create bundle options on a go.',
+
+                        'create' => [
+                            'title'       => 'Add Option',
+                            'name'        => 'Title',
+                            'type'        => 'Type',
+                            'radio'       => 'Radio',
+                            'select'      => 'Select',
+                            'checkbox'    => 'Checkbox',
+                            'multiselect' => 'Multiselect',
+                            'is-required' => 'Is Required',
+                            'yes'         => 'Yes',
+                            'no'          => 'No',
+                            'save-btn'    => 'Add',
+                        ],
+
+                        'option' => [
+                            'add-btn'     => 'Add Product',
+                            'delete-btn'  => 'Delete',
+                            'edit-btn'    => 'Edit',
+                            'empty-title' => 'Add Product',
+                            'empty-info'  => 'To create various combination of product on a go.',
+                            'sku'         => 'SKU - :sku',
+                            'default-qty' => 'Default Qty',
+                            'delete'      => 'Delete',
+
+                            'types' => [
+                                'radio' => [
+                                    'title' => 'Radio',
+                                    'info'  => 'Set default product using radio button'
+                                ],
+    
+                                'checkbox' => [
+                                    'title' => 'Checkbox',
+                                    'info'  => 'Set default product using checkbox'
+                                ],
+    
+                                'select' => [
+                                    'title' => 'Select',
+                                    'info'  => 'Set default product using radio button'
+                                ],
+    
+                                'multiselect' => [
+                                    'title' => 'Multiselect',
+                                    'info'  => 'Set default product using checkbox button'
+                                ]
+                            ]
                         ]
                     ]
                 ]
@@ -1391,6 +1452,17 @@ return [
                 'collapse' => 'Collapse',
             ],
         ],
+
+        'products' => [
+            'search' => [
+                'title'       => 'Select Products',
+                'add-btn'     => 'Add Selected Product',
+                'empty-title' => 'No products found',
+                'empty-info'  => 'No products available for search term.',
+                'sku'         => 'SKU - :sku',
+                'qty'         => ':qty Available',
+            ]
+        ]
     ],
 
     'layouts' => [

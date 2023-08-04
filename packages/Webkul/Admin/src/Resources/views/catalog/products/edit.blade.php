@@ -114,7 +114,7 @@
                         @endphp
 
                         @if (count($customAttributes))
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.before', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form..' . $group->name . '.before', ['product' => $product]) !!}
 
                             <div class="relative p-[16px] bg-white rounded-[4px] box-shadow">
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
@@ -146,7 +146,7 @@
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.controls.before', ['product' => $product]) !!}
 
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
@@ -161,13 +161,13 @@
                                         <x-admin::form.control-group.error :control-name="$attribute->code"></x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.controls.before', ['product' => $product]) !!}
                                 @endforeach
 
                                 @includeWhen($group->name == 'Price', 'admin::catalog.products.edit.price.group')
                             </div>
 
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.' . $group->name . '.after', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->name . '.after', ['product' => $product]) !!}
                         @endif
                     @endforeach
 
