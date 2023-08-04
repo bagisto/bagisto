@@ -68,7 +68,7 @@
 
                                     <!-- Target Currency -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.exchange-rates.index.create.target-currency')
                                         </x-admin::form.control-group.label>
                                     
@@ -95,7 +95,7 @@
 
                                     <!-- Rate -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.exchange-rates.index.create.rate')
                                         </x-admin::form.control-group.label>
                 

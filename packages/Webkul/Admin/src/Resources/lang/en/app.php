@@ -414,25 +414,24 @@ return [
             'index' => [
                 'title' => 'Groups',
 
-                'modal' => [
-                    'create' =>  [
-                        'title'          => 'Create new Group',
-                        'create-btn'     => 'Create Group',
-                        'code'           => 'Code',
-                        'name'           => 'Name', 
-                        'save-btn'       => 'Save Group',   
-                        'create-success' => 'Group created successfully',
-                    ],
+                'create' =>  [
+                    'title'          => 'Create new Group',
+                    'create-btn'     => 'Create Group',
+                    'code'           => 'Code',
+                    'name'           => 'Name', 
+                    'save-btn'       => 'Save Group',   
+                    'create-success' => 'Group created successfully',
                 ],
             ],
 
             'edit'  =>  [
-                'title'       => 'Edit Group',
-                'cancel-btn'  => 'Cancel',
-                'save-btn'    => 'Save Group',
-                'general'     => 'General',
-                'code'        => 'Code',
-                'name'        => 'Name',
+                'title'             => 'Edit Group',
+                'cancel-btn'        => 'Cancel',
+                'save-btn'          => 'Save Group',
+                'general'           => 'General',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'update-success'    => 'Group Updated Successfully',
             ],
         ],
 

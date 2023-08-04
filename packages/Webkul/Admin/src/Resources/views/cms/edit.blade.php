@@ -229,7 +229,7 @@
                                             
                                         <x-admin::form.control-group.label 
                                             :for="'channels_' . $channel->id"
-                                            class="cursor-pointer"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                         >
                                             {{ core()->getChannelName($channel) }}
                                         </x-admin::form.control-group.label>
