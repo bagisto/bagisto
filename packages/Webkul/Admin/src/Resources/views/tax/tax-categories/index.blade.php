@@ -142,7 +142,7 @@
                                                 
                                             <x-admin::form.control-group.label 
                                                 :for="'taxrates_' . $taxRate->id"
-                                                class="cursor-pointer"
+                                                class="!text-[14px] !text-gray-600 cursor-pointer"
                                             >
                                                 {{ $taxRate->identifier }}
                                             </x-admin::form.control-group.label>
