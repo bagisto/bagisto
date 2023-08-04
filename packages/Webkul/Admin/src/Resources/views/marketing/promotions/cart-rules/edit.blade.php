@@ -87,67 +87,6 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <div class="mb-[10px]">
-                                    <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">
-                                        @lang('admin::app.promotions.cart-rules.edit.channels')
-                                    </label>
-
-                                    @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
-                                    
-                                    @foreach(core()->getAllChannels() as $channel)
-                                        <label
-                                            class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                            for="channel_{{ $channel->id }}"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                name="channels[]"
-                                                id="channel_{{ $channel->id }}"
-                                                value="{{ $channel->id }}"
-                                                class="hidden peer"
-                                                {{ in_array($channel->id, $selectedOptionIds) ? 'checked' : '' }}
-                                            >
-                                            
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                            
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
-                                                {{ core()->getChannelName($channel) }}
-                                            </p>
-                                        </label>
-                                    @endforeach
-                                </div>
-
-                                <div class="mb-[10px]">
-                                    <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">
-                                        @lang('admin::app.promotions.cart-rules.edit.customer-groups')
-                                    </label>
-                                    
-                                        
-                                    @php($selectedOptionIds = old('customer_groups') ?: $cartRule->customer_groups->pluck('id')->toArray())
-
-                                    @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                        <label
-                                            class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                            for="customer_group_{{ $customerGroup->id }}"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                name="customer_groups[]"
-                                                id="customer_group_{{ $customerGroup->id }}"
-                                                value="{{ $customerGroup->id }}"
-                                                class="hidden peer"
-                                                {{ in_array($customerGroup->id, $selectedOptionIds) ? 'checked' : '' }}
-                                            >
-                                            
-                                            <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-                                            
-                                            <p class="text-gray-600 font-semibold cursor-pointer">
-                                                {{ $customerGroup->name }}
-                                            </p>
-                                        </label>
-                                    @endforeach
-                                </div>
-
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.promotions.cart-rules.edit.coupon-type')
@@ -618,29 +557,6 @@
                                 </x-slot:header>
                             
                                 <x-slot:content>
-                                    <label
-                                        for="status"
-                                        class="flex gap-[10px] w-full items-center p-[6px] cursor-pointer select-none hover:bg-gray-100 hover:rounded-[8px]"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            name="status"
-                                            value="{{ old('status') ?? $cartRule->status }}" 
-                                            id="status"
-                                            class="hidden peer"
-                                            {{ $cartRule->status ? 'checked' : '' }}
-                                        >
-
-                                        <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
-
-                                        <div
-                                            class="text-[14px] text-gray-600 font-semibold cursor-pointer"
-                                        >
-                                            @lang('admin::app.promotions.cart-rules.edit.status')
-                                        </div>
-
-                                    </label>
-
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.promotions.cart-rules.edit.priority')
@@ -661,6 +577,107 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
+
+                                    @php($selectedOptionIds = old('channels') ?? $cartRule->channels->pluck('id')->toArray())
+
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.cart-rules.create.channels')
+                                        </p>
+                                        
+                                        @foreach(core()->getAllChannels() as $channel)
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="channels[]"
+                                                    :value="$channel->id"
+                                                    :id="'channel_' . '_' . $channel->id"
+                                                    :for="'channel_' . '_' . $channel->id"
+                                                    :label="$channel->name"
+                                                    :checked="in_array($channel->id, $selectedOptionIds)"
+                                                >
+                                                </x-admin::form.control-group.control>
+                                
+                                                <x-admin::form.control-group.label
+                                                    :for="'channel_' . '_' . $channel->id"
+                                                    class="cursor-pointer"
+                                                >
+                                                    {{ core()->getChannelName($channel) }}
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="channels[]"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.cart-rules.create.customer-groups')
+                                        </p>
+                                            
+                                        @php($selectedOptionIds = old('customer_groups') ?? $cartRule->customer_groups->pluck('id')->toArray())
+
+                                        @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="customer_groups[]"
+                                                    :value="$customerGroup->id"
+                                                    :id="'customer_group_' . '_' . $customerGroup->id"
+                                                    :for="'customer_group_' . '_' . $customerGroup->id"
+                                                    :label="$customerGroup->name"
+                                                    :checked="in_array($customerGroup->id, $selectedOptionIds)"
+                                                >
+                                                </x-admin::form.control-group.control>
+
+                                                <x-admin::form.control-group.label
+                                                    :for="'customer_group_' . '_' . $customerGroup->id"
+                                                    class="cursor-pointer"
+                                                >
+                                                    {{ $customerGroup->name }}
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="customer_groups[]"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="mb-[10px]">
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.cart-rules.create.status')
+                                        </p>
+    
+                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                            <x-admin::form.control-group.control
+                                                type="checkbox"
+                                                name="status"
+                                                :value="$cartRule->status"
+                                                id="status"
+                                                for="status"
+                                                label="status"
+                                                :checked="(boolean) $cartRule->status"
+                                            >
+                                            </x-admin::form.control-group.control>
+                            
+                                            <x-admin::form.control-group.label
+                                                for="status"
+                                                class="cursor-pointer"
+                                            >
+                                                @lang('admin::app.promotions.cart-rules.create.status')
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="status"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>  
+                                    </div>
                                 </x-slot:content>
                             </x-admin::accordion>
                 
