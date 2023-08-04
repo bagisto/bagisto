@@ -73,6 +73,7 @@
                                     v-if="permission_type == 'custom'"
                                 >
                                     <x-admin::tree.view
+                                        input-type="checkbox"
                                         value-field="key"
                                         id-field="key"
                                         :items="json_encode($acl->items)"
@@ -160,11 +161,5 @@
                 }
             })
         </script>
-
-        {{-- v tree checkbox component --}}
-        <x-admin::tree.item></x-admin::tree.item>
-
-        {{-- v tree checkbox component--}}
-        <x-admin::tree.checkbox></x-admin::tree.checkbox>
     @endPushOnce
 </x-admin::layouts>

@@ -1,5 +1,10 @@
+@props([
+    'inputType' => 'checkbox'
+])
+
 <v-tree-view 
-    {{ $attributes }}
+    {{ $attributes->except('input-type') }}
+    input-type="{{ $inputType }}"
 >
 </v-tree-view>
 
@@ -152,3 +157,14 @@
         }
     </style>
 @endPushOnce
+
+{{-- Tree Item Component --}}
+<x-admin::tree.item></x-admin::tree.item>
+
+@if ($inputType == 'checkbox')
+    {{-- Tree Checkbox Component --}}
+    <x-admin::tree.checkbox></x-admin::tree.checkbox>
+@else 
+    {{-- Tree Radio component --}}
+    <x-admin::tree.radio></x-admin::tree.radio>
+@endif

@@ -84,7 +84,6 @@
                                 :items="json_encode($categories)"
                                 :fallback-locale="config('app.fallback_locale')"
                             >
-
                             </x-admin::tree.view>
                         </div>
                     </div>
@@ -398,10 +397,4 @@
             </div>
         </div>
     </x-admin::form>
-
-    {{-- v tree item --}}
-    <x-admin::tree.item></x-admin::tree.item>
-    
-    {{-- v tree radio --}}
-    <x-admin::tree.radio></x-admin::tree.radio>
 </x-admin::layouts>
