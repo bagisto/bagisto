@@ -534,16 +534,16 @@
                         >
 
                         <div v-if="matchedAttribute.key == 'product|category_ids'">
-                            <v-tree-view 
+                            <x-admin::tree.view
                                 value-field="id"
                                 id-field="id"
-                                :name-field="'conditions[' + index + '][value]'"
+                                ::name-field="'conditions[' + index + '][value]'"
                                 input-type="checkbox"
-                                :items='matchedAttribute.options'
-                                :behavior="'no'"
-                                fallback-locale="{{ config('app.fallback_locale') }}"
+                                ::items='matchedAttribute.options'
+                                behavior="no"
+                                :fallback-locale="config('app.fallback_locale')"
                             >
-                            </v-tree-view>
+                            </x-admin::tree.view>
                         </div>
 
                         <div v-else>
@@ -867,19 +867,10 @@
             });
         </script>
 
-        {{-- v tree view --}}
-        @include('admin::tree.view')
-
-        {{-- v tree item --}}
-        @include('admin::tree.item')
+        {{-- v tree checkbox --}}
+        <x-admin::tree.item></x-admin::tree.item>
 
         {{-- v tree checkbox --}}
-        @include('admin::tree.item')
-
-        {{-- v tree checkbox --}}
-        @include('admin::tree.checkbox')
-
-        {{-- v tree radio --}}
-        @include('admin::tree.radio')
+        <x-admin::tree.checkbox></x-admin::tree.checkbox>
     @endPushOnce
 </x-admin::layouts>

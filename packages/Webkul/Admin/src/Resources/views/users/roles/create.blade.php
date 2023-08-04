@@ -72,13 +72,13 @@
                                     class="mb-[10px]"
                                     v-if="permission_type == 'custom'"
                                 >
-                                    <v-tree-view 
+                                    <x-admin::tree.view
                                         value-field="key"
                                         id-field="key"
-                                        items='@json($acl->items)'
-                                        fallback-locale="{{ config('app.fallback_locale') }}"
+                                        :items="json_encode($acl->items)"
+                                        :fallback-locale="config('app.fallback_locale')"
                                     >
-                                    </v-tree-view>
+                                    </x-admin::tree.view>
                                 </div>
                             </div>
                         </div>
@@ -161,19 +161,10 @@
             })
         </script>
 
-        {{-- v tree view --}}
-        @include('admin::tree.view')
+        {{-- v tree checkbox component --}}
+        <x-admin::tree.item></x-admin::tree.item>
 
-        {{-- v tree item --}}
-        @include('admin::tree.item')
-
-        {{-- v tree checkbox --}}
-        @include('admin::tree.item')
-
-        {{-- v tree checkbox --}}
-        @include('admin::tree.checkbox')
-
-        {{-- v tree radio --}}
-        @include('admin::tree.radio')
+        {{-- v tree checkbox component--}}
+        <x-admin::tree.checkbox></x-admin::tree.checkbox>
     @endPushOnce
 </x-admin::layouts>

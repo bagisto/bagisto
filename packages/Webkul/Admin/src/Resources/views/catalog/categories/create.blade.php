@@ -75,16 +75,17 @@
 
                         {{-- Radio select button --}}
                         <div class="flex flex-col gap-[12px]">
-                            <v-tree-view
+                            <x-admin::tree.view
                                 input-type="radio"
                                 name-field="parent_id"
                                 value-field="key"
                                 id-field="key"
-                                model-value='@json($categories)'
-                                items='@json($categories)'
-                                fallback-locale="{{ config('app.fallback_locale') }}"
+                                model-value="json_encode($categories)"
+                                :items="json_encode($categories)"
+                                :fallback-locale="config('app.fallback_locale')"
                             >
-                            </v-tree-view>
+
+                            </x-admin::tree.view>
                         </div>
                     </div>
                 </div>
@@ -397,12 +398,10 @@
             </div>
         </div>
     </x-admin::form>
-    {{-- v tree view --}}
-    @include('admin::tree.view')
 
     {{-- v tree item --}}
-    @include('admin::tree.item')
+    <x-admin::tree.item></x-admin::tree.item>
     
     {{-- v tree radio --}}
-    @include('admin::tree.radio')
+    <x-admin::tree.radio></x-admin::tree.radio>
 </x-admin::layouts>
