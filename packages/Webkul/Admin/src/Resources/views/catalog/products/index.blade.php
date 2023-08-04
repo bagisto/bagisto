@@ -25,7 +25,6 @@
 
     {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 
-
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-product-form-template">
             <!-- Product Create Button -->
