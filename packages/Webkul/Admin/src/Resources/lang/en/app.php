@@ -467,20 +467,25 @@ return [
         ],
 
         'currencies'        => [
-            'code'               => 'Code',
-            'create-success'     => 'Currency created successfully.',
-            'create'             => 'Create Currency',
-            'create-btn'         => 'Create Currency',
-            'delete-success'     => 'Currency deleted successfully.',
-            'decimal'            => 'Decimal',
-            'edit-title'         => 'Edit Currency',
-            'general'            => 'General',
-            'last-delete-error'  => 'At least one Currency is required.',
-            'name'               => 'Name',
-            'save-btn-title'     => 'Save Currency',
-            'symbol'             => 'Symbol',
-            'title'              => 'Currencies',
-            'update-success'     => 'Currency updated successfully.',
+            'index' => [
+                'title'      => 'Currencies',
+                'create-btn' => 'Create Currency'
+            ],
+
+            'create' => [
+                'title'              => 'Create New Currency', 
+                'create-btn'         => 'Create Currency',
+                'save-btn'           => 'Create Currency',
+                'general'            => 'General',
+                'code'               => 'Code',
+                'name'               => 'Name',
+                'symbol'             => 'Symbol',
+                'decimal'            => 'Decimal',
+                'create-success'     => 'Currency created successfully.',
+                'update-success'     => 'Currency updated successfully.',
+                'delete-success'     => 'Currency deleted successfully.',
+                'last-delete-error'  => 'At least one Currency is required.',
+            ],
         ],
 
         'exchange-rates'  => [
@@ -1044,7 +1049,6 @@ return [
                 'decimal'                     => 'Decimal',
                 'email'                       => 'Email',
                 'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
-                'enable-wysiwyg'              => 'Enable Wysiwyg Editor',
                 'file'                        => 'File',
                 'general'                     => 'General',
                 'is_required'                 => 'Is Required',
@@ -1067,7 +1071,6 @@ return [
                 'select-type'                 => 'Select Attribute Type',
                 'save-btn'                    => 'Save Attribute',
                 'swatch_type'                 => 'Swatch Type',
-                'select'                      => 'Select',
                 'swatch'                      => 'Swatch',
                 'title'                       => 'Add Attribute',
                 'type'                        => 'Attribute Type',
