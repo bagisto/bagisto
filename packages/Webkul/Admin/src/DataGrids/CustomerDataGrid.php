@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CustomerDataGrid extends DataGrid
 {
@@ -50,15 +50,15 @@ class CustomerDataGrid extends DataGrid
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
             );
 
-        $this->addFilter('customer_id', 'customers.id');
-        $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
-        $this->addFilter('group', 'customer_groups.name');
-        $this->addFilter('phone', 'customers.phone');
-        $this->addFilter('gender', 'customers.gender');
-        $this->addFilter('status', 'status');
-        $this->addFilter('is_suspended', 'customers.is_suspended');
+        // $this->addFilter('customer_id', 'customers.id');
+        // $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
+        // $this->addFilter('group', 'customer_groups.name');
+        // $this->addFilter('phone', 'customers.phone');
+        // $this->addFilter('gender', 'customers.gender');
+        // $this->addFilter('status', 'status');
+        // $this->addFilter('is_suspended', 'customers.is_suspended');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -66,7 +66,7 @@ class CustomerDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'customer_id',
@@ -115,7 +115,7 @@ class CustomerDataGrid extends DataGrid
                 if (! $row->phone) {
                     return '-';
                 }
-                
+
                 return $row->phone;
             },
         ]);
@@ -131,7 +131,7 @@ class CustomerDataGrid extends DataGrid
                 if (! $row->gender) {
                     return '-';
                 }
-                
+
                 return $row->gender;
             },
         ]);

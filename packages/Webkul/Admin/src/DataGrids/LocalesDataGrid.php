@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class LocalesDataGrid extends DataGrid
 {
@@ -30,7 +30,7 @@ class LocalesDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name', 'direction');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -38,7 +38,7 @@ class LocalesDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -78,7 +78,7 @@ class LocalesDataGrid extends DataGrid
                 if ($value->direction == 'ltr') {
                     return trans('admin::app.datagrid.ltr');
                 }
-                
+
                 return trans('admin::app.datagrid.rtl');
             },
         ]);

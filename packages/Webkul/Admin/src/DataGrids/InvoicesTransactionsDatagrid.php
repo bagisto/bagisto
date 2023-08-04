@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class InvoicesTransactionsDatagrid extends DataGrid
 {
@@ -33,12 +33,12 @@ class InvoicesTransactionsDatagrid extends DataGrid
             ->select('order_transactions.id as id', 'order_transactions.transaction_id as transaction_id', 'order_transactions.invoice_id as invoice_id', 'order_transactions.created_at as created_at')
             ->where('order_transactions.invoice_id', request('id'));
 
-        $this->addFilter('id', 'order_transactions.id');
-        $this->addFilter('transaction_id', 'order_transactions.transaction_id');
-        $this->addFilter('order_id', 'ors.increment_id');
-        $this->addFilter('created_at', 'order_transactions.created_at');
+        // $this->addFilter('id', 'order_transactions.id');
+        // $this->addFilter('transaction_id', 'order_transactions.transaction_id');
+        // $this->addFilter('order_id', 'ors.increment_id');
+        // $this->addFilter('created_at', 'order_transactions.created_at');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -46,7 +46,7 @@ class InvoicesTransactionsDatagrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

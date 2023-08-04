@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
 
 class CartRuleDataGrid extends DataGrid
@@ -81,8 +81,8 @@ class CartRuleDataGrid extends DataGrid
                 'sort_order'
             );
 
-        $this->addFilter('id', 'cart_rules.id');
-        $this->addFilter('coupon_code', 'cart_rule_coupons.code');
+        // $this->addFilter('id', 'cart_rules.id');
+        // $this->addFilter('coupon_code', 'cart_rule_coupons.code');
 
         if ($this->customer_group !== 'all') {
             $queryBuilder->leftJoin(
@@ -102,13 +102,13 @@ class CartRuleDataGrid extends DataGrid
                 '=',
                 'cart_rules.id'
             );
-            
+
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
 
-        $this->addFilter('status', 'status');
+        // $this->addFilter('status', 'status');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -116,7 +116,7 @@ class CartRuleDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -157,7 +157,7 @@ class CartRuleDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 return $value->starts_from ?? '-';
-              },            
+            },
         ]);
 
         $this->addColumn([
@@ -168,7 +168,7 @@ class CartRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-               return $value->ends_till ?? '-'; 
+                return $value->ends_till ?? '-';
             },
         ]);
 
@@ -185,7 +185,7 @@ class CartRuleDataGrid extends DataGrid
                 } elseif ($value->status == 0) {
                     return trans('admin::app.datagrid.inactive');
                 }
-                
+
                 return trans('admin::app.datagrid.draft');
             },
         ]);

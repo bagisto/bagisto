@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class TaxCategoryDataGrid extends DataGrid
 {
@@ -15,10 +15,10 @@ class TaxCategoryDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 use Webkul\Core\Repositories\ChannelRepository;
 
 class ChannelDataGrid extends DataGrid
@@ -38,21 +38,21 @@ class ChannelDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = $this->channelRepository->query()
-            ->leftJoin('channel_translations', function($leftJoin) {
+            ->leftJoin('channel_translations', function ($leftJoin) {
                 $leftJoin->on('channel_translations.channel_id', '=', 'channels.id')
                     ->where('channel_translations.locale', $this->locale);
             })
             ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname');
 
-        $this->addFilter('id', 'channels.id');
-        $this->addFilter('code', 'channels.code');
-        $this->addFilter('hostname', 'channels.hostname');
-        $this->addFilter('translated_name', 'channel_translations.name');
+        // $this->addFilter('id', 'channels.id');
+        // $this->addFilter('code', 'channels.code');
+        // $this->addFilter('hostname', 'channels.hostname');
+        // $this->addFilter('translated_name', 'channel_translations.name');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

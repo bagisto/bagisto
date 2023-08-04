@@ -88,109 +88,11 @@ abstract class DataGrid
         if ($column['type'] === 'date_range') {
             $column['input_type'] = 'date';
 
-            $column['options'] = [
-                [
-                    'name' => 'today',
-                    'label' => 'Today',
-                    'from' => now()->today()->format('Y-m-d'),
-                    'to' => now()->today()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'yesterday',
-                    'label' => 'Yesterday',
-                    'from' => now()->yesterday()->format('Y-m-d'),
-                    'to' => now()->yesterday()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'this_week',
-                    'label' => 'This Week',
-                    'from' => now()->startOfWeek()->format('Y-m-d'),
-                    'to' => now()->endOfWeek()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'this_month',
-                    'label' => 'This Month',
-                    'from' => now()->startOfMonth()->format('Y-m-d'),
-                    'to' => now()->endOfMonth()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'last_month',
-                    'label' => 'Last Month',
-                    'from' => now()->subMonth(1)->startOfMonth()->format('Y-m-d'),
-                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'last_three_months',
-                    'label' => 'Last 3 Months',
-                    'from' => now()->subMonth(3)->startOfMonth()->format('Y-m-d'),
-                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'last_six_months',
-                    'label' => 'Last 6 Months',
-                    'from' => now()->subMonth(6)->startOfMonth()->format('Y-m-d'),
-                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d'),
-                ],
-                [
-                    'name' => 'this_year',
-                    'label' => 'This Year',
-                    'from' => now()->startOfYear()->format('Y-m-d'),
-                    'to' => now()->endOfYear()->format('Y-m-d'),
-                ],
-            ];
+            $column['options'] = $this->getDateOptions();
         } elseif ($column['type'] === 'datetime_range') {
             $column['input_type'] = 'datetime-local';
 
-            $column['options'] = [
-                [
-                    'name' => 'today',
-                    'label' => 'Today',
-                    'from' => now()->today()->format('Y-m-d H:i:s'),
-                    'to' => now()->today()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'yesterday',
-                    'label' => 'Yesterday',
-                    'from' => now()->yesterday()->format('Y-m-d H:i:s'),
-                    'to' => now()->yesterday()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'this_week',
-                    'label' => 'This Week',
-                    'from' => now()->startOfWeek()->format('Y-m-d H:i:s'),
-                    'to' => now()->endOfWeek()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'this_month',
-                    'label' => 'This Month',
-                    'from' => now()->startOfMonth()->format('Y-m-d H:i:s'),
-                    'to' => now()->endOfMonth()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'last_month',
-                    'label' => 'Last Month',
-                    'from' => now()->subMonth(1)->startOfMonth()->format('Y-m-d H:i:s'),
-                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'last_three_months',
-                    'label' => 'Last 3 Months',
-                    'from' => now()->subMonth(3)->startOfMonth()->format('Y-m-d H:i:s'),
-                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'last_six_months',
-                    'label' => 'Last 6 Months',
-                    'from' => now()->subMonth(6)->startOfMonth()->format('Y-m-d H:i:s'),
-                    'to' => now()->subMonth(1)->endOfMonth()->format('Y-m-d H:i:s'),
-                ],
-                [
-                    'name' => 'this_year',
-                    'label' => 'This Year',
-                    'from' => now()->startOfYear()->format('Y-m-d H:i:s'),
-                    'to' => now()->endOfYear()->format('Y-m-d H:i:s'),
-                ],
-            ];
+            $column['options'] = $this->getDateOptions('Y-m-d H:i:s');
         }
 
         $this->columns[] = $column;
@@ -377,5 +279,64 @@ abstract class DataGrid
         $this->queryBuilder = $this->prepareQueryBuilder();
 
         return response()->json($this->prepareData());
+    }
+
+    /**
+     * Get date options.
+     *
+     * @return array
+     */
+    public function getDateOptions($format = 'Y-m-d')
+    {
+        return [
+            [
+                'name' => 'today',
+                'label' => 'Today',
+                'from' => now()->today()->format($format),
+                'to' => now()->today()->format($format),
+            ],
+            [
+                'name' => 'yesterday',
+                'label' => 'Yesterday',
+                'from' => now()->yesterday()->format($format),
+                'to' => now()->yesterday()->format($format),
+            ],
+            [
+                'name' => 'this_week',
+                'label' => 'This Week',
+                'from' => now()->startOfWeek()->format($format),
+                'to' => now()->endOfWeek()->format($format),
+            ],
+            [
+                'name' => 'this_month',
+                'label' => 'This Month',
+                'from' => now()->startOfMonth()->format($format),
+                'to' => now()->endOfMonth()->format($format),
+            ],
+            [
+                'name' => 'last_month',
+                'label' => 'Last Month',
+                'from' => now()->subMonth(1)->startOfMonth()->format($format),
+                'to' => now()->subMonth(1)->endOfMonth()->format($format),
+            ],
+            [
+                'name' => 'last_three_months',
+                'label' => 'Last 3 Months',
+                'from' => now()->subMonth(3)->startOfMonth()->format($format),
+                'to' => now()->subMonth(1)->endOfMonth()->format($format),
+            ],
+            [
+                'name' => 'last_six_months',
+                'label' => 'Last 6 Months',
+                'from' => now()->subMonth(6)->startOfMonth()->format($format),
+                'to' => now()->subMonth(1)->endOfMonth()->format($format),
+            ],
+            [
+                'name' => 'this_year',
+                'label' => 'This Year',
+                'from' => now()->startOfYear()->format($format),
+                'to' => now()->endOfYear()->format($format),
+            ],
+        ];
     }
 }

@@ -4,7 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderAddress;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class OrderShipmentsDataGrid extends DataGrid
 {
@@ -15,7 +15,7 @@ class OrderShipmentsDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments')
-            ->leftJoin('addresses as order_address_shipping', function($leftJoin) {
+            ->leftJoin('addresses as order_address_shipping', function ($leftJoin) {
                 $leftJoin->on('order_address_shipping.order_id', '=', 'shipments.order_id')
                          ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
             })
@@ -25,18 +25,18 @@ class OrderShipmentsDataGrid extends DataGrid
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
             ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
 
-        $this->addFilter('shipment_id', 'shipments.id');
-        $this->addFilter('shipment_order_id', 'ors.increment_id');
-        $this->addFilter('shipment_total_qty', 'shipments.total_qty');
-        $this->addFilter('inventory_source_name', DB::raw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name)'));
-        $this->addFilter('order_date', 'ors.created_at');
-        $this->addFilter('shipment_created_at', 'shipments.created_at');
-        $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
+        // $this->addFilter('shipment_id', 'shipments.id');
+        // $this->addFilter('shipment_order_id', 'ors.increment_id');
+        // $this->addFilter('shipment_total_qty', 'shipments.total_qty');
+        // $this->addFilter('inventory_source_name', DB::raw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name)'));
+        // $this->addFilter('order_date', 'ors.created_at');
+        // $this->addFilter('shipment_created_at', 'shipments.created_at');
+        // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'shipment_id',

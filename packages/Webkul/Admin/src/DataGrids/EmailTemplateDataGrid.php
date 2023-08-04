@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class EmailTemplateDataGrid extends DataGrid
 {
@@ -30,9 +30,9 @@ class EmailTemplateDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('marketing_templates')->addSelect('id', 'name', 'status');
 
-        $this->addFilter('status', 'status');
+        // $this->addFilter('status', 'status');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -40,7 +40,7 @@ class EmailTemplateDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -72,7 +72,7 @@ class EmailTemplateDataGrid extends DataGrid
                     return trans('admin::app.datagrid.active');
                 } elseif ($value->status == 'inactive') {
                     return trans('admin::app.datagrid.inactive');
-                } elseif ($value->status == 'draft') {                    
+                } elseif ($value->status == 'draft') {
                     return trans('admin::app.datagrid.draft');
                 }
             },
