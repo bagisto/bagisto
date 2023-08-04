@@ -347,7 +347,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function productLinkSearch()
+    public function search()
     {
         $results = [];
 
@@ -386,25 +386,5 @@ class ProductController extends Controller
         ]);
 
         return Storage::download($productAttribute['text_value']);
-    }
-
-    /**
-     * Search simple products.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function searchSimpleProducts()
-    {
-        request()->query->add([
-            'name'  => request('query'),
-            'type'  => 'simple',
-            'sort'  => 'created_at',
-            'order' => 'desc',
-            'limit' => 50,
-        ]);
-
-        $products = $this->productRepository->getAll();
-
-        return response()->json($products);
     }
 }

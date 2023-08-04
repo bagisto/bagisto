@@ -1,12 +1,12 @@
 {{-- Seperator --}}
 <span class="block w-full absolute left-0 my-[5px] border border-[#E9E9E9]"></span>
 
-<v-customer-group-price></v-customer-group-price>
+<v-product-customer-group-price></v-product-customer-group-price>
 
 @inject('customerGroupRepository', 'Webkul\Customer\Repositories\CustomerGroupRepository')
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-customer-group-price-template">
+    <script type="text/x-template" id="v-product-customer-group-price-template">
         <div>
             <!-- Header -->
             <div class="flex items-center justify-between mt-[6px] py-[15px]">
@@ -30,29 +30,13 @@
                     v-for="(item, index) in prices"
                 >
                     <!-- Hidden Inputs -->
-                    <input
-                        type="hidden"
-                        :name="'customer_group_prices[' + item.id + '][customer_group_id]'"
-                        :value="item.customer_group_id"
-                    />
+                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][customer_group_id]'" :value="item.customer_group_id"/>
 
-                    <input
-                        type="hidden"
-                        :name="'customer_group_prices[' + item.id + '][qty]'"
-                        :value="item.qty"
-                    />
+                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][qty]'" :value="item.qty"/>
 
-                    <input
-                        type="hidden"
-                        :name="'customer_group_prices[' + item.id + '][value_type]'"
-                        :value="item.value_type"
-                    />
+                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value_type]'" :value="item.value_type"/>
 
-                    <input
-                        type="hidden"
-                        :name="'customer_group_prices[' + item.id + '][value]'"
-                        :value="item.amount"
-                    />
+                    <input type="hidden" :name="'customer_group_prices[' + item.id + '][value]'" :value="item.amount"/>
 
                     <div class="flex justify-between">
                         <p class="text-gray-600 font-semibold">
@@ -248,8 +232,8 @@
     </script>
 
     <script type="module">
-        app.component('v-customer-group-price', {
-            template: '#v-customer-group-price-template',
+        app.component('v-product-customer-group-price', {
+            template: '#v-product-customer-group-price-template',
 
             data: function() {
                 return {

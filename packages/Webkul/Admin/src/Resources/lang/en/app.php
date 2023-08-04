@@ -414,25 +414,24 @@ return [
             'index' => [
                 'title' => 'Groups',
 
-                'modal' => [
-                    'create' =>  [
-                        'title'          => 'Create new Group',
-                        'create-btn'     => 'Create Group',
-                        'code'           => 'Code',
-                        'name'           => 'Name', 
-                        'save-btn'       => 'Save Group',   
-                        'create-success' => 'Group created successfully',
-                    ],
+                'create' =>  [
+                    'title'          => 'Create new Group',
+                    'create-btn'     => 'Create Group',
+                    'code'           => 'Code',
+                    'name'           => 'Name', 
+                    'save-btn'       => 'Save Group',   
+                    'create-success' => 'Group created successfully',
                 ],
             ],
 
             'edit'  =>  [
-                'title'       => 'Edit Group',
-                'cancel-btn'  => 'Cancel',
-                'save-btn'    => 'Save Group',
-                'general'     => 'General',
-                'code'        => 'Code',
-                'name'        => 'Name',
+                'title'             => 'Edit Group',
+                'cancel-btn'        => 'Cancel',
+                'save-btn'          => 'Save Group',
+                'general'           => 'General',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'update-success'    => 'Group Updated Successfully',
             ],
         ],
 
@@ -466,6 +465,7 @@ return [
                 'last-delete-error' => 'At least one Locale is required.',
             ],
         ],
+
         'currencies'        => [
             'index' => [
                 'title'      => 'Currencies',
@@ -490,17 +490,15 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'create-btn'  => 'Create Exchange Rate',
                 'title'       => 'Exchange Rates',
+                'create-btn'  => 'Create Exchange Rate',
 
-                'modal'  =>  [
-                    'create' => [
-                        'rate'             => 'Rate',
-                        'save-btn'         => 'Save',
-                        'source-currency'  => 'Source Currency',
-                        'target-currency'  => 'Target Currency',
-                        'title'            => 'Create Exchange Rate',
-                    ],
+                'create' => [
+                    'title'            => 'Create Exchange Rate',
+                    'rate'             => 'Rate',
+                    'save-btn'         => 'Save Exchange Rate',
+                    'source-currency'  => 'Source Currency',
+                    'target-currency'  => 'Target Currency',
                 ],
             ],
 
@@ -517,15 +515,16 @@ return [
         'inventory-sources' => [
             'index'  => [
                 'title'             => 'Inventory Sources',
-                'add'               => 'Add',
+                'create-btn'        => 'Create Inventory Sources',
             ],
 
             'create' => [
                 'add-title'         => 'Add Inventory Source',
                 'title'             => 'Inventory Sources',
                 'general'           => 'General',
-                'save-btn-title'    => 'Save',
+                'save-btn'          => 'Save Inventory Sources',
                 'code'              => 'Code',
+                'cancel-btn'        => 'Cancel',
                 'name'              => 'Name',
                 'description'       => 'Description',
                 'latitude'          => 'Latitude',
@@ -538,6 +537,35 @@ return [
                 'contact-number'    => 'Contact Number',
                 'contact-fax'       => 'Fax',
                 'address'           => 'Source Address',
+                'country'           => 'Country',
+                'select-country'    => 'Select Country',
+                'state'             => 'State',
+                'select-state'      => 'Select State',
+                'city'              => 'City',
+                'street'            => 'Street',
+                'postcode'          => 'Postcode',
+                'settings'          => 'Settings',
+            ],
+
+            'edit' => [
+                'title'             => 'Edit Inventory Sources',
+                'general'           => 'General',
+                'save-btn'          => 'Save Inventory Sources',
+                'cancel-btn'        => 'Cancel',
+                'general'           => 'General',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'description'       => 'Description',
+                'latitude'          => 'Latitude',
+                'longitude'         => 'Longitude',
+                'priority'          => 'Priority',
+                'status'            => 'Status',
+                'contact-info'      => 'Contact Information',
+                'contact-name'      => 'Name',
+                'contact-email'     => 'Email',
+                'contact-number'    => 'Contact Number',
+                'contact-fax'       => 'Fax',
+                'source-address'    => 'Source Address',
                 'country'           => 'Country',
                 'select-country'    => 'Select Country',
                 'state'             => 'State',
@@ -825,12 +853,6 @@ return [
 
             'edit' => [
                 'title'       => 'Edit Product',
-                
-                'inventories' => [
-                    'title'                    => 'Inventories',
-                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
-                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
-                ],
 
                 'price' => [
                     'group' => [
@@ -855,6 +877,16 @@ return [
                             'save-btn'       => 'Save',
                         ]
                     ]
+                ],
+                
+                'inventories' => [
+                    'title'                    => 'Inventories',
+                    'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
+                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
+                ],
+
+                'categories' => [
+                    'title' => 'Categories',
                 ],
 
                 'links' => [
@@ -881,15 +913,6 @@ return [
                     'empty-info'  => 'To add :type products on a go.',
                     'sku'         => 'SKU - :sku',
                     'delete'      => 'Delete',
-
-                    'search' => [
-                        'title'       => 'Select Products',
-                        'add-btn'     => 'Add Selected Product',
-                        'empty-title' => 'No products found',
-                        'empty-info'  => 'No products available for search term.',
-                        'sku'         => 'SKU - :sku',
-                        'qty'         => ':qty Available',
-                    ]
                 ],
 
                 'types' => [
@@ -926,6 +949,72 @@ return [
                             'quantities'      => 'Quantities',
                             'edit-info'       => 'If you want to update product information in detail, then go to the',
                             'edit-link-title' => 'Product Details Page'
+                        ]
+                    ],
+
+                    'grouped' => [
+                        'title'       => 'Group Products',
+                        'add-btn'     => 'Add Product',
+                        'info'        => 'A grouped product comprises standalone items presented as a set, allowing variations or coordination by season or theme. Each product can be bought individually or as part of the group.',
+                        'empty-title' => 'Add Product',
+                        'empty-info'  => 'To create various combination of product on a go.',
+                        'sku'         => 'SKU - :sku',
+                        'default-qty' => 'Default Qty',
+                        'delete'      => 'Delete',
+                    ],
+
+                    'bundle' => [
+                        'title'       => 'Bundle Items',
+                        'add-btn'     => 'Add Option',
+                        'info'        => 'A bundle product is a package of multiple items or services sold together at a special price, providing value and convenience to customers.',
+                        'empty-title' => 'Add Option',
+                        'empty-info'  => 'To create bundle options on a go.',
+
+                        'create' => [
+                            'title'       => 'Add Option',
+                            'name'        => 'Title',
+                            'type'        => 'Type',
+                            'radio'       => 'Radio',
+                            'select'      => 'Select',
+                            'checkbox'    => 'Checkbox',
+                            'multiselect' => 'Multiselect',
+                            'is-required' => 'Is Required',
+                            'yes'         => 'Yes',
+                            'no'          => 'No',
+                            'save-btn'    => 'Add',
+                        ],
+
+                        'option' => [
+                            'add-btn'     => 'Add Product',
+                            'delete-btn'  => 'Delete',
+                            'edit-btn'    => 'Edit',
+                            'empty-title' => 'Add Product',
+                            'empty-info'  => 'To create various combination of product on a go.',
+                            'sku'         => 'SKU - :sku',
+                            'default-qty' => 'Default Qty',
+                            'delete'      => 'Delete',
+
+                            'types' => [
+                                'radio' => [
+                                    'title' => 'Radio',
+                                    'info'  => 'Set default product using radio button'
+                                ],
+    
+                                'checkbox' => [
+                                    'title' => 'Checkbox',
+                                    'info'  => 'Set default product using checkbox'
+                                ],
+    
+                                'select' => [
+                                    'title' => 'Select',
+                                    'info'  => 'Set default product using radio button'
+                                ],
+    
+                                'multiselect' => [
+                                    'title' => 'Multiselect',
+                                    'info'  => 'Set default product using checkbox button'
+                                ]
+                            ]
                         ]
                     ]
                 ]
@@ -1313,7 +1402,7 @@ return [
             'title'            => 'Create Page',
             'save-btn'         => 'Save Page',
             'general'          => 'General',
-            'page-title'       => 'Page Title',
+            'page-title'       => 'Title',
             'channels'          => 'Channels',
             'content'          => 'Content',
             'meta-keywords'    => 'Meta Keywords',
@@ -1395,6 +1484,17 @@ return [
                 'collapse' => 'Collapse',
             ],
         ],
+
+        'products' => [
+            'search' => [
+                'title'       => 'Select Products',
+                'add-btn'     => 'Add Selected Product',
+                'empty-title' => 'No products found',
+                'empty-info'  => 'No products available for search term.',
+                'sku'         => 'SKU - :sku',
+                'qty'         => ':qty Available',
+            ]
+        ]
     ],
 
     'layouts' => [
