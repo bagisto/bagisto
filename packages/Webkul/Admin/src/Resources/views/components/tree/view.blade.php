@@ -1,3 +1,13 @@
+@props([
+    'inputType' => 'checkbox'
+])
+
+<v-tree-view 
+    {{ $attributes->except('input-type') }}
+    input-type="{{ $inputType }}"
+>
+</v-tree-view>
+
 @pushOnce('scripts')
     {{-- v-tree-view component --}}
     <script type="module">
@@ -122,7 +132,7 @@
             render () {
                 return this.$h('div', {
                         class: [
-                            'v-tree-container',
+                            'v-tree-container group',
                         ]
                     }, [this.generateChildren()]
                 )
@@ -142,9 +152,19 @@
         }
 
         .v-tree-container .v-tree-item {
-            padding-left: 30px;
             display: inline-block;
             width: 100%;
         }
     </style>
 @endPushOnce
+
+{{-- Tree Item Component --}}
+<x-admin::tree.item></x-admin::tree.item>
+
+@if ($inputType == 'checkbox')
+    {{-- Tree Checkbox Component --}}
+    <x-admin::tree.checkbox></x-admin::tree.checkbox>
+@else 
+    {{-- Tree Radio component --}}
+    <x-admin::tree.radio></x-admin::tree.radio>
+@endif

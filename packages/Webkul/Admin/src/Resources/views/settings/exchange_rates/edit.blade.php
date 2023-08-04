@@ -15,14 +15,14 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <!-- Cancel Button -->
+                {{-- Cancel Button --}}
                 <a href="{{ route('admin.exchange_rates.index') }}">
                     <span class="text-gray-600 leading-[24px]">
                         @lang('admin::app.settings.exchange-rates.edit.cancel-btn')
                     </span>
                 </a>
                     
-                <!-- Save Button -->
+                {{-- Save Button --}}
                 <div class="flex gap-x-[10px] items-center">
                     <button 
                         type="submit"
@@ -36,20 +36,28 @@
 
         {!! view_render_event('bagisto.admin.settings.exchangerate.edit.before') !!}
     
-        <!-- Full Pannel -->
+        {{-- Full Pannel --}}
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 <div class="p-[16px] bg-white box-shadow rounded-[4px]">
-                    <div class="block mb-[10px] leading-[24px] text-[12px] text-gray-800 font-medium">
-                        @lang('admin::app.settings.exchange-rates.edit.source-currency')
-    
-                        <p class="text-[14px] text-gray-500 font-medium">
-                            {{ core()->getBaseCurrencyCode() }}
-                        </p>
-                    </div>
-    
+                    {{-- Base Currency Code --}}
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
+                            @lang('admin::app.settings.exchange-rates.edit.source-currency')
+                        </x-admin::form.control-group.label>
+                        
+                        <x-admin::form.control-group.control
+                            type="text"
+                            name="getBaseCurrencyCode"
+                            :value="core()->getBaseCurrencyCode()"
+                            disabled
+                        >
+                        </x-admin::form.control-group.control>
+                    </x-admin::form.control-group>
+    
+                    {{-- Target Currencies --}}
+                    <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.exchange-rates.edit.target-currency')
                         </x-admin::form.control-group.label>
                         
@@ -77,8 +85,9 @@
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
     
+                    {{-- Rate --}}
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.exchange-rates.edit.rate')
                         </x-admin::form.control-group.label>
     

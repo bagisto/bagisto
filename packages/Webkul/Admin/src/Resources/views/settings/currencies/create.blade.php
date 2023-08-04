@@ -3,24 +3,24 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-create-currencies-form-template">
         <div>
+            <!-- Craete currency Button -->
+            <button 
+                type="button"
+                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                @click="$refs.currencyModal.toggle()"
+            >
+                @lang('admin::app.settings.currencies.create-btn')
+            </button>
+
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
             >
                 <form @submit="handleSubmit($event, store)">
                     <x-admin::modal ref="currencyModal">
-                        <x-slot:toggle>
-                            <button 
-                                type="button"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
-                            >
-                                @lang('admin::app.settings.currencies.add-title')
-                            </button>
-                        </x-slot:toggle>
-
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
-                                @lang('admin::app.settings.currencies.add-title')
+                                @lang('admin::app.settings.currencies.create')
                             </p>
                         </x-slot:header>
 
