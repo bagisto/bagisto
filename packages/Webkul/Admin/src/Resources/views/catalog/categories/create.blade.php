@@ -27,7 +27,7 @@
                     type="submit" 
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.catalog.categories.create.create-btn')
+                    @lang('admin::app.catalog.categories.create.save-btn')
                 </button>
             </div>
         </div>
@@ -59,10 +59,10 @@
                         <x-admin::form.control-group.control
                             type="text"
                             name="name"
-                            value="{{ old('name') }}"
+                            :value="old('name')"
                             class="w-full"
-                            label="{{ trans('admin::app.catalog.categories.create.company-name') }}"
-                            placeholder="{{ trans('admin::app.catalog.categories.create.company-name') }}"
+                            :label="trans('admin::app.catalog.categories.create.company-name')"
+                            :placeholder="trans('admin::app.catalog.categories.create.company-name')"
                         >
                         </x-admin::form.control-group.control>
                     </x-admin::form.control-group>
@@ -70,7 +70,7 @@
                     <div class="mb-[10px]">
                         {{-- Parent category --}}
                         <label class="block mb-[10px] text-[12px] text-gray-800 font-medium leading-[24px]">
-                            @lang('admin::app.catalog.categories.create.select-parent-category')
+                            @lang('admin::app.catalog.categories.create.parent-category')
                         </label>
 
                         {{-- Radio select button --}}
@@ -97,7 +97,7 @@
 
                     <!-- Description -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.catalog.categories.create.description')
                         </x-admin::form.control-group.label>
 
@@ -106,9 +106,9 @@
                             name="description"
                             id="description"
                             class="description"
-                            value="{{ old('description') }}"
+                            :value="old('description')"
                             rules="required"
-                            label="{{ trans('admin::app.catalog.categories.create.description') }}"
+                            :label="trans('admin::app.catalog.categories.create.description')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -129,7 +129,6 @@
                                 @lang('admin::app.catalog.categories.create.logo-size')
                             </p>
 
-                           
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.control
                                     type="image"
@@ -141,7 +140,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="image[]"
+                                    control-name="logo_path[image_1]"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
@@ -172,7 +171,7 @@
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
-                                    control-name="category_icon_image[]"
+                                    control-name="banner_path[]"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
@@ -218,9 +217,9 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="meta_title"
-                                value="{{ old('meta_title') }}"
-                                label="{{ trans('admin::app.catalog.categories.create.meta-title') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.meta-title') }}"
+                                :value="old('meta_title')"
+                                :label="trans('admin::app.catalog.categories.create.meta-title')"
+                                :placeholder="trans('admin::app.catalog.categories.create.meta-title')"
                                 v-model="metaTitle"
                             >
                             </x-admin::form.control-group.control>
@@ -228,17 +227,17 @@
 
                         {{-- Slug --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.categories.create.slug')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="slug"
-                                value="{{ old('slug') }}"
+                                :value="old('slug')"
                                 rules="required"
-                                label="{{ trans('admin::app.catalog.categories.create.slug') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                :label="trans('admin::app.catalog.categories.create.slug')"
+                                :placeholder="trans('admin::app.catalog.categories.create.slug')"
                             >
                             </x-admin::form.control-group.control>
 
@@ -257,9 +256,9 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="meta_keywords"
-                                value="{{ old('meta_keywords') }}"
-                                label="{{ trans('admin::app.catalog.categories.create.meta-keywords') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.meta-keywords') }}"
+                                :value="old('meta_keywords')"
+                                :label="trans('admin::app.catalog.categories.create.meta-keywords')"
+                                :placeholder="trans('admin::app.catalog.categories.create.meta-keywords')"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -273,9 +272,9 @@
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 name="meta_description"
-                                value="{{ old('meta_description') }}"
-                                label="{{ trans('admin::app.catalog.categories.create.meta-description') }}"
-                                placeholder="{{ trans('admin::app.catalog.categories.create.meta-description') }}"
+                                :value="old('meta_description')"
+                                :label="trans('admin::app.catalog.categories.create.meta-description')"
+                                :placeholder="trans('admin::app.catalog.categories.create.meta-description')"
                                 v-model="metaDescription"
                             >
                             </x-admin::form.control-group.control>
@@ -298,17 +297,17 @@
                         {{-- Position --}}
                         <div class="mb-[10px]">
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800">
                                     @lang('admin::app.catalog.categories.create.position')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="position"
-                                    value="{{ old('position') }}"
+                                    :value="old('position')"
                                     rules="required"
-                                    label="{{ trans('admin::app.catalog.categories.create.position') }}"
-                                    placeholder="{{ trans('admin::app.catalog.categories.create.enter-position') }}"
+                                    :label="trans('admin::app.catalog.categories.create.position')"
+                                    :placeholder="trans('admin::app.catalog.categories.create.enter-position')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -321,7 +320,7 @@
 
                         {{-- Display Mode  --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                            <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
                                 @lang('admin::app.catalog.categories.create.display-mode')
                             </x-admin::form.control-group.label>
 
@@ -330,7 +329,7 @@
                                 name="display_mode"
                                 class="cursor-pointer"
                                 rules="required"
-                                label="{{ trans('admin::app.catalog.categories.create.display-mode') }}"
+                                :label="trans('admin::app.catalog.categories.create.display-mode')"
                             >
                                 @foreach (['products_and_description', 'products_only', 'description_only'] as $item)
                                     <option value="{{ $item }}">
@@ -356,7 +355,7 @@
                                 name="status"
                                 class="cursor-pointer"
                                 value="1"
-                                label="{{ trans('admin::app.catalog.categories.create.visible-in-menu') }}"
+                                :label="trans('admin::app.catalog.categories.create.visible-in-menu')"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -377,15 +376,16 @@
                                 class="flex gap-[10px] w-max items-center p-[6px] cursor-pointer select-none"
                                 for="{{ $attribute->name ?? $attribute->admin_name }}"
                             >
-                                <input
-                                    type="checkbox" 
+                                <x-admin::form.control-group.control
+                                    type="checkbox"
+                                    name="attributes[{{ $attribute->name ?? $attribute->admin_name }}]"
                                     id="{{ $attribute->name ?? $attribute->admin_name }}"
+                                    class="cursor-pointer"
                                     value="{{ $attribute->id }}"
-                                    name="attributes[]" 
-                                    class="hidden peer"
+                                    for="{{ $attribute->name ?? $attribute->admin_name }}"
                                 >
+                                </x-admin::form.control-group.control>
 
-                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointe peer-checked:icon-checked peer-checked:text-navyBlue"></span>
 
                                 <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
                                     {{ $attribute->name ?? $attribute->admin_name }}
