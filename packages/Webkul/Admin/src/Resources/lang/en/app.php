@@ -1307,7 +1307,7 @@ return [
             'title'            => 'Create Page',
             'save-btn'         => 'Save Page',
             'general'          => 'General',
-            'page-title'       => 'Page Title',
+            'page-title'       => 'Title',
             'channels'          => 'Channels',
             'content'          => 'Content',
             'meta-keywords'    => 'Meta Keywords',
