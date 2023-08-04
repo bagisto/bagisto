@@ -320,7 +320,24 @@ abstract class DataGrid
 
         $queryBuilder->orderBy(request('sort.column', $this->primaryColumn), request('sort.order', $this->sortOrder));
 
-        $paginator = $queryBuilder->paginate($this->itemsPerPage)->toArray();
+        $paginator = $queryBuilder->paginate(
+            request('pagination.per_page', $this->itemsPerPage),
+            ['*'],
+            'page',
+            request('pagination.page', 1)
+        )->toArray();
+
+        foreach($paginator['data'] as $data) {
+            $data->actions = [];
+
+            foreach ($this->actions as $action) {
+                $data->actions[] = [
+                    ...$action,
+
+                    'url' => $action['url']($data),
+                ];
+            }
+        }
 
         // refactor
         return [

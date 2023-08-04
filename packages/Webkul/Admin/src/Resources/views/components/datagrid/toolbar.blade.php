@@ -48,16 +48,26 @@
         <span class="icon-settings text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
 
         <div class="flex gap-x-[8px] items-center">
-            <div class="">
-                <div class="inline-flex gap-x-[8px] items-center justify-between text-gray-600 py-[6px] px-[10px] text-center leading-[24px] w-full max-w-max bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400">
-                    <span v-text="applied.pagination.perPage"></span>
+            <x-admin::dropdown>
+                <!-- Dropdown Toggler -->
+                <x-slot:toggle>
+                    <button class="inline-flex gap-x-[8px] items-center justify-between text-gray-600 py-[6px] px-[10px] text-center leading-[24px] w-full max-w-max bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400">
+                        <span v-text="applied.pagination.perPage"></span>
 
-                    <span class="icon-sort-down text-[24px]"></span>
-                </div>
+                        <span class="icon-sort-down text-[24px]"></span>
+                    </button>
+                </x-slot:toggle>
 
-                <div class="hidden w-full z-10 bg-white divide-y divide-gray-100 rounded shadow">
-                </div>
-            </div>
+                <!-- Dropdown Content -->
+                <x-slot:menu>
+                    <x-admin::dropdown.menu.item
+                        v-for="perPageOption in available.meta.per_page_options"
+                        v-text="perPageOption"
+                        @click="changePerPageOption(perPageOption)"
+                    >
+                    </x-admin::dropdown.menu.item>
+                </x-slot:menu>
+            </x-admin::dropdown>
 
             <p class="text-gray-600 whitespace-nowrap max-sm:hidden">per page</p>
 

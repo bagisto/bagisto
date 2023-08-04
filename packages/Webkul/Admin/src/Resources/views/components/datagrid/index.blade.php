@@ -63,7 +63,10 @@
                  */
                 get() {
                     let params = {
-                        page: this.applied.pagination.page,
+                        pagination: {
+                            page: this.applied.pagination.page,
+                            per_page: this.applied.pagination.perPage,
+                        },
 
                         sort: {
                             column: this.applied.sort.column,
@@ -132,6 +135,18 @@
                 },
 
                 /**
+                 * Change per page option.
+                 *
+                 * @param {integer} option
+                 * @returns {void}
+                 */
+                changePerPageOption(option) {
+                    this.applied.pagination.perPage = option;
+
+                    this.get();
+                },
+
+                /**
                  * Sort Page.
                  *
                  * @param {object} column
@@ -176,6 +191,8 @@
                         }
                     } else {
                         this.applyFilter(column, $event.target.value, additional);
+
+                        $event.target.value = '';
                     }
 
                     this.get();
@@ -263,8 +280,16 @@
                     }
                 },
 
+                //================================================================
+
                 findAppliedColumn(columnIndex) {
                     return this.applied.filters.columns.find(column => column.index === columnIndex);
+                },
+
+                hasAnyAppliedColumnValues(columnIndex) {
+                    let appliedColumn = this.findAppliedColumn(columnIndex);
+
+                    return appliedColumn?.value.length > 0;
                 },
 
                 getAppliedColumnValues(columnIndex) {
@@ -286,6 +311,65 @@
                     }
 
                     this.get();
+                },
+
+                removeAppliedColumnAllValues(columnIndex) {
+                    this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
+
+                    this.get();
+                },
+
+                //================================================================
+
+                // refactor when not in that much use case
+                performAction(action) {
+                    switch (action.method.toLowerCase()) {
+                        case 'get':
+                            window.location.href = action.url;
+
+                            break;
+
+                        case 'post':
+                            this.$axios
+                                .post(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        case 'put':
+                            this.$axios
+                                .put(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        case 'patch':
+                            this.$axios
+                                .patch(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        case 'delete':
+                            this.$axios
+                                .delete(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        default:
+                            console.error('Method not supported.');
+
+                            break;
+                    }
                 },
             },
         });
