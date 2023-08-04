@@ -31,6 +31,7 @@
                     </a>
                 @endif
 
+                {{--Save Button --}}
                 <button 
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -49,71 +50,18 @@
             </div>
         </div>
 
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+          {{-- body content --}}
+          <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+            {{-- Left sub-component --}}
+            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+
+                {{--Content --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.before') !!}
-
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('admin::app.cms.edit.general')
+                    <p class="required text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('admin::app.cms.edit.content')
                     </p>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.page-title')
-                        </x-admin::form.control-group.label>
-
-                        <x-admin::form.control-group.control
-                            type="text"
-                            name="{{ $locale }}[page_title]"
-                            value="{{ old($locale)['page_title'] ?? ($page->translate($locale)['page_title'] ?? '') }}"
-                            id="{{ $locale }}[page_title]"
-                            rules="required"
-                            :label="trans('admin::app.cms.edit.page-title')"
-                            :placeholder="trans('admin::app.cms.edit.page-title')"
-                        >
-                        </x-admin::form.control-group.control>
-
-                        <x-admin::form.control-group.error
-                            control-name="{{ $locale }}[page_title]"
-                        >
-                        </x-admin::form.control-group.error>
-                    </x-admin::form.control-group>
-
-                    <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.channels')
-                        </x-admin::form.control-group.label>
-
-                        <x-admin::form.control-group.control
-                            type="select"
-                            name="channels[]"
-                            id="channels[]"
-                            :value="implode($selectedOptionIds)"
-                            rules="required"
-                            :label="trans('admin::app.cms.edit.channels')"
-                            :placeholder="trans('admin::app.cms.edit.channels')"
-                            multiple
-                        >
-                            @foreach($channels->all() as $channel)
-                                <option value="{{ $channel->id }}" {{ in_array($channel->id, $selectedOptionIds) ? 'selected' : '' }}>
-                                    {{ core()->getChannelName($channel) }}
-                                </option>
-                            @endforeach
-                        </x-admin::form.control-group.control>
-
-                        <x-admin::form.control-group.error
-                            control-name="channels[]"
-                        >
-                        </x-admin::form.control-group.error>
-                    </x-admin::form.control-group>  
-                    
-                    <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.cms.edit.content')
-                        </x-admin::form.control-group.label>
-
                         <x-admin::form.control-group.control
                             type="tinymce"
                             name="{{ $locale }}[html_content]"
@@ -131,18 +79,10 @@
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
-
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.general.after') !!}
                 </div>
-            </div>
-        </div>
 
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                {{-- SEO Input Fields --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.before') !!}
-
                     <x-admin::form.control-group class="mb-[30px]">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.cms.edit.meta-title')
@@ -153,7 +93,6 @@
                             name="{{$locale}}[meta_title]"
                             :value="old($locale)['meta_title'] ?? ($page->translate($locale)['meta_title'] ?? '') "
                             id="meta_title"
-                            rules="required"
                             :label="trans('admin::app.cms.edit.meta-title')"
                             :placeholder="trans('admin::app.cms.edit.meta-title')"
                         >
@@ -166,7 +105,7 @@
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.edit.url-key')
                         </x-admin::form.control-group.label>
 
@@ -198,7 +137,6 @@
                             :value="old($locale)['meta_keywords'] ?? ($page->translate($locale)['meta_keywords'] ?? '')"
                             id="meta_keywords"
                             class="text-gray-600"
-                            rules="required"
                             :label="trans('admin::app.cms.edit.meta-keywords')"
                             :placeholder="trans('admin::app.cms.edit.meta-keywords')"
                         >
@@ -221,7 +159,6 @@
                             :value="old($locale)['meta_description'] ?? ($page->translate($locale)['meta_description'] ?? '')"
                             id="meta_description"
                             class="text-gray-600"
-                            rules="required"
                             :label="trans('admin::app.cms.edit.meta-description')"
                             :placeholder="trans('admin::app.cms.edit.meta-description')"
                         >
@@ -232,8 +169,80 @@
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
+                </div>
+            </div>
+            {{-- Right sub-component --}}
+            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                {{-- General --}}
+                <div class="bg-white rounded-[4px] box-shadow">
+                    <x-admin::accordion>
+                        <x-slot:header>
+                            <div class="flex items-center justify-between p-[6px]">
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.users.roles.create.general')
+                                </p>
+                            </div>
+                        </x-slot:header>
+                
+                        <x-slot:content>
+                            <div class="mb-[10px]">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.cms.edit.page-title')
+                                    </x-admin::form.control-group.label>
+            
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="{{ $locale }}[page_title]"
+                                        value="{{ old($locale)['page_title'] ?? ($page->translate($locale)['page_title'] ?? '') }}"
+                                        id="{{ $locale }}[page_title]"
+                                        rules="required"
+                                        :label="trans('admin::app.cms.edit.page-title')"
+                                        :placeholder="trans('admin::app.cms.edit.page-title')"
+                                    >
+                                    </x-admin::form.control-group.control>
+            
+                                    <x-admin::form.control-group.error
+                                        control-name="{{ $locale }}[page_title]"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+            
+                                {{-- Select Channels --}}
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.cms.create.channels')
+                                </p>
 
-                    {!! view_render_event('bagisto.admin.cms.pages.edit_form_accordian.seo.after') !!}
+                                @foreach($channels->all() as $channel)
+                                    <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="channels[]"
+                                            :value="$channel->id"
+                                            :id="'channels_' . $channel->id"
+                                            :for="'channels_' . $channel->id"
+                                            rules="required"
+                                            :label="trans('admin::app.cms.create.channels')"
+                                            :checked="in_array($channel->id, $selectedOptionIds)"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                            
+                                        <x-admin::form.control-group.label 
+                                            :for="'channels_' . $channel->id"
+                                            class="cursor-pointer"
+                                        >
+                                            {{ core()->getChannelName($channel) }}
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="channels[]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                @endforeach 
+                            </div>
+                        </x-slot:content>
+                    </x-admin::accordion>
                 </div>
             </div>
         </div>
@@ -242,10 +251,10 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-locale-switcher-template">
             <div>
-                {{-- Locale dropdown --}}
+                <!-- Locale dropdown -->
                 <x-admin::dropdown>
                     <x-slot:toggle>
-                        {{-- Current Locale--}}
+                        <!-- Current Locale-->
                         <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
                             <span class="icon-language text-[24px] "></span>
                                 @{{ selectedLocale[0].name }}
@@ -253,7 +262,7 @@
                         </div>
                     </x-slot:toggle>
                 
-                    {{-- Locale content --}}
+                    <!-- Locale content -->
                     <x-slot:content class="!p-[0px]">
                         <div class="grid gap-[4px] mt-[10px] pb-[10px]">
                             <a
