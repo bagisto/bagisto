@@ -281,38 +281,36 @@
                                     </x-admin::form.control-group>
 
                                     <div class="mb-[10px]">
-                                        <div class="mb-[10px]">
-                                            <p class="block leading-[24px] text-gray-800 font-medium">
-                                                @lang('admin::app.promotions.catalog-rules.create.channels')
-                                            </p>
-                                            
-                                            @foreach(core()->getAllChannels() as $channel)
-                                                <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                                    <x-admin::form.control-group.control
-                                                        type="checkbox"
-                                                        name="channel[]"
-                                                        :value="$channel->id"
-                                                        :id="'channel_' . '_' . $channel->id"
-                                                        :for="'channel_' . '_' . $channel->id"
-                                                        :label="$channel->name"
-                                                        :checked="in_array($channel->id, old('channel[]', []))"
-                                                    >
-                                                    </x-admin::form.control-group.control>
-                                    
-                                                    <x-admin::form.control-group.label
-                                                        :for="'channel_' . '_' . $channel->id"
-                                                        class="cursor-pointer"
-                                                    >
-                                                        {{ core()->getChannelName($channel) }}
-                                                    </x-admin::form.control-group.label>
-    
-                                                    <x-admin::form.control-group.error
-                                                        control-name="channel[]"
-                                                    >
-                                                    </x-admin::form.control-group.error>
-                                                </x-admin::form.control-group>
-                                            @endforeach
-                                        </div>
+                                        <p class="block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.promotions.catalog-rules.create.channels')
+                                        </p>
+                                        
+                                        @foreach(core()->getAllChannels() as $channel)
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="channels[]"
+                                                    :value="$channel->id"
+                                                    :id="'channel_' . '_' . $channel->id"
+                                                    :for="'channel_' . '_' . $channel->id"
+                                                    :label="$channel->name"
+                                                    :checked="in_array($channel->id, old('channels[]', []))"
+                                                >
+                                                </x-admin::form.control-group.control>
+                                
+                                                <x-admin::form.control-group.label
+                                                    :for="'channel_' . '_' . $channel->id"
+                                                    class="cursor-pointer"
+                                                >
+                                                    {{ core()->getChannelName($channel) }}
+                                                </x-admin::form.control-group.label>
+
+                                                <x-admin::form.control-group.error
+                                                    control-name="channels[]"
+                                                >
+                                                </x-admin::form.control-group.error>
+                                            </x-admin::form.control-group>
+                                        @endforeach
                                     </div>
     
                                     <div class="mb-[10px]">
@@ -451,7 +449,7 @@
                 
                 data() {
                     return {
-                        condition_type: 1,
+                        condition_type: "{{ old('condition_type', 0) }}",
 
                         conditions: []
                     }

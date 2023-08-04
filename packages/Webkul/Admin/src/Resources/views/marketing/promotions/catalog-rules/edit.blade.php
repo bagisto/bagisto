@@ -300,7 +300,7 @@
                                                         :id="'channel_' . '_' . $channel->id"
                                                         :for="'channel_' . '_' . $channel->id"
                                                         :label="$channel->name"
-                                                        :checked="in_array($channel->id, old('channel[]') ?? $selectedOptionIds)"
+                                                        :checked="in_array($channel->id, $selectedOptionIds)"
                                                     >
                                                     </x-admin::form.control-group.control>
                                     
@@ -336,7 +336,7 @@
                                                     :id="'customer_group_' . '_' . $customerGroup->id"
                                                     :for="'customer_group_' . '_' . $customerGroup->id"
                                                     :label="$customerGroup->name"
-                                                    :checked="in_array($customerGroup->id, old('customer_groups[]') ?? $selectedOptionIds)"
+                                                    :checked="in_array($customerGroup->id, $selectedOptionIds)"
                                                 >
                                                 </x-admin::form.control-group.control>
                                 
