@@ -1,7 +1,7 @@
 <x-admin::layouts>    
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.promotions.catalog-rules.create.title')
+        @lang('admin::app.marketing.promotions.catalog-rules.create.title')
     </x-slot:title>
 
     {{-- Create Catalog form --}}
@@ -17,7 +17,7 @@
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
                         <p class="text-[20px] text-gray-800 font-bold">
-                            @lang('admin::app.promotions.catalog-rules.create.title')
+                            @lang('admin::app.marketing.promotions.catalog-rules.create.title')
                         </p>
                 
                         <div class="flex gap-x-[10px] items-center">
@@ -25,7 +25,7 @@
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.promotions.catalog-rules.create.save-btn')
+                                @lang('admin::app.marketing.promotions.catalog-rules.create.save-btn')
                             </button>
                         </div>
                     </div>
@@ -33,15 +33,14 @@
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-
-                                {{-- General Form --}}
+                                <!-- General Form -->
                                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                                    General
+                                    @lang('admin::app.marketing.promotions.catalog-rules.create.general')
                                 </p>
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.promotions.catalog-rules.create.name')
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.marketing.promotions.catalog-rules.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -50,8 +49,8 @@
                                         :value="old('name')"
                                         id="name"
                                         rules="required"
-                                        :label="trans('admin::app.promotions.catalog-rules.create.name')"
-                                        :placeholder="trans('admin::app.promotions.catalog-rules.create.name')"
+                                        :label="trans('admin::app.marketing.promotions.catalog-rules.create.name')"
+                                        :placeholder="trans('admin::app.marketing.promotions.catalog-rules.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -63,7 +62,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.promotions.catalog-rules.create.description')
+                                        @lang('admin::app.marketing.promotions.catalog-rules.create.description')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -72,8 +71,8 @@
                                         :value="old('description')"
                                         id="description"
                                         class="text-gray-600"
-                                        :label="trans('admin::app.promotions.catalog-rules.create.description')"
-                                        :placeholder="trans('admin::app.promotions.catalog-rules.create.description')"
+                                        :label="trans('admin::app.marketing.promotions.catalog-rules.create.description')"
+                                        :placeholder="trans('admin::app.marketing.promotions.catalog-rules.create.description')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -82,15 +81,13 @@
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-
-                          
                             </div>
         
-                            {{-- Conditions --}}
+                            <!-- Conditions -->
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                                 <div class="flex gap-[16px] items-center justify-between">
                                     <p class="text-[16px] text-gray-800 font-semibold">
-                                        @lang('admin::app.promotions.catalog-rules.create.conditions')
+                                        @lang('admin::app.marketing.promotions.catalog-rules.create.conditions')
                                     </p>
 
                                     <x-admin::form.control-group class="!mb-0">
@@ -99,16 +96,16 @@
                                             name="condition_type"
                                             id="condition_type"
                                             class="pr-[40px] text-gray-400 border-gray-300"
-                                            :label="trans('admin::app.promotions.catalog-rules.condition-type')"
-                                            :placeholder="trans('admin::app.promotions.catalog-rules.condition-type')"
+                                            :label="trans('admin::app.marketing.promotions.catalog-rules.condition-type')"
+                                            :placeholder="trans('admin::app.marketing.promotions.catalog-rules.condition-type')"
                                             v-model="condition_type"
                                         >
                                             <option value="1">
-                                                @lang('admin::app.promotions.catalog-rules.create.all-conditions-true')
+                                                @lang('admin::app.marketing.promotions.catalog-rules.create.all-conditions-true')
                                             </option>
 
                                             <option value="2">
-                                                @lang('admin::app.promotions.catalog-rules.create.any-conditions-true')
+                                                @lang('admin::app.marketing.promotions.catalog-rules.create.any-conditions-true')
                                             </option>
                                         </x-admin::form.control-group.control>
 
@@ -132,23 +129,23 @@
                                     class="max-w-max px-[12px] py-[5px] mt-[15px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="addCondition"
                                 >
-                                    @lang('admin::app.promotions.catalog-rules.create.add-condition')
+                                    @lang('admin::app.marketing.promotions.catalog-rules.create.add-condition')
                                 </div>
         
                             </div>
         
-                            {{-- Actions --}}
+                            <!-- Actions -->
                             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                                 <div class="grid gap-[6px]">
                                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
-                                        @lang('admin::app.promotions.catalog-rules.create.actions')
+                                        @lang('admin::app.marketing.promotions.catalog-rules.create.actions')
                                     </p>
         
                                     <div class="flex  gap-[16px]  max-sm:flex-wrap">
-                                        <div class="w-full mb-[10px]">
+                                        <div class="w-full">
                                             <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.create.action-type')
+                                                <x-admin::form.control-group.label class="required">
+                                                    @lang('admin::app.marketing.promotions.catalog-rules.create.action-type')
                                                 </x-admin::form.control-group.label>
         
                                                 <x-admin::form.control-group.control
@@ -164,14 +161,14 @@
                                                         value="by_percent" 
                                                         {{ old('action_type') == 'by_percent' ? 'selected' : '' }}
                                                     >
-                                                        @lang('admin::app.promotions.catalog-rules.create.percentage-product-price')
+                                                        @lang('admin::app.marketing.promotions.catalog-rules.create.percentage-product-price')
                                                     </option>
             
                                                     <option 
                                                         value="by_fixed"
                                                         {{ old('action_type') == 'by_fixed' ? 'selected' : '' }}
                                                     >
-                                                        @lang('admin::app.promotions.catalog-rules.create.fixed-amount')
+                                                        @lang('admin::app.marketing.promotions.catalog-rules.create.fixed-amount')
                                                     </option>
                                                 </x-admin::form.control-group.control>
         
@@ -182,10 +179,10 @@
                                             </x-admin::form.control-group>
                                         </div>
 
-                                        <div class="w-full mb-[10px]">
+                                        <div class="w-full">
                                             <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.create.discount-amount')
+                                                <x-admin::form.control-group.label class="required">
+                                                    @lang('admin::app.marketing.promotions.catalog-rules.create.discount-amount')
                                                 </x-admin::form.control-group.label>
         
                                                 <x-admin::form.control-group.control
@@ -194,7 +191,7 @@
                                                     :value="old('discount_amount') ?? 0"
                                                     id="discount_amount"
                                                     rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.create.discount-amount')"
+                                                    :label="trans('admin::app.marketing.promotions.catalog-rules.create.discount-amount')"
                                                 >
                                                 </x-admin::form.control-group.control>
         
@@ -205,10 +202,10 @@
                                             </x-admin::form.control-group>
                                         </div>
 
-                                        <div class="w-full mb-[10px]">
+                                        <div class="w-full">
                                             <x-admin::form.control-group>
                                                 <x-admin::form.control-group.label>
-                                                    @lang('admin::app.promotions.catalog-rules.create.end-other-rules')
+                                                    @lang('admin::app.marketing.promotions.catalog-rules.create.end-other-rules')
                                                 </x-admin::form.control-group.label>
         
                                                 <x-admin::form.control-group.control
@@ -217,21 +214,20 @@
                                                     :value="old('end_other_rules') ?? 0"
                                                     id="end_other_rules"
                                                     class="h-[39px]"
-                                                    rules="required"
-                                                    :label="trans('admin::app.promotions.catalog-rules.create.end-other-rules')"
+                                                    :label="trans('admin::app.marketing.promotions.catalog-rules.create.end-other-rules')"
                                                 >
                                                     <option
                                                         value="0"
                                                         {{ ! old('end_other_rules') ? 'selected' : '' }}
                                                     >
-                                                        @lang('admin::app.promotions.catalog-rules.create.no')
+                                                        @lang('admin::app.marketing.promotions.catalog-rules.create.no')
                                                     </option>
             
                                                     <option
                                                         value="1"
                                                         {{ old('end_other_rules') ? 'selected' : '' }}
                                                     >
-                                                        @lang('admin::app.promotions.catalog-rules.create.yes')
+                                                        @lang('admin::app.marketing.promotions.catalog-rules.create.yes')
                                                     </option>
                                                 </x-admin::form.control-group.control>
         
@@ -246,14 +242,14 @@
                             </div>
                         </div>
 
-                        {{-- Rightsub components --}}
+                        <!-- Right sub-components -->
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                             {{-- Settings --}}
                             <x-admin::accordion>
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
                                         <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                                            @lang('admin::app.promotions.catalog-rules.create.settings')
+                                            @lang('admin::app.marketing.promotions.catalog-rules.create.settings')
                                         </p>
                                     </div>
                                 </x-slot:header>
@@ -261,7 +257,7 @@
                                 <x-slot:content>
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.promotions.catalog-rules.create.priority')
+                                            @lang('admin::app.marketing.promotions.catalog-rules.create.priority')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -269,8 +265,8 @@
                                             name="sort_order"
                                             :value="old('sort_order')"
                                             id="sort_order"
-                                            :label="trans('admin::app.promotions.catalog-rules.create.priority')"
-                                            :placeholder="trans('admin::app.promotions.catalog-rules.create.priority')"
+                                            :label="trans('admin::app.marketing.promotions.catalog-rules.create.priority')"
+                                            :placeholder="trans('admin::app.marketing.promotions.catalog-rules.create.priority')"
                                         >
                                         </x-admin::form.control-group.control>
 
@@ -280,27 +276,29 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
+                                    <!-- channels -->
                                     <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
-                                            @lang('admin::app.promotions.catalog-rules.create.channels')
+                                        <p class="required block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.marketing.promotions.catalog-rules.create.channels')
                                         </p>
                                         
                                         @foreach(core()->getAllChannels() as $channel)
-                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px] hover:bg-gray-100 hover:rounded-[8px]">
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
                                                     name="channels[]"
                                                     :value="$channel->id"
                                                     :id="'channel_' . '_' . $channel->id"
                                                     :for="'channel_' . '_' . $channel->id"
-                                                    :label="$channel->name"
+                                                    rules="required"
+                                                    :label="trans('admin::app.marketing.promotions.catalog-rules.create.channels')"
                                                     :checked="in_array($channel->id, old('channels[]', []))"
                                                 >
                                                 </x-admin::form.control-group.control>
                                 
                                                 <x-admin::form.control-group.label
                                                     :for="'channel_' . '_' . $channel->id"
-                                                    class="cursor-pointer"
+                                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                                 >
                                                     {{ core()->getChannelName($channel) }}
                                                 </x-admin::form.control-group.label>
@@ -312,10 +310,11 @@
                                             </x-admin::form.control-group>
                                         @endforeach
                                     </div>
-    
+
+                                    <!-- Customer Groups -->
                                     <div class="mb-[10px]">
-                                        <p class="block leading-[24px] text-gray-800 font-medium">
-                                            @lang('admin::app.promotions.catalog-rules.create.customer-groups')
+                                        <p class="required block leading-[24px] text-gray-800 font-medium">
+                                            @lang('admin::app.marketing.promotions.catalog-rules.create.customer-groups')
                                         </p>
                                         
                                         @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
@@ -326,14 +325,15 @@
                                                     :value="$customerGroup->id"
                                                     :id="'customer_group_' . '_' . $customerGroup->id"
                                                     :for="'customer_group_' . '_' . $customerGroup->id"
-                                                    :label="$customerGroup->name"
+                                                    rules="required"
+                                                    :label="trans('admin::app.marketing.promotions.catalog-rules.create.customer-groups')"
                                                     :checked="in_array($customerGroup->id, old('customer_groups[]', []))"
                                                 >
                                                 </x-admin::form.control-group.control>
                                 
                                                 <x-admin::form.control-group.label
                                                     :for="'customer_group_' . '_' . $customerGroup->id"
-                                                    class="cursor-pointer"
+                                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                                 >
                                                     {{ $customerGroup->name }}
                                                 </x-admin::form.control-group.label>
@@ -344,11 +344,12 @@
                                                 </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
-                                    </div>
+                                    </div> 
 
+                                    <!-- Status -->
                                     <div class="mb-[10px]">
                                         <p class="block leading-[24px] text-gray-800 font-medium">
-                                            @lang('admin::app.promotions.catalog-rules.create.status')
+                                            @lang('admin::app.marketing.promotions.catalog-rules.create.status')
                                         </p>
     
                                         <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
@@ -364,9 +365,9 @@
                             
                                             <x-admin::form.control-group.label
                                                 for="status"
-                                                class="cursor-pointer"
+                                                class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                             >
-                                                @lang('admin::app.promotions.catalog-rules.create.status')
+                                                @lang('admin::app.marketing.promotions.catalog-rules.create.status')
                                             </x-admin::form.control-group.label>
     
                                             <x-admin::form.control-group.error
@@ -383,7 +384,7 @@
                                 <x-slot:header>
                                     <div class="flex items-center justify-between p-[6px]">
                                         <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                                            @lang('admin::app.promotions.catalog-rules.create.marketing-time')
+                                            @lang('admin::app.marketing.promotions.catalog-rules.create.marketing-time')
                                         </p>
                                     </div>
                                 </x-slot:header>
@@ -392,7 +393,7 @@
                                     <div class="flex gap-[16px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.promotions.catalog-rules.create.from')
+                                                @lang('admin::app.marketing.promotions.catalog-rules.create.from')
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
@@ -400,9 +401,8 @@
                                                 name="starts_from"
                                                 :value="old('starts_from')"
                                                 id="starts_from"
-                                                rules="required"
-                                                :label="trans('admin::app.promotions.catalog-rules.create.from')"
-                                                :placeholder="trans('admin::app.promotions.catalog-rules.create.from')"
+                                                :label="trans('admin::app.marketing.promotions.catalog-rules.create.from')"
+                                                :placeholder="trans('admin::app.marketing.promotions.catalog-rules.create.from')"
                                             >
                                             </x-admin::form.control-group.control>
         
@@ -414,7 +414,7 @@
 
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label>
-                                                @lang('admin::app.promotions.catalog-rules.create.to')
+                                                @lang('admin::app.marketing.promotions.catalog-rules.create.to')
                                             </x-admin::form.control-group.label>
         
                                             <x-admin::form.control-group.control
@@ -422,9 +422,8 @@
                                                 name="ends_till"
                                                 :value="old('ends_till')"
                                                 id="ends_till"
-                                                rules="required"
-                                                :label="trans('admin::app.promotions.catalog-rules.create.to')"
-                                                :placeholder="trans('admin::app.promotions.catalog-rules.create.to')"
+                                                :label="trans('admin::app.marketing.promotions.catalog-rules.create.to')"
+                                                :placeholder="trans('admin::app.marketing.promotions.catalog-rules.create.to')"
                                             >
                                             </x-admin::form.control-group.control>
         
@@ -495,7 +494,7 @@
                         class="custom-select flex w-1/3 min:w-1/3 h-[40px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400 pr-[40px]"
                         v-model="condition.attribute"
                     >
-                        <option value="">@lang('admin::app.promotions.catalog-rules.create.choose-condition-to-add')</option>
+                        <option value="">@lang('admin::app.marketing.promotions.catalog-rules.create.choose-condition-to-add')</option>
 
                         <optgroup 
                             v-for='(conditionAttribute, index) in conditionAttributes'
@@ -602,11 +601,11 @@
                                     v-model="condition.value"
                                 >
                                     <option value="1">
-                                        @lang('admin::app.promotions.catalog-rules.create.yes')
+                                        @lang('admin::app.marketing.promotions.catalog-rules.create.yes')
                                     </option>
 
                                     <option value="0">
-                                        @lang('admin::app.promotions.catalog-rules.create.no')
+                                        @lang('admin::app.marketing.promotions.catalog-rules.create.no')
                                     </option>
                                 </select>
                             </div>
@@ -691,146 +690,146 @@
                         conditionOperators: {
                             'price': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-less-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.less-than') }}'
                                 }],
                             'decimal': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.less-than') }}'
                                 }],
                             'integer': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.less-than') }}'
                                 }],
                             'text': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }, {
                                     'operator': '{}',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.contain') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.contain') }}'
                                 }, {
                                     'operator': '!{}',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.does-not-contain') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.does-not-contain') }}'
                                 }],
                             'boolean': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }],
                             'date': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.less-than') }}'
                                 }],
                             'datetime': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.equals-or-less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.greater-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.less-than') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.less-than') }}'
                                 }],
                             'select': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }],
                             'radio': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.is-not-equal-to') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.is-not-equal-to') }}'
                                 }],
                             'multiselect': [{
                                     'operator': '{}',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.contains') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.contains') }}'
                                 }, {
                                     'operator': '!{}',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.does-not-contain') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.does-not-contain') }}'
                                 }],
                             'checkbox': [{
                                     'operator': '{}',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.contains') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.contains') }}'
                                 }, {
                                     'operator': '!{}',
-                                    'label': '{{ __('admin::app.promotions.catalog-rules.create.does-not-contain') }}'
+                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.create.does-not-contain') }}'
                                 }]
                         }
                     }

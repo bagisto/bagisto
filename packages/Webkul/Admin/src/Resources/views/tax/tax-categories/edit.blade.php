@@ -39,7 +39,7 @@
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                         <!-- Code -->
                         <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.taxes.tax-categories.edit.code')
                         </x-admin::form.control-group.label>
 
@@ -62,7 +62,7 @@
 
                     <!-- Name -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.taxes.tax-categories.edit.name')
                         </x-admin::form.control-group.label>
 
@@ -85,7 +85,7 @@
 
                     <!-- Description -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.taxes.tax-categories.edit.description')
                         </x-admin::form.control-group.label>
 
@@ -120,41 +120,45 @@
                     </x-slot:header>
                 
                     <x-slot:content>
-                        @php 
+               
+                       @inject('taxRates', 'Webkul\Tax\Repositories\TaxRateRepository')
+
+                       @php 
                             $selectedOptions = old('taxrates') ?: $taxCategory->tax_rates()->pluck('tax_rates.id')->toArray();
                         @endphp
 
-                        @inject('taxRates', 'Webkul\Tax\Repositories\TaxRateRepository')
-
                         <!-- Select Tax Rates -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.taxes.tax-categories.edit.select-tax-rates')
-                            </x-admin::form.control-group.label>
+                        <p class="block leading-[24px] text-gray-800 font-medium">
+                            @lang('admin::app.settings.taxes.tax-categories.edit.select-tax-rates')
+                        </p>
 
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="taxrates[]"
-                                id="taxrates"
-                                :label="trans('admin::app.settings.taxes.tax-categories.edit.select-tax-rates')"
-                                :placeholder="trans('admin::app.settings.taxes.tax-categories.edit.select-tax-rates')"
-                                multiple
-                            >
-                                @foreach ($taxRates->all() as $taxRate)
-                                    <option
-                                        value="{{ $taxRate->id }}"
-                                        {{ in_array($taxRate->id, $selectedOptions) ? 'selected' : '' }}
-                                    >
-                                        {{ $taxRate['identifier'] }}
-                                    </option>
-                                @endforeach
-                            </x-admin::form.control-group.control>
+                        @foreach ($taxRates->all() as $taxRate)
+                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                <x-admin::form.control-group.control
+                                    type="checkbox"
+                                    name="taxrates[]"
+                                    :value="$taxRate->id"
+                                    :id="'taxrates_' . $taxRate->id"
+                                    :for="'taxrates_' . $taxRate->id"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.taxes.tax-categories.edit.select-tax-rates')"
+                                    :checked="in_array($taxRate->id, $selectedOptions)"
+                                >
+                                </x-admin::form.control-group.control>
+                                    
+                                <x-admin::form.control-group.label 
+                                    :for="'taxrates_' . $taxRate->id"
+                                    class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                >
+                                    {{ $taxRate['identifier'] }}
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.error
-                                control-name="taxrates"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="taxrates[]"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        @endforeach 
                     </x-slot:content>
                 </x-admin::accordion>
             </div>
