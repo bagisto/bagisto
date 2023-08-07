@@ -279,8 +279,8 @@
                 generateIcon() {
                     return this.$h('i', {
                         class: [
-                            this.isActive ? 'icon-sort-down' : 
-                            this.hasChildren ? 'icon-sort-right' : '',
+                            this.isActive ? 'icon-sort-right' : 
+                            this.hasChildren ? 'icon-sort-down' : '',
                             'text-[24px] cursor-pointer'
                         ],
                         
