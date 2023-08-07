@@ -190,7 +190,7 @@
                                 <div class="mt-[15px] overflow-auto">    
                                     <x-admin::table class="w-full text-left">
                                         <x-admin::table.thead class="text-[14px] font-medium">
-                                            <x-admin::table.tr>
+                                            <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
@@ -217,7 +217,7 @@
 
                                                 <!-- Action tables heading -->
                                                 <x-admin::table.th></x-admin::table.th>
-                                            </x-admin::table.tr>
+                                            </x-admin::table.thead.tr>
                                         </x-admin::table.thead>
 
                                         <!-- Draggable Component -->
@@ -228,7 +228,7 @@
                                             item-key="id"
                                         >
                                             <template #item="{ element, index }" v-show="! element.isDelete">
-                                                <x-admin::table.tr>
+                                                <x-admin::table.thead.tr>
                                                     <input
                                                         type="hidden"
                                                         :name="'options[' + element.id + '][isNew]'"
@@ -281,6 +281,8 @@
                                                         </div>
                                                     </x-admin::table.td>
 
+                                                    @{{ element.id }}
+
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
                                                         <p v-text="element.admin_name"></p>
@@ -292,6 +294,7 @@
                                                         />
                                                     </x-admin::table.td>
 
+                                                    @{{ element.locales }}
                                                     <!-- English Loacle -->
                                                      <x-admin::table.td v-for="locale in allLocales">
                                                         <p v-text="locale.name"></p>
@@ -322,7 +325,7 @@
                                                         >
                                                         </span> 
                                                     </x-admin::table.td>
-                                                </x-admin::table.tr>
+                                                </x-admin::table.thead.tr>
                                             </template>
                                         </draggable>
                                     </x-admin::table>
@@ -828,10 +831,14 @@
                                 let id = 'option_' + rowCount;
                                 row = {'id': id, params};
                             } else {
+                                let id = params.id;
                                 row = params;
+                                let updatedObject = {
+                                    ...this.optionsData[id], ...this.optionsData[id].row,
+                                };
+                               
+                                this.options.splice(id, 1, updatedObject);
                             }
-
-                            this.optionsData.push(row);
                         }
 
                         this.$refs.addOptionsRow.toggle();

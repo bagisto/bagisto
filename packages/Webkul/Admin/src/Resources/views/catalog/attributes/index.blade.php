@@ -12,4 +12,6 @@
             </div>
         </a>
     </div>
+
+    <x-admin::datagrid></x-admin::datagrid>
 </x-admin::layouts>
