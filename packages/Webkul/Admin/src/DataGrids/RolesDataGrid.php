@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class RolesDataGrid extends DataGrid
 {
@@ -15,10 +15,10 @@ class RolesDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

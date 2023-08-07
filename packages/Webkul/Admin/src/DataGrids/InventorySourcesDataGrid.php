@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class InventorySourcesDataGrid extends DataGrid
 {
@@ -30,9 +30,9 @@ class InventorySourcesDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
 
-        $this->addFilter('status', 'status');
+        // $this->addFilter('status', 'status');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -40,7 +40,7 @@ class InventorySourcesDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -89,7 +89,7 @@ class InventorySourcesDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 }
-                
+
                 return trans('admin::app.datagrid.inactive');
             },
         ]);

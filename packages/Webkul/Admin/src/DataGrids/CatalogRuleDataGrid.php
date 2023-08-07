@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CatalogRuleDataGrid extends DataGrid
 {
@@ -32,9 +32,9 @@ class CatalogRuleDataGrid extends DataGrid
             ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
 
-        $this->addFilter('status', 'status');
+        // $this->addFilter('status', 'status');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -42,7 +42,7 @@ class CatalogRuleDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -70,7 +70,7 @@ class CatalogRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-              return $value->starts_from ?? '-';
+                return $value->starts_from ?? '-';
             },
         ]);
 
@@ -82,7 +82,7 @@ class CatalogRuleDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'closure'    => function ($value) {
-               return $value->ends_till ?? '-'; 
+                return $value->ends_till ?? '-';
             },
         ]);
 

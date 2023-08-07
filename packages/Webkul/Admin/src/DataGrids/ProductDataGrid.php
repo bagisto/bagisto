@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 
@@ -66,8 +66,7 @@ class ProductDataGrid extends DataGrid
     public function __construct(
         protected ProductRepository $productRepository,
         protected InventorySourceRepository $inventorySourceRepository
-    )
-    {
+    ) {
         /* locale */
         $this->locale = core()->getRequestedLocaleCode();
 
@@ -122,15 +121,15 @@ class ProductDataGrid extends DataGrid
         $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
 
-        $this->addFilter('product_id', 'product_flat.product_id');
-        $this->addFilter('product_name', 'product_flat.name');
-        $this->addFilter('product_sku', 'product_flat.sku');
-        $this->addFilter('product_number', 'product_flat.product_number');
-        $this->addFilter('status', 'product_flat.status');
-        $this->addFilter('product_type', 'product_flat.type');
-        $this->addFilter('attribute_family', 'attribute_families.name');
+        // $this->addFilter('product_id', 'product_flat.product_id');
+        // $this->addFilter('product_name', 'product_flat.name');
+        // $this->addFilter('product_sku', 'product_flat.sku');
+        // $this->addFilter('product_number', 'product_flat.product_number');
+        // $this->addFilter('status', 'product_flat.status');
+        // $this->addFilter('product_type', 'product_flat.type');
+        // $this->addFilter('attribute_family', 'attribute_families.name');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -138,7 +137,7 @@ class ProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'product_id',
@@ -176,7 +175,7 @@ class ProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($row) {
                 if (
-                    ! empty($row->visible_individually) 
+                    ! empty($row->visible_individually)
                     && ! empty($row->url_key)
                 ) {
                     return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
@@ -244,7 +243,7 @@ class ProductDataGrid extends DataGrid
                 if (is_null($row->quantity)) {
                     return 0;
                 }
-                
+
                 return $this->renderQuantityView($row);
             },
         ]);
@@ -262,7 +261,7 @@ class ProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function () {                
+            'condition' => function () {
                 return true;
             },
         ]);

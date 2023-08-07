@@ -33,7 +33,7 @@
                         <div class="mb-[10px]">
                             {{-- Register Email --}}
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.reset-password.email')
                                 </x-admin::form.control-group.label>
 
@@ -41,7 +41,7 @@
                                     type="email"
                                     name="email" 
                                     id="email"
-                                    class="w-[252px] max-w-full" 
+                                    class="w-[254px] max-w-full" 
                                     rules="required|email" 
                                     :label="trans('admin::app.users.reset-password.email')"
                                     :placeholder="trans('admin::app.users.reset-password.email')"
@@ -58,7 +58,7 @@
                         <div class="mb-[10px]">
                             {{-- Password --}}
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.reset-password.password')
                                 </x-admin::form.control-group.label>
 
@@ -66,7 +66,7 @@
                                     type="password"
                                     name="password" 
                                     id="password"
-                                    class="w-[252px] max-w-full" 
+                                    class="w-[254px] max-w-full" 
                                     ref="password"
                                     rules="required|min:6" 
                                     :label="trans('admin::app.users.reset-password.password')"
@@ -84,7 +84,7 @@
                         <div class="mb-[10px]">
                             {{-- Confirm Password --}}
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.reset-password.confirm-password')
                                 </x-admin::form.control-group.label>
 
@@ -92,7 +92,7 @@
                                     type="password"
                                     name="password_confirmation"
                                     id="password_confirmation"
-                                    class="w-[252px] max-w-full" 
+                                    class="w-[254px] max-w-full" 
                                     ref="password"
                                     rules="confirmed:@password" 
                                     :label="trans('admin::app.users.reset-password.confirm-password')"
