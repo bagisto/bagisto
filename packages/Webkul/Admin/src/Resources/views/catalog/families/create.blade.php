@@ -46,7 +46,7 @@
                         {{-- Panel Content --}}
                         <x-slot:content>
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800">
                                     @lang('admin::app.catalog.families.create.code')
                                 </x-admin::form.control-group.label>
 
@@ -68,7 +68,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800">
                                     @lang('admin::app.catalog.families.create.name')
                                 </x-admin::form.control-group.label>
 
@@ -329,7 +329,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Group Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.families.create.name')
                                         </x-admin::form.control-group.label>
 
@@ -347,7 +347,7 @@
 
                                     <!-- Select Group Type -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                        <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
                                             @lang('admin::app.catalog.families.create.column')
                                         </x-admin::form.control-group.label>
 

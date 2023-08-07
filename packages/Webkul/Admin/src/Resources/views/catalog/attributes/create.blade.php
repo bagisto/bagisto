@@ -81,7 +81,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="{{ $locale->code }}[name]"
-                                        :value="old($locale->code)['name'] ?? ''"
+                                        value="{{ old($locale->code) }}"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
@@ -254,12 +254,12 @@
 
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
-                                                        <p v-text="element.params.admin"></p>
+                                                        <p v-text="element.params.admin_name"></p>
 
                                                         <input
                                                             type="hidden"
-                                                            :name="'options[' + element.id + '][admin]'"
-                                                            v-model="element.params.admin"
+                                                            :name="'options[' + element.id + '][admin_name]'"
+                                                            v-model="element.params.admin_name"
                                                         />
                                                     </x-admin::table.td>
                     
@@ -390,7 +390,7 @@
                                 <!-- Attribute Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.catalog.attributes.create.general')
+                                        @lang('admin::app.catalog.attributes.create.code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -621,13 +621,13 @@
                                 
                                 <!-- Admin Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.create.admin')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="admin"
+                                        name="admin_name"
                                         rules="required"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.admin')"
@@ -635,7 +635,7 @@
                                     </x-admin::form.control-group.control>
         
                                     <x-admin::form.control-group.error
-                                        control-name="admin"
+                                        control-name="admin_name"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
@@ -643,7 +643,7 @@
                                 <!-- Locales Input -->
                                 @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label :class="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
 
@@ -665,7 +665,7 @@
 
                                 <!-- Position Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.create.position')
                                     </x-admin::form.control-group.label>
 
