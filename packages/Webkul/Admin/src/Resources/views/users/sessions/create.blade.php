@@ -26,7 +26,7 @@
                         <div class="mb-[10px]">
                             {{-- Email --}}
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.sessions.email')
                                 </x-admin::form.control-group.label>
 
@@ -34,7 +34,7 @@
                                     type="email"
                                     name="email" 
                                     id="email"
-                                    class="w-[252px] max-w-full" 
+                                    class="w-[254px] max-w-full" 
                                     rules="required|email" 
                                     :label="trans('admin::app.users.sessions.email')"
                                     :placeholder="trans('admin::app.users.sessions.email')"
@@ -50,7 +50,7 @@
                         <div class="mb-[10px]">
                             {{-- Password --}}
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.sessions.password')
                                 </x-admin::form.control-group.label>
 
@@ -58,7 +58,7 @@
                                     type="password"
                                     name="password" 
                                     id="password"
-                                    class="w-[252px] max-w-full" 
+                                    class="w-[254px] max-w-full" 
                                     rules="required|min:6" 
                                     :label="trans('admin::app.users.sessions.password')"
                                     :placeholder="trans('admin::app.users.sessions.password')"

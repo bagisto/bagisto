@@ -18,8 +18,6 @@ return [
         ],
     ],
 
-   
-
     'sales'=> [
         'orders' => [
             'index' => [
@@ -541,7 +539,7 @@ return [
 
         'sessions' => [
             'title'                      => 'Sign In',
-            'email'                      => 'Email',
+            'email'                      => 'Email Address',
             'password'                   => 'Password',
             'forget-password-link'       => 'Forget Password ?',
             'submit-btn'                 => 'Sign In',
