@@ -62,25 +62,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $data = request()->only([
-            'code',
-            'type',
-            'admin_name',
-            'options',
-            'is_required',
-            'is_unique',
-            'validation',
-            'value_per_locale',
-            'value_per_channel',
-            'is_filterable',
-            'is_configurable',
-            'is_visible_on_front',
-            'use_in_flat',
-            'is_comparable',
-            'is_user_defined' => 1
-        ]);
-
-        $attribute = $this->attributeRepository->create($data);
+        $attribute = $this->attributeRepository->create(request()->input());
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
@@ -108,9 +90,9 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function getAttributeOptions($id)
+    public function getAttributeOptions()
     {
-        $attribute = $this->attributeRepository->findOrFail($id);
+        $attribute = $this->attributeRepository->findOrFail(request()->input('id'));
 
         return $attribute->options()->paginate(50);
     }
