@@ -27,6 +27,17 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-product-form-template">
+            <!-- Product Create Button -->
+            @if (bouncer()->hasPermission('catalog.products.create'))
+                <button 
+                    type="button"
+                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    @click="$refs.productCreateModal.toggle()"
+                >
+                    @lang('admin::app.catalog.products.index.create-btn')
+                </button>
+            @endif
+
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
@@ -34,16 +45,6 @@
                 <form @submit="handleSubmit($event, create)">
                     <!-- Customer Create Modal -->
                     <x-admin::modal ref="productCreateModal">
-                        <x-slot:toggle>
-                            <!-- Customer Create Button -->
-                            <button
-                                type="button"
-                                class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                            >
-                                @lang('admin::app.catalog.products.index.create-btn')
-                            </button>
-                        </x-slot:toggle>
-        
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p

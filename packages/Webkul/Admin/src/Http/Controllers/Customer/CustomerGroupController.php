@@ -61,7 +61,7 @@ class CustomerGroupController extends Controller
         Event::dispatch('customer.customer_group.create.after', $customerGroup);
 
         return new JsonResource([
-            'message' => trans('admin::app.customers.groups.index.modal.create.create-success'),
+            'message' => trans('admin::app.customers.groups.index.create.create-success'),
         ]);
     }
 
@@ -102,7 +102,7 @@ class CustomerGroupController extends Controller
 
         Event::dispatch('customer.customer_group.update.after', $customerGroup);
 
-        session()->flash('success', trans('admin::app.customers.groups.create-success'));
+        session()->flash('success', trans('admin::app.customers.groups.edit.update-success'));
 
         return redirect()->route('admin.groups.index');
     }
