@@ -6,9 +6,7 @@
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex gap-2 mt-[30px]">
-                <div v-if="showFilters">
-                    <x-admin::datagrid.filters></x-admin::datagrid.filters>
-                </div>
+                <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
                 <x-admin::datagrid.table></x-admin::datagrid.table>
             </div>
@@ -85,12 +83,19 @@
                     });
 
                     this.$axios
-                        .get(this.src, { params })
+                        .get(this.src, {
+                            params
+                        })
                         .then((response) => {
                             /**
                              * Precisely taking all the keys to the data prop to avoid adding any extra keys from the response.
                              */
-                            const { actions, columns, records, meta } = response.data;
+                            const {
+                                actions,
+                                columns,
+                                records,
+                                meta
+                            } = response.data;
 
                             this.available.actions = actions;
 
@@ -184,9 +189,17 @@
                         switch (column.type) {
                             case 'date_range':
                             case 'datetime_range':
-                                this.applyFilter(column, options.from, { range: { name: 'from' } });
+                                this.applyFilter(column, options.from, {
+                                    range: {
+                                        name: 'from'
+                                    }
+                                });
 
-                                this.applyFilter(column, options.to, { range: { name: 'to' } });
+                                this.applyFilter(column, options.to, {
+                                    range: {
+                                        name: 'to'
+                                    }
+                                });
 
                                 break;
 
@@ -196,7 +209,9 @@
                     } else {
                         this.applyFilter(column, $event.target.value, additional);
 
-                        $event.target.value = '';
+                        if (column) {
+                            $event.target.value = '';
+                        }
                     }
 
                     this.get();
@@ -205,20 +220,19 @@
                 applyFilter(column, requestedValue, additional = {}) {
                     let appliedColumn = this.findAppliedColumn(column?.index);
 
-                    if (
-                        ! requestedValue
-                        || requestedValue == appliedColumn?.value
-                    ) {
-                        return;
-                    }
-
                     /**
                      * If no column is found, it means that search from the toolbar have been
                      * activated. In this case, we will search for `all` indices and update the
                      * value accordingly.
                      */
-                    if (! column) {
+                    if (!column) {
                         let appliedColumn = this.findAppliedColumn('all');
+
+                        if (!requestedValue) {
+                            this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== 'all');
+
+                            return;
+                        }
 
                         if (appliedColumn) {
                             appliedColumn.value = [requestedValue];
@@ -229,14 +243,23 @@
                             });
                         }
 
-                    /**
-                     * Else, we will look into the sidebar filters and update the value accordingly.
-                     */
+                        /**
+                         * Else, we will look into the sidebar filters and update the value accordingly.
+                         */
                     } else {
+                        if (
+                            !requestedValue ||
+                            requestedValue == appliedColumn?.value
+                        ) {
+                            return;
+                        }
+
                         switch (column.type) {
                             case 'date_range':
                             case 'datetime_range':
-                                let { range } = additional;
+                                let {
+                                    range
+                                } = additional;
 
                                 if (appliedColumn) {
                                     let appliedRanges = appliedColumn.value[0];
@@ -310,7 +333,7 @@
                     /**
                      * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
                      */
-                    if (! appliedColumn.value.length) {
+                    if (!appliedColumn.value.length) {
                         this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
@@ -377,7 +400,7 @@
                 },
 
                 toggleFilters() {
-                    this.showFilters = ! this.showFilters;
+                    this.showFilters = !this.showFilters;
                 },
             },
         });
