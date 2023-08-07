@@ -4,7 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderAddress;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class OrderDataGrid extends DataGrid
 {
@@ -42,12 +42,12 @@ class OrderDataGrid extends DataGrid
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
 
-        $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
-        $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
-        $this->addFilter('increment_id', 'orders.increment_id');
-        $this->addFilter('created_at', 'orders.created_at');
+        // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
+        // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
+        // $this->addFilter('increment_id', 'orders.increment_id');
+        // $this->addFilter('created_at', 'orders.created_at');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -55,7 +55,7 @@ class OrderDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'increment_id',
@@ -131,7 +131,7 @@ class OrderDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
                 } elseif ($value->status == 'pending_payment') {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
-                } elseif ($value->status == 'fraud') {                    
+                } elseif ($value->status == 'fraud') {
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
                 }
             },

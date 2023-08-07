@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CampaignDataGrid extends DataGrid
 {
@@ -30,9 +30,9 @@ class CampaignDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('marketing_campaigns')->addSelect('id', 'name', 'subject', 'status');
 
-        $this->addFilter('status', 'marketing_campaigns.status');
+        // $this->addFilter('status', 'marketing_campaigns.status');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -40,7 +40,7 @@ class CampaignDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -80,7 +80,7 @@ class CampaignDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 }
-                
+
                 return trans('admin::app.datagrid.inactive');
             },
         ]);

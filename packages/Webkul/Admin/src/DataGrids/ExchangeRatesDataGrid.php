@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class ExchangeRatesDataGrid extends DataGrid
 {
@@ -17,12 +17,12 @@ class ExchangeRatesDataGrid extends DataGrid
             ->leftJoin('currencies as curr', 'cer.target_currency', '=', 'curr.id')
             ->addSelect('cer.id as currency_exch_id', 'curr.name', 'cer.rate');
 
-        $this->addFilter('currency_exch_id', 'cer.id');
+        // $this->addFilter('currency_exch_id', 'cer.id');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'currency_exch_id',

@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CustomerGroupDataGrid extends DataGrid
 {
@@ -15,10 +15,10 @@ class CustomerGroupDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('customer_groups')->addSelect('id', 'code', 'name');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

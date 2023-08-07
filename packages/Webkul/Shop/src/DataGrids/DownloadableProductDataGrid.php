@@ -3,7 +3,7 @@
 namespace Webkul\Shop\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class DownloadableProductDataGrid extends DataGrid
 {
@@ -36,11 +36,11 @@ class DownloadableProductDataGrid extends DataGrid
             ->addSelect(DB::raw('(' . DB::getTablePrefix() . 'downloadable_link_purchased.download_bought - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_canceled - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_used) as remaining_downloads'))
             ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
-        $this->addFilter('status', 'downloadable_link_purchased.status');
-        $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
-        $this->addFilter('increment_id', 'orders.increment_id');
+        // $this->addFilter('status', 'downloadable_link_purchased.status');
+        // $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
+        // $this->addFilter('increment_id', 'orders.increment_id');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -48,7 +48,7 @@ class DownloadableProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'increment_id',
@@ -114,7 +114,7 @@ class DownloadableProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => false,
             'closure'    => function ($value) {
-                if (! $value->download_bought) {                    
+                if (! $value->download_bought) {
                     return trans('shop::app.customer.account.downloadable_products.unlimited');
                 }
 

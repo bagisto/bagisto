@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class OrderInvoicesDataGrid extends DataGrid
 {
@@ -35,12 +35,12 @@ class OrderInvoicesDataGrid extends DataGrid
             ->select('invoices.id as id', 'ors.increment_id as order_id', 'invoices.state as state', 'invoices.base_grand_total as base_grand_total', 'invoices.created_at as created_at')
             ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE {$dbPrefix}invoices.id END AS increment_id");
 
-        $this->addFilter('increment_id', 'invoices.increment_id');
-        $this->addFilter('order_id', 'ors.increment_id');
-        $this->addFilter('base_grand_total', 'invoices.base_grand_total');
-        $this->addFilter('created_at', 'invoices.created_at');
+        // $this->addFilter('increment_id', 'invoices.increment_id');
+        // $this->addFilter('order_id', 'ors.increment_id');
+        // $this->addFilter('base_grand_total', 'invoices.base_grand_total');
+        // $this->addFilter('created_at', 'invoices.created_at');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -48,7 +48,7 @@ class OrderInvoicesDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'increment_id',
@@ -97,14 +97,14 @@ class OrderInvoicesDataGrid extends DataGrid
                 if ($value->state == 'paid') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
                 } elseif (
-                    $value->state == 'pending' 
+                    $value->state == 'pending'
                     || $value->state == 'pending_payment'
                 ) {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
                 } elseif ($value->state == 'overdue') {
                     return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
                 }
-                
+
                 return $value->state;
             },
         ]);

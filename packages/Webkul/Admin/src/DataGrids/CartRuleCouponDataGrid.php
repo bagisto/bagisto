@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CartRuleCouponDataGrid extends DataGrid
 {
@@ -32,7 +32,7 @@ class CartRuleCouponDataGrid extends DataGrid
             ->addSelect('id', 'code', 'created_at', 'expired_at', 'times_used')
             ->where('cart_rule_coupons.cart_rule_id', request('id'));
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -40,7 +40,7 @@ class CartRuleCouponDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
