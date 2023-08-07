@@ -26,7 +26,7 @@
                         <div class="mb-[10px]">
                             {{-- Registered Email --}}
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.forget-password.email')
                                 </x-admin::form.control-group.label>
 
@@ -35,7 +35,7 @@
                                     name="email" 
                                     :value="old('email')"
                                     id="email"
-                                    class="w-[252px] max-w-full" 
+                                    class="w-[254px] max-w-full" 
                                     rules="required|email" 
                                     :label="trans('admin::app.users.forget-password.email')"
                                     :placeholder="trans('admin::app.users.forget-password.email')"
