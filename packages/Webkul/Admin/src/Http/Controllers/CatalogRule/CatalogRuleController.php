@@ -62,7 +62,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.promotions.catalog-rules.create.create-success'));
+        session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.create.create-success'));
 
         return redirect()->route('admin.catalog_rules.index');
     }
@@ -98,7 +98,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.promotions.catalog-rules.edit.update-success'));
+        session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.edit.update-success'));
 
         return redirect()->route('admin.catalog_rules.index');
     }
@@ -120,10 +120,10 @@ class CatalogRuleController extends Controller
 
             Event::dispatch('promotions.catalog_rule.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.promotions.catalog-rules.delete-success')]);
+            return response()->json(['message' => trans('admin::app.marketing.promotions.catalog-rules.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.promotions.catalog-rules.delete-failed')], 400);
+        return response()->json(['message' => trans('admin::app.marketing.promotions.catalog-rules.delete-failed')], 400);
     }
 }
