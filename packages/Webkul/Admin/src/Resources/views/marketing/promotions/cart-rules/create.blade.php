@@ -575,13 +575,13 @@
                                                 >
                                                     {{ core()->getChannelName($channel) }}
                                                 </x-admin::form.control-group.label>
-
-                                                <x-admin::form.control-group.error
-                                                    control-name="channels[]"
-                                                >
-                                                </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
+
+                                        <x-admin::form.control-group.error
+                                            control-name="channels[]"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </div>
     
                                     <!-- Customer Grous -->
@@ -610,13 +610,13 @@
                                                 >
                                                     {{ $customerGroup->name }}
                                                 </x-admin::form.control-group.label>
-
-                                                <x-admin::form.control-group.error
-                                                    control-name="customer_groups[]"
-                                                >
-                                                </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
+
+                                        <x-admin::form.control-group.error
+                                            control-name="customer_groups[]"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </div>
 
                                     <!-- Status -->

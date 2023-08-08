@@ -227,7 +227,7 @@
                                 </x-admin::form.control-group>
 
                                 <p class="text-sm text-gray-500">
-                                    @lang('admin::app.promotions.cart-rules.create.uses-per-customer-control-info')
+                                    @lang('admin::app.marketing.promotions.cart-rules.edit.uses-per-customer-control-info')
                                 </p>
                             </div>
                 
@@ -594,7 +594,7 @@
                                                     :id="'channel_' . '_' . $channel->id"
                                                     :for="'channel_' . '_' . $channel->id"
                                                     rules="required"
-                                                    label="trans('admin::app.marketing.promotions.cart-rules.edit.channels')"
+                                                    :label="trans('admin::app.marketing.promotions.cart-rules.edit.channels')"
                                                     :checked="in_array($channel->id, $selectedOptionIds)"
                                                 >
                                                 </x-admin::form.control-group.control>
@@ -605,13 +605,13 @@
                                                 >
                                                     {{ core()->getChannelName($channel) }}
                                                 </x-admin::form.control-group.label>
-
-                                                <x-admin::form.control-group.error
-                                                    control-name="channels[]"
-                                                >
-                                                </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
+
+                                        <x-admin::form.control-group.error
+                                            control-name="channels[]"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </div>
 
                                     <!--Customer Groups -->
@@ -643,12 +643,13 @@
                                                     {{ $customerGroup->name }}
                                                 </x-admin::form.control-group.label>
 
-                                                <x-admin::form.control-group.error
-                                                    control-name="customer_groups[]"
-                                                >
-                                                </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
+
+                                        <x-admin::form.control-group.error
+                                            control-name="customer_groups[]"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </div>
 
                                     <!-- Status -->
