@@ -53,10 +53,9 @@
     {{-- Content --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-
             {{-- Orders --}}
-            @if($totalOrderCount = count($customer->orders))
-                <div class=" bg-white rounded-[4px] box-shadow">
+            <div class=" bg-white rounded-[4px] box-shadow">
+                @if($totalOrderCount = count($customer->orders))
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
                         <p class="text-[16px] text-gray-800 font-semibold">
@@ -151,12 +150,32 @@
                         {{-- single row --}}
                         <span class="border-b-[1px] border-gray-300"></span>
                     </div>
-                </div>
-            @endif
+                @else
+                    {{-- Empty Container --}} 
+                    <div class="p-[16px] flex justify-between">
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.customers.view.orders')(0)
+                        </p>
+                    </div>
+
+                    {{-- Order Details --}}
+                    <div class="table-responsive grid w-full">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                            <!-- Placeholder Image -->
+                            <img src="{{ bagisto_asset('images/empty-order.png') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold"> 
+                                    @lang('admin::app.customers.view.empty-order')
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             {{-- Invoices --}}
-            @if($totalInvoiceCount = count($customer->invoices))
-                <div class="bg-white rounded box-shadow">
+            <div class="bg-white rounded box-shadow">
+                @if($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
@@ -196,12 +215,31 @@
                             @endforeach
                         </table>
                     </div>
-                </div>
-            @endif
+                @else
+                    {{-- Empty Container --}}
+                    <div class="p-[16px] flex justify-between">
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.customers.view.invoice')(0)
+                        </p>
+                    </div>
+
+                    <div class="table-responsive grid w-full">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                            <!-- Placeholder Image -->
+                            <img src="{{ bagisto_asset('images/empty-order.png') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold"> 
+                                    @lang('admin::app.customers.view.empty-invoice')
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             {{-- Reviews --}}
-            @if($totalReviewsCount = count($customer->reviews) )
-                <div class="bg-white rounded box-shadow">
+            <div class="bg-white rounded box-shadow">
+                @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.customers.view.reviews')({{ $totalReviewsCount }})
@@ -278,8 +316,27 @@
                             <span class="block w-full border-b-[1px] border-gray-300"></span>
                         </div>
                     @endforeach    
-                </div>
-            @endif
+                @else
+                    {{-- Empty Invoice Container --}}
+                    <div class="p-[16px] flex justify-between">
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.customers.view.invoice')(0)
+                        </p>
+                    </div>
+
+                    <div class="table-responsive grid w-full">
+                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                            {{-- Placeholder Image --}}
+                            <img src="{{ bagisto_asset('images/empty-order.png') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold"> 
+                                   @lang('admin::app.customers.view.empty-review')
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
           
             {{-- Notes Form --}}
             <div class="bg-white rounded box-shadow">
@@ -508,9 +565,9 @@
                             class="flex gap-[20px] items-center py-[10px]"
                         >
                             <img
-                                src="{{ bagisto_asset('images/icon-discount.svg') }}"
+                                src="{{ bagisto_asset('images/address-setting.png') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
-                            />
+                            >
 
                             <div class="flex flex-col gap-[6px]">
                                 <p class="text-[16px] text-gray-400 font-semibold">
