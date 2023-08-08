@@ -13,6 +13,7 @@ return [
         'key'  => 'general.general',
         'name' => 'admin::app.admin.system.general',
         'info' => 'admin::app.admin.system.general-info',
+        'icon' => 'store-information.svg',
         'sort' => 1,
     ], [
         'key'    => 'general.general.locale_options',
@@ -65,6 +66,7 @@ return [
         'key'  => 'general.design',
         'name' => 'admin::app.admin.system.design',
         'info' => 'admin::app.admin.system.design-info',
+        'icon' => 'store-information.svg',
         'sort' => 3,
     ], [
         'key'    => 'general.design.admin_logo',
@@ -335,6 +337,7 @@ return [
         'key'  => 'catalog.rich_snippets',
         'name' => 'admin::app.admin.system.rich-snippets',
         'info' => 'admin::app.admin.system.rich-snippets-info',
+        'icon' => 'settings.png',
         'sort' => 3,
     ], [
         'key'    => 'catalog.rich_snippets.products',
@@ -406,6 +409,7 @@ return [
         'key'  => 'customer.address',
         'name' => 'admin::app.admin.system.address',
         'info' => 'admin::app.admin.system.address-info',
+        'icon' => 'address-setting.png',
         'sort' => 1,
     ], [
         'key'    => 'customer.address.requirements',
@@ -453,6 +457,7 @@ return [
         'key'  => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',
         'info' => 'admin::app.admin.system.settings-info',
+        'icon' => 'store-information.svg',
         'sort' => 3,
     ], [
         'key'    => 'customer.settings.wishlist',
@@ -504,6 +509,7 @@ return [
         'key'  => 'emails.configure',
         'name' => 'admin::app.admin.system.email-settings',
         'info' => 'admin::app.admin.system.email-settings-info',
+        'icon' => 'email.png',
         'sort' => 1,
     ], [
         'key'    => 'emails.configure.email_settings',
@@ -549,6 +555,7 @@ return [
         'key'  => 'emails.general',
         'name' => 'admin::app.admin.emails.notification_label',
         'info' => 'admin::app.admin.emails.notification_label-info',
+        'icon' => 'notification.svg',
         'sort' => 1,
     ], [
         'key'    => 'emails.general.notifications',

@@ -38,10 +38,12 @@
                             class="flex items-center gap-[8px] max-w-[360px]"
                             href="{{ route('admin.configuration.index', ($itemKey . '/' . $childKey)) }}"
                         >
-                            <img
-                                class="w-[60px] h-[60px]"
-                                src="http://192.168.15.43/bagisto-admin-panel/resources/images/configration-icon/store-information-1.svg"
-                            >
+                            @if (isset($child['icon']))
+                                <img
+                                    class="w-[60px] h-[60px]"
+                                    src="{{ bagisto_asset('images/' . $child['icon'] ?? '') }}"
+                                >
+                            @endif
 
                             <div class="grid">
                                 <p class="text-[16px] text-gray-800">
