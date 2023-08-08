@@ -3,8 +3,8 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\DataGrid\DataGrid;
 use Illuminate\Support\Facades\Storage;
+use Webkul\DataGrid\DataGrid;
 
 class UserDataGrid extends DataGrid
 {
@@ -51,7 +51,7 @@ class UserDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'user_id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -64,7 +64,7 @@ class UserDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
-            'closure'  => function ($row) {
+            'closure'    => function ($row) {
                 if ($row->user_image) {
                     return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
                 }

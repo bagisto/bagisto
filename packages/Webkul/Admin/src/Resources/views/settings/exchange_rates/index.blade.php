@@ -15,6 +15,8 @@
         </div>
     </div>
 
+    <x-admin::datagrid src="{{ route('admin.exchange_rates.index') }}"></x-admin::datagrid>
+
     @pushOnce('scripts')
         <script
             type="text/x-template"
@@ -23,11 +25,11 @@
             <div>
                 <!-- Create Button -->
                 @if (bouncer()->hasPermission('settings.exchange_rates.create'))
-                    <button 
+                    <button
                         type="button"
                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                         @click="$refs.exchangeRate.toggle()"
-                    >     
+                    >
                         @lang('admin::app.settings.exchange-rates.index.create-btn')
                     </button>
                 @endif
@@ -44,9 +46,9 @@
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.settings.exchange-rates.index.create.title')
-                                </p>    
+                                </p>
                             </x-slot:header>
-            
+
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
@@ -56,10 +58,10 @@
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.exchange-rates.index.create.source-currency')
                                         </x-admin::form.control-group.label>
-                                    
+
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="base_currency" 
+                                            name="base_currency"
                                             disabled
                                             :value="core()->getBaseCurrencyCode()"
                                         >
@@ -71,10 +73,10 @@
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.exchange-rates.index.create.target-currency')
                                         </x-admin::form.control-group.label>
-                                    
+
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="target_currency" 
+                                            name="target_currency"
                                             rules="required"
                                             label="{{ trans('admin::app.settings.exchange-rates.index.create.target-currency') }}"
                                         >
@@ -86,7 +88,7 @@
                                                 @endif
                                             @endforeach
                                         </x-admin::form.control-group.control>
-            
+
                                         <x-admin::form.control-group.error
                                             control-name="target_currency"
                                         >
@@ -98,7 +100,7 @@
                                         <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.exchange-rates.index.create.rate')
                                         </x-admin::form.control-group.label>
-                
+
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="rate"
@@ -109,7 +111,7 @@
                                             placeholder="{{ trans('admin::app.settings.exchange-rates.index.create.rate') }}"
                                         >
                                         </x-admin::form.control-group.control>
-                
+
                                         <x-admin::form.control-group.error
                                             control-name="rate"
                                         >
@@ -117,11 +119,11 @@
                                     </x-admin::form.control-group>
                                 </div>
                             </x-slot:content>
-            
+
                             <x-slot:footer>
                                 <div class="flex gap-x-[10px] items-center">
                                     <!-- Save Button -->
-                                    <button 
+                                    <button
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
@@ -141,7 +143,7 @@
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
-                    
+
                         this.$axios.post("{{ route('admin.exchange_rates.store')  }}", params)
                             .then((response) => {
                                 this.$refs.exchangeRate.toggle();
