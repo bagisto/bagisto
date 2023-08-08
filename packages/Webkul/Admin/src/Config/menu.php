@@ -199,13 +199,13 @@ return [
         'icon'       => '',
     ], [
         'key'        => 'marketing.promotions.catalog-rules',
-        'name'       => 'admin::app.promotions.tab.catalog-rule-title',
+        'name'       => 'admin::app.marketing.promotions.index.catalog-rule-title',
         'route'      => 'admin.catalog_rules.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
         'key'        => 'marketing.promotions.cart-rules',
-        'name'       => 'admin::app.promotions.tab.cart-rule-title',
+        'name'       => 'admin::app.marketing.promotions.index.cart-rule-title',
         'route'      => 'admin.cart_rules.index',
         'sort'       => 2,
         'icon'       => '',

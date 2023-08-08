@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CustomerReviewDataGrid extends DataGrid
 {
@@ -34,12 +34,12 @@ class CustomerReviewDataGrid extends DataGrid
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
 
-        $this->addFilter('product_review_id', 'pr.id');
-        $this->addFilter('product_review_status', 'pr.status');
-        $this->addFilter('product_name', 'pf.name');
-        $this->addFilter('created_at', 'pr.created_at');
+        // $this->addFilter('product_review_id', 'pr.id');
+        // $this->addFilter('product_review_status', 'pr.status');
+        // $this->addFilter('product_name', 'pf.name');
+        // $this->addFilter('created_at', 'pr.created_at');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -47,7 +47,7 @@ class CustomerReviewDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'product_review_id',
@@ -107,7 +107,7 @@ class CustomerReviewDataGrid extends DataGrid
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
                 } elseif ($value->product_review_status == "pending") {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
-                } elseif ($value->product_review_status == "disapproved") {  
+                } elseif ($value->product_review_status == "disapproved") {
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                 }
             },

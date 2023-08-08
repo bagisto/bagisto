@@ -20,6 +20,11 @@
 
                 value: String,
 
+                allowInput: {
+                    type: Boolean,
+                    default: true,
+                },
+
                 disable: Array,
 
                 minDate: String,
@@ -44,7 +49,7 @@
                     let self = this;
 
                     return {
-                        allowInput: true,
+                        allowInput: this.allowInput ?? true,
                         disable: this.disable ?? [],
                         minDate: this.minDate ?? '',
                         maxDate: this.maxDate ?? '',

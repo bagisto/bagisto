@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CMSPageDataGrid extends DataGrid
 {
@@ -36,9 +36,9 @@ class CMSPageDataGrid extends DataGrid
                     ->whereIn('cms_page_translations.locale', $whereInLocales);
             });
 
-        $this->addFilter('id', 'cms_pages.id');
+        // $this->addFilter('id', 'cms_pages.id');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -46,7 +46,7 @@ class CMSPageDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class EventDataGrid extends DataGrid
 {
@@ -15,10 +15,10 @@ class EventDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('marketing_events')->addSelect('id', 'name', 'date');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',

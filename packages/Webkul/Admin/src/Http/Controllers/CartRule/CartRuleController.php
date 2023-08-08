@@ -90,7 +90,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.create.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.promotions.cart-rules.create.create-success'));
+            session()->flash('success', trans('admin::app.marketing.promotions.cart-rules.create.create-success'));
 
             return redirect()->route('admin.cart_rules.index');
         } catch (ValidationException $e) {

@@ -141,23 +141,6 @@
     </script>
 @endPushOnce
 
-@pushOnce('styles')
-    <style>
-        .v-tree-container .v-tree-item.active>.v-tree-item {
-            display: inline-block;
-        }
-
-        .v-tree-container .v-tree-item>.v-tree-item {
-            display: none;
-        }
-
-        .v-tree-container .v-tree-item {
-            display: inline-block;
-            width: 100%;
-        }
-    </style>
-@endPushOnce
-
 {{-- Tree Item Component --}}
 <x-admin::tree.item></x-admin::tree.item>
 

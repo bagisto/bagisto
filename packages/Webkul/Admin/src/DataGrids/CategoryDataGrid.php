@@ -4,7 +4,7 @@ namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Locale;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
 {
@@ -29,11 +29,11 @@ class CategoryDataGrid extends DataGrid
      */
     protected $locale = 'all';
 
-     /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
+    /**
+    * Contains the keys for which extra filters to show.
+    *
+    * @var string[]
+    */
     protected $extraFilters = [
         'locales',
     ];
@@ -77,13 +77,13 @@ class CategoryDataGrid extends DataGrid
                     ->whereIn('ct.locale', $whereInLocales);
             })
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
-            ->groupBy('cat.id', 'ct.locale',);
+            ->groupBy('cat.id', 'ct.locale', );
 
 
-        $this->addFilter('status', 'cat.status');
-        $this->addFilter('category_id', 'cat.id');
+        // $this->addFilter('status', 'cat.status');
+        // $this->addFilter('category_id', 'cat.id');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -91,7 +91,7 @@ class CategoryDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'category_id',

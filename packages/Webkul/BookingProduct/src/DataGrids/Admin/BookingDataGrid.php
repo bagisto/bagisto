@@ -4,7 +4,7 @@ namespace Webkul\BookingProduct\DataGrids\Admin;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class BookingDataGrid extends DataGrid
 {
@@ -35,12 +35,12 @@ class BookingDataGrid extends DataGrid
             ->leftJoin('orders', 'bookings.order_id', '=', 'orders.id')
             ->select('bookings.id as id', 'orders.increment_id as order_id', 'bookings.from as from', 'bookings.to as to', 'bookings.qty as qty', 'orders.created_at as created_at');
 
-        $this->addFilter('id', 'bookings.id');
-        $this->addFilter('order_id', 'orders.increment_id');
-        $this->addFilter('qty', 'bookings.qty');
-        $this->addFilter('created_at', 'orders.created_at');
+        // $this->addFilter('id', 'bookings.id');
+        // $this->addFilter('order_id', 'orders.increment_id');
+        // $this->addFilter('qty', 'bookings.qty');
+        // $this->addFilter('created_at', 'orders.created_at');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -48,7 +48,7 @@ class BookingDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -96,7 +96,7 @@ class BookingDataGrid extends DataGrid
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,
-            'closure'    => function ($value) {                
+            'closure'    => function ($value) {
                 return Carbon::createFromTimestamp($value->to)->format('d F, Y H:iA');
             }
         ]);

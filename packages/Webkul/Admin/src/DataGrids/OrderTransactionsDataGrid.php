@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class OrderTransactionsDataGrid extends DataGrid
 {
@@ -17,16 +17,16 @@ class OrderTransactionsDataGrid extends DataGrid
             ->leftJoin('orders as ors', 'order_transactions.order_id', '=', 'ors.id')
             ->select('order_transactions.id as id', 'order_transactions.transaction_id as transaction_id', 'order_transactions.invoice_id as invoice_id', 'ors.increment_id as order_id', 'order_transactions.created_at as created_at', 'order_transactions.amount as amount', 'order_transactions.status as status');
 
-        $this->addFilter('id', 'order_transactions.id');
-        $this->addFilter('transaction_id', 'order_transactions.transaction_id');
-        $this->addFilter('invoice_id', 'order_transactions.invoice_id');
-        $this->addFilter('order_id', 'ors.increment_id');
-        $this->addFilter('created_at', 'order_transactions.created_at');
+        // $this->addFilter('id', 'order_transactions.id');
+        // $this->addFilter('transaction_id', 'order_transactions.transaction_id');
+        // $this->addFilter('invoice_id', 'order_transactions.invoice_id');
+        // $this->addFilter('order_id', 'ors.increment_id');
+        // $this->addFilter('created_at', 'order_transactions.created_at');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -45,7 +45,7 @@ class OrderTransactionsDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
         ]);
-        
+
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.datagrid.transaction-date'),
@@ -72,7 +72,7 @@ class OrderTransactionsDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
         ]);
-        
+
 
         $this->addColumn([
             'index'      => 'order_id',
