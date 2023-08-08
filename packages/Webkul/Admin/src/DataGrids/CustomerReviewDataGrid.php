@@ -52,7 +52,7 @@ class CustomerReviewDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'product_review_id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -79,7 +79,7 @@ class CustomerReviewDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'rating',
             'label'      => trans('admin::app.customers.reviews.rating'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
@@ -105,9 +105,9 @@ class CustomerReviewDataGrid extends DataGrid
             'closure'    => function ($value) {
                 if ($value->product_review_status == 'approved') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.approved') . '</span>';
-                } elseif ($value->product_review_status == "pending") {
+                } elseif ($value->product_review_status == 'pending') {
                     return '<span class="badge badge-md badge-warning">' . trans('admin::app.datagrid.pending') . '</span>';
-                } elseif ($value->product_review_status == "disapproved") {
+                } elseif ($value->product_review_status == 'disapproved') {
                     return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                 }
             },
@@ -153,7 +153,7 @@ class CustomerReviewDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'  => 'delete',
+            'type'   => 'delete',
             'label'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.customer.review.mass_delete'),
             'method' => 'POST',

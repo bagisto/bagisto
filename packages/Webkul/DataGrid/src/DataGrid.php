@@ -78,6 +78,19 @@ abstract class DataGrid
     }
 
     /**
+     * Map your filter.
+     */
+    public function addFilter(string $datagridColumn, string $queryColumn): void
+    {
+        foreach ($this->columns as &$column) {
+            if ($column['index'] === $datagridColumn) {
+                $column['column_name'] = $queryColumn;
+                break;
+            }
+        }
+    }
+
+    /**
      * Add column.
      *
      * @param  array  $column
@@ -85,6 +98,8 @@ abstract class DataGrid
      */
     public function addColumn($column)
     {
+        $column['column_name'] = $column['index'];
+
         if ($column['type'] === 'date_range') {
             $column['input_type'] = 'date';
 
@@ -181,38 +196,37 @@ abstract class DataGrid
      */
     public function prepareData()
     {
-        // dd(request()->all());
-        // refactor
+        // need to refactor
         $queryBuilder = $this->queryBuilder;
 
-        $filters = request('filters', []);
+        $requestedFilters = request('filters', []);
 
-        foreach ($filters as $column => $values) {
-            if ($column === 'all') {
-                $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
-                    foreach ($values as $value) {
+        foreach ($requestedFilters as $requestedColumn => $requestedValues) {
+            if ($requestedColumn === 'all') {
+                $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
+                    foreach ($requestedValues as $value) {
                         collect($this->columns)
                             ->filter(fn ($column) => $column['searchable'] && $column['type'] !== 'boolean')
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column['index'], $value));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column['column_name'], $value));
                     }
                 });
             } else {
-                $foundColumn = collect($this->columns)->first(fn($c) => $c['index'] === $column);
+                $column = collect($this->columns)->first(fn ($c) => $c['index'] === $requestedColumn);
 
-                switch ($foundColumn['type']) {
-                    case'date_range':
-                    case'datetime_range':
-                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
-                            foreach ($values as $value) {
-                                $scopeQueryBuilder->whereBetween($column, [$value[0] ?? '', $value[1] ?? '']);
+                switch ($column['type']) {
+                    case 'date_range':
+                    case 'datetime_range':
+                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->whereBetween($column['column_name'], [$value[0] ?? '', $value[1] ?? '']);
                             }
                         });
                         break;
 
                     default:
-                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $values) {
-                            foreach ($values as $value) {
-                                $scopeQueryBuilder->orWhere($column, $value);
+                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                            foreach ($requestedValues as $value) {
+                                $scopeQueryBuilder->orWhere($column['column_name'], $value);
                             }
                         });
                         break;
@@ -220,6 +234,7 @@ abstract class DataGrid
             }
         }
 
+        // need to make good search column method, currently this is working but still need work here...
         $queryBuilder->orderBy(request('sort.column', $this->primaryColumn), request('sort.order', $this->sortOrder));
 
         $paginator = $queryBuilder->paginate(
@@ -229,7 +244,7 @@ abstract class DataGrid
             request('pagination.page', 1)
         )->toArray();
 
-        foreach($paginator['data'] as $data) {
+        foreach ($paginator['data'] as $data) {
             $data->actions = [];
 
             foreach ($this->actions as $action) {
@@ -290,52 +305,52 @@ abstract class DataGrid
     {
         return [
             [
-                'name' => 'today',
+                'name'  => 'today',
                 'label' => 'Today',
-                'from' => now()->today()->format($format),
-                'to' => now()->today()->format($format),
+                'from'  => now()->today()->format($format),
+                'to'    => now()->today()->format($format),
             ],
             [
-                'name' => 'yesterday',
+                'name'  => 'yesterday',
                 'label' => 'Yesterday',
-                'from' => now()->yesterday()->format($format),
-                'to' => now()->yesterday()->format($format),
+                'from'  => now()->yesterday()->format($format),
+                'to'    => now()->yesterday()->format($format),
             ],
             [
-                'name' => 'this_week',
+                'name'  => 'this_week',
                 'label' => 'This Week',
-                'from' => now()->startOfWeek()->format($format),
-                'to' => now()->endOfWeek()->format($format),
+                'from'  => now()->startOfWeek()->format($format),
+                'to'    => now()->endOfWeek()->format($format),
             ],
             [
-                'name' => 'this_month',
+                'name'  => 'this_month',
                 'label' => 'This Month',
-                'from' => now()->startOfMonth()->format($format),
-                'to' => now()->endOfMonth()->format($format),
+                'from'  => now()->startOfMonth()->format($format),
+                'to'    => now()->endOfMonth()->format($format),
             ],
             [
-                'name' => 'last_month',
+                'name'  => 'last_month',
                 'label' => 'Last Month',
-                'from' => now()->subMonth(1)->startOfMonth()->format($format),
-                'to' => now()->subMonth(1)->endOfMonth()->format($format),
+                'from'  => now()->subMonth(1)->startOfMonth()->format($format),
+                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
             ],
             [
-                'name' => 'last_three_months',
+                'name'  => 'last_three_months',
                 'label' => 'Last 3 Months',
-                'from' => now()->subMonth(3)->startOfMonth()->format($format),
-                'to' => now()->subMonth(1)->endOfMonth()->format($format),
+                'from'  => now()->subMonth(3)->startOfMonth()->format($format),
+                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
             ],
             [
-                'name' => 'last_six_months',
+                'name'  => 'last_six_months',
                 'label' => 'Last 6 Months',
-                'from' => now()->subMonth(6)->startOfMonth()->format($format),
-                'to' => now()->subMonth(1)->endOfMonth()->format($format),
+                'from'  => now()->subMonth(6)->startOfMonth()->format($format),
+                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
             ],
             [
-                'name' => 'this_year',
+                'name'  => 'this_year',
                 'label' => 'This Year',
-                'from' => now()->startOfYear()->format($format),
-                'to' => now()->endOfYear()->format($format),
+                'from'  => now()->startOfYear()->format($format),
+                'to'    => now()->endOfYear()->format($format),
             ],
         ];
     }
