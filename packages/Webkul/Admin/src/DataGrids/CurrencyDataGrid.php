@@ -13,7 +13,7 @@ class CurrencyDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('currencies')->addSelect('id', 'name', 'code');
+        $queryBuilder = DB::table('currencies')->addSelect('id', 'name', 'code', 'symbol', 'decimal');
 
         return $queryBuilder;
     }
@@ -51,17 +51,23 @@ class CurrencyDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('admin::app.datagrid.edit'),
-            'method' => 'GET',
-            'route'  => 'admin.currencies.edit',
             'icon'   => 'icon pencil-lg-icon',
+            'title'  => trans('admin::app.datagrid.edit'),
+            'method' => 'ref',
+            'route'  => 'admin.currencies.edit',
+            'url'    => function ($row) {
+                return json_encode($row);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon trash-icon',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.currencies.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.currencies.delete', $row->id);
+            },
         ]);
     }
 }

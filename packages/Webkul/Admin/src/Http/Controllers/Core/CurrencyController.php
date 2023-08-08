@@ -75,12 +75,12 @@ class CurrencyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function update($id)
     {
         $this->validate(request(), [
-            'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Rules\Code],
+            'code' => ['required','min:3', 'max:3','unique:currencies,code,' . $id, new \Webkul\Core\Rules\Code],
             'name' => 'required',
         ]);
 
@@ -93,9 +93,9 @@ class CurrencyController extends Controller
 
         $this->currencyRepository->update($data, $id);
 
-        session()->flash('success', trans('admin::app.settings.currencies.update-success'));
-
-        return redirect()->route('admin.currencies.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.currencies.edit.update-success'),
+        ]);
     }
 
     /**

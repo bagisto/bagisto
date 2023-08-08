@@ -76,7 +76,7 @@ class LocaleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\JsonResource;
      */
     public function update($id)
     {
@@ -95,9 +95,9 @@ class LocaleController extends Controller
 
         $this->localeRepository->update($data, $id);
 
-        session()->flash('success', trans('admin::app.settings.locales.update-success'));
-
-        return redirect()->route('admin.locales.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.locales.index.update-success'),
+        ]);
     }
 
     /**

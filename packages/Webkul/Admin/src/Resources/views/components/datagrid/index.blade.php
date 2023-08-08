@@ -1,4 +1,4 @@
-<v-datagrid src="{{ route('admin.catalog.attributes.index') }}"></v-datagrid>
+<v-datagrid {{ $attributes }}></v-datagrid>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-template">
@@ -9,7 +9,7 @@
                 <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
                 <x-admin::datagrid.table></x-admin::datagrid.table>
-            </div>
+            </div>  
         </div>
     </script>
 
@@ -392,12 +392,18 @@
 
                             break;
 
+                        case 'ref':
+                            this.$emit('toggle', action);
+
+                            break;
+
                         default:
                             console.error('Method not supported.');
 
                             break;
                     }
                 },
+
 
                 toggleFilters() {
                     this.showFilters = !this.showFilters;

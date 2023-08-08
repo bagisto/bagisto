@@ -212,17 +212,22 @@ return [
             'create' => [
                 'title'              => 'Create New Currency', 
                 'create-btn'         => 'Create Currency',
-                'save-btn'           => 'Create Currency',
+                'save-btn'           => 'Save Currency',
                 'general'            => 'General',
                 'code'               => 'Code',
                 'name'               => 'Name',
                 'symbol'             => 'Symbol',
                 'decimal'            => 'Decimal',
                 'create-success'     => 'Currency created successfully.',
-                'update-success'     => 'Currency updated successfully.',
                 'delete-success'     => 'Currency deleted successfully.',
                 'last-delete-error'  => 'At least one Currency is required.',
             ],
+
+            'edit' => [
+                'title'              => 'Edit Currency', 
+                'save-btn'           => 'Save Currency',
+                'update-success'     => 'Currency updated successfully.',
+            ]
         ],
 
         'exchange-rates'  => [

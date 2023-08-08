@@ -44,7 +44,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.currencies.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.currencies.update');
+        Route::post('edit/{id}', 'update')->name('admin.currencies.update');
 
         Route::post('delete/{id}', 'destroy')->name('admin.currencies.delete');
 
@@ -80,7 +80,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.locales.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.locales.update');
+        Route::post('edit/{id}', 'update')->name('admin.locales.update');
 
         Route::post('delete/{id}', 'destroy')->name('admin.locales.delete');
     });
