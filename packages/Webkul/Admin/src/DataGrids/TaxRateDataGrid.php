@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class TaxRateDataGrid extends DataGrid
 {
@@ -30,7 +30,7 @@ class TaxRateDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'zip_code', 'zip_from', 'zip_to', 'tax_rate');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -38,7 +38,7 @@ class TaxRateDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -69,7 +69,7 @@ class TaxRateDataGrid extends DataGrid
                 if (empty($value->state)) {
                     return '*';
                 }
-                
+
                 return $value->state;
             },
         ]);

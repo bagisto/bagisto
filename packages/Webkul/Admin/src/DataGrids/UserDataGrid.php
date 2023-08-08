@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 use Illuminate\Support\Facades\Storage;
 
 class UserDataGrid extends DataGrid
@@ -33,12 +33,12 @@ class UserDataGrid extends DataGrid
             ->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
             ->addSelect('u.id as user_id', 'u.name as user_name', 'u.image as user_image', 'u.status', 'u.email', 'ro.name as role_name');
 
-        $this->addFilter('user_id', 'u.id');
-        $this->addFilter('user_name', 'u.name');
-        $this->addFilter('role_name', 'ro.name');
-        $this->addFilter('status', 'u.status');
+        // $this->addFilter('user_id', 'u.id');
+        // $this->addFilter('user_name', 'u.name');
+        // $this->addFilter('role_name', 'ro.name');
+        // $this->addFilter('status', 'u.status');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -46,7 +46,7 @@ class UserDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'user_id',
@@ -68,7 +68,7 @@ class UserDataGrid extends DataGrid
                 if ($row->user_image) {
                     return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
                 }
-                
+
                 return '<div class="avatar"><span class="icon profile-pic-icon"></span></div>' . $row->user_name;
             },
         ]);
@@ -84,7 +84,7 @@ class UserDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 }
-                
+
                 return trans('admin::app.datagrid.inactive');
             },
         ]);

@@ -21,6 +21,8 @@
 
             data() {
                 return {
+                    showFilters: false,
+
                     available: {
                         actions: [],
 
@@ -63,7 +65,10 @@
                  */
                 get() {
                     let params = {
-                        page: this.applied.pagination.page,
+                        pagination: {
+                            page: this.applied.pagination.page,
+                            per_page: this.applied.pagination.perPage,
+                        },
 
                         sort: {
                             column: this.applied.sort.column,
@@ -78,12 +83,19 @@
                     });
 
                     this.$axios
-                        .get(this.src, { params })
+                        .get(this.src, {
+                            params
+                        })
                         .then((response) => {
                             /**
                              * Precisely taking all the keys to the data prop to avoid adding any extra keys from the response.
                              */
-                            const { actions, columns, records, meta } = response.data;
+                            const {
+                                actions,
+                                columns,
+                                records,
+                                meta
+                            } = response.data;
 
                             this.available.actions = actions;
 
@@ -132,6 +144,18 @@
                 },
 
                 /**
+                 * Change per page option.
+                 *
+                 * @param {integer} option
+                 * @returns {void}
+                 */
+                changePerPageOption(option) {
+                    this.applied.pagination.perPage = option;
+
+                    this.get();
+                },
+
+                /**
                  * Sort Page.
                  *
                  * @param {object} column
@@ -165,9 +189,17 @@
                         switch (column.type) {
                             case 'date_range':
                             case 'datetime_range':
-                                this.applyFilter(column, options.from, { range: { name: 'from' } });
+                                this.applyFilter(column, options.from, {
+                                    range: {
+                                        name: 'from'
+                                    }
+                                });
 
-                                this.applyFilter(column, options.to, { range: { name: 'to' } });
+                                this.applyFilter(column, options.to, {
+                                    range: {
+                                        name: 'to'
+                                    }
+                                });
 
                                 break;
 
@@ -176,6 +208,10 @@
                         }
                     } else {
                         this.applyFilter(column, $event.target.value, additional);
+
+                        if (column) {
+                            $event.target.value = '';
+                        }
                     }
 
                     this.get();
@@ -184,20 +220,19 @@
                 applyFilter(column, requestedValue, additional = {}) {
                     let appliedColumn = this.findAppliedColumn(column?.index);
 
-                    if (
-                        ! requestedValue
-                        || requestedValue == appliedColumn?.value
-                    ) {
-                        return;
-                    }
-
                     /**
                      * If no column is found, it means that search from the toolbar have been
                      * activated. In this case, we will search for `all` indices and update the
                      * value accordingly.
                      */
-                    if (! column) {
+                    if (!column) {
                         let appliedColumn = this.findAppliedColumn('all');
+
+                        if (!requestedValue) {
+                            this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== 'all');
+
+                            return;
+                        }
 
                         if (appliedColumn) {
                             appliedColumn.value = [requestedValue];
@@ -208,14 +243,23 @@
                             });
                         }
 
-                    /**
-                     * Else, we will look into the sidebar filters and update the value accordingly.
-                     */
+                        /**
+                         * Else, we will look into the sidebar filters and update the value accordingly.
+                         */
                     } else {
+                        if (
+                            !requestedValue ||
+                            requestedValue == appliedColumn?.value
+                        ) {
+                            return;
+                        }
+
                         switch (column.type) {
                             case 'date_range':
                             case 'datetime_range':
-                                let { range } = additional;
+                                let {
+                                    range
+                                } = additional;
 
                                 if (appliedColumn) {
                                     let appliedRanges = appliedColumn.value[0];
@@ -263,8 +307,16 @@
                     }
                 },
 
+                //================================================================
+
                 findAppliedColumn(columnIndex) {
                     return this.applied.filters.columns.find(column => column.index === columnIndex);
+                },
+
+                hasAnyAppliedColumnValues(columnIndex) {
+                    let appliedColumn = this.findAppliedColumn(columnIndex);
+
+                    return appliedColumn?.value.length > 0;
                 },
 
                 getAppliedColumnValues(columnIndex) {
@@ -281,11 +333,74 @@
                     /**
                      * Clean up is done here. If there are no applied values present, there is no point in including the applied column as well.
                      */
-                    if (! appliedColumn.value.length) {
+                    if (!appliedColumn.value.length) {
                         this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
                     }
 
                     this.get();
+                },
+
+                removeAppliedColumnAllValues(columnIndex) {
+                    this.applied.filters.columns = this.applied.filters.columns.filter(column => column.index !== columnIndex);
+
+                    this.get();
+                },
+
+                //================================================================
+
+                // refactor when not in that much use case
+                performAction(action) {
+                    switch (action.method.toLowerCase()) {
+                        case 'get':
+                            window.location.href = action.url;
+
+                            break;
+
+                        case 'post':
+                            this.$axios
+                                .post(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        case 'put':
+                            this.$axios
+                                .put(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        case 'patch':
+                            this.$axios
+                                .patch(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        case 'delete':
+                            this.$axios
+                                .delete(action.url)
+                                .then(response => {
+                                    this.get();
+                                });
+
+                            break;
+
+                        default:
+                            console.error('Method not supported.');
+
+                            break;
+                    }
+                },
+
+                toggleFilters() {
+                    this.showFilters = !this.showFilters;
                 },
             },
         });

@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class CategoryProductDataGrid extends DataGrid
 {
@@ -91,14 +91,14 @@ class CategoryProductDataGrid extends DataGrid
         $queryBuilder->whereIn('product_flat.locale', [$this->locale]);
         $queryBuilder->whereIn('product_flat.channel', [$this->channel]);
 
-        $this->addFilter('product_id', 'product_flat.product_id');
-        $this->addFilter('product_name', 'product_flat.name');
-        $this->addFilter('product_sku', 'products.sku');
-        $this->addFilter('product_number', 'product_flat.product_number');
-        $this->addFilter('status', 'product_flat.status');
-        $this->addFilter('product_type', 'products.type');
+        // $this->addFilter('product_id', 'product_flat.product_id');
+        // $this->addFilter('product_name', 'product_flat.name');
+        // $this->addFilter('product_sku', 'products.sku');
+        // $this->addFilter('product_number', 'product_flat.product_number');
+        // $this->addFilter('status', 'product_flat.status');
+        // $this->addFilter('product_type', 'products.type');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -106,7 +106,7 @@ class CategoryProductDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'product_id',
@@ -164,7 +164,7 @@ class CategoryProductDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
                 }
-                
+
                 return trans('admin::app.datagrid.inactive');
             },
         ]);
@@ -191,7 +191,7 @@ class CategoryProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'icon'      => 'icon pencil-lg-icon',
-            'condition' => function () {                
+            'condition' => function () {
                 return true;
             },
         ]);

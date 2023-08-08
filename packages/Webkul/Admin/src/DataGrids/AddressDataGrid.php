@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class AddressDataGrid extends DataGrid
 {
@@ -31,7 +31,6 @@ class AddressDataGrid extends DataGrid
      */
     public function __construct(protected CustomerRepository $customerRepository)
     {
-        parent::__construct();
     }
 
     /**
@@ -58,15 +57,15 @@ class AddressDataGrid extends DataGrid
         $queryBuilder->groupBy('ca.id')
             ->addSelect(DB::raw(DB::getTablePrefix() . 'country_states.default_name as state_name'));
 
-        $this->addFilter('company_name', 'ca.company_name');
-        $this->addFilter('address1', 'ca.address1');
-        $this->addFilter('postcode', 'ca.postcode');
-        $this->addFilter('city', 'ca.city');
-        $this->addFilter('state_name', DB::raw(DB::getTablePrefix() . 'country_states.default_name'));
-        $this->addFilter('country_name', DB::raw(DB::getTablePrefix() . 'countries.name'));
-        $this->addFilter('default_address', 'ca.default_address');
+        // $this->addFilter('company_name', 'ca.company_name');
+        // $this->addFilter('address1', 'ca.address1');
+        // $this->addFilter('postcode', 'ca.postcode');
+        // $this->addFilter('city', 'ca.city');
+        // $this->addFilter('state_name', DB::raw(DB::getTablePrefix() . 'country_states.default_name'));
+        // $this->addFilter('country_name', DB::raw(DB::getTablePrefix() . 'countries.name'));
+        // $this->addFilter('default_address', 'ca.default_address');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -74,7 +73,7 @@ class AddressDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'address_id',
@@ -149,7 +148,7 @@ class AddressDataGrid extends DataGrid
                 if ($row->default_address) {
                     return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
                 }
-                
+
                 return trans('admin::app.customers.addresses.dash');
             },
         ]);

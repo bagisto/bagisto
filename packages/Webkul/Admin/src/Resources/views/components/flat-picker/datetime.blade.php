@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datetime-picker-template">
-        <span>
+        <span class="relative">
             <slot></slot>
 
             <i class="icon-calendar text-[24px] text-gray-400 absolute right-[8px] top-[50%] -translate-y-[50%]"></i>
@@ -19,6 +19,11 @@
                 name: String,
 
                 value: String,
+
+                allowInput: {
+                    type: Boolean,
+                    default: true,
+                },
 
                 disable: Array,
 
@@ -44,7 +49,7 @@
                     let self = this;
 
                     return {
-                        allowInput: true,
+                        allowInput: this.allowInput ?? true,
                         disable: this.disable ?? [],
                         minDate: this.minDate ?? '',
                         maxDate: this.maxDate ?? '',

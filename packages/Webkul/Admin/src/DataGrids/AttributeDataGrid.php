@@ -127,17 +127,23 @@ class AttributeDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon pencil-lg-icon',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog.attributes.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.catalog.attributes.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon trash-icon',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.catalog.attributes.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.catalog.attributes.delete', $row->id);
+            },
         ]);
     }
 

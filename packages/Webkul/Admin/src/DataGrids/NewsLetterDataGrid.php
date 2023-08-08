@@ -3,7 +3,7 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Ui\DataGrid\DataGrid;
+use Webkul\DataGrid\DataGrid;
 
 class NewsLetterDataGrid extends DataGrid
 {
@@ -30,9 +30,9 @@ class NewsLetterDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('subscribers_list')->select('subscribers_list.id', 'subscribers_list.is_subscribed as status', 'subscribers_list.email');
 
-        $this->addFilter('status', 'subscribers_list.is_subscribed');
+        // $this->addFilter('status', 'subscribers_list.is_subscribed');
 
-        $this->setQueryBuilder($queryBuilder);
+        return $queryBuilder;
     }
 
     /**
@@ -40,7 +40,7 @@ class NewsLetterDataGrid extends DataGrid
      *
      * @return void
      */
-    public function addColumns()
+    public function prepareColumns()
     {
         $this->addColumn([
             'index'      => 'id',
@@ -62,7 +62,7 @@ class NewsLetterDataGrid extends DataGrid
                 if ($value->status) {
                     return trans('admin::app.datagrid.true');
                 }
-                
+
                 return trans('admin::app.datagrid.false');
             },
         ]);
