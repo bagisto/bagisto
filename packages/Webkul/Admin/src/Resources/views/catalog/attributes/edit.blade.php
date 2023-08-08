@@ -80,7 +80,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Locales Inputs -->
-                            @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
+                            @foreach ($allLocales as $locale)
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
@@ -172,6 +172,7 @@
                                                 name="empty_option"
                                                 id="empty_option"
                                                 value="1"
+                                                v-model="isNullOptionChecked"
                                                 @click="isNullOptionChecked=true"
                                             >
                                             </x-admin::form.control-group.control>
@@ -187,7 +188,7 @@
                                 </div>
 
                                 <!-- Table Information -->
-                                <div class="mt-[15px] overflow-auto">    
+                                <div class="mt-[15px] overflow-auto">
                                     <x-admin::table class="w-full text-left">
                                         <x-admin::table.thead class="text-[14px] font-medium">
                                             <x-admin::table.thead.tr>
@@ -204,7 +205,7 @@
                                                 </x-admin::table.th>
 
                                                 <!-- Loacles tables heading -->
-                                                @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
+                                                @foreach ($allLocales as $locale)
                                                     <x-admin::table.th>
                                                         {{ $locale->name . ' (' . $locale->code . ')' }}
                                                     </x-admin::table.th>
@@ -318,9 +319,15 @@
                                                     <x-admin::table.td class="!px-0">
                                                         <span
                                                             class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                                            @click="editModal(element)"
+                                                            @click="editOptions(element)"
                                                         >
-                                                        </span> 
+                                                        </span>
+                                                        
+                                                        <span
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            @click="deleteOptions(element)"
+                                                        >
+                                                        </span>
                                                     </x-admin::table.td>
                                                 </x-admin::table.thead.tr>
                                             </template>
@@ -690,7 +697,27 @@
                                 </x-admin::form.control-group.control>
                                 
                                 <!-- Admin Input -->
-                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                <x-admin::form.control-group class="w-full mb-[10px]" v-if="!isNullOptionChecked">
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.catalog.attributes.edit.admin')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="admin_name"
+                                        rules="required"
+                                        :label="trans('admin::app.catalog.attributes.edit.admin')"
+                                        :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
+                                    >
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="admin_name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group class="w-full mb-[10px]" v-else>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.edit.admin')
                                     </x-admin::form.control-group.label>
@@ -711,7 +738,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Locales Input -->
-                                @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
+                                @foreach ($allLocales as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
                                         <x-admin::form.control-group.label :class="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
@@ -794,8 +821,6 @@
 
                         idNullOption: null,
 
-                        options: [],
-
                         optionsData: [],
 
                         src: "{{ route('admin.catalog.attributes.options', $attribute->id) }}",
@@ -821,11 +846,19 @@
                         resetForm();
                     },
 
-                    editModal(value) {
+                    editOptions(value) {
                         // For set value on edit form
                         this.$refs.modelForm.setValues(value);
 
                         this.$refs.addOptionsRow.toggle();
+                    },
+
+                    deleteOptions(value) {
+                        let foundIndex = this.optionsData.findIndex(item => item.id === value.id);
+
+                        if (foundIndex !== -1) {
+                            this.optionsData.splice(foundIndex, 1);
+                        }
                     },
 
                     getAttributesOption() {
@@ -846,6 +879,7 @@
                                         'isNew': false,
                                         'isDelete': false,
                                     };
+
                                     if (! option.label) {
                                         this.isNullOptionChecked = true;
                                         this.idNullOption = option.id;
@@ -865,18 +899,9 @@
                 },
 
                 watch: {
-                    isNullOptionChecked: function (val) {
-                        /* 
-                        *  Here else part code is useless 
-                        *  Need to add code for When modal is closed after that input checkbox should unchecked
-                        */ 
-                        if (val) {
-                            // For open existing model
-                            if (! this.idNullOption) {
-                                this.$refs.addOptionsRow.toggle();
-                            }
-                        } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
-                            this.$refs.addOptionsRow.toggle()
+                    isNullOptionChecked: function (val) { 
+                        if (val && ! this.idNullOption) {
+                            this.$refs.addOptionsRow.toggle();
                         }
                     },
                 },
