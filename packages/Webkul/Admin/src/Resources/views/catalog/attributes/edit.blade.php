@@ -253,20 +253,20 @@
                                                     </x-admin::table.td>
  
                                                     <!-- Swatch Type Image / Color -->
-                                                    <x-admin::table.td>
+                                                    <x-admin::table.td v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
                                                         <!-- Swatch Image -->
-                                                        <div v-if="show_swatch && swatch_type == 'image'">
+                                                        <div v-if="swatch_type == 'image'">
                                                             @{{ element.swatch_value.name }}
 
                                                             <input
                                                                 type="hidden"
                                                                 :name="'options[' + element.id + '][swatch_value]'"
-                                                                v-model="element.swatch_value'"
+                                                                v-model="element.swatch_value"
                                                             />    
                                                         </div>
 
                                                         <!-- Swatch Color -->
-                                                        <div v-if="show_swatch && swatch_type == 'color'">
+                                                        <div v-if="swatch_type == 'color'">
                                                             <div
                                                                 class="w-[25px] h-[25px] mx-auto rounded-[5px]"
                                                                 :style="{ background: element.swatch_value }"
@@ -281,8 +281,6 @@
                                                         </div>
                                                     </x-admin::table.td>
 
-                                                    @{{ element.id }}
-
                                                     <!-- Admin-->
                                                     <x-admin::table.td>
                                                         <p v-text="element.admin_name"></p>
@@ -294,14 +292,13 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    @{{ element.locales }}
                                                     <!-- English Loacle -->
                                                      <x-admin::table.td v-for="locale in allLocales">
-                                                        <p v-text="locale.name"></p>
-
+                                                        <p v-text="element['locales'][locale.code]"></p>
+                                                        
                                                         <input
                                                             type="hidden"
-                                                            :name="'options[' + element.id + '][' + locale + '][label]'"
+                                                            :name="'options[' + element.id + '][' + locale.code + '][label]'"
                                                             v-model="element['locales'][locale.code]"
                                                         />
                                                     </x-admin::table.td>
@@ -528,7 +525,6 @@
                                         id="is_unique"
                                         for="is_unique"
                                         value="1"
-                                        class="!cursor-not-allowed"
                                         :checked="(boolean) $attribute->is_unique"
                                         :disabled="(boolean) $attribute->is_unique"
                                     >
@@ -567,7 +563,6 @@
                                             type="checkbox"
                                             :name="$type"
                                             :id="$type"
-                                            class="!cursor-not-allowed"
                                             :checked="(boolean) $attribute->$type"
                                             :disabled="(boolean) $attribute->$type"
                                         >
@@ -801,6 +796,8 @@
                         options: [],
 
                         optionsData: [],
+
+                        src: "{{ route('admin.catalog.attributes.options', $attribute->id) }}",
                     }
                 },
 
@@ -810,35 +807,12 @@
 
                 methods: {
                     storeOptions(params, {resetForm, setValues}) {
-                        let foundIndex = this.options.findIndex(item => item.id === params.id);
-                    
-                        // Added check for data are comming from new Or existing model
+                        let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
+
                         if (foundIndex !== -1) {
-                            let updatedObject = {
-                                ...this.options[foundIndex],
-                                params: {
-                                    ...this.options[foundIndex].params,
-                                    ...params,
-                                }
-                            };
-
-                            this.options.splice(foundIndex, 1, updatedObject);
+                            this.optionsData.splice(foundIndex, 1, params);
                         } else {
-                            let row = {};
-
-                            if (! params.id) {
-                                let rowCount = this.optionRowCount++;
-                                let id = 'option_' + rowCount;
-                                row = {'id': id, params};
-                            } else {
-                                let id = params.id;
-                                row = params;
-                                let updatedObject = {
-                                    ...this.optionsData[id], ...this.optionsData[id].row,
-                                };
-                               
-                                this.options.splice(id, 1, updatedObject);
-                            }
+                            this.optionsData.push(params);
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -847,16 +821,6 @@
                     },
 
                     editModal(value) {
-                        // value.locales = Object.assign({}, this.allLocales);
-                        value.locales = this.allLocales.map(locale => locale.name);
-
-                        // Create an object where keys are the 'name' properties and values are the corresponding objects
-						value.locales = this.allLocales.reduce((acc, locale) => {
-							acc[locale.code] = locale.name;
-							return acc;
-						}, {});
-
-
                         // For set value on edit form
                         this.$refs.modelForm.setValues(value);
 
@@ -864,9 +828,7 @@
                     },
 
                     getAttributesOption() {
-                        this.$axios.put('{{ route('admin.catalog.attributes.options') }}',  { 
-                            id: "{{ $attribute->id }}"
-                        })
+                        this.$axios.get(`${this.src}`)
                             .then(response => {
                                 let options = response.data.data;
                                 options.forEach((option) => {
@@ -896,9 +858,8 @@
                                     });
 
                                     this.optionsData.push(row);
-
-                                });      
-                            });                          
+                                });
+                            });
                     },
                 },
 

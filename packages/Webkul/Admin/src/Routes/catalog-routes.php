@@ -17,7 +17,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(AttributeController::class)->prefix('attributes')->group(function () {
             Route::get('', 'index')->name('admin.catalog.attributes.index');
 
-            Route::put('options', 'getAttributeOptions')->name('admin.catalog.attributes.options');
+            Route::get('{id}/options', 'getAttributeOptions')->name('admin.catalog.attributes.options');
 
             Route::get('create', 'create')->name('admin.catalog.attributes.create');
 

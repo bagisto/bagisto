@@ -62,7 +62,11 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create(request()->input());
+        $data = array_merge(request()->input(), [
+            'is_user_defined' => 1,
+        ]);
+
+        $attribute = $this->attributeRepository->create(array_merge($data));
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
@@ -90,11 +94,11 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function getAttributeOptions()
+    public function getAttributeOptions($id)
     {
-        $attribute = $this->attributeRepository->findOrFail(request()->input('id'));
+        $attribute = $this->attributeRepository->findOrFail($id);
 
-        return $attribute->options()->paginate(50);
+        return $attribute->options()->paginate(10);
     }
 
     /**
@@ -113,7 +117,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
-        $attribute = $this->attributeRepository->update(request()->all(), $id);
+        $attribute = $this->attributeRepository->update(request()->input(), $id);
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 

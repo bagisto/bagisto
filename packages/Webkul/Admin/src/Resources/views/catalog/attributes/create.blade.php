@@ -1,3 +1,7 @@
+@php
+    $allLocales = app('Webkul\Core\Repositories\LocaleRepository')->all();
+@endphp
+
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
@@ -5,7 +9,7 @@
     </x-slot:title>
 
     {{-- Create Attributes Vue Components --}}
-    <v-create-attributes></v-create-attributes>
+    <v-create-attributes :all-locales="{{ $allLocales->toJson() }}"></v-create-attributes>
 
     @pushOnce('scripts')
         <script
@@ -173,7 +177,7 @@
                                 <div class="mt-[15px] overflow-auto">    
                                     <x-admin::table class="w-full text-left">
                                         <x-admin::table.thead class="text-[14px] font-medium">
-                                            <x-admin::table.tr>
+                                            <x-admin::table.thead.tr>
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
@@ -200,7 +204,7 @@
 
                                                 <!-- Action tables heading -->
                                                 <x-admin::table.th></x-admin::table.th>
-                                            </x-admin::table.tr>
+                                            </x-admin::table.thead.tr>
                                         </x-admin::table.thead>
 
                                         <!-- Draggable Component -->
@@ -211,7 +215,7 @@
                                             item-key="id"
                                         >
                                             <template #item="{ element, index }">
-                                                <x-admin::table.tr>
+                                                <x-admin::table.thead.tr>
                                                     <!-- Draggable Icon -->
                                                     <x-admin::table.td class="!px-0">
                                                         <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
@@ -224,7 +228,7 @@
                                                     </x-admin::table.td>
 
                                                     <!-- Swatch Type Image / Color -->
-                                                    <x-admin::table.td v-if="show_swatch">
+                                                    <x-admin::table.td v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatch_type == 'image'">
                                                             @{{ element.params.swatch_value?.name }}
@@ -262,59 +266,14 @@
                                                             v-model="element.params.admin_name"
                                                         />
                                                     </x-admin::table.td>
-                    
-                                                    <!-- English Loacle -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.params.en"></p>
+
+                                                    <x-admin::table.td v-for="locale in allLocales">
+                                                        <p v-text="element.params[locale.code]"></p>
 
                                                         <input
                                                             type="hidden"
-                                                            :name="'options[' + element.id + '][en]'"
-                                                            v-model="element.params.en"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- French Loacle -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.params.fr"></p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][fr]'"
-                                                            v-model="element.params.fr"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Dutch Loacle -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.params.nl"></p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][nl]'"
-                                                            v-model="element.params.nl"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Turkce Loacle -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.params.tr"></p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][tr]'"
-                                                            v-model="element.params.tr"
-                                                        />
-                                                    </x-admin::table.td>
-
-                                                    <!-- Espanol Loacle -->
-                                                    <x-admin::table.td>
-                                                        <p v-text="element.params.es"></p>
-
-                                                        <input
-                                                            type="hidden"
-                                                            :name="'options[' + element.id + '][es]'"
-                                                            v-model="element.params.es"
+                                                            :name="'options[' + element.id + '][' + locale.code + '][label]'"
+                                                            v-model="element.params[locale.code]"
                                                         />
                                                     </x-admin::table.td>
 
@@ -337,7 +296,7 @@
                                                         >
                                                         </span> 
                                                     </x-admin::table.td>
-                                                </x-admin::table.tr>
+                                                </x-admin::table.thead.tr>
                                             </template>
                                         </draggable>
                                     </x-admin::table>
@@ -703,6 +662,10 @@
         <script type="module">
             app.component('v-create-attributes', {
                 template: '#v-create-attributes-template',
+
+                props: [
+                    'allLocales'
+                ],
 
                 data: function() {
                     return {
