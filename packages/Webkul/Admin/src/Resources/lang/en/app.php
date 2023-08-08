@@ -23,6 +23,12 @@ return [
             'index' => [
                 'title' => 'Orders',
             ],
+
+            'status' => [
+                'pending'         => 'Pending',
+                'pending-payment' => 'Pending Payment',
+                'processing'      => 'Processing',
+            ]
         ],
 
         'shipments' => [
@@ -33,7 +39,12 @@ return [
 
         'invoices' => [
             'index' => [
-                'title' => 'Invoices',
+                'title'  => 'Invoices',
+            ],
+
+            'status' => [
+                'pending' => 'Pending',
+                'paid'    => 'Paid',
             ],
         ],
 
@@ -2236,7 +2247,7 @@ return [
 
     'configuration' => [
         'title'                       => 'Configuration',
-        'save-btn-title'              => 'Save',
+        'save-btn'                    => 'Save Configuration',
         'save-message'                => 'Configuration saved successfully',
         'yes'                         => 'Yes',
         'no'                          => 'No',
@@ -2823,8 +2834,9 @@ return [
 
     'admin' => [
         'emails' => [
-            'email'              => 'Email',
-            'notification_label' => 'Notifications',
+            'email'                   => 'Email',
+            'notification_label'      => 'Notifications',
+            'notification_label-info' => 'Set notifications.',
             'notifications'      => [
                 'verification'                                     => 'Send a verification e-mail after customer registration',
                 'registration'                                     => 'Send a confirmation e-mail after customer registration',
@@ -2848,6 +2860,7 @@ return [
             'cart-view-page'                        => 'Cart view page confguration',
             'allow-out-of-stock-items'              => 'Allow out of stock items',
             'products'                              => 'Products',
+            'products-info'                         => 'Set guest checkout, homepage, product view page, cart view page, store front, review and attribute social share.',
             'guest-checkout'                        => 'Guest Checkout',
             'allow-guest-checkout'                  => 'Allow Guest Checkout',
             'allow-guest-checkout-hint'             => 'Hint: If turned on, this option can be configured for each product specifically.',
@@ -2857,19 +2870,24 @@ return [
             'review'                                => 'Review',
             'allow-guest-review'                    => 'Allow Guest Review',
             'inventory'                             => 'Inventory',
+            'inventory-info'                        => 'Set backorders',
             'stock-options'                         => 'Stock Options',
             'allow-backorders'                      => 'Allow Backorders',
             'customer'                              => 'Customer',
             'wishlist'                              => 'Wishlist',
             'wishlist-share'                        => 'Enable Sharing',
             'settings'                              => 'Settings',
+            'settings-info'                         => 'Set wishlist, newsletter subscriptions, email varifications and social login.',
             'address'                               => 'Address',
+            'address-info'                          => 'Set country, state, zip and lines in a street address.',
             'street-lines'                          => 'Lines in a Street Address',
             'sales'                                 => 'Sales',
             'shipping-methods'                      => 'Shipping Methods',
+            'shipping-methods-info'                 => 'Set shipping methods information',
             'free-shipping'                         => 'Free Shipping',
             'flate-rate-shipping'                   => 'Flat Rate Shipping',
             'shipping'                              => 'Shipping',
+            'shipping-info'                         => 'Set shipping informations.',
             'origin'                                => 'Origin',
             'requirements'                          => 'Requirements',
             'country'                               => 'Country',
@@ -2885,6 +2903,7 @@ return [
             'calculate-tax'                         => 'Calculate Tax',
             'type'                                  => 'Type',
             'payment-methods'                       => 'Payment Methods',
+            'payment-methods-info'                  => 'Set payment methods information',
             'cash-on-delivery'                      => 'Cash On Delivery',
             'money-transfer'                        => 'Money Transfer',
             'paypal-standard'                       => 'PayPal Standard',
@@ -2895,13 +2914,16 @@ return [
             'email-verification'                    => 'Allow Email Verification',
             'sort_order'                            => 'Sort Order',
             'general'                               => 'General',
+            'general-info'                          => 'Set units options.',
             'footer'                                => 'Footer',
             'content'                               => 'Content',
+            'content-info'                          => 'Set compare options, wishlist options, image search options, footer, toggle footer and custom scripts.',
             'footer-content'                        => 'Footer Text',
             'footer-toggle'                         => 'Toggle footer',
             'locale-options'                        => 'Unit Options',
             'weight-unit'                           => 'Weight Unit',
             'email-settings'                        => 'Email Settings',
+            'email-settings-info'                   => 'Set email sender name, shop email address, admin name and admin email address.',
             'email-sender-name'                     => 'Email Sender Name',
             'email-sender-name-tip'                 => 'This name will be displayed in the customers inbox',
             'shop-email-from'                       => 'Shop Email Address',
@@ -2912,12 +2934,14 @@ return [
             'admin-email-tip'                       => 'The email address of the admin for this channel to receive emails',
             'admin-page-limit'                      => 'Default Items Per Page (Admin)',
             'design'                                => 'Design',
+            'design-info'                           => 'Set logo and fevicon icon.',
             'admin-logo'                            => 'Admin Logo',
             'logo-image'                            => 'Logo Image',
             'credit-max'                            => 'Customer Credit Max',
             'credit-max-value'                      => 'Credit Max Value',
             'use-credit-max'                        => 'Use Credit Max',
             'order-settings'                        => 'Order Settings',
+            'order-settings-info'                   => 'Set order numbers and minimum orders.',
             'orderNumber'                           => 'Order Number Settings',
             'order-number-prefix'                   => 'Order Number Prefix',
             'order-number-length'                   => 'Order Number Length',
@@ -2926,6 +2950,7 @@ return [
             'minimum-order'                         => 'Minimum Order Settings',
             'minimum-order-amount'                  => 'Minimum Order Amount',
             'invoice-settings'                      => 'Invoice Settings',
+            'invoice-settings-info'                 => 'Set invoice number, payment terms, invoice slip design and invoice reminders.',
             'invoice-number'                        => 'Invoice Number Settings',
             'invoice-number-prefix'                 => 'Invoice Number Prefix',
             'invoice-number-length'                 => 'Invoice Number Length',
@@ -2964,6 +2989,7 @@ return [
             'favicon'                               => 'Favicon',
             'seo'                                   => 'SEO',
             'rich-snippets'                         => 'Rich Snippets',
+            'rich-snippets-info'                    => 'Set products and categories.',
             'enable'                                => 'Enable',
             'show-weight'                           => 'Show Weight',
             'show-categories'                       => 'Show Categories',
@@ -3009,7 +3035,6 @@ return [
             'logo-size'                             => 'Image resolution should be like 112px X 41px',
             'favicon-size'                          => 'Image resolution should be like 16px X 16px',
             'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px',
-
         ],
     ],
 

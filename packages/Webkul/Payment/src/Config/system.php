@@ -11,10 +11,12 @@ return [
     [
         'key'  => 'sales.paymentmethods',
         'name' => 'admin::app.admin.system.payment-methods',
+        'info' => 'admin::app.admin.system.payment-methods-info',
         'sort' => 3,
     ], [
         'key'    => 'sales.paymentmethods.cashondelivery',
         'name'   => 'admin::app.admin.system.cash-on-delivery',
+        'info'   => 'admin::app.admin.system.cash-on-delivery',
         'sort'   => 1,
         'fields' => [
             [
@@ -51,10 +53,10 @@ return [
                 'type'          => 'select',
                 'options'       => [
                     [
-                        'title' => 'admin::app.sales.invoices.status-pending',
+                        'title' => 'admin::app.sales.invoices.status.pending',
                         'value' => 'pending',
                     ], [
-                        'title' => 'admin::app.sales.invoices.status-paid',
+                        'title' => 'admin::app.sales.invoices.status.paid',
                         'value' => 'paid',
                     ],
                 ],
@@ -67,13 +69,13 @@ return [
                 'type'          => 'select',
                 'options'       => [
                     [
-                        'title' => 'admin::app.sales.orders.order-status-pending',
+                        'title' => 'admin::app.sales.orders.status.pending',
                         'value' => 'pending',
                     ], [
-                        'title' => 'admin::app.sales.orders.order-status-pending-payment',
+                        'title' => 'admin::app.sales.orders.status.pending-payment',
                         'value' => 'pending_payment',
                     ], [
-                        'title' => 'admin::app.sales.orders.order-status-processing',
+                        'title' => 'admin::app.sales.orders.status.processing',
                         'value' => 'processing',
                     ],
                 ],
@@ -111,6 +113,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.moneytransfer',
         'name'   => 'admin::app.admin.system.money-transfer',
+        'info'   => 'admin::app.admin.system.money-transfer',
         'sort'   => 2,
         'fields' => [
             [
@@ -140,10 +143,10 @@ return [
                 'type'    => 'select',
                 'options' => [
                     [
-                        'title' => 'admin::app.sales.invoices.status-pending',
+                        'title' => 'admin::app.sales.invoices.status.pending',
                         'value' => 'pending',
                     ], [
-                        'title' => 'admin::app.sales.invoices.status-paid',
+                        'title' => 'admin::app.sales.invoices.status.paid',
                         'value' => 'paid',
                     ],
                 ],
@@ -156,13 +159,13 @@ return [
                 'type'    => 'select',
                 'options' => [
                     [
-                        'title' => 'admin::app.sales.orders.order-status-pending',
+                        'title' => 'admin::app.sales.orders.status.pending',
                         'value' => 'pending',
                     ], [
-                        'title' => 'admin::app.sales.orders.order-status-pending-payment',
+                        'title' => 'admin::app.sales.orders.status.pending-payment',
                         'value' => 'pending_payment',
                     ], [
-                        'title' => 'admin::app.sales.orders.order-status-processing',
+                        'title' => 'admin::app.sales.orders.status.processing',
                         'value' => 'processing',
                     ],
                 ],

@@ -4,10 +4,12 @@ return [
     [
         'key'  => 'customer.captcha',
         'name' => 'customer::app.admin.system.captcha.title',
+        'info' => 'customer::app.admin.system.captcha.info',
         'sort' => 2,
     ], [
         'key'    => 'customer.captcha.credentials',
         'name'   => 'customer::app.admin.system.captcha.credentials',
+        'info'   => 'customer::app.admin.system.captcha.credentials',
         'sort'   => 1,
         'fields' => [
             [
