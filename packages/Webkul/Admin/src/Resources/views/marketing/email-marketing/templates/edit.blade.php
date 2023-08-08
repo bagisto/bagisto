@@ -41,7 +41,7 @@
                     <div class="mb-[10px]">
                         {{-- Template Name --}}
                         <x-admin::form.control-group class="w-full mb-[10px]">
-                            <x-admin::form.control-group.label class="!mt-0">
+                            <x-admin::form.control-group.label class="required !mt-0">
                                 @lang('admin::app.marketing.email-marketing.templates.edit.name')
                             </x-admin::form.control-group.label>
 
@@ -63,7 +63,7 @@
 
                         {{-- Template Status --}}
                         <x-admin::form.control-group class="w-full mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.templates.edit.status')
                             </x-admin::form.control-group.label>
 
@@ -94,7 +94,7 @@
 
                         {{-- Template Textarea --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.templates.edit.content')
                             </x-admin::form.control-group.label>
 

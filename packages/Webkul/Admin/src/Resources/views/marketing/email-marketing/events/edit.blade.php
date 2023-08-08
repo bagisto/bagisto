@@ -47,7 +47,7 @@
 
                     <!-- Event Name -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label class="!mt-0">
+                        <x-admin::form.control-group.label class="required !mt-0">
                             @lang('admin::app.marketing.email-marketing.events.edit.name')
                         </x-admin::form.control-group.label>
 
@@ -69,7 +69,7 @@
 
                     <!-- Event Description -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.marketing.email-marketing.events.edit.description')
                         </x-admin::form.control-group.label>
 
@@ -92,7 +92,7 @@
 
                     <!-- Event Date -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.marketing.email-marketing.events.edit.date')
                         </x-admin::form.control-group.label>
 
