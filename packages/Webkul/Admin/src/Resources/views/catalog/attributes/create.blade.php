@@ -27,13 +27,14 @@
                     </p>
         
                     <div class="flex gap-x-[10px] items-center">
-                        <!-- Canvel Button -->
+                        <!-- Cancel Button -->
                         <a href="{{ route('admin.catalog.attributes.index') }}">
                             <span class="text-gray-600 leading-[24px]">
                                 @lang('admin::app.catalog.attributes.create.cancel-btn')
                             </span>
                         </a>
-        
+
+                        <!-- Save Button -->
                         <button
                             type="submit"
                             class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -76,7 +77,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Locales Inputs -->
-                            @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
+                            @foreach ($allLocales as $locale)
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
@@ -85,7 +86,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="{{ $locale->code }}[name]"
-                                        value="{{ old($locale->code) }}"
+                                        :value="old($locale->code)"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
@@ -159,6 +160,7 @@
                                                 name="empty_option"
                                                 id="empty_option"
                                                 value="1"
+                                                ref="emptyCheckbox"
                                                 @click="isNullOptionChecked=true"
                                             >
                                             </x-admin::form.control-group.control>
@@ -191,7 +193,7 @@
                                                 </x-admin::table.th>
 
                                                 <!-- Loacles tables heading -->
-                                                @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
+                                                @foreach ($allLocales as $locale)
                                                     <x-admin::table.th>
                                                         {{ $locale->name . ' (' . $locale->code . ')' }}
                                                     </x-admin::table.th>
@@ -309,7 +311,7 @@
                                     <!-- Attribute Option Image -->
                                     <img 
                                         class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
-                                        src="{{ bagisto_asset('images/add-product-to-store.png') }}" 
+                                        src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
                                     >
                                     <!-- Add Attribute Options Information -->
@@ -433,10 +435,8 @@
                                             type="checkbox"
                                             :id="$item"
                                             :name="$item"
-                                            class="cursor-pointer"
                                             :for="$item"
                                             value="1"
-                                            required
                                         >
                                         </x-admin::form.control-group.control>
 
@@ -460,17 +460,15 @@
                             </x-slot:header>
                         
                             <x-slot:content>
-                                <!-- All Types Define In The Loop -->
+                                <!-- Configuration Types Define In The Loop -->
                                 @foreach (['value_per_locale', 'value_per_channel', 'is_configurable', 'is_visible_on_front', 'use_in_flat','is_comparable'] as $item)
                                     <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             :id="$item"
                                             :name="$item"
-                                            class="cursor-pointer"
                                             :for="$item"
                                             value="1"
-                                            required
                                         >
                                         </x-admin::form.control-group.control>
 
@@ -494,7 +492,7 @@
                                         id="is_filterable"
                                         name="is_filterable"
                                         value="1"
-                                        :disabled="attribute_type === 'price' ||  attribute_type === 'checkbox' || attribute_type === 'select' || attribute_type === 'multiselect' ? disabled : '' "
+                                        :disabled="attribute_type === 'price' ||  attribute_type === 'checkbox' || attribute_type === 'select' || attribute_type === 'multiselect' ? hidden : '' "
                                     >
             
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
@@ -515,8 +513,11 @@
                 as="div"
                 ref="modelForm"
             >
-                <form @submit.prevent="handleSubmit($event, storeOptions)" enctype="multipart/form-data">
-                    <x-admin::modal ref="addOptionsRow">
+                <Form
+                    @submit.prevent="handleSubmit($event, storeOptions)"
+                    enctype="multipart/form-data"
+                >
+                    <x-admin::modal ref="addOptionsRow" @click="abc=true">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
@@ -600,7 +601,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Locales Input -->
-                                @foreach (app('Webkul\Core\Repositories\LocaleRepository')->all() as $locale)
+                                @foreach ($allLocales as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
                                         <x-admin::form.control-group.label :class="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
@@ -655,7 +656,7 @@
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
-                </form>
+                </Form>
             </x-admin::form>
         </script>
 

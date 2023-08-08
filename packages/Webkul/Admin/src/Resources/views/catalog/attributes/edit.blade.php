@@ -292,7 +292,7 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    <!-- English Loacle -->
+                                                    <!-- Loacles -->
                                                      <x-admin::table.td v-for="locale in allLocales">
                                                         <p v-text="element['locales'][locale.code]"></p>
                                                         
@@ -303,7 +303,7 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    <!-- Position Loacle -->
+                                                    <!-- Position -->
                                                     <x-admin::table.td>
                                                         <p v-text="element.sort_order"></p>
 
@@ -337,6 +337,7 @@
                                             src="{{ bagisto_asset('images/add-product-to-store.png') }}" 
                                             alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                         >
+
                                         <!-- Add Attribute Options Information -->
                                         <div class="flex flex-col items-center">
                                             <p class="text-[16px] text-gray-400 font-semibold">
