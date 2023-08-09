@@ -753,6 +753,56 @@ return [
                                 ]
                             ]
                         ]
+                    ],
+
+                    'downloadable' => [
+                        'links' => [
+                            'title'       => 'Downloadable Links',
+                            'add-btn'     => 'Add Link',
+                            'edit-btn'    => 'Edit',
+                            'delete-btn'  => 'Delete',
+                            'info'        => 'Downloadable product type allows to sell digital products, such as eBooks, software applications, music, games, etc.',
+                            'empty-title' => 'Add Link',
+                            'empty-info'  => 'To create link on a go.',
+                            'file'        => 'File : ',
+                            'sample-file' => 'Sample File : ',
+                            'url'         => 'URL : ',
+                            'sample-url'  => 'Sample URL : ',
+
+                            'update-create' => [
+                                'title'       => 'Link',
+                                'name'        => 'Title',
+                                'price'       => 'Price',
+                                'downloads'   => 'Download Allowed',
+                                'file-type'   => 'File Type',
+                                'file'        => 'File',
+                                'url'         => 'URL',
+                                'sample-type' => 'Sample Type',
+                                'sample'      => 'Sample',
+                                'save-btn'    => 'Save',
+                            ],
+                        ],
+
+                        'samples' => [
+                            'title'       => 'Downloadable Samples',
+                            'add-btn'     => 'Add Sample',
+                            'edit-btn'    => 'Edit',
+                            'delete-btn'  => 'Delete',
+                            'info'        => 'Downloadable product type allows to sell digital products, such as eBooks, software applications, music, games, etc.',
+                            'empty-title' => 'Add Sample',
+                            'empty-info'  => 'To create sample on a go.',
+                            'file'        => 'File : ',
+                            'url'         => 'URL : ',
+
+                            'update-create' => [
+                                'title'       => 'Link',
+                                'name'        => 'Title',
+                                'file-type'   => 'File Type',
+                                'file'        => 'File',
+                                'url'         => 'URL',
+                                'save-btn'    => 'Save',
+                            ],
+                        ],
                     ]
                 ]
             ]
