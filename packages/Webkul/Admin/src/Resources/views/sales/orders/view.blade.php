@@ -46,7 +46,8 @@
 
         <div
             class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-mail text-[24px]"></span> Invoice
+            <span class="icon-mail text-[24px]"></span> 
+            @lang('Invoice')
         </div>
 
         <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
@@ -55,11 +56,19 @@
         </div>
     </div>
 
+    {{-- Order details --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">Order Items ({{ count($order->items) }})</p>
+                <div class="flex justify-between">
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">@lang('Order Items') ({{ count($order->items) }})</p>
 
+                    <p class="text-[16px] text-gray-800 font-semibold">
+                        @lang('Grand Total') - {{ core()->formatBasePrice($order->base_grand_total) }}
+                    </p>
+                </div>
+
+                {{-- Order items --}}
                 <div class="grid">
                     @foreach ($order->items as $item)
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
@@ -147,9 +156,10 @@
                 </div>
             </div>
            
+            {{-- Customer's comment form --}}
             <div class="bg-white rounded box-shadow">
                 <p class="p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">
-                    Customers
+                    @lang('Customers')
                 </p>
 
                 <x-admin::form action="{{ route('admin.sales.orders.comment', $order->id) }}">
@@ -175,7 +185,6 @@
                         </div>
 
                         <div class="flex justify-between items-center">
-
                             <label 
                                 class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
                                 for="customer_notified"
@@ -199,15 +208,15 @@
                                 type="submit"
                                 class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
                             >
-                                Submit Comment
+                                @lang('Submit Comment')
                             </button>
                         </div>
                     </div>
                 </x-admin::form> 
 
-                {{-- Comment List --}}
                 <span class="block w-full border-b-[1px] border-gray-300"></span>
 
+                {{-- Comment List --}}
                 @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                     <div class="grid gap-[6px] p-[16px]">
                         <p class="text-[16px] text-gray-800">
@@ -228,70 +237,58 @@
             </div>
         </div>
 
-        {{-- Side right --}}
-        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-            <div class="bg-white rounded-[4px] box-shadow">
-                <div class="flex items-center justify-between p-[6px] active">
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                        Customer
-                    </p>
-                    <div>
-                        <div>
-                            <form>
-                                <!-- Customer Edit Modal -->
-                                <div>
-                                    <div>
-                                        <!-- Customer Edit Button -->
-                                        <div class="flex gap-[6px] items-center justify-between">
-                                            <button type="button" class="text-blue-600 cursor-pointer">
-                                                Edit
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10]"
-                                        tag="div" enter-class="ease-out duration-300" leave-class="ease-in duration-200"
-                                        style="display: none"></div>
-                                    <!--v-if-->
+        {{-- Billing and shipping address accordion --}}
+        @if (
+            $order->billing_address
+            || $order->shipping_address
+        )
+            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Marketing Time</p>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <div class="pb-[16px]">
+                            <div class="flex flex-col">
+                                <p class="text-gray-800 font-semibold">{{ $order->customer_full_name }}</p>
+                                <p class="text-gray-600">{{ $order->customer_email }}</p>
+                                <p class="text-gray-600">@lang('Customer Group') : {{ $order->customer->group->name ?? '' }}</p>
+                            </div>
+                        </div>
+                        
+                        <span class="block w-full border-b-[1px] border-gray-300"></span>
+                        
+                        {{-- Billing Address --}}
+                        @if ($order->billing_address)
+                            <div class="pb-[16px]">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Billing Address')</p>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <span
-                        class="text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 icon-arrow-up"></span>
-                </div>
-                <div class="px-[16px] pb-[16px] select-none">
-                    <div>
-                        <div class="grid gap-y-[10px]">
-                            <div class="">
-                                <p class="text-gray-800 font-semibold">Ram Gupta</p>
-                                <p class="text-gray-600">Email - seller@example.com</p>
-                                <p class="text-gray-600">Phone - 08593485343</p>
+
+                                @include ('admin::sales.address', ['address' => $order->billing_address])
+
+                                {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
                             </div>
-                            <div class="">
-                                <p class="text-gray-600">Gender - Male</p>
-                                <p class="text-gray-600">DOB - 2023-07-26</p>
+
+                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                        @endif
+
+                        {{-- Shipping Address --}}
+                        @if ($order->shipping_address)
+                            <div class="pb-[16px]">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Shipping Address')</p>
+                                </div>
+
+                                @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                                {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
                             </div>
-                            <div class="">
-                                <p class="text-gray-600">Group- general</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        @endif
+                    </x-slot:content>
+                </x-admin::accordion> 
             </div>
-            <div class="bg-white rounded-[4px] box-shadow">
-                <div class="flex items-center justify-between p-[6px] active">
-                    <div class="flex items-center justify-between p-[6px]">
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                            Address (0)
-                        </p>
-                    </div>
-                    <span
-                        class="text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 icon-arrow-up"></span>
-                </div>
-                <div class="px-[16px] pb-[16px] select-none">
-                    <div></div>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
 </x-admin::layouts>
