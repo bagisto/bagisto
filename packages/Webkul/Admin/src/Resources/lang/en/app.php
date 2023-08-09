@@ -61,6 +61,7 @@ return [
                 'order-status'           => 'Order Status',
                 'invoice-status'         => 'Invoice Status',
                 'channel'                => 'Channel',
+                'invoice-sent'           => 'Invoice sent successfully',
             ],
         ],
 

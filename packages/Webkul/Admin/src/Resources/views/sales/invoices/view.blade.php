@@ -106,7 +106,7 @@
     {{-- body content --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
         {{-- Left sub-component --}}
-        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                 <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
