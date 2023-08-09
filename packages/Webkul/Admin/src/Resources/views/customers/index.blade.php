@@ -21,7 +21,6 @@
                     @lang('Customer View')
                 </div>
             </a>
-            
         </div>
     </div>
 
