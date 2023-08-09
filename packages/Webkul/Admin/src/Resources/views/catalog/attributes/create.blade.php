@@ -161,6 +161,7 @@
                                                 id="empty_option"
                                                 value="1"
                                                 ref="emptyCheckbox"
+                                                v-model="isNullOptionChecked"
                                                 @click="isNullOptionChecked=true"
                                             >
                                             </x-admin::form.control-group.control>
@@ -517,7 +518,10 @@
                     @submit.prevent="handleSubmit($event, storeOptions)"
                     enctype="multipart/form-data"
                 >
-                    <x-admin::modal ref="addOptionsRow" @click="abc=true">
+                    <x-admin::modal
+                        ref="addOptionsRow"
+                        @toggle="listenModel"
+                    >
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 @lang('admin::app.catalog.attributes.create.add-option')
@@ -722,6 +726,14 @@
 
                         this.$refs.addOptionsRow.toggle();
                     },
+
+                    listenModel(event) {
+                        if (this.isNullOptionChecked) {
+                            this.$refs.emptyCheckbox.classList.remove("peer-checked:icon-checked", "peer-checked:text-navyBlue");
+
+                            console.log(this.$refs);
+                        }
+                    },
                 },
 
                 watch: {
@@ -729,7 +741,7 @@
                         /* 
                         *  Here else part code is useless 
                         *  Need to add code for When modal is closed after that input checkbox should unchecked
-                        */ 
+                        */
                         if (val) {
                             // For open existing model
                             if (! this.idNullOption) {

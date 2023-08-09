@@ -172,6 +172,7 @@
                                                 name="empty_option"
                                                 id="empty_option"
                                                 value="1"
+                                                ref="emptyCheckbox"
                                                 v-model="isNullOptionChecked"
                                                 @click="isNullOptionChecked=true"
                                             >
@@ -634,7 +635,10 @@
                 ref="modelForm"
             >
                 <form @submit.prevent="handleSubmit($event, storeOptions)" enctype="multipart/form-data">
-                    <x-admin::modal ref="addOptionsRow">
+                    <x-admin::modal
+                        ref="addOptionsRow"
+                        @toggle="listenModel"
+                    >
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 @lang('admin::app.catalog.attributes.edit.add-option')
@@ -697,7 +701,7 @@
                                 </x-admin::form.control-group.control>
                                 
                                 <!-- Admin Input -->
-                                <x-admin::form.control-group class="w-full mb-[10px]" v-if="!isNullOptionChecked">
+                                <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.catalog.attributes.edit.admin')
                                     </x-admin::form.control-group.label>
@@ -706,26 +710,7 @@
                                         type="text"
                                         name="admin_name"
                                         rules="required"
-                                        :label="trans('admin::app.catalog.attributes.edit.admin')"
-                                        :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="admin_name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group class="w-full mb-[10px]" v-else>
-                                    <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.catalog.attributes.edit.admin')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="admin_name"
-                                        rules="required"
+                                        ref="inputAdmin"
                                         :label="trans('admin::app.catalog.attributes.edit.admin')"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
                                     >
@@ -858,6 +843,12 @@
 
                         if (foundIndex !== -1) {
                             this.optionsData.splice(foundIndex, 1);
+                        }
+                    },
+
+                    listenModel(event) {
+                        if ( this.isNullOptionChecked) {
+                            this.$refs.emptyCheckbox.classList.remove("peer-checked:icon-checked", "peer-checked:text-navyBlue");
                         }
                     },
 
