@@ -20,7 +20,7 @@
             id="v-create-email-events-template"
         >
             <div>
-                {{-- Create Button --}}
+                <!-- Create Button -->
                 <div
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                     @click="$refs.emailEvents.toggle()"
@@ -28,7 +28,7 @@
                     @lang('admin::app.marketing.email-marketing.events.index.create-btn')
                 </div>
 
-                {{-- Email Events form --}}
+                <!-- Email Events form -->
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
@@ -43,9 +43,9 @@
 
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                                    {{-- Event Name --}}
+                                    <!-- Event Name -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="!mt-0">
+                                        <x-admin::form.control-group.label class="required !mt-0">
                                             @lang('admin::app.marketing.email-marketing.events.create.name')
                                         </x-admin::form.control-group.label>
             
@@ -66,9 +66,9 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
             
-                                    {{-- Event Description --}}
+                                    <!-- Event Description -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.email-marketing.events.create.description')
                                         </x-admin::form.control-group.label>
             
@@ -89,9 +89,9 @@
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
 
-                                    {{-- Event Date --}}
+                                    <!-- Event Date -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="!mt-0">
+                                        <x-admin::form.control-group.label class="required !mt-0">
                                             @lang('admin::app.marketing.email-marketing.events.create.date')
                                         </x-admin::form.control-group.label>
             

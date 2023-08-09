@@ -85,14 +85,24 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
+<<<<<<< HEAD
     "file": "assets/app-05f8acf7.css",
+=======
+    "file": "assets/app-c04ede37.css",
+>>>>>>> upstream/2.x
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
+<<<<<<< HEAD
       "assets/app-05f8acf7.css"
     ],
     "file": "assets/app-a831fcca.js",
+=======
+      "assets/app-c04ede37.css"
+    ],
+    "file": "assets/app-31ffb949.js",
+>>>>>>> upstream/2.x
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

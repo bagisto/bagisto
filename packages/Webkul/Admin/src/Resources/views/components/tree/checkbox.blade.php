@@ -19,7 +19,7 @@
             </span>
 
             <div
-                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                class="text-[14px] text-gray-600 cursor-pointer"
                 v-text="label"
             >
             </div>

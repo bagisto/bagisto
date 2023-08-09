@@ -12,7 +12,7 @@
         <v-field
             name="{{ $name }}"
             v-slot="{ field }"
-            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', ':rules', 'label', ':label']) }}
+            {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input
                 type="{{ $type }}"
