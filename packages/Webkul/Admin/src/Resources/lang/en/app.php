@@ -5,7 +5,7 @@ return [
         'edit' => [
             'title'                => 'My Account',
             'save-btn'             => 'Save Account',
-            'cancel-btn'           => 'cancel',
+            'cancel-btn'           => 'Cancel',
             'general'              => 'General',
             'profile-image'        => 'Profile Image',
             'upload-image-info'    => 'Upload a Profile Image (100px X 100px) in PNG or JPG Format',

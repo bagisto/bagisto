@@ -61,7 +61,7 @@
                     <div class="profile-info-icon">
                         <img
                             src="{{ $admin->image_url }}"
-                            class="max-w-[35px]"
+                            class="max-w-[35px] max-h-[35px] rounded-[6px]"
                         />
                     </div>
                 @else

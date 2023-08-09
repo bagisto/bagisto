@@ -46,7 +46,7 @@
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                 <!-- File Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="!mt-0">
+                                    <x-admin::form.control-group.label class="required !mt-0">
                                         @lang('admin::app.marketing.sitemaps.create.file-name')
                                     </x-admin::form.control-group.label>
         
@@ -73,7 +73,7 @@
         
                                 <!---- File Path -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.sitemaps.create.path')
                                     </x-admin::form.control-group.label>
         
