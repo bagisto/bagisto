@@ -103,6 +103,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     protected function getValidationsAttribute()
     {
         $validations = [];
+        
         if ($this->is_required) {
             $validations[] = 'required';
         }

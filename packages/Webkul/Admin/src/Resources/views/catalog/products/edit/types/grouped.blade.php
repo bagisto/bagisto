@@ -162,7 +162,7 @@
 
             data() {
                 return {
-                    groupProducts: @json($product->grouped_products()->with('associated_product.inventory_indices')->get())
+                    groupProducts: @json($product->grouped_products()->with('associated_product.inventory_indices')->orderBy('sort_order', 'asc')->get())
                 }
             },
 

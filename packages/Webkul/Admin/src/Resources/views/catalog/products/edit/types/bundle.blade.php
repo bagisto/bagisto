@@ -23,7 +23,7 @@
                 <div class="flex gap-x-[4px] items-center">
                     <div
                         class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                        @click="$refs.optionCreateModal.open()"
+                        @click="$refs.updateCreateOptionModal.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.add-btn')
                     </div>
@@ -42,7 +42,7 @@
                     :index="index"
                     :option="option"
                     :errors="errors"
-                    @onEdit="selectedOption = $event; $refs.optionCreateModal.open()"
+                    @onEdit="selectedOption = $event; $refs.updateCreateOptionModal.open()"
                     @onRemove="removeOption($event)"
                 ></v-bundle-option-item>
             </div>
@@ -71,7 +71,7 @@
 
                 <div
                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                    @click="$refs.optionCreateModal.open()"
+                    @click="$refs.updateCreateOptionModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.bundle.add-btn')
                 </div>
@@ -84,7 +84,7 @@
             >
                 <form @submit="handleSubmit($event, updateOrCreate)">
                     <!-- Customer Create Modal -->
-                    <x-admin::modal ref="optionCreateModal">
+                    <x-admin::modal ref="updateCreateOptionModal">
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -415,7 +415,7 @@
 
                     this.resetForm();
 
-                    this.$refs.optionCreateModal.close();
+                    this.$refs.updateCreateOptionModal.close();
                 },
 
                 removeOption(option) {
