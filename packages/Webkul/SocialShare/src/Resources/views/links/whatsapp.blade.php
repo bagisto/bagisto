@@ -9,7 +9,7 @@
 <v-whatsapp-share></v-whatsapp-share>
 
 @push('scripts')
-    <script type="text/x-template" id="whatsapp-share-link">
+    <script type="text/x-template" id="v-whatsapp-share-template">
         <li class="transition-all hover:opacity-[0.8]">
             <a 
                 :href="shareUrl" 
