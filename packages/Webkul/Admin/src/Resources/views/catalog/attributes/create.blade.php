@@ -730,8 +730,6 @@
                     listenModel(event) {
                         if (this.isNullOptionChecked) {
                             this.$refs.emptyCheckbox.classList.remove("peer-checked:icon-checked", "peer-checked:text-navyBlue");
-
-                            console.log(this.$refs);
                         }
                     },
                 },
