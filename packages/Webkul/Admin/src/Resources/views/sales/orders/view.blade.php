@@ -19,80 +19,61 @@
 
     <div class="flex justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
         <div>
-            <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px"
-                onclick="window.print()"
-            >
-                <span class="icon-printer text-[24px]"></span> 
-                @lang('Print')
-            </div>
-
-            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                <span class="icon-mail text-[24px]"></span>
-                @lang('Email')
-            </div>
-
-            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                <span class="icon-cancel text-[24px]"></span>
-                @lang('Cancel')
-            </div>
-
-            <div
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                <span class="icon-mail text-[24px]"></span> 
-                @lang('Invoice')
-            </div>
-
-            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                <span class="icon-ship text-[24px]"></span> 
-                @lang('Ship')
-            </div>
-        </div>
-
-        <div class="flex gap-x-[10px] items-center">
             {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
             @if (
                 $order->canCancel()
                 && bouncer()->hasPermission('sales.orders.cancel')
             )
-                <a
-                    href="{{ route('admin.sales.orders.cancel', $order->id) }}"
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                    onclick="return confirm('admin::app.sales.orders.cancel-confirm-msg')"
-                >
-                    @lang('Cancel')    
-                </a>
+                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                    <span class="icon-cancel text-[24px]"></span>
+
+                    <a
+                        href="{{ route('admin.sales.orders.cancel', $order->id) }}"
+                        onclick="return confirm('admin::app.sales.orders.cancel-confirm-msg')"
+                    >
+                        @lang('Cancel')    
+                    </a>
+                </div>
             @endif
 
             @if (
                 $order->canInvoice()
                 && $order->payment->method !== 'paypal_standard'
             )
-                <a
-                    href="{{ route('admin.sales.invoices.create', $order->id) }}"
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                >
-                    @lang('Invoice')    
-                </a>
-            @endif
+                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                    <span class="icon-mail text-[24px]"></span> 
 
-            @if ($order->canRefund())
-                <a
-                    href="{{ route('admin.sales.refunds.create', $order->id) }}"
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                >
-                    @lang('Refund')    
-                </a>
+                    <a
+                        href="{{ route('admin.sales.invoices.create', $order->id) }}"
+                    >
+                        @lang('Invoice')    
+                    </a>
+                </div>
             @endif
 
             @if ($order->canShip())
-                <a
-                    href="{{ route('admin.sales.shipments.create', $order->id) }}"
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                >
-                    @lang('Ship')    
-                </a>
+                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                    <span class="icon-ship text-[24px]"></span> 
+
+                    <a
+                        href="{{ route('admin.sales.shipments.create', $order->id) }}"
+                    >
+                        @lang('Ship')    
+                    </a>
+                </div>
+            @endif
+
+            @if ($order->canRefund())
+                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                    <span class="icon-mail text-[24px]"></span> 
+
+                    <a
+                        href="{{ route('admin.sales.refunds.create', $order->id) }}"
+                    >
+                        @lang('Refund')    
+                    </a>
+                </div>
             @endif
 
             {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
