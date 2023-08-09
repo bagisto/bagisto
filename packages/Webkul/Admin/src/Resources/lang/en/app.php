@@ -23,36 +23,60 @@ return [
             'index' => [
                 'title' => 'Orders',
             ],
-        ],
 
-        'shipments' => [
-            'index' => [
-                'title' => 'Shipments',
+            'view' => [
+                'title'                 => 'Order #:order_id',
+                'cancel'                => 'Cancel',
+                'cancel-msg'            => 'Are your sure you want to cancel this order',
+                'invoice'               => 'Invoice',
+                'ship'                  => 'Ship',
+                'refund'                => 'Refund',
+                'grand-total'           => 'Grand Total',
+                'per-unit'              => 'Per Unit',
+                'quantity'              => 'Quantity',
+                'ordered'               => 'Ordered',
+                'invoiced'              => 'Invoiced',
+                'shipped'               => 'Shipped',
+                'sku'                   => 'SKU',
+                'price'                 => 'Price',
+                'tax'                   => 'Tax',
+                'sub-total'             => 'Sub Total',
+                'shipping-and-handling' => 'Shipping and Handling',
+                'total-paid'            => 'Total Paid',
+                'total-refund'          => 'Total Refund',
+                'total-due'             => 'Total Due',
+                'comments'              => 'Comments',
+                'write-your-comment'    => 'Write your comment',
+                'notify-customer'       => 'Notify Customer',
+                'submit-comment'        => 'Submit Comment',
+                'customer-notified'     => ':date | Customer <b>Notified</b>',
+                'customer-not-notified' => ':date | Customer <b>Not Notified</b>',
+                'customer'              => 'Customer',
+                'customer-group'        => 'Cutomer Group',
+                'billing-address'       => 'Billing Address',
+                'shipping-address'      => 'Shipping Address',
+                'order-information'     => 'Order Information',
+                'order-date'            => 'Order Date',
+                'order-status'          => 'Order Status',
+                'channel'               => 'Channel',
+                'invoices'              => 'Invoices',
+                'download-pdf'          => 'Download PDF',
+                'view'                  => 'View',
+                'no-invoice-found'      => 'No Invoice Found',
+                'shipments'             => 'Shipments',
+                'no-shipment-found'     => 'No Shipments Found',
+                'payment-and-shipping'  => 'Payment and Shipping',
+                'payment-method'        => 'Payment method',
+                'currency'              => 'Currency',
+                'contact'               => 'Contact',
+                'shipping-method'       => 'Shipping Method',
+                'shipping-price'        => 'Shipping Price',
+                'refunded'              => 'Refunded',
+                'name'                  => 'Name',
+                'status'                => 'Status',
+                'no-refund-found'       => 'No Refund Found',
             ],
         ],
-
-        'invoices' => [
-            'index' => [
-                'title' => 'Invoices',
-            ],
-        ],
-
-        'refunds' => [
-            'index' => [
-                'title' => 'Refunds',
-            ],
-        ],
-
-        'transactions' => [
-            'index' => [
-                'title' => 'Transactions',
-            ],
-
-            'create' => [
-                'add' => 'Add transaction',
-            ],
-        ],
-
     ],
 
     'customers' => [
