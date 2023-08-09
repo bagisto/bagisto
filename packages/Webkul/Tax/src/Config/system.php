@@ -15,6 +15,7 @@ return [
         'key'  => 'taxes.catalogue',
         'name' => 'tax::app.admin.system.taxes.catalogue',
         'info' => 'tax::app.admin.system.taxes.catalogue-info',
+        'icon' => 'tax.png',
         'sort' => 1,
     ], [
         'key'    => 'taxes.catalogue.pricing',

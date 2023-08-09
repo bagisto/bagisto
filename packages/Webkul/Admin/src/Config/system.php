@@ -41,6 +41,7 @@ return [
         'key'  => 'general.content',
         'name' => 'admin::app.admin.system.content',
         'info' => 'admin::app.admin.system.content-info',
+        'icon' => 'store-information.svg',
         'sort' => 2,
     ], [
         'key'    => 'general.content.custom_scripts',
@@ -66,7 +67,7 @@ return [
         'key'  => 'general.design',
         'name' => 'admin::app.admin.system.design',
         'info' => 'admin::app.admin.system.design-info',
-        'icon' => 'store-information.svg',
+        'icon' => 'theme-setting.png',
         'sort' => 3,
     ], [
         'key'    => 'general.design.admin_logo',
@@ -102,6 +103,7 @@ return [
         'key'  => 'catalog.products',
         'name' => 'admin::app.admin.system.products',
         'info' => 'admin::app.admin.system.products-info',
+        'icon' => 'group.png',
         'sort' => 2,
     ], [
         'key'    => 'catalog.products.guest-checkout',
@@ -319,6 +321,7 @@ return [
         'key'  => 'catalog.inventory',
         'name' => 'admin::app.admin.system.inventory',
         'info' => 'admin::app.admin.system.inventory-info',
+        'icon' => 'store-information.svg',
         'sort' => 1,
     ], [
         'key'    => 'catalog.inventory.stock_options',
@@ -457,7 +460,7 @@ return [
         'key'  => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',
         'info' => 'admin::app.admin.system.settings-info',
-        'icon' => 'store-information.svg',
+        'icon' => 'settings.png',
         'sort' => 3,
     ], [
         'key'    => 'customer.settings.wishlist',
@@ -555,7 +558,7 @@ return [
         'key'  => 'emails.general',
         'name' => 'admin::app.admin.emails.notification_label',
         'info' => 'admin::app.admin.emails.notification_label-info',
-        'icon' => 'notification.svg',
+        'icon' => 'store-information.svg',
         'sort' => 1,
     ], [
         'key'    => 'emails.general.notifications',

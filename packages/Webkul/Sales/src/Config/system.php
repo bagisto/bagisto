@@ -26,6 +26,7 @@ return [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.admin.system.order-settings',
         'info' => 'admin::app.admin.system.order-settings-info',
+        'icon' => 'order-setting.png',
         'sort' => 4,
     ], [
         'key'    => 'sales.orderSettings.order_number',
@@ -90,6 +91,7 @@ return [
         'key'  => 'sales.invoice_settings',
         'name' => 'admin::app.admin.system.invoice-settings',
         'info' => 'admin::app.admin.system.invoice-settings-info',
+        'icon' => 'invoice-setting.png',
         'sort' => 5,
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',

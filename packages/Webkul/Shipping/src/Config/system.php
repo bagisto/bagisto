@@ -12,6 +12,7 @@ return [
         'key'  => 'sales.shipping',
         'name' => 'admin::app.admin.system.shipping',
         'info' => 'admin::app.admin.system.shipping-info',
+        'icon' => 'shipping.png',
         'sort' => 1,
     ], [
         'key'    => 'sales.shipping.origin',
@@ -85,6 +86,7 @@ return [
         'key'  => 'sales.carriers',
         'name' => 'admin::app.admin.system.shipping-methods',
         'info' => 'admin::app.admin.system.shipping-methods-info',
+        'icon' => 'shipping-method.png',
         'sort' => 2,
     ], [
         'key'    => 'sales.carriers.free',

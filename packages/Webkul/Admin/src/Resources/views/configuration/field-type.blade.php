@@ -236,7 +236,7 @@
                         class="cursor-pointer"
                         :for="$name.'[delete]'"
                     >
-                        {{ trans($field['title']) }}
+                        @lang('admin::app.configuration.delete')
                     </x-admin::form.control-group.label>
                 </div>
             @endif

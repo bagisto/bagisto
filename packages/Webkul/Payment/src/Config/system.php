@@ -12,6 +12,7 @@ return [
         'key'  => 'sales.paymentmethods',
         'name' => 'admin::app.admin.system.payment-methods',
         'info' => 'admin::app.admin.system.payment-methods-info',
+        'icon' => 'payment-method.png',
         'sort' => 3,
     ], [
         'key'    => 'sales.paymentmethods.cashondelivery',

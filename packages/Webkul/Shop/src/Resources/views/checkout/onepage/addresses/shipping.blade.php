@@ -4,7 +4,7 @@
         v-if="! forms.shipping.isNew"
     >
         <x-shop::accordion class="!border-b-[0px]">
-            <x-slot:header class="suraj">
+            <x-slot:header>
                 <div class="flex justify-between items-center">
                     <h2 class="text-[26px] font-medium max-sm:text-[20px]">
                         @lang('shop::app.checkout.onepage.addresses.shipping.shipping-address')
