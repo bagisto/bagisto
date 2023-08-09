@@ -142,8 +142,13 @@
                                 </div>
 
                                 <div class="flex flex-col gap-[6px] items-end place-items-start">
-                                    <p class="text-gray-600">@lang('Total') - {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}</p>
-                                    <p class="text-gray-600">{{ $item->tax_percent }}% Tax - {{ core()->formatBasePrice($item->base_tax_amount) }}</p>
+                                    <p class="text-gray-600">@lang('Price') - {{ core()->formatBasePrice($item->base_price) }}</p>
+                                    <p class="text-gray-600">{{ $item->tax_percent }}% @lang('Tax') - {{ core()->formatBasePrice($item->base_tax_amount) }}</p>
+
+                                    @if (! $order->base_discount_amount)
+                                        <p class="text-gray-600">@lang('Discount') - {{ core()->formatBasePrice($item->base_discount_amount) }}</p>
+                                    @endif
+
                                     <p class="text-gray-600">@lang('Sub Total') - {{ core()->formatBasePrice($item->base_total) }}</p>
                                 </div>
                             </div>
@@ -270,11 +275,11 @@
 
         {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
 
-        {{-- Account and order --}}
+        {{-- Customer and address information --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('Account and Order')</p>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('Customer')</p>
                 </x-slot:header>
 
                 <x-slot:content>
@@ -296,9 +301,45 @@
                     
                     <span class="block w-full border-b-[1px] border-gray-300"></span>
 
-                    <div class="">
-                        <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Order Information')</p>
+                    {{-- Billing Address --}}
+                    @if ($order->billing_address)
+                        <div class="pb-[16px]">
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Billing Address')</p>
+                            </div>
 
+                            @include ('admin::sales.address', ['address' => $order->billing_address])
+
+                            {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
+                        </div>
+
+                        <span class="block w-full border-b-[1px] border-gray-300"></span>
+                    @endif
+
+                    {{-- Shipping Address --}}
+                    @if ($order->shipping_address)
+                        <div class="pb-[16px]">
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Shipping Address')</p>
+                            </div>
+
+                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                            {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
+                        </div>
+                    @endif
+
+                </x-slot:content>
+            </x-admin::accordion> 
+
+            {{-- Order Information --}}
+            <x-admin::accordion>
+                <x-slot:header>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('Order Information')</p>
+                </x-slot:header>
+
+                <x-slot:content>
+                    <div class="">
                         <div class="flex w-full gap-[20px] justify-start">
                             <div class="flex flex-col gap-y-[6px]">
                                 <p class="text-gray-600">
@@ -342,48 +383,6 @@
                     </div>
                 </x-slot:content>
             </x-admin::accordion> 
-
-            {{-- Billing and shipping address accordion --}}
-            @if (
-                $order->billing_address
-                || $order->shipping_address
-            )
-                <x-admin::accordion>
-                    <x-slot:header>
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Billing and Shipping Addresses</p>
-                    </x-slot:header>
-
-                    <x-slot:content>
-                        {{-- Billing Address --}}
-                        @if ($order->billing_address)
-                            <div class="pb-[16px]">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Billing Address')</p>
-                                </div>
-
-                                @include ('admin::sales.address', ['address' => $order->billing_address])
-
-                                {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
-                            </div>
-
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
-                        @endif
-
-                        {{-- Shipping Address --}}
-                        @if ($order->shipping_address)
-                            <div class="pb-[16px]">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Shipping Address')</p>
-                                </div>
-
-                                @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
-                            </div>
-                        @endif
-                    </x-slot:content>
-                </x-admin::accordion> 
-            @endif
 
             {{-- Invoice Information--}}    
             <x-admin::accordion>
