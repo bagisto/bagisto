@@ -3,8 +3,8 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Sales\Models\OrderAddress;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Models\OrderAddress;
 
 class OrderRefundDataGrid extends DataGrid
 {
@@ -19,7 +19,7 @@ class OrderRefundDataGrid extends DataGrid
             ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
             ->leftJoin('addresses as order_address_billing', function ($leftJoin) {
                 $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
-                         ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
+                    ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
             })
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'));
 
@@ -38,7 +38,7 @@ class OrderRefundDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,

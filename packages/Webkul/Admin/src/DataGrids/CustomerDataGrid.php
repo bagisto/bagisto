@@ -71,7 +71,7 @@ class CustomerDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'customer_id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -107,7 +107,7 @@ class CustomerDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'phone',
             'label'      => trans('admin::app.datagrid.phone'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => false,

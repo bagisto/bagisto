@@ -45,7 +45,7 @@ class CartRuleCouponDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -81,7 +81,7 @@ class CartRuleCouponDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'times_used',
             'label'      => trans('admin::app.datagrid.times-used'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,

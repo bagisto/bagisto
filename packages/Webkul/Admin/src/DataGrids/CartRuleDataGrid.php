@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\DataGrid\DataGrid;
 use Illuminate\Support\Facades\DB;
+use Webkul\DataGrid\DataGrid;
 
 class CartRuleDataGrid extends DataGrid
 {
@@ -121,7 +121,7 @@ class CartRuleDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -193,7 +193,7 @@ class CartRuleDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'sort_order',
             'label'      => trans('admin::app.datagrid.priority'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
