@@ -30,10 +30,10 @@ class CategoryDataGrid extends DataGrid
     protected $locale = 'all';
 
     /**
-    * Contains the keys for which extra filters to show.
-    *
-    * @var string[]
-    */
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
     protected $extraFilters = [
         'locales',
     ];
@@ -77,8 +77,7 @@ class CategoryDataGrid extends DataGrid
                     ->whereIn('ct.locale', $whereInLocales);
             })
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
-            ->groupBy('cat.id', 'ct.locale', );
-
+            ->groupBy('cat.id', 'ct.locale');
 
         // $this->addFilter('status', 'cat.status');
         // $this->addFilter('category_id', 'cat.id');
@@ -96,7 +95,7 @@ class CategoryDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'category_id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -114,7 +113,7 @@ class CategoryDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'position',
             'label'      => trans('admin::app.datagrid.position'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -129,17 +128,17 @@ class CategoryDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return '<span class="badge badge-md badge-success">'. trans('admin::app.datagrid.active') . '</span>';
+                    return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.active') . '</span>';
                 }
 
-                return '<span class="badge badge-md badge-danger">'. trans('admin::app.datagrid.inactive') . '</span>';
+                return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.inactive') . '</span>';
             },
         ]);
 
         $this->addColumn([
             'index'      => 'count',
             'label'      => trans('admin::app.datagrid.no-of-products'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'sortable'   => true,
             'searchable' => false,
             'filterable' => false,
