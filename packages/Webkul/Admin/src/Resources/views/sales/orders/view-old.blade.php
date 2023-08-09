@@ -403,7 +403,13 @@
                                         <ul class="comment-list">
                                             @foreach ($order->comments()->orderBy('id', 'desc')->get() as $comment)
                                                 <li>
-                                                   
+                                                    <span class="comment-info">
+                                                        @if ($comment->customer_notified)
+                                                            {!! __('admin::app.sales.orders.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s')]) !!}
+                                                        @else
+                                                            {!! __('admin::app.sales.orders.customer-not-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s')]) !!}
+                                                        @endif
+                                                    </span>
 
                                                     <p>{{ $comment->comment }}</p>
                                                 </li>

@@ -14,16 +14,7 @@
                 <span class="label-pending text-[14px] mx-[5px]"> {{ $order->status }} </span>
             </p>
             
-            <div class="flex gap-x-[10px] items-center">
-                <div
-                    class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all hover:bg-gray-200">
-                    <span class="icon-arrow-right text-[24px]"></span>
-                </div>
-                <div
-                    class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all hover:bg-gray-200">
-                    <span class="icon-arrow-left text-[24px]"></span>
-                </div>
-            </div>
+            {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
         </div>
     </div>
 
@@ -60,12 +51,52 @@
         </div>
 
         <div class="flex gap-x-[10px] items-center">
-            <button
-                type="button"
-                class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-            >
-                @lang('Refund')    
-            </button>
+            {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
+
+            @if (
+                $order->canCancel()
+                && bouncer()->hasPermission('sales.orders.cancel')
+            )
+                <a
+                    href="{{ route('admin.sales.orders.cancel', $order->id) }}"
+                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    onclick="return confirm('admin::app.sales.orders.cancel-confirm-msg')"
+                >
+                    @lang('Cancel')    
+                </a>
+            @endif
+
+            @if (
+                $order->canInvoice()
+                && $order->payment->method !== 'paypal_standard'
+            )
+                <a
+                    href="{{ route('admin.sales.invoices.create', $order->id) }}"
+                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                >
+                    @lang('Invoice')    
+                </a>
+            @endif
+
+            @if ($order->canRefund())
+                <a
+                    href="{{ route('admin.sales.refunds.create', $order->id) }}"
+                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                >
+                    @lang('Refund')    
+                </a>
+            @endif
+
+            @if ($order->canShip())
+                <a
+                    href="{{ route('admin.sales.shipments.create', $order->id) }}"
+                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                >
+                    @lang('Ship')    
+                </a>
+            @endif
+
+            {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
         </div>
     </div>
 
@@ -250,6 +281,8 @@
             </div>
         </div>
 
+        {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
+
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
             <x-admin::accordion>
                 <x-slot:header>
@@ -260,8 +293,16 @@
                     <div class="pb-[16px]">
                         <div class="flex flex-col">
                             <p class="text-gray-800 font-semibold">{{ $order->customer_full_name }}</p>
+
+                            {!! view_render_event('sales.order.customer_full_name.after', ['order' => $order]) !!}
+
                             <p class="text-gray-600">{{ $order->customer_email }}</p>
+
+                            {!! view_render_event('sales.order.customer_email.after', ['order' => $order]) !!}
+
                             <p class="text-gray-600">@lang('Customer Group') : {{ $order->customer->group->name ?? '' }}</p>
+
+                            {!! view_render_event('sales.order.customer_group.after', ['order' => $order]) !!}
                         </div>
                     </div>
                     
@@ -272,10 +313,6 @@
 
                         <div class="flex w-full gap-[20px] justify-start">
                             <div class="flex flex-col gap-y-[6px]">
-                                <p class="text-gray-600">
-                                    @lang('Order Id')
-                                </p>
-
                                 <p class="text-gray-600">
                                     @lang('Order Date')
                                 </p>
@@ -290,25 +327,28 @@
                             </div>
                     
                             <div class="flex flex-col gap-y-[6px]">
-                                {{-- Order Id --}}
-                                <p class="text-blue-600 font-semibold">
-                                    <a href="{{route('admin.sales.orders.view', $order->id) }}">#{{$order->increment_id}}</a>
-                                </p>
-                                
+                                {!! view_render_event('sales.order.created_at.before', ['order' => $order]) !!}
+
                                 {{-- Order Date --}}
                                 <p class="text-gray-600">
                                     {{core()->formatDate($order->created_at) }}
                                 </p>
+
+                                {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
                             
                                 {{-- Order Status --}}
                                 <p class="text-gray-600">
                                     {{$order->status_label}}
                                 </p>
                             
+                                {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
+
                                 {{-- Order Channel --}}
                                 <p class="text-gray-800">
                                     {{$order->channel_name}}
                                 </p>
+
+                                {!! view_render_event('sales.order.channel_name.after', ['order' => $order]) !!}
                             </div>
                         </div>
                     </div>
@@ -446,6 +486,8 @@
                             <p class="pt-[16px] text-gray-800 font-semibold">{{ $additionalDetails['title'] }}</p>
                             <p class="text-gray-600">{{ $additionalDetails['value'] }}</p>
                         @endif
+
+                        {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
                     </div>
 
                     <span class="block w-full border-b-[1px] border-gray-300"></span>
@@ -458,6 +500,8 @@
                             <p class="pt-[16px] text-gray-800 font-semibold">{{ core()->formatBasePrice($order->base_shipping_amount) }}</p>
                             <p class="text-gray-600">@lang('Shipping price')</p>
                         </div>
+
+                        {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
                     @endif
                 </x-slot:content>
             </x-admin::accordion> 
@@ -495,5 +539,7 @@
                 </x-slot:content>
             </x-admin::accordion> 
         </div>
+
+        {!! view_render_event('sales.order.tabs.after', ['order' => $order]) !!}
     </div>
 </x-admin::layouts>
