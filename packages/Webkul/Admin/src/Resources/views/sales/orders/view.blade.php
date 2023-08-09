@@ -25,34 +25,45 @@
         </div>
     </div>
 
-    <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
-        <div
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px"
-            onclick="window.print()"
-        >
-            <span class="icon-printer text-[24px]"></span> 
-            @lang('Print')
+    <div class="flex justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
+        <div>
+            <div
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px"
+                onclick="window.print()"
+            >
+                <span class="icon-printer text-[24px]"></span> 
+                @lang('Print')
+            </div>
+
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-mail text-[24px]"></span>
+                @lang('Email')
+            </div>
+
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-cancel text-[24px]"></span>
+                @lang('Cancel')
+            </div>
+
+            <div
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-mail text-[24px]"></span> 
+                @lang('Invoice')
+            </div>
+
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-ship text-[24px]"></span> 
+                @lang('Ship')
+            </div>
         </div>
 
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-mail text-[24px]"></span>
-            @lang('Email')
-        </div>
-
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-cancel text-[24px]"></span>
-            @lang('Cancel')
-        </div>
-
-        <div
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-mail text-[24px]"></span> 
-            @lang('Invoice')
-        </div>
-
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-ship text-[24px]"></span> 
-            @lang('Ship')
+        <div class="flex gap-x-[10px] items-center">
+            <button
+                type="button"
+                class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+            >
+                @lang('Refund')    
+            </button>
         </div>
     </div>
 
@@ -237,12 +248,12 @@
             </div>
         </div>
 
-        {{-- Billing and shipping address accordion --}}
-        @if (
-            $order->billing_address
-            || $order->shipping_address
-        )
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            {{-- Billing and shipping address accordion --}}
+            @if (
+                $order->billing_address
+                || $order->shipping_address
+            )
                 <x-admin::accordion>
                     <x-slot:header>
                         <p class="text-gray-600 text-[16px] p-[10px] font-semibold">Marketing Time</p>
@@ -288,7 +299,71 @@
                         @endif
                     </x-slot:content>
                 </x-admin::accordion> 
-            </div>
-        @endif
+            @endif
+
+            {{-- Invoice Information--}}    
+            <x-admin::accordion>
+                <x-slot:header>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('Invoices') ({{ count($order->invoices) }})</p>
+                </x-slot:header>
+
+                <x-slot:content>
+                    @foreach ($order->invoices as $invoice)
+                        <div class="grid gap-y-[10px] pb-[16px]">
+                            <div>
+                                <p class="text-gray-800 font-semibold">@lang('Invoice') #{{ $invoice->increment_id ?? $invoice->id }}</p>
+                                <p class="text-gray-600">{{ core()->formatDate($invoice->created_at, 'd M, Y H:i:s a') }}</p>
+                            </div>
+
+                            <div class="flex gap-[10px]">
+                                <a
+                                    href="{{ route('admin.sales.invoices.view', $invoice->id) }}"
+                                    class="text-blue-600"
+                                >
+                                    @lang('View')
+                                </a>
+
+                                <a
+                                    href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
+                                    class="text-blue-600"
+                                >
+                                    @lang('Download Pdf')
+                                </a>
+                                
+                            </div>
+                        </div>
+                    @endforeach
+                </x-slot:content>
+            </x-admin::accordion> 
+
+            {{-- Invoice Information--}}    
+            <x-admin::accordion>
+                <x-slot:header>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('Shipments') ({{ count($order->shipments) }})</p>
+                </x-slot:header>
+
+                <x-slot:content>
+                    @forelse ($order->shipments as $shipment)
+                        <div class="grid gap-y-[10px] pb-[16px]">
+                            <div>
+                                <p class="text-gray-800 font-semibold">@lang('Shipment') #{{ $shipment->id }}</p>
+                                <p class="text-gray-600">{{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}</p>
+                            </div>
+
+                            <div class="flex gap-[10px]">
+                                <a
+                                    href="{{ route('admin.sales.shipments.view', $shipment->id) }}"
+                                    class="text-blue-600"
+                                >
+                                    @lang('View')
+                                </a>
+                            </div>
+                        </div>
+                    @empty 
+                        <p class="text-gray-600">@lang('No shipment found')</p>
+                    @endforelse
+                </x-slot:content>
+            </x-admin::accordion> 
+        </div>
     </div>
 </x-admin::layouts>
