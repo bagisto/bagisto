@@ -31,7 +31,6 @@ class CatalogRuleDataGrid extends DataGrid
         $queryBuilder = DB::table('catalog_rules')
             ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
-
         // $this->addFilter('status', 'status');
 
         return $queryBuilder;
@@ -47,7 +46,7 @@ class CatalogRuleDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -105,7 +104,7 @@ class CatalogRuleDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'sort_order',
             'label'      => trans('admin::app.datagrid.priority'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,

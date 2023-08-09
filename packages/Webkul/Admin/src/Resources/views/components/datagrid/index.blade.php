@@ -1,4 +1,4 @@
-<v-datagrid src="{{ route('admin.catalog.attributes.index') }}"></v-datagrid>
+<v-datagrid {{ $attributes }}></v-datagrid>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-datagrid-template">
@@ -41,9 +41,9 @@
                         },
 
                         sort: {
-                            column: 'id',
+                            column: null,
 
-                            order: 'desc',
+                            order: null,
                         },
 
                         filters: {
@@ -70,13 +70,17 @@
                             per_page: this.applied.pagination.perPage,
                         },
 
-                        sort: {
-                            column: this.applied.sort.column,
-                            order: this.applied.sort.order,
-                        },
+                        sort: {},
 
                         filters: {},
                     };
+
+                    if (
+                        this.applied.sort.column
+                        && this.applied.sort.order
+                    ) {
+                        params.sort = this.applied.sort;
+                    }
 
                     this.applied.filters.columns.forEach(column => {
                         params.filters[column.index] = column.value;
