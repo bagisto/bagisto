@@ -1,6 +1,5 @@
 <x-admin::layouts>
     <x-slot:title>
-        {{-- @lang('admin::app.sales.orders.view-title', ['order_id' => $order->increment_id]) --}}
         @lang('Order') #{{ $order->increment_id }}
     </x-slot:title>
 
@@ -115,11 +114,18 @@
                 {{-- Order items --}}
                 <div class="grid">
                     @foreach ($order->items as $item)
+
+
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
                             <div class="flex gap-[10px]">
-                                <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                    <img class="w-[20px]" src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/next-angle-top.png">
-                                </div>
+                                @if($item->product)
+                                    <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                        <img
+                                            class="w-[20px]"
+                                            src="{{ $item->product->base_image_url }}"
+                                        >
+                                    </div>
+                                @endif
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}</p>
@@ -203,7 +209,7 @@
             {{-- Customer's comment form --}}
             <div class="bg-white rounded box-shadow">
                 <p class="p-[16px] pb-0 text-[16px] text-gray-800 font-semibold">
-                    @lang('Customers')
+                    @lang('Comments')
                 </p>
 
                 <x-admin::form action="{{ route('admin.sales.orders.comment', $order->id) }}">
@@ -283,6 +289,7 @@
 
         {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
 
+        {{-- Account and order --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
             <x-admin::accordion>
                 <x-slot:header>
