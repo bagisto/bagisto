@@ -25,7 +25,7 @@
         app.component('v-whatsapp-share', {
             template: '#v-whatsapp-share-template',
 
-            data: function () {
+            data() {
                 return {
                     shareUrl: '{{ $whatsappURL }}'
                 }

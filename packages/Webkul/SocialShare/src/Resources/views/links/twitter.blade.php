@@ -23,14 +23,14 @@
         app.component('v-twitter-share', {
             template: '#v-twitter-share-template',
 
-            data: function () {
+            data() {
                 return {
                     shareUrl: '{{ $twitterURL }}'
                 }
             },
 
             methods: {
-                openSharePopup: function () {
+                openSharePopup() {
                     window.open(this.shareUrl, '_blank', 'resizable=yes,top=500,left=500,width=500,height=500')
                 }
             }
