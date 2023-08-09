@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        Invoice #{{ $invoice->increment_id ?? $invoice->id }}
+        @lang('admin::app.sales.invoices.view.title') #{{ $invoice->increment_id ?? $invoice->id }}
     </x-slot:title>
 
     @php
@@ -10,11 +10,13 @@
 
     {{-- Main Body --}}
     <div class="grid">
-        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
 
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
-                Invoice #{{ $invoice->increment_id ?? $invoice->id }}
+                @lang('admin::app.sales.invoices.view.title') #{{ $invoice->increment_id ?? $invoice->id }}
+
+                <span class="label-active text-[14px] mx-[5px]">{{ $invoice->status_label }}</span>
             </p>
 
             {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
@@ -29,19 +31,21 @@
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
                 class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                <span class="icon-printer text-[24px] "></span> Print
+                <span class="icon-printer text-[24px] "></span> 
+
+                @lang('admin::app.sales.invoices.view.print')
             </a>
 
             {{-- Send Duplicate Invoice Modal --}}
-
             <div>
                 <button
                     type="button"
                     class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
                     @click="$refs.groupCreateModal.open()"
                 >
-                    <span class="icon-cart text-[24px] "></span> Send Duplicate invoice
-                </button>
+                    <span class="icon-cart text-[24px] "></span>
+                        @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
+                    </button>
 
                 <x-admin::form :action="route('admin.sales.invoices.send_duplicate', $invoice->id)">
                         <!-- Create Group Modal -->
@@ -49,7 +53,7 @@
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    Send Duplicate Invoice
+                                    @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
                                 </p>   
                             </x-slot:header>
             
@@ -58,7 +62,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label class="required">
-                                            Email
+                                            @lang('admin::app.sales.invoices.view.email')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
@@ -67,7 +71,7 @@
                                             id="email"
                                             rules="required|email"
                                             :value="$invoice->order->customer_email"
-                                            label="Email"
+                                            :label="trans('admin::app.sales.invoices.view.email')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -86,7 +90,7 @@
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        Send
+                                        @lang('admin::app.sales.invoices.view.send')
                                     </button>
                                 </div>
                             </x-slot:footer>
@@ -105,7 +109,10 @@
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">Invoice Items ({{ count($invoice->items) }})</p>
+                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                    @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
+                </p>
+
                 <div class="grid">
                     {{-- Invoice Item Details--}}
                     @foreach($invoice->items as $item)
@@ -118,7 +125,7 @@
                                         class="w-[20px]"
                                     >
                                     <p class="text-[6px] text-gray-400 font-semibold">
-                                        Product Image
+                                        @lang('admin::app.sales.invoices.view.product-image') 
                                     </p>
                                 </div>
                                 
@@ -130,7 +137,7 @@
 
                                     <p class="text-gray-600">
                                         {{core()->formatBasePrice($item->base_price) }}
-                                        @lang('per unit') x {{ $item->qty}}@lang('Quantity')
+                                        @lang('admin::app.sales.invoices.view.per-unit') x {{ $item->qty}}@lang('admin::app.sales.invoices.view.qty')
                                     </p>
 
                                     <div class="flex flex-col gap-[6px] place-items-start">
@@ -145,12 +152,12 @@
 
                                         {{--SKU --}}
                                         <p class="text-gray-600">
-                                            SKU - {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
+                                            @lang('admin::app.sales.invoices.view.sku') - {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                         </p>
 
                                         {{-- Quantity --}}
                                         <p class="text-gray-600">
-                                            Qty - {{ $item->qty }}
+                                            @lang('admin::app.sales.invoices.view.qty') - {{ $item->qty }}
                                         </p>
                                     </div>
                                 </div>
@@ -171,24 +178,24 @@
                                 {{-- Item Base Price --}}
                                 <div class="flex flex-col gap-[6px] items-end place-items-start">
                                     <p class="text-gray-600">
-                                        Price - {{ core()->formatBasePrice($item->base_price) }}
+                                        @lang('admin::app.sales.invoices.view.price') - {{ core()->formatBasePrice($item->base_price) }}
                                     </p>
 
                                     {{-- Item Tax Amount --}}
                                     <p class="text-gray-600">
-                                        Tax Amount- {{ core()->formatBasePrice($item->base_tax_amount) }}
+                                        @lang('admin::app.sales.invoices.view.tax') - {{ core()->formatBasePrice($item->base_tax_amount) }}
                                     </p>
 
                                     {{-- Item Discount --}}
                                     @if ($invoice->base_discount_amount > 0)
                                         <p class="text-gray-600">
-                                            Discount - {{ core()->formatBasePrice($item->base_discount_amount) }}
+                                            @lang('admin::app.sales.invoices.view.discount') - {{ core()->formatBasePrice($item->base_discount_amount) }}
                                         </p>
                                     @endif
 
                                     {{-- Item Sub-Total --}}
                                     <p class="text-gray-600">
-                                        Sub Total - {{ core()->formatBasePrice($item->base_total) }}
+                                        @lang('admin::app.sales.invoices.view.sub-total') - {{ core()->formatBasePrice($item->base_total) }}
                                     </p>
                                 </div>
                             </div>
@@ -200,23 +207,25 @@
                 <div class="flex w-full gap-[10px] justify-end mt-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 font-semibold">
-                            Subtotal
+                            @lang('admin::app.sales.invoices.view.sub-total')
                         </p>
 
                         <p class="text-gray-600">
-                            Shipping and Handling
+                            @lang('admin::app.sales.invoices.view.shipping-and-handling')                    
                         </p>
 
                         <p class="text-gray-600">
-                            Tax
+                            @lang('admin::app.sales.invoices.view.tax')    
                         </p>
 
                         @if ($invoice->base_discount_amount > 0)
-                            <p class="text-gray-600">Discount</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.invoices.view.discount')    
+                            </p>
                         @endif
 
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            Grand Total
+                            @lang('admin::app.sales.invoices.view.grand-total')   
                         </p>
                     </div>
 
@@ -257,7 +266,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                            Customer
+                        @lang('admin::app.sales.invoices.view.customer')
                     </p>
                 </x-slot:header>
                 <x-slot:content>
@@ -269,7 +278,7 @@
                         {!! view_render_event('sales.invoice.customer_name.after', ['order' => $order]) !!}
 
                         <p class="text-gray-600">
-                            Email - {{ $invoice->order->customer_email }}
+                            @lang('admin::app.sales.invoices.view.email') - {{ $invoice->order->customer_email }}
                         </p>
 
                         {!! view_render_event('sales.invoice.customer_email.after', ['order' => $order]) !!}
@@ -314,7 +323,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                        Order Information
+                        @lang('admin::app.sales.invoices.view.order-information') 
                     </p>
                 </x-slot:header>
 
@@ -322,23 +331,23 @@
                     <div class="flex w-full gap-[20px] justify-start">
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600">
-                                Order Id
+                                @lang('admin::app.sales.invoices.view.order-id') 
                             </p>
 
                             <p class="text-gray-600">
-                                Order Date
+                                @lang('admin::app.sales.invoices.view.order-date')
                             </p>
 
                             <p class="text-gray-600">
-                                Order Status
+                                @lang('admin::app.sales.invoices.view.order-status')
                             </p>
 
                             <p class="text-gray-600">
-                                Invoice Status
+                                @lang('admin::app.sales.invoices.view.invoice-status')
                             </p>
 
                             <p class="text-gray-600">
-                                Channel
+                                @lang('admin::app.sales.invoices.view.channel')
                             </p>
                         </div>
 
