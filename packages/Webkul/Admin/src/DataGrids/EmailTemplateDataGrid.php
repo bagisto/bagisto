@@ -24,7 +24,7 @@ class EmailTemplateDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {

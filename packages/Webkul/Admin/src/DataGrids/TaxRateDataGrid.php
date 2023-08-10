@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class TaxRateDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'zip_code', 'zip_from', 'zip_to', 'tax_rate');

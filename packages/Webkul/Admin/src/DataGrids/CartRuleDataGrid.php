@@ -7,7 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class CartRuleDataGrid extends DataGrid
 {
- 
     /**
      * Customer group.
      *
@@ -37,7 +36,7 @@ class CartRuleDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {

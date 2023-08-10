@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class CustomerDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers')
@@ -157,6 +162,7 @@ class CustomerDataGrid extends DataGrid
             'route'  => 'admin.customer.edit',
             'title'  => trans('admin::app.customers.customers.edit-help-title'),
             'url'          => function ($row) {
+                dd($row);
                 return route('admin.customer.edit', $row->id);
             },
         ]);

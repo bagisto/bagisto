@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class LocalesDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name', 'direction');

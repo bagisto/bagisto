@@ -8,6 +8,11 @@ use Webkul\Sales\Models\OrderAddress;
 
 class OrderRefundDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('refunds')

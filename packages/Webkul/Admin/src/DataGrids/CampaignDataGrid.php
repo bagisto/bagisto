@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class CampaignDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('marketing_campaigns')->addSelect('id', 'name', 'subject', 'status');

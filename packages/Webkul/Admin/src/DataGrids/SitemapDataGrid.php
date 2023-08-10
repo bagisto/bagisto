@@ -8,10 +8,11 @@ use Webkul\DataGrid\DataGrid;
 
 class SitemapDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('sitemaps')->addSelect('id', 'file_name', 'path', 'path as url');

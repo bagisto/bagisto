@@ -24,9 +24,9 @@ class CategoryProductDataGrid extends DataGrid
     protected $channel;
 
     /**
-     * Create datagrid instance.
+     * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function __construct()
     {

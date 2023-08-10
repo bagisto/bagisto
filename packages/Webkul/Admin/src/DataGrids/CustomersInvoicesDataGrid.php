@@ -22,9 +22,9 @@ class CustomersInvoicesDataGrid extends DataGrid
     protected $sortOrder = 'desc';
 
     /**
-     * Prepare query.
+     * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {

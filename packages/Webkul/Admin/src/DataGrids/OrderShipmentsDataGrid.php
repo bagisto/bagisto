@@ -8,6 +8,11 @@ use Webkul\Sales\Models\OrderAddress;
 
 class OrderShipmentsDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments')
@@ -20,14 +25,6 @@ class OrderShipmentsDataGrid extends DataGrid
             ->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
             ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
-
-        // $this->addFilter('shipment_id', 'shipments.id');
-        // $this->addFilter('shipment_order_id', 'ors.increment_id');
-        // $this->addFilter('shipment_total_qty', 'shipments.total_qty');
-        // $this->addFilter('inventory_source_name', DB::raw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name)'));
-        // $this->addFilter('order_date', 'ors.created_at');
-        // $this->addFilter('shipment_created_at', 'shipments.created_at');
-        // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
 
         return $queryBuilder;
     }

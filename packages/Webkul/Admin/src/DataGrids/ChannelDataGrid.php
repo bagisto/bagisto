@@ -17,6 +17,11 @@ class ChannelDataGrid extends DataGrid
         $this->locale = core()->getRequestedLocaleCode();
     }
 
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = $this->channelRepository->query()

@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class CMSPageDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $locale = core()->getRequestedLocaleCode();

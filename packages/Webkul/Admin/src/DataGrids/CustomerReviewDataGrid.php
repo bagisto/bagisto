@@ -8,9 +8,9 @@ use Webkul\DataGrid\DataGrid;
 class CustomerReviewDataGrid extends DataGrid
 {
     /**
-     * Index.
+     * Prepare query builder.
      *
-     * @var string
+     * @return \Illuminate\Database\Query\Builder
      */
     protected $index = 'product_review_id';
 

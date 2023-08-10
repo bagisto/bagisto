@@ -14,6 +14,11 @@ class ExchangeRatesDataGrid extends DataGrid
      */
     protected $primaryColumn = 'currency_exchange_id';
 
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currency_exchange_rates')

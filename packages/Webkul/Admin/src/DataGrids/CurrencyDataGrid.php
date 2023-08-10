@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class CurrencyDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currencies')->addSelect('id', 'name', 'code');

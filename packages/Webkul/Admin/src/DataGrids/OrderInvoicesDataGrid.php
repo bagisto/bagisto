@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class OrderInvoicesDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $dbPrefix = DB::getTablePrefix();

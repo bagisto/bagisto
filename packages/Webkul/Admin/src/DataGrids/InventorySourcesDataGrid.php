@@ -8,11 +8,14 @@ use Webkul\DataGrid\DataGrid;
 class InventorySourcesDataGrid extends DataGrid
 {
 
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
-
-        // $this->addFilter('status', 'status');
 
         return $queryBuilder;
     }

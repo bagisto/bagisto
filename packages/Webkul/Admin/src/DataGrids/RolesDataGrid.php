@@ -7,6 +7,11 @@ use Webkul\DataGrid\DataGrid;
 
 class RolesDataGrid extends DataGrid
 {
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');
