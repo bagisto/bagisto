@@ -21,6 +21,7 @@
                 :action="route('admin.catalog.attributes.store')"
                 enctype="multipart/form-data"
             >
+                <!-- actions buttons -->
                 <div class="flex justify-between items-center">
                     <p class="text-[20px] text-gray-800 font-bold">
                         @lang('admin::app.catalog.attributes.create.title')
@@ -29,7 +30,7 @@
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Cancel Button -->
                         <a href="{{ route('admin.catalog.attributes.index') }}">
-                            <span class="text-gray-600 leading-[24px]">
+                            <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                 @lang('admin::app.catalog.attributes.create.cancel-btn')
                             </span>
                         </a>
@@ -85,14 +86,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="{{ $locale->code }}[name]"
+                                        :name="$locale->code . '[name]'"
                                         :value="old($locale->code)"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="{{ $locale->code }}[name]"
+                                        :control-name="$locale->code . '[name]'"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>    
@@ -154,25 +155,30 @@
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                            <x-admin::form.control-group.control
+                                        <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <input 
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
-                                                value="1"
-                                                ref="emptyCheckbox"
-                                                v-model="isNullOptionChecked"
-                                                @click="isNullOptionChecked=true"
-                                            >
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.label
                                                 for="empty_option"
-                                                class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                                class="hidden peer"
+                                                v-model="isNullOptionChecked"
+                                                @click="$refs.addOptionsRow.toggle()"
                                             >
-                                                @lang('admin::app.catalog.attributes.create.create-empty-option')
-                                            </x-admin::form.control-group.label>
-                                        </x-admin::form.control-group>
+
+                                            <label
+                                                for="empty_option"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+                                            >
+                                            </label>
+
+                                            <label
+                                                for="empty_option"
+                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                            >
+                                                Create default empty opton
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -214,6 +220,7 @@
                                         <draggable
                                             tag="tbody"
                                             ghost-class="draggable-ghost"
+                                            v-bind="{animation: 200}"
                                             :list="options"
                                             item-key="id"
                                         >
@@ -291,11 +298,17 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    <!-- Actions Bustion -->
+                                                    <!-- Actions button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
                                                             class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                                            @click="editModal(element.id)"
+                                                            @click="editModal(element)"
+                                                        >
+                                                        </span> 
+
+                                                        <span
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            @click="removeOption(element.id)"
                                                         >
                                                         </span> 
                                                     </x-admin::table.td>
@@ -315,6 +328,7 @@
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
                                     >
+                                    
                                     <!-- Add Attribute Options Information -->
                                     <div class="flex flex-col items-center">
                                         <p class="text-[16px] text-gray-400 font-semibold">
@@ -493,7 +507,10 @@
                                         id="is_filterable"
                                         name="is_filterable"
                                         value="1"
-                                        :disabled="attribute_type === 'price' ||  attribute_type === 'checkbox' || attribute_type === 'select' || attribute_type === 'multiselect' ? hidden : '' "
+                                        :disabled="attribute_type == 'price' ||  attribute_type == 'checkbox'
+                                            || attribute_type == 'select' || attribute_type == 'multiselect' 
+                                            ? false : true
+                                        "
                                     >
             
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
@@ -514,13 +531,13 @@
                 as="div"
                 ref="modelForm"
             >
-                <Form
+                <form
                     @submit.prevent="handleSubmit($event, storeOptions)"
                     enctype="multipart/form-data"
                 >
                     <x-admin::modal
+                        @toggle="listenModal"
                         ref="addOptionsRow"
-                        @toggle="listenModel"
                     >
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -585,14 +602,14 @@
                                 
                                 <!-- Admin Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.admin')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="admin_name"
-                                        rules="required"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.admin')"
                                     >
@@ -607,14 +624,14 @@
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label :class="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''">
+                                        <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
                                             :name="$locale->code"
-                                            :rules="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''"
+                                            ::rules="{ '{{core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }"
                                             :label="$locale->name"
                                             :placeholder="$locale->name"
                                         >
@@ -629,14 +646,14 @@
 
                                 <!-- Position Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.position')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="number"
                                         name="sort_order"
-                                        rules="required"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
                                         :label="trans('admin::app.catalog.attributes.create.position')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.position')"
                                     >
@@ -660,7 +677,7 @@
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
-                </Form>
+                </form>
             </x-admin::form>
         </script>
 
@@ -668,15 +685,15 @@
             app.component('v-create-attributes', {
                 template: '#v-create-attributes-template',
 
-                props: [
-                    'allLocales'
-                ],
+                props: ['allLocales'],
 
-                data: function() {
+                data() {
                     return {
                         optionRowCount: 1,
 
-                        attribute_type: false,
+                        attribute_type: '',
+
+                        swatch_type: '',
 
                         swatch_attribute: false,
 
@@ -684,32 +701,27 @@
 
                         isNullOptionChecked: false,
 
-                        idNullOption: null,
-
                         options: [],
                     }
                 },
 
                 methods: {
-                    storeOptions(params, {resetForm, setValues}) {
-                        let foundIndex = this.options.findIndex(item => item.id === params.id);
+                    storeOptions(params, { resetForm }) {
+                        if (params.id) {
+                            let foundIndex = this.options.findIndex(item => item.id === params.id);
 
-                        if (foundIndex !== -1) {
-                            let updatedObject = {
+                            this.options.splice(foundIndex, 1, {
                                 ...this.options[foundIndex],
-                                params: {
+                                params: {   
                                     ...this.options[foundIndex].params,
                                     ...params,
                                 }
-                            };
-
-                            this.options.splice(foundIndex, 1, updatedObject);
+                            });
                         } else {
-                            let rowCount = this.optionRowCount++;
-                            let id = 'option_' + rowCount;
-                            let row = {'id': id, params};
-    
-                            this.options.push(row);
+                            this.options.push({
+                                id: 'option_' + this.optionRowCount++,
+                                params
+                            });
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -717,38 +729,23 @@
                         resetForm();
                     },
 
-                    editModal(value) {
-                        const foundData = this.options.find(item => item.id === value);
-                        // For set value on edit form
-                        this.$refs.modelForm.setValues(foundData.params);
+                    editModal(values) {
+                        values.params.id = values.id;
 
-                        this.$refs.modelForm.setValues(foundData);
+                        this.$refs.modelForm.setValues(values.params);
 
                         this.$refs.addOptionsRow.toggle();
                     },
 
-                    listenModel(event) {
-                        if (this.isNullOptionChecked) {
-                            this.$refs.emptyCheckbox.classList.remove("peer-checked:icon-checked", "peer-checked:text-navyBlue");
-                        }
+                    removeOption(id) {
+                        this.options = this.options.filter(option => option.id !== id);
                     },
-                },
 
-                watch: {
-                    isNullOptionChecked: function (val) {
-                        /* 
-                        *  Here else part code is useless 
-                        *  Need to add code for When modal is closed after that input checkbox should unchecked
-                        */
-                        if (val) {
-                            // For open existing model
-                            if (! this.idNullOption) {
-                                this.$refs.addOptionsRow.toggle();
-                            }
-                        } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
-                            this.$refs.addOptionsRow.toggle()
+                    listenModal(event) {
+                        if (! event.isActive) {
+                            this.isNullOptionChecked = false;                            
                         }
-                    },
+                    }
                 },
             });
         </script>

@@ -53,9 +53,10 @@
                         <!-- Information -->
                         <div class="flex gap-[10px]">
                             <!-- Image -->
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                <img src="{{ bagisto_asset('images/product-placeholders/top-angle.svg') }}" class="w-[20px]" />
-                                <p class="text-[6px] text-gray-400 font-semibold">Product Image</p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                             </div>
 
                             <!-- Details -->
