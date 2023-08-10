@@ -62,23 +62,11 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $attribute = $this->attributeRepository->create(request()->only([
-            'code',
-            'type',
-            'admin_name',
-            'options',
-            'is_required',
-            'is_unique',
-            'validation',
-            'value_per_locale',
-            'value_per_channel',
-            'is_filterable',
-            'is_configurable',
-            'is_visible_on_front',
-            'use_in_flat',
-            'is_comparable',
-            'is_user_defined' => 1
-        ]));
+        $data = array_merge(request()->input(), [
+            'is_user_defined' => 1,
+        ]);
+
+        $attribute = $this->attributeRepository->create(array_merge($data));
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
@@ -129,7 +117,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
-        $attribute = $this->attributeRepository->update(request()->all(), $id);
+        $attribute = $this->attributeRepository->update(request()->input(), $id);
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 

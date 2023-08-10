@@ -23,7 +23,7 @@ class AttributeFamilyDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -35,7 +35,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
-            'filterable' => true
+            'filterable' => true,
         ]);
 
         $this->addColumn([

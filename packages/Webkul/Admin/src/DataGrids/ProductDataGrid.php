@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductDataGrid extends DataGrid
 {
@@ -59,8 +59,6 @@ class ProductDataGrid extends DataGrid
     /**
      * Create datagrid instance.
      *
-     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
-     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
      * @return void
      */
     public function __construct(
@@ -142,7 +140,7 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'product_id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
@@ -178,7 +176,7 @@ class ProductDataGrid extends DataGrid
                     ! empty($row->visible_individually)
                     && ! empty($row->url_key)
                 ) {
-                    return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . "</a>";
+                    return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . '</a>';
                 }
 
                 return $row->product_name;
@@ -235,7 +233,7 @@ class ProductDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'quantity',
             'label'      => trans('admin::app.datagrid.qty'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'sortable'   => true,
             'searchable' => false,
             'filterable' => false,

@@ -69,7 +69,7 @@
                                     {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
                                     <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.index.create.type')
                                         </x-admin::form.control-group.label>
             
@@ -90,7 +90,7 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.index.create.family')
                                         </x-admin::form.control-group.label>
             
@@ -111,7 +111,7 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.products.index.create.sku')
                                         </x-admin::form.control-group.label>
             

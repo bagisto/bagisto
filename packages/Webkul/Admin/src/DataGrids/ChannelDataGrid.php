@@ -2,8 +2,8 @@
 
 namespace Webkul\Admin\DataGrids;
 
-use Webkul\DataGrid\DataGrid;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\DataGrid\DataGrid;
 
 class ChannelDataGrid extends DataGrid
 {
@@ -25,7 +25,6 @@ class ChannelDataGrid extends DataGrid
     /**
      * Create a new datagrid instance.
      *
-     * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @return void
      */
     public function __construct(protected ChannelRepository $channelRepository)
@@ -57,7 +56,7 @@ class ChannelDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,

@@ -26,7 +26,6 @@ class AddressDataGrid extends DataGrid
     /**
      * Create a new datagrid instance.
      *
-     * @param  \Webkul\Customer\Repositories\CustomerRepository $customerRepository
      * @return void
      */
     public function __construct(protected CustomerRepository $customerRepository)
@@ -78,7 +77,7 @@ class AddressDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'address_id',
             'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
             'filterable' => true,
