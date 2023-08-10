@@ -25,14 +25,14 @@ module.exports = {
 
         extend: {
             colors: {
-                'darkGreen': '#40994A',
-                'darkBlue': '#0044F2',
-                'darkPink': '#F85156',
+                darkGreen: '#40994A',
+                darkBlue: '#0044F2',
+                darkPink: '#F85156',
             },
 
             fontFamily: {
-                'inter': ['Inter'],
-                'icon': ['icomoon']
+                inter: ['Inter'],
+                icon: ['icomoon']
             }
         },
     },
