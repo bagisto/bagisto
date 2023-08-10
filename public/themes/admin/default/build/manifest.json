@@ -107,17 +107,5 @@
   "src/Resources/assets/images/user-owner.svg": {
     "file": "assets/user-owner-466fac11.svg",
     "src": "src/Resources/assets/images/user-owner.svg"
-  },
-  "src/Resources/assets/js/app.css": {
-    "file": "assets/app-c04ede37.css",
-    "src": "src/Resources/assets/js/app.css"
-  },
-  "src/Resources/assets/js/app.js": {
-    "css": [
-      "assets/app-c04ede37.css"
-    ],
-    "file": "assets/app-31ffb949.js",
-    "isEntry": true,
-    "src": "src/Resources/assets/js/app.js"
   }
 }

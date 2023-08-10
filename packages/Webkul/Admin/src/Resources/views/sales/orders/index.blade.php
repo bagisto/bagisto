@@ -9,6 +9,6 @@
         </p>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid :src="route('admin.sales.orders.index')"></x-admin::datagrid>
 
 </x-admin::layouts>
