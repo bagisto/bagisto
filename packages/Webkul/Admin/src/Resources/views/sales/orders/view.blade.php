@@ -11,7 +11,20 @@
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
                 @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
 
-                <span class="label-pending text-[14px] mx-[5px]"> {{ $order->status }} </span>
+                @switch($order->status)
+                    @case('processing')
+                        <span class="label-processing text-[14px] mx-[5px]">{{ $order->status }}</span>
+
+                        @break
+                    @case('completed')
+                        <span class="label-closed text-[14px] mx-[5px]">{{ $order->status }}</span>
+
+                        @break
+                    @case('pending')
+                        <span class="label-pending text-[14px] mx-[5px]">{{ $order->status }}</span>
+
+                        @break
+                @endswitch
             </p>
             
             {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
