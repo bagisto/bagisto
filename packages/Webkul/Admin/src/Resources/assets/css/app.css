@@ -343,10 +343,10 @@
 	.label-pending {
 		@apply bg-yellow-500;
 	}
-/* 
+
 	.label-processing,  .label-active {
 		@apply bg-darkGreen;
-	} */
+	}
 
 	.label-closed {
 		@apply bg-darkBlue;
