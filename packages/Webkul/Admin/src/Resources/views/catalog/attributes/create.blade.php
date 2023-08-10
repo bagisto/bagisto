@@ -124,7 +124,7 @@
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <x-admin::form.control-group class="w-full mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.catalog.attributes.create.input-options')dsfasdf  
+                                            @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -155,25 +155,30 @@
                                             @lang('admin::app.catalog.attributes.create.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                            <x-admin::form.control-group.control
+                                        <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <input 
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
-                                                value="1"
-                                                ref="emptyCheckbox"
-                                                v-model="isNullOptionChecked"
-                                                @click="isNullOptionChecked=true"
-                                            >
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.label
                                                 for="empty_option"
-                                                class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                                class="hidden peer"
+                                                v-model="isNullOptionChecked"
+                                                @click="$refs.addOptionsRow.toggle()"
                                             >
-                                                @lang('admin::app.catalog.attributes.create.create-empty-option')
-                                            </x-admin::form.control-group.label>
-                                        </x-admin::form.control-group>
+
+                                            <label
+                                                for="empty_option"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+                                            >
+                                            </label>
+
+                                            <label
+                                                for="empty_option"
+                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
+                                            >
+                                                Create default empty opton
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -297,6 +302,12 @@
                                                         <span
                                                             class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
                                                             @click="editModal(element)"
+                                                        >
+                                                        </span> 
+
+                                                        <span
+                                                            class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                                            @click="removeOption(element.id)"
                                                         >
                                                         </span> 
                                                     </x-admin::table.td>
@@ -524,8 +535,8 @@
                     enctype="multipart/form-data"
                 >
                     <x-admin::modal
+                        @toggle="listenModal"
                         ref="addOptionsRow"
-                        @toggle="listenModel"
                     >
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -590,14 +601,14 @@
                                 
                                 <!-- Admin Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.admin')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="admin_name"
-                                        rules="required"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
                                         :label="trans('admin::app.catalog.attributes.create.admin')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.admin')"
                                     >
@@ -612,14 +623,14 @@
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label :class="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''">
+                                        <x-admin::form.control-group.label ::class="{ '{{core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
                                             :name="$locale->code"
-                                            :rules="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''"
+                                            ::rules="{ '{{core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''}}' : ! isNullOptionChecked }"
                                             :label="$locale->name"
                                             :placeholder="$locale->name"
                                         >
@@ -634,14 +645,14 @@
 
                                 <!-- Position Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.create.position')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="number"
                                         name="sort_order"
-                                        rules="required"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
                                         :label="trans('admin::app.catalog.attributes.create.position')"
                                         :placeholder="trans('admin::app.catalog.attributes.create.position')"
                                     >
@@ -689,8 +700,6 @@
 
                         isNullOptionChecked: false,
 
-                        idNullOption: null,
-
                         options: [],
                     }
                 },
@@ -727,28 +736,15 @@
                         this.$refs.addOptionsRow.toggle();
                     },
 
-                    listenModel(event) {
-                        if (this.isNullOptionChecked) {
-                            this.$refs.emptyCheckbox.classList.remove("peer-checked:icon-checked", "peer-checked:text-navyBlue");
-                        }
+                    removeOption(id) {
+                        this.options = this.options.filter(option => option.id !== id);
                     },
-                },
 
-                watch: {
-                    isNullOptionChecked(val) {
-                        /* 
-                        *  Here else part code is useless 
-                        *  Need to add code for When modal is closed after that input checkbox should unchecked
-                        */
-                        if (val) {
-                            // For open existing model
-                            if (! this.idNullOption) {
-                                this.$refs.addOptionsRow.toggle();
-                            }
-                        } else if(this.idNullOption !== null && typeof this.idNullOption !== 'undefined') {
-                            this.$refs.addOptionsRow.toggle()
+                    listenModal(event) {
+                        if (! event.isActive) {
+                            this.isNullOptionChecked = false;                            
                         }
-                    },
+                    }
                 },
             });
         </script>

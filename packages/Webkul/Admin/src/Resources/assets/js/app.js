@@ -62,17 +62,7 @@ defineRule("decimal", (value, { decimals = '*', separator = '.' } = {}) => {
     return regex.test(value);
 });
 
-defineRule("phone", (value) => {
-    if (!value || !value.length) {
-        return true;
-    }
-
-    if (!/^\+?\d+$/.test(value)) {
-        return false;
-    }
-
-    return true;
-});
+defineRule("", () => true);
 
 configure({
     /**
