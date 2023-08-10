@@ -127,12 +127,13 @@
                                         {{ $inventorySource->name }}
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="inventory_sources[]"
-                                    >
-                                    </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             @endforeach 
+
+                            <x-admin::form.control-group.error
+                                control-name="inventory_sources[]"
+                            >
+                            </x-admin::form.control-group.error>
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
@@ -388,13 +389,14 @@
                                             >
                                                 {{ $locale->name }} 
                                             </x-admin::form.control-group.label>
-    
-                                            <x-admin::form.control-group.error
-                                                control-name="locales[]"
-                                            >
-                                            </x-admin::form.control-group.error>
+                                  
                                         </x-admin::form.control-group>
-                                    @endforeach 
+                                    @endforeach
+
+                                    <x-admin::form.control-group.error
+                                        control-name="locales[]"
+                                    >
+                                    </x-admin::form.control-group.error> 
                                 </div>
     
                                 <x-admin::form.control-group class="mb-[10px]">
@@ -448,12 +450,14 @@
                                                 {{ $currency->name }}  
                                             </x-admin::form.control-group.label>
     
-                                            <x-admin::form.control-group.error
-                                                control-name="currencies[]"
-                                            >
-                                            </x-admin::form.control-group.error>
+                                            
                                         </x-admin::form.control-group>
                                     @endforeach 
+                                    
+                                    <x-admin::form.control-group.error
+                                        control-name="currencies[]"
+                                    >
+                                    </x-admin::form.control-group.error>
                                 </div>
     
                                 <x-admin::form.control-group class="mb-[10px]">
