@@ -470,10 +470,11 @@
                 </x-slot:content>
             </x-admin::accordion> 
 
+            {{-- Addresses listing--}}
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        <p class="text-gray-600 text-[16px] font-semibold">
                             @lang('admin::app.customers.view.address')
                             ({{ count($customer->addresses) }})
                         </p>
@@ -496,10 +497,12 @@
                                     </p>
 
                                     <p class="text-gray-600">
-                                        {{$address->address1}}
-                                        {{$address->city}} 
-                                        {{$address->state}} 
-                                        {{$address->country}}
+                                        {{$address->address1}},
+                                        {{$address->address2}},
+                                        {{$address->city}},
+                                        {{$address->postcode}},
+                                        {{$address->state}}, 
+                                        {{ core()->country_name($address->country) }}
                                     </p>
                                 </div>
 
@@ -557,7 +560,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                            <span class="block w-full mb-[10px] mt-[10px] border-b-[1px] border-gray-300"></span>
                         @endforeach
                     @else    
                         {{-- Empty Address Container --}}
