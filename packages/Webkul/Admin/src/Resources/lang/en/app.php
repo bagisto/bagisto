@@ -590,6 +590,7 @@ return [
 
             'edit' => [
                 'title'       => 'Edit Product',
+                'save-btn'    => 'Save Product',
 
                 'price' => [
                     'group' => [
