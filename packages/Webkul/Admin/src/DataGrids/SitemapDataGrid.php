@@ -68,14 +68,18 @@ class SitemapDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.sitemaps.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.sitemaps.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.sitemaps.delete',
-            'icon'   => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.sitemaps.delete', $row->id);
+            },
         ]);
     }
 }

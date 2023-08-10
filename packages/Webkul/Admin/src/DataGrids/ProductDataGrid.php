@@ -12,27 +12,6 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductDataGrid extends DataGrid
 {
     /**
-     * Default sort order of datagrid.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Set index columns, ex: id.
-     *
-     * @var string
-     */
-    protected $index = 'product_id';
-
-    /**
-     * If paginated then value of pagination.
-     *
-     * @var int
-     */
-    protected $itemsPerPage = 10;
-
-    /**
      * Locale.
      *
      * @var string
@@ -46,21 +25,6 @@ class ProductDataGrid extends DataGrid
      */
     protected $channel = 'all';
 
-    /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'channels',
-        'locales',
-    ];
-
-    /**
-     * Create datagrid instance.
-     *
-     * @return void
-     */
     public function __construct(
         protected ProductRepository $productRepository,
         protected InventorySourceRepository $inventorySourceRepository
@@ -70,9 +34,6 @@ class ProductDataGrid extends DataGrid
 
         /* channel */
         $this->channel = core()->getRequestedChannelCode();
-
-        /* parent constructor */
-        parent::__construct();
     }
 
     /**
@@ -258,7 +219,10 @@ class ProductDataGrid extends DataGrid
             'title'     => trans('admin::app.datagrid.edit'),
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
-            'icon'      => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.products.edit', $row->id);
+            },
+
             'condition' => function () {
                 return true;
             },
@@ -269,14 +233,18 @@ class ProductDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.products.delete', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.catalog.products.copy',
-            'icon'   => 'icon copy-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.products.copy', $row->id);
+            },
         ]);
     }
 

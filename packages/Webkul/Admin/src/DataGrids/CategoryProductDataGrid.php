@@ -10,27 +10,6 @@ use Webkul\DataGrid\DataGrid;
 class CategoryProductDataGrid extends DataGrid
 {
     /**
-     * Default sort order of datagrid.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Set index columns, ex: id.
-     *
-     * @var string
-     */
-    protected $index = 'product_id';
-
-    /**
-     * If paginated then value of pagination.
-     *
-     * @var int
-     */
-    protected $itemsPerPage = 10;
-
-    /**
      * Locale.
      *
      * @var string
@@ -56,9 +35,6 @@ class CategoryProductDataGrid extends DataGrid
 
         /* channel */
         $this->channel = core()->getRequestedChannelCode();
-
-        /* parent constructor */
-        parent::__construct();
     }
 
     /**
@@ -190,7 +166,10 @@ class CategoryProductDataGrid extends DataGrid
             'title'     => trans('admin::app.datagrid.edit'),
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
-            'icon'      => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.products.index', $row->id);
+            },
+
             'condition' => function () {
                 return true;
             },

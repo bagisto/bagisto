@@ -7,25 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class TaxRateDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'zip_code', 'zip_from', 'zip_to', 'tax_rate');
@@ -131,14 +112,18 @@ class TaxRateDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.tax_rates.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.tax_rates.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.tax_rates.delete',
-            'icon'   => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.tax_rates.delete', $row->id);
+            },
         ]);
     }
 }

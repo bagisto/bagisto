@@ -27,7 +27,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.catalog.attributes.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.attributes.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog.attributes.delete');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.attributes.mass_delete');
 
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.catalog.families.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.families.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog.families.delete');
         });
 
         /**

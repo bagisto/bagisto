@@ -1044,7 +1044,7 @@ return [
             'error-create'        => 'Müşteri adresi silinirken hata oluştu!',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'login as customer',
             'login-message'=> 'you login as :customer_name',
         ],

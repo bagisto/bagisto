@@ -7,25 +7,7 @@ use Webkul\DataGrid\DataGrid;
 
 class InventorySourcesDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
 
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
@@ -106,15 +88,19 @@ class InventorySourcesDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.inventory_sources.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.inventory_sources.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
+            'method'       => 'DELETE',
             'route'        => 'admin.inventory_sources.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Inventory Source']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.inventory_sources.delete', $row->id);
+            },
         ]);
     }
 }

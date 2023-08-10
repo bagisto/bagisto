@@ -15,13 +15,6 @@ class CustomerReviewDataGrid extends DataGrid
     protected $index = 'product_review_id';
 
     /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
      * @return void
@@ -134,14 +127,18 @@ class CustomerReviewDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.customer.review.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.customer.review.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.customer.review.delete',
-            'icon'   => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.customer.review.delete', $row->id);
+            },
         ]);
     }
 

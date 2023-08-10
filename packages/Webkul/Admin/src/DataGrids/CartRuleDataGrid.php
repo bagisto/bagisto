@@ -7,20 +7,7 @@ use Webkul\DataGrid\DataGrid;
 
 class CartRuleDataGrid extends DataGrid
 {
-    /**
-     * Set index columns, ex: id.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Default sort order of datagrid.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
+ 
     /**
      * Customer group.
      *
@@ -36,24 +23,12 @@ class CartRuleDataGrid extends DataGrid
     protected $channel = 'all';
 
     /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'channels',
-        'customer_groups',
-    ];
-
-    /**
      * Create a new datagrid instance.
      *
      * @return void
      */
     public function __construct()
     {
-        parent::__construct();
-
         $this->customer_group = core()->getRequestedCustomerGroupCode() ?? 'all';
 
         $this->channel = core()->getRequestedChannelCode(false) ?? 'all';
@@ -105,8 +80,6 @@ class CartRuleDataGrid extends DataGrid
 
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
-
-        // $this->addFilter('status', 'status');
 
         return $queryBuilder;
     }
@@ -211,21 +184,27 @@ class CartRuleDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.cart_rules.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.cart_rules.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.cart_rules.copy',
-            'icon'   => 'icon copy-icon',
+            'url'    => function ($row) {
+                return route('admin.cart_rules.copy', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.cart_rules.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.cart_rules.delete', $row->id);
+            },
         ]);
     }
 }

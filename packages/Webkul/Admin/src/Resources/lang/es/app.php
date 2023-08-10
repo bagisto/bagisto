@@ -1062,7 +1062,7 @@ return [
             'error-create'        => 'La dirección del cliente no fue creada.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'logige sisse kliendina',
             'login-message'=> 'logisite sisse kui :customer_name',
         ],

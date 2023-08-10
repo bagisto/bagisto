@@ -8,10 +8,6 @@ use Webkul\Sales\Models\OrderAddress;
 
 class OrderShipmentsDataGrid extends DataGrid
 {
-    protected $index = 'shipment_id';
-
-    protected $sortOrder = 'desc';
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments')
@@ -108,7 +104,9 @@ class OrderShipmentsDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'admin.sales.shipments.view',
-            'icon'   => 'icon eye-icon',
+            'url'          => function ($row) {
+                return route('admin.sales.shipments.view', $row->id);
+            },
         ]);
     }
 }

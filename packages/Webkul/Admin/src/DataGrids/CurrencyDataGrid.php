@@ -7,10 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class CurrencyDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('currencies')->addSelect('id', 'name', 'code');
@@ -54,14 +50,18 @@ class CurrencyDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.currencies.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.currencies.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.currencies.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.currencies.delete', $row->id);
+            },
         ]);
     }
 }

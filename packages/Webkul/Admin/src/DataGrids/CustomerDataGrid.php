@@ -7,32 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class CustomerDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'customer_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Items per page.
-     *
-     * @var int
-     */
-    protected $itemsPerPage = 10;
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('customers')
@@ -181,30 +155,38 @@ class CustomerDataGrid extends DataGrid
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.edit',
-            'icon'   => 'icon pencil-lg-icon',
             'title'  => trans('admin::app.customers.customers.edit-help-title'),
+            'url'          => function ($row) {
+                return route('admin.customer.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.note.create',
-            'icon'   => 'icon note-icon',
             'title'  => trans('admin::app.customers.note.help-title'),
+            'url'          => function ($row) {
+                return route('admin.customer.note.create', $row->id);
+            },
         ]);
 
         $this->addAction([
             'method' => 'GET',
-            'route'  => 'admin.customer.loginascustomer',
-            'icon'   => 'icon login-icon',
+            'route'  => 'admin.customer.login_as_customer',
             'target' => 'blank',
-            'title'  => trans('admin::app.customers.loginascustomer.grid-title'),
+            'title'  => trans('admin::app.customers.login-as-customer.grid-title'),
+            'url'          => function ($row) {
+                return route('admin.customer.login_as_customer', $row->id);
+            },
         ]);
 
         $this->addAction([
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.customer.delete',
-            'icon'   => 'icon trash-icon',
             'title'  => trans('admin::app.customers.customers.delete-help-title'),
+            'url'          => function ($row) {
+                return route('admin.customer.delete', $row->id);
+            },
         ]);
     }
 

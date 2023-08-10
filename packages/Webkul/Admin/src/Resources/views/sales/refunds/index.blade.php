@@ -8,7 +8,7 @@
             @lang('admin::app.sales.refunds.index.title')
         </p>
     </div>
-    
-    {{-- datagrid will be here --}}
+
+    <x-admin::datagrid src="{{ route('admin.sales.refunds.index') }}"></x-admin::datagrid>
 
 </x-admin::layouts>

@@ -1040,7 +1040,7 @@ return [
             'error-create'        => 'ग्राहक पता नहीं बनाया गया।',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'ग्राहक के रूप में लॉगिन करें',
             'login-message'=> 'आप के रूप में लॉग इन किया :customer_name',
         ],

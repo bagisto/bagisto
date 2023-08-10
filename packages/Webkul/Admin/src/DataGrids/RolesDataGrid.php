@@ -7,10 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class RolesDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('roles')->addSelect('id', 'name', 'permission_type');
@@ -55,14 +51,18 @@ class RolesDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.roles.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.roles.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.roles.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.roles.delete', $row->id);
+            },
         ]);
     }
 }

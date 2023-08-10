@@ -8,25 +8,6 @@ use Webkul\DataGrid\DataGrid;
 
 class UserDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'user_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('admins as u')
@@ -119,14 +100,18 @@ class UserDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.users.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.users.edit', $row->user_id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.users.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.users.delete', $row->user_id);
+            },
         ]);
     }
 }

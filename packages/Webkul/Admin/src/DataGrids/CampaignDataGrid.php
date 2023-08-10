@@ -7,30 +7,9 @@ use Webkul\DataGrid\DataGrid;
 
 class CampaignDataGrid extends DataGrid
 {
-    /**
-     * Set index columns, ex: id.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Default sort order of datagrid.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('marketing_campaigns')->addSelect('id', 'name', 'subject', 'status');
-
-        // $this->addFilter('status', 'marketing_campaigns.status');
 
         return $queryBuilder;
     }
@@ -97,15 +76,19 @@ class CampaignDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.campaigns.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.campaigns.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
+            'method'       => 'DELETE',
             'route'        => 'admin.campaigns.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.campaigns.delete', $row->id);
+            },
         ]);
     }
 }

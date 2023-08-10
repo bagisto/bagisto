@@ -7,25 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class LocalesDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('locales')->addSelect('id', 'code', 'name', 'direction');
@@ -95,15 +76,18 @@ class LocalesDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.locales.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.locales.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
+            'method'       => 'DELETE',
             'route'        => 'admin.locales.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Locale']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.locales.delete', $row->id);
+            },
         ]);
     }
 }

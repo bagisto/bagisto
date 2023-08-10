@@ -90,7 +90,9 @@ class EmailTemplateDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.email_templates.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.email_templates.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
@@ -98,7 +100,9 @@ class EmailTemplateDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.email_templates.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Email Template']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.email_templates.delete', $row->id);
+            },
         ]);
     }
 }

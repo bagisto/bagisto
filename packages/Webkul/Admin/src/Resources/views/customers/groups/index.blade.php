@@ -14,7 +14,9 @@
             <v-create-group></v-create-group>
         </div>
     </div>
-    
+
+    <x-admin::datagrid src="{{ route('admin.groups.index') }}"></x-admin::datagrid>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-group-template">
             <div>

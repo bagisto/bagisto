@@ -13,5 +13,6 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.currencies.index') }}"></x-admin::datagrid>
+    
 </x-admin::layouts>

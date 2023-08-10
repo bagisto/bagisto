@@ -15,6 +15,8 @@
         </div>
     </div>
 
+    <x-admin::datagrid src="{{ route('admin.users.index') }}"></x-admin::datagrid>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-user-form-template">
             <div>

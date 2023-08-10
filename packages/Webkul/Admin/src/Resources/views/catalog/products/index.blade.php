@@ -21,7 +21,7 @@
     
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}"></x-admin::datagrid>
 
     {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 

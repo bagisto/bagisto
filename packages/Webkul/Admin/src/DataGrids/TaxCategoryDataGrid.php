@@ -7,10 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class TaxCategoryDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('tax_categories')->addSelect('id', 'name', 'code');
@@ -54,14 +50,18 @@ class TaxCategoryDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.tax_categories.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.tax_categories.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.tax_categories.delete',
-            'icon'   => 'icon trash-icon',
+            'url'    => function ($row) {
+                return route('admin.tax_categories.delete', $row->id);
+            },
         ]);
     }
 }

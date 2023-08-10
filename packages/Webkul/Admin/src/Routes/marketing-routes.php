@@ -31,7 +31,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('edit/{id}', 'update')->name('admin.cart_rules.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.cart_rules.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.cart_rules.delete');
         });
 
         /**
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('edit/{id}', 'update')->name('admin.catalog_rules.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog_rules.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog_rules.delete');
         });
 
         /**
@@ -76,7 +76,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('edit/{id}', 'update')->name('admin.campaigns.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.campaigns.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.campaigns.delete');
         });
 
         /**
@@ -93,7 +93,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.events.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.events.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.events.delete');
         });
 
         /**
@@ -106,7 +106,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('edit/{id}', 'update')->name('admin.customers.subscribers.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.customers.subscribers.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.customers.subscribers.delete');
         });
 
         /**
@@ -123,7 +123,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('edit/{id}', 'update')->name('admin.email_templates.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.email_templates.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.email_templates.delete');
         });
 
         /**
@@ -140,7 +140,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('edit/{id}', 'update')->name('admin.sitemaps.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.sitemaps.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.sitemaps.delete');
         });
     });
 });

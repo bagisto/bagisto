@@ -8,25 +8,6 @@ use Webkul\DataGrid\DataGrid;
 
 class OrderDataGrid extends DataGrid
 {
-    /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('orders')
@@ -167,7 +148,9 @@ class OrderDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'admin.sales.orders.view',
-            'icon'   => 'icon eye-icon',
+            'url'          => function ($row) {
+                return route('admin.sales.orders.view', $row->id);
+            },
         ]);
     }
 }

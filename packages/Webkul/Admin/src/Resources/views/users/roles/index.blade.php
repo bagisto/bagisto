@@ -23,5 +23,5 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.roles.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

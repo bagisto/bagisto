@@ -7,10 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class AttributeFamilyDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('attribute_families')->select('id')->addSelect('id', 'code', 'name');
@@ -54,14 +50,18 @@ class AttributeFamilyDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog.families.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.families.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'route'  => 'admin.catalog.families.delete',
-            'icon'   => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.families.delete', $row->id);
+            },
         ]);
     }
 }

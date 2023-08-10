@@ -8,29 +8,12 @@ use Webkul\DataGrid\DataGrid;
 class ChannelDataGrid extends DataGrid
 {
     /**
-     * Assign primary key.
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Filter Locale.
      */
     protected $locale;
 
-    /**
-     * Create a new datagrid instance.
-     *
-     * @return void
-     */
     public function __construct(protected ChannelRepository $channelRepository)
     {
-        parent::__construct();
-
         $this->locale = core()->getRequestedLocaleCode();
     }
 
@@ -96,7 +79,10 @@ class ChannelDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.channels.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                dd($row);
+                return route('admin.channels.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
@@ -104,7 +90,9 @@ class ChannelDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.channels.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.channels.delete', $row->id);
+            },
         ]);
     }
 }

@@ -7,10 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class EventDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('marketing_events')->addSelect('id', 'name', 'date');
@@ -54,7 +50,9 @@ class EventDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.events.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.events.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
@@ -62,7 +60,9 @@ class EventDataGrid extends DataGrid
             'method'       => 'POST',
             'route'        => 'admin.events.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Event']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.events.delete', $row->id);
+            },
         ]);
     }
 }

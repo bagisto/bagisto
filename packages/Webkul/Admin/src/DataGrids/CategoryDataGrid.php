@@ -9,44 +9,14 @@ use Webkul\DataGrid\DataGrid;
 class CategoryDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'category_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Locale.
      *
      * @var string
      */
     protected $locale = 'all';
 
-    /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'locales',
-    ];
-
-    /**
-     * Create a new datagrid instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        parent::__construct();
-
         $this->locale = core()->getRequestedLocaleCode();
     }
 
@@ -156,15 +126,19 @@ class CategoryDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog.categories.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.catalog.categories.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
+            'method'       => 'DELETE',
             'route'        => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.catalog.categories.delete', $row->id);
+            },
         ]);
 
         $this->addMassAction([

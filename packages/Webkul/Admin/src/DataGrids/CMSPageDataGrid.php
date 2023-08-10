@@ -7,20 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class CMSPageDataGrid extends DataGrid
 {
-    /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'locales',
-    ];
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
-     */
     public function prepareQueryBuilder()
     {
         $locale = core()->getRequestedLocaleCode();
@@ -36,8 +22,6 @@ class CMSPageDataGrid extends DataGrid
                     ->whereIn('cms_page_translations.locale', $whereInLocales);
             });
 
-        // $this->addFilter('id', 'cms_pages.id');
-
         return $queryBuilder;
     }
 
@@ -50,7 +34,7 @@ class CMSPageDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.cms.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
@@ -59,7 +43,7 @@ class CMSPageDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'page_title',
-            'label'      => trans('admin::app.cms.datagrid.page_title'),
+            'label'      => trans('admin::app.datagrid.page_title'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -68,7 +52,7 @@ class CMSPageDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'url_key',
-            'label'      => trans('admin::app.cms.datagrid.url_key'),
+            'label'      => trans('admin::app.datagrid.url_key'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -84,26 +68,32 @@ class CMSPageDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('admin::app.cms.datagrid.view'),
+            'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'shop.cms.page',
             'index'  => 'url_key',
             'target' => '_blank',
-            'icon'   => 'icon eye-icon',
+            'url'          => function ($row) {
+                return route('shop.cms.page', $row->url_key);
+            },
         ]);
 
         $this->addAction([
-            'title'  => trans('admin::app.cms.datagrid.edit'),
+            'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.cms.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'          => function ($row) {
+                return route('admin.cms.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
-            'title'  => trans('admin::app.cms.datagrid.delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.cms.delete',
-            'icon'   => 'icon trash-icon',
+            'url'          => function ($row) {
+                return route('admin.cms.delete', $row->id);
+            },
         ]);
     }
 

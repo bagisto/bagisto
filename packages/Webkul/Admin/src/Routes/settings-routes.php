@@ -46,7 +46,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.currencies.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.currencies.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.currencies.delete');
 
         Route::post('mass-delete', 'massDestroy')->name('admin.currencies.mass_delete');
     });
@@ -65,7 +65,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.exchange_rates.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.exchange_rates.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.exchange_rates.delete');
     });
 
     /**
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.locales.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.locales.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.locales.delete');
     });
 
     /**
@@ -99,7 +99,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.inventory_sources.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.inventory_sources.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.inventory_sources.delete');
     });
 
     /**
@@ -114,7 +114,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.tax_categories.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.tax_categories.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.tax_categories.delete');
     });
 
     /**
@@ -129,9 +129,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.tax_rates.edit');
 
-        Route::put('update/{id}', 'update')->name('admin.tax_rates.update');
+        Route::put('edit/{id}', 'update')->name('admin.tax_rates.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.tax_rates.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.tax_rates.delete');
 
         Route::post('import', 'import')->name('admin.tax_rates.import');
     });
@@ -150,7 +150,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.roles.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.roles.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.roles.delete');
     });
 
     /**
