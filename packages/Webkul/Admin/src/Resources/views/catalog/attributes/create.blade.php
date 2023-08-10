@@ -696,28 +696,22 @@
                 },
 
                 methods: {
-                    storeOptions(params, {resetForm, setValues}) {
-                        let foundIndex = this.options.findIndex(item => item.id === params.id);
+                    storeOptions(params, { resetForm }) {
+                        if (params.id) {
+                            let foundIndex = this.options.findIndex(item => item.id === params.id);
 
-                        if (foundIndex !== -1) {
-
-                            console.log('want edit');
-                            let updatedObject = {
+                            this.options.splice(foundIndex, 1, {
                                 ...this.options[foundIndex],
-                                params: {
+                                params: {   
                                     ...this.options[foundIndex].params,
                                     ...params,
                                 }
-                            };
-
-                            this.options.splice(foundIndex, 1, updatedObject);
+                            });
                         } else {
-                            let row = {
+                            this.options.push({
                                 id: 'option_' + this.optionRowCount++,
                                 params
-                            };
-    
-                            this.options.push(row);
+                            });
                         }
 
                         this.$refs.addOptionsRow.toggle();
@@ -726,6 +720,8 @@
                     },
 
                     editModal(values) {
+                        values.params.id = values.id;
+
                         this.$refs.modelForm.setValues(values.params);
 
                         this.$refs.addOptionsRow.toggle();
