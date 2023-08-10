@@ -184,7 +184,7 @@ class CustomerDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.customer.view',
             'title'  => trans('admin::app.datagrid.view'),
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.customer.view', $row->customer_id);
             },
         ]);
@@ -194,7 +194,7 @@ class CustomerDataGrid extends DataGrid
             'route'  => 'admin.customer.login_as_customer',
             'target' => 'blank',
             'title'  => trans('admin::app.datagrid.login-as-customer'),
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.customer.login_as_customer', $row->customer_id);
             },
         ]);
@@ -203,7 +203,7 @@ class CustomerDataGrid extends DataGrid
             'method' => 'DELETE',
             'route'  => 'admin.customer.delete',
             'title'  => trans('admin::app.datagrid.delete'),
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.customer.delete', $row->customer_id);
             },
         ]);

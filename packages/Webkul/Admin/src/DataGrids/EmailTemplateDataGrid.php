@@ -90,7 +90,7 @@ class EmailTemplateDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.email_templates.edit',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.email_templates.edit', $row->id);
             },
         ]);

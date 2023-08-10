@@ -55,7 +55,7 @@ class EventDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.events.edit',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.events.edit', $row->id);
             },
         ]);

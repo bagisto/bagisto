@@ -108,7 +108,7 @@ class CatalogRuleDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog_rules.edit',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.catalog_rules.edit', $row->id);
             },
         ]);
@@ -117,7 +117,7 @@ class CatalogRuleDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
             'route'  => 'admin.catalog_rules.delete',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.catalog_rules.delete', $row->id);
             },
         ]);

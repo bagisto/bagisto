@@ -117,7 +117,7 @@ class TaxRateDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.tax_rates.edit',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.tax_rates.edit', $row->id);
             },
         ]);
@@ -126,7 +126,7 @@ class TaxRateDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.tax_rates.delete',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.tax_rates.delete', $row->id);
             },
         ]);

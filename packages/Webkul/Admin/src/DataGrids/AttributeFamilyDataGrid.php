@@ -55,7 +55,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.catalog.families.edit',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.catalog.families.edit', $row->id);
             },
         ]);
@@ -64,7 +64,7 @@ class AttributeFamilyDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
             'route'  => 'admin.catalog.families.delete',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.catalog.families.delete', $row->id);
             },
         ]);

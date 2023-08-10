@@ -64,7 +64,7 @@ class CustomerGroupDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.groups.delete',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.groups.delete', $row->id);
             },
         ]);

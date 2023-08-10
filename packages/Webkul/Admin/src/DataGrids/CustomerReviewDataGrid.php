@@ -127,7 +127,7 @@ class CustomerReviewDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.customer.review.edit',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.customer.review.edit', $row->product_review_id);
             },
         ]);
@@ -136,7 +136,7 @@ class CustomerReviewDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
             'route'  => 'admin.customer.review.delete',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.customer.review.delete', $row->product_review_id);
             },
         ]);

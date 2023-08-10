@@ -243,7 +243,7 @@ class ProductDataGrid extends DataGrid
             'title'     => trans('admin::app.datagrid.edit'),
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
-            'url'          => function ($row) {
+            'url'       => function ($row) {
                 return route('admin.catalog.products.edit', $row->product_id);
             },
 
@@ -266,7 +266,7 @@ class ProductDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
             'route'  => 'admin.catalog.products.copy',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.catalog.products.copy', $row->product_id);
             },
         ]);

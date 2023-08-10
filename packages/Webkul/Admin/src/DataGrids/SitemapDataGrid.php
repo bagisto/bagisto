@@ -78,7 +78,7 @@ class SitemapDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
             'route'  => 'admin.sitemaps.delete',
-            'url'          => function ($row) {
+            'url'    => function ($row) {
                 return route('admin.sitemaps.delete', $row->id);
             },
         ]);
