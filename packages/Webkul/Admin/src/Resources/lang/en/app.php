@@ -1120,6 +1120,7 @@ return [
                     'name'           => 'Name',
                     'save-btn'       => 'Save',
                     'status'         => 'Status',
+                    'update-success' => 'Updated successfully',
                 ],
 
                 'index' => [

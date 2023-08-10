@@ -107,7 +107,7 @@ class TemplateController extends Controller
 
         Event::dispatch('marketing.templates.update.after', $template);
 
-        session()->flash('success', trans('admin::app.marketing.templates.update-success'));
+        session()->flash('success', trans('admin::app.marketing.email-marketing.templates.edit.update-success'));
 
         return redirect()->route('admin.email_templates.index');
     }

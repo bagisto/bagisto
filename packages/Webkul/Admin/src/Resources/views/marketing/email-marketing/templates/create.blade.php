@@ -40,7 +40,7 @@
 
                     <div class="mb-[10px]">
                         {{-- Template Textarea --}}
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group>
                             <x-admin::form.control-group.control
                                 type="tinymce"
                                 name="content"
@@ -75,9 +75,9 @@
                         </x-slot:header>
                 
                         <x-slot:content>
-                            <div class="mb-[10px]">
+                            <div class="w-full mb-[10px]">
                                 {{-- Template Name --}}
-                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.email-marketing.templates.create.name')
                                     </x-admin::form.control-group.label>
@@ -99,7 +99,7 @@
                                 </x-admin::form.control-group>
 
                                 {{-- Template Status --}}
-                                <x-admin::form.control-group class="w-full mb-[10px]">
+                                <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.email-marketing.templates.create.status')
                                     </x-admin::form.control-group.label>
