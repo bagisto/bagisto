@@ -10,6 +10,20 @@ use Webkul\DataGrid\DataGrid;
 class CategoryProductDataGrid extends DataGrid
 {
     /**
+     * Set index columns, ex: id.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'product_id';
+
+    /**
+     * If paginated then value of pagination.
+     *
+     * @var int
+     */
+    protected $itemsPerPage = 10;
+
+    /**
      * Locale.
      *
      * @var string
@@ -67,12 +81,12 @@ class CategoryProductDataGrid extends DataGrid
         $queryBuilder->whereIn('product_flat.locale', [$this->locale]);
         $queryBuilder->whereIn('product_flat.channel', [$this->channel]);
 
-        // $this->addFilter('product_id', 'product_flat.product_id');
-        // $this->addFilter('product_name', 'product_flat.name');
-        // $this->addFilter('product_sku', 'products.sku');
-        // $this->addFilter('product_number', 'product_flat.product_number');
-        // $this->addFilter('status', 'product_flat.status');
-        // $this->addFilter('product_type', 'products.type');
+        $this->addFilter('product_id', 'product_flat.product_id');
+        $this->addFilter('product_name', 'product_flat.name');
+        $this->addFilter('product_sku', 'products.sku');
+        $this->addFilter('product_number', 'product_flat.product_number');
+        $this->addFilter('status', 'product_flat.status');
+        $this->addFilter('product_type', 'products.type');
 
         return $queryBuilder;
     }

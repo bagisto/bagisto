@@ -22,6 +22,16 @@ class CartRuleDataGrid extends DataGrid
     protected $channel = 'all';
 
     /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'channels',
+        'customer_groups',
+    ];
+
+    /**
      * Create a new datagrid instance.
      *
      * @return void
@@ -79,6 +89,8 @@ class CartRuleDataGrid extends DataGrid
 
             $queryBuilder->where('cart_rule_channels.channel_id', $this->channel);
         }
+
+        // $this->addFilter('status', 'status');
 
         return $queryBuilder;
     }

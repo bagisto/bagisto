@@ -12,7 +12,7 @@ class CustomerReviewDataGrid extends DataGrid
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    protected $index = 'product_review_id';
+    protected $primaryColumn = 'product_review_id';
 
     /**
      * Prepare query builder.
@@ -71,7 +71,7 @@ class CustomerReviewDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'rating',
-            'label'      => trans('admin::app.customers.reviews.rating'),
+            'label'      => trans('admin::app.datagrid.rating'),
             'type'       => 'integer',
             'searchable' => true,
             'sortable'   => true,
@@ -128,7 +128,7 @@ class CustomerReviewDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.customer.review.edit',
             'url'          => function ($row) {
-                return route('admin.customer.review.edit', $row->id);
+                return route('admin.customer.review.edit', $row->product_review_id);
             },
         ]);
 
@@ -137,7 +137,7 @@ class CustomerReviewDataGrid extends DataGrid
             'method' => 'DELETE',
             'route'  => 'admin.customer.review.delete',
             'url'          => function ($row) {
-                return route('admin.customer.review.delete', $row->id);
+                return route('admin.customer.review.delete', $row->product_review_id);
             },
         ]);
     }

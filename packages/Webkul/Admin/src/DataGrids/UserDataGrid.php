@@ -9,6 +9,13 @@ use Webkul\DataGrid\DataGrid;
 class UserDataGrid extends DataGrid
 {
     /**
+     * Index.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'user_id';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder

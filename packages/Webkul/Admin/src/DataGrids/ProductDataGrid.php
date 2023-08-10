@@ -12,6 +12,20 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductDataGrid extends DataGrid
 {
     /**
+     * Set index columns, ex: id.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'product_id';
+
+     /**
+     * If paginated then value of pagination.
+     *
+     * @var int
+     */
+    protected $itemsPerPage = 10;
+
+    /**
      * Locale.
      *
      * @var string
@@ -24,6 +38,16 @@ class ProductDataGrid extends DataGrid
      * @var string
      */
     protected $channel = 'all';
+
+    /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'channels',
+        'locales',
+    ];
 
     public function __construct(
         protected ProductRepository $productRepository,
@@ -220,7 +244,7 @@ class ProductDataGrid extends DataGrid
             'method'    => 'GET',
             'route'     => 'admin.catalog.products.edit',
             'url'          => function ($row) {
-                return route('admin.catalog.products.edit', $row->id);
+                return route('admin.catalog.products.edit', $row->product_id);
             },
 
             'condition' => function () {
@@ -230,11 +254,11 @@ class ProductDataGrid extends DataGrid
 
         $this->addAction([
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
+            'method'       => 'DELETE',
             'route'        => 'admin.catalog.products.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'url'          => function ($row) {
-                return route('admin.catalog.products.delete', $row->id);
+                return route('admin.catalog.products.delete', $row->product_id);
             },
         ]);
 
@@ -243,7 +267,7 @@ class ProductDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.catalog.products.copy',
             'url'          => function ($row) {
-                return route('admin.catalog.products.copy', $row->id);
+                return route('admin.catalog.products.copy', $row->product_id);
             },
         ]);
     }

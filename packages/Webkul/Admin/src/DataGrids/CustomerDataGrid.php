@@ -8,6 +8,20 @@ use Webkul\DataGrid\DataGrid;
 class CustomerDataGrid extends DataGrid
 {
     /**
+     * Index.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'customer_id';
+
+    /**
+     * Items per page.
+     *
+     * @var int
+     */
+    protected $itemsPerPage = 10;
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -132,7 +146,7 @@ class CustomerDataGrid extends DataGrid
                 }
 
                 if ($row->is_suspended) {
-                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.suspended') . '</span>';
+                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.suspended') . '</span>';
                 }
 
                 return $html;
@@ -141,7 +155,7 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'       => 'is_suspended',
-            'label'       => trans('admin::app.customers.customers.suspended'),
+            'label'       => trans('admin::app.datagrid.suspended'),
             'type'        => 'boolean',
             'searchable'  => false,
             'sortable'    => true,
@@ -160,18 +174,18 @@ class CustomerDataGrid extends DataGrid
         $this->addAction([
             'method' => 'GET',
             'route'  => 'admin.customer.edit',
-            'title'  => trans('admin::app.customers.customers.edit-help-title'),
+            'title'  => trans('admin::app.datagrid.edit'),
             'url'          => function ($row) {
-                return route('admin.customer.edit', $row->id);
+                return route('admin.customer.edit', $row->customer_id);
             },
         ]);
 
         $this->addAction([
             'method' => 'GET',
-            'route'  => 'admin.customer.note.create',
-            'title'  => trans('admin::app.customers.note.help-title'),
+            'route'  => 'admin.customer.view',
+            'title'  => trans('admin::app.datagrid.view'),
             'url'          => function ($row) {
-                return route('admin.customer.note.create', $row->id);
+                return route('admin.customer.view', $row->customer_id);
             },
         ]);
 
@@ -179,18 +193,18 @@ class CustomerDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.customer.login_as_customer',
             'target' => 'blank',
-            'title'  => trans('admin::app.customers.login-as-customer.grid-title'),
+            'title'  => trans('admin::app.datagrid.login-as-customer'),
             'url'          => function ($row) {
-                return route('admin.customer.login_as_customer', $row->id);
+                return route('admin.customer.login_as_customer', $row->customer_id);
             },
         ]);
 
         $this->addAction([
             'method' => 'DELETE',
             'route'  => 'admin.customer.delete',
-            'title'  => trans('admin::app.customers.customers.delete-help-title'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'url'          => function ($row) {
-                return route('admin.customer.delete', $row->id);
+                return route('admin.customer.delete', $row->customer_id);
             },
         ]);
     }

@@ -8,12 +8,28 @@ use Webkul\DataGrid\DataGrid;
 
 class CategoryDataGrid extends DataGrid
 {
+      /**
+     * Index.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'category_id';
+
     /**
      * Locale.
      *
      * @var string
      */
     protected $locale = 'all';
+
+    /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'locales',
+    ];
 
     public function __construct()
     {
@@ -49,8 +65,8 @@ class CategoryDataGrid extends DataGrid
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
             ->groupBy('cat.id', 'ct.locale');
 
-        // $this->addFilter('status', 'cat.status');
-        // $this->addFilter('category_id', 'cat.id');
+        $this->addFilter('status', 'cat.status');
+        $this->addFilter('category_id', 'cat.id');
 
         return $queryBuilder;
     }
@@ -127,7 +143,7 @@ class CategoryDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.catalog.categories.edit',
             'url'    => function ($row) {
-                return route('admin.catalog.categories.edit', $row->id);
+                return route('admin.catalog.categories.edit', $row->category_id);
             },
         ]);
 
@@ -137,7 +153,7 @@ class CategoryDataGrid extends DataGrid
             'route'        => 'admin.catalog.categories.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
             'url'          => function ($row) {
-                return route('admin.catalog.categories.delete', $row->id);
+                return route('admin.catalog.categories.delete', $row->category_id);
             },
         ]);
 

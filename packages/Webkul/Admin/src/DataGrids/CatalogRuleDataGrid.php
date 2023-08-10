@@ -18,6 +18,7 @@ class CatalogRuleDataGrid extends DataGrid
             ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
         // $this->addFilter('status', 'status');
+
         return $queryBuilder;
     }
 

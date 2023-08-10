@@ -7,6 +7,15 @@ use Webkul\DataGrid\DataGrid;
 
 class CMSPageDataGrid extends DataGrid
 {
+     /**
+     * Contains the keys for which extra filters to show.
+     *
+     * @var string[]
+     */
+    protected $extraFilters = [
+        'locales',
+    ];
+
     /**
      * Prepare query builder.
      *
@@ -27,7 +36,7 @@ class CMSPageDataGrid extends DataGrid
                     ->whereIn('cms_page_translations.locale', $whereInLocales);
             });
 
-            // $this->addFilter('id', 'cms_pages.id');
+        // $this->addFilter('id', 'cms_pages.id');
 
         return $queryBuilder;
     }
