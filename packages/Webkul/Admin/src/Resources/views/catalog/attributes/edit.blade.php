@@ -226,6 +226,7 @@
                                         <draggable
                                             tag="tbody"
                                             ghost-class="draggable-ghost"
+                                            v-bind="{animation: 200}"
                                             :list="optionsData"
                                             item-key="id"
                                         >

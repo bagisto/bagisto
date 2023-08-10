@@ -41,6 +41,7 @@
                 <!-- Draggable Products -->
                 <draggable
                     ghost-class="draggable-ghost"
+                    v-bind="{animation: 200}"
                     :list="links"
                     item-key="id"
                 >
@@ -521,6 +522,7 @@
                 <!-- Draggable Products -->
                 <draggable
                     ghost-class="draggable-ghost"
+                    v-bind="{animation: 200}"
                     :list="samples"
                     item-key="id"
                 >
@@ -801,7 +803,7 @@
                 return {
                     links: @json($product->downloadable_links->sortBy('sort_order')->values()->all()),
 
-                    selectedLink: {}
+                    selectedLink: {},
                 }
             },
 

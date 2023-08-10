@@ -172,8 +172,11 @@
                     @endforeach
 
                     @if ($column == 1)
-                        {{-- Media View Blade File --}}
-                        @include('admin::catalog.products.edit.media')
+                        {{-- Images View Blade File --}}
+                        @include('admin::catalog.products.edit.images')
+
+                        {{-- Videos View Blade File --}}
+                        @include('admin::catalog.products.edit.videos')
 
                         {{-- Product Type View Blade File --}}
                         @includeIf('admin::catalog.products.edit.types.' . $product->type)
