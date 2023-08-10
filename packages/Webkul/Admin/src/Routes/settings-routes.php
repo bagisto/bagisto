@@ -29,7 +29,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.channels.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.channels.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.channels.delete');
     });
 
     /**
@@ -167,7 +167,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.users.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.users.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.users.delete');
 
         Route::get('confirm/{id}', 'confirm')->name('super.users.confirm');
 

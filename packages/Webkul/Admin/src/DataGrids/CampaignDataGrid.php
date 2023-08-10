@@ -16,6 +16,8 @@ class CampaignDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('marketing_campaigns')->addSelect('id', 'name', 'subject', 'status');
 
+        //  $this->addFilter('status', 'marketing_campaigns.status');
+
         return $queryBuilder;
     }
 

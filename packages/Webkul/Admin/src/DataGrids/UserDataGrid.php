@@ -19,6 +19,11 @@ class UserDataGrid extends DataGrid
             ->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
             ->addSelect('u.id as user_id', 'u.name as user_name', 'u.image as user_image', 'u.status', 'u.email', 'ro.name as role_name');
 
+        // $this->addFilter('user_id', 'u.id');
+        // $this->addFilter('user_name', 'u.name');
+        // $this->addFilter('role_name', 'ro.name');
+        // $this->addFilter('status', 'u.status');
+
         return $queryBuilder;
     }
 

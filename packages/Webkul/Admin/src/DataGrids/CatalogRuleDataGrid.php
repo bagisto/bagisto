@@ -17,6 +17,7 @@ class CatalogRuleDataGrid extends DataGrid
         $queryBuilder = DB::table('catalog_rules')
             ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
 
+        // $this->addFilter('status', 'status');
         return $queryBuilder;
     }
 

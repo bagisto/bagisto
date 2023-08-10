@@ -162,7 +162,6 @@ class CustomerDataGrid extends DataGrid
             'route'  => 'admin.customer.edit',
             'title'  => trans('admin::app.customers.customers.edit-help-title'),
             'url'          => function ($row) {
-                dd($row);
                 return route('admin.customer.edit', $row->id);
             },
         ]);

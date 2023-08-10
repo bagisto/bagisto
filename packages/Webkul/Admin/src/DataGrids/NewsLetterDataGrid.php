@@ -16,6 +16,8 @@ class NewsLetterDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('subscribers_list')->select('subscribers_list.id', 'subscribers_list.is_subscribed as status', 'subscribers_list.email');
 
+        // $this->addFilter('status', 'subscribers_list.is_subscribed');
+
         return $queryBuilder;
     }
 

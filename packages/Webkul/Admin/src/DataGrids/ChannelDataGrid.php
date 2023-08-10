@@ -85,7 +85,6 @@ class ChannelDataGrid extends DataGrid
             'method' => 'GET',
             'route'  => 'admin.channels.edit',
             'url'    => function ($row) {
-                dd($row);
                 return route('admin.channels.edit', $row->id);
             },
         ]);
