@@ -21,6 +21,7 @@
                 :action="route('admin.catalog.attributes.store')"
                 enctype="multipart/form-data"
             >
+                <!-- actions buttons -->
                 <div class="flex justify-between items-center">
                     <p class="text-[20px] text-gray-800 font-bold">
                         @lang('admin::app.catalog.attributes.create.title')
@@ -85,14 +86,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="{{ $locale->code }}[name]"
+                                        :name="$locale->code . '[name]'"
                                         :value="old($locale->code)"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="{{ $locale->code }}[name]"
+                                        :control-name="$locale->code . '[name]'"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>    
@@ -123,7 +124,7 @@
                                 <div class="flex gap-[16px] max-sm:flex-wrap">
                                     <x-admin::form.control-group class="w-full mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.catalog.attributes.create.input-options')
+                                            @lang('admin::app.catalog.attributes.create.input-options')dsfasdf  
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -291,11 +292,11 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    <!-- Actions Bustion -->
+                                                    <!-- Actions button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
                                                             class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                                            @click="editModal(element.id)"
+                                                            @click="editModal(element)"
                                                         >
                                                         </span> 
                                                     </x-admin::table.td>
@@ -315,6 +316,7 @@
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
                                     >
+                                    
                                     <!-- Add Attribute Options Information -->
                                     <div class="flex flex-col items-center">
                                         <p class="text-[16px] text-gray-400 font-semibold">
@@ -493,7 +495,10 @@
                                         id="is_filterable"
                                         name="is_filterable"
                                         value="1"
-                                        :disabled="attribute_type === 'price' ||  attribute_type === 'checkbox' || attribute_type === 'select' || attribute_type === 'multiselect' ? hidden : '' "
+                                        :disabled="attribute_type == 'price' ||  attribute_type == 'checkbox'
+                                            || attribute_type == 'select' || attribute_type == 'multiselect' 
+                                            ? false : true
+                                        "
                                     >
             
                                     <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
@@ -514,7 +519,7 @@
                 as="div"
                 ref="modelForm"
             >
-                <Form
+                <form
                     @submit.prevent="handleSubmit($event, storeOptions)"
                     enctype="multipart/form-data"
                 >
@@ -660,7 +665,7 @@
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
-                </Form>
+                </form>
             </x-admin::form>
         </script>
 
@@ -668,15 +673,15 @@
             app.component('v-create-attributes', {
                 template: '#v-create-attributes-template',
 
-                props: [
-                    'allLocales'
-                ],
+                props: ['allLocales'],
 
-                data: function() {
+                data() {
                     return {
                         optionRowCount: 1,
 
-                        attribute_type: false,
+                        attribute_type: '',
+
+                        swatch_type: '',
 
                         swatch_attribute: false,
 
@@ -695,6 +700,8 @@
                         let foundIndex = this.options.findIndex(item => item.id === params.id);
 
                         if (foundIndex !== -1) {
+
+                            console.log('want edit');
                             let updatedObject = {
                                 ...this.options[foundIndex],
                                 params: {
@@ -705,9 +712,10 @@
 
                             this.options.splice(foundIndex, 1, updatedObject);
                         } else {
-                            let rowCount = this.optionRowCount++;
-                            let id = 'option_' + rowCount;
-                            let row = {'id': id, params};
+                            let row = {
+                                id: 'option_' + this.optionRowCount++,
+                                params
+                            };
     
                             this.options.push(row);
                         }
@@ -717,12 +725,8 @@
                         resetForm();
                     },
 
-                    editModal(value) {
-                        const foundData = this.options.find(item => item.id === value);
-                        // For set value on edit form
-                        this.$refs.modelForm.setValues(foundData.params);
-
-                        this.$refs.modelForm.setValues(foundData);
+                    editModal(values) {
+                        this.$refs.modelForm.setValues(values.params);
 
                         this.$refs.addOptionsRow.toggle();
                     },
@@ -735,7 +739,7 @@
                 },
 
                 watch: {
-                    isNullOptionChecked: function (val) {
+                    isNullOptionChecked(val) {
                         /* 
                         *  Here else part code is useless 
                         *  Need to add code for When modal is closed after that input checkbox should unchecked
