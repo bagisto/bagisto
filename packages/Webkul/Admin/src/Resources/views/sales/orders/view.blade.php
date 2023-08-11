@@ -588,7 +588,7 @@
                                 <p class="text-[20px] font-medium">
                                     @lang('New Shipment')
                                 </p>
-
+        
                                 <button
                                     type="submit"
                                     class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -596,177 +596,185 @@
                                     @lang('Create Shipment')
                                 </button>
                             </div>
-
-                            <p class="text-gray-600 font-semibold">
-                                @lang('Shipping & Handling Charges')
-                            </p>
-                            
-                            <div class="flex gap-[10px] !p-0 !m-0">
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('Carrier Name')
-                                    </x-admin::form.control-group.label>
-        
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="carrier_name" 
-                                        id="carrier_name" 
-                                        :label="trans('Carrier Name')"
-                                        :placeholder="trans('Carrier Name')"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="carrier_name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('Tracking Number')
-                                    </x-admin::form.control-group.label>
-        
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="first_name"
-                                        id="first_name"
-                                        :label="trans('Tracking Number')"
-                                        :placeholder="trans('Tracking Number')"
-                                    >
-                                    </x-admin::form.control-group.control>
-        
-                                    <x-admin::form.control-group.error
-                                        control-name="first_name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                            </div>
-
-                            <x-admin::form.control-group class="">
-                                <x-admin::form.control-group.label>
-                                    @lang('Source')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="shipment[source]" 
-                                    id="shipment[source]" 
-                                    rules="required"
-                                    :label="trans('Source')"
-                                    :placeholder="trans('Source')"
-                                >
-                                    @foreach ($order->channel->inventory_sources as $key => $inventorySource)
-                                        <option value="{{ $inventorySource->id }}">
-                                            {{ $inventorySource->name }}
-                                        </option>
-                                    @endforeach
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="shipment[source]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
                         </div>
+                        
                     </x-slot:header>
 
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
+                        
                         <div class="grid">
-                            <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300">
-                                <!-- Information -->
-                                <div class="flex gap-[10px]">
-                                    @if ($item->product)
-                                        <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                            <img
-                                                class="w-[20px]"
-                                                src="{{ $item->product->base_image_url }}"
-                                            >
-                                        </div>
-                                    @endif
-
-                                    <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}</p>
-
-                                        <div class="flex flex-col gap-[6px] place-items-start">
-                                            <p class="text-gray-600">
-                                                {{ core()->formatBasePrice($item->base_price) }} 
-
-                                                @lang('admin::app.sales.orders.view.per-unit') x {{ $item->qty_ordered }} @lang('admin::app.sales.orders.view.quantity')
-                                            </p>
-
-                                            @if (isset($item->additional['attributes']))
-                                                <p class="text-gray-600">
-                                                    @foreach ($item->additional['attributes'] as $attribute)
-                                                        {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
-                                                    @endforeach
-                                                </p>
-                                            @endif
-
-                                            <p class="text-gray-600">@lang('admin::app.sales.orders.view.sku')  - {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}</p>
-
-                                            <p class="text-gray-600">
-                                                @lang('admin::app.sales.orders.view.ordered') {{ $item->qty_ordered }},
-
-                                                @lang('admin::app.sales.orders.view.invoiced') {{ $item->qty_invoiced }},
-
-                                                @lang('admin::app.sales.orders.view.shipped') {{ $item->qty_shipped }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300">
-                                <!-- Information -->
-                                <div class="flex justify-between">
-
-                                    @foreach ($order->channel->inventory_sources as $key => $inventorySource)
-                                        <div class="grid gap-[10px]">
-                                            <p class="text-[16x] text-gray-800 font-semibold">
-                                                {{ $inventorySource->name }}
-                                            </p>
-
-                                            <p class="text-gray-600">
-                                                Qty. Available :                  
-
-                                                @php
-                                                    $product = $item->getTypeInstance()->getOrderedItem($item)->product;
-
-                                                    $sourceQty = $product->type == 'bundle' ? $item->qty_ordered : $product->inventory_source_qty($inventorySource->id);
-                                                @endphp
-
-                                                {{ $sourceQty }}
-                                            </p>
-                                        </div>
-
-                                        <div class="flex gap-[10px] items-center">
-                                            @php($inputName = "shipment[items][$item->id][$inventorySource->id]")
-
-                                            <x-admin::form.control-group.label class="required">
-                                                Qty to Ship
+                            <div class="p-[16px] !pt-0">
+                               <div>
+                                    <div class="grid grid-cols-2 gap-x-[20px]">
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label>
+                                                @lang('Carrier Name')
                                             </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="shipment[carrier_title]" 
+                                                id="shipment[carrier_title]" 
+                                                :label="trans('Carrier Name')"
+                                                :placeholder="trans('Carrier Name')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="carrier_name"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+        
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label>
+                                                @lang('Tracking Number')
+                                            </x-admin::form.control-group.label>
+        
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="shipment[track_number]"
+                                                id="shipment[track_number]"
+                                                :label="trans('Tracking Number')"
+                                                :placeholder="trans('Tracking Number')"
+                                            >
+                                            </x-admin::form.control-group.control>
+        
+                                            <x-admin::form.control-group.error
+                                                control-name="shipment[track_number]"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                    
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('Source')
+                                        </x-admin::form.control-group.label>
 
-                                            <x-admin::form.control-group class="!mb-0">
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    :name="$inputName" 
-                                                    :id="$inputName" 
-                                                    :value="$item->qty_to_ship"
-                                                    :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
-                                                    class="!w-[100px]"
-                                                    data-original-quantity="{{ $item->qty_to_ship }}"
-                                                    :disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
-                                                >
-                                                </x-admin::form.control-group.control>
-                    
-                                                <x-admin::form.control-group.error
-                                                    :control-name="$inputName"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="shipment[source]" 
+                                            id="shipment[source]" 
+                                            rules="required"
+                                            :label="trans('Source')"
+                                            :placeholder="trans('Source')"
+                                            v-model="source"
+                                            @change="onSourceChange"
+                                        >
+                                            @foreach ($order->channel->inventory_sources as $inventorySource)
+                                                <option value="{{ $inventorySource->id }}">
+                                                    {{ $inventorySource->name }}
+                                                </option>
+                                            @endforeach
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="shipment[source]"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                               </div>
+
+                                <div class="grid">
+                                    @foreach ($order->items as $item)
+                                        <div class="flex gap-[10px] justify-between py-[16px] ">
+                                            <div class="flex gap-[10px]">
+                                                @if($item->product)
+                                                    <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                                        <img
+                                                            class="w-[20px]"
+                                                            src="{{ $item->product->base_image_url }}"
+                                                        >
+                                                    </div>
+                                                @endif
+                
+                                                <div class="grid gap-[6px] place-content-start">
+                                                    <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}</p>
+                
+                                                    <div class="flex flex-col gap-[6px] place-items-start">
+                                                        <p class="text-gray-600">
+                                                            {{ core()->formatBasePrice($item->base_price) }} 
+                
+                                                            @lang('admin::app.sales.orders.view.per-unit') x {{ $item->qty_ordered }} @lang('admin::app.sales.orders.view.quantity')
+                                                        </p>
+                
+                                                        @if (isset($item->additional['attributes']))
+                                                            <p class="text-gray-600">
+                                                                @foreach ($item->additional['attributes'] as $attribute)
+                                                                    {{ $attribute['attribute_name'] }} : {{ $attribute['option_label'] }}
+                                                                @endforeach
+                                                            </p>
+                                                        @endif
+                
+                                                        <p class="text-gray-600">@lang('admin::app.sales.orders.view.sku')  - {{ $item->sku }}</p>
+                
+                                                        <p class="text-gray-600">
+                                                            @lang('admin::app.sales.orders.view.ordered') {{ $item->qty_ordered }},
+                
+                                                            @lang('admin::app.sales.orders.view.invoiced') {{ $item->qty_invoiced }},
+                
+                                                            @lang('admin::app.sales.orders.view.shipped') {{ $item->qty_shipped }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300">
+                                            <!-- Information -->
+                                            <div class="flex justify-between">
+            
+                                                @foreach ($order->channel->inventory_sources as $inventorySource)
+                                                    <div class="grid gap-[10px]">
+                                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                                            {{ $inventorySource->name }}
+                                                        </p>
+            
+                                                        <p class="text-gray-600">
+                                                            Qty. Available :                  
+            
+                                                            @php
+                                                                $product = $item->getTypeInstance()->getOrderedItem($item)->product;
+            
+                                                                $sourceQty = $product->type == 'bundle' ? $item->qty_ordered : $product->inventory_source_qty($inventorySource->id);
+                                                            @endphp
+            
+                                                            {{ $sourceQty }}
+                                                        </p>
+                                                    </div>
+            
+                                                    <div class="flex gap-[10px] items-center">
+                                                        @php
+                                                            $inputName = "shipment[items][$item->id][$inventorySource->id]";
+                                                        @endphp
+            
+                                                        <x-admin::form.control-group.label class="required">
+                                                            Qty to Ship
+                                                        </x-admin::form.control-group.label>
+            
+                                                        <x-admin::form.control-group class="!mb-0">
+                                                            <x-admin::form.control-group.control
+                                                                type="text"
+                                                                :name="$inputName" 
+                                                                :id="$inputName" 
+                                                                :value="$item->qty_to_ship"
+                                                                :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
+                                                                class="!w-[100px]"
+                                                                data-original-quantity="{{ $item->qty_to_ship }}"
+                                                                ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
+                                                                :ref="$inputName"
+                                                            >
+                                                            </x-admin::form.control-group.control>
+                                
+                                                            <x-admin::form.control-group.error
+                                                                :control-name="$inputName"
+                                                            >
+                                                            </x-admin::form.control-group.error>
+                                                        </x-admin::form.control-group>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -780,6 +788,38 @@
         <script type="module">
             app.component('v-create-shipment', {
                 template: '#v-create-shipment-template',
+
+                data() {
+                    return {
+                        source: "",
+                    };
+                },
+
+                methods: {
+                    onSourceChange() {
+                        this.setOriginalQuantityToAllShipmentInputElements();
+                    },
+
+                    getAllShipmentInputElements() {
+                        let allRefs = this.$refs;
+
+                        let allInputElements = [];
+
+                        Object.keys(allRefs).forEach((key) => {
+                            if (key.startsWith('shipment')) {
+                                allInputElements.push(allRefs[key]);
+                            }
+                        });
+
+                        return allInputElements;
+                    },
+
+                    setOriginalQuantityToAllShipmentInputElements() {
+                        this.getAllShipmentInputElements().forEach((element) => {
+                            element.value = element.dataset.originalQuantity;
+                        });
+                    }
+                },
             });
         </script>
     @endPushOnce
