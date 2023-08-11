@@ -27,7 +27,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.catalog.attributes.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.attributes.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog.attributes.delete');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.attributes.mass_delete');
 
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.catalog.families.update');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.families.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog.families.delete');
         });
 
         /**
@@ -65,9 +65,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.catalog.categories.update');
 
-            Route::get('products/{id}', 'products')->name('admin.catalog.categories.products');
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog.categories.delete');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.categories.delete');
+            Route::get('products/{id}', 'products')->name('admin.catalog.categories.products');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.categories.mass_delete');
 
@@ -97,13 +97,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::put('edit/{id}', 'update')->name('admin.catalog.products.update');
 
+            Route::delete('edit/{id}', 'destroy')->name('admin.catalog.products.delete');
+
             Route::put('edit/{id}/inventories', 'updateInventories')->name('admin.catalog.products.update_inventories');
 
             Route::post('upload-file/{id}', 'uploadLink')->name('admin.catalog.products.upload_link');
 
             Route::post('upload-sample/{id}', 'uploadSample')->name('admin.catalog.products.upload_sample');
-
-            Route::post('delete/{id}', 'destroy')->name('admin.catalog.products.delete');
 
             Route::post('mass-action', 'massActionHandler')->name('admin.catalog.products.mass_action');
 

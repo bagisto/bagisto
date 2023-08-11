@@ -14,6 +14,8 @@
         </div>
     </div>
 
+    <x-admin::datagrid src="{{ route('admin.events.index') }}"></x-admin::datagrid>
+
     @pushOnce('scripts')
         <script 
             type="text/x-template" 

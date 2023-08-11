@@ -10,7 +10,5 @@
         </p>
     </div>
 
-    <div class="page-content">
-        <datagrid-plus src="{{ route('admin.customers.subscribers.index') }}"></datagrid-plus>
-    </div>
+    <x-admin::datagrid src="{{ route('admin.customers.subscribers.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

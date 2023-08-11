@@ -8,23 +8,9 @@ use Webkul\DataGrid\DataGrid;
 class OrderInvoicesDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
@@ -32,7 +18,13 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $queryBuilder = DB::table('invoices')
             ->leftJoin('orders as ors', 'invoices.order_id', '=', 'ors.id')
-            ->select('invoices.id as id', 'ors.increment_id as order_id', 'invoices.state as state', 'invoices.base_grand_total as base_grand_total', 'invoices.created_at as created_at')
+            ->select(
+                'invoices.id as id',
+                'ors.increment_id as order_id',
+                'invoices.state as state',
+                'invoices.base_grand_total as base_grand_total',
+                'invoices.created_at as created_at'
+            )
             ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE {$dbPrefix}invoices.id END AS increment_id");
 
         // $this->addFilter('increment_id', 'invoices.increment_id');
@@ -55,8 +47,8 @@ class OrderInvoicesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -64,8 +56,8 @@ class OrderInvoicesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -73,8 +65,8 @@ class OrderInvoicesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.invoice-date'),
             'type'       => 'datetime',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -82,18 +74,18 @@ class OrderInvoicesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.grand-total'),
             'type'       => 'price',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'state',
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
-            'closure' => function ($value) {
+            'sortable'   => true,
+            'closure'    => function ($value) {
                 if ($value->state == 'paid') {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
                 } elseif (
@@ -118,10 +110,12 @@ class OrderInvoicesDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-eye',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.sales.invoices.view',
-            'icon'   => 'icon eye-icon',
+            'url'    => function ($row) {
+                return route('admin.sales.invoices.view', $row->id);
+            },
         ]);
     }
 }

@@ -89,4 +89,6 @@
             @endif
         </div>
     </div>
+
+    <x-admin::datagrid src="{{ route('admin.cms.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

@@ -1044,7 +1044,7 @@ return [
             'error-create'        => 'গ্রাহক ঠিকানা তৈরি করা হয়নি.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'    => 'গ্রাহক হিসাবে লগইন করুন',
             'login-message' => 'আপনি হিসাবে লগ ইন করেছেন :customer_name',
         ],

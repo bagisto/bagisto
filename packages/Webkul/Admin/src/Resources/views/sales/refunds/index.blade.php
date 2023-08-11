@@ -79,10 +79,6 @@
         </div>
     </div>
 
-    <a href="{{ route('admin.sales.refunds.view', 1) }}">
-        <p>view</p>
-    </a>
-    
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid :src="route('admin.sales.refunds.index')"></x-admin::datagrid>
 
 </x-admin::layouts>

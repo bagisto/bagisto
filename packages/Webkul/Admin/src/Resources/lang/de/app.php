@@ -1038,7 +1038,7 @@ return [
             'error-create'        => 'Fehler: Kunde-Adresse nicht erstellt.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'=>'inloggen als klant',
             'login-message'=>'je bent ingelogd als :customer_name'
         ],

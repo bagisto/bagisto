@@ -1036,7 +1036,7 @@ return [
             'error-create'        => 'Error: Klantadres niet aangemaakt.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'login as customer',
             'login-message'=> 'you login as :customer_name',
         ],

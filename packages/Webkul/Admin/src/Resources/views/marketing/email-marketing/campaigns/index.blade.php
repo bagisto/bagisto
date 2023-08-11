@@ -17,4 +17,6 @@
             </a>
         </div>
     </div>
+
+    <x-admin::datagrid src="{{ route('admin.campaigns.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

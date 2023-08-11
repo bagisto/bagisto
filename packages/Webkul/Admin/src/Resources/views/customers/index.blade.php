@@ -85,6 +85,8 @@
         </div>
     </div>
 
+    <x-admin::datagrid src="{{ route('admin.customer.index') }}"></x-admin::datagrid>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-customer-form-template">
             <div>

@@ -12,86 +12,35 @@ use Webkul\Product\Repositories\ProductRepository;
 class ProductDataGrid extends DataGrid
 {
     /**
-     * Default sort order of datagrid.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Set index columns, ex: id.
      *
      * @var string
      */
-    protected $index = 'product_id';
+    protected $primaryColumn = 'product_id';
 
-    /**
-     * If paginated then value of pagination.
-     *
-     * @var int
-     */
-    protected $itemsPerPage = 10;
-
-    /**
-     * Locale.
-     *
-     * @var string
-     */
-    protected $locale = 'all';
-
-    /**
-     * Channel.
-     *
-     * @var string
-     */
-    protected $channel = 'all';
-
-    /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'channels',
-        'locales',
-    ];
-
-    /**
-     * Create datagrid instance.
-     *
-     * @return void
-     */
     public function __construct(
         protected ProductRepository $productRepository,
         protected InventorySourceRepository $inventorySourceRepository
     ) {
-        /* locale */
-        $this->locale = core()->getRequestedLocaleCode();
-
-        /* channel */
-        $this->channel = core()->getRequestedChannelCode();
-
-        /* parent constructor */
-        parent::__construct();
     }
 
     /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        if ($this->channel === 'all') {
+        if (core()->getRequestedChannelCode() === 'all') {
             $whereInChannels = Channel::query()->pluck('code')->toArray();
         } else {
-            $whereInChannels = [$this->channel];
+            $whereInChannels = [core()->getRequestedChannelCode()];
         }
 
-        if ($this->locale === 'all') {
+        if (core()->getRequestedLocaleCode() === 'all') {
             $whereInLocales = Locale::query()->pluck('code')->toArray();
         } else {
-            $whereInLocales = [$this->locale];
+            $whereInLocales = [core()->getRequestedLocaleCode()];
         }
 
         /* query builder */
@@ -142,8 +91,8 @@ class ProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -151,8 +100,8 @@ class ProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.sku'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -160,8 +109,8 @@ class ProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.product-number'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -169,8 +118,8 @@ class ProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if (
                     ! empty($row->visible_individually)
@@ -188,26 +137,26 @@ class ProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.attribute-family'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'product_type',
             'label'      => trans('admin::app.datagrid.type'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'boolean',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 $html = '';
 
@@ -225,18 +174,18 @@ class ProductDataGrid extends DataGrid
             'index'      => 'price',
             'label'      => trans('admin::app.datagrid.price'),
             'type'       => 'price',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'quantity',
             'label'      => trans('admin::app.datagrid.qty'),
             'type'       => 'integer',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => false,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if (is_null($row->quantity)) {
                     return 0;
@@ -255,28 +204,34 @@ class ProductDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'     => trans('admin::app.datagrid.edit'),
-            'method'    => 'GET',
-            'route'     => 'admin.catalog.products.edit',
-            'icon'      => 'icon pencil-lg-icon',
+            'icon'     => 'icon-edit',
+            'title'    => trans('admin::app.datagrid.edit'),
+            'method'   => 'GET',
+            'url'      => function ($row) {
+                return route('admin.catalog.products.edit', $row->product_id);
+            },
+
             'condition' => function () {
                 return true;
             },
         ]);
 
         $this->addAction([
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.catalog.products.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon',
+            'icon'    => 'icon-eye',
+            'title'   => trans('admin::app.datagrid.delete'),
+            'method'  => 'DELETE',
+            'url'     => function ($row) {
+                return route('admin.catalog.products.delete', $row->product_id);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-copy',
             'title'  => trans('admin::app.datagrid.copy'),
             'method' => 'GET',
-            'route'  => 'admin.catalog.products.copy',
-            'icon'   => 'icon copy-icon',
+            'url'    => function ($row) {
+                return route('admin.catalog.products.copy', $row->product_id);
+            },
         ]);
     }
 
@@ -288,15 +243,13 @@ class ProductDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'   => 'delete',
-            'label'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'action' => route('admin.catalog.products.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
-            'type'    => 'update',
-            'label'   => trans('admin::app.datagrid.update-status'),
+            'title'   => trans('admin::app.datagrid.update-status'),
             'action'  => route('admin.catalog.products.mass_update'),
             'method'  => 'POST',
             'options' => [

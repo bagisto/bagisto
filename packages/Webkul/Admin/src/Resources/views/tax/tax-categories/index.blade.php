@@ -17,7 +17,7 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.tax_categories.index') }}"></x-admin::datagrid>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-tax-category-template">
