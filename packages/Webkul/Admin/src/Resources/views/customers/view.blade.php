@@ -32,19 +32,10 @@
 
     {{-- Filters --}}
     <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-printer text-[24px] "></span> Print
-        </div>
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-mail text-[24px] "></span> Email
-        </div>
-        
+ 
         {{--Address Create component --}}
         @include('admin::customers.addresses.create')
        
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-cart text-[24px] "></span> Create Order
-        </div>
         <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
             <span class="icon-cancel text-[24px] "></span> Delete Account
         </div>
@@ -62,7 +53,7 @@
                             @lang('admin::app.customers.view.orders')({{ $totalOrderCount }})
                         </p>
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.total-revenue')- {{ core()->currency($customer->orders->sum('grand_total')) }}
+                            @lang('admin::app.customers.view.total-revenue') - {{ core()->currency($customer->orders->sum('grand_total')) }}
                         </p>
                     </div>
 

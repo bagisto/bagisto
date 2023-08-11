@@ -32,12 +32,12 @@ class AddressController extends Controller
      */
     public function index($id)
     {
+        if (request()->ajax()) {
+            return app(AddressDataGrid::class)->toJson();
+        }
 
         $customer = $this->customerRepository->find($id);
 
-        // if (request()->ajax()) {
-        //     return app(AddressDataGrid::class)->toJson();
-        // }
 
         return view('admin::customers.addresses.index', compact('customer'));
     }
@@ -98,7 +98,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-        return redirect()->route('admin.customer.addresses.index', ['id' => request('customer_id')]);
+        return redirect()->route('admin.customer.view', ['id' => request('customer_id')]);
     }
 
     /**
