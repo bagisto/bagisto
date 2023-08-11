@@ -147,7 +147,7 @@ class CustomerController extends Controller
 
         session()->flash('success', trans('admin::app.customers.index.edit.edit-success'));
 
-        return redirect()->route('admin.customer.index');
+        return redirect()->back();
     }
 
     /**
@@ -213,13 +213,13 @@ class CustomerController extends Controller
 
         if (request()->has('customer_notified')) {
             try {
-                Mail::send(new CustomerNoteNotification($customer, request()->input('note', 'email')));
+                Mail::queue(new CustomerNoteNotification($customer, request()->input('note', 'email')));
             } catch(\Exception$e) {
                 session()->flash('warning', $e->getMessage());
             }
         }
 
-        session()->flash('success', trans('Note created successfully'));
+        session()->flash('success', trans('admin::app.customers.view.note-created-success'));
 
         return redirect()->back();
     }

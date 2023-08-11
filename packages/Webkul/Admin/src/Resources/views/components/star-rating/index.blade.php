@@ -10,7 +10,6 @@
     value="{{ $value }}"
     disabled="{{ $disabled }}"
 >
-    <x-shop::shimmer.products.reviews.ratings></x-shop::shimmer.products.reviews.ratings>
 </v-star-rating>
 
 @pushOnce("scripts")
@@ -22,16 +21,14 @@
                 v-if="! disabled"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 @click="change(rating)"
-            >
-            </span>
+            ></span>
 
             <span
-                class="icon-star-fill text-[24px]"
+                class="icon-star text-[24px]"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 v-else
-            >
-            </span>
+            ></span>
 
             <v-field
                 type="hidden"

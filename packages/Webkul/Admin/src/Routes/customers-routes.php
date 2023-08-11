@@ -56,7 +56,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::prefix('addresses')->group(function () {
             Route::get('edit/{id}', 'edit')->name('admin.customer.addresses.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.customer.addresses.update');
+            Route::post('edit/{id}', 'update')->name('admin.customer.addresses.update');
 
             Route::post('default/{id}', 'makeDefault')->name('admin.customer.addresses.set_default');
 
