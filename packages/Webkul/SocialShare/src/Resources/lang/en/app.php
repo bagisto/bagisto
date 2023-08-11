@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'config' => [
+    'configurations' => [
         'system' => [
             'enable-social-share'    => 'Enable Social Share?',
             'enable-share-facebook'  => 'Enable Share in Facebook?',

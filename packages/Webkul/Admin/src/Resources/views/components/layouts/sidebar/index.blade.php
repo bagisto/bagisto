@@ -21,28 +21,15 @@
                         </div>
                     </a>
 
-                    @if ($menuItem['key'] != 'configuration')
-                        <div class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : '' }} pb-[7px]">
-                            @foreach ($menuItem['children'] as $subMenuItem)
-                                <a href="{{ $subMenuItem['url'] }}">
-                                    <p class="text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
-                                        @lang($subMenuItem['name'])
-                                    </p>
-                                </a>
-                            @endforeach
-                        </div>
-                    @else 
-                        <div class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : '' }} pb-[7px]">
-                            @foreach (core()->sortItems($tree->items) as $key => $item)
-                                <a href="{{ route('admin.configuration.index', $item['key']) }}">
-                                    <p class="text-{{ $item['key'] == request()->route('slug') ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
-                                        {{ trans($item['name']) ?? '' }}
-                                    </p>
-                                </a>
-                            @endforeach
-                        </div>
-                    @endif
-
+                    <div class="grid {{ $menu->getActive($menuItem) ? 'bg-gray-100' : '' }} pb-[7px]">
+                        @foreach ($menuItem['children'] as $subMenuItem)
+                            <a href="{{ $subMenuItem['url'] }}">
+                                <p class="text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 px-[40px] py-[4px]">
+                                    @lang($subMenuItem['name'])
+                                </p>
+                            </a>
+                        @endforeach
+                    </div>
                 @endforeach
             </div>
         </nav>
