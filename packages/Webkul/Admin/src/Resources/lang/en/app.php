@@ -159,6 +159,46 @@ return [
                 'tax'                 => 'Tax',
             ],
         ],
+
+        'shipments' => [
+            'index' => [
+                'title' => 'Shipments',
+            ],
+        ],
+
+        'invoices' => [
+            'index' => [
+                'title' => 'Invoices',
+            ],
+
+            'view' => [
+                'title'                  => 'Invoice',
+                'print'                  => 'Print',
+                'send-duplicate-invoice' => 'Send Duplicate Invoice',
+                'send'                   => 'Send',
+                'email'                  => 'Email',
+                'send-btn'               => 'Send',
+                'invoice-items'          => 'Invoice Items',
+                'product-image'          => 'Product Image',
+                'sku'                    => 'SKU',
+                'qty'                    => 'Quantity',
+                'per-unit'               => 'Per Unit',
+                'price'                  => 'Price',
+                'tax'                    => 'Tax Amount',
+                'discount'               => 'Discount Amount',
+                'sub-total'              => 'Sub Total',
+                'shipping-and-handling'  => 'Shipping and Handling',
+                'grand-total'            => 'Grand Total',
+                'customer'               => 'Customer',
+                'order-information'      => 'Order Information',
+                'order-id'               => 'Order ID',
+                'order-date'             => 'Order Date',
+                'order-status'           => 'Order Status',
+                'invoice-status'         => 'Invoice Status',
+                'channel'                => 'Channel',
+                'invoice-sent'           => 'Invoice sent successfully',
+            ],
+        ],
     ],
 
     'customers' => [
