@@ -11,29 +11,20 @@
 
     {{-- Panel Content --}}
     <div class="mb-[20px] text-[14px] text-gray-600">
-        <v-tree-view 
+        <x-admin::tree.view
             input-type="checkbox"
             name-field="categories"
             id-field="id"
             value-field="id"
-            :items='@json($categories)'
-            :value='@json($product->categories->pluck("id"))'
-            :behavior="'no'"
-            fallback-locale="{{ config('app.fallback_locale') }}"
+            :items="json_encode($categories)"
+            :value="json_encode($product->categories->pluck('id'))"
+            behavior="no"
+            :fallback-locale="config('app.fallback_locale')"
         >
-        </v-tree-view>
+        </x-admin::tree.view>
     </div>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.controls.after', ['product' => $product]) !!}
 </div>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.categories.after', ['product' => $product]) !!}
-
-{{-- v tree view --}}
-@include('admin::tree.view')
-
-{{-- v tree item --}}
-@include('admin::tree.item')
-
-{{-- v tree radio --}}
-@include('admin::tree.checkbox')

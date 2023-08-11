@@ -45,6 +45,7 @@
         <a 
             href="{{ route('shop.home.index') }}" 
             target="_blank"
+            class="mt-[6px]"
         >
             <span 
                 class="icon-store p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100"
@@ -66,7 +67,7 @@
                     <div class="profile-info-icon">
                         <img
                             src="{{ $admin->image_url }}"
-                            class="max-w-[35px]"
+                            class="max-w-[36px] max-h-[36px] rounded-[6px]"
                         />
                     </div>
                 @else

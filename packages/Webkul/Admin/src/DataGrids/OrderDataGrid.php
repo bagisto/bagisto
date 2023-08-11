@@ -9,23 +9,9 @@ use Webkul\DataGrid\DataGrid;
 class OrderDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
@@ -41,11 +27,6 @@ class OrderDataGrid extends DataGrid
             ->addSelect('orders.id', 'orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
-
-        // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
-        // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
-        // $this->addFilter('increment_id', 'orders.increment_id');
-        // $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
     }
@@ -164,10 +145,13 @@ class OrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon pencil-lg-icon',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'admin.sales.orders.view',
-            'icon'   => 'icon eye-icon',
+            'url'    => function ($row) {
+                return route('admin.sales.orders.view', $row->id);
+            },
         ]);
     }
 }
