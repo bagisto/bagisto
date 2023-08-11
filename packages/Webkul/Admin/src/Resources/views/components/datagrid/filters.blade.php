@@ -1,9 +1,6 @@
-<div
-    class="rounded-[4px] border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]"
-    v-if="showFilters"
->
+<div v-if="showFilters">
     <!-- Custom Filter -->
-    <x-admin::accordion>
+    <x-admin::accordion class="w-[298px] rounded-[4px] border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
         <x-slot:header>
             @lang('admin::app.components.datagrid.filters.custom-filters.title')
         </x-slot:header>
@@ -31,7 +28,7 @@
                         </div>
                     </div>
 
-                    <div class="my-[16px] grid grid-cols-2 gap-[5px]">
+                    <div class="mt-[16px] grid grid-cols-2 gap-[5px]">
                         <p
                             class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center font-medium leading-[24px] text-gray-600"
                             v-for="option in column.options"
@@ -92,7 +89,7 @@
                         </div>
                     </div>
 
-                    <hr class="mb-2">
+                    {{-- <hr class="mb-2"> --}}
                 </div>
 
                 <div v-else-if="column.type === 'datetime_range'">

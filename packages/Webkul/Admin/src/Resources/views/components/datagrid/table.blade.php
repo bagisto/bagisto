@@ -30,6 +30,7 @@
                 <x-admin::table.th
                     v-for="column in available.columns"
                     v-text="column.label"
+                    class="cursor-pointer"
                     @click="sortPage(column)"
                 >
                 </x-admin::table.th>
