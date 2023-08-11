@@ -8,10 +8,11 @@ use Webkul\Sales\Models\OrderAddress;
 
 class OrderShipmentsDataGrid extends DataGrid
 {
-    protected $index = 'shipment_id';
-
-    protected $sortOrder = 'desc';
-
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('shipments')
@@ -21,7 +22,13 @@ class OrderShipmentsDataGrid extends DataGrid
             })
             ->leftJoin('orders as ors', 'shipments.order_id', '=', 'ors.id')
             ->leftJoin('inventory_sources as is', 'shipments.inventory_source_id', '=', 'is.id')
-            ->select('shipments.id as shipment_id', 'ors.increment_id as shipment_order_id', 'shipments.total_qty as shipment_total_qty', 'ors.created_at as order_date', 'shipments.created_at as shipment_created_at')
+            ->select(
+                'shipments.id as shipment_id',
+                'ors.increment_id as shipment_order_id',
+                'shipments.total_qty as shipment_total_qty',
+                'ors.created_at as order_date',
+                'shipments.created_at as shipment_created_at'
+            )
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
             ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
 
@@ -36,6 +43,11 @@ class OrderShipmentsDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+     /**
+     * Add Columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -43,8 +55,8 @@ class OrderShipmentsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -52,8 +64,8 @@ class OrderShipmentsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -61,8 +73,8 @@ class OrderShipmentsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.total-qty'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -70,45 +82,52 @@ class OrderShipmentsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.inventory-source'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'order_date',
             'label'      => trans('admin::app.datagrid.order-date'),
             'type'       => 'datetime',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'shipment_created_at',
             'label'      => trans('admin::app.datagrid.shipment-date'),
             'type'       => 'datetime',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'shipped_to',
             'label'      => trans('admin::app.datagrid.shipment-to'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
+     /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            // 'icon'   => 'icon-eye',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.sales.shipments.view',
-            'icon'   => 'icon eye-icon',
+            'url'    => function ($row) {
+                return route('admin.sales.shipments.view', $row->id);
+            },
         ]);
     }
 }

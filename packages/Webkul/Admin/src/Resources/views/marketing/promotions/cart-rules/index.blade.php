@@ -88,5 +88,5 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.cart_rules.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

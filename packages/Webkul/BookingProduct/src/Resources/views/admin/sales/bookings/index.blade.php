@@ -79,5 +79,5 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.sales.bookings.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

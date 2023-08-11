@@ -7,15 +7,24 @@ use Webkul\DataGrid\DataGrid;
 
 class OrderTransactionsDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('order_transactions')
             ->leftJoin('orders as ors', 'order_transactions.order_id', '=', 'ors.id')
-            ->select('order_transactions.id as id', 'order_transactions.transaction_id as transaction_id', 'order_transactions.invoice_id as invoice_id', 'ors.increment_id as order_id', 'order_transactions.created_at as created_at', 'order_transactions.amount as amount', 'order_transactions.status as status');
+            ->select(
+                'order_transactions.id as id',
+                'order_transactions.transaction_id as transaction_id',
+                'order_transactions.invoice_id as invoice_id',
+                'ors.increment_id as order_id',
+                'order_transactions.created_at as created_at',
+                'order_transactions.amount as amount',
+                'order_transactions.status as status'
+            );
 
         // $this->addFilter('id', 'order_transactions.id');
         // $this->addFilter('transaction_id', 'order_transactions.transaction_id');
@@ -26,6 +35,11 @@ class OrderTransactionsDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+     /**
+     * Add Columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -33,8 +47,8 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => false,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -42,8 +56,8 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.transaction-id'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -51,17 +65,17 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.transaction-date'),
             'type'       => 'datetime',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'amount',
-            'label'      => trans('admin::app.sales.transactions.transaction-amount'),
+            'label'      => trans('admin::app.datagrid.transaction-amount'),
             'type'       => 'price',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -69,8 +83,8 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.invoice-id'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -78,8 +92,8 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.order-id'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -87,18 +101,25 @@ class OrderTransactionsDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
+     /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            // 'icon'   => 'icon-eye',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.sales.transactions.view',
-            'icon'   => 'icon eye-icon',
+            'url'    => function ($row) {
+                return route('admin.sales.transactions.view', $row->id);
+            },
         ]);
     }
 }

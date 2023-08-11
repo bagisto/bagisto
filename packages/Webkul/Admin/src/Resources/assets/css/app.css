@@ -342,17 +342,17 @@
         @apply text-[12px] text-white font-semibold py-[1px] px-[6px] max-w-max rounded-[35px];
     }
 
-    .label-pending {
-        @apply bg-yellow-500;
-    }
-    /*
+	.label-pending {
+		@apply bg-yellow-500;
+	}
+
 	.label-processing,  .label-active {
 		@apply bg-darkGreen;
 	}
 
-    .label-closed {
-        @apply bg-darkBlue;
-    }
+	.label-closed {
+		@apply bg-darkBlue;
+	}
 
     .label-cancelled {
         @apply bg-darkPink;
@@ -366,6 +366,11 @@
         @apply text-red-600;
     }
 
+	.icon-star-fill:before {
+        content: "\e938";
+    color: #ffb600;
+    }
+	
     .shimmer {
         animation-duration: 2.2s;
         animation-fill-mode: forwards;

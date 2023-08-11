@@ -8,10 +8,11 @@ use Webkul\DataGrid\DataGrid;
 
 class SitemapDataGrid extends DataGrid
 {
-    protected $index = 'id';
-
-    protected $sortOrder = 'desc';
-
+    /**
+     * Prepare query builder.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('sitemaps')->addSelect('id', 'file_name', 'path', 'path as url');
@@ -19,6 +20,11 @@ class SitemapDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+     /**
+     * Add Columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -26,9 +32,9 @@ class SitemapDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'width'      => '40px',
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -36,8 +42,8 @@ class SitemapDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.file-name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -45,8 +51,8 @@ class SitemapDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.path'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -54,28 +60,38 @@ class SitemapDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.link-for-google'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => false,
             'filterable' => false,
+            'sortable'   => false,
             'closure'    => function ($row) {
                 return '<a href="' . ($url = Storage::url($row->path . '/' . $row->file_name)) . '" target="_blank">' . $url . '</a>';
             },
         ]);
     }
 
+     /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.sitemaps.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.sitemaps.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
-            'route'  => 'admin.sitemaps.delete',
-            'icon'   => 'icon trash-icon',
+            'method' => 'DELETE',
+            'url'    => function ($row) {
+                return route('admin.sitemaps.delete', $row->id);
+            },
         ]);
     }
 }

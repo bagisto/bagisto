@@ -1043,7 +1043,7 @@ return [
             'error-create'        => 'Customer address not created.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'login as customer',
             'login-message'=> 'you logged in as :customer_name',
         ],

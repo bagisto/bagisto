@@ -3,7 +3,7 @@
         <x-admin::form.control-group.control
             type="text"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             v-model="{{ $attribute->code }}"
@@ -21,7 +21,7 @@
             <x-admin::form.control-group.control
                 type="text"
                 :name="$attribute->code"
-                :rules="$attribute->validations"
+                ::rules="{{ $attribute->validations }}"
                 :label="$attribute->admin_name"
                 value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
                 :class="'pl-[30px] ' . ($attribute->code == 'price' ? 'py-2 bg-gray-50 text-[20px] font-bold' : '')"
@@ -36,7 +36,7 @@
             :type="$attribute->enable_wysiwyg ? 'tinymce' : 'textarea'"
             :id="$attribute->code"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             v-model="{{ $attribute->code }}"
@@ -49,7 +49,7 @@
         <x-admin::form.control-group.control
             type="date"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
         >
@@ -61,7 +61,7 @@
         <x-admin::form.control-group.control
             type="datetime"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
         >
@@ -73,7 +73,7 @@
         <x-admin::form.control-group.control
             type="select"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             :value="old($attribute->code) ?: $product[$attribute->code]"
         >
@@ -102,8 +102,8 @@
     @case('multiselect')
         <x-admin::form.control-group.control
             type="multiselect"
-            :name="$attribute->code"
-            :rules="$attribute->validations"
+            :name="$attribute->code . '[]'"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
         >
             @php
@@ -135,7 +135,7 @@
                     :value="$option->id"
                     :id="$attribute->code . '_' . $option->id"
                     :for="$attribute->code . '_' . $option->id"
-                    :rules="$attribute->validations"
+                    ::rules="{{ $attribute->validations }}"
                     :label="$attribute->admin_name"
                     :checked="in_array($option->id, $selectedOption)"
                 >

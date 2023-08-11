@@ -1065,7 +1065,7 @@ return [
             'error-create'        => 'Erreur : L\'adresse du client n\'a pas été créée.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'se connecter en tant que client',
             'login-message'=> 'vous vous êtes connecté en tant que :customer_name',
         ],

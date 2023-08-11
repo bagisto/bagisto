@@ -1044,7 +1044,7 @@ return [
             'error-create'        => 'Адрес клиента не создан.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'увійти як клієнт',
             'login-message'=> 'ви ввійшли як :customer_name',
         ],

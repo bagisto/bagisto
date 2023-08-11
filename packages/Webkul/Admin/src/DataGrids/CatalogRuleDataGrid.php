@@ -8,30 +8,23 @@ use Webkul\DataGrid\DataGrid;
 class CatalogRuleDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('catalog_rules')
-            ->addSelect('catalog_rules.id', 'name', 'status', 'starts_from', 'ends_till', 'sort_order');
+            ->addSelect(
+                'catalog_rules.id',
+                'name',
+                'status',
+                'starts_from',
+                'ends_till',
+                'sort_order'
+            );
 
-        // $this->addFilter('status', 'status');
+        $this->addFilter('status', 'status');
 
         return $queryBuilder;
     }
@@ -48,8 +41,8 @@ class CatalogRuleDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -57,17 +50,17 @@ class CatalogRuleDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'starts_from',
             'label'      => trans('admin::app.datagrid.start'),
             'type'       => 'datetime',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 return $value->starts_from ?? '-';
             },
@@ -77,9 +70,9 @@ class CatalogRuleDataGrid extends DataGrid
             'index'      => 'ends_till',
             'label'      => trans('admin::app.datagrid.end'),
             'type'       => 'datetime',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 return $value->ends_till ?? '-';
             },
@@ -90,8 +83,8 @@ class CatalogRuleDataGrid extends DataGrid
             'label'      => trans('admin::app.status'),
             'type'       => 'boolean',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
@@ -106,8 +99,8 @@ class CatalogRuleDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.priority'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -119,17 +112,21 @@ class CatalogRuleDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.catalog_rules.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.catalog_rules.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
-            'method' => 'POST',
-            'route'  => 'admin.catalog_rules.delete',
-            'icon'   => 'icon trash-icon',
+            'method' => 'DELETE',
+            'url'    => function ($row) {
+                return route('admin.catalog_rules.delete', $row->id);
+            },
         ]);
     }
 }

@@ -39,7 +39,6 @@
                     :variant="variant"
                     :attributes="superAttributes"
                     @onRemoved="removeVariant"
-                    @onUpdated="updateVariant"
                 ></v-product-variation-item>
             </div>
 
@@ -170,9 +169,30 @@
                     <input type="hidden" :name="'variants[' + variant.id + '][inventories][' + inventorySource.id + ']'" :value="variant.inventories[inventorySource.id]"/>
                 </template>
 
+                <template v-for="(image, index) in variant.images">
+                    <input type="hidden" :name="'variants[' + variant.id + '][images][files][' + image.id + ']'" v-if="! image.is_new"/>
+
+                    <input type="hidden" :name="'variants[' + variant.id + '][images][positions][' + image.id + ']'"/>
+
+                    <input
+                        type="file"
+                        :name="'variants[' + variant.id + '][images][files][]'"
+                        :id="$.uid + '_imageInput_' + index"
+                        class="hidden"
+                        accept="image/*"
+                        :ref="$.uid + '_imageInput_' + index"
+                    />
+                </template>
+
                 <!-- Image -->
-                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                    <template v-if="! variant.images.length">
+                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                    </template>
+
+                    <template v-else>
+                        <img :src="variant.images[0].url">
+                    </template>
                     
                     <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                         @lang('admin::app.catalog.products.edit.types.configurable.image-placeholder')
@@ -214,7 +234,7 @@
             <!-- Actions -->
             <div class="grid gap-[4px] place-content-start text-right">
                 <p class="text-gray-800 font-semibold">
-                    $120.00
+                    @{{ $admin.formatPrice(variant.price) }}  
                 </p>
 
                 <p class="text-gray-800 font-semibold">
@@ -239,6 +259,7 @@
                             @lang('admin::app.catalog.products.edit.types.configurable.edit-btn')
                         </p>
 
+                        <!-- Edit Drawer -->
                         <x-admin::form
                             v-slot="{ meta, errors, handleSubmit }"
                             as="div"
@@ -406,6 +427,8 @@
                                             </div>
                                         </div>
 
+                                        <v-product-images :uploaded-images="variant.images"></v-product-images>
+
                                         <p
                                             class="mt-[10px] font-semibold text-gray-800"
                                             v-if="typeof variant.id !== 'string'"
@@ -438,7 +461,7 @@
                 return {
                     defaultId: parseInt('{{ $product->additional['default_variant_id'] ?? null }}'),
 
-                    variants: @json($product->variants),
+                    variants: @json($product->variants()->with(['images', 'inventories'])->get()),
 
                     superAttributes: @json($product->super_attributes()->with('options')->get()),
 
@@ -457,7 +480,6 @@
 
             methods: {
                 addVariant(params, { resetForm }) {
-                    //Check if variant already exists
                     let self = this;
 
                     let filteredVariants = this.variants.filter(function (variant) {
@@ -491,21 +513,9 @@
                         images: []
                     }, params));
 
-                    //Reset form
                     resetForm();
 
                     this.$refs.variantCreateModal.close();
-                },
-
-                updateVariant(params) {
-                    //find varaint by id and update
-                    let variant = this.variants.find(function (variant) {
-                        return variant.id == params.id;
-                    });
-
-                    for (let key in params) {
-                        variant[key] = params[key];
-                    }
                 },
 
                 removeVariant(variant) {
@@ -513,7 +523,6 @@
                 }
             }
         });
-
 
         app.component('v-product-variation-item', {
             template: '#v-product-variation-item-template',
@@ -556,7 +565,7 @@
                     let totalQty = 0;
 
                     for (let key in this.variant.inventories) {
-                        totalQty += this.variant.inventories[key];
+                        totalQty += parseInt(this.variant.inventories[key]);
                     }
 
                     return totalQty;
@@ -571,11 +580,29 @@
                 },
 
                 update(params) {
-                    params.inventories = Object.assign({}, params.inventories);
+                    Object.assign(this.variant, params);
 
-                    this.$emit('onUpdated', params);
+                    this.setFiles();
 
                     this.$refs.editVariantDrawer.close();
+                },
+
+                setFiles() {
+                    let self = this;
+
+                    this.variant.images.forEach(function (image, index) {
+                        if (image.file instanceof File) {
+                            image.is_new = 1;
+
+                            const dataTransfer = new DataTransfer();
+
+                            dataTransfer.items.add(image.file);
+
+                            self.$refs[self.$.uid + '_imageInput_' + index][0].files = dataTransfer.files;
+                        } else {
+                            image.is_new = 0;
+                        }
+                    });
                 },
 
                 remove: function () {

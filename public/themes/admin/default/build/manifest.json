@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-7c177536.css",
+    "file": "assets/app-5d2cb037.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -32,6 +32,14 @@
     "file": "assets/Icon-remove-32d29b4e.svg",
     "src": "src/Resources/assets/images/Icon-remove.svg"
   },
+  "src/Resources/assets/images/address-setting.png": {
+    "file": "assets/address-setting-f66277be.png",
+    "src": "src/Resources/assets/images/address-setting.png"
+  },
+  "src/Resources/assets/images/captcha.png": {
+    "file": "assets/captcha-d5a5a414.png",
+    "src": "src/Resources/assets/images/captcha.png"
+  },
   "src/Resources/assets/images/checked-checkbox.png": {
     "file": "assets/checked-checkbox-98f8f649.png",
     "src": "src/Resources/assets/images/checked-checkbox.png"
@@ -47,6 +55,14 @@
   "src/Resources/assets/images/dark-chevron-right.svg": {
     "file": "assets/dark-chevron-right-113be50d.svg",
     "src": "src/Resources/assets/images/dark-chevron-right.svg"
+  },
+  "src/Resources/assets/images/email.png": {
+    "file": "assets/email-b67bb4f9.png",
+    "src": "src/Resources/assets/images/email.png"
+  },
+  "src/Resources/assets/images/group.png": {
+    "file": "assets/group-a995d3da.png",
+    "src": "src/Resources/assets/images/group.png"
   },
   "src/Resources/assets/images/hamburger.svg": {
     "file": "assets/hamburger-9b9f7edd.svg",
@@ -68,6 +84,10 @@
     "file": "assets/img-b0f898b0.png",
     "src": "src/Resources/assets/images/img.png"
   },
+  "src/Resources/assets/images/invoice-setting.png": {
+    "file": "assets/invoice-setting-cfa225e0.png",
+    "src": "src/Resources/assets/images/invoice-setting.png"
+  },
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",
     "src": "src/Resources/assets/images/logo.png"
@@ -75,6 +95,18 @@
   "src/Resources/assets/images/media-image.png": {
     "file": "assets/media-image-4aa33a76.png",
     "src": "src/Resources/assets/images/media-image.png"
+  },
+  "src/Resources/assets/images/notification.svg": {
+    "file": "assets/notification-2b25c326.svg",
+    "src": "src/Resources/assets/images/notification.svg"
+  },
+  "src/Resources/assets/images/order-setting.png": {
+    "file": "assets/order-setting-eeb0d0d0.png",
+    "src": "src/Resources/assets/images/order-setting.png"
+  },
+  "src/Resources/assets/images/payment-method.png": {
+    "file": "assets/payment-method-c2d776c3.png",
+    "src": "src/Resources/assets/images/payment-method.png"
   },
   "src/Resources/assets/images/product-placeholders/front.svg": {
     "file": "assets/front-93490c30.svg",
@@ -104,19 +136,43 @@
     "file": "assets/search-a93e6b3f.svg",
     "src": "src/Resources/assets/images/search.svg"
   },
+  "src/Resources/assets/images/settings.png": {
+    "file": "assets/settings-b1bfc52c.png",
+    "src": "src/Resources/assets/images/settings.png"
+  },
+  "src/Resources/assets/images/shipping-method.png": {
+    "file": "assets/shipping-method-63ad9667.png",
+    "src": "src/Resources/assets/images/shipping-method.png"
+  },
+  "src/Resources/assets/images/shipping.png": {
+    "file": "assets/shipping-7963bb7e.png",
+    "src": "src/Resources/assets/images/shipping.png"
+  },
+  "src/Resources/assets/images/store-information.svg": {
+    "file": "assets/store-information-8d27c0df.svg",
+    "src": "src/Resources/assets/images/store-information.svg"
+  },
+  "src/Resources/assets/images/tax.png": {
+    "file": "assets/tax-3a04fe05.png",
+    "src": "src/Resources/assets/images/tax.png"
+  },
+  "src/Resources/assets/images/theme-setting.png": {
+    "file": "assets/theme-setting-f1ac626b.png",
+    "src": "src/Resources/assets/images/theme-setting.png"
+  },
   "src/Resources/assets/images/user-owner.svg": {
     "file": "assets/user-owner-466fac11.svg",
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-f72387a9.css",
+    "file": "assets/app-c04ede37.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-f72387a9.css"
+      "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-fc5e4e43.js",
+    "file": "assets/app-2bd61f0c.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

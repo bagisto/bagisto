@@ -12,26 +12,12 @@ class CustomerDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'customer_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Items per page.
-     *
-     * @var int
-     */
-    protected $itemsPerPage = 10;
+    protected $primaryColumn = 'customer_id';
 
     /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
@@ -73,8 +59,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -82,8 +68,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -91,8 +77,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -100,8 +86,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.group'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -109,8 +95,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.phone'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => false,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if (! $row->phone) {
                     return '-';
@@ -125,8 +111,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.gender'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => false,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if (! $row->gender) {
                     return '-';
@@ -141,8 +127,8 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 $html = '';
 
@@ -153,7 +139,7 @@ class CustomerDataGrid extends DataGrid
                 }
 
                 if ($row->is_suspended) {
-                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.customers.customers.suspended') . '</span>';
+                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.suspended') . '</span>';
                 }
 
                 return $html;
@@ -162,12 +148,12 @@ class CustomerDataGrid extends DataGrid
 
         $this->addColumn([
             'index'       => 'is_suspended',
-            'label'       => trans('admin::app.customers.customers.suspended'),
+            'label'       => trans('admin::app.datagrid.suspended'),
             'type'        => 'boolean',
             'searchable'  => false,
-            'sortable'    => true,
             'filterable'  => true,
             'visibility'  => false,
+            'sortable'    => true,
         ]);
     }
 
@@ -179,32 +165,40 @@ class CustomerDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'method' => 'GET',
-            'route'  => 'admin.customer.edit',
-            'icon'   => 'icon pencil-lg-icon',
-            'title'  => trans('admin::app.customers.customers.edit-help-title'),
+            'icon'         => 'icon-edit',
+            'title'        => trans('admin::app.datagrid.edit'),
+            'method'       => 'GET',
+            'url'          => function ($row) {
+                return route('admin.customer.edit', $row->customer_id);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-eye',
+            'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.customer.note.create',
-            'icon'   => 'icon note-icon',
-            'title'  => trans('admin::app.customers.note.help-title'),
+            'url'    => function ($row) {
+                return route('admin.customer.view', $row->customer_id);
+            },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.datagrid.login-as-customer'),
             'method' => 'GET',
-            'route'  => 'admin.customer.loginascustomer',
-            'icon'   => 'icon login-icon',
             'target' => 'blank',
-            'title'  => trans('admin::app.customers.loginascustomer.grid-title'),
+            'url'    => function ($row) {
+                return route('admin.customer.login_as_customer', $row->customer_id);
+            },
         ]);
 
         $this->addAction([
-            'method' => 'POST',
-            'route'  => 'admin.customer.delete',
-            'icon'   => 'icon trash-icon',
-            'title'  => trans('admin::app.customers.customers.delete-help-title'),
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
+                return route('admin.customer.delete', $row->customer_id);
+            },
         ]);
     }
 
@@ -216,17 +210,15 @@ class CustomerDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'   => 'delete',
-            'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.customer.mass_delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
+            'action' => route('admin.customer.mass_delete'),
         ]);
 
         $this->addMassAction([
-            'type'    => 'update',
-            'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.customer.mass_update'),
+            'title'   => trans('admin::app.datagrid.update-status'),
             'method'  => 'POST',
+            'action'  => route('admin.customer.mass_update'),
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,
                 trans('admin::app.datagrid.inactive')  => 0,

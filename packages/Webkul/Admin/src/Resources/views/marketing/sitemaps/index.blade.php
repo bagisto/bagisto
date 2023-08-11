@@ -26,6 +26,8 @@
                 </div>
             </div>
 
+            <x-admin::datagrid src="{{ route('admin.sitemaps.index') }}"></x-admin::datagrid>
+
             <!-- Model Form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"

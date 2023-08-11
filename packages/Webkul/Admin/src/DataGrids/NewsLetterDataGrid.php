@@ -8,29 +8,20 @@ use Webkul\DataGrid\DataGrid;
 class NewsLetterDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('subscribers_list')->select('subscribers_list.id', 'subscribers_list.is_subscribed as status', 'subscribers_list.email');
+        $queryBuilder = DB::table('subscribers_list')
+            ->select(
+                'subscribers_list.id',
+                'subscribers_list.is_subscribed as status',
+                'subscribers_list.email'
+            );
 
-        // $this->addFilter('status', 'subscribers_list.is_subscribed');
+        $this->addFilter('status', 'subscribers_list.is_subscribed');
 
         return $queryBuilder;
     }
@@ -47,8 +38,8 @@ class NewsLetterDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -56,8 +47,8 @@ class NewsLetterDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.subscribed'),
             'type'       => 'boolean',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.true');
@@ -72,8 +63,8 @@ class NewsLetterDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -85,18 +76,21 @@ class NewsLetterDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.customers.subscribers.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.customers.subscribers.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
+            'icon'         => 'icon-delete',
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.customers.subscribers.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'News Letter']),
-            'icon'         => 'icon trash-icon',
+            'method'       => 'DELETE',
+            'url'          => function ($row) {
+                return route('admin.customers.subscribers.delete', $row->id);
+            },
         ]);
     }
 }
