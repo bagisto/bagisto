@@ -579,7 +579,6 @@
                 method="POST"
                 :action="route('admin.sales.shipments.store', $order->id)"
             >
-
                 <x-admin::drawer ref="invoice">
                     <!-- Drawer Header -->
                     <x-slot:header>
@@ -597,7 +596,6 @@
                                 </button>
                             </div>
                         </div>
-                        
                     </x-slot:header>
 
                     <!-- Drawer Content -->
@@ -718,6 +716,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="gap-[10px] justify-between pb-[16px] border-b-[1px] border-slate-300">
                                             <!-- Information -->
                                             <div class="flex justify-between">
