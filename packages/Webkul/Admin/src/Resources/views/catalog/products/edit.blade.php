@@ -17,10 +17,16 @@
                         @lang('admin::app.catalog.products.edit.title')
                     </p>
                 </div>
-                
+
                 <div class="flex gap-x-[10px] items-center">
+                    <a href="{{ route('admin.catalog.products.index') }}">
+                        <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                            @lang('admin::app.account.edit.cancel-btn')
+                        </span>
+                    </a>
+
                     <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
-                        Save Product
+                        @lang('admin::app.catalog.products.edit.save-btn')
                     </button>
                 </div>
             </div>
@@ -172,8 +178,11 @@
                     @endforeach
 
                     @if ($column == 1)
-                        {{-- Media View Blade File --}}
-                        @include('admin::catalog.products.edit.media')
+                        {{-- Images View Blade File --}}
+                        @include('admin::catalog.products.edit.images')
+
+                        {{-- Videos View Blade File --}}
+                        @include('admin::catalog.products.edit.videos')
 
                         {{-- Product Type View Blade File --}}
                         @includeIf('admin::catalog.products.edit.types.' . $product->type)

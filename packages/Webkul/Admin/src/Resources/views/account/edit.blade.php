@@ -16,7 +16,7 @@
 
             <div class="flex gap-x-[10px] items-center">
                  <!-- Cancel Button -->
-                 <a href="{{ route('admin.dashboard.index') }}">
+                <a href="{{ route('admin.dashboard.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.account.edit.cancel-btn')
                     </span>
@@ -71,7 +71,7 @@
 
                     <!-- Name -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.account.edit.name')
                         </x-admin::form.control-group.label>
 
@@ -93,7 +93,7 @@
 
                     <!-- Email -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.account.edit.email')
                         </x-admin::form.control-group.label>
 
@@ -128,7 +128,7 @@
                     <x-slot:content>
                         <!-- Current Password -->
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.account.edit.current-password')
                             </x-admin::form.control-group.label>
 

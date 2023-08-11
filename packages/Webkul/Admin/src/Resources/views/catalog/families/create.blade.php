@@ -46,7 +46,7 @@
                         {{-- Panel Content --}}
                         <x-slot:content>
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800">
                                     @lang('admin::app.catalog.families.create.code')
                                 </x-admin::form.control-group.label>
 
@@ -68,7 +68,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label class="!text-gray-800">
+                                <x-admin::form.control-group.label class="required !text-gray-800">
                                     @lang('admin::app.catalog.families.create.name')
                                 </x-admin::form.control-group.label>
 
@@ -157,6 +157,7 @@
                         <draggable
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto border-r-[1px] border-gray-200"
                             ghost-class="draggable-ghost"
+                            v-bind="{animation: 200}"
                             :list="groups"
                             item-key="id"
                             group="groups"
@@ -221,6 +222,7 @@
                                     <draggable
                                         class="ml-[43px]"
                                         ghost-class="draggable-ghost"
+                                        v-bind="{animation: 200}"
                                         :list="getGroupAttributes(element)"
                                         item-key="id"
                                         group="attributes"
@@ -284,6 +286,7 @@
                             id="unassigned-attributes"
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto"
                             ghost-class="draggable-ghost"
+                            v-bind="{animation: 200}"
                             :list="unassignedAttributes"
                             item-key="id"
                             group="attributes"
@@ -329,7 +332,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Group Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.catalog.families.create.name')
                                         </x-admin::form.control-group.label>
 
@@ -347,7 +350,7 @@
 
                                     <!-- Select Group Type -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                        <x-admin::form.control-group.label class="required !text-gray-800 font-medium">
                                             @lang('admin::app.catalog.families.create.column')
                                         </x-admin::form.control-group.label>
 
