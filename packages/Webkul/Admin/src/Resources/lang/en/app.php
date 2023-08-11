@@ -24,13 +24,6 @@ return [
                 'title' => 'Orders',
             ],
 
-            'status' => [
-                'pending'         => 'Pending',
-                'pending-payment' => 'Pending Payment',
-                'processing'      => 'Processing',
-            ]
-        ],
-
             'view' => [
                 'title'                 => 'Order #:order_id',
                 'cancel'                => 'Cancel',
