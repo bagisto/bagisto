@@ -60,9 +60,9 @@ class OrderController extends Controller
         $result = $this->orderRepository->cancel($id);
 
         if ($result) {
-            session()->flash('success', trans('admin::app.sales.orders.cancel-error'));
+            session()->flash('success', trans('admin::app.sales.orders.view.cancel-error'));
         } else {
-            session()->flash('error', trans('admin::app.sales.orders.create-success'));
+            session()->flash('error', trans('admin::app.sales.orders.view.create-success'));
         }
 
         return redirect()->back();
@@ -90,7 +90,7 @@ class OrderController extends Controller
 
         Event::dispatch('sales.order.comment.create.after', $comment);
 
-        session()->flash('success', trans('admin::app.sales.orders.comment-added-success'));
+        session()->flash('success', trans('admin::app.sales.orders.view.comment-success'));
 
         return redirect()->back();
     }

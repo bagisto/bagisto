@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-9424d12f.css",
+    "file": "assets/app-7c177536.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -64,6 +64,10 @@
     "file": "assets/icon-options-ebfcd268.svg",
     "src": "src/Resources/assets/images/icon-options.svg"
   },
+  "src/Resources/assets/images/img.png": {
+    "file": "assets/img-b0f898b0.png",
+    "src": "src/Resources/assets/images/img.png"
+  },
   "src/Resources/assets/images/logo.png": {
     "file": "assets/logo-013cd27b.png",
     "src": "src/Resources/assets/images/logo.png"
@@ -72,9 +76,29 @@
     "file": "assets/media-image-4aa33a76.png",
     "src": "src/Resources/assets/images/media-image.png"
   },
-  "src/Resources/assets/images/product-placeholders/top-angle.svg": {
-    "file": "assets/top-angle-a5454c50.svg",
-    "src": "src/Resources/assets/images/product-placeholders/top-angle.svg"
+  "src/Resources/assets/images/product-placeholders/front.svg": {
+    "file": "assets/front-93490c30.svg",
+    "src": "src/Resources/assets/images/product-placeholders/front.svg"
+  },
+  "src/Resources/assets/images/product-placeholders/next-1.svg": {
+    "file": "assets/next-1-91bb148a.svg",
+    "src": "src/Resources/assets/images/product-placeholders/next-1.svg"
+  },
+  "src/Resources/assets/images/product-placeholders/next-2.svg": {
+    "file": "assets/next-2-6aace5ca.svg",
+    "src": "src/Resources/assets/images/product-placeholders/next-2.svg"
+  },
+  "src/Resources/assets/images/product-placeholders/size.svg": {
+    "file": "assets/size-04e2a252.svg",
+    "src": "src/Resources/assets/images/product-placeholders/size.svg"
+  },
+  "src/Resources/assets/images/product-placeholders/use-cases.svg": {
+    "file": "assets/use-cases-4a33de1a.svg",
+    "src": "src/Resources/assets/images/product-placeholders/use-cases.svg"
+  },
+  "src/Resources/assets/images/product-placeholders/zoom.svg": {
+    "file": "assets/zoom-0c75bed3.svg",
+    "src": "src/Resources/assets/images/product-placeholders/zoom.svg"
   },
   "src/Resources/assets/images/search.svg": {
     "file": "assets/search-a93e6b3f.svg",
@@ -85,14 +109,14 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-c04ede37.css",
+    "file": "assets/app-f72387a9.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-c04ede37.css"
+      "assets/app-f72387a9.css"
     ],
-    "file": "assets/app-31ffb949.js",
+    "file": "assets/app-fc5e4e43.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

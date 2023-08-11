@@ -6,6 +6,7 @@ return [
             'taxes' => [
                 'taxes'                        => 'Taxes',
                 'catalogue'                    => 'Catalog',
+                'catalogue-info'               => 'Set pricing and default location calculations',
                 'pricing'                      => 'Pricing',
                 'tax-inclusive'                => 'Tax inclusive',
                 'default-location-calculation' => 'Default Location Calculation',

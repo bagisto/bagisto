@@ -160,6 +160,7 @@
                         <draggable
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto border-r-[1px] border-gray-200"
                             ghost-class="draggable-ghost"
+                            v-bind="{animation: 200}"
                             :list="groups"
                             item-key="id"
                             group="groups"
@@ -222,6 +223,7 @@
                                     <draggable
                                         class="ml-[43px]"
                                         ghost-class="draggable-ghost"
+                                        v-bind="{animation: 200}"
                                         :list="getGroupAttributes(element)"
                                         item-key="id"
                                         group="attributes"
@@ -283,6 +285,7 @@
                         <draggable
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto"
                             ghost-class="draggable-ghost"
+                            v-bind="{animation: 200}"
                             :list="unassignedAttributes"
                             item-key="id"
                             group="attributes"

@@ -10,18 +10,6 @@
         @lang('admin::app.settings.channels.edit.title')
     </x-slot:title>
 
-    <h1>Create Post</h1>
-    
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
- 
     {{-- Channeld Edit Form --}}
     <x-admin::form  
         :action="route('admin.channels.update', ['id' => $channel->id, 'locale' => $locale])"
@@ -125,7 +113,7 @@
                         </x-admin::form.control-group>
 
                         <div class="mb-[10px]">
-                            <p class="block leading-[24px] text-[12px] text-gray-800 font-medium">
+                            <p class="required block leading-[24px] text-[12px] text-gray-800 font-medium">
                                 @lang('admin::app.settings.channels.edit.inventory-sources')
                             </p>
                     
@@ -137,6 +125,7 @@
                                         :value="$inventorySource->id" 
                                         :id="'inventory_sources_' . $inventorySource->id"
                                         :for="'inventory_sources_' . $inventorySource->id"
+                                        rules="required"
                                         :label="trans('admin::app.settings.channels.edit.inventory-sources')"
                                         :checked="in_array($inventorySource->id, old('inventory_sources') ?? $channel->inventory_sources->pluck('id')->toArray())"
                                     >
@@ -144,6 +133,7 @@
 
                                     <x-admin::form.control-group.label
                                         :for="'inventory_sources_' . $inventorySource->id"
+                                        class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                     >
                                         <span class="text-gray-600 font-semibold cursor-pointer">
                                             {{ $inventorySource->name }}
@@ -151,11 +141,12 @@
                                     </x-admin::form.control-group.label>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group.error
-                                    control-name="inventory_sources[]"
-                                >
-                                </x-admin::form.control-group.error>
                             @endforeach
+
+                            <x-admin::form.control-group.error
+                                control-name="inventory_sources[]"
+                            >
+                            </x-admin::form.control-group.error>
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
@@ -308,7 +299,7 @@
 
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.seo-title')
                             </x-admin::form.control-group.label>
 
@@ -330,7 +321,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.seo-description')
                             </x-admin::form.control-group.label>
 
@@ -352,7 +343,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.seo-keywords')
                             </x-admin::form.control-group.label>
 
@@ -389,132 +380,133 @@
                 
                         <x-slot:content>
                             <div class="mb-[10px]">
-                                <div class="mb-[10px]">
-                                    <x-admin::form.control-group.label
-                                        class="required"
-                                    >
-                                        @lang('admin::app.settings.channels.edit.locales') 
-                                    </x-admin::form.control-group.label>
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.settings.channels.edit.locales') 
+                                </p>
 
-                                    @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
-                                    
-                                    @foreach (core()->getAllLocales() as $locale)
-                                        <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
-                                            <x-admin::form.control-group.control
-                                                type="checkbox"
-                                                name="locales[]"
-                                                :value="$locale->id"
-                                                :id="'locales_' . $locale->id" 
-                                                :for="'locales_' . $locale->id" 
-                                                :checked="in_array($locale->id, $selectedLocalesId)"
-                                                :label="trans('admin::app.settings.channels.edit.locales')"
-                                            >
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.label
-                                                :for="'locales_' . $locale->id" 
-                                            >
-                                                <span class="text-gray-600 font-semibold cursor-pointer">
-                                                    {{ $locale->name }} 
-                                                </span>
-                                            </x-admin::form.control-group.label>
-                                           
-                                        </x-admin::form.control-group>
-
-                                        <x-admin::form.control-group.error
-                                            control-name="locales[]" 
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    @endforeach
-                                </div>
-    
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.channels.edit.default-locale')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="default_locale_id"
-                                        :value="old('default_locale_id') ?? $channel->default_locale_id"
-                                        id="default_locale_id"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.channels.edit.default-locale')"
-                                    >
-                                        @foreach (core()->getAllLocales() as $locale)
-                                            <option value="{{ $locale->id }}">
-                                                {{ $locale->name }}
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="default_locale_id"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-    
-                                <div class="mb-[10px]">
-                                    <p class="block leading-[24px] text-gray-800 font-medium">
-                                        @lang('admin::app.settings.channels.edit.currencies')
-                                    </p>
+                                @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray() @endphp
                                 
-                                    @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
+                                @foreach (core()->getAllLocales() as $locale)
+                                    <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="locales[]"
+                                            :value="$locale->id"
+                                            :id="'locales_' . $locale->id" 
+                                            :for="'locales_' . $locale->id" 
+                                            :checked="in_array($locale->id, $selectedLocalesId)"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.channels.edit.locales')"
+                                        >
+                                        </x-admin::form.control-group.control>
 
-                                    @foreach (core()->getAllCurrencies() as $currency)
-                                        <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
-                                            <x-admin::form.control-group.control
-                                                type="checkbox"
-                                                name="currencies[]"
-                                                :value="$currency->id" 
-                                                :id="'currencies_' . $currency->id"
-                                                :for="'currencies_' . $currency->id"
-                                                :checked="in_array($currency->id, $selectedCurrenciesId)"
-                                            >
-                                            </x-admin::form.control-group.control>
+                                        <x-admin::form.control-group.label
+                                            :for="'locales_' . $locale->id"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            <span class="text-gray-600 font-semibold cursor-pointer">
+                                                {{ $locale->name }} 
+                                            </span>
+                                        </x-admin::form.control-group.label>
+                                        
+                                    </x-admin::form.control-group>
+                                @endforeach
 
-                                            <x-admin::form.control-group.label
-                                                :for="'currencies_' . $currency->id"
-                                            >
-                                                <span class="text-gray-600 font-semibold cursor-pointer">
-                                                    {{ $currency->name }} 
-                                                </span>
-                                            </x-admin::form.control-group.label>
-                
-                                            <x-admin::form.control-group.error
-                                                :control-name="$currency->id"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                                    @endforeach
-                                </div>
-    
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.channels.edit.default-currency')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="base_currency_id"
-                                        :value="old('base_currency_id') ?? $channel->base_currency_id"
-                                        id="base_currency_id"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.channels.edit.default-currency')"
-                                    >
-                                        @foreach (core()->getAllCurrencies() as $currency)
-                                            <option value="{{ $currency->id }}">
-                                                {{ $currency->name }}
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="base_currency_id"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="locales[]" 
+                                >
+                                </x-admin::form.control-group.error>
                             </div>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('admin::app.settings.channels.edit.default-locale')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="default_locale_id"
+                                    :value="old('default_locale_id') ?? $channel->default_locale_id"
+                                    id="default_locale_id"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.channels.edit.default-locale')"
+                                >
+                                    @foreach (core()->getAllLocales() as $locale)
+                                        <option value="{{ $locale->id }}">
+                                            {{ $locale->name }}
+                                        </option>
+                                    @endforeach
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="default_locale_id"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <div class="mb-[10px]">
+                                <p class="required block leading-[24px] text-gray-800 font-medium">
+                                    @lang('admin::app.settings.channels.edit.currencies')
+                                </p>
+                            
+                                @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray() @endphp
+
+                                @foreach (core()->getAllCurrencies() as $currency)
+                                    <x-admin::form.control-group class="flex gap-[10px] mb-[10px]">
+                                        <x-admin::form.control-group.control
+                                            type="checkbox"
+                                            name="currencies[]"
+                                            :value="$currency->id" 
+                                            :id="'currencies_' . $currency->id"
+                                            :for="'currencies_' . $currency->id"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.channels.edit.currencies')"
+                                            :checked="in_array($currency->id, $selectedCurrenciesId)"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.label
+                                            :for="'currencies_' . $currency->id"
+                                            class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
+                                        >
+                                            <span class="text-gray-600 font-semibold cursor-pointer">
+                                                {{ $currency->name }} 
+                                            </span>
+                                        </x-admin::form.control-group.label>
+                                    </x-admin::form.control-group>
+                                @endforeach
+
+                                <x-admin::form.control-group.error
+                                    control-name="currencies[]"
+                                >
+                                </x-admin::form.control-group.error>
+                            </div>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label class="required"> 
+                                    @lang('admin::app.settings.channels.edit.default-currency')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::form.control-group.control
+                                    type="select"
+                                    name="base_currency_id"
+                                    :value="old('base_currency_id') ?? $channel->base_currency_id"
+                                    id="base_currency_id"
+                                    rules="required"
+                                    :label="trans('admin::app.settings.channels.edit.default-currency')"
+                                >
+                                    @foreach (core()->getAllCurrencies() as $currency)
+                                        <option value="{{ $currency->id }}">
+                                            {{ $currency->name }}
+                                        </option>
+                                    @endforeach
+                                </x-admin::form.control-group.control>
+
+                                <x-admin::form.control-group.error
+                                    control-name="base_currency_id"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
                         </x-slot:content>
                     </x-admin::accordion>
                 </div>

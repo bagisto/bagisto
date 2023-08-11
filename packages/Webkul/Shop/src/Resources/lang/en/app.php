@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'configurations' => [
+        'settings-title' => 'Settings',
+    ],
+
     'customers' => [
         'forgot-password' => [
             'title'                => 'Recover Password',
@@ -387,6 +391,11 @@ return [
                 'attachments' => 'Attachments',
             ],
         ],
+
+        'configurations' => [
+            'compare_options'     => 'Compare options',
+            'wishlist-options'    => 'Wishlist options',
+        ]
     ],
 
     'categories' => [
@@ -408,7 +417,10 @@ return [
     ],
 
     'search' => [
-        'title' => 'Search results for : :query',
+        'title'          => 'Search results for : :query',
+        'configurations' => [
+            'image-search-option' => 'Image Search Option',
+        ]
     ],
 
     'compare'  => [
