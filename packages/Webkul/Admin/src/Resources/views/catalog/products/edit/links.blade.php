@@ -53,8 +53,14 @@
                         <!-- Information -->
                         <div class="flex gap-[10px]">
                             <!-- Image -->
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <template v-if="! product.images.length">
+                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                </template>
+
+                                <template v-else>
+                                    <img :src="product.images[0].url">
+                                </template>
                                 
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                             </div>
@@ -157,11 +163,11 @@
                     ],
 
                     addedProducts: {
-                        'up_sells': @json($product->up_sells()->get()),
+                        'up_sells': @json($product->up_sells()->with('images')->get()),
 
-                        'cross_sells': @json($product->cross_sells()->get()),
+                        'cross_sells': @json($product->cross_sells()->with('images')->get()),
 
-                        'related_products': @json($product->related_products()->get())
+                        'related_products': @json($product->related_products()->with('images')->get())
                     },
                 }
             },

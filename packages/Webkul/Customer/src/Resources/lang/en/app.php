@@ -27,6 +27,7 @@ return [
         'system' => [
             'captcha' => [
                 'title' => 'Captcha',
+                'info'  => 'Set site key, secret key and status.',
                 'credentials' => 'Credentials',
                 'site-key' => 'Site Key',
                 'secret-key' => 'Secret Key',

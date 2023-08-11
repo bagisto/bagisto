@@ -48,7 +48,7 @@
                     <template #item="{ element, index }">
                         <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer">
                             <!-- Hidden Input -->
-                            <input type="hidden" :name="'downloadable_links[' + element.id + '][title]'" :value="element.title"/>
+                            <input type="hidden" :name="'downloadable_links[' + element.id + '][{{$currentLocale->code}}][title]'" :value="element.title"/>
 
                             <input type="hidden" :name="'downloadable_links[' + element.id + '][price]'" :value="element.price"/>
 
@@ -843,9 +843,9 @@
                 },
 
                 remove(link) {
-                    let index = this.links.indexOf(link)
+                    let index = this.links.indexOf(link);
 
-                    this.links.splice(index, 1)
+                    this.links.splice(index, 1);
                 },
 
                 resetForm() {

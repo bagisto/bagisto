@@ -11,10 +11,13 @@ return [
     [
         'key'  => 'sales.shipping',
         'name' => 'admin::app.admin.system.shipping',
+        'info' => 'admin::app.admin.system.shipping-info',
+        'icon' => 'shipping.png',
         'sort' => 1,
     ], [
         'key'    => 'sales.shipping.origin',
         'name'   => 'admin::app.admin.system.origin',
+        'info'   => 'admin::app.admin.system.origin',
         'sort'   => 0,
         'fields' => [
             [
@@ -82,10 +85,13 @@ return [
     [
         'key'  => 'sales.carriers',
         'name' => 'admin::app.admin.system.shipping-methods',
+        'info' => 'admin::app.admin.system.shipping-methods-info',
+        'icon' => 'shipping-method.png',
         'sort' => 2,
     ], [
         'key'    => 'sales.carriers.free',
         'name'   => 'admin::app.admin.system.free-shipping',
+        'info'   => 'admin::app.admin.system.free-shipping',
         'sort'   => 1,
         'fields' => [
             [
@@ -114,6 +120,7 @@ return [
     ], [
         'key'    => 'sales.carriers.flatrate',
         'name'   => 'admin::app.admin.system.flate-rate-shipping',
+        'info'   => 'admin::app.admin.system.flate-rate-shipping',
         'sort'   => 2,
         'fields' => [
             [
