@@ -121,11 +121,16 @@ window.debounce = debounce;
  * Global components registration;
  */
 import { Field, Form, ErrorMessage } from "vee-validate";
+import Slugify from "./directives/slugify";
+import SlugifyTarget from "./directives/slugify-target";
 
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
 app.component("draggable", draggable);
+
+app.directive("slugify", Slugify);
+app.directive("slugify-target", SlugifyTarget);
 
 window.Flatpickr = Flatpickr;
 
