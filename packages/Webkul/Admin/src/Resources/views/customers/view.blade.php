@@ -50,7 +50,7 @@
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders')({{ $totalOrderCount }})
+                            @lang('admin::app.customers.view.orders') ({{ $totalOrderCount }})
                         </p>
                         <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.customers.view.total-revenue') - {{ core()->currency($customer->orders->sum('grand_total')) }}
@@ -74,20 +74,29 @@
                                                 <p class="text-gray-600">
                                                     {{ $order->created_at }}
                                                 </p>
-
                                                 @switch($order->status)
                                                     @case('processing')
-                                                        <p class="label-processing">
+                                                        <p class="label-active">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
                                                     @case('completed')
-                                                        <p class="label-closed">
+                                                        <p class="label-active">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
                                                     @case('pending')
                                                         <p class="label-pending">
+                                                            {{ $order->status }}
+                                                        </p>
+                                                        @break
+                                                    @case('canceled')
+                                                        <p class="label-cancelled">
+                                                            {{ $order->status }}
+                                                        </p>
+                                                        @break
+                                                    @case('closed')
+                                                        <p class="label-closed">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
@@ -134,8 +143,11 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
                             </div>
+
+                            <span class="block w-full border-b-[1px] border-gray-300"></span>
                         @endforeach
 
                         {{-- single row --}}
@@ -145,7 +157,7 @@
                     {{-- Empty Container --}} 
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders')(0)
+                            @lang('admin::app.customers.view.orders') (0)
                         </p>
                     </div>
 
@@ -174,7 +186,7 @@
                     {{-- Invoice Table --}}
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left min-w-[800px]">
-                            <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200  ">
+                            <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200">
                                 <tr>
                                     <th scope="col" class="px-6 py-[16px] font-semibold"> 
                                         @lang('admin::app.customers.view.invoice-id')  
@@ -210,7 +222,7 @@
                     {{-- Empty Container --}}
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.invoice')(0)
+                            @lang('admin::app.customers.view.invoice') (0)
                         </p>
                     </div>
 
@@ -233,7 +245,7 @@
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.customers.view.reviews')({{ $totalReviewsCount }})
+                        @lang('admin::app.customers.view.reviews') ({{ $totalReviewsCount }})
                     </p>
 
                     @foreach($customer->reviews as $review)
@@ -311,7 +323,7 @@
                     {{-- Empty Invoice Container --}}
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.reviews')(0)
+                            @lang('admin::app.customers.view.reviews') (0)
                         </p>
                     </div>
 

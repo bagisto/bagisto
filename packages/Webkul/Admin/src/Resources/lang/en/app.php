@@ -112,12 +112,6 @@ return [
             ],
         ],
 
-        'invoices' => [
-            'index' => [
-                'title'  => 'Invoices',
-            ],
-        ],
-
         'refunds' => [
             'index' => [
                 'title' => 'Refunds',
@@ -152,12 +146,6 @@ return [
                 'tax-amount'          =>  'Tax Amount',
                 'title'               => 'Refund #:refund_id',
                 'tax'                 => 'Tax',
-            ],
-        ],
-
-        'shipments' => [
-            'index' => [
-                'title' => 'Shipments',
             ],
         ],
 
@@ -275,7 +263,7 @@ return [
             'order-id'                => 'Order ID', 
             'empty-title'             => 'Add Customer Address',
             'empty-description'       => 'Create New Addresses for Customer',
-            'invoice'                 => 'Invoice',
+            'invoice'                 => 'Invoices',
             'note'                    => 'Note',
             'empty-order'             => 'No Orders Available',
             'empty-invoice'           => 'No Invoices Available',

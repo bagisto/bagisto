@@ -20,6 +20,15 @@
             </p>
 
             {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
+
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.sales.invoices.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.account.edit.cancel-btn')
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -302,7 +311,7 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <div class="pb-[16px]">
+                            <div>
                                 <div class="flex items-center justify-between">
                                     <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Shipping Address')</p>
                                 </div>
