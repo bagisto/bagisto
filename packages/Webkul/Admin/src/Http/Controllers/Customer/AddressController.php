@@ -38,7 +38,6 @@ class AddressController extends Controller
 
         $customer = $this->customerRepository->find($id);
 
-
         return view('admin::customers.addresses.index', compact('customer'));
     }
 
