@@ -75,9 +75,52 @@ return [
                 'name'                  => 'Name',
                 'status'                => 'Status',
                 'no-refund-found'       => 'No Refund Found',
-                'comment-success'       => 'Comment addded successfully.',
+                'comment-success'       => 'Comment added successfully.',
                 'create-success'        => 'Order created successfully',
                 'cancel-error'          => 'Order not be canceled',
+            ],
+        ],
+        
+        'shipments' => [
+            'index' => [
+                'title' => 'Shipments',
+            ],
+
+            'view' => [
+                'title'                 => 'Shipment',
+                'ordered-items'         => 'Ordered Items',
+                'product-image'         => 'Product Image',
+                'sku'                   => 'SKU',
+                'qty'                   => 'Quantity',
+                'customer'              => 'Customer',
+                'email'                 => 'Email',
+                'billing-address'       => 'Billing Address',
+                'shipping-address'      => 'Shipping Address',
+                'order-information'     => 'Order Information',
+                'order-id'              => 'Order ID',
+                'order-date'            => 'Order Date',
+                'order-status'          => 'Order Status',
+                'channel'               => 'Channel',
+                'payment-and-shipping'  => 'Payment and Shipping',
+                'payment-method'        => 'Payment Method',
+                'currency'              => 'Currency',
+                'shipping-method'       => 'Shipping Method',
+                'shipping-price'        => 'Shipping Price',
+                'inventory-source'      => 'Inventory Source',
+                'carrier-title'         => 'Carrier Title',
+                'tracking-number'       => 'Tracking Number',
+            ],
+        ],
+
+        'invoices' => [
+            'index' => [
+                'title' => 'Invoices',
+            ],
+        ],
+
+        'refunds' => [
+            'index' => [
+                'title' => 'Refunds',
             ],
         ],
     ],
@@ -577,7 +620,7 @@ return [
             'title'                      => 'Recover Password',
             'email'                      => 'Registered Email',
             'sign-in-link'               => 'Back to Sign In ?',
-            'submit-btn'                 => 'Reset Password',
+            'submit-btn'                 => 'Reset',
         ],
 
         'reset-password' => [
