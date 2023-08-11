@@ -78,6 +78,14 @@ return [
                 'comment-success'       => 'Comment added successfully.',
                 'create-success'        => 'Order created successfully',
                 'cancel-error'          => 'Order not be canceled',
+                'new-shipment'          => 'New shipment',
+                'create-shipment'       => 'Create new shipment',
+                'carrier-name'          => 'Carrier Name',
+                'tracking-number'       => 'Tracking Number',
+                'source'                => 'Source',
+                'qty-available'         => 'Qty. Available',
+                'qty-to-ship'           => 'Qty. To Ship',
+
             ],
         ],
 

@@ -586,14 +586,14 @@
                         <div class="grid gap-[12px]">
                             <div class="flex justify-between items-center">
                                 <p class="text-[20px] font-medium">
-                                    @lang('New Shipment')
+                                    @lang('admin::app.sales.orders.view.new-shipment')
                                 </p>
         
                                 <button
                                     type="submit"
                                     class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                 >
-                                    @lang('Create Shipment')
+                                    @lang('admin::app.sales.orders.view.create-shipment')
                                 </button>
                             </div>
                         </div>
@@ -602,21 +602,20 @@
 
                     <!-- Drawer Content -->
                     <x-slot:content class="!p-0">
-                        
                         <div class="grid">
                             <div class="p-[16px] !pt-0">
                                 <div class="grid grid-cols-2 gap-x-[20px]">
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('Carrier Name')
+                                            @lang('admin::app.sales.orders.view.carrier-name')
                                         </x-admin::form.control-group.label>
     
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="shipment[carrier_title]" 
                                             id="shipment[carrier_title]" 
-                                            :label="trans('Carrier Name')"
-                                            :placeholder="trans('Carrier Name')"
+                                            :label="trans('admin::app.sales.orders.view.carrier-name')"
+                                            :placeholder="trans('admin::app.sales.orders.view.carrier-name')"
                                         >
                                         </x-admin::form.control-group.control>
     
@@ -628,15 +627,15 @@
     
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('Tracking Number')
+                                            @lang('admin::app.sales.orders.view.tracking-number')
                                         </x-admin::form.control-group.label>
     
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="shipment[track_number]"
                                             id="shipment[track_number]"
-                                            :label="trans('Tracking Number')"
-                                            :placeholder="trans('Tracking Number')"
+                                            :label="trans('admin::app.sales.orders.view.tracking-number')"
+                                            :placeholder="trans('admin::app.sales.orders.view.tracking-number')"
                                         >
                                         </x-admin::form.control-group.control>
     
@@ -649,7 +648,7 @@
                                 
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('Source')
+                                        @lang('admin::app.sales.orders.view.source')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -657,8 +656,8 @@
                                         name="shipment[source]" 
                                         id="shipment[source]" 
                                         rules="required"
-                                        :label="trans('Source')"
-                                        :placeholder="trans('Source')"
+                                        :label="trans('admin::app.sales.orders.view.source')"
+                                        :placeholder="trans('admin::app.sales.orders.view.source')"
                                         v-model="source"
                                         @change="onSourceChange"
                                     >
@@ -729,7 +728,7 @@
                                                         </p>
             
                                                         <p class="text-gray-600">
-                                                            Qty. Available :                  
+                                                            @lang('admin::app.sales.orders.view.qty-available') :                  
             
                                                             @php
                                                                 $product = $item->getTypeInstance()->getOrderedItem($item)->product;
@@ -747,7 +746,7 @@
                                                         @endphp
             
                                                         <x-admin::form.control-group.label class="required">
-                                                            Qty to Ship
+                                                            @lang('admin::app.sales.orders.view.qty-to-ship')
                                                         </x-admin::form.control-group.label>
             
                                                         <x-admin::form.control-group class="!mb-0">
