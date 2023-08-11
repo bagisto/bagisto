@@ -108,7 +108,7 @@
                         :for="'videoInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="'videos[files][' + video.id + ']'" v-if="! isNew"/>
+                    <input type="hidden" :name="'videos[files][' + video.id + ']'" v-if="! video.is_new"/>
 
                     <input type="hidden" :name="'videos[positions][' + video.id + ']'"/>
 
@@ -181,8 +181,6 @@
 
             data() {
                 return {
-                    isNew: 0,
-
                     isPlaying: false
                 }
             },
@@ -213,7 +211,7 @@
                 },
 
                 setFile(file) {
-                    this.isNew = 1;
+                    this.video.is_new = 1;
 
                     const dataTransfer = new DataTransfer();
 

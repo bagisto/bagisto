@@ -102,7 +102,7 @@
     @case('multiselect')
         <x-admin::form.control-group.control
             type="multiselect"
-            :name="$attribute->code"
+            :name="$attribute->code . '[]'"
             :rules="$attribute->validations"
             :label="$attribute->admin_name"
         >
