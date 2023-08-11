@@ -5,7 +5,7 @@
     <!-- Custom Filter -->
     <x-admin::accordion>
         <x-slot:header>
-            Custom Filters
+            @lang('admin::app.components.datagrid.filters.custom-filters.title')
         </x-slot:header>
 
         <x-slot:content>
@@ -26,7 +26,7 @@
                                 class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
                                 v-if="hasAnyAppliedColumnValues(column.index)"
                             >
-                                Clear All
+                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
                             </p>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                                 class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
                                 v-if="hasAnyAppliedColumnValues(column.index)"
                             >
-                                Clear All
+                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
                             </p>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                                 class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
                                 v-if="hasAnyAppliedColumnValues(column.index)"
                             >
-                                Clear All
+                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
                             </p>
                         </div>
                     </div>

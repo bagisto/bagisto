@@ -115,78 +115,18 @@ abstract class DataGrid
 
     /**
      * Add action.
-     *
-     * @param  array  $action
-     * @param  bool  $specialPermission
-     * @return void
      */
-    public function addAction($action, $specialPermission = false)
+    public function addAction(array $action): void
     {
-        $this->checkPermissions($action, $specialPermission, function ($action) {
-            $this->actions[] = $action;
-        });
+        $this->actions[] = $action;
     }
 
     /**
-     * Add mass action. Some datagrids are used in shops also. So extra
-     * parameters is their. If needs to give an access just pass true
-     * in second param.
-     *
-     * @param  array  $massAction
-     * @param  bool  $specialPermission
-     * @return void
+     * Add mass action.
      */
-    public function addMassAction($massAction, $specialPermission = false)
+    public function addMassAction(array $massAction): void
     {
-        $massAction['route'] = $this->getRouteNameFromUrl($massAction['action'], $massAction['method']);
-
-        $this->checkPermissions($massAction, $specialPermission, function ($action) {
-            $this->massActions[] = $action;
-        }, 'label');
-    }
-
-    /**
-     * Check permissions.
-     *
-     * @param  array  $action
-     * @param  bool  $specialPermission
-     * @param  \Closure  $operation
-     * @return void
-     */
-    private function checkPermissions($action, $specialPermission, $operation)
-    {
-        $currentRouteACL = $this->fetchCurrentRouteACL($action);
-
-        if (
-            bouncer()->hasPermission($currentRouteACL['key'] ?? null)
-            || $specialPermission
-        ) {
-            $operation($action);
-        }
-    }
-
-    /**
-     * Fetch current route acl. As no access to acl key, this will fetch acl by route name.
-     *
-     * @return array
-     */
-    private function fetchCurrentRouteACL($action)
-    {
-        return collect(config('acl'))->filter(function ($acl) use ($action) {
-            return $acl['route'] === $action['route'];
-        })->first();
-    }
-
-    /**
-     * Fetch route name from full url, not the current one.
-     *
-     * @return array
-     */
-    private function getRouteNameFromUrl($action, $method)
-    {
-        return app('router')->getRoutes()
-            ->match(app('request')->create(str_replace(url('/'), '', $action), $method))
-            ->getName();
+        $this->massActions[] = $massAction;
     }
 
     /**
@@ -267,6 +207,7 @@ abstract class DataGrid
             'records' => $paginator['data'],
 
             'meta' => [
+                'primary_column'   => $this->primaryColumn,
                 'from'             => $paginator['from'],
                 'to'               => $paginator['to'],
                 'total'            => $paginator['total'],

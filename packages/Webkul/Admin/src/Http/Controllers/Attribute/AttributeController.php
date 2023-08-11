@@ -3,11 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Attribute;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Core\Rules\Code;
-use Webkul\Attribute\Repositories\AttributeRepository;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Admin\DataGrids\AttributeDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
+use Webkul\Core\Rules\Code;
+use Webkul\Product\Repositories\ProductRepository;
 
 class AttributeController extends Controller
 {
@@ -19,8 +20,7 @@ class AttributeController extends Controller
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -55,7 +55,7 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
+            'code'       => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code()],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
@@ -110,7 +110,7 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'       => ['required', 'unique:attributes,code,' . $id, new Code],
+            'code'       => ['required', 'unique:attributes,code,' . $id, new Code()],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
@@ -161,35 +161,27 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
-        if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
+        $indices = $massDestroyRequest->input('indices');
 
-            foreach ($indexes as $index) {
-                $attribute = $this->attributeRepository->find($index);
+        foreach ($indices as $index) {
+            $attribute = $this->attributeRepository->find($index);
 
-                if (! $attribute->is_user_defined) {
-                    session()->flash('error', trans('admin::app.catalog.attributes.user-define-error'));
-
-                    return redirect()->back();
-                }
+            if (! $attribute->is_user_defined) {
+                return response()->json([], 422);
             }
-
-            foreach ($indexes as $index) {
-                Event::dispatch('catalog.attribute.delete.before', $index);
-
-                $this->attributeRepository->delete($index);
-
-                Event::dispatch('catalog.attribute.delete.after', $index);
-            }
-
-            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'attributes']));
-        } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
         }
 
-        return redirect()->back();
+        foreach ($indices as $index) {
+            Event::dispatch('catalog.attribute.delete.before', $index);
+
+            $this->attributeRepository->delete($index);
+
+            Event::dispatch('catalog.attribute.delete.after', $index);
+        }
+
+        return response()->json([]);
     }
 
     /**

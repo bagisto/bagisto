@@ -21,6 +21,13 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.cms.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.account.edit.cancel-btn')
+                    </span>
+                </a>
+
                 @if ($page->translate($locale))
                     <a 
                         href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}"

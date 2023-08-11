@@ -3,7 +3,6 @@
 namespace Webkul\Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Rules\CommaSeparatedInteger;
 
 class MassUpdateRequest extends FormRequest
 {
@@ -25,23 +24,9 @@ class MassUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'indexes'      => ['required', new CommaSeparatedInteger],
-            'update_key'   => ['sometimes', 'required', 'string'],
-            'update_value' => ['required'],
+            'indices'      => ['required', 'array'],
+            'indices.*'    => ['integer'],
+            'value'        => ['required'],
         ];
-    }
-
-    /**
-     * Handle passed validations.
-     *
-     * @return void
-     */
-    public function passedValidation()
-    {
-        $this->replace([
-            'indexes'      => explode(',', $this->indexes),
-            'update_key'   => $this->update_key,
-            'update_value' => $this->update_value,
-        ]);
     }
 }

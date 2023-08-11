@@ -8,23 +8,9 @@ use Webkul\DataGrid\DataGrid;
 class LocalesDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
@@ -92,18 +78,23 @@ class LocalesDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon pencil-lg-icon',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.locales.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'route'  => 'admin.exchange_rates.edit',
+            'url'    => function ($row) {
+                return route('admin.locales.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.locales.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Locale']),
             'icon'         => 'icon trash-icon',
+            'title'        => trans('admin::app.datagrid.delete'),
+            'method'       => 'DELETE',
+            'route'        => 'admin.exchange_rates.delete',
+            'url'          => function ($row) {
+                return route('admin.locales.delete', $row->id);
+            },
         ]);
     }
 }
