@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Requests\ConfigurationForm;
 use Webkul\Core\Repositories\CoreConfigRepository;
@@ -51,37 +52,19 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        $slugs = $this->getDefaultConfigSlugs();
+        $groups = Arr::get(
+            $this->configTree->items,
+            request()->route('slug') . '.children.' . request()->route('slug2') . '.children'
+        );
 
-        if (count($slugs)) {
-            return redirect()->route('admin.configuration.index', $slugs);
+        if ($groups) {
+            return view('admin::configuration.field', [
+                'config' => $this->configTree,
+                'groups' => $groups,
+            ]);
         }
 
         return view('admin::configuration.index', ['config' => $this->configTree]);
-    }
-
-    /**
-     * Returns slugs.
-     *
-     * @return array
-     */
-    public function getDefaultConfigSlugs()
-    {
-        if (! request()->route('slug')) {
-            $firstItem = current($this->configTree->items);
-
-            $secondItem = current($firstItem['children']);
-
-            return $this->getSlugs($secondItem);
-        }
-
-        if (! request()->route('slug2')) {
-            $secondItem = current($this->configTree->items[request()->route('slug')]['children']);
-
-            return $this->getSlugs($secondItem);
-        }
-
-        return [];
     }
 
     /**
@@ -137,7 +120,7 @@ class ConfigurationController extends Controller
     /**
      * Download the file for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function download()
     {
@@ -148,17 +131,5 @@ class ConfigurationController extends Controller
         $config = $this->coreConfigRepository->findOneByField('value', $fileName);
 
         return Storage::download($config['value']);
-    }
-
-    /**
-     * Get slugs.
-     *
-     * @param  string  $secondItem
-     */
-    private function getSlugs($secondItem): array
-    {
-        $temp = explode('.', $secondItem['key']);
-
-        return ['slug' => current($temp), 'slug2' => end($temp)];
     }
 }

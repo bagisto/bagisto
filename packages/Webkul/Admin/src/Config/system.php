@@ -7,14 +7,18 @@ return [
     [
         'key'  => 'general',
         'name' => 'admin::app.admin.system.general',
+        'info' => 'admin::app.admin.system.general-info',
         'sort' => 1,
     ], [
         'key'  => 'general.general',
         'name' => 'admin::app.admin.system.general',
+        'info' => 'admin::app.admin.system.general-info',
+        'icon' => 'store-information.svg',
         'sort' => 1,
     ], [
         'key'    => 'general.general.locale_options',
         'name'   => 'admin::app.admin.system.locale-options',
+        'info'   => 'admin::app.admin.system.locale-options',
         'sort'   => 1,
         'fields' => [
             [
@@ -36,10 +40,13 @@ return [
     ], [
         'key'  => 'general.content',
         'name' => 'admin::app.admin.system.content',
+        'info' => 'admin::app.admin.system.content-info',
+        'icon' => 'store-information.svg',
         'sort' => 2,
     ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.admin.system.custom-scripts',
+        'info'   => 'admin::app.admin.system.custom-scripts',
         'sort'   => 1,
         'fields' => [
             [
@@ -59,10 +66,13 @@ return [
     ], [
         'key'  => 'general.design',
         'name' => 'admin::app.admin.system.design',
+        'info' => 'admin::app.admin.system.design-info',
+        'icon' => 'theme-setting.png',
         'sort' => 3,
     ], [
         'key'    => 'general.design.admin_logo',
         'name'   => 'admin::app.admin.system.admin-logo',
+        'info'   => 'admin::app.admin.system.admin-logo',
         'sort'   => 1,
         'fields' => [
             [
@@ -87,14 +97,18 @@ return [
     [
         'key'  => 'catalog',
         'name' => 'admin::app.admin.system.catalog',
+        'info' => 'admin::app.admin.system.catalog',
         'sort' => 2,
     ], [
         'key'  => 'catalog.products',
         'name' => 'admin::app.admin.system.products',
+        'info' => 'admin::app.admin.system.products-info',
+        'icon' => 'group.png',
         'sort' => 2,
     ], [
         'key'    => 'catalog.products.guest-checkout',
         'name'   => 'admin::app.admin.system.guest-checkout',
+        'info'   => 'admin::app.admin.system.guest-checkout',
         'sort'   => 1,
         'fields' => [
             [
@@ -106,6 +120,7 @@ return [
     ], [
         'key'    => 'catalog.products.homepage',
         'name'   => 'admin::app.admin.system.homepage',
+        'info'   => 'admin::app.admin.system.homepage',
         'sort'   => 2,
         'fields' => [
             [
@@ -124,6 +139,7 @@ return [
     ], [
         'key'    => 'catalog.products.product_view_page',
         'name'   => 'admin::app.admin.system.product-view-page',
+        'info'   => 'admin::app.admin.system.product-view-page',
         'sort'   => 3,
         'fields' => [
             [
@@ -141,6 +157,7 @@ return [
     ], [
         'key'    => 'catalog.products.cart_view_page',
         'name'   => 'admin::app.admin.system.cart-view-page',
+        'info'   => 'admin::app.admin.system.cart-view-page',
         'sort'   => 3,
         'fields' => [
             [
@@ -153,6 +170,7 @@ return [
     ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
+        'info'   => 'admin::app.admin.system.storefront',
         'sort'   => 3,
         'fields' => [
             [
@@ -223,6 +241,7 @@ return [
     ], [
         'key'    => 'catalog.products.cache-small-image',
         'name'   => 'admin::app.admin.system.cache-small-image',
+        'info'   => 'admin::app.admin.system.cache-small-image',
         'sort'   => 4,
         'fields' => [
             [
@@ -239,6 +258,7 @@ return [
     ], [
         'key'    => 'catalog.products.cache-medium-image',
         'name'   => 'admin::app.admin.system.cache-medium-image',
+        'info'   => 'admin::app.admin.system.cache-medium-image',
         'sort'   => 5,
         'fields' => [
             [
@@ -255,6 +275,7 @@ return [
     ], [
         'key'    => 'catalog.products.cache-large-image',
         'name'   => 'admin::app.admin.system.cache-large-image',
+        'info'   => 'admin::app.admin.system.cache-large-image',
         'sort'   => 6,
         'fields' => [
             [
@@ -271,6 +292,7 @@ return [
     ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.admin.system.review',
+        'info'   => 'admin::app.admin.system.review',
         'sort'   => 7,
         'fields' => [
             [
@@ -282,6 +304,7 @@ return [
     ], [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.admin.system.attribute',
+        'info'   => 'admin::app.admin.system.attribute',
         'sort'   => 8,
         'fields' => [
             [
@@ -297,10 +320,13 @@ return [
     ], [
         'key'  => 'catalog.inventory',
         'name' => 'admin::app.admin.system.inventory',
+        'info' => 'admin::app.admin.system.inventory-info',
+        'icon' => 'store-information.svg',
         'sort' => 1,
     ], [
         'key'    => 'catalog.inventory.stock_options',
         'name'   => 'admin::app.admin.system.stock-options',
+        'info'   => 'admin::app.admin.system.stock-options',
         'sort'   => 1,
         'fields' => [
             [
@@ -313,10 +339,13 @@ return [
     ], [
         'key'  => 'catalog.rich_snippets',
         'name' => 'admin::app.admin.system.rich-snippets',
+        'info' => 'admin::app.admin.system.rich-snippets-info',
+        'icon' => 'settings.png',
         'sort' => 3,
     ], [
         'key'    => 'catalog.rich_snippets.products',
         'name'   => 'admin::app.admin.system.products',
+        'info'   => 'admin::app.admin.system.products',
         'sort'   => 1,
         'fields' => [
             [
@@ -356,6 +385,7 @@ return [
     ], [
         'key'    => 'catalog.rich_snippets.categories',
         'name'   => 'admin::app.admin.system.categories',
+        'info'   => 'admin::app.admin.system.categories',
         'sort'   => 1,
         'fields' => [
             [
@@ -376,14 +406,18 @@ return [
     [
         'key'  => 'customer',
         'name' => 'admin::app.admin.system.customer',
+        'info' => 'admin::app.admin.system.customer',
         'sort' => 3,
     ], [
         'key'  => 'customer.address',
         'name' => 'admin::app.admin.system.address',
+        'info' => 'admin::app.admin.system.address-info',
+        'icon' => 'address-setting.png',
         'sort' => 1,
     ], [
         'key'    => 'customer.address.requirements',
         'name'   => 'admin::app.admin.system.requirements',
+        'info'   => 'admin::app.admin.system.requirements',
         'sort'   => 1,
         'fields' => [
             [
@@ -410,7 +444,8 @@ return [
         ],
     ], [
         'key'    => 'customer.address.information',
-        'name'   => 'Information',
+        'name'   => 'admin::app.admin.system.information',
+        'info'   => 'admin::app.admin.system.information',
         'sort'   => 2,
         'fields' => [
             [
@@ -424,10 +459,13 @@ return [
     ], [
         'key'  => 'customer.settings',
         'name' => 'admin::app.admin.system.settings',
+        'info' => 'admin::app.admin.system.settings-info',
+        'icon' => 'settings.png',
         'sort' => 3,
     ], [
         'key'    => 'customer.settings.wishlist',
         'name'   => 'admin::app.admin.system.wishlist',
+        'info'   => 'admin::app.admin.system.wishlist',
         'sort'   => 1,
         'fields' => [
             [
@@ -439,6 +477,7 @@ return [
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.admin.system.newsletter',
+        'info'   => 'admin::app.admin.system.newsletter',
         'sort'   => 2,
         'fields' => [
             [
@@ -450,6 +489,7 @@ return [
     ], [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.admin.system.email',
+        'info'   => 'admin::app.admin.system.email',
         'sort'   => 3,
         'fields' => [
             [
@@ -466,14 +506,18 @@ return [
     [
         'key'  => 'emails',
         'name' => 'admin::app.admin.emails.email',
+        'info' => 'admin::app.admin.emails.email',
         'sort' => 4,
     ], [
         'key'  => 'emails.configure',
         'name' => 'admin::app.admin.system.email-settings',
+        'info' => 'admin::app.admin.system.email-settings-info',
+        'icon' => 'email.png',
         'sort' => 1,
     ], [
         'key'    => 'emails.configure.email_settings',
         'name'   => 'admin::app.admin.system.email-settings',
+        'info'   => 'admin::app.admin.system.email-settings',
         'sort'   => 1,
         'fields' => [
             [
@@ -513,10 +557,13 @@ return [
     ], [
         'key'  => 'emails.general',
         'name' => 'admin::app.admin.emails.notification_label',
+        'info' => 'admin::app.admin.emails.notification_label-info',
+        'icon' => 'store-information.svg',
         'sort' => 1,
     ], [
         'key'    => 'emails.general.notifications',
         'name'   => 'admin::app.admin.emails.notification_label',
+        'info'   => 'admin::app.admin.emails.notification_label',
         'sort'   => 1,
         'fields' => [
             [
