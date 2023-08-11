@@ -23,36 +23,63 @@ return [
             'index' => [
                 'title' => 'Orders',
             ],
-        ],
 
-        'shipments' => [
-            'index' => [
-                'title' => 'Shipments',
+            'view' => [
+                'title'                 => 'Order #:order_id',
+                'cancel'                => 'Cancel',
+                'cancel-msg'            => 'Are your sure you want to cancel this order',
+                'invoice'               => 'Invoice',
+                'ship'                  => 'Ship',
+                'refund'                => 'Refund',
+                'grand-total'           => 'Grand Total',
+                'per-unit'              => 'Per Unit',
+                'quantity'              => 'Quantity',
+                'ordered'               => 'Ordered',
+                'invoiced'              => 'Invoiced',
+                'shipped'               => 'Shipped',
+                'sku'                   => 'SKU',
+                'price'                 => 'Price',
+                'tax'                   => 'Tax',
+                'sub-total'             => 'Sub Total',
+                'shipping-and-handling' => 'Shipping and Handling',
+                'total-paid'            => 'Total Paid',
+                'total-refund'          => 'Total Refund',
+                'total-due'             => 'Total Due',
+                'comments'              => 'Comments',
+                'write-your-comment'    => 'Write your comment',
+                'notify-customer'       => 'Notify Customer',
+                'submit-comment'        => 'Submit Comment',
+                'customer-notified'     => ':date | Customer <b>Notified</b>',
+                'customer-not-notified' => ':date | Customer <b>Not Notified</b>',
+                'customer'              => 'Customer',
+                'customer-group'        => 'Cutomer Group',
+                'billing-address'       => 'Billing Address',
+                'shipping-address'      => 'Shipping Address',
+                'order-information'     => 'Order Information',
+                'order-date'            => 'Order Date',
+                'order-status'          => 'Order Status',
+                'channel'               => 'Channel',
+                'invoices'              => 'Invoices',
+                'download-pdf'          => 'Download PDF',
+                'view'                  => 'View',
+                'no-invoice-found'      => 'No Invoice Found',
+                'shipments'             => 'Shipments',
+                'no-shipment-found'     => 'No Shipments Found',
+                'payment-and-shipping'  => 'Payment and Shipping',
+                'payment-method'        => 'Payment method',
+                'currency'              => 'Currency',
+                'contact'               => 'Contact',
+                'shipping-method'       => 'Shipping Method',
+                'shipping-price'        => 'Shipping Price',
+                'refunded'              => 'Refunded',
+                'name'                  => 'Name',
+                'status'                => 'Status',
+                'no-refund-found'       => 'No Refund Found',
+                'comment-success'       => 'Comment addded successfully.',
+                'create-success'        => 'Order created successfully',
+                'cancel-error'          => 'Order not be canceled',
             ],
         ],
-
-        'invoices' => [
-            'index' => [
-                'title' => 'Invoices',
-            ],
-        ],
-
-        'refunds' => [
-            'index' => [
-                'title' => 'Refunds',
-            ],
-        ],
-
-        'transactions' => [
-            'index' => [
-                'title' => 'Transactions',
-            ],
-
-            'create' => [
-                'add' => 'Add transaction',
-            ],
-        ],
-
     ],
 
     'customers' => [
@@ -135,7 +162,7 @@ return [
                 'address-2'          => 'Address 2',
                 'city'               => 'City',
                 'state'              => 'State',
-                'select-country'     => "Select Country",
+                'select-country'     => 'Select Country',
                 'country'            => 'Country',
                 'default-address'    => 'Default Address',
                 'first-name'         => 'First Name',
@@ -146,22 +173,22 @@ return [
                 'save-btn-title'     => 'Save Address',
             ],
         ],
-       
+
         'groups' => [
             'index' => [
                 'title' => 'Groups',
 
-                'create' =>  [
+                'create' => [
                     'title'          => 'Create new Group',
                     'create-btn'     => 'Create Group',
                     'code'           => 'Code',
-                    'name'           => 'Name', 
-                    'save-btn'       => 'Save Group',   
+                    'name'           => 'Name',
+                    'save-btn'       => 'Save Group',
                     'create-success' => 'Group created successfully',
                 ],
             ],
 
-            'edit'  =>  [
+            'edit'  => [
                 'title'             => 'Edit Group',
                 'cancel-btn'        => 'Cancel',
                 'save-btn'          => 'Save Group',
@@ -219,11 +246,11 @@ return [
         'currencies'        => [
             'index' => [
                 'title'      => 'Currencies',
-                'create-btn' => 'Create Currency'
+                'create-btn' => 'Create Currency',
             ],
 
             'create' => [
-                'title'              => 'Create New Currency', 
+                'title'              => 'Create New Currency',
                 'create-btn'         => 'Create Currency',
                 'save-btn'           => 'Create Currency',
                 'general'            => 'General',
@@ -263,7 +290,7 @@ return [
                 ],
             ],
 
-            'edit'  =>  [
+            'edit'  => [
                 'cancel-btn'       => 'Cancel',
                 'rate'             => 'Rate',
                 'source-currency'  => 'Source Currency',
@@ -397,7 +424,7 @@ return [
                     'create-success' => 'Tax rate created successfully.',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'basic-settings' => 'Basic Settings',
                     'country'        => 'Country',
                     'cancel-btn'     => 'Cancel',
@@ -415,14 +442,14 @@ return [
                 ],
             ],
         ],
-         
+
         'channels' => [
             'index' => [
-                'title'           => 'Channels',
+                'title'            => 'Channels',
                 'create-btn'       => 'Create Channel',
             ],
 
-            'create' => [   
+            'create' => [
                 'title'                     => 'Create Channel',
                 'cancel'                    => 'Cancel',
                 'save-btn'                  => 'Save Channel',
@@ -455,9 +482,9 @@ return [
                 'status'                    => 'Status',
                 'maintenance-mode-text'     => 'Message',
                 'create-success'            => 'Channel created successfully.',
-            ],  
+            ],
 
-            'edit' => [   
+            'edit' => [
                 'title'                     => 'Edit Channel',
                 'cancel'                    => 'Cancel',
                 'save-btn'                  => 'Save Channel',
@@ -490,17 +517,17 @@ return [
                 'status'                    => 'Status',
                 'maintenance-mode-text'     => 'Message',
                 'update-success'            => 'Channel updated successfully.',
-            ],  
-        ],  
-        
-    ],  
-    
-    'users' => [    
-        'users' => [    
-            'index' => [    
+            ],
+        ],
+
+    ],
+
+    'users' => [
+        'users' => [
+            'index' => [
                 'title' => 'Users',
 
-                'create'  =>  [
+                'create'  => [
                     'title'            => 'Create User',
                     'name'             => 'Name',
                     'email'            => 'Email',
@@ -513,7 +540,7 @@ return [
                 ],
             ],
 
-            'edit'  =>  [
+            'edit'  => [
                 'title'            => 'Edit User',
                 'general'          => 'General',
                 'cancel-btn'       => 'Cancel',
@@ -523,7 +550,7 @@ return [
                 'confirm-password' => 'Confirm Password',
                 'role'             => 'Role',
                 'status'           => 'Status',
-                'save-btn'         => 'Save User',    
+                'save-btn'         => 'Save User',
                 'update-success'   => 'User updated successfully.',
             ],
         ],
@@ -544,7 +571,7 @@ return [
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
                 'custom'          => 'Custom',
-                'all'             => 'All', 
+                'all'             => 'All',
             ],
 
             'edit' => [
@@ -557,7 +584,7 @@ return [
                 'access-control'  => 'Access Control',
                 'permissions'     => 'Permissions',
                 'custom'          => 'Custom',
-                'all'             => 'All',     
+                'all'             => 'All',
             ],
         ],
 
@@ -609,11 +636,12 @@ return [
                     'booking'                 => 'Booking',
                     'family'                  => 'Family',
                     'sku'                     => 'SKU',
-                ]
+                ],
             ],
 
             'edit' => [
                 'title'       => 'Edit Product',
+                'save-btn'    => 'Save Product',
 
                 'price' => [
                     'group' => [
@@ -636,10 +664,10 @@ return [
                             'price'          => 'Price',
                             'delete-btn'     => 'Delete',
                             'save-btn'       => 'Save',
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
-                
+
                 'inventories' => [
                     'title'                    => 'Inventories',
                     'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
@@ -650,23 +678,47 @@ return [
                     'title' => 'Categories',
                 ],
 
+                'images' => [
+                    'title'             => 'Images',
+                    'info'              => 'Image resolution should be like 609px X 560px',
+                    'add-image-btn'     => 'Add Image',
+                    'allowed-types'     => 'png, jpeg, jpg',
+                    'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
+
+                    'placeholders'  => [
+                        'front'     => 'Front',
+                        'next'      => 'Next',
+                        'zoom'      => 'Zoom',
+                        'use-cases' => 'Use Cases',
+                        'size'      => 'Size',
+                    ],
+                ],
+
+                'videos' => [
+                    'title'             => 'Videos',
+                    'info'              => 'Maximum video size should be like :size',
+                    'add-video-btn'     => 'Add Video',
+                    'allowed-types'     => 'png, jpeg, jpg',
+                    'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+                ],
+
                 'links' => [
                     'related-products' => [
                         'title'      => 'Related Products',
                         'info'       => 'In addition to the product the customer is viewing, they are presented with related products.',
-                        'empty-info' => 'To add related products on a go.'
+                        'empty-info' => 'To add related products on a go.',
                     ],
 
                     'up-sells' => [
                         'title'      => 'Up-Sell Products',
                         'info'       => 'The customer is presented with an up-sell products, which serves as a premium or higher-quality alternative to the product they are currently viewing.',
-                        'empty-info' => 'To add up sells products on a go.'
+                        'empty-info' => 'To add up sells products on a go.',
                     ],
 
                     'cross-sells' => [
                         'title'      => 'Cross-Sell Products',
                         'info'       => 'Adjacent to the shopping cart, you\'ll find these \"impulse-buy\" products positioned as cross-sells to complement the items already added to your cart.',
-                        'empty-info' => 'To add cross sells products on a go.'
+                        'empty-info' => 'To add cross sells products on a go.',
                     ],
 
                     'add-btn'     => 'Add Product',
@@ -694,7 +746,7 @@ return [
                             'name'                   => 'Name',
                             'description'            => 'Description',
                             'save-btn'               => 'Add',
-                            'variant-already-exists' => 'This variant already exists'
+                            'variant-already-exists' => 'This variant already exists',
                         ],
 
                         'edit' => [
@@ -709,8 +761,8 @@ return [
                             'weight'          => 'Weight',
                             'quantities'      => 'Quantities',
                             'edit-info'       => 'If you want to update product information in detail, then go to the',
-                            'edit-link-title' => 'Product Details Page'
-                        ]
+                            'edit-link-title' => 'Product Details Page',
+                        ],
                     ],
 
                     'grouped' => [
@@ -758,25 +810,25 @@ return [
                             'types' => [
                                 'radio' => [
                                     'title' => 'Radio',
-                                    'info'  => 'Set default product using radio button'
+                                    'info'  => 'Set default product using radio button',
                                 ],
-    
+
                                 'checkbox' => [
                                     'title' => 'Checkbox',
-                                    'info'  => 'Set default product using checkbox'
+                                    'info'  => 'Set default product using checkbox',
                                 ],
-    
+
                                 'select' => [
                                     'title' => 'Select',
-                                    'info'  => 'Set default product using radio button'
+                                    'info'  => 'Set default product using radio button',
                                 ],
-    
+
                                 'multiselect' => [
                                     'title' => 'Multiselect',
-                                    'info'  => 'Set default product using checkbox button'
-                                ]
-                            ]
-                        ]
+                                    'info'  => 'Set default product using checkbox button',
+                                ],
+                            ],
+                        ],
                     ],
 
                     'downloadable' => [
@@ -827,9 +879,9 @@ return [
                                 'save-btn'    => 'Save',
                             ],
                         ],
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ],
 
         'attributes' => [
@@ -890,7 +942,7 @@ return [
                 'value_per_locale'            => 'Value Per Locale',
                 'value_per_channel'           => 'Value Per Channel',
                 'yes'                         => 'Yes',
-                'option'  =>  [
+                'option'                      => [
                     'color'     => 'Color Swatch',
                     'dropdown'  => 'Dropdown',
                     'image'     => 'Image Swatch',
@@ -953,7 +1005,7 @@ return [
                 'value_per_locale'            => 'Value Per Locale',
                 'value_per_channel'           => 'Value Per Channel',
                 'yes'                         => 'Yes',
-                'option'  =>  [
+                'option'                      => [
                     'color'     => 'Color Swatch',
                     'dropdown'  => 'Dropdown',
                     'image'     => 'Image Swatch',
@@ -1001,7 +1053,7 @@ return [
                 'visible-in-menu'          => 'Visible In Menu',
             ],
 
-            'edit'  =>  [
+            'edit'  => [
                 'add-logo'                 => 'Add Logo',
                 'add-banner'               => 'Add Banner',
                 'banner'                   => 'Banner',
@@ -1029,7 +1081,7 @@ return [
                 'seo-details'              => 'SEO Details',
                 'select-parent-category'   => 'Select Parent Category*',
                 'select-display-mode'      => 'Select Display Mode',
-                'title'                    => 'Edit Category', 
+                'title'                    => 'Edit Category',
                 'visible-in-menu'          => 'Visible In Menu',
             ],
 
@@ -1144,6 +1196,7 @@ return [
                     'name'           => 'Name',
                     'save-btn'       => 'Save Template',
                     'status'         => 'Status',
+                    'update-success' => 'Updated successfully',
                 ],
 
                 'index' => [
@@ -1193,7 +1246,7 @@ return [
                     'title'           => 'Edit Campaign',
                 ],
 
-                'index' =>  [
+                'index' => [
                     'title'          => 'Campaigns',
                     'create-btn'     => 'Create Campaign',
                 ],
@@ -1213,12 +1266,12 @@ return [
                     'save-btn'       => 'Save Event',
                 ],
 
-                'index'  =>  [
-                    'title'    => 'Events',
+                'index'  => [
+                    'title'       => 'Events',
                     'create-btn'  => 'Create Event',
                 ],
 
-                'edit'  =>  [
+                'edit'  => [
                     'title'        => 'Edit Events',
                     'cancel-btn'   => 'Cancel',
                     'general'      => 'General',
@@ -1240,7 +1293,7 @@ return [
                     'subscribed'  => 'Subscribed',
                     'true'        => 'True',
                     'false'       => 'False',
-                ]
+                ],
             ],
         ],
 
@@ -1273,13 +1326,13 @@ return [
                 'catalog-rule-title' => 'Catalog Rules',
                 'cart-rule-title'    => 'Cart Rules',
             ],
-    
+
             'cart-rules' => [
                 'index' => [
                     'title'      => 'Cart Rules',
                     'create-btn' => 'Create Cart Rule',
                 ],
-    
+
                 'create' => [
                     'cancel-btn'                                => 'Cancel',
                     'title'                                     => 'Create Cart Rule',
@@ -1300,7 +1353,7 @@ return [
                     'uses-per-customer'                         => 'Uses Per Customer',
                     'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                     'conditions'                                => 'Conditions',
-                    'condition-type'                            =>'Condition Type',
+                    'condition-type'                            => 'Condition Type',
                     'all-conditions-true'                       => 'All Conditions Are True',
                     'any-conditions-true'                       => 'Any Conditions Are True',
                     'add-condition'                             => 'Add Condition',
@@ -1354,7 +1407,7 @@ return [
                     'create-success'                            => 'Cart rule created successfully',
                     'choose-condition-to-add'                   => 'Choose condition to add',
                 ],
-    
+
                 'edit' => [
                     'cancel-btn'                                => 'Cancel',
                     'title'                                     => 'Edit Cart Rule',
@@ -1375,7 +1428,7 @@ return [
                     'uses-per-customer'                         => 'Uses Per Customer',
                     'uses-per-customer-control-info'            => 'Will be used for logged in customers only.',
                     'conditions'                                => 'Conditions',
-                    'condition-type'                            =>'Condition Type',
+                    'condition-type'                            => 'Condition Type',
                     'all-conditions-true'                       => 'All Conditions Are True',
                     'any-conditions-true'                       => 'Any Conditions Are True',
                     'add-condition'                             => 'Add Condition',
@@ -1439,15 +1492,15 @@ return [
                     'generate'                                  => 'Generate',
                     'status'                                    => 'Status',
                     'customer-group'                            => 'Customer Group',
-                ] 
+                ],
             ],
-    
+
             'catalog-rules' => [
                 'index' => [
-                    'title'     => 'Catalog Rules',
+                    'title'      => 'Catalog Rules',
                     'create-btn' => 'Create Catalog Rule',
                 ],
-    
+
                 'create' => [
                     'cancel-btn'               => 'Cancel',
                     'title'                    => 'Create Catalog Rule',
@@ -1470,7 +1523,7 @@ return [
                     'yes'                      => 'Yes',
                     'no'                       => 'No',
                     'settings'                 => 'Settings',
-                    'status'                   => 'Status',   
+                    'status'                   => 'Status',
                     'priority'                 => 'Priority',
                     'marketing-time'           => 'Marketing Time',
                     'from'                     => 'From',
@@ -1489,9 +1542,9 @@ return [
                     'attribute_family'         => 'Attribute Family',
                     'product-attribute'        => 'Product attribute',
                     'action-type'              => 'Action Type',
-                    'create-success'           => 'Catalog rule created successfully'
+                    'create-success'           => 'Catalog rule created successfully',
                 ],
-    
+
                 'edit' => [
                     'cancel-btn'               => 'Cancel',
                     'title'                    => 'Edit Catalog Rule',
@@ -1514,7 +1567,7 @@ return [
                     'yes'                      => 'Yes',
                     'no'                       => 'No',
                     'settings'                 => 'Settings',
-                    'status'                   => 'Status',   
+                    'status'                   => 'Status',
                     'priority'                 => 'Priority',
                     'marketing-time'           => 'Marketing Time',
                     'from'                     => 'From',
@@ -1534,7 +1587,7 @@ return [
                     'product-attribute'        => 'Product attribute',
                     'action-type'              => 'Action Type',
                     'update-success'           => 'Catalog rule updated successfully',
-                ]
+                ],
             ],
         ],
     ],
@@ -1546,17 +1599,17 @@ return [
         ],
 
         'create' => [
-            'title'            => 'Create Page',
-            'save-btn'         => 'Save Page',
-            'general'          => 'General',
-            'page-title'       => 'Title',
+            'title'             => 'Create Page',
+            'save-btn'          => 'Save Page',
+            'general'           => 'General',
+            'page-title'        => 'Title',
             'channels'          => 'Channels',
-            'content'          => 'Content',
-            'meta-keywords'    => 'Meta Keywords',
-            'meta-description' => 'Meta Description',
-            'meta-title'       => 'Meta Title',
-            'seo'              => 'SEO',
-            'url-key'          => 'URL Key',
+            'content'           => 'Content',
+            'meta-keywords'     => 'Meta Keywords',
+            'meta-description'  => 'Meta Description',
+            'meta-title'        => 'Meta Title',
+            'seo'               => 'SEO',
+            'url-key'           => 'URL Key',
             'create-success'    => 'Cms created successfully.',
         ],
 
@@ -1633,6 +1686,35 @@ return [
             ],
         ],
 
+        'datagrid' => [
+            'toolbar' => [
+                'mass-actions' => [
+                    'select-action' => 'Select Action',
+                    'select-option' => 'Select Option',
+                    'submit'        => 'Submit',
+                ],
+
+                'filter' => [
+                    'title' => 'Filter',
+                ],
+
+                'search' => [
+                    'title' => 'Search',
+                ],
+            ],
+
+            'filters' => [
+                'custom-filters' => [
+                    'title'     => 'Custom Filters',
+                    'clear-all' => 'Clear All',
+                ],
+            ],
+
+            'table' => [
+                'actions' => 'Actions',
+            ],
+        ],
+
         'products' => [
             'search' => [
                 'title'       => 'Select Products',
@@ -1641,8 +1723,8 @@ return [
                 'empty-info'  => 'No products available for search term.',
                 'sku'         => 'SKU - :sku',
                 'qty'         => ':qty Available',
-            ]
-        ]
+            ],
+        ],
     ],
 
     'layouts' => [

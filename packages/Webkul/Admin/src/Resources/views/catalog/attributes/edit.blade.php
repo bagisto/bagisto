@@ -8,13 +8,13 @@
         @lang('admin::app.catalog.attributes.edit.title')
     </x-slot:title>
 
-    {{-- Create Attributes Vue Components --}}
-    <v-create-attributes :all-locales="{{ $allLocales->toJson() }}"></v-create-attributes>
+    {{-- Edit Attributes Vue Components --}}
+    <v-edit-attributes :all-locales="{{ $allLocales->toJson() }}"></v-edit-attributes>
 
     @pushOnce('scripts')
         <script
             type="text/x-template"
-            id="v-create-attributes-template"
+            id="v-edit-attributes-template"
         >
             <!-- Input Form -->
             <x-admin::form
@@ -28,13 +28,14 @@
                     </p>
         
                     <div class="flex gap-x-[10px] items-center">
-                        <!-- Canvel Button -->
+                        <!-- Cancel Button -->
                         <a href="{{ route('admin.catalog.attributes.index') }}">
-                            <span class="text-gray-600 leading-[24px]">
+                            <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                 @lang('admin::app.catalog.attributes.edit.cancel-btn')
                             </span>
                         </a>
-        
+
+                        <!-- Save Button -->
                         <button
                             type="submit"
                             class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -88,14 +89,14 @@
 
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        name="{{ $locale->code }}[name]"
+                                        :name="$locale->code . '[name]'"
                                         :value="old($locale->code)['name'] ?? ($attribute->translate($locale->code)->name ?? '')"
                                         :placeholder="$locale->name"
                                     >
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
-                                        control-name="{{ $locale->code }}[name]"
+                                        :control-name="$locale->code . '[name]'"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>    
@@ -166,25 +167,30 @@
                                             @lang('admin::app.catalog.attributes.edit.input-options')
                                         </x-admin::form.control-group.label>
 
-                                        <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
-                                            <x-admin::form.control-group.control
+                                        <div class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
+                                            <input 
                                                 type="checkbox"
                                                 name="empty_option"
                                                 id="empty_option"
-                                                value="1"
-                                                ref="emptyCheckbox"
-                                                v-model="isNullOptionChecked"
-                                                @click="isNullOptionChecked=true"
-                                            >
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.label
                                                 for="empty_option"
-                                                class="!text-[14px] !font-semibold !text-gray-600 cursor-pointer" 
+                                                class="hidden peer"
+                                                v-model="isNullOptionChecked"
+                                                @click="$refs.addOptionsRow.toggle()"
+                                            >
+
+                                            <label
+                                                for="empty_option"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+                                            >
+                                            </label>
+
+                                            <label
+                                                for="empty_option"
+                                                class="text-[14px] text-gray-600 font-semibold cursor-pointer"
                                             >
                                                 @lang('admin::app.catalog.attributes.edit.create-empty-option')
-                                            </x-admin::form.control-group.label>
-                                        </x-admin::form.control-group>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -226,6 +232,7 @@
                                         <draggable
                                             tag="tbody"
                                             ghost-class="draggable-ghost"
+                                            v-bind="{animation: 200}"
                                             :list="optionsData"
                                             item-key="id"
                                         >
@@ -316,7 +323,7 @@
                                                         />
                                                     </x-admin::table.td>
 
-                                                    <!-- Actions Bustion -->
+                                                    <!-- Actions Button -->
                                                     <x-admin::table.td class="!px-0">
                                                         <span
                                                             class="icon-edit p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
@@ -326,7 +333,7 @@
                                                         
                                                         <span
                                                             class="icon-delete p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100 max-sm:place-self-center"
-                                                            @click="deleteOptions(element)"
+                                                            @click="removeOption(element.id)"
                                                         >
                                                         </span>
                                                     </x-admin::table.td>
@@ -636,8 +643,8 @@
             >
                 <form @submit.prevent="handleSubmit($event, storeOptions)" enctype="multipart/form-data">
                     <x-admin::modal
-                        ref="addOptionsRow"
                         @toggle="listenModel"
+                        ref="addOptionsRow"
                     >
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -702,14 +709,14 @@
                                 
                                 <!-- Admin Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.edit.admin')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="admin_name"
-                                        rules="required"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
                                         ref="inputAdmin"
                                         :label="trans('admin::app.catalog.attributes.edit.admin')"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.admin')"
@@ -725,14 +732,14 @@
                                 <!-- Locales Input -->
                                 @foreach ($allLocales as $locale)
                                     <x-admin::form.control-group class="w-full mb-[10px]">
-                                        <x-admin::form.control-group.label :class="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''">
+                                        <x-admin::form.control-group.label ::class="{ '{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }">
                                             {{ $locale->name }} ({{ strtoupper($locale->code) }})
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="locales.{{ $locale->code }}"
-                                            :rules="core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : ''"
+                                            ::rules="{ '{{ core()->getDefaultChannelLocaleCode() == $locale->code ? 'required' : '' }}' : ! isNullOptionChecked }"
                                             :label="$locale->name"
                                             :placeholder="$locale->name"
                                         >
@@ -747,14 +754,14 @@
 
                                 <!-- Position Input -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label ::class="{ 'required' : ! isNullOptionChecked }">
                                         @lang('admin::app.catalog.attributes.edit.position')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="number"
                                         name="sort_order"
-                                        rules="required"
+                                        ::rules="{ 'required' : ! isNullOptionChecked }"
                                         :label="trans('admin::app.catalog.attributes.edit.position')"
                                         :placeholder="trans('admin::app.catalog.attributes.edit.position')"
                                     >
@@ -783,12 +790,10 @@
         </script>
 
         <script type="module">
-            app.component('v-create-attributes', {
-                template: '#v-create-attributes-template',
+            app.component('v-edit-attributes', {
+                template: '#v-edit-attributes-template',
 
-                props: [
-                    'allLocales'
-                ],
+                props: ['allLocales'],
 
                 data: function() {
                     return {
@@ -804,8 +809,6 @@
 
                         isNullOptionChecked: false,
 
-                        idNullOption: null,
-
                         optionsData: [],
 
                         src: "{{ route('admin.catalog.attributes.options', $attribute->id) }}",
@@ -817,7 +820,7 @@
                 },
 
                 methods: {
-                    storeOptions(params, {resetForm, setValues}) {
+                    storeOptions(params, { resetForm, setValues }) {
                         let foundIndex = this.optionsData.findIndex(item => item.id === params.id);
 
                         if (foundIndex !== -1) {
@@ -832,14 +835,13 @@
                     },
 
                     editOptions(value) {
-                        // For set value on edit form
                         this.$refs.modelForm.setValues(value);
 
                         this.$refs.addOptionsRow.toggle();
                     },
 
-                    deleteOptions(value) {
-                        let foundIndex = this.optionsData.findIndex(item => item.id === value.id);
+                    removeOption(id) {
+                        let foundIndex = this.optionsData.findIndex(item => item.id === id);
 
                         if (foundIndex !== -1) {
                             this.optionsData.splice(foundIndex, 1);
@@ -847,8 +849,8 @@
                     },
 
                     listenModel(event) {
-                        if ( this.isNullOptionChecked) {
-                            this.$refs.emptyCheckbox.classList.remove("peer-checked:icon-checked", "peer-checked:text-navyBlue");
+                        if (! event.isActive) {
+                            this.isNullOptionChecked = false;                            
                         }
                     },
 
@@ -886,15 +888,7 @@
                                     this.optionsData.push(row);
                                 });
                             });
-                    },
-                },
-
-                watch: {
-                    isNullOptionChecked: function (val) { 
-                        if (val && ! this.idNullOption) {
-                            this.$refs.addOptionsRow.toggle();
-                        }
-                    },
+                    }
                 },
             });
         </script>

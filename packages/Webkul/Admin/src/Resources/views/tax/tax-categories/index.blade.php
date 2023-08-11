@@ -147,12 +147,13 @@
                                                 {{ $taxRate->identifier }}
                                             </x-admin::form.control-group.label>
     
-                                            <x-admin::form.control-group.error
-                                                control-name="taxrates"
-                                            >
-                                            </x-admin::form.control-group.error>
                                         </x-admin::form.control-group>
                                     @endforeach 
+
+                                    <x-admin::form.control-group.error
+                                        control-name="taxrates"
+                                    >
+                                    </x-admin::form.control-group.error>
 
                                 </div>
                             </x-slot:content>

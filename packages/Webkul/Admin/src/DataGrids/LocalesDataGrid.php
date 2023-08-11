@@ -78,6 +78,7 @@ class LocalesDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon pencil-lg-icon',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.locales.edit',
@@ -87,6 +88,7 @@ class LocalesDataGrid extends DataGrid
         ]);
 
         $this->addAction([
+            'icon'         => 'icon trash-icon',
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'DELETE',
             'route'        => 'admin.locales.delete',

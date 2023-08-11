@@ -13,6 +13,6 @@
         </div>
     </div>
     
-    <x-admin::datagrid src="{{ route('admin.locales.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.locales.index')"></x-admin::datagrid>
 
 </x-admin::layouts>

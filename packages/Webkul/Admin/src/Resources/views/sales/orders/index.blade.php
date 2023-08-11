@@ -8,7 +8,7 @@
             @lang('admin::app.sales.orders.index.title')
         </p>
     </div>
-
-    <x-admin::datagrid src="{{ route('admin.sales.orders.index') }}"></x-admin::datagrid>
+    
+    <x-admin::datagrid :src="route('admin.sales.orders.index')"></x-admin::datagrid>
 
 </x-admin::layouts>
