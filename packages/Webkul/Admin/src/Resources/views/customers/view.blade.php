@@ -311,7 +311,7 @@
                     {{-- Empty Invoice Container --}}
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.invoice')(0)
+                            @lang('admin::app.customers.view.reviews')(0)
                         </p>
                     </div>
 
