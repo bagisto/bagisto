@@ -354,10 +354,6 @@
 		@apply bg-darkBlue;
 	}
 
-    .label-closed {
-        @apply bg-darkBlue;
-    }
-
     .label-cancelled {
         @apply bg-darkPink;
     }
