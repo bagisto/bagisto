@@ -24,7 +24,14 @@ class UserDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('admins as u')
             ->leftJoin('roles as ro', 'u.role_id', '=', 'ro.id')
-            ->addSelect('u.id as user_id', 'u.name as user_name', 'u.image as user_image', 'u.status', 'u.email', 'ro.name as role_name');
+            ->addSelect(
+                'u.id as user_id',
+                'u.name as user_name',
+                'u.image as user_image',
+                'u.status',
+                'u.email',
+                'ro.name as role_name'
+            );
 
         // $this->addFilter('user_id', 'u.id');
         // $this->addFilter('user_name', 'u.name');
@@ -46,8 +53,8 @@ class UserDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -55,8 +62,8 @@ class UserDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if ($row->user_image) {
                     return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
@@ -71,8 +78,8 @@ class UserDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
@@ -87,8 +94,8 @@ class UserDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -96,8 +103,8 @@ class UserDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.role'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -109,18 +116,18 @@ class UserDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.users.edit',
             'url'    => function ($row) {
                 return route('admin.users.edit', $row->user_id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
-            'route'  => 'admin.users.delete',
             'url'    => function ($row) {
                 return route('admin.users.delete', $row->user_id);
             },

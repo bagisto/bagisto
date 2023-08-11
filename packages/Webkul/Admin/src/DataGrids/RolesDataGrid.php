@@ -19,6 +19,11 @@ class RolesDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+     /**
+     * Add Columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -26,9 +31,9 @@ class RolesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'width'      => '40px',
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -36,8 +41,8 @@ class RolesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -45,26 +50,31 @@ class RolesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.permission-type'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
+     /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.roles.edit',
             'url'    => function ($row) {
                 return route('admin.roles.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
-            'route'  => 'admin.roles.delete',
             'url'    => function ($row) {
                 return route('admin.roles.delete', $row->id);
             },

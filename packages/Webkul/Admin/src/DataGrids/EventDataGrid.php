@@ -26,8 +26,8 @@ class EventDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -35,8 +35,8 @@ class EventDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -44,28 +44,27 @@ class EventDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.date'),
             'type'       => 'datetime',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.events.edit',
             'url'    => function ($row) {
                 return route('admin.events.edit', $row->id);
             },
         ]);
 
         $this->addAction([
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.events.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Event']),
-            'url'          => function ($row) {
+            'icon'    => 'icon-delete',
+            'title'   => trans('admin::app.datagrid.delete'),
+            'method'  => 'POST',
+            'url'     => function ($row) {
                 return route('admin.events.delete', $row->id);
             },
         ]);

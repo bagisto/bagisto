@@ -19,6 +19,11 @@ class AttributeFamilyDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+    /**
+     * Add columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -26,8 +31,8 @@ class AttributeFamilyDataGrid extends DataGrid
             'label'      => trans('admin::app.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -35,8 +40,8 @@ class AttributeFamilyDataGrid extends DataGrid
             'label'      => trans('admin::app.code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -44,26 +49,31 @@ class AttributeFamilyDataGrid extends DataGrid
             'label'      => trans('admin::app.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.catalog.families.edit',
             'url'    => function ($row) {
                 return route('admin.catalog.families.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
-            'route'  => 'admin.catalog.families.delete',
             'url'    => function ($row) {
                 return route('admin.catalog.families.delete', $row->id);
             },

@@ -16,7 +16,13 @@ class OrderRefundDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('refunds')
-            ->select('refunds.id', 'orders.increment_id', 'refunds.state', 'refunds.base_grand_total', 'refunds.created_at')
+            ->select(
+                'refunds.id',
+                'orders.increment_id',
+                'refunds.state',
+                'refunds.base_grand_total',
+                'refunds.created_at'
+            )
             ->leftJoin('orders', 'refunds.order_id', '=', 'orders.id')
             ->leftJoin('addresses as order_address_billing', function ($leftJoin) {
                 $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
@@ -34,6 +40,11 @@ class OrderRefundDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+     /**
+     * Add Columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -41,8 +52,8 @@ class OrderRefundDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -50,8 +61,8 @@ class OrderRefundDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -59,8 +70,8 @@ class OrderRefundDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.refunded'),
             'type'       => 'price',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -68,8 +79,8 @@ class OrderRefundDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.billed-to'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -77,17 +88,22 @@ class OrderRefundDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.refund-date'),
             'type'       => 'datetime',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
+     /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            // 'icon'   => 'icon-eye',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.sales.refunds.view',
             'url'    => function ($row) {
                 return route('admin.sales.refunds.view', $row->id);
             },

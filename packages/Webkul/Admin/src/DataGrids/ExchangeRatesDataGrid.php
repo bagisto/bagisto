@@ -43,8 +43,8 @@ class ExchangeRatesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -52,8 +52,8 @@ class ExchangeRatesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.currency-name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -61,29 +61,27 @@ class ExchangeRatesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.exch-rate'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon pencil-lg-icon',
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.exchange_rates.edit',
             'url'    => function ($row) {
                 return route('admin.exchange_rates.edit', $row->currency_exchange_id);
             },
         ]);
 
         $this->addAction([
-            'icon'         => 'icon trash-icon',
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'DELETE',
-            'route'        => 'admin.exchange_rates.delete',
-            'url'          => function ($row) {
+            'icon'    => 'icon-delete',
+            'title'   => trans('admin::app.datagrid.delete'),
+            'method'  => 'DELETE',
+            'url'     => function ($row) {
                 return route('admin.exchange_rates.delete', $row->currency_exchange_id);
             },
         ]);

@@ -26,8 +26,8 @@ class CustomerGroupDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -35,8 +35,8 @@ class CustomerGroupDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.code'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -44,26 +44,26 @@ class CustomerGroupDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.groups.edit',
             'url'    => function ($row) {
                 return route('admin.groups.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.groups.delete',
             'url'    => function ($row) {
                 return route('admin.groups.delete', $row->id);
             },

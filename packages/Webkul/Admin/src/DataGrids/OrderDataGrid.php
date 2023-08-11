@@ -24,14 +24,22 @@ class OrderDataGrid extends DataGrid
                 $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
                     ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
             })
-            ->addSelect('orders.id', 'orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
+            ->addSelect(
+                'orders.id',
+                'orders.increment_id',
+                'orders.base_sub_total',
+                'orders.base_grand_total',
+                'orders.created_at',
+                'channel_name',
+                'status'
+            )
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
 
-            // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
-            // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
-            // $this->addFilter('increment_id', 'orders.increment_id');
-            // $this->addFilter('created_at', 'orders.created_at');
+        // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
+        // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
+        // $this->addFilter('increment_id', 'orders.increment_id');
+        // $this->addFilter('created_at', 'orders.created_at');
         return $queryBuilder;
     }
 
@@ -47,8 +55,8 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'string',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -56,8 +64,8 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.sub-total'),
             'type'       => 'price',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -65,26 +73,26 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.grand-total'),
             'type'       => 'price',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.datagrid.order-date'),
             'type'       => 'datetime',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'channel_name',
             'label'      => trans('admin::app.datagrid.channel-name'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -100,9 +108,9 @@ class OrderDataGrid extends DataGrid
                 'pending_payment' => trans('shop::app.customer.account.order.index.pending-payment'),
                 'fraud'           => trans('shop::app.customer.account.order.index.fraud'),
             ],
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 switch ($value->status) {
                     case 'processing':
@@ -120,7 +128,7 @@ class OrderDataGrid extends DataGrid
                     case 'closed':
                         return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.orders.order-status-closed') . '</span>';
                         break;
-                    
+
                     case 'pending':
                         return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
                         break;
@@ -141,8 +149,8 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.billed-to'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -150,8 +158,8 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.shipped-to'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -163,10 +171,9 @@ class OrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon pencil-lg-icon',
+            'icon'   => 'icon-eye',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'admin.sales.orders.view',
             'url'    => function ($row) {
                 return route('admin.sales.orders.view', $row->id);
             },

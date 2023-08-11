@@ -3,8 +3,6 @@
 namespace Webkul\Admin\DataGrids;
 
 use Illuminate\Support\Facades\DB;
-use Webkul\Core\Models\Channel;
-use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
 
 class CategoryProductDataGrid extends DataGrid
@@ -17,44 +15,9 @@ class CategoryProductDataGrid extends DataGrid
     protected $primaryColumn = 'product_id';
 
     /**
-     * If paginated then value of pagination.
-     *
-     * @var int
-     */
-    protected $itemsPerPage = 10;
-
-    /**
-     * Locale.
-     *
-     * @var string
-     */
-    protected $locale;
-
-    /**
-     * Channel.
-     *
-     * @var string
-     */
-    protected $channel;
-
-    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
-     */
-    public function __construct()
-    {
-        /* locale */
-        $this->locale = core()->getRequestedLocaleCode();
-
-        /* channel */
-        $this->channel = core()->getRequestedChannelCode();
-    }
-
-    /**
-     * Prepare query builder.
-     *
-     * @return void
      */
     public function prepareQueryBuilder()
     {
@@ -78,8 +41,8 @@ class CategoryProductDataGrid extends DataGrid
         $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
 
         $queryBuilder->where('product_categories.category_id', request('id'));
-        $queryBuilder->whereIn('product_flat.locale', [$this->locale]);
-        $queryBuilder->whereIn('product_flat.channel', [$this->channel]);
+        $queryBuilder->whereIn('product_flat.locale', [core()->getRequestedLocaleCode()]);
+        $queryBuilder->whereIn('product_flat.channel', [core()->getRequestedChannelCode()]);
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('product_name', 'product_flat.name');
@@ -103,8 +66,8 @@ class CategoryProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -112,8 +75,8 @@ class CategoryProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.sku'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -121,8 +84,8 @@ class CategoryProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.product-number'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -130,26 +93,26 @@ class CategoryProductDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'product_type',
             'label'      => trans('admin::app.datagrid.type'),
             'type'       => 'string',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'boolean',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
@@ -163,9 +126,9 @@ class CategoryProductDataGrid extends DataGrid
             'index'      => 'price',
             'label'      => trans('admin::app.datagrid.price'),
             'type'       => 'price',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -177,9 +140,9 @@ class CategoryProductDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'      => 'icon-edit',
             'title'     => trans('admin::app.datagrid.edit'),
             'method'    => 'GET',
-            'route'     => 'admin.catalog.products.edit',
             'url'       => function ($row) {
                 return route('admin.catalog.products.index', $row->id);
             },

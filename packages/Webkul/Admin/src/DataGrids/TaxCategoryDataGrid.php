@@ -19,6 +19,11 @@ class TaxCategoryDataGrid extends DataGrid
         return $queryBuilder;
     }
 
+     /**
+     * Add Columns.
+     *
+     * @return void
+     */
     public function prepareColumns()
     {
         $this->addColumn([
@@ -26,8 +31,8 @@ class TaxCategoryDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -35,8 +40,8 @@ class TaxCategoryDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -44,26 +49,31 @@ class TaxCategoryDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
+     /**
+     * Prepare actions.
+     *
+     * @return void
+     */
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.tax_categories.edit',
             'url'    => function ($row) {
                 return route('admin.tax_categories.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
-            'route'  => 'admin.tax_categories.delete',
             'url'    => function ($row) {
                 return route('admin.tax_categories.delete', $row->id);
             },

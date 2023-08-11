@@ -14,7 +14,17 @@ class TaxRateDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('tax_rates')->addSelect('id', 'identifier', 'state', 'country', 'zip_code', 'zip_from', 'zip_to', 'tax_rate');
+        $queryBuilder = DB::table('tax_rates')
+            ->addSelect(
+                'id',
+                'identifier',
+                'state',
+                'country',
+                'zip_code',
+                'zip_from',
+                'zip_to',
+                'tax_rate'
+            );
 
         return $queryBuilder;
     }
@@ -31,8 +41,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -40,8 +50,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.identifier'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -49,8 +59,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.state'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if (empty($value->state)) {
                     return '*';
@@ -65,8 +75,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.country'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -74,8 +84,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.configuration.tax-rates.zip_code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -83,8 +93,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.configuration.tax-rates.zip_from'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -92,8 +102,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.configuration.tax-rates.zip_to'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -101,8 +111,8 @@ class TaxRateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.tax-rate'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -114,18 +124,18 @@ class TaxRateDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.tax_rates.edit',
             'url'    => function ($row) {
                 return route('admin.tax_rates.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.tax_rates.delete',
             'url'    => function ($row) {
                 return route('admin.tax_rates.delete', $row->id);
             },

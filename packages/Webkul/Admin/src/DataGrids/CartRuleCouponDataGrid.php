@@ -82,10 +82,9 @@ class CartRuleCouponDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'   => 'delete',
-            'action' => route('admin.cart_rules.coupons.mass_delete'),
-            'label'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
+            'url'    => route('admin.cart_rules.coupons.mass_delete'),
         ]);
     }
 }

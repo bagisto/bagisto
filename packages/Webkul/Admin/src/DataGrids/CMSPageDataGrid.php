@@ -7,15 +7,6 @@ use Webkul\DataGrid\DataGrid;
 
 class CMSPageDataGrid extends DataGrid
 {
-     /**
-     * Contains the keys for which extra filters to show.
-     *
-     * @var string[]
-     */
-    protected $extraFilters = [
-        'locales',
-    ];
-
     /**
      * Prepare query builder.
      *
@@ -23,14 +14,16 @@ class CMSPageDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $locale = core()->getRequestedLocaleCode();
-
-        $whereInLocales = $locale === 'all'
+        $whereInLocales = core()->getRequestedLocaleCode() === 'all'
             ? core()->getAllLocales()->pluck('code')->toArray()
-            : [$locale];
+            : [core()->getRequestedLocaleCode()];
 
         $queryBuilder = DB::table('cms_pages')
-            ->select('cms_pages.id', 'cms_page_translations.page_title', 'cms_page_translations.url_key')
+            ->select(
+                'cms_pages.id',
+                'cms_page_translations.page_title',
+                'cms_page_translations.url_key'
+            )
             ->join('cms_page_translations', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('cms_pages.id', '=', 'cms_page_translations.cms_page_id')
                     ->whereIn('cms_page_translations.locale', $whereInLocales);
@@ -53,8 +46,8 @@ class CMSPageDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -62,8 +55,8 @@ class CMSPageDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.page_title'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -71,8 +64,8 @@ class CMSPageDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.url_key'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 
@@ -84,9 +77,9 @@ class CMSPageDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-eye',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
-            'route'  => 'shop.cms.page',
             'index'  => 'url_key',
             'target' => '_blank',
             'url'    => function ($row) {
@@ -95,18 +88,18 @@ class CMSPageDataGrid extends DataGrid
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.cms.edit',
             'url'    => function ($row) {
                 return route('admin.cms.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'   => 'icon-delete',
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
-            'route'  => 'admin.cms.delete',
             'url'    => function ($row) {
                 return route('admin.cms.delete', $row->id);
             },
@@ -121,10 +114,9 @@ class CMSPageDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'   => 'delete',
-            'label'  => trans('admin::app.cms.datagrid.delete'),
-            'action' => route('admin.cms.mass_delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
+            'url'    => route('admin.cms.mass_delete'),
         ]);
     }
 }

@@ -31,8 +31,8 @@ class LocalesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -40,8 +40,8 @@ class LocalesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -49,8 +49,8 @@ class LocalesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -58,8 +58,8 @@ class LocalesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.direction'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->direction == 'ltr') {
                     return trans('admin::app.datagrid.ltr');
@@ -78,21 +78,19 @@ class LocalesDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon pencil-lg-icon',
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.locales.edit',
             'url'    => function ($row) {
                 return route('admin.locales.edit', $row->id);
             },
         ]);
 
         $this->addAction([
-            'icon'         => 'icon trash-icon',
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'DELETE',
-            'route'        => 'admin.locales.delete',
-            'url'          => function ($row) {
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
                 return route('admin.locales.delete', $row->id);
             },
         ]);

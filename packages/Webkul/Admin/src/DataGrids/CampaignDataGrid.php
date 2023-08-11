@@ -80,18 +80,18 @@ class CampaignDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.campaigns.edit',
             'url'    => function ($row) {
                 return route('admin.campaigns.edit', $row->id);
             },
         ]);
 
         $this->addAction([
+            'icon'         => 'icon-delete',
             'title'        => trans('admin::app.datagrid.delete'),
             'method'       => 'DELETE',
-            'route'        => 'admin.campaigns.delete',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
             'url'          => function ($row) {
                 return route('admin.campaigns.delete', $row->id);
