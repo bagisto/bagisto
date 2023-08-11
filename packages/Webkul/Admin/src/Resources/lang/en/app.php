@@ -759,8 +759,8 @@ return [
                         'empty-title' => 'Add Option',
                         'empty-info'  => 'To create bundle options on a go.',
 
-                        'create' => [
-                            'title'       => 'Add Option',
+                        'update-create' => [
+                            'title'       => 'Option',
                             'name'        => 'Title',
                             'type'        => 'Type',
                             'radio'       => 'Radio',
@@ -770,7 +770,7 @@ return [
                             'is-required' => 'Is Required',
                             'yes'         => 'Yes',
                             'no'          => 'No',
-                            'save-btn'    => 'Add',
+                            'save-btn'    => 'Save',
                         ],
 
                         'option' => [

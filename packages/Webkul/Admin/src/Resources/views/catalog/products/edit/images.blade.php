@@ -1,12 +1,16 @@
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.images.before', ['product' => $product]) !!}
 
-<v-product-images></v-product-images>
+<div class="relative p-[16px] bg-white rounded-[4px] box-shadow">
+
+    <v-product-images :uploaded-images='@json($product->images)'></v-product-images>
+
+</div>
 
 {!! view_render_event('bagisto.admin.catalog.product.edit.form.images.after', ['product' => $product]) !!}
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-product-images-template">
-        <div class="relative p-[16px] bg-white rounded-[4px] box-shadow">
+        <div>
             <!-- Panel Header -->
             <div class="flex gap-[20px] justify-between mb-[16px]">
                 <div class="flex flex-col gap-[8px]">
@@ -22,11 +26,11 @@
 
             <!-- Panel Content -->
             <div class="grid">
-                <div class="flex gap-[4px]">
+                <div class="flex flex-wrap gap-[4px]">
                     <!-- Upload Image Button -->
                     <label
-                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] max-h-[120px] border border-dashed border-gray-300 rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
-                        for="imageInput"
+                        class="grid justify-items-center items-center w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] border border-dashed border-gray-300 rounded-[4px] cursor-pointer transition-all hover:border-gray-400"
+                        :for="$.uid + '_imageInput'"
                     >
                         <div class="flex flex-col items-center">
                             <span class="icon-image text-[24px]"></span>
@@ -42,10 +46,10 @@
                             <input
                                 type="file"
                                 class="hidden"
-                                id="imageInput"
+                                :id="$.uid + '_imageInput'"
                                 accept="image/*"
                                 multiple="multiple"
-                                ref="imageInput"
+                                :ref="$.uid + '_imageInput'"
                                 @change="add"
                             />
                         </div>
@@ -72,7 +76,7 @@
                     <template v-if="! images.length">
                         <!-- Front Placeholder -->
                         <div
-                            class="w-full h-[120px] max-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 rounded-[4px]"
+                            class="w-full h-[120px] max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 rounded-[4px]"
                             v-for="placeholder in placeholders"
                         >
                             <img :src="placeholder.image">
@@ -105,10 +109,10 @@
 
                     <label
                         class="icon-edit text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-100"
-                        :for="'imageInput_' + index"
+                        :for="$.uid + '_imageInput_' + index"
                     ></label>
 
-                    <input type="hidden" :name="'images[files][' + image.id + ']'" v-if="! isNew"/>
+                    <input type="hidden" :name="'images[files][' + image.id + ']'" v-if="! image.is_new"/>
 
                     <input type="hidden" :name="'images[positions][' + image.id + ']'"/>
 
@@ -117,8 +121,8 @@
                         name="images[files][]"
                         class="hidden"
                         accept="image/*"
-                        :id="'imageInput_' + index"
-                        :ref="'imageInput_' + index"
+                        :id="$.uid + '_imageInput_' + index"
+                        :ref="$.uid + '_imageInput_' + index"
                         @change="edit"
                     />
                 </div>
@@ -130,9 +134,11 @@
         app.component('v-product-images', {
             template: '#v-product-images-template',
 
+            props: ['uploadedImages'],
+
             data() {
                 return {
-                    images: @json($product->images),
+                    images: [],
 
                     placeholders: [
                         {
@@ -158,9 +164,13 @@
                 }
             },
 
+            mounted() {
+                this.images = this.uploadedImages;
+            },
+
             methods: {
                 add() {
-                    let imageInput = this.$refs.imageInput;
+                    let imageInput = this.$refs[this.$.uid + '_imageInput'];
 
                     if (imageInput.files == undefined) {
                         return;
@@ -199,12 +209,6 @@
 
             props: ['index', 'image'],
 
-            data() {
-                return {
-                    isNew: 0,
-                }
-            },
-
             mounted() {
                 if (this.image.file instanceof File) {
                     this.setFile(this.image.file);
@@ -215,9 +219,20 @@
 
             methods: {
                 edit() {
-                    let imageInput = this.$refs['imageInput_' + this.index];
+                    let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
 
                     if (imageInput.files == undefined) {
+                        return;
+                    }
+
+                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+
+                    if (! validFiles) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'warning',
+                            message: "{{ trans('admin::app.catalog.products.edit.images.not-allowed-error') }}"
+                        });
+
                         return;
                     }
 
@@ -231,13 +246,13 @@
                 },
 
                 setFile(file) {
-                    this.isNew = 1;
+                    this.image.is_new = 1;
 
                     const dataTransfer = new DataTransfer();
 
                     dataTransfer.items.add(file);
 
-                    this.$refs['imageInput_' + this.index].files = dataTransfer.files;
+                    this.$refs[this.$.uid + '_imageInput_' + this.index].files = dataTransfer.files;
                 },
 
                 readFile(file) {
