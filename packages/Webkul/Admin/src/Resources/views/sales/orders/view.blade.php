@@ -674,7 +674,7 @@
 
                                 <div class="grid">
                                     @foreach ($order->items as $item)
-                                        <div class="flex gap-[10px] justify-between py-[16px] ">
+                                        <div class="flex gap-[10px] justify-between py-[16px]">
                                             <div class="flex gap-[10px]">
                                                 @if ($item->product)
                                                     <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
@@ -690,9 +690,10 @@
                 
                                                     <div class="flex flex-col gap-[6px] place-items-start">
                                                         <p class="text-gray-600">
-                                                            {{ core()->formatBasePrice($item->base_price) }} 
-                
-                                                            @lang('admin::app.sales.orders.view.per-unit') x {{ $item->qty_ordered }} @lang('admin::app.sales.orders.view.quantity')
+                                                            @lang('admin::app.sales.orders.view.amount-per-unit', [
+                                                                'amount' => core()->formatBasePrice($item->base_price),
+                                                                'qty'    => $item->qty_ordered,
+                                                            ])
                                                         </p>
                 
                                                         @if (isset($item->additional['attributes']))
@@ -756,6 +757,7 @@
                                                                 :value="$item->qty_to_ship"
                                                                 :rules="'required|numeric|min_value:0|max_value:' . $item->qty_ordered"
                                                                 class="!w-[100px]"
+                                                                :label="trans('admin::app.sales.orders.view.qty-to-ship')"
                                                                 data-original-quantity="{{ $item->qty_to_ship }}"
                                                                 ::disabled="'{{ empty($sourceQty) }}' || source != '{{ $inventorySource->id }}'"
                                                                 :ref="$inputName"

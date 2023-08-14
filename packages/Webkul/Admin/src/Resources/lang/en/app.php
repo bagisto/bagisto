@@ -33,6 +33,7 @@ return [
                 'refund'                => 'Refund',
                 'grand-total'           => 'Grand Total',
                 'per-unit'              => 'Per Unit',
+                'amount-per-unit'       => ':amount Per Unit x :qty Quantity',
                 'quantity'              => 'Quantity',
                 'ordered'               => 'Ordered',
                 'invoiced'              => 'Invoiced',
