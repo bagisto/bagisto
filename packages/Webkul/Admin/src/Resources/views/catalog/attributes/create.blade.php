@@ -176,7 +176,7 @@
                                                 for="empty_option"
                                                 class="text-[14px] text-gray-600 font-semibold cursor-pointer"
                                             >
-                                                Create default empty opton
+                                                @lang('admin::app.catalog.attributes.create.default-options')
                                             </label>
                                         </div>
                                     </div>
@@ -243,10 +243,16 @@
                                                         <div v-if="swatch_type == 'image'">
                                                             @{{ element.params.swatch_value?.name }}
 
+                                                            <img 
+                                                                :ref="'image_' + element.params.id"
+                                                                class="h-[50px] w-[50px]"
+                                                            >
+
                                                             <input
-                                                                type="hidden"
+                                                                type="file"
                                                                 :name="'options[' + element.id + '][swatch_value]'"
-                                                                v-model="element.params.swatch_value"
+                                                                class="hidden"
+                                                                :ref="'imageInput_' + element.id"
                                                             />    
                                                         </div>
 
@@ -726,6 +732,10 @@
 
                         this.$refs.addOptionsRow.toggle();
 
+                        if (params.swatch_value instanceof File) {
+                            this.setFile(params);
+                        }
+
                         resetForm();
                     },
 
@@ -745,6 +755,19 @@
                         if (! event.isActive) {
                             this.isNullOptionChecked = false;                            
                         }
+                    },
+
+                    setFile(event) {
+                        let dataTransfer = new DataTransfer();
+
+                        dataTransfer.items.add(event.swatch_value);
+
+                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        setTimeout(() => {
+                            this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
+                        }, 0);
+
+                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
                     }
                 },
             });
