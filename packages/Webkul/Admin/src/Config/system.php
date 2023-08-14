@@ -417,7 +417,7 @@ return [
     ], [
         'key'    => 'customer.address.requirements',
         'name'   => 'admin::app.admin.system.requirements',
-        'info'   => 'admin::app.admin.system.requirements',
+        'info'   => 'admin::app.admin.system.requirements-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -445,7 +445,7 @@ return [
     ], [
         'key'    => 'customer.address.information',
         'name'   => 'admin::app.admin.system.information',
-        'info'   => 'admin::app.admin.system.information',
+        'info'   => 'admin::app.admin.system.information-info',
         'sort'   => 2,
         'fields' => [
             [
@@ -465,7 +465,7 @@ return [
     ], [
         'key'    => 'customer.settings.wishlist',
         'name'   => 'admin::app.admin.system.wishlist',
-        'info'   => 'admin::app.admin.system.wishlist',
+        'info'   => 'admin::app.admin.system.wishlist-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -477,7 +477,7 @@ return [
     ], [
         'key'    => 'customer.settings.newsletter',
         'name'   => 'admin::app.admin.system.newsletter',
-        'info'   => 'admin::app.admin.system.newsletter',
+        'info'   => 'admin::app.admin.system.newsletter-info',
         'sort'   => 2,
         'fields' => [
             [
@@ -489,7 +489,7 @@ return [
     ], [
         'key'    => 'customer.settings.email',
         'name'   => 'admin::app.admin.system.email',
-        'info'   => 'admin::app.admin.system.email',
+        'info'   => 'admin::app.admin.system.email-info',
         'sort'   => 3,
         'fields' => [
             [
@@ -517,7 +517,7 @@ return [
     ], [
         'key'    => 'emails.configure.email_settings',
         'name'   => 'admin::app.admin.system.email-settings',
-        'info'   => 'admin::app.admin.system.email-settings',
+        'info'   => 'admin::app.admin.system.email-settings-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -563,7 +563,7 @@ return [
     ], [
         'key'    => 'emails.general.notifications',
         'name'   => 'admin::app.admin.emails.notification_label',
-        'info'   => 'admin::app.admin.emails.notification_label',
+        'info'   => 'admin::app.admin.emails.notification_label-info',
         'sort'   => 1,
         'fields' => [
             [
