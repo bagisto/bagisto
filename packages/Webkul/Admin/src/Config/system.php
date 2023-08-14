@@ -18,7 +18,7 @@ return [
     ], [
         'key'    => 'general.general.locale_options',
         'name'   => 'admin::app.admin.system.locale-options',
-        'info'   => 'admin::app.admin.system.locale-options',
+        'info'   => 'admin::app.admin.system.locale-options-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -46,7 +46,7 @@ return [
     ], [
         'key'    => 'general.content.custom_scripts',
         'name'   => 'admin::app.admin.system.custom-scripts',
-        'info'   => 'admin::app.admin.system.custom-scripts',
+        'info'   => 'admin::app.admin.system.custom-scripts-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -72,7 +72,7 @@ return [
     ], [
         'key'    => 'general.design.admin_logo',
         'name'   => 'admin::app.admin.system.admin-logo',
-        'info'   => 'admin::app.admin.system.admin-logo',
+        'info'   => 'admin::app.admin.system.admin-logo-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -108,7 +108,7 @@ return [
     ], [
         'key'    => 'catalog.products.guest-checkout',
         'name'   => 'admin::app.admin.system.guest-checkout',
-        'info'   => 'admin::app.admin.system.guest-checkout',
+        'info'   => 'admin::app.admin.system.guest-checkout-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -120,7 +120,7 @@ return [
     ], [
         'key'    => 'catalog.products.homepage',
         'name'   => 'admin::app.admin.system.homepage',
-        'info'   => 'admin::app.admin.system.homepage',
+        'info'   => 'admin::app.admin.system.homepage-info',
         'sort'   => 2,
         'fields' => [
             [
@@ -139,7 +139,7 @@ return [
     ], [
         'key'    => 'catalog.products.product_view_page',
         'name'   => 'admin::app.admin.system.product-view-page',
-        'info'   => 'admin::app.admin.system.product-view-page',
+        'info'   => 'admin::app.admin.system.product-view-page-info',
         'sort'   => 3,
         'fields' => [
             [
@@ -157,7 +157,7 @@ return [
     ], [
         'key'    => 'catalog.products.cart_view_page',
         'name'   => 'admin::app.admin.system.cart-view-page',
-        'info'   => 'admin::app.admin.system.cart-view-page',
+        'info'   => 'admin::app.admin.system.cart-view-page-info',
         'sort'   => 3,
         'fields' => [
             [
@@ -170,7 +170,7 @@ return [
     ], [
         'key'    => 'catalog.products.storefront',
         'name'   => 'admin::app.admin.system.storefront',
-        'info'   => 'admin::app.admin.system.storefront',
+        'info'   => 'admin::app.admin.system.storefront-info',
         'sort'   => 3,
         'fields' => [
             [
@@ -241,7 +241,7 @@ return [
     ], [
         'key'    => 'catalog.products.cache-small-image',
         'name'   => 'admin::app.admin.system.cache-small-image',
-        'info'   => 'admin::app.admin.system.cache-small-image',
+        'info'   => 'admin::app.admin.system.cache-small-image-info',
         'sort'   => 4,
         'fields' => [
             [
@@ -258,7 +258,7 @@ return [
     ], [
         'key'    => 'catalog.products.cache-medium-image',
         'name'   => 'admin::app.admin.system.cache-medium-image',
-        'info'   => 'admin::app.admin.system.cache-medium-image',
+        'info'   => 'admin::app.admin.system.cache-medium-image-info',
         'sort'   => 5,
         'fields' => [
             [
@@ -275,7 +275,7 @@ return [
     ], [
         'key'    => 'catalog.products.cache-large-image',
         'name'   => 'admin::app.admin.system.cache-large-image',
-        'info'   => 'admin::app.admin.system.cache-large-image',
+        'info'   => 'admin::app.admin.system.cache-large-image-info',
         'sort'   => 6,
         'fields' => [
             [
@@ -292,7 +292,7 @@ return [
     ], [
         'key'    => 'catalog.products.review',
         'name'   => 'admin::app.admin.system.review',
-        'info'   => 'admin::app.admin.system.review',
+        'info'   => 'admin::app.admin.system.review-info',
         'sort'   => 7,
         'fields' => [
             [
@@ -304,7 +304,7 @@ return [
     ], [
         'key'    => 'catalog.products.attribute',
         'name'   => 'admin::app.admin.system.attribute',
-        'info'   => 'admin::app.admin.system.attribute',
+        'info'   => 'admin::app.admin.system.attribute-info',
         'sort'   => 8,
         'fields' => [
             [
@@ -326,7 +326,7 @@ return [
     ], [
         'key'    => 'catalog.inventory.stock_options',
         'name'   => 'admin::app.admin.system.stock-options',
-        'info'   => 'admin::app.admin.system.stock-options',
+        'info'   => 'admin::app.admin.system.stock-options-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -345,7 +345,7 @@ return [
     ], [
         'key'    => 'catalog.rich_snippets.products',
         'name'   => 'admin::app.admin.system.products',
-        'info'   => 'admin::app.admin.system.products',
+        'info'   => 'admin::app.admin.system.rich-snippet-product-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -385,7 +385,7 @@ return [
     ], [
         'key'    => 'catalog.rich_snippets.categories',
         'name'   => 'admin::app.admin.system.categories',
-        'info'   => 'admin::app.admin.system.categories',
+        'info'   => 'admin::app.admin.system.categories-info',
         'sort'   => 1,
         'fields' => [
             [
