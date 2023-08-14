@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-5d2cb037.css",
+    "file": "assets/app-a7799339.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-ae816848.woff",
+    "file": "assets/bagisto-admin-1b657040.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg": {
@@ -59,6 +59,10 @@
   "src/Resources/assets/images/email.png": {
     "file": "assets/email-b67bb4f9.png",
     "src": "src/Resources/assets/images/email.png"
+  },
+  "src/Resources/assets/images/empty-order.png": {
+    "file": "assets/empty-order-a73b017e.png",
+    "src": "src/Resources/assets/images/empty-order.png"
   },
   "src/Resources/assets/images/group.png": {
     "file": "assets/group-a995d3da.png",
@@ -172,7 +176,7 @@
     "css": [
       "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-2bd61f0c.js",
+    "file": "assets/app-7538412e.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   }

@@ -26,8 +26,17 @@
                         @break
                 @endswitch
             </p>
-            
+
             {!! view_render_event('sales.order.title.after', ['order' => $order]) !!}
+
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.sales.orders.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.account.edit.cancel-btn')
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -262,7 +271,7 @@
                                     class="hidden peer"
                                 >
                     
-                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
                     
                                 <p class="flex gap-x-[4px] items-center cursor-pointer">
                                     @lang('admin::app.sales.orders.view.notify-customer')
@@ -347,7 +356,7 @@
 
                     {{-- Shipping Address --}}
                     @if ($order->shipping_address)
-                        <div class="pb-[16px]">
+                        <div>
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('admin::app.sales.orders.view.shipping-address')</p>
                             </div>
@@ -368,46 +377,44 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="">
-                        <div class="flex w-full gap-[20px] justify-start">
-                            <div class="flex flex-col gap-y-[6px]">
-                                <p class="text-gray-600">
-                                    @lang('admin::app.sales.orders.view.order-date')
-                                </p>
+                    <div class="flex w-full gap-[20px] justify-start">
+                        <div class="flex flex-col gap-y-[6px]">
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.order-date')
+                            </p>
 
-                                <p class="text-gray-600">
-                                    @lang('admin::app.sales.orders.view.order-status')
-                                </p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.order-status')
+                            </p>
 
-                                <p class="text-gray-600">
-                                    @lang('admin::app.sales.orders.view.channel')
-                                </p>
-                            </div>
-                    
-                            <div class="flex flex-col gap-y-[6px]">
-                                {!! view_render_event('sales.order.created_at.before', ['order' => $order]) !!}
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.channel')
+                            </p>
+                        </div>
+                
+                        <div class="flex flex-col gap-y-[6px]">
+                            {!! view_render_event('sales.order.created_at.before', ['order' => $order]) !!}
 
-                                {{-- Order Date --}}
-                                <p class="text-gray-600">
-                                    {{core()->formatDate($order->created_at) }}
-                                </p>
+                            {{-- Order Date --}}
+                            <p class="text-gray-600">
+                                {{core()->formatDate($order->created_at) }}
+                            </p>
 
-                                {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
-                            
-                                {{-- Order Status --}}
-                                <p class="text-gray-600">
-                                    {{$order->status_label}}
-                                </p>
-                            
-                                {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
+                            {!! view_render_event('sales.order.created_at.after', ['order' => $order]) !!}
+                        
+                            {{-- Order Status --}}
+                            <p class="text-gray-600">
+                                {{$order->status_label}}
+                            </p>
+                        
+                            {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
 
-                                {{-- Order Channel --}}
-                                <p class="text-gray-800">
-                                    {{$order->channel_name}}
-                                </p>
+                            {{-- Order Channel --}}
+                            <p class="text-gray-800">
+                                {{$order->channel_name}}
+                            </p>
 
-                                {!! view_render_event('sales.order.channel_name.after', ['order' => $order]) !!}
-                            </div>
+                            {!! view_render_event('sales.order.channel_name.after', ['order' => $order]) !!}
                         </div>
                     </div>
                 </x-slot:content>
@@ -420,8 +427,8 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    @forelse ($order->invoices as $invoice)
-                        <div class="grid gap-y-[10px] pb-[16px]">
+                    @forelse ($order->invoices as $index => $invoice)
+                        <div class="grid gap-y-[10px]">
                             <div>
                                 <p class="text-gray-800 font-semibold">@lang('admin::app.sales.orders.view.invoice') #{{ $invoice->increment_id ?? $invoice->id }}</p>
                                 <p class="text-gray-600">{{ core()->formatDate($invoice->created_at, 'd M, Y H:i:s a') }}</p>
@@ -430,20 +437,23 @@
                             <div class="flex gap-[10px]">
                                 <a
                                     href="{{ route('admin.sales.invoices.view', $invoice->id) }}"
-                                    class="text-blue-600"
+                                    class="text-[14px] text-blue-600"
                                 >
                                     @lang('admin::app.sales.orders.view.view')
                                 </a>
 
                                 <a
                                     href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                                    class="text-blue-600"
+                                    class="text-[14px] text-blue-600"
                                 >
                                     @lang('admin::app.sales.orders.view.download-pdf')
                                 </a>
-                                
                             </div>
                         </div>
+
+                        @if ($index < count($order->invoices) - 1)
+                            <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+                        @endif
                     @empty 
                         <p class="text-gray-600">
                             @lang('admin::app.sales.orders.view.no-invoice-found')
@@ -460,7 +470,7 @@
 
                 <x-slot:content>
                     @forelse ($order->shipments as $shipment)
-                        <div class="grid gap-y-[10px] pb-[16px]">
+                        <div class="grid gap-y-[10px]">
                             <div>
                                 <p class="text-gray-800 font-semibold">@lang('Shipment') #{{ $shipment->id }}</p>
                                 <p class="text-gray-600">{{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}</p>
@@ -469,7 +479,7 @@
                             <div class="flex gap-[10px]">
                                 <a
                                     href="{{ route('admin.sales.shipments.view', $shipment->id) }}"
-                                    class="text-blue-600"
+                                    class="text-[14px] text-blue-600"
                                 >
                                     @lang('admin::app.sales.orders.view.view')
                                 </a>
@@ -514,7 +524,7 @@
                     <span class="block w-full border-b-[1px] border-gray-300"></span>
                     
                     @if ($order->shipping_address)
-                        <div class="py-[16px]">
+                        <div class="pt-[16px]">
                             <p class="text-gray-800 font-semibold">{{ $order->shipping_title }}</p>
                             <p class="text-gray-600">@lang('admin::app.sales.orders.view.shipping-method')</p>
 
@@ -535,7 +545,7 @@
 
                 <x-slot:content>
                     @forelse ($order->refunds as $refund)
-                        <div class="grid gap-y-[10px] pb-[16px]">
+                        <div class="grid gap-y-[10px]">
                             <div>
                                 <p class="text-gray-800 font-semibold">@lang('admin::app.sales.orders.view.refund') #{{ $refund->id }}</p>
                                 <p class="text-gray-600">{{ core()->formatDate($refund->created_at, 'd M, Y H:i:s a') }}</p>
@@ -548,7 +558,7 @@
                             <div class="flex gap-[10px]">
                                 <a
                                     href="{{ route('admin.sales.refunds.view', $refund->id) }}"
-                                    class="text-blue-600"
+                                    class="text-[14px] text-blue-600"
                                 >
                                     @lang('admin::app.sales.orders.view.view')
                                 </a>
