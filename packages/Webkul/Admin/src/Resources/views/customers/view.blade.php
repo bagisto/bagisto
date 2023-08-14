@@ -5,7 +5,7 @@
     </x-slot:title>
 
     <div class="grid">
-        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
                 {{ $customer->first_name . " " . $customer->last_name }}
 
@@ -43,6 +43,7 @@
 
     {{-- Content --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        {{-- Left Component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Orders --}}
             <div class=" bg-white rounded-[4px] box-shadow">
@@ -183,6 +184,7 @@
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
                     </p>
+
                     {{-- Invoice Table --}}
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left min-w-[800px]">
@@ -205,14 +207,26 @@
                                     </th>
                                 </tr>
                             </thead>
+
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
                                     <tr class="bg-white border-b ">
-                                        <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->id }}</td>
-                                        <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">{{ $invoice->created_at }}</td>
-                                        <td scope="row" class="px-6 py-[16px] text-gray-600">{{ core()->currency($invoice->grand_total) }}</td>
-                                        <td class="px-6 py-[16px] text-gray-600">#{{ $invoice->order_id }}</td>
+                                        <td class="px-6 py-[16px] text-gray-600">
+                                            #{{ $invoice->id }}
+                                        </td>
+
+                                        <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">
+                                            {{ $invoice->created_at }}
+                                        </td>
+
+                                        <td scope="row" class="px-6 py-[16px] text-gray-600">
+                                            {{ core()->currency($invoice->grand_total) }}
+                                        </td>
+
+                                        <td class="px-6 py-[16px] text-gray-600">
+                                            #{{ $invoice->order_id }}
+                                        </td>
                                     </tr>
                                 </tbody>
                             @endforeach
@@ -229,7 +243,11 @@
                     <div class="table-responsive grid w-full">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
-                            <img src="{{ bagisto_asset('images/empty-order.png') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                            <img
+                                src="{{ bagisto_asset('images/empty-order.png') }}"
+                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                            />
+
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold"> 
                                     @lang('admin::app.customers.view.empty-invoice')
@@ -254,30 +272,36 @@
                             <div class="grid gap-y-[16px] p-[16px]">
                                 <div class="flex justify-start [&amp;>*]:flex-1">
                                     <div class="flex flex-col gap-[6px]">
+                                        {{-- Review Name --}}
                                         <p class="text-[16px] text-gray-800 font-semibold">
                                             {{ $review->name }}
                                         </p>
 
+                                        {{-- Product Name --}}
                                         <p class="text-gray-600">
                                             {{ $review->product->name }}
                                         </p>
-                                        
+
+                                        {{-- Review Status --}}
                                         @switch($review->status)
                                             @case('approved')
                                                 <p class="label-active">
                                                     {{ $review->status }}
                                                 </p>
                                                 @break
+
                                             @case('pending')
                                                 <p class="label-pending">
                                                     {{ $review->status }}
                                                 </p>
                                                 @break
+
                                             @case('disapproved')
                                                 <p class="label-cancelled">
                                                     {{ $review->status }}
                                                 </p>
                                                 @break
+
                                         @endswitch
                                     </div>
 
@@ -304,10 +328,12 @@
 
                                 <div class="flex justify-between gap-x-[16px] items-center">
                                     <div class="flex flex-col gap-[6px]">
+                                        {{-- Review Title --}}
                                         <p class="text-[16px] text-gray-800 font-semibold">
                                             {{ $review->title }}
                                         </p>
 
+                                        {{-- Review Comment --}}
                                         <p class="text-gray-600">
                                             {{ $review->comment }}
                                         </p>
@@ -316,6 +342,7 @@
                                     <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
                                 </div>
                             </div>
+
                             <span class="block w-full border-b-[1px] border-gray-300"></span>
                         </div>
                     @endforeach    
@@ -330,7 +357,11 @@
                     <div class="table-responsive grid w-full">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
-                            <img src="{{ bagisto_asset('images/empty-order.png') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                            <img
+                                src="{{ bagisto_asset('images/empty-order.png') }}"
+                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                            />
+
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold"> 
                                    @lang('admin::app.customers.view.empty-review')
@@ -351,27 +382,25 @@
                     action="{{ route('admin.customer.note.store', $customer->id) }}"
                 >
                     <div class="p-[16px]">
-                        <div class="mb-[10px]">
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.control
-                                    type="textarea"
-                                    name="note" 
-                                    id="note"
-                                    rules="required"
-                                    :label="trans('admin::app.customers.view.note')"
-                                    placeholder="Note"
-                                >
-                                </x-admin::form.control-group.control>
+                        {{-- Note --}}
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="note" 
+                                id="note"
+                                rules="required"
+                                :label="trans('admin::app.customers.view.note')"
+                                placeholder="Note"
+                            >
+                            </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
-                                    control-name="note"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-                        </div>
+                            <x-admin::form.control-group.error
+                                control-name="note"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
 
                         <div class="flex justify-between items-center">
-
                             <label 
                                 class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
                                 for="customer_notified"
@@ -426,16 +455,19 @@
             </div>
         </div>
 
-        {{-- Information --}}
+        {{-- Right Component --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            {{-- Information --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                        @lang('admin::app.customers.view.customer')
-                    </p>
-
-                    {{--Customer Edit Component --}}
-                   @include('admin::customers.edit', ['groups' => $groups])
+                    <div class="flex w-[100%]">
+                        <p class="w-[100%] text-gray-600 text-[16px] p-[10px] font-semibold">
+                            @lang('admin::app.customers.view.customer')
+                        </p>
+    
+                        {{--Customer Edit Component --}}
+                       @include('admin::customers.edit', ['groups' => $groups])
+                    </div>
                 </x-slot:header>
 
                 <x-slot:content>

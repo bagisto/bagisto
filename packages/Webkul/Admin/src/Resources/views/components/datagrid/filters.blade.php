@@ -211,7 +211,7 @@
                         />
                     </div>
 
-                    <div class="flex gap-2 mb-2">
+                    <div class="flex gap-2">
                         <p
                             class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -225,8 +225,6 @@
                             </span>
                         </p>
                     </div>
-
-                    <hr class="mb-2">
                 </div>
             </div>
         </x-slot:content>
