@@ -2,16 +2,7 @@
     <x-slot:title>
         @lang('admin::app.sales.orders.view.title', ['order_id' => $order->increment_id])
     </x-slot:title>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
- 
+
     {{-- Header --}}
     <div class="grid">
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
