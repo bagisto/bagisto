@@ -1,7 +1,8 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.sales.shipments.view.title') #{{ $shipment->id }}
+        {{ trans('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id]) }}
+        
     </x-slot:title>
 
     @php $order = $shipment->order; @endphp
@@ -9,7 +10,7 @@
     <div class="grid">
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
-                @lang('admin::app.sales.shipments.view.title') #{{ $shipment->id }}
+                {{ trans('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id]) }}
             </p>
 
             <div class="flex gap-x-[10px] items-center">
