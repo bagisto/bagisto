@@ -1,13 +1,19 @@
 <v-datagrid {{ $attributes }}></v-datagrid>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-datagrid-template">
+    <script
+        type="text/x-template"
+        id="v-datagrid-template"
+    >
         <div>
+            <!-- Datagrid Toolbar X-Component -->
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex gap-2 mt-[30px]">
+                <!-- Datagrid Filter X-Component -->
                 <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
+                <!-- Datagrid Table X-Component -->
                 <x-admin::datagrid.table></x-admin::datagrid.table>
             </div>
         </div>
