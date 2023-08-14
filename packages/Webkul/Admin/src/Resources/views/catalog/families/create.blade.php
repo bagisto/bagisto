@@ -471,15 +471,13 @@
                     },
 
                     addGroup(params, { resetForm, setErrors }) {
-                        console.log(this.isGroupAlreadyExists(params.name));
                         if (this.isGroupAlreadyExists(params.name)) {
                             setErrors({'name': ["{{ trans('admin::app.catalog.families.create.group-already-exists') }}"]});
 
                             return;
                         }
 
-                        // Check if params.column exists or create a new array for it
-                        if (!this.columnGroups.hasOwnProperty(params.column)) {
+                        if (! this.columnGroups.hasOwnProperty(params.column)) {
                             this.columnGroups[params.column] = [];
                         }
 
