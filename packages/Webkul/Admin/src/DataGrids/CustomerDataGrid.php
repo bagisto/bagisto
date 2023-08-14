@@ -165,16 +165,7 @@ class CustomerDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'         => 'icon-edit',
-            'title'        => trans('admin::app.datagrid.edit'),
-            'method'       => 'GET',
-            'url'          => function ($row) {
-                return route('admin.customer.edit', $row->customer_id);
-            },
-        ]);
-
-        $this->addAction([
-            'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
@@ -183,7 +174,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'   => 'icon-delete',
+            'icon'   => 'icon-exit',
             'title'  => trans('admin::app.datagrid.login-as-customer'),
             'method' => 'GET',
             'target' => 'blank',

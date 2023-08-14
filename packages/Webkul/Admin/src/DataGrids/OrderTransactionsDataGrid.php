@@ -114,7 +114,7 @@ class OrderTransactionsDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            // 'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {

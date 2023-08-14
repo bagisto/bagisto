@@ -147,7 +147,7 @@ class CustomerOrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'method' => 'GET',
             'title'  => trans('admin::app.datagrid.view'),
             'url'    => function ($row) {

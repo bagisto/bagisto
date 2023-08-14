@@ -63,7 +63,11 @@ class ProductDataGrid extends DataGrid
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
-        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
+        $queryBuilder->groupBy(
+            'product_flat.product_id',
+            'product_flat.locale',
+            'product_flat.channel'
+        );
 
         $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
@@ -217,7 +221,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-eye',
+            'icon'    => 'icon-delete',
             'title'   => trans('admin::app.datagrid.delete'),
             'method'  => 'DELETE',
             'url'     => function ($row) {
