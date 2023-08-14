@@ -17,8 +17,8 @@
                         <span
                             class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
                             :class="[
-                                this.applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-navyBlue' : (
-                                    this.applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                this.applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                    this.applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
                                 ),
                             ]"
                         >
@@ -56,7 +56,7 @@
                             @change="setCurrentSelectionMode"
                         >
 
-                        <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-[6px] text-[24px] peer-checked:text-navyBlue">
+                        <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-[6px] text-[24px] peer-checked:text-blue-600">
                         </span>
                     </label>
                 </x-admin::table.td>
