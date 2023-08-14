@@ -65,8 +65,8 @@ class CartRuleDataGrid extends DataGrid
                 'sort_order'
             );
 
-        // $this->addFilter('id', 'cart_rules.id');
-        // $this->addFilter('coupon_code', 'cart_rule_coupons.code');
+        $this->addFilter('id', 'cart_rules.id');
+        $this->addFilter('coupon_code', 'cart_rule_coupons.code');
 
         if ($this->customer_group !== 'all') {
             $queryBuilder->leftJoin(

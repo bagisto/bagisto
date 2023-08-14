@@ -29,7 +29,7 @@ class CMSPageDataGrid extends DataGrid
                     ->whereIn('cms_page_translations.locale', $whereInLocales);
             });
 
-        // $this->addFilter('id', 'cms_pages.id');
+        $this->addFilter('id', 'cms_pages.id');
 
         return $queryBuilder;
     }

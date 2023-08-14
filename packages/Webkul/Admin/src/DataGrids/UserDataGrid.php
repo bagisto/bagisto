@@ -33,10 +33,10 @@ class UserDataGrid extends DataGrid
                 'ro.name as role_name'
             );
 
-        // $this->addFilter('user_id', 'u.id');
-        // $this->addFilter('user_name', 'u.name');
-        // $this->addFilter('role_name', 'ro.name');
-        // $this->addFilter('status', 'u.status');
+        $this->addFilter('user_id', 'u.id');
+        $this->addFilter('user_name', 'u.name');
+        $this->addFilter('role_name', 'ro.name');
+        $this->addFilter('status', 'u.status');
 
         return $queryBuilder;
     }

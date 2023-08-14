@@ -26,10 +26,10 @@ class CustomersInvoicesDataGrid extends DataGrid
             )
             ->where('ors.customer_id', request('id'));
 
-        // $this->addFilter('id', 'invoices.id');
-        // $this->addFilter('order_id', 'ors.increment_id');
-        // $this->addFilter('base_grand_total', 'invoices.base_grand_total');
-        // $this->addFilter('created_at', 'invoices.created_at');
+        $this->addFilter('id', 'invoices.id');
+        $this->addFilter('order_id', 'ors.increment_id');
+        $this->addFilter('base_grand_total', 'invoices.base_grand_total');
+        $this->addFilter('created_at', 'invoices.created_at');
 
         return $queryBuilder;
     }

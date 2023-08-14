@@ -36,13 +36,13 @@ class CustomerDataGrid extends DataGrid
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
             );
 
-        // $this->addFilter('customer_id', 'customers.id');
+        $this->addFilter('customer_id', 'customers.id');
         // $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
-        // $this->addFilter('group', 'customer_groups.name');
-        // $this->addFilter('phone', 'customers.phone');
-        // $this->addFilter('gender', 'customers.gender');
-        // $this->addFilter('status', 'status');
-        // $this->addFilter('is_suspended', 'customers.is_suspended');
+        $this->addFilter('group', 'customer_groups.name');
+        $this->addFilter('phone', 'customers.phone');
+        $this->addFilter('gender', 'customers.gender');
+        $this->addFilter('status', 'status');
+        $this->addFilter('is_suspended', 'customers.is_suspended');
 
         return $queryBuilder;
     }
