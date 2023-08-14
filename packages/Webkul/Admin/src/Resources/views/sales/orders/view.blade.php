@@ -134,9 +134,10 @@
 
                                     <div class="flex flex-col gap-[6px] place-items-start">
                                         <p class="text-gray-600">
-                                            {{ core()->formatBasePrice($item->base_price) }} 
-
-                                            @lang('admin::app.sales.orders.view.per-unit') x {{ $item->qty_ordered }} @lang('admin::app.sales.orders.view.quantity')
+                                            @lang('admin::app.sales.orders.view.amount-per-unit', [
+                                                'amount' => core()->formatBasePrice($item->base_price),
+                                                'qty'    => $item->qty_ordered,
+                                                ])
                                         </p>
 
                                         @if (isset($item->additional['attributes']))

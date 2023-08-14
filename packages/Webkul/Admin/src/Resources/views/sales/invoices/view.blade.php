@@ -143,8 +143,10 @@
                                     </p>
 
                                     <p class="text-gray-600">
-                                        {{core()->formatBasePrice($item->base_price) }}
-                                        @lang('admin::app.sales.invoices.view.per-unit') x {{ $item->qty}}@lang('admin::app.sales.invoices.view.qty')
+                                        @lang('admin::app.sales.invoices.view.amount-per-unit', [
+                                            'amount' => core()->formatBasePrice($item->base_price),
+                                            'qty'    => $item->qty,
+                                            ])
                                     </p>
 
                                     <div class="flex flex-col gap-[6px] place-items-start">
