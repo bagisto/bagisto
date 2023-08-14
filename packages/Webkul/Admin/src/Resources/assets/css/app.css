@@ -41,6 +41,14 @@
         @apply shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)];
     }
 
+    .icon-checkbox-partical:before {
+        content: "\e90b";
+    }
+
+    .icon-uncheckbox:before {
+        content: "\e93b";
+    }
+
     .icon-add-customer:before {
         content: "\e900";
     }
@@ -69,10 +77,6 @@
         content: "\e906";
     }
 
-    .icon-bin:before {
-        content: "\e908";
-    }
-
     .icon-calendar:before {
         content: "\e907";
     }
@@ -87,10 +91,6 @@
 
     .icon-cart:before {
         content: "\e90a";
-    }
-
-    .icon-checkbox-partial:before {
-        content: "\e90b";
     }
 
     .icon-checked:before {
@@ -233,7 +233,7 @@
         content: "\e92e";
     }
 
-    .icon-search:before {
+    .icon-serch:before {
         content: "\e92f";
     }
 
@@ -281,10 +281,6 @@
         content: "\e93a";
     }
 
-    .icon-uncheckbox:before {
-        content: "\e93b";
-    }
-
     .icon-up-stat:before {
         content: "\e93c";
     }
@@ -292,6 +288,18 @@
     .icon-view:before {
         content: "\e93d";
     }
+
+    .icon-copy:before {
+        content: "\e93e";
+    }
+
+    .icon-exit:before {
+        content: "\e93f";
+    }
+
+    .icon-clip:before {
+        content: "\e940";
+    }      
 
     p {
         @apply text-[14px] leading-[17px];

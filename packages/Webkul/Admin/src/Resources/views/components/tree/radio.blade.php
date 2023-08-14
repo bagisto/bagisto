@@ -17,7 +17,7 @@
                 :checked="isActive"
             >
 
-            <span class="icon-radio-normal mr-[4px] text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-radio-selected peer-checked:text-navyBlue"></span>
+            <span class="icon-radio-normal mr-[4px] text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-radio-selected peer-checked:text-blue-600"></span>
 
             <div 
                 class="text-[14px] cursor-pointer"
