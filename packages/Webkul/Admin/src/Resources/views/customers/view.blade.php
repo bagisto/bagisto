@@ -10,7 +10,7 @@
                 {{ $customer->first_name . " " . $customer->last_name }}
 
                 {{-- Customer Status --}}
-                @if($customer->status == 1)
+                @if ($customer->status == 1)
                     <span class="label-active text-[14px] mx-[5px]">
                         @lang('admin::app.customers.view.active')
                     </span>
@@ -21,7 +21,7 @@
                 @endif
 
                 {{-- Customer Suspended Status --}}
-                @if($customer->is_suspended == 1)
+                @if ($customer->is_suspended == 1)
                     <span class="label-pending text-[14px]">
                         @lang('admin::app.customers.view.suspended')
                     </span>
@@ -46,7 +46,7 @@
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Orders --}}
             <div class=" bg-white rounded-[4px] box-shadow">
-                @if($totalOrderCount = count($customer->orders))
+                @if ($totalOrderCount = count($customer->orders))
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
                         <p class="text-[16px] text-gray-800 font-semibold">
@@ -178,7 +178,7 @@
 
             {{-- Invoices --}}
             <div class="bg-white rounded box-shadow">
-                @if($totalInvoiceCount = count($customer->invoices))
+                @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
@@ -485,10 +485,10 @@
                 </x-slot:header>
 
                 <x-slot:content>
-                    @if(count($customer->addresses))
+                    @if (count($customer->addresses))
                         @foreach ($customer->addresses as $index => $address)
                             <div class="grid gap-y-[10px]">
-                                @if( $address->default_address )
+                                @if ( $address->default_address )
                                     <p class="label-pending">
                                         @lang('admin::app.customers.view.default-address')
                                     </p>
@@ -536,7 +536,7 @@
                                     </form>
 
                                     {{-- Set Default Address --}}
-                                    @if(! $address->default_address )
+                                    @if (! $address->default_address )
                                         <p 
                                             class="text-blue-600 cursor-pointer"
                                             onclick="event.preventDefault();

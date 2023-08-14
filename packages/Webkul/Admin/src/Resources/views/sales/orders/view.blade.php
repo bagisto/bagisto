@@ -13,17 +13,23 @@
 
                 @switch($order->status)
                     @case('processing')
-                        <span class="label-processing text-[14px] mx-[5px]">{{ $order->status }}</span>
-
+                        <span class="label-processing text-[14px] mx-[5px]">
+                            {{ $order->status }}
+                        </span>
                         @break
+
                     @case('completed')
-                        <span class="label-closed text-[14px] mx-[5px]">{{ $order->status }}</span>
-
+                        <span class="label-closed text-[14px] mx-[5px]">
+                            {{ $order->status }}
+                        </span>
                         @break
+
                     @case('pending')
-                        <span class="label-pending text-[14px] mx-[5px]">{{ $order->status }}</span>
-
+                        <span class="label-pending text-[14px] mx-[5px]">
+                            {{ $order->status }}
+                        </span>
                         @break
+
                 @endswitch
             </p>
 
@@ -41,74 +47,69 @@
     </div>
 
     <div class="flex justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
-        <div>
-            {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
+        {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
-            @if (
-                $order->canCancel()
-                && bouncer()->hasPermission('sales.orders.cancel')
-            )
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                    <span class="icon-cancel text-[24px]"></span>
+        @if (
+            $order->canCancel()
+            && bouncer()->hasPermission('sales.orders.cancel')
+        )
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-cancel text-[24px]"></span>
 
-                    <a
-                        href="{{ route('admin.sales.orders.cancel', $order->id) }}"
-                        onclick="return confirm('@lang('admin::app.sales.orders.view.cancel-msg')')"
-                    >
-                        @lang('admin::app.sales.orders.view.cancel')    
-                    </a>
-                </div>
-            @endif
+                <a
+                    href="{{ route('admin.sales.orders.cancel', $order->id) }}"
+                    onclick="return confirm('@lang('admin::app.sales.orders.view.cancel-msg')')"
+                >
+                    @lang('admin::app.sales.orders.view.cancel')    
+                </a>
+            </div>
+        @endif
 
-            @if (
-                $order->canInvoice()
-                && $order->payment->method !== 'paypal_standard'
-            )
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                    <span class="icon-mail text-[24px]"></span> 
+        @if (
+            $order->canInvoice()
+            && $order->payment->method !== 'paypal_standard'
+        )
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-mail text-[24px]"></span> 
 
-                    <a
-                        href="{{ route('admin.sales.invoices.create', $order->id) }}"
-                    >
-                        @lang('admin::app.sales.orders.view.invoice')     
-                    </a>
-                </div>
-            @endif
+                <a href="{{ route('admin.sales.invoices.create', $order->id) }}">
+                    @lang('admin::app.sales.orders.view.invoice')     
+                </a>
+            </div>
+        @endif
 
-            @if ($order->canShip())
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                    <span class="icon-ship text-[24px]"></span> 
+        @if ($order->canShip())
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-ship text-[24px]"></span> 
 
-                    <a
-                        href="{{ route('admin.sales.shipments.create', $order->id) }}"
-                    >
-                        @lang('admin::app.sales.orders.view.ship')     
-                    </a>
-                </div>
-            @endif
+                <a href="{{ route('admin.sales.shipments.create', $order->id) }}">
+                    @lang('admin::app.sales.orders.view.ship')     
+                </a>
+            </div>
+        @endif
 
-            @if ($order->canRefund())
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                    <span class="icon-cancel text-[24px]"></span> 
+        @if ($order->canRefund())
+            <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                <span class="icon-cancel text-[24px]"></span> 
 
-                    <a
-                        href="{{ route('admin.sales.refunds.create', $order->id) }}"
-                    >
-                        @lang('admin::app.sales.orders.view.refund')     
-                    </a>
-                </div>
-            @endif
+                <a href="{{ route('admin.sales.refunds.create', $order->id) }}">
+                    @lang('admin::app.sales.orders.view.refund')     
+                </a>
+            </div>
+        @endif
 
-            {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
-        </div>
+        {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
     </div>
 
     {{-- Order details --}}
     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        {{-- Left Component --}}
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                 <div class="flex justify-between">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">@lang('Order Items') ({{ count($order->items) }})</p>
+                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+                        @lang('Order Items') ({{ count($order->items) }})
+                    </p>
 
                     <p class="text-[16px] text-gray-800 font-semibold">
                         @lang('admin::app.sales.orders.view.grand-total') - {{ core()->formatBasePrice($order->base_grand_total) }}
@@ -130,7 +131,9 @@
                                 @endif
 
                                 <div class="grid gap-[6px] place-content-start">
-                                    <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}</p>
+                                    <p class="text-[16x] text-gray-800 font-semibold">
+                                        {{ $item->name }}
+                                    </p>
 
                                     <div class="flex flex-col gap-[6px] place-items-start">
                                         <p class="text-gray-600">
@@ -156,7 +159,9 @@
                                         </p>
                                     </div>
 
-                                    <p class="text-gray-600">@lang('admin::app.sales.orders.view.sku')  - {{ $item->sku }}</p>
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.sales.orders.view.sku')  - {{ $item->sku }}
+                                    </p>
                                 </div>
                             </div>
 
@@ -313,67 +318,78 @@
 
         {!! view_render_event('sales.order.tabs.before', ['order' => $order]) !!}
 
-        {{-- Customer and address information --}}
+        {{-- Right Component --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+            {{-- Customer and address information --}}
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('admin::app.sales.orders.view.customer')</p>
                 </x-slot:header>
 
                 <x-slot:content>
-                    <div class="pb-[16px]">
+                    <div class="{{ $order->billing_address ? 'pb-[16px]' : '' }}">
                         <div class="flex flex-col">
-                            <p class="text-gray-800 font-semibold">{{ $order->customer_full_name }}</p>
+                            <p class="text-gray-800 font-semibold">
+                                {{ $order->customer_full_name }}
+                            </p>
 
                             {!! view_render_event('sales.order.customer_full_name.after', ['order' => $order]) !!}
 
-                            <p class="text-gray-600">{{ $order->customer_email }}</p>
+                            <p class="text-gray-600">
+                                {{ $order->customer_email }}
+                            </p>
 
                             {!! view_render_event('sales.order.customer_email.after', ['order' => $order]) !!}
 
-                            <p class="text-gray-600">@lang('admin::app.sales.orders.view.customer-group') : {{ $order->customer->group->name ?? '' }}</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.customer-group') : {{ $order->customer->group->name ?? '' }}
+                            </p>
 
                             {!! view_render_event('sales.order.customer_group.after', ['order' => $order]) !!}
                         </div>
                     </div>
                     
-                    <span class="block w-full border-b-[1px] border-gray-300"></span>
-
                     {{-- Billing Address --}}
                     @if ($order->billing_address)
-                        <div class="pb-[16px]">
+                        <span class="block w-full border-b-[1px] border-gray-300"></span>
+
+                        <div class="{{ $order->shipping_address ? 'pb-[16px]' : '' }}">
+
                             <div class="flex items-center justify-between">
-                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('admin::app.sales.orders.view.billing-address')</p>
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                    @lang('admin::app.sales.orders.view.billing-address')
+                                </p>
                             </div>
 
                             @include ('admin::sales.address', ['address' => $order->billing_address])
 
                             {!! view_render_event('sales.order.billing_address.after', ['order' => $order]) !!}
                         </div>
-
-                        <span class="block w-full border-b-[1px] border-gray-300"></span>
                     @endif
 
                     {{-- Shipping Address --}}
                     @if ($order->shipping_address)
-                        <div>
-                            <div class="flex items-center justify-between">
-                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('admin::app.sales.orders.view.shipping-address')</p>
-                            </div>
+                        <span class="block w-full border-b-[1px] border-gray-300"></span>
 
-                            @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                            {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
+                        <div class="flex items-center justify-between">
+                            <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                @lang('admin::app.sales.orders.view.shipping-address')
+                            </p>
                         </div>
-                    @endif
 
+                        @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                        {!! view_render_event('sales.order.shipping_address.after', ['order' => $order]) !!}
+                    @endif
                 </x-slot:content>
             </x-admin::accordion> 
 
             {{-- Order Information --}}
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('admin::app.sales.orders.view.order-information')</p>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        @lang('admin::app.sales.orders.view.order-information')
+                    </p>
                 </x-slot:header>
 
                 <x-slot:content>
@@ -430,8 +446,13 @@
                     @forelse ($order->invoices as $index => $invoice)
                         <div class="grid gap-y-[10px]">
                             <div>
-                                <p class="text-gray-800 font-semibold">@lang('admin::app.sales.orders.view.invoice') #{{ $invoice->increment_id ?? $invoice->id }}</p>
-                                <p class="text-gray-600">{{ core()->formatDate($invoice->created_at, 'd M, Y H:i:s a') }}</p>
+                                <p class="text-gray-800 font-semibold">
+                                    @lang('admin::app.sales.orders.view.invoice') #{{ $invoice->increment_id ?? $invoice->id }}
+                                </p>
+
+                                <p class="text-gray-600">
+                                    {{ core()->formatDate($invoice->created_at, 'd M, Y H:i:s a') }}
+                                </p>
                             </div>
 
                             <div class="flex gap-[10px]">
@@ -465,15 +486,24 @@
             {{-- Shipment Information--}}    
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('admin::app.sales.orders.view.shipments') ({{ count($order->shipments) }})</p>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        @lang('admin::app.sales.orders.view.shipments') ({{ count($order->shipments) }})
+                    </p>
                 </x-slot:header>
 
                 <x-slot:content>
                     @forelse ($order->shipments as $shipment)
                         <div class="grid gap-y-[10px]">
                             <div>
-                                <p class="text-gray-800 font-semibold">@lang('Shipment') #{{ $shipment->id }}</p>
-                                <p class="text-gray-600">{{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}</p>
+                                {{-- Shipment Id --}}
+                                <p class="text-gray-800 font-semibold">
+                                    @lang('Shipment') #{{ $shipment->id }}
+                                </p>
+
+                                {{-- Shipment Created --}}
+                                <p class="text-gray-600">
+                                    {{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}
+                                </p>
                             </div>
 
                             <div class="flex gap-[10px]">
@@ -496,26 +526,42 @@
             {{-- Payment Information--}}    
             <x-admin::accordion>
                 <x-slot:header>
-                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('admin::app.sales.orders.view.payment-and-shipping')</p>
+                    <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                        @lang('admin::app.sales.orders.view.payment-and-shipping')
+                    </p>
                 </x-slot:header>
 
                 <x-slot:content>
                     <div class="pb-[16px]">
                         {{-- Payment method --}}
-                        <p class="text-gray-800 font-semibold">{{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}</p>
-                        <p class="text-gray-600">@lang('admin::app.sales.orders.view.payment-method')</p>
+                        <p class="text-gray-800 font-semibold">
+                            {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                        </p>
+
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.orders.view.payment-method')
+                        </p>
 
                         {{-- Currency --}}
-                        <p class="pt-[16px] text-gray-800 font-semibold">{{ $order->order_currency_code }}</p>
-                        <p class="text-gray-600">@lang('admin::app.sales.orders.view.currency')</p>
+                        <p class="pt-[16px] text-gray-800 font-semibold">
+                            {{ $order->order_currency_code }}
+                        </p>
+
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.orders.view.currency')
+                        </p>
 
                         @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
 
                         {{-- Addtional details --}}
                         @if (! empty($additionalDetails))
-                            <p class="pt-[16px] text-gray-800 font-semibold">{{ $additionalDetails['title'] }}</p>
+                            <p class="pt-[16px] text-gray-800 font-semibold">
+                                {{ $additionalDetails['title'] }}
+                            </p>
 
-                            <p class="text-gray-600">{{ $additionalDetails['value'] }}</p>
+                            <p class="text-gray-600">
+                                {{ $additionalDetails['value'] }}
+                            </p>
                         @endif
 
                         {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
@@ -525,11 +571,21 @@
                     
                     @if ($order->shipping_address)
                         <div class="pt-[16px]">
-                            <p class="text-gray-800 font-semibold">{{ $order->shipping_title }}</p>
-                            <p class="text-gray-600">@lang('admin::app.sales.orders.view.shipping-method')</p>
+                            <p class="text-gray-800 font-semibold">
+                                {{ $order->shipping_title }}
+                            </p>
 
-                            <p class="pt-[16px] text-gray-800 font-semibold">{{ core()->formatBasePrice($order->base_shipping_amount) }}</p>
-                            <p class="text-gray-600">@lang('admin::app.sales.orders.view.shipping-price')</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.shipping-method')
+                            </p>
+
+                            <p class="pt-[16px] text-gray-800 font-semibold">
+                                {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.shipping-price')
+                            </p>
                         </div>
 
                         {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
@@ -547,12 +603,33 @@
                     @forelse ($order->refunds as $refund)
                         <div class="grid gap-y-[10px]">
                             <div>
-                                <p class="text-gray-800 font-semibold">@lang('admin::app.sales.orders.view.refund') #{{ $refund->id }}</p>
-                                <p class="text-gray-600">{{ core()->formatDate($refund->created_at, 'd M, Y H:i:s a') }}</p>
-                                <p class="mt-[16px] text-gray-800 font-semibold">@lang('admin::app.sales.orders.view.name')</p>
-                                <p class="text-gray-600">{{ $refund->order->customer_full_name }}</p>
-                                <p class="mt-[16px] text-gray-800 font-semibold">@lang('admin::app.sales.orders.view.status')</p>
-                                <p class="text-gray-600">@lang('admin::app.sales.orders.view.refunded') <span class="text-gray-800 font-semibold">{{ core()->formatBasePrice($refund->base_grand_total) }}</span></p>
+                                <p class="text-gray-800 font-semibold">
+                                    @lang('admin::app.sales.orders.view.refund') #{{ $refund->id }}
+                                </p>
+
+                                <p class="text-gray-600">
+                                    {{ core()->formatDate($refund->created_at, 'd M, Y H:i:s a') }}
+                                </p>
+
+                                <p class="mt-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.sales.orders.view.name')
+                                </p>
+
+                                <p class="text-gray-600">
+                                    {{ $refund->order->customer_full_name }}
+                                </p>
+
+                                <p class="mt-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.sales.orders.view.status')
+                                </p>
+
+                                <p class="text-gray-600">
+                                    @lang('admin::app.sales.orders.view.refunded') 
+                                    
+                                    <span class="text-gray-800 font-semibold">
+                                        {{ core()->formatBasePrice($refund->base_grand_total) }}
+                                    </span>
+                                </p>
                             </div>
 
                             <div class="flex gap-[10px]">
@@ -565,7 +642,9 @@
                             </div>
                         </div>
                     @empty 
-                        <p class="text-gray-600">@lang('admin::app.sales.orders.view.no-refund-found')</p>
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.orders.view.no-refund-found')
+                        </p>
                     @endforelse
                 </x-slot:content>
             </x-admin::accordion> 

@@ -25,6 +25,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'is_required',
         'is_unique',
         'validation',
+        'regex',
         'value_per_locale',
         'value_per_channel',
         'is_filterable',
