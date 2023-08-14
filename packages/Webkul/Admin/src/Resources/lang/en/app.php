@@ -86,7 +86,9 @@ return [
                 'source'                => 'Source',
                 'qty-available'         => 'Qty. Available',
                 'qty-to-ship'           => 'Qty. To Ship',
-
+                'qty-to-invoiced'       => 'Qty. to invoiced',
+                'create-invoice'        => 'Create Invoice',
+                'new-invoice'           => 'New Invoice',
             ],
         ],
 
