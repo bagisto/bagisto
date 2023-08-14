@@ -350,6 +350,7 @@ return [
         'starting-at'            => 'Starting at',
         'name'                   => 'Name',
         'qty'                    => 'Qty',
+        'offers'                 => 'Buy :qty for :price each and save :discount%',
 
         'sort-by'                => [
             'title'   => 'Sort By',
