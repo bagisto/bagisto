@@ -39,8 +39,8 @@ class CustomerOrderDataGrid extends DataGrid
 
         // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
         // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
-        // $this->addFilter('increment_id', 'orders.increment_id');
-        // $this->addFilter('created_at', 'orders.created_at');
+        $this->addFilter('increment_id', 'orders.increment_id');
+        $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
     }
@@ -147,7 +147,7 @@ class CustomerOrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'method' => 'GET',
             'title'  => trans('admin::app.datagrid.view'),
             'url'    => function ($row) {

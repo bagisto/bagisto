@@ -4,7 +4,7 @@ return [
     [
         'key'    => 'sales.paymentmethods.paypal_standard',
         'name'   => 'admin::app.admin.system.paypal-standard',
-        'info'   => 'admin::app.admin.system.paypal-standard',
+        'info'   => 'admin::app.admin.system.paypal-standard-info',
         'sort'   => 3,
         'fields' => [
             [
@@ -66,7 +66,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.paypal_smart_button',
         'name'   => 'admin::app.admin.system.paypal-smart-button',
-        'info'   => 'admin::app.admin.system.paypal-smart-button',
+        'info'   => 'admin::app.admin.system.paypal-smart-button-info',
         'sort'   => 0,
         'fields' => [
             [

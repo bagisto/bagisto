@@ -17,7 +17,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.cashondelivery',
         'name'   => 'admin::app.admin.system.cash-on-delivery',
-        'info'   => 'admin::app.admin.system.cash-on-delivery',
+        'info'   => 'admin::app.admin.system.cash-on-delivery-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -114,7 +114,7 @@ return [
     ], [
         'key'    => 'sales.paymentmethods.moneytransfer',
         'name'   => 'admin::app.admin.system.money-transfer',
-        'info'   => 'admin::app.admin.system.money-transfer',
+        'info'   => 'admin::app.admin.system.money-transfer-info',
         'sort'   => 2,
         'fields' => [
             [

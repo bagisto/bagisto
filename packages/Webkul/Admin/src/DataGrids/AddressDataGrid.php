@@ -55,13 +55,13 @@ class AddressDataGrid extends DataGrid
         $queryBuilder->groupBy('ca.id')
             ->addSelect(DB::raw(DB::getTablePrefix() . 'country_states.default_name as state_name'));
 
-        // $this->addFilter('company_name', 'ca.company_name');
-        // $this->addFilter('address1', 'ca.address1');
-        // $this->addFilter('postcode', 'ca.postcode');
-        // $this->addFilter('city', 'ca.city');
+        $this->addFilter('company_name', 'ca.company_name');
+        $this->addFilter('address1', 'ca.address1');
+        $this->addFilter('postcode', 'ca.postcode');
+        $this->addFilter('city', 'ca.city');
         // $this->addFilter('state_name', DB::raw(DB::getTablePrefix() . 'country_states.default_name'));
         // $this->addFilter('country_name', DB::raw(DB::getTablePrefix() . 'countries.name'));
-        // $this->addFilter('default_address', 'ca.default_address');
+        $this->addFilter('default_address', 'ca.default_address');
 
         return $queryBuilder;
     }
