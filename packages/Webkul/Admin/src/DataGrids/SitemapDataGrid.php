@@ -20,7 +20,7 @@ class SitemapDataGrid extends DataGrid
         return $queryBuilder;
     }
 
-     /**
+    /**
      * Add Columns.
      *
      * @return void
@@ -68,7 +68,7 @@ class SitemapDataGrid extends DataGrid
         ]);
     }
 
-     /**
+    /**
      * Prepare actions.
      *
      * @return void

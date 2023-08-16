@@ -48,9 +48,8 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                :value="old('name')"
                                 rules="required"
-                                class="mb-1"
+                                :value="old('name')"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.name')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.campaigns.create.name')"
                             >
@@ -71,8 +70,8 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="subject"
-                                :value="old('subject')"
                                 rules="required"
+                                :value="old('subject')"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.subject')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.campaigns.create.subject')"
                             >

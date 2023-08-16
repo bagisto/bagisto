@@ -44,9 +44,9 @@
                             <x-admin::form.control-group.control
                                 type="tinymce"
                                 name="content"
-                                :value="old('content')"
                                 rules="required"
                                 id="content"
+                                :value="old('content')"
                                 :label="trans('admin::app.marketing.email-marketing.templates.create.content')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.templates.create.content')"
                             >
@@ -85,8 +85,8 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
-                                        :value="old('name')"
                                         rules="required"
+                                        :value="old('name')"
                                         :label="trans('admin::app.marketing.email-marketing.templates.create.name')"
                                         :placeholder="trans('admin::app.marketing.email-marketing.templates.create.name')"
                                     >

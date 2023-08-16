@@ -35,10 +35,11 @@
         </div>
 
         {!! view_render_event('bagisto.admin.settings.exchangerate.edit.before') !!}
+
+        <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
     
-        <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <!-- Full Pannel -->
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <!-- General -->
                 <div class="p-[16px] bg-white box-shadow rounded-[4px]">
                     <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
@@ -47,17 +48,17 @@
 
                     <!-- Event Name -->
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label class="required !mt-0">
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.marketing.email-marketing.events.edit.name')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
                             type="text"
                             name="name"
-                            value="{{ old('name') ?: $event->name }}"
                             rules="required"
-                            label="{{ trans('admin::app.marketing.email-marketing.events.edit.name') }}"
-                            placeholder="{{ trans('admin::app.marketing.email-marketing.events.edit.name') }}"
+                            value="{{ old('name') ?: $event->name }}"
+                            :label="trans('admin::app.marketing.email-marketing.events.edit.name')"
+                            :placeholder="trans('admin::app.marketing.email-marketing.events.edit.name')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -76,15 +77,15 @@
                         <x-admin::form.control-group.control
                             type="textarea"
                             name="description"
-                            value="{{ old('description') ?: $event->description }}"
                             rules="required"
                             id="description"
                             class="h-[100px]"
-                            label="{{ trans('admin::app.marketing.email-marketing.events.edit.description')}}"
+                            value="{{ old('description') ?: $event->description }}"
+                            :label="trans('admin::app.marketing.email-marketing.events.edit.description')"
                         >
                         </x-admin::form.control-group.control>
 
-                        <x-admin::form.control-group.error 
+                        <x-admin::form.control-group.error
                             control-name="description"
                         >
                         </x-admin::form.control-group.error>
@@ -99,9 +100,9 @@
                         <x-admin::form.control-group.control
                             type="date"
                             name="date"
-                            value="{{ old('date') ?: $event->date }}"
                             rules="required"
-                            label="{{ trans('date') }}"
+                            value="{{ old('date') ?: $event->date }}"
+                            :label="trans('admin::app.marketing.email-marketing.events.edit.date')"
                             placeholder="{{ trans('admin::app.marketing.email-marketing.events.edit.date') }}"
                         >
                         </x-admin::form.control-group.control>
