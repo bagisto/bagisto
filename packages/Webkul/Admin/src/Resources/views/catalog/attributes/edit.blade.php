@@ -265,13 +265,18 @@
                                                     <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatchType == 'image'">
-                                                            @{{ element.swatch_value.name }}
+                                                            <img 
+                                                                :src="element.swatch_value_url"
+                                                                :ref="'image_' + element.id"
+                                                                class="h-[50px] w-[50px]"
+                                                            >
 
                                                             <input
-                                                                type="hidden"
+                                                                type="file"
                                                                 :name="'options[' + element.id + '][swatch_value]'"
-                                                                v-model="element.swatch_value"
-                                                            />    
+                                                                class="hidden"
+                                                                :ref="'imageInput_' + element.id"
+                                                            /> 
                                                         </div>
 
                                                         <!-- Swatch Color -->
@@ -875,6 +880,10 @@
 
                         this.$refs.addOptionsRow.toggle();
 
+                        if (params.swatch_value instanceof File) {
+                            this.setFile(params);
+                        }
+
                         resetForm();
                     },
 
@@ -932,6 +941,19 @@
                                     this.optionsData.push(row);
                                 });
                             });
+                    },
+
+                    setFile(event) {
+                        let dataTransfer = new DataTransfer();
+
+                        dataTransfer.items.add(event.swatch_value);
+
+                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        setTimeout(() => {
+                            this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
+                        }, 0);
+
+                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
                     }
                 },
             });
