@@ -1,4 +1,4 @@
-<script src="{{ asset('vendor/webkul/admin/assets/js/tinyMCE/tinymce.min.js') }}"></script>
+<script src="{{ asset('../packages/Webkul/Admin/node_modules/tinymce/tinymce.min.js')}}"></script>
 
 <script>
     let tinyMCEHelper = {
@@ -7,6 +7,7 @@
 
             let config = {
                 relative_urls : false,
+                menubar: false,
                 remove_script_host : false,
                 document_base_url : '{{ asset('/') }}',
                 uploadRoute: '{{ route('admin.tinymce.upload') }}',
