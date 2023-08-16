@@ -1414,17 +1414,17 @@ return [
 
             'events' => [
                 'create'   => [
-                    'title'          => 'Events',
-                    'general'        => 'General',
-                    'name'           => 'Name',
                     'description'    => 'Description',
                     'date'           => 'Date',
+                    'general'        => 'General',
+                    'name'           => 'Name',
                     'save-btn'       => 'Save Event',
+                    'title'          => 'Events',
                 ],
 
                 'index'  => [
-                    'title'       => 'Events',
                     'create-btn'  => 'Create Event',
+                    'title'       => 'Events',
                 ],
 
                 'edit'  => [

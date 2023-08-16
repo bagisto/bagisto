@@ -47,7 +47,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Event Name -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="required !mt-0">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.email-marketing.events.create.name')
                                         </x-admin::form.control-group.label>
             
@@ -56,9 +56,8 @@
                                             name="name"
                                             :value="old('name')"
                                             rules="required"
-                                            class="!mb-1"
-                                            label="{{ trans('admin::app.marketing.email-marketing.events.create.name') }}"
-                                            placeholder="{{ trans('admin::app.marketing.email-marketing.events.create.name') }}"
+                                            :label="trans('admin::app.marketing.email-marketing.events.create.name')"
+                                            :placeholder="trans('admin::app.marketing.email-marketing.events.create.name')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -77,11 +76,11 @@
                                         <x-admin::form.control-group.control
                                             type="textarea"
                                             name="description"
-                                            value="{{ old('description') }}"
+                                            :value="old('description')"
                                             rules="required"
                                             id="description"
-                                            class="!mb-1 h-[100px]"
-                                            label="{{ trans('admin::app.marketing.email-marketing.events.create.description')}}"
+                                            class="h-[100px]"
+                                            :label="trans('admin::app.marketing.email-marketing.events.create.description')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -93,18 +92,18 @@
 
                                     <!-- Event Date -->
                                     <x-admin::form.control-group class="mb-4">
-                                        <x-admin::form.control-group.label class="required !mt-0">
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.marketing.email-marketing.events.create.date')
                                         </x-admin::form.control-group.label>
             
                                         <x-admin::form.control-group.control
                                             type="date"
                                             name="date"
+                                            class="cursor-pointer"
                                             :value="old('date')"
                                             rules="required"
-                                            label="{{ trans('date') }}"
-                                            class="!mb-1"
-                                            placeholder="{{ trans('admin::app.marketing.email-marketing.events.create.date') }}"
+                                            :label="trans('admin::app.marketing.email-marketing.events.create.date')"
+                                            :placeholder="trans('admin::app.marketing.email-marketing.events.create.date')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -117,7 +116,7 @@
                             </x-slot:content>
                             
                             <x-slot:footer>
-                                {{-- Save Button --}}
+                                <!-- Save Button -->
                                 <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
                                     @lang('admin::app.marketing.email-marketing.events.create.save-btn')
                                 </button>
@@ -134,7 +133,7 @@
 
                 methods: {
                     createEmailEvents(params, { resetForm, setErrors }) {
-                        this.$axios.post("{{ route('admin.events.store') }}", params )
+                        this.$axios.post("{{ route('admin.events.store') }}", params)
                             .then((response) => {
                                 this.$refs.emailEvents.toggle();
 

@@ -95,9 +95,9 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="marketing_event_id"
-                                rules="required"
+                                class="cursor-pointer"
                                 :value="$selectedOption"
-                                class="cursor-pointer mb-1"
+                                rules="required"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.edit.event')"
                             >
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
