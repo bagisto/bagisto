@@ -25,6 +25,15 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
     ];
 
     /**
+     * Append to the model attributes
+     *
+     * @var array
+     */
+    protected $appends = [
+        'swatch_value_url',
+    ];
+
+    /**
      * Get the attribute that owns the attribute option.
      */
     public function attribute(): BelongsTo
