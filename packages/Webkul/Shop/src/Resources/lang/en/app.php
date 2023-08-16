@@ -2,7 +2,8 @@
 
 return [
     'configurations' => [
-        'settings-title' => 'Settings',
+        'settings-title'      => 'Settings',
+        'settings-title-info' => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
     ],
 
     'customers' => [

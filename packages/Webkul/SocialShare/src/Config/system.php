@@ -3,8 +3,8 @@
 return [
     [
         'key'    => 'catalog.products.social_share',
-        'name'   => 'Social Share',
-        'info'   => 'Social Share',
+        'name'   => 'social_share::app.title',
+        'info'   => 'social_share::app.title-info',
         'sort'   => 100,
         'fields' => [
             [
