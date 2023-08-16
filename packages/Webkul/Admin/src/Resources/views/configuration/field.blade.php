@@ -23,18 +23,6 @@
         action="" 
         enctype="multipart/form-data"
     >
-        <a href="{{ route('admin.configuration.index') }}">
-            <div class="flex items-center cursor-pointer">
-                <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 text-center w-full max-w-max rounded-[6px]">
-                    <span class="icon-sort-left text-[24px]"></span>
-                </div>
-                
-                <p class="text-gray-600">
-                    @lang('admin::app.configuration.title') / {{ $title }}
-                </p>
-            </div>
-        </a>
-
         {{-- Save Inventory --}}
         <div class="flex gap-[16px] justify-between items-center mt-[14px] max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">

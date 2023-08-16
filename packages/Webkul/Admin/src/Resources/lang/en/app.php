@@ -196,6 +196,13 @@ return [
                 'invoice-sent'           => 'Invoice sent successfully',
             ],
         ],
+
+        'transactions' => [
+            'index' => [
+                'title'       => 'Transactions',
+                'create-btn'  => 'Create Transactions',
+            ],
+        ],
     ],
 
     'customers' => [
@@ -383,15 +390,16 @@ return [
             ],
 
             'edit'  => [
-                'cancel-btn'  => 'Cancel',
-                'code'        => 'Code',
-                'save-btn'    => 'Save Locale',
-                'general'     => 'General',
-                'title'       => 'Edit Locales',
-                'name'        => 'Name',
-                'direction'   => 'Direction',
-                'logo'        => 'Locale Logo',
-                'logo-path'   => 'Locale Path',
+                'cancel-btn'     => 'Cancel',
+                'code'           => 'Code',
+                'save-btn'       => 'Save Locale',
+                'general'        => 'General',
+                'title'          => 'Edit Locales',
+                'name'           => 'Name',
+                'direction'      => 'Direction',
+                'logo'           => 'Locale Logo',
+                'logo-path'      => 'Locale Path',
+                'update-success' => 'Locale Updated Successfully.',
 
             ],
         ],
@@ -426,6 +434,7 @@ return [
                 'save-btn'           => 'Save Currency',
                 'symbol'             => 'Symbol',
                 'title'              => 'Edit Currency',
+                'update-success'     => 'Currency updated successfully.',
             ],
         ],
 
@@ -534,6 +543,9 @@ return [
                     'save-btn'         => 'Save Tax Category',
                     'tax-rates'        => 'Tax Rates',
                     'title'            => 'Tax Categories',
+                    'add-tax-rates'    => 'Add Tax Rates',
+                    'empty-text'       => 'Tax Rates are not available please create new Tax Rates.',
+                    'create-success'   => 'New Tax Category Created',
                 ],
 
                 'edit' => [
@@ -546,10 +558,9 @@ return [
                     'save-btn'         => 'Save Tax Category',
                     'select-tax-rates' => 'Select Tax Rates',
                     'title'            => 'Edit Tax Categories',
+                    'update-success'   => 'Successfully Updated Tax Category',
                 ],
 
-                'create-success'  => 'New Tax Category Created',
-                'update-success'  => 'Successfully Updated Tax Category',
             ],
 
             'tax-rates'   => [
@@ -592,6 +603,7 @@ return [
                     'zip_code'       => 'Zip Code',
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
+                    'update-success' => 'Tax Rate Update Successfully',
                 ],
             ],
         ],

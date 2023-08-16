@@ -28,7 +28,7 @@
                                 {!! view_render_event('bagisto.admin.settings.locale.create.before') !!}
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.locales.index.code')
                                     </x-admin::form.control-group.label>
 
@@ -49,7 +49,7 @@
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.locales.index.name')
                                     </x-admin::form.control-group.label>
 
@@ -70,7 +70,7 @@
                                 </x-admin::form.control-group>
                     
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.locales.index.direction')
                                     </x-admin::form.control-group.label>
 
