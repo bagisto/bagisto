@@ -24,7 +24,6 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
         'attribute_id',
     ];
 
-
     /**
      * Append to the model attributes
      *
