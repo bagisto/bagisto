@@ -4,7 +4,7 @@ return [
     [
         'key'    => 'general.content.shop',
         'name'   => 'shop::app.configurations.settings-title',
-        'info'   => 'shop::app.configurations.settings-title',
+        'info'   => 'shop::app.configurations.settings-title-info',
         'sort'   => 1,
         'fields' => [
             [
