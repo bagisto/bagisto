@@ -103,7 +103,12 @@
                         <!-- Options -->
                         <div 
                             class="p-[16px] bg-white box-shadow rounded-[4px]"
-                            v-if="swatchAttribute && (attributeType == 'select' || attributeType == 'multiselect' || attributeType == 'price' || attributeType == 'checkbox')"
+                            v-if="swatchAttribute && (
+                                    attributeType == 'select' 
+                                    || attributeType == 'multiselect' 
+                                    || attributeType == 'price' 
+                                    || attributeType == 'checkbox'
+                                )"
                         >
                             <div class="flex justify-between items-center mb-3">
                                 <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">

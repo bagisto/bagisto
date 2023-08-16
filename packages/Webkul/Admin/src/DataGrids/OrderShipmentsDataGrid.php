@@ -8,7 +8,6 @@ use Webkul\Sales\Models\OrderAddress;
 
 class OrderShipmentsDataGrid extends DataGrid
 {
-
     /**
      * Shipment Id.
      *

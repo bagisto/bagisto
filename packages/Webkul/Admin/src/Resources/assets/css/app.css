@@ -41,7 +41,7 @@
         @apply shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)];
     }
 
-    .icon-checkbox-partical:before {
+    .icon-checkbox-partial:before {
         content: "\e90b";
     }
 
