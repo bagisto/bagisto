@@ -1,4 +1,6 @@
-<script src="{{ asset('../packages/Webkul/Admin/node_modules/tinymce/tinymce.min.js')}}"></script>
+{{-- <script src="{{ bagisto_asset('js/tinymce.min.js') }}"></script> --}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.6.2/tinymce.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
     let tinyMCEHelper = {
@@ -39,8 +41,8 @@
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = function () {
-                    let id = 'blobid' + (new Date()).getTime();
-                    let blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                    let id = 'blobid' + new Date().getTime();
+                    let blobCache = tinymce.get().editorUpload.blobCache;
                     let base64 = reader.result.split(',')[1];
                     let blobInfo = blobCache.create(id, file, base64);
                     blobCache.add(blobInfo);
@@ -60,7 +62,7 @@
             xhr.open('POST', config.uploadRoute);
 
             xhr.upload.onprogress = function (e) {
-                progress(e.loaded / e.total * 100);
+                progress((e.loaded / e.total) * 100);
             };
 
             xhr.onload = function() {
@@ -95,6 +97,6 @@
             formData.append('file', blobInfo.blob(), blobInfo.filename());
 
             xhr.send(formData);
-        }
+        },
     };
 </script>
