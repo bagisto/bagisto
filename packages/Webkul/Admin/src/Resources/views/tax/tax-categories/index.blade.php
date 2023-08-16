@@ -17,7 +17,7 @@
         </div>
     </div>
     
-    <x-admin::datagrid src="{{ route('admin.tax_categories.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.tax_categories.index') }}" ref="taxCategory_data"></x-admin::datagrid>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-tax-category-template">
@@ -194,7 +194,7 @@
         <script type="module">
             app.component('v-create-tax-category', {
                 template: '#v-create-tax-category-template',
-                
+
                 methods: {
                     store(params, { resetForm, setErrors }) {
                     
@@ -206,6 +206,8 @@
                             .then((response) => {
                                 this.$refs.taxCategory.toggle();
 
+                                this.$root.$refs.taxCategory_data.get();
+                                
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();
