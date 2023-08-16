@@ -171,7 +171,7 @@ class AddressController extends Controller
         if ($default = $this->customerAddressRepository->findOneWhere(['customer_id' => $id, 'default_address' => 1])) {
             $default->update(['default_address' => 0]);
         }
-        
+
         $address = $this->customerAddressRepository->findOneWhere([
             'id'              => request('set_as_default'),
             'customer_id'     => $id
@@ -181,10 +181,10 @@ class AddressController extends Controller
             $address->update(['default_address' => 1]);
 
             session()->flash('success', trans('admin::app.customers.view.set-default-success'));
-        } 
+        }
 
         return redirect()->back();
-    } 
+    }
 
     /**
      * Remove the specified resource from storage.

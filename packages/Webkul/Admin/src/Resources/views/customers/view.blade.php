@@ -37,7 +37,8 @@
         @include('admin::customers.addresses.create')
        
         <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-cancel text-[24px] "></span> Delete Account
+            <span class="icon-cancel text-[24px] "></span>
+            @lang('Delete Account')
         </div>
     </div>
 
@@ -75,32 +76,38 @@
                                                 <p class="text-gray-600">
                                                     {{ $order->created_at }}
                                                 </p>
+
                                                 @switch($order->status)
                                                     @case('processing')
                                                         <p class="label-active">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
+
                                                     @case('completed')
                                                         <p class="label-active">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
+
                                                     @case('pending')
                                                         <p class="label-pending">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
+
                                                     @case('canceled')
                                                         <p class="label-cancelled">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
+
                                                     @case('closed')
                                                         <p class="label-closed">
                                                             {{ $order->status }}
                                                         </p>
                                                         @break
+
                                                 @endswitch
                                             </div>
                                         </div>
@@ -190,21 +197,11 @@
                         <table class="w-full text-sm text-left min-w-[800px]">
                             <thead class="text-[14px] text-gray-600 bg-gray-50 border-b-[1px] border-gray-200">
                                 <tr>
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> 
-                                        @lang('admin::app.customers.view.invoice-id')  
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-[16px] font-semibold"> 
-                                        @lang('admin::app.customers.view.invoice-date')  
-                                    </th>
-                                    
-                                    <th scope="col" class="px-6 py-[16px] font-semibold">
-                                        @lang('admin::app.customers.view.invoice-amount') 
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-[16px] font-semibold">
-                                        @lang('admin::app.customers.view.order-id')  
-                                    </th>
+                                    @foreach (['invoice-id', 'invoice-date', 'invoice-amount', 'order-id'] as $item)
+                                        <th scope="col" class="px-6 py-[16px] font-semibold"> 
+                                            @lang('admin::app.customers.view.' . $item)
+                                        </th>
+                                    @endforeach
                                 </tr>
                             </thead>
 
@@ -234,7 +231,7 @@
                     </div>
                 @else
                     {{-- Empty Container --}}
-                    <div class="p-[16px] flex justify-between">
+                    <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.customers.view.invoice') (0)
                         </p>
@@ -339,7 +336,7 @@
                                         </p>
                                     </div>
 
-                                    <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                                    <span class="icon-sort-right ml-[4px] text-[24px] cursor-pointer"></span>
                                 </div>
                             </div>
 
@@ -348,7 +345,7 @@
                     @endforeach    
                 @else
                     {{-- Empty Invoice Container --}}
-                    <div class="p-[16px] flex justify-between">
+                    <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.customers.view.reviews') (0)
                         </p>
@@ -423,7 +420,7 @@
                             {{--Note Submit Button --}}
                             <button
                                 type="submit"
-                                class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
+                                class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                             >
                                 @lang('admin::app.customers.view.submit-btn-title')
                             </button>
@@ -461,7 +458,7 @@
             <x-admin::accordion>
                 <x-slot:header>
                     <div class="flex w-[100%]">
-                        <p class="w-[100%] text-gray-600 text-[16px] p-[10px] font-semibold">
+                        <p class="w-[100%] p-[10px] text-gray-600 text-[16px] font-semibold">
                             @lang('admin::app.customers.view.customer')
                         </p>
     
@@ -472,35 +469,29 @@
 
                 <x-slot:content>
                     <div class="grid gap-y-[10px]">
-                        <div class="">
-                            <p class="text-gray-800 font-semibold">
-                                {{ $customer->first_name . " " . $customer->last_name }}
-                            </p>
+                        <p class="text-gray-800 font-semibold">
+                            {{ $customer->first_name . " " . $customer->last_name }}
+                        </p>
 
-                            <p class="text-gray-600">
-                                @lang('admin::app.customers.view.email') - {{ $customer->email }}
-                            </p>
+                        <p class="text-gray-600">
+                            @lang('admin::app.customers.view.email') - {{ $customer->email }}
+                        </p>
 
-                            <p class="text-gray-600">
-                                @lang('admin::app.customers.view.phone') - {{ $customer->phone }}
-                            </p>
-                        </div>
+                        <p class="text-gray-600">
+                            @lang('admin::app.customers.view.phone') - {{ $customer->phone }}
+                        </p>
 
-                        <div class="">
-                            <p class="text-gray-600">
-                                @lang('admin::app.customers.view.gender') - {{ $customer->gender }}
-                            </p>
+                        <p class="text-gray-600">
+                            @lang('admin::app.customers.view.gender') - {{ $customer->gender }}
+                        </p>
 
-                            <p class="text-gray-600">
-                                @lang('admin::app.customers.view.date-of-birth') - {{ $customer->date_of_birth }}
-                            </p>
-                        </div>
+                        <p class="text-gray-600">
+                            @lang('admin::app.customers.view.date-of-birth') - {{ $customer->date_of_birth }}
+                        </p>
 
-                        <div class="">
-                            <p class="text-gray-600">
-                                @lang('admin::app.customers.view.group') - {{ $customer->group->code }}
-                            </p>
-                        </div>
+                        <p class="text-gray-600">
+                            @lang('admin::app.customers.view.group') - {{ $customer->group->code }}
+                        </p>
                     </div>
                 </x-slot:content>
             </x-admin::accordion> 
@@ -601,9 +592,7 @@
                         @endforeach
                     @else    
                         {{-- Empty Address Container --}}
-                        <div
-                            class="flex gap-[20px] items-center py-[10px]"
-                        >
+                        <div class="flex gap-[20px] items-center py-[10px]">
                             <img
                                 src="{{ bagisto_asset('images/address-setting.png') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
@@ -625,4 +614,3 @@
         </div>
     </div>
 </x-admin::layouts>
-    
