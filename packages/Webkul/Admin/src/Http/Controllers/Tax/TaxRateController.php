@@ -141,7 +141,7 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.tax-rates.update-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.edit.update-success'));
 
         return redirect()->route('admin.tax_rates.index');
     }
