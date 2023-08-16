@@ -95,7 +95,7 @@ class LocaleController extends Controller
 
         $this->localeRepository->update($data, $id);
 
-        session()->flash('success', trans('admin::app.settings.locales.update-success'));
+        session()->flash('success', trans('admin::app.settings.locales.edit.update-success'));
 
         return redirect()->route('admin.locales.index');
     }

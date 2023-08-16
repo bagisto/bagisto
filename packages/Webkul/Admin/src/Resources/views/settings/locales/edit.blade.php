@@ -49,7 +49,7 @@
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.locales.edit.code')
                         </x-admin::form.control-group.label>
 
@@ -72,7 +72,7 @@
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.locales.edit.name')
                         </x-admin::form.control-group.label>
 
@@ -94,7 +94,7 @@
                     </x-admin::form.control-group>
         
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
+                        <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.locales.edit.direction')
                         </x-admin::form.control-group.label>
 
