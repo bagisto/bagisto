@@ -36,13 +36,13 @@ class CustomerDataGrid extends DataGrid
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
             );
 
-        // $this->addFilter('customer_id', 'customers.id');
+        $this->addFilter('customer_id', 'customers.id');
         // $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
-        // $this->addFilter('group', 'customer_groups.name');
-        // $this->addFilter('phone', 'customers.phone');
-        // $this->addFilter('gender', 'customers.gender');
-        // $this->addFilter('status', 'status');
-        // $this->addFilter('is_suspended', 'customers.is_suspended');
+        $this->addFilter('group', 'customer_groups.name');
+        $this->addFilter('phone', 'customers.phone');
+        $this->addFilter('gender', 'customers.gender');
+        $this->addFilter('status', 'status');
+        $this->addFilter('is_suspended', 'customers.is_suspended');
 
         return $queryBuilder;
     }
@@ -165,16 +165,7 @@ class CustomerDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'         => 'icon-edit',
-            'title'        => trans('admin::app.datagrid.edit'),
-            'method'       => 'GET',
-            'url'          => function ($row) {
-                return route('admin.customer.edit', $row->customer_id);
-            },
-        ]);
-
-        $this->addAction([
-            'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
@@ -183,7 +174,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'   => 'icon-delete',
+            'icon'   => 'icon-exit',
             'title'  => trans('admin::app.datagrid.login-as-customer'),
             'method' => 'GET',
             'target' => 'blank',

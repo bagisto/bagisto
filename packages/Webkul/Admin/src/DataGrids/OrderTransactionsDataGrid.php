@@ -26,11 +26,11 @@ class OrderTransactionsDataGrid extends DataGrid
                 'order_transactions.status as status'
             );
 
-        // $this->addFilter('id', 'order_transactions.id');
-        // $this->addFilter('transaction_id', 'order_transactions.transaction_id');
-        // $this->addFilter('invoice_id', 'order_transactions.invoice_id');
-        // $this->addFilter('order_id', 'ors.increment_id');
-        // $this->addFilter('created_at', 'order_transactions.created_at');
+        $this->addFilter('id', 'order_transactions.id');
+        $this->addFilter('transaction_id', 'order_transactions.transaction_id');
+        $this->addFilter('invoice_id', 'order_transactions.invoice_id');
+        $this->addFilter('order_id', 'ors.increment_id');
+        $this->addFilter('created_at', 'order_transactions.created_at');
 
         return $queryBuilder;
     }
@@ -114,7 +114,7 @@ class OrderTransactionsDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            // 'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
