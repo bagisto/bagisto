@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.sales.invoices.view.title') #{{ $invoice->increment_id ?? $invoice->id }}
+        {{ trans('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
     </x-slot:title>
 
     @php
@@ -14,7 +14,7 @@
             {!! view_render_event('sales.invoice.title.before', ['order' => $order]) !!}
 
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
-                @lang('admin::app.sales.invoices.view.title') #{{ $invoice->increment_id ?? $invoice->id }}
+                {{ trans('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
 
                 <span class="label-active text-[14px] mx-[5px]">{{ $invoice->status_label }}</span>
             </p>
@@ -143,8 +143,10 @@
                                     </p>
 
                                     <p class="text-gray-600">
-                                        {{core()->formatBasePrice($item->base_price) }}
-                                        @lang('admin::app.sales.invoices.view.per-unit') x {{ $item->qty}}@lang('admin::app.sales.invoices.view.qty')
+                                        @lang('admin::app.sales.invoices.view.amount-per-unit', [
+                                            'amount' => core()->formatBasePrice($item->base_price),
+                                            'qty'    => $item->qty,
+                                            ])
                                     </p>
 
                                     <div class="flex flex-col gap-[6px] place-items-start">

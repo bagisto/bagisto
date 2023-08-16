@@ -108,15 +108,6 @@ class AttributeDataGrid extends DataGrid
             'filterable' => true,
             'sortable'   => true,
         ]);
-
-        $this->addColumn([
-            'index'      => 'created_at',
-            'label'      => trans('Created At'),
-            'type'       => 'datetime_range',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
     }
 
     /**

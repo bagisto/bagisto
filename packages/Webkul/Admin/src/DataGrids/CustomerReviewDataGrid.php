@@ -35,10 +35,10 @@ class CustomerReviewDataGrid extends DataGrid
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
 
-        // $this->addFilter('product_review_id', 'pr.id');
-        // $this->addFilter('product_review_status', 'pr.status');
-        // $this->addFilter('product_name', 'pf.name');
-        // $this->addFilter('created_at', 'pr.created_at');
+        $this->addFilter('product_review_id', 'pr.id');
+        $this->addFilter('product_review_status', 'pr.status');
+        $this->addFilter('product_name', 'pf.name');
+        $this->addFilter('created_at', 'pr.created_at');
 
         return $queryBuilder;
     }
