@@ -20,7 +20,7 @@ return [
     ], [
         'key'    => 'taxes.catalogue.pricing',
         'name'   => 'tax::app.admin.system.taxes.pricing',
-        'info'   => 'tax::app.admin.system.taxes.pricing',
+        'info'   => 'tax::app.admin.system.taxes.pricing-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -34,7 +34,7 @@ return [
     ], [
         'key'    => 'taxes.catalogue.default-location-calculation',
         'name'   => 'tax::app.admin.system.taxes.default-location-calculation',
-        'info'   => 'tax::app.admin.system.taxes.default-location-calculation',
+        'info'   => 'tax::app.admin.system.taxes.default-location-calculation-info',
         'sort'   => 1,
         'fields' => [
             [

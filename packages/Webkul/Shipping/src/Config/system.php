@@ -17,7 +17,7 @@ return [
     ], [
         'key'    => 'sales.shipping.origin',
         'name'   => 'admin::app.admin.system.origin',
-        'info'   => 'admin::app.admin.system.origin',
+        'info'   => 'admin::app.admin.system.origin-info',
         'sort'   => 0,
         'fields' => [
             [
@@ -91,7 +91,7 @@ return [
     ], [
         'key'    => 'sales.carriers.free',
         'name'   => 'admin::app.admin.system.free-shipping',
-        'info'   => 'admin::app.admin.system.free-shipping',
+        'info'   => 'admin::app.admin.system.free-shipping-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -120,7 +120,7 @@ return [
     ], [
         'key'    => 'sales.carriers.flatrate',
         'name'   => 'admin::app.admin.system.flate-rate-shipping',
-        'info'   => 'admin::app.admin.system.flate-rate-shipping',
+        'info'   => 'admin::app.admin.system.flate-rate-shipping-info',
         'sort'   => 2,
         'fields' => [
             [
