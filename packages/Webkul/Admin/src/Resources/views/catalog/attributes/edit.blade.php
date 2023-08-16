@@ -513,7 +513,7 @@
                                 <!-- Input Validation -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.catalog.attributes.create.input-validation')
+                                        @lang('admin::app.catalog.attributes.edit.input-validation')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -526,7 +526,7 @@
                                          <!-- Here! All Needed types are defined -->
                                          @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
                                          <option value="{{ $type }}">
-                                             @lang($type)
+                                             @lang('admin::app.catalog.attributes.edit.' . $type)
                                          </option>
                                      @endforeach
                                     </x-admin::form.control-group.control>

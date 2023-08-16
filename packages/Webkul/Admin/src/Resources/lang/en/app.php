@@ -179,7 +179,7 @@ return [
                 'product-image'          => 'Product Image',
                 'sku'                    => 'SKU',
                 'qty'                    => 'Quantity',
-                'amount-per-unit'        =>':amount Per Unit x :qty Quantity',
+                'amount-per-unit'        => ':amount Per Unit x :qty Quantity',
                 'price'                  => 'Price',
                 'tax'                    => 'Tax Amount',
                 'discount'               => 'Discount Amount',
@@ -243,9 +243,9 @@ return [
             'suspended'             => 'Suspended',
 
         ],
-  
-        'view' => [  
-            'title'                   => 'Customer View',         
+
+        'view' => [
+            'title'                   => 'Customer View',
             'customer'                => 'Customer',
             'active'                  => 'Active',
             'inactive'                => 'Inactive',
@@ -274,7 +274,7 @@ return [
             'invoice-id'              => 'Invoice ID',
             'invoice-date'            => 'Invoice Date',
             'invoice-amount'          => 'Invoice Amount',
-            'order-id'                => 'Order ID', 
+            'order-id'                => 'Order ID',
             'empty-title'             => 'Add Customer Address',
             'empty-description'       => 'Create New Addresses for Customer',
             'invoice'                 => 'Invoices',
@@ -316,10 +316,6 @@ return [
             'index' => [
                 'title' => 'Reviews',
             ],
-
-            'edit' => [
-
-            ],
         ],
 
         'addresses' => [
@@ -340,7 +336,7 @@ return [
                 'phone'              => 'Phone',
                 'street-address'     => 'Street Address',
                 'post-code'          => 'Post Code',
-                'default-address'    => 'Default Address', 
+                'default-address'    => 'Default Address',
                 'save-btn-title'     => 'Save Address',
             ],
 
@@ -360,7 +356,7 @@ return [
                 'phone'            => 'Phone',
                 'street-address'   => 'Street Address',
                 'post-code'        => 'Post Code',
-                'default-address'  => 'Default Address', 
+                'default-address'  => 'Default Address',
                 'save-btn-title'   => 'Save Address',
             ],
         ],
@@ -1104,8 +1100,8 @@ return [
                     'color'     => 'Color Swatch',
                     'dropdown'  => 'Dropdown',
                     'image'     => 'Image Swatch',
-                    'text'      => 'Text Swatch',
                     'save-btn'  => 'Save Option',
+                    'text'      => 'Text Swatch',
                 ],
             ],
 
@@ -1133,7 +1129,7 @@ return [
                 'file'                        => 'File',
                 'general'                     => 'General',
                 'is_required'                 => 'Is Required',
-                'input_validation'            => 'Input Validation',
+                'input-validation'            => 'Input Validation',
                 'image'                       => 'Image',
                 'is_unique'                   => 'Is Unique',
                 'is_filterable'               => 'Use in Layered Navigation',
@@ -1147,6 +1143,7 @@ return [
                 'number'                      => 'Number',
                 'price'                       => 'Price',
                 'position'                    => 'Position',
+                'regex'                       => 'Regex',
                 'select'                      => 'Select',
                 'select-type'                 => 'Select Attribute Type',
                 'save-btn'                    => 'Save Attribute',
@@ -1167,8 +1164,8 @@ return [
                     'color'     => 'Color Swatch',
                     'dropdown'  => 'Dropdown',
                     'image'     => 'Image Swatch',
-                    'text'      => 'Text Swatch',
                     'save-btn'  => 'Save Option',
+                    'text'      => 'Text Swatch',
                 ],
             ],
         ],
@@ -2012,7 +2009,7 @@ return [
             'update-success' => 'Selected :resource were successfully updated',
             'no-resource'    => 'The resource provided for insufficient for the action',
         ],
-        
+
         'admin-name'         => 'Name',
         'attribute-family'   => 'Attribute Family',
         'base-total'         => 'Base Total',
