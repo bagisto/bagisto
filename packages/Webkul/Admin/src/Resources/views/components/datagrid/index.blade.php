@@ -1,4 +1,6 @@
-<v-datagrid {{ $attributes }}></v-datagrid>
+<v-datagrid {{ $attributes }}>
+    {{ $slot }}
+</v-datagrid>
 
 @pushOnce('scripts')
     <script
@@ -6,15 +8,36 @@
         id="v-datagrid-template"
     >
         <div>
-            <!-- Datagrid Toolbar X-Component -->
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex gap-2 mt-[30px]">
-                <!-- Datagrid Filter X-Component -->
                 <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
-                <!-- Datagrid Table X-Component -->
-                <x-admin::datagrid.table></x-admin::datagrid.table>
+                <x-admin::datagrid.table>
+                    <template #header>
+                        <slot
+                            name="header"
+                            :columns="available.columns"
+                            :actions="available.actions"
+                            :mass-actions="available.massActions"
+                            :records="available.records"
+                            :meta="available.meta"
+                        >
+                        </slot>
+                    </template>
+
+                    <template #body>
+                        <slot
+                            name="body"
+                            :columns="available.columns"
+                            :actions="available.actions"
+                            :mass-actions="available.massActions"
+                            :records="available.records"
+                            :meta="available.meta"
+                        >
+                        </slot>
+                    </template>
+                </x-admin::datagrid.table>
             </div>
         </div>
     </script>
