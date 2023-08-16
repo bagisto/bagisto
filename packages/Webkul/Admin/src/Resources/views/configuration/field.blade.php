@@ -75,7 +75,7 @@
                         </p>
 
                         <p class="text-gray-600 mt-[4px]">
-                            @lang($item['info'] ?? '') <br>
+                            @lang($item['info'] ?? '')
                         </p>
                     </div>
 
