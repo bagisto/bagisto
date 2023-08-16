@@ -92,8 +92,8 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="marketing_event_id"
-                                class="cursor-pointer"
                                 rules="required"
+                                class="cursor-pointer"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.event')"
                             >
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
@@ -121,8 +121,8 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="marketing_template_id"
-                                class="cursor-pointer"
                                 rules="required"
+                                class="cursor-pointer"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.email-template')"
                             >
                                 @foreach ($templates as $template)
@@ -164,8 +164,8 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="channel_id"
-                                class="cursor-pointer"
                                 rules="required"
+                                class="cursor-pointer"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.channel')"
                             >
                                 @foreach (app('Webkul\Core\Repositories\ChannelRepository')->all() as $channel)
@@ -193,8 +193,8 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="customer_group_id"
-                                class="cursor-pointer"
                                 rules="required"
+                                class="cursor-pointer"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.customer-group')"
                             >
                                 @foreach (app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)

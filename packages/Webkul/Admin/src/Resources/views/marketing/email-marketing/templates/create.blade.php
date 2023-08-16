@@ -44,9 +44,9 @@
                             <x-admin::form.control-group.control
                                 type="tinymce"
                                 name="content"
-                                id="content"
                                 :value="old('content')"
                                 rules="required"
+                                id="content"
                                 :label="trans('admin::app.marketing.email-marketing.templates.create.content')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.templates.create.content')"
                             >

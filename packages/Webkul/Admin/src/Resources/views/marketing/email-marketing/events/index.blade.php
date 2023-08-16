@@ -54,8 +54,8 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="name"
-                                            rules="required"
                                             :value="old('name')"
+                                            rules="required"
                                             :label="trans('admin::app.marketing.email-marketing.events.create.name')"
                                             :placeholder="trans('admin::app.marketing.email-marketing.events.create.name')"
                                         >
@@ -76,10 +76,10 @@
                                         <x-admin::form.control-group.control
                                             type="textarea"
                                             name="description"
-                                            id="description"
-                                            class="h-[100px]"
                                             :value="old('description')"
                                             rules="required"
+                                            id="description"
+                                            class="h-[100px]"
                                             :label="trans('admin::app.marketing.email-marketing.events.create.description')"
                                         >
                                         </x-admin::form.control-group.control>
