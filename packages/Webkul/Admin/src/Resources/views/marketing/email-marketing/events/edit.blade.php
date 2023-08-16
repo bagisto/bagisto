@@ -55,8 +55,8 @@
                         <x-admin::form.control-group.control
                             type="text"
                             name="name"
-                            rules="required"
                             value="{{ old('name') ?: $event->name }}"
+                            rules="required"
                             :label="trans('admin::app.marketing.email-marketing.events.edit.name')"
                             :placeholder="trans('admin::app.marketing.email-marketing.events.edit.name')"
                         >
@@ -77,10 +77,10 @@
                         <x-admin::form.control-group.control
                             type="textarea"
                             name="description"
-                            rules="required"
                             id="description"
                             class="h-[100px]"
                             value="{{ old('description') ?: $event->description }}"
+                            rules="required"
                             :label="trans('admin::app.marketing.email-marketing.events.edit.description')"
                         >
                         </x-admin::form.control-group.control>
@@ -100,8 +100,8 @@
                         <x-admin::form.control-group.control
                             type="date"
                             name="date"
-                            rules="required"
                             value="{{ old('date') ?: $event->date }}"
+                            rules="required"
                             :label="trans('admin::app.marketing.email-marketing.events.edit.date')"
                             placeholder="{{ trans('admin::app.marketing.email-marketing.events.edit.date') }}"
                         >

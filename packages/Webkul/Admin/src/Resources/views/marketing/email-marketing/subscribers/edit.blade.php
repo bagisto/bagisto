@@ -48,9 +48,9 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                rules="required"
                                 class="mb-1 cursor-not-allowed"
                                 :value="$subscriber->email ?: old('email')"
+                                rules="required"
                                 :label="trans('admin::app.marketing.email-marketing.newsletters.edit.email')"
                                 disabled
                             >
@@ -75,9 +75,9 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="status"
-                                rules="required"
                                 class="cursor-pointer mb-1"
                                 :value="$selectedOption == 'true' ? 1 : 0" 
+                                rules="required"
                                 label="{{ trans('admin::app.marketing.email-marketing.newsletters.edit.subscribed') }}"
                             >
                                 @foreach (['true', 'false'] as $state)

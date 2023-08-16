@@ -45,9 +45,9 @@
                             <x-admin::form.control-group.control
                                 type="tinymce"
                                 name="content"
-                                rules="required"
                                 id="content"
                                 value="{{ old('content') ?: $template->content }}"
+                                rules="required"
                                 :label="trans('admin::app.marketing.email-marketing.templates.edit.content')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.templates.edit.content')"
                             >
@@ -86,8 +86,8 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
-                                        rules="required"
                                         value="{{ old('name') ?: $template->name }}"
+                                        rules="required"
                                         :label="trans('admin::app.marketing.email-marketing.templates.edit.name')"
                                         :placeholder="trans('admin::app.marketing.email-marketing.templates.edit.name')"
                                     >

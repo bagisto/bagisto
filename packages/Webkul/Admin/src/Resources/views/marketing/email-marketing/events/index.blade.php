@@ -76,10 +76,10 @@
                                         <x-admin::form.control-group.control
                                             type="textarea"
                                             name="description"
-                                            rules="required"
                                             id="description"
                                             class="h-[100px]"
                                             :value="old('description')"
+                                            rules="required"
                                             :label="trans('admin::app.marketing.email-marketing.events.create.description')"
                                         >
                                         </x-admin::form.control-group.control>
@@ -99,9 +99,9 @@
                                         <x-admin::form.control-group.control
                                             type="date"
                                             name="date"
-                                            rules="required"
                                             class="cursor-pointer"
                                             :value="old('date')"
+                                            rules="required"
                                             :label="trans('admin::app.marketing.email-marketing.events.create.date')"
                                             :placeholder="trans('admin::app.marketing.email-marketing.events.create.date')"
                                         >

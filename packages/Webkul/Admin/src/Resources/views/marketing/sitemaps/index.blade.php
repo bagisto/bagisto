@@ -55,8 +55,8 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="file_name"
-                                        rules="required"
                                         :value="old('file_name')"
+                                        rules="required"
                                         :label="trans('admin::app.marketing.sitemaps.create.file-name')"
                                         :placeholder="trans('admin::app.marketing.sitemaps.create.file-name')"
                                     >
