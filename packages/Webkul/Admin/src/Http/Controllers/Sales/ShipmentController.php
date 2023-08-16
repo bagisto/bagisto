@@ -76,7 +76,7 @@ class ShipmentController extends Controller
             'shipment.items.*.*' => 'required|numeric|min:0',
         ]);
 
-        $data = request()->only(['shipment']);
+        $data = request()->only(['shipment', 'carrier_name']);
 
         if (! $this->isInventoryValidate($data)) {
             session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
