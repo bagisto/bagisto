@@ -545,6 +545,7 @@ return [
                     'title'            => 'Tax Categories',
                     'add-tax-rates'    => 'Add Tax Rates',
                     'empty-text'       => 'Tax Rates are not available please create new Tax Rates.',
+                    'create-success'   => 'New Tax Category Created',
                 ],
 
                 'edit' => [
@@ -557,10 +558,9 @@ return [
                     'save-btn'         => 'Save Tax Category',
                     'select-tax-rates' => 'Select Tax Rates',
                     'title'            => 'Edit Tax Categories',
+                    'update-success'   => 'Successfully Updated Tax Category',
                 ],
 
-                'create-success'  => 'New Tax Category Created',
-                'update-success'  => 'Successfully Updated Tax Category',
             ],
 
             'tax-rates'   => [
@@ -603,6 +603,7 @@ return [
                     'zip_code'       => 'Zip Code',
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
+                    'update-success' => 'Tax Rate Update Successfully',
                 ],
             ],
         ],

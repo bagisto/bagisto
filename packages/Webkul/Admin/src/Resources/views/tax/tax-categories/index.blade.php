@@ -146,7 +146,7 @@
                                             <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
                                                 <x-admin::form.control-group.control
                                                     type="checkbox"
-                                                    name="taxrates" 
+                                                    name="taxrates[]" 
                                                     :value="$taxRate->id"
                                                     :id="'taxrates_' . $taxRate->id"
                                                     :for="'taxrates_' . $taxRate->id"
@@ -160,7 +160,7 @@
                                                     :for="'taxrates_' . $taxRate->id"
                                                     class="!text-[14px] !text-gray-600 cursor-pointer"
                                                 >
-                                                    {{ $taxRate->identifier }}
+                                                    {{ $taxRate['identifier'] }}
                                                 </x-admin::form.control-group.label>
         
                                             </x-admin::form.control-group>
@@ -168,7 +168,7 @@
                                     @endif
                                     
                                     <x-admin::form.control-group.error
-                                        control-name="taxrates"
+                                        control-name="taxrates[]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </div>
@@ -198,7 +198,11 @@
                 methods: {
                     store(params, { resetForm, setErrors }) {
                     
-                        this.$axios.post('{{ route('admin.tax_categories.store') }}', params)
+                        this.$axios.post('{{ route('admin.tax_categories.store') }}', params,{
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                             .then((response) => {
                                 this.$refs.taxCategory.toggle();
 

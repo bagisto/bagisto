@@ -497,10 +497,6 @@
                     }
                 },
 
-                mounted(){
-                    console.log(this.state);
-                },
-
                 methods: {
                     haveStates: function () {
                         if (this.countryStates[this.country] && this.countryStates[this.country].length) {
