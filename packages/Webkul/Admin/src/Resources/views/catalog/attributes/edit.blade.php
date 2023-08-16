@@ -108,7 +108,7 @@
                         <!-- Options -->
                         <div
                             class="p-[16px] bg-white box-shadow rounded-[4px] {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
-                            v-if="show_swatch"
+                            v-if="showSwatch"
                         >
                             <div class="flex justify-between items-center mb-3">
                                 <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
@@ -135,18 +135,18 @@
                                     <!-- Input Options -->
                                     <x-admin::form.control-group
                                         class="w-full mb-[10px]"
-                                        v-if="this.show_swatch"
+                                        v-if="this.showSwatch"
                                     >
-                                        <x-admin::form.control-group.label for="swatch_type">
+                                        <x-admin::form.control-group.label for="swatchType">
                                             @lang('admin::app.catalog.attributes.edit.input-options')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="swatch_type"
-                                            id="swatch_type"
-                                            v-model="swatch_type"
-                                            @change="show_swatch=true"
+                                            name="swatchType"
+                                            id="swatchType"
+                                            v-model="swatchType"
+                                            @change="showSwatch=true"
                                         >
                                             @foreach (['dropdown', 'color', 'image', 'text'] as $type)
                                                 <option value="{{ $type }}">
@@ -202,7 +202,7 @@
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
-                                                <x-admin::table.th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
+                                                <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                     @lang('admin::app.catalog.attributes.edit.swatch')
                                                 </x-admin::table.th>
 
@@ -262,9 +262,9 @@
                                                     </x-admin::table.td>
  
                                                     <!-- Swatch Type Image / Color -->
-                                                    <x-admin::table.td v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
+                                                    <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
-                                                        <div v-if="swatch_type == 'image'">
+                                                        <div v-if="swatchType == 'image'">
                                                             <img 
                                                                 :src="element.swatch_value_url"
                                                                 :ref="'image_' + element.id"
@@ -280,7 +280,7 @@
                                                         </div>
 
                                                         <!-- Swatch Color -->
-                                                        <div v-if="swatch_type == 'color'">
+                                                        <div v-if="swatchType == 'color'">
                                                             <div
                                                                 class="w-[25px] h-[25px] mx-auto rounded-[5px]"
                                                                 :style="{ background: element.swatch_value }"
@@ -510,6 +510,50 @@
                             </x-slot:header>
                         
                             <x-slot:content>
+                                <!-- Input Validation -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.edit.input-validation')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="validation"
+                                        :value="$attribute->validation"
+                                        class="cursor-pointer"
+                                        v-model="validationType"
+                                    >
+                                         <!-- Here! All Needed types are defined -->
+                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                         <option value="{{ $type }}">
+                                             @lang('admin::app.catalog.attributes.edit.' . $type)
+                                         </option>
+                                     @endforeach
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+
+                                <!-- REGEX -->
+                                <x-admin::form.control-group
+                                    class="mb-[10px]"
+                                    v-if="validationType === 'regex'"
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.create.regex')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="regex"
+                                        v-model="regexValue"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="regex"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
                                 <!-- Is Required -->
                                 <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] select-none">
                                     <x-admin::form.control-group.control
@@ -662,7 +706,7 @@
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
-                                    v-if="swatch_type == 'image'"
+                                    v-if="swatchType == 'image'"
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.edit.image')
@@ -684,7 +728,7 @@
                                 <!-- Color Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
-                                    v-if="swatch_type == 'color'"
+                                    v-if="swatchType == 'color'"
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.edit.color')
@@ -804,13 +848,13 @@
                     return {
                         optionRowCount: 1,
 
-                        show_swatch: "{{ $attribute->type == 'select' ? true : false  }}",
+                        showSwatch: "{{ $attribute->type == 'select' ? true : false  }}",
 
-                        swatch_type: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
+                        swatchType: "{{ $attribute->swatchType == '' ? 'dropdown' : $attribute->swatchType }}",
 
-                        attribute_type: false,
+                        validationType: "{{ $attribute->validation }}",
 
-                        swatch_attribute: false,
+                        regexValue: '{{ $attribute->validation }}',
 
                         isNullOptionChecked: false,
 

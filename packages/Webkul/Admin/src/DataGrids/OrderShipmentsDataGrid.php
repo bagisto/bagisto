@@ -9,6 +9,13 @@ use Webkul\Sales\Models\OrderAddress;
 class OrderShipmentsDataGrid extends DataGrid
 {
     /**
+     * Shipment Id.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'shipment_id';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -126,7 +133,7 @@ class OrderShipmentsDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.sales.shipments.view', $row->id);
+                return route('admin.sales.shipments.view', $row->shipment_id);
             },
         ]);
     }

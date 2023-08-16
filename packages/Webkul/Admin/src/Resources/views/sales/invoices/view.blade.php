@@ -16,7 +16,9 @@
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
                 {{ trans('admin::app.sales.invoices.view.title', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
 
-                <span class="label-active text-[14px] mx-[5px]">{{ $invoice->status_label }}</span>
+                <span class="label-active text-[14px] mx-[5px]">
+                    {{ $invoice->status_label }}
+                </span>
             </p>
 
             {!! view_render_event('sales.invoice.title.after', ['order' => $order]) !!}
@@ -39,7 +41,8 @@
 
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+            >
                 <span class="icon-printer text-[24px] "></span> 
 
                 @lang('admin::app.sales.invoices.view.print')
@@ -53,57 +56,58 @@
                     @click="$refs.groupCreateModal.open()"
                 >
                     <span class="icon-cart text-[24px] "></span>
-                        @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
-                    </button>
+
+                    @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
+                </button>
 
                 <x-admin::form :action="route('admin.sales.invoices.send_duplicate', $invoice->id)">
-                        <!-- Create Group Modal -->
-                        <x-admin::modal ref="groupCreateModal">          
-                            <x-slot:header>
-                                <!-- Modal Header -->
-                                <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
-                                </p>   
-                            </x-slot:header>
-            
-                            <x-slot:content>
-                                <!-- Modal Content -->
-                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.sales.invoices.view.email')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="email"
-                                            name="email"
-                                            id="email"
-                                            rules="required|email"
-                                            :value="$invoice->order->customer_email"
-                                            :label="trans('admin::app.sales.invoices.view.email')"
-                                        >
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error
-                                            control-name="email"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-                            </x-slot:content>
-            
-                            <x-slot:footer>
-                                <!-- Modal Submission -->
-                                <div class="flex gap-x-[10px] items-center">
-                                    <button 
-                                        type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    <!-- Create Group Modal -->
+                    <x-admin::modal ref="groupCreateModal">
+                        <x-slot:header>
+                            <!-- Modal Header -->
+                            <p class="text-[18px] text-gray-800 font-bold">
+                                @lang('admin::app.sales.invoices.view.send-duplicate-invoice')
+                            </p>
+                        </x-slot:header>
+
+                        <x-slot:content>
+                            <!-- Modal Content -->
+                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label class="required">
+                                        @lang('admin::app.sales.invoices.view.email')
+                                    </x-admin::form.control-group.label>
+        
+                                    <x-admin::form.control-group.control
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        rules="required|email"
+                                        :value="$invoice->order->customer_email"
+                                        :label="trans('admin::app.sales.invoices.view.email')"
                                     >
-                                        @lang('admin::app.sales.invoices.view.send')
-                                    </button>
-                                </div>
-                            </x-slot:footer>
-                        </x-admin::modal>
+                                    </x-admin::form.control-group.control>
+        
+                                    <x-admin::form.control-group.error
+                                        control-name="email"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </div>
+                        </x-slot:content>
+        
+                        <x-slot:footer>
+                            <!-- Modal Submission -->
+                            <div class="flex gap-x-[10px] items-center">
+                                <button 
+                                    type="submit"
+                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                >
+                                    @lang('admin::app.sales.invoices.view.send')
+                                </button>
+                            </div>
+                        </x-slot:footer>
+                    </x-admin::modal>
                 </x-admin::form>
             </div>
 
@@ -131,7 +135,7 @@
                                 <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                                     
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                    <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
                                         @lang('admin::app.sales.invoices.view.product-image') 
                                     </p>
                                 </div>
@@ -173,16 +177,12 @@
                             </div>
 
                             <div class="grid gap-[4px] place-content-start">
-                                <div class="">
-                                    {{-- Item Grand Total --}}
-                                    <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
-                                        {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
-                                        <span 
-                                            class="icon-sort-up text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"
-                                        >
-                                        </span>
-                                    </p>
-                                </div>
+                                {{-- Item Grand Total --}}
+                                <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
+                                    {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
+                                    <span class="icon-sort-up text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100">
+                                    </span>
+                                </p>
 
                                 {{-- Item Base Price --}}
                                 <div class="flex flex-col gap-[6px] items-end place-items-start">
@@ -238,7 +238,7 @@
                         </p>
                     </div>
 
-                    <div class="flex  flex-col gap-y-[6px]">
+                    <div class="flex flex-col gap-y-[6px]">
                         {{-- Subtotal --}}
                         <p class="text-gray-600 font-semibold">
                             {{ core()->formatBasePrice($invoice->base_sub_total) }}
@@ -269,6 +269,7 @@
                 </div>
             </div>
         </div>
+
         {{-- Right sub-component --}}
         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
             {{-- component 1 --}}
@@ -278,8 +279,9 @@
                         @lang('admin::app.sales.invoices.view.customer')
                     </p>
                 </x-slot:header>
+
                 <x-slot:content>
-                    <div class="flex flex-col pb-[16px]">
+                    <div class="flex flex-col {{ $order->billing_address ? 'pb-[16px]' : ''}}">
                         <p class="text-gray-800 font-semibold">
                             {{ $invoice->order->customer_full_name }}
                         </p>
@@ -293,42 +295,43 @@
                         {!! view_render_event('sales.invoice.customer_email.after', ['order' => $order]) !!}
                     </div>
 
-                    <span class="block w-full border-b-[1px] border-gray-300"></span>
-
                     @if ($order->billing_address || $order->shipping_address)
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
-                            <div class="pb-[16px]">
+                            <div class="{{ $order->shipping_address ? 'pb-[16px]' : '' }}">
+                                <span class="block w-full border-b-[1px] border-gray-300"></span>
+
                                 <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Billing Address')</p>
+                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                        @lang('Billing Address')
+                                    </p>
                                 </div>
 
                                 @include ('admin::sales.address', ['address' => $order->billing_address])
 
                                 {!! view_render_event('sales.invoice.billing_address.after', ['order' => $order]) !!}
                             </div>
-
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
                         @endif
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <div>
-                                <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">@lang('Shipping Address')</p>
-                                </div>
+                            <span class="block w-full border-b-[1px] border-gray-300"></span>
 
-                                @include ('admin::sales.address', ['address' => $order->shipping_address])
-
-                                {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                    @lang('Shipping Address')
+                                </p>
                             </div>
+
+                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+
+                            {!! view_render_event('sales.invoice.shipping_address.after', ['order' => $order]) !!}
                         @endif
                     @endif
                 </x-slot:content>
             </x-admin::accordion> 
             
             {{-- component 2 --}}
-        
             <x-admin::accordion>
                 <x-slot:header>
                     <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
@@ -339,25 +342,11 @@
                 <x-slot:content>
                     <div class="flex w-full gap-[20px] justify-start">
                         <div class="flex flex-col gap-y-[6px]">
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.invoices.view.order-id') 
-                            </p>
-
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.invoices.view.order-date')
-                            </p>
-
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.invoices.view.order-status')
-                            </p>
-
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.invoices.view.invoice-status')
-                            </p>
-
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.invoices.view.channel')
-                            </p>
+                            @foreach (['order-id', 'order-date', 'order-status', 'invoice-status', 'channel'] as $item)
+                                <p class="text-gray-600">
+                                    @lang('admin::app.sales.invoices.view.' . $item) 
+                                </p>    
+                            @endforeach
                         </div>
 
                         <div class="flex  flex-col gap-y-[6px]">
@@ -393,7 +382,6 @@
                             </p>
 
                             {!! view_render_event('sales.invoice.channel_name.after', ['order' => $order]) !!}
-
                         </div>
                     </div>
                 </x-slot:content>
