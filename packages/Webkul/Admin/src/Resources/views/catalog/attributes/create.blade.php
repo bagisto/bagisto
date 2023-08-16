@@ -168,7 +168,7 @@
 
                                             <label
                                                 for="empty_option"
-                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"
+                                                class="icon-uncheckbox text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                             >
                                             </label>
 
@@ -513,7 +513,7 @@
                                         "
                                     >
             
-                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-navyBlue"></span>
+                                    <span class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"></span>
 
                                     <div class="text-[14px] text-gray-600 font-semibold cursor-pointer">
                                         @lang('admin::app.catalog.attributes.create.is_filterable')
