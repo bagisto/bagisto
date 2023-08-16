@@ -77,10 +77,10 @@
                         <x-admin::form.control-group.control
                             type="textarea"
                             name="description"
-                            id="description"
-                            class="h-[100px]"
                             value="{{ old('description') ?: $event->description }}"
                             rules="required"
+                            id="description"
+                            class="h-[100px]"
                             :label="trans('admin::app.marketing.email-marketing.events.edit.description')"
                         >
                         </x-admin::form.control-group.control>

@@ -42,7 +42,7 @@
                                 @lang('admin::app.marketing.sitemaps.create.general')
                             </p>
                         </x-slot:header>
- 
+
                         <!-- Modal Content -->
                         <x-slot:content>
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
