@@ -20,7 +20,8 @@ class AttributeController extends Controller
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -62,11 +63,9 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.create.before');
 
-        $data = array_merge(request()->input(), [
+        $attribute = $this->attributeRepository->create(array_merge(request()->all(), [
             'is_user_defined' => 1,
-        ]);
-
-        $attribute = $this->attributeRepository->create(array_merge($data));
+        ]));
 
         Event::dispatch('catalog.attribute.create.after', $attribute);
 
@@ -110,14 +109,14 @@ class AttributeController extends Controller
     public function update($id)
     {
         $this->validate(request(), [
-            'code'       => ['required', 'unique:attributes,code,' . $id, new Code()],
+            'code'       => ['required', 'unique:attributes,code,' . $id, new Code],
             'admin_name' => 'required',
             'type'       => 'required',
         ]);
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
-        $attribute = $this->attributeRepository->update(request()->input(), $id);
+        $attribute = $this->attributeRepository->update(request()->all(), $id);       
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 

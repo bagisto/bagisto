@@ -241,9 +241,8 @@
                                                     <x-admin::table.td v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
                                                         <!-- Swatch Image -->
                                                         <div v-if="swatch_type == 'image'">
-                                                            @{{ element.params.swatch_value?.name }}
-
                                                             <img 
+                                                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                                                 :ref="'image_' + element.params.id"
                                                                 class="h-[50px] w-[50px]"
                                                             >
