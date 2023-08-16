@@ -473,7 +473,7 @@
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
                                             <option value="{{ $type }}">
-                                                @lang($type)
+                                                @lang('admin::app.catalog.attributes.create.' . $type)
                                             </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
