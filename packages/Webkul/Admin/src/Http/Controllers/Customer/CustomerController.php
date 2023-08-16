@@ -186,7 +186,7 @@ class CustomerController extends Controller
 
         auth()->guard('customer')->login($customer);
 
-        session()->flash('success', trans('admin::app.customers.login-as-customer.login-message', ['customer_name' => $customer->name]));
+        session()->flash('success', trans('admin::app.customers.index.login-message', ['customer_name' => $customer->name]));
 
         return redirect(route('shop.customers.account.profile.index'));
     }

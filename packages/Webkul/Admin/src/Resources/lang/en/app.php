@@ -35,9 +35,11 @@ return [
                 'per-unit'              => 'Per Unit',
                 'amount-per-unit'       => ':amount Per Unit x :qty Quantity',
                 'quantity'              => 'Quantity',
-                'ordered'               => 'Ordered',
-                'invoiced'              => 'Invoiced',
-                'shipped'               => 'Shipped',
+                'item-ordered'          => 'Ordered (:qty_ordered)',
+                'item-invoice'          => 'Invoiced (:qty_invoiced)',
+                'item-shipped'          => 'Shipped (:qty_shipped)',
+                'item-canceled'         => 'Canceled (:qty_canceled)',
+                'item-refunded'         => 'Refunded (:qty_refunded)',
                 'sku'                   => 'SKU',
                 'price'                 => 'Price',
                 'tax'                   => 'Tax',
@@ -53,7 +55,7 @@ return [
                 'customer-notified'     => ':date | Customer <b>Notified</b>',
                 'customer-not-notified' => ':date | Customer <b>Not Notified</b>',
                 'customer'              => 'Customer',
-                'customer-group'        => 'Cutomer Group',
+                'customer-group'        => 'Customer Group',
                 'billing-address'       => 'Billing Address',
                 'shipping-address'      => 'Shipping Address',
                 'order-information'     => 'Order Information',
@@ -98,7 +100,7 @@ return [
             ],
 
             'view' => [
-                'title'                 => 'Shipment',
+                'title'                 => 'Shipment #:shipment_id',
                 'ordered-items'         => 'Ordered Items',
                 'product-image'         => 'Product Image',
                 'sku'                   => 'SKU',
@@ -166,7 +168,7 @@ return [
             ],
 
             'view' => [
-                'title'                  => 'Invoice',
+                'title'                  => 'Invoice #:invoice_id',
                 'print'                  => 'Print',
                 'send-duplicate-invoice' => 'Send Duplicate Invoice',
                 'send'                   => 'Send',
@@ -176,7 +178,7 @@ return [
                 'product-image'          => 'Product Image',
                 'sku'                    => 'SKU',
                 'qty'                    => 'Quantity',
-                'per-unit'               => 'Per Unit',
+                'amount-per-unit'        =>':amount Per Unit x :qty Quantity',
                 'price'                  => 'Price',
                 'tax'                    => 'Tax Amount',
                 'discount'               => 'Discount Amount',
@@ -197,7 +199,8 @@ return [
 
     'customers' => [
         'index'  => [
-            'title' => 'Customers',
+            'title'         => 'Customers',
+            'login-message' => 'you logged in as :customer_name',
 
             'create' => [
                 'title'                 => 'Create New Customer',

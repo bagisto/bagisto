@@ -133,9 +133,10 @@
 
                                     <div class="flex flex-col gap-[6px] place-items-start">
                                         <p class="text-gray-600">
-                                            {{ core()->formatBasePrice($item->base_price) }} 
-
-                                            @lang('admin::app.sales.orders.view.per-unit') x {{ $item->qty_ordered }} @lang('admin::app.sales.orders.view.quantity')
+                                            @lang('admin::app.sales.orders.view.amount-per-unit', [
+                                                'amount' => core()->formatBasePrice($item->base_price),
+                                                'qty'    => $item->qty_ordered,
+                                                ])
                                         </p>
 
                                         @if (isset($item->additional['attributes']))
@@ -149,11 +150,11 @@
                                         <p class="text-gray-600">@lang('admin::app.sales.orders.view.sku')  - {{ $item->sku }}</p>
 
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.orders.view.ordered') {{ $item->qty_ordered }},
-
-                                            @lang('admin::app.sales.orders.view.invoiced') {{ $item->qty_invoiced }},
-
-                                            @lang('admin::app.sales.orders.view.shipped') {{ $item->qty_shipped }}
+                                            {{ $item->qty_ordered ? trans('admin::app.sales.orders.view.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
+                                            {{ $item->qty_invoiced ? trans('admin::app.sales.orders.view.item-invoice', ['qty_invoiced' => $item->qty_invoiced]) : '' }}
+                                            {{ $item->qty_shipped ? trans('admin::app.sales.orders.view.item-shipped', ['qty_shipped' => $item->qty_shipped]) : '' }}
+                                            {{ $item->qty_refunded ? trans('admin::app.sales.orders.view.item-refunded', ['qty_refunded' => $item->qty_refunded]) : '' }}
+                                            {{ $item->qty_canceled ? trans('admin::app.sales.orders.view.item-canceled', ['qty_canceled' => $item->qty_canceled]) : '' }}
                                         </p>
                                     </div>
                                 </div>
