@@ -13,21 +13,7 @@ class CategoryDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'category_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
-     * Locale.
-     *
-     * @var string
-     */
-    protected $locale = 'all';
+    protected $primaryColumn = 'category_id';
 
     /**
      * Contains the keys for which extra filters to show.
@@ -39,28 +25,16 @@ class CategoryDataGrid extends DataGrid
     ];
 
     /**
-     * Create a new datagrid instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->locale = core()->getRequestedLocaleCode();
-    }
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        if ($this->locale === 'all') {
+        if (core()->getRequestedLocaleCode() === 'all') {
             $whereInLocales = Locale::query()->pluck('code')->toArray();
         } else {
-            $whereInLocales = [$this->locale];
+            $whereInLocales = [core()->getRequestedLocaleCode()];
         }
 
         $queryBuilder = DB::table('categories as cat')
@@ -79,8 +53,8 @@ class CategoryDataGrid extends DataGrid
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
             ->groupBy('cat.id', 'ct.locale');
 
-        // $this->addFilter('status', 'cat.status');
-        // $this->addFilter('category_id', 'cat.id');
+        $this->addFilter('status', 'cat.status');
+        $this->addFilter('category_id', 'cat.id');
 
         return $queryBuilder;
     }
@@ -97,8 +71,8 @@ class CategoryDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -106,8 +80,8 @@ class CategoryDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -115,17 +89,17 @@ class CategoryDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.position'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'status',
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'boolean',
-            'sortable'   => true,
             'searchable' => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
                     return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.active') . '</span>';
@@ -139,9 +113,9 @@ class CategoryDataGrid extends DataGrid
             'index'      => 'count',
             'label'      => trans('admin::app.datagrid.no-of-products'),
             'type'       => 'integer',
-            'sortable'   => true,
             'searchable' => false,
             'filterable' => false,
+            'sortable'   => true,
         ]);
     }
 
@@ -153,32 +127,33 @@ class CategoryDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.catalog.categories.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.catalog.categories.edit', $row->category_id);
+            },
         ]);
 
         $this->addAction([
+            'icon'         => 'icon-delete',
             'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.catalog.categories.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'product']),
-            'icon'         => 'icon trash-icon',
+            'method'       => 'DELETE',
+            'url'          => function ($row) {
+                return route('admin.catalog.categories.delete', $row->category_id);
+            },
         ]);
 
         $this->addMassAction([
-            'type'   => 'delete',
-            'label'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.catalog.categories.mass_delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
+            'url'    => route('admin.catalog.categories.mass_delete'),
         ]);
 
         $this->addMassAction([
-            'type'    => 'update',
-            'label'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.catalog.categories.mass_update'),
+            'title'   => trans('admin::app.datagrid.update-status'),
             'method'  => 'POST',
+            'url'     => route('admin.catalog.categories.mass_update'),
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,
                 trans('admin::app.datagrid.inactive')  => 0,

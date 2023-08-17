@@ -22,7 +22,7 @@
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel Button -->
                             <a href="{{ route('admin.inventory_sources.index') }}">
-                                <span class="text-gray-600 leading-[24px]">
+                                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                     @lang('admin::app.marketing.email-marketing.campaigns.create.cancel-btn')
                                 </span>
                             </a>
@@ -50,7 +50,7 @@
 
                                 <!-- Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.code')
                                     </x-admin::form.control-group.label>
 
@@ -73,7 +73,7 @@
 
                                 <!-- Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.name')
                                     </x-admin::form.control-group.label>
 
@@ -126,7 +126,7 @@
 
                                 <!-- Contact name -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.contact-name')
                                     </x-admin::form.control-group.label>
 
@@ -149,7 +149,7 @@
 
                                 <!-- Contact Email -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.contact-email')
                                     </x-admin::form.control-group.label>
 
@@ -172,7 +172,7 @@
 
                                 <!-- Contact Number -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.contact-number')
                                     </x-admin::form.control-group.label>
 
@@ -224,7 +224,7 @@
 
                                 <!-- Country -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.country')
                                     </x-admin::form.control-group.label>
                     
@@ -254,7 +254,7 @@
                                         
                                 <!-- State -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.state')
                                     </x-admin::form.control-group.label>
                     
@@ -302,7 +302,7 @@
 
                                 <!-- City -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.city')
                                     </x-admin::form.control-group.label>
 
@@ -325,7 +325,7 @@
 
                                 <!-- Street -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.street')
                                     </x-admin::form.control-group.label>
 
@@ -348,7 +348,7 @@
 
                                 <!-- postcode -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.inventory-sources.create.postcode')
                                     </x-admin::form.control-group.label>
 

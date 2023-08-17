@@ -13,14 +13,7 @@ class BookingDataGrid extends DataGrid
      *
      * @var string
      */
-    protected $index = 'order_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
+    protected $primaryColumn = 'order_id';
 
     /**
      * Prepare query builder.
@@ -122,7 +115,9 @@ class BookingDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'route'  => 'admin.sales.orders.view',
-            'icon'   => 'icon eye-icon',
+            'url'    => function ($row) {
+                return route('admin.sales.orders.view', $row->order_id);
+            },
         ]);
     }
 }

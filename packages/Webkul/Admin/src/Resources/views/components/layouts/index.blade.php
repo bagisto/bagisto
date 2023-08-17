@@ -32,6 +32,22 @@
         rel="stylesheet"
     />
 
+    @if ($favicon = core()->getConfigData('general.design.admin_logo.favicon', core()->getCurrentChannelCode()))
+        <link 
+            type="image/x-icon"
+            href="{{ Storage::url($favicon) }}" 
+            rel="shortcut icon"
+            sizes="16x16"
+        >
+    @else
+        <link 
+            type="image/x-icon"
+            href="{{ asset('vendor/webkul/ui/assets/images/favicon.ico') }}" 
+            rel="shortcut icon"
+            sizes="16x16"
+        />
+    @endif
+    
     @stack('styles')
 
     <style>
@@ -53,14 +69,18 @@
         {{-- Page Header Blade Component --}}
         <x-admin::layouts.header />
 
-        <div class="flex gap-[16px]">
+        <div class="flex gap-[16px] group" ref="appLayout">
 
             {{-- Page Sidebar Blade Component --}}
             <x-admin::layouts.sidebar />
 
-            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[275px] max-lg:px-[16px]">
+            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[286px] max-lg:px-[16px] transition-all duration-300 group-[.is-collapsed]:pl-[85px]">
                 {{-- Added dynamic tabs for third level menus  --}}
-                @include ('admin::layouts.tabs')
+                {{-- Todo @suraj-webkul need to optimize below statement. --}}
+                @if (! request()->routeIs('admin.configuration.index'))
+                    @include ('admin::layouts.tabs')
+                @endif
+
                 {{-- Page Content Blade Component --}}
                 {{ $slot }}
             </div>

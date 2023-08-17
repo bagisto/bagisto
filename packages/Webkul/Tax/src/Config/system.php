@@ -4,6 +4,7 @@ return [
     [
         'key'  => 'taxes',
         'name' => 'tax::app.admin.system.taxes.taxes',
+        'info' => 'tax::app.admin.system.taxes.taxes',
         'sort' => 6,
     ],
 
@@ -13,10 +14,13 @@ return [
     [
         'key'  => 'taxes.catalogue',
         'name' => 'tax::app.admin.system.taxes.catalogue',
+        'info' => 'tax::app.admin.system.taxes.catalogue-info',
+        'icon' => 'tax.png',
         'sort' => 1,
     ], [
         'key'    => 'taxes.catalogue.pricing',
         'name'   => 'tax::app.admin.system.taxes.pricing',
+        'info'   => 'tax::app.admin.system.taxes.pricing-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -30,6 +34,7 @@ return [
     ], [
         'key'    => 'taxes.catalogue.default-location-calculation',
         'name'   => 'tax::app.admin.system.taxes.default-location-calculation',
+        'info'   => 'tax::app.admin.system.taxes.default-location-calculation-info',
         'sort'   => 1,
         'fields' => [
             [

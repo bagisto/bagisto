@@ -17,7 +17,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <!-- Cancel Button -->
                 <a href="{{ route('admin.tax_categories.index') }}">
-                    <span class="text-gray-600 leading-[24px]">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.settings.taxes.tax-categories.edit.cancel-btn')
                     </span>
                 </a>
@@ -152,13 +152,13 @@
                                 >
                                     {{ $taxRate['identifier'] }}
                                 </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.error
-                                    control-name="taxrates[]"
-                                >
-                                </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
                         @endforeach 
+
+                        <x-admin::form.control-group.error
+                            control-name="taxrates[]"
+                        >
+                        </x-admin::form.control-group.error>
                     </x-slot:content>
                 </x-admin::accordion>
             </div>

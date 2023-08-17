@@ -4,6 +4,7 @@ return [
     [
         'key'    => 'customer.settings.social_login',
         'name'   => 'social_login::app.admin.system.social-login',
+        'info'   => 'social_login::app.admin.system.social-login-info',
         'sort'   => 4,
         'fields' => [
             [

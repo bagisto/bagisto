@@ -8,29 +8,15 @@ use Webkul\DataGrid\DataGrid;
 class EmailTemplateDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
         $queryBuilder = DB::table('marketing_templates')->addSelect('id', 'name', 'status');
 
-        // $this->addFilter('status', 'status');
+        $this->addFilter('status', 'status');
 
         return $queryBuilder;
     }
@@ -47,8 +33,8 @@ class EmailTemplateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -56,8 +42,8 @@ class EmailTemplateDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -65,8 +51,8 @@ class EmailTemplateDataGrid extends DataGrid
             'label'      => trans('admin::app.status'),
             'type'       => 'boolean',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status == 'active') {
                     return trans('admin::app.datagrid.active');
@@ -87,18 +73,21 @@ class EmailTemplateDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.email_templates.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.email_templates.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.email_templates.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Email Template']),
-            'icon'         => 'icon trash-icon',
+            'icon'    => 'icon-delete',
+            'title'   => trans('admin::app.datagrid.delete'),
+            'method'  => 'POST',
+            'url'     => function ($row) {
+                return route('admin.email_templates.delete', $row->id);
+            },
         ]);
     }
 }

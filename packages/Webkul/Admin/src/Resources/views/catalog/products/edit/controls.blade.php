@@ -1,14 +1,24 @@
 @switch($attribute->type)
     @case('text')
-        <x-admin::form.control-group.control
+        <v-field
             type="text"
-            :name="$attribute->code"
-            :rules="$attribute->validations"
-            :label="$attribute->admin_name"
+            name="{{ $attribute->code }}"
+            :rules="{{ $attribute->validations }}"
+            label="{{ $attribute->admin_name }}"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
-            v-model="{{ $attribute->code }}"
+            v-slot="{ field }"
         >
-        </x-admin::form.control-group.control>
+            <input
+                type="text"
+                name="{{ $attribute->code }}"
+                id="{{ $attribute->code }}"
+                v-bind="field"
+                :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
+                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                @if ($attribute->code == 'url_key') v-slugify @endif
+                @if ($attribute->code == 'name') v-slugify-target:url_key @endif
+            >
+        </v-field>
 
         @break
 
@@ -21,7 +31,8 @@
             <x-admin::form.control-group.control
                 type="text"
                 :name="$attribute->code"
-                :rules="$attribute->validations"
+                :id="$attribute->code"
+                ::rules="{{ $attribute->validations }}"
                 :label="$attribute->admin_name"
                 value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
                 :class="'pl-[30px] ' . ($attribute->code == 'price' ? 'py-2 bg-gray-50 text-[20px] font-bold' : '')"
@@ -34,12 +45,11 @@
     @case('textarea')
         <x-admin::form.control-group.control
             :type="$attribute->enable_wysiwyg ? 'tinymce' : 'textarea'"
-            :id="$attribute->code"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            :id="$attribute->code"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
-            v-model="{{ $attribute->code }}"
         >
         </x-admin::form.control-group.control>
 
@@ -49,7 +59,8 @@
         <x-admin::form.control-group.control
             type="date"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            :id="$attribute->code"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
         >
@@ -61,7 +72,7 @@
         <x-admin::form.control-group.control
             type="datetime"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
         >
@@ -73,7 +84,8 @@
         <x-admin::form.control-group.control
             type="select"
             :name="$attribute->code"
-            :rules="$attribute->validations"
+            :id="$attribute->code"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             :value="old($attribute->code) ?: $product[$attribute->code]"
         >
@@ -102,8 +114,9 @@
     @case('multiselect')
         <x-admin::form.control-group.control
             type="multiselect"
-            :name="$attribute->code"
-            :rules="$attribute->validations"
+            :name="$attribute->code . '[]'"
+            :id="$attribute->code . '[]'"
+            ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
         >
             @php
@@ -135,7 +148,7 @@
                     :value="$option->id"
                     :id="$attribute->code . '_' . $option->id"
                     :for="$attribute->code . '_' . $option->id"
-                    :rules="$attribute->validations"
+                    ::rules="{{ $attribute->validations }}"
                     :label="$attribute->admin_name"
                     :checked="in_array($option->id, $selectedOption)"
                 >
@@ -155,6 +168,7 @@
         <x-admin::form.control-group.control
             type="switch"
             :name="$attribute->code"
+            :id="$attribute->code"
             :value="1"
             :label="$attribute->admin_name"
             :checked="(boolean) $selectedValue"

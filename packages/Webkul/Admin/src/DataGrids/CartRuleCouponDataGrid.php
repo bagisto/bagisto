@@ -8,23 +8,9 @@ use Webkul\DataGrid\DataGrid;
 class CartRuleCouponDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
@@ -96,10 +82,9 @@ class CartRuleCouponDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'   => 'delete',
-            'action' => route('admin.cart_rules.coupons.mass_delete'),
-            'label'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
+            'url'    => route('admin.cart_rules.coupons.mass_delete'),
         ]);
     }
 }

@@ -26,6 +26,8 @@
                 </div>
             </div>
 
+            <x-admin::datagrid src="{{ route('admin.sitemaps.index') }}"></x-admin::datagrid>
+
             <!-- Model Form -->
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
@@ -46,7 +48,7 @@
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                 <!-- File Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label class="!mt-0">
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.sitemaps.create.file-name')
                                     </x-admin::form.control-group.label>
         
@@ -55,8 +57,8 @@
                                         name="file_name"
                                         :value="old('file_name')"
                                         rules="required"
-                                        label="{{ trans('admin::app.marketing.sitemaps.create.file-name') }}"
-                                        placeholder="{{ trans('admin::app.marketing.sitemaps.create.file-name') }}"
+                                        :label="trans('admin::app.marketing.sitemaps.create.file-name')"
+                                        :placeholder="trans('admin::app.marketing.sitemaps.create.file-name')"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -73,7 +75,7 @@
         
                                 <!---- File Path -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.sitemaps.create.path')
                                     </x-admin::form.control-group.label>
         
@@ -82,8 +84,8 @@
                                         name="path"
                                         :value="old('path')"
                                         rules="required"
-                                        label="{{ trans('admin::app.marketing.sitemaps.create.path') }}"
-                                        placeholder="{{ trans('admin::app.marketing.sitemaps.create.path') }}"
+                                        :label="trans('admin::app.marketing.sitemaps.create.path')"
+                                        :placeholder="trans('admin::app.marketing.sitemaps.create.path')"
                                     >
                                     </x-admin::form.control-group.control>
         

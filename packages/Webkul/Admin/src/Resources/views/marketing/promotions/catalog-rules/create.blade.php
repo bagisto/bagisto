@@ -21,6 +21,14 @@
                         </p>
                 
                         <div class="flex gap-x-[10px] items-center">
+                            <!-- Cancel Button -->
+                            <a href="{{ route('admin.catalog_rules.index') }}">
+                                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                                    @lang('admin::app.marketing.promotions.catalog-rules.create.cancel-btn')
+                                </span>
+                            </a>
+
+                            <!-- Save Button -->
                             <button 
                                 type="submit"
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
@@ -302,13 +310,13 @@
                                                 >
                                                     {{ core()->getChannelName($channel) }}
                                                 </x-admin::form.control-group.label>
-
-                                                <x-admin::form.control-group.error
-                                                    control-name="channels[]"
-                                                >
-                                                </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
+
+                                        <x-admin::form.control-group.error
+                                            control-name="channels[]"
+                                        >
+                                        </x-admin::form.control-group.error>    
                                     </div>
 
                                     <!-- Customer Groups -->
@@ -337,13 +345,13 @@
                                                 >
                                                     {{ $customerGroup->name }}
                                                 </x-admin::form.control-group.label>
-
-                                                <x-admin::form.control-group.error
-                                                    control-name="customer_groups[]"
-                                                >
-                                                </x-admin::form.control-group.error>
                                             </x-admin::form.control-group>
                                         @endforeach
+
+                                        <x-admin::form.control-group.error
+                                            control-name="customer_groups[]"
+                                        >
+                                        </x-admin::form.control-group.error>
                                     </div> 
 
                                     <!-- Status -->

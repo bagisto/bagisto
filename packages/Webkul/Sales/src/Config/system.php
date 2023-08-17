@@ -15,6 +15,7 @@ return [
     [
         'key'  => 'sales',
         'name' => 'admin::app.admin.system.sales',
+        'info' => 'admin::app.admin.system.sales',
         'sort' => 5,
     ],
 
@@ -24,10 +25,13 @@ return [
     [
         'key'  => 'sales.orderSettings',
         'name' => 'admin::app.admin.system.order-settings',
+        'info' => 'admin::app.admin.system.order-settings-info',
+        'icon' => 'order-setting.png',
         'sort' => 4,
     ], [
         'key'    => 'sales.orderSettings.order_number',
-        'name'   => 'admin::app.admin.system.orderNumber',
+        'name'   => 'admin::app.admin.system.order-number',
+        'info'   => 'admin::app.admin.system.order-number-info',
         'sort'   => 0,
         'fields' => [
             [
@@ -66,13 +70,14 @@ return [
     ], [
         'key'    => 'sales.orderSettings.minimum-order',
         'name'   => 'admin::app.admin.system.minimum-order',
+        'info'   => 'admin::app.admin.system.minimum-order-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'minimum_order_amount',
                 'title'         => 'admin::app.admin.system.minimum-order-amount',
                 'type'          => 'number',
-                'validation'    => 'decimal',
+                'validation'    => 'regex:^-?\d+(\.\d+)?$',
                 'channel_based' => true,
                 'locale_based'  => true,
             ],
@@ -85,10 +90,13 @@ return [
     [
         'key'  => 'sales.invoice_settings',
         'name' => 'admin::app.admin.system.invoice-settings',
+        'info' => 'admin::app.admin.system.invoice-settings-info',
+        'icon' => 'invoice-setting.png',
         'sort' => 5,
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',
         'name'   => 'admin::app.admin.system.invoice-number',
+        'info'   => 'admin::app.admin.system.invoice-number-info',
         'sort'   => 0,
         'fields' => [
             [
@@ -127,6 +135,7 @@ return [
     ], [
         'key'    => 'sales.invoice_settings.payment_terms',
         'name'   => 'admin::app.admin.system.payment-terms',
+        'info'   => 'admin::app.admin.system.payment-terms-info',
         'sort'   => 1,
         'fields' => [
             [
@@ -140,6 +149,7 @@ return [
     ], [
         'key'    => 'sales.invoice_settings.invoice_slip_design',
         'name'   => 'admin::app.admin.system.invoice-slip-design',
+        'info'   => 'admin::app.admin.system.invoice-slip-design-info',
         'sort'   => 2,
         'fields' => [
             [
@@ -153,6 +163,7 @@ return [
     ], [
         'key'    => 'sales.invoice_settings.invoice_reminders',
         'name'   => 'admin::app.admin.system.invoice-reminders',
+        'info'   => 'admin::app.admin.system.invoice-reminders-info',
         'sort'   => 2,
         'fields' => [
             [

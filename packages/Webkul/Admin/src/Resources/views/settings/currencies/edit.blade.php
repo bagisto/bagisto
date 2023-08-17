@@ -1,21 +1,32 @@
 <x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.settings.currencies.edit.title')
+    </x-slot:title>
+    
     <x-admin::form 
         :action="route('admin.currencies.update', $currency->id)"
         enctype="multipart/form-data"
+        method="PUT"
     >
-        @method('PUT')
-
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('Edit Currency')
+                @lang('admin::app.settings.currencies.edit.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
+                <!-- Cancel Button -->
+                <a href="{{ route('admin.currencies.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.settings.currencies.edit.cancel-btn')
+                    </span>
+                </a>
+
                 <button 
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('Save Currency')
+                    @lang('admin::app.settings.currencies.edit.save-btn')
                 </button>
             </div>
         </div>
@@ -27,7 +38,7 @@
                     {!! view_render_event('bagisto.admin.settings.currencies.edit.before') !!}
 
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('General')
+                        @lang('admin::app.settings.currencies.edit.general')
                     </p>
 
                     <x-admin::form.control-group.control
@@ -38,8 +49,8 @@
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            Code
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.settings.currencies.edit.code')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -47,8 +58,8 @@
                             name="code"
                             :value="old('code') ?? $currency->code"
                             id="code"
-                            label="Code"
-                            :placeholder="trans('Code')"
+                            :label="trans('admin::app.settings.currencies.edit.code')"
+                            :placeholder="trans('admin::app.settings.currencies.edit.code')"
                             disabled="disabled"
                         >
                         </x-admin::form.control-group.control>
@@ -60,8 +71,8 @@
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            Name
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.settings.currencies.edit.name')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -70,8 +81,8 @@
                             :value="old('name') ?? $currency->name"
                             id="name"
                             rules="required"
-                            label="name"
-                            :placeholder="trans('Name')"
+                            :label="trans('admin::app.settings.currencies.edit.name')"
+                            :placeholder="trans('admin::app.settings.currencies.edit.name')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -83,7 +94,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            Symbol
+                            @lang('admin::app.settings.currencies.edit.symbol')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -91,8 +102,8 @@
                             name="symbol"
                             :value="old('symbol') ?? $currency->symbol"
                             id="symbol"
-                            label="symbol"
-                            :placeholder="trans('Symbol')"
+                            :label="trans('admin::app.settings.currencies.edit.symbol')"
+                            :placeholder="trans('admin::app.settings.currencies.edit.symbol')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -104,7 +115,7 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            Decimal
+                            @lang('admin::app.settings.currencies.edit.decimal')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -112,8 +123,8 @@
                             name="decimal"
                             :value="old('decimal') ?? $currency->decimal"
                             id="decimal"
-                            label="decimal"
-                            :placeholder="trans('Decimal')"
+                            :label="trans('admin::app.settings.currencies.edit.decimal')"
+                            :placeholder="trans('admin::app.settings.currencies.edit.decimal')"
                         >
                         </x-admin::form.control-group.control>
 

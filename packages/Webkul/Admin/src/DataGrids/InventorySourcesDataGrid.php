@@ -8,29 +8,20 @@ use Webkul\DataGrid\DataGrid;
 class InventorySourcesDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
-     * @return void
+     * @return \Illuminate\Database\Query\Builder
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('inventory_sources')->addSelect('id', 'code', 'name', 'priority', 'status');
-
-        // $this->addFilter('status', 'status');
+        $queryBuilder = DB::table('inventory_sources')
+            ->addSelect(
+                'id',
+                'code',
+                'name',
+                'priority',
+                'status'
+            );
 
         return $queryBuilder;
     }
@@ -47,8 +38,8 @@ class InventorySourcesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -56,8 +47,8 @@ class InventorySourcesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -65,8 +56,8 @@ class InventorySourcesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -74,8 +65,8 @@ class InventorySourcesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.priority'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -83,8 +74,8 @@ class InventorySourcesDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
                     return trans('admin::app.datagrid.active');
@@ -103,18 +94,21 @@ class InventorySourcesDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.inventory_sources.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.inventory_sources.edit', $row->id);
+            },
         ]);
 
         $this->addAction([
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.inventory_sources.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Inventory Source']),
-            'icon'         => 'icon trash-icon',
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.datagrid.delete'),
+            'method' => 'DELETE',
+            'url'    => function ($row) {
+                return route('admin.inventory_sources.delete', $row->id);
+            },
         ]);
     }
 }

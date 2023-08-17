@@ -21,5 +21,5 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.tax_rates.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

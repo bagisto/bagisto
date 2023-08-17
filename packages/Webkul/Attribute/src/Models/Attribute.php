@@ -25,6 +25,7 @@ class Attribute extends TranslatableModel implements AttributeContract
         'is_required',
         'is_unique',
         'validation',
+        'regex',
         'value_per_locale',
         'value_per_channel',
         'is_filterable',
@@ -103,12 +104,13 @@ class Attribute extends TranslatableModel implements AttributeContract
     protected function getValidationsAttribute()
     {
         $validations = [];
+        
         if ($this->is_required) {
-            $validations[] = 'required';
+            $validations[] = 'required: true';
         }
 
         if ($this->type == 'price') {
-            $validations[] = 'decimal';
+            $validations[] = 'decimal: true';
         }
 
         if ($this->type == 'file') {
@@ -124,12 +126,12 @@ class Attribute extends TranslatableModel implements AttributeContract
         }
 
         if ($this->validation == 'regex') {
-            // $validations[] = 'regex:' . $this->regex;
-        } else {
-            $validations[] = $this->validation;
+            $validations[] = 'regex: ' . $this->regex;
+        } elseif ($this->validation) {
+            $validations[] = $this->validation . ': true';
         }
 
-        $validations = implode('|', array_filter($validations));
+        $validations = '{ '. implode(', ', array_filter($validations)) . ' }';
 
         return $validations;
     }

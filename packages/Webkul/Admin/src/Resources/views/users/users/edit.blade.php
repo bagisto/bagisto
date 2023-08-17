@@ -14,7 +14,7 @@
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.users.index') }}">
-                    <span class="text-gray-600 leading-[24px]">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.users.users.edit.cancel-btn')
                     </span>
                 </a>
@@ -39,9 +39,9 @@
                     </p>
 
                     <div class="mb-[10px]">
-                        <!-- Name -->
+                        {{-- Name --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.users.edit.name')
                             </x-admin::form.control-group.label>
 
@@ -62,9 +62,9 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Email -->
+                        {{-- Email --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.users.edit.email')
                             </x-admin::form.control-group.label>
 
@@ -85,9 +85,9 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Password -->
+                        {{-- Password --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.users.edit.password')
                             </x-admin::form.control-group.label>
 
@@ -108,9 +108,9 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Confirm Password -->
+                        {{-- Confirm Password --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.users.edit.confirm-password')
                             </x-admin::form.control-group.label>
 
@@ -130,9 +130,9 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
-                        <!-- Role -->
+                        {{-- Role --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.users.users.edit.role')
                             </x-admin::form.control-group.label>
 

@@ -15,6 +15,8 @@
         </div>
     </div>
 
+    <x-admin::datagrid src="{{ route('admin.users.index') }}"></x-admin::datagrid>
+
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-user-form-template">
             <div>
@@ -48,7 +50,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.users.users.index.create.name')
                                         </x-admin::form.control-group.label>
             
@@ -70,7 +72,7 @@
 
                                     <!-- Email -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.users.users.index.create.email')
                                         </x-admin::form.control-group.label>
             
@@ -92,7 +94,7 @@
 
                                     <!-- Password -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.users.users.index.create.password')
                                         </x-admin::form.control-group.label>
             
@@ -115,7 +117,7 @@
 
                                     <!-- Confirm Password -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.users.users.index.create.confirm-password')
                                         </x-admin::form.control-group.label>
             
@@ -137,7 +139,7 @@
 
                                     <!-- Role -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.users.users.index.create.role')
                                         </x-admin::form.control-group.label>
             

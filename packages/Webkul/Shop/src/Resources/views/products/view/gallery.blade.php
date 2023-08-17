@@ -9,7 +9,7 @@
             <div class="flex-24 place-content-start h-509 overflow-x-hidden overflow-y-auto flex gap-[30px] max-w-[100px] flex-wrap">
                 <img 
                     :class="`min-w-[100px] max-h-[100px] rounded-[12px] ${ hover ? 'cursor-pointer' : '' }`" 
-                    v-for="image in mediaContents.images"
+                    v-for="image in media.images"
                     :src="image.small_image_url"
                     @mouseover="change(image)"
                 />
@@ -17,7 +17,7 @@
                 <!-- Need to Set Play Button  -->
                 <video 
                     class="min-w-[100px] rounded-[12px]"
-                    v-for="video in mediaContents.videos"
+                    v-for="video in media.videos"
                     @mouseover="change(video)"
                 >
                     <source 
@@ -67,7 +67,7 @@
             <x-shop::shimmer.image
                 ::src="image.large_image_url"
                 class="min-w-[450px] max-sm:min-w-full w-[490px]" 
-                v-for="image in mediaContents.images"
+                v-for="image in media.images"
             >
             </x-shop::shimmer.image>
         </div>
@@ -81,7 +81,7 @@
                 return {
                     isMediaLoading: true,
 
-                    mediaContents: {
+                    media: {
                         images: @json(product_image()->getGalleryImages($product)),
 
                         videos: @json(product_video()->getVideos($product)),
@@ -98,12 +98,12 @@
             },
 
             mounted() {
-                if (this.mediaContents.images.length) {
+                if (this.media.images.length) {
                     this.baseFile.type = 'image';
-                    this.baseFile.path = this.mediaContents.images[0].large_image_url;
+                    this.baseFile.path = this.media.images[0].large_image_url;
                 } else {
-                    this.baseFile.type = this.mediaContents.videos[0].type;
-                    this.baseFile.path = this.mediaContents.videos[0].video_url;
+                    this.baseFile.type = this.media.videos[0].type;
+                    this.baseFile.path = this.media.videos[0].video_url;
                 }
             },
 

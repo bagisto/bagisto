@@ -42,7 +42,7 @@
                     <div class="mb-[10px]">
                         {{-- Name --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.name')
                             </x-admin::form.control-group.label>
 
@@ -64,7 +64,7 @@
 
                         {{-- Subject --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.subject')
                             </x-admin::form.control-group.label>
 
@@ -86,7 +86,7 @@
 
                          {{-- Event --}}
                          <x-admin::form.control-group class="mb-[10px]">
-                             <x-admin::form.control-group.label>
+                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.event')
                             </x-admin::form.control-group.label>
 
@@ -95,9 +95,9 @@
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="marketing_event_id"
-                                rules="required"
+                                class="cursor-pointer"
                                 :value="$selectedOption"
-                                class="cursor-pointer mb-1"
+                                rules="required"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.edit.event')"
                             >
                                 @foreach (app('Webkul\Marketing\Repositories\EventRepository')->all() as $event)
@@ -118,7 +118,7 @@
 
                         {{-- Email Template --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.email-template')
                             </x-admin::form.control-group.label>
 
@@ -164,7 +164,7 @@
                     <x-slot:content>
                          {{-- Channel --}}
                          <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.channel')
                             </x-admin::form.control-group.label>
 
@@ -196,7 +196,7 @@
 
                         {{-- Customer Group --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.edit.customer-group')
                             </x-admin::form.control-group.label>
 

@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'configurations' => [
+        'settings-title'      => 'Settings',
+        'settings-title-info' => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+    ],
+
     'customers' => [
         'forgot-password' => [
             'title'                => 'Recover Password',
@@ -346,6 +351,7 @@ return [
         'starting-at'            => 'Starting at',
         'name'                   => 'Name',
         'qty'                    => 'Qty',
+        'offers'                 => 'Buy :qty for :price each and save :discount%',
 
         'sort-by'                => [
             'title'   => 'Sort By',
@@ -387,6 +393,11 @@ return [
                 'attachments' => 'Attachments',
             ],
         ],
+
+        'configurations' => [
+            'compare_options'     => 'Compare options',
+            'wishlist-options'    => 'Wishlist options',
+        ]
     ],
 
     'categories' => [
@@ -408,7 +419,10 @@ return [
     ],
 
     'search' => [
-        'title' => 'Search results for : :query',
+        'title'          => 'Search results for : :query',
+        'configurations' => [
+            'image-search-option' => 'Image Search Option',
+        ]
     ],
 
     'compare'  => [

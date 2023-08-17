@@ -1068,7 +1068,7 @@ return [
             'error-create'        => 'لم يتم إنشاء عنوان العميل',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'سجل دخولك كعميل',
             'login-message'=> 'you login as :customer_name',
         ],

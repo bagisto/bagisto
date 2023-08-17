@@ -14,14 +14,7 @@ class AddressDataGrid extends DataGrid
      *
      * @var string
      */
-    public $index = 'address_id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
+    public $primaryColumn = 'address_id';
 
     /**
      * Create a new datagrid instance.
@@ -44,7 +37,13 @@ class AddressDataGrid extends DataGrid
         $queryBuilder = DB::table('addresses as ca')
             ->leftJoin('countries', 'ca.country', '=', 'countries.code')
             ->leftJoin('customers as c', 'ca.customer_id', '=', 'c.id')
-            ->addSelect('ca.id as address_id', 'ca.company_name', 'ca.address1', 'ca.country', DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address')
+            ->addSelect(
+                'ca.id as address_id',
+                'ca.company_name',
+                'ca.address1',
+                'ca.country',
+                DB::raw('' . DB::getTablePrefix() . 'countries.name as country_name'), 'ca.state', 'ca.city', 'ca.postcode', 'ca.phone', 'ca.default_address'
+            )
             ->where('ca.address_type', CustomerAddress::ADDRESS_TYPE)
             ->where('c.id', $customer->id);
 
@@ -56,13 +55,13 @@ class AddressDataGrid extends DataGrid
         $queryBuilder->groupBy('ca.id')
             ->addSelect(DB::raw(DB::getTablePrefix() . 'country_states.default_name as state_name'));
 
-        // $this->addFilter('company_name', 'ca.company_name');
-        // $this->addFilter('address1', 'ca.address1');
-        // $this->addFilter('postcode', 'ca.postcode');
-        // $this->addFilter('city', 'ca.city');
+        $this->addFilter('company_name', 'ca.company_name');
+        $this->addFilter('address1', 'ca.address1');
+        $this->addFilter('postcode', 'ca.postcode');
+        $this->addFilter('city', 'ca.city');
         // $this->addFilter('state_name', DB::raw(DB::getTablePrefix() . 'country_states.default_name'));
         // $this->addFilter('country_name', DB::raw(DB::getTablePrefix() . 'countries.name'));
-        // $this->addFilter('default_address', 'ca.default_address');
+        $this->addFilter('default_address', 'ca.default_address');
 
         return $queryBuilder;
     }
@@ -79,8 +78,8 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -88,8 +87,8 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.addresses.company-name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -97,8 +96,8 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.addresses.address-1'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -106,8 +105,8 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.addresses.postcode'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -115,8 +114,8 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.addresses.city'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -124,8 +123,8 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.addresses.state-name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
@@ -133,16 +132,16 @@ class AddressDataGrid extends DataGrid
             'label'      => trans('admin::app.customers.addresses.country-name'),
             'type'       => 'string',
             'searchable' => true,
-            'sortable'   => true,
             'filterable' => true,
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'default_address',
             'label'      => trans('admin::app.customers.addresses.default-address'),
             'type'       => 'boolean',
-            'sortable'   => true,
             'searchable' => false,
+            'sortable'   => true,
             'closure'    => function ($row) {
                 if ($row->default_address) {
                     return '<span class="badge badge-md badge-success"">' . trans('admin::app.customers.addresses.yes') . '</span>';
@@ -161,18 +160,21 @@ class AddressDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.customer.addresses.edit',
-            'icon'   => 'icon pencil-lg-icon',
+            'url'    => function ($row) {
+                return route('admin.customer.addresses.edit', $row->address_id);
+            },
         ]);
 
         $this->addAction([
-            'title'        => trans('admin::app.datagrid.delete'),
-            'method'       => 'POST',
-            'route'        => 'admin.customer.addresses.delete',
-            'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'address']),
-            'icon'         => 'icon trash-icon',
+            'icon'    => 'icon-delete',
+            'title'   => trans('admin::app.datagrid.delete'),
+            'method'  => 'POST',
+            'url'     => function ($row) {
+                return route('admin.customer.addresses.delete', $row->address_id);
+            },
         ]);
     }
 
@@ -184,8 +186,7 @@ class AddressDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'type'   => 'delete',
-            'label'  => trans('admin::app.customers.addresses.delete'),
+            'title'  => trans('admin::app.customers.addresses.delete'),
             'action' => route('admin.customer.addresses.mass_delete', request('id')),
             'method' => 'POST',
         ]);

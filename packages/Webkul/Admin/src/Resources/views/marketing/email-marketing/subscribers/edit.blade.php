@@ -13,8 +13,8 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.campaigns.index') }}">
-                    <span class="text-gray-600 leading-[24px]">
+                <a href="{{ route('admin.customers.subscribers.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.marketing.email-marketing.newsletters.edit.cancel-btn')
                     </span>
                 </a>
@@ -48,10 +48,10 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                value="{{ $subscriber->email ?: old('email') }}"
+                                :value="$subscriber->email ?: old('email')"
                                 rules="required"
-                                class="mb-1"
-                                label="{{ trans('admin::app.marketing.email-marketing.newsletters.edit.email') }}"
+                                class="mb-1 cursor-not-allowed"
+                                :label="trans('admin::app.marketing.email-marketing.newsletters.edit.email')"
                                 disabled
                             >
                             </x-admin::form.control-group.control>
@@ -68,13 +68,16 @@
                                 @lang('admin::app.marketing.email-marketing.newsletters.edit.subscribed')
                             </x-admin::form.control-group.label>
 
-                            @php $selectedOption = old('status') ?: ($subscriber->is_subscribed == 1 ? 'true' : 'false') @endphp
+                            @php 
+                                $selectedOption = old('status') ?: ($subscriber->is_subscribed == 1 ? 'true' : 'false');
+                            @endphp
 
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="status"
-                                rules="required"
+                                :value="$selectedOption == 'true' ? 1 : 0" 
                                 class="cursor-pointer mb-1"
+                                rules="required"
                                 label="{{ trans('admin::app.marketing.email-marketing.newsletters.edit.subscribed') }}"
                             >
                                 @foreach (['true', 'false'] as $state)

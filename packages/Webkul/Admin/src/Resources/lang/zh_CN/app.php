@@ -1018,7 +1018,7 @@ return [
             'error-create'        => '客户地址没有创建.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => '以客户身份登录',
             'login-message'=> '您登录为 :customer_name',
         ],

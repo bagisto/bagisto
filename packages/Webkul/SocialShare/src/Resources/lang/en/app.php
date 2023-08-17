@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'config' => [
+    'configurations' => [
         'system' => [
             'enable-social-share'    => 'Enable Social Share?',
             'enable-share-facebook'  => 'Enable Share in Facebook?',
@@ -14,5 +14,9 @@ return [
         ]
     ],
 
-    'share-now'   => 'Share Now',
+    'share-now'  => 'Share Now',
+
+    'title'      => 'Social Share',
+
+    'title-info' => 'Sharing things from a website with friends on social media platforms like Facebook, Twitter, or Instagram.'
 ];

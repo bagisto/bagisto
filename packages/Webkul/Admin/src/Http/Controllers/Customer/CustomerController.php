@@ -147,7 +147,7 @@ class CustomerController extends Controller
 
         session()->flash('success', trans('admin::app.customers.index.edit.edit-success'));
 
-        return redirect()->route('admin.customer.index');
+        return redirect()->back();
     }
 
     /**
@@ -180,13 +180,13 @@ class CustomerController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function loginAsCustomer($id)
+    public function login_as_customer($id)
     {
         $customer = $this->customerRepository->findOrFail($id);
 
         auth()->guard('customer')->login($customer);
 
-        session()->flash('success', trans('admin::app.customers.loginascustomer.login-message', ['customer_name' => $customer->name]));
+        session()->flash('success', trans('admin::app.customers.index.login-message', ['customer_name' => $customer->name]));
 
         return redirect(route('shop.customers.account.profile.index'));
     }
@@ -213,13 +213,13 @@ class CustomerController extends Controller
 
         if (request()->has('customer_notified')) {
             try {
-                Mail::send(new CustomerNoteNotification($customer, request()->input('note', 'email')));
+                Mail::queue(new CustomerNoteNotification($customer, request()->input('note', 'email')));
             } catch(\Exception$e) {
                 session()->flash('warning', $e->getMessage());
             }
         }
 
-        session()->flash('success', trans('Note created successfully'));
+        session()->flash('success', trans('admin::app.customers.view.note-created-success'));
 
         return redirect()->back();
     }
@@ -316,7 +316,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses'])->findOrFail($id);
+        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses' => function ($query) {
+            $query->orderBy('default_address', 'desc');
+        }])->findOrFail($id);
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 

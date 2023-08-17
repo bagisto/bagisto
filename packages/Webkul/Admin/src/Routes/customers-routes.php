@@ -22,13 +22,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.customer.edit');
 
-        Route::get('loginascustomer/{id}', 'loginAsCustomer')->name('admin.customer.loginascustomer');
+        Route::get('login-as-customer/{id}', 'login_as_customer')->name('admin.customer.login_as_customer');
 
         Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 
         Route::post('edit/{id}', 'update')->name('admin.customer.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.customer.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.customer.delete');
 
         Route::post('mass-delete', 'massDestroy')->name('admin.customer.mass_delete');
 
@@ -50,13 +50,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('create', 'store')->name('admin.customer.addresses.store');
 
-            Route::post('', 'massDestroy')->name('admin.customer.addresses.mass_delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.customer.addresses.mass_delete');
         });
 
         Route::prefix('addresses')->group(function () {
             Route::get('edit/{id}', 'edit')->name('admin.customer.addresses.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.customer.addresses.update');
+            Route::post('edit/{id}', 'update')->name('admin.customer.addresses.update');
 
             Route::post('default/{id}', 'makeDefault')->name('admin.customer.addresses.set_default');
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::put('edit/{id}', 'update')->name('admin.customer.review.update');
 
-        Route::post('delete/{id}', 'destroy')->name('admin.customer.review.delete');
+        Route::delete('edit/{id}', 'destroy')->name('admin.customer.review.delete');
 
         Route::post('mass-delete', 'massDestroy')->name('admin.customer.review.mass_delete');
 

@@ -32,12 +32,11 @@ class AddressController extends Controller
      */
     public function index($id)
     {
-
-        $customer = $this->customerRepository->find($id);
-
         if (request()->ajax()) {
             return app(AddressDataGrid::class)->toJson();
         }
+
+        $customer = $this->customerRepository->find($id);
 
         return view('admin::customers.addresses.index', compact('customer'));
     }
@@ -98,7 +97,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-        return redirect()->route('admin.customer.addresses.index', ['id' => request('customer_id')]);
+        return redirect()->route('admin.customer.view', ['id' => request('customer_id')]);
     }
 
     /**
@@ -158,7 +157,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-update'));
 
-        return redirect()->route('admin.customer.addresses.index', ['id' => $customerAddress->customer_id]);
+        return redirect()->route('admin.customer.view', ['id' => $customerAddress->customer_id]);
     }
 
     /**
@@ -172,7 +171,7 @@ class AddressController extends Controller
         if ($default = $this->customerAddressRepository->findOneWhere(['customer_id' => $id, 'default_address' => 1])) {
             $default->update(['default_address' => 0]);
         }
-        
+
         $address = $this->customerAddressRepository->findOneWhere([
             'id'              => request('set_as_default'),
             'customer_id'     => $id
@@ -181,11 +180,11 @@ class AddressController extends Controller
         if ($address) {
             $address->update(['default_address' => 1]);
 
-            session()->flash('success', trans('Default Address Updated'));
-        } 
+            session()->flash('success', trans('admin::app.customers.view.set-default-success'));
+        }
 
         return redirect()->back();
-    } 
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -201,7 +200,7 @@ class AddressController extends Controller
 
         Event::dispatch('customer.addresses.delete.after', $id);
 
-        session()->flash('success', trans('Address Deleted Successfully'));
+        session()->flash('success', trans('admin::app.customers.view.address-delete-success'));
 
         return redirect()->back();
     }

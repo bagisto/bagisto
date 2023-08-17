@@ -17,4 +17,6 @@
             </a>
         </div>
     </div>
+
+    <x-admin::datagrid src="{{ route('admin.email_templates.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

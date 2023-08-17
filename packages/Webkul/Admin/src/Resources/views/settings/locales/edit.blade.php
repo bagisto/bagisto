@@ -1,21 +1,32 @@
 <x-admin::layouts>
+    {{-- Title of the page --}}
+    <x-slot:title>
+        @lang('admin::app.settings.locales.edit.title')
+    </x-slot:title>
+
     <x-admin::form 
         :action="route('admin.locales.update', $locale->id)"
         enctype="multipart/form-data"
+        method="PUT"
     >
-        @method('PUT')
-
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.settings.locales.edit-title')
+                @lang('admin::app.settings.locales.edit.title')
             </p>
 
             <div class="flex gap-x-[10px] items-center">
+                <!-- Cancel Button -->
+                <a href="{{ route('admin.locales.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.settings.locales.edit.cancel-btn')
+                    </span>
+                </a>
+
                 <button 
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
-                    @lang('admin::app.settings.locales.save-btn-title')
+                    @lang('admin::app.settings.locales.edit.save-btn')
                 </button>
             </div>
         </div>
@@ -27,7 +38,7 @@
                     {!! view_render_event('bagisto.admin.settings.locale.edit.before', ['locale' => $locale]) !!}
                     
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('admin::app.settings.locales.general')
+                        @lang('admin::app.settings.locales.edit.general')
                     </p>
 
                     <x-admin::form.control-group.control
@@ -38,8 +49,8 @@
                     </x-admin::form.control-group.control>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.settings.locales.code')
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.settings.locales.edit.code')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -48,8 +59,8 @@
                             :value="old('code') ?? $locale->code"
                             id="code"
                             rules="required"
-                            :label="trans('admin::app.settings.locales.code')"
-                            :placeholder="trans('admin::app.settings.locales.code')"
+                            :label="trans('admin::app.settings.locales.edit.code')"
+                            :placeholder="trans('admin::app.settings.locales.edit.code')"
                             disabled="disabled"
                         >
                         </x-admin::form.control-group.control>
@@ -61,8 +72,8 @@
                     </x-admin::form.control-group>
 
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.settings.locales.name')
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.settings.locales.edit.name')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -71,8 +82,8 @@
                             :value="old('name') ?? $locale->name"
                             id="name"
                             rules="required"
-                            :label="trans('admin::app.settings.locales.name')"
-                            :placeholder="trans('admin::app.settings.locales.name')"
+                            :label="trans('admin::app.settings.locales.edit.name')"
+                            :placeholder="trans('admin::app.settings.locales.edit.name')"
                         >
                         </x-admin::form.control-group.control>
 
@@ -83,8 +94,8 @@
                     </x-admin::form.control-group>
         
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.settings.locales.direction')
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.settings.locales.edit.direction')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
@@ -93,7 +104,7 @@
                             :value="old('direction') ?? $locale->direction"
                             id="direction"
                             rules="required"
-                            :label="trans('admin::app.settings.locales.direction')"
+                            :label="trans('admin::app.settings.locales.edit.direction')"
                         >
                             <option 
                                 value="ltr"
@@ -120,14 +131,14 @@
         
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
-                            @lang('admin::app.settings.locales.locale-logo')
+                            @lang('admin::app.settings.locales.edit.logo')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
                             type="image"
                             name="logo_path[image_1]"
                             id="direction"
-                            :label="trans('Logo Path')"
+                            :label="trans('admin::app.settings.locales.edit.logo-path')"
                             :src="$locale->logo_url"
                             accepted-types="image/*"
                         >

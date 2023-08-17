@@ -139,7 +139,7 @@ class InvoiceController extends Controller
 
         $this->sendDuplicateInvoiceMail($invoice, $request->email);
 
-        session()->flash('success', trans('admin::app.sales.invoices.invoice-sent'));
+        session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 
         return redirect()->back();
     }

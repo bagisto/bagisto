@@ -3,7 +3,6 @@
 namespace Webkul\Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Webkul\Core\Rules\CommaSeparatedInteger;
 
 class MassDestroyRequest extends FormRequest
 {
@@ -25,19 +24,8 @@ class MassDestroyRequest extends FormRequest
     public function rules()
     {
         return [
-            'indexes' => ['required', new CommaSeparatedInteger],
+            'indices'   => ['required', 'array'],
+            'indices.*' => ['integer'],
         ];
-    }
-
-    /**
-     * Handle passed validations.
-     *
-     * @return void
-     */
-    public function passedValidation()
-    {
-        $this->replace([
-            'indexes' => explode(',', $this->indexes),
-        ]);
     }
 }

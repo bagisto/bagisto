@@ -14,7 +14,7 @@
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.sitemaps.index') }}">
-                    <span class="text-gray-600 leading-[24px]">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.marketing.sitemaps.edit.cancel-btn')
                     </span>
                 </a>
@@ -41,7 +41,7 @@
                     <div class="mb-[10px]">
                         <!-- File Name -->
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="!mt-0">
+                            <x-admin::form.control-group.label class="required !mt-0">
                                 @lang('admin::app.marketing.sitemaps.edit.file-name')
                             </x-admin::form.control-group.label>
 
@@ -68,7 +68,7 @@
 
                         <!---- File Path -->
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.sitemaps.edit.path')
                             </x-admin::form.control-group.label>
 

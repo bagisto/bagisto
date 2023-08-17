@@ -160,6 +160,7 @@
                         <draggable
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto border-r-[1px] border-gray-200"
                             ghost-class="draggable-ghost"
+                            v-bind="{animation: 200}"
                             :list="groups"
                             item-key="id"
                             group="groups"
@@ -222,6 +223,7 @@
                                     <draggable
                                         class="ml-[43px]"
                                         ghost-class="draggable-ghost"
+                                        v-bind="{animation: 200}"
                                         :list="getGroupAttributes(element)"
                                         item-key="id"
                                         group="attributes"
@@ -269,8 +271,6 @@
                         <!-- Unassigned Attributes Header -->
                         <div class="flex flex-col mb-[16px]">
                             <p class="text-gray-600 font-semibold leading-[24px]">
-                                Unassigned Attribues
-
                                 @lang('admin::app.catalog.families.edit.unassigned-attributes')
                             </p>
 
@@ -281,8 +281,10 @@
 
                         <!-- Draggable Unassigned Attributes -->
                         <draggable
+                            id="unassigned-attributes"
                             class="h-[calc(100vh-285px)] pb-[16px] overflow-auto"
                             ghost-class="draggable-ghost"
+                            v-bind="{animation: 200}"
                             :list="unassignedAttributes"
                             item-key="id"
                             group="attributes"

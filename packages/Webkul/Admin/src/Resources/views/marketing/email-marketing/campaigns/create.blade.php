@@ -41,7 +41,7 @@
                     <div class="mb-[10px]">
                         {{-- Name --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.create.name')
                             </x-admin::form.control-group.label>
 
@@ -50,7 +50,6 @@
                                 name="name"
                                 :value="old('name')"
                                 rules="required"
-                                class="mb-1"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.name')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.campaigns.create.name')"
                             >
@@ -64,7 +63,7 @@
 
                         {{-- Subject --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.create.subject')
                             </x-admin::form.control-group.label>
 
@@ -86,7 +85,7 @@
 
                          {{-- Event --}}
                          <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.create.event')
                             </x-admin::form.control-group.label>
 
@@ -115,7 +114,7 @@
 
                         {{-- Email Template --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.create.email-template')
                             </x-admin::form.control-group.label>
 
@@ -158,7 +157,7 @@
                     <x-slot:content>
                         {{-- Channel --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.create.channel')
                             </x-admin::form.control-group.label>
 
@@ -187,7 +186,7 @@
 
                         {{-- Customer Group --}}
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.marketing.email-marketing.campaigns.create.customer-group')
                             </x-admin::form.control-group.label>
 

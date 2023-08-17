@@ -17,7 +17,7 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.tax_categories.index') }}" ref="taxCategory_data"></x-admin::datagrid>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-tax-category-template">
@@ -126,34 +126,51 @@
                                         @lang('admin::app.settings.taxes.tax-categories.create.tax-rates')
                                     </p>
 
-                                    @foreach ($taxRates as $taxRate)
-                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                            <x-admin::form.control-group.control
-                                                type="checkbox"
-                                                name="taxrates" 
-                                                :value="$taxRate->id"
-                                                :id="'taxrates_' . $taxRate->id"
-                                                :for="'taxrates_' . $taxRate->id"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.taxes.tax-categories.create.tax-rates')"
-                                                :checked="in_array($taxRate['id'], $selectedOptions)"
-                                            >
-                                            </x-admin::form.control-group.control>
-                                                
-                                            <x-admin::form.control-group.label 
-                                                :for="'taxrates_' . $taxRate->id"
-                                                class="!text-[14px] !text-gray-600 cursor-pointer"
-                                            >
-                                                {{ $taxRate->identifier }}
-                                            </x-admin::form.control-group.label>
-    
-                                            <x-admin::form.control-group.error
-                                                control-name="taxrates"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                                    @endforeach 
-
+                                    @if(! count($taxRates))
+                                        <div class="flex gap-[20px] items-center py-[10px]">
+                                            <img 
+                                                src="{{ bagisto_asset('images/tax.png') }}" 
+                                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                                    >
+                                            <div class="flex flex-col gap-[6px]">
+                                                <p class="text-[16px] text-gray-400 font-semibold">
+                                                    @lang('admin::app.settings.taxes.tax-categories.create.add-tax-rates')
+                                                </p>
+                                                <p class="text-gray-400"> 
+                                                    @lang('admin::app.settings.taxes.tax-categories.create.empty-text')
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @else
+                                        @foreach ($taxRates as $taxRate)
+                                            <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
+                                                <x-admin::form.control-group.control
+                                                    type="checkbox"
+                                                    name="taxrates[]" 
+                                                    :value="$taxRate->id"
+                                                    :id="'taxrates_' . $taxRate->id"
+                                                    :for="'taxrates_' . $taxRate->id"
+                                                    rules="required"
+                                                    :label="trans('admin::app.settings.taxes.tax-categories.create.tax-rates')"
+                                                    :checked="in_array($taxRate['id'], $selectedOptions)"
+                                                >
+                                                </x-admin::form.control-group.control>
+                                                    
+                                                <x-admin::form.control-group.label 
+                                                    :for="'taxrates_' . $taxRate->id"
+                                                    class="!text-[14px] !text-gray-600 cursor-pointer"
+                                                >
+                                                    {{ $taxRate['identifier'] }}
+                                                </x-admin::form.control-group.label>
+        
+                                            </x-admin::form.control-group>
+                                        @endforeach 
+                                    @endif
+                                    
+                                    <x-admin::form.control-group.error
+                                        control-name="taxrates[]"
+                                    >
+                                    </x-admin::form.control-group.error>
                                 </div>
                             </x-slot:content>
 
@@ -177,14 +194,20 @@
         <script type="module">
             app.component('v-create-tax-category', {
                 template: '#v-create-tax-category-template',
-                
+
                 methods: {
                     store(params, { resetForm, setErrors }) {
                     
-                        this.$axios.post('{{ route('admin.tax_categories.store') }}', params)
+                        this.$axios.post('{{ route('admin.tax_categories.store') }}', params,{
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                             .then((response) => {
                                 this.$refs.taxCategory.toggle();
 
+                                this.$root.$refs.taxCategory_data.get();
+                                
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                 resetForm();

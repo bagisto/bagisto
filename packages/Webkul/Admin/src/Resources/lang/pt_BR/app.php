@@ -1020,7 +1020,7 @@ return [
             'error-create'        => 'Error: Endereço do cliente não criado.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'   => 'entrar como cliente',
             'login-message'=> 'você se conectou como :customer_name',
         ],

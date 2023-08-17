@@ -1021,7 +1021,7 @@ return [
             'error-create'        => 'Błąd: nie utworzono adresu klienta.',
         ],
 
-        'loginascustomer' => [
+        'login-as-customer' => [
             'grid-title'=>'zaloguj się jako klient',
             'login-message'=>'logujesz się jako :customer_name'
         ],

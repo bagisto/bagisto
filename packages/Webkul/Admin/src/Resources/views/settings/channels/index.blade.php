@@ -23,5 +23,6 @@
         </div>
     </div>
     
-    {{-- datagrid will be here --}}
+    <x-admin::datagrid src="{{ route('admin.channels.index') }}"></x-admin::datagrid>
+
 </x-admin::layouts>
