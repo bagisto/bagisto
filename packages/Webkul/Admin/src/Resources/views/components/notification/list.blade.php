@@ -5,87 +5,113 @@
         type="text/x-template"
         id="v-notification-list-template"
     >
-        <div class="content">
-            <div class="page-header">
-                <div class="page-title">
-                    <h1 v-text="title"></h1>
+            <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
+                <div class="grid gap-[6px]">
+                    <p
+                        class="pt-[6px] text-[20px] text-gray-800 font-bold leading-[24px]"
+                        v-text="title"
+                    >
+                    </p>
+
+                    <p class="text-gray-600">List all the Notifications</p>
                 </div>
 
-                <div class="page-action">
-                    <div class="control-group notif-filter">
-                        <input 
-                            type="text"
-                            class="form-control control"
-                            placeholder="Search Order"
-                            @keyup="applyFilter('search',$event)"
-                        >
-
-                        <i class="icon search-icon search-btn"></i>
-                    </div>
-
-                    <div class="control-group notif-filter">
-                        <select
-                            @change="applyFilter('filter',$event)"
-                            class="control"
-                        >
-                            <option 
-                                v-for="orderstatus in orderTypeStatus"
-                                :value="orderstatus"
-                                v-text="orderstatus"
-                            >
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-100"></span>
             </div>
 
-            <div class="page-content">
-                <ul
-                    class="notif"
-                    v-if="notifications.length" 
-                >
-                    <li 
-                        v-for="notification in notifications"
-                        :class="notification.read ? 'read' : ''"
-                    >
-                        <div>
-                            <span hidden v-text="localeCode"></span>localeCode
-                        </div>
+            <div
+                class="flex flex-col justify-between max-w-max bg-white border border-gray-300 rounded-[6px] box-shadow h-[calc(100vh-179px)]"
+                v-if="notifications.length"
+            >
+                <div class="">
+                    <div class="flex border-b-[1px] border-gray-300 overflow-auto journal-scroll">
+                        <div
+                            class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px]"
+                            :class="isSelected ? 'border-blue-600' : ''"
+                            v-for="(count, orderstatus) in orderTypeStatus"
+                        >
+                            <p
+                                class="text-gray-600 cursor-pointer "
+                                v-text="orderstatus"
+                                @click="applyFilter('filter', orderstatus)"
+                            >
+                            </p>
                         
-                        <a :href="`${orderViewUrl + notification.order_id}`">
-                            <div
-                                class="notif-icon"
-                                :class="notification.order.status"
-                            >
-                                <span :class="ordertype[notification.order.status].icon"></span>
-                            </div>
+                            <span class="text-[12px] text-white font-semibold py-[1px] px-[6px] bg-gray-400 rounded-[35px]"></span>
+                        </div>    
 
-                            <div class="notif-content">
-                                #@{{ notification.order.id + ' ' + orderTypeMessages[notification.order.status]}}
-                            </div>
+                    </div>
 
-                            <div
-                                class="notif-content"
-                                v-text="notification.order.created_at"
+                    <div class="grid gap-[24px] px-[24px] py-[12px] max-h-[calc(100vh-330px)] overflow-auto journal-scroll">
+                        <div
+                            class="flex gap-[5px] items-start"
+                            v-for="notification in notifications"
+                            :class="notification.read ? 'opacity-60' : ''"
+                        >
+                            <a
+                                :href="`${orderViewUrl + notification.order_id}`"
+                                class="flex gap-[5px]"    
                             >
+                                <span
+                                    v-if="notification.order.status in notificationStatusIcon"
+                                    class="h-fit"
+                                    :class="notificationStatusIcon[notification.order.status]"
+                                >
+                                </span>
+
+                                <div class="grid">
+                                    <p class="text-gray-800">
+                                        #@{{ notification.order.id }}
+                                        @{{ orderTypeMessages[notification.order.status] }}
+                                    </p>
+        
+                                    <p class="text-[12px] text-gray-600">
+                                        @{{ notification.order.datetime }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-x-[8px] items-center p-[24px] border-t-[1px] border-gray-300">
+                    <div
+                        class="inline-flex gap-x-[4px] items-center justify-between ml-[8px] text-gray-600 py-[6px] px-[8px] leading-[24px] text-center w-full max-w-max bg-white border border-gray-300 rounded-[6px] marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400 max-sm:hidden" v-text="pagNotif.per_page"
+                    >
+                    </div>
+
+                    <span class="text-gray-600 whitespace-nowrap">of</span>
+
+                    <p
+                        class="text-gray-600 whitespace-nowrap"
+                        v-text="pagNotif.current_page"
+                    >
+                    </p>
+
+                    <!-- Prev & Next Page Button -->
+                    <div class="flex gap-[4px] items-center">
+                        <a :href="pagNotif.prev_page_url">
+                            <div class="inline-flex gap-x-[4px] items-center justify-between ml-[8px] text-gray-600 p-[6px] text-center w-full max-w-max bg-white border rounded-[6px] border-gray-300 cursor-pointer transition-all hover:border hover:bg-gray-100 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                <span class="icon-sort-left text-[24px]"></span>
                             </div>
                         </a>
-                    </li>
-                </ul>
-                {{-- <pagination align="center" :data="pagNotif" @pagination-change-page="getResults">
-                    <span slot="prev-nav">&lt;</span>
-                    <span slot="next-nav">&gt;</span>
-                </pagination> --}}
 
-                <ul
-                    class="notif"
-                    v-if="! notifications.length"
-                >
-                    <li v-text="noRecordText"></li>
-                </ul>
-
+                        <a :href="pagNotif.next_page_url">
+                            <div
+                                class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 p-[6px] text-center w-full max-w-max rounded-[6px] border border-transparent cursor-pointer transition-all active:border-gray-300 hover:bg-gray-100 marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black">
+                                <span class="icon-sort-right text-[24px]"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <!-- For Empty Page -->
+            <div
+                v-if="! notifications.length"
+                v-text="noRecordText"
+            >
+            </div>
     </script>
 
     <script type="module">
@@ -132,9 +158,22 @@
                             message: 'Order Closed'
                         },
                     },
+                    isSelected: true,
                     orderTypeStatus: JSON.parse(this.orderStatus),
                     orderTypeMessages: JSON.parse(this.orderStatusMessages)
                 }
+            },
+
+            computed: {
+                notificationStatusIcon() {
+                    return {
+                        pending: 'icon-information text-[24px] text-amber-600 bg-amber-100 rounded-full',
+                        closed: 'icon-repeat text-[24px] text-red-600 bg-red-100 rounded-full',
+                        completed: 'icon-done text-[24px] text-blue-600 bg-blue-100 rounded-full',
+                        canceled: 'icon-cancel-1 text-[24px] text-red-600 bg-red-100 rounded-full',
+                        processing: 'icon-sort-right text-[24px] text-green-600 bg-green-100 rounded-full',
+                    };
+                },
             },
 
             mounted() {
@@ -171,7 +210,6 @@
                             params: params
                         })
                         .then ((response) => {
-                            console.log(response);
                             this.notifications = [];
 
                             this.notifications = response.data.search_results.data;
@@ -181,7 +219,7 @@
                 },
 
                 applyFilter(type, $event) {
-                    type == 'search' ? this.id = $event.target.value : this.status = $event.target.value;
+                    type == 'search' ? this.id = $event.target.value : this.status = $event;
 
                     this.getNotification();
                 },

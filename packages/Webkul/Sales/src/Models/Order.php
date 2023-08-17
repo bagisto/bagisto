@@ -19,7 +19,7 @@ class Order extends Model implements OrderContract
 
     protected $dates = ['created_at'];
 
-    protected $appends = ['human_readable_datetime'];
+    protected $appends = ['datetime'];
 
     public const STATUS_PENDING = 'pending';
 
@@ -89,7 +89,8 @@ class Order extends Model implements OrderContract
         return $this->grand_total - $this->grand_total_invoiced;
     }
 
-    public function getHumanReadableDatetimeAttribute() {
+    public function getDatetimeAttribute()
+    {
         return $this->created_at->diffForHumans();
     }
 
@@ -399,6 +400,6 @@ class Order extends Model implements OrderContract
      */
     protected static function newFactory(): Factory
     {
-        return OrderFactory::new ();
+        return OrderFactory::new();
     }
 }

@@ -24,7 +24,7 @@
                         </span>
                         @break
 
-                    @case('pending')    
+                    @case('pending')
                         <span class="label-pending text-[14px] mx-[5px]">
                             {{ $order->status }}
                         </span>

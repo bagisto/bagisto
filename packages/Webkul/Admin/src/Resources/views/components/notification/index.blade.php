@@ -35,54 +35,63 @@
                 </x-slot:toggle>
     
                 <!-- Notification Content -->
-                <x-slot:content class="!p-[0px]">
-                    <span   
-                        class="block text-gray-600 text-left font-semibold p-2"
-                        v-text="notifTitle"
-                    >
-                    </span>
-
-                    <div 
-                        class="py-2"
-                        v-if="notifications.length > 0"
-                    >
-                        <a 
-                            :href="`${orderViewUrl + notification.order_id}`"
-                            class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"
-                            v-for="notification in notifications"
-                        >
-                            <span   
-                                class="rounded-full object-cover text-[24px] mx-1"
-                                :class="ordertype[notification.order.status].icon"
+                <x-slot:content class="!p-0">
+                    <div class="box-shadow max-w-[320px]">
+                        <div class="p-[24px]">
+                            <p
+                                class="text-[16px] text-gray-600 font-semibold mb-[12px]"
+                                v-text="notifTitle"
                             >
-                            </span>
-
-                            <p class="text-gray-600 text-sm mx-2">
-                                <span class="font-bold">
-                                    #@{{ notification.order.id }}
-                                    @{{ orderTypeMessages[notification.order.status] }}
-                                    @{{ notification.order.human_readable_datetime }}
-                                </span>
                             </p>
-                        </a>
-                    </div>
 
-                    <!-- Notification Footer -->
-                    <div class="flex gap-[10px] items-center justify-between">
-                        <a  
-                            :href="viewAll"
-                            class="block text-gray-600 text-center font-bold p-2"
-                            :text="viewAllTitle"
-                        >
-                        </a>
-                        
-                        <a  
-                            class="block text-gray-600 text-center font-bold p-2 cursor-pointer"
-                            :text="readAllTitle"
-                            @click="readAll()"
-                            v-if="notifications.length > 0"
-                        >
-                        </a>
+                            <div
+                                class="grid gap-[24px]"
+                                v-if="notifications.length > 0"
+                            >
+                                <div v-for="notification in notifications">
+                                    <a
+                                        class="flex gap-[5px] items-start"
+                                        :href="`${orderViewUrl + notification.order_id}`"
+                                    >
+                                        <span
+                                            v-if="notification.order.status in notificationStatusIcon"
+                                            class="h-fit"
+                                            :class="notificationStatusIcon[notification.order.status]"
+                                        >
+                                        </span>
+
+                                        <div class="grid">
+                                            <p class="text-gray-800">
+                                                #@{{ notification.order.id }}
+                                                @{{ orderTypeMessages[notification.order.status] }}
+                                            </p>
+
+                                            <p class="text-[12px] text-gray-600">
+                                                @{{ notification.order.human_readable_datetime }}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Notification Footer -->
+                        <div class="flex gap-[10px] justify-between p-[24px] border-t-[1px] border-b-[1px] border-gray-300">
+                            <a  
+                                :href="viewAll"
+                                class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                :text="viewAllTitle"
+                            >
+                            </a>
+
+                            <a  
+                                class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                :text="readAllTitle"
+                                @click="readAll()"
+                                v-if="notifications.length > 0"
+                            >
+                            </a>
+                        </div>
                     </div>
                 </x-slot:content>
             </x-admin::dropdown>
@@ -143,6 +152,18 @@
 
                     orderTypeMessages: JSON.parse(this.orderStatusMessages)
                 }
+            },
+
+            computed: {
+                notificationStatusIcon() {
+                    return {
+                        pending: 'icon-information text-[24px] text-amber-600 bg-amber-100 rounded-full',
+                        closed: 'icon-repeat text-[24px] text-red-600 bg-red-100 rounded-full',
+                        completed: 'icon-done text-[24px] text-blue-600 bg-blue-100 rounded-full',
+                        canceled: 'icon-cancel-1 text-[24px] text-red-600 bg-red-100 rounded-full',
+                        processing: 'icon-sort-right text-[24px] text-green-600 bg-green-100 rounded-full',
+                    };
+                },
             },
 
             mounted() {
