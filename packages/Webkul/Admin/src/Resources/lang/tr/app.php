@@ -1362,12 +1362,6 @@ return [
             'title'      => 'Yetkisiz Erişim',
             'message'    => 'Erişmek istediğiniz sayfa için özel yetki gerekiyor!',
         ],
-
-        'tinymce' => [
-            'http-error'    => 'HTTP error.',
-            'invalid-json'  => 'Invalid JSON.',
-            'upload-failed' => 'XHR Aktarım hatası nedeniyle resim yükleme başarısız oldu.',
-        ],
     ],
 
     'export' => [

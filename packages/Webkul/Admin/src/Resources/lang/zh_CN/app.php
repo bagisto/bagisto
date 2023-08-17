@@ -1337,12 +1337,6 @@ return [
             'title'      => '未经授权的错误',
             'message'    => '该请求未经授权, 因为它缺少目标资源的有效身份验证凭据.',
         ],
-
-        'tinymce' => [
-            'http-error'    => 'HTTP错误.',
-            'invalid-json'  => '无效的JSON.',
-            'upload-failed' => '由于XHR传输错误, 图片上传失败.',
-        ],
     ],
 
     'export' => [

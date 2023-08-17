@@ -88,7 +88,7 @@
                     <div class="control-group {!! $errors->has('image.*') ? 'has-error' : '' !!}">
                         <label class="required">{{ __('admin::app.catalog.categories.image') }}</label>
                         <span class="control-info mt-10">{{ __('admin::app.settings.sliders.image-size') }}</span>
-                        
+
                         <image-wrapper button-label="{{ __('admin::app.settings.sliders.image') }}" input-name="image" :multiple="false" :images='"{{ Storage::url($slider->path) }}"'></image-wrapper>
 
                         <span class="control-error" v-if="{!! $errors->has('image.*') !!}">
@@ -114,24 +114,3 @@
         </form>
     </div>
 @endsection
-
-@push('scripts')
-    @include('admin::layouts.tinymce')
-
-    <script>
-        $(document).ready(function () {
-            tinyMCEHelper.initTinyMCE({
-                selector: 'textarea#tiny',
-                height: 200,
-                width: "100%",
-                plugins: 'image imagetools media wordcount save fullscreen code table lists link hr',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | code | table',
-                image_advtab: true,
-                templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
-                ],
-            });
-        });
-    </script>
-@endpush

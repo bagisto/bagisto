@@ -27,7 +27,7 @@
             <span class="absolute left-[15px] top-[50%] -translate-y-[50%] text-gray-500 {{ $attribute->code == 'price' ? 'text-[20px]' : '' }}">
                 {{ core()->currencySymbol(core()->getBaseCurrencyCode()) }}
             </span>
-            
+
             <x-admin::form.control-group.control
                 type="text"
                 :name="$attribute->code"
@@ -44,17 +44,18 @@
 
     @case('textarea')
         <x-admin::form.control-group.control
-            :type="$attribute->enable_wysiwyg ? 'tinymce' : 'textarea'"
+            type="textarea"
             :name="$attribute->code"
             :id="$attribute->code"
             ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
+            :tinymce="(bool) $attribute->enable_wysiwyg"
         >
         </x-admin::form.control-group.control>
 
         @break
-    
+
     @case('date')
         <x-admin::form.control-group.control
             type="date"
@@ -67,7 +68,7 @@
         </x-admin::form.control-group.control>
 
         @break
-    
+
     @case('datetime')
         <x-admin::form.control-group.control
             type="datetime"
@@ -77,9 +78,9 @@
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
         >
         </x-admin::form.control-group.control>
-        
+
         @break
-    
+
     @case('select')
         <x-admin::form.control-group.control
             type="select"
@@ -161,7 +162,7 @@
         @endforeach
 
         @break
-    
+
     @case('boolean')
         @php $selectedValue = old($attribute->code) ?: $product[$attribute->code] @endphp
 
@@ -174,7 +175,7 @@
             :checked="(boolean) $selectedValue"
         >
         </x-admin::form.control-group.control>
-        
+
         @break
 
 @endswitch

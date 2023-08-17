@@ -1393,12 +1393,6 @@ return [
             'title'      => 'No autorizado',
             'message'    => 'La solicitud no se ha aplicado porque carece de credenciales de autenticación válidas para el recurso de destino.',
         ],
-
-        'tinymce' => [
-            'http-error'    => 'Error HTTP.',
-            'invalid-json'  => 'JSON inválido.',
-            'upload-failed' => 'Carga de la imagen falló debido a un error de transporte XHR.',
-        ],
     ],
 
     'export' => [

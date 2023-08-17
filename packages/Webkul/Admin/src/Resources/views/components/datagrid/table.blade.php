@@ -12,7 +12,7 @@
                         :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                     >
                         <!-- Mass Actions -->
-                        <p>
+                        <p v-if="$parent.available.massActions.length">
                             <label for="mass_action_select_all_records">
                                 <input
                                     type="checkbox"
@@ -39,6 +39,7 @@
                         <p
                             v-for="column in $parent.available.columns"
                             v-text="column.label"
+                            v-if="$parent.available.actions.length"
                             @click="$parent.sortPage(column)"
                         >
                         </p>
@@ -54,10 +55,11 @@
                     <div
                         class="row grid px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600"
                         v-for="record in $parent.available.records"
+                        v-if="$parent.available.records.length"
                         :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                     >
                         <!-- Mass Actions -->
-                        <p>
+                        <p v-if="$parent.available.massActions.length">
                             <label :for="`mass_action_select_record_${record[$parent.available.meta.primary_column]}`">
                                 <input
                                     type="checkbox"
@@ -82,7 +84,7 @@
                         </p>
 
                         <!-- Actions -->
-                        <p>
+                        <p v-if="$parent.available.actions.length">
                             <span
                                 class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
                                 :class="action.icon"
@@ -91,6 +93,15 @@
                                 @click="$parent.performAction(action)"
                             >
                             </span>
+                        </p>
+                    </div>
+
+                    <div
+                        class="row grid px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 text-center"
+                        v-else
+                    >
+                        <p>
+                            @lang('admin::app.components.datagrid.table.no-records-available')
                         </p>
                     </div>
                 </slot>

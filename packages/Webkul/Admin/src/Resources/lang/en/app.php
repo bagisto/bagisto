@@ -22,6 +22,16 @@ return [
         'orders' => [
             'index' => [
                 'title' => 'Orders',
+                'customer'     => 'Customer',
+                'email'        => 'Email',
+                'location'     => 'Location',
+                'pay-via'      => 'Pay Via',
+                'date'         => 'Date',
+                'order-id'     => 'Order ID',
+                'status'       => 'Status',
+                'grand-total'  => 'Grand Total',
+                'channel-name' => 'Channel',
+                'view'         => 'View',
             ],
 
             'view' => [
@@ -1880,7 +1890,10 @@ return [
 
             'table' => [
                 'actions' => 'Actions',
+                'no-records-available' => 'No Records Available.'
             ],
+
+        
         ],
 
         'products' => [
@@ -3126,12 +3139,6 @@ return [
             'name'       => '401',
             'title'      => 'Unauthorized Error',
             'message'    => 'The request has not been applied because it lacks valid authentication credentials for the target resource.',
-        ],
-
-        'tinymce' => [
-            'http-error'    => 'HTTP error.',
-            'invalid-json'  => 'Invalid JSON.',
-            'upload-failed' => 'Image upload failed due to a XHR Transport error.',
         ],
     ],
 
