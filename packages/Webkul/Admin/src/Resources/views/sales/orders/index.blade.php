@@ -76,12 +76,6 @@
                     </div>
                 </x-slot:content>
             </x-admin::dropdown>
-
-            <a href="#">
-                <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
-                    @lang('Create Order')
-                </div>
-            </a>
         </div>
     </div>
 
@@ -96,7 +90,7 @@
                 </div>
 
                 <div class="">
-                    <p class="text-gray-600">Price / Pay Via / Channel</p>
+                    <p class="text-gray-600">Total / Pay Via / Channel</p>
                 </div>
 
                 <div class="">
@@ -112,32 +106,32 @@
                         <span class="icon-uncheckbox text-[24px]"></span>
 
                         <div class="flex flex-col gap-[6px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">#02153</p>
+                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.id }}</p>
 
-                            <p class="text-gray-600">23 Mar 2023, 01:00:00</p>
+                            <p class="text-gray-600">@{{ record.created_at }}</p>
 
-                            <p class="label-pending">Pending</p>
+                            <p class="label-pending"> @{{ record.status }}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="">
                     <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">$75.00</p>
+                        <p class="text-[16px] text-gray-800 font-semibold">@{{ record.base_grand_total }}</p>
 
-                        <p class="text-gray-600">Pay by - Cash on Delivery</p>
+                        <p class="text-gray-600">Pay by - @{{ record.method }}</p>
 
-                        <p class="text-gray-600">Online Store</p>
+                        <p class="text-gray-600">@{{ record.channel_name }}</p>
                     </div>
                 </div>
 
                 <div class="">
                     <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800">John Doe</p>
+                        <p class="text-[16px] text-gray-800">@{{ record.full_name }}</p>
 
-                        <p class="text-gray-600">john@deo.com</p>
+                        <p class="text-gray-600">@{{ record.customer_email }}</p>
 
-                        <p class="text-gray-600">Broadway, New York</p>
+                        <p class="text-gray-600">@{{ record.location }}</p>
                     </div>
                 </div>
 

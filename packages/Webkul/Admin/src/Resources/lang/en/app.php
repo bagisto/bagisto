@@ -22,6 +22,16 @@ return [
         'orders' => [
             'index' => [
                 'title' => 'Orders',
+                'customer'     => 'Customer',
+                'email'        => 'Email',
+                'location'     => 'Location',
+                'pay-via'      => 'Pay Via',
+                'date'         => 'Date',
+                'order-id'     => 'Order ID',
+                'status'       => 'Status',
+                'grand-total'  => 'Grand Total',
+                'channel-name' => 'Channel',
+                'view'         => 'View',
             ],
 
             'view' => [
@@ -1881,6 +1891,8 @@ return [
             'table' => [
                 'actions' => 'Actions',
             ],
+
+        
         ],
 
         'products' => [
