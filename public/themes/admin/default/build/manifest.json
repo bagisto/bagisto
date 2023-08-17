@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-72d38502.css",
+    "file": "assets/app-f0188473.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -169,14 +169,14 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-c04ede37.css",
+    "file": "assets/app-f72387a9.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-c04ede37.css"
+      "assets/app-f72387a9.css"
     ],
-    "file": "assets/app-8ff54681.js",
+    "file": "assets/app-5b679f76.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

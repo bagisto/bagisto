@@ -1880,6 +1880,7 @@ return [
 
             'table' => [
                 'actions' => 'Actions',
+                'no-records-available' => 'No Records Available.'
             ],
         ],
 
