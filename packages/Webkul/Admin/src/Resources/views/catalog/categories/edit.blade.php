@@ -7,9 +7,9 @@
     @php
         $locale = core()->getRequestedLocaleCode();
     @endphp
-    
+
     {{-- Input Form --}}
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.catalog.categories.update', $category->id)"
         enctype="multipart/form-data"
         method="PUT"
@@ -28,8 +28,8 @@
                 </a>
 
                 <!-- Save Button -->
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.catalog.categories.edit.save-btn')
@@ -120,13 +120,14 @@
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
-                            type="tinymce"
+                            type="textarea"
                             name="description"
                             id="description"
                             class="description"
                             :value="old($locale)['description'] ?? ($category->translate($locale)['description'] ?? '')"
                             rules="required"
                             label="{{ trans('admin::app.catalog.categories.edit.description') }}"
+                            :tinymce="true"
                         >
                         </x-admin::form.control-group.control>
 
@@ -323,7 +324,7 @@
                             @lang('admin::app.catalog.categories.edit.settings')
                         </p>
                     </x-slot:header>
-                
+
                     <x-slot:content>
                         {{-- Position --}}
                         <div class="mb-[10px]">
@@ -371,7 +372,7 @@
                                         {{ $selectedValue == $item ? 'selected' : '' }}
                                     >
                                         @lang('admin::app.catalog.categories.edit.' . $item)
-                                    </option>    
+                                    </option>
                                 @endforeach
                             </x-admin::form.control-group.control>
 
@@ -409,7 +410,7 @@
                             @lang('admin::app.catalog.categories.edit.filterable-attributes')
                         </p>
                     </x-slot:header>
-                
+
                     @php $selectedaAtributes = old('attributes') ?: $category->filterableAttributes->pluck('id')->toArray() @endphp
 
                     <x-slot:content class="pointer-events-none">
@@ -453,7 +454,7 @@
                             <span class="icon-sort-down text-[24px]"></span>
                         </div>
                     </x-slot:toggle>
-                
+
                     <!-- Locale content -->
                     <x-slot:content class="!p-[0px]">
                         <div class="grid gap-[4px] mt-[10px] pb-[10px]">

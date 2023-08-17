@@ -5,7 +5,7 @@
     </x-slot:title>
 
     {{-- Input Form --}}
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.catalog.categories.store')"
         enctype="multipart/form-data"
     >
@@ -23,8 +23,8 @@
                 </a>
 
                 <!-- Save Button -->
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.catalog.categories.create.save-btn')
@@ -102,13 +102,14 @@
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
-                            type="tinymce"
+                            type="textarea"
                             name="description"
                             id="description"
                             class="description"
                             :value="old('description')"
                             rules="required"
                             :label="trans('admin::app.catalog.categories.create.description')"
+                            :tinymce="true"
                         >
                         </x-admin::form.control-group.control>
 
@@ -292,7 +293,7 @@
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
                     </x-slot:header>
-                
+
                     <x-slot:content>
                         {{-- Position --}}
                         <div class="mb-[10px]">
@@ -334,7 +335,7 @@
                                 @foreach (['products_and_description', 'products_only', 'description_only'] as $item)
                                     <option value="{{ $item }}">
                                         @lang('admin::app.catalog.categories.create.' . $item)
-                                    </option>    
+                                    </option>
                                 @endforeach
                             </x-admin::form.control-group.control>
 
@@ -369,7 +370,7 @@
                             @lang('admin::app.catalog.categories.create.filterable-attributes')
                         </p>
                     </x-slot:header>
-                
+
                     <x-slot:content class="pointer-events-none">
                         @foreach ($attributes as $attribute)
                             <label
