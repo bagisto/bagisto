@@ -26,18 +26,22 @@
                 <div class="">
                     <div class="flex border-b-[1px] border-gray-300 overflow-auto journal-scroll">
                         <div
-                            class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px]"
-                            :class="isSelected ? 'border-blue-600' : ''"
-                            v-for="(count, orderstatus) in orderTypeStatus"
+                            class="flex py-[15px] px-[15px] gap-[4px] border-b-[2px] first:border-blue-600"
+                            ref="tabs"
+                            v-for="data in statusCount"
                         >
                             <p
-                                class="text-gray-600 cursor-pointer "
-                                v-text="orderstatus"
-                                @click="applyFilter('filter', orderstatus)"
+                                class="text-gray-600 cursor-pointer"
+                                v-text="data.status"
+                                @click="applyFilter(data.status, $event)"
                             >
                             </p>
-                        
-                            <span class="text-[12px] text-white font-semibold py-[1px] px-[6px] bg-gray-400 rounded-[35px]"></span>
+
+                            <span
+                                class="text-[12px] text-white font-semibold py-[1px] px-[6px] bg-gray-400 rounded-[35px]"
+                                v-text="data.status_count"
+                            >
+                            </span>
                         </div>    
 
                     </div>
@@ -46,7 +50,7 @@
                         <div
                             class="flex gap-[5px] items-start"
                             v-for="notification in notifications"
-                            :class="notification.read ? 'opacity-60' : ''"
+                            :class="notification.read ? 'opacity-50' : ''"
                         >
                             <a
                                 :href="`${orderViewUrl + notification.order_id}`"
@@ -136,6 +140,8 @@
                     pagNotif: {},
                     id: '',
                     status: '',
+                    statusCount: [],
+                    sumStatusCount : 0,
                     ordertype: {
                         pending : {
                             icon: 'pending-icon',
@@ -158,8 +164,6 @@
                             message: 'Order Closed'
                         },
                     },
-                    isSelected: true,
-                    orderTypeStatus: JSON.parse(this.orderStatus),
                     orderTypeMessages: JSON.parse(this.orderStatusMessages)
                 }
             },
@@ -195,31 +199,42 @@
             },
 
             methods: {
-                getNotification() {
+                getNotification($event) {
                     const params = {};
 
-                    if (this.id) {
-                        params.id = this.id;
-                    }
+                    this.id ? params.id = this.id : '';
 
-                    if (this.status) {
-                        params.status = this.status;
-                    }
+                    this.status ? params.status = this.status : '';
 
                     this.$axios.get(this.url, {
-                            params: params
-                        })
-                        .then ((response) => {
-                            this.notifications = [];
+                        params: params
+                    })
+                    .then((response) => {
+                        this.notifications = response.data.search_results.data;
 
-                            this.notifications = response.data.search_results.data;
+                        this.statusCount = response.data.status_count;
 
-                            this.pagNotif = response.data.search_results;
-                        }).catch (error => console.log(error));
+                        this.sumStatusCount = response.data.status_count.reduce((sum, item) => sum + item.status_count, 0);
+
+                        this.statusCount.unshift({ status: 'All', status_count: this.sumStatusCount });
+
+                        this.pagNotif = response.data.search_results;
+                    })
+                    .catch(error => console.log(error));
                 },
 
-                applyFilter(type, $event) {
-                    type == 'search' ? this.id = $event.target.value : this.status = $event;
+                applyFilter(status, $event) {
+                    let elements = $event.target.parentElement.parentElement.children;
+
+                    for (let element of elements) {
+                        if (element.classList.contains('border-blue-600') || element.classList.contains('first:border-blue-600')) {
+                            element.classList.remove('border-blue-600', 'first:border-blue-600');
+                        }
+                    }
+
+                    $event.target.parentElement.classList.add('border-blue-600')
+
+                    this.status = status;
 
                     this.getNotification();
                 },
