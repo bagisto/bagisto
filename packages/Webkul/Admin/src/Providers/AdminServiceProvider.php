@@ -3,10 +3,9 @@
 namespace Webkul\Admin\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Blade;
-use Webkul\Admin\Http\Middleware\Locale;
 use Webkul\Core\Tree;
 
 class AdminServiceProvider extends ServiceProvider
@@ -24,9 +23,7 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
 
-        Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'admin');
-
-        $this->loadPublishers();
+        Blade::anonymousComponentPath(__DIR__ . '/../Resources/views/components', 'admin');
 
         $this->composeView();
 
@@ -69,23 +66,13 @@ class AdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Load publishers.
-     *
-     * @return void
-     */
-    protected function loadPublishers(): void
-    {
-        $this->publishes([__DIR__ . '/../../publishable/assets' => public_path('vendor/webkul/admin/assets')], 'public');
-    }
-
-    /**
      * Bind the data to the views.
      *
      * @return void
      */
     protected function composeView()
     {
-        view()->composer(['admin::layouts.nav-left', 'admin::components.layouts.sidebar.index','admin::layouts.tabs','admin::layouts.mobile-nav'], function ($view) {
+        view()->composer(['admin::layouts.nav-left', 'admin::components.layouts.sidebar.index', 'admin::layouts.tabs', 'admin::layouts.mobile-nav'], function ($view) {
             $tree = Tree::create();
 
             $permissionType = auth()->guard('admin')->user()->role->permission_type;

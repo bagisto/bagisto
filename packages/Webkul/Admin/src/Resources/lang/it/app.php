@@ -1358,12 +1358,6 @@ return [
             'title'      => 'Errore non autorizzato',
             'message'    => 'La richiesta non è stata applicata perchè priva di una valida autenticazione per accedere alla risorsa.',
         ],
-
-        'tinymce' => [
-            'http-error'    => 'HTTP error.',
-            'invalid-json'  => 'Invalid JSON.',
-            'upload-failed' => 'Image upload failed due to a XHR Transport error.',
-        ],
     ],
 
     'export' => [

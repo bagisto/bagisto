@@ -72,6 +72,10 @@
             </textarea>
         </v-field>
 
+        @if ($attributes->get('tinymce', false) || $attributes->get(':tinymce', false))
+            <x-admin::tinymce :selector="'textarea#' . $attributes->get('id')"></x-admin::tinymce>
+        @endif
+
         @break
 
     @case('date')
@@ -192,7 +196,7 @@
         </label>
 
         @break
-    
+
     @case('switch')
         <label class="relative inline-flex items-center cursor-pointer">
             <v-field
@@ -230,16 +234,6 @@
 
         @break
 
-    @case('tinymce')
-        <x-admin::tinymce
-            name="{{ $name }}"
-            {{ $attributes }}
-        >
-            {{ $slot }}
-        </x-admin::tinymce>
-
-        @break
-        
     @case('custom')
         <v-field {{ $attributes }}>
             {{ $slot }}

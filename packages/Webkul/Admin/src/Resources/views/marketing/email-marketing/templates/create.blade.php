@@ -19,8 +19,8 @@
                 </a>
 
                 {{-- Save Button --}}
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="py-[6px] px-[12px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.marketing.email-marketing.templates.create.save-btn')
@@ -42,13 +42,14 @@
                         {{-- Template Textarea --}}
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.control
-                                type="tinymce"
+                                type="textarea"
                                 name="content"
                                 :value="old('content')"
                                 rules="required"
                                 id="content"
                                 :label="trans('admin::app.marketing.email-marketing.templates.create.content')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.templates.create.content')"
+                                :tinymce="true"
                             >
                             </x-admin::form.control-group.control>
 
@@ -73,7 +74,7 @@
                                 </p>
                             </div>
                         </x-slot:header>
-                
+
                         <x-slot:content>
                             <div class="w-full mb-[10px]">
                                 {{-- Template Name --}}
@@ -112,7 +113,7 @@
                                     >
                                         @foreach (['active', 'inactive', 'draft'] as $state)
                                             <option
-                                                value="{{ $state }}" 
+                                                value="{{ $state }}"
                                                 {{ old('status') == $state ? 'selected' : '' }}
                                             >
                                                 @lang('admin::app.marketing.email-marketing.templates.create.' . $state)

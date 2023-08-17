@@ -7,7 +7,7 @@
     </x-slot:title>
 
     {{--Create Page Form --}}
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.cms.store')"
         enctype="multipart/form-data"
     >
@@ -15,8 +15,8 @@
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.cms.create.title')
             </p>
-            
-           
+
+
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.cms.index') }}">
@@ -26,7 +26,7 @@
                 </a>
 
                 {{--Save Button --}}
-                <button 
+                <button
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
@@ -52,13 +52,14 @@
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
-                            type="tinymce"
+                            type="textarea"
                             name="html_content"
                             :value="old('html_content')"
                             id="content"
                             rules="required"
                             :label="trans('admin::app.cms.create.content')"
                             :placeholder="trans('admin::app.cms.create.content')"
+                            :tinymce="true"
                         >
                         </x-admin::form.control-group.control>
 
@@ -118,7 +119,7 @@
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
-                        
+
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.cms.create.meta-keywords')
@@ -175,14 +176,14 @@
                                 </p>
                             </div>
                         </x-slot:header>
-                
+
                         <x-slot:content>
                             <div class="mb-[10px]">
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.cms.create.page-title')
                                     </x-admin::form.control-group.label>
-            
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="page_title"
@@ -193,13 +194,13 @@
                                         :placeholder="trans('admin::app.cms.create.page-title')"
                                     >
                                     </x-admin::form.control-group.control>
-            
+
                                     <x-admin::form.control-group.error
                                         control-name="page_title"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-            
+
                                 {{-- Select Channels --}}
                                 <p class="required block leading-[24px] text-gray-800 font-medium">
                                     @lang('admin::app.cms.create.channels')
@@ -217,15 +218,15 @@
                                             :label="trans('admin::app.cms.create.channels')"
                                         >
                                         </x-admin::form.control-group.control>
-                                            
-                                        <x-admin::form.control-group.label 
+
+                                        <x-admin::form.control-group.label
                                             :for="'channels_' . $channel->id"
                                             class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                         >
                                             {{ core()->getChannelName($channel) }}
                                         </x-admin::form.control-group.label>
                                     </x-admin::form.control-group>
-                                @endforeach 
+                                @endforeach
 
                                 <x-admin::form.control-group.error
                                     control-name="channels[]"

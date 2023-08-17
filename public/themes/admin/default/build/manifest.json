@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-f0188473.css",
+    "file": "assets/app-34946690.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -169,27 +169,15 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-f72387a9.css",
+    "file": "assets/app-c04ede37.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-f72387a9.css"
+      "assets/app-c04ede37.css"
     ],
-    "file": "assets/app-5b679f76.js",
+    "file": "assets/app-0e929f36.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
-  },
-  "src/Resources/assets/js/tinymce.css": {
-    "file": "assets/tinymce-f6d54ec3.css",
-    "src": "src/Resources/assets/js/tinymce.css"
-  },
-  "src/Resources/assets/js/tinymce.js": {
-    "css": [
-      "assets/tinymce-f6d54ec3.css"
-    ],
-    "file": "assets/tinymce-18f574f5.js",
-    "isEntry": true,
-    "src": "src/Resources/assets/js/tinymce.js"
   }
 }
