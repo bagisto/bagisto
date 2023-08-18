@@ -21,18 +21,39 @@ class Order extends Model implements OrderContract
 
     protected $appends = ['datetime'];
 
+    /**
+     * Using const variable for status pending
+     */
     public const STATUS_PENDING = 'pending';
 
+    /**
+     * Using const variable for status pending payment
+     */
     public const STATUS_PENDING_PAYMENT = 'pending_payment';
 
+    /**
+     * Using const variable for status processing
+     */
     public const STATUS_PROCESSING = 'processing';
 
+    /**
+     * Using const variable for status completed
+     */
     public const STATUS_COMPLETED = 'completed';
 
+    /**
+     * Using const variable for status canceled
+     */
     public const STATUS_CANCELED = 'canceled';
 
+    /**
+     * Using const variable for status closed
+     */
     public const STATUS_CLOSED = 'closed';
 
+    /**
+     * Using const variable for status fraud
+     */
     public const STATUS_FRAUD = 'fraud';
 
     protected $guarded = [
@@ -89,6 +110,9 @@ class Order extends Model implements OrderContract
         return $this->grand_total - $this->grand_total_invoiced;
     }
 
+    /**
+     * Return Human Friendly Date
+     */
     public function getDatetimeAttribute()
     {
         return $this->created_at->diffForHumans();
