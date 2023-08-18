@@ -220,7 +220,6 @@
                             message: "All",
                             status_count: response.data.status_count.reduce((sum, item) => sum + item.status_count, 0)
                         }
-                        console.log(this.orderType);
 
                         this.pagination = response.data.search_results;
                     })
