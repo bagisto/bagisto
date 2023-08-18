@@ -80,20 +80,28 @@
     </div>
 
     <x-admin::datagrid :src="route('admin.sales.orders.index')">
-        <template #header="{ columns, records }">
+        <template #header="{ columns, records, sortPage }">
             <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-4 grid-rows-1">
-                <div class="">
+                <div
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'increment_id'))"
+                >
                     <div class="flex gap-[10px]">
-                        <span class="icon-uncheckbox text-[24px]"></span>
                         <p class="text-gray-600">Order ID / Date / Status</p>
                     </div>
                 </div>
 
-                <div class="">
+                <div
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'base_grand_total'))"
+                >
                     <p class="text-gray-600">Total / Pay Via / Channel</p>
                 </div>
 
-                <div class="">
+                <div
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'full_name'))"
+                >
                     <p class="text-gray-600">Customer / Email / Location / Image</p>
                 </div>
             </div>
@@ -103,8 +111,6 @@
             <div class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
                 <div class="">
                     <div class="flex gap-[10px]">
-                        <span class="icon-uncheckbox text-[24px]"></span>
-
                         <div class="flex flex-col gap-[6px]">
                             <p class="text-[16px] text-gray-800 font-semibold">@{{ record.id }}</p>
 
@@ -117,7 +123,7 @@
 
                 <div class="">
                     <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">@{{ record.base_grand_total }}</p>
+                        <p class="text-[16px] text-gray-800 font-semibold">@{{ $admin.formatPrice(record.base_grand_total) }}</p>
 
                         <p class="text-gray-600">Pay by - @{{ record.method }}</p>
 

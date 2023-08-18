@@ -22,6 +22,7 @@
                             :mass-actions="available.massActions"
                             :records="available.records"
                             :meta="available.meta"
+                            :sort-page="sortPage"
                         >
                         </slot>
                     </template>
