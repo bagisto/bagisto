@@ -22,40 +22,45 @@ class Order extends Model implements OrderContract
     protected $appends = ['datetime'];
 
     /**
-     * Using const variable for status pending
+     * Pending Order
      */
     public const STATUS_PENDING = 'pending';
 
     /**
-     * Using const variable for status pending payment
+     * Payment is in pending
      */
     public const STATUS_PENDING_PAYMENT = 'pending_payment';
 
     /**
-     * Using const variable for status processing
+     * Order in processing
      */
     public const STATUS_PROCESSING = 'processing';
 
     /**
-     * Using const variable for status completed
+     * Complete Order
      */
     public const STATUS_COMPLETED = 'completed';
 
     /**
-     * Using const variable for status canceled
+     * Canceled Order
      */
     public const STATUS_CANCELED = 'canceled';
 
     /**
-     * Using const variable for status closed
+     * Closed Order
      */
     public const STATUS_CLOSED = 'closed';
 
     /**
-     * Using const variable for status fraud
+     * Fraud Order
      */
     public const STATUS_FRAUD = 'fraud';
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [
         'id',
         'items',
