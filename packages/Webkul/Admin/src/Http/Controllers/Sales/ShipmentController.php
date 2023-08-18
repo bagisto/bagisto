@@ -88,7 +88,7 @@ class ShipmentController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.sales.shipments.create-success'));
+        session()->flash('success', trans('admin::app.sales.shipments.create.create-success'));
 
         return redirect()->route('admin.sales.orders.view', $orderId);
     }

@@ -30,7 +30,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="address_id"
-                                v-model="address_data.id"
+                                v-model="addressData.id"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -64,7 +64,7 @@
                                                         name="company_name"
                                                         :label="trans('admin::app.customers.addresses.edit.company-name')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.company-name')"
-                                                        v-model="address_data.company_name"
+                                                        v-model="addressData.company_name"
                                                     >
                                                     </x-admin::form.control-group.control>
 
@@ -84,7 +84,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="vat_id"
-                                                        v-model="address_data.vat_id"
+                                                        v-model="addressData.vat_id"
                                                         :label="trans('admin::app.customers.addresses.edit.vat-id')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.vat-id')"
                                                     >
@@ -109,7 +109,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="first_name"
-                                                        v-model="address_data.first_name"
+                                                        v-model="addressData.first_name"
                                                         rules="required"
                                                         :label="trans('admin::app.customers.addresses.edit.first-name')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.first-name')"
@@ -132,7 +132,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="last_name"
-                                                        v-model="address_data.last_name"
+                                                        v-model="addressData.last_name"
                                                         rules="required"
                                                         :label="trans('admin::app.customers.addresses.edit.last-name')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.last-name')"
@@ -157,7 +157,7 @@
                                                 type="text"
                                                 name="address1[]"
                                                 id="address_0"
-                                                v-model="address_data.address1"
+                                                v-model="addressData.address1"
                                                 rules="required"
                                                 :label="trans('admin::app.customers.addresses.edit.street-address')"
                                                 :placeholder="trans('admin::app.customers.addresses.edit.street-address')"
@@ -177,7 +177,7 @@
                                                     type="text"
                                                     ::name="'address1[' + index + ']'"
                                                     ::id="'address_' + index"
-                                                    v-model="address_data.address1[' + index + ']"
+                                                    v-model="addressData.address1[' + index + ']"
                                                     :label="trans('admin::app.customers.addresses.edit.street-address')"
                                                     :placeholder="trans('admin::app.customers.addresses.edit.street-address')"
                                                 >
@@ -201,7 +201,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="city"
-                                                        v-model="address_data.city"
+                                                        v-model="addressData.city"
                                                         rules="required"
                                                         :label="trans('admin::app.customers.addresses.edit.city')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.city')"
@@ -224,7 +224,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="postcode"
-                                                        v-model="address_data.postcode"
+                                                        v-model="addressData.postcode"
                                                         rules="required|integer"
                                                         :label="trans('admin::app.customers.addresses.edit.post-code')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.post-code')"
@@ -250,7 +250,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="select"
                                                         name="country"
-                                                        v-model="address_data.country"
+                                                        v-model="addressData.country"
                                                         rules="required"
                                                         :label="trans('admin::app.customers.addresses.edit.country')"
                                                     >
@@ -280,7 +280,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="state"
-                                                        v-model="address_data.state"
+                                                        v-model="addressData.state"
                                                         rules="required"
                                                         :label="trans('admin::app.customers.addresses.edit.state')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.state')"
@@ -306,7 +306,7 @@
                                                     <x-admin::form.control-group.control
                                                         type="text"
                                                         name="phone"
-                                                        v-model="address_data.phone"
+                                                        v-model="addressData.phone"
                                                         rules="required|integer"
                                                         :label="trans('admin::app.customers.addresses.edit.phone')"
                                                         :placeholder="trans('admin::app.customers.addresses.edit.phone')"
@@ -327,9 +327,9 @@
                                                         type="checkbox"
                                                         name="default_address"
                                                         id="default_address"
-                                                        v-model="address_data.default_address"
+                                                        v-model="addressData.default_address"
                                                         :label="trans('admin::app.customers.addresses.edit.default-address')"
-                                                        ::checked="address_data.default_address"
+                                                        ::checked="addressData.default_address"
                                                     >
                                                     </x-admin::form.control-group.control>
 
@@ -381,13 +381,13 @@
 
                 data() {
                     return {
-                        address_data: {},
+                        addressData: {},
 
                         streetLineCount: 0,
                     };
                 },
                 mounted() {
-                    this.address_data = JSON.parse(this.address);
+                    this.addressData = JSON.parse(this.address);
                 },
                 methods: {
                     update(params, {resetForm, setErrors,}) {
