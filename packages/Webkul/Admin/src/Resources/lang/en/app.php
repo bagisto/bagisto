@@ -1820,6 +1820,42 @@ return [
         ],
     ],
 
+    'dashboard' => [
+        'user-name'                 => 'Hi ! :user_name',
+        'user-info'                 => 'Quickly Review what’s going on in your store',
+        'average-sale'              => 'Average Order Sale',
+        'customer-with-most-sales'  => 'Customer With Most Sales',
+        'decreased'                 => ':progress%',
+        'from'                      => 'From',
+        'increased'                 => ':progress%',
+        'order-count'               => ':count Orders',
+        'order'                     => ':total_orders Orders',
+        'product-count'             => ':count Products',
+        'product-number'            => 'Product - :product_number',
+        'product-image'             => 'Product Image',
+        'revenue'                   => 'Revenue :total',
+        'stock-threshold'           => 'Stock Threshold',
+        'sale-count'                => ':count Sales',
+        'sales'                     => 'Sales',
+        'sku'                       => 'SKU - :sku',
+        'store-stats'               => 'Store Stats',
+        'to'                        => 'To',
+        'title'                     => 'Dashboard',
+        'overall-details'           => 'Overall Details',
+        'top-performing-categories' => 'Top Performing Categories',
+        'top-selling-products'      => 'Top Selling Products',
+        'total-customers'           => 'Total Customers',
+        'total-orders'              => 'Total Orders',
+        'total-sales'               => 'Total Sales',
+        'total-unpaid-invoices'     => 'Total Unpaid Invoices',
+        'total-stock'               => ':total_stock Stock',
+        'today-orders'              => 'Today’s Orders',
+        'today-sales'               => 'Today’s Sales',
+        'today-customers'           => 'Today’s Customers',
+        'today-details'            => 'Today’s Details',
+        'visitor'                   => 'Visitor',
+    ],
+
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
     'copy-of-slug'  => 'copy-of-:value',
@@ -1904,7 +1940,7 @@ return [
                 'no-records-available' => 'No Records Available.'
             ],
 
-        
+
         ],
 
         'products' => [
@@ -2015,28 +2051,6 @@ return [
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
-    'dashboard' => [
-        'title'                     => 'Dashboard',
-        'from'                      => 'From',
-        'to'                        => 'To',
-        'total-customers'           => 'Total Customers',
-        'total-orders'              => 'Total Orders',
-        'total-sale'                => 'Total Sale',
-        'average-sale'              => 'Average Order Sale',
-        'total-unpaid-invoices'     => 'Total Unpaid Invoices',
-        'increased'                 => ':progress%',
-        'decreased'                 => ':progress%',
-        'sales'                     => 'Sales',
-        'top-performing-categories' => 'Top Performing Categories',
-        'product-count'             => ':count Products',
-        'top-selling-products'      => 'Top Selling Products',
-        'sale-count'                => ':count Sales',
-        'customer-with-most-sales'  => 'Customer With Most Sales',
-        'order-count'               => ':count Orders',
-        'revenue'                   => 'Revenue :total',
-        'stock-threshold'           => 'Stock Threshold',
-        'qty-left'                  => ':qty Left',
-    ],
 
     'datagrid' => [
         'mass-ops' => [

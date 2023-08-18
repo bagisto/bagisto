@@ -67,10 +67,11 @@ class DashboardService
             'top_selling_products' => $this->getTopSellingProducts(),
             'customer_with_most_sales' => $this->getCustomerWithMostSales(),
             'stock_threshold' => $this->getStockThreshold(),
-            'sale_graph' => $this->generateSaleGraphData()
+            'sale_graph' => $this->generateSaleGraphData(),
+            'today_details' => $this->getTodayDetails(),
         ];
     }
-    
+
     /**
      * Get the start date.
      */
@@ -86,7 +87,7 @@ class DashboardService
     {
         return $this->endDate;
     }
-    
+
     /**
      * Set the start date or default to 30 days ago if not provided.
      */
@@ -222,7 +223,7 @@ class DashboardService
         $productIds = $orderItems->pluck('product_id');
         $products = $this->productRepository->getModel()->whereIn('id', $productIds)->with('categories')->get();
 
-        return $orderItems->map(function ($orderItem) use ($products){
+        return $orderItems->map(function ($orderItem) use ($products) {
             $product = $products->firstWhere('id', $orderItem->product_id);
 
             return $this->getCategoryDetails($product, $orderItem);
@@ -285,5 +286,13 @@ class DashboardService
 
         return $saleGraphData;
     }
-}
 
+    private function getTodayDetails(): array
+    {
+        return [
+            'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->orderRepository->calculateSaleAmountByDate(Carbon::today()),
+            'progress' => $this->getPercentageChange($previous, $current)
+        ];
+    }
+}
