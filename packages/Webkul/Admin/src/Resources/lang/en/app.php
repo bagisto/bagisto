@@ -90,14 +90,6 @@ return [
                 'no-refund-found'       => 'No Refund Found',
                 'comment-success'       => 'Comment added successfully.',
                 'create-success'        => 'Order created successfully',
-                'cancel-error'          => 'Order not be canceled',
-                'new-shipment'          => 'New shipment',
-                'create-shipment'       => 'Create new shipment',
-                'carrier-name'          => 'Carrier Name',
-                'tracking-number'       => 'Tracking Number',
-                'source'                => 'Source',
-                'qty-available'         => 'Qty. Available',
-                'qty-to-ship'           => 'Qty. To Ship',
                 'qty-to-invoiced'       => 'Qty. to invoiced',
                 'create-invoice'        => 'Create Invoice',
                 'new-invoice'           => 'New Invoice',
@@ -108,6 +100,25 @@ return [
             'index' => [
                 'title' => 'Shipments',
             ],
+
+            'create' => [
+                'title'                 => 'Create new Shipment',
+                'create-btn'            => 'Create Shipment',
+                'cancel-error'          => 'Order not be canceled',
+                'carrier-name'          => 'Carrier Name',
+                'tracking-number'       => 'Tracking Number',
+                'source'                => 'Source',
+                'per-unit'              => 'Per Unit',
+                'amount-per-unit'       => ':amount Per Unit x :qty Quantity',
+                'item-ordered'          => 'Ordered (:qty_ordered)',
+                'item-invoice'          => 'Invoiced (:qty_invoiced)',
+                'item-shipped'          => 'Shipped (:qty_shipped)',
+                'item-canceled'         => 'Canceled (:qty_canceled)',
+                'item-refunded'         => 'Refunded (:qty_refunded)',
+                'qty-to-ship'           => 'Qty. To Ship',
+                'qty-available'         => 'Qty. Available',
+                'create-success'        => 'Shipment created successfully'
+              ],
 
             'view' => [
                 'title'                 => 'Shipment #:shipment_id',
@@ -258,7 +269,6 @@ return [
             'save-btn'              => 'Save customer',
             'suspended'             => 'Suspended',
             'title'                 => 'Edit Customer',
-
         ],
 
         'view' => [
@@ -303,6 +313,7 @@ return [
             'set-as-default'          => 'Set as Default',
             'total-revenue'           => 'Total Revenue',
             'title'                   => 'Customer View',
+            'note-placeholder'        => 'Write Your Note here',
         ],
 
         'groups' => [

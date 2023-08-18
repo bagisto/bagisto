@@ -388,7 +388,8 @@
                                 id="note"
                                 rules="required"
                                 :label="trans('admin::app.customers.view.note')"
-                                placeholder="Note"
+                                :placeholder="trans('admin::app.customers.view.note-placeholder')"
+                                rows="3"
                             >
                             </x-admin::form.control-group.control>
 
