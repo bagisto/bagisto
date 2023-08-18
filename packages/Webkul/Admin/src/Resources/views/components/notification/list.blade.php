@@ -209,7 +209,7 @@
                     .then((response) => {
                         this.notifications = response.data.search_results.data;
 
-                        for (const item of response.data.status_count) {
+                        for (let item of response.data.status_count) {
                             if (this.orderType[item.status]) {
                                 this.orderType[item.status].status_count = item.status_count;
                             }
