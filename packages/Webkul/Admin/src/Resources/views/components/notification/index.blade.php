@@ -47,30 +47,32 @@
                             class="grid gap-[24px]"
                             v-if="notifications?.length"
                         >
-                            <div v-for="notification in notifications">
-                                <a
-                                    class="flex gap-[5px] items-start"
-                                    :href="`${orderViewUrl + notification.order_id}`"
+                            <a
+                                class="flex gap-[5px] items-start"
+                                :href="`${orderViewUrl + notification.order_id}`"
+                                v-for="notification in notifications"
+                            >
+                                <!-- Notification Icon -->
+                                <span
+                                    v-if="notification.order.status in notificationStatusIcon"
+                                    class="h-fit"
+                                    :class="notificationStatusIcon[notification.order.status]"
                                 >
-                                    <span
-                                        v-if="notification.order.status in notificationStatusIcon"
-                                        class="h-fit"
-                                        :class="notificationStatusIcon[notification.order.status]"
-                                    >
-                                    </span>
+                                </span>
 
-                                    <div class="grid">
-                                        <p class="text-gray-800">
-                                            #@{{ notification.order.id }}
-                                            @{{ orderTypeMessages[notification.order.status] }}
-                                        </p>
+                                <div class="grid">
+                                    <!-- Order Id & Status -->
+                                    <p class="text-gray-800">
+                                        #@{{ notification.order.id }}
+                                        @{{ orderTypeMessages[notification.order.status] }}
+                                    </p>
 
-                                        <p class="text-[12px] text-gray-600">
-                                            @{{ notification.order.human_readable_datetime }}
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
+                                    <!-- Craeted Date In humand Readable Format -->
+                                    <p class="text-[12px] text-gray-600">
+                                        @{{ notification.order.datetime }}
+                                    </p>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
@@ -86,8 +88,8 @@
                         <a
                             class="text-[12px] text-blue-600 font-semibold cursor-pointer"
                             :text="readAllTitle"
+                            v-if="notifications?.length"
                             @click="readAll()"
-                            v-if="notifications.length > 0"
                         >
                         </a>
                     </div>

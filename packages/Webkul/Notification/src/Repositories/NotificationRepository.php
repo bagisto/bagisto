@@ -25,17 +25,12 @@ class NotificationRepository extends Repository
      */
     public function getParamsData($params)
     {
-
         $query = $this->model->with('order');
 
         if (isset($params['status']) && $params['status'] != 'All') {
             $query->whereHas('order', function ($q) use ($params) {
                 $q->where(['status' => $params['status']]);
             });
-        }
-
-        if (isset($params['id'])) {
-            $query->where('order_id', $params['id']);
         }
 
         if (isset($params['read']) && isset($params['limit'])) {
@@ -51,7 +46,7 @@ class NotificationRepository extends Repository
             ->groupBy('orders.status')
             ->get();
 
-        return ['notifications' => $notifications, 'statusCounts' => $statusCounts];
+        return ['notifications' => $notifications, 'status_counts' => $statusCounts];
     }
 
     /**
@@ -59,7 +54,7 @@ class NotificationRepository extends Repository
      *
      * @return array
      */
-    public function getData()
+    public function getAll()
     {
 
         $query = $this->model->with('order');
@@ -71,6 +66,6 @@ class NotificationRepository extends Repository
             ->groupBy('orders.status')
             ->get();
 
-        return ['notifications' => $notifications, 'statusCounts' => $statusCounts];
+        return ['notifications' => $notifications, 'status_counts' => $statusCounts];
     }
 }

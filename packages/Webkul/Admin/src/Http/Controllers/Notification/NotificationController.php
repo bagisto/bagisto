@@ -37,16 +37,11 @@ class NotificationController extends Controller
 
         $searchResults = count($params)
             ? $this->notificationRepository->getParamsData($params)
-            : $this->notificationRepository->getData();
+            : $this->notificationRepository->getAll();
 
-        if (isset($searchResults['notifications'])) {
-            $results = $searchResults['notifications'];
+        $results = isset($searchResults['notifications']) ? $searchResults['notifications'] : $searchResults;
 
-            $statusCount = $searchResults['statusCounts'];
-        } else {
-            $results = $searchResults;
-            $statusCount = '';
-        }
+        $statusCount = isset($searchResults['status_counts']) ? $searchResults['status_counts'] : '';
 
         return [
             'search_results' => $results,

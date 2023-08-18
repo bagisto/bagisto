@@ -54,7 +54,7 @@
         </form>
     </div>
 
-    <div class="flex gap-[4px] items-center">
+    <div class="flex gap-[10px] items-center">
         <a 
             href="{{ route('shop.home.index') }}" 
             target="_blank"
