@@ -156,33 +156,23 @@
                             </x-admin::form.control-group>
 
                             <!--need to check this -->
-                            @if (
-                                core()->getConfigData('customer.address.information.street_lines')
-                                && core()->getConfigData('customer.address.information.street_lines') > 1
-                            )
-                                <div v-for="(address, index) in addressLines" :key="index">
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.customers.addresses.create.street-address')
-                                    </x-admin::form.control-group.label>
-                            
+                            <div v-if="streetLineCount && streetLineCount > 1" v-for="index in streetLineCount">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.control
                                         type="text"
-                                        :name="'address1[' + index + ']'"
-                                        :id="'address_' + index"
-                                        rules="required"
+                                        ::name="'address1[' + index + ']'"
+                                        ::id="'address_' + index"
                                         :label="trans('admin::app.customers.addresses.create.street-address')"
                                         :placeholder="trans('admin::app.customers.addresses.create.street-address')"
                                     >
                                     </x-admin::form.control-group.control>
                             
                                     <x-admin::form.control-group.error
-                                        :control-name="'address1[' + index + ']'"
+                                        ::control-name="'address1[' + index + ']'"
                                     >
                                     </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </div>
-                            @endif
+                                </x-admin::form.control-group>
+                            </div>
 
                             <div class="flex gap-[16px] max-sm:flex-wrap">
                                 <!-- City -->
@@ -369,30 +359,24 @@
         app.component('v-create-customer-address', {
             template: '#v-create-customer-address-template',
 
-            props: {
-                addressLines: {
-                    type: Number,
-                    default: 0, // Default to 0 if no data is provided
-                }
-            },
-
             data: function () {
                 return {
                     country: "",
 
                     state: "",
 
-                    countryStates: @json(core()->groupedStatesByCountries())
+                    countryStates: @json(core()->groupedStatesByCountries()),
+                    
+                    streetLineCount: 0,
                 }
             },
 
             methods: {
-
                 create(params, { resetForm, setErrors }) {
                     this.$axios.post('{{ route("admin.customer.addresses.store", $customer->id) }}', params,
                         {
                             headers: {
-                            'Content-Type': 'multipart/form-data'
+                                'Content-Type': 'multipart/form-data'
                             }
                         })
                     

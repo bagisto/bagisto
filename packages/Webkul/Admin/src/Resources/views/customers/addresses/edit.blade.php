@@ -171,34 +171,24 @@
                                         </x-admin::form.control-group>
 
                                         <!--need to check this -->
-                                        @if (
-                                            core()->getConfigData('customer.address.information.street_lines')
-                                            && core()->getConfigData('customer.address.information.street_lines') > 1
-                                        )
-                                            <div v-for="(address, index) in addressLines" :key="index">
-                                                <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label>
-                                                    @lang('admin::app.customers.addresses.edit.street-address')
-                                                </x-admin::form.control-group.label>
-                                        
+                                        <div v-if="streetLineCount && streetLineCount > 1" v-for="index in streetLineCount">
+                                            <x-admin::form.control-group class="mb-[10px]">
                                                 <x-admin::form.control-group.control
                                                     type="text"
-                                                    :name="'address1[' + index + ']'"
-                                                    :id="'address_' + index"
+                                                    ::name="'address1[' + index + ']'"
+                                                    ::id="'address_' + index"
                                                     v-model="address_data.address1[' + index + ']"
-                                                    rules="required"
                                                     :label="trans('admin::app.customers.addresses.edit.street-address')"
                                                     :placeholder="trans('admin::app.customers.addresses.edit.street-address')"
                                                 >
                                                 </x-admin::form.control-group.control>
                                         
                                                 <x-admin::form.control-group.error
-                                                    :control-name="'address1[' + index + ']'"
+                                                    ::control-name="'address1[' + index + ']'"
                                                 >
                                                 </x-admin::form.control-group.error>
-                                                </x-admin::form.control-group>
-                                            </div>
-                                        @endif
+                                            </x-admin::form.control-group>
+                                        </div>
 
                                         <div class="flex gap-[16px] max-sm:flex-wrap">
                                             <div class="w-full">
@@ -384,10 +374,6 @@
                 template: '#v-edit-customer-address-template',
 
                 props: {
-                    addressLines: {
-                        type: Number,
-                        default: 0, // Default to 0 if no data is provided
-                    },
                     address: {
                         type: String,
                     }
@@ -396,13 +382,14 @@
                 data() {
                     return {
                         address_data: {},
+
+                        streetLineCount: 0,
                     };
                 },
                 mounted() {
                     this.address_data = JSON.parse(this.address);
                 },
                 methods: {
-
                     update(params, {resetForm, setErrors,}) {
                         if(! params.default_address) {
                             delete params.default_address;
