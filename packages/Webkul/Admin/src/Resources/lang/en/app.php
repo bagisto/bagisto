@@ -118,7 +118,7 @@ return [
                 'qty-to-ship'           => 'Qty. To Ship',
                 'qty-available'         => 'Qty. Available',
                 'create-success'        => 'Shipment created successfully'
-              ],
+            ],
 
             'view' => [
                 'title'                 => 'Shipment #:shipment_id',
@@ -1821,6 +1821,8 @@ return [
     ],
 
     'dashboard' => [
+        'attribute-code'            => 'Attribute Code',
+        'color'                     => 'Color',
         'user-name'                 => 'Hi ! :user_name',
         'user-info'                 => 'Quickly Review what’s going on in your store',
         'average-sale'              => 'Average Order Sale',
@@ -1828,11 +1830,13 @@ return [
         'decreased'                 => ':progress%',
         'from'                      => 'From',
         'increased'                 => ':progress%',
+        'more-products'             => ':product_count+ More Images',
         'order-count'               => ':count Orders',
         'order'                     => ':total_orders Orders',
         'product-count'             => ':count Products',
         'product-number'            => 'Product - :product_number',
         'product-image'             => 'Product Image',
+        'pay-by'                    => 'Pay By - :method',
         'revenue'                   => 'Revenue :total',
         'stock-threshold'           => 'Stock Threshold',
         'sale-count'                => ':count Sales',

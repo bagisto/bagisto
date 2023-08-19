@@ -151,8 +151,17 @@ class DashboardService
     /**
      * Retrieves total customers and their progress.
      */
-    private function getTotalCustomers(): array
+    private function getTotalCustomers($todayStartOfDay = null, $todayEndOfDay = null): array
     {
+        if ($todayStartOfDay && $todayEndOfDay) {
+            return [
+                'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->lastStartDate, $this->lastEndDate),
+                'current' => $current = $this->customerRepository->getCustomersCountByDate($todayStartOfDay, $todayEndOfDay),
+                'progress' => $this->getPercentageChange($previous, $current)
+            ];
+        }
+
+
         return [
             'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->lastStartDate, $this->lastEndDate),
             'current' => $current = $this->customerRepository->getCustomersCountByDate($this->startDate, $this->endDate),
@@ -163,8 +172,16 @@ class DashboardService
     /**
      * Retrieves total orders and their progress.
      */
-    private function getTotalOrders(): array
+    private function getTotalOrders($todayStartOfDay = null, $todayEndOfDay = null)
     {
+        if ($todayStartOfDay && $todayEndOfDay) {
+            return [
+                'previous' => $previous = $this->orderRepository->getOrdersCountByDate($this->lastStartDate, $this->lastEndDate),
+                'current' => $current = $this->orderRepository->getOrdersByDate($todayStartOfDay, $todayEndOfDay),
+                'progress' => $this->getPercentageChange($previous, count($current))
+            ];
+        }
+
         return [
             'previous' => $previous = $this->orderRepository->getOrdersCountByDate($this->lastStartDate, $this->lastEndDate),
             'current' => $current = $this->orderRepository->getOrdersCountByDate($this->startDate, $this->endDate),
@@ -175,8 +192,16 @@ class DashboardService
     /**
      * Retrieves total sales and their progress.
      */
-    private function getTotalSales(): array
+    private function getTotalSales($todayStartOfDay = null, $todayEndOfDay = null): array
     {
+        if ($todayStartOfDay && $todayEndOfDay) {
+            return [
+                'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
+                'current' => $current = $this->orderRepository->calculateSaleAmountByDate($todayStartOfDay, $todayEndOfDay),
+                'progress' => $this->getPercentageChange($previous, $current)
+            ];
+        }
+
         return [
             'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
             'current' => $current = $this->orderRepository->calculateSaleAmountByDate($this->startDate, $this->endDate),
@@ -289,10 +314,13 @@ class DashboardService
 
     private function getTodayDetails(): array
     {
+        $todayStartOfDay = now()->today();
+        $todayEndOfDay = now()->endOfDay();
+
         return [
-            'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
-            'current' => $current = $this->orderRepository->calculateSaleAmountByDate(Carbon::today()),
-            'progress' => $this->getPercentageChange($previous, $current)
+            'today_customers' => $this->getTotalCustomers($todayStartOfDay, $todayEndOfDay),
+            'today_sales'     => $this->getTotalSales($todayStartOfDay, $todayEndOfDay),
+            'today_orders'    => $this->getTotalOrders($todayStartOfDay, $todayEndOfDay),
         ];
     }
 }

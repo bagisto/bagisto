@@ -43,6 +43,7 @@
                                 </p>
                             </div>
 
+                            {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
@@ -52,13 +53,14 @@
                                     @lang('admin::app.dashboard.total-sales')
                                 </p>
 
+                                {{-- Sales Percentage --}}
                                 <div class="flex gap-[2px] items-center">
                                     @if ($statistics['total_sales']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.decreased', [
-                                                'progress' => -number_format($statistics['total_sales']['progress'], 1),
+                                                'progress' => number_format($statistics['total_sales']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -76,16 +78,18 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center jus   tify-items-center min-w-[60px] h-[60px] px-[6px]">
+                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
                                 <img
                                     class="w-[20px]"
                                     src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
+                                />
+
                                 <p class="text-[6px] text-gray-400 font-semibold">
                                     @lang('admin::app.dashboard.total-orders')
                                 </p>
                             </div>
 
+                            {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     {{ $statistics['total_orders']['current'] }}
@@ -95,13 +99,14 @@
                                     @lang('admin::app.dashboard.total-orders')
                                 </p>
 
+                                {{-- Order Percentage --}}
                                 <div class="flex gap-[2px] items-center">
                                     @if ($statistics['total_orders']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.decreased', [
-                                                'progress' => -number_format($statistics['total_orders']['progress'], 1),
+                                                'progress' => number_format($statistics['total_orders']['progress'], 1),
                                             ])
                                         </p>
                                     @else
@@ -122,14 +127,15 @@
                             <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
                                 <img
                                     class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
+                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                />
 
                                 <p class="text-[6px] text-gray-400 font-semibold">
                                     @lang('admin::app.dashboard.total-customers')
                                 </p>
                             </div>
 
+                            {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     {{ $statistics['total_customers']['current'] }}
@@ -139,13 +145,14 @@
                                     @lang('admin::app.dashboard.total-customers')
                                 </p>
 
+                                {{-- Customers Percentage --}}
                                 <div class="flex gap-[2px] items-center">
                                     @if ($statistics['total_customers']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
 
                                         <p class="text-[12px] text-red-500 font-semibold">
                                             @lang('admin::app.dashboard.decreased', [
-                                                    'progress' => -number_format($statistics['total_customers']['progress'], 1)
+                                                    'progress' => number_format($statistics['total_customers']['progress'], 1)
                                             ])
                                         </p>
                                     @else
@@ -167,13 +174,14 @@
                                 <img
                                     class="w-[20px]"
                                     src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
+                                />
 
                                 <p class="text-[6px] text-gray-400 font-semibold">
                                     @lang('Average Sales')
                                 </p>
                             </div>
 
+                            {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     {{ core()->formatBasePrice($statistics['avg_sales']['current']) }}
@@ -183,29 +191,31 @@
                                     @lang('admin::app.dashboard.average-sale')
                                 </p>
 
+                                {{-- Sales Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    {{-- @if ($statistics['avg_sales']['progress'] < 0)
+                                    @if ($statistics['avg_sales']['progress'] < 0)
                                         <span class="icon-down-stat text-[16px] text-red-500"></span>
+
                                         <p class="text-[12px] text-red-500 font-semibold">
-                                            {{ __('admin::app.dashboard.decreased', [
-                                                'progress' => -number_format($statistics['avg_sales']['progress'], 1),
-                                            ]) }}
+                                            @lang('admin::app.dashboard.decreased', [
+                                                'progress' => number_format($statistics['avg_sales']['progress'], 1),
+                                            ])
                                         </p>
                                     @else
                                         <span class="icon-up-stat text-[16px] text-emerald-500"></span>
-                                        <p class="text-[12px] text-emerald-500 font-semibold"
-                                            {{ __('admin::app.dashboard.increased', [
+                                        <p class="text-[12px] text-emerald-500 font-semibold">
+                                            @lang('admin::app.dashboard.increased', [
                                                 'progress' => number_format($statistics['avg_sales']['progress'], 1),
-                                            ]) }}
+                                            ])
                                         </p>
-                                    @endif --}}
+                                    @endif
                                 </div>
                             </div>
                         </div>
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] justify-items-center content-center min-w-[60px] h-[60px] px-[6px]">
+                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
                                 <img
                                     class="w-[20px]"
                                     src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
@@ -251,18 +261,35 @@
                                 </p>
                             </div>
 
+                            {{-- Sales Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    $387,820.85
+                                    {{ core()->formatBasePrice($statistics['today_details']['today_sales']['current']) }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 font-semibold">
                                     @lang('admin::app.dashboard.today-sales')
                                 </p>
 
+                                {{-- Percentage Of Sales --}}
                                 <div class="flex gap-[2px] items-center">
-                                    <span class="icon-up-stat text-[16px] text-emerald-500"></span>
-                                    <p class="text-[12px] text-emerald-500 font-semibold">25%</p>
+                                    @if ($statistics['today_details']['today_sales']['progress'] < 0)
+                                        <span class="icon-down-stat text-[16px] text-red-500"></span>
+
+                                        <p class="text-[12px] text-red-500 font-semibold">
+                                            @lang('admin::app.dashboard.decreased', [
+                                                'progress' => number_format($statistics['today_details']['today_sales']['progress'], 1),
+                                            ])
+                                        </p>
+                                    @else
+                                        <span class="icon-up-stat text-[16px] text-emerald-500"></span>
+
+                                        <p class="text-[12px] text-emerald-500 font-semibold">
+                                            @lang('admin::app.dashboard.increased', [
+                                                'progress' => number_format($statistics['today_details']['today_sales']['progress'], 1),
+                                            ])
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -280,18 +307,35 @@
                                 </p>
                             </div>
 
+                            {{-- Orders Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    $387,820.85
+                                    {{ count($statistics['today_details']['today_orders']['current']) }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 font-semibold">
                                     @lang('admin::app.dashboard.today-orders')
                                 </p>
 
+                                {{-- Orders Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    <span class="icon-down-stat text-[16px] text-red-500"></span>
-                                    <p class="text-[12px] text-red-500 font-semibold">25%</p>
+                                    @if ($statistics['today_details']['today_orders']['progress'] < 0)
+                                        <span class="icon-down-stat text-[16px] text-red-500"></span>
+
+                                        <p class="text-[12px] text-red-500 font-semibold">
+                                            @lang('admin::app.dashboard.decreased', [
+                                                'progress' => number_format($statistics['today_details']['today_orders']['progress'], 1),
+                                            ])
+                                        </p>
+                                    @else
+                                        <span class="icon-up-stat text-[16px] text-emerald-500"></span>
+
+                                        <p class="text-[12px] text-emerald-500 font-semibold">
+                                            @lang('admin::app.dashboard.increased', [
+                                                'progress' => number_format($statistics['today_details']['today_orders']['progress'], 1),
+                                            ])
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -309,67 +353,196 @@
                                 </p>
                             </div>
 
+                            {{-- Customers Stats --}}
                             <div class="grid gap-[4px] place-content-start">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    $387,820.85
+                                    {{ $statistics['today_details']['today_customers']['current'] }}
                                 </p>
 
                                 <p class="text-[12px] text-gray-600 font-semibold">
                                     @lang('admin::app.dashboard.today-customers')
                                 </p>
 
+                                {{-- Customers Percentage --}}
                                 <div class="flex gap-[2px] items-center">
-                                    <span class="icon-up-stat text-[16px] text-emerald-500"></span>
-                                    <p class="text-[12px] text-emerald-500 font-semibold">25%</p>
+                                    @if ($statistics['today_details']['today_customers']['progress'] < 0)
+                                        <span class="icon-down-stat text-[16px] text-red-500"></span>
+
+                                        <p class="text-[12px] text-red-500 font-semibold">
+                                            @lang('admin::app.dashboard.decreased', [
+                                                'progress' => number_format($statistics['today_details']['today_customers']['progress'], 1),
+                                            ])
+                                        </p>
+                                    @else
+                                        <span class="icon-up-stat text-[16px] text-emerald-500"></span>
+
+                                        <p class="text-[12px] text-emerald-500 font-semibold">
+                                            @lang('admin::app.dashboard.increased', [
+                                                'progress' => number_format($statistics['today_details']['today_customers']['progress'], 1),
+                                            ])
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- single row -->
-                    <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-1580:grid-cols-3 max-sm:grid-cols-1">
-                        <div class="">
-                            <div class="flex gap-[10px]">
-                                <div class="flex flex-col gap-[6px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">#02153</p>
-                                    <p class="text-gray-600">23 Mar 2023, 01:00:00</p>
-                                    <p class="label-pending">Pending</p>
+                    <!-- Today Orders Detailes -->
+                    @foreach ($statistics['today_details']['today_orders']['current'] as $item)
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-1580:grid-cols-3 max-sm:grid-cols-1">
+                            <div class="">
+                                {{-- Order ID, Status, Created --}}
+                                <div class="flex gap-[10px]">
+                                    <div class="flex flex-col gap-[6px]">
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            #{{ $item->id}}
+                                        </p>
+
+                                        <p class="text-gray-600">
+                                            {{ $item->created_at}}
+                                        </p>
+
+                                        @switch($item->status)
+                                            @case('processing')
+                                                <p class="label-active">
+                                                    {{ $item->status }}
+                                                </p>
+                                                @break
+
+                                            @case('completed')
+                                                <p class="label-active">
+                                                    {{ $item->status }}
+                                                </p>
+                                                @break
+
+                                            @case('pending')
+                                                <p class="label-pending">
+                                                    {{ $item->status }}
+                                                </p>
+                                                @break
+
+                                            @case('canceled')
+                                                <p class="label-cancelled">
+                                                    {{ $item->status }}
+                                                </p>
+                                                @break
+
+                                            @case('closed')
+                                                <p class="label-closed">
+                                                    {{ $item->status }}
+                                                </p>
+                                                @break
+
+                                        @endswitch
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="">
-                            <div class="flex flex-col gap-[6px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">$75.00</p>
-                                <p class="text-gray-600">Pay by - Cash on Delivery</p>
-                                <p class="text-gray-600">Online Store</p>
+        
+                            <div class="">
+                                {{-- Payment And Channel Detailes --}}
+                                <div class="flex flex-col gap-[6px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        {{ core()->formatBasePrice($item->grand_total)}}
+                                    </p>
+
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.dashboard.pay-by', ['method' => $item->payment->method])
+                                    </p>
+
+                                    <p class="text-gray-600">
+                                        {{ $item->channel_name }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="">
-                            <div class="flex flex-col gap-[6px]">
-                                <p class="text-[16px] text-gray-800">John Doe</p>
-                                <p class="text-gray-600">john@deo.com</p>
-                                <p class="text-gray-600">Broadway, New York</p>
+
+                            <div class="">
+                                <div class="flex flex-col gap-[6px]">
+                                    {{-- Customer Detailes --}}
+                                    <p class="text-[16px] text-gray-800">
+                                        {{ $item->customer_first_name }} {{ $item->customer_last_name }}
+                                    </p>
+
+                                    <p class="text-gray-600">
+                                        {{ $item->customer_email }}
+                                    </p>
+
+                                    {{-- Order Address --}}
+                                    @foreach ($item->addresses as $address)
+                                        @if ($address->address_type == 'order_billing')
+                                            <p class="text-gray-600">
+                                                @if (isset($address->country)) 
+                                                    {{ $address->city }},
+                                                @else 
+                                                    {{ $address->city }}
+                                                @endif
+
+                                                {{ core()->country_name($address->country) }}
+                                            </p>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        <div class="max-1580:col-span-full">
-                            <div class="flex  gap-[6px] items-center justify-between">
-                                <div class="flex gap-[6px] items-center flex-wrap">
-                                    <div class="relative">
-                                        <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
-                                        <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">1</span>
-                                    </div>
-                                    <div class="relative">
-                                        <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
-                                        <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">2</span>
+
+                            {{-- Ordered Product Images --}}
+                            <div class="max-1580:col-span-full">
+                                <div class="flex gap-[6px] items-center justify-between">
+                                    <div class="flex gap-[6px] items-center flex-wrap">
+                                        @foreach ($item->items as $orderItem)
+                                        {{-- Using Variable for image Numbering --}}
+                                            @php $count = 1; @endphp
+                                            
+                                            @if (count($orderItem->product->images) < 5)
+                                                @foreach ($orderItem->product->images as $index => $image)
+                                                    <div class="relative">
+                                                        <img
+                                                            class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                                            src="{{ $image->url }}"
+                                                        />
+
+                                                        <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
+                                                            {{ $count}}
+                                                        </span>
+
+                                                        @php $count++; @endphp
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                @foreach ($orderItem->product->images as $index => $image)
+                                                    @if ($index >= 2)
+                                                        @break
+                                                    @endif
+
+                                                    <div class="relative">
+                                                        <img
+                                                            class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                                            src="{{ $image->url }}"
+                                                        />
+
+                                                        <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
+                                                            {{ $count}}
+                                                        </span>
+
+                                                        @php $count++; @endphp
+                                                    </div>
+                                                @endforeach
+
+                                                {{-- Count of Rest Images --}}
+                                                <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
+                                                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
+                                                        @lang('admin::app.dashboard.more-products', ['product_count' => count($orderItem->product->images) - 2])
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
 
-                                    <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                        <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">2+ More Products </p>
-                                    </div>
+                                    {{-- View More Icon --}}
+                                    <a href="{{ route('admin.sales.orders.view', $item->id) }}">
+                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                                    </a>
                                 </div>
-                                <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -389,7 +562,7 @@
                                         <div class="">
                                             <img
                                                 class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] border border-dashed border-gray-300 rounded-[4px]"
-                                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                                src="{{ $item->product->base_image_url }}"
                                             >
                                         </div>
 
@@ -450,32 +623,35 @@
                 @lang('admin::app.dashboard.store-stats')
             </p>
 
-            <div class="bg-white rounded-[4px] box-shadow">
+            {{-- Store Stats --}}
+            <div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
                 <div class="flex gap-[6px] px-[16px] py-[8px] border-b border-gray-300">
                     <div class="flex-1 ">
                         <label
-                            class="block text-[12px] text-gray-800 font-medium leading-[24px]"
+                            class="block text-[12px] text-gray-800 font-medium leading-[24px] required"
                             for="username"
                         >
-                            Attribute Code*
+                            @lang('admin::app.dashboard.attribute-code')
                         </label>
                         
                         <div class="flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center max-w-full bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400">
-                            color
+                            @lang('admin::app.dashboard.color')
+
                             <span class="icon-sort-down text-[24px]"></span>
                         </div>
                     </div>
 
                     <div class="flex-1">
                         <label
-                            class="block text-[12px] text-gray-800 font-medium leading-[24px]"
+                            class="block text-[12px] text-gray-800 font-medium leading-[24px] required"
                             for="username"
                         >
-                            Attribute Code*
+                        @lang('admin::app.dashboard.attribute-code')
                         </label>
 
                         <div class="flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center max-w-full bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400">
-                            color
+                            @lang('admin::app.dashboard.color')
+
                             <span class="icon-sort-down text-[24px]"></span>
                         </div>
                     </div>
@@ -547,22 +723,24 @@
                     </div>
 
                     <div class="flex flex-col gap-[32px] p-[16px]">
-                        <!-- single product  -->
+                        <!-- Products List  -->
                         @foreach ($statistics['top_selling_products'] as $item)
                             <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
+                                {{-- Product Detailes --}}
                                 <div class="flex gap-[10px]">
                                     <img
                                         class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                        src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                        src="{{ $item->product->base_image_url }}"
                                     >
-                                    <div class="flex flex-col gap-[6px]">
+
+                                    <div class="flex flex-col gap-[6px] w-full">
                                         <p class="text-gray-600">
                                             @if (isset($item->name))
                                                 {{ $item->name }}
                                             @endif
                                         </p>
 
-                                        <div class="flex  justify-between">
+                                        <div class="flex justify-between">
                                             <p class="text-gray-600 font-semibold">
                                                 @if (isset($item->price))
                                                     {{ core()->formatBasePrice($item->price) }}
@@ -594,8 +772,8 @@
                         </p>
                     </div>
 
+                    {{-- Customers Lists --}}
                     <div class="flex flex-col gap-[32px] p-[16px]">
-                        <!-- single product  -->
                         @foreach ($statistics['customer_with_most_sales'] as $item)
                             @if ($item->customer_id)
                                 <a href="{{ route('admin.customer.view', $item->customer_id) }}">
@@ -603,11 +781,11 @@
                                 <div class="flex justify-between gap-[6px]">
                                     <div class="flex flex-col">
                                         <p class="text-gray-600 font-semibold">
-                                            {{ $item->customer_full_name }}
+                                            {{ $item->customer_full_name ?? $item->first_name . ' ' . $item->last_name }}
                                         </p>
 
                                         <p class="text-gray-600">
-                                            {{ $item->customer_email }}
+                                            {{ $item->customer_email ?? $item->customer_address_email }}
                                         </p>
                                     </div>
 

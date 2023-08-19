@@ -409,6 +409,19 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Get orders by Today date
+     */
+    public function getOrdersByDate(?Carbon $from = null, Carbon $to = null)
+    {
+        if ($from && $to) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->whereBetween('orders.created_at', [$from, $to])
+                ->get();
+        }
+    }
+
+    /**
      * Calculate sale amount by date.
      */
     public function calculateSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float
@@ -468,20 +481,24 @@ class OrderRepository extends Repository
         $dbPrefix = DB::getTablePrefix();
 
         $query = $this->getModel()
+            ->join('addresses', 'orders.id', '=', 'addresses.order_id')
             ->whereNotIn("orders.status", ['closed', 'canceled'])
             ->select(
-                'customer_id',
+                'orders.customer_id',
                 'customer_email',
                 'customer_first_name',
                 'customer_last_name',
                 DB::raw("(
-                    SUM(base_grand_total) -
-                    SUM(
-                        IFNULL(
-                            (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
-                            0)
-                        )
-                    ) as total_base_grand_total")
+            SUM(base_grand_total) -
+            SUM(
+                IFNULL(
+                    (SELECT SUM(base_grand_total) FROM {$dbPrefix}refunds WHERE {$dbPrefix}refunds.order_id = {$dbPrefix}orders.id),
+                    0)
+                )
+            ) as total_base_grand_total"),
+                'addresses.first_name',
+                'addresses.last_name',
+                'addresses.email as customer_address_email'
             );
 
         if ($from && $to) {

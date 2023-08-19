@@ -231,13 +231,13 @@ class OrderItemRepository extends Repository
     }
 
     /**
-     * Get top sellling products by date.
+     * Get top selling products by date.
      */
     public function getTopSellingProductsByDate(?Carbon $from = null, ?Carbon $to = null): Collection
     {
         $query = $this->getModel()
             ->with('product', 'product.images')
-            ->select('product_id', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('*', DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->whereNull('parent_id');
 
         if ($from && $to) {
