@@ -85,13 +85,14 @@
             @endif
 
             @if ($order->canRefund())
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
+                {{-- <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
                     <span class="icon-cancel text-[24px]"></span> 
 
                     <a href="{{ route('admin.sales.refunds.create', $order->id) }}">
                         @lang('admin::app.sales.orders.view.refund')     
                     </a>
-                </div>
+                </div> --}}
+                @include('admin::sales.refunds.create')
             @endif
 
             {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
@@ -182,8 +183,7 @@
                                             {{ $item->tax_percent }}% 
                                             @lang('admin::app.sales.orders.view.tax') - {{ core()->formatBasePrice($item->base_tax_amount) }}
                                         </p>
-
-                                        @if (! $order->base_discount_amount)
+                                        @if ($order->base_discount_amount > 0)
                                             <p class="text-gray-600">
                                                 @lang('admin::app.sales.orders.view.discount') - {{ core()->formatBasePrice($item->base_discount_amount) }}
                                             </p>

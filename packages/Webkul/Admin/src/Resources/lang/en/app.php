@@ -1,5 +1,7 @@
 <?php
 
+use Elasticsearch\Endpoints\Indices\Create;
+
 return [
     'account' => [
         'edit' => [
@@ -54,6 +56,7 @@ return [
                 'price'                 => 'Price',
                 'tax'                   => 'Tax',
                 'sub-total'             => 'Sub Total',
+                'discount'              =>  'Discount',  
                 'shipping-and-handling' => 'Shipping and Handling',
                 'total-paid'            => 'Total Paid',
                 'total-refund'          => 'Total Refund',
@@ -215,6 +218,13 @@ return [
                 'invoice-status'         => 'Invoice Status',
                 'channel'                => 'Channel',
                 'invoice-sent'           => 'Invoice sent successfully',
+            ],
+
+            'create'   => [
+                'invalid-qty'            => 'We found an invalid quantity to invoice items.',
+                'creation-error'         => 'Order invoice creation is not allowed.',
+                'product-error'          => 'Invoice can not be created without products.',
+                'create-success'         => 'Invoice created successfully',
             ],
         ],
 
