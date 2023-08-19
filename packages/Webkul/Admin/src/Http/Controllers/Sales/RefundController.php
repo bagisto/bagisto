@@ -89,7 +89,7 @@ class RefundController extends Controller
         $refundAmount = $totals['grand_total']['price'] - $totals['shipping']['price'] + $data['refund']['shipping'] + $data['refund']['adjustment_refund'] - $data['refund']['adjustment_fee'];
 
         if (! $refundAmount) {
-            session()->flash('error', trans('admin::app.sales.refunds.invalid-refund-amount-error'));
+            session()->flash('error', trans('admin::app.sales.refunds.create.invalid-refund-amount-error'));
 
             return redirect()->back();
         }
