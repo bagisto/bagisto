@@ -21,7 +21,15 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+
         $queryBuilder = DB::table('customers')
+            ->leftJoin('addresses', 'customers.id', '=', 'addresses.customer_id')
+            ->where('addresses.address_type', 'customer')
+            ->addSelect(DB::raw('COUNT(addresses.id) as address_count'))
+
+            // ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
+            // ->addSelect(DB::raw('COUNT(orders.id) as orders_count'))
+
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect(
                 'customers.id as customer_id',
@@ -44,6 +52,7 @@ class CustomerDataGrid extends DataGrid
         $this->addFilter('status', 'status');
         $this->addFilter('is_suspended', 'customers.is_suspended');
 
+        // dd($queryBuilder->get());
         return $queryBuilder;
     }
 
@@ -150,6 +159,16 @@ class CustomerDataGrid extends DataGrid
             'index'       => 'is_suspended',
             'label'       => trans('admin::app.datagrid.suspended'),
             'type'        => 'boolean',
+            'searchable'  => false,
+            'filterable'  => true,
+            'visibility'  => false,
+            'sortable'    => true,
+        ]);
+
+        $this->addColumn([
+            'index'       => 'address_count',
+            'label'       => trans('Address Count'),
+            'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => true,
             'visibility'  => false,
