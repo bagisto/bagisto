@@ -152,7 +152,7 @@
                                                 @if ($order->base_discount_amount > 0)
                                                     <p class="text-gray-600"> 
                                                         @lang('admin::app.sales.refunds.create.discount-amount')
-                                                        </p>
+                                                    </p>
                                                 @endif
 
                                                 <p class="text-gray-600 font-semibold">
@@ -264,7 +264,7 @@
                                 </p>
 
                                 <p class="text-gray-600"> 
-                                    @lang('admin::app.sales.refunds.create.discount')
+                                    @lang('admin::app.sales.refunds.create.discount-amount')
                                 </p>
 
                                 <p class="text-gray-600">

@@ -46,8 +46,9 @@
             <!-- Drawer Content -->
             <x-slot:content class="!p-0">
                 <div class="grid">
-                    <div class="p-[16px] !pt-0">
+                    <div class="p-[16px] pt-2">
                         <div class="grid grid-cols-2 gap-x-[20px]">
+                            <!-- Carrier Name -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.sales.shipments.create.carrier-name')
@@ -68,6 +69,7 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
+                            <!-- Tracking Number -->
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.sales.shipments.create.tracking-number')
@@ -89,6 +91,7 @@
                             </x-admin::form.control-group>
                         </div>
                         
+                        <!-- Resource -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.sales.shipments.create.source')
@@ -118,6 +121,7 @@
                         </x-admin::form.control-group>
 
                         <div class="grid">
+                            <!-- Item Listing -->
                             @foreach ($order->items as $item)
                                 <div class="flex gap-[10px] justify-between py-[16px]">
                                     <div class="flex gap-[10px]">
@@ -131,7 +135,10 @@
                                         @endif
         
                                         <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}</p>
+                                            <!-- Item Name -->
+                                            <p class="text-[16x] text-gray-800 font-semibold">
+                                                {{ $item->name }}
+                                            </p>
         
                                             <div class="flex flex-col gap-[6px] place-items-start">
                                                 <p class="text-gray-600">
@@ -141,6 +148,7 @@
                                                     ])
                                                 </p>
         
+                                                <!--Additional Attributes -->
                                                 @if (isset($item->additional['attributes']))
                                                     <p class="text-gray-600">
                                                         @foreach ($item->additional['attributes'] as $attribute)
@@ -148,9 +156,13 @@
                                                         @endforeach
                                                     </p>
                                                 @endif
-        
-                                                <p class="text-gray-600">@lang('admin::app.sales.orders.view.sku') - {{ $item->sku }}</p>
-        
+
+                                                <!-- Item SKU -->
+                                                <p class="text-gray-600">
+                                                    @lang('admin::app.sales.orders.view.sku') - {{ $item->sku }}
+                                                </p>
+
+                                                <!--Item Status -->
                                                 <p class="text-gray-600">
                                                     {{ $item->qty_ordered ? trans('admin::app.sales.shipments.create.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
 
@@ -172,10 +184,12 @@
                                     <div class="flex justify-between">
                                         @foreach ($order->channel->inventory_sources as $inventorySource)
                                             <div class="grid gap-[10px]">
+                                                <!--Inventory Source -->
                                                 <p class="text-[16x] text-gray-800 font-semibold">
                                                     {{ $inventorySource->name }}
                                                 </p>
 
+                                                <!-- Available Quantity -->
                                                 <p class="text-gray-600">
                                                     @lang('admin::app.sales.shipments.create.qty-available') :                  
 
@@ -194,6 +208,7 @@
                                                     $inputName = "shipment[items][$item->id][$inventorySource->id]";
                                                 @endphp
 
+                                                <!-- Quantity  To Ship -->
                                                 <x-admin::form.control-group.label class="required">
                                                     @lang('admin::app.sales.shipments.create.qty-to-ship')
                                                 </x-admin::form.control-group.label>
