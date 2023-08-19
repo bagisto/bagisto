@@ -126,11 +126,17 @@
                                 <div class="flex gap-[10px] justify-between py-[16px]">
                                     <div class="flex gap-[10px]">
                                         @if ($item->product)
-                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                                <img
-                                                    class="w-[20px]"
-                                                    src="{{ $item->product->base_image_url }}"
-                                                >
+                                            <img
+                                                class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                src="{{ $item->product->base_image_url }}"
+                                            >
+                                        @else
+                                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                                
+                                                <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                    @lang('admin::app.sales.invoices.view.product-image') 
+                                                </p>
                                             </div>
                                         @endif
         

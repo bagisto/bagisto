@@ -67,11 +67,10 @@
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="">
                                         <div class="flex gap-[10px]">
-                                            <span class="icon-uncheckbox text-[24px]"></span>
 
                                             <div class="flex flex-col gap-[6px]">
                                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                                    #{{ $order->id }}
+                                                    #{{ $order->increment_id }}
                                                 </p>
 
                                                 <p class="text-gray-600">
@@ -153,9 +152,12 @@
                                     </div>
                                 </div>
 
-                                <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                                <a 
+                                    href="{{ route('admin.sales.orders.view', $order->id) }}" 
+                                    class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                                >
+                                </a>
                             </div>
-
                             <span class="block w-full border-b-[1px] border-gray-300"></span>
                         @endforeach
 
