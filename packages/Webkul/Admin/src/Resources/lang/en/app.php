@@ -1,5 +1,7 @@
 <?php
 
+use Elasticsearch\Endpoints\Indices\Create;
+
 return [
     'account' => [
         'edit' => [
@@ -54,6 +56,7 @@ return [
                 'price'                 => 'Price',
                 'tax'                   => 'Tax',
                 'sub-total'             => 'Sub Total',
+                'discount'              =>  'Discount',  
                 'shipping-and-handling' => 'Shipping and Handling',
                 'total-paid'            => 'Total Paid',
                 'total-refund'          => 'Total Refund',
@@ -182,6 +185,33 @@ return [
                 'title'                  => 'Refund #:refund_id',
                 'tax'                    => 'Tax',
             ],
+
+            'create' => [
+                'title'                       => 'Create Refund',
+                'update-quantity-btn'         => 'Update Quantity',
+                'refund-btn'                  => 'Refund',
+                'sku'                         => 'SKU',
+                'per-unit'                    => 'Per Unit',
+                'amount-per-unit'             => ':amount Per Unit x :qty Quantity',
+                'item-ordered'                => 'Ordered (:qty_ordered)',
+                'item-invoice'                => 'Invoiced (:qty_invoiced)',
+                'item-shipped'                => 'Shipped (:qty_shipped)',
+                'item-canceled'               => 'Canceled (:qty_canceled)',
+                'item-refunded'               => 'Refunded (:qty_refunded)',
+                'qty-to-refund'               => 'Qty To Refund',
+                'refund-shipping'             => 'Refund Shipping',
+                'adjustment-refund'           => 'Adjustment Refund',
+                'adjustment-fee'              => 'Adjustment Fee',
+                'price'                       => 'Price',
+                'subtotal'                    => 'Subtotal',
+                'tax-amount'                  => 'Tax Amount',
+                'discount-amount'             => 'Discount Amount',
+                'grand-total'                 => 'Grand Total',
+                'create-success'              => 'Refund created successfully',
+                'invalid-refund-amount-error' => 'Refund amount should be non zero.',
+
+
+            ],
         ],
 
         'invoices' => [
@@ -215,6 +245,13 @@ return [
                 'invoice-status'         => 'Invoice Status',
                 'channel'                => 'Channel',
                 'invoice-sent'           => 'Invoice sent successfully',
+            ],
+
+            'create'   => [
+                'invalid-qty'            => 'We found an invalid quantity to invoice items.',
+                'creation-error'         => 'Order invoice creation is not allowed.',
+                'product-error'          => 'Invoice can not be created without products.',
+                'create-success'         => 'Invoice created successfully',
             ],
         ],
 

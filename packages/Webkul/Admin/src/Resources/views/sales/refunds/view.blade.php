@@ -154,9 +154,9 @@
                     </div>
 
                     <div class="flex  flex-col gap-y-[6px]">
-                        {{-- Base Discount Amount --}}
+                        {{-- Base Sub Total --}}
                         <p class="text-gray-600 font-semibold">
-                            {{ core()->formatBasePrice($refund->base_discount_amount) }}
+                            {{ core()->formatBasePrice($refund->base_sub_total) }}
                         </p>
 
                         {{-- Base Shipping Amount --}}
