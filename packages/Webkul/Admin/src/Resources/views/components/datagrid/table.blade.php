@@ -4,11 +4,11 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-table-template">
-        <div class="w-full shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.20)] border-[1px] border-gray-300 rounded-[4px] bg-white">
-            <div class="table-responsive grid w-full">
+        <div class="w-full">
+            <div class="table-responsive grid w-full shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.20)] border-[1px] border-gray-300 rounded-[4px] bg-white overflow-hidden">
                 <slot name="header">
                     <div
-                        class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50"
+                        class="row grid gap-[10px] px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 items-center"
                         :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                     >
                         <!-- Mass Actions -->
@@ -53,7 +53,7 @@
 
                 <slot name="body">
                     <div
-                        class="row grid px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600"
+                        class="row grid gap-[10px] px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
                         v-for="record in $parent.available.records"
                         v-if="$parent.available.records.length"
                         :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
