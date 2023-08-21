@@ -652,6 +652,9 @@
                             <p class="text-[18px] text-gray-800 font-bold">
                                 {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
                             </p>
+
+                            <canvas id="myChart"></canvas>
+
                         </div>
 
                         <div class="flex flex-col gap-[4px]justify-between">
@@ -791,4 +794,38 @@
             </div>
         </div>
     </div>
+    
+    @push('scripts')
+        <script src="{{ bagisto_asset('js/chart.js') }}"></script>
+
+        <script async>
+              window.addEventListener("DOMContentLoaded", function () {
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                
+                    var data = @json($statistics['sale_graph']);
+                
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data['label'],
+                            datasets: [{
+                                label: 'Total Sales',
+                                data: data['total'],
+                                backgroundColor: 'rgba(34, 201, 93, 1)',
+                                borderColor: 'rgba(34, 201, 93, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        </script>    
+    @endpush
 </x-admin::layouts>
