@@ -92,27 +92,45 @@
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}">
         <template #header="{ columns, records, sortPage }">
             <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-3 grid-rows-1">
-                <div
-                    class="cursor-pointer"
-                >
+                <div class="cursor-pointer">
                     <div class="flex gap-[10px]">
                         <span class="icon-uncheckbox text-[24px]"></span>
                         <p class="text-gray-600">
-                            <span @click="sortPage(columns.find(column => column.index === 'product_name'))">Product Name</span> /
-                            <span @click="sortPage(columns.find(column => column.index === 'product_sku'))">SKU</span> /
-                            <span @click="sortPage(columns.find(column => column.index === 'product_number'))">Product Number</span>
+                            <span @click="sortPage(columns.find(column => column.index === 'product_name'))">
+                                @lang('admin::app.catalog.products.index.product_name')
+                            </span> /
+
+                            <span @click="sortPage(columns.find(column => column.index === 'product_sku'))">
+                                @lang('admin::app.catalog.products.index.sku')
+                            </span> /
+
+                            <span @click="sortPage(columns.find(column => column.index === 'product_number'))">
+                                @lang('admin::app.catalog.products.index.product_number')
+                            </span>
                         </p>
                     </div>
                 </div>
 
                 <div class="cursor-pointer">
-                    <p class="text-gray-600">Image / Price / Stock /  ID</p>
+                    <p class="text-gray-600">
+                        @lang('admin::app.catalog.products.index.image')/
+                        @lang('admin::app.catalog.products.index.price')/
+                        @lang('admin::app.catalog.products.index.stock')/
+                        @lang('admin::app.catalog.products.index.id')
+                    </p>
                 </div>
 
                 <div class="cursor-pointer">
                     <p class="text-gray-600">
-                        <span @click="sortPage(columns.find(column => column.index === 'status'))">Status</span> / Category /
-                        <span @click="sortPage(columns.find(column => column.index === 'product_type'))">Type</span>
+                        <span @click="sortPage(columns.find(column => column.index === 'status'))">
+                            @lang('admin::app.catalog.products.index.status')
+                        </span> / 
+                        
+                        @lang('admin::app.catalog.products.index.category') /
+
+                        <span @click="sortPage(columns.find(column => column.index === 'product_type'))">
+                            @lang('admin::app.catalog.products.index.type')
+                        </span>
                     </p>
                 </div>
             </div>
@@ -138,13 +156,13 @@
                             <p
                                 class="text-gray-600"
                             >
-                                SKU - @{{ record.product_sku }}
+                                @lang('admin::app.catalog.products.index.sku') - @{{ record.product_sku }}
                             </p>
 
                             <p
                                 class="text-gray-600"
                             >
-                            Number - @{{ record.product_number }}
+                                @lang('admin::app.catalog.products.index.number') - @{{ record.product_number }}
                             </p>
                         </div>
                     </div>
@@ -182,20 +200,20 @@
 
                             <p class="text-gray-600" v-if="record.quantity > 0">
                                 <a href="#" class="text-green-600">
-                                    @{{ record.quantity }} Available
+                                    @{{ record.quantity }} @lang('admin::app.catalog.products.index.available')
                                 </a>
                             </p>
 
                             <p class="text-gray-600" v-else>
                                 <a href="#" class="text-red-600">
-                                    Out Of Stock
+                                    @lang('admin::app.catalog.products.index.out-of-stock')
                                 </a>
                             </p>
     
                             <p
                                 class="text-gray-600"
                             >
-                                ID - @{{ record.product_id }}
+                            @lang('admin::app.catalog.products.index.id') - @{{ record.product_id }}
                             </p>
                         </div>
                     </div>
@@ -293,7 +311,7 @@
                                         >
                                             @foreach(config('product_types') as $key => $type)
                                                 <option value="{{ $key }}">
-                                                    {{ __('admin::app.catalog.products.index.create.' . $key) }}
+                                                    @lang('admin::app.catalog.products.index.create.' . $key)
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>

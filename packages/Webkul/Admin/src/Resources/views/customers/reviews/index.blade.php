@@ -87,7 +87,11 @@
                     @click="sortPage(columns.find(column => column.index === 'product_review_status'))"
                 >
                     <div class="flex gap-[10px]">
-                        <p class="text-gray-600">Name / Product / Status</p>
+                        <p class="text-gray-600">
+                            @lang('admin::app.customers.reviews.index.name') / 
+                            @lang('admin::app.customers.reviews.index.product') / 
+                            @lang('admin::app.customers.reviews.index.status')
+                        </p>
                     </div>
                 </div>
 
@@ -95,11 +99,18 @@
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'product_review_id'))"
                 >
-                    <p class="text-gray-600">Rating / Date / ID</p>
+                    <p class="text-gray-600">
+                        @lang('admin::app.customers.reviews.index.rating') / 
+                        @lang('admin::app.customers.reviews.index.date') / 
+                        @lang('admin::app.customers.reviews.index.id')
+                    </p>
                 </div>
 
                 <div class="cursor-pointer">
-                    <p class="text-gray-600">Title / Description</p>
+                    <p class="text-gray-600">
+                        @lang('admin::app.customers.reviews.index.title') / 
+                        @lang('admin::app.customers.reviews.index.description')
+                    </p>
                 </div>
             </div>
         </template>
