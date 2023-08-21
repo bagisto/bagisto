@@ -79,19 +79,10 @@ class CustomerDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'customer_id',
-            'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'integer',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'full_name',
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -100,8 +91,8 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'email',
             'label'      => trans('admin::app.datagrid.email'),
             'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
+            'searchable' => false,
+            'filterable' => false,
             'sortable'   => true,
         ]);
 
@@ -119,7 +110,7 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.phone'),
             'type'       => 'integer',
             'searchable' => true,
-            'filterable' => false,
+            'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
                 if (! $row->phone) {
@@ -135,7 +126,7 @@ class CustomerDataGrid extends DataGrid
             'label'      => trans('admin::app.datagrid.gender'),
             'type'       => 'string',
             'searchable' => false,
-            'filterable' => false,
+            'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
                 if (! $row->gender) {
@@ -185,8 +176,7 @@ class CustomerDataGrid extends DataGrid
             'label'       => trans('Revenue'),
             'type'        => 'integer',
             'searchable'  => false,
-            'filterable'  => true,
-            'visibility'  => false,
+            'filterable'  => false,
             'sortable'    => true,
         ]);
 
@@ -195,8 +185,7 @@ class CustomerDataGrid extends DataGrid
             'label'       => trans('Address Count'),
             'type'        => 'integer',
             'searchable'  => false,
-            'filterable'  => true,
-            'visibility'  => false,
+            'filterable'  => false,
             'sortable'    => true,
         ]);
 
@@ -205,8 +194,7 @@ class CustomerDataGrid extends DataGrid
             'label'       => trans('Address Count'),
             'type'        => 'integer',
             'searchable'  => false,
-            'filterable'  => true,
-            'visibility'  => false,
+            'filterable'  => false,
             'sortable'    => true,
         ]);
     }

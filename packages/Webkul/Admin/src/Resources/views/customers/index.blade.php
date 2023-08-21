@@ -105,7 +105,7 @@
                 </div>
                 <div 
                     class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'order_count'))"
+                    @click="sortPage(columns.find(column => column.index === 'total_base_grand_total'))"
                 >
                     <p class="text-gray-600">Revenue/Order Count/ Address Count</p>
                 </div>
@@ -186,6 +186,7 @@
                     </div>
                     <a 
                         class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                        :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
                     >
                     </a>
                 </div>
