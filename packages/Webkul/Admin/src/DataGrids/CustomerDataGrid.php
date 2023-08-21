@@ -21,15 +21,31 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-
+        
         $queryBuilder = DB::table('customers')
-            ->leftJoin('addresses', 'customers.id', '=', 'addresses.customer_id')
-            ->where('addresses.address_type', 'customer')
-            ->addSelect(DB::raw('COUNT(addresses.id) as address_count'))
+            ->leftJoin('addresses', function ($join) {
+                $join->on('customers.id', '=', 'addresses.customer_id')
+                    ->where('addresses.address_type', '=', 'customer');
+            })
+            ->addSelect('customers.id as customer_id') 
+            ->addSelect(DB::raw('COUNT(DISTINCT addresses.id) as address_count'))
+            ->groupBy('customers.id') 
 
-            // ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
-            // ->addSelect(DB::raw('COUNT(orders.id) as orders_count'))
-
+            ->leftJoin('orders', function ($join) {
+                $join->on('customers.id', '=', 'orders.customer_id');
+            })
+            ->addSelect('customers.id as customer_id') 
+            ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as order_count'))
+            
+            // ->whereNotIn("orders.status", ['closed', 'canceled'])
+            ->addSelect(
+                DB::raw("(
+                    SUM(DISTINCT base_grand_total) -
+                    SUM(IFNULL((SELECT SUM(base_grand_total) FROM  refunds WHERE refunds.order_id = orders.id),0))
+                    ) as total_base_grand_total"),
+                )
+            ->groupBy('customers.id') 
+            
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect(
                 'customers.id as customer_id',
@@ -52,7 +68,6 @@ class CustomerDataGrid extends DataGrid
         $this->addFilter('status', 'status');
         $this->addFilter('is_suspended', 'customers.is_suspended');
 
-        // dd($queryBuilder->get());
         return $queryBuilder;
     }
 
@@ -166,7 +181,27 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index'       => 'total_base_grand_total',
+            'label'       => trans('Revenue'),
+            'type'        => 'integer',
+            'searchable'  => false,
+            'filterable'  => true,
+            'visibility'  => false,
+            'sortable'    => true,
+        ]);
+
+        $this->addColumn([
             'index'       => 'address_count',
+            'label'       => trans('Address Count'),
+            'type'        => 'integer',
+            'searchable'  => false,
+            'filterable'  => true,
+            'visibility'  => false,
+            'sortable'    => true,
+        ]);
+
+        $this->addColumn([
+            'index'       => 'order_count',
             'label'       => trans('Address Count'),
             'type'        => 'integer',
             'searchable'  => false,
