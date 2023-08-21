@@ -10,7 +10,7 @@
         <div>
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
-            <div class="flex gap-2 mt-[16px]">
+            <div class="flex mt-[16px]">
                 <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
                 <x-admin::datagrid.table>

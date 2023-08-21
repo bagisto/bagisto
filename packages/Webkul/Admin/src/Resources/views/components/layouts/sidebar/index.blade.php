@@ -24,7 +24,7 @@
                     </a>
 
                     @if (count($menuItem['children']))
-                        <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden pl-[40px] pb-[7px] rounded-b-[8px] z-[100] group-[.sidebar-collapsed]/container:!hidden group-[.sidebar-collapsed]/container:absolute group-[.sidebar-collapsed]/container:top-0 group-[.sidebar-collapsed]/container:left-[70px] group-[.sidebar-collapsed]/container:p-[0] group-[.sidebar-collapsed]/container:bg-white group-[.sidebar-collapsed]/container:border-l-[1px] group-[.sidebar-collapsed]/container:border-gray-300 group-[.sidebar-collapsed]/container:rounded-none group-[.sidebar-collapsed]/container:shadow-[2px_1px_3px_rgba(0,0,0,0.1)] group-[.sidebar-collapsed]/container:group-hover/item:!grid">
+                        <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] pl-[40px] pb-[7px] rounded-b-[8px] z-[100] group-[.sidebar-collapsed]/container:!hidden group-[.sidebar-collapsed]/container:absolute group-[.sidebar-collapsed]/container:top-0 group-[.sidebar-collapsed]/container:left-[70px] group-[.sidebar-collapsed]/container:p-[0] group-[.sidebar-collapsed]/container:bg-white group-[.sidebar-collapsed]/container:border-l-[1px] group-[.sidebar-collapsed]/container:border-gray-300 group-[.sidebar-collapsed]/container:rounded-none group-[.sidebar-collapsed]/container:shadow-[2px_1px_3px_rgba(0,0,0,0.1)] group-[.sidebar-collapsed]/container:group-hover/item:!grid">
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a
                                     href="{{ $subMenuItem['url'] }}"
