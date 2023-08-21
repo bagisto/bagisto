@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-table-template">
-        <div class="w-full shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.20)] border-[1px] border-gray-300 rounded-[4px] mt-[16px] bg-white">
+        <div class="w-full shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.20)] border-[1px] border-gray-300 rounded-[4px] bg-white">
             <div class="table-responsive grid w-full">
                 <slot name="header">
                     <div
