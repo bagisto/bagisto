@@ -486,53 +486,36 @@
                             <div class="max-1580:col-span-full">
                                 <div class="flex gap-[6px] items-center justify-between">
                                     <div class="flex gap-[6px] items-center flex-wrap">
-                                        @foreach ($item->items as $orderItem)
                                         {{-- Using Variable for image Numbering --}}
-                                            @php $count = 1; @endphp
-                                            
-                                            @if (count($orderItem->product->images) < 5)
-                                                @foreach ($orderItem->product->images as $index => $image)
-                                                    <div class="relative">
-                                                        <img
-                                                            class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                                            src="{{ $image->url }}"
-                                                        />
+                                        @php $count = 1; @endphp
 
-                                                        <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                            {{ $count}}
-                                                        </span>
-
-                                                        @php $count++; @endphp
-                                                    </div>
-                                                @endforeach
-                                            @else
-                                                @foreach ($orderItem->product->images as $index => $image)
-                                                    @if ($index >= 2)
-                                                        @break
-                                                    @endif
-
-                                                    <div class="relative">
-                                                        <img
-                                                            class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                                            src="{{ $image->url }}"
-                                                        />
-
-                                                        <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                            {{ $count}}
-                                                        </span>
-
-                                                        @php $count++; @endphp
-                                                    </div>
-                                                @endforeach
-
-                                                {{-- Count of Rest Images --}}
-                                                <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
-                                                        @lang('admin::app.dashboard.more-products', ['product_count' => count($orderItem->product->images) - 2])
-                                                    </p>
-                                                </div>
+                                        @foreach ($item->items as $index => $orderItem)
+                                            @if ($index >= 2 && count($item->items) >= 5)
+                                                @break;
                                             @endif
+
+                                            <div class="relative">
+                                                <img
+                                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                                    src="{{ $orderItem->product->base_image_url }}"
+                                                />
+
+                                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
+                                                    {{ $count}}
+                                                </span>
+
+                                                @php $count++; @endphp
+                                            </div>
                                         @endforeach
+
+                                        {{-- Count of Rest Images --}}
+                                        @if (count($item->items) - 2)
+                                            <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
+                                                <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
+                                                    @lang('admin::app.dashboard.more-products', ['product_count' => count($item->items) - 2 ])
+                                                </p>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     {{-- View More Icon --}}
