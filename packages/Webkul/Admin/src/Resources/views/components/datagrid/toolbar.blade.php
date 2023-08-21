@@ -61,7 +61,7 @@
             </button>
 
             <div class="pl-[10px]">
-                <p class="text-[14px] font-light">
+                <p class="text-[14px] text-gray-800 font-light">
                     <!-- Need to manage this translation. -->
                     @{{ applied.massActions.indices.length }} of @{{ available.meta.total }} Selected
                 </p>
@@ -75,7 +75,7 @@
                 class=""
                 @click="toggleFilters"
             >
-                <div class="inline-flex w-full max-w-max px-[4px] py-[6px] cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white text-center font-semibold text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gratext-gray-600">
+                <div class="inline-flex w-full max-w-max px-[4px] py-[6px] cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white text-center font-semibold text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gratext-gray-600 select-none">
                     <span class="icon-filter text-[24px]"></span>
 
                     <span>
@@ -108,7 +108,7 @@
 
             <!-- Information Panel -->
             <div class="pl-[10px]">
-                <p class="text-[14px] font-light">
+                <p class="text-[14px] text-gray-800 font-light">
                     <!-- Need to manage this translation. -->
                     @{{ available.meta.total }} Results
                 </p>
@@ -117,7 +117,7 @@
     </div>
 
     <!-- Right Toolbar -->
-    <div class="flex gap-x-[16px] px-[12px]">
+    <div class="flex gap-x-[16px]">
         <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100"></span>
 
         <div class="flex items-center gap-x-[8px]">

@@ -30,6 +30,18 @@
                         </span>
                         @break
 
+                    @case('closed')
+                        <span class="label-closed text-[14px] mx-[5px]">
+                            {{ $order->status }}
+                        </span>
+                        @break
+
+                    @case('canceled')
+                        <span class="label-canceled text-[14px] mx-[5px]">
+                            {{ $order->status }}
+                        </span>
+                        @break
+
                 @endswitch
             </p>
 
@@ -85,13 +97,7 @@
             @endif
 
             @if ($order->canRefund())
-                <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-                    <span class="icon-cancel text-[24px]"></span> 
-
-                    <a href="{{ route('admin.sales.refunds.create', $order->id) }}">
-                        @lang('admin::app.sales.orders.view.refund')     
-                    </a>
-                </div>
+                @include('admin::sales.refunds.create')
             @endif
 
             {!! view_render_event('sales.order.page_action.after', ['order' => $order]) !!}
@@ -118,14 +124,20 @@
                             <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
                                 <div class="flex gap-[10px]">
                                     @if($item->product)
-                                        <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                            <img
-                                                class="w-[20px]"
-                                                src="{{ $item->product->base_image_url }}"
-                                            >
+                                        <img
+                                            class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                            src="{{ $item->product->base_image_url }}"
+                                        >
+                                    @else
+                                        <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                            
+                                            <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                @lang('admin::app.sales.invoices.view.product-image') 
+                                            </p>
                                         </div>
                                     @endif
-
+                    
                                     <div class="grid gap-[6px] place-content-start">
                                         <p class="text-[16x] text-gray-800 font-semibold">
                                             {{ $item->name }}
@@ -182,8 +194,7 @@
                                             {{ $item->tax_percent }}% 
                                             @lang('admin::app.sales.orders.view.tax') - {{ core()->formatBasePrice($item->base_tax_amount) }}
                                         </p>
-
-                                        @if (! $order->base_discount_amount)
+                                        @if ($order->base_discount_amount > 0)
                                             <p class="text-gray-600">
                                                 @lang('admin::app.sales.orders.view.discount') - {{ core()->formatBasePrice($item->base_discount_amount) }}
                                             </p>
@@ -286,7 +297,7 @@
                                         rules="required"
                                         :label="trans('admin::app.sales.orders.view.comments')"
                                         :placeholder="trans('admin::app.sales.orders.view.write-your-comment')"
-                                        rows="5"
+                                        rows="3"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -460,7 +471,7 @@
                                 {!! view_render_event('sales.order.status_label.after', ['order' => $order]) !!}
 
                                 {{-- Order Channel --}}
-                                <p class="text-gray-800">
+                                <p class="text-gray-600">
                                     {{$order->channel_name}}
                                 </p>
 
@@ -722,11 +733,17 @@
                                     <div class="flex gap-[10px] justify-between py-[16px]">
                                         <div class="flex gap-[10px]">
                                             @if ($item->product)
-                                                <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                                    <img
-                                                        class="w-[20px]"
-                                                        src="{{ $item->product->base_image_url }}"
-                                                    >
+                                                <img
+                                                    class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                                    src="{{ $item->product->base_image_url }}"
+                                                >
+                                            @else
+                                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                                    
+                                                    <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                                        @lang('admin::app.sales.invoices.view.product-image') 
+                                                    </p>
                                                 </div>
                                             @endif
             
@@ -749,7 +766,7 @@
                                                         </p>
                                                     @endif
             
-                                                    <p class="mt-[16px] text-gray-600">
+                                                    <p class="text-gray-600">
                                                         @lang('admin::app.sales.orders.view.sku') - {{ $item->sku }}
                                                     </p>
                                                 </div>

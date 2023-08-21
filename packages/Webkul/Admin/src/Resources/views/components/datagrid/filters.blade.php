@@ -1,8 +1,11 @@
-<div v-if="showFilters">
+<div
+    class="min-w-[0] max-w-[0] transition-all duration-300 [&>*]:whitespace-nowrap"
+    :class="[showFilters ? '!min-w-[344px] !max-w-[344px] pr-[10px]': 'overflow-hidden']"
+>
     <!-- Custom Filter -->
-    <x-admin::accordion class="w-[298px] rounded-[4px] border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
+    <x-admin::accordion class="w-full rounded-[4px] border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
         <x-slot:header>
-            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+            <p class="p-[10px] text-gray-800 text-[16px] font-medium">
                 @lang('admin::app.components.datagrid.filters.custom-filters.title')
             </p>
         </x-slot:header>
@@ -75,7 +78,7 @@
                             />
                         </x-admin::flat-picker.date>
 
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 mb-[16px]">
                             <p
                                 class="flex items-center px-[8px] py-[3px] rounded-[3px] bg-gray-600 font-semibold text-white"
                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -160,7 +163,7 @@
                             />
                         </x-admin::flat-picker.datetime>
 
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 mb-[16px]">
                             <p
                                 class="flex px-[8px] py-[3px] items-center rounded-[3px] bg-gray-600 font-semibold text-white"
                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
@@ -182,7 +185,7 @@
                 <div v-else>
                     <div class="flex items-center justify-between">
                         <p
-                            class="font-medium leading-[24px] text-gray-800"
+                            class="text-[12px] font-medium leading-[24px] text-gray-800"
                             v-text="column.label"
                         >
                         </p>
@@ -200,7 +203,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-[16px] mb-[8px] grid">
+                    <div class="mt-[5px] mb-[8px] grid">
                         <input
                             type="text"
                             class="block w-full px-[8px] py-[6px] rounded-[6px] border border-gray-300 bg-white text-[14px] leading-[24px] text-gray-400"
@@ -210,7 +213,7 @@
                         />
                     </div>
 
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 mb-[16px]">
                         <p
                             class="flex px-[8px] py-[3px] items-center rounded-[3px] bg-gray-600 font-semibold text-white"
                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"

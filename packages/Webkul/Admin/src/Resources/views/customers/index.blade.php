@@ -85,7 +85,56 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.customer.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.customer.index') }}">
+        <template #header="{ columns, records, sortPage }">
+            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                <div class="">
+                    <div class="flex gap-[10px]">
+                        <span class="icon-uncheckbox text-[24px]"></span>
+                        <p class="text-gray-600">Customer Name / Email / Contact Number</p>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="text-gray-600">Status / Gender / Group</p>
+                </div>
+                <div class="">
+                    <p class="text-gray-600">Revenue/Order Count/ Address Count</p>
+                </div>
+            </div>
+        </template>
+
+        <template #body="{ columns, records }">
+          <!-- single row -->
+            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
+                <div class="">
+                    <div class="flex gap-[10px]">
+                        <span class="icon-uncheckbox text-[24px]"></span>
+                        <div class="flex flex-col gap-[6px]">
+                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.full_name}}</p>
+                            <p class="text-gray-600">@{{ record.email }}</p>
+                            <p class="text-gray-600">Phone: @{{ record.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="flex flex-col gap-[6px]">
+                        <span class="label-active">@{{ record.status }}</span>
+                        
+                        <p class="text-gray-600">@{{ record.gender }}</p>
+                        <p class="text-gray-600">@{{ record.group }}</p>
+                    </div>
+                </div>
+                <div class="flex gap-x-[16px] justify-between items-center">
+                    <div class="flex flex-col gap-[6px]">
+                        <p class="text-[16px] text-gray-800 font-semibold">$125.00 Revenue</p>
+                        <p class="text-gray-600">@{{ record.order_count }} Orders</p>
+                        <p class="text-gray-600">@{{ record.address_count }} Address</p>
+                    </div>
+                    <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                </div>
+            </div>
+        </template>
+    </x-admin::datagrid>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-customer-form-template">

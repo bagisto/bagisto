@@ -112,7 +112,7 @@
                 <div class="">
                     <div class="flex gap-[10px]">
                         <div class="flex flex-col gap-[6px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.id }}</p>
+                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.increment_id }}</p>
 
                             <p class="text-gray-600">@{{ record.created_at }}</p>
 
