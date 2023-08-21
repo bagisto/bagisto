@@ -92,7 +92,7 @@
     </script>
 
     <script type="text/x-template" id="v-product-image-item-template">
-        <div class="grid justify-items-center max-w-[120px] min-w-[120px] max-h-[120px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden transition-all hover:border-gray-400 group cursor-pointer">
+        <div class="grid justify-items-center max-w-[120px] min-w-[120px] max-h-[120px] relative rounded-[4px] overflow-hidden transition-all hover:border-gray-400 group cursor-pointer">
             <!-- Image Preview -->
             <img :src="image.url"/>
 

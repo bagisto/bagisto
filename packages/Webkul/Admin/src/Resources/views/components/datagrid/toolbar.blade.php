@@ -117,7 +117,7 @@
     </div>
 
     <!-- Right Toolbar -->
-    <div class="flex gap-x-[16px] px-[12px]">
+    <div class="flex gap-x-[16px]">
         <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100"></span>
 
         <div class="flex items-center gap-x-[8px]">

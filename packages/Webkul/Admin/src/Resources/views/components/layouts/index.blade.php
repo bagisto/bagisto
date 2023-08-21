@@ -69,12 +69,14 @@
         {{-- Page Header Blade Component --}}
         <x-admin::layouts.header />
 
-        <div class="flex gap-[16px] group {{ ($_COOKIE['sidebar_collapsed'] ?? 0) ? 'sidebar-collapsed' : '' }}" ref="appLayout">
-
+        <div
+            class="flex gap-[16px] group/container {{ ($_COOKIE['sidebar_collapsed'] ?? 0) ? 'sidebar-collapsed' : '' }}"
+            ref="appLayout"
+        >
             {{-- Page Sidebar Blade Component --}}
             <x-admin::layouts.sidebar />
 
-            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[286px] max-lg:px-[16px] transition-all duration-300 group-[.sidebar-collapsed]:pl-[85px]">
+            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[286px] max-lg:px-[16px] transition-all duration-300 group-[.sidebar-collapsed]/container:pl-[85px]">
                 {{-- Added dynamic tabs for third level menus  --}}
                 {{-- Todo @suraj-webkul need to optimize below statement. --}}
                 @if (! request()->routeIs('admin.configuration.index'))
