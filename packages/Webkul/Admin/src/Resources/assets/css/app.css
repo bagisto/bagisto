@@ -40,245 +40,245 @@
     .box-shadow {
         @apply shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)];
     }
-
-    .icon-checkbox-partial:before {
-        content: "\e90b";
-    }
-
+    
     .icon-uncheckbox:before {
-        content: "\e93b";
-    }
-
-    .icon-add-customer:before {
         content: "\e900";
     }
 
-    .icon-arrow-down:before {
+    .icon-checkbox-partial:before {
         content: "\e901";
     }
 
-    .icon-arrow-left:before {
+    .icon-add-customer:before {
         content: "\e902";
     }
 
-    .icon-arrow-right:before {
+    .icon-arrow-down:before {
         content: "\e903";
     }
 
-    .icon-arrow-up:before {
+    .icon-arrow-left:before {
         content: "\e904";
     }
 
-    .icon-attribute-block:before {
+    .icon-arrow-right:before {
         content: "\e905";
     }
 
-    .icon-attribute:before {
+    .icon-arrow-up:before {
         content: "\e906";
     }
 
-    .icon-calendar:before {
+    .icon-attribute-block:before {
         content: "\e907";
     }
 
-    .icon-cancel-1:before {
+    .icon-attribute:before {
         content: "\e908";
     }
 
-    .icon-cancel:before {
+    .icon-calendar:before {
         content: "\e909";
     }
 
-    .icon-cart:before {
+    .icon-cancel-1:before {
         content: "\e90a";
     }
 
-    .icon-checked:before {
+    .icon-cancel:before {
+        content: "\e90b";
+    }
+
+    .icon-cart:before {
         content: "\e90c";
     }
 
-    .icon-cms:before {
+    .icon-checked:before {
         content: "\e90d";
     }
 
-    .icon-configuration:before {
+    .icon-cms:before {
         content: "\e90e";
     }
 
-    .icon-cross:before {
+    .icon-configuration:before {
         content: "\e90f";
     }
 
-    .icon-customer-2:before {
+    .icon-cross:before {
         content: "\e910";
     }
 
-    .icon-customer:before {
+    .icon-customer-2:before {
         content: "\e911";
     }
 
-    .icon-dashboard:before {
+    .icon-customer:before {
         content: "\e912";
     }
 
-    .icon-delete:before {
+    .icon-dashboard:before {
         content: "\e913";
     }
 
-    .icon-done:before {
+    .icon-delete:before {
         content: "\e914";
     }
 
-    .icon-dot:before {
+    .icon-done:before {
         content: "\e915";
     }
 
-    .icon-dots:before {
+    .icon-dot:before {
         content: "\e916";
     }
 
-    .icon-down-stat:before {
+    .icon-dots:before {
         content: "\e917";
     }
 
-    .icon-drag:before {
+    .icon-down-stat:before {
         content: "\e918";
     }
 
-    .icon-edit-save:before {
+    .icon-drag:before {
         content: "\e919";
     }
 
-    .icon-edit:before {
+    .icon-edit-save:before {
         content: "\e91a";
     }
 
-    .icon-filter:before {
+    .icon-edit:before {
         content: "\e91b";
     }
 
-    .icon-folder-block:before {
+    .icon-filter:before {
         content: "\e91c";
     }
 
-    .icon-folder:before {
+    .icon-folder-block:before {
         content: "\e91d";
     }
 
-    .icon-image:before {
+    .icon-folder:before {
         content: "\e91e";
     }
 
-    .icon-information:before {
+    .icon-image:before {
         content: "\e91f";
     }
 
-    .icon-language:before {
+    .icon-information:before {
         content: "\e920";
     }
 
-    .icon-location:before {
+    .icon-language:before {
         content: "\e921";
     }
 
-    .icon-mail:before {
+    .icon-location:before {
         content: "\e922";
     }
 
-    .icon-menu:before {
+    .icon-mail:before {
         content: "\e923";
     }
 
-    .icon-notification:before {
+    .icon-menu:before {
         content: "\e924";
     }
 
-    .icon-order-back:before {
+    .icon-notification:before {
         content: "\e925";
     }
 
-    .icon-printer:before {
+    .icon-order-back:before {
         content: "\e926";
     }
 
-    .icon-processing:before {
+    .icon-printer:before {
         content: "\e927";
     }
 
-    .icon-product-1:before {
+    .icon-processing:before {
         content: "\e928";
     }
 
-    .icon-product:before {
+    .icon-product-1:before {
         content: "\e929";
     }
 
-    .icon-promotion:before {
+    .icon-product:before {
         content: "\e92a";
     }
 
-    .icon-radio-normal:before {
+    .icon-promotion:before {
         content: "\e92b";
     }
 
-    .icon-radio-selected:before {
+    .icon-radio-normal:before {
         content: "\e92c";
     }
 
-    .icon-repeat:before {
+    .icon-radio-selected:before {
         content: "\e92d";
     }
 
-    .icon-sales:before {
+    .icon-repeat:before {
         content: "\e92e";
     }
 
-    .icon-serch:before {
+    .icon-sales:before {
         content: "\e92f";
     }
 
-    .icon-setting:before {
+    .icon-serch:before {
         content: "\e930";
     }
 
-    .icon-settings:before {
+    .icon-setting:before {
         content: "\e931";
     }
 
-    .icon-ship:before {
+    .icon-settings:before {
         content: "\e932";
     }
 
-    .icon-sort-down:before {
+    .icon-ship:before {
         content: "\e933";
     }
 
-    .icon-sort-left:before {
+    .icon-sort-down:before {
         content: "\e934";
     }
 
-    .icon-sort-right:before {
+    .icon-sort-left:before {
         content: "\e935";
     }
 
-    .icon-sort-up-down:before {
+    .icon-sort-right:before {
         content: "\e936";
     }
 
-    .icon-sort-up:before {
+    .icon-sort-up-down:before {
         content: "\e937";
     }
 
-    .icon-star:before {
+    .icon-sort-up:before {
         content: "\e938";
     }
 
-    .icon-store:before {
+    .icon-star:before {
         content: "\e939";
     }
 
-    .icon-tick:before {
+    .icon-store:before {
         content: "\e93a";
+    }
+
+    .icon-tick:before {
+        content: "\e93b";
     }
 
     .icon-up-stat:before {
@@ -300,6 +300,7 @@
     .icon-clip:before {
         content: "\e940";
     }
+
 
     p {
         @apply text-[14px] leading-[17px];

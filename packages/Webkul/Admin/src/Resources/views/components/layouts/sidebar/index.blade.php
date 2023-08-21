@@ -6,8 +6,8 @@
     }
 @endphp
 
-<div class="fixed top-[57px] h-full bg-white pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]:w-[70px]">
-    <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]:overflow-visible">
+<div class="fixed top-[57px] h-full bg-white pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
+    <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid gap-[7px] w-full">
             {{-- Navigation Menu --}}
             @foreach ($menu->items as $menuItem)
@@ -18,17 +18,17 @@
                     >
                         <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         
-                        <p class="text-gray-600 font-semibold whitespace-nowrap group-[.sidebar-collapsed]:hidden {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
+                        <p class="text-gray-600 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
                             @lang($menuItem['name']) 
                         </p>
                     </a>
 
                     @if (count($menuItem['children']))
-                        <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden pl-[40px] pb-[7px] rounded-b-[8px] z-[100] group-[.sidebar-collapsed]:!hidden group-[.sidebar-collapsed]:absolute group-[.sidebar-collapsed]:top-0 group-[.sidebar-collapsed]:left-[70px] group-[.sidebar-collapsed]:p-[0] group-[.sidebar-collapsed]:bg-white group-[.sidebar-collapsed]:border-l-[1px] group-[.sidebar-collapsed]:border-gray-300 group-[.sidebar-collapsed]:rounded-none group-[.sidebar-collapsed]:shadow-[2px_1px_3px_rgba(0,0,0,0.1)] group-[.sidebar-collapsed]:group-hover/item:!grid">
+                        <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden pl-[40px] pb-[7px] rounded-b-[8px] z-[100] group-[.sidebar-collapsed]/container:!hidden group-[.sidebar-collapsed]/container:absolute group-[.sidebar-collapsed]/container:top-0 group-[.sidebar-collapsed]/container:left-[70px] group-[.sidebar-collapsed]/container:p-[0] group-[.sidebar-collapsed]/container:bg-white group-[.sidebar-collapsed]/container:border-l-[1px] group-[.sidebar-collapsed]/container:border-gray-300 group-[.sidebar-collapsed]/container:rounded-none group-[.sidebar-collapsed]/container:shadow-[2px_1px_3px_rgba(0,0,0,0.1)] group-[.sidebar-collapsed]/container:group-hover/item:!grid">
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a
                                     href="{{ $subMenuItem['url'] }}"
-                                    class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-[4px] group-[.sidebar-collapsed]:px-[20px] group-[.sidebar-collapsed]:py-[10px] hover:bg-gray-100"
+                                    class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-[4px] group-[.sidebar-collapsed]/container:px-[20px] group-[.sidebar-collapsed]/container:py-[10px] hover:bg-gray-100"
                                 >
                                     @lang($subMenuItem['name'])
                                 </a>
@@ -59,7 +59,7 @@
 
                 <p
                     class="text-gray-600 font-semibold transition-all duration-300 select-none"
-                    :class="{'group-[.sidebar-collapsed]:invisible': isCollapsed}"
+                    :class="{'group-[.sidebar-collapsed]/container:invisible': isCollapsed}"
                     v-show="! isCollapsed"
                 >
                     @lang('admin::app.components.layouts.sidebar.collapse')
