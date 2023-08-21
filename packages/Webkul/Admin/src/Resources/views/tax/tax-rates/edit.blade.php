@@ -44,7 +44,7 @@
                             <div class="mb-[10px]">
                                 <!-- Identifier -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.edit.identifier')*
                                     </x-admin::form.control-group.label>
     
@@ -66,7 +66,7 @@
     
                                 <!-- Country -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.edit.country')
                                     </x-admin::form.control-group.label>
                     
@@ -75,8 +75,8 @@
                                         name="country"
                                         value="{{ old('country') }}"
                                         rules="required"
-                                        label="{{ trans('admin::app.settings.taxes.tax-rates.edit.country') }}"
-                                        placeholder="{{ trans('admin::app.settings.taxes.tax-rates.edit.country') }}"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.edit.country')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.edit.country')"
                                         v-model="country"
                                     >
                                         <option value="">
@@ -98,7 +98,7 @@
                     
                                 <!-- State -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.edit.state')
                                     </x-admin::form.control-group.label>
                     
@@ -106,8 +106,8 @@
                                         type="select"
                                         name="state"
                                         value="{{ old('state') }}"
-                                        label="{{ trans('admin::app.settings.taxes.tax-rates.edit.state') }}"
-                                        placeholder="{{ trans('admin::app.settings.taxes.tax-rates.edit.state') }}"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.edit.state')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.edit.state')"
                                         v-model="state"
                                     >
                                         <option value="">
@@ -122,7 +122,7 @@
     
                                 <!-- Tax Rate -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.edit.tax_rate')*
                                     </x-admin::form.control-group.label>
     
@@ -131,8 +131,8 @@
                                         name="tax_rate"
                                         value="{{ old('tax_rate') ?: $taxRate->tax_rate }}"
                                         rules="required"
-                                        label="{{ trans('admin::app.settings.taxes.tax-rates.edit.tax_rate') }}"
-                                        placeholder="{{ trans('admin::app.settings.taxes.tax-rates.edit.tax_rate') }}"
+                                        :label="trans('admin::app.settings.taxes.tax-rates.edit.tax_rate')"
+                                        :placeholder="trans('admin::app.settings.taxes.tax-rates.edit.tax_rate')"
                                     >
                                     </x-admin::form.control-group.control>
     
@@ -167,7 +167,7 @@
     
                                     <!-- Zip From -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-rates.edit.zip_from')*
                                         </x-admin::form.control-group.label>
     
@@ -176,8 +176,8 @@
                                             name="zip_from"
                                             value="{{ old('zip_form') ?: $taxRate->zip_from }}"
                                             rules="required"
-                                            label="{{ trans('admin::app.settings.taxes.tax-rates.edit.zip_from') }}"
-                                            placeholder="{{ trans('admin::app.settings.taxes.tax-rates.edit.zip_from') }}"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.edit.zip_from')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.edit.zip_from')"
                                         >
                                         </x-admin::form.control-group.control>
     
@@ -190,7 +190,7 @@
     
                                     <!-- Zip To -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-rates.edit.zip_to')*
                                         </x-admin::form.control-group.label>
     
@@ -199,8 +199,8 @@
                                             name="zip_to"
                                             value="{{ old('zip_form') ?: $taxRate->zip_to }}"
                                             rules="required"
-                                            label="{{ trans('admin::app.settings.taxes.tax-rates.edit.zip_to') }}"
-                                            placeholder="{{ trans('admin::app.settings.taxes.tax-rates.edit.zip_to') }}"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.edit.zip_to')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.edit.zip_to')"
                                         >
                                         </x-admin::form.control-group.control>
     
@@ -222,8 +222,8 @@
                                             type="text"
                                             name="zip_code"
                                             value="{{ old('zip_code') ?: $taxRate->zip_code }}"
-                                            label="{{ trans('admin::app.settings.taxes.tax-rates.edit.zip_code') }}"
-                                            placeholder="{{ trans('admin::app.settings.taxes.tax-rates.edit.zip_code') }}"
+                                            :label="trans('admin::app.settings.taxes.tax-rates.edit.zip_code')"
+                                            :placeholder="trans('admin::app.settings.taxes.tax-rates.edit.zip_code')"
                                         >
                                         </x-admin::form.control-group.control>
     

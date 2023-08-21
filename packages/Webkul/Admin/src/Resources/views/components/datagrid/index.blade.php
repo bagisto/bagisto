@@ -1,14 +1,44 @@
-<v-datagrid {{ $attributes }}></v-datagrid>
+<v-datagrid {{ $attributes }}>
+    {{ $slot }}
+</v-datagrid>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-datagrid-template">
+    <script
+        type="text/x-template"
+        id="v-datagrid-template"
+    >
         <div>
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex gap-2 mt-[30px]">
                 <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
-                <x-admin::datagrid.table></x-admin::datagrid.table>
+                <x-admin::datagrid.table>
+                    <template #header>
+                        <slot
+                            name="header"
+                            :columns="available.columns"
+                            :actions="available.actions"
+                            :mass-actions="available.massActions"
+                            :records="available.records"
+                            :meta="available.meta"
+                            :sort-page="sortPage"
+                        >
+                        </slot>
+                    </template>
+
+                    <template #body>
+                        <slot
+                            name="body"
+                            :columns="available.columns"
+                            :actions="available.actions"
+                            :mass-actions="available.massActions"
+                            :records="available.records"
+                            :meta="available.meta"
+                        >
+                        </slot>
+                    </template>
+                </x-admin::datagrid.table>
             </div>
         </div>
     </script>

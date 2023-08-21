@@ -50,7 +50,6 @@
                                 name="name"
                                 :value="old('name')"
                                 rules="required"
-                                class="mb-1"
                                 :label="trans('admin::app.marketing.email-marketing.campaigns.create.name')"
                                 :placeholder="trans('admin::app.marketing.email-marketing.campaigns.create.name')"
                             >

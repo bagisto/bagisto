@@ -47,7 +47,7 @@
                             <div class="mb-[10px]">
                                 <!-- Identifier -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.create.identifier')
                                     </x-admin::form.control-group.label>
 
@@ -69,7 +69,7 @@
 
                                 <!-- Country -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.create.country')
                                     </x-admin::form.control-group.label>
                     
@@ -98,7 +98,7 @@
                                 <!-- State -->
                                 <template v-if="haveStates()">
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-rates.create.state')
                                         </x-admin::form.control-group.label>
                         
@@ -137,7 +137,7 @@
 
                                 <!-- Tax Rate -->
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.taxes.tax-rates.create.tax_rate')
                                     </x-admin::form.control-group.label>
 
@@ -219,7 +219,7 @@
                                 <div v-if="is_zip">
                                     <!-- Zip From -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-rates.create.zip_from')
                                         </x-admin::form.control-group.label>
 
@@ -241,7 +241,7 @@
 
                                     <!-- Zip To -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.taxes.tax-rates.create.zip_to')
                                         </x-admin::form.control-group.label>
 

@@ -1,17 +1,26 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.sales.shipments.view.title') #{{ $shipment->id }}
+        {{ trans('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id]) }}
+        
     </x-slot:title>
 
     @php $order = $shipment->order; @endphp
 
-
     <div class="grid">
         <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
             <p class="text-[20px] text-gray-800 font-bold leading-[24px]">
-                @lang('admin::app.sales.shipments.view.title') #{{ $shipment->id }}
+                {{ trans('admin::app.sales.shipments.view.title', ['shipment_id' => $shipment->id]) }}
             </p>
+
+            <div class="flex gap-x-[10px] items-center">
+                {{-- Cancel Button --}}
+                <a href="{{ route('admin.sales.shipments.index') }}">
+                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                        @lang('admin::app.account.edit.cancel-btn')
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
     {{-- body content --}}
@@ -79,11 +88,12 @@
 
                 <x-slot:content>
                     <div class="flex flex-col pb-[16px]">
+                        {{-- Customer Full Name --}}
                         <p class="text-gray-800 font-semibold">
                             {{ $shipment->order->customer_full_name }}
-
                         </p>
 
+                        {{-- Customer Email --}}
                         <p class="text-gray-600">
                             @lang('admin::app.sales.shipments.view.email') - {{ $shipment->order->customer_email }}
                         </p>
@@ -197,7 +207,7 @@
                             @lang('admin::app.sales.shipments.view.payment-method')
                         </p>
 
-                        {{-- Currency --}}
+                        {{-- Currency Code --}}
                         <p class="pt-[16px] text-gray-800 font-semibold">  
                             {{ $order->order_currency_code }}
                         </p>
@@ -207,19 +217,24 @@
                         </p>
                     </div>
 
+                    {{-- Horizontal Line --}}
                     <span class="block w-full border-b-[1px] border-gray-300"></span>
                 
                     <div class="py-[16px]">
+                        {{-- Shipping Menthod --}}
                         <p class="text-gray-800 font-semibold">
                             {{ $order->shipping_title }}
                         </p>
+
                         <p class="text-gray-600">
                             @lang('admin::app.sales.shipments.view.shipping-method')
                         </p>
 
+                        {{-- Inventory Source --}}
                         <p class="pt-[16px] text-gray-800 font-semibold">
                             {{ core()->formatBasePrice($order->base_shipping_amount) }}
                         </p>
+
                         <p class="text-gray-600">
                             @lang('admin::app.sales.shipments.view.shipping-price')
                         </p>
@@ -231,12 +246,13 @@
                             <p class="pt-[16px] text-gray-800 font-semibold">
                                 {{ $shipment->inventory_source ? $shipment->inventory_source->name : $shipment->inventory_source_name }}
                             </p>
+
                             <p class="text-gray-600">
                                 @lang('admin::app.sales.shipments.view.inventory-source')
                             </p>
                         @endif
 
-                        @if($shipment->carrier_title)
+                        @if ($shipment->carrier_title)
                             <p class="pt-[16px] text-gray-800 font-semibold">
                                 {{ $shipment->carrier_title }}
                             </p>
@@ -246,7 +262,7 @@
                             </p>
                         @endif
 
-                        @if($shipment->track_number)
+                        @if ($shipment->track_number)
                             <p class="pt-[16px] text-gray-800 font-semibold">
                                 {{ $shipment->track_number }}
                             </p>

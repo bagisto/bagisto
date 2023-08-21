@@ -30,42 +30,49 @@
                                     @lang('admin::app.users.sessions.email')
                                 </x-admin::form.control-group.label>
 
-                                <x-admin::form.control-group.control
-                                    type="email"
+                                <x-admin::form.control-group.control 
+                                    type="email" 
                                     name="email" 
                                     id="email"
                                     class="w-[254px] max-w-full" 
                                     rules="required|email" 
                                     :label="trans('admin::app.users.sessions.email')"
                                     :placeholder="trans('admin::app.users.sessions.email')"
-                                >
+                                    >
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error
+                                <x-admin::form.control-group.error 
                                     control-name="email"
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
                         </div>
-                        <div class="mb-[10px]">
-                            {{-- Password --}}
+
+                        {{-- Password --}}
+                        <div class="relative w-full">
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.users.sessions.password')
                                 </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="password"
+                        
+                                <x-admin::form.control-group.control 
+                                    type="password" 
                                     name="password" 
                                     id="password"
-                                    class="w-[254px] max-w-full" 
+                                    class="w-[254px] max-w-full pr-10" 
                                     rules="required|min:6" 
                                     :label="trans('admin::app.users.sessions.password')"
                                     :placeholder="trans('admin::app.users.sessions.password')"
                                 >
                                 </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
+                        
+                                <span 
+                                    class="icon-view text-[22px] cursor-pointer absolute top-[42px] transform -translate-y-1/2 right-2"
+                                    onclick="switchVisibility()"
+                                >
+                                </span>
+                        
+                                <x-admin::form.control-group.error 
                                     control-name="password"
                                 >
                                 </x-admin::form.control-group.error>
@@ -80,7 +87,7 @@
                         >
                             @lang('admin::app.users.sessions.forget-password-link')
                         </a>
-                        <button 
+                        <button
                             class="px-[14px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
                             @lang('admin::app.users.sessions.submit-btn')
                         </button>
@@ -89,4 +96,16 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            function switchVisibility() {
+                let passwordField = document.getElementById("password");
+
+                passwordField.type = passwordField.type === "password"
+                    ? "text"
+                    : "password";
+            }
+        </script>
+    @endpush
 </x-admin::layouts.anonymous>

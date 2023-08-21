@@ -1,4 +1,17 @@
-@php $admin = auth()->guard('admin')->user(); @endphp
+@php
+    $admin = auth()->guard('admin')->user();
+
+    $orderStatusMessages = [
+        'pending'         => trans('admin::app.notification.order-status-messages.pending'),
+        'canceled'        => trans('admin::app.notification.order-status-messages.canceled'),
+        'closed'          => trans('admin::app.notification.order-status-messages.closed'),
+        'completed'       => trans('admin::app.notification.order-status-messages.completed'),
+        'processing'      => trans('admin::app.notification.order-status-messages.processing'),
+        'pending_payment' => trans('admin::app.notification.order-status-messages.pending_payment')
+    ];
+
+    $allLocales = core()->getAllLocales()->pluck('name', 'code');
+@endphp
 
 <header class="flex justify-between items-center px-[16px] py-[10px] bg-white border-b-[1px] border-gray-300 sticky top-0 z-10">
     <div class="flex gap-[16px]">
@@ -41,7 +54,7 @@
         </form>
     </div>
 
-    <div class="flex gap-[4px] items-center">
+    <div class="flex gap-[10px] items-center">
         <a 
             href="{{ route('shop.home.index') }}" 
             target="_blank"
@@ -54,14 +67,24 @@
             </span>
         </a>
 
-        <span 
-            class="icon-notification p-[6px] bg-gray-100 rounded-[6px] text-[24px] text-red cursor-pointer transition-all" 
-            title="@lang('admin::app.components.layouts.header.notifications')"
+        <x-admin::notification
+            notif-title="{{ __('admin::app.notification.notification-title', ['read' => 0]) }}"
+            :get-notification-url="route('admin.notification.get_notification')"
+            :view-all="route('admin.notification.index')"
+            order-view-url="{{ \URL::to('/') }}/{{ config('app.admin_url')}}/viewed-notifications/"
+            :pusher-key="env('PUSHER_APP_KEY')"
+            :pusher-cluster="env('PUSHER_APP_CLUSTER')"
+            title="{{ __('admin::app.notification.title-plural') }}"
+            view-all-title="{{ __('admin::app.notification.view-all') }}"
+            :get-read-all-url="route('admin.notification.read_all')"
+            :order-status-messages="json_encode($orderStatusMessages)"
+            read-all-title="{{ __('admin::app.notification.read-all') }}"
+            :locale-code="core()->getCurrentLocale()->code"
         >
-        </span>
+        </x-admin::notification>
 
-         {{-- Admin profile --}}
-         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+        {{-- Admin profile --}}
+        <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <x-slot:toggle>
                 @if ($admin->image)
                     <div class="profile-info-icon">
@@ -102,12 +125,12 @@
                     </a>
 
                     {{--Admin logout--}}
-                    <x-shop::form
+                    <x-admin::form
                         method="DELETE"
                         action="{{ route('admin.session.destroy') }}"
                         id="adminLogout"
                     >
-                    </x-shop::form>
+                    </x-admin::form>
 
                     <a
                         class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"

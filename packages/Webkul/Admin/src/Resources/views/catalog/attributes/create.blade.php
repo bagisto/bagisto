@@ -103,7 +103,12 @@
                         <!-- Options -->
                         <div 
                             class="p-[16px] bg-white box-shadow rounded-[4px]"
-                            v-if="swatch_attribute && (attribute_type == 'select' || attribute_type == 'multiselect' || attribute_type == 'price' || attribute_type == 'checkbox')"
+                            v-if="swatchAttribute && (
+                                    attributeType == 'select' 
+                                    || attributeType == 'multiselect' 
+                                    || attributeType == 'price' 
+                                    || attributeType == 'checkbox'
+                                )"
                         >
                             <div class="flex justify-between items-center mb-3">
                                 <p class="mb-[16px] text-[16px] text-gray-800 font-semibold">
@@ -129,11 +134,11 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="swatch_type"
-                                            id="swatch_type"
-                                            :value="old('swatch_type')"
-                                            v-model="swatch_type"
-                                            @change="show_swatch=true"
+                                            name="swatchType"
+                                            id="swatchType"
+                                            :value="old('swatchType')"
+                                            v-model="swatchType"
+                                            @change="showSwatch=true"
                                         >
                                             @foreach (['dropdown', 'color', 'image', 'text'] as $type)
                                                 <option value="{{ $type }}">
@@ -176,7 +181,7 @@
                                                 for="empty_option"
                                                 class="text-[14px] text-gray-600 font-semibold cursor-pointer"
                                             >
-                                                Create default empty opton
+                                                @lang('admin::app.catalog.attributes.create.default-options')
                                             </label>
                                         </div>
                                     </div>
@@ -190,7 +195,7 @@
                                                 <x-admin::table.th class="!p-0"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
-                                                <x-admin::table.th v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
+                                                <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                     @lang('admin::app.catalog.attributes.create.swatch')
                                                 </x-admin::table.th>
 
@@ -238,20 +243,25 @@
                                                     </x-admin::table.td>
 
                                                     <!-- Swatch Type Image / Color -->
-                                                    <x-admin::table.td v-if="show_swatch && (swatch_type == 'color' || swatch_type == 'image')">
+                                                    <x-admin::table.td v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
                                                         <!-- Swatch Image -->
-                                                        <div v-if="swatch_type == 'image'">
-                                                            @{{ element.params.swatch_value?.name }}
+                                                        <div v-if="swatchType == 'image'">
+                                                            <img 
+                                                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                                                :ref="'image_' + element.params.id"
+                                                                class="h-[50px] w-[50px]"
+                                                            >
 
                                                             <input
-                                                                type="hidden"
+                                                                type="file"
                                                                 :name="'options[' + element.id + '][swatch_value]'"
-                                                                v-model="element.params.swatch_value"
+                                                                class="hidden"
+                                                                :ref="'imageInput_' + element.id"
                                                             />    
                                                         </div>
 
                                                         <!-- Swatch Color -->
-                                                        <div v-if="swatch_type == 'color'">
+                                                        <div v-if="swatchType == 'color'">
                                                             <div
                                                                 class="w-[25px] h-[25px] mx-auto rounded-[5px]"
                                                                 :style="{ background: element.params.swatch_value }"
@@ -399,8 +409,8 @@
                                         id="type"
                                         class="cursor-pointer"
                                         :label="trans('admin::app.catalog.attributes.create.type')"
-                                        v-model="attribute_type"
-                                        @change="swatch_attribute=true"
+                                        v-model="attributeType"
+                                        @change="swatchAttribute=true"
                                     >
                                         <!-- Here! All Needed types are defined -->
                                         @foreach(['text', 'textarea', 'price', 'boolean', 'select', 'multiselect', 'datetime', 'date', 'image', 'file', 'checkbox'] as $type)
@@ -417,7 +427,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Textarea Switcher -->
-                                <x-admin::form.control-group v-show="swatch_attribute && (attribute_type == 'textarea')">
+                                <x-admin::form.control-group v-show="swatchAttribute && (attributeType == 'textarea')">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.enable-wysiwyg')
                                     </x-admin::form.control-group.label>
@@ -443,6 +453,62 @@
                             </x-slot:header>
                         
                             <x-slot:content>
+                                <!-- Input Validation -->
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.create.input-validation')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="validation"
+                                        :value="old('validation')"
+                                        id="validation"
+                                        class="cursor-pointer"
+                                        refs="validation"
+                                        :label="trans('admin::app.catalog.attributes.create.input-validation')"
+                                        v-model="validationType"
+                                        @change="inputValidation=true"
+                                    >
+                                        <!-- Here! All Needed types are defined -->
+                                        @foreach(['number', 'email', 'decimal', 'url', 'regex'] as $type)
+                                            <option value="{{ $type }}">
+                                                @lang('admin::app.catalog.attributes.create.' . $type)
+                                            </option>
+                                        @endforeach
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="validation"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+
+                                <!-- REGEX -->
+                                <x-admin::form.control-group
+                                    class="mb-[10px]"
+                                    v-show="inputValidation && (validationType == 'regex')"
+                                >
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.catalog.attributes.create.regex')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="text"
+                                        name="regex"
+                                        {{-- rules="required|regex:/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/" --}}
+                                        :value="old('regex')"
+                                        :placeholder="trans('admin::app.catalog.attributes.create.regex')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="regex"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
                                 <!-- All Types Define In The Loop -->
                                 @foreach (['is_required', 'is_unique'] as $item)
                                     <x-admin::form.control-group class="flex gap-[10px] w-max !mb-0 p-[6px] cursor-pointer select-none">
@@ -507,8 +573,8 @@
                                         id="is_filterable"
                                         name="is_filterable"
                                         value="1"
-                                        :disabled="attribute_type == 'price' ||  attribute_type == 'checkbox'
-                                            || attribute_type == 'select' || attribute_type == 'multiselect' 
+                                        :disabled="attributeType == 'price' ||  attributeType == 'checkbox'
+                                            || attributeType == 'select' || attributeType == 'multiselect' 
                                             ? false : true
                                         "
                                     >
@@ -550,7 +616,7 @@
                                 <!-- Image Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
-                                    v-if="swatch_type == 'image'"
+                                    v-if="swatchType == 'image'"
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.image')
@@ -572,7 +638,7 @@
                                 <!-- Color Input -->
                                 <x-admin::form.control-group
                                     class="w-full"
-                                    v-if="swatch_type == 'color'"
+                                    v-if="swatchType == 'color'"
                                 >
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.catalog.attributes.create.color')
@@ -691,13 +757,17 @@
                     return {
                         optionRowCount: 1,
 
-                        attribute_type: '',
+                        attributeType: '',
 
-                        swatch_type: '',
+                        validationType: '',
 
-                        swatch_attribute: false,
+                        inputValidation: false,
 
-                        show_swatch: false,
+                        swatchType: '',
+
+                        swatchAttribute: false,
+
+                        showSwatch: false,
 
                         isNullOptionChecked: false,
 
@@ -726,6 +796,10 @@
 
                         this.$refs.addOptionsRow.toggle();
 
+                        if (params.swatch_value instanceof File) {
+                            this.setFile(params);
+                        }
+
                         resetForm();
                     },
 
@@ -745,6 +819,19 @@
                         if (! event.isActive) {
                             this.isNullOptionChecked = false;                            
                         }
+                    },
+
+                    setFile(event) {
+                        let dataTransfer = new DataTransfer();
+
+                        dataTransfer.items.add(event.swatch_value);
+
+                        // use settimeout because need to wait for render dom before set the src or get the ref value
+                        setTimeout(() => {
+                            this.$refs['image_' + event.id].src =  URL.createObjectURL(event.swatch_value);
+                        }, 0);
+
+                        this.$refs['imageInput_' + event.id].files = dataTransfer.files;
                     }
                 },
             });

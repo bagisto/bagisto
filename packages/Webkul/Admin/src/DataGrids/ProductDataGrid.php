@@ -63,18 +63,22 @@ class ProductDataGrid extends DataGrid
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
-        $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
+        $queryBuilder->groupBy(
+            'product_flat.product_id',
+            'product_flat.locale',
+            'product_flat.channel'
+        );
 
         $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
 
-        // $this->addFilter('product_id', 'product_flat.product_id');
-        // $this->addFilter('product_name', 'product_flat.name');
-        // $this->addFilter('product_sku', 'product_flat.sku');
-        // $this->addFilter('product_number', 'product_flat.product_number');
-        // $this->addFilter('status', 'product_flat.status');
-        // $this->addFilter('product_type', 'product_flat.type');
-        // $this->addFilter('attribute_family', 'attribute_families.name');
+        $this->addFilter('product_id', 'product_flat.product_id');
+        $this->addFilter('product_name', 'product_flat.name');
+        $this->addFilter('product_sku', 'product_flat.sku');
+        $this->addFilter('product_number', 'product_flat.product_number');
+        $this->addFilter('status', 'product_flat.status');
+        $this->addFilter('product_type', 'product_flat.type');
+        $this->addFilter('attribute_family', 'attribute_families.name');
 
         return $queryBuilder;
     }
@@ -217,7 +221,7 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'    => 'icon-eye',
+            'icon'    => 'icon-delete',
             'title'   => trans('admin::app.datagrid.delete'),
             'method'  => 'DELETE',
             'url'     => function ($row) {

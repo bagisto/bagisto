@@ -21,7 +21,15 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+
         $queryBuilder = DB::table('customers')
+            ->leftJoin('addresses', 'customers.id', '=', 'addresses.customer_id')
+            ->where('addresses.address_type', 'customer')
+            ->addSelect(DB::raw('COUNT(addresses.id) as address_count'))
+
+            // ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
+            // ->addSelect(DB::raw('COUNT(orders.id) as orders_count'))
+
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect(
                 'customers.id as customer_id',
@@ -36,14 +44,15 @@ class CustomerDataGrid extends DataGrid
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
             );
 
-        // $this->addFilter('customer_id', 'customers.id');
+        $this->addFilter('customer_id', 'customers.id');
         // $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
-        // $this->addFilter('group', 'customer_groups.name');
-        // $this->addFilter('phone', 'customers.phone');
-        // $this->addFilter('gender', 'customers.gender');
-        // $this->addFilter('status', 'status');
-        // $this->addFilter('is_suspended', 'customers.is_suspended');
+        $this->addFilter('group', 'customer_groups.name');
+        $this->addFilter('phone', 'customers.phone');
+        $this->addFilter('gender', 'customers.gender');
+        $this->addFilter('status', 'status');
+        $this->addFilter('is_suspended', 'customers.is_suspended');
 
+        // dd($queryBuilder->get());
         return $queryBuilder;
     }
 
@@ -155,6 +164,16 @@ class CustomerDataGrid extends DataGrid
             'visibility'  => false,
             'sortable'    => true,
         ]);
+
+        $this->addColumn([
+            'index'       => 'address_count',
+            'label'       => trans('Address Count'),
+            'type'        => 'integer',
+            'searchable'  => false,
+            'filterable'  => true,
+            'visibility'  => false,
+            'sortable'    => true,
+        ]);
     }
 
     /**
@@ -165,16 +184,7 @@ class CustomerDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'         => 'icon-edit',
-            'title'        => trans('admin::app.datagrid.edit'),
-            'method'       => 'GET',
-            'url'          => function ($row) {
-                return route('admin.customer.edit', $row->customer_id);
-            },
-        ]);
-
-        $this->addAction([
-            'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
@@ -183,7 +193,7 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'icon'   => 'icon-delete',
+            'icon'   => 'icon-exit',
             'title'  => trans('admin::app.datagrid.login-as-customer'),
             'method' => 'GET',
             'target' => 'blank',

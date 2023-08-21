@@ -33,23 +33,23 @@ class NotificationController extends Controller
      */
     public function getNotifications()
     {
-        $params = request()->all();
+        $params = request()->except('page');
 
-        if (isset($params['page'])) {
-            unset($params['page']);
-        }
+        $searchResults = count($params)
+            ? $this->notificationRepository->getParamsData($params)
+            : $this->notificationRepository->getAll();
 
-        if (count($params)) {
-            $searchResults = $this->notificationRepository->getParamsData($params);
-        } else {
-            $searchResults = $this->notificationRepository->with('order')->latest()->paginate(10);
-        }
+        $results = isset($searchResults['notifications']) ? $searchResults['notifications'] : $searchResults;
+
+        $statusCount = isset($searchResults['status_counts']) ? $searchResults['status_counts'] : '';
 
         return [
-            'search_results' => $searchResults,
+            'search_results' => $results,
+            'status_count'   => $statusCount,
             'total_unread'   => $this->notificationRepository->where('read', 0)->count(),
         ];
     }
+
 
     /**
      * Update the notification is reade or not.

@@ -16,9 +16,6 @@ import { configure, defineRule } from "vee-validate";
 import { localize } from "@vee-validate/i18n";
 import en from "@vee-validate/i18n/dist/locale/en.json";
 import AllRules from "@vee-validate/rules";
-import draggable from 'vuedraggable';
-import Flatpickr from "flatpickr";
-import 'flatpickr/dist/flatpickr.css';
 
 /**
  * Registration of all global validators.
@@ -106,32 +103,38 @@ import Axios from "./plugins/axios";
 import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
 import Admin from "./plugins/admin";
-import debounce from "./plugins/debounce";
+import Debounce from "./plugins/debounce";
 
-window.debounce = debounce;
 [
     Axios,
     CreateElement,
     Emitter,
     Admin,
-    debounce
+    Debounce
 ].forEach((plugin) => app.use(plugin));
 
 /**
  * Global components registration;
  */
 import { Field, Form, ErrorMessage } from "vee-validate";
-import Slugify from "./directives/slugify";
-import SlugifyTarget from "./directives/slugify-target";
+import Draggable from 'vuedraggable';
 
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("VErrorMessage", ErrorMessage);
-app.component("draggable", draggable);
+app.component("draggable", Draggable);
+
+/**
+ * Global directives.
+ */
+import Slugify from "./directives/slugify";
+import SlugifyTarget from "./directives/slugify-target";
 
 app.directive("slugify", Slugify);
 app.directive("slugify-target", SlugifyTarget);
 
+import Flatpickr from "flatpickr";
+import 'flatpickr/dist/flatpickr.css';
 window.Flatpickr = Flatpickr;
 
 /**

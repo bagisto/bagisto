@@ -80,7 +80,7 @@ class InvoiceController extends Controller
         $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canInvoice()) {
-            session()->flash('error', trans('admin::app.sales.invoices.creation-error'));
+            session()->flash('error', trans('admin::app.sales.invoices.create.creation-error'));
 
             return redirect()->back();
         }
@@ -90,13 +90,13 @@ class InvoiceController extends Controller
         ]);
 
         if (! $this->invoiceRepository->haveProductToInvoice(request()->all())) {
-            session()->flash('error', trans('admin::app.sales.invoices.product-error'));
+            session()->flash('error', trans('admin::app.sales.invoices.create.product-error'));
 
             return redirect()->back();
         }
 
         if (! $this->invoiceRepository->isValidQuantity(request()->all())) {
-            session()->flash('error', trans('admin::app.sales.invoices.invalid-qty'));
+            session()->flash('error', trans('admin::app.sales.invoices.create.invalid-qty'));
 
             return redirect()->back();
         }
@@ -105,7 +105,7 @@ class InvoiceController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.sales.invoices.create-success'));
+        session()->flash('success', trans('admin::app.sales.invoices.create.create-success'));
 
         return redirect()->route('admin.sales.orders.view', $orderId);
     }

@@ -9,6 +9,13 @@ use Webkul\Sales\Models\OrderAddress;
 class OrderShipmentsDataGrid extends DataGrid
 {
     /**
+     * Shipment Id.
+     *
+     * @var string
+     */
+    protected $primaryColumn = 'shipment_id';
+
+    /**
      * Prepare query builder.
      *
      * @return \Illuminate\Database\Query\Builder
@@ -32,12 +39,12 @@ class OrderShipmentsDataGrid extends DataGrid
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'))
             ->selectRaw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name) as inventory_source_name');
 
-        // $this->addFilter('shipment_id', 'shipments.id');
-        // $this->addFilter('shipment_order_id', 'ors.increment_id');
-        // $this->addFilter('shipment_total_qty', 'shipments.total_qty');
+        $this->addFilter('shipment_id', 'shipments.id');
+        $this->addFilter('shipment_order_id', 'ors.increment_id');
+        $this->addFilter('shipment_total_qty', 'shipments.total_qty');
         // $this->addFilter('inventory_source_name', DB::raw('IF(' . DB::getTablePrefix() . 'shipments.inventory_source_id IS NOT NULL,' . DB::getTablePrefix() . 'is.name, ' . DB::getTablePrefix() . 'shipments.inventory_source_name)'));
-        // $this->addFilter('order_date', 'ors.created_at');
-        // $this->addFilter('shipment_created_at', 'shipments.created_at');
+        $this->addFilter('order_date', 'ors.created_at');
+        $this->addFilter('shipment_created_at', 'shipments.created_at');
         // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
 
         return $queryBuilder;
@@ -122,11 +129,11 @@ class OrderShipmentsDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            // 'icon'   => 'icon-eye',
+            'icon'   => 'icon-view',
             'title'  => trans('admin::app.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.sales.shipments.view', $row->id);
+                return route('admin.sales.shipments.view', $row->shipment_id);
             },
         ]);
     }

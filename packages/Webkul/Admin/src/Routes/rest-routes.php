@@ -26,7 +26,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      */
     Route::post('tinymce/upload', [TinyMCEController::class, 'upload'])->name('admin.tinymce.upload');
 
-
     /**
      * Admin profile routes.
      */

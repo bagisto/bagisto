@@ -186,7 +186,7 @@ class CustomerController extends Controller
 
         auth()->guard('customer')->login($customer);
 
-        session()->flash('success', trans('admin::app.customers.login-as-customer.login-message', ['customer_name' => $customer->name]));
+        session()->flash('success', trans('admin::app.customers.index.login-message', ['customer_name' => $customer->name]));
 
         return redirect(route('shop.customers.account.profile.index'));
     }
@@ -316,7 +316,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses'])->findOrFail($id);
+        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses' => function ($query) {
+            $query->orderBy('default_address', 'desc');
+        }])->findOrFail($id);
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 

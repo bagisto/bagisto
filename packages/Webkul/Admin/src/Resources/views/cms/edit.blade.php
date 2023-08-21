@@ -11,7 +11,7 @@
         @lang('admin::app.cms.edit.title')
     </x-slot:title>
 
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.cms.update', $page->id)"
         enctype="multipart/form-data"
     >
@@ -30,7 +30,7 @@
 
                 {{-- Preview Button --}}
                 @if ($page->translate($locale))
-                    <a 
+                    <a
                         href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}"
                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                         target="_blank"
@@ -40,7 +40,7 @@
                 @endif
 
                 {{--Save Button --}}
-                <button 
+                <button
                     type="submit"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
@@ -71,13 +71,14 @@
 
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.control
-                            type="tinymce"
+                            type="textarea"
                             name="{{ $locale }}[html_content]"
                             :value="old('html_content')"
                             id="content"
                             rules="required"
                             :label="trans('admin::app.cms.edit.content')"
                             :placeholder="trans('admin::app.cms.edit.content')"
+                            :tinymce="true"
                         >
                             {{ old($locale)['html_content'] ?? ($page->translate($locale)['html_content'] ?? '') }}
                         </x-admin::form.control-group.control>
@@ -133,7 +134,7 @@
                         >
                         </x-admin::form.control-group.error>
                     </x-admin::form.control-group>
-                    
+
                     <x-admin::form.control-group class="mb-[10px]">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.cms.edit.meta-keywords')
@@ -191,14 +192,14 @@
                                 </p>
                             </div>
                         </x-slot:header>
-                
+
                         <x-slot:content>
                             <div class="mb-[10px]">
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.cms.edit.page-title')
                                     </x-admin::form.control-group.label>
-            
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="{{ $locale }}[page_title]"
@@ -209,13 +210,13 @@
                                         :placeholder="trans('admin::app.cms.edit.page-title')"
                                     >
                                     </x-admin::form.control-group.control>
-            
+
                                     <x-admin::form.control-group.error
                                         control-name="{{ $locale }}[page_title]"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-            
+
                                 {{-- Select Channels --}}
                                 <p class="required block leading-[24px] text-gray-800 font-medium">
                                     @lang('admin::app.cms.create.channels')
@@ -234,8 +235,8 @@
                                             :checked="in_array($channel->id, $selectedOptionIds)"
                                         >
                                         </x-admin::form.control-group.control>
-                                            
-                                        <x-admin::form.control-group.label 
+
+                                        <x-admin::form.control-group.label
                                             :for="'channels_' . $channel->id"
                                             class="!text-[14px] !text-gray-600 font-semibold cursor-pointer"
                                         >
@@ -247,7 +248,7 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-                                @endforeach 
+                                @endforeach
                             </div>
                         </x-slot:content>
                     </x-admin::accordion>
@@ -269,7 +270,7 @@
                             <span class="icon-sort-down text-[24px]"></span>
                         </div>
                     </x-slot:toggle>
-                
+
                     <!-- Locale content -->
                     <x-slot:content class="!p-[0px]">
                         <div class="grid gap-[4px] mt-[10px] pb-[10px]">

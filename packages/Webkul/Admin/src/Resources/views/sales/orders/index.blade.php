@@ -36,7 +36,7 @@
                             <x-admin::modal ref="exportModal">
                                 <x-slot:toggle>
                                     <p class="text-gray-600 font-semibold leading-[24px]">
-                                        Export                                            
+                                        Export
                                     </p>
                                 </x-slot:toggle>
 
@@ -65,7 +65,7 @@
                                 <x-slot:footer>
                                     <!-- Save Button -->
                                     <button
-                                        type="submit" 
+                                        type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
                                         @lang('Export')
@@ -76,15 +76,103 @@
                     </div>
                 </x-slot:content>
             </x-admin::dropdown>
-
-            <a href="#">
-                <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
-                    @lang('Create Order')
-                </div>
-            </a>
         </div>
     </div>
-    
-    <x-admin::datagrid :src="route('admin.sales.orders.index')"></x-admin::datagrid>
 
+    <x-admin::datagrid :src="route('admin.sales.orders.index')">
+        <template #header="{ columns, records, sortPage }">
+            <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-4 grid-rows-1">
+                <div
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'increment_id'))"
+                >
+                    <div class="flex gap-[10px]">
+                        <p class="text-gray-600">Order ID / Date / Status</p>
+                    </div>
+                </div>
+
+                <div
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'base_grand_total'))"
+                >
+                    <p class="text-gray-600">Total / Pay Via / Channel</p>
+                </div>
+
+                <div
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'full_name'))"
+                >
+                    <p class="text-gray-600">Customer / Email / Location / Image</p>
+                </div>
+            </div>
+        </template>
+
+        <template #body="{ columns, records }">
+            <div class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
+                <div class="">
+                    <div class="flex gap-[10px]">
+                        <div class="flex flex-col gap-[6px]">
+                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.increment_id }}</p>
+
+                            <p class="text-gray-600">@{{ record.created_at }}</p>
+
+                            <p class="label-pending"> @{{ record.status }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="flex flex-col gap-[6px]">
+                        <p class="text-[16px] text-gray-800 font-semibold">@{{ $admin.formatPrice(record.base_grand_total) }}</p>
+
+                        <p class="text-gray-600">Pay by - @{{ record.method }}</p>
+
+                        <p class="text-gray-600">@{{ record.channel_name }}</p>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="flex flex-col gap-[6px]">
+                        <p class="text-[16px] text-gray-800">@{{ record.full_name }}</p>
+
+                        <p class="text-gray-600">@{{ record.customer_email }}</p>
+
+                        <p class="text-gray-600">@{{ record.location }}</p>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="flex  gap-[6px] items-center">
+                        <div class="flex gap-[6px] items-center flex-wrap">
+                            <div class="relative">
+                                <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
+
+                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">1</span>
+                            </div>
+
+                            <div class="relative">
+                                <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
+
+                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">2</span>
+                            </div>
+
+                            <div class="relative">
+                                <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
+
+                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">3</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-[6px] items-center">
+                            <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
+                                <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">2+ More Products </p>
+                            </div>
+
+                            <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </x-admin::datagrid>
 </x-admin::layouts>

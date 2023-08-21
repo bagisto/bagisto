@@ -10,7 +10,7 @@ return [
     ], [
         'key'    => 'customer.captcha.credentials',
         'name'   => 'customer::app.admin.system.captcha.credentials',
-        'info'   => 'customer::app.admin.system.captcha.credentials',
+        'info'   => 'customer::app.admin.system.captcha.credentials-info',
         'sort'   => 1,
         'fields' => [
             [

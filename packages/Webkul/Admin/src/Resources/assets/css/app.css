@@ -299,7 +299,7 @@
 
     .icon-clip:before {
         content: "\e940";
-    }      
+    }
 
     p {
         @apply text-[14px] leading-[17px];
@@ -378,7 +378,7 @@
         content: "\e938";
     color: #ffb600;
     }
-	
+
     .shimmer {
         animation-duration: 2.2s;
         animation-fill-mode: forwards;

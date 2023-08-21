@@ -1083,9 +1083,9 @@ return [
             'is-suspended'         => 'Is Suspended',
             'suspend'              => 'Suspend',
             'suspended'            => 'Suspended',
-        ],   
-        'reviews'     =>   
-        [   
+        ],
+        'reviews'     =>
+        [
             'title'          => 'Bewertungen',
             'edit-title'     => 'Bewertung bearbeiten',
             'rating'         => 'Bewertung',
@@ -1357,13 +1357,6 @@ return [
             'name'       => '401',
             'title'      => 'Unauthorisiert',
             'message'    => 'Die Anforderung wurde nicht angewendet, da keine gültigen Authentifizierungsdaten für die Zielressource vorhanden sind.',
-        ],
-
-        'tinymce' =>
-        [
-            'http-error'    => 'HTTP error.',
-            'invalid-json'  => 'Invalid JSON.',
-            'upload-failed' => 'Image upload failed due to a XHR Transport error.',
         ],
     ],
     'export'        =>

@@ -29,7 +29,7 @@
                                 {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.currencies.create.code')
                                     </x-admin::form.control-group.label>
 
@@ -51,7 +51,7 @@
                                 </x-admin::form.control-group>
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required"> 
                                         @lang('admin::app.settings.currencies.create.name')
                                     </x-admin::form.control-group.label>
 

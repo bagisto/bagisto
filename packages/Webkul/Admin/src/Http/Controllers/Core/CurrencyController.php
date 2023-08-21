@@ -93,7 +93,7 @@ class CurrencyController extends Controller
 
         $this->currencyRepository->update($data, $id);
 
-        session()->flash('success', trans('admin::app.settings.currencies.update-success'));
+        session()->flash('success', trans('admin::app.settings.currencies.edit.update-success'));
 
         return redirect()->route('admin.currencies.index');
     }

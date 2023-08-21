@@ -24,22 +24,30 @@ class OrderDataGrid extends DataGrid
                 $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
                     ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
             })
+            ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
+            ->select('orders.id', 'order_payment.method')
+
             ->addSelect(
                 'orders.id',
                 'orders.increment_id',
-                'orders.base_sub_total',
                 'orders.base_grand_total',
                 'orders.created_at',
                 'channel_name',
-                'status'
+                'status',
+                'customer_email'
             )
-            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
+            ->addSelect(
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name) as full_name')
+            )
+            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, " ", ' . DB::getTablePrefix() . 'order_address_billing.state," ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location'))
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
+
 
         // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
         // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
-        // $this->addFilter('increment_id', 'orders.increment_id');
-        // $this->addFilter('created_at', 'orders.created_at');
+        $this->addFilter('increment_id', 'orders.increment_id');
+        $this->addFilter('created_at', 'orders.created_at');
+
         return $queryBuilder;
     }
 
@@ -52,26 +60,8 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.sales.orders.index.order-id'),
             'type'       => 'string',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'base_sub_total',
-            'label'      => trans('admin::app.datagrid.sub-total'),
-            'type'       => 'price',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.datagrid.grand-total'),
-            'type'       => 'price',
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
@@ -79,7 +69,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.datagrid.order-date'),
+            'label'      => trans('admin::app.sales.orders.index.date'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -87,17 +77,8 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'channel_name',
-            'label'      => trans('admin::app.datagrid.channel-name'),
-            'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
+            'label'      => trans('admin::app.sales.orders.index.status'),
             'type'       => 'checkbox',
             'options'    => [
                 'processing'      => trans('shop::app.customer.account.order.index.processing'),
@@ -145,8 +126,17 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'billed_to',
-            'label'      => trans('admin::app.datagrid.billed-to'),
+            'index'      => 'base_grand_total',
+            'label'      => trans('admin::app.sales.orders.index.grand-total'),
+            'type'       => 'price',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'method',
+            'label'      => trans('admin::app.sales.orders.index.pay-via'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -154,10 +144,37 @@ class OrderDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'shipped_to',
-            'label'      => trans('admin::app.datagrid.shipped-to'),
+            'index'      => 'channel_name',
+            'label'      => trans('admin::app.sales.orders.index.channel-name'),
             'type'       => 'string',
             'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'full_name',
+            'label'      => trans('admin::app.sales.orders.index.customer'),
+            'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'customer_email',
+            'label'      => trans('admin::app.sales.orders.index.email'),
+            'type'       => 'string',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'location',
+            'label'      => trans('admin::app.sales.orders.index.location'),
+            'type'       => 'string',
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -171,8 +188,8 @@ class OrderDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon-eye',
-            'title'  => trans('admin::app.datagrid.view'),
+            'icon'   => 'icon-view',
+            'title'  => trans('admin::app.sales.orders.index.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.orders.view', $row->id);
