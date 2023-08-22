@@ -46,11 +46,11 @@
                             @endif
 
                             <div class="grid">
-                                <p class="text-[16px] text-gray-800">
+                                <p class="mb-[5px] text-[16px] text-gray-800 font-semibold">
                                     @lang($child['name'])
                                 </p>
                                 
-                                <p class="text-gray-600">
+                                <p class="text-[12px] text-gray-600">
                                     @lang($child['info'] ?? '')
                                 </p>
                             </div>
