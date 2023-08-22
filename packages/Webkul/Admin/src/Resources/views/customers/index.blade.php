@@ -141,24 +141,20 @@
             <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
                 <div class="">
                     <div class="flex gap-[10px]">
-                        <label
-                            class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                        <input 
+                            type="checkbox" 
+                            :name="`mass_action_select_record_${record.customer_id}`"
+                            :id="`mass_action_select_record_${record.customer_id}`"
+                            :value="record.customer_id"
+                            class="hidden peer"
+                            v-model="applied.massActions.indices"
+                            @change="setCurrentSelectionMode"
+                        >
+
+                        <label 
+                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                             :for="`mass_action_select_record_${record.customer_id}`"
                         >
-                            <input 
-                                type="checkbox" 
-                                :name="`mass_action_select_record_${record.customer_id}`"
-                                :id="`mass_action_select_record_${record.customer_id}`"
-                                :value="record.customer_id"
-                                class="hidden peer"
-                                v-model="applied.massActions.indices"
-                                @change="setCurrentSelectionMode"
-                            >
-
-                            <label 
-                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
-                                :for="`mass_action_select_record_${record.customer_id}`"
-                            ></label>
                         </label>
                         <div class="flex flex-col gap-[6px]">
                             <p 
