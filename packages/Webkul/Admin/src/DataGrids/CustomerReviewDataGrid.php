@@ -23,6 +23,7 @@ class CustomerReviewDataGrid extends DataGrid
     {
         $queryBuilder = DB::table('product_reviews as pr')
             ->leftJoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
+            ->leftJoin('customers as c', 'pr.customer_id', '=', 'c.id')
             ->select(
                 'pr.id as product_review_id',
                 'pr.title',
@@ -30,7 +31,8 @@ class CustomerReviewDataGrid extends DataGrid
                 'pf.name as product_name',
                 'pr.status as product_review_status',
                 'pr.rating',
-                'pr.created_at'
+                'pr.created_at',
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'c.first_name, " ", ' . DB::getTablePrefix() . 'c.last_name) as customer_full_name')
             )
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());
@@ -116,7 +118,6 @@ class CustomerReviewDataGrid extends DataGrid
                     case 'disapproved':
                         return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.disapproved') . '</span>';
                         break;
-
                 }
             },
         ]);
