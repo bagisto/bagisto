@@ -105,7 +105,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('upload-sample/{id}', 'uploadSample')->name('admin.catalog.products.upload_sample');
 
-            Route::post('mass-action', 'massActionHandler')->name('admin.catalog.products.mass_action');
+            Route::post('mass-action', 'massUpdate')->name('admin.catalog.products.mass_action');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
 

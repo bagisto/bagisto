@@ -20,8 +20,21 @@ class DashboardController extends Controller
     /**
      * Dashboard page.
      */
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function index()
     {
+        if (request()->ajax()) {
+            $statistics = $this->dashboardService
+                ->setStartDate(request()->date('start'))
+                ->setEndDate(request()->date('end'))
+                ->getStatistics();
+
+            return response()->json([
+                'statistics' => $statistics,
+                'startDate' => $this->dashboardService->getStartDate(),
+                'endDate' => $this->dashboardService->getEndDate(),
+            ]);
+        }
+
         $statistics = $this->dashboardService
             ->setStartDate(request()->date('start'))
             ->setEndDate(request()->date('end'))
