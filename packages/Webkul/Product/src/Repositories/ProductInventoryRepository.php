@@ -47,7 +47,7 @@ class ProductInventoryRepository extends Repository
     {
         return $this->getModel()
             ->with('product', 'product.attribute_family', 'product.attribute_values', 'product.images')
-            ->select('product_id', DB::raw('SUM(qty) as total_qty'))
+            ->select('*', DB::raw('SUM(qty) as total_qty'))
             ->groupBy('product_id')
             ->orderBy('total_qty', 'ASC')
             ->limit(5)
