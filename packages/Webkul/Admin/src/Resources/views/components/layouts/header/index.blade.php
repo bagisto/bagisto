@@ -104,19 +104,14 @@
 
             {{-- Admin Dropdown --}}
             <x-slot:content class="!p-[0px]">
-                <div class="grid gap-[10px] p-[20px] pb-0">
+                <div class="grid gap-[10px] px-[20px] py-[10px] border border-b-gray-300">
                     {{-- Version --}}
                     <p class="text-gray-400">
                         @lang('admin::app.layouts.app-version', ['version' => 'v' . core()->version()])
                     </p>
-
-                    {{-- Title --}}
-                    <p class="py-1 text-[16px] text-gray-500">
-                        @lang('admin::app.layouts.account-title')
-                    </p>
                 </div>
 
-                <div class="grid gap-[4px] mt-[10px] pb-[10px]">
+                <div class="grid gap-[4px] pb-[10px]">
                     <a
                         class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"
                         href="{{ route('admin.account.edit') }}"
