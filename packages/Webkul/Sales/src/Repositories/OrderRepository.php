@@ -409,6 +409,34 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Get orders by Today date
+     */
+    public function getOrdersByDate(?Carbon $from = null, Carbon $to = null)
+    {
+        if ($from && $to) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->whereBetween('orders.created_at', [$from, $to])
+                ->get();
+        }
+
+        if ($from) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->where('created_at', '>=', $from)
+                ->get();
+        }
+
+        if ($to) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->where('created_at', '<=', $to)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'))
+                ->get();
+        }
+    }
+
+    /**
      * Calculate sale amount by date.
      */
     public function calculateSaleAmountByDate(?Carbon $from = null, ?Carbon $to = null): ?float

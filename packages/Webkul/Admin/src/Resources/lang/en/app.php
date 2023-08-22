@@ -30,6 +30,7 @@ return [
                 'pay-via'      => 'Pay Via',
                 'date'         => 'Date',
                 'order-id'     => 'Order ID',
+                'pay-by'       => 'Pay By - :method',
                 'status'       => 'Status',
                 'grand-total'  => 'Grand Total',
                 'channel-name' => 'Channel',
