@@ -39,16 +39,20 @@
                     @foreach ($refund->items as $item)
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
                             <div class="flex gap-[10px]">
-                                <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                @if ($item->product)
                                     <img
-                                        class="w-[20px]"
-                                        src="{{ bagisto_asset('images/product-placeholders/top-angle.svg') }}"
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        src="{{ $item->product->base_image_url }}"
                                     >
-
-                                    <p class="text-[6px] text-gray-400 font-semibold">
-                                        @lang('admin::app.sales.refunds.view.product-image')
-                                    </p>
-                                </div>
+                                @else
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        
+                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                            @lang('admin::app.sales.invoices.view.product-image') 
+                                        </p>
+                                    </div>
+                                @endif
 
                                 {{-- Product Name --}}
                                 <div class="grid gap-[6px] place-content-start">
@@ -243,7 +247,7 @@
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                            <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
 
                             <div class="flex items-center justify-between">
                                 <p class="text-gray-600 text-[16px] py-[16px] font-semibold">

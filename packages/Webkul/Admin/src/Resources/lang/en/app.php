@@ -1436,7 +1436,7 @@ return [
                     'title'          => 'Edit Template',
                     'active'         => 'Active',
                     'content'        => 'Content*',
-                    'cancel'         => 'Cancel',
+                    'back-btn'       => 'Back',
                     'draft'          => 'Draft',
                     'general'        => 'General',
                     'inactive'       => 'Inactive',

@@ -34,13 +34,13 @@
             <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                 {{--Content --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="required text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('admin::app.marketing.email-marketing.templates.create.content')
-                    </p>
-
                     <div class="mb-[10px]">
                         {{-- Template Textarea --}}
                         <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.marketing.email-marketing.templates.create.content')
+                            </x-admin::form.control-group.label>
+
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 name="content"

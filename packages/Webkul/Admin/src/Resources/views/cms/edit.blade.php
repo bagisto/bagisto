@@ -65,11 +65,11 @@
 
                 {{--Content --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="required text-[16px] text-gray-800 font-semibold mb-[16px]">
-                        @lang('admin::app.cms.edit.content')
-                    </p>
-
                     <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.cms.edit.content')
+                        </x-admin::form.control-group.label>
+
                         <x-admin::form.control-group.control
                             type="textarea"
                             name="{{ $locale }}[html_content]"
