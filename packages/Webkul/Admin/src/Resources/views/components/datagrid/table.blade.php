@@ -8,7 +8,7 @@
             <div class="table-responsive grid w-full shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.20)] border-[1px] border-gray-300 rounded-[4px] bg-white overflow-hidden">
                 <slot name="header">
                     <div
-                        class="row grid gap-[10px] px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 items-center"
+                        class="row grid gap-[10px] px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold items-center"
                         :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                     >
                         <!-- Mass Actions -->
