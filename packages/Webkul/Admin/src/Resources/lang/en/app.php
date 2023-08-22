@@ -357,7 +357,7 @@ return [
             'note-placeholder'        => 'Write Your Note here',
             'delete-success'          => 'Account Deleted Successfully',
             'order-pending'           => 'Cannot delete account because some Order(s) are pending or processing state.',
-
+            'delete-confirmation'     => 'Are you sure you want to delete this account?',
         ],
 
         'groups' => [
