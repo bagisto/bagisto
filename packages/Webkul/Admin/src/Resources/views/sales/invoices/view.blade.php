@@ -27,7 +27,7 @@
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.sales.invoices.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.cancel-btn')
+                        @lang('admin::app.account.edit.back-btn')
                     </span>
                 </a>
             </div>
@@ -180,8 +180,6 @@
                                 {{-- Item Grand Total --}}
                                 <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
-                                    <span class="icon-sort-up text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100">
-                                    </span>
                                 </p>
 
                                 {{-- Item Base Price --}}

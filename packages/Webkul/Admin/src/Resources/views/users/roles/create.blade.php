@@ -21,7 +21,7 @@
                             <!-- Cancel Button -->
                             <a href="{{ route('admin.roles.index') }}">
                                 <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                    @lang('admin::app.users.roles.create.cancel-btn')
+                                    @lang('admin::app.users.roles.create.back-btn')
                                 </span>
                             </a>
 

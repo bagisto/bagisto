@@ -10,7 +10,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a href="{{ route('admin.catalog.families.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.catalog.families.create.cancel-btn')
+                        @lang('admin::app.catalog.families.create.back-btn')
                     </span>
                 </a>
 

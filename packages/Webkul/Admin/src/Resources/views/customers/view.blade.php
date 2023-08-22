@@ -490,7 +490,8 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.date-of-birth') - {{ $customer->date_of_birth }}
+                            @lang('admin::app.customers.view.date-of-birth') -
+                            {{ $customer->date_of_birth ?? 'N/A' }}   
                         </p>
 
                         <p class="text-gray-600">
