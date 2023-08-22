@@ -88,37 +88,39 @@
     <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data">
         <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
             <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                <div 
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'full_name'))"
-                >
-                    <div class="flex gap-[10px]">
-                        <label 
-                            class="flex gap-[4px] w-max items-center cursor-pointer select-none"
-                            for="mass_action_select_all_records"
+                <div class="flex gap-[10px]">
+                    <label 
+                        class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                        for="mass_action_select_all_records"
+                    >
+                        <input 
+                            type="checkbox" 
+                            name="mass_action_select_all_records"
+                            id="mass_action_select_all_records"
+                            class="hidden peer"
+                            :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                            @change="selectAllRecords"
                         >
-                            <input 
-                                type="checkbox" 
-                                name="mass_action_select_all_records"
-                                id="mass_action_select_all_records"
-                                class="hidden peer"
-                                :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                @change="selectAllRecords"
-                            >
 
-                            <span
-                                class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
-                                :class="[
-                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-navyBlue' : (
-                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
-                                    ),
-                                ]"
-                            >
-                            </span>
-                        </label>
+                        <span
+                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                            :class="[
+                                applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-navyBlue' : (
+                                    applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                ),
+                            ]"
+                        >
+                        </span>
+                    </label>
+                
+                    <div 
+                        class="cursor-pointer"
+                        @click="sortPage(columns.find(column => column.index === 'full_name'))"
+                    >
                         <p class="text-gray-600">Customer Name / Email / Contact Number</p>
                     </div>
                 </div>
+               
                 <div 
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'status'))"
