@@ -164,9 +164,9 @@
                                     class="mb-0 !p-0 rounded-[12px] text-gray-700"
                                     :width="200"
                                     :height="110"
-                                    :label="trans('admin::app.catalog.categories.create.add-banner')"
                                     :is-multiple="false"
                                     accepted-types="image/*"
+                                    :label="trans('admin::app.catalog.categories.create.add-banner')"
                                     :src="isset($customer) ? $customer->category_icon_image : ''"
                                 >
                                 </x-admin::form.control-group.control>
@@ -186,27 +186,8 @@
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 
-                    <div class="flex flex-col gap-[3px]">
-                        <p
-                            class="text-[#161B9D]"
-                            v-text="metaTitle"
-                        >
-                        </p>
-
-                        {{-- Get Meta Title From v-model and convet in lower case also replace space with (-) --}}
-                        <p
-                            class="text-[#135F29]"
-                            v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
-                        >
-                        </p>
-
-                        {{-- Get Meta Description From v-model --}}
-                        <p
-                            class="text-gray-600"
-                            v-text="metaDescription"
-                        >
-                        </p>
-                    </div>
+                    {{-- SEO Title & Description Vue Componnet --}}
+                    <v-category-seo></v-category-seo>
 
                     <div class="mt-[30px]">
                         {{-- Meta Title --}}
@@ -218,10 +199,10 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="meta_title"
+                                id="meta_title"
                                 :value="old('meta_title')"
                                 :label="trans('admin::app.catalog.categories.create.meta-title')"
                                 :placeholder="trans('admin::app.catalog.categories.create.meta-title')"
-                                v-model="metaTitle"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -273,10 +254,10 @@
                             <x-admin::form.control-group.control
                                 type="textarea"
                                 name="meta_description"
+                                id="meta_description"
                                 :value="old('meta_description')"
                                 :label="trans('admin::app.catalog.categories.create.meta-description')"
                                 :placeholder="trans('admin::app.catalog.categories.create.meta-description')"
-                                v-model="metaDescription"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -398,4 +379,58 @@
             </div>
         </div>
     </x-admin::form>
+
+    @pushOnce('scripts')
+    {{-- SEO Vue Component Template --}}
+    <script type="text/x-template" id="v-category-seo-template">
+        <div class="flex flex-col gap-[3px] mb-[30px]">
+            <p 
+                class="text-[#161B9D]"
+                v-text="metaTitle"
+            >
+            </p>
+
+            <!-- SEO Meta Title -->
+            <p 
+                class="text-[#135F29]"
+                v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
+            >
+            </p>
+
+            <!-- SEP Meta Description -->
+            <p 
+                class="text-gray-600"
+                v-text="metaDescription"
+            >
+            </p>
+        </div>
+    </script>
+
+    {{-- SEO Vue Component --}}
+    <script type="module">
+        app.component('v-category-seo', {
+            template: '#v-category-seo-template',
+
+            data() {
+                return {
+                    metaTitle: this.$parent.getValues()['meta_title'],
+
+                    metaDescription: this.$parent.getValues()['meta_description'],
+                }
+            },
+
+            mounted() {
+                let self = this;
+
+                document.getElementById('meta_title').addEventListener('input', function(e) {
+                    self.metaTitle = e.target.value;
+                });
+
+                document.getElementById('meta_description').addEventListener('input', function(e) {
+                    self.metaDescription = e.target.value;
+                });
+            },
+        });
+    </script>
+@endPushOnce
 </x-admin::layouts>

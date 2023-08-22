@@ -10,7 +10,7 @@ return [
             'cancel-btn'           => 'Cancel',
             'general'              => 'General',
             'profile-image'        => 'Profile Image',
-            'upload-image-info'    => 'Upload a Profile Image (100px X 100px) in PNG or JPG Format',
+            'upload-image-info'    => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format',
             'name'                 => 'Name',
             'email'                => 'Email',
             'password'             => 'Password',
