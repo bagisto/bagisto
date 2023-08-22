@@ -27,7 +27,7 @@
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.sales.invoices.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.cancel-btn')
+                        @lang('admin::app.account.edit.back-btn')
                     </span>
                 </a>
             </div>
@@ -132,13 +132,20 @@
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
                             <div class="flex gap-[10px]">
                                 {{-- Product Image --}}
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                    
-                                    <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
-                                        @lang('admin::app.sales.invoices.view.product-image') 
-                                    </p>
-                                </div>
+                                @if ($item->product)
+                                    <img
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        src="{{ $item->product->base_image_url }}"
+                                    >
+                                @else
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        
+                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                            @lang('admin::app.sales.invoices.view.product-image') 
+                                        </p>
+                                    </div>
+                                @endif
                                 
                                 <div class="grid gap-[6px] place-content-start">
                                     {{-- Item Name --}}
@@ -180,8 +187,6 @@
                                 {{-- Item Grand Total --}}
                                 <p class="flex items-center gap-x-[4px] justify-end text-[16px] text-gray-800 font-semibold">
                                     {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
-                                    <span class="icon-sort-up text-[24px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100">
-                                    </span>
                                 </p>
 
                                 {{-- Item Base Price --}}

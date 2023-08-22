@@ -17,7 +17,7 @@
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.sales.shipments.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.cancel-btn')
+                        @lang('admin::app.account.edit.back-btn')
                     </span>
                 </a>
             </div>
@@ -35,17 +35,24 @@
 
                 <div class="grid">
                     {{-- Shipment Items --}}
-                    @foreach ($shipment->items as $item)
-                        <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
+                    @foreach ($shipment->items as $index => $item)
+                        <div class="flex gap-[10px] justify-between px-[16px] py-[24px]">
                             <div class="flex gap-[10px]">
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                    
-                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                        @lang('admin::app.sales.shipments.view.product-image')
-                                    </p>
-                                </div>
+                                @if ($item->product)
+                                    <img
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        src="{{ $item->product->base_image_url }}"
+                                    >
+                                @else
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        
+                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                            @lang('admin::app.sales.invoices.view.product-image') 
+                                        </p>
+                                    </div>
+                                @endif
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}
@@ -71,6 +78,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if ($index < count($shipment->items) - 1)
+                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -104,32 +115,28 @@
                     @if ($order->billing_address || $order->shipping_address)
                         {{-- Billing Address --}}
                         @if ($order->billing_address)
-                            <div class="pb-[16px]">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
-                                        @lang('admin::app.sales.shipments.view.billing-address')
-                                    </p>
-                                </div>
-
-                                @include ('admin::sales.address', ['address' => $order->billing_address])
-
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                    @lang('admin::app.sales.shipments.view.billing-address')
+                                </p>
                             </div>
 
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                            @include ('admin::sales.address', ['address' => $order->billing_address])
+                            
                         @endif
 
                         {{-- Shipping Address --}}
                         @if ($order->shipping_address)
-                            <div class="pb-[16px]">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
-                                        @lang('admin::app.sales.shipments.view.shipping-address')
-                                    </p>
-                                </div>
+                            <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
 
-                                @include ('admin::sales.address', ['address' => $order->shipping_address])
-
+                            <div class="flex items-center justify-between">
+                                <p class="text-gray-600 text-[16px] py-[16px] font-semibold">
+                                    @lang('admin::app.sales.shipments.view.shipping-address')
+                                </p>
                             </div>
+
+                            @include ('admin::sales.address', ['address' => $order->shipping_address])
+
                         @endif
                     @endif
                 </x-slot:content>
@@ -220,7 +227,7 @@
                     {{-- Horizontal Line --}}
                     <span class="block w-full border-b-[1px] border-gray-300"></span>
                 
-                    <div class="py-[16px]">
+                    <div class="pt-[16px]">
                         {{-- Shipping Menthod --}}
                         <p class="text-gray-800 font-semibold">
                             {{ $order->shipping_title }}
@@ -271,7 +278,6 @@
                                 @lang('admin::app.sales.shipments.view.tracking-number')
                             </p>
                         @endif
-
                     </div>
                 </x-slot:content>
             </x-admin::accordion> 

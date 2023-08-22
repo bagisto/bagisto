@@ -36,10 +36,26 @@
         {{--Address Create component --}}
         @include('admin::customers.addresses.create')
        
-        <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
-            <span class="icon-cancel text-[24px] "></span>
+        <div 
+            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+            onclick="if (confirm('Are you sure you want to delete this account?')) {
+                event.preventDefault();
+                document.getElementById('delete-account{{ $customer->id }}').submit();
+            }"
+        >
+            <span class="icon-cancel text-[24px]"></span>
 
             @lang('admin::app.customers.view.delete-account')
+
+              {{-- Delete Customer Account --}}
+       
+              <form 
+                method="post"
+                action="{{ route('admin.customer.delete', $customer->id) }}" 
+                id="delete-account{{ $customer->id }}" 
+            >
+                @csrf
+            </form>
         </div>
     </div>
 
@@ -490,7 +506,8 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.date-of-birth') - {{ $customer->date_of_birth }}
+                            @lang('admin::app.customers.view.date-of-birth') -
+                            {{ $customer->date_of_birth ?? 'N/A' }}   
                         </p>
 
                         <p class="text-gray-600">

@@ -7,7 +7,7 @@ return [
         'edit' => [
             'title'                => 'My Account',
             'save-btn'             => 'Save Account',
-            'cancel-btn'           => 'Cancel',
+            'back-btn'             => 'Back',
             'general'              => 'General',
             'profile-image'        => 'Profile Image',
             'upload-image-info'    => 'Upload a Profile Image (100px X 100px) in PNG or JPG Format',
@@ -35,6 +35,7 @@ return [
                 'grand-total'  => 'Grand Total',
                 'channel-name' => 'Channel',
                 'view'         => 'View',
+                'id'           => '# :id',
             ],
 
             'view' => [
@@ -268,6 +269,8 @@ return [
         'index'  => [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
+            'order'         => ':order Order',
+            'address'       => ':address  Address',
 
             'create' => [
                 'create-btn'            => 'Create Customer',
@@ -352,6 +355,9 @@ return [
             'total-revenue'           => 'Total Revenue',
             'title'                   => 'Customer View',
             'note-placeholder'        => 'Write Your Note here',
+            'delete-success'          => 'Account Deleted Successfully',
+            'order-pending'           => 'Cannot delete account because some Order(s) are pending or processing state.',
+
         ],
 
         'groups' => [
@@ -370,7 +376,7 @@ return [
 
             'edit'  => [
                 'title'             => 'Edit Group',
-                'cancel-btn'        => 'Cancel',
+                'back-btn'          => 'Back',
                 'save-btn'          => 'Save Group',
                 'general'           => 'General',
                 'code'              => 'Code',
@@ -456,7 +462,7 @@ return [
             ],
 
             'edit'  => [
-                'cancel-btn'     => 'Cancel',
+                'back-btn'       => 'Back',
                 'code'           => 'Code',
                 'save-btn'       => 'Save Locale',
                 'general'        => 'General',
@@ -492,7 +498,7 @@ return [
             ],
 
             'edit' => [
-                'cancel-btn'         => 'Cancel',
+                'back-btn'           => 'Back',
                 'code'               => 'Code',
                 'decimal'            => 'Decimal',
                 'general'            => 'General',
@@ -519,7 +525,7 @@ return [
             ],
 
             'edit'  => [
-                'cancel-btn'       => 'Cancel',
+                'back-btn'         => 'Back',
                 'rate'             => 'Rate',
                 'source-currency'  => 'Source Currency',
                 'save-btn'         => 'Save Exchange Rate',
@@ -540,7 +546,7 @@ return [
                 'general'           => 'General',
                 'save-btn'          => 'Save Inventory Sources',
                 'code'              => 'Code',
-                'cancel-btn'        => 'Cancel',
+                'back-btn'          => 'Back',
                 'name'              => 'Name',
                 'description'       => 'Description',
                 'latitude'          => 'Latitude',
@@ -567,7 +573,7 @@ return [
                 'title'             => 'Edit Inventory Sources',
                 'general'           => 'General',
                 'save-btn'          => 'Save Inventory Sources',
-                'cancel-btn'        => 'Cancel',
+                'back-btn'          => 'Back',
                 'general'           => 'General',
                 'code'              => 'Code',
                 'name'              => 'Name',
@@ -601,7 +607,7 @@ return [
 
                 'create' => [
                     'create-title'     => 'Create Tax Category',
-                    'cancel-btn'       => 'Cancel',
+                    'back-btn'         => 'Back',
                     'code'             => 'Code',
                     'description'      => 'Description',
                     'general'          => 'Tax Category',
@@ -616,7 +622,7 @@ return [
 
                 'edit' => [
                     'add-title'        => 'Create Tax Category',
-                    'cancel-btn'       => 'Cancel',
+                    'back-btn'         => 'Back',
                     'code'             => 'Code',
                     'description'      => 'Description',
                     'general'          => 'Tax Category',
@@ -637,7 +643,7 @@ return [
 
                 'create'  => [
                     'country'        => 'Country',
-                    'cancel-btn'     => 'Cancel',
+                    'back-btn'       => 'Back',
                     'general'        => 'General',
                     'is_zip'         => 'Enable Zip Range',
                     'identifier'     => 'Identifier',
@@ -657,7 +663,7 @@ return [
                 'edit'  => [
                     'basic-settings' => 'Basic Settings',
                     'country'        => 'Country',
-                    'cancel-btn'     => 'Cancel',
+                    'back-btn'       => 'Back',
                     'is_zip'         => 'Enable Zip Range',
                     'identifier'     => 'Identifier',
                     'select-country' => 'Select Country',
@@ -682,7 +688,7 @@ return [
 
             'create' => [
                 'title'                     => 'Create Channel',
-                'cancel'                    => 'Cancel',
+                'cancel'                    => 'Back',
                 'save-btn'                  => 'Save Channel',
                 'general'                   => 'General',
                 'code'                      => 'Code',
@@ -774,7 +780,7 @@ return [
             'edit'  => [
                 'title'            => 'Edit User',
                 'general'          => 'General',
-                'cancel-btn'       => 'Cancel',
+                'back-btn'         => 'Back',
                 'name'             => 'Name',
                 'email'            => 'Email',
                 'password'         => 'Password',
@@ -795,7 +801,7 @@ return [
             'create' => [
                 'title'           => 'Create Role',
                 'save-btn'        => 'Save Role',
-                'cancel-btn'      => 'Cancel',
+                'back-btn'        => 'Back',
                 'general'         => 'General',
                 'name'            => 'Name',
                 'description'     => 'Description',
@@ -808,7 +814,7 @@ return [
             'edit' => [
                 'title'           => 'Edit Role',
                 'save-btn'        => 'Save Role',
-                'cancel-btn'      => 'Cancel',
+                'back-btn'        => 'Back',
                 'general'         => 'General',
                 'name'            => 'Name',
                 'description'     => 'Description',
@@ -1142,7 +1148,7 @@ return [
                 'add-options-info'            => 'To create various combination of Attribute Option on a go.',
                 'admin_name'                  => 'Admin Name',
                 'boolean'                     => 'Boolean',
-                'cancel-btn'                  => 'Cancel',
+                'back-btn'                    => 'Back',
                 'code'                        => 'Attribute Code',
                 'checkbox'                    => 'Checkbox',
                 'color'                       => 'Color',
@@ -1205,7 +1211,7 @@ return [
                 'add-options-info'            => 'To create various combination of Attribute Option on a go.',
                 'admin_name'                  => 'Admin Name',
                 'boolean'                     => 'Boolean',
-                'cancel-btn'                  => 'Cancel',
+                'back-btn'                    => 'Back',
                 'code'                        => 'Attribute Code',
                 'checkbox'                    => 'Checkbox',
                 'color'                       => 'Color',
@@ -1273,7 +1279,7 @@ return [
                 'add-banner'               => 'Add Banner',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
-                'cancel-btn'               => 'Cancel',
+                'back-btn'                 => 'Back',
                 'company-name'             => 'Name',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description and Images',
@@ -1305,7 +1311,7 @@ return [
                 'add-banner'               => 'Add Banner',
                 'banner'                   => 'Banner',
                 'banner-size'              => 'Banner aspect ration (1320px X 300px)',
-                'cancel-btn'               => 'Cancel',
+                'back-btn'                 => 'Back',
                 'company-name'             => 'Name*',
                 'description'              => 'Description',
                 'description-and-images'   => 'Description and Images',
@@ -1346,7 +1352,7 @@ return [
             'create' => [
                 'title'                            => 'Create Attribute Family',
                 'save-btn'                         => 'Save Attribute Family',
-                'cancel-btn'                       => 'Cancel',
+                'back-btn'                         => 'Back',
                 'general'                          => 'General',
                 'groups'                           => 'Groups',
                 'groups-info'                      => 'Manage attribute family groups',
@@ -1376,7 +1382,7 @@ return [
             'edit' => [
                 'title'                            => 'Edit Attribute Family',
                 'save-btn'                         => 'Save Attribute Family',
-                'cancel-btn'                       => 'Cancel',
+                'back-btn'                         => 'Back',
                 'groups'                           => 'Groups',
                 'groups-info'                      => 'Manage attribute family groups',
                 'delete-group-btn'                 => 'Delete Group',
@@ -1421,7 +1427,7 @@ return [
                     'title'          => 'Create Template',
                     'active'         => 'Active',
                     'content'        => 'Content',
-                    'cancel'         => 'Cancel',
+                    'back-btn'       => 'Back',
                     'draft'          => 'Draft',
                     'general'        => 'General',
                     'inactive'       => 'Inactive',
@@ -1436,7 +1442,7 @@ return [
                     'title'          => 'Edit Template',
                     'active'         => 'Active',
                     'content'        => 'Content*',
-                    'cancel'         => 'Cancel',
+                    'back-btn'       => 'Back',
                     'draft'          => 'Draft',
                     'general'        => 'General',
                     'inactive'       => 'Inactive',
@@ -1455,7 +1461,7 @@ return [
             'campaigns' => [
                 'create'    => [
                     'active'          => 'Active',
-                    'cancel-btn'      => 'Cancel',
+                    'back-btn'        => 'Back',
                     'customer-group'  => 'Customer Group',
                     'channel'         => 'Channel',
                     'email-template'  => 'Email Template',
@@ -1476,7 +1482,7 @@ return [
                 'edit'    => [
                     'active'          => 'Active',
                     'audience'        => 'Audience',
-                    'cancel-btn'      => 'Cancel',
+                    'back-btn'        => 'Back',
                     'customer-group'  => 'Customer Group',
                     'channel'         => 'Channel',
                     'email-template'  => 'Email Template',
@@ -1520,7 +1526,7 @@ return [
 
                 'edit'  => [
                     'title'        => 'Edit Events',
-                    'cancel-btn'   => 'Cancel',
+                    'back-btn'     => 'Back',
                     'general'      => 'General',
                     'name'         => 'Name',
                     'description'  => 'Description',
@@ -1534,7 +1540,7 @@ return [
 
                 'edit'  => [
                     'title'       => 'Edit Newsletter Subscriber',
-                    'cancel-btn'  => 'Cancel',
+                    'back-btn'    => 'Back',
                     'save-btn'    => 'Save Subscriber',
                     'email'       => 'Email',
                     'subscribed'  => 'Subscribed',
@@ -1557,7 +1563,7 @@ return [
             ],
 
             'edit'  => [
-                'cancel-btn'     => 'Cancel',
+                'back-btn'       => 'Back',
                 'file-name'      => 'File Name',
                 'file-name-info' => 'Example: sitemap.xml',
                 'general'        => 'General',
@@ -1581,7 +1587,7 @@ return [
                 ],
 
                 'create' => [
-                    'cancel-btn'                                => 'Cancel',
+                    'back-btn'                                  => 'Back',
                     'title'                                     => 'Create Cart Rule',
                     'save-btn'                                  => 'Save Cart Rule',
                     'general'                                   => 'General',
@@ -1656,7 +1662,7 @@ return [
                 ],
 
                 'edit' => [
-                    'cancel-btn'                                => 'Cancel',
+                    'back-btn'                                  => 'Back',
                     'title'                                     => 'Edit Cart Rule',
                     'save-btn'                                  => 'Save Cart Rule',
                     'general'                                   => 'General',
@@ -1749,7 +1755,7 @@ return [
                 ],
 
                 'create' => [
-                    'cancel-btn'               => 'Cancel',
+                    'back-btn'                 => 'Back',
                     'title'                    => 'Create Catalog Rule',
                     'save-btn'                 => 'Save Catalog Rule',
                     'general'                  => 'General',
@@ -1793,7 +1799,7 @@ return [
                 ],
 
                 'edit' => [
-                    'cancel-btn'               => 'Cancel',
+                    'back-btn'                 => 'Back',
                     'title'                    => 'Edit Catalog Rule',
                     'save-btn'                 => 'Save Catalog Rule',
                     'general'                  => 'General',
@@ -1866,7 +1872,7 @@ return [
             'save-btn'         => 'Save Page',
             'general'          => 'General',
             'page-title'       => 'Page Title',
-            'cancel-btn'       => 'Cancel',
+            'back-btn'         => 'Back',
             'channels'         => 'Channels',
             'content'          => 'Content',
             'seo'              => 'SEO',
@@ -1914,7 +1920,7 @@ return [
         'today-orders'              => 'Today’s Orders',
         'today-sales'               => 'Today’s Sales',
         'today-customers'           => 'Today’s Customers',
-        'today-details'            => 'Today’s Details',
+        'today-details'             => 'Today’s Details',
         'visitor'                   => 'Visitor',
     ],
 

@@ -79,6 +79,15 @@ class CustomerDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
+            'index'      => 'customer_id',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'integer',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
             'index'      => 'full_name',
             'label'      => trans('admin::app.datagrid.name'),
             'type'       => 'string',

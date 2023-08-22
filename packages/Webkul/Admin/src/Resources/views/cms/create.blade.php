@@ -21,7 +21,7 @@
                 {{-- Cancel Button --}}
                 <a href="{{ route('admin.cms.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.cancel-btn')
+                        @lang('admin::app.account.edit.back-btn')
                     </span>
                 </a>
 
@@ -42,13 +42,9 @@
 
                 {{--Content --}}
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <p class="text-[16px] text-gray-800 font-semibold mb-[16px] required">
-                        @lang('admin::app.cms.create.content')
-                    </p>
-
                     <x-admin::form.control-group class="mb-[10px]">
-                        <x-admin::form.control-group.label>
-                            {{-- @lang('admin::app.cms.create.content') --}}
+                        <x-admin::form.control-group.label class="required">
+                            @lang('admin::app.cms.create.content')
                         </x-admin::form.control-group.label>
 
                         <x-admin::form.control-group.control
