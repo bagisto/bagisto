@@ -34,6 +34,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.total-sales')
                                 </p>
@@ -76,6 +77,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.total-orders')
                                 </p>
@@ -118,6 +120,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.total-customers')
                                 </p>
@@ -160,6 +163,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('Average Sales')
                                 </p>
@@ -201,6 +205,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('Invoices')
                                 </p>
@@ -232,6 +237,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.product-image')
                                 </p>
@@ -274,6 +280,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.product-image')
                                 </p>
@@ -316,6 +323,7 @@
                         <div class="flex gap-[10px] flex-1">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.product-image')
                                 </p>
@@ -470,6 +478,7 @@
                                                 @else
                                                     <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                                             @lang('admin::app.dashboard.product-image')
                                                         </p>
@@ -494,7 +503,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -512,71 +521,73 @@
                 <div class="border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
                     @foreach ($statistics['stock_threshold'] as $item)
                         <!-- single row -->
-                        <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                            <div class="relative">
-                                <div class="row grid grid-cols-2  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-sm:grid-cols-[1fr_auto]">
-                                    <div class="flex gap-[10px]">
-                                        @if ($item->product->base_image_url)
-                                            <div class="">
-                                                <img
-                                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] border border-dashed border-gray-300 rounded-[4px]"
-                                                    src="{{ $item->product->base_image_url }}"
-                                                >
-                                            </div>
-                                        @else
-                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-                                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                                    @lang('admin::app.dashboard.product-image')
-                                                </p>
-                                            </div>
-                                        @endif
+                        <div class="relative">
+                            <div class="row grid grid-cols-2  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-sm:grid-cols-[1fr_auto]">
+                                <div class="flex gap-[10px]">
+                                    @if ($item->product->base_image_url)
+                                        <div class="">
+                                            <img
+                                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] border border-dashed border-gray-300 rounded-[4px]"
+                                                src="{{ $item->product->base_image_url }}"
+                                            >
+                                        </div>
+                                    @else
+                                        <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
-                                        <div class="flex flex-col gap-[6px]">
-                                            {{-- Product Name --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
-                                                @if (isset($item->product->name))
-                                                    {{ $item->product->name }}
-                                                @endif
-                                            </p>
-
-                                            {{-- Product SKU --}}
-                                            <p class="text-gray-600">
-                                                @lang('admin::app.dashboard.sku', ['sku' => $item->product->sku])
-                                            </p>
-
-                                        {{-- Product Number --}}
-                                            <p class="text-gray-600">
-                                                @if (
-                                                    isset($item->product->product_number)
-                                                    && ! empty($item->product->product_number)
-                                                )
-                                                    @lang('admin::app.dashboard.product-number', ['product_number' => $item->product->product_number])
-                                                @endif
+                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                @lang('admin::app.dashboard.product-image')
                                             </p>
                                         </div>
-                                    </div>
+                                    @endif
 
-                                    <div class="flex items-center">
-                                        <div class="flex flex-col gap-[6px]">
-                                            {{-- Product Price --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
-                                                @if (isset($item->product->price))
-                                                    {{ core()->formatBasePrice($item->product->price) }}
-                                                @endif
-                                            </p>
+                                    <div class="flex flex-col gap-[6px]">
+                                        {{-- Product Name --}}
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            @if (isset($item->product->name))
+                                                {{ $item->product->name }}
+                                            @endif
+                                        </p>
 
-                                            {{-- Total Product Stock --}}
-                                            <p class="{{ $item->total_qty > 10 ? 'text-emerald-500' : 'text-red-500' }} ">
-                                                @lang('admin::app.dashboard.total-stock', ['total_stock' => $item->total_qty])
-                                            </p>
-                                        </div>
+                                        {{-- Product SKU --}}
+                                        <p class="text-gray-600">
+                                            @lang('admin::app.dashboard.sku', ['sku' => $item->product->sku])
+                                        </p>
 
-                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer pointer-events-none sm:absolute sm:top-[50%] sm:-translate-y-[50%] sm:right-[16px]"></span>
+                                    {{-- Product Number --}}
+                                        <p class="text-gray-600">
+                                            @if (
+                                                isset($item->product->product_number)
+                                                && ! empty($item->product->product_number)
+                                            )
+                                                @lang('admin::app.dashboard.product-number', ['product_number' => $item->product->product_number])
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
+
+                                <div class="flex gap-[6px] items-center justify-between">
+                                    <div class="flex flex-col gap-[6px]">
+                                        {{-- Product Price --}}
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            @if (isset($item->product->price))
+                                                {{ core()->formatBasePrice($item->product->price) }}
+                                            @endif
+                                        </p>
+
+                                        {{-- Total Product Stock --}}
+                                        <p class="{{ $item->total_qty > 10 ? 'text-emerald-500' : 'text-red-500' }} ">
+                                            @lang('admin::app.dashboard.total-stock', ['total_stock' => $item->total_qty])
+                                        </p>
+                                    </div>
+
+                                    {{-- View More Icon --}}
+                                    <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
+                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                    </a>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     @endforeach
                 </div>
             </div>

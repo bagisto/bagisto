@@ -90,11 +90,34 @@
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}">
-        <template #header="{ columns, records, sortPage }">
+        <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
             <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-3 grid-rows-1">
                 <div class="cursor-pointer">
                     <div class="flex gap-[10px]">
-                        <span class="icon-uncheckbox text-[24px]"></span>
+                        <label 
+                            class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                            for="mass_action_select_all_records"
+                        >
+                            <input 
+                                type="checkbox" 
+                                name="mass_action_select_all_records"
+                                id="mass_action_select_all_records"
+                                class="hidden peer"
+                                :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                @change="selectAllRecords"
+                            >
+                
+                            <span
+                                class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                :class="[
+                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-navyBlue' : (
+                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                    ),
+                                ]"
+                            >
+                            </span>
+                        </label>
+
                         <p class="text-gray-600">
                             <span @click="sortPage(columns.find(column => column.index === 'product_name'))">
                                 @lang('admin::app.catalog.products.index.product_name')
@@ -136,7 +159,7 @@
             </div>
         </template>
 
-        <template #body="{ columns, records }">
+        <template #body="{ columns, records, setCurrentSelectionMode, applied }">
             <div
                 class="row grid grid-cols-3 grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
                 v-for="record in records"
@@ -144,7 +167,25 @@
                 {{-- Product Name, SKU, Product Number --}}
                 <div class="">
                     <div class="flex gap-[10px]">
-                        <span class="icon-uncheckbox text-[24px]"></span>
+                        <label
+                            class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                            :for="`mass_action_select_record_${record.product_id}`"
+                        >
+                            <input 
+                                type="checkbox" 
+                                :name="`mass_action_select_record_${record.product_id}`"
+                                :id="`mass_action_select_record_${record.product_id}`"
+                                :value="record.product_id"
+                                class="hidden peer"
+                                v-model="applied.massActions.indices"
+                                @change="setCurrentSelectionMode"
+                            >
+                
+                            <label 
+                                class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                                :for="`mass_action_select_record_${record.product_id}`"
+                            ></label>
+                        </label>
 
                         <div class="flex flex-col gap-[6px]">
                             <p
