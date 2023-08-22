@@ -601,184 +601,264 @@
             </p>
 
             {{-- Store Stats --}}
-            <div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
-                <div class="flex gap-[6px] px-[16px] py-[8px] border-b border-gray-300">
-                    <div class="flex-1 ">
-                        <label
-                            class="block text-[12px] text-gray-800 font-medium leading-[24px] required"
-                            for="username"
-                        >
-                            @lang('admin::app.dashboard.attribute-code')
-                        </label>
-                        
-                        <div class="flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center max-w-full bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400">
-                            @lang('admin::app.dashboard.color')
-
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </div>
-                    </div>
-
-                    <div class="flex-1">
-                        <label
-                            class="block text-[12px] text-gray-800 font-medium leading-[24px] required"
-                            for="username"
-                        >
-                        @lang('admin::app.dashboard.attribute-code')
-                        </label>
-
-                        <div class="flex gap-x-[4px] items-center justify-between text-gray-600 text-[14px] font-normal py-[6px] px-[12px] text-center max-w-full bg-white border border-gray-300 rounded-[6px] cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-black transition-all hover:border-gray-400">
-                            @lang('admin::app.dashboard.color')
-
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- sale -->
-                <div class="grid gap-[16px] px-[16px] py-[8px] border-b border-gray-300">
-                    <div class="flex gap-[8px] justify-between">
-                        <div class="flex flex-col gap-[4px] justify-between">
-                            <p class="text-[12px] text-gray-600 font-semibold">
-                                @lang('admin::app.dashboard.total-sales')
-                            </p>
-
-                            {{-- Total Order Revenue --}}
-                            <p class="text-[18px] text-gray-800 font-bold">
-                                {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
-                            </p>
-
-                            <canvas id="myChart"></canvas>
-
-                        </div>
-
-                        <div class="flex flex-col gap-[4px]justify-between">
-                            {{-- Orders Time Duration --}}
-                            <p class="text-[12px] text-gray-400 font-semibold">
-                                Apr 1-30
-                            </p>
-
-                            {{-- Total Orders --}}
-                            <p class="text-[12px] text-gray-400 font-semibold">
-                                @lang('admin::app.dashboard.order', ['total_orders' => $statistics['total_orders']['current']])
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Top Products -->
-                <div class="border-b border-gray-300">
-                    <div class="flex items-center justify-between p-[16px] pb-0">
-                        <p class="text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.dashboard.top-selling-products')
-                        </p>
-
-                        <p class="text-[12px] text-gray-400 font-semibold">
-                            Apr 1-30
-                        </p>
-                    </div>
-
-                    <div class="flex flex-col gap-[32px] p-[16px]">
-                        <!-- Products List  -->
-                        @foreach ($statistics['top_selling_products'] as $item)
-                            <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                {{-- Product Detailes --}}
-                                <div class="flex gap-[10px]">
-                                    @if ($item->product->base_image_url)
-                                        <img
-                                            class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                            src="{{ $item->product->base_image_url }}"
-                                        >
-                                    @else
-                                        <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                                @lang('admin::app.dashboard.product-image')
-                                            </p>
-                                        </div>
-                                    @endif
-
-                                    <div class="flex flex-col gap-[6px] w-full">
-                                        <p class="text-gray-600">
-                                            @if (isset($item->name))
-                                                {{ $item->name }}
-                                            @endif
-                                        </p>
-
-                                        <div class="flex justify-between">
-                                            <p class="text-gray-600 font-semibold">
-                                                @if (isset($item->price))
-                                                    {{ core()->formatBasePrice($item->price) }}
-                                                @endif
-                                            </p>
-
-                                            <p class="text-[16px] text-gray-800 font-semibold">
-                                                @if (isset($item->total))
-                                                    {{ core()->formatBasePrice($item->total) }}
-                                                @endif
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-
-                <!-- Top Customers -->
-                <div class="">
-                    <div class="flex items-center justify-between p-[16px] pb-0">
-                        <p class="text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.dashboard.customer-with-most-sales')
-                        </p>
-
-                        <p class="text-[12px] text-gray-400 font-semibold">
-                            Apr 1-30
-                        </p>
-                    </div>
-
-                    {{-- Customers Lists --}}
-                    <div class="flex flex-col gap-[32px] p-[16px]">
-                        @foreach ($statistics['customer_with_most_sales'] as $item)
-                            @if ($item->customer_id)
-                                <a href="{{ route('admin.customer.view', $item->customer_id) }}">
-                            @endif
-                                <div class="flex justify-between gap-[6px]">
-                                    <div class="flex flex-col">
-                                        <p class="text-gray-600 font-semibold">
-                                            {{ $item->customer_full_name ?? $item->first_name . ' ' . $item->last_name }}
-                                        </p>
-
-                                        <p class="text-gray-600">
-                                            {{ $item->customer_email ?? $item->customer_address_email }}
-                                        </p>
-                                    </div>
-
-                                    <div class="flex flex-col">
-                                        <p class="text-gray-800 font-semibold">
-                                            {{ core()->formatBasePrice($item->total_base_grand_total) }}
-                                        </p>
-
-                                        <p class="text-gray-600">
-                                            @lang('admin::app.dashboard.order-count', ['count' => $item->total_orders])
-                                        </p>
-                                    </div>
-                                </div>
-                            @if ($item->customer_id)
-                                </a>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+            <date-filter></date-filter>
         </div>
     </div>
     
     @push('scripts')
         <script src="{{ bagisto_asset('js/chart.js') }}"></script>
 
-        <script async>
+        <script type="text/x-template" id="date-filter-template">
+            <div>
+                <x-admin::form
+                    :action="route('admin.catalog.categories.store')"
+                    enctype="multipart/form-data"
+                >
+                    <div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
+                        <div class="flex gap-[6px] px-[16px] py-[8px] border-b border-gray-300">
+                            <div class="flex-1 ">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                        @lang('Start Date')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="date"
+                                        name="startDate" 
+                                        class="cursor-pointer"
+                                        :value="$startDate->format('Y-m-d')"
+                                        :label="trans('Start Date')"
+                                        :placeholder="trans('Start Date')"
+                                        @change="applyFilter('start', $event)"
+                                    >
+                                    </x-admin::form.control-group.control>
+                                </x-admin::form.control-group>
+                            </div>
+
+                            <div class="flex-1">
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label class="!text-gray-800 font-medium">
+                                        @lang('End Date')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="date"
+                                        name="endDate" 
+                                        class="cursor-pointer"
+                                        :value="$endDate->format('Y-m-d')"
+                                        :label="trans('admin::app.catalog.categories.create.display-mode')"
+                                        :placeholder="trans('End Date')"
+                                        @change="applyFilter('end', $event)"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                </x-admin::form.control-group>
+                            </div>
+                        </div>
+
+                        <!-- sale -->
+                        <div class="grid gap-[16px] px-[16px] py-[8px] border-b border-gray-300">
+                            <div class="flex gap-[8px] justify-between">
+                                <div class="flex flex-col gap-[4px] justify-between">
+                                    <p class="text-[12px] text-gray-600 font-semibold">
+                                        @lang('admin::app.dashboard.total-sales')
+                                    </p>
+
+                                    {{-- Total Order Revenue --}}
+                                    <p class="text-[18px] text-gray-800 font-bold">
+                                        {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
+                                    </p>
+
+                                    <canvas id="myChart"></canvas>
+
+                                </div>
+
+                                <div class="flex flex-col gap-[4px]justify-between">
+                                    {{-- Orders Time Duration --}}
+                                    <p class="text-[12px] text-gray-400 font-semibold">
+                                        Apr 1-30
+                                    </p>
+
+                                    {{-- Total Orders --}}
+                                    <p class="text-[12px] text-gray-400 font-semibold">
+                                        {{-- @lang('admin::app.dashboard.order', ['total_orders' => $statistics['total_orders']['current']]) --}}
+                                        @{{ statistics.total_orders?.current }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Products -->
+                        <div class="border-b border-gray-300">
+                            <div class="flex items-center justify-between p-[16px] pb-0">
+                                <p class="text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.dashboard.top-selling-products')
+                                </p>
+
+                                <p class="text-[12px] text-gray-400 font-semibold">
+                                    Apr 1-30
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col gap-[32px] p-[16px]">
+                                <a
+                                    v-for="item in statistics.top_selling_products"
+                                    :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
+                                >
+                                    <div class="flex gap-[10px]">
+
+                                        <img
+                                        />
+                                        <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                @lang('admin::app.dashboard.product-image')
+                                            </p>
+                                        </div>
+
+                                        <div class="flex flex-col gap-[6px] w-full">
+                                            <p class="text-gray-600" v-text="item.name">
+                                            </p>
+
+                                            <div class="flex justify-between">
+                                                <p class="text-gray-600 font-semibold" v-text="item.price">
+                                                </p>
+
+                                                <p class="text-[16px] text-gray-800 font-semibold" v-text="item.total">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Top Customers -->
+                        <div class="">
+                            <div class="flex items-center justify-between p-[16px] pb-0">
+                                <p class="text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.dashboard.customer-with-most-sales')
+                                </p>
+
+                                <p class="text-[12px] text-gray-400 font-semibold">
+                                    Apr 1-30
+                                </p>
+                            </div>
+
+                            {{-- Customers Lists --}}
+                            <div
+                                class="flex flex-col gap-[32px] p-[16px]"
+                                v-for="item in statistics.customer_with_most_sales"
+                            >
+                                <a :href="`{{ route('admin.customer.view', '') }}/${item.customer_id}`">
+                                    <div class="flex justify-between gap-[6px]">
+                                        <div class="flex flex-col">
+                                            <p class="text-gray-600 font-semibold" v-text="item.customer_full_name ?? item.first_name">
+                                            </p>
+
+                                            <p class="text-gray-600" v-text="item.customer_email ?? item.customer_address_email">
+                                            </p>
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <p class="text-gray-800 font-semibold" v-text="item.total_base_grand_total">
+                                            </p>
+
+                                            <p class="text-gray-600">
+                                                @{{ item.total_orders }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            {{-- <div class="flex flex-col gap-[32px] p-[16px]">
+                                @foreach ($statistics['customer_with_most_sales'] as $item)
+                                    @if ($item->customer_id)
+                                        <a href="{{ route('admin.customer.view', $item->customer_id) }}">
+                                    @endif
+                                        <div class="flex justify-between gap-[6px]">
+                                            <div class="flex flex-col">
+                                                <p class="text-gray-600 font-semibold">
+                                                    {{ $item->customer_full_name ?? $item->first_name . ' ' . $item->last_name }}
+                                                </p>
+
+                                                <p class="text-gray-600">
+                                                    {{ $item->customer_email ?? $item->customer_address_email }}
+                                                </p>
+                                            </div>
+
+                                            <div class="flex flex-col">
+                                                <p class="text-gray-800 font-semibold">
+                                                    {{ core()->formatBasePrice($item->total_base_grand_total) }}
+                                                </p>
+
+                                                <p class="text-gray-600">
+                                                    @lang('admin::app.dashboard.order-count', ['count' => $item->total_orders])
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @if ($item->customer_id)
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div> --}}
+                        </div>
+                    </div>
+                </x-admin::form>
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('date-filter', {
+                template: '#date-filter-template',
+
+                data() {
+                    return {
+                        start: "{{ $startDate->format('Y-m-d') }}",
+
+                        end: "{{ $endDate->format('Y-m-d') }}",
+
+                        statistics: {},
+                    }
+                },
+
+                mounted() {
+                    this.$axios.get("{{ route('admin.dashboard.index') }}")
+                        .then((response) => {
+                            this.statistics = response.data.statistics;
+                            console.log(this.statistics);
+                        })
+                        .catch(error => {
+                            if (error.response.status == 422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
+                },
+
+                methods: {
+                    applyFilter: function(field, date) {
+                        this[field] = event.target.value;
+
+                        const queryParams = `?start=${this.start}&end=${this.end}`;
+
+                        this.$axios.get("{{ route('admin.dashboard.index') }}" + queryParams)
+                            .then((response) => {
+                                this.statistics = response.data.statistics;
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    }
+                }
+            });
+        </script>
+
+        <script>
               window.addEventListener("DOMContentLoaded", function () {
-                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const ctx = document.getElementById('myChart');
                 
                     var data = @json($statistics['sale_graph']);
                 
@@ -787,7 +867,6 @@
                         data: {
                             labels: data['label'],
                             datasets: [{
-                                label: 'Total Sales',
                                 data: data['total'],
                                 backgroundColor: 'rgba(34, 201, 93, 1)',
                                 borderColor: 'rgba(34, 201, 93, 1)',
