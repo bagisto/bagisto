@@ -145,7 +145,7 @@
             <p class="whitespace-nowrap text-gray-600 max-sm:hidden">per page</p>
 
             <div
-                class="ml-[8px] inline-flex w-full gap-x-[4px]appearance-none justify-between items-center max-w-max px-[12px] py-[6px] rounded-[6px] border border-gray-300 bg-white text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
+                class="min-w-[35px] min-h-[38px] ml-[8px] inline-flex w-full gap-x-[4px]appearance-none justify-between items-center max-w-max px-[12px] py-[6px] rounded-[6px] border border-gray-300 bg-white text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
                 v-text="available.meta.current_page"
             >
             </div>
