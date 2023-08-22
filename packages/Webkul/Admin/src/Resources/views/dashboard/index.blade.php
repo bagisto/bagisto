@@ -32,13 +32,9 @@
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.total-sales')
                                 </p>
                             </div>
@@ -78,13 +74,9 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                />
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.total-orders')
                                 </p>
                             </div>
@@ -124,13 +116,9 @@
 
                         {{-- Total Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                                />
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.total-customers')
                                 </p>
                             </div>
@@ -170,13 +158,9 @@
 
                         {{-- Average sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                />
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('Average Sales')
                                 </p>
                             </div>
@@ -215,13 +199,9 @@
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                                />
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('Invoices')
                                 </p>
                             </div>
@@ -250,13 +230,9 @@
                     <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.product-image')
                                 </p>
                             </div>
@@ -296,13 +272,9 @@
 
                         {{-- Today's Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.product-image')
                                 </p>
                             </div>
@@ -342,13 +314,9 @@
 
                         {{-- Today's Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px]">
-                                <img
-                                    class="w-[20px]"
-                                    src="{{ bagisto_asset('images/product-placeholders/front.svg')}}"
-                                >
-
-                                <p class="text-[6px] text-gray-400 font-semibold">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                     @lang('admin::app.dashboard.product-image')
                                 </p>
                             </div>
@@ -487,29 +455,35 @@
                                 <div class="flex gap-[6px] items-center justify-between">
                                     <div class="flex gap-[6px] items-center flex-wrap">
                                         {{-- Using Variable for image Numbering --}}
-                                        @php $count = 1; @endphp
-
                                         @foreach ($item->items as $index => $orderItem)
+
                                             @if ($index >= 2 && count($item->items) >= 5)
                                                 @break;
                                             @endif
 
                                             <div class="relative">
-                                                <img
-                                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                                    src="{{ $orderItem->product->base_image_url }}"
-                                                />
+                                                @if ($orderItem->product->base_image_url)
+                                                    <img
+                                                        class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                                        src="{{ $orderItem->product->base_image_url }}"
+                                                    />
+                                                @else
+                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                            @lang('admin::app.dashboard.product-image')
+                                                        </p>
+                                                    </div>
+                                                @endif
 
                                                 <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                    {{ $count}}
+                                                    {{ count($orderItem->product->images) }}
                                                 </span>
-
-                                                @php $count++; @endphp
                                             </div>
                                         @endforeach
 
                                         {{-- Count of Rest Images --}}
-                                        @if (count($item->items) - 2)
+                                        @if (count($item->items) - 2 && count($item->items) > 4)
                                             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
                                                 <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
                                                     @lang('admin::app.dashboard.more-products', ['product_count' => count($item->items) - 2 ])
@@ -542,12 +516,21 @@
                             <div class="relative">
                                 <div class="row grid grid-cols-2  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-sm:grid-cols-[1fr_auto]">
                                     <div class="flex gap-[10px]">
-                                        <div class="">
-                                            <img
-                                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] border border-dashed border-gray-300 rounded-[4px]"
-                                                src="{{ $item->product->base_image_url }}"
-                                            >
-                                        </div>
+                                        @if ($item->product->base_image_url)
+                                            <div class="">
+                                                <img
+                                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] border border-dashed border-gray-300 rounded-[4px]"
+                                                    src="{{ $item->product->base_image_url }}"
+                                                >
+                                            </div>
+                                        @else
+                                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                    @lang('admin::app.dashboard.product-image')
+                                                </p>
+                                            </div>
+                                        @endif
 
                                         <div class="flex flex-col gap-[6px]">
                                             {{-- Product Name --}}
@@ -671,31 +654,6 @@
                     </div>
                 </div>
 
-                <!-- visitors -->
-                <div class="grid gap-[16px] px-[16px] py-[8px] border-b border-gray-300">
-                    <div class="flex gap-[8px] justify-between">
-                        <div class="flex flex-col gap-[4px] justify-between">
-                            <p class="text-[12px] text-gray-600 font-semibold">
-                                @lang('visitor')
-                            </p>
-
-                            <p class="text-[18px] text-gray-800 font-bold">
-                                249071
-                            </p>
-                        </div>
-
-                        <div class="flex flex-col gap-[4px]justify-between">
-                            <p class="text-[12px] text-gray-400 font-semibold">
-                                Apr 1-30
-                            </p>
-
-                            <p class="text-[12px] text-gray-400 font-semibold">
-                                216,119 unique
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Top Products -->
                 <div class="border-b border-gray-300">
                     <div class="flex items-center justify-between p-[16px] pb-0">
@@ -714,10 +672,19 @@
                             <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
                                 {{-- Product Detailes --}}
                                 <div class="flex gap-[10px]">
-                                    <img
-                                        class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                        src="{{ $item->product->base_image_url }}"
-                                    >
+                                    @if ($item->product->base_image_url)
+                                        <img
+                                            class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                            src="{{ $item->product->base_image_url }}"
+                                        >
+                                    @else
+                                        <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                                @lang('admin::app.dashboard.product-image')
+                                            </p>
+                                        </div>
+                                    @endif
 
                                     <div class="flex flex-col gap-[6px] w-full">
                                         <p class="text-gray-600">
