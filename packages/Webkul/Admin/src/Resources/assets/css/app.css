@@ -347,6 +347,7 @@
     .label-processing,
     .label-closed,
     .label-cancelled,
+    .label-info,
     .label-active {
         @apply text-[12px] text-white font-semibold py-[1px] px-[6px] max-w-max rounded-[35px];
     }
@@ -366,6 +367,11 @@
     .label-cancelled {
         @apply bg-darkPink;
     }
+
+    .label-info {
+        @apply bg-slate-400;
+    }
+
     /* status */
     .status-enable {
         @apply text-green-600;
@@ -377,7 +383,7 @@
 
 	.icon-star-fill:before {
         content: "\e938";
-    color: #ffb600;
+        color: #ffb600;
     }
 
     .shimmer {
