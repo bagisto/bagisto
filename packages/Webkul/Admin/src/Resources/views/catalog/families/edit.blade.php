@@ -13,7 +13,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a href="{{ route('admin.catalog.families.index') }}">
                     <button class="text-gray-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.catalog.families.edit.cancel-btn')
+                        @lang('admin::app.catalog.families.edit.back-btn')
                     </button>
                 </a>
 
