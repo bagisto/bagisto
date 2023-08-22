@@ -105,7 +105,7 @@
                             </span> /
 
                             <span @click="sortPage(columns.find(column => column.index === 'product_number'))">
-                                @lang('admin::app.catalog.products.index.product_number')
+                                @lang('admin::app.catalog.products.index.prod_number')
                             </span>
                         </p>
                     </div>
@@ -156,13 +156,13 @@
                             <p
                                 class="text-gray-600"
                             >
-                                @lang('admin::app.catalog.products.index.sku') - @{{ record.product_sku }}
+                                @{{ "@lang('admin::app.catalog.products.index.sku_number')".replace(':sku', record.product_sku) }}
                             </p>
 
                             <p
                                 class="text-gray-600"
                             >
-                                @lang('admin::app.catalog.products.index.number') - @{{ record.product_number }}
+                                @{{ "@lang('admin::app.catalog.products.index.product_number')".replace(':product_number', record.product_number) }}
                             </p>
                         </div>
                     </div>
@@ -178,11 +178,12 @@
                                 :src=`{{ Storage::url('') }}${record.path}`
                             />
 
-                            <img 
-                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                v-else
-                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
-                            />
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
+                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                    @lang('admin::app.dashboard.product-image')
+                                </p>
+                            </div>
 
                             <span
                                 class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
@@ -200,7 +201,7 @@
 
                             <p class="text-gray-600" v-if="record.quantity > 0">
                                 <a href="#" class="text-green-600">
-                                    @{{ record.quantity }} @lang('admin::app.catalog.products.index.available')
+                                    @{{ "@lang('admin::app.catalog.products.index.available')".replace(':qty', record.quantity) }}
                                 </a>
                             </p>
 
@@ -210,10 +211,8 @@
                                 </a>
                             </p>
     
-                            <p
-                                class="text-gray-600"
-                            >
-                            @lang('admin::app.catalog.products.index.id') - @{{ record.product_id }}
+                            <p class="text-gray-600">
+                                @{{ "@lang('admin::app.catalog.products.index.product_id')".replace(':id', record.product_id) }}
                             </p>
                         </div>
                     </div>
@@ -228,7 +227,7 @@
                                 'label-active': record.status === 1,
                             }"
                         >
-                            @{{ record.status ? 'Active' : 'Disable' }}
+                            @{{ record.status ? "@lang('admin::app.catalog.products.index.active')" : "@lang('admin::app.catalog.products.index.disable')" }}
                         </p>
 
                         <p

@@ -48,6 +48,7 @@ class ProductDataGrid extends DataGrid
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->leftJoin('product_images as images', 'product_flat.product_id', '=', 'images.product_id')
+            ->distinct()
             ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
             ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
                 $leftJoin->on('pc.category_id', '=', 'ct.category_id')
