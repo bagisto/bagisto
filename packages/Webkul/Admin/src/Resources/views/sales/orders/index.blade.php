@@ -118,8 +118,8 @@
                         <div class="flex flex-col gap-[6px]">
                             <p
                                 class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.increment_id"
                             >
+                                @{{ "@lang('admin::app.sales.orders.index.id')".replace(':id', record.increment_id) }}
                             </p>
 
                             <p

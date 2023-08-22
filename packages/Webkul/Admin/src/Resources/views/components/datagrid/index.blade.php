@@ -1,4 +1,6 @@
 <v-datagrid {{ $attributes }}>
+    <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+
     {{ $slot }}
 </v-datagrid>
 
@@ -55,6 +57,8 @@
 
             data() {
                 return {
+                    isLoading: false,
+
                     showFilters: false,
 
                     available: {
@@ -134,6 +138,8 @@
                         params.filters[column.index] = column.value;
                     });
 
+                    this.isLoading = true;
+
                     this.$axios
                         .get(this.src, {
                             params
@@ -149,6 +155,8 @@
                                 records,
                                 meta
                             } = response.data;
+
+                            this.isLoading = false;
 
                             this.available.columns = columns;
 

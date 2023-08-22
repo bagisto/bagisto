@@ -80,7 +80,14 @@
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
     
             @if (bouncer()->hasPermission('catalog.products.create'))
-                <v-create-product-form></v-create-product-form>
+                <v-create-product-form>
+                    <button 
+                        type="button"
+                        class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    >
+                        @lang('admin::app.catalog.products.index.create-btn')
+                    </button>
+                </v-create-product-form>
             @endif
     
             {!! view_render_event('bagisto.admin.catalog.products.create.after') !!}
@@ -136,9 +143,9 @@
 
                 <div class="cursor-pointer">
                     <p class="text-gray-600">
-                        @lang('admin::app.catalog.products.index.image')/
-                        @lang('admin::app.catalog.products.index.price')/
-                        @lang('admin::app.catalog.products.index.stock')/
+                        @lang('admin::app.catalog.products.index.image') /
+                        @lang('admin::app.catalog.products.index.price') /
+                        @lang('admin::app.catalog.products.index.stock') /
                         @lang('admin::app.catalog.products.index.id')
                     </p>
                 </div>
@@ -215,8 +222,8 @@
                         <div class="relative">
                             <img
                                 class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                v-if="record.path"
-                                :src=`{{ Storage::url('') }}${record.path}`
+                                v-if="record.base_image"
+                                :src=`{{ Storage::url('') }}${record.base_image}`
                             />
 
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
@@ -228,28 +235,34 @@
 
                             <span
                                 class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
-                                v-text="record.quantity ?? 0"
+                                v-text="record.images_count"
                             >
                             </span>
                         </div>
 
-                        <div class="flex-col gap-[6px]">
+                        <div class="flex flex-col gap-[6px]">
                             <p 
                                 class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.price"
+                                v-text="record.price ?? 'N/A'"
                             >
                             </p>
 
-                            <p class="text-gray-600" v-if="record.quantity > 0">
-                                <a href="#" class="text-green-600">
+                            <p
+                                class="text-gray-600"
+                                v-if="record.quantity > 0"
+                            >
+                                <span class="text-green-600">
                                     @{{ "@lang('admin::app.catalog.products.index.available')".replace(':qty', record.quantity) }}
-                                </a>
+                                </span>
                             </p>
 
-                            <p class="text-gray-600" v-else>
-                                <a href="#" class="text-red-600">
+                            <p
+                                class="text-gray-600"
+                                v-else
+                            >
+                                <span class="text-red-600">
                                     @lang('admin::app.catalog.products.index.out-of-stock')
-                                </a>
+                                </span>
                             </p>
     
                             <p class="text-gray-600">
@@ -262,18 +275,13 @@
                 {{-- Status, Category, Type --}}
                 <div class="flex gap-x-[16px] justify-between items-center">
                     <div class="flex flex-col gap-[6px]">
-                        <p
-                            :class="{
-                                'label-cancelled': record.status == '',
-                                'label-active': record.status === 1,
-                            }"
-                        >
+                        <p :class="[record.status ? 'label-active': 'label-info']">
                             @{{ record.status ? "@lang('admin::app.catalog.products.index.active')" : "@lang('admin::app.catalog.products.index.disable')" }}
                         </p>
 
                         <p
                             class="text-gray-600"
-                            v-text="record.category_name"
+                            v-text="record.category_name ?? 'N/A'"
                         >
                         </p>
 
@@ -297,162 +305,164 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-create-product-form-template">
-            <!-- Product Create Button -->
-            @if (bouncer()->hasPermission('catalog.products.create'))
-                <button 
-                    type="button"
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                    @click="$refs.productCreateModal.toggle()"
+            <div>
+                <!-- Product Create Button -->
+                @if (bouncer()->hasPermission('catalog.products.create'))
+                    <button 
+                        type="button"
+                        class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                        @click="$refs.productCreateModal.toggle()"
+                    >
+                        @lang('admin::app.catalog.products.index.create-btn')
+                    </button>
+                @endif
+
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
                 >
-                    @lang('admin::app.catalog.products.index.create-btn')
-                </button>
-            @endif
+                    <form @submit="handleSubmit($event, create)">
+                        <!-- Customer Create Modal -->
+                        <x-admin::modal ref="productCreateModal">
+                            <x-slot:header>
+                                <!-- Modal Header -->
+                                <p
+                                    class="text-[18px] text-gray-800 font-bold"
+                                    v-if="! attributes.length"
+                                >
+                                    @lang('admin::app.catalog.products.index.create.title')
+                                </p>    
 
-            <x-admin::form
-                v-slot="{ meta, errors, handleSubmit }"
-                as="div"
-            >
-                <form @submit="handleSubmit($event, create)">
-                    <!-- Customer Create Modal -->
-                    <x-admin::modal ref="productCreateModal">
-                        <x-slot:header>
-                            <!-- Modal Header -->
-                            <p
-                                class="text-[18px] text-gray-800 font-bold"
-                                v-if="! attributes.length"
-                            >
-                                @lang('admin::app.catalog.products.index.create.title')
-                            </p>    
-
-                            <p
-                                class="text-[18px] text-gray-800 font-bold"
-                                v-else
-                            >
-                                @lang('admin::app.catalog.products.index.create.configurable-attributes')
-                            </p>    
-                        </x-slot:header>
-        
-                        <x-slot:content>
-                            <!-- Modal Content -->
-                            <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                                <div v-show="! attributes.length">
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
-
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.index.create.type')
-                                        </x-admin::form.control-group.label>
+                                <p
+                                    class="text-[18px] text-gray-800 font-bold"
+                                    v-else
+                                >
+                                    @lang('admin::app.catalog.products.index.create.configurable-attributes')
+                                </p>    
+                            </x-slot:header>
             
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="type"
-                                            rules="required"
-                                            :label="trans('admin::app.catalog.products.index.create.type')"
-                                        >
-                                            @foreach(config('product_types') as $key => $type)
-                                                <option value="{{ $key }}">
-                                                    @lang('admin::app.catalog.products.index.create.' . $key)
-                                                </option>
-                                            @endforeach
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
+                            <x-slot:content>
+                                <!-- Modal Content -->
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <div v-show="! attributes.length">
+                                        {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
 
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.index.create.family')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="select"
-                                            name="attribute_family_id"
-                                            rules="required"
-                                            :label="trans('admin::app.catalog.products.index.create.family')"
-                                        >
-                                            @foreach($families as $family)
-                                                <option value="{{ $family->id }}">
-                                                    {{ $family->name }}
-                                                </option>
-                                            @endforeach
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="attribute_family_id"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label class="required">
-                                            @lang('admin::app.catalog.products.index.create.sku')
-                                        </x-admin::form.control-group.label>
-            
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="sku"
-                                            ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
-                                            :label="trans('admin::app.catalog.products.index.create.sku')"
-                                        >
-                                        </x-admin::form.control-group.control>
-            
-                                        <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
-                                </div>
-
-                                <div v-show="attributes.length">
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
-
-                                    <div
-                                        class="mb-[10px]"
-                                        v-for="attribute in attributes"
-                                    >
-                                        <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">
-                                            @{{ attribute.name }}
-                                        </label>
-
-                                        <div class="flex gap-[4px] min-h-[38px] p-[6px] border border-gray-300 rounded-[6px]">
-                                            <p
-                                                class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[3px] text-white font-semibold"
-                                                v-for="option in attribute.options"
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.catalog.products.index.create.type')
+                                            </x-admin::form.control-group.label>
+                
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="type"
+                                                rules="required"
+                                                :label="trans('admin::app.catalog.products.index.create.type')"
                                             >
-                                                @{{ option.name + option.id }}
+                                                @foreach(config('product_types') as $key => $type)
+                                                    <option value="{{ $key }}">
+                                                        @lang('admin::app.catalog.products.index.create.' . $key)
+                                                    </option>
+                                                @endforeach
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error control-name="type"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
 
-                                                <span
-                                                    class="icon-cross text-white text-[18px] ml-[5px] cursor-pointer"
-                                                    @click="removeOption(option)"
-                                                ></span>
-                                            </p>
-                                        </div>
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.catalog.products.index.create.family')
+                                            </x-admin::form.control-group.label>
+                
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="attribute_family_id"
+                                                rules="required"
+                                                :label="trans('admin::app.catalog.products.index.create.family')"
+                                            >
+                                                @foreach($families as $family)
+                                                    <option value="{{ $family->id }}">
+                                                        {{ $family->name }}
+                                                    </option>
+                                                @endforeach
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error control-name="attribute_family_id"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.catalog.products.index.create.sku')
+                                            </x-admin::form.control-group.label>
+                
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="sku"
+                                                ::rules="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
+                                                :label="trans('admin::app.catalog.products.index.create.sku')"
+                                            >
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error control-name="sku"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        {!! view_render_event('bagisto.admin.catalog.products.create_form.general.controls.before') !!}
                                     </div>
 
-                                    {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
-                                </div>
-                            </div>
-                        </x-slot:content>
-        
-                        <x-slot:footer>
-                            <!-- Modal Submission -->
-                            <div class="flex gap-x-[10px] items-center">
-                                <button
-                                    type="button"
-                                    class="text-gray-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer"
-                                    v-if="attributes.length"
-                                    @click="attributes = []"
-                                >
-                                    @lang('admin::app.catalog.products.index.create.back-btn')
-                                </button>
+                                    <div v-show="attributes.length">
+                                        {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
 
-                                <button 
-                                    type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
-                                >
-                                    @lang('admin::app.catalog.products.index.create.save-btn')
-                                </button>
-                            </div>
-                        </x-slot:footer>
-                    </x-admin::modal>
-                </form>
-            </x-admin::form>
+                                        <div
+                                            class="mb-[10px]"
+                                            v-for="attribute in attributes"
+                                        >
+                                            <label class="block leading-[24px] text-[12px] text-gray-800 font-medium">
+                                                @{{ attribute.name }}
+                                            </label>
+
+                                            <div class="flex gap-[4px] min-h-[38px] p-[6px] border border-gray-300 rounded-[6px]">
+                                                <p
+                                                    class="flex items-center py-[3px] px-[8px] bg-gray-600 rounded-[3px] text-white font-semibold"
+                                                    v-for="option in attribute.options"
+                                                >
+                                                    @{{ option.name + option.id }}
+
+                                                    <span
+                                                        class="icon-cross text-white text-[18px] ml-[5px] cursor-pointer"
+                                                        @click="removeOption(option)"
+                                                    ></span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {!! view_render_event('bagisto.admin.catalog.products.create_form.attributes.controls.before') !!}
+                                    </div>
+                                </div>
+                            </x-slot:content>
+            
+                            <x-slot:footer>
+                                <!-- Modal Submission -->
+                                <div class="flex gap-x-[10px] items-center">
+                                    <button
+                                        type="button"
+                                        class="text-gray-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer"
+                                        v-if="attributes.length"
+                                        @click="attributes = []"
+                                    >
+                                        @lang('admin::app.catalog.products.index.create.back-btn')
+                                    </button>
+
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        @lang('admin::app.catalog.products.index.create.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
+            </div>
         </script>
 
         <script type="module">
