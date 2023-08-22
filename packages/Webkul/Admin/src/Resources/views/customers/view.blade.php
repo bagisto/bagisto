@@ -38,9 +38,10 @@
        
         <div 
             class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-            onclick="event.preventDefault();
-            document.getElementById('delete-account{{ $customer->id }}').submit();"
-
+            onclick="if (confirm('Are you sure you want to delete this account?')) {
+                event.preventDefault();
+                document.getElementById('delete-account{{ $customer->id }}').submit();
+            }"
         >
             <span class="icon-cancel text-[24px]"></span>
 

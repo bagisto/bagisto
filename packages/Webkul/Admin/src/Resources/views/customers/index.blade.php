@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.customer.index') }}">
+    <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data">
         <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
             <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
                 <div 
@@ -471,6 +471,8 @@
                         this.$axios.post("{{ route('admin.customer.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.close();
+
+                                this.$root.$refs.customer_data.get();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
