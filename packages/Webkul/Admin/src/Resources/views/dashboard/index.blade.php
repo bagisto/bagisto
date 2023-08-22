@@ -158,7 +158,7 @@
                                     @else
                                         <span class="icon-up-stat text-[16px] text-emerald-500"></span>
 
-                                        <p class="text-[12px] text-emerald-500 font-semibold"
+                                        <p class="text-[12px] text-emerald-500 font-semibold">
                                             @lang('admin::app.dashboard.increased', [
                                                 'progress' => number_format($statistics['total_customers']['progress'], 1)
                                             ])
