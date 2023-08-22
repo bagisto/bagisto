@@ -87,8 +87,8 @@
 
     <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data">
         <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
-            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                <div class="flex gap-[10px]">
+            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 items-center">
+                <div class="flex gap-[10px] items-center">
                     <label 
                         class="flex gap-[4px] w-max items-center cursor-pointer select-none"
                         for="mass_action_select_all_records"
