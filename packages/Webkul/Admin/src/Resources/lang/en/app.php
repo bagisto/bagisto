@@ -35,6 +35,7 @@ return [
                 'grand-total'  => 'Grand Total',
                 'channel-name' => 'Channel',
                 'view'         => 'View',
+                'id'           => '# :id',
             ],
 
             'view' => [
@@ -268,6 +269,8 @@ return [
         'index'  => [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
+            'order'         => ':order Order',
+            'address'       => ':address  Address',
 
             'create' => [
                 'create-btn'            => 'Create Customer',
@@ -352,6 +355,9 @@ return [
             'total-revenue'           => 'Total Revenue',
             'title'                   => 'Customer View',
             'note-placeholder'        => 'Write Your Note here',
+            'delete-success'          => 'Account Deleted Successfully',
+            'order-pending'           => 'Cannot delete account because some Order(s) are pending or processing state.',
+
         ],
 
         'groups' => [

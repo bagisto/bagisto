@@ -39,22 +39,20 @@
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px]">
                             <div class="flex gap-[10px]">
                                 <!-- Image -->
-                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                    @if ($item->product)
-                                        <img
-                                            class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
-                                            src="{{ $item->product->base_image_url }}"
-                                        >
-                                    @else
-                                        <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
-                                            
-                                            <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
-                                                @lang('admin::app.sales.invoices.view.product-image') 
-                                            </p>
-                                        </div>
-                                    @endif
-                                </div>
+                                @if ($item->product)
+                                    <img
+                                        class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
+                                        src="{{ $item->product->base_image_url }}"
+                                    >
+                                @else
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        
+                                        <p class="absolute w-full bottom-[5px] text-[6px] text-gray-400 text-center font-semibold"> 
+                                            @lang('admin::app.sales.invoices.view.product-image') 
+                                        </p>
+                                    </div>
+                                @endif
 
                                 <div class="grid gap-[6px] place-content-start">
                                     <p class="text-[16x] text-gray-800 font-semibold">{{ $item->name }}

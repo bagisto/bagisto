@@ -85,18 +85,42 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.customer.index') }}">
-        <template #header="{ columns, records, sortPage }">
-            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                <div 
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'full_name'))"
-                >
-                    <div class="flex gap-[10px]">
-                        <span class="icon-uncheckbox text-[24px]"></span>
+    <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data">
+        <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
+            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 items-center">
+                <div class="flex gap-[10px] items-center">
+                    <label 
+                        class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                        for="mass_action_select_all_records"
+                    >
+                        <input 
+                            type="checkbox" 
+                            name="mass_action_select_all_records"
+                            id="mass_action_select_all_records"
+                            class="hidden peer"
+                            :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                            @change="selectAllRecords"
+                        >
+
+                        <span
+                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                            :class="[
+                                applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-navyBlue' : (
+                                    applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                ),
+                            ]"
+                        >
+                        </span>
+                    </label>
+                
+                    <div 
+                        class="cursor-pointer"
+                        @click="sortPage(columns.find(column => column.index === 'full_name'))"
+                    >
                         <p class="text-gray-600">Customer Name / Email / Contact Number</p>
                     </div>
                 </div>
+               
                 <div 
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'status'))"
@@ -112,12 +136,26 @@
             </div>
         </template>
 
-        <template #body="{ columns, records }">
+        <template #body="{ columns, records, setCurrentSelectionMode, applied }">
           <!-- single row -->
             <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
                 <div class="">
                     <div class="flex gap-[10px]">
-                        <span class="icon-uncheckbox text-[24px]"></span>
+                        <input 
+                            type="checkbox" 
+                            :name="`mass_action_select_record_${record.customer_id}`"
+                            :id="`mass_action_select_record_${record.customer_id}`"
+                            :value="record.customer_id"
+                            class="hidden peer"
+                            v-model="applied.massActions.indices"
+                            @change="setCurrentSelectionMode"
+                        >
+
+                        <label 
+                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                            :for="`mass_action_select_record_${record.customer_id}`"
+                        >
+                        </label>
                         <div class="flex flex-col gap-[6px]">
                             <p 
                                 class="text-[16px] text-gray-800 font-semibold" 
@@ -181,8 +219,12 @@
                         >
                         </p>
                         
-                        <p class="text-gray-600">@{{ record.order_count }} Orders</p>
-                        <p class="text-gray-600">@{{ record.address_count }} Address</p>
+                        <p class="text-gray-600">
+                            @{{ "@lang('admin::app.customers.index.order')".replace(':order', record.order_count) }}
+                        </p>
+                        <p class="text-gray-600">
+                            @{{ "@lang('admin::app.customers.index.address')".replace(':address', record.address_count) }}
+                        </p>
                     </div>
                     <a 
                         class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
@@ -427,6 +469,8 @@
                         this.$axios.post("{{ route('admin.customer.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.close();
+
+                                this.$root.$refs.customer_data.get();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
