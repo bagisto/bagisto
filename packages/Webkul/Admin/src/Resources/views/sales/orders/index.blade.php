@@ -108,41 +108,85 @@
         </template>
 
         <template #body="{ columns, records }">
-            <div class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
+            <div
+                class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                v-for="record in records"
+            > 
+                {{-- Order Id, Created, Status Section --}}
                 <div class="">
                     <div class="flex gap-[10px]">
                         <div class="flex flex-col gap-[6px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.increment_id }}</p>
+                            <p
+                                class="text-[16px] text-gray-800 font-semibold"
+                                v-text="record.increment_id"
+                            >
+                            </p>
 
-                            <p class="text-gray-600">@{{ record.created_at }}</p>
+                            <p
+                                class="text-gray-600"
+                                v-text="record.created_at"
+                            >
+                            </p>
 
-                            <p class="label-pending"> @{{ record.status }}</p>
+                            <p
+                                :class="{
+                                    'label-pending': record.status === 'pending',
+                                    'label-closed': record.status === 'closed',
+                                    'label-cancelled': record.status === 'canceled',
+                                    'label-active': record.status === 'processing' || record.status === 'completed'
+                                }"
+                                v-text="record.status"
+                            >
+                            </p>
                         </div>
                     </div>
                 </div>
 
+                {{-- Total Amount, Pay Via, Channel --}}
                 <div class="">
                     <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">@{{ $admin.formatPrice(record.base_grand_total) }}</p>
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @{{ $admin.formatPrice(record.base_grand_total) }}
+                        </p>
 
-                        <p class="text-gray-600">Pay by - @{{ record.method }}</p>
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.orders.index.pay-by', ['method' => ''])@{{ record.method }}
+                        </p>
 
-                        <p class="text-gray-600">@{{ record.channel_name }}</p>
+                        <p
+                            class="text-gray-600"
+                            v-text="record.channel_name"
+                        >
+                        </p>
                     </div>
                 </div>
 
+                {{-- Custoemr, Email, Location Section --}}
                 <div class="">
                     <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800">@{{ record.full_name }}</p>
+                        <p
+                            class="text-[16px] text-gray-800"
+                            v-text="record.full_name"
+                        >
+                        </p>
 
-                        <p class="text-gray-600">@{{ record.customer_email }}</p>
+                        <p
+                            class="text-gray-600"
+                            v-text="record.customer_email"
+                        >
+                        </p>
 
-                        <p class="text-gray-600">@{{ record.location }}</p>
+                        <p
+                            class="text-gray-600"
+                            v-text="record.location"
+                        >
+                        </p>
                     </div>
                 </div>
 
+                {{-- Imgaes Section --}}
                 <div class="">
-                    <div class="flex  gap-[6px] items-center">
+                    <div class="flex gap-[6px] items-center">
                         <div class="flex gap-[6px] items-center flex-wrap">
                             <div class="relative">
                                 <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
@@ -168,7 +212,10 @@
                                 <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">2+ More Products </p>
                             </div>
 
-                            <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                            {{-- View Page Linking --}}
+                            <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
+                                <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                            </a>
                         </div>
                     </div>
                 </div>

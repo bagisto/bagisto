@@ -89,7 +89,169 @@
     
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}">
+        <template #header="{ columns, records, sortPage }">
+            <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-3 grid-rows-1">
+                <div class="cursor-pointer">
+                    <div class="flex gap-[10px]">
+                        <span class="icon-uncheckbox text-[24px]"></span>
+                        <p class="text-gray-600">
+                            <span @click="sortPage(columns.find(column => column.index === 'product_name'))">
+                                @lang('admin::app.catalog.products.index.product_name')
+                            </span> /
+
+                            <span @click="sortPage(columns.find(column => column.index === 'product_sku'))">
+                                @lang('admin::app.catalog.products.index.sku')
+                            </span> /
+
+                            <span @click="sortPage(columns.find(column => column.index === 'product_number'))">
+                                @lang('admin::app.catalog.products.index.product_number')
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cursor-pointer">
+                    <p class="text-gray-600">
+                        @lang('admin::app.catalog.products.index.image')/
+                        @lang('admin::app.catalog.products.index.price')/
+                        @lang('admin::app.catalog.products.index.stock')/
+                        @lang('admin::app.catalog.products.index.id')
+                    </p>
+                </div>
+
+                <div class="cursor-pointer">
+                    <p class="text-gray-600">
+                        <span @click="sortPage(columns.find(column => column.index === 'status'))">
+                            @lang('admin::app.catalog.products.index.status')
+                        </span> / 
+                        
+                        @lang('admin::app.catalog.products.index.category') /
+
+                        <span @click="sortPage(columns.find(column => column.index === 'product_type'))">
+                            @lang('admin::app.catalog.products.index.type')
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template #body="{ columns, records }">
+            <div
+                class="row grid grid-cols-3 grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                v-for="record in records"
+            >
+                {{-- Product Name, SKU, Product Number --}}
+                <div class="">
+                    <div class="flex gap-[10px]">
+                        <span class="icon-uncheckbox text-[24px]"></span>
+
+                        <div class="flex flex-col gap-[6px]">
+                            <p
+                                class="text-[16px] text-gray-800 font-semibold"
+                                v-text="record.product_name"
+                            >
+                            </p>
+
+                            <p
+                                class="text-gray-600"
+                            >
+                                @lang('admin::app.catalog.products.index.sku') - @{{ record.product_sku }}
+                            </p>
+
+                            <p
+                                class="text-gray-600"
+                            >
+                                @lang('admin::app.catalog.products.index.number') - @{{ record.product_number }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Image, Price, Id, Stock --}}
+                <div class="">
+                    <div class="flex gap-[6px]">
+                        <div class="relative">
+                            <img
+                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                v-if="record.path"
+                                :src=`{{ Storage::url('') }}${record.path}`
+                            />
+
+                            <img 
+                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                v-else
+                                src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                            />
+
+                            <span
+                                class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
+                                v-text="record.quantity ?? 0"
+                            >
+                            </span>
+                        </div>
+
+                        <div class="flex-col gap-[6px]">
+                            <p 
+                                class="text-[16px] text-gray-800 font-semibold"
+                                v-text="record.price"
+                            >
+                            </p>
+
+                            <p class="text-gray-600" v-if="record.quantity > 0">
+                                <a href="#" class="text-green-600">
+                                    @{{ record.quantity }} @lang('admin::app.catalog.products.index.available')
+                                </a>
+                            </p>
+
+                            <p class="text-gray-600" v-else>
+                                <a href="#" class="text-red-600">
+                                    @lang('admin::app.catalog.products.index.out-of-stock')
+                                </a>
+                            </p>
+    
+                            <p
+                                class="text-gray-600"
+                            >
+                            @lang('admin::app.catalog.products.index.id') - @{{ record.product_id }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Status, Category, Type --}}
+                <div class="flex gap-x-[16px] justify-between items-center">
+                    <div class="flex flex-col gap-[6px]">
+                        <p
+                            :class="{
+                                'label-cancelled': record.status == '',
+                                'label-active': record.status === 1,
+                            }"
+                        >
+                            @{{ record.status ? 'Active' : 'Disable' }}
+                        </p>
+
+                        <p
+                            class="text-gray-600"
+                            v-text="record.category_name"
+                        >
+                        </p>
+
+                        <p
+                            class="text-gray-600"
+                            v-text="record.product_type"
+                        >
+                        </p>
+                    </div>
+
+                    <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
+                        <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                    </a>
+
+                </div>
+            </div>
+        </template>
+    </x-admin::datagrid>
 
     {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 
@@ -149,7 +311,7 @@
                                         >
                                             @foreach(config('product_types') as $key => $type)
                                                 <option value="{{ $key }}">
-                                                    {{ __('admin::app.catalog.products.index.create.' . $key) }}
+                                                    @lang('admin::app.catalog.products.index.create.' . $key)
                                                 </option>
                                             @endforeach
                                         </x-admin::form.control-group.control>

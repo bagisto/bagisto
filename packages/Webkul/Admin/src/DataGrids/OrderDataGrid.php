@@ -25,23 +25,19 @@ class OrderDataGrid extends DataGrid
                     ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
             })
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
-            ->select('orders.id', 'order_payment.method')
-
-            ->addSelect(
+            ->select(
                 'orders.id',
+                'order_payment.method',
                 'orders.increment_id',
                 'orders.base_grand_total',
                 'orders.created_at',
                 'channel_name',
                 'status',
-                'customer_email'
-            )
-            ->addSelect(
-                DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name) as full_name')
-            )
-            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, " ", ' . DB::getTablePrefix() . 'order_address_billing.state," ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location'))
-            ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));
-
+                'customer_email',
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name) as full_name'),
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, ", ", ' . DB::getTablePrefix() . 'order_address_billing.state,", ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location'),
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to')
+            );
 
         // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
         // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
