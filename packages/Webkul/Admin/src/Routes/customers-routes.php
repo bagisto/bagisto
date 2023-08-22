@@ -28,7 +28,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::post('edit/{id}', 'update')->name('admin.customer.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.customer.delete');
+        Route::post('/{id}', 'destroy')->name('admin.customer.delete');
 
         Route::post('mass-delete', 'massDestroy')->name('admin.customer.mass_delete');
 

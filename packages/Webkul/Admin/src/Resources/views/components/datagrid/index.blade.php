@@ -25,6 +25,8 @@
                             :records="available.records"
                             :meta="available.meta"
                             :sort-page="sortPage"
+                            :selectAllRecords="selectAllRecords"
+                            :applied="applied"
                         >
                         </slot>
                     </template>
@@ -37,6 +39,8 @@
                             :mass-actions="available.massActions"
                             :records="available.records"
                             :meta="available.meta"
+                            :setCurrentSelectionMode="setCurrentSelectionMode"
+                            :applied="applied"
                         >
                         </slot>
                     </template>
@@ -507,7 +511,7 @@
                         case 'post':
                         case 'put':
                         case 'patch':
-                            this.$axios[method](action.url, {
+                            this.$axios[method](action.action, {
                                     indices: this.applied.massActions.indices,
                                     value: this.applied.massActions.value,
                                 })

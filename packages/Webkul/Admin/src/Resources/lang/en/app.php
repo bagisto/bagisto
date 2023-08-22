@@ -268,6 +268,8 @@ return [
         'index'  => [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
+            'order'         => ':order Order',
+            'address'       => ':address  Address',
 
             'create' => [
                 'create-btn'            => 'Create Customer',
