@@ -45,11 +45,20 @@ class ProductDataGrid extends DataGrid
 
         /* query builder */
         $queryBuilder = DB::table('product_flat')
-            ->leftJoin('attribute_families', 'product_flat.attribute_family_id', '=', 'attribute_families.id')
+            ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+            ->leftJoin('product_images as images', 'product_flat.product_id', '=', 'images.product_id')
+            ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
+            ->leftJoin('category_translations as ct', function ($leftJoin) use ($whereInLocales) {
+                $leftJoin->on('pc.category_id', '=', 'ct.category_id')
+                    ->whereIn('ct.locale', $whereInLocales);
+            })
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
+                'images.path',
+                'pc.category_id',
+                'ct.name as category_name',
                 'product_flat.product_id',
                 'product_flat.sku as product_sku',
                 'product_flat.product_number',
@@ -59,7 +68,7 @@ class ProductDataGrid extends DataGrid
                 'product_flat.price',
                 'product_flat.url_key',
                 'product_flat.visible_individually',
-                'attribute_families.name as attribute_family',
+                'af.name as attribute_family',
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
             );
 
@@ -126,8 +135,8 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($row) {
                 if (
-                    ! empty($row->visible_individually)
-                    && ! empty($row->url_key)
+                    !empty($row->visible_individually)
+                    && !empty($row->url_key)
                 ) {
                     return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . '</a>';
                 }

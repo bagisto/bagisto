@@ -419,6 +419,21 @@ class OrderRepository extends Repository
                 ->whereBetween('orders.created_at', [$from, $to])
                 ->get();
         }
+
+        if ($from) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->where('created_at', '>=', $from)
+                ->get();
+        }
+
+        if ($to) {
+            return app(OrderRepository::class)
+                ->with(['addresses', 'payment', 'items'])
+                ->where('created_at', '<=', $to)
+                ->sum(DB::raw('base_grand_total_invoiced - base_grand_total_refunded'))
+                ->get();
+        }
     }
 
     /**

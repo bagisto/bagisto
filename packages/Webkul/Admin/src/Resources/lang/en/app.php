@@ -30,6 +30,7 @@ return [
                 'pay-via'      => 'Pay Via',
                 'date'         => 'Date',
                 'order-id'     => 'Order ID',
+                'pay-by'       => 'Pay By - :method',
                 'status'       => 'Status',
                 'grand-total'  => 'Grand Total',
                 'channel-name' => 'Channel',
@@ -56,7 +57,7 @@ return [
                 'price'                 => 'Price',
                 'tax'                   => 'Tax',
                 'sub-total'             => 'Sub Total',
-                'discount'              =>  'Discount',  
+                'discount'              =>  'Discount',
                 'shipping-and-handling' => 'Shipping and Handling',
                 'total-paid'            => 'Total Paid',
                 'total-refund'          => 'Total Refund',
@@ -381,6 +382,13 @@ return [
         'reviews' => [
             'index' => [
                 'title' => 'Reviews',
+                'description' => 'Description',
+                'rating'      => 'Rating',
+                'date'        => 'Date',
+                'id'          => 'Id',
+                'name'        => 'Name',
+                'product'     => 'Product',
+                'status'      => 'Status',
             ],
         ],
 
@@ -840,8 +848,21 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
-                'title'      => 'Products',
-                'create-btn' => 'Create Product',
+                'title'           => 'Products',
+                'create-btn'      => 'Create Product',
+                'sku'             => 'SKU',
+                'number'          => 'Number',
+                'available'       => 'Available',
+                'out-of-stock'    => 'Out of Stock',
+                'id'              => 'Id',
+                'product_name'    => 'Product Name',
+                'product_number'  => 'Product Number',
+                'price'           => 'Price',
+                'image'           => 'Image',
+                'stock'           => 'Stock',
+                'category'        => 'Category',
+                'type'            => 'Type',
+                'status'          => 'Status',
 
                 'create' => [
                     'title'                   => 'Create New Product',

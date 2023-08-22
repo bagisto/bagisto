@@ -88,16 +88,25 @@
     <x-admin::datagrid src="{{ route('admin.customer.index') }}">
         <template #header="{ columns, records, sortPage }">
             <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                <div class="">
+                <div 
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'full_name'))"
+                >
                     <div class="flex gap-[10px]">
                         <span class="icon-uncheckbox text-[24px]"></span>
                         <p class="text-gray-600">Customer Name / Email / Contact Number</p>
                     </div>
                 </div>
-                <div class="">
+                <div 
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'status'))"
+                >
                     <p class="text-gray-600">Status / Gender / Group</p>
                 </div>
-                <div class="">
+                <div 
+                    class="cursor-pointer"
+                    @click="sortPage(columns.find(column => column.index === 'total_base_grand_total'))"
+                >
                     <p class="text-gray-600">Revenue/Order Count/ Address Count</p>
                 </div>
             </div>
@@ -110,27 +119,76 @@
                     <div class="flex gap-[10px]">
                         <span class="icon-uncheckbox text-[24px]"></span>
                         <div class="flex flex-col gap-[6px]">
-                            <p class="text-[16px] text-gray-800 font-semibold">@{{ record.full_name}}</p>
-                            <p class="text-gray-600">@{{ record.email }}</p>
-                            <p class="text-gray-600">Phone: @{{ record.phone }}</p>
+                            <p 
+                                class="text-[16px] text-gray-800 font-semibold" 
+                                v-text="record.full_name"
+                            >
+                            </p>
+
+                            <p 
+                                class="text-gray-600" 
+                                v-text="record.email"
+                            >
+                            </p>
+
+                            <p 
+                                class="text-gray-600"
+                                v-text="record.phone"
+                            >
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="">
                     <div class="flex flex-col gap-[6px]">
-                        <span class="label-active">@{{ record.status }}</span>
-                        
-                        <p class="text-gray-600">@{{ record.gender }}</p>
-                        <p class="text-gray-600">@{{ record.group }}</p>
+                        <div class="flex gap-[6px]">
+                            <span
+                                :class="{
+                                    'label-cancelled': record.status == '',
+                                    'label-active': record.status === 1,
+                                }"
+                            >
+                                @{{ record.status ? 'Active' : 'Inactive' }}
+                            </span>
+
+                            <span
+                                :class="{
+                                    'label-cancelled': record.is_suspended === 1,
+                                }"
+                            >
+                                @{{ record.is_suspended ?  'Suspended' : '' }}
+                            </span>
+                        </div>
+
+                        <p 
+                            class="text-gray-600"
+                            v-text="record.gender"
+                        >
+                        </p>
+
+                        <p 
+                            class="text-gray-600"
+                            v-text="record.group"
+                        >
+                        </p>
                     </div>
                 </div>
                 <div class="flex gap-x-[16px] justify-between items-center">
                     <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">$125.00 Revenue</p>
+                        <p 
+                            class="text-[16px] text-gray-800 font-semibold" 
+                            v-text="record.total_base_grand_total"
+                        >
+                        </p>
+                        
                         <p class="text-gray-600">@{{ record.order_count }} Orders</p>
                         <p class="text-gray-600">@{{ record.address_count }} Address</p>
                     </div>
-                    <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                    <a 
+                        class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                        :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
+                    >
+                    </a>
                 </div>
             </div>
         </template>
