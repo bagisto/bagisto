@@ -14,8 +14,6 @@
                 @lang('admin::app.dashboard.user-info')
             </p>
         </div>
-
-        <span class="icon-settings p-[6px] rounded-[6px] text-[24px]cursor-pointer transition-all hover:bg-gray-100"></span>
     </div>
 
     {{-- Body Component --}}
@@ -32,12 +30,8 @@
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.total-sales')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/total-sales.svg')}}">
                             </div>
 
                             {{-- Sales Stats --}}
@@ -75,12 +69,8 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.total-orders')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/total-orders.svg')}}">
                             </div>
 
                             {{-- Orders Stats --}}
@@ -118,12 +108,8 @@
 
                         {{-- Total Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.total-customers')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/customer.svg')}}">
                             </div>
 
                             {{-- Customers Stats --}}
@@ -161,12 +147,8 @@
 
                         {{-- Average sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('Average Sales')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/average-order.svg')}}">
                             </div>
 
                             {{-- Sales Stats --}}
@@ -203,12 +185,8 @@
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('Invoices')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/unpaid-invoice.svg')}}">
                             </div>
 
                             <div class="grid gap-[4px] place-content-start">
@@ -235,12 +213,8 @@
                     <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.product-image')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/total-sales.svg')}}">
                             </div>
 
                             {{-- Sales Stats --}}
@@ -278,12 +252,8 @@
 
                         {{-- Today's Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.product-image')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/total-orders.svg')}}">
                             </div>
 
                             {{-- Orders Stats --}}
@@ -321,12 +291,8 @@
 
                         {{-- Today's Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.product-image')
-                                </p>
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
+                                <img src="{{ bagisto_asset('images/customer.svg')}}">
                             </div>
 
                             {{-- Customers Stats --}}
@@ -413,49 +379,45 @@
                                 </div>
                             </div>
         
-                            <div class="">
-                                {{-- Payment And Channel Detailes --}}
-                                <div class="flex flex-col gap-[6px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
-                                        {{ core()->formatBasePrice($item->grand_total)}}
-                                    </p>
+                            {{-- Payment And Channel Detailes --}}
+                            <div class="flex flex-col gap-[6px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    {{ core()->formatBasePrice($item->grand_total)}}
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        @lang('admin::app.dashboard.pay-by', ['method' => $item->payment->method])
-                                    </p>
+                                <p class="text-gray-600">
+                                    @lang('admin::app.dashboard.pay-by', ['method' => $item->payment->method])
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        {{ $item->channel_name }}
-                                    </p>
-                                </div>
+                                <p class="text-gray-600">
+                                    {{ $item->channel_name }}
+                                </p>
                             </div>
 
-                            <div class="">
-                                <div class="flex flex-col gap-[6px]">
-                                    {{-- Customer Detailes --}}
-                                    <p class="text-[16px] text-gray-800">
-                                        {{ $item->customer_first_name }} {{ $item->customer_last_name }}
-                                    </p>
+                            <div class="flex flex-col gap-[6px]">
+                                {{-- Customer Detailes --}}
+                                <p class="text-[16px] text-gray-800">
+                                    {{ $item->customer_first_name }} {{ $item->customer_last_name }}
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        {{ $item->customer_email }}
-                                    </p>
+                                <p class="text-gray-600">
+                                    {{ $item->customer_email }}
+                                </p>
 
-                                    {{-- Order Address --}}
-                                    @foreach ($item->addresses as $address)
-                                        @if ($address->address_type == 'order_billing')
-                                            <p class="text-gray-600">
-                                                @if (isset($address->country)) 
-                                                    {{ $address->city }},
-                                                @else 
-                                                    {{ $address->city }}
-                                                @endif
+                                {{-- Order Address --}}
+                                @foreach ($item->addresses as $address)
+                                    @if ($address->address_type == 'order_billing')
+                                        <p class="text-gray-600">
+                                            @if (isset($address->country)) 
+                                                {{ $address->city }},
+                                            @else 
+                                                {{ $address->city }}
+                                            @endif
 
-                                                {{ core()->country_name($address->country) }}
-                                            </p>
-                                        @endif
-                                    @endforeach
-                                </div>
+                                            {{ core()->country_name($address->country) }}
+                                        </p>
+                                    @endif
+                                @endforeach
                             </div>
 
                             {{-- Ordered Product Images --}}
@@ -465,7 +427,7 @@
                                         {{-- Using Variable for image Numbering --}}
                                         @foreach ($item->items as $index => $orderItem)
 
-                                            @if ($index >= 2 && count($item->items) >= 5)
+                                            @if ($index >= 3 && $item->items->count() >= 5)
                                                 @break;
                                             @endif
 
@@ -476,7 +438,7 @@
                                                         src="{{ $orderItem->product->base_image_url }}"
                                                     />
                                                 @else
-                                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                                    <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
@@ -486,16 +448,16 @@
                                                 @endif
 
                                                 <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                    {{ count($orderItem->product->images) }}
+                                                    {{ $orderItem->product->images->count() }}
                                                 </span>
                                             </div>
                                         @endforeach
 
                                         {{-- Count of Rest Images --}}
-                                        @if (count($item->items) - 2 && count($item->items) > 4)
+                                        @if ($item->items->count() - 3 && $item->items->count() > 4)
                                             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
                                                 <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
-                                                    @lang('admin::app.dashboard.more-products', ['product_count' => count($item->items) - 2 ])
+                                                    @lang('admin::app.dashboard.more-products', ['product_count' => $item->items->count() - 3 ])
                                                 </p>
                                             </div>
                                         @endif
@@ -601,7 +563,9 @@
             </p>
 
             {{-- Store Stats --}}
-            <date-filter></date-filter>
+            <date-filter>
+                <div class="shimmer h-[800px] w-full"></div>
+            </date-filter>
         </div>
     </div>
     
@@ -609,7 +573,9 @@
         <script src="{{ bagisto_asset('js/chart.js') }}"></script>
 
         <script type="text/x-template" id="date-filter-template">
-            <div>
+            <div v-if="isLoading" class="shimmer h-[700] w-full"></div>
+
+            <div v-else>
                 <x-admin::form
                     :action="route('admin.catalog.categories.store')"
                     enctype="multipart/form-data"
@@ -627,7 +593,6 @@
                                         name="startDate" 
                                         class="cursor-pointer"
                                         :value="$startDate->format('Y-m-d')"
-                                        :label="trans('Start Date')"
                                         :placeholder="trans('Start Date')"
                                         @change="applyFilter('start', $event)"
                                     >
@@ -646,12 +611,10 @@
                                         name="endDate" 
                                         class="cursor-pointer"
                                         :value="$endDate->format('Y-m-d')"
-                                        :label="trans('admin::app.catalog.categories.create.display-mode')"
                                         :placeholder="trans('End Date')"
                                         @change="applyFilter('end', $event)"
                                     >
                                     </x-admin::form.control-group.control>
-
                                 </x-admin::form.control-group>
                             </div>
                         </div>
@@ -664,27 +627,27 @@
                                         @lang('admin::app.dashboard.total-sales')
                                     </p>
 
-                                    {{-- Total Order Revenue --}}
+                                    <!-- Total Order Revenue -->
                                     <p class="text-[18px] text-gray-800 font-bold">
-                                        {{ core()->formatBasePrice($statistics['total_sales']['current']) }}
+                                        @{{ statistics.total_sales?.formatted_total }}
                                     </p>
-
-                                    <canvas id="myChart"></canvas>
-
                                 </div>
 
                                 <div class="flex flex-col gap-[4px]justify-between">
-                                    {{-- Orders Time Duration --}}
+                                    <!-- Orders Time Duration -->
                                     <p class="text-[12px] text-gray-400 font-semibold">
                                         Apr 1-30
                                     </p>
 
-                                    {{-- Total Orders --}}
+                                    <!-- Total Orders -->
                                     <p class="text-[12px] text-gray-400 font-semibold">
-                                        {{-- @lang('admin::app.dashboard.order', ['total_orders' => $statistics['total_orders']['current']]) --}}
-                                        @{{ statistics.total_orders?.current }}
+                                        @{{ "@lang('admin::app.dashboard.order')".replace(':total_orders', statistics.total_orders?.current) }}
                                     </p>
                                 </div>
+                            </div>
+
+                            <div class="w-full h-[250px]">
+                                <canvas id="myChart" style="width: 100%; height: 87%"></canvas>
                             </div>
                         </div>
 
@@ -700,36 +663,65 @@
                                 </p>
                             </div>
 
-                            <div class="flex flex-col gap-[32px] p-[16px]">
+                            <div class="flex flex-col gap-[32px] p-[16px]" v-if="statistics?.top_selling_products?.length">
                                 <a
                                     v-for="item in statistics.top_selling_products"
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
                                 >
+                                    <!-- Product Image -->
                                     <div class="flex gap-[10px]">
-
                                         <img
+                                            v-if="item?.product?.images"
+                                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
+                                            :src="item?.product?.images[0].url"
                                         />
-                                        <div class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+
+                                        <div
+                                            v-else
+                                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
+                                        >
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                            
                                             <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
                                                 @lang('admin::app.dashboard.product-image')
                                             </p>
                                         </div>
 
+                                        <!-- Product Detailes -->
                                         <div class="flex flex-col gap-[6px] w-full">
-                                            <p class="text-gray-600" v-text="item.name">
+                                            <p
+                                                class="text-gray-600"
+                                                v-text="item.name"
+                                            >
                                             </p>
 
                                             <div class="flex justify-between">
-                                                <p class="text-gray-600 font-semibold" v-text="item.price">
+                                                <p
+                                                    class="text-gray-600 font-semibold"
+                                                    v-text="item.formatted_price"
+                                                >
                                                 </p>
 
-                                                <p class="text-[16px] text-gray-800 font-semibold" v-text="item.total">
+                                                <p
+                                                    class="text-[16px] text-gray-800 font-semibold"
+                                                    v-text="item.formatted_total"
+                                                >
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
+                            </div>
+                            <div class="flex flex-col gap-[32px] p-[16px]" v-else>
+                                <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
+                                    <!-- Placeholder Image -->
+                                    <img src="http://localhost:5173/src/Resources/assets/images/icon-add-product.svg" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                                    <!-- Add Variants Information -->
+                                    <div class="flex flex-col items-center">
+                                        <p class="text-[16px] text-gray-400 font-semibold"> Add Product </p>
+                                        <p class="text-gray-400">To add related products on a go.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -745,64 +737,89 @@
                                 </p>
                             </div>
 
-                            {{-- Customers Lists --}}
+                            <!-- Customers Lists -->
                             <div
                                 class="flex flex-col gap-[32px] p-[16px]"
+                                v-if="statistics?.customer_with_most_sales?.length"
                                 v-for="item in statistics.customer_with_most_sales"
                             >
-                                <a :href="`{{ route('admin.customer.view', '') }}/${item.customer_id}`">
+                                <a
+                                    :href="`{{ route('admin.customer.view', '') }}/${item.customer_id}`"
+                                    v-if="item.customer_id"
+                                >
                                     <div class="flex justify-between gap-[6px]">
                                         <div class="flex flex-col">
-                                            <p class="text-gray-600 font-semibold" v-text="item.customer_full_name ?? item.first_name">
+                                            <p
+                                                class="text-gray-600 font-semibold"
+                                                v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                            >
                                             </p>
 
-                                            <p class="text-gray-600" v-text="item.customer_email ?? item.customer_address_email">
+                                            <p
+                                                class="text-gray-600"
+                                                v-text="item.customer_email ?? item.customer_address_email"
+                                            >
                                             </p>
                                         </div>
 
                                         <div class="flex flex-col">
-                                            <p class="text-gray-800 font-semibold" v-text="item.total_base_grand_total">
+                                            <p
+                                                class="text-gray-800 font-semibold"
+                                                v-text="item.formatted_total_base_grand_total"
+                                            >
                                             </p>
 
-                                            <p class="text-gray-600">
-                                                @{{ item.total_orders }}
+                                            <p class="text-gray-600" v-if="item.order_count">
+                                                @{{ "@lang('admin::app.dashboard.order-count')".replace(':count', item.order_count) }}
                                             </p>
+                                            
                                         </div>
                                     </div>
                                 </a>
+
+                                <div
+                                    v-else
+                                    class="flex justify-between gap-[6px]"
+                                >
+                                    <div class="flex flex-col">
+                                        <p
+                                            class="text-gray-600 font-semibold"
+                                            v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                        >
+                                        </p>
+
+                                        <p
+                                            class="text-gray-600"
+                                            v-text="item.customer_email ?? item.customer_address_email"
+                                        >
+                                        </p>
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <p
+                                            class="text-gray-800 font-semibold"
+                                            v-text="item.formatted_total_base_grand_total"
+                                        >
+                                        </p>
+
+                                        <p class="text-gray-600" v-if="item.order_count">
+                                            @{{ "@lang('admin::app.dashboard.order-count')".replace(':count', item.order_count) }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
-                            {{-- <div class="flex flex-col gap-[32px] p-[16px]">
-                                @foreach ($statistics['customer_with_most_sales'] as $item)
-                                    @if ($item->customer_id)
-                                        <a href="{{ route('admin.customer.view', $item->customer_id) }}">
-                                    @endif
-                                        <div class="flex justify-between gap-[6px]">
-                                            <div class="flex flex-col">
-                                                <p class="text-gray-600 font-semibold">
-                                                    {{ $item->customer_full_name ?? $item->first_name . ' ' . $item->last_name }}
-                                                </p>
-
-                                                <p class="text-gray-600">
-                                                    {{ $item->customer_email ?? $item->customer_address_email }}
-                                                </p>
-                                            </div>
-
-                                            <div class="flex flex-col">
-                                                <p class="text-gray-800 font-semibold">
-                                                    {{ core()->formatBasePrice($item->total_base_grand_total) }}
-                                                </p>
-
-                                                <p class="text-gray-600">
-                                                    @lang('admin::app.dashboard.order-count', ['count' => $item->total_orders])
-                                                </p>
-                                            </div>
-                                        </div>
-                                    @if ($item->customer_id)
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </div> --}}
+                            <div class="flex flex-col gap-[32px] p-[16px]" v-else>
+                                <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
+                                    <!-- Placeholder Image -->
+                                    <img src="{{ bagisto_asset('images/icon-add-product.svg') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                                    <!-- Add Variants Information -->
+                                    <div class="flex flex-col items-center">
+                                        <p class="text-[16px] text-gray-400 font-semibold"> Add Customer </p>
+                                        <p class="text-gray-400">No Customer Found With Most Sales</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </x-admin::form>
@@ -827,7 +844,33 @@
                     this.$axios.get("{{ route('admin.dashboard.index') }}")
                         .then((response) => {
                             this.statistics = response.data.statistics;
-                            console.log(this.statistics);
+                            
+                            const ctx = document.getElementById('myChart');
+                
+                            var data = this.statistics.sale_graph;
+                        
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: data['label'],
+                                    datasets: [{
+                                        data: data['total'],
+                                        barThickness: 6,
+                                        backgroundColor: '#5990e2',
+                                        borderColor: '#5990e2',
+                                        borderWidth: 1
+                                    }]
+                                },
+                        
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    }
+
+                                }
+                            });
                         })
                         .catch(error => {
                             if (error.response.status == 422) {
@@ -854,35 +897,6 @@
                     }
                 }
             });
-        </script>
-
-        <script>
-              window.addEventListener("DOMContentLoaded", function () {
-                    const ctx = document.getElementById('myChart');
-                
-                    var data = @json($statistics['sale_graph']);
-                
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: data['label'],
-                            datasets: [{
-                                data: data['total'],
-                                backgroundColor: 'rgba(34, 201, 93, 1)',
-                                borderColor: 'rgba(34, 201, 93, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-                });
-        </script>    
+        </script>   
     @endpush
 </x-admin::layouts>

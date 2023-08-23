@@ -199,38 +199,36 @@
                 </div>
 
                 {{-- Imgaes Section --}}
-                <div class="">
+                <div class="flex gap-[6px] items-center place-self-end">
+                    <div class="flex gap-[6px] items-center flex-wrap">
+                        <div class="relative">
+                            <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
+
+                            <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">1</span>
+                        </div>
+
+                        <div class="relative">
+                            <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
+
+                            <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">2</span>
+                        </div>
+
+                        <div class="relative">
+                            <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
+
+                            <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">3</span>
+                        </div>
+                    </div>
+
                     <div class="flex gap-[6px] items-center">
-                        <div class="flex gap-[6px] items-center flex-wrap">
-                            <div class="relative">
-                                <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
-
-                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">1</span>
-                            </div>
-
-                            <div class="relative">
-                                <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
-
-                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">2</span>
-                            </div>
-
-                            <div class="relative">
-                                <img class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]" src="../images/order-1.png">
-
-                                <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px] ">3</span>
-                            </div>
+                        <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
+                            <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">2+ More Products </p>
                         </div>
 
-                        <div class="flex gap-[6px] items-center">
-                            <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">2+ More Products </p>
-                            </div>
-
-                            {{-- View Page Linking --}}
-                            <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                                <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
-                            </a>
-                        </div>
+                        {{-- View Page Linking --}}
+                        <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
+                            <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                        </a>
                     </div>
                 </div>
             </div>

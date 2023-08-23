@@ -1,7 +1,5 @@
 <?php
 
-use Elasticsearch\Endpoints\Indices\Create;
-
 return [
     'account' => [
         'edit' => [
