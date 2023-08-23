@@ -117,7 +117,10 @@
                         class="cursor-pointer"
                         @click="sortPage(columns.find(column => column.index === 'full_name'))"
                     >
-                        <p class="text-gray-600">Customer Name / Email / Contact Number</p>
+                        <p class="text-gray-600">@lang('admin::app.customers.index.datagrid.name') /
+                             @lang('admin::app.customers.index.datagrid.email') /  
+                             @lang('admin::app.customers.index.datagrid.phone')
+                        </p>
                     </div>
                 </div>
                
@@ -125,13 +128,19 @@
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'status'))"
                 >
-                    <p class="text-gray-600">Status / Gender / Group</p>
+                    <p class="text-gray-600">@lang('admin::app.customers.index.datagrid.status') / 
+                        @lang('admin::app.customers.index.datagrid.gender') / 
+                        @lang('admin::app.customers.index.datagrid.group')
+                    </p>
                 </div>
                 <div 
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'total_base_grand_total'))"
                 >
-                    <p class="text-gray-600">Revenue/Order Count/ Address Count</p>
+                    <p class="text-gray-600">@lang('admin::app.customers.index.datagrid.revenue') /
+                        @lang('admin::app.customers.index.datagrid.order-count') / 
+                        @lang('admin::app.customers.index.datagrid.address-count')
+                    </p>
                 </div>
             </div>
         </template>
@@ -220,10 +229,10 @@
                         </p>
                         
                         <p class="text-gray-600">
-                            @{{ "@lang('admin::app.customers.index.order')".replace(':order', record.order_count) }}
+                            @{{ "@lang('admin::app.customers.index.datagrid.order')".replace(':order', record.order_count) }}
                         </p>
                         <p class="text-gray-600">
-                            @{{ "@lang('admin::app.customers.index.address')".replace(':address', record.address_count) }}
+                            @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
                         </p>
                     </div>
                     <a 
