@@ -424,15 +424,7 @@
                                 <p class="text-[16px] text-gray-800">
                                     {{ $item->customer_first_name }} {{ $item->customer_last_name }}
                                 </p>
-                            <div class="flex flex-col gap-[6px]">
-                                {{-- Customer Detailes --}}
-                                <p class="text-[16px] text-gray-800">
-                                    {{ $item->customer_first_name }} {{ $item->customer_last_name }}
-                                </p>
 
-                                <p class="text-gray-600">
-                                    {{ $item->customer_email }}
-                                </p>
                                 <p class="text-gray-600">
                                     {{ $item->customer_email }}
                                 </p>
@@ -454,7 +446,6 @@
                                         {{-- Using Variable for image Numbering --}}
                                         @foreach ($item->items as $index => $orderItem)
 
-                                            @if ($index >= 3 && $item->items->count() >= 5)
                                             @if ($index >= 3 && $item->items->count() >= 5)
                                                 @break;
                                             @endif
@@ -483,7 +474,10 @@
                                         @endforeach
 
                                         {{-- Count of Rest Images --}}
-                                        @if ($item->items->count() - 3 && $item->items->count() > 4)
+                                        @if (
+                                            $item->items->count() - 3 
+                                            && $item->items->count() > 4
+                                        )
                                             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
                                                 <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
                                                     @lang('admin::app.dashboard.more-products', ['product_count' => $item->items->count() - 3 ])
