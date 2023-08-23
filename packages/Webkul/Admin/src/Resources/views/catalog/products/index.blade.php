@@ -98,11 +98,11 @@
 
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}">
         <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
-            <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
+            <div class="row grid grid-cols-[2fr_1fr_1fr] items-center grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
                 <div class="cursor-pointer">
-                    <div class="flex gap-[10px]">
+                    <div class="flex gap-[10px] items-center">
                         <label 
-                            class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                            class="flex gap-[4px] w-max items-center cursor-pointer select-none"
                             for="mass_action_select_all_records"
                         >
                             <input 
@@ -174,10 +174,6 @@
                 {{-- Product Name, SKU, Product Number --}}
                 <div class="">
                     <div class="flex gap-[10px]">
-                        <label
-                            class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
-                            :for="`mass_action_select_record_${record.product_id}`"
-                        >
                             <input 
                                 type="checkbox" 
                                 :name="`mass_action_select_record_${record.product_id}`"
@@ -192,7 +188,6 @@
                                 class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.product_id}`"
                             ></label>
-                        </label>
 
                         <div class="flex flex-col gap-[6px]">
                             <p
@@ -243,7 +238,7 @@
                         <div class="flex flex-col gap-[6px]">
                             <p 
                                 class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.price ?? 'N/A'"
+                                v-text="$admin.formatPrice(record.price) || 'N/A'"
                             >
                             </p>
 
