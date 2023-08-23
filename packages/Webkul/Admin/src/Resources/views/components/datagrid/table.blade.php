@@ -1,3 +1,5 @@
+@props(['isMultiRow' => false])
+
 <v-table>
     {{ $slot }}
 </v-table>
@@ -8,7 +10,7 @@
             <div class="table-responsive grid w-full shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.20)] border-[1px] border-gray-300 rounded-[4px] bg-white overflow-hidden">
                 <slot name="header">
                     <template v-if="$parent.isLoading">
-                        <x-admin::shimmer.datagrid.table.head></x-admin::shimmer.datagrid.table.head>
+                        <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.head>
                     </template>
 
                     <template v-else>
@@ -66,7 +68,7 @@
 
                 <slot name="body">
                     <template v-if="$parent.isLoading">
-                        <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+                        <x-admin::shimmer.datagrid.table.body :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid.table.body>
                     </template>
 
                     <template v-else>
