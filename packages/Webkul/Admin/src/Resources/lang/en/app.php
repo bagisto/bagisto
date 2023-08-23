@@ -911,6 +911,7 @@ return [
                     'disable'                => 'Disable',
                     'category'               => 'Category',
                     'type'                   => 'Type',
+                    'product-image'          => 'Product Image',
                 ],
             ],
 

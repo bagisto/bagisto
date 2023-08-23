@@ -222,7 +222,7 @@
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
                                 <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
                                 <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.product-image')
+                                    @lang('admin::app.catalog.products.index.datagrid.product-image')
                                 </p>
                             </div>
 
@@ -236,7 +236,7 @@
                         <div class="flex flex-col gap-[6px]">
                             <p 
                                 class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.price ?? 'N/A'"
+                                v-text="$admin.formatPrice(record.price)"
                             >
                             </p>
 

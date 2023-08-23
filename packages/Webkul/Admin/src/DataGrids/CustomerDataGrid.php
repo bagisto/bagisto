@@ -21,7 +21,6 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        
         $queryBuilder = DB::table('customers')
             ->leftJoin('addresses', function ($join) {
                 $join->on('customers.id', '=', 'addresses.customer_id')
@@ -106,35 +105,10 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'group',
-            'label'      => trans('admin::app.customers.index.datagrid.group'),
-            'type'       => 'string',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
             'index'      => 'phone',
             'label'      => trans('admin::app.customers.index.datagrid.phone'),
             'type'       => 'integer',
             'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($row) {
-                if (! $row->phone) {
-                    return '-';
-                }
-
-                return $row->phone;
-            },
-        ]);
-
-        $this->addColumn([
-            'index'      => 'gender',
-            'label'      => trans('admin::app.customers.index.datagrid.gender'),
-            'type'       => 'string',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -148,6 +122,24 @@ class CustomerDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
+        $this->addColumn([
+            'index'      => 'gender',
+            'label'      => trans('admin::app.customers.index.datagrid.gender'),
+            'type'       => 'string',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'group',
+            'label'      => trans('admin::app.customers.index.datagrid.group'),
+            'type'       => 'string',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+     
         $this->addColumn([
             'index'       => 'is_suspended',
             'label'       => trans('admin::app.customers.index.datagrid.suspended'),
@@ -168,8 +160,8 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'       => 'address_count',
-            'label'       => trans('admin::app.customers.index.datagrid.address-count'),
+            'index'       => 'order_count',
+            'label'       => trans('admin::app.customers.index.datagrid.order-count'),
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
@@ -177,8 +169,8 @@ class CustomerDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'       => 'order_count',
-            'label'       => trans('admin::app.customers.index.datagrid.order-count'),
+            'index'       => 'address_count',
+            'label'       => trans('admin::app.customers.index.datagrid.address-count'),
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
