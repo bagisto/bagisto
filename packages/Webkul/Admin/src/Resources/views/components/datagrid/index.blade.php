@@ -1,5 +1,7 @@
+@props(['isMultiRow' => false])
+
 <v-datagrid {{ $attributes }}>
-    <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+    <x-admin::shimmer.datagrid :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid>
 
     {{ $slot }}
 </v-datagrid>
@@ -15,7 +17,7 @@
             <div class="flex mt-[16px]">
                 <x-admin::datagrid.filters></x-admin::datagrid.filters>
 
-                <x-admin::datagrid.table>
+                <x-admin::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
                             name="header"
