@@ -143,9 +143,9 @@
 
                 <div class="cursor-pointer">
                     <p class="text-gray-600">
-                        @lang('admin::app.catalog.products.index.image')/
-                        @lang('admin::app.catalog.products.index.price')/
-                        @lang('admin::app.catalog.products.index.stock')/
+                        @lang('admin::app.catalog.products.index.image') /
+                        @lang('admin::app.catalog.products.index.price') /
+                        @lang('admin::app.catalog.products.index.stock') /
                         @lang('admin::app.catalog.products.index.id')
                     </p>
                 </div>
@@ -222,8 +222,8 @@
                         <div class="relative">
                             <img
                                 class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                v-if="record.path"
-                                :src=`{{ Storage::url('') }}${record.path}`
+                                v-if="record.base_image"
+                                :src=`{{ Storage::url('') }}${record.base_image}`
                             />
 
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
@@ -235,7 +235,7 @@
 
                             <span
                                 class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
-                                v-text="record.quantity ?? 0"
+                                v-text="record.images_count"
                             >
                             </span>
                         </div>
@@ -243,20 +243,26 @@
                         <div class="flex flex-col gap-[6px]">
                             <p 
                                 class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.price"
+                                v-text="record.price ?? 'N/A'"
                             >
                             </p>
 
-                            <p class="text-gray-600" v-if="record.quantity > 0">
-                                <a href="#" class="text-green-600">
+                            <p
+                                class="text-gray-600"
+                                v-if="record.quantity > 0"
+                            >
+                                <span class="text-green-600">
                                     @{{ "@lang('admin::app.catalog.products.index.available')".replace(':qty', record.quantity) }}
-                                </a>
+                                </span>
                             </p>
 
-                            <p class="text-gray-600" v-else>
-                                <a href="#" class="text-red-600">
+                            <p
+                                class="text-gray-600"
+                                v-else
+                            >
+                                <span class="text-red-600">
                                     @lang('admin::app.catalog.products.index.out-of-stock')
-                                </a>
+                                </span>
                             </p>
     
                             <p class="text-gray-600">
@@ -269,18 +275,13 @@
                 {{-- Status, Category, Type --}}
                 <div class="flex gap-x-[16px] justify-between items-center">
                     <div class="flex flex-col gap-[6px]">
-                        <p
-                            :class="{
-                                'label-cancelled': record.status == '',
-                                'label-active': record.status === 1,
-                            }"
-                        >
+                        <p :class="[record.status ? 'label-active': 'label-info']">
                             @{{ record.status ? "@lang('admin::app.catalog.products.index.active')" : "@lang('admin::app.catalog.products.index.disable')" }}
                         </p>
 
                         <p
                             class="text-gray-600"
-                            v-text="record.category_name"
+                            v-text="record.category_name ?? 'N/A'"
                         >
                         </p>
 

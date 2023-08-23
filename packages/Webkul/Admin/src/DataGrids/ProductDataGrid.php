@@ -57,7 +57,8 @@ class ProductDataGrid extends DataGrid
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
-                'images.path',
+                'images.path as base_image',
+                DB::raw('COUNT(DISTINCT images.id) as images_count'),
                 'pc.category_id',
                 'ct.name as category_name',
                 'product_flat.product_id',
