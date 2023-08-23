@@ -15,15 +15,34 @@
                         <span class="icon-sort-down text-[24px]"></span>
                     </button>
                 </x-slot:toggle>
-
                 <!-- Dropdown Content -->
                 <x-slot:menu>
-                    <x-admin::dropdown.menu.item
-                        v-for="massAction in available.massActions"
-                        v-text="massAction.title"
-                        @click="setupMassAction(massAction)"
-                    >
-                    </x-admin::dropdown.menu.item>
+                    <div class="group/item">
+                        <x-admin::dropdown.menu.item
+                            v-for="massAction in available.massActions"
+                            @click="setupMassAction(massAction)"
+                            style="height: 44px"
+                        >
+                            <div class="flex gap-[10px]">
+                                @{{ massAction.title }}
+
+                                <span class="text-[24px]" :class="massAction.icon"></span>
+                            </div>
+
+                            <div
+                                v-if="massAction.options"
+                                class="absolute bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.20),0px_6px_30px_0px_rgba(0,0,0,0.12),0px_16px_24px_0px_rgba(0,0,0,0.14)] rounded-[4px] w-max z-10"
+                                style="position: relative;min-width: 149px;top: -27px;left: 169px;"
+                            >
+                                <x-admin::dropdown.menu.item
+                                    v-for="massAction in available.massActions"
+                                    @click="setupMassAction(massAction)"
+                                >
+                                    @{{ massAction.title }}
+                                </x-admin::dropdown.menu.item>
+                            </div>
+                        </x-admin::dropdown.menu.item>
+                    </div>
                 </x-slot:menu>
             </x-admin::dropdown>
 
