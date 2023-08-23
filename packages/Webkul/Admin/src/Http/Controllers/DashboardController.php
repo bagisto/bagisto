@@ -2,9 +2,6 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Webkul\Admin\Services\DashboardService;
 
 class DashboardController extends Controller
@@ -12,9 +9,8 @@ class DashboardController extends Controller
     /**
      * Create a controller instance.
      */
-    public function __construct(
-        protected DashboardService $dashboardService
-    ) {
+    public function __construct(protected DashboardService $dashboardService)
+    {
     }
 
     /**
