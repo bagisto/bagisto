@@ -298,7 +298,7 @@ return [
     ], [
         'key'   => 'customers.groups.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.groups.edit',
+        // 'route' => 'admin.groups.edit',
         'sort'  => 2,
     ], [
         'key'   => 'customers.groups.delete',

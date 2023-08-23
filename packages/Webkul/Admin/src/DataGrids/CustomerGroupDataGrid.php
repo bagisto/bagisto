@@ -56,7 +56,7 @@ class CustomerGroupDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.groups.edit', $row->id);
+                // return route('admin.groups.edit', $row->id);
             },
         ]);
 

@@ -89,10 +89,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::post('create', 'store')->name('admin.groups.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.groups.edit');
+        Route::post('edit', 'update')->name('admin.groups.update');
 
-        Route::put('edit/{id}', 'update')->name('admin.groups.update');
-
-        Route::post('delete/{id}', 'destroy')->name('admin.groups.delete');
+        Route::delete('delete/{id}', 'destroy')->name('admin.groups.delete');
     });
 });
