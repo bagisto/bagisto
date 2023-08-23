@@ -5,6 +5,7 @@ namespace Webkul\Admin\DataGrids;
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Models\OrderAddress;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class OrderDataGrid extends DataGrid
 {
@@ -34,6 +35,7 @@ class OrderDataGrid extends DataGrid
                 'channel_name',
                 'status',
                 'customer_email',
+                'orders.cart_id as image',
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name) as full_name'),
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, ", ", ' . DB::getTablePrefix() . 'order_address_billing.state,", ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location'),
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to')
@@ -91,32 +93,25 @@ class OrderDataGrid extends DataGrid
             'closure'    => function ($value) {
                 switch ($value->status) {
                     case 'processing':
-                        return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-processing') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Processing') . '</span>';
 
                     case 'completed':
-                        return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-success') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Success') . '</span>';
 
                     case 'canceled':
-                        return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-canceled') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Cancelled') . '</span>';
 
                     case 'closed':
-                        return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.orders.order-status-closed') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Closed') . '</span>';
 
                     case 'pending':
-                        return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Pending') . '</span>';
 
                     case 'pending_payment':
-                        return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Pending Payment') . '</span>';
 
                     case 'fraud':
-                        return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
-                        break;
+                        return '<span class="label-pending">' . trans('Fraud') . '</span>';
                 }
             },
         ]);
@@ -173,6 +168,20 @@ class OrderDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'image',
+            'label'      => trans('admin::app.sales.orders.index.location'),
+            'type'       => 'string',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+            'closure'    => function ($value) {
+                $order = app(OrderRepository::class)->with('items')->find($value->id);
+
+                return view('admin::sales.orders.images', compact('order'))->render();
+            },
         ]);
     }
 

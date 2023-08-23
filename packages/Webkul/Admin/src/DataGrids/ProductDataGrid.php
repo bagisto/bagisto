@@ -6,15 +6,18 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class ProductDataGrid extends DataGrid
 {
+
     /**
-     * Set index columns, ex: id.
+     * Constructor for the class
      *
-     * @var string
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @return void
      */
     protected $primaryColumn = 'product_id';
 
