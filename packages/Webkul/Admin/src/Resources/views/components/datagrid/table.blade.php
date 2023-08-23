@@ -74,7 +74,7 @@
                     <template v-else>
                         <template v-if="$parent.available.records.length">
                             <div
-                                class="row grid gap-[10px] px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
+                                class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
                                 v-for="record in $parent.available.records"
                                 :style="`grid-template-columns: repeat(${gridsCount}, 1fr)`"
                             >
