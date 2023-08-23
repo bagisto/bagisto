@@ -903,7 +903,7 @@
 
                 data() {
                     return {
-                        isLoading: false,
+                        isLoading: true,
 
                         start: "{{ $startDate->format('Y-m-d') }}",
 
@@ -918,8 +918,8 @@
                         .then((response) => {
                             this.statistics = response.data.statistics;
 
-                            this.isLoading = false;
-                            
+                            this.isLoading = ! this.isLoading;
+
                             this.graphChart();
 
                         })
