@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\Core\ChannelController;
-use Webkul\Admin\Http\Controllers\Core\CurrencyController;
-use Webkul\Admin\Http\Controllers\Core\ExchangeRateController;
-use Webkul\Admin\Http\Controllers\Core\LocaleController;
-use Webkul\Admin\Http\Controllers\Inventory\InventorySourceController;
-use Webkul\Admin\Http\Controllers\Tax\TaxCategoryController;
-use Webkul\Admin\Http\Controllers\Tax\TaxRateController;
+use Webkul\Admin\Http\Controllers\Settings\ChannelController;
+use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
+use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
+use Webkul\Admin\Http\Controllers\Settings\LocaleController;
+use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
+use Webkul\Admin\Http\Controllers\Settings\TaxCategoryController;
+use Webkul\Admin\Http\Controllers\Settings\TaxRateController;
 use Webkul\Admin\Http\Controllers\User\RoleController;
 use Webkul\Admin\Http\Controllers\User\UserController;
 

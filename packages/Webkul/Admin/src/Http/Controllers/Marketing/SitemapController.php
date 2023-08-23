@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Sitemap;
+namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
