@@ -56,7 +56,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.sales.orders.index.order-id'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -65,7 +65,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.orders.index.date'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.date'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -74,7 +74,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.sales.orders.index.status'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.status'),
             'type'       => 'checkbox',
             'options'    => [
                 'processing'      => trans('shop::app.customer.account.order.index.processing'),
@@ -88,42 +88,11 @@ class OrderDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                switch ($value->status) {
-                    case 'processing':
-                        return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-processing') . '</span>';
-                        break;
-
-                    case 'completed':
-                        return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.orders.order-status-success') . '</span>';
-                        break;
-
-                    case 'canceled':
-                        return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-canceled') . '</span>';
-                        break;
-
-                    case 'closed':
-                        return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.orders.order-status-closed') . '</span>';
-                        break;
-
-                    case 'pending':
-                        return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending') . '</span>';
-                        break;
-
-                    case 'pending_payment':
-                        return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.orders.order-status-pending-payment') . '</span>';
-                        break;
-
-                    case 'fraud':
-                        return '<span class="badge badge-md badge-danger">' . trans('admin::app.sales.orders.order-status-fraud') . '</span>';
-                        break;
-                }
-            },
         ]);
 
         $this->addColumn([
             'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.sales.orders.index.grand-total'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.grand-total'),
             'type'       => 'price',
             'searchable' => false,
             'filterable' => true,
@@ -132,7 +101,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'method',
-            'label'      => trans('admin::app.sales.orders.index.pay-via'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.pay-via'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -141,7 +110,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'channel_name',
-            'label'      => trans('admin::app.sales.orders.index.channel-name'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.channel-name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -150,7 +119,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'full_name',
-            'label'      => trans('admin::app.sales.orders.index.customer'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.customer'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -159,7 +128,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'customer_email',
-            'label'      => trans('admin::app.sales.orders.index.email'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -168,7 +137,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'location',
-            'label'      => trans('admin::app.sales.orders.index.location'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.location'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -185,7 +154,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.orders.index.view'),
+            'title'  => trans('admin::app.sales.orders.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.orders.view', $row->id);

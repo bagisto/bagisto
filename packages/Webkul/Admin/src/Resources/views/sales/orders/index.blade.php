@@ -87,7 +87,11 @@
                     @click="sortPage(columns.find(column => column.index === 'increment_id'))"
                 >
                     <div class="flex gap-[10px]">
-                        <p class="text-gray-600">Order ID / Date / Status</p>
+                        <p class="text-gray-600">
+                            @lang('admin::app.sales.orders.index.datagrid.order-id') / 
+                            @lang('admin::app.sales.orders.index.datagrid.date') / 
+                            @lang('admin::app.sales.orders.index.datagrid.status')
+                        </p>
                     </div>
                 </div>
 
@@ -95,14 +99,22 @@
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'base_grand_total'))"
                 >
-                    <p class="text-gray-600">Total / Pay Via / Channel</p>
+                    <p class="text-gray-600">
+                        @lang('admin::app.sales.orders.index.datagrid.grand-total') / 
+                        @lang('admin::app.sales.orders.index.datagrid.pay-via') / 
+                        @lang('admin::app.sales.orders.index.datagrid.channel-name')
+                    </p>
                 </div>
 
                 <div
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'full_name'))"
                 >
-                    <p class="text-gray-600">Customer / Email / Location / Image</p>
+                    <p class="text-gray-600">
+                        @lang('admin::app.sales.orders.index.datagrid.customer') / 
+                        @lang('admin::app.sales.orders.index.datagrid.email') /
+                        @lang('admin::app.sales.orders.index.datagrid.location') / 
+                        @lang('admin::app.sales.orders.index.datagrid.images')</p>
                 </div>
             </div>
         </template>
@@ -119,7 +131,7 @@
                             <p
                                 class="text-[16px] text-gray-800 font-semibold"
                             >
-                                @{{ "@lang('admin::app.sales.orders.index.id')".replace(':id', record.increment_id) }}
+                                @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
                             </p>
 
                             <p
@@ -131,6 +143,8 @@
                             <p
                                 :class="{
                                     'label-pending': record.status === 'pending',
+                                    'label-cancelled': record.status === 'fraud',
+                                    'label-pending': record.status === 'pending-payment',
                                     'label-closed': record.status === 'closed',
                                     'label-cancelled': record.status === 'canceled',
                                     'label-active': record.status === 'processing' || record.status === 'completed'
@@ -150,7 +164,7 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.sales.orders.index.pay-by', ['method' => ''])@{{ record.method }}
+                            @lang('admin::app.sales.orders.index.datagrid.pay-by', ['method' => ''])@{{ record.method }}
                         </p>
 
                         <p
