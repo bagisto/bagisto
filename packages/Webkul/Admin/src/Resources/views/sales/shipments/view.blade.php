@@ -39,7 +39,7 @@
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px]">
                             <div class="flex gap-[10px]">
                                 <!-- Image -->
-                                @if ($item->product)
+                                @if ($item->product->base_image_url)
                                     <img
                                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
                                         src="{{ $item->product->base_image_url }}"
