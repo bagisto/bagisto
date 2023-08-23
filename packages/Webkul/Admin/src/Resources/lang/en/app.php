@@ -387,14 +387,25 @@ return [
 
         'reviews' => [
             'index' => [
-                'title' => 'Reviews',
                 'description' => 'Description',
-                'rating'      => 'Rating',
                 'date'        => 'Date',
                 'id'          => 'Id',
                 'name'        => 'Name',
                 'product'     => 'Product',
+                'rating'      => 'Rating',
                 'status'      => 'Status',
+                'title' => 'Reviews',
+
+                'datagrid'   =>  [
+                    'customer_names' => 'Name',
+                    'comment'        => 'Comment',
+                    'date'           => 'Date',
+                    'id'             => 'id',
+                    'product'        => 'Product',
+                    'rating'         => 'Rating',
+                    'status'         => 'Status',
+                    'title'          => 'Title',
+                ],
             ],
         ],
 

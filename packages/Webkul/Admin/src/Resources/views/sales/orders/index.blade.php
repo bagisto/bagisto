@@ -186,7 +186,7 @@
                 </div>
 
                 {{-- Imgaes Section --}}
-                <div class="flex gap-x-[16px] justify-between items-center">
+                <div class="flex justify-between items-center">
                     <div class="flex flex-col gap-[6px]">
                         <p
                             v-if="record.is_closure"
