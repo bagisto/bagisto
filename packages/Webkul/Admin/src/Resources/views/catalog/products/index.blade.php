@@ -98,7 +98,7 @@
 
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}">
         <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
-            <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-3 grid-rows-1">
+            <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
                 <div class="cursor-pointer">
                     <div class="flex gap-[10px]">
                         <label 
@@ -168,7 +168,7 @@
 
         <template #body="{ columns, records, setCurrentSelectionMode, applied }">
             <div
-                class="row grid grid-cols-3 grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
                 v-for="record in records"
             >
                 {{-- Product Name, SKU, Product Number --}}

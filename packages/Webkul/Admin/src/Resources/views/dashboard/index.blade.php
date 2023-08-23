@@ -30,7 +30,7 @@
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/total-sales.svg')}}">
                             </div>
 
@@ -69,7 +69,7 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/total-orders.svg')}}">
                             </div>
 
@@ -108,7 +108,7 @@
 
                         {{-- Total Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/customer.svg')}}">
                             </div>
 
@@ -147,7 +147,7 @@
 
                         {{-- Average sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/average-order.svg')}}">
                             </div>
 
@@ -185,7 +185,7 @@
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/unpaid-invoice.svg')}}">
                             </div>
 
@@ -213,7 +213,7 @@
                     <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/total-sales.svg')}}">
                             </div>
 
@@ -252,7 +252,7 @@
 
                         {{-- Today's Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/total-orders.svg')}}">
                             </div>
 
@@ -291,7 +291,7 @@
 
                         {{-- Today's Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img src="{{ bagisto_asset('images/customer.svg')}}">
                             </div>
 
@@ -379,49 +379,45 @@
                                 </div>
                             </div>
         
-                            <div class="">
-                                {{-- Payment And Channel Detailes --}}
-                                <div class="flex flex-col gap-[6px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
-                                        {{ core()->formatBasePrice($item->grand_total)}}
-                                    </p>
+                            {{-- Payment And Channel Detailes --}}
+                            <div class="flex flex-col gap-[6px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    {{ core()->formatBasePrice($item->grand_total)}}
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        @lang('admin::app.dashboard.pay-by', ['method' => $item->payment->method])
-                                    </p>
+                                <p class="text-gray-600">
+                                    @lang('admin::app.dashboard.pay-by', ['method' => $item->payment->method])
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        {{ $item->channel_name }}
-                                    </p>
-                                </div>
+                                <p class="text-gray-600">
+                                    {{ $item->channel_name }}
+                                </p>
                             </div>
 
-                            <div class="">
-                                <div class="flex flex-col gap-[6px]">
-                                    {{-- Customer Detailes --}}
-                                    <p class="text-[16px] text-gray-800">
-                                        {{ $item->customer_first_name }} {{ $item->customer_last_name }}
-                                    </p>
+                            <div class="flex flex-col gap-[6px]">
+                                {{-- Customer Detailes --}}
+                                <p class="text-[16px] text-gray-800">
+                                    {{ $item->customer_first_name }} {{ $item->customer_last_name }}
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        {{ $item->customer_email }}
-                                    </p>
+                                <p class="text-gray-600">
+                                    {{ $item->customer_email }}
+                                </p>
 
-                                    {{-- Order Address --}}
-                                    @foreach ($item->addresses as $address)
-                                        @if ($address->address_type == 'order_billing')
-                                            <p class="text-gray-600">
-                                                @if (isset($address->country)) 
-                                                    {{ $address->city }},
-                                                @else 
-                                                    {{ $address->city }}
-                                                @endif
+                                {{-- Order Address --}}
+                                @foreach ($item->addresses as $address)
+                                    @if ($address->address_type == 'order_billing')
+                                        <p class="text-gray-600">
+                                            @if (isset($address->country)) 
+                                                {{ $address->city }},
+                                            @else 
+                                                {{ $address->city }}
+                                            @endif
 
-                                                {{ core()->country_name($address->country) }}
-                                            </p>
-                                        @endif
-                                    @endforeach
-                                </div>
+                                            {{ core()->country_name($address->country) }}
+                                        </p>
+                                    @endif
+                                @endforeach
                             </div>
 
                             {{-- Ordered Product Images --}}
@@ -431,7 +427,7 @@
                                         {{-- Using Variable for image Numbering --}}
                                         @foreach ($item->items as $index => $orderItem)
 
-                                            @if ($index >= 2 && count($item->items) >= 5)
+                                            @if ($index >= 3 && $item->items->count() >= 5)
                                                 @break;
                                             @endif
 
@@ -452,16 +448,16 @@
                                                 @endif
 
                                                 <span class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                                                    {{ count($orderItem->product->images) }}
+                                                    {{ $orderItem->product->images->count() }}
                                                 </span>
                                             </div>
                                         @endforeach
 
                                         {{-- Count of Rest Images --}}
-                                        @if (count($item->items) - 2 && count($item->items) > 4)
+                                        @if ($item->items->count() - 3 && $item->items->count() > 4)
                                             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
                                                 <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
-                                                    @lang('admin::app.dashboard.more-products', ['product_count' => count($item->items) - 2 ])
+                                                    @lang('admin::app.dashboard.more-products', ['product_count' => $item->items->count() - 3 ])
                                                 </p>
                                             </div>
                                         @endif

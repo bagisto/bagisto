@@ -81,7 +81,7 @@
     
     <x-admin::datagrid src="{{ route('admin.customer.review.index') }}">
         <template #header="{ columns, records, sortPage }">
-            <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-4 grid-rows-1">
+            <div class="row grid grid-rows-1 grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300">
                 <div
                     class="cursor-pointer"
                     @click="sortPage(columns.find(column => column.index === 'product_review_status'))"
@@ -117,7 +117,7 @@
 
         <template #body="{ columns, records }">
             <div
-                class="row grid grid-cols-[1fr_1fr_minmax(150px,_2fr)] px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                class="row grid grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
                 v-for="record in records"
             >
                 {{-- Name, Product, Description --}}
@@ -145,6 +145,8 @@
                                 v-text="record.product_review_status"
                             >
                             </p>
+
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -173,21 +175,21 @@
                 </div>
 
                 {{-- Title, Description --}}
-                <div class="flex gap-x-[16px] justify-between items-center">
-                    <div class="flex flex-col gap-[6px]">
-                        <p
-                            class="text-[16px] text-gray-800 font-semibold"
-                            v-text="record.title"
-                        >
-                        </p>
+                <div class="flex flex-col gap-[6px]">
+                    <p
+                        class="text-[16px] text-gray-800 font-semibold"
+                        v-text="record.title"
+                    >
+                    </p>
 
-                        <p
-                            class="text-gray-600"
-                            v-text="record.comment"
-                        >
-                        </p>
-                    </div>
+                    <p
+                        class="text-gray-600"
+                        v-text="record.comment"
+                    >
+                    </p>
+                </div>
 
+                <div class="flex gap-[5px] place-content-end self-center">
                     <a :href=`{{ route('admin.customer.review.delete', '') }}/${record.product_review_id}`>
                         <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                     </a>
