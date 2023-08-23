@@ -27,6 +27,7 @@
                             :sort-page="sortPage"
                             :selectAllRecords="selectAllRecords"
                             :applied="applied"
+                            :is-loading="isLoading"
                         >
                         </slot>
                     </template>
@@ -41,6 +42,7 @@
                             :meta="available.meta"
                             :setCurrentSelectionMode="setCurrentSelectionMode"
                             :applied="applied"
+                            :is-loading="isLoading"
                         >
                         </slot>
                     </template>
