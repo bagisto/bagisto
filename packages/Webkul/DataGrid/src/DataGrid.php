@@ -185,6 +185,14 @@ abstract class DataGrid
         )->toArray();
 
         foreach ($paginator['data'] as $data) {
+            foreach ($this->columns as $column) {
+                if (isset($column['closure'])) {
+                    $data->{$column['index']} = $column['closure']($data);
+                    
+                    $data->is_closure = true;
+                }
+            }
+
             $data->actions = [];
 
             foreach ($this->actions as $action) {
