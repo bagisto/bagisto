@@ -30,7 +30,7 @@
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-sales.svg')}}"
                                     title="{{ trans('admin::app.dashboard.total-sales') }}"
@@ -72,7 +72,7 @@
 
                         {{-- Total Orders --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-orders.svg')}}"
                                     title="{{ trans('admin::app.dashboard.total-orders') }}"
@@ -114,7 +114,7 @@
 
                         {{-- Total Customers --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/customer.svg')}}"
                                     title="{{ trans('admin::app.dashboard.total-customers') }}"
@@ -156,7 +156,7 @@
 
                         {{-- Average sales --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/average-order.svg')}}"
                                     title="{{ trans('admin::app.dashboard.average-sale') }}"
@@ -197,7 +197,7 @@
 
                         {{-- Unpaid Invoices --}}
                         <div class="flex gap-[10px] flex-1">
-                            <div class="w-full h-[65px] max-w-[65px] max-h-[65px]">
+                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/unpaid-invoice.svg')}}"
                                     title="{{ trans('admin::app.dashboard.total-unpaid-invoices') }}"
@@ -229,7 +229,7 @@
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[65px] max-w-[65px] max-h-[65px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
                                 src="{{ bagisto_asset('images/total-sales.svg')}}"
                                 title="{{ trans('admin::app.dashboard.today-sales') }}"
                             >
@@ -270,7 +270,7 @@
                         {{-- Today's Orders --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[65px] max-w-[65px] max-h-[65px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
                                 src="{{ bagisto_asset('images/total-orders.svg')}}"
                                 title="{{ trans('admin::app.dashboard.today-orders') }}"
                             >
@@ -311,7 +311,7 @@
                         {{-- Today's Customers --}}
                         <div class="flex gap-[10px] flex-1">
                             <img
-                                class="w-full h-[65px] max-w-[65px] max-h-[65px]"
+                                class="w-full h-[60px] max-w-[60px] max-h-[60px]"
                                 src="{{ bagisto_asset('images/customer.svg')}}"
                                 title="{{ trans('admin::app.dashboard.today-customers') }}"
                             >
@@ -424,7 +424,15 @@
                                 <p class="text-[16px] text-gray-800">
                                     {{ $item->customer_first_name }} {{ $item->customer_last_name }}
                                 </p>
+                            <div class="flex flex-col gap-[6px]">
+                                {{-- Customer Detailes --}}
+                                <p class="text-[16px] text-gray-800">
+                                    {{ $item->customer_first_name }} {{ $item->customer_last_name }}
+                                </p>
 
+                                <p class="text-gray-600">
+                                    {{ $item->customer_email }}
+                                </p>
                                 <p class="text-gray-600">
                                     {{ $item->customer_email }}
                                 </p>
@@ -446,6 +454,7 @@
                                         {{-- Using Variable for image Numbering --}}
                                         @foreach ($item->items as $index => $orderItem)
 
+                                            @if ($index >= 3 && $item->items->count() >= 5)
                                             @if ($index >= 3 && $item->items->count() >= 5)
                                                 @break;
                                             @endif
@@ -474,10 +483,7 @@
                                         @endforeach
 
                                         {{-- Count of Rest Images --}}
-                                        @if (
-                                            $item->items->count() - 3 
-                                            && $item->items->count() > 4
-                                        )
+                                        @if ($item->items->count() - 3 && $item->items->count() > 4)
                                             <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
                                                 <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
                                                     @lang('admin::app.dashboard.more-products', ['product_count' => $item->items->count() - 3 ])

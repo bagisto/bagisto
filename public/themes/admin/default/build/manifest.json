@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-f5babb96.css",
+    "file": "assets/app-5cb34b0f.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -36,6 +36,10 @@
     "file": "assets/address-setting-f66277be.png",
     "src": "src/Resources/assets/images/address-setting.png"
   },
+  "src/Resources/assets/images/average-order.svg": {
+    "file": "assets/average-order-53dedd0e.svg",
+    "src": "src/Resources/assets/images/average-order.svg"
+  },
   "src/Resources/assets/images/captcha.png": {
     "file": "assets/captcha-d5a5a414.png",
     "src": "src/Resources/assets/images/captcha.png"
@@ -47,6 +51,10 @@
   "src/Resources/assets/images/close.svg": {
     "file": "assets/close-d41610b9.svg",
     "src": "src/Resources/assets/images/close.svg"
+  },
+  "src/Resources/assets/images/customer.svg": {
+    "file": "assets/customer-0e2ce672.svg",
+    "src": "src/Resources/assets/images/customer.svg"
   },
   "src/Resources/assets/images/dark-chevron-left.svg": {
     "file": "assets/dark-chevron-left-3b40c29a.svg",
@@ -163,6 +171,18 @@
   "src/Resources/assets/images/theme-setting.png": {
     "file": "assets/theme-setting-f1ac626b.png",
     "src": "src/Resources/assets/images/theme-setting.png"
+  },
+  "src/Resources/assets/images/total-orders.svg": {
+    "file": "assets/total-orders-330a76a6.svg",
+    "src": "src/Resources/assets/images/total-orders.svg"
+  },
+  "src/Resources/assets/images/total-sales.svg": {
+    "file": "assets/total-sales-13443ba1.svg",
+    "src": "src/Resources/assets/images/total-sales.svg"
+  },
+  "src/Resources/assets/images/unpaid-invoice.svg": {
+    "file": "assets/unpaid-invoice-672f48b4.svg",
+    "src": "src/Resources/assets/images/unpaid-invoice.svg"
   },
   "src/Resources/assets/images/user-owner.svg": {
     "file": "assets/user-owner-466fac11.svg",
