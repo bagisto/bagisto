@@ -96,14 +96,20 @@
     
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
+    {{-- Datagrid --}}
     <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}">
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
-            <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                <div class="cursor-pointer">
-                    <div class="flex gap-[10px]">
+        {{-- Datagrid Header --}}
+        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
+            <template v-if="! isLoading">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                    <div
+                        class="flex gap-[10px] items-center select-none"
+                        v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
+                    >
                         <label 
-                            class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
+                            class="flex gap-[4px] items-center w-max cursor-pointer select-none"
                             for="mass_action_select_all_records"
+                            v-if="! index"
                         >
                             <input 
                                 type="checkbox" 
@@ -117,7 +123,7 @@
                             <span
                                 class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
                                 :class="[
-                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-navyBlue' : (
+                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
                                         applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
                                     ),
                                 ]"
@@ -126,58 +132,49 @@
                         </label>
 
                         <p class="text-gray-600">
-                            <span @click="sortPage(columns.find(column => column.index === 'product_name'))">
-                                @lang('admin::app.catalog.products.index.product_name')
-                            </span> /
-
-                            <span @click="sortPage(columns.find(column => column.index === 'product_sku'))">
-                                @lang('admin::app.catalog.products.index.sku')
-                            </span> /
-
-                            <span @click="sortPage(columns.find(column => column.index === 'product_number'))">
-                                @lang('admin::app.catalog.products.index.prod_number')
+                            <span class="[&>*]:after:content-['_/_']">
+                                <template v-for="column in columnGroup">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                    </span>
+                                </template>
                             </span>
+
+                            <i
+                                class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                v-if="columnGroup.includes(applied.sort.column)"
+                            ></i>
                         </p>
                     </div>
                 </div>
+            </template>
 
-                <div class="cursor-pointer">
-                    <p class="text-gray-600">
-                        @lang('admin::app.catalog.products.index.image') /
-                        @lang('admin::app.catalog.products.index.price') /
-                        @lang('admin::app.catalog.products.index.stock') /
-                        @lang('admin::app.catalog.products.index.id')
-                    </p>
-                </div>
-
-                <div class="cursor-pointer">
-                    <p class="text-gray-600">
-                        <span @click="sortPage(columns.find(column => column.index === 'status'))">
-                            @lang('admin::app.catalog.products.index.status')
-                        </span> / 
-                        
-                        @lang('admin::app.catalog.products.index.category') /
-
-                        <span @click="sortPage(columns.find(column => column.index === 'product_type'))">
-                            @lang('admin::app.catalog.products.index.type')
-                        </span>
-                    </p>
-                </div>
-            </div>
+            {{-- Datagrid Head Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.head></x-admin::shimmer.datagrid.table.head>
+            </template>
         </template>
 
-        <template #body="{ columns, records, setCurrentSelectionMode, applied }">
-            <div
-                class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
-                v-for="record in records"
-            >
-                {{-- Product Name, SKU, Product Number --}}
-                <div class="">
-                    <div class="flex gap-[10px]">
-                        <label
-                            class="flex gap-[4px] w-max items-center p-[6px] cursor-pointer select-none"
-                            :for="`mass_action_select_record_${record.product_id}`"
-                        >
+        {{-- Datagrid Body --}}
+        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+            <template v-if="! isLoading">
+                <div
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                    v-for="record in records"
+                >
+                    {{-- Name, SKU, Attribute Family Columns --}}
+                    <div class="">
+                        <div class="flex gap-[10px]">
                             <input 
                                 type="checkbox" 
                                 :name="`mass_action_select_record_${record.product_id}`"
@@ -192,112 +189,117 @@
                                 class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
                                 :for="`mass_action_select_record_${record.product_id}`"
                             ></label>
-                        </label>
 
-                        <div class="flex flex-col gap-[6px]">
-                            <p
-                                class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.product_name"
-                            >
-                            </p>
+                            <div class="flex flex-col gap-[6px]">
+                                <p
+                                    class="text-[16px] text-gray-800 font-semibold"
+                                    v-text="record.name"
+                                >
+                                </p>
 
-                            <p
-                                class="text-gray-600"
-                            >
-                                @{{ "@lang('admin::app.catalog.products.index.sku_number')".replace(':sku', record.product_sku) }}
-                            </p>
+                                <p
+                                    class="text-gray-600"
+                                >
+                                    @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
+                                </p>
 
-                            <p
-                                class="text-gray-600"
-                            >
-                                @{{ "@lang('admin::app.catalog.products.index.product_number')".replace(':product_number', record.product_number) }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Image, Price, Id, Stock --}}
-                <div class="">
-                    <div class="flex gap-[6px]">
-                        <div class="relative">
-                            <img
-                                class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
-                                v-if="record.base_image"
-                                :src=`{{ Storage::url('') }}${record.base_image}`
-                            />
-
-                            <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
-                                <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-                                <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                    @lang('admin::app.dashboard.product-image')
+                                <p
+                                    class="text-gray-600"
+                                >
+                                    @{{ "@lang('admin::app.catalog.products.index.datagrid.attribute-family-value')".replace(':attribute_family', record.attribute_family) }}
                                 </p>
                             </div>
-
-                            <span
-                                class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
-                                v-text="record.images_count"
-                            >
-                            </span>
                         </div>
+                    </div>
 
+                    {{-- Image, Price, Id, Stock Columns --}}
+                    <div class="">
+                        <div class="flex gap-[6px]">
+                            <div class="relative">
+                                <img
+                                    class="min-h-[65px] min-w-[65px] max-h-[65px] max-w-[65px] rounded-[4px]"
+                                    v-if="record.base_image"
+                                    :src=`{{ Storage::url('') }}${record.base_image}`
+                                />
+
+                                <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden" v-else>
+                                    <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                    <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                        @lang('admin::app.dashboard.product-image')
+                                    </p>
+                                </div>
+
+                                <span
+                                    class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]"
+                                    v-text="record.images_count"
+                                >
+                                </span>
+                            </div>
+
+                            <div class="flex flex-col gap-[6px]">
+                                <p 
+                                    class="text-[16px] text-gray-800 font-semibold"
+                                    v-text="record.price ?? 'N/A'"
+                                >
+                                </p>
+
+                                <p
+                                    class="text-gray-600"
+                                    v-if="record.quantity > 0"
+                                >
+                                    <span class="text-green-600">
+                                        @{{ "@lang('admin::app.catalog.products.index.datagrid.qty-value')".replace(':qty', record.quantity) }}
+                                    </span>
+                                </p>
+
+                                <p
+                                    class="text-gray-600"
+                                    v-else
+                                >
+                                    <span class="text-red-600">
+                                        @lang('admin::app.catalog.products.index.datagrid.out-of-stock')
+                                    </span>
+                                </p>
+        
+                                <p class="text-gray-600">
+                                    @{{ "@lang('admin::app.catalog.products.index.datagrid.id-value')".replace(':id', record.product_id) }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Status, Category, Type Columns --}}
+                    <div class="flex gap-x-[16px] justify-between items-center">
                         <div class="flex flex-col gap-[6px]">
-                            <p 
-                                class="text-[16px] text-gray-800 font-semibold"
-                                v-text="record.price ?? 'N/A'"
+                            <p :class="[record.status ? 'label-active': 'label-info']">
+                                @{{ record.status ? "@lang('admin::app.catalog.products.index.datagrid.active')" : "@lang('admin::app.catalog.products.index.datagrid.disable')" }}
+                            </p>
+
+                            <p
+                                class="text-gray-600"
+                                v-text="record.category_name ?? 'N/A'"
                             >
                             </p>
 
                             <p
                                 class="text-gray-600"
-                                v-if="record.quantity > 0"
+                                v-text="record.type"
                             >
-                                <span class="text-green-600">
-                                    @{{ "@lang('admin::app.catalog.products.index.available')".replace(':qty', record.quantity) }}
-                                </span>
-                            </p>
-
-                            <p
-                                class="text-gray-600"
-                                v-else
-                            >
-                                <span class="text-red-600">
-                                    @lang('admin::app.catalog.products.index.out-of-stock')
-                                </span>
-                            </p>
-    
-                            <p class="text-gray-600">
-                                @{{ "@lang('admin::app.catalog.products.index.product_id')".replace(':id', record.product_id) }}
                             </p>
                         </div>
+
+                        <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
+                            <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                        </a>
+
                     </div>
                 </div>
+            </template>
 
-                {{-- Status, Category, Type --}}
-                <div class="flex gap-x-[16px] justify-between items-center">
-                    <div class="flex flex-col gap-[6px]">
-                        <p :class="[record.status ? 'label-active': 'label-info']">
-                            @{{ record.status ? "@lang('admin::app.catalog.products.index.active')" : "@lang('admin::app.catalog.products.index.disable')" }}
-                        </p>
-
-                        <p
-                            class="text-gray-600"
-                            v-text="record.category_name ?? 'N/A'"
-                        >
-                        </p>
-
-                        <p
-                            class="text-gray-600"
-                            v-text="record.product_type"
-                        >
-                        </p>
-                    </div>
-
-                    <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                        <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                    </a>
-
-                </div>
-            </div>
+            {{-- Datagrid Body Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.body></x-admin::shimmer.datagrid.table.body>
+            </template>
         </template>
     </x-admin::datagrid>
 

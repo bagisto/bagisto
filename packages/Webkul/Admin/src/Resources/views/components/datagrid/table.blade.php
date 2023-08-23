@@ -43,10 +43,17 @@
                             <!-- Columns -->
                             <p
                                 v-for="column in $parent.available.columns"
-                                v-text="column.label"
                                 v-if="$parent.available.actions.length"
+                                :class="{'cursor-pointer': column.sortable}"
                                 @click="$parent.sortPage(column)"
                             >
+                                @{{ column.label }}
+
+                                <i
+                                    class="ml-[5px] text-[16px] text-gray-600 align-text-bottom"
+                                    :class="[$parent.applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                    v-if="column.index == $parent.applied.sort.column"
+                                ></i>
                             </p>
 
                             <!-- Actions -->
