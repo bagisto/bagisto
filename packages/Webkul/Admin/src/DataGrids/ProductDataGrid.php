@@ -135,16 +135,16 @@ class ProductDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($row) {
-                if (
-                    !empty($row->visible_individually)
-                    && !empty($row->url_key)
-                ) {
-                    return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . '</a>';
-                }
+            // 'closure'    => function ($row) {
+            //     if (
+            //         !empty($row->visible_individually)
+            //         && !empty($row->url_key)
+            //     ) {
+            //         return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . '</a>';
+            //     }
 
-                return $row->product_name;
-            },
+            //     return $row->product_name;
+            // },
         ]);
 
         $this->addColumn([
@@ -201,13 +201,13 @@ class ProductDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => false,
             'sortable'   => true,
-            'closure'    => function ($row) {
-                if (is_null($row->quantity)) {
-                    return 0;
-                }
+            // 'closure'    => function ($row) {
+            //     if (is_null($row->quantity)) {
+            //         return 0;
+            //     }
 
-                return $this->renderQuantityView($row);
-            },
+            //     return $this->renderQuantityView($row);
+            // },
         ]);
     }
 
