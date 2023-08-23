@@ -202,9 +202,12 @@ class DashboardService
             ];
         }
 
+        $getTotalSales = $this->orderRepository->calculateSaleAmountByDate($this->startDate, $this->endDate);
+
         return [
             'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
-            'current' => $current = $this->orderRepository->calculateSaleAmountByDate($this->startDate, $this->endDate),
+            'current' => $current = $getTotalSales,
+            'formatted_total' => core()->formatBasePrice($getTotalSales),
             'progress' => $this->getPercentageChange($previous, $current)
         ];
     }
@@ -273,9 +276,16 @@ class DashboardService
     /**
      * Gets top-selling products.
      */
-    private function getTopSellingProducts(): Collection
+    private function getTopSellingProducts(): collection
     {
-        return $this->orderItemRepository->getTopSellingProductsByDate($this->startDate, $this->endDate);
+        $topSellingProducts = $this->orderItemRepository->getTopSellingProductsByDate($this->startDate, $this->endDate);
+
+        foreach ($topSellingProducts as $orderItem) {
+            $orderItem->formatted_total = core()->formatBasePrice($orderItem->total);
+            $orderItem->formatted_price = core()->formatBasePrice($orderItem->price);
+        }
+
+        return $topSellingProducts;
     }
 
     /**
@@ -283,7 +293,14 @@ class DashboardService
      */
     private function getCustomerWithMostSales(): Collection
     {
-        return $this->orderRepository->getCustomerWithMostSalesByDate($this->startDate, $this->endDate);
+
+        $customerWithMostSales = $this->orderRepository->getCustomerWithMostSalesByDate($this->startDate, $this->endDate);
+
+        foreach ($customerWithMostSales as $order) {
+            $order->formatted_total_base_grand_total = core()->formatBasePrice($order->total_base_grand_total);
+        }
+
+        return $customerWithMostSales;
     }
 
     /**

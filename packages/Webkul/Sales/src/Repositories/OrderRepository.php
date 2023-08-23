@@ -514,7 +514,9 @@ class OrderRepository extends Repository
                 'addresses.first_name',
                 'addresses.last_name',
                 'addresses.email as customer_address_email'
-            );
+
+            )
+            ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as order_count'));
 
         if ($from && $to) {
             $query->whereBetween("orders.created_at", [$from, $to]);
