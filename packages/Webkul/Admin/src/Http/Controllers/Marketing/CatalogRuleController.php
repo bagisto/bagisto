@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\CatalogRule;
+namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;

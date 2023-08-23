@@ -6,15 +6,18 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Inventory\Repositories\InventorySourceRepository;
 
 class ProductDataGrid extends DataGrid
 {
+
     /**
-     * Set index columns, ex: id.
+     * Constructor for the class
      *
-     * @var string
+     * @param  \Webkul\Product\Repositories\ProductRepository  $productRepository
+     * @param  \Webkul\Inventory\Repositories\InventorySourceRepository  $inventorySourceRepository
+     * @return void
      */
     protected $primaryColumn = 'product_id';
 
@@ -43,7 +46,9 @@ class ProductDataGrid extends DataGrid
             $whereInLocales = [core()->getRequestedLocaleCode()];
         }
 
-        /* query builder */
+        /**
+         * Query Builder to fetch records from `product_flat` table
+         */
         $queryBuilder = DB::table('product_flat')
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
             ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
@@ -58,21 +63,20 @@ class ProductDataGrid extends DataGrid
                 'product_flat.locale',
                 'product_flat.channel',
                 'images.path as base_image',
-                DB::raw('COUNT(DISTINCT images.id) as images_count'),
                 'pc.category_id',
                 'ct.name as category_name',
                 'product_flat.product_id',
-                'product_flat.sku as product_sku',
-                'product_flat.product_number',
-                'product_flat.name as product_name',
-                'product_flat.type as product_type',
+                'product_flat.sku',
+                'product_flat.name',
+                'product_flat.type',
                 'product_flat.status',
                 'product_flat.price',
                 'product_flat.url_key',
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
                 DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
-            );
+            )
+            ->addSelect(DB::raw('COUNT(DISTINCT images.id) as images_count'));
 
         $queryBuilder->groupBy(
             'product_flat.product_id',
@@ -84,11 +88,7 @@ class ProductDataGrid extends DataGrid
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
 
         $this->addFilter('product_id', 'product_flat.product_id');
-        $this->addFilter('product_name', 'product_flat.name');
-        $this->addFilter('product_sku', 'product_flat.sku');
-        $this->addFilter('product_number', 'product_flat.product_number');
         $this->addFilter('status', 'product_flat.status');
-        $this->addFilter('product_type', 'product_flat.type');
         $this->addFilter('attribute_family', 'attribute_families.name');
 
         return $queryBuilder;
@@ -102,17 +102,8 @@ class ProductDataGrid extends DataGrid
     public function prepareColumns()
     {
         $this->addColumn([
-            'index'      => 'product_id',
-            'label'      => trans('admin::app.datagrid.id'),
-            'type'       => 'integer',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'product_sku',
-            'label'      => trans('admin::app.datagrid.sku'),
+            'index'      => 'name',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -120,36 +111,17 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'product_number',
-            'label'      => trans('admin::app.datagrid.product-number'),
+            'index'      => 'sku',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.sku'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'product_name',
-            'label'      => trans('admin::app.datagrid.name'),
-            'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($row) {
-                if (
-                    !empty($row->visible_individually)
-                    && !empty($row->url_key)
-                ) {
-                    return "<a href='" . route('shop.product_or_category.index', $row->url_key) . "' target='_blank'>" . $row->product_name . '</a>';
-                }
-
-                return $row->product_name;
-            },
         ]);
 
         $this->addColumn([
             'index'      => 'attribute_family',
-            'label'      => trans('admin::app.datagrid.attribute-family'),
+            'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -157,37 +129,17 @@ class ProductDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'product_type',
-            'label'      => trans('admin::app.datagrid.type'),
+            'index'      => 'base_image',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.image'),
             'type'       => 'string',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
-            'type'       => 'boolean',
             'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
-            'closure'    => function ($value) {
-                $html = '';
-
-                if ($value->status) {
-                    $html .= '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.active') . '</span>';
-                } else {
-                    $html .= '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.inactive') . '</span>';
-                }
-
-                return $html;
-            },
+            'filterable' => false,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'price',
-            'label'      => trans('admin::app.datagrid.price'),
+            'label'      => trans('admin::app.catalog.products.index.datagrid.price'),
             'type'       => 'price',
             'searchable' => false,
             'filterable' => true,
@@ -196,18 +148,47 @@ class ProductDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'quantity',
-            'label'      => trans('admin::app.datagrid.qty'),
+            'label'      => trans('admin::app.catalog.products.index.datagrid.qty'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => false,
             'sortable'   => true,
-            'closure'    => function ($row) {
-                if (is_null($row->quantity)) {
-                    return 0;
-                }
+        ]);
 
-                return $this->renderQuantityView($row);
-            },
+        $this->addColumn([
+            'index'      => 'product_id',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.id'),
+            'type'       => 'integer',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'status',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.status'),
+            'type'       => 'boolean',
+            'searchable' => false,
+            'filterable' => true,
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'category_name',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.category'),
+            'type'       => 'string',
+            'searchable' => false,
+            'filterable' => false,
+            'sortable'   => false,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'type',
+            'label'      => trans('admin::app.catalog.products.index.datagrid.type'),
+            'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
         ]);
     }
 

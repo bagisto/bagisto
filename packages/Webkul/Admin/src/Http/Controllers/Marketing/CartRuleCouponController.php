@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\CartRule;
+namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Webkul\Admin\DataGrids\CartRuleCouponDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;

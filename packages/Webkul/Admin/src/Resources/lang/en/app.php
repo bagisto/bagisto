@@ -872,28 +872,10 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
-                'available'       => ':qty Available',
-                'active'          => 'Active',
-                'create-btn'      => 'Create Product',
-                'category'        => 'Category',
-                'disable'         => 'Disable',
-                'id'              => 'Id',
-                'image'           => 'Image',
-                'number'          => 'Number',
-                'out-of-stock'    => 'Out of Stock',
-                'product_id'      => 'Id - :id',
-                'product_name'    => 'Product Name',
-                'prod_number'     => 'Prod Number',
-                'product_number'  => 'Product Number - :product_number',
-                'price'           => 'Price',
-                'sku_number'      => 'SKU - :sku',
-                'stock'           => 'Stock',
-                'status'          => 'Status',
-                'sku'             => 'SKU',
-                'title'           => 'Products',
-                'type'            => 'Type',
+                'title'      => 'Products',
+                'create-btn' => 'Create Product',
 
-                'create' => [
+                'create'     => [
                     'title'                   => 'Create New Product',
                     'configurable-attributes' => 'Configurable Attributes',
                     'create-btn'              => 'Create Product',
@@ -909,6 +891,26 @@ return [
                     'booking'                 => 'Booking',
                     'family'                  => 'Family',
                     'sku'                     => 'SKU',
+                ],
+
+                'datagrid'   => [
+                    'name'                   => 'Name',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'attribute-family'       => 'Attribute Family',
+                    'attribute-family-value' => 'Attribute Family - :attribute_family',
+                    'image'                  => 'Image',
+                    'price'                  => 'Price',
+                    'qty'                    => 'Quantity',
+                    'qty-value'              => ':qty Available',
+                    'out-of-stock'           => 'Out of Stock',
+                    'id'                     => 'Id',
+                    'id-value'               => 'Id - :id',
+                    'status'                 => 'Status',
+                    'active'                 => 'Active',
+                    'disable'                => 'Disable',
+                    'category'               => 'Category',
+                    'type'                   => 'Type',
                 ],
             ],
 
