@@ -1890,6 +1890,15 @@ return [
     ],
 
     'dashboard' => [
+        'index' => [
+            'add_customer'  => 'Add Customer',
+            'customer-info'  => 'No Customer Found With Most Sales',
+            'add-product'    => 'Add Product',
+            'product-info'   => 'To add related products on a go.',
+            'start-date'     => 'Start Date',
+            'end-date'       => 'End Date',
+            'order-id'       => '#:id',
+        ],
         'attribute-code'            => 'Attribute Code',
         'color'                     => 'Color',
         'user-name'                 => 'Hi ! :user_name',
