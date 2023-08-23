@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\Category\CategoryController;
-use Webkul\Admin\Http\Controllers\Attribute\AttributeFamilyController;
-use Webkul\Admin\Http\Controllers\Attribute\AttributeController;
+use Webkul\Admin\Http\Controllers\Catalog\CategoryController;
+use Webkul\Admin\Http\Controllers\Catalog\AttributeFamilyController;
+use Webkul\Admin\Http\Controllers\Catalog\AttributeController;
 use Webkul\Admin\Http\Controllers\Catalog\ProductController;
 
 /**

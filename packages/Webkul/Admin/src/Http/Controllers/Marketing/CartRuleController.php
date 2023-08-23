@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\CartRule;
+namespace Webkul\Admin\Http\Controllers\Marketing;
 
 use Exception;
 use Illuminate\Support\Facades\Event;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Attribute;
+namespace Webkul\Admin\Http\Controllers\catalog;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\AttributeDataGrid;
