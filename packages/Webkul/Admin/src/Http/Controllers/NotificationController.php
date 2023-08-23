@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Notification;
+namespace Webkul\Admin\Http\Controllers;
 
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Notification\Repositories\NotificationRepository;
