@@ -1,7 +1,9 @@
 {{-- Seperator --}}
 <span class="block w-full absolute left-0 my-[5px] border border-[#E9E9E9]"></span>
 
-<v-product-customer-group-price></v-product-customer-group-price>
+<v-product-customer-group-price>
+    <x-admin::shimmer.products.edit.group-price></x-admin::shimmer.products.edit.group-price>
+</v-product-customer-group-price>
 
 @inject('customerGroupRepository', 'Webkul\Customer\Repositories\CustomerGroupRepository')
 
