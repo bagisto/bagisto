@@ -80,147 +80,157 @@
     </div>
 
     <x-admin::datagrid :src="route('admin.sales.orders.index')">
-        <template #header="{ columns, records, sortPage }">
-            <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 grid-cols-4 grid-rows-1">
-                <div
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'increment_id'))"
-                >
-                    <div class="flex gap-[10px]">
+        {{-- Datagrid Header --}}
+        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
+             <template v-if="! isLoading">
+                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                    <div
+                        class="flex gap-[10px] items-center select-none"
+                        v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
+                    >
                         <p class="text-gray-600">
-                            @lang('admin::app.sales.orders.index.datagrid.order-id') / 
-                            @lang('admin::app.sales.orders.index.datagrid.date') / 
-                            @lang('admin::app.sales.orders.index.datagrid.status')
+                            <span class="[&>*]:after:content-['_/_']">
+                                <template v-for="column in columnGroup">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                    </span>
+                                </template>
+                            </span>
+
+                            <i
+                                class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                v-if="columnGroup.includes(applied.sort.column)"
+                            ></i>
                         </p>
                     </div>
                 </div>
+            </template>
 
-                <div
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'base_grand_total'))"
-                >
-                    <p class="text-gray-600">
-                        @lang('admin::app.sales.orders.index.datagrid.grand-total') / 
-                        @lang('admin::app.sales.orders.index.datagrid.pay-via') / 
-                        @lang('admin::app.sales.orders.index.datagrid.channel-name')
-                    </p>
-                </div>
-
-                <div
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'full_name'))"
-                >
-                    <p class="text-gray-600">
-                        @lang('admin::app.sales.orders.index.datagrid.customer') / 
-                        @lang('admin::app.sales.orders.index.datagrid.email') /
-                        @lang('admin::app.sales.orders.index.datagrid.location') / 
-                        @lang('admin::app.sales.orders.index.datagrid.images')</p>
-                </div>
-            </div>
+            {{-- Datagrid Head Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+            </template>
         </template>
 
-        <template #body="{ columns, records }">
-            <div
-                class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300"
-                v-for="record in records"
-            > 
-                {{-- Order Id, Created, Status Section --}}
-                <div class="">
-                    <div class="flex gap-[10px]">
+        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+            <template v-if="! isLoading">
+                <div
+                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                    v-for="record in records"
+                > 
+                    {{-- Order Id, Created, Status Section --}}
+                    <div class="">
+                        <div class="flex gap-[10px]">
+                            <div class="flex flex-col gap-[6px]">
+                                <p
+                                    class="text-[16px] text-gray-800 font-semibold"
+                                >
+                                    @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
+                                </p>
+
+                                <p
+                                    class="text-gray-600"
+                                    v-text="record.created_at"
+                                >
+                                </p>
+
+                                <p
+                                    v-if="record.is_closure"
+                                    v-html="record.status"
+                                >
+                                </p>
+
+                                <p
+                                    v-else
+                                    v-text="record.status"
+                                >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Total Amount, Pay Via, Channel --}}
+                    <div class="">
                         <div class="flex flex-col gap-[6px]">
-                            <p
-                                class="text-[16px] text-gray-800 font-semibold"
-                            >
-                                @{{ "@lang('admin::app.sales.orders.index.datagrid.id')".replace(':id', record.increment_id) }}
+                            <p class="text-[16px] text-gray-800 font-semibold">
+                                @{{ $admin.formatPrice(record.base_grand_total) }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.index.datagrid.pay-by', ['method' => ''])@{{ record.method }}
                             </p>
 
                             <p
                                 class="text-gray-600"
-                                v-text="record.created_at"
+                                v-text="record.channel_name"
+                            >
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- Custoemr, Email, Location Section --}}
+                    <div class="">
+                        <div class="flex flex-col gap-[6px]">
+                            <p
+                                class="text-[16px] text-gray-800"
+                                v-text="record.full_name"
                             >
                             </p>
 
                             <p
+                                class="text-gray-600"
+                                v-text="record.customer_email"
+                            >
+                            </p>
+
+                            <p
+                                class="text-gray-600"
+                                v-text="record.location"
+                            >
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- Imgaes Section --}}
+                    <div class="flex gap-x-[16px] justify-between items-center">
+                        <div class="flex flex-col gap-[6px]">
+                            <p
                                 v-if="record.is_closure"
-                                v-html="record.status"
+                                class="text-gray-600"
+                                v-html="record.image"
                             >
                             </p>
 
                             <p
                                 v-else
-                                v-text="record.is_closure"
+                                class="text-gray-600"
+                                v-html="record.image"
                             >
                             </p>
+                            
                         </div>
+
+                        <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
+                            <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
+                        </a>
                     </div>
                 </div>
+            </template>
 
-                {{-- Total Amount, Pay Via, Channel --}}
-                <div class="">
-                    <div class="flex flex-col gap-[6px]">
-                        <p class="text-[16px] text-gray-800 font-semibold">
-                            @{{ $admin.formatPrice(record.base_grand_total) }}
-                        </p>
-
-                        <p class="text-gray-600">
-                            @lang('admin::app.sales.orders.index.datagrid.pay-by', ['method' => ''])@{{ record.method }}
-                        </p>
-
-                        <p
-                            class="text-gray-600"
-                            v-text="record.channel_name"
-                        >
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Custoemr, Email, Location Section --}}
-                <div class="">
-                    <div class="flex flex-col gap-[6px]">
-                        <p
-                            class="text-[16px] text-gray-800"
-                            v-text="record.full_name"
-                        >
-                        </p>
-
-                        <p
-                            class="text-gray-600"
-                            v-text="record.customer_email"
-                        >
-                        </p>
-
-                        <p
-                            class="text-gray-600"
-                            v-text="record.location"
-                        >
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Imgaes Section --}}
-                <div class="flex gap-x-[16px] justify-between items-center">
-                    <div class="flex flex-col gap-[6px]">
-                        <p
-                            v-if="record.is_closure"
-                            class="text-gray-600"
-                            v-html="record.image"
-                        >
-                        </p>
-
-                        <p
-                            v-else
-                            class="text-gray-600"
-                            v-html="record.image"
-                        >
-                        </p>
-                        
-                    </div>
-
-                    <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"></span>
-                    </a>
-                </div>
-            </div>
+            {{-- Datagrid Body Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+            </template>
         </template>
     </x-admin::datagrid>
 </x-admin::layouts>

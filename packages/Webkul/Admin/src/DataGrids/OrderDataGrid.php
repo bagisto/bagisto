@@ -93,25 +93,25 @@ class OrderDataGrid extends DataGrid
             'closure'    => function ($value) {
                 switch ($value->status) {
                     case 'processing':
-                        return '<span class="label-pending">' . trans('Processing') . '</span>';
+                        return '<p class="label-processing">' . trans('Processing') . '</p>';
 
                     case 'completed':
-                        return '<span class="label-pending">' . trans('Success') . '</span>';
+                        return '<p class="label-active">' . trans('Success') . '</p>';
 
                     case 'canceled':
-                        return '<span class="label-pending">' . trans('Cancelled') . '</span>';
+                        return '<p class="label-cancelled">' . trans('Cancelled') . '</p>';
 
                     case 'closed':
-                        return '<span class="label-pending">' . trans('Closed') . '</span>';
+                        return '<p class="label-closed">' . trans('Closed') . '</p>';
 
                     case 'pending':
-                        return '<span class="label-pending">' . trans('Pending') . '</span>';
+                        return '<p class="label-pending">' . trans('Pending') . '</p>';
 
                     case 'pending_payment':
-                        return '<span class="label-pending">' . trans('Pending Payment') . '</span>';
+                        return '<p class="label-pending">' . trans('Pending Payment') . '</p>';
 
                     case 'fraud':
-                        return '<span class="label-pending">' . trans('Fraud') . '</span>';
+                        return '<p class="label-cancelled">' . trans('Fraud') . '</p>';
                 }
             },
         ]);
@@ -131,7 +131,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -140,7 +140,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -158,7 +158,7 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -167,16 +167,16 @@ class OrderDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'image',
-            'label'      => trans('admin::app.sales.orders.index.location'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.images'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
             'closure'    => function ($value) {
                 $order = app(OrderRepository::class)->with('items')->find($value->id);
 
