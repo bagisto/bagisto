@@ -26,7 +26,13 @@
                         @lang('admin::app.customers.view.suspended')
                     </span>
                 @endif
-            </p>   
+            </p>
+            {{-- Back Button --}}
+            <a href="{{ route('admin.customer.index') }}">
+                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
+                    @lang('admin::app.customers.groups.edit.back-btn')
+                </span>
+            </a>   
         </div>
     </div>
 
@@ -38,7 +44,7 @@
        
         <div 
             class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
-            onclick="if (confirm('Are you sure you want to delete this account?')) {
+            onclick="if (confirm('@lang('admin::app.customers.view.delete-confirmation')')) {
                 event.preventDefault();
                 document.getElementById('delete-account{{ $customer->id }}').submit();
             }"
@@ -184,7 +190,7 @@
                     {{-- Empty Container --}} 
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders') (0)
+                            @lang('admin::app.customers.view.orders') ({{ $totalOrderCount }})
                         </p>
                     </div>
 
@@ -252,7 +258,7 @@
                     {{-- Empty Container --}}
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.invoice') (0)
+                            @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
                         </p>
                     </div>
 
@@ -366,7 +372,7 @@
                     {{-- Empty Invoice Container --}}
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.reviews') (0)
+                            @lang('admin::app.customers.view.reviews') ({{$totalReviewsCount}})
                         </p>
                     </div>
 
@@ -374,7 +380,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             {{-- Placeholder Image --}}
                             <img
-                                src="{{ bagisto_asset('images/empty-order.png') }}"
+                                src="{{ bagisto_asset('images/empty-review.png') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 

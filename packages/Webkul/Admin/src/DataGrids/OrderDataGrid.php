@@ -58,7 +58,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.sales.orders.index.order-id'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -67,7 +67,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.sales.orders.index.date'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.date'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -76,7 +76,7 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.sales.orders.index.status'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.status'),
             'type'       => 'checkbox',
             'options'    => [
                 'processing'      => trans('shop::app.customer.account.order.index.processing'),
@@ -93,32 +93,32 @@ class OrderDataGrid extends DataGrid
             'closure'    => function ($value) {
                 switch ($value->status) {
                     case 'processing':
-                        return '<span class="label-pending">' . trans('Processing') . '</span>';
+                        return '<p class="label-processing">' . trans('Processing') . '</p>';
 
                     case 'completed':
-                        return '<span class="label-pending">' . trans('Success') . '</span>';
+                        return '<p class="label-active">' . trans('Success') . '</p>';
 
                     case 'canceled':
-                        return '<span class="label-pending">' . trans('Cancelled') . '</span>';
+                        return '<p class="label-cancelled">' . trans('Cancelled') . '</p>';
 
                     case 'closed':
-                        return '<span class="label-pending">' . trans('Closed') . '</span>';
+                        return '<p class="label-closed">' . trans('Closed') . '</p>';
 
                     case 'pending':
-                        return '<span class="label-pending">' . trans('Pending') . '</span>';
+                        return '<p class="label-pending">' . trans('Pending') . '</p>';
 
                     case 'pending_payment':
-                        return '<span class="label-pending">' . trans('Pending Payment') . '</span>';
+                        return '<p class="label-pending">' . trans('Pending Payment') . '</p>';
 
                     case 'fraud':
-                        return '<span class="label-pending">' . trans('Fraud') . '</span>';
+                        return '<p class="label-cancelled">' . trans('Fraud') . '</p>';
                 }
             },
         ]);
 
         $this->addColumn([
             'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.sales.orders.index.grand-total'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.grand-total'),
             'type'       => 'price',
             'searchable' => false,
             'filterable' => true,
@@ -127,25 +127,25 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'method',
-            'label'      => trans('admin::app.sales.orders.index.pay-via'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.pay-via'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'channel_name',
-            'label'      => trans('admin::app.sales.orders.index.channel-name'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.channel-name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'full_name',
-            'label'      => trans('admin::app.sales.orders.index.customer'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.customer'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -154,29 +154,29 @@ class OrderDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'customer_email',
-            'label'      => trans('admin::app.sales.orders.index.email'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'location',
-            'label'      => trans('admin::app.sales.orders.index.location'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.location'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
             'index'      => 'image',
-            'label'      => trans('admin::app.sales.orders.index.location'),
+            'label'      => trans('admin::app.sales.orders.index.datagrid.images'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
             'closure'    => function ($value) {
                 $order = app(OrderRepository::class)->with('items')->find($value->id);
 
@@ -194,7 +194,7 @@ class OrderDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.sales.orders.index.view'),
+            'title'  => trans('admin::app.sales.orders.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.orders.view', $row->id);

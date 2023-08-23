@@ -1,7 +1,5 @@
 <?php
 
-use Elasticsearch\Endpoints\Indices\Create;
-
 return [
     'account' => [
         'edit' => [
@@ -23,19 +21,23 @@ return [
     'sales' => [
         'orders' => [
             'index' => [
-                'title' => 'Orders',
-                'customer'     => 'Customer',
-                'email'        => 'Email',
-                'location'     => 'Location',
-                'pay-via'      => 'Pay Via',
-                'date'         => 'Date',
-                'order-id'     => 'Order ID',
-                'pay-by'       => 'Pay By - :method',
-                'status'       => 'Status',
-                'grand-total'  => 'Grand Total',
-                'channel-name' => 'Channel',
-                'view'         => 'View',
-                'id'           => '#:id',
+                'title'        => 'Orders',
+
+                'datagrid' => [
+                    'customer'     => 'Customer',
+                    'email'        => 'Email',
+                    'location'     => 'Location',
+                    'pay-via'      => 'Pay Via',
+                    'date'         => 'Date',
+                    'order-id'     => 'Order ID',
+                    'pay-by'       => 'Pay By - :method',
+                    'status'       => 'Status',
+                    'grand-total'  => 'Grand Total',
+                    'channel-name' => 'Channel',
+                    'view'         => 'View',
+                    'id'           => '# :id',
+                    'images'       => 'Images',
+                ],
             ],
 
             'view' => [
@@ -269,8 +271,24 @@ return [
         'index'  => [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
-            'order'         => ':order Order',
-            'address'       => ':address  Address',
+
+            'datagrid'  =>[
+                'id'            => 'Customer ID',
+                'order'         => ':order Order',
+                'address'       => ':address  Address',
+                'name'          => 'Customer Name',
+                'email'         => 'Email',
+                'group'         => 'Group',
+                'phone'         => 'Contact Number',
+                'gender'        => 'Gender',
+                'status'        => 'Status',
+                'suspended'     => 'Suspended',
+                'revenue'       => 'Revenue',
+                'address-count' => 'Address Count',
+                'order-count'   => 'Order Count',
+                'update-status' => 'Update Status',
+                'delete'        => 'Delete',
+            ],
 
             'create' => [
                 'create-btn'            => 'Create Customer',
@@ -357,7 +375,7 @@ return [
             'note-placeholder'        => 'Write Your Note here',
             'delete-success'          => 'Account Deleted Successfully',
             'order-pending'           => 'Cannot delete account because some Order(s) are pending or processing state.',
-
+            'delete-confirmation'     => 'Are you sure you want to delete this account?',
         ],
 
         'groups' => [

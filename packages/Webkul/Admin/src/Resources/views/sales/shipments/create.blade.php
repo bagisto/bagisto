@@ -125,7 +125,7 @@
                             @foreach ($order->items as $item)
                                 <div class="flex gap-[10px] justify-between py-[16px]">
                                     <div class="flex gap-[10px]">
-                                        @if ($item->product)
+                                        @if ($item->product->base_image_url)
                                             <img
                                                 class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
                                                 src="{{ $item->product->base_image_url }}"
