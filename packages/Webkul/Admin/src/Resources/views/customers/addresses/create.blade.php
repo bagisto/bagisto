@@ -1,5 +1,5 @@
 <v-create-customer-address>
-    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
+    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
         <span class="icon-location text-[24px]"></span>
 
         @lang('admin::app.customers.addresses.create.create-address-btn')

@@ -1,4 +1,12 @@
-<v-locale-form></v-locale-form>
+<v-locale-form>
+    <button 
+        type="button"
+        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+        @click="$refs.localeModal.toggle()"
+    >
+        @lang('admin::app.settings.locales.index.create-btn')
+    </button>
+</v-locale-form>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-locale-form-template">
