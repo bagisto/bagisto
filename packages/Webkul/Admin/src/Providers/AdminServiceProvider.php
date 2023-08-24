@@ -73,7 +73,6 @@ class AdminServiceProvider extends ServiceProvider
     protected function composeView()
     {
         view()->composer([
-            'admin::layouts.nav-left',
             'admin::components.layouts.header.index',
             'admin::components.layouts.sidebar.index',
             'admin::components.layouts.tabs',
