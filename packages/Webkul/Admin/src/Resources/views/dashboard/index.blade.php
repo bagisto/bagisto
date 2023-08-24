@@ -594,7 +594,7 @@
     </div>
     
     @push('scripts')
-        <script src="{{ bagisto_asset('js/chart.js') }}"></script>
+        <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
