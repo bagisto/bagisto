@@ -499,8 +499,6 @@
                 performMassAction(currentAction, currentOption = null) {
                     this.applied.massActions.meta.action = currentAction;
 
-                    console.log(currentOption);
-
                     if (currentOption) {
                         this.applied.massActions.value = currentOption.value;
                     }
