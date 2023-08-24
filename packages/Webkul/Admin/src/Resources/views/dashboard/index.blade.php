@@ -587,21 +587,21 @@
             </p>
 
             {{-- Store Stats --}}
-            <date-filter>
-                <div class="shimmer h-[800px] w-full"></div>
-            </date-filter>
+            <v-store-stats>
+                <x-admin::shimmer.dashboard.right></x-admin::shimmer.dashboard.right>
+            </v-store-stats>
         </div>
     </div>
     
     @push('scripts')
         <script src="{{ bagisto_asset('js/chart.js') }}"></script>
 
-        <script type="text/x-template" id="date-filter-template">
+        <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
                 <div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
-                        <x-admin::shimmer.dashboard.total-sales></x-admin::shimmer.dashboard.total-sales>
+                        <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard.right.total-sales>
                     </template>
 
                     <template v-else>
@@ -692,7 +692,7 @@
 
                         <!-- Top Selling Products Shimmer -->
                         <div v-if="isLoading">
-                            <x-admin::shimmer.dashboard.top-selling></x-admin::shimmer.dashboard.top-selling>
+                            <x-admin::shimmer.dashboard.right.top-selling></x-admin::shimmer.dashboard.right.top-selling>
                         </div>
 
                         <!-- Top Selling Products Detailes -->
@@ -791,7 +791,7 @@
                     <!-- Customers Shimmer -->
                     
                     <template v-if="isLoading">
-                        <x-admin::shimmer.dashboard.most-customer-sales></x-admin::shimmer.dashboard.most-customer-sales>
+                        <x-admin::shimmer.dashboard.right.most-customer-sales></x-admin::shimmer.dashboard.right.most-customer-sales>
                     </template>
 
                     <template v-else>
@@ -895,8 +895,8 @@
         </script>
 
         <script type="module">
-            app.component('date-filter', {
-                template: '#date-filter-template',
+            app.component('v-store-stats', {
+                template: '#v-store-stats-template',
 
                 data() {
                     return {
