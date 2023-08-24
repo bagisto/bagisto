@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-d7db5984.css",
+    "file": "assets/app-5d7cdf5c.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -71,6 +71,10 @@
   "src/Resources/assets/images/empty-order.png": {
     "file": "assets/empty-order-a73b017e.png",
     "src": "src/Resources/assets/images/empty-order.png"
+  },
+  "src/Resources/assets/images/empty-review.png": {
+    "file": "assets/empty-review-20ca8784.png",
+    "src": "src/Resources/assets/images/empty-review.png"
   },
   "src/Resources/assets/images/group.png": {
     "file": "assets/group-a995d3da.png",

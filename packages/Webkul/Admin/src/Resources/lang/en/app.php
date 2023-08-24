@@ -35,7 +35,7 @@ return [
                     'grand-total'  => 'Grand Total',
                     'channel-name' => 'Channel',
                     'view'         => 'View',
-                    'id'           => '# :id',
+                    'id'           => '#:id',
                     'images'       => 'Images',
                 ],
             ],
