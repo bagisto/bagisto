@@ -869,7 +869,7 @@ return [
 
             'edit' => [
                 'title'                  => 'Edit Channel',
-                'cancel'                 => 'Cancel',
+                'back-btn'               => 'Back',
                 'save-btn'               => 'Save Channel',
                 'general'                => 'General',
                 'code'                   => 'Code',
