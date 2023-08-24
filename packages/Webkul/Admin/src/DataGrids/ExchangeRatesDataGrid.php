@@ -40,7 +40,7 @@ class ExchangeRatesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'currency_exchange_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.exchange-rates.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -49,7 +49,7 @@ class ExchangeRatesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'currency_name',
-            'label'      => trans('admin::app.datagrid.currency-name'),
+            'label'      => trans('admin::app.settings.exchange-rates.index.datagrid.currency-name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -58,7 +58,7 @@ class ExchangeRatesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'currency_rate',
-            'label'      => trans('admin::app.datagrid.exch-rate'),
+            'label'      => trans('admin::app.settings.exchange-rates.index.datagrid.exchange-rate'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -70,7 +70,7 @@ class ExchangeRatesDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.exchange-rates.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.exchange_rates.edit', $row->currency_exchange_id);
@@ -79,7 +79,7 @@ class ExchangeRatesDataGrid extends DataGrid
 
         $this->addAction([
             'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.datagrid.delete'),
+            'title'   => trans('admin::app.settings.exchange-rates.index.datagrid.delete'),
             'method'  => 'DELETE',
             'url'     => function ($row) {
                 return route('admin.exchange_rates.delete', $row->currency_exchange_id);

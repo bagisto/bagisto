@@ -23,7 +23,7 @@ class EventDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.email-marketing.events.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -32,7 +32,7 @@ class EventDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.marketing.email-marketing.events.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -41,7 +41,7 @@ class EventDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'date',
-            'label'      => trans('admin::app.datagrid.date'),
+            'label'      => trans('admin::app.marketing.email-marketing.events.index.datagrid.date'),
             'type'       => 'datetime',
             'searchable' => true,
             'filterable' => true,
@@ -53,7 +53,7 @@ class EventDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.email-marketing.events.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.events.edit', $row->id);
@@ -62,7 +62,7 @@ class EventDataGrid extends DataGrid
 
         $this->addAction([
             'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.datagrid.delete'),
+            'title'   => trans('admin::app.marketing.email-marketing.events.index.datagrid.delete'),
             'method'  => 'POST',
             'url'     => function ($row) {
                 return route('admin.events.delete', $row->id);

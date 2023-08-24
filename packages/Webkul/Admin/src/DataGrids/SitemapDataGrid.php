@@ -29,7 +29,7 @@ class SitemapDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'width'      => '40px',
@@ -39,7 +39,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'file_name',
-            'label'      => trans('admin::app.datagrid.file-name'),
+            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.file-name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -48,7 +48,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'path',
-            'label'      => trans('admin::app.datagrid.path'),
+            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.path'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -57,7 +57,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'url',
-            'label'      => trans('admin::app.datagrid.link-for-google'),
+            'label'      => trans('admin::app.marketing.sitemaps.index.datagrid.link-for-google'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => false,
@@ -77,7 +77,7 @@ class SitemapDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.sitemaps.index.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.sitemaps.edit',
             'url'    => function ($row) {
@@ -87,7 +87,7 @@ class SitemapDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.marketing.sitemaps.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.sitemaps.delete', $row->id);

@@ -30,7 +30,7 @@ class EmailTemplateDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.email-marketing.templates.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -39,7 +39,7 @@ class EmailTemplateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.marketing.email-marketing.templates.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -48,18 +48,18 @@ class EmailTemplateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.status'),
+            'label'      => trans('admin::app.marketing.email-marketing.templates.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status == 'active') {
-                    return trans('admin::app.datagrid.active');
+                    return trans('admin::app.marketing.email-marketing.templates.index.datagrid.active');
                 } elseif ($value->status == 'inactive') {
-                    return trans('admin::app.datagrid.inactive');
+                    return trans('admin::app.marketing.email-marketing.templates.index.datagrid.inactive');
                 } elseif ($value->status == 'draft') {
-                    return trans('admin::app.datagrid.draft');
+                    return trans('admin::app.marketing.email-marketing.templates.index.datagrid.draft');
                 }
             },
         ]);
@@ -74,7 +74,7 @@ class EmailTemplateDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.email-marketing.templates.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.email_templates.edit', $row->id);
@@ -83,7 +83,7 @@ class EmailTemplateDataGrid extends DataGrid
 
         $this->addAction([
             'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.datagrid.delete'),
+            'title'   => trans('admin::app.marketing.email-marketing.templates.index.datagrid.delete'),
             'method'  => 'POST',
             'url'     => function ($row) {
                 return route('admin.email_templates.delete', $row->id);
