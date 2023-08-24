@@ -11,7 +11,14 @@
 
         <div class="flex gap-x-[10px] items-center">
             {{-- Create new Exchange Rates Vue Component --}}
-            <v-create-exchange-rates></v-create-exchange-rates>
+            <v-create-exchange-rates>
+                <button
+                    type="button"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.settings.exchange-rates.index.create-btn')
+                </button>
+            </v-create-exchange-rates>
         </div>
     </div>
 
