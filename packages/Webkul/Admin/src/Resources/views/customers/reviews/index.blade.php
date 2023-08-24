@@ -182,7 +182,7 @@
                             </p>
 
                             <p
-                                class="text-[16px] text-gray-800 font-semibold"
+                                class="text-gray-600"
                                 v-text="record.product_name"
                             >
                             </p>
