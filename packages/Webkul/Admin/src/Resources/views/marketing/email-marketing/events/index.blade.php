@@ -4,7 +4,23 @@
         @lang('admin::app.marketing.email-marketing.events.index.title')
     </x-slot:title>
 
-    <v-events></v-events>
+    <v-events>
+        <div class="flex gap-[16px] justify-between max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.marketing.email-marketing.events.index.title')
+            </p>
+    
+            <div class="flex gap-x-[10px] items-center">
+                <!-- Create Button -->
+                <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                    @lang('admin::app.marketing.email-marketing.events.index.create-btn')
+                </div>
+            </div>
+        </div>
+
+        {{-- Added For Shimmer --}}
+        <x-admin::datagrid src="{{ route('admin.events.index') }}"></x-admin::datagrid>
+    </v-events>
 
     @pushOnce('scripts')
         <script 
@@ -28,7 +44,10 @@
             </div>
 
             <!-- Datagrid -->
-            <x-admin::datagrid src="{{ route('admin.events.index') }}" ref="datagrid">
+            <x-admin::datagrid
+                src="{{ route('admin.events.index') }}"
+                ref="datagrid"
+            >
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage}">
                     <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">

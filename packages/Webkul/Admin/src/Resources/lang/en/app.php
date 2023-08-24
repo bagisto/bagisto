@@ -1756,17 +1756,18 @@ return [
                         'delete'      => 'Delete',
                         'email'       => 'Email',
                     ],
+
+                    'edit'  => [
+                        'title'       => 'Edit Newsletter Subscriber',
+                        'back-btn'    => 'Back',
+                        'save-btn'    => 'Save Subscriber',
+                        'email'       => 'Email',
+                        'subscribed'  => 'Subscribed',
+                        'true'        => 'True',
+                        'false'       => 'False',
+                    ],
                 ],
 
-                'edit'  => [
-                    'title'       => 'Edit Newsletter Subscriber',
-                    'back-btn'    => 'Back',
-                    'save-btn'    => 'Save Subscriber',
-                    'email'       => 'Email',
-                    'subscribed'  => 'Subscribed',
-                    'true'        => 'True',
-                    'false'       => 'False',
-                ],
             ],
         ],
 

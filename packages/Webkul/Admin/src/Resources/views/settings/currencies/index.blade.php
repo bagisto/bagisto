@@ -3,7 +3,26 @@
         @lang('admin::app.settings.currencies.index.title')
     </x-slot:title>
 
-    <v-currencies></v-currencies>
+    <v-currencies>
+        <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.currencies.index.title')
+            </p>
+
+            <div class="flex gap-x-[10px] items-center">
+                <!-- Craete currency Button -->
+                <button 
+                    type="button"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.settings.currencies.index.create-btn')
+                </button>
+            </div>
+        </div>
+
+        {{-- Added For Shimmer --}}
+        <x-admin::datagrid></x-admin::datagrid>
+    </v-currencies>
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-currencies-template">

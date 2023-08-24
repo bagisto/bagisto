@@ -4,7 +4,26 @@
         @lang('admin::app.settings.exchange-rates.index.title')
     </x-slot:title>
 
-    <v-exchange-rates></v-exchange-rates>
+    <v-exchange-rates>
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.exchange-rates.index.title')
+            </p>
+
+            <div class="flex gap-x-[10px] items-center">
+                 <!-- Create Button -->
+                <button
+                    type="button"
+                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                >
+                    @lang('admin::app.settings.exchange-rates.index.create-btn')
+                </button>
+            </div>
+        </div>
+
+        {{-- Added For Shimmer --}}
+        <x-admin::datagrid></x-admin::datagrid>
+    </v-exchange-rates>
 
     @pushOnce('scripts')
         <script
