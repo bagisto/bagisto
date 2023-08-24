@@ -79,50 +79,101 @@
         </div>
     </div>
     
-    <x-admin::datagrid src="{{ route('admin.customer.review.index') }}">
-        <template #header="{ columns, records, sortPage }">
-            <div class="row grid grid-rows-1 grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300">
-                <div
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'product_review_status'))"
-                >
-                    <div class="flex gap-[10px]">
+    <x-admin::datagrid
+        src="{{ route('admin.customer.review.index') }}"
+        :isMultiRow="true"
+    >
+        {{-- Datagrid Header --}}
+        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
+            <template v-if="! isLoading">
+                <div class="row grid grid-rows-1 grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                    <div
+                        class="flex gap-[10px] items-center"
+                        v-for="(columnGroup, index) in [['name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
+                    >
+                        <label
+                            class="flex gap-[4px] w-max items-center cursor-pointer select-none"
+                            for="mass_action_select_all_records"
+                            v-if="! index"
+                        >
+                            <input 
+                                type="checkbox" 
+                                name="mass_action_select_all_records"
+                                id="mass_action_select_all_records"
+                                class="hidden peer"
+                                :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                @change="selectAllRecords"
+                            >
+                
+                            <span
+                                class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                :class="[
+                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                    ),
+                                ]"
+                            >
+                            </span>
+                        </label>
+
+                        {{-- Product Name, Review Status --}}
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.reviews.index.name') / 
-                            @lang('admin::app.customers.reviews.index.product') / 
-                            @lang('admin::app.customers.reviews.index.status')
+                            <span class="[&>*]:after:content-['_/_']">
+                                <template v-for="column in columnGroup">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                    </span>
+                                </template>
+                            </span>
+
+                            <i
+                                class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                v-if="columnGroup.includes(applied.sort.column)"
+                            ></i>
                         </p>
                     </div>
                 </div>
+            </template>               
 
-                <div
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'product_review_id'))"
-                >
-                    <p class="text-gray-600">
-                        @lang('admin::app.customers.reviews.index.rating') / 
-                        @lang('admin::app.customers.reviews.index.date') / 
-                        @lang('admin::app.customers.reviews.index.id')
-                    </p>
-                </div>
-
-                <div class="cursor-pointer">
-                    <p class="text-gray-600">
-                        @lang('admin::app.customers.reviews.index.title') / 
-                        @lang('admin::app.customers.reviews.index.description')
-                    </p>
-                </div>
-            </div>
+             {{-- Datagrid Head Shimmer --}}
+             <template v-else>
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+            </template>
         </template>
 
-        <template #body="{ columns, records }">
-            <div
-                class="row grid grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
-                v-for="record in records"
-            >
-                {{-- Name, Product, Description --}}
-                <div class="">
+        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+            <template v-if="! isLoading">
+                <div
+                    class="row grid grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                    v-for="record in records"
+                >
+                    {{-- Name, Product, Description --}}
                     <div class="flex gap-[10px]">
+                        <input 
+                            type="checkbox" 
+                            :name="`mass_action_select_record_${record.product_review_id}`"
+                            :id="`mass_action_select_record_${record.product_review_id}`"
+                            :value="record.product_review_id"
+                            class="hidden peer"
+                            v-model="applied.massActions.indices"
+                            @change="setCurrentSelectionMode"
+                        >
+            
+                        <label 
+                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                            :for="`mass_action_select_record_${record.product_review_id}`"
+                        ></label>
+
                         <div class="flex flex-col gap-[6px]">
                             <p
                                 class="text-[16px] text-gray-800 font-semibold"
@@ -136,6 +187,7 @@
                             >
                             </p>
 
+                            @{{ record.product_review_status , 'pending' }}
                             <p
                                 :class="{
                                     'label-cancelled': record.product_review_status === 'disapproved',
@@ -145,14 +197,10 @@
                                 v-text="record.product_review_status"
                             >
                             </p>
-
-                            <p></p>
                         </div>
                     </div>
-                </div>
 
-                {{-- Rating, Date, Id Section --}}
-                <div class="">
+                    {{-- Rating, Date, Id Section --}}
                     <div class="flex flex-col gap-[6px]">
                         <div class="flex">
                             <template v-for="(rating, index) in record.rating">
@@ -172,34 +220,40 @@
                         >
                         </p>
                     </div>
+
+                    {{-- Title, Description --}}
+                    <div class="flex flex-col gap-[6px]">
+                        <p
+                            class="text-[16px] text-gray-800 font-semibold"
+                            v-text="record.title"
+                        >
+                        </p>
+
+                        <p
+                            class="text-gray-600"
+                            v-text="record.comment"
+                        >
+                        </p>
+                    </div>
+
+                    <div class="flex gap-[5px] place-content-end self-center">
+                        {{-- Review Delete Button --}}
+                        <a :href=`{{ route('admin.customer.review.delete', '') }}/${record.product_review_id}`>
+                            <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                        </a>
+
+                        {{-- View Button --}}
+                        <a :href=`{{ route('admin.customer.review.edit', '') }}/${record.product_review_id}`>
+                            <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                        </a>
+                    </div>
                 </div>
+            </template>
 
-                {{-- Title, Description --}}
-                <div class="flex flex-col gap-[6px]">
-                    <p
-                        class="text-[16px] text-gray-800 font-semibold"
-                        v-text="record.title"
-                    >
-                    </p>
-
-                    <p
-                        class="text-gray-600"
-                        v-text="record.comment"
-                    >
-                    </p>
-                </div>
-
-                <div class="flex gap-[5px] place-content-end self-center">
-                    <a :href=`{{ route('admin.customer.review.delete', '') }}/${record.product_review_id}`>
-                        <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                    </a>
-
-                    <a :href=`{{ route('admin.customer.review.edit', '') }}/${record.product_review_id}`>
-                        <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                    </a>
-                </div>
-
-            </div>
+            {{-- Datagrid Body Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+            </template>
         </template>
     </x-admin::datagrid>
 </x-admin::layouts>
