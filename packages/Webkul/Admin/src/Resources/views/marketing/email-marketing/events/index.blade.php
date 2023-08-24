@@ -79,7 +79,7 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record)">
+                            <a @click="id=1; editModal(record.id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
@@ -217,8 +217,10 @@
                 methods: {
                     createEmailEvents(params, { resetForm, setErrors }) {
                         if (params.id) {
-                            this.$axios.put("{{ route('admin.events.update')}}", params)
+                            this.$axios.post("{{ route('admin.events.update')}}", params)
                                 .then((response) => {
+                                    this.$refs.emailEvents.toggle();
+
                                     this.$refs.datagrid.get();
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: 'Event Updated successfully' });
@@ -244,10 +246,26 @@
                         }
                     },
 
-                    editModal(value) {
-                        this.$refs.emailEvents.toggle();
+                    editModal(id) {
+                        this.$axios.get(`{{ route('admin.events.edit', '') }}/${id}`)
+                            .then((response) => {
 
-                        this.$refs.modalForm.setValues(value);
+                                let values = {
+                                    id: response.data.data.id,
+                                    name: response.data.data.name,
+                                    date: response.data.data.date,
+                                    description: response.data.data.description,
+                                };
+
+                                this.$refs.emailEvents.toggle();
+
+                                this.$refs.modalForm.setValues(values);
+                            })
+                            .catch(error => {
+                                if (error.response.status ==422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     deleteModal(url) {

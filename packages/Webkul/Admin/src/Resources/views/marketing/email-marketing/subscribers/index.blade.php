@@ -69,7 +69,7 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="editModal(record)">
+                            <a @click="editModal(record.id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
@@ -212,10 +212,25 @@
                         });
                     },
 
-                    editModal(value) {
-                        this.$refs.groupCreateModal.toggle();
+                    editModal(id) {
 
-                        this.$refs.modalForm.setValues(value);
+                        this.$axios.get(`{{ route('admin.customers.subscribers.edit', '') }}/${id}`)
+                            .then((response) => {
+                                let values = {
+                                    id: response.data.data.id,
+                                    email: response.data.data.email,
+                                    status: response.data.data.is_subscribed,
+                                };
+
+                                this.$refs.groupCreateModal.toggle();
+
+                                this.$refs.modalForm.setValues(values);
+                            })
+                            .catch(error => {
+                                if (error.response.status ==422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     deleteModal(url) {

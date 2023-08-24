@@ -519,34 +519,28 @@ return [
             'index' => [
                 'title'      => 'Currencies',
                 'create-btn' => 'Create Currency',
+
+                'create' => [
+                    'title'              => 'Create New Currency',
+                    'create-btn'         => 'Create Currency',
+                    'save-btn'           => 'Create Currency',
+                    'general'            => 'General',
+                    'code'               => 'Code',
+                    'name'               => 'Name',
+                    'symbol'             => 'Symbol',
+                    'decimal'            => 'Decimal',
+                    'create-success'     => 'Currency created successfully.',
+                    'update-success'     => 'Currency updated successfully.',
+                    'delete-success'     => 'Currency deleted successfully.',
+                    'last-delete-error'  => 'At least one Currency is required.',
+                ],
+
+                'edit' => [
+                    'title'   => 'Edit New Currency',
+                ],
             ],
 
-            'create' => [
-                'title'              => 'Create New Currency',
-                'create-btn'         => 'Create Currency',
-                'save-btn'           => 'Create Currency',
-                'general'            => 'General',
-                'code'               => 'Code',
-                'name'               => 'Name',
-                'symbol'             => 'Symbol',
-                'decimal'            => 'Decimal',
-                'create-success'     => 'Currency created successfully.',
-                'update-success'     => 'Currency updated successfully.',
-                'delete-success'     => 'Currency deleted successfully.',
-                'last-delete-error'  => 'At least one Currency is required.',
-            ],
 
-            'edit' => [
-                'back-btn'           => 'Back',
-                'code'               => 'Code',
-                'decimal'            => 'Decimal',
-                'general'            => 'General',
-                'name'               => 'Name',
-                'save-btn'           => 'Save Currency',
-                'symbol'             => 'Symbol',
-                'title'              => 'Edit Currency',
-                'update-success'     => 'Currency updated successfully.',
-            ],
         ],
 
         'exchange-rates'  => [
@@ -561,15 +555,10 @@ return [
                     'source-currency'  => 'Source Currency',
                     'target-currency'  => 'Target Currency',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'         => 'Back',
-                'rate'             => 'Rate',
-                'source-currency'  => 'Source Currency',
-                'save-btn'         => 'Save Exchange Rate',
-                'title'            => 'Edit Exchange Rates',
-                'target-currency'  => 'Target Currency',
+                'edit'  =>  [
+                    'title'    => 'Edit Exchange Rates',
+                ],
             ],
         ],
 

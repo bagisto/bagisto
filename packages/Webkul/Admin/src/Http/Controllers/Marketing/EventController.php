@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\EventRepository;
@@ -71,12 +72,12 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Event Details
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         if ($id == 1) {
             session()->flash('error', trans('admin::app.marketing.events.edit-error'));
@@ -86,7 +87,7 @@ class EventController extends Controller
 
         $event = $this->eventRepository->findOrFail($id);
 
-        return view('admin::marketing.email-marketing.events.edit', compact('event'));
+        return new JsonResource($event);
     }
 
     /**
@@ -97,7 +98,7 @@ class EventController extends Controller
      */
     public function update()
     {
-        $id = request()->only('id');
+        $id = request()->id;
 
         $this->validate(request(), [
             'name'        => 'required',

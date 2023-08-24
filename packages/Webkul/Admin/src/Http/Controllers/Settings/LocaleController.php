@@ -69,7 +69,7 @@ class LocaleController extends Controller
     {
         $locale = $this->localeRepository->findOrFail($id);
 
-        return view('admin::settings.locales.edit', compact('locale'));
+        return $locale;
     }
 
     /**
@@ -78,10 +78,10 @@ class LocaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
         $this->validate(request(), [
-            'code'      => ['required', 'unique:locales,code,' . $id, new \Webkul\Core\Rules\Code],
+            'code'      => ['required', 'unique:locales,code,' . request()->id, new \Webkul\Core\Rules\Code],
             'name'      => 'required',
             'direction' => 'in:ltr,rtl',
         ]);
@@ -93,7 +93,7 @@ class LocaleController extends Controller
             'logo_path'
         ]);
 
-        $this->localeRepository->update($data, $id);
+        $this->localeRepository->update($data, request()->id);
 
         session()->flash('success', trans('admin::app.settings.locales.edit.update-success'));
 
