@@ -244,7 +244,7 @@
                         </p>
                     </div>
                     <a 
-                        class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                        class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
                         :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
                     >
                     </a>
@@ -342,7 +342,7 @@
                             </p>
                         </div>
                         <a 
-                            class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
                             :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
                         >
                         </a>
