@@ -1,4 +1,11 @@
-<v-create-currencies-form></v-create-currencies-form>
+<v-create-currencies-form>
+    <button 
+        type="button"
+        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+    >
+        @lang('admin::app.settings.currencies.create.create-btn')
+    </button>
+</v-create-currencies-form>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-create-currencies-form-template">

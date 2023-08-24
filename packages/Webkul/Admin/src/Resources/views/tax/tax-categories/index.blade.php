@@ -12,7 +12,14 @@
         <div class="flex gap-x-[10px] items-center">
             <div class="flex gap-x-[10px] items-center">
                 {{-- Create Tax Category Vue Component --}}
-                <v-create-tax-category></v-create-tax-category>
+                <v-create-tax-category>
+                    <button
+                        type="button"
+                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    >
+                        @lang('admin::app.settings.taxes.tax-categories.create.create-title')
+                    </button>
+                </v-create-tax-category>
             </div>
         </div>
     </div>

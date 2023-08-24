@@ -11,7 +11,14 @@
 
         <div class="flex gap-x-[10px] items-center">
             {{-- Create User Vue Component --}}
-            <v-create-user-form></v-create-user-form>
+            <v-create-user-form>
+                <button
+                type="button"
+                class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+            >
+                @lang('admin::app.users.users.index.create.title')
+            </button>
+            </v-create-user-form>
         </div>
     </div>
 
