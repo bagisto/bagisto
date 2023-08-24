@@ -1,4 +1,4 @@
-<div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
+<div class="bg-white rounded-[4px] box-shadow">
     <!-- Total Sales Shimmer -->
     <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard..right.total-sales>
 

@@ -19,7 +19,7 @@
                 <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-100"></span>
             </div>
 
-            <div class="flex flex-col justify-between max-w-max bg-white border border-gray-300 rounded-[6px] box-shadow h-[calc(100vh-179px)]">
+            <div class="flex flex-col justify-between max-w-max bg-white rounded-[6px] box-shadow h-[calc(100vh-179px)]">
                 <div class="">
                     <div class="flex border-b-[1px] border-gray-300 overflow-auto journal-scroll">
                         <div
