@@ -534,6 +534,7 @@ return [
                 'last-delete-error' => 'At least one Locale is required.',
 
                 'datagrid' => [
+                    'actions'   => 'Actions',
                     'id'        => 'ID',
                     'name'      => 'Name',
                     'code'      => 'Code',
@@ -565,11 +566,12 @@ return [
                 'create-btn' => 'Create Currency',
 
                 'datagrid' => [
-                    'id'     => 'ID',
-                    'name'   => 'Name',
-                    'code'   => 'Code',
-                    'edit'   => 'Edit',
-                    'delete' => 'Delete',
+                    'id'      => 'ID',
+                    'name'    => 'Name',
+                    'code'    => 'Code',
+                    'edit'    => 'Edit',
+                    'delete'  => 'Delete',
+                    'actions' => 'Actions',
                 ],
 
                 'create' => [
@@ -620,6 +622,7 @@ return [
                     'exchange-rate' => 'Exchange Rate',
                     'edit'          => 'Edit',
                     'delete'        => 'Delete',
+                    'actions'       => 'Actions',
                 ],
             ],
         ],
@@ -1727,6 +1730,7 @@ return [
                         'date'      => 'Date',
                         'edit'      => 'Edit',
                         'delete'    => 'Delete',
+                        'actions'   => 'Actions',
 
                     ],
 
@@ -1757,6 +1761,7 @@ return [
                         'edit'        => 'Edit',
                         'delete'      => 'Delete',
                         'email'       => 'Email',
+                        'actions'     => 'Actions',
                     ],
 
                     'edit'  => [
