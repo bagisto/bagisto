@@ -221,6 +221,19 @@ return [
         'invoices' => [
             'index' => [
                 'title' => 'Invoices',
+
+                'datagrid' => [
+                    'id'            => 'ID',
+                    'order-id'      => 'Order ID',
+                    'invoice-date'  => 'Invoice Date',
+                    'invoice-date'  => 'Invoice Date',
+                    'grand-total'   => 'Grand Total',
+                    'status'        => 'Status',
+                    'action'        => 'Actions',
+                    'paid'          => 'Paid',
+                    'pending'       => 'Pending',
+                    'overdue'       => 'Overdue',
+                ],
             ],
 
             'view' => [
