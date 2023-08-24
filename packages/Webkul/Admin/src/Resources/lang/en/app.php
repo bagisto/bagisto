@@ -272,7 +272,7 @@ return [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
 
-            'datagrid'  =>[
+            'datagrid'  => [
                 'id'            => 'Customer ID',
                 'order'         => ':order Order',
                 'address'       => ':address  Address',
@@ -389,6 +389,10 @@ return [
                     'name'           => 'Name',
                     'save-btn'       => 'Save Group',
                     'title'          => 'Create new Group',
+                ],
+
+                'edit'  => [
+                    'title' => 'Edit Group',
                 ],
 
                 'datagrid'  =>  [
@@ -1553,18 +1557,23 @@ return [
             ],
 
             'events' => [
-                'create'   => [
-                    'description'    => 'Description',
-                    'date'           => 'Date',
-                    'general'        => 'General',
-                    'name'           => 'Name',
-                    'save-btn'       => 'Save Event',
-                    'title'          => 'Events',
-                ],
-
                 'index'  => [
                     'create-btn'  => 'Create Event',
                     'title'       => 'Events',
+
+                    'create'  =>  [
+                        'title'          => 'Create Events',
+                        'description'    => 'Description',
+                        'date'           => 'Date',
+                        'general'        => 'General',
+                        'name'           => 'Name',
+                        'save-btn'       => 'Save Event',
+                        'title'          => 'Events',
+                    ],
+
+                    'edit'  =>  [
+                        'title' => 'Edit Events',
+                    ],
                 ],
 
                 'edit'  => [

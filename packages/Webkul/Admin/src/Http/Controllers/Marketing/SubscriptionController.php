@@ -50,8 +50,10 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
+        $id = request()->only('id');
+
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         $customer = $subscriber->customer;

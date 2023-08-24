@@ -95,8 +95,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
+        $id = request()->only('id');
+
         $this->validate(request(), [
             'name'        => 'required',
             'description' => 'required',
