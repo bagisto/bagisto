@@ -23,7 +23,7 @@ class CustomerGroupDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.customers.groups.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -32,7 +32,7 @@ class CustomerGroupDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.datagrid.code'),
+            'label'      => trans('admin::app.customers.groups.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -41,7 +41,7 @@ class CustomerGroupDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.customers.groups.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -53,7 +53,7 @@ class CustomerGroupDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.customers.groups.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 // return route('admin.groups.edit', $row->id);
@@ -62,7 +62,7 @@ class CustomerGroupDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.customers.groups.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => function ($row) {
                 return route('admin.groups.delete', $row->id);

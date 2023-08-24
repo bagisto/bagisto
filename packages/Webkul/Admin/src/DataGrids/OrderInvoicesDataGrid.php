@@ -27,10 +27,10 @@ class OrderInvoicesDataGrid extends DataGrid
             )
             ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE {$dbPrefix}invoices.id END AS increment_id");
 
-        // $this->addFilter('increment_id', 'invoices.increment_id');
-        // $this->addFilter('order_id', 'ors.increment_id');
-        // $this->addFilter('base_grand_total', 'invoices.base_grand_total');
-        // $this->addFilter('created_at', 'invoices.created_at');
+        $this->addFilter('increment_id', 'invoices.increment_id');
+        $this->addFilter('order_id', 'ors.increment_id');
+        $this->addFilter('base_grand_total', 'invoices.base_grand_total');
+        $this->addFilter('created_at', 'invoices.created_at');
 
         return $queryBuilder;
     }
@@ -44,7 +44,7 @@ class OrderInvoicesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.sales.invoices.index.datagrid.id'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -53,7 +53,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'order_id',
-            'label'      => trans('admin::app.datagrid.order-id'),
+            'label'      => trans('admin::app.sales.invoices.index.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -62,7 +62,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.datagrid.invoice-date'),
+            'label'      => trans('admin::app.sales.invoices.index.datagrid.invoice-date'),
             'type'       => 'datetime',
             'searchable' => true,
             'filterable' => true,
@@ -71,7 +71,7 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.datagrid.grand-total'),
+            'label'      => trans('admin::app.sales.invoices.index.datagrid.grand-total'),
             'type'       => 'price',
             'searchable' => true,
             'filterable' => true,
@@ -80,21 +80,21 @@ class OrderInvoicesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'state',
-            'label'      => trans('admin::app.datagrid.status'),
+            'label'      => trans('admin::app.sales.invoices.index.datagrid.status'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->state == 'paid') {
-                    return '<span class="badge badge-md badge-success">' . trans('admin::app.sales.invoices.status-paid') . '</span>';
+                    return '<p class="label-active">' . trans('admin::app.sales.invoices.index.datagrid.paid') . '</p>';
                 } elseif (
                     $value->state == 'pending'
                     || $value->state == 'pending_payment'
                 ) {
-                    return '<span class="badge badge-md badge-warning">' . trans('admin::app.sales.invoices.status-pending') . '</span>';
+                    return '<p class="label-pending">' . trans('admin::app.sales.invoices.index.datagrid.pending') . '</p>';
                 } elseif ($value->state == 'overdue') {
-                    return '<span class="badge badge-md badge-info">' . trans('admin::app.sales.invoices.status-overdue') . '</span>';
+                    return '<p class="label-cancel">' . trans('admin::app.sales.invoices.index.datagrid.overdue') . '</p>';
                 }
 
                 return $value->state;
@@ -111,7 +111,7 @@ class OrderInvoicesDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.datagrid.view'),
+            'title'  => trans('admin::app.sales.invoices.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.invoices.view', $row->id);

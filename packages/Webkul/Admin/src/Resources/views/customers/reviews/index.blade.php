@@ -7,76 +7,6 @@
         <p class="py-[11px] text-[20px] text-gray-800 font-bold">
             @lang('admin::app.customers.reviews.index.title')
         </p>
-
-        <div class="flex gap-x-[10px] items-center">
-            <!-- Dropdown -->
-            <x-admin::dropdown position="bottom-right">
-                <x-slot:toggle>
-                    <span class="icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-100"></span>
-                </x-slot:toggle>
-
-                <x-slot:content class="w-[174px] max-w-full !p-[8PX] border border-gray-300 rounded-[4px] z-10 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
-                    <div class="grid gap-[2px]">
-                        <!-- Current Channel -->
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
-                                Channel - {{ core()->getCurrentChannel()->name }}
-                            </p>
-                        </div>
-
-                        <!-- Current Locale -->
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <p class="text-gray-600 font-semibold leading-[24px]">
-                                Language - {{ core()->getCurrentLocale()->name }}
-                            </p>
-                        </div>
-
-                        <div class="p-[6px] items-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
-                            <!-- Export Modal -->
-                            <x-admin::modal ref="exportModal">
-                                <x-slot:toggle>
-                                    <p class="text-gray-600 font-semibold leading-[24px]">
-                                        Export                                            
-                                    </p>
-                                </x-slot:toggle>
-
-                                <x-slot:header>
-                                    <p class="text-[18px] text-gray-800 font-bold">
-                                        @lang('Download')
-                                    </p>
-                                </x-slot:header>
-
-                                <x-slot:content>
-                                    <div class="p-[16px]">
-                                        <x-admin::form action="">
-                                            <x-admin::form.control-group>
-                                                <x-admin::form.control-group.control
-                                                    type="select"
-                                                    name="format"
-                                                    id="format"
-                                                >
-                                                    <option value="xls">XLS</option>
-                                                    <option value="csv">CLS</option>
-                                                </x-admin::form.control-group.control>
-                                            </x-admin::form.control-group>
-                                        </x-admin::form>
-                                    </div>
-                                </x-slot:content>
-                                <x-slot:footer>
-                                    <!-- Save Button -->
-                                    <button
-                                        type="submit" 
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
-                                    >
-                                        @lang('Export')
-                                    </button>
-                                </x-slot:footer>
-                            </x-admin::modal>
-                        </div>
-                    </div>
-                </x-slot:content>
-            </x-admin::dropdown>
-        </div>
     </div>
     
     <x-admin::datagrid
@@ -86,7 +16,7 @@
         {{-- Datagrid Header --}}
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
             <template v-if="! isLoading">
-                <div class="row grid grid-rows-1 grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
                     <div
                         class="flex gap-[10px] items-center"
                         v-for="(columnGroup, index) in [['name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
@@ -154,7 +84,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[2fr_2fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                    class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
                     v-for="record in records"
                 >
                     {{-- Name, Product, Description --}}
@@ -187,7 +117,6 @@
                             >
                             </p>
 
-                            @{{ record.product_review_status , 'pending' }}
                             <p
                                 :class="{
                                     'label-cancelled': record.product_review_status === 'disapproved',
@@ -203,9 +132,11 @@
                     {{-- Rating, Date, Id Section --}}
                     <div class="flex flex-col gap-[6px]">
                         <div class="flex">
-                            <template v-for="(rating, index) in record.rating">
-                                <span class="icon-star text-[18px] text-amber-500"></span>
-                            </template>
+                            <x-admin::star-rating 
+                                :is-editable="false"
+                                ::value="record.rating"
+                            >
+                            </x-admin::star-rating>
                         </div>
 
                         <p
@@ -216,8 +147,8 @@
 
                         <p
                             class="text-gray-600"
-                            v-text="record.product_review_id"
                         >
+                            @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review-id', record.product_review_id) }}
                         </p>
                     </div>
 
@@ -244,7 +175,7 @@
 
                         {{-- View Button --}}
                         <a :href=`{{ route('admin.customer.review.edit', '') }}/${record.product_review_id}`>
-                            <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                         </a>
                     </div>
                 </div>

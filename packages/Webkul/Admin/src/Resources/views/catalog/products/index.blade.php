@@ -285,7 +285,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                            <span class="icon-sort-right text-[24px] ml-[4px]p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                         </a>
 
                     </div>

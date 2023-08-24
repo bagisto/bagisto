@@ -33,7 +33,7 @@ class CurrencyDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.currencies.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -42,7 +42,7 @@ class CurrencyDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.settings.currencies.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -51,7 +51,7 @@ class CurrencyDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.datagrid.code'),
+            'label'      => trans('admin::app.settings.currencies.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -68,7 +68,7 @@ class CurrencyDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.currencies.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.currencies.edit', $row->id);
@@ -77,7 +77,7 @@ class CurrencyDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.currencies.delete', $row->id);
@@ -93,7 +93,7 @@ class CurrencyDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => route('admin.currencies.mass_delete'),
         ]);

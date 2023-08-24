@@ -252,11 +252,5 @@ return [
         'sort'       => 5,
         'icon'       => 'icon-cms',
         'icon-class' => 'cms-icon',
-    ], [
-        'key'        => 'cms.pages',
-        'name'       => 'admin::app.cms.index.title',
-        'route'      => 'admin.cms.index',
-        'sort'       => 1,
-        'icon'       => '',
     ]
 ];

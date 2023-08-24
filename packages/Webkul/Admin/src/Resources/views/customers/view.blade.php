@@ -504,11 +504,11 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.phone') - {{ $customer->phone }}
+                            @lang('admin::app.customers.view.phone') - {{ $customer->phone ?? 'N/A' }}
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.gender') - {{ $customer->gender }}
+                            @lang('admin::app.customers.view.gender') - {{ $customer->gender ?? 'N/A' }}
                         </p>
 
                         <p class="text-gray-600">
@@ -517,7 +517,7 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.group') - {{ $customer->group->code }}
+                            @lang('admin::app.customers.view.group') - {{ $customer->group->code ?? 'N/A' }}
                         </p>
                     </div>
                 </x-slot:content>

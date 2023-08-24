@@ -1,7 +1,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @lang('admin::app.marketing.sitemaps.create.title')
+        @lang('admin::app.marketing.sitemaps.index.title')
     </x-slot:title>
 
     {{-- Create Sitemap Vue Component --}}
@@ -14,7 +14,7 @@
         >
             <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <p class="text-[20px] text-gray-800 font-bold">
-                    @lang('admin::app.marketing.sitemaps.create.title')
+                    @lang('admin::app.marketing.sitemaps.index.title')
                 </p>
 
                 <!-- Cancel Button -->

@@ -14,20 +14,27 @@
 @endphp
 
 <header class="flex justify-between items-center px-[16px] py-[10px] bg-white border-b-[1px] border-gray-300 sticky top-0 z-10">
-    <div class="flex gap-[16px]">
+    <div class="flex gap-[6px] items-center">
+        {{-- Hamburger Menu --}}
+        <i
+            class="hidden icon-menu text-[24px] p-[6px] max-lg:block cursor-pointer"
+            @click="$refs.sidebarMenuDrawer.open()"
+        ></i>
+
+        {{-- Logo --}}
         <a
             href="{{ route('admin.dashboard.index') }}" 
             class="place-self-start -mt-[4px]"            
         >
-        
             @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
-                <img src="{{ \Illuminate\Support\Facades\Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+                <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
             @else
                 <img src="{{ bagisto_asset('images/logo.png') }}">
             @endif
         </a>
 
-        <form class="flex items-center max-w-[445px]">
+        {{-- Search Bar --}}
+        <form class="flex items-center max-w-[445px] ml-[10px]">
             <label 
                 for="organic-search" 
                 class="sr-only"
@@ -139,3 +146,57 @@
         </x-admin::dropdown>
     </div>
 </header>
+
+<!-- Menu Sidebar Drawer -->
+<x-admin::drawer
+    position="left"
+    width="270px"
+    ref="sidebarMenuDrawer"
+>
+    <!-- Drawer Header -->
+    <x-slot:header>
+        <div class="flex justify-between items-center">
+            @if (core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode()))
+                <img src="{{ Storage::url(core()->getConfigData('general.design.admin_logo.logo_image', core()->getCurrentChannelCode())) }}" alt="{{ config('app.name') }}" style="height: 40px; width: 110px;"/>
+            @else
+                <img src="{{ bagisto_asset('images/logo.png') }}">
+            @endif
+        </div>
+    </x-slot:header>
+
+    <!-- Drawer Content -->
+    <x-slot:content class="p-[16px]">
+        <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll">
+            <nav class="grid gap-[7px] w-full">
+                {{-- Navigation Menu --}}
+                @foreach ($menu->items as $menuItem)
+                    <div class="relative group/item">
+                        <a
+                            href="{{ $menuItem['url'] }}"
+                            class="flex gap-[10px] p-[6px] items-center cursor-pointer {{ $menu->getActive($menuItem) == 'active' ? 'bg-blue-600 rounded-[8px]' : ' hover:bg-gray-100' }} peer"
+                        >
+                            <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
+                            
+                            <p class="text-gray-600 font-semibold whitespace-nowrap {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
+                                @lang($menuItem['name'])
+                            </p>
+                        </a>
+
+                        @if (count($menuItem['children']))
+                            <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] pl-[40px] pb-[7px] rounded-b-[8px] z-[100]">
+                                @foreach ($menuItem['children'] as $subMenuItem)
+                                    <a
+                                        href="{{ $subMenuItem['url'] }}"
+                                        class="text-[14px] text-{{ $menu->getActive($subMenuItem) ? 'blue':'gray' }}-600 whitespace-nowrap py-[4px]"
+                                    >
+                                        @lang($subMenuItem['name'])
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+            </nav>
+        </div>
+    </x-slot:content>
+</x-admin::drawer>

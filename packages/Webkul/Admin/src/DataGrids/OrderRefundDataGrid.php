@@ -31,11 +31,11 @@ class OrderRefundDataGrid extends DataGrid
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'));
 
         // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
-        // $this->addFilter('id', 'refunds.id');
-        // $this->addFilter('increment_id', 'orders.increment_id');
-        // $this->addFilter('state', 'refunds.state');
-        // $this->addFilter('base_grand_total', 'refunds.base_grand_total');
-        // $this->addFilter('created_at', 'refunds.created_at');
+        $this->addFilter('id', 'refunds.id');
+        $this->addFilter('increment_id', 'orders.increment_id');
+        $this->addFilter('state', 'refunds.state');
+        $this->addFilter('base_grand_total', 'refunds.base_grand_total');
+        $this->addFilter('created_at', 'refunds.created_at');
 
         return $queryBuilder;
     }
@@ -49,7 +49,7 @@ class OrderRefundDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.sales.refunds.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -58,7 +58,7 @@ class OrderRefundDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'increment_id',
-            'label'      => trans('admin::app.datagrid.order-id'),
+            'label'      => trans('admin::app.sales.refunds.index.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -67,7 +67,7 @@ class OrderRefundDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'base_grand_total',
-            'label'      => trans('admin::app.datagrid.refunded'),
+            'label'      => trans('admin::app.sales.refunds.index.datagrid.refunded'),
             'type'       => 'price',
             'searchable' => true,
             'filterable' => true,
@@ -76,7 +76,7 @@ class OrderRefundDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'billed_to',
-            'label'      => trans('admin::app.datagrid.billed-to'),
+            'label'      => trans('admin::app.sales.refunds.index.datagrid.billed-to'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -85,7 +85,7 @@ class OrderRefundDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.datagrid.refund-date'),
+            'label'      => trans('admin::app.sales.refunds.index.datagrid.refund-date'),
             'type'       => 'datetime',
             'searchable' => true,
             'filterable' => true,
@@ -102,7 +102,7 @@ class OrderRefundDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.datagrid.view'),
+            'title'  => trans('admin::app.sales.refunds.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.refunds.view', $row->id);

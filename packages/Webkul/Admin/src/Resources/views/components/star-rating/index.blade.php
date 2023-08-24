@@ -24,7 +24,7 @@
             ></span>
 
             <span
-                class="icon-star text-[24px]"
+                class="icon-star text-[18px]"
                 v-for="rating in availableRatings"
                 :style="[`color: ${appliedRatings >= rating ? '#ffb600' : '#7d7d7d'}`]"
                 v-else

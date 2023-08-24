@@ -9,7 +9,7 @@
 
     $validations = $coreConfigRepository->getValidations($field);
 
-    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $channel, $locale);
+    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
 @endphp
 
 <x-admin::form.control-group>
@@ -36,7 +36,7 @@
             <x-admin::form.control-group.control
                 type="text"
                 :name="$name"
-                :value="old($nameKey) ?? (core()->getConfigData($nameKey, $channel, $locale) ? core()->getConfigData($nameKey, $channel, $locale) : ($field['default_value'] ?? ''))"
+                :value="old($nameKey) ?? (core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) : ($field['default_value'] ?? ''))"
                 :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
@@ -48,7 +48,7 @@
             <x-admin::form.control-group.control
                 type="password"
                 :name="$name"
-                :value="old($nameKey) ?? core()->getConfigData($nameKey, $channel, $locale)"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
@@ -60,7 +60,7 @@
             <x-admin::form.control-group.control
                 type="number"
                 :name="$name"
-                :value="old($nameKey) ?? core()->getConfigData($nameKey, $channel, $locale)"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
@@ -73,7 +73,7 @@
             <x-admin::form.control-group.control
                 type="color"
                 :name="$name"
-                :value="old($nameKey) ?? core()->getConfigData($nameKey, $channel, $locale)"
+                :value="old($nameKey) ?? core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                 :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
@@ -85,7 +85,7 @@
             <x-admin::form.control-group.control
                 type="textarea"
                 :name="$name"
-                :value="old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
+                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
                 class="text-gray-600"
                 :id="$name"
                 :rules="$validations"
@@ -99,7 +99,7 @@
             <x-admin::form.control-group.control
                 type="textarea"
                 :name="$name"
-                :value="old($nameKey) ?: core()->getConfigData($nameKey, $channel, $locale) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
+                :value="old($nameKey) ?: core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?: (isset($field['default_value']) ? $field['default_value'] : '')"
                 :id="$name"
                 :rules="$validations"
                 :label="trans($field['title'])"
@@ -108,7 +108,7 @@
 
         {{-- Select input --}}
         @elseif ($field['type'] == 'select')
-            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
+            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
             <x-admin::form.control-group.control
                 type="select"
@@ -145,7 +145,7 @@
 
         {{-- Multiselect Input --}}
         @elseif ($field['type'] == 'multiselect')
-            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ''; @endphp
+            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ''; @endphp
 
             <x-admin::form.control-group.control
                 type="select"
@@ -178,7 +178,7 @@
 
         {{-- Boolean/Switch input --}}
         @elseif ($field['type'] == 'boolean')
-            @php $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? ($field['default_value'] ?? ''); @endphp
+            @php $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? ($field['default_value'] ?? ''); @endphp
 
             <x-admin::form.control-group.control
                 type="switch"
@@ -194,8 +194,8 @@
         @elseif ($field['type'] == 'image')
 
             @php
-                $src = Storage::url(core()->getConfigData($nameKey, $channel, $locale));
-                $result = core()->getConfigData($nameKey, $channel, $locale);
+                $src = Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code));
+                $result = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code);
             @endphp
 
             <div class="flex justify-center items-center">
@@ -243,7 +243,7 @@
 
         @elseif ($field['type'] == 'file')
             @php
-                $result = core()->getConfigData($nameKey, $channel, $locale);
+                $result = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code);
                 $src = explode("/", $result);
                 $path = end($src);
             @endphp
@@ -293,7 +293,7 @@
                         <x-admin::form.control-group.control
                             type="select"
                             :name="$name"
-                            :value="core()->getConfigData($nameKey, $channel, $locale)"
+                            :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                             :id="$name"
                             :rules="$validations"
                             :label="trans($field['title'])"
@@ -319,7 +319,7 @@
                                 <x-admin::form.control-group.control
                                     type="select"
                                     :name="$name"
-                                    :value="core()->getConfigData($nameKey, $channel, $locale)"
+                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :id="$name"
                                     :rules="$validations"
                                     :label="trans($field['title'])"
@@ -339,7 +339,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     :name="$name"
-                                    :value="core()->getConfigData($nameKey, $channel, $locale)"
+                                    :value="core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)"
                                     :id="$name"
                                     :rules="$validations"
                                     :label="trans($field['title'])"
@@ -386,7 +386,7 @@
 
                 data() {
                     return {
-                        country: "{{ core()->getConfigData($nameKey, $channel, $locale) ?? '' }}",
+                        country: "{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}",
                     }
                 },
 

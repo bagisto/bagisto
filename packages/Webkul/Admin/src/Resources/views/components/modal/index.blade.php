@@ -51,7 +51,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[10]"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity z-[1000]"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -67,7 +67,7 @@
                 leave-to-class="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-10 transform transition overflow-y-auto"
+                    class="fixed inset-0 z-[2000] transform transition overflow-y-auto"
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">

@@ -9,9 +9,9 @@
 
     $field['options'] = $coreConfigRepository->getDependentFieldOptions($field, $value);
 
-    $selectedOption = core()->getConfigData($nameKey, $channel, $locale) ?? '';
+    $selectedOption = core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '';
 
-    $dependSelectedOption = core()->getConfigData($dependNameKey, $channel, $locale) ?? '';
+    $dependSelectedOption = core()->getConfigData($dependNameKey, $currentChannel->code, $currentLocale->code) ?? '';
 @endphp
 
 @if (strpos($field['validation'], 'required_if') !== false)

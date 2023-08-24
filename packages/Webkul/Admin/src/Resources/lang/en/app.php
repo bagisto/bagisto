@@ -106,7 +106,18 @@ return [
         'shipments' => [
             'index' => [
                 'title' => 'Shipments',
-            ],
+
+                'datagrid'  => [
+                    'id'               => 'ID',
+                    'order-id'         => 'Order ID',
+                    'total-qty'        => 'Total Quantity',
+                    'inventory-source' => 'Inventory Source',
+                    'order-date'       => 'Order Date',
+                    'shipment-date'    => 'Shipment Date',
+                    'shipment-to'      => 'Shipment To',
+                    'view'             => 'View',
+                ],
+             ],
 
             'create' => [
                 'title'                 => 'Create new Shipment',
@@ -156,6 +167,15 @@ return [
         'refunds' => [
             'index' => [
                 'title' => 'Refunds',
+
+                'datagrid'  => [
+                    'id'               => 'ID',
+                    'order-id'         => 'Order ID',
+                    'billed-to'        => 'Billed To',
+                    'refund-date'      => 'Refund Date',
+                    'refunded'         => 'Refunded',
+                    'view'             => 'View',
+                ],
             ],
 
             'view' => [
@@ -221,6 +241,19 @@ return [
         'invoices' => [
             'index' => [
                 'title' => 'Invoices',
+
+                'datagrid' => [
+                    'id'            => 'ID',
+                    'order-id'      => 'Order ID',
+                    'invoice-date'  => 'Invoice Date',
+                    'invoice-date'  => 'Invoice Date',
+                    'grand-total'   => 'Grand Total',
+                    'status'        => 'Status',
+                    'action'        => 'Actions',
+                    'paid'          => 'Paid',
+                    'pending'       => 'Pending',
+                    'overdue'       => 'Overdue',
+                ],
             ],
 
             'view' => [
@@ -274,8 +307,8 @@ return [
 
             'datagrid'  => [
                 'id'            => 'Customer ID',
-                'order'         => ':order Order',
-                'address'       => ':address  Address',
+                'order'         => ':order Order(s)',
+                'address'       => ':address  Address(s)',
                 'name'          => 'Customer Name',
                 'email'         => 'Email',
                 'group'         => 'Group',
@@ -397,8 +430,10 @@ return [
 
                 'datagrid'  =>  [
                     'code'  => 'Code',
-                    'id'    => 'Id',
+                    'id'    => 'ID',
                     'name'  => 'Name',
+                    'edit'  => 'Edit',
+                    'delete' => 'Delete',
                 ],
             ],
 
@@ -428,12 +463,19 @@ return [
                     'customer_names' => 'Name',
                     'comment'        => 'Comment',
                     'date'           => 'Date',
-                    'id'             => 'id',
+                    'id'             => 'Id',
                     'product'        => 'Product',
                     'rating'         => 'Rating',
                     'status'         => 'Status',
                     'title'          => 'Title',
-                ],
+                    'edit'           => 'Edit',
+                    'delete'         => 'Delete',
+                    'update-status'  => 'Update Status',
+                    'pending'        => 'Pending',
+                    'approved'       => 'Approved',
+                    'disapproved'    => 'Disapproved',
+                    'review-id'      => 'ID - :review-id',
+                 ],
             ],
         ],
 
@@ -498,6 +540,17 @@ return [
                 'update-success'    => 'Locale updated successfully.',
                 'delete-success'    => 'Locale deleted successfully.',
                 'last-delete-error' => 'At least one Locale is required.',
+
+                'datagrid' => [
+                    'id'        => 'ID',
+                    'name'      => 'Name',
+                    'code'      => 'Code',
+                    'direction' => 'Direction',
+                    'ltr'       => 'LTR',
+                    'rtl'       => 'RTL',
+                    'edit'      => 'Edit',
+                    'delete'    => 'Delete',
+                ],
             ],
 
             'edit'  => [
@@ -520,33 +573,50 @@ return [
                 'title'      => 'Currencies',
                 'create-btn' => 'Create Currency',
 
-                'create' => [
-                    'title'              => 'Create New Currency',
-                    'create-btn'         => 'Create Currency',
-                    'save-btn'           => 'Create Currency',
-                    'general'            => 'General',
-                    'code'               => 'Code',
-                    'name'               => 'Name',
-                    'symbol'             => 'Symbol',
-                    'decimal'            => 'Decimal',
-                    'create-success'     => 'Currency created successfully.',
-                    'update-success'     => 'Currency updated successfully.',
-                    'delete-success'     => 'Currency deleted successfully.',
-                    'last-delete-error'  => 'At least one Currency is required.',
-                ],
-
-                'edit' => [
-                    'title'   => 'Edit New Currency',
+                'datagrid' => [
+                    'id'     => 'ID',
+                    'name'   => 'Name',
+                    'code'   => 'Code',
+                    'edit'   => 'Edit',
+                    'delete' => 'Delete',
                 ],
             ],
+
+            'create' => [
+                'title'             => 'Create New Currency',
+                'create-btn'        => 'Create Currency',
+                'save-btn'          => 'Create Currency',
+                'general'           => 'General',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'symbol'            => 'Symbol',
+                'decimal'           => 'Decimal',
+                'create-success'    => 'Currency created successfully.',
+                'update-success'    => 'Currency updated successfully.',
+                'delete-success'    => 'Currency deleted successfully.',
+                'last-delete-error' => 'At least one Currency is required.',
+            ],
+
+            'edit' => [
+                'back-btn'       => 'Back',
+                'code'           => 'Code',
+                'decimal'        => 'Decimal',
+                'general'        => 'General',
+                'name'           => 'Name',
+                'save-btn'       => 'Save Currency',
+                'symbol'         => 'Symbol',
+                'title'          => 'Edit Currency',
+                'update-success' => 'Currency updated successfully.',
+            ],
+        ],
 
 
         ],
 
         'exchange-rates'  => [
             'index' => [
-                'title'       => 'Exchange Rates',
-                'create-btn'  => 'Create Exchange Rate',
+                'title'      => 'Exchange Rates',
+                'create-btn' => 'Create Exchange Rate',
 
                 'create' => [
                     'title'            => 'Create Exchange Rate',
@@ -556,96 +626,129 @@ return [
                     'target-currency'  => 'Target Currency',
                 ],
 
-                'edit'  =>  [
-                    'title'    => 'Edit Exchange Rates',
+                'datagrid' => [
+                    'id'            => 'ID',
+                    'currency-name' => 'Currency Name',
+                    'exchange-rate' => 'Exchange Rate',
+                    'edit'          => 'Edit',
+                    'delete'        => 'Delete',
                 ],
+            ],
+
+            'edit'  => [
+                'back-btn'        => 'Back',
+                'rate'            => 'Rate',
+                'source-currency' => 'Source Currency',
+                'save-btn'        => 'Save Exchange Rate',
+                'title'           => 'Edit Exchange Rates',
+                'target-currency' => 'Target Currency',
             ],
         ],
 
         'inventory-sources' => [
             'index'  => [
-                'title'             => 'Inventory Sources',
-                'create-btn'        => 'Create Inventory Sources',
+                'title'      => 'Inventory Sources',
+                'create-btn' => 'Create Inventory Sources',
+
+                'datagrid' => [
+                    'id'       => 'ID',
+                    'code'     => 'Code',
+                    'name'     => 'Name',
+                    'priority' => 'Priority',
+                    'status'   => 'Status',
+                    'active'   => 'Active',
+                    'inactive' => 'Inactive',
+                    'edit'     => 'Edit',
+                    'delete'   => 'Delete',
+                ],
             ],
 
             'create' => [
-                'add-title'         => 'Add Inventory Source',
-                'title'             => 'Inventory Sources',
-                'general'           => 'General',
-                'save-btn'          => 'Save Inventory Sources',
-                'code'              => 'Code',
-                'back-btn'          => 'Back',
-                'name'              => 'Name',
-                'description'       => 'Description',
-                'latitude'          => 'Latitude',
-                'longitude'         => 'Longitude',
-                'priority'          => 'Priority',
-                'status'            => 'Status',
-                'contact-info'      => 'Contact Information',
-                'contact-name'      => 'Name',
-                'contact-email'     => 'Email',
-                'contact-number'    => 'Contact Number',
-                'contact-fax'       => 'Fax',
-                'address'           => 'Source Address',
-                'country'           => 'Country',
-                'select-country'    => 'Select Country',
-                'state'             => 'State',
-                'select-state'      => 'Select State',
-                'city'              => 'City',
-                'street'            => 'Street',
-                'postcode'          => 'Postcode',
-                'settings'          => 'Settings',
+                'add-title'      => 'Add Inventory Source',
+                'title'          => 'Inventory Sources',
+                'general'        => 'General',
+                'save-btn'       => 'Save Inventory Sources',
+                'code'           => 'Code',
+                'back-btn'       => 'Back',
+                'name'           => 'Name',
+                'description'    => 'Description',
+                'latitude'       => 'Latitude',
+                'longitude'      => 'Longitude',
+                'priority'       => 'Priority',
+                'status'         => 'Status',
+                'contact-info'   => 'Contact Information',
+                'contact-name'   => 'Name',
+                'contact-email'  => 'Email',
+                'contact-number' => 'Contact Number',
+                'contact-fax'    => 'Fax',
+                'address'        => 'Source Address',
+                'country'        => 'Country',
+                'select-country' => 'Select Country',
+                'state'          => 'State',
+                'select-state'   => 'Select State',
+                'city'           => 'City',
+                'street'         => 'Street',
+                'postcode'       => 'Postcode',
+                'settings'       => 'Settings',
             ],
 
             'edit' => [
-                'title'             => 'Edit Inventory Sources',
-                'general'           => 'General',
-                'save-btn'          => 'Save Inventory Sources',
-                'back-btn'          => 'Back',
-                'general'           => 'General',
-                'code'              => 'Code',
-                'name'              => 'Name',
-                'description'       => 'Description',
-                'latitude'          => 'Latitude',
-                'longitude'         => 'Longitude',
-                'priority'          => 'Priority',
-                'status'            => 'Status',
-                'contact-info'      => 'Contact Information',
-                'contact-name'      => 'Name',
-                'contact-email'     => 'Email',
-                'contact-number'    => 'Contact Number',
-                'contact-fax'       => 'Fax',
-                'source-address'    => 'Source Address',
-                'country'           => 'Country',
-                'select-country'    => 'Select Country',
-                'state'             => 'State',
-                'select-state'      => 'Select State',
-                'city'              => 'City',
-                'street'            => 'Street',
-                'postcode'          => 'Postcode',
-                'settings'          => 'Settings',
+                'title'          => 'Edit Inventory Sources',
+                'general'        => 'General',
+                'save-btn'       => 'Save Inventory Sources',
+                'back-btn'       => 'Back',
+                'general'        => 'General',
+                'code'           => 'Code',
+                'name'           => 'Name',
+                'description'    => 'Description',
+                'latitude'       => 'Latitude',
+                'longitude'      => 'Longitude',
+                'priority'       => 'Priority',
+                'status'         => 'Status',
+                'contact-info'   => 'Contact Information',
+                'contact-name'   => 'Name',
+                'contact-email'  => 'Email',
+                'contact-number' => 'Contact Number',
+                'contact-fax'    => 'Fax',
+                'source-address' => 'Source Address',
+                'country'        => 'Country',
+                'select-country' => 'Select Country',
+                'state'          => 'State',
+                'select-state'   => 'Select State',
+                'city'           => 'City',
+                'street'         => 'Street',
+                'postcode'       => 'Postcode',
+                'settings'       => 'Settings',
             ],
         ],
 
         'taxes' => [
             'tax-categories' => [
                 'index' => [
-                    'title'           => 'Tax Categories',
+                    'title'  => 'Tax Categories',
+                    
+                    'datagrid' => [
+                        'id'     => 'ID',
+                        'name'   => 'Name',
+                        'code'   => 'Code',
+                        'edit'   => 'Edit',
+                        'delete' => 'Delete',
+                    ],
                 ],
 
                 'create' => [
-                    'create-title'     => 'Create Tax Category',
-                    'back-btn'         => 'Back',
-                    'code'             => 'Code',
-                    'description'      => 'Description',
-                    'general'          => 'Tax Category',
-                    'name'             => 'Name',
-                    'save-btn'         => 'Save Tax Category',
-                    'tax-rates'        => 'Tax Rates',
-                    'title'            => 'Tax Categories',
-                    'add-tax-rates'    => 'Add Tax Rates',
-                    'empty-text'       => 'Tax Rates are not available please create new Tax Rates.',
-                    'create-success'   => 'New Tax Category Created',
+                    'create-title'    => 'Create Tax Category',
+                    'back-btn'        => 'Back',
+                    'code'            => 'Code',
+                    'description'     => 'Description',
+                    'general'         => 'Tax Category',
+                    'name'            => 'Name',
+                    'save-btn'        => 'Save Tax Category',
+                    'tax-rates'       => 'Tax Rates',
+                    'title'           => 'Tax Categories',
+                    'add-tax-rates'   => 'Add Tax Rates',
+                    'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
+                    'create-success'  => 'New Tax Category Created',
                 ],
 
                 'edit' => [
@@ -667,6 +770,19 @@ return [
                 'index' => [
                     'title'        => 'Tax Rates',
                     'button-title' => 'Create Tax Rates',
+
+                    'datagrid' => [
+                        'id'         => 'ID',
+                        'identifier' => 'Identifier',
+                        'state'      => 'State',
+                        'country'    => 'Country',
+                        'zip-code'   => 'Zip Code',
+                        'zip-from'   => 'Zip From',
+                        'zip-to'     => 'Zip To',
+                        'tax-rate'   => 'Tax Rate',
+                        'edit'       => 'Edit',
+                        'delete'     => 'Delete',
+                    ],
                 ],
 
                 'create'  => [
@@ -710,78 +826,87 @@ return [
 
         'channels' => [
             'index' => [
-                'title'            => 'Channels',
-                'create-btn'       => 'Create Channel',
+                'title'      => 'Channels',
+                'create-btn' => 'Create Channel',
+
+                'datagrid' => [
+                    'id'        => 'ID',
+                    'code'      => 'Code',
+                    'name'      => 'Name',
+                    'host-name' => 'Host Name',
+                    'edit'      => 'Edit',
+                    'delete'    => 'Delete',
+                ],
             ],
 
             'create' => [
-                'title'                     => 'Create Channel',
-                'cancel'                    => 'Back',
-                'save-btn'                  => 'Save Channel',
-                'general'                   => 'General',
-                'code'                      => 'Code',
-                'name'                      => 'Name',
-                'description'               => 'Description',
-                'inventory-sources'         => 'Inventory Sources',
-                'root-category'             => 'Root Category',
-                'hostname'                  => 'Hostname',
-                'hostname-placeholder'      => 'https://www.example.com (Don\'t add slash in the end.)',
-                'design'                    => 'Design',
-                'theme'                     => 'Theme',
-                'logo'                      => 'Logo',
-                'allowed-ips'               => 'Allowed IPs',
-                'logo-size'                 => 'Image resolution should be like 192px X 50px',
-                'favicon'                   => 'Favicon',
-                'favicon-size'              => 'Image resolution should be like 16px X 16px',
-                'seo'                       => 'Home page SEO',
-                'seo-title'                 => 'Meta title',
-                'seo-description'           => 'Meta description',
-                'seo-keywords'              => 'Meta keywords',
-                'currencies-and-locales'    => 'Currencies and Locales',
-                'locales'                   => 'Locales',
-                'default-locale'            => 'Default Locale',
-                'currencies'                => 'Currencies',
-                'default-currency'          => 'Default Currency',
-                'last-delete-error'         => 'At least one Channel is required.',
-                'settings'                  => 'Settings',
-                'status'                    => 'Status',
-                'maintenance-mode-text'     => 'Message',
-                'create-success'            => 'Channel created successfully.',
+                'title'                  => 'Create Channel',
+                'cancel'                 => 'Back',
+                'save-btn'               => 'Save Channel',
+                'general'                => 'General',
+                'code'                   => 'Code',
+                'name'                   => 'Name',
+                'description'            => 'Description',
+                'inventory-sources'      => 'Inventory Sources',
+                'root-category'          => 'Root Category',
+                'hostname'               => 'Hostname',
+                'hostname-placeholder'   => 'https://www.example.com (Don\'t add slash in the end.)',
+                'design'                 => 'Design',
+                'theme'                  => 'Theme',
+                'logo'                   => 'Logo',
+                'allowed-ips'            => 'Allowed IPs',
+                'logo-size'              => 'Image resolution should be like 192px X 50px',
+                'favicon'                => 'Favicon',
+                'favicon-size'           => 'Image resolution should be like 16px X 16px',
+                'seo'                    => 'Home page SEO',
+                'seo-title'              => 'Meta title',
+                'seo-description'        => 'Meta description',
+                'seo-keywords'           => 'Meta keywords',
+                'currencies-and-locales' => 'Currencies and Locales',
+                'locales'                => 'Locales',
+                'default-locale'         => 'Default Locale',
+                'currencies'             => 'Currencies',
+                'default-currency'       => 'Default Currency',
+                'last-delete-error'      => 'At least one Channel is required.',
+                'settings'               => 'Settings',
+                'status'                 => 'Status',
+                'maintenance-mode-text'  => 'Message',
+                'create-success'         => 'Channel created successfully.',
             ],
 
             'edit' => [
-                'title'                     => 'Edit Channel',
-                'cancel'                    => 'Cancel',
-                'save-btn'                  => 'Save Channel',
-                'general'                   => 'General',
-                'code'                      => 'Code',
-                'name'                      => 'Name',
-                'description'               => 'Description',
-                'inventory-sources'         => 'Inventory Sources',
-                'root-category'             => 'Root Category',
-                'hostname'                  => 'Hostname',
-                'hostname-placeholder'      => 'https://www.example.com (Don\'t add slash in the end.)',
-                'design'                    => 'Design',
-                'theme'                     => 'Theme',
-                'logo'                      => 'Logo',
-                'allowed-ips'               => 'Allowed IPs',
-                'logo-size'                 => 'Image resolution should be like 192px X 50px',
-                'favicon'                   => 'Favicon',
-                'favicon-size'              => 'Image resolution should be like 16px X 16px',
-                'seo'                       => 'Home page SEO',
-                'seo-title'                 => 'Meta title',
-                'seo-description'           => 'Meta description',
-                'seo-keywords'              => 'Meta keywords',
-                'currencies-and-locales'    => 'Currencies and Locales',
-                'locales'                   => 'Locales',
-                'default-locale'            => 'Default Locale',
-                'currencies'                => 'Currencies',
-                'default-currency'          => 'Default Currency',
-                'last-delete-error'         => 'At least one Channel is required.',
-                'settings'                  => 'Settings',
-                'status'                    => 'Status',
-                'maintenance-mode-text'     => 'Message',
-                'update-success'            => 'Channel updated successfully.',
+                'title'                  => 'Edit Channel',
+                'back-btn'               => 'Back',
+                'save-btn'               => 'Save Channel',
+                'general'                => 'General',
+                'code'                   => 'Code',
+                'name'                   => 'Name',
+                'description'            => 'Description',
+                'inventory-sources'      => 'Inventory Sources',
+                'root-category'          => 'Root Category',
+                'hostname'               => 'Hostname',
+                'hostname-placeholder'   => 'https://www.example.com (Don\'t add slash in the end.)',
+                'design'                 => 'Design',
+                'theme'                  => 'Theme',
+                'logo'                   => 'Logo',
+                'allowed-ips'            => 'Allowed IPs',
+                'logo-size'              => 'Image resolution should be like 192px X 50px',
+                'favicon'                => 'Favicon',
+                'favicon-size'           => 'Image resolution should be like 16px X 16px',
+                'seo'                    => 'Home page SEO',
+                'seo-title'              => 'Meta title',
+                'seo-description'        => 'Meta description',
+                'seo-keywords'           => 'Meta keywords',
+                'currencies-and-locales' => 'Currencies and Locales',
+                'locales'                => 'Locales',
+                'default-locale'         => 'Default Locale',
+                'currencies'             => 'Currencies',
+                'default-currency'       => 'Default Currency',
+                'last-delete-error'      => 'At least one Channel is required.',
+                'settings'               => 'Settings',
+                'status'                 => 'Status',
+                'maintenance-mode-text'  => 'Message',
+                'update-success'         => 'Channel updated successfully.',
             ],
         ],
 
@@ -803,6 +928,17 @@ return [
                     'save-btn'         => 'Save User',
                     'create-success'   => 'User created successfully.',
                 ],
+
+                'datagrid' => [
+                    'id'        => 'ID',
+                    'name'      => 'Name',
+                    'status'    => 'Status',
+                    'email'     => 'Email',
+                    'role'      => 'Role',
+                    'edit'      => 'Edit',  
+                    'active'    => 'Active',
+                    'inactive'  => 'Inactive',
+                ],
             ],
 
             'edit'  => [
@@ -822,8 +958,8 @@ return [
 
         'roles' => [
             'index' => [
-                'title'             => 'Roles',
-                'create-btn'        => 'Create Role',
+                'title'      => 'Roles',
+                'create-btn' => 'Create Role',
             ],
 
             'create' => [
@@ -854,19 +990,19 @@ return [
         ],
 
         'sessions' => [
-            'title'                      => 'Sign In',
-            'email'                      => 'Email Address',
-            'password'                   => 'Password',
-            'forget-password-link'       => 'Forget Password ?',
-            'submit-btn'                 => 'Sign In',
+            'title'                => 'Sign In',
+            'email'                => 'Email Address',
+            'password'             => 'Password',
+            'forget-password-link' => 'Forget Password ?',
+            'submit-btn'           => 'Sign In',
         ],
 
         'forget-password' => [
-            'page-title'                 => 'Forget Password',
-            'title'                      => 'Recover Password',
-            'email'                      => 'Registered Email',
-            'sign-in-link'               => 'Back to Sign In ?',
-            'submit-btn'                 => 'Reset',
+            'page-title'   => 'Forget Password',
+            'title'        => 'Recover Password',
+            'email'        => 'Registered Email',
+            'sign-in-link' => 'Back to Sign In ?',
+            'submit-btn'   => 'Reset',
         ],
 
         'reset-password' => [
@@ -926,8 +1062,8 @@ return [
             ],
 
             'edit' => [
-                'title'       => 'Edit Product',
-                'save-btn'    => 'Save Product',
+                'title'    => 'Edit Product',
+                'save-btn' => 'Save Product',
 
                 'price' => [
                     'group' => [
@@ -1174,6 +1310,20 @@ return [
             'index' => [
                 'title'      => 'Attributes',
                 'create-btn' => 'Create Attributes',
+
+                'datagrid' => [
+                    'id'            => 'ID',
+                    'name'          => 'Name',
+                    'code'          => 'Code',
+                    'type'          => 'Type',
+                    'required'      => 'Required',
+                    'unique'        => 'Unique',
+                    'locale-based'  => 'Locale Based',
+                    'channel-based' => 'Channel Based',
+                    'created-at'    => 'Created At',
+                    'edit'          => 'Edit',
+                    'delete'        => 'Delete',
+                ],
             ],
 
             'create'  => [
@@ -1308,6 +1458,17 @@ return [
             'index' => [
                 'title'    => 'Categories',
                 'add-btn'  => 'Create Category',
+
+                'datagrid' => [
+                    'id'             => 'ID',
+                    'name'           => 'Name',
+                    'position'       => 'Position',
+                    'status'         => 'Status',
+                    'active'         => 'Active',
+                    'inactive'       => 'Inactive',
+                    'no-of-products' => 'Number of Products',
+                    'edit'           => 'Edit',
+                ],
             ],
 
             'create' => [
@@ -1383,6 +1544,14 @@ return [
             'index' => [
                 'title'  => 'Families',
                 'add'    => 'Create Attribute Family',
+
+                'datagrid' => [
+                    'id'        => 'ID',
+                    'code'      => 'Code',
+                    'name'      => 'Name',
+                    'edit'      => 'Edit',
+                    'delete'    => 'Delete',
+                ],
             ],
 
             'create' => [
@@ -1459,6 +1628,20 @@ return [
     'marketing' => [
         'email-marketing' => [
             'templates' => [
+                'index' => [
+                    'title'          => 'Email Templates',
+                    'create-btn'     => 'Create Template',
+
+                    'datagrid' => [ 
+                        'id'        => 'ID',
+                        'name'      => 'Name',
+                        'status'    => 'Status',
+                        'active'    => 'Active',
+                        'inactive'  => 'Inactive',
+                        'draft'     => 'Draft',
+                    ],
+                ],
+
                 'create' => [
                     'title'          => 'Create Template',
                     'active'         => 'Active',
@@ -1488,13 +1671,25 @@ return [
                     'update-success' => 'Updated successfully',
                 ],
 
-                'index' => [
-                    'title'          => 'Email Templates',
-                    'create-btn'     => 'Create Template',
-                ],
             ],
 
             'campaigns' => [
+                'index' => [
+                    'title'          => 'Campaigns',
+                    'create-btn'     => 'Create Campaign',
+
+                    'datagrid' => [
+                        'id'        => 'ID',
+                        'name'      => 'Name',
+                        'subject'   => 'Subject',
+                        'status'    => 'Status',
+                        'active'    => 'Active',
+                        'inactive'  => 'Inactive',
+                        'edit'      => 'Edit',
+                        'delete'    => 'Delete',
+                    ],
+                ],
+
                 'create'    => [
                     'active'          => 'Active',
                     'back-btn'        => 'Back',
@@ -1535,11 +1730,6 @@ return [
                     'title'           => 'Edit Campaign',
                 ],
 
-                'index' => [
-                    'title'          => 'Campaigns',
-                    'create-btn'     => 'Create Campaign',
-                ],
-
                 'create-success' => 'Campaign created successfully.',
                 'update-success' => 'Campaign updated successfully.',
                 'delete-success' => 'Campaign deleted successfully',
@@ -1550,19 +1740,23 @@ return [
                     'create-btn'  => 'Create Event',
                     'title'       => 'Events',
 
-                    'create'  =>  [
-                        'title'          => 'Create Events',
-                        'description'    => 'Description',
-                        'date'           => 'Date',
-                        'general'        => 'General',
-                        'name'           => 'Name',
-                        'save-btn'       => 'Save Event',
-                        'title'          => 'Events',
+                    'datagrid' => [ 
+                        'id'        => 'ID',
+                        'name'      => 'Name',
+                        'date'      => 'Date',
+                        'edit'      => 'Edit',
+                        'delete'    => 'Delete',
+             
                     ],
+                ],
 
-                    'edit'  =>  [
-                        'title' => 'Edit Events',
-                    ],
+                'create'   => [
+                    'description'    => 'Description',
+                    'date'           => 'Date',
+                    'general'        => 'General',
+                    'name'           => 'Name',
+                    'save-btn'       => 'Save Event',
+                    'title'          => 'Events',
                 ],
 
                 'edit'  => [
@@ -1577,7 +1771,19 @@ return [
             ],
 
             'newsletters' => [
-                'title' => 'Newsletter Subscriptions',
+                'index' => [    
+                    'title' => 'Newsletter Subscriptions',
+
+                    'datagrid' => [
+                        'id'          => 'ID',
+                        'subscribed'  => 'Subscribed',
+                        'true'        => 'True',
+                        'false'       => 'False',
+                        'edit'        => 'Edit',
+                        'delete'      => 'Delete',
+                        'email'       => 'Email',
+                    ],
+                ],
 
                 'edit'  => [
                     'title'       => 'Edit Newsletter Subscriber',
@@ -1592,6 +1798,18 @@ return [
         ],
 
         'sitemaps' => [
+            'index' => [
+                'title' => 'Sitemaps',
+                
+                'datagrid' => [
+                    'id'              => 'ID',
+                    'file-name'       => 'File Name',
+                    'path'            => 'Path',
+                    'link-for-google' => 'Link for Google',
+                    'edit'            => 'Edit',
+                    'delete'          => 'Delete',
+                ],
+            ],
             'create'  => [
                 'file-name'      => 'File Name',
                 'file-name-info' => 'Example: sitemap.xml',
@@ -1625,6 +1843,22 @@ return [
                 'index' => [
                     'title'      => 'Cart Rules',
                     'create-btn' => 'Create Cart Rule',
+
+                    'datagrid' => [
+                        'id'            => 'ID',
+                        'name'          => 'Name',
+                        'coupon-code'   => 'Coupon Code',
+                        'start'         => 'Start',
+                        'end'           => 'End',
+                        'status'        => 'Status',
+                        'active'        => 'Active',
+                        'inactive'      => 'Inactive',
+                        'draft'         => 'Draft',
+                        'priority'      => 'Priority',  
+                        'edit'          => 'Edit',
+                        'delete'        => 'Delete',
+                        'view'          => 'View',
+                    ],
                 ],
 
                 'create' => [
@@ -1793,6 +2027,19 @@ return [
                 'index' => [
                     'title'      => 'Catalog Rules',
                     'create-btn' => 'Create Catalog Rule',
+
+                    'datagrid' => [
+                        'id'        => 'ID',
+                        'name'      => 'Name',
+                        'start'     => 'Start',
+                        'end'       => 'End',
+                        'status'    => 'Status',
+                        'active'    => 'Active',
+                        'inactive'  => 'Inactive',
+                        'priority'  => 'Priority',  
+                        'edit'      => 'Edit',
+                        'delete'    => 'Delete',
+                    ],
                 ],
 
                 'create' => [
@@ -1890,6 +2137,15 @@ return [
         'index' => [
             'title'      => 'Pages',
             'create-btn' => 'Create Page',
+
+            'datagrid' => [
+                'id'         => 'ID',
+                'page-title' => 'Page Title',
+                'url-key'    => 'URL Key',
+                'view'       => 'View',
+                'edit'       => 'Edit',
+                'delete'     => 'Delete',
+            ],
         ],
 
         'create' => [

@@ -28,7 +28,7 @@ class TaxCategoryDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.taxes.tax-categories.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -37,7 +37,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.settings.taxes.tax-categories.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -46,7 +46,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.datagrid.code'),
+            'label'      => trans('admin::app.settings.taxes.tax-categories.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -63,7 +63,7 @@ class TaxCategoryDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.taxes.tax-categories.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.tax_categories.edit', $row->id);
@@ -72,7 +72,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.settings.taxes.tax-categories.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.tax_categories.delete', $row->id);
