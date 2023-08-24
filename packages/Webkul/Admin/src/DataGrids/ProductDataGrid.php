@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Models\Locale;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Repositories\ProductRepository;
 
 class ProductDataGrid extends DataGrid
 {
-
     /**
      * Constructor for the class
      *
@@ -240,35 +239,18 @@ class ProductDataGrid extends DataGrid
     {
         $this->addMassAction([
             'title'  => trans('admin::app.datagrid.delete'),
-            'action' => route('admin.catalog.products.mass_delete'),
+            'url'    => route('admin.catalog.products.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'title'   => trans('admin::app.datagrid.update-status'),
-            'action'  => route('admin.catalog.products.mass_update'),
+            'url'     => route('admin.catalog.products.mass_update'),
             'method'  => 'POST',
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,
                 trans('admin::app.datagrid.inactive')  => 0,
             ],
         ]);
-    }
-
-    /**
-     * Render quantity view.
-     *
-     * @param  object  $row
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
-    private function renderQuantityView($row)
-    {
-        $product = $this->productRepository->find($row->product_id);
-
-        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
-
-        $totalQuantity = $row->quantity;
-
-        return view('admin::catalog.products.datagrid.quantity', compact('product', 'inventorySources', 'totalQuantity'))->render();
     }
 }

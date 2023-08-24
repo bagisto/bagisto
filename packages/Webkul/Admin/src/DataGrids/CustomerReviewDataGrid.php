@@ -80,7 +80,6 @@ class CustomerReviewDataGrid extends DataGrid
             'sortable'   => true,
         ]);
 
-
         $this->addColumn([
             'index'      => 'rating',
             'label'      => trans('admin::app.customers.reviews.index.datagrid.rating'),
@@ -162,14 +161,14 @@ class CustomerReviewDataGrid extends DataGrid
     {
         $this->addMassAction([
             'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
-            'action' => route('admin.customer.review.mass_delete'),
+            'url'    => route('admin.customer.review.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'title'   => trans('admin::app.customers.reviews.index.datagrid.update-status'),
             'method'  => 'POST',
-            'action'  => route('admin.customer.review.mass_update'),
+            'url'     => route('admin.customer.review.mass_update'),
             'options' => [
                 trans('admin::app.customers.reviews.index.datagrid.pending')     => 0,
                 trans('admin::app.customers.reviews.index.datagrid.approved')    => 1,
