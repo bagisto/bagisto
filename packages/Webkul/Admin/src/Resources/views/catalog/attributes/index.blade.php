@@ -1,14 +1,13 @@
 <x-admin::layouts>
-    <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
+    <div class="flex items-center justify-between gap-[16px] max-sm:flex-wrap">
         {{-- Title --}}
-        <p class="text-[20px] text-gray-800 font-bold">
+        <p class="text-[20px] font-bold text-gray-800">
             @lang('admin::app.catalog.attributes.index.title')
         </p>
 
-        <div class="flex gap-x-[10px] items-center">
-        
+        <div class="flex items-center gap-x-[10px]">
             <a href="{{ route('admin.catalog.attributes.create') }}">
-                <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                <div class="cursor-pointer rounded-[6px] border border-blue-700 bg-blue-600 px-[12px] py-[6px] font-semibold text-gray-50">
                     @lang('admin::app.catalog.attributes.index.create-btn')
                 </div>
             </a>

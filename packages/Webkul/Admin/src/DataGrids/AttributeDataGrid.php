@@ -144,26 +144,10 @@ class AttributeDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
+            'icon'   => 'icon-delete',
+            'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'url'    => route('admin.catalog.attributes.mass_delete'),
         ]);
-
-        // dummy sample for all datagrids
-        // $this->addMassAction([
-        //     'title'   => trans('admin::app.catalog.attributes.index.datagrid.update-status'),
-        //     'method'  => 'POST',
-        //     'url'     => route('admin.catalog.attributes.mass_delete'),
-        //     'options' => [
-        //         [
-        //             'name' => trans('admin::app.catalog.attributes.index.datagrid.active'),
-        //             'value' => 1,
-        //         ],
-        //         [
-        //             'name' => trans('admin::app.catalog.attributes.index.datagrid.inactive'),
-        //             'value' => 0,
-        //         ],
-        //     ],
-        // ]);
     }
 }
