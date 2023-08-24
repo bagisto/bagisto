@@ -155,8 +155,14 @@ class CategoryDataGrid extends DataGrid
             'method'  => 'POST',
             'url'     => route('admin.catalog.categories.mass_update'),
             'options' => [
-                trans('admin::app.datagrid.active')    => 1,
-                trans('admin::app.datagrid.inactive')  => 0,
+                [
+                    'name' => trans('admin::app.datagrid.active'),
+                    'value' => 1,
+                ],
+                [
+                    'name' => trans('admin::app.datagrid.inactive'),
+                    'value' => 0,
+                ],
             ],
         ]);
     }

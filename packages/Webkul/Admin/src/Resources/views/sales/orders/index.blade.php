@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <x-admin::datagrid :src="route('admin.sales.orders.index')">
+    <x-admin::datagrid :src="route('admin.sales.orders.index')" :isMultiRow="true">
         {{-- Datagrid Header --}}
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
              <template v-if="! isLoading">
