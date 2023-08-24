@@ -687,6 +687,7 @@
 
                             <p class="text-[12px] text-gray-400 font-semibold">
                                 @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
+                                @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
                             </p>
                         </div>
 
@@ -782,7 +783,15 @@
                         <p class="text-gray-600 text-[16px] font-semibold">
                             @lang('admin::app.dashboard.index.customer-with-most-sales')
                         </p>
+                    <div class="flex items-center justify-between p-[16px] pb-0">
+                        <p class="text-gray-600 text-[16px] font-semibold">
+                            @lang('admin::app.dashboard.index.customer-with-most-sales')
+                        </p>
 
+                        <p class="text-[12px] text-gray-400 font-semibold">
+                            @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
+                        </p>
+                    </div>
                         <p class="text-[12px] text-gray-400 font-semibold">
                             @{{ "@lang('admin::app.dashboard.index.date-duration')".replace(':start', formatStart ?? 0).replace(':end', formatEnd ?? 0) }}
                         </p>
@@ -812,7 +821,31 @@
                                             v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
                                         >
                                         </p>
+                    <template v-else>
+                        <!-- Customers Lists -->
+                        <div
+                            class="flex flex-col gap-[32px] p-[16px]"
+                            v-if="statistics?.customer_with_most_sales?.length"
+                            v-for="item in statistics.customer_with_most_sales"
+                        >
+                            <a
+                                :href="`{{ route('admin.customer.view', '') }}/${item.customer_id}`"
+                                v-if="item.customer_id"
+                            >
+                                <div class="flex justify-between gap-[6px]">
+                                    <div class="flex flex-col">
+                                        <p
+                                            class="text-gray-600 font-semibold"
+                                            v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                        >
+                                        </p>
 
+                                        <p
+                                            class="text-gray-600"
+                                            v-text="item.customer_email ?? item.customer_address_email"
+                                        >
+                                        </p>
+                                    </div>
                                         <p
                                             class="text-gray-600"
                                             v-text="item.customer_email ?? item.customer_address_email"
@@ -826,7 +859,19 @@
                                             v-text="item.formatted_total_base_grand_total"
                                         >
                                         </p>
+                                    <div class="flex flex-col">
+                                        <p
+                                            class="text-gray-800 font-semibold"
+                                            v-text="item.formatted_total_base_grand_total"
+                                        >
+                                        </p>
 
+                                        <p class="text-gray-600" v-if="item.order_count">
+                                            @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
                                         <p class="text-gray-600" v-if="item.order_count">
                                             @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                         </p>
@@ -844,7 +889,23 @@
                                         v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
                                     >
                                     </p>
+                            <div
+                                v-else
+                                class="flex justify-between gap-[6px]"
+                            >
+                                <div class="flex flex-col">
+                                    <p
+                                        class="text-gray-600 font-semibold"
+                                        v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                    >
+                                    </p>
 
+                                    <p
+                                        class="text-gray-600"
+                                        v-text="item.customer_email ?? item.customer_address_email"
+                                    >
+                                    </p>
+                                </div>
                                     <p
                                         class="text-gray-600"
                                         v-text="item.customer_email ?? item.customer_address_email"
@@ -858,7 +919,19 @@
                                         v-text="item.formatted_total_base_grand_total"
                                     >
                                     </p>
+                                <div class="flex flex-col">
+                                    <p
+                                        class="text-gray-800 font-semibold"
+                                        v-text="item.formatted_total_base_grand_total"
+                                    >
+                                    </p>
 
+                                    <p class="text-gray-600" v-if="item.order_count">
+                                        @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                                     <p class="text-gray-600" v-if="item.order_count">
                                         @{{ "@lang('admin::app.dashboard.index.order-count')".replace(':count', item.order_count) }}
                                     </p>
@@ -876,13 +949,35 @@
                                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                     class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                                 />
+                        <div
+                            class="flex flex-col gap-[32px] p-[16px]"
+                            v-else
+                        >
+                            <div class="grid gap-[14px] justify-center justify-items-center py-[10px]">
+                                <!-- Placeholder Image -->
+                                <img
+                                    src="{{ bagisto_asset('images/icon-add-product.svg') }}"
+                                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                />
 
                                 <!-- Add Variants Information -->
                                 <div class="flex flex-col items-center">
                                     <p class="text-[16px] text-gray-400 font-semibold">
                                         @lang('admin::app.dashboard.index.add_customer')
                                     </p>
+                                <!-- Add Variants Information -->
+                                <div class="flex flex-col items-center">
+                                    <p class="text-[16px] text-gray-400 font-semibold">
+                                        @lang('admin::app.dashboard.index.add_customer')
+                                    </p>
 
+                                    <p class="text-gray-400">
+                                        @lang('admin::app.dahsboard.index.customer-info')
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                                     <p class="text-gray-400">
                                         @lang('admin::app.dahsboard.index.customer-info')
                                     </p>
@@ -906,7 +1001,11 @@
 
                         formatStart: "{{ $startDate->format('d M') }}",
 
+                        formatStart: "{{ $startDate->format('d M') }}",
+
                         end: "{{ $endDate->format('Y-m-d') }}",
+
+                        formatEnd: "{{ $endDate->format('d M') }}",
 
                         formatEnd: "{{ $endDate->format('d M') }}",
 

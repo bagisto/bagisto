@@ -230,8 +230,28 @@
                             });
                         } else {
                             this.$axios.post("{{ route('admin.groups.store') }}", params)
+                        if (params.id) {
+                            this.$axios.post("{{ route('admin.groups.update') }}", params)
                             .then((response) => {
                                 this.$refs.groupCreateModal.close();
+
+                                this.$refs.datagrid.get();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: 'Group Updated successfully' });
+
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status ==422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                        } else {
+                            this.$axios.post("{{ route('admin.groups.store') }}", params)
+                            .then((response) => {
+                                this.$refs.groupCreateModal.close();
+
+                                this.$refs.datagrid.get();
 
                                 this.$refs.datagrid.get();
 
