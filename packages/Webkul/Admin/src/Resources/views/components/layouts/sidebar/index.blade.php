@@ -1,11 +1,3 @@
-@php
-    $tree = \Webkul\Core\Tree::create();
-
-    foreach (config('core') as $item) {
-        $tree->add($item);
-    }
-@endphp
-
 <div class="fixed top-[57px] h-full bg-white pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
     <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid gap-[7px] w-full">
@@ -19,7 +11,7 @@
                         <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         
                         <p class="text-gray-600 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
-                            @lang($menuItem['name']) 
+                            @lang($menuItem['name'])
                         </p>
                     </a>
 
