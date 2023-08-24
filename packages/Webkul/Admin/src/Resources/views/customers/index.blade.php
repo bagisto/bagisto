@@ -85,64 +85,72 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data">
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied}">
-            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 items-center">
-                <div class="flex gap-[10px] items-center">
-                    <label 
-                        class="flex gap-[4px] w-max items-center cursor-pointer select-none"
-                        for="mass_action_select_all_records"
+    <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data" :isMultiRow="true">
+        {{-- Datagrid Header --}}
+        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
+            <template v-if="! isLoading">
+                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                    <div
+                        class="flex gap-[10px] items-center select-none"
+                        v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group', 'is_suspended'], ['total_base_grand_total', 'order_count', 'address_count']]"
                     >
-                        <input 
-                            type="checkbox" 
-                            name="mass_action_select_all_records"
-                            id="mass_action_select_all_records"
-                            class="hidden peer"
-                            :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                            @change="selectAllRecords"
+                        <label 
+                            class="flex gap-[4px] items-center w-max cursor-pointer select-none"
+                            for="mass_action_select_all_records"
+                            v-if="! index"
                         >
-
-                        <span
-                            class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
-                            :class="[
-                                applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
-                                    applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
-                                ),
-                            ]"
-                        >
-                        </span>
-                    </label>
+                            <input 
+                                type="checkbox" 
+                                name="mass_action_select_all_records"
+                                id="mass_action_select_all_records"
+                                class="hidden peer"
+                                :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
+                                @change="selectAllRecords"
+                            >
                 
-                    <div 
-                        class="cursor-pointer"
-                        @click="sortPage(columns.find(column => column.index === 'full_name'))"
-                    >
-                        <p class="text-gray-600">@lang('admin::app.customers.index.datagrid.name') /
-                             @lang('admin::app.customers.index.datagrid.email') /  
-                             @lang('admin::app.customers.index.datagrid.phone')
+                            <span
+                                class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
+                                :class="[
+                                    applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
+                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                    ),
+                                ]"
+                            >
+                            </span>
+                        </label>
+
+                        <p class="text-gray-600">
+                            <span class="[&>*]:after:content-['_/_']">
+                                <template v-for="column in columnGroup">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == column,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                    </span>
+                                </template>
+                            </span>
+
+                            <i
+                                class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                v-if="columnGroup.includes(applied.sort.column)"
+                            ></i>
                         </p>
                     </div>
                 </div>
-               
-                <div 
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'status'))"
-                >
-                    <p class="text-gray-600">@lang('admin::app.customers.index.datagrid.status') / 
-                        @lang('admin::app.customers.index.datagrid.gender') / 
-                        @lang('admin::app.customers.index.datagrid.group')
-                    </p>
-                </div>
-                <div 
-                    class="cursor-pointer"
-                    @click="sortPage(columns.find(column => column.index === 'total_base_grand_total'))"
-                >
-                    <p class="text-gray-600">@lang('admin::app.customers.index.datagrid.revenue') /
-                        @lang('admin::app.customers.index.datagrid.order-count') / 
-                        @lang('admin::app.customers.index.datagrid.address-count')
-                    </p>
-                </div>
-            </div>
+            </template>
+
+            {{-- Datagrid Head Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
+            </template>
         </template>
 
         <template #body="{ columns, records, setCurrentSelectionMode, applied }">
@@ -242,6 +250,110 @@
                     </a>
                 </div>
             </div>
+        </template>
+
+        {{-- Datagrid Body --}}
+        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
+            <template v-if="! isLoading">
+                <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
+                    <div class="flex gap-[10px]">
+                        <input 
+                            type="checkbox" 
+                            :name="`mass_action_select_record_${record.customer_id}`"
+                            :id="`mass_action_select_record_${record.customer_id}`"
+                            :value="record.customer_id"
+                            class="hidden peer"
+                            v-model="applied.massActions.indices"
+                            @change="setCurrentSelectionMode"
+                        >
+
+                        <label 
+                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                            :for="`mass_action_select_record_${record.customer_id}`"
+                        >
+                        </label>
+                        <div class="flex flex-col gap-[6px]">
+                            <p 
+                                class="text-[16px] text-gray-800 font-semibold" 
+                                v-text="record.full_name"
+                            >
+                            </p>
+
+                            <p 
+                                class="text-gray-600" 
+                                v-text="record.email"
+                            >
+                            </p>
+
+                            <p 
+                                class="text-gray-600"
+                                v-text="record.phone"
+                            >
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-[6px]">
+                        <div class="flex gap-[6px]">
+                            <span
+                                :class="{
+                                    'label-cancelled': record.status == '',
+                                    'label-active': record.status === 1,
+                                }"
+                            >
+                                @{{ record.status ? 'Active' : 'Inactive' }}
+                            </span>
+
+                            <span
+                                :class="{
+                                    'label-cancelled': record.is_suspended === 1,
+                                }"
+                            >
+                                @{{ record.is_suspended ?  'Suspended' : '' }}
+                            </span>
+                        </div>
+
+                        <p 
+                            class="text-gray-600"
+                            v-text="record.gender"
+                        >
+                        </p>
+
+                        <p 
+                            class="text-gray-600"
+                            v-text="record.group"
+                        >
+                        </p>
+                    </div>
+
+                    <div class="flex gap-x-[16px] justify-between items-center">
+                        <div class="flex flex-col gap-[6px]">
+                            <p 
+                                class="text-[16px] text-gray-800 font-semibold" 
+                                v-text="record.total_base_grand_total"
+                            >
+                            </p>
+                            
+                            <p class="text-gray-600">
+                                @{{ "@lang('admin::app.customers.index.datagrid.order')".replace(':order', record.order_count) }}
+                            </p>
+                            <p class="text-gray-600">
+                                @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
+                            </p>
+                        </div>
+                        <a 
+                            class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                            :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
+                        >
+                        </a>
+                    </div>
+                </div>
+            </template>
+
+            {{-- Datagrid Body Shimmer --}}
+            <template v-else>
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
+            </template>
         </template>
     </x-admin::datagrid>
 
