@@ -182,7 +182,7 @@
                             </p>
 
                             <p
-                                class="text-gray-600"
+                                class="text-[16px] text-gray-800 font-semibold"
                                 v-text="record.product_name"
                             >
                             </p>
@@ -202,9 +202,11 @@
                     {{-- Rating, Date, Id Section --}}
                     <div class="flex flex-col gap-[6px]">
                         <div class="flex">
-                            <template v-for="(rating, index) in record.rating">
-                                <span class="icon-star text-[18px] text-amber-500"></span>
-                            </template>
+                            <x-admin::star-rating 
+                                :is-editable="false"
+                                ::value="record.rating"
+                            >
+                            </x-admin::star-rating>
                         </div>
 
                         <p
@@ -215,8 +217,8 @@
 
                         <p
                             class="text-gray-600"
-                            v-text="record.product_review_id"
                         >
+                            @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review-id', record.product_review_id) }}
                         </p>
                     </div>
 

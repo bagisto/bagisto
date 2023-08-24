@@ -30,7 +30,7 @@ class CampaignDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
@@ -39,7 +39,7 @@ class CampaignDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -48,7 +48,7 @@ class CampaignDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'subject',
-            'label'      => trans('admin::app.datagrid.subject'),
+            'label'      => trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.subject'),
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
@@ -64,10 +64,10 @@ class CampaignDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.datagrid.active');
+                    return trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.active');
                 }
 
-                return trans('admin::app.datagrid.inactive');
+                return trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.inactive');
             },
         ]);
     }
@@ -81,7 +81,7 @@ class CampaignDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.campaigns.edit', $row->id);
@@ -90,7 +90,7 @@ class CampaignDataGrid extends DataGrid
 
         $this->addAction([
             'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.datagrid.delete'),
+            'title'        => trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.delete'),
             'method'       => 'DELETE',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
             'url'          => function ($row) {

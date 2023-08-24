@@ -35,7 +35,7 @@ class NewsLetterDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -44,23 +44,23 @@ class NewsLetterDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.subscribed'),
+            'label'      => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.subscribed'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.datagrid.true');
+                    return trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.true');
                 }
 
-                return trans('admin::app.datagrid.false');
+                return trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.false');
             },
         ]);
 
         $this->addColumn([
             'index'      => 'email',
-            'label'      => trans('admin::app.datagrid.email'),
+            'label'      => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -77,7 +77,7 @@ class NewsLetterDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.customers.subscribers.edit', $row->id);
@@ -86,7 +86,7 @@ class NewsLetterDataGrid extends DataGrid
 
         $this->addAction([
             'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.datagrid.delete'),
+            'title'        => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.delete'),
             'method'       => 'DELETE',
             'url'          => function ($row) {
                 return route('admin.customers.subscribers.delete', $row->id);

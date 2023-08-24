@@ -38,7 +38,7 @@ class CatalogRuleDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -47,7 +47,7 @@ class CatalogRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -56,7 +56,7 @@ class CatalogRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'starts_from',
-            'label'      => trans('admin::app.datagrid.start'),
+            'label'      => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.start'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -68,7 +68,7 @@ class CatalogRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'ends_till',
-            'label'      => trans('admin::app.datagrid.end'),
+            'label'      => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.end'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -80,23 +80,23 @@ class CatalogRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.status'),
+            'label'      => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.datagrid.active');
+                    return trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.active');
                 }
 
-                return trans('admin::app.datagrid.inactive');
+                return trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.inactive');
             },
         ]);
 
         $this->addColumn([
             'index'      => 'sort_order',
-            'label'      => trans('admin::app.datagrid.priority'),
+            'label'      => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.priority'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -113,7 +113,7 @@ class CatalogRuleDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.catalog_rules.edit', $row->id);
@@ -122,7 +122,7 @@ class CatalogRuleDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.catalog_rules.delete', $row->id);

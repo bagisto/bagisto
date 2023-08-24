@@ -38,7 +38,7 @@ class TaxRateDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -47,7 +47,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'identifier',
-            'label'      => trans('admin::app.datagrid.identifier'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.identifier'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -56,7 +56,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'state',
-            'label'      => trans('admin::app.datagrid.state'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.state'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -72,7 +72,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'country',
-            'label'      => trans('admin::app.datagrid.country'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.country'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -81,7 +81,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'zip_code',
-            'label'      => trans('admin::app.configuration.tax-rates.zip_code'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.zip-code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -90,7 +90,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'zip_from',
-            'label'      => trans('admin::app.configuration.tax-rates.zip_from'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.zip-from'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -99,7 +99,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'zip_to',
-            'label'      => trans('admin::app.configuration.tax-rates.zip_to'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.zip-to'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -108,7 +108,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'tax_rate',
-            'label'      => trans('admin::app.datagrid.tax-rate'),
+            'label'      => trans('admin::app.settings.taxes.tax-rates.index.datagrid.tax-rate'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -125,7 +125,7 @@ class TaxRateDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.taxes.tax-rates.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.tax_rates.edit', $row->id);
@@ -134,7 +134,7 @@ class TaxRateDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.settings.taxes.tax-rates.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => function ($row) {
                 return route('admin.tax_rates.delete', $row->id);
