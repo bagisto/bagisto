@@ -50,7 +50,7 @@ class UserDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'user_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.users.users.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -59,39 +59,54 @@ class UserDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'user_name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.users.users.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
                 if ($row->user_image) {
-                    return '<div class="avatar"><img src="' . Storage::url($row->user_image) . '"></div>' . $row->user_name;
+                    return 
+                    '<div class="flex gap-[10px] items-center">
+                        <div class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden">
+                            <img class="w-[36px] h-[36px]" src="' . Storage::url($row->user_image) . '" alt="' . $row->user_name . '">
+                        </div>
+
+                        <div class="text-sm">' . $row->user_name . '</div> 
+                    </div>';
+                
                 }
 
-                return '<div class="avatar"><span class="icon profile-pic-icon"></span></div>' . $row->user_name;
+                return  
+                    '<div class="flex gap-[10px] items-center">
+                        <div class="inline-block w-[36px] h-[36px] rounded-full bg-gray-200 border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden">
+                            <span class="icon-customer text-[30px]"></span>
+                        </div>
+
+                        <div class="text-sm">' . $row->user_name . '</div>
+                    </div>';
             },
         ]);
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
+            'label'      => trans('admin::app.users.users.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.datagrid.active');
+                    return trans('admin::app.users.users.index.datagrid.active');
                 }
 
-                return trans('admin::app.datagrid.inactive');
+                return trans('admin::app.users.users.index.datagrid.inactive');
             },
         ]);
 
         $this->addColumn([
             'index'      => 'email',
-            'label'      => trans('admin::app.datagrid.email'),
+            'label'      => trans('admin::app.users.users.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -100,7 +115,7 @@ class UserDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'role_name',
-            'label'      => trans('admin::app.datagrid.role'),
+            'label'      => trans('admin::app.users.users.index.datagrid.role'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -117,7 +132,7 @@ class UserDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.users.users.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.users.edit', $row->user_id);
@@ -126,7 +141,7 @@ class UserDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.users.users.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.users.delete', $row->user_id);

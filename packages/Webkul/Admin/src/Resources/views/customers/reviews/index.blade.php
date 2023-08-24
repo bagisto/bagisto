@@ -182,12 +182,11 @@
                             </p>
 
                             <p
-                                class="text-gray-600"
+                                class="text-[16px] text-gray-800 font-semibold"
                                 v-text="record.product_name"
                             >
                             </p>
 
-                            @{{ record.product_review_status , 'pending' }}
                             <p
                                 :class="{
                                     'label-cancelled': record.product_review_status === 'disapproved',
@@ -216,8 +215,8 @@
 
                         <p
                             class="text-gray-600"
-                            v-text="record.product_review_id"
                         >
+                            @{{ "@lang('admin::app.customers.reviews.index.datagrid.review-id')".replace(':review-id', record.product_review_id) }}
                         </p>
                     </div>
 
