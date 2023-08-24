@@ -21,7 +21,7 @@
                                 <button 
                                     type="button"
                                     class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                                    @click="$refs.groupCreateModal.open()"
+                                    @click="id=0; $refs.groupCreateModal.open()"
                                 >
                                     @lang('admin::app.customers.groups.index.create.create-btn')
                                 </button>
@@ -39,7 +39,13 @@
                                         <x-slot:header>
                                             <!-- Modal Header -->
                                             <p class="text-[18px] text-gray-800 font-bold">
-                                                @lang('admin::app.customers.groups.index.create.title')
+                                                <span v-if="id">
+                                                    @lang('admin::app.customers.groups.index.edit.title')
+                                                </span>
+                                                <span v-else>
+                                                    @lang('admin::app.customers.groups.index.create.title')
+                                                </span>
+                                                    
                                             </p>    
                                         </x-slot:header>
                         
@@ -122,7 +128,7 @@
                 <x-admin::datagrid src="{{ route('admin.groups.index') }}" ref="datagrid">
                     <!-- DataGrid Header -->
                     <template #header="{ columns, records, sortPage}">
-                        <div class="row grid px-[16px] py-[10px] border-b-[1px] border-gray-300 font-semibold grid-cols-4 grid-rows-1">
+                        <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
                             <div
                                 class="cursor-pointer"
                                 @click="sortPage(columns.find(column => column.index === 'id'))"
@@ -156,7 +162,7 @@
                     <template #body="{ columns, records }">
                         <div
                             v-for="record in records"
-                            class="row grid gap-[10px] px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 items-center"
+                            class="row grid gap-[10px] items-center px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600 transition-all hover:bg-gray-100"
                             style="grid-template-columns: repeat(4, 1fr);"
                         >
                             <!-- Id -->
@@ -170,7 +176,7 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                <a @click="editModal(record)">
+                                <a @click="id=1; editModal(record)">
                                     <span
                                         :class="record.actions['0'].icon"
                                         class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
@@ -197,6 +203,12 @@
         <script type="module">
             app.component('v-create-group', {
                 template: '#v-create-group-template',
+
+                data() {
+                    return {
+                        id: 0,
+                    }
+                },
 
                 methods: {
                     create(params, { resetForm, setErrors  }) {
@@ -239,7 +251,7 @@
                     editModal(value) {
                         this.$refs.groupCreateModal.toggle();
 
-                        this.$refs.modalForm.setValues(value)
+                        this.$refs.modalForm.setValues(value);
                     },
 
                     deleteModal(url) {

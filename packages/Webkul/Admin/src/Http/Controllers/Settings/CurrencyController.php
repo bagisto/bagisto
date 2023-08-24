@@ -59,16 +59,16 @@ class CurrencyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Currency Details
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         $currency = $this->currencyRepository->findOrFail($id);
 
-        return view('admin::settings.currencies.edit', compact('currency'));
+        return new JsonResource($currency);
     }
 
     /**
@@ -77,8 +77,10 @@ class CurrencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
+        $id = request()->id;
+
         $this->validate(request(), [
             'code' => ['required', 'unique:currencies,code,' . $id, new \Webkul\Core\Rules\Code],
             'name' => 'required',

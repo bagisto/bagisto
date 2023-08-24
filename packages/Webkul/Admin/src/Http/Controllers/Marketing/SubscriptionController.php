@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Admin\DataGrids\NewsLetterDataGrid;
@@ -32,16 +33,16 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * To unsubscribe the user without deleting the resource of the subscribed user.
+     * Subscriber Details
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
-        return view('admin::marketing.email-marketing.subscribers.edit')->with('subscriber', $subscriber);
+        return new JsonResource($subscriber);
     }
 
     /**
@@ -50,13 +51,15 @@ class SubscriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
+        $id = request()->only('id');
+
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         $customer = $subscriber->customer;
 
-        if (! is_null($customer)) {
+        if (!is_null($customer)) {
             $customer->subscribed_to_news_letter = request('is_subscribed');
 
             $customer->save();

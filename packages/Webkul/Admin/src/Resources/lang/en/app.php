@@ -117,7 +117,7 @@ return [
                     'shipment-to'      => 'Shipment To',
                     'view'             => 'View',
                 ],
-             ],
+            ],
 
             'create' => [
                 'title'                 => 'Create new Shipment',
@@ -305,7 +305,7 @@ return [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
 
-            'datagrid'  =>[
+            'datagrid'  => [
                 'id'            => 'Customer ID',
                 'order'         => ':order Order(s)',
                 'address'       => ':address  Address(s)',
@@ -424,6 +424,10 @@ return [
                     'title'          => 'Create new Group',
                 ],
 
+                'edit'  => [
+                    'title' => 'Edit Group',
+                ],
+
                 'datagrid'  =>  [
                     'code'  => 'Code',
                     'id'    => 'ID',
@@ -471,7 +475,7 @@ return [
                     'approved'       => 'Approved',
                     'disapproved'    => 'Disapproved',
                     'review-id'      => 'ID - :review-id',
-                 ],
+                ],
             ],
         ],
 
@@ -524,14 +528,6 @@ return [
             'index' => [
                 'title'             => 'Locales',
                 'create-btn'        => 'Create Locale',
-                'add-title'         => 'Add Locale',
-                'edit-title'        => 'Edit Locale',
-                'save-btn-title'    => 'Save Locale',
-                'general'           => 'General',
-                'code'              => 'Code',
-                'name'              => 'Name',
-                'direction'         => 'Direction',
-                'locale-logo'       => 'Locale Logo',
                 'create-success'    => 'Locale created successfully.',
                 'update-success'    => 'Locale updated successfully.',
                 'delete-success'    => 'Locale deleted successfully.',
@@ -547,20 +543,19 @@ return [
                     'edit'      => 'Edit',
                     'delete'    => 'Delete',
                 ],
-            ],
 
-            'edit'  => [
-                'back-btn'       => 'Back',
-                'code'           => 'Code',
-                'save-btn'       => 'Save Locale',
-                'general'        => 'General',
-                'title'          => 'Edit Locales',
-                'name'           => 'Name',
-                'direction'      => 'Direction',
-                'logo'           => 'Locale Logo',
-                'logo-path'      => 'Locale Path',
-                'update-success' => 'Locale Updated Successfully.',
+                'create'  =>  [
+                    'code'          => 'Code',
+                    'name'          => 'Name',
+                    'direction'     => 'Direction',
+                    'locale-logo'   => 'Locale Logo',
+                    'title'         => 'Create Locale',
+                    'save-btn'      => 'Save Locale',
+                ],
 
+                'edit'  => [
+                    'title'   => 'Edit Locales',
+                ],
             ],
         ],
 
@@ -576,34 +571,30 @@ return [
                     'edit'   => 'Edit',
                     'delete' => 'Delete',
                 ],
+
+                'create' => [
+                    'title'             => 'Create New Currency',
+                    'create-btn'        => 'Create Currency',
+                    'save-btn'          => 'Create Currency',
+                    'general'           => 'General',
+                    'code'              => 'Code',
+                    'name'              => 'Name',
+                    'symbol'            => 'Symbol',
+                    'decimal'           => 'Decimal',
+                    'create-success'    => 'Currency created successfully.',
+                    'update-success'    => 'Currency updated successfully.',
+                    'delete-success'    => 'Currency deleted successfully.',
+                    'last-delete-error' => 'At least one Currency is required.',
+                ],
+
+                'edit' => [
+                    'title'          => 'Edit Currency',
+                ],
             ],
 
-            'create' => [
-                'title'             => 'Create New Currency',
-                'create-btn'        => 'Create Currency',
-                'save-btn'          => 'Create Currency',
-                'general'           => 'General',
-                'code'              => 'Code',
-                'name'              => 'Name',
-                'symbol'            => 'Symbol',
-                'decimal'           => 'Decimal',
-                'create-success'    => 'Currency created successfully.',
-                'update-success'    => 'Currency updated successfully.',
-                'delete-success'    => 'Currency deleted successfully.',
-                'last-delete-error' => 'At least one Currency is required.',
-            ],
 
-            'edit' => [
-                'back-btn'       => 'Back',
-                'code'           => 'Code',
-                'decimal'        => 'Decimal',
-                'general'        => 'General',
-                'name'           => 'Name',
-                'save-btn'       => 'Save Currency',
-                'symbol'         => 'Symbol',
-                'title'          => 'Edit Currency',
-                'update-success' => 'Currency updated successfully.',
-            ],
+
+
         ],
 
         'exchange-rates'  => [
@@ -619,6 +610,10 @@ return [
                     'target-currency'  => 'Target Currency',
                 ],
 
+                'edit' => [
+                    'title'   => 'Edit Exchange Rates',
+                ],
+
                 'datagrid' => [
                     'id'            => 'ID',
                     'currency-name' => 'Currency Name',
@@ -626,15 +621,6 @@ return [
                     'edit'          => 'Edit',
                     'delete'        => 'Delete',
                 ],
-            ],
-
-            'edit'  => [
-                'back-btn'        => 'Back',
-                'rate'            => 'Rate',
-                'source-currency' => 'Source Currency',
-                'save-btn'        => 'Save Exchange Rate',
-                'title'           => 'Edit Exchange Rates',
-                'target-currency' => 'Target Currency',
             ],
         ],
 
@@ -719,7 +705,7 @@ return [
             'tax-categories' => [
                 'index' => [
                     'title'  => 'Tax Categories',
-                    
+
                     'datagrid' => [
                         'id'     => 'ID',
                         'name'   => 'Name',
@@ -928,7 +914,7 @@ return [
                     'status'    => 'Status',
                     'email'     => 'Email',
                     'role'      => 'Role',
-                    'edit'      => 'Edit',  
+                    'edit'      => 'Edit',
                     'active'    => 'Active',
                     'inactive'  => 'Inactive',
                 ],
@@ -1627,7 +1613,7 @@ return [
                     'title'          => 'Email Templates',
                     'create-btn'     => 'Create Template',
 
-                    'datagrid' => [ 
+                    'datagrid' => [
                         'id'        => 'ID',
                         'name'      => 'Name',
                         'status'    => 'Status',
@@ -1735,38 +1721,32 @@ return [
                     'create-btn'  => 'Create Event',
                     'title'       => 'Events',
 
-                    'datagrid' => [ 
+                    'datagrid' => [
                         'id'        => 'ID',
                         'name'      => 'Name',
                         'date'      => 'Date',
                         'edit'      => 'Edit',
                         'delete'    => 'Delete',
-             
+
                     ],
-                ],
 
-                'create'   => [
-                    'description'    => 'Description',
-                    'date'           => 'Date',
-                    'general'        => 'General',
-                    'name'           => 'Name',
-                    'save-btn'       => 'Save Event',
-                    'title'          => 'Events',
-                ],
+                    'create'   => [
+                        'description'    => 'Description',
+                        'date'           => 'Date',
+                        'general'        => 'General',
+                        'name'           => 'Name',
+                        'save-btn'       => 'Save Event',
+                        'title'          => 'Events',
+                    ],
 
-                'edit'  => [
-                    'title'        => 'Edit Events',
-                    'back-btn'     => 'Back',
-                    'general'      => 'General',
-                    'name'         => 'Name',
-                    'description'  => 'Description',
-                    'date'         => 'Date',
-                    'save-btn'     => 'Save Events',
+                    'edit'  => [
+                        'title'        => 'Edit Events',
+                    ],
                 ],
             ],
 
             'newsletters' => [
-                'index' => [    
+                'index' => [
                     'title' => 'Newsletter Subscriptions',
 
                     'datagrid' => [
@@ -1778,24 +1758,25 @@ return [
                         'delete'      => 'Delete',
                         'email'       => 'Email',
                     ],
+
+                    'edit'  => [
+                        'title'       => 'Edit Newsletter Subscriber',
+                        'back-btn'    => 'Back',
+                        'save-btn'    => 'Save Subscriber',
+                        'email'       => 'Email',
+                        'subscribed'  => 'Subscribed',
+                        'true'        => 'True',
+                        'false'       => 'False',
+                    ],
                 ],
 
-                'edit'  => [
-                    'title'       => 'Edit Newsletter Subscriber',
-                    'back-btn'    => 'Back',
-                    'save-btn'    => 'Save Subscriber',
-                    'email'       => 'Email',
-                    'subscribed'  => 'Subscribed',
-                    'true'        => 'True',
-                    'false'       => 'False',
-                ],
             ],
         ],
 
         'sitemaps' => [
             'index' => [
                 'title' => 'Sitemaps',
-                
+
                 'datagrid' => [
                     'id'              => 'ID',
                     'file-name'       => 'File Name',
@@ -1849,7 +1830,7 @@ return [
                         'active'        => 'Active',
                         'inactive'      => 'Inactive',
                         'draft'         => 'Draft',
-                        'priority'      => 'Priority',  
+                        'priority'      => 'Priority',
                         'edit'          => 'Edit',
                         'delete'        => 'Delete',
                         'view'          => 'View',
@@ -2031,7 +2012,7 @@ return [
                         'status'    => 'Status',
                         'active'    => 'Active',
                         'inactive'  => 'Inactive',
-                        'priority'  => 'Priority',  
+                        'priority'  => 'Priority',
                         'edit'      => 'Edit',
                         'delete'    => 'Delete',
                     ],

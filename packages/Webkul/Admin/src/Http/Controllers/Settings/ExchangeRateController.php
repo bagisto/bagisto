@@ -19,8 +19,7 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -77,7 +76,10 @@ class ExchangeRateController extends Controller
 
         $exchangeRate = $this->exchangeRateRepository->findOrFail($id);
 
-        return view('admin::settings.exchange_rates.edit', compact('currencies', 'exchangeRate'));
+        return [
+            'currencies' => $currencies,
+            'exchangeRate' => $exchangeRate,
+        ];
     }
 
     /**
@@ -86,19 +88,19 @@ class ExchangeRateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
         $this->validate(request(), [
-            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . $id],
+            'target_currency' => ['required', 'unique:currency_exchange_rates,target_currency,' . request()->id],
             'rate'            => 'required|numeric',
         ]);
 
-        Event::dispatch('core.exchange_rate.update.before', $id);
+        Event::dispatch('core.exchange_rate.update.before', request()->id);
 
         $exchangeRate = $this->exchangeRateRepository->update(request()->only([
             'target_currency',
             'rate'
-        ]), $id);
+        ]), request()->id);
 
         Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
 

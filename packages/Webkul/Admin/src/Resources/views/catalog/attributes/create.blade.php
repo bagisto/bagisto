@@ -817,7 +817,7 @@
 
                     listenModal(event) {
                         if (! event.isActive) {
-                            this.isNullOptionChecked = false;                            
+                            this.isNullOptionChecked = false;
                         }
                     },
 

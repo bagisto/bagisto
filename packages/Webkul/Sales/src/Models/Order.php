@@ -120,7 +120,7 @@ class Order extends Model implements OrderContract
      */
     public function getDatetimeAttribute()
     {
-        // return $this->created_at->diffForHumans();
+        return $this->created_at?->diffForHumans();
     }
 
     /**
