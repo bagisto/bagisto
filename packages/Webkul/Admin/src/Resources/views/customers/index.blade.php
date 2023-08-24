@@ -153,6 +153,105 @@
             </template>
         </template>
 
+        <template #body="{ columns, records, setCurrentSelectionMode, applied }">
+          <!-- single row -->
+            <div class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300" v-for="record in records">
+                <div class="">
+                    <div class="flex gap-[10px]">
+                        <input 
+                            type="checkbox" 
+                            :name="`mass_action_select_record_${record.customer_id}`"
+                            :id="`mass_action_select_record_${record.customer_id}`"
+                            :value="record.customer_id"
+                            class="hidden peer"
+                            v-model="applied.massActions.indices"
+                            @change="setCurrentSelectionMode"
+                        >
+
+                        <label 
+                            class="icon-uncheckbox rounded-[6px] text-[24px] cursor-pointer peer-checked:icon-checked peer-checked:text-blue-600"
+                            :for="`mass_action_select_record_${record.customer_id}`"
+                        >
+                        </label>
+                        <div class="flex flex-col gap-[6px]">
+                            <p 
+                                class="text-[16px] text-gray-800 font-semibold" 
+                                v-text="record.full_name"
+                            >
+                            </p>
+
+                            <p 
+                                class="text-gray-600" 
+                                v-text="record.email"
+                            >
+                            </p>
+
+                            <p 
+                                class="text-gray-600"
+                                v-text="record.phone"
+                            >
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="flex flex-col gap-[6px]">
+                        <div class="flex gap-[6px]">
+                            <span
+                                :class="{
+                                    'label-cancelled': record.status == '',
+                                    'label-active': record.status === 1,
+                                }"
+                            >
+                                @{{ record.status ? 'Active' : 'Inactive' }}
+                            </span>
+
+                            <span
+                                :class="{
+                                    'label-cancelled': record.is_suspended === 1,
+                                }"
+                            >
+                                @{{ record.is_suspended ?  'Suspended' : '' }}
+                            </span>
+                        </div>
+
+                        <p 
+                            class="text-gray-600"
+                            v-text="record.gender"
+                        >
+                        </p>
+
+                        <p 
+                            class="text-gray-600"
+                            v-text="record.group"
+                        >
+                        </p>
+                    </div>
+                </div>
+                <div class="flex gap-x-[16px] justify-between items-center">
+                    <div class="flex flex-col gap-[6px]">
+                        <p 
+                            class="text-[16px] text-gray-800 font-semibold" 
+                            v-text="record.total_base_grand_total"
+                        >
+                        </p>
+                        
+                        <p class="text-gray-600">
+                            @{{ "@lang('admin::app.customers.index.datagrid.order')".replace(':order', record.order_count) }}
+                        </p>
+                        <p class="text-gray-600">
+                            @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
+                        </p>
+                    </div>
+                    <a 
+                        class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
+                        :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
+                    >
+                    </a>
+                </div>
+            </div>
+        </template>
+
         {{-- Datagrid Body --}}
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
@@ -243,7 +342,7 @@
                             </p>
                         </div>
                         <a 
-                            class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
                             :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
                         >
                         </a>

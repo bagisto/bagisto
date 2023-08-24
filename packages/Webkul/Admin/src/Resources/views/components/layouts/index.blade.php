@@ -76,11 +76,11 @@
             {{-- Page Sidebar Blade Component --}}
             <x-admin::layouts.sidebar />
 
-            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[286px] max-lg:px-[16px] transition-all duration-300 group-[.sidebar-collapsed]/container:pl-[85px]">
+            <div class="flex-1 h-full max-w-full px-[16px] pt-[11px] pb-[22px] pl-[286px] max-lg:!px-[16px] transition-all duration-300 group-[.sidebar-collapsed]/container:pl-[85px]">
                 {{-- Added dynamic tabs for third level menus  --}}
                 {{-- Todo @suraj-webkul need to optimize below statement. --}}
                 @if (! request()->routeIs('admin.configuration.index'))
-                    @include ('admin::layouts.tabs')
+                    <x-admin::layouts.tabs />
                 @endif
 
                 {{-- Page Content Blade Component --}}

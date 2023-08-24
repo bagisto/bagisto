@@ -488,7 +488,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -569,7 +569,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -594,7 +594,7 @@
     </div>
     
     @push('scripts')
-        <script src="{{ bagisto_asset('js/chart.js') }}"></script>
+        <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
@@ -708,7 +708,7 @@
                                     <!-- Product Image -->
                                     <div class="flex gap-[10px]">
                                         <img
-                                            v-if="item?.product?.images"
+                                            v-if="item?.product?.images.length"
                                             class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
                                             :src="item?.product?.images[0]?.url"
                                         />
