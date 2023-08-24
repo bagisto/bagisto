@@ -117,11 +117,11 @@
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 <span v-if="id">
-                                    @lang('admin::app.settings.locales.index.edit.create-btn')
+                                    @lang('admin::app.settings.locales.index.edit.title')
                                 </span>
 
                                 <span v-else>
-                                    @lang('admin::app.settings.locales.index.create-btn')
+                                    @lang('admin::app.settings.locales.index.create.title')
                                 </span>
                             </p>
                         </x-slot:header>
@@ -138,7 +138,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.locales.index.code')
+                                        @lang('admin::app.settings.locales.index.create.code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -146,8 +146,8 @@
                                         name="code"
                                         id="code"
                                         rules="required"
-                                        :label="trans('admin::app.settings.locales.index.code')"
-                                        :placeholder="trans('admin::app.settings.locales.index.code')"
+                                        :label="trans('admin::app.settings.locales.index.create.code')"
+                                        :placeholder="trans('admin::app.settings.locales.index.create.code')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -159,7 +159,7 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.locales.index.name')
+                                        @lang('admin::app.settings.locales.index.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -167,8 +167,8 @@
                                         name="name"
                                         id="name"
                                         rules="required"
-                                        :label="trans('admin::app.settings.locales.index.name')"
-                                        :placeholder="trans('admin::app.settings.locales.index.name')"
+                                        :label="trans('admin::app.settings.locales.index.create.name')"
+                                        :placeholder="trans('admin::app.settings.locales.index.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -180,7 +180,7 @@
                     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.locales.index.direction')
+                                        @lang('admin::app.settings.locales.index.create.direction')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -188,7 +188,7 @@
                                         name="direction"
                                         id="direction"
                                         rules="required"
-                                        :label="trans('admin::app.settings.locales.index.direction')"
+                                        :label="trans('admin::app.settings.locales.index.create.direction')"
                                     >
                                         <option value="ltr" selected title="Text direction left to right">LTR</option>
                     
@@ -203,14 +203,14 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.locales.index.locale-logo')
+                                        @lang('admin::app.settings.locales.index.create.locale-logo')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="image"
                                         name="logo_path[image_1]"
                                         id="direction"
-                                        :label="trans('Logo Path')"
+                                        :label="trans('admin::app.settings.locales.index.create.locale-logo')"
                                         accepted-types="image/*"
                                         ref="image"
                                     >
@@ -232,7 +232,7 @@
                                     type="submit"
                                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                 >
-                                    @lang('admin::app.settings.locales.index.save-btn-title')
+                                    @lang('admin::app.settings.locales.index.create.save-btn')
                                 </button>
                             </div>
                         </x-slot:footer>
