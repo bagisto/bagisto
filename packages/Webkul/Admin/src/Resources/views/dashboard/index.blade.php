@@ -26,7 +26,7 @@
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
-                <div class="p-[16px] border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1">
@@ -224,7 +224,7 @@
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
-                <div class="border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
+                <div class="bg-white rounded-[4px] box-shadow">
                     <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
@@ -504,7 +504,7 @@
                 </p>
 
                 {{-- Products List --}}
-                <div class="border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
+                <div class="bg-white rounded-[4px] box-shadow">
                     @foreach ($statistics['stock_threshold'] as $item)
                         <!-- Single Product -->
                         <div class="relative">
@@ -598,7 +598,7 @@
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
-                <div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
+                <div class="bg-white rounded-[4px] box-shadow box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
                         <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard.right.total-sales>

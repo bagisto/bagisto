@@ -58,7 +58,7 @@ class ConfigurationController extends Controller
         );
 
         if ($groups) {
-            return view('admin::configuration.field', [
+            return view('admin::configuration.edit', [
                 'config' => $this->configTree,
                 'groups' => $groups,
             ]);
