@@ -58,8 +58,8 @@
         </div>
     </div>
 
-    <div class="justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
-        <div class="flex">
+    <div class="justify-between gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[20px]">
+        <div class="flex gap-[5px]">
             {!! view_render_event('sales.order.page_action.before', ['order' => $order]) !!}
 
             @if (
