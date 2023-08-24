@@ -383,36 +383,53 @@ return [
                 'title' => 'Groups',
 
                 'create' => [
-                    'title'          => 'Create new Group',
                     'create-btn'     => 'Create Group',
                     'code'           => 'Code',
+                    'create-success' => 'Group created successfully',
                     'name'           => 'Name',
                     'save-btn'       => 'Save Group',
-                    'create-success' => 'Group created successfully',
+                    'title'          => 'Create new Group',
+                ],
+
+                'datagrid'  =>  [
+                    'code'  => 'Code',
+                    'id'    => 'Id',
+                    'name'  => 'Name',
                 ],
             ],
 
             'edit'  => [
-                'title'             => 'Edit Group',
                 'back-btn'          => 'Back',
-                'save-btn'          => 'Save Group',
-                'general'           => 'General',
                 'code'              => 'Code',
+                'general'           => 'General',
                 'name'              => 'Name',
+                'save-btn'          => 'Save Group',
+                'title'             => 'Edit Group',
                 'update-success'    => 'Group Updated Successfully',
             ],
         ],
 
         'reviews' => [
             'index' => [
-                'title' => 'Reviews',
                 'description' => 'Description',
-                'rating'      => 'Rating',
                 'date'        => 'Date',
                 'id'          => 'Id',
                 'name'        => 'Name',
                 'product'     => 'Product',
+                'rating'      => 'Rating',
                 'status'      => 'Status',
+                'title' => 'Reviews',
+
+                'datagrid'   =>  [
+                    'customer_names' => 'Name',
+                    'comment'        => 'Comment',
+                    'date'           => 'Date',
+                    'id'             => 'id',
+                    'product'        => 'Product',
+                    'rating'         => 'Rating',
+                    'status'         => 'Status',
+                    'title'          => 'Title',
+                ],
             ],
         ],
 
@@ -911,6 +928,7 @@ return [
                     'disable'                => 'Disable',
                     'category'               => 'Category',
                     'type'                   => 'Type',
+                    'product-image'          => 'Product Image',
                 ],
             ],
 
@@ -1912,12 +1930,13 @@ return [
     'dashboard' => [
         'index' => [
             'add_customer'              => 'Add Customer',
+            'average-sale'              => 'Average Order Sale',
             'add-product'               => 'Add Product',
             'attribute-code'            => 'Attribute Code',
             'color'                     => 'Color',
-            'customer-info'             => 'No Customer Found With Most Sales',
-            'average-sale'              => 'Average Order Sale',
             'customer-with-most-sales'  => 'Customer With Most Sales',
+            'customer-info'             => 'No Customer Found With Most Sales',
+            'date-duration'             => ':start - :end',
             'decreased'                 => ':progress%',
             'end-date'                  => 'End Date',
             'from'                      => 'From',

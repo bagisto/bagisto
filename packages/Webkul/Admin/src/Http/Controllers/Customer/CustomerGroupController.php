@@ -84,8 +84,10 @@ class CustomerGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
+        $id = request()->input('id');
+
         $this->validate(request(), [
             'code' => ['required', 'unique:customer_groups,code,' . $id, new Code],
             'name' => 'required',
@@ -117,7 +119,7 @@ class CustomerGroupController extends Controller
     {
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
-        if (! $customerGroup->is_user_defined) {
+        if (!$customerGroup->is_user_defined) {
             return response()->json([
                 'message' => trans('admin::app.customers.customers.group-default'),
             ], 400);
