@@ -1,9 +1,9 @@
 @php
-    $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
-    
-    $channel = core()->getRequestedChannelCode();
-    
-    $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
+    $channels = core()->getAllChannels();
+
+    $currentChannel = core()->getRequestedChannel();
+
+    $currentLocale = core()->getRequestedLocale();
 @endphp
 
 <x-admin::layouts>
@@ -42,15 +42,61 @@
 
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                <div>
-                    {{-- Channel switcher --}}
-                    <v-channel-switcher></v-channel-switcher>
-                </div>
-                
-                <div>
-                    {{-- Locale switcher --}}
-                    <v-locale-switcher></v-locale-switcher>
-                </div>
+                {{-- Channel Switcher --}}
+                <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
+                    {{-- Dropdown Toggler --}}
+                    <x-slot:toggle>
+                        <div class="inline-flex gap-x-[8px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                            <span class="icon-store text-[24px] "></span>
+                            
+                            {{ $currentChannel->name }}
+
+                            <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
+
+                            <span class="icon-sort-down text-[24px]"></span>
+                        </div>
+                    </x-slot:toggle>
+
+                    {{-- Dropdown Content --}}
+                    <x-slot:content class="!p-[0px]">
+                        @foreach ($channels as $channel)
+                            <a
+                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
+                            >
+                                {{ $channel->name }}
+                            </a>
+                        @endforeach
+                    </x-slot:content>
+                </x-admin::dropdown>
+
+                {{-- Channel Switcher --}}
+                <x-admin::dropdown>
+                    {{-- Dropdown Toggler --}}
+                    <x-slot:toggle>
+                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                            <span class="icon-language text-[24px] "></span>
+
+                            {{ $currentLocale->name }}
+                            
+                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+
+                            <span class="icon-sort-down text-[24px]"></span>
+                        </div>
+                    </x-slot:toggle>
+
+                    {{-- Dropdown Content --}}
+                    <x-slot:content class="!p-[0px]">
+                        @foreach ($currentChannel->locales as $locale)
+                            <a
+                                href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
+                            >
+                                {{ $locale->name }}
+                            </a>
+                        @endforeach
+                    </x-slot:content>
+                </x-admin::dropdown>
             </div>
         </div>
 
@@ -87,148 +133,4 @@
             </div>
         @endif
     </x-admin::form>
-
-    @pushOnce('scripts')
-        {{-- Locale switcher template --}}
-        <script type="text/x-template" id="v-locale-switcher-template">
-            <div>
-                {{-- Locale dropdown --}}
-                <x-admin::dropdown>
-                    <x-slot:toggle>
-                        {{-- Current Locale--}}
-                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
-                            <span class="icon-language text-[24px] "></span>
-                                @{{ selectedLocale[0].name }}
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </div>
-                    </x-slot:toggle>
-                
-                    {{-- Locale content --}}
-                    <x-slot:content class="!p-[0px]">
-                        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
-                            <input 
-                                class="hidden"
-                                name="locale"
-                                :value="selectedLocale[0].code"
-                            >
-
-                            <a
-                                class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
-                                v-for="locale in locales"
-                                :class="{'bg-gray-100': locale.code == '{{ $locale }}'}"
-                                v-text="locale.name"
-                                @click="change(locale)"
-                            >
-                            </a>
-                        </div>
-                    </x-slot:content>
-                </x-admin::dropdown>
-            </div>
-        </script>
-
-        {{-- Locale switcher component --}}
-        <script type="module">
-            app.component('v-locale-switcher', {
-                template: '#v-locale-switcher-template',
-                data() {
-                    return {
-                        locales: @json(core()->getAllLocales()),
-
-                        selectedLocale: {},
-                    }
-                },
-
-                created() {
-                    this.init();
-                },
-
-                methods: {
-                    init() {
-                        this.selectedLocale = this.locales.filter((locale) => "{{ $locale }}" == locale.code);
-                    },
-
-                    change(locale) {
-                        let url = new URL(window.location.href);
-
-                        url.searchParams.set('locale', locale.code);
-
-                        window.location.href = url.href;
-                    },
-                },
-            });
-        </script>
-
-        {{-- Channel switcher template --}}
-        <script 
-            type="text/x-template"
-            id="v-channel-switcher-template"
-        >
-            <div>
-                {{-- channel dropdown --}}
-                <x-admin::dropdown>
-                    <x-slot:toggle>
-                        {{-- Current channel--}}
-                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
-                            <span class="icon-language text-[24px] "></span>
-                                @{{ selectedChannel[0].name }}
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </div>
-                    </x-slot:toggle>
-                
-                    {{-- Channel content --}}
-                    <x-slot:content class="!p-[0px]">
-                        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
-                            <input 
-                                class="hidden"
-                                name="channel"
-                                :value="selectedChannel[0].code"
-                            >
-
-                            <a
-                                class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
-                                v-for="channel in channels"
-                                :class="{'bg-gray-100': channel.code == '{{ $channel }}'}"
-                                v-text="channel.name"
-                                @click="change(channel)"
-                            >
-                            </a>
-                        </div>
-                    </x-slot:content>
-                </x-admin::dropdown>
-            </div>
-        </script>
-
-        {{-- channel switcher component --}}
-        <script type="module">
-            app.component('v-channel-switcher', {
-                template: '#v-channel-switcher-template',
-
-                data() {
-                    return {
-                       channels: @json(core()->getAllChannels()),
-
-                       selectedChannel: '',
-                    }
-                },
-
-                created() {
-                    this.init();
-                },
-
-                methods: {
-                    init() {
-                        this.selectedChannel = this.channels.filter((channel) => "{{ $channel }}" == channel.code);
-                    },
-
-                    change(channel) {
-                        let url = new URL(window.location.href);
-
-                        url.searchParams.set('channel', channel.code);
-
-                        window.location.href = url.href;
-                    },
-                },
-            });
-        </script>
-    @endPushOnce
 </x-admin::layouts>
