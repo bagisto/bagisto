@@ -106,7 +106,18 @@ return [
         'shipments' => [
             'index' => [
                 'title' => 'Shipments',
-            ],
+
+                'datagrid'  => [
+                    'id'               => 'ID',
+                    'order-id'         => 'Order ID',
+                    'total-qty'        => 'Total Quantity',
+                    'inventory-source' => 'Inventory Source',
+                    'order-date'       => 'Order Date',
+                    'shipment-date'    => 'Shipment Date',
+                    'shipment-to'      => 'Shipment To',
+                    'view'             => 'View',
+                ],
+             ],
 
             'create' => [
                 'title'                 => 'Create new Shipment',
@@ -156,6 +167,15 @@ return [
         'refunds' => [
             'index' => [
                 'title' => 'Refunds',
+
+                'datagrid'  => [
+                    'id'               => 'ID',
+                    'order-id'         => 'Order ID',
+                    'billed-to'        => 'Billed To',
+                    'refund-date'      => 'Refund Date',
+                    'refunded'         => 'Refunded',
+                    'view'             => 'View',
+                ],
             ],
 
             'view' => [
@@ -287,8 +307,8 @@ return [
 
             'datagrid'  =>[
                 'id'            => 'Customer ID',
-                'order'         => ':order Order',
-                'address'       => ':address  Address',
+                'order'         => ':order Order(s)',
+                'address'       => ':address  Address(s)',
                 'name'          => 'Customer Name',
                 'email'         => 'Email',
                 'group'         => 'Group',
@@ -406,8 +426,10 @@ return [
 
                 'datagrid'  =>  [
                     'code'  => 'Code',
-                    'id'    => 'Id',
+                    'id'    => 'ID',
                     'name'  => 'Name',
+                    'edit'  => 'Edit',
+                    'delete' => 'Delete',
                 ],
             ],
 
@@ -1212,6 +1234,20 @@ return [
             'index' => [
                 'title'      => 'Attributes',
                 'create-btn' => 'Create Attributes',
+
+                'datagrid' => [
+                    'id'            => 'ID',
+                    'name'          => 'Name',
+                    'code'          => 'Code',
+                    'type'          => 'Type',
+                    'required'      => 'Required',
+                    'unique'        => 'Unique',
+                    'locale-based'  => 'Locale Based',
+                    'channel-based' => 'Channel Based',
+                    'created-at'    => 'Created At',
+                    'edit'          => 'Edit',
+                    'delete'        => 'Delete',
+                ],
             ],
 
             'create'  => [
@@ -1346,6 +1382,17 @@ return [
             'index' => [
                 'title'    => 'Categories',
                 'add-btn'  => 'Create Category',
+
+                'datagrid' => [
+                    'id'             => 'ID',
+                    'name'           => 'Name',
+                    'position'       => 'Position',
+                    'status'         => 'Status',
+                    'active'         => 'Active',
+                    'inactive'       => 'Inactive',
+                    'no-of-products' => 'Number of Products',
+                    'edit'           => 'Edit',
+                ],
             ],
 
             'create' => [
@@ -1421,6 +1468,14 @@ return [
             'index' => [
                 'title'  => 'Families',
                 'add'    => 'Create Attribute Family',
+
+                'datagrid' => [
+                    'id'        => 'ID',
+                    'code'      => 'Code',
+                    'name'      => 'Name',
+                    'edit'      => 'Edit',
+                    'delete'    => 'Delete',
+                ],
             ],
 
             'create' => [
@@ -1658,6 +1713,22 @@ return [
                 'index' => [
                     'title'      => 'Cart Rules',
                     'create-btn' => 'Create Cart Rule',
+
+                    'datagrid' => [
+                        'id'            => 'ID',
+                        'name'          => 'Name',
+                        'coupon-code'   => 'Coupon Code',
+                        'start'         => 'Start',
+                        'end'           => 'End',
+                        'status'        => 'Status',
+                        'active'        => 'Active',
+                        'inactive'      => 'Inactive',
+                        'draft'         => 'Draft',
+                        'priority'      => 'Priority',  
+                        'edit'          => 'Edit',
+                        'delete'        => 'Delete',
+                        'view'          => 'View',
+                    ],
                 ],
 
                 'create' => [
@@ -1826,6 +1897,19 @@ return [
                 'index' => [
                     'title'      => 'Catalog Rules',
                     'create-btn' => 'Create Catalog Rule',
+
+                    'datagrid' => [
+                        'id'        => 'ID',
+                        'name'      => 'Name',
+                        'start'     => 'Start',
+                        'end'       => 'End',
+                        'status'    => 'Status',
+                        'active'    => 'Active',
+                        'inactive'  => 'Inactive',
+                        'priority'  => 'Priority',  
+                        'edit'      => 'Edit',
+                        'delete'    => 'Delete',
+                    ],
                 ],
 
                 'create' => [

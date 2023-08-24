@@ -30,7 +30,7 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -39,7 +39,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.datagrid.code'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -119,7 +119,7 @@ class AttributeDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.catalog.attributes.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.catalog.attributes.edit', $row->id);
@@ -128,7 +128,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => function ($row) {
                 return route('admin.catalog.attributes.delete', $row->id);
@@ -144,23 +144,23 @@ class AttributeDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => route('admin.catalog.attributes.mass_delete'),
         ]);
 
         // dummy sample for all datagrids
         // $this->addMassAction([
-        //     'title'   => trans('admin::app.datagrid.update-status'),
+        //     'title'   => trans('admin::app.catalog.attributes.index.datagrid.update-status'),
         //     'method'  => 'POST',
         //     'url'     => route('admin.catalog.attributes.mass_delete'),
         //     'options' => [
         //         [
-        //             'name' => trans('admin::app.datagrid.active'),
+        //             'name' => trans('admin::app.catalog.attributes.index.datagrid.active'),
         //             'value' => 1,
         //         ],
         //         [
-        //             'name' => trans('admin::app.datagrid.inactive'),
+        //             'name' => trans('admin::app.catalog.attributes.index.datagrid.inactive'),
         //             'value' => 0,
         //         ],
         //     ],

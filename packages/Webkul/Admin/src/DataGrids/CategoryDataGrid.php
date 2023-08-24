@@ -68,7 +68,7 @@ class CategoryDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'category_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.catalog.categories.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -77,7 +77,7 @@ class CategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.catalog.categories.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -86,7 +86,7 @@ class CategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'position',
-            'label'      => trans('admin::app.datagrid.position'),
+            'label'      => trans('admin::app.catalog.categories.index.datagrid.position'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -95,23 +95,23 @@ class CategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
+            'label'      => trans('admin::app.catalog.categories.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return '<span class="badge badge-md badge-success">' . trans('admin::app.datagrid.active') . '</span>';
+                    return '<span class="badge badge-md badge-success">' . trans('admin::app.catalog.categories.index.datagrid.active') . '</span>';
                 }
 
-                return '<span class="badge badge-md badge-danger">' . trans('admin::app.datagrid.inactive') . '</span>';
+                return '<span class="badge badge-md badge-danger">' . trans('admin::app.catalog.categories.index.datagrid.inactive') . '</span>';
             },
         ]);
 
         $this->addColumn([
             'index'      => 'count',
-            'label'      => trans('admin::app.datagrid.no-of-products'),
+            'label'      => trans('admin::app.catalog.categories.index.datagrid.no-of-products'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => false,
@@ -128,7 +128,7 @@ class CategoryDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.catalog.categories.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.catalog.categories.edit', $row->category_id);
@@ -137,7 +137,7 @@ class CategoryDataGrid extends DataGrid
 
         $this->addAction([
             'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.datagrid.delete'),
+            'title'        => trans('admin::app.catalog.categories.index.datagrid.delete'),
             'method'       => 'DELETE',
             'url'          => function ($row) {
                 return route('admin.catalog.categories.delete', $row->category_id);
@@ -145,22 +145,22 @@ class CategoryDataGrid extends DataGrid
         ]);
 
         $this->addMassAction([
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.catalog.categories.index.datagrid.delete'),
             'method' => 'POST',
             'url'    => route('admin.catalog.categories.mass_delete'),
         ]);
 
         $this->addMassAction([
-            'title'   => trans('admin::app.datagrid.update-status'),
+            'title'   => trans('admin::app.catalog.categories.index.datagrid.update-status'),
             'method'  => 'POST',
             'url'     => route('admin.catalog.categories.mass_update'),
             'options' => [
                 [
-                    'name' => trans('admin::app.datagrid.active'),
+                    'name' => trans('admin::app.catalog.categories.index.datagrid.active'),
                     'value' => 1,
                 ],
                 [
-                    'name' => trans('admin::app.datagrid.inactive'),
+                    'name' => trans('admin::app.catalog.categories.index.datagrid.inactive'),
                     'value' => 0,
                 ],
             ],

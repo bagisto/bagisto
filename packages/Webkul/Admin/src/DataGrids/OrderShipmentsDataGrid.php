@@ -59,7 +59,7 @@ class OrderShipmentsDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'shipment_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -68,7 +68,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'shipment_order_id',
-            'label'      => trans('admin::app.datagrid.order-id'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.order-id'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -77,7 +77,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'shipment_total_qty',
-            'label'      => trans('admin::app.datagrid.total-qty'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.total-qty'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -86,7 +86,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'inventory_source_name',
-            'label'      => trans('admin::app.datagrid.inventory-source'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.inventory-source'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -95,7 +95,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'order_date',
-            'label'      => trans('admin::app.datagrid.order-date'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.order-date'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -104,7 +104,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'shipment_created_at',
-            'label'      => trans('admin::app.datagrid.shipment-date'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-date'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -113,7 +113,7 @@ class OrderShipmentsDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'shipped_to',
-            'label'      => trans('admin::app.datagrid.shipment-to'),
+            'label'      => trans('admin::app.sales.shipments.index.datagrid.shipment-to'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -130,7 +130,7 @@ class OrderShipmentsDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.datagrid.view'),
+            'title'  => trans('admin::app.sales.shipments.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.shipments.view', $row->shipment_id);

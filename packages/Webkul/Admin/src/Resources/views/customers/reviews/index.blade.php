@@ -202,9 +202,11 @@
                     {{-- Rating, Date, Id Section --}}
                     <div class="flex flex-col gap-[6px]">
                         <div class="flex">
-                            <template v-for="(rating, index) in record.rating">
-                                <span class="icon-star text-[18px] text-amber-500"></span>
-                            </template>
+                            <x-admin::star-rating 
+                                :is-editable="false"
+                                ::value="record.rating"
+                            >
+                            </x-admin::star-rating>
                         </div>
 
                         <p
