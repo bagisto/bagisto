@@ -109,7 +109,7 @@
                                     class="col-start-[none]"
                                 >
                                     <span
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
                                         :class="action.icon"
                                         v-text="!action.icon ? action.title : ''"
                                         v-for="action in record.actions"

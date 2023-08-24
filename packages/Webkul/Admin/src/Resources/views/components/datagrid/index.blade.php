@@ -160,8 +160,6 @@
                                 meta
                             } = response.data;
 
-                            this.isLoading = false;
-
                             this.available.columns = columns;
 
                             this.available.actions = actions;
@@ -173,6 +171,8 @@
                             this.available.meta = meta;
 
                             this.setCurrentSelectionMode();
+
+                            this.isLoading = false;
                         });
                 },
 
