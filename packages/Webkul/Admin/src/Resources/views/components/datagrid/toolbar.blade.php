@@ -25,29 +25,34 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:menu>
+                    <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] border-gray-300">
                         <template v-for="massAction in available.massActions">
                             <li
                                 class="group/item relative overflow-visible"
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="whitespace-no-wrap block cursor-not-allowed rounded-t px-4 py-2 hover:bg-gray-400"
+                                    class="flex gap-[5px] justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                 >
                                     <i
+                                        class="text-[24px]"
                                         :class="massAction.icon"
                                         v-if="massAction?.icon"
                                     >
                                     </i>
 
-                                    @{{ massAction.title }}
+                                    <span>
+                                        @{{ massAction.title }}
+                                    </span>
+
+                                    <i class="icon-arrow-right text-[24px] !icon-arrow-left"></i>
                                 </a>
 
-                                <ul class="absolute left-full top-0 z-10 hidden w-max rounded-[4px] bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.20),0px_6px_30px_0px_rgba(0,0,0,0.12),0px_16px_24px_0px_rgba(0,0,0,0.14)] group-hover/item:block">
+                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
-                                            class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-400"
+                                            class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
                                             href="javascript:void(0);"
                                             v-text="option.name"
                                             @click="performMassAction(massAction, option)"
@@ -59,11 +64,12 @@
 
                             <li v-else>
                                 <a
-                                    class="whitespace-no-wrap block rounded-b px-4 py-2 hover:bg-gray-400"
+                                    class="flex gap-[5px] whitespace-no-wrap rounded-b px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >
                                     <i
+                                        class="text-[24px]"
                                         :class="massAction.icon"
                                         v-if="massAction?.icon"
                                     >

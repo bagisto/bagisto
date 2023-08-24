@@ -1461,6 +1461,8 @@ return [
                     'inactive'       => 'Inactive',
                     'no-of-products' => 'Number of Products',
                     'edit'           => 'Edit',
+                    'delete'         => 'Delete',
+                    'update-status'  => 'Update Status',
                 ],
             ],
 
