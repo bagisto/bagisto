@@ -105,7 +105,7 @@
                                 class="icon-uncheckbox cursor-pointer rounded-[6px] text-[24px]"
                                 :class="[
                                     applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-checked peer-checked:text-blue-600' : (
-                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-navyBlue' : ''
+                                        applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial peer-checked:text-blue-600' : ''
                                     ),
                                 ]"
                             >

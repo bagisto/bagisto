@@ -21,8 +21,8 @@
             </div>
         </div>
 
-        {{-- Added For Shimmer --}}
-        <x-admin::datagrid></x-admin::datagrid>
+        {{-- DataGrid Shimmer --}}
+        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
     </v-exchange-rates>
 
     @pushOnce('scripts')
@@ -56,31 +56,41 @@
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage}">
                     <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
+                        <!-- ID -->
                         <div
-                            class="cursor-pointer"
+                            class="flex gap-[10px] cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'currency_exchange_id'))"
                         >
-                            <div class="flex gap-[10px]">
-                                <p class="text-gray-600">ID</p>
-                            </div>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.exchange-rates.index.datagrid.id')
+                            </p>
                         </div>
-        
+
+                        <!-- Currency Name -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'currency_name'))"
                         >
-                            <p class="text-gray-600">Currency Name</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.exchange-rates.index.datagrid.currency-name')
+                            </p>
                         </div>
-        
+
+                        <!-- Exchange Rate -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'currency_rate'))"
                         >
-                            <p class="text-gray-600">Exchange Rate</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.exchange-rates.index.datagrid.exchange-rate')
+                            </p>
                         </div>
         
+                        <!-- Actions -->
                         <div class="cursor-pointer flex justify-end">
-                            <p class="text-gray-600">Actions</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.exchange-rates.index.datagrid.actions')
+                            </p>
                         </div>
                     </div>
                 </template>

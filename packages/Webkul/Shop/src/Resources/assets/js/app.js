@@ -85,7 +85,12 @@ window.app = createApp({
 import Axios from "./plugins/axios";
 import Emitter from "./plugins/emitter";
 import Shop from "./plugins/shop";
+
 [Axios, Emitter, Shop].forEach((plugin) => app.use(plugin));
+
+import Flatpickr from "flatpickr";
+import 'flatpickr/dist/flatpickr.css';
+window.Flatpickr = Flatpickr;
 
 /**
  * Global components registration;

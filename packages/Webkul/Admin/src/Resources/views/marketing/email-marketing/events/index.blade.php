@@ -18,8 +18,8 @@
             </div>
         </div>
 
-        {{-- Added For Shimmer --}}
-        <x-admin::datagrid src="{{ route('admin.events.index') }}"></x-admin::datagrid>
+        {{-- DataGrid Shimmer --}}
+        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
     </v-events>
 
     @pushOnce('scripts')
@@ -51,31 +51,41 @@
                 <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage}">
                     <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
+                        <!-- Id -->
                         <div
-                            class="cursor-pointer"
+                            class="flex gap-[10px] cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'id'))"
                         >
-                            <div class="flex gap-[10px]">
-                                <p class="text-gray-600">ID</p>
-                            </div>
+                            <p class="text-gray-600">
+                                @lang('admin::app.marketing.email-marketing.events.index.datagrid.id')
+                            </p>
                         </div>
-        
+
+                        <!-- Name -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'name'))"
                         >
-                            <p class="text-gray-600">Name</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.marketing.email-marketing.events.index.datagrid.name')
+                            </p>
                         </div>
-        
+
+                        <!-- Date -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'date'))"
                         >
-                            <p class="text-gray-600">Date</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.marketing.email-marketing.events.index.datagrid.date')
+                            </p>
                         </div>
-        
+
+                        <!-- Actions -->
                         <div class="cursor-pointer flex justify-end">
-                            <p class="text-gray-600">Actions</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.marketing.email-marketing.events.index.datagrid.actions')
+                            </p>
                         </div>
                     </div>
                 </template>
