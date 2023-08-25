@@ -173,7 +173,7 @@
 
                             <div class="flex gap-[5px] place-content-end self-center">
                                 <!-- Review Delete Button -->
-                                <a :href=`{{ route('admin.customer.review.delete', '') }}/${record.product_review_id}`>
+                                <a :href="`{{ route('admin.customer.review.delete', '') }}/${record.product_review_id}`">
                                     <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                                 </a>
 
