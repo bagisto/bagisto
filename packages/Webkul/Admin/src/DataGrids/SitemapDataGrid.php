@@ -79,9 +79,9 @@ class SitemapDataGrid extends DataGrid
             'icon'   => 'icon-edit',
             'title'  => trans('admin::app.marketing.sitemaps.index.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.sitemaps.edit',
+            'route'  => 'admin.sitemaps.update',
             'url'    => function ($row) {
-                return route('admin.sitemaps.edit', $row->id);
+                return route('admin.sitemaps.update', $row->id);
             },
         ]);
 

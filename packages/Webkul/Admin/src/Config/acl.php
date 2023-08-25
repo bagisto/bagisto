@@ -493,7 +493,7 @@ return [
     ], [
         'key'   => 'marketing.sitemaps.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.sitemaps.edit',
+        'route' => 'admin.sitemaps.update',
         'sort'  => 2,
     ], [
         'key'   => 'marketing.sitemaps.delete',

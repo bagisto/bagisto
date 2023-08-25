@@ -70,26 +70,15 @@ class SitemapController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $sitemap = $this->sitemapRepository->findOrFail($id);
-
-        return view('admin::marketing.sitemaps.edit', compact('sitemap'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update()
     {
+        $id = request()->id;
+
         $this->validate(request(), [
             'file_name' => 'required',
             'path'      => 'required',

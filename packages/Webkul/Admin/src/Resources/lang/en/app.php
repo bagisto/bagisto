@@ -914,6 +914,7 @@ return [
                 ],
 
                 'datagrid' => [
+                    'actions'   => 'Actions',
                     'id'        => 'ID',
                     'name'      => 'Name',
                     'status'    => 'Status',
@@ -1781,6 +1782,7 @@ return [
         'sitemaps' => [
             'index' => [
                 'title' => 'Sitemaps',
+                'create-btn'     => 'Create Sitemap',
 
                 'datagrid' => [
                     'id'              => 'ID',
@@ -1789,17 +1791,21 @@ return [
                     'link-for-google' => 'Link for Google',
                     'edit'            => 'Edit',
                     'delete'          => 'Delete',
+                    'actions'         => 'Actions',
                 ],
-            ],
-            'create'  => [
-                'file-name'      => 'File Name',
-                'file-name-info' => 'Example: sitemap.xml',
-                'general'        => 'General',
-                'path'           => 'Path',
-                'path-info'      => 'Example: "/sitemap/" or "/" for base path',
-                'save-btn'       => 'Save',
-                'title'          => 'Add Sitemap',
-                'create-btn'     => 'Create Sitemap',
+
+                'create'  => [
+                    'file-name'      => 'File Name',
+                    'file-name-info' => 'Example: sitemap.xml',
+                    'path'           => 'Path',
+                    'path-info'      => 'Example: "/sitemap/" or "/" for base path',
+                    'save-btn'       => 'Save Sitemap',
+                    'title'          => 'Create Sitemap',
+                ],
+
+                'edit'  =>  [
+                    'title'   => 'Edit Sitemap',
+                ],
             ],
 
             'edit'  => [
@@ -1810,7 +1816,6 @@ return [
                 'path'           => 'Path',
                 'path-info'      => 'Example: "/sitemap/" or "/" for base path',
                 'save-btn'       => 'Save Sitemap',
-                'title'          => 'Edit Sitemap',
             ],
         ],
 

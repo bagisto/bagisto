@@ -22,8 +22,7 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    ) 
-    {
+    ) {
     }
 
     /**
@@ -76,18 +75,21 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * User Details
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param int $id
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         $user = $this->adminRepository->findOrFail($id);
 
         $roles = $this->roleRepository->all();
 
-        return view('admin::users.users.edit', compact('user', 'roles'));
+        return new JsonResource([
+            'roles' => $roles,
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -108,7 +110,7 @@ class UserController extends Controller
 
         $admin = $this->adminRepository->update($data, $id);
 
-        if (! empty($data['password'])) {
+        if (!empty($data['password'])) {
             Event::dispatch('user.admin.update-password', $admin);
         }
 
@@ -211,7 +213,7 @@ class UserController extends Controller
         /**
          * Password check.
          */
-        if (! $data['password']) {
+        if (!$data['password']) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);
@@ -222,12 +224,11 @@ class UserController extends Controller
          */
         $data['status'] = isset($data['status']);
 
-        $isStatusChangedToInactive = ! $data['status'] && (bool) $user->status;
+        $isStatusChangedToInactive = !$data['status'] && (bool) $user->status;
 
         if (
             $isStatusChangedToInactive
-            && (
-                auth()->guard('admin')->user()->id === (int) $id
+            && (auth()->guard('admin')->user()->id === (int) $id
                 || $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
             )
         ) {
