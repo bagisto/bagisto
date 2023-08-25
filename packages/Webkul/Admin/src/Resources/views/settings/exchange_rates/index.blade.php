@@ -264,7 +264,7 @@
     
                                     this.$refs.datagrid.get();
 
-                                    this.$emitter.emit('add-flash', { type: 'success', message: 'Exchange Rate Updated successfully' });
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
         
                                     resetForm();
                                 })
@@ -276,7 +276,7 @@
                         } else {
                             this.$axios.post("{{ route('admin.exchange_rates.store')  }}", params)
                                 .then((response) => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: 'Exchange Rate Created successfully' });
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                     this.$refs.exchangeRate.close();
 
@@ -296,9 +296,9 @@
                         this.$axios.get(`{{ route('admin.exchange_rates.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
-                                    id: response.data.exchangeRate.id,
-                                    rate: response.data.exchangeRate.rate,
-                                    target_currency: response.data.exchangeRate.target_currency,
+                                    id: response.data.data.exchangeRate.id,
+                                    rate: response.data.data.exchangeRate.rate,
+                                    target_currency: response.data.data.exchangeRate.target_currency,
                                 };
 
                                 this.$refs.exchangeRate.toggle();
@@ -324,7 +324,7 @@
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Exchange Rate Deleted successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

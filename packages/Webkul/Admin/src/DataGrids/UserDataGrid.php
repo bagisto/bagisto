@@ -64,27 +64,18 @@ class UserDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'user_img',
+            'label'      => trans('admin::app.users.users.index.datagrid.name'),
+            'type'       => 'string',
+            'searchable' => true,
+            'filterable' => true,
+            'sortable'   => true,
             'closure'    => function ($row) {
-                if ($row->user_image) {
-                    return 
-                    '<div class="flex gap-[10px] items-center">
-                        <div class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden">
-                            <img class="w-[36px] h-[36px]" src="' . Storage::url($row->user_image) . '" alt="' . $row->user_name . '">
-                        </div>
-
-                        <div class="text-sm">' . $row->user_name . '</div> 
-                    </div>';
-                
-                }
-
-                return  
-                    '<div class="flex gap-[10px] items-center">
-                        <div class="inline-block w-[36px] h-[36px] rounded-full bg-gray-200 border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden">
-                            <span class="icon-customer text-[30px]"></span>
-                        </div>
-
-                        <div class="text-sm">' . $row->user_name . '</div>
-                    </div>';
+                return
+                    '' . Storage::url($row->user_image) . '';
             },
         ]);
 

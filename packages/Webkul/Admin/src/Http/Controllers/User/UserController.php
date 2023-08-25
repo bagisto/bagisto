@@ -22,8 +22,7 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    ) 
-    {
+    ) {
     }
 
     /**
@@ -45,9 +44,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource;
+     * @param UserForm $request
+     * @return JsonResource
      */
-    public function store(UserForm $request)
+    public function store(UserForm $request): JsonResource
     {
         $data = $request->only([
             'name',
@@ -71,33 +71,38 @@ class UserController extends Controller
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.users.users.index.create.create-success'),
+            'message' => trans('admin::app.users.users.index.create.success'),
         ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * User Details
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param int $id
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         $user = $this->adminRepository->findOrFail($id);
 
         $roles = $this->roleRepository->all();
 
-        return view('admin::users.users.edit', compact('user', 'roles'));
+        return new JsonResource([
+            'roles' => $roles,
+            'user' => $user,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UserForm $request
+     * @return JsonResource
      */
-    public function update(UserForm $request, $id)
+    public function update(UserForm $request): JsonResource
     {
+        $id = request()->id;
+
         $data = $this->prepareUserData($request, $id);
 
         if ($data instanceof \Illuminate\Http\RedirectResponse) {
@@ -108,27 +113,27 @@ class UserController extends Controller
 
         $admin = $this->adminRepository->update($data, $id);
 
-        if (! empty($data['password'])) {
+        if (!empty($data['password'])) {
             Event::dispatch('user.admin.update-password', $admin);
         }
 
         Event::dispatch('user.admin.update.after', $admin);
 
-        session()->flash('success', trans('admin::app.users.users.index.create.update-success', ['name' => 'User']));
-
-        return redirect()->route('admin.users.index');
+        return new JsonResource([
+            'message' => trans('admin::app.users.users.index.edit.success', ['name' => trans('admin::app.users.users.index.user')]),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         if ($this->adminRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'Admin'])], 400);
+            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'admin::app.users.users.index.admin'])], 400);
         }
 
         if (auth()->guard('admin')->user()->id == $id) {
@@ -144,11 +149,15 @@ class UserController extends Controller
 
             Event::dispatch('user.admin.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Admin'])]);
+            return new JsonResource([
+                'message' => trans('admin::app.response.delete-success', ['name' => trans('admin::app.users.users.index.admin')]),
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Admin'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.users.users.index.admin')]),
+        ], 500);
     }
 
     /**
@@ -211,7 +220,7 @@ class UserController extends Controller
         /**
          * Password check.
          */
-        if (! $data['password']) {
+        if (!$data['password']) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);
@@ -222,12 +231,11 @@ class UserController extends Controller
          */
         $data['status'] = isset($data['status']);
 
-        $isStatusChangedToInactive = ! $data['status'] && (bool) $user->status;
+        $isStatusChangedToInactive = !$data['status'] && (bool) $user->status;
 
         if (
             $isStatusChangedToInactive
-            && (
-                auth()->guard('admin')->user()->id === (int) $id
+            && (auth()->guard('admin')->user()->id === (int) $id
                 || $this->adminRepository->countAdminsWithAllAccessAndActiveStatus() === 1
             )
         ) {

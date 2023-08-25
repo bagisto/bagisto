@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -34,21 +35,11 @@ class SitemapController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::marketing.sitemaps.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function store()
+    public function store(): JsonResource
     {
         $this->validate(request(), [
             'file_name' => 'required',
@@ -64,32 +55,21 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.create.after', $sitemap);
 
-        session()->flash('success', trans('admin::app.marketing.sitemaps.create-success'));
-
-        return redirect()->route('admin.sitemaps.index');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $sitemap = $this->sitemapRepository->findOrFail($id);
-
-        return view('admin::marketing.sitemaps.edit', compact('sitemap'));
+        return new JsonResource([
+            'message' => trans('admin::app.marketing.sitemaps.index.create.success'),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function update($id)
+    public function update(): JsonResource
     {
+        $id = request()->id;
+
         $this->validate(request(), [
             'file_name' => 'required',
             'path'      => 'required',
@@ -104,18 +84,18 @@ class SitemapController extends Controller
 
         Event::dispatch('marketing.sitemaps.update.after', $sitemap);
 
-        session()->flash('success', trans('admin::app.marketing.sitemaps.update-success'));
-
-        return redirect()->route('admin.sitemaps.index');
+        return new JsonResource([
+            'message' => trans('admin::app.marketing.sitemaps.index.edit.success'),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
@@ -128,10 +108,14 @@ class SitemapController extends Controller
 
             Event::dispatch('marketing.sitemaps.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.marketing.sitemaps.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.sitemaps.index.edit.delete-success'),
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Sitemap'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
+        ], 500);
     }
 }

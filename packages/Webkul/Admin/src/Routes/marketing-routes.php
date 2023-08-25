@@ -85,8 +85,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(EventController::class)->prefix('events')->group(function () {
             Route::get('', 'index')->name('admin.events.index');
 
-            Route::get('create', 'create')->name('admin.events.create');
-
             Route::post('create', 'store')->name('admin.events.store');
 
             Route::get('edit/{id}', 'edit')->name('admin.events.edit');
@@ -132,13 +130,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(SitemapController::class)->prefix('sitemaps')->group(function () {
             Route::get('', 'index')->name('admin.sitemaps.index');
 
-            Route::get('create', 'create')->name('admin.sitemaps.create');
-
             Route::post('create', 'store')->name('admin.sitemaps.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.sitemaps.edit');
-
-            Route::post('edit/{id}', 'update')->name('admin.sitemaps.update');
+            Route::post('edit', 'update')->name('admin.sitemaps.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.sitemaps.delete');
         });
