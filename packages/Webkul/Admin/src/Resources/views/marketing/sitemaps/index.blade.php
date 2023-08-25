@@ -112,7 +112,11 @@
                         <p v-text="record.path"></p>
 
                         <!-- URL -->
-                        <p v-text="record.url"></p>
+                        <p v-text="record.url">
+                            <a :href="record.url" target="_blank">
+                                @{{ record.url}}
+                            </a>
+                        </p>
 
                         <!-- Actions -->
                         <div class="flex justify-end">
