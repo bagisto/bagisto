@@ -457,7 +457,24 @@ return [
                 'product'     => 'Product',
                 'rating'      => 'Rating',
                 'status'      => 'Status',
-                'title' => 'Reviews',
+                'title'       => 'Reviews',
+
+                'edit'  => [
+                    'title'          => 'Edit Review',
+                    'save-btn'       => 'Save',
+                    'customer'       => 'Customer',
+                    'product'        => 'Product',
+                    'id'             => 'ID',
+                    'date'           => 'Date',
+                    'status'         => 'Status',
+                    'approved'       => 'Approved',
+                    'disapproved'    => 'Disapproved',
+                    'pending'        => 'Pending',
+                    'rating'         => 'Rating',
+                    'review-title'   => 'Title',
+                    'review-comment' => 'Comment',
+                    'images'         => 'Images',
+                ],
 
                 'datagrid'   =>  [
                     'customer_names' => 'Name',

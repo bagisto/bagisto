@@ -18,7 +18,7 @@
                 :isMultiRow="true"
                 ref="review_data"
             >
-                {{-- Datagrid Header --}}
+                <!-- Datagrid Header -->
                 <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading }">
                     <template v-if="! isLoading">
                         <div class="row grid grid-rows-1 grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300">
@@ -51,7 +51,7 @@
                                     </span>
                                 </label>
 
-                                {{-- Product Name, Review Status --}}
+                                <!-- Product Name, Review Status -->
                                 <p class="text-gray-600">
                                     <span class="[&>*]:after:content-['_/_']">
                                         <template v-for="column in columnGroup">
@@ -80,7 +80,7 @@
                         </div>
                     </template>               
 
-                    {{-- Datagrid Head Shimmer --}}
+                    <!-- Datagrid Head Shimmer -->
                     <template v-else>
                         <x-admin::shimmer.datagrid.table.head :isMultiRow="true"></x-admin::shimmer.datagrid.table.head>
                     </template>
@@ -92,7 +92,7 @@
                             class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
                             v-for="record in records"
                         >
-                            {{-- Name, Product, Description --}}
+                            <!-- Name, Product, Description -->
                             <div class="flex gap-[10px]">
                                 <input 
                                     type="checkbox" 
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
 
-                            {{-- Rating, Date, Id Section --}}
+                            <!-- Rating, Date, Id Section -->
                             <div class="flex flex-col gap-[6px]">
                                 <div class="flex">
                                     <x-admin::star-rating 
@@ -156,7 +156,7 @@
                                 </p>
                             </div>
 
-                            {{-- Title, Description --}}
+                            <!-- Title, Description -->
                             <div class="flex flex-col gap-[6px]">
                                 <p
                                     class="text-[16px] text-gray-800 font-semibold"
@@ -183,7 +183,7 @@
                         </div>
                     </template>
 
-                    {{-- Datagrid Body Shimmer --}}
+                    <!-- Datagrid Body Shimmer -->
                     <template v-else>
                         <x-admin::shimmer.datagrid.table.body :isMultiRow="true"></x-admin::shimmer.datagrid.table.body>
                     </template>
@@ -191,131 +191,174 @@
             </x-admin::datagrid>
 
             <!-- Drawer content -->
-            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <!-- Left sub-component -->
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <x-admin::form
-                        v-slot="{ meta, errors, handleSubmit }"
-                        as="div"
-                    >
-                        <form @submit="handleSubmit($event, update)">
-                            <x-admin::drawer ref="review">
-                                <!-- Drawer Header -->
-                                <x-slot:header>
-                                    <div class="flex justify-between items-center">
-                                        <p class="text-[20px] font-medium">
-                                            @lang('Edit Reivew')
-                                        </p>
-                    
-                                        <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
-                                            @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
-                                        </button>
-                                    </div>
-                                </x-slot:header>
-                                <!-- Drawer Content -->
-                    
-                                <x-slot:content>
-                                    <div class="flex flex-col gap-[16px] px-[5px] py-[10px]">
-                                        <div class="grid grid-cols-2 gap-[16px]">
-                                            <div class="">
-                                                <p class="text-[12px] text-gray-800 font-semibold">Customer</p>
-                                                <p class="text-gray-800 font-semibold" v-text="review.name !== '' ? review.name : 'N/A'"></p>
-                                            </div>
+            <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form @submit="handleSubmit($event, update)">
+                        <x-admin::drawer ref="review">
+                            <!-- Drawer Header -->
+                            <x-slot:header>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-[20px] font-medium">
+                                        @lang('admin::app.customers.reviews.index.edit.title')
+                                    </p>
+                
+                                    <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                        @lang('admin::app.customers.reviews.index.edit.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:header>
 
-                                            <div class="">
-                                                <p class="text-[12px] text-gray-800 font-semibold">Product</p>
-                                                <p class="text-gray-800 font-semibold" v-text="review.product.name"></p>
-                                            </div>
-                    
-                                            <div class="">
-                                                <p class="text-[12px] text-gray-800 font-semibold">ID</p>
-                                                <p class="text-gray-800 font-semibold" v-text="review.id"></p>
-                                            </div>
-                    
-                                            <div class="">
-                                                <p class="text-[12px] text-gray-800 font-semibold">Date</p>
-                                                <p class="text-gray-800 font-semibold" v-text="review.created_at"></p>
-                                            </div>
+                            <!-- Drawer Content -->
+                            <x-slot:content>
+                                <div class="flex flex-col gap-[16px] px-[5px] py-[10px]">
+                                    <div class="grid grid-cols-2 gap-[16px]">
+                                        <div class="">
+                                            <!-- Customer Name -->
+                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                                @lang('admin::app.customers.reviews.index.edit.customer')
+                                            </p>
+
+                                            <p 
+                                                class="text-gray-800 font-semibold" 
+                                                v-text="review.name !== '' ? review.name : 'N/A'"
+                                            >
+                                            </p>
                                         </div>
-                                        <div class="w-full">
+
+                                        <div class="">
+                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                                @lang('admin::app.customers.reviews.index.edit.product')
+                                            </p>
+
+                                            <p 
+                                                class="text-gray-800 font-semibold" 
+                                                v-text="review.product.name"
+                                            >
+                                            </p>
+                                        </div>
+                
+                                        <div class="">
+                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                                @lang('admin::app.customers.reviews.index.edit.id')
+                                            </p>
+
+                                            <p 
+                                                class="text-gray-800 font-semibold" 
+                                                v-text="review.id"
+                                            >
+                                            </p>
+                                        </div>
+                
+                                        <div class="">
+                                            <p class="text-[12px] text-gray-600 font-semibold">
+                                                @lang('admin::app.customers.reviews.index.edit.date')
+                                            </p>
+
+                                            <p 
+                                                class="text-gray-800 font-semibold" 
+                                                v-text="review.date"
+                                            >
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="w-full">
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            name="id"
+                                            ::value="review.id"
+                                            rules="required"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.customers.reviews.index.edit.status')
+                                            </x-admin::form.control-group.label>
                                             <x-admin::form.control-group.control
-                                                type="hidden"
-                                                name="id"
-                                                ::value="review.id"
+                                                type="select"
+                                                name="status"
+                                                ::value="review.status"
                                                 rules="required"
                                             >
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label class="required">
-                                                    Status 
-                                                </x-admin::form.control-group.label>
-                                                <x-admin::form.control-group.control
-                                                    type="select"
-                                                    name="status"
-                                                    ::value="review.status"
-                                                    rules="required"
-                                                >
-                                                    <option value="approved" >
-                                                        Approved
-                                                    </option>
-                    
-                                                    <option value="disapproved">
-                                                        Disapproved
-                                                    </option>
-                    
-                                                    <option value="pending">
-                                                        Pending
-                                                    </option>
-                                                </x-admin::form.control-group.control>
-                    
-                                                <x-admin::form.control-group.error
-                                                    control-name="status"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
-                    
-                                        <div class="w-full ">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Rating </label>
-                                            <div class="flex">
-                                                <x-admin::star-rating 
-                                                    :is-editable="false"
-                                                    ::value="review.rating"
-                                                >
-                                                </x-admin::star-rating>
-                                            </div>
-                                        </div>
-                    
-                                        <div class="w-full">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="title"> Title </label>
-                                            <p class="text-gray-800 font-semibold" v-text="review.title"></p>
-                                        </div>
-                    
-                                        <div class="w-full">
-                                            <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="comment"> Comment </label>
-                                            <p class="text-gray-800" v-text="review.comment"></p>
-                                        </div>
-                    
-                                        <div class="w-full" v-if="review.images.length">
-                                            <x-admin::form.control-group.label>
-                                                Images
-                                            </x-admin::form.control-group.label>
+                                                <option value="approved" >
+                                                    @lang('admin::app.customers.reviews.index.edit.approved')
+                                                </option>
                 
-                                            <div class="flex gap-4">   
-                                                <img
-                                                    class="h-[60px] w-[60px] rounded-[4px]" 
-                                                    v-for="image in review.images"
-                                                    :src="image.url"
-                                                >
-                                            </div>
+                                                <option value="disapproved">
+                                                    @lang('admin::app.customers.reviews.index.edit.disapproved')
+                                                </option>
+                
+                                                <option value="pending">
+                                                    @lang('admin::app.customers.reviews.index.edit.pending')
+                                                </option>
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error
+                                                control-name="status"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    </div>
+                
+                                    <div class="w-full ">
+                                        <p class="text-gray-600 font-semibold">
+                                            @lang('admin::app.customers.reviews.index.edit.rating') 
+                                        </p>
+
+                                        <div class="flex">
+                                            <x-admin::star-rating 
+                                                :is-editable="false"
+                                                ::value="review.rating"
+                                            >
+                                            </x-admin::star-rating>
                                         </div>
                                     </div>
-                                </x-slot:content>
-                            </x-admin::drawer>
-                        </form>
-                    </x-admin::form>
-                </div>
+                
+                                    <div class="w-full">
+                                        <p class="block text-[12px] text-gray-800 font-medium leading-[24px]">
+                                            @lang('admin::app.customers.reviews.index.edit.review-title') 
+                                        </p>
+
+                                        <p 
+                                            class="text-gray-800 font-semibold" 
+                                            v-text="review.title"
+                                        >
+                                        </p>
+                                    </div>
+                
+                                    <div class="w-full">
+                                        <p class="block text-[12px]  text-gray-600 font-semibold leading-[24px]">
+                                            @lang('admin::app.customers.reviews.index.edit.review-comment')     
+                                        </p>
+
+                                        <p 
+                                            class="text-gray-800" 
+                                            v-text="review.comment"
+                                        >
+                                        </p>
+                                    </div>
+                
+                                    <div class="w-full" v-if="review.images.length">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.customers.reviews.index.edit.images')     
+                                        </x-admin::form.control-group.label>
+            
+                                        <div class="flex gap-4">   
+                                            <img
+                                                class="h-[60px] w-[60px] rounded-[4px]" 
+                                                v-for="image in review.images"
+                                                :src="image.url"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </x-slot:content>
+                        </x-admin::drawer>
+                    </form>
+                </x-admin::form>
             </div>
         </script>
 

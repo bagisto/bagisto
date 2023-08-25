@@ -44,6 +44,8 @@ class ReviewController extends Controller
     {
         $review = $this->productReviewRepository->with(['images', 'product'])->findOrFail($id);
 
+        $review->date = $review->created_at->format('Y-m-d');
+        
         return new JsonResource($review);
     }
 
