@@ -3,9 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
 {
@@ -33,17 +34,19 @@ class ReviewController extends Controller
         return view('admin::customers.reviews.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
+     /**
+     * Review Details
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
-        $review = $this->productReviewRepository->findOrFail($id);
+        $review = $this->productReviewRepository->with(['images', 'product'])->findOrFail($id);
 
-        return view('admin::customers.reviews.edit', compact('review'));
+        $review->date = $review->created_at->format('Y-m-d');
+        
+        return new JsonResource($review);
     }
 
     /**
