@@ -904,11 +904,11 @@
 
                         start: "{{ $startDate->format('Y-m-d') }}",
 
-                        formatStart: "{{ $startDate->format('d M') }}",
+                        formatStart: "",
 
                         end: "{{ $endDate->format('Y-m-d') }}",
 
-                        formatEnd: "{{ $endDate->format('d M') }}",
+                        formatEnd: "",
 
                         statistics: {},
                     }
@@ -917,6 +917,10 @@
                 mounted() {
                     this.$axios.get("{{ route('admin.dashboard.index') }}")
                         .then((response) => {
+                            this.formatStart = response.data.startDate;
+
+                            this.formatEnd = response.data.endDate;
+
                             this.statistics = response.data.statistics;
 
                             this.isLoading = ! this.isLoading;
@@ -941,6 +945,10 @@
 
                         this.$axios.get("{{ route('admin.dashboard.index') }}" + queryParams)
                             .then((response) => {
+                                this.formatStart = response.data.startDate;
+
+                                this.formatEnd = response.data.endDate;
+
                                 this.statistics = response.data.statistics;
                             })
                             .catch(error => {
