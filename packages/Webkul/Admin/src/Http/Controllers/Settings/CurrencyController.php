@@ -150,15 +150,15 @@ class CurrencyController extends Controller
                 }
             }
 
-            if (!$suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'currencies']));
+            if (! $suppressFlash) {
+                session()->flash('success', trans('admin::app.settings.currencies.index.datagrid.delete-success', ['resource' => 'currencies']));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'currencies']));
+                session()->flash('info', trans('admin::app.settings.currencies.index.datagrid.partial-action', ['resource' => 'currencies']));
             }
 
             return redirect()->back();
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            session()->flash('error', trans('admin::app.settings.currencies.index.datagrid.method-error'));
 
             return redirect()->back();
         }

@@ -114,7 +114,7 @@
                 <div class="grid gap-[10px] px-[20px] py-[10px] border border-b-gray-300">
                     {{-- Version --}}
                     <p class="text-gray-400">
-                        @lang('admin::app.layouts.app-version', ['version' => 'v' . core()->version()])
+                        @lang('admin::app.components.layouts.header.app-version', ['version' => 'v' . core()->version()])
                     </p>
                 </div>
 
@@ -123,7 +123,7 @@
                         class="px-5 py-2 text-[16px] text-gray-800 hover:bg-gray-100 cursor-pointer"
                         href="{{ route('admin.account.edit') }}"
                     >
-                        @lang('admin::app.layouts.my-account')
+                        @lang('admin::app.components.layouts.header.my-account')
                     </a>
 
                     {{--Admin logout--}}
@@ -139,7 +139,7 @@
                         href="{{ route('admin.session.destroy') }}"
                         onclick="event.preventDefault(); document.getElementById('adminLogout').submit();"
                     >
-                        @lang('admin::app.layouts.logout')
+                        @lang('admin::app.components.layouts.header.logout')
                     </a>
                 </div>
             </x-slot:content>
