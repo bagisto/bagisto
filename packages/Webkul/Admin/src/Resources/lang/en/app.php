@@ -2271,15 +2271,23 @@ return [
     'components' => [
         'layouts' => [
             'header' => [
-                'search'        => 'Search',
-                'mega-search'   => 'Mega Search',
                 'notifications' => 'Notifications',
-                'visit-shop'    => 'Visit Shop',
                 'app-version'   => 'Version : :version',
                 'account-title' => 'Account',
                 'my-account'    => 'My Account',
                 'logout'        => 'Logout',
                 'visit-shop'    => 'Visit Shop',
+
+                'mega-search' => [
+                    'title'              => 'Mega Search',
+                    'recent-searches' => 'Recent Searches',
+                    'clear-all'       => 'Clear All',
+                    'products'        => 'Products',
+                    'orders'          => 'Orders',
+                    'categories'      => 'Categories',
+                    'customers'       => 'Customers',
+                    'sku'             => 'SKU: :sku',
+                ],
             ],
 
             'sidebar' => [

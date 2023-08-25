@@ -284,4 +284,27 @@ class CategoryController extends Controller
 
         return $category->id === 1 || $channelRootCategoryIds->contains($category->id);
     }
+
+    /**
+     * Result of search customer.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = [];
+
+        $categories = $this->categoryRepository->scopeQuery(function($query) {
+            return $query
+                ->select('categories.*')
+                ->leftJoin('category_translations', function ($query) {
+                    $query->on('categories.id', '=', 'category_translations.category_id')
+                        ->where('category_translations.locale', app()->getLocale());
+                })
+                ->where('category_translations.name', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orderBy('created_at', 'desc');
+        })->paginate(10);
+
+        return response()->json($categories);
+    }
 }

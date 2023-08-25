@@ -33,32 +33,18 @@
             @endif
         </a>
 
-        {{-- Search Bar --}}
-        <form class="flex items-center max-w-[445px] ml-[10px]">
-            <label 
-                for="organic-search" 
-                class="sr-only"
-            >
-                @lang('admin::app.components.layouts.header.search')
-            </label>
-
-            <div class="relative w-full">
-                <div class="icon-search text-[22px] absolute left-[12px] top-[6px] flex items-center pointer-events-none"></div>
+        {{-- Mega Search Bar Vue Component --}}
+        <v-mega-search>
+            <div class="flex items-center relative w-[525px] max-w-[525px] ml-[10px]">
+                <i class="icon-search text-[22px] flex items-center absolute left-[12px] top-[6px]"></i>
 
                 <input 
                     type="text" 
                     class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-400 transition-all hover:border-gray-400"
-                    placeholder="@lang('admin::app.components.layouts.header.mega-search')" 
-                    required=""
+                    placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
                 >
-
-                <button 
-                    type="button" 
-                    class="absolute icon-camera top-[12px] right-[12px] flex items-center pr-[12px] text-[22px]"
-                >
-                </button>
             </div>
-        </form>
+        </v-mega-search>
     </div>
 
     <div class="flex gap-[10px] items-center">
@@ -200,3 +186,275 @@
         </div>
     </x-slot:content>
 </x-admin::drawer>
+
+@pushOnce('scripts')
+    <script type="text/x-template" id="v-mega-search-template">
+        <div class="flex items-center relative w-[525px] max-w-[525px] ml-[10px]">
+            <i class="icon-search text-[22px] flex items-center absolute left-[12px] top-[6px]"></i>
+
+            <input 
+                type="text" 
+                class="bg-white border border-gray-300 rounded-lg block w-full px-[40px] py-[5px] leading-6 text-gray-400 transition-all hover:border-gray-400 focus:border-gray-400 peer"
+                placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
+                v-model="searchTerm"
+                @input="search"
+                @click="searchTerm.length ? isDropdownOpen = true : {}"
+            >
+
+            <div
+                class="absolute top-[40px] w-full bg-white shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] border border-gray-300 rounded-[8px] z-10"
+                v-if="isDropdownOpen"
+            >
+                <!-- Search Tabs -->
+                <div class="flex border-b-[1px] border-gray-300 text-[14px] text-gray-600">
+                    <div
+                        class="p-[16px] hover:bg-gray-100 cursor-pointer"
+                        :class="{ 'border-b-[2px] border-blue-600': activeTab == tab.key }"
+                        v-for="tab in tabs"
+                        @click="activeTab = tab.key; search();"
+                    >
+                        @{{ tab.title }}
+                    </div>
+                </div>
+
+                <!-- Searched Results -->
+                <template v-if="activeTab == 'products'">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.header.mega-search.products></x-admin::shimmer.header.mega-search.products>
+                    </template>
+
+                    <template v-else>
+                        <div class="grid max-h-[400px] overflow-y-auto">
+                            <div
+                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                v-for="product in searchedResults.products"
+                            >
+                                <!-- Left Information -->
+                                <div class="flex gap-[10px]">
+                                    <!-- Image -->
+                                    <div
+                                        class="w-full h-[46px] max-w-[46px] max-h-[46px] relative rounded-[4px] overflow-hidden"
+                                        :class="{'border border-dashed border-gray-300': ! product.images.length}"
+                                    >
+                                        <template v-if="! product.images.length">
+                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        
+                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
+                                        </template>
+
+                                        <template v-else>
+                                            <img :src="product.images[0].url">
+                                        </template>
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-600 font-semibold">
+                                            @{{ product.name }}
+                                        </p>
+
+                                        <p class="text-gray-500">
+                                            @{{ "@lang('admin::app.components.layouts.header.mega-search.sku')".replace(':sku', product.sku) }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Right Information -->
+                                <div class="grid gap-[4px] place-content-center text-right">
+                                    <p class="text-gray-600 font-semibold">
+                                        @{{ $admin.formatPrice(product.price) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="p-[16px]">
+                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
+                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
+                            </span>
+                        </div>
+                    </template>
+                </template>
+
+                <template v-if="activeTab == 'orders'">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.header.mega-search.orders></x-admin::shimmer.header.mega-search.orders>
+                    </template>
+
+                    <template v-else>
+                        <div class="grid max-h-[400px] overflow-y-auto">
+                            <div
+                                class="grid gap-[6px] place-content-start  p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                v-for="order in searchedResults.orders"
+                            >
+                                <p class="text-[16x] text-gray-600 font-semibold">
+                                    #@{{ order.increment_id }}
+                                </p>
+
+                                <p class="text-gray-500">
+                                    @{{ order.formatted_created_at + ', ' + order.status_label + ', ' + order.customer_full_name }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-[16px]">
+                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
+                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
+                            </span>
+                        </div>
+                    </template>
+                </template>
+
+                <template v-if="activeTab == 'categories'">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.header.mega-search.categories></x-admin::shimmer.header.mega-search.categories>
+                    </template>
+
+                    <template v-else>
+                        <div class="grid max-h-[400px] overflow-y-auto">
+                            <div
+                                class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 font-semibold cursor-pointer hover:bg-gray-100"
+                                v-for="category in searchedResults.categories"
+                            >
+                                @{{ category.name }}
+                            </div>
+                        </div>
+
+                        <div class="p-[16px]">
+                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
+                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
+                            </span>
+                        </div>
+                    </template>
+                </template>
+
+                <template v-if="activeTab == 'customers'">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.header.mega-search.customers></x-admin::shimmer.header.mega-search.customers>
+                    </template>
+
+                    <template v-else>
+                        <div class="grid max-h-[400px] overflow-y-auto">
+                            <div
+                                class="grid gap-[6px] place-content-start  p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                v-for="customer in searchedResults.customers"
+                            >
+                                <p class="text-[16x] text-gray-600 font-semibold">
+                                    @{{ customer.first_name + ' ' + customer.last_name }}
+                                </p>
+
+                                <p class="text-gray-500">
+                                    @{{ customer.email }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-[16px]">
+                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
+                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
+                            </span>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-mega-search', {
+            template: '#v-mega-search-template',
+
+            data() {
+                return {
+                    recentSearches: [],
+
+                    activeTab: 'products',
+
+                    isDropdownOpen: false,
+
+                    tabs: {
+                        products: {
+                            key: 'products',
+                            title: "@lang('admin::app.components.layouts.header.mega-search.products')",
+                            is_active: true,
+                            endpoint: "{{ route('admin.catalog.products.search') }}"
+                        },
+                        
+                        orders: {
+                            key: 'orders',
+                            title: "@lang('admin::app.components.layouts.header.mega-search.orders')",
+                            endpoint: "{{ route('admin.sales.orders.search') }}"
+                        },
+                        
+                        categories: {
+                            key: 'categories',
+                            title: "@lang('admin::app.components.layouts.header.mega-search.categories')",
+                            endpoint: "{{ route('admin.catalog.categories.search') }}"
+                        },
+                        
+                        customers: {
+                            key: 'customers',
+                            title: "@lang('admin::app.components.layouts.header.mega-search.customers')",
+                            endpoint: "{{ route('admin.customer.search') }}"
+                        }
+                    },
+
+                    isLoading: false,
+
+                    searchTerm: '',
+
+                    searchedResults: {
+                        products: [],
+                        orders: [],
+                        categories: [],
+                        customers: []
+                    },
+                }
+            },
+
+            created() {
+                window.addEventListener('click', this.handleFocusOut);
+            },
+
+            beforeDestroy() {
+                window.removeEventListener('click', this.handleFocusOut);
+            },
+
+            methods: {
+                search() {
+                    if (! this.searchTerm.length) {
+                        this.searchedResults[this.activeTab] = [];
+
+                        this.isDropdownOpen = false;
+
+                        return;
+                    }
+
+                    this.isDropdownOpen = true;
+
+                    let self = this;
+
+                    this.isLoading = true;
+                    
+                    this.$axios.get(this.tabs[this.activeTab].endpoint, {
+                            params: {query: this.searchTerm}
+                        })
+                        .then(function(response) {
+                            self.searchedResults[self.activeTab] = response.data.data;
+
+                            self.isLoading = false;
+                        })
+                        .catch(function (error) {
+                        })
+                },
+
+                handleFocusOut(e) {
+                    if (! this.$el.contains(e.target)) {
+                        this.isDropdownOpen = false;
+                    }
+                },
+            }
+        });
+    </script>
+@endpushOnce
