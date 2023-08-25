@@ -112,7 +112,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.tax_categories.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.tax_categories.update');
+        Route::post('edit', 'update')->name('admin.tax_categories.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.tax_categories.delete');
     });
@@ -159,13 +159,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('', 'index')->name('admin.users.index');
 
-        Route::get('create', 'create')->name('admin.users.create');
-
         Route::post('create', 'store')->name('admin.users.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.users.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.users.update');
+        Route::post('edit', 'update')->name('admin.users.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.users.delete');
 

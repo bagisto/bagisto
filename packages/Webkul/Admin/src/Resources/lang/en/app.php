@@ -532,10 +532,8 @@ return [
         'locales' => [
             'index' => [
                 'title'             => 'Locales',
+                'locale'            => 'Locale',
                 'create-btn'        => 'Create Locale',
-                'create-success'    => 'Locale created successfully.',
-                'update-success'    => 'Locale updated successfully.',
-                'delete-success'    => 'Locale deleted successfully.',
                 'last-delete-error' => 'At least one Locale is required.',
 
                 'datagrid' => [
@@ -550,16 +548,19 @@ return [
                 ],
 
                 'create'  =>  [
-                    'code'          => 'Code',
-                    'name'          => 'Name',
-                    'direction'     => 'Direction',
-                    'locale-logo'   => 'Locale Logo',
-                    'title'         => 'Create Locale',
-                    'save-btn'      => 'Save Locale',
+                    'code'              => 'Code',
+                    'name'              => 'Name',
+                    'direction'         => 'Direction',
+                    'locale-logo'       => 'Locale Logo',
+                    'title'             => 'Create Locale',
+                    'save-btn'          => 'Save Locale',
+                    'success'           => 'Locale created successfully.',
+                    'delete-success'    => 'Locale deleted successfully.',
                 ],
 
                 'edit'  => [
                     'title'   => 'Edit Locales',
+                    'success' => 'Locale updated successfully.',
                 ],
             ],
         ],
@@ -568,6 +569,7 @@ return [
             'index' => [
                 'title'      => 'Currencies',
                 'create-btn' => 'Create Currency',
+                'currency'   => 'Currency',
 
                 'datagrid' => [
                     'id'     => 'ID',
@@ -586,14 +588,14 @@ return [
                     'name'              => 'Name',
                     'symbol'            => 'Symbol',
                     'decimal'           => 'Decimal',
-                    'create-success'    => 'Currency created successfully.',
-                    'update-success'    => 'Currency updated successfully.',
-                    'delete-success'    => 'Currency deleted successfully.',
+                    'success'           => 'Currency created successfully.',
                     'last-delete-error' => 'At least one Currency is required.',
                 ],
 
                 'edit' => [
-                    'title'          => 'Edit Currency',
+                    'title'     => 'Edit Currency',
+                    'success'   => 'Currency updated successfully.',
+                    'delete-success' => 'Currency deleted successfully.',
                 ],
             ],
 
@@ -604,8 +606,9 @@ return [
 
         'exchange-rates'  => [
             'index' => [
-                'title'      => 'Exchange Rates',
-                'create-btn' => 'Create Exchange Rate',
+                'title'         => 'Exchange Rates',
+                'create-btn'    => 'Create Exchange Rate',
+                'exchange-rate' => 'Exchange Rate',
 
                 'create' => [
                     'title'            => 'Create Exchange Rate',
@@ -613,10 +616,13 @@ return [
                     'save-btn'         => 'Save Exchange Rate',
                     'source-currency'  => 'Source Currency',
                     'target-currency'  => 'Target Currency',
+                    'success'          => 'Exchange Rate Created Successfully',
                 ],
 
                 'edit' => [
                     'title'   => 'Edit Exchange Rates',
+                    'success' => 'Exchange Rate Updated Successfully',
+                    'delete'  => 'Exchange Rate Deleted Successfully',
                 ],
 
                 'datagrid' => [
@@ -709,7 +715,9 @@ return [
         'taxes' => [
             'tax-categories' => [
                 'index' => [
-                    'title'  => 'Tax Categories',
+                    'title'        => 'Tax Categories',
+                    'tax-category' => 'Tax Category',
+                    'delete-success' => 'Tax Category Deleted Successfully',
 
                     'datagrid' => [
                         'id'     => 'ID',
@@ -717,37 +725,28 @@ return [
                         'code'   => 'Code',
                         'edit'   => 'Edit',
                         'delete' => 'Delete',
+                        'actions' => 'Actions',
+                    ],
+
+                    'create' => [
+                        'title'           => 'Create Tax Category',
+                        'code'            => 'Code',
+                        'description'     => 'Description',
+                        'general'         => 'Tax Category',
+                        'name'            => 'Name',
+                        'save-btn'        => 'Save Tax Category',
+                        'tax-rates'       => 'Tax Rates',
+                        'title'           => 'Tax Categories',
+                        'add-tax-rates'   => 'Add Tax Rates',
+                        'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
+                        'success'  => 'New Tax Category Created',
+                    ],
+
+                    'edit'  => [
+                        'title'    => 'Edit Tax Categories',
+                        'success'  => 'Successfully Updated Tax Category',
                     ],
                 ],
-
-                'create' => [
-                    'create-title'    => 'Create Tax Category',
-                    'back-btn'        => 'Back',
-                    'code'            => 'Code',
-                    'description'     => 'Description',
-                    'general'         => 'Tax Category',
-                    'name'            => 'Name',
-                    'save-btn'        => 'Save Tax Category',
-                    'tax-rates'       => 'Tax Rates',
-                    'title'           => 'Tax Categories',
-                    'add-tax-rates'   => 'Add Tax Rates',
-                    'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
-                    'create-success'  => 'New Tax Category Created',
-                ],
-
-                'edit' => [
-                    'add-title'        => 'Create Tax Category',
-                    'back-btn'         => 'Back',
-                    'code'             => 'Code',
-                    'description'      => 'Description',
-                    'general'          => 'Tax Category',
-                    'name'             => 'Name',
-                    'save-btn'         => 'Save Tax Category',
-                    'select-tax-rates' => 'Select Tax Rates',
-                    'title'            => 'Edit Tax Categories',
-                    'update-success'   => 'Successfully Updated Tax Category',
-                ],
-
             ],
 
             'tax-rates'   => [
@@ -900,6 +899,8 @@ return [
         'users' => [
             'index' => [
                 'title' => 'Users',
+                'admin' => 'Admin',
+                'user'  => 'User',
 
                 'create'  => [
                     'title'            => 'Create User',
@@ -910,7 +911,7 @@ return [
                     'role'             => 'Role',
                     'status'           => 'Status',
                     'save-btn'         => 'Save User',
-                    'create-success'   => 'User created successfully.',
+                    'success'          => 'User created successfully.',
                 ],
 
                 'datagrid' => [
@@ -924,6 +925,11 @@ return [
                     'active'    => 'Active',
                     'inactive'  => 'Inactive',
                 ],
+
+                'edit'  => [
+                    'title'    => 'Edit User',
+                    'success'  => 'User updated successfully.'
+                ]
             ],
 
             'edit'  => [

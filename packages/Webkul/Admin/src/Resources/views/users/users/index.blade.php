@@ -4,7 +4,7 @@
         @lang('admin::app.users.users.index.title')
     </x-slot:title>
 
-    <v-create-user-form>
+    <v-users>
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.users.users.index.title')
@@ -23,10 +23,10 @@
 
         {{-- DataGrid Shimmer --}}
         <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
-    </v-create-user-form>
+    </v-users>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-user-form-template">
+        <script type="text/x-template" id="v-users-template">
 
             <div class="flex justify-between items-center">
                 <p class="text-[20px] text-gray-800 font-bold">
@@ -188,7 +188,13 @@
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
-                                @lang('admin::app.users.users.index.create.title')
+                                <span v-if="id">
+                                    @lang('admin::app.users.users.index.edit.title')
+                                </span>
+
+                                <span v-else>
+                                    @lang('admin::app.users.users.index.create.title')
+                                </span>
                             </p>    
                         </x-slot:header>
         
@@ -289,10 +295,12 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.users.users.index.create.role')
                                     </x-admin::form.control-group.label>
-        
+
+                                    <!-- For New Form -->
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="role_id"
+                                        v-if="! id"
                                         rules="required"
                                         :label="trans('admin::app.users.users.index.create.role')"
                                         :placeholder="trans('admin::app.users.users.index.create.role')"
@@ -303,6 +311,25 @@
                                             </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
+
+                                    <!-- For Edit Form -->
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="role_id"
+                                        v-if="id"
+                                        rules="required"
+                                        ::value="user.role_id"
+                                        :label="trans('admin::app.users.users.index.create.role')"
+                                        :placeholder="trans('admin::app.users.users.index.create.role')"
+                                    >
+                                        <option
+                                            v-for="role in roles"
+                                            :value="role.id"
+                                        >
+                                            @{{ role.name }}
+                                        </option>                                        
+
+                                    </x-admin::form.control-group.control>
         
                                     <x-admin::form.control-group.error
                                         control-name="role_id"
@@ -311,16 +338,35 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Status -->
-                                <x-admin::form.control-group class="!mb-[0px]">
+                                <x-admin::form.control-group v-if="! id" class="!mb-[0px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.users.users.index.create.status')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
                                         :value="1"
                                         :checked="old('status')"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.error
+                                        control-name="status"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+
+                                <x-admin::form.control-group v-if="id" class="!mb-[0px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.users.users.index.create.status')
+                                    </x-admin::form.control-group.label>
+
+                                    <x-admin::form.control-group.control
+                                        type="switch"
+                                        name="status"
+                                        ::checked="user.status ?? old('status')"
+                                        ::value="user.status ?? 1"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -349,24 +395,53 @@
         </script>
 
         <script type="module">
-            app.component('v-create-user-form', {
-                template: '#v-create-user-form-template',
+            app.component('v-users', {
+                template: '#v-users-template',
+
+                data() {
+                    return {
+                        roles: {},
+                        user: {},
+                        id: 0,
+                    }
+                },
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
-                        this.$axios.post("{{ route('admin.users.store') }}", params)
-                            .then((response) => {
-                                this.$refs.customerCreateModal.close();
+                        console.log(params);
+                        if (params.id) {
+                            this.$axios.post("{{ route('admin.users.update') }}", params)
+                                .then((response) => {
+                                    this.$refs.customerCreateModal.close();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    this.$refs.datagrid.get();
 
-                                resetForm();
-                            })
-                            .catch(error => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                    resetForm();
+                                })
+                                .catch(error => {
+                                    if (error.response.status == 422) {
+                                        setErrors(error.response.data.errors);
+                                    }
+                                });
+                        } else {
+                            this.$axios.post("{{ route('admin.users.store') }}", params)
+                                .then((response) => {
+                                    this.$refs.customerCreateModal.close();
+
+                                    this.$refs.datagrid.get();
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                    resetForm();
+                                })
+                                .catch(error => {
+                                    if (error.response.status == 422) {
+                                        setErrors(error.response.data.errors);
+                                    }
+                                });
+                        }
                     },
 
                     editModal(id) {
@@ -376,8 +451,12 @@
                                     id: response.data.data.user.id,
                                     name: response.data.data.user.name,
                                     email: response.data.data.user.email,
-                                    status: response.data.data.user.status,
+                                    status: response.data.data.user.sttus,
                                 };
+
+                                this.roles = response.data.data.roles;
+
+                                this.user = response.data.data.user;
 
                                 this.$refs.customerCreateModal.toggle();
 
@@ -389,6 +468,26 @@
                                 }
                             });
                     },
+
+                    deleteModal(url) {
+                        if (! confirm('Are you sure, you want to perform this action?')) {
+                            return;
+                        }
+
+                        this.$axios.post(url, {
+                            '_method': 'DELETE'
+                        })
+                            .then((response) => {
+                                this.$refs.datagrid.get();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            })
+                            .catch(error => {
+                                if (error.response.status ==422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    }
                 }
             })
         </script>

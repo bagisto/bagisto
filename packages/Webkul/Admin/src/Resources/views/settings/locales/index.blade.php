@@ -282,7 +282,7 @@
     
                                 this.$refs.datagrid.get();
     
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Locales Updated successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
     
                                 resetForm();
                             })
@@ -298,15 +298,13 @@
                                 }
                             })
                             .then((response) => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
                                 this.$refs.localeModal.close();
-
+                                
                                 this.$refs.datagrid.get();
                                 
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
                                 resetForm();
-                                
-                                this.$refs.image.uploadedFiles = [];
                             }).catch((error) => {
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
@@ -319,29 +317,22 @@
                         this.$axios.get(`{{ route('admin.locales.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
-                                    id: response.data.id,
-                                    code: response.data.code,
-                                    name: response.data.name,
-                                    direction: response.data.direction,
-                                    // logo_path: {},
-                                    logo_path: response.data.logo_url,
+                                    id: response.data.data.id,
+                                    code: response.data.data.code,
+                                    name: response.data.data.name,
+                                    direction: response.data.data.direction,
+                                    logo_path: response.data.data.logo_url,
                                 };
 
                                 this.image = {
-                                    id: response.data.id,
-                                    src: response.data.logo_url
+                                    id: response.data.data.id,
+                                    src: response.data.data.logo_url
                                 };
-                                // values.logo_path['image_1'] = response.data.logo_url;
 
                                 this.$refs.localeModal.toggle();
 
                                 this.$refs.modalForm.setValues(values);
                             })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
                     },
 
                     deleteModal(url) {
@@ -355,7 +346,7 @@
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Locales Deleted successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

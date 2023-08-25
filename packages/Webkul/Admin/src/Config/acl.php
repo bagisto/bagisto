@@ -668,7 +668,7 @@ return [
     ], [
         'key'   => 'settings.users.users.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.users.create',
+        'route' => 'admin.users.store',
         'sort'  => 1,
     ], [
         'key'   => 'settings.users.users.edit',

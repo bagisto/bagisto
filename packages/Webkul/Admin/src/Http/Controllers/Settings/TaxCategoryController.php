@@ -66,31 +66,32 @@ class TaxCategoryController extends Controller
         Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.create.create-success'),
+            'message' => trans('admin::app.settings.taxes.tax-categories.index.create.success'),
         ]);
     }
 
     /**
-     * To show the edit form for the tax category.
+     * Tax Category Details
      *
-     * @param  int  $id
-     * @return \Illuminate\View\View
+     * @param int $id
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         $taxCategory = $this->taxCategoryRepository->findOrFail($id);
 
-        return view('admin::tax.tax-categories.edit', compact('taxCategory'));
+        return new JsonResource($taxCategory);
     }
 
     /**
      * To update the tax category.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function update($id)
+    public function update(): JsonResource
     {
+        $id = request()->id;
+
         $this->validate(request(), [
             'code'        => 'required|string|unique:tax_categories,code,' . $id,
             'name'        => 'required|string',
@@ -115,16 +116,18 @@ class TaxCategoryController extends Controller
 
         session()->flash('success', trans('admin::app.settings.taxes.tax-categories.edit.update-success'));
 
-        return redirect()->route('admin.tax_categories.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.taxes.tax-categories.index.edit.success'),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->taxCategoryRepository->findOrFail($id);
 
@@ -135,10 +138,14 @@ class TaxCategoryController extends Controller
 
             Event::dispatch('tax.tax_category.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Tax Category'])]);
+            return new JsonResource([
+                'message' => trans('admin::app.response.delete-success', ['name' => trans('admin::app.settings.taxes.tax-categories.index.delete-success')]),
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Tax Category'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.taxes.tax-categories.index.tax-category')]),
+        ], 500);
     }
 }
