@@ -19,7 +19,8 @@
             </div>
         </div>
 
-        <x-admin::datagrid></x-admin::datagrid>
+        {{-- DataGrid Shimmer --}}
+        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
     </v-locales>
 
     @pushOnce('scripts')
@@ -44,38 +45,51 @@
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage}">
                     <div class="row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
+                        <!-- Id -->
                         <div
-                            class="cursor-pointer"
+                            class="flex gap-[10px] cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'id'))"
                         >
-                            <div class="flex gap-[10px]">
-                                <p class="text-gray-600">ID</p>
-                            </div>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.locales.index.datagrid.id')
+                            </p>
                         </div>
 
+                        <!-- Code -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'code'))"
                         >
-                            <p class="text-gray-600">Code</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.locales.index.datagrid.code')
+                            </p>
                         </div>
 
+                        <!-- Name -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'name'))"
                         >
-                            <p class="text-gray-600">Name</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.locales.index.datagrid.name')
+                            </p>
                         </div>
 
+                        <!-- Direction -->
                         <div
                             class="cursor-pointer"
                             @click="sortPage(columns.find(column => column.index === 'direction'))"
                         >
-                            <p class="text-gray-600">Direction</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.locales.index.datagrid.direction')
+                            </p>
                         </div>
 
+                        <!-- Actions -->
                         <div class="cursor-pointer flex justify-end">
-                            <p class="text-gray-600">Actions</p>
+                            <p class="text-gray-600">
+                                @lang('admin::app.settings.locales.index.datagrid.actions')
+                            </p>
                         </div>
                     </div>
                 </template>
@@ -90,13 +104,13 @@
                         <!-- Id -->
                         <p v-text="record.id"></p>
 
-                        <!-- Status -->
+                        <!-- Code -->
                         <p v-text="record.code"></p>
 
-                        <!-- Email -->
+                        <!-- Name -->
                         <p v-text="record.name"></p>
 
-                        <!-- Email -->
+                        <!-- Direction -->
                         <p v-text="record.direction"></p>
 
                         <!-- Actions -->
