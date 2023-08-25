@@ -358,7 +358,7 @@ class ProductController extends Controller
         ]);
 
         foreach ($this->productRepository->getAll() as $product) {
-            $results[] = [
+            $results['data'][] = [
                 'id'          => $product->id,
                 'sku'         => $product->sku,
                 'name'        => $product->name,
