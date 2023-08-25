@@ -34,21 +34,11 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('admin::marketing.email-marketing.events.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function store()
+    public function store(): JsonResource
     {
         $this->validate(request(), [
             'name'        => 'required',
@@ -66,9 +56,9 @@ class EventController extends Controller
 
         Event::dispatch('marketing.events.create.after', $event);
 
-        session()->flash('success', trans('admin::app.marketing.events.create-success'));
-
-        return redirect()->route('admin.events.index');
+        return new JsonResource([
+            'message' => trans('admin::app.marketing.email-marketing.events.index.create.success'),
+        ]);
     }
 
     /**
@@ -87,16 +77,17 @@ class EventController extends Controller
 
         $event = $this->eventRepository->findOrFail($id);
 
-        return new JsonResource($event);
+        return new JsonResource([
+            'data' => $event,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function update()
+    public function update(): JsonResource
     {
         $id = request()->id;
 
@@ -116,18 +107,18 @@ class EventController extends Controller
 
         Event::dispatch('marketing.events.update.after', $event);
 
-        session()->flash('success', trans('admin::app.marketing.events.update-success'));
-
-        return redirect()->route('admin.events.index');
+        return new JsonResource([
+            'message' => trans('admin::app.marketing.email-marketing.events.index.edit.success'),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->eventRepository->findOrFail($id);
 
@@ -138,10 +129,14 @@ class EventController extends Controller
 
             Event::dispatch('marketing.events.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.marketing.events.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.email-marketing.events.index.edit.delete-success'),
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Event'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.response.delete-failed', ['name'  =>  'admin::app.marketing.email-marketing.events.index.event']),
+        ], 500);
     }
 }

@@ -25,8 +25,11 @@
     </v-currencies>
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-currencies-template">
-            <div class="flex  gap-[16px] justify-between items-center max-sm:flex-wrap">
+        <script
+            type="text/x-template"
+            id="v-currencies-template"
+        >
+            <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
                 <p class="text-[20px] text-gray-800 font-bold">
                     @lang('admin::app.settings.currencies.index.title')
                 </p>
@@ -43,7 +46,10 @@
                 </div>
             </div>
     
-            <x-admin::datagrid src="{{ route('admin.currencies.index') }}" ref="datagrid">
+            <x-admin::datagrid
+                src="{{ route('admin.currencies.index') }}"
+                ref="datagrid"
+            >
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage}">
                     <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
@@ -273,7 +279,7 @@
     
                                 this.$refs.datagrid.get();
     
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Currencies Updated successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
     
                                 resetForm();
                             })
@@ -334,7 +340,7 @@
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Currencies Deleted successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

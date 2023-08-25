@@ -63,7 +63,7 @@ class SitemapDataGrid extends DataGrid
             'filterable' => false,
             'sortable'   => false,
             'closure'    => function ($row) {
-                return '<a href="' . ($url = Storage::url($row->path . '/' . $row->file_name)) . '" target="_blank">' . $url . '</a>';
+                return Storage::url($row->path . '/' . $row->file_name);
             },
         ]);
     }
@@ -79,9 +79,9 @@ class SitemapDataGrid extends DataGrid
             'icon'   => 'icon-edit',
             'title'  => trans('admin::app.marketing.sitemaps.index.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.sitemaps.edit',
+            'route'  => 'admin.sitemaps.update',
             'url'    => function ($row) {
-                return route('admin.sitemaps.edit', $row->id);
+                return route('admin.sitemaps.update', $row->id);
             },
         ]);
 

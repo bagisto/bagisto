@@ -35,9 +35,9 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return JsonResource
      */
-    public function store()
+    public function store(): JsonResource
     {
         $this->validate(request(), [
             'code' => 'required|min:3|max:3|unique:currencies,code',
@@ -54,7 +54,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->create($data);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.create.create-success'),
+            'message' => trans('admin::app.settings.currencies.index.create.success'),
         ]);
     }
 
@@ -74,10 +74,9 @@ class CurrencyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function update()
+    public function update(): JsonResource
     {
         $id = request()->id;
 
@@ -95,18 +94,18 @@ class CurrencyController extends Controller
 
         $this->currencyRepository->update($data, $id);
 
-        session()->flash('success', trans('admin::app.settings.currencies.edit.update-success'));
-
-        return redirect()->route('admin.currencies.index');
+        return new JsonResource([
+            'message' => trans('admin::app.settings.currencies.index.edit.success'),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->currencyRepository->findOrFail($id);
 
@@ -117,12 +116,16 @@ class CurrencyController extends Controller
         try {
             $this->currencyRepository->delete($id);
 
-            return response()->json(['message' => trans('admin::app.settings.currencies.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.settings.currencies.index.edit.delete-success'),
+            ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Currency'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
+        ], 500);
     }
 
     /**
@@ -147,7 +150,7 @@ class CurrencyController extends Controller
                 }
             }
 
-            if (! $suppressFlash) {
+            if (!$suppressFlash) {
                 session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'currencies']));
             } else {
                 session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'currencies']));
