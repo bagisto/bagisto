@@ -205,7 +205,7 @@ class CategoryController extends Controller
             count($categoryIds) != 1
             || $suppressFlash == true
         ) {
-            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Category']));
+            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'Category']));
         }
 
         return redirect()->route('admin.catalog.categories.index');
