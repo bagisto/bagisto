@@ -246,7 +246,7 @@
                         if (params.id) {
                             this.$axios.post("{{ route('admin.sitemaps.update') }}", params )
                                 .then((response) => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: 'Sitemap Updated successfully' });
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                                     this.$refs.sitemap.toggle();
 
@@ -279,26 +279,9 @@
                     },
 
                     editModal(values) {
-                        // this.$axios.get(`{{ route('admin.currencies.edit', '') }}/${id}`)
-                        //     .then((response) => {
-                        //         let values = {
-                        //             id: response.data.data.id,
-                        //             code: response.data.data.code,
-                        //             name: response.data.data.name,
-                        //             decimal: response.data.data.decimal,
-                        //             symbol: response.data.data.symbol,
-                        //         };
+                        this.$refs.sitemap.toggle();
 
-                                this.$refs.sitemap.toggle();
-
-                                this.$refs.modalForm.setValues(values);
-                            // })
-                            // .catch(error => {
-                            //     if (error.response.status ==422) {
-                            //         setErrors(error.response.data.errors);
-                            //     }
-                            // });
-                        
+                        this.$refs.modalForm.setValues(values);
                     },
 
                     deleteModal(url) {
@@ -312,7 +295,7 @@
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Currencies Deleted successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

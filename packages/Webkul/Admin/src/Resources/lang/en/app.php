@@ -418,8 +418,7 @@ return [
                 'create' => [
                     'create-btn'     => 'Create Group',
                     'code'           => 'Code',
-                    'create-success' => 'Group created successfully',
-                    'create-success' => 'Group created successfully',
+                    'success'        => 'Group created successfully',
                     'name'           => 'Name',
                     'save-btn'       => 'Save Group',
                     'title'          => 'Create new Group',
@@ -427,7 +426,11 @@ return [
                 ],
 
                 'edit'  => [
-                    'title' => 'Edit Group',
+                    'title'           => 'Edit Group',
+                    'success'         => 'Group Updated Successfully',
+                    'delete-success'  => 'Group Deleted Successfully',
+                    'delete-failed'   => 'Group Deleted Failed',
+                    'group-default'   => 'Default Group Can not be Deleted',
                 ],
 
                 'datagrid'  =>  [
@@ -437,19 +440,6 @@ return [
                     'edit'  => 'Edit',
                     'delete' => 'Delete',
                 ],
-            ],
-
-            'edit'  => [
-                'back-btn'          => 'Back',
-                'code'              => 'Code',
-                'general'           => 'General',
-                'general'           => 'General',
-                'name'              => 'Name',
-                'save-btn'          => 'Save Group',
-                'title'             => 'Edit Group',
-                'save-btn'          => 'Save Group',
-                'title'             => 'Edit Group',
-                'update-success'    => 'Group Updated Successfully',
             ],
         ],
 
@@ -1752,6 +1742,7 @@ return [
                 'index'  => [
                     'create-btn'  => 'Create Event',
                     'title'       => 'Events',
+                    'event'       => 'Event',
 
                     'datagrid' => [
                         'id'        => 'ID',
@@ -1770,10 +1761,13 @@ return [
                         'name'           => 'Name',
                         'save-btn'       => 'Save Event',
                         'title'          => 'Events',
+                        'success'        => 'Events Created Successfully',
                     ],
 
                     'edit'  => [
-                        'title'        => 'Edit Events',
+                        'title'            => 'Edit Events',
+                        'success'          => 'Events Updated Successfully',
+                        'delete-success'   => 'Events Deleted Successfully',
                     ],
                 ],
             ],
@@ -1794,13 +1788,15 @@ return [
                     ],
 
                     'edit'  => [
-                        'title'       => 'Edit Newsletter Subscriber',
-                        'back-btn'    => 'Back',
-                        'save-btn'    => 'Save Subscriber',
-                        'email'       => 'Email',
-                        'subscribed'  => 'Subscribed',
-                        'true'        => 'True',
-                        'false'       => 'False',
+                        'title'         => 'Edit Newsletter Subscriber',
+                        'back-btn'      => 'Back',
+                        'save-btn'      => 'Save Subscriber',
+                        'email'         => 'Email',
+                        'subscribed'    => 'Subscribed',
+                        'true'          => 'True',
+                        'false'         => 'False',
+                        'success'       => 'Newsletter Subscription Updated Successfully',
+                        'update-failed' => 'Newsletter Subscription Not Updated',
                     ],
                 ],
 
@@ -1809,8 +1805,9 @@ return [
 
         'sitemaps' => [
             'index' => [
-                'title' => 'Sitemaps',
-                'create-btn'     => 'Create Sitemap',
+                'title'       => 'Sitemaps',
+                'create-btn'  => 'Create Sitemap',
+                'sitemap'     => 'Sitemap',
 
                 'datagrid' => [
                     'id'              => 'ID',
@@ -1829,10 +1826,13 @@ return [
                     'path-info'      => 'Example: "/sitemap/" or "/" for base path',
                     'save-btn'       => 'Save Sitemap',
                     'title'          => 'Create Sitemap',
+                    'success'        => 'Sitemap created successfully'
                 ],
 
                 'edit'  =>  [
                     'title'   => 'Edit Sitemap',
+                    'success' => 'Sitemap Updated successfully',
+                    'delete-success' => 'Sitemap Deleted successfully'
                 ],
             ],
 

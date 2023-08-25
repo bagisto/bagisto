@@ -433,7 +433,7 @@ return [
     ], [
         'key'   => 'marketing.email-marketing.events.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.events.create',
+        'route' => 'admin.events.update',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.email-marketing.events.edit',
@@ -488,7 +488,7 @@ return [
     ], [
         'key'   => 'marketing.sitemaps.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sitemaps.create',
+        'route' => 'admin.sitemaps.update',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.sitemaps.edit',
