@@ -120,15 +120,15 @@ class ReviewController extends Controller
             }
 
             if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Reviews']));
+                session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.delete-success', ['resource' => 'Reviews']));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+                session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
             return redirect()->route('admin.customer.review.index');
 
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
             return redirect()->back();
         }
@@ -180,14 +180,14 @@ class ReviewController extends Controller
             }
 
             if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.update-success', ['resource' => 'Reviews']));
+                session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.update-success', ['resource' => 'Reviews']));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+                session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
             return redirect()->route('admin.customer.review.index');
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
             return redirect()->back();
         }

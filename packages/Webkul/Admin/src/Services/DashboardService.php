@@ -46,8 +46,7 @@ class DashboardService
         protected CustomerRepository $customerRepository,
         protected ProductInventoryRepository $productInventoryRepository,
         protected ProductRepository $productRepository,
-    )
-    {
+    ) {
         $this->setLastStartDate();
         $this->setLastEndDate();
     }
@@ -114,11 +113,11 @@ class DashboardService
      */
     private function setLastStartDate(): void
     {
-        if (! isset($this->startDate)) {
+        if (!isset($this->startDate)) {
             $this->setStartDate();
         }
 
-        if (! isset($this->endDate)) {
+        if (!isset($this->endDate)) {
             $this->setEndDate();
         }
 
@@ -141,7 +140,7 @@ class DashboardService
      */
     private function getPercentageChange($previous, $current): float|int
     {
-        if (! $previous) {
+        if (!$previous) {
             return $current ? 100 : 0;
         }
 
