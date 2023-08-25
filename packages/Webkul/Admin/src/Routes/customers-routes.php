@@ -72,7 +72,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.customer.review.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.customer.review.update');
+        Route::post('edit/{id}', 'update')->name('admin.customer.review.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.customer.review.delete');
 
