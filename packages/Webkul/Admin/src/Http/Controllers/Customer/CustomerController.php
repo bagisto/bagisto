@@ -8,9 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Admin\DataGrids\CustomerDataGrid;
-use Webkul\Admin\DataGrids\CustomerOrderDataGrid;
-use Webkul\Admin\DataGrids\CustomersInvoicesDataGrid;
+use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Admin\Mail\CustomerNoteNotification;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
@@ -47,9 +45,9 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource;
+     * @return JsonResource
      */
-    public function store()
+    public function store(): JsonResource
     {
         $this->validate(request(), [
             'first_name'    => 'string|required',
@@ -160,11 +158,11 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->findorFail($id);
 
-        if (! $customer) {
+        if (!$customer) {
             return response()->json(['message' => trans('admin::app.customers.delete-failed')], 400);
         }
 
-        if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+        if (!$this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
 
             $this->customerRepository->delete($id);
 
@@ -195,7 +193,7 @@ class CustomerController extends Controller
         return redirect(route('shop.customers.account.profile.index'));
     }
 
-      /**
+    /**
      * To store the response of the note.
      *
      * @param  int  $id
@@ -218,7 +216,7 @@ class CustomerController extends Controller
         if (request()->has('customer_notified')) {
             try {
                 Mail::queue(new CustomerNoteNotification($customer, request()->input('note', 'email')));
-            } catch(\Exception$e) {
+            } catch (\Exception $e) {
                 session()->flash('warning', $e->getMessage());
             }
         }
@@ -263,7 +261,7 @@ class CustomerController extends Controller
     {
         $customerIds = explode(',', request()->input('indexes'));
 
-        if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
+        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
             foreach ($customerIds as $customerId) {
                 Event::dispatch('customer.delete.before', $customerId);
 
@@ -280,36 +278,6 @@ class CustomerController extends Controller
         session()->flash('error', trans('admin::app.customers.order-pending'));
 
         return redirect()->back();
-    }
-
-    /**
-     * Retrieve all invoices from customer.
-     *
-     * @param  int  $id
-     * @return \Webkul\Admin\DataGrids\CustomersInvoicesDataGrid
-     */
-    public function invoices($id)
-    {
-        if (request()->ajax()) {
-            return app(CustomersInvoicesDataGrid::class)->toJson();
-        }
-    }
-
-    /**
-     * Retrieve all orders from customer.
-     *
-     * @param  int  $id
-     * @return \Webkul\Admin\DataGrids\CustomerOrderDataGrid
-     */
-    public function orders($id)
-    {
-        if (request()->ajax()) {
-            return app(CustomerOrderDataGrid::class)->toJson();
-        }
-
-        $customer = $this->customerRepository->find(request('id'));
-
-        return view('admin::customers.orders.index', compact('customer'));
     }
 
     /**

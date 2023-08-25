@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
-use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
+use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
 
 class TaxCategoryController extends Controller
 {

@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Marketing;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
-use Webkul\Admin\DataGrids\NewsLetterDataGrid;
+use Webkul\Admin\DataGrids\Marketing\NewsLetterDataGrid;
 
 class SubscriptionController extends Controller
 {

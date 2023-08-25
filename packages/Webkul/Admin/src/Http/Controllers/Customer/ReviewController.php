@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
+use Webkul\Admin\DataGrids\Customers\CustomerReviewDataGrid;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller

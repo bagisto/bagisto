@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\LocaleRepository;
-use Webkul\Admin\DataGrids\LocalesDataGrid;
+use Webkul\Admin\DataGrids\Settings\LocalesDataGrid;
 
 class LocaleController extends Controller
 {

@@ -9,7 +9,7 @@ use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Admin\DataGrids\AddressDataGrid;
+use Webkul\Admin\DataGrids\Customers\AddressDataGrid;
 
 class AddressController extends Controller
 {

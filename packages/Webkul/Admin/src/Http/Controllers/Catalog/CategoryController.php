@@ -8,8 +8,8 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
-use Webkul\Admin\DataGrids\CategoryDataGrid;
-use Webkul\Admin\DataGrids\CategoryProductDataGrid;
+use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
+use Webkul\Admin\DataGrids\Catalog\CategoryProductDataGrid;
 
 class CategoryController extends Controller
 {

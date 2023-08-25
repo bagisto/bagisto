@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
-use Webkul\Admin\DataGrids\CatalogRuleDataGrid;
+use Webkul\Admin\DataGrids\Marketing\CatalogRuleDataGrid;
 use Webkul\CatalogRule\Http\Requests\CatalogRuleRequest;
 
 class CatalogRuleController extends Controller
@@ -19,8 +19,7 @@ class CatalogRuleController extends Controller
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleIndex $catalogRuleIndexHelper
-    ) 
-    {
+    ) {
     }
 
     /**

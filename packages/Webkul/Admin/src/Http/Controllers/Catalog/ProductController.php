@@ -18,7 +18,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Admin\Http\Resources\AttributeResource;
-use Webkul\Admin\DataGrids\ProductDataGrid;
+use Webkul\Admin\DataGrids\Catalog\ProductDataGrid;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Facades\ProductImage;

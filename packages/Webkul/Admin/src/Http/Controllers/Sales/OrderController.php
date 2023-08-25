@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderCommentRepository;
-use Webkul\Admin\DataGrids\OrderDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
 
 class OrderController extends Controller
 {
