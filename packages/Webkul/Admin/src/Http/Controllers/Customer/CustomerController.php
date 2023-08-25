@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
@@ -295,5 +296,23 @@ class CustomerController extends Controller
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
         return view('admin::customers.view', compact('customer', 'groups'));
+    }
+
+    /**
+     * Result of search customer.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = [];
+
+        $customers = $this->customerRepository->scopeQuery(function($query) {
+            return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orderBy('created_at', 'desc');
+        })->paginate(10);
+
+        return response()->json($customers);
     }
 }

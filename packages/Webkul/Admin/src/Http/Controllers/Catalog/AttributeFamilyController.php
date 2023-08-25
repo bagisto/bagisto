@@ -189,14 +189,14 @@ class AttributeFamilyController extends Controller
             }
 
             if (! $suppressFlash) {
-                session()->flash('success', ('admin::app.datagrid.mass-ops.delete-success'));
+                session()->flash('success', ('admin::app.catalog.families.index.datagrid.delete-success'));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => trans('admin::app.catalog.families.attribute-family')]));
+                session()->flash('info', trans('admin::app.catalog.families.index.datagrid.partial-action', ['resource' => trans('admin::app.catalog.families.attribute-family')]));
             }
 
             return redirect()->back();
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            session()->flash('error', trans('admin::app.catalog.families.index.datagrid.method-error'));
 
             return redirect()->back();
         }

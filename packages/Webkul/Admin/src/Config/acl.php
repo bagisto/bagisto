@@ -512,7 +512,7 @@ return [
     */
     [
         'key'   => 'cms',
-        'name'  => 'admin::app.layouts.cms',
+        'name'  => 'admin::app.acl.cms',
         'route' => 'admin.cms.index',
         'sort'  => 7,
     ], [

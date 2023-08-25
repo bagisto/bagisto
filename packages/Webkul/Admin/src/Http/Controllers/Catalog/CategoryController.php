@@ -205,7 +205,7 @@ class CategoryController extends Controller
             count($categoryIds) != 1
             || $suppressFlash == true
         ) {
-            session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Category']));
+            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'Category']));
         }
 
         return redirect()->route('admin.catalog.categories.index');
@@ -283,5 +283,28 @@ class CategoryController extends Controller
         }
 
         return $category->id === 1 || $channelRootCategoryIds->contains($category->id);
+    }
+
+    /**
+     * Result of search customer.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = [];
+
+        $categories = $this->categoryRepository->scopeQuery(function($query) {
+            return $query
+                ->select('categories.*')
+                ->leftJoin('category_translations', function ($query) {
+                    $query->on('categories.id', '=', 'category_translations.category_id')
+                        ->where('category_translations.locale', app()->getLocale());
+                })
+                ->where('category_translations.name', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orderBy('created_at', 'desc');
+        })->paginate(10);
+
+        return response()->json($categories);
     }
 }
