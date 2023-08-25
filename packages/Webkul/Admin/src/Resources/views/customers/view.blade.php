@@ -78,7 +78,11 @@
                             @lang('admin::app.customers.view.orders') ({{ $totalOrderCount }})
                         </p>
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.total-revenue') - {{ core()->currency($customer->orders->sum('grand_total')) }}
+                            @lang('admin::app.customers.view.total-revenue') - 
+                            {{ core()->currency($customer->orders
+                                ->whereNotIn('status', ['canceled', 'closed'])
+                                ->sum('grand_total'))
+                            }}
                         </p>
                     </div>
 
