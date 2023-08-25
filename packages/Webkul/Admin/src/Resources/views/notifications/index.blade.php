@@ -19,8 +19,6 @@
 
                         <p class="text-gray-600">List all the Notifications</p>
                     </div>
-
-                    <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-100"></span>
                 </div>
 
                 <div class="flex flex-col justify-between max-w-max bg-white rounded-[6px] box-shadow h-[calc(100vh-179px)]">

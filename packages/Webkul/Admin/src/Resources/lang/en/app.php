@@ -296,6 +296,16 @@ return [
             'index' => [
                 'title'       => 'Transactions',
                 'create-btn'  => 'Create Transactions',
+
+                'datagrid' => [
+                    'id'                 => 'ID',
+                    'transaction-id'     => 'Transaction ID',
+                    'transaction-date'   => 'Transaction Date',
+                    'transaction-amount' => 'Transaction Amount',
+                    'invoice-id'         => 'Invoice Number',
+                    'order-id'           => 'Order ID',
+                    'status'             => 'Status',
+                ],
             ],
         ],
     ],
