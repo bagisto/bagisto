@@ -185,6 +185,12 @@ return [
         'sort'       => 2,
         'icon'       => '',
     ], [
+        'key'        => 'settings.theme',
+        'name'       => 'Themes',
+        'route'      => 'admin.theme.index',
+        'sort'       => 7,
+        'icon'       => '',
+    ], [
         'key'        => 'marketing',
         'name'       => 'admin::app.layouts.marketing',
         'route'      => 'admin.catalog_rules.index',

@@ -8,6 +8,7 @@ use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
 use Webkul\Admin\Http\Controllers\Settings\TaxCategoryController;
 use Webkul\Admin\Http\Controllers\Settings\TaxRateController;
+use Webkul\Admin\Http\Controllers\Settings\ThemeController;
 use Webkul\Admin\Http\Controllers\User\RoleController;
 use Webkul\Admin\Http\Controllers\User\UserController;
 
@@ -172,5 +173,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::get('confirm/{id}', 'confirm')->name('super.users.confirm');
 
         Route::post('confirm/{id}', 'destroySelf')->name('admin.users.destroy');
+    });
+
+
+    Route::controller(ThemeController::class)->prefix('themes')->group(function () {
+        Route::get('', 'index')->name('admin.theme.index');
+
+        Route::get('all', 'getThemes')->name('admin.theme.themes');
     });
 });
