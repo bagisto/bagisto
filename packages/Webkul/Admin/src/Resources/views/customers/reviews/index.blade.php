@@ -171,14 +171,19 @@
                                 </p>
                             </div>
 
-                            <div class="flex gap-[5px] place-content-end self-center">
+                            <div class="flex gap-[5px] place-content-end items-center self-center">
                                 <!-- Review Delete Button -->
-                                <a :href="`{{ route('admin.customer.review.delete', '') }}/${record.product_review_id}`">
+                                <a  
+                                    @click="deleteReview(record.actions['1']?.url)">
                                     <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
                                 </a>
 
                                 <!-- View Button -->
-                                    <span @click="edit(record.product_review_id)" class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                                <span 
+                                    @click="edit(record.product_review_id)" 
+                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"
+                                >
+                                </span>
                             </div>
                         </div>
                     </template>
@@ -373,7 +378,7 @@
                 },
 
                 methods: {
-                    edit (id) {
+                    edit(id) {
                         this.$axios.get(`{{ route('admin.customer.review.edit', '') }}/${id}`)
                             .then((response) => {
                                 this.$refs.review.open(),
@@ -394,13 +399,35 @@
                                 this.$refs.review.close();
 
                                 this.$refs.review_data.get();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: 'Review Updated Successfully' });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                    }
+                    },
+
+                    deleteReview(url) {
+                        if (! confirm('Are you sure, you want to perform this action?')) {
+                            return;
+                        }
+
+                        this.$axios.post(url, {
+                            '_method': 'DELETE'
+                        })
+                            .then((response) => {
+                                this.$refs.review_data.get();
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: 'Currencies Deleted successfully' });
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
+                    },
                 }
             })
         </script>

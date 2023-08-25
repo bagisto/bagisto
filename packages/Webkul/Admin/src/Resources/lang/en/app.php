@@ -474,6 +474,7 @@ return [
                     'review-title'   => 'Title',
                     'review-comment' => 'Comment',
                     'images'         => 'Images',
+                    'update-success' => 'Update Successfully',
                 ],
 
                 'datagrid'   =>  [
@@ -492,6 +493,7 @@ return [
                     'approved'       => 'Approved',
                     'disapproved'    => 'Disapproved',
                     'review-id'      => 'ID - :review-id',
+                    'delete-success' => 'Review Deleted Successfully',
                 ],
             ],
         ],
