@@ -51,44 +51,41 @@
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
-                <template #header="{ columns, records, sortPage}">
-                    <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
-                        <!-- ID -->
+                <template #header="{ columns, records, sortPage, applied}">
+                    <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'id'))"
+                            v-for="(columnGroup, index) in ['id', 'code', 'name']"
                         >
                             <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.id')
-                            </p>
-                        </div>
+                                <span class="[&>*]:after:content-['_/_']">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == columnGroup,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
+                                    </span>
+                                </span>
 
-                        <!-- Code -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'code'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.code')
-                            </p>
-                        </div>
-
-                        <!-- Name -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'name'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.name')
+                                <!-- Filter Arrow Icon -->
+                                <i
+                                    class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                    v-if="columnGroup.includes(applied.sort.column)"
+                                ></i>
                             </p>
                         </div>
 
                         <!-- Actions -->
-                        <div class="cursor-pointer flex justify-end">
-                            <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.actions')
-                            </p>
-                        </div>
+                        <p class="flex gap-[10px] justify-end">
+                            @lang('admin::app.components.datagrid.table.actions')
+                        </p>
                     </div>
                 </template>
 
