@@ -111,7 +111,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
 
-
             Route::get('search', 'search')->name('admin.catalog.products.search');
 
             Route::get('{id}/{attribute_id}', 'download')->defaults('_config', [
