@@ -249,11 +249,11 @@ class ProductDataGrid extends DataGrid
             'method'  => 'POST',
             'options' => [
                 [
-                    'name' => trans('admin::app.catalog.product.index.datagrid.active'),
+                    'name' => trans('admin::app.catalog.products.index.datagrid.active'),
                     'value' => 1,
                 ],
                 [
-                    'name' => trans('admin::app.catalog.product.index.datagrid.inactive'),
+                    'name' => trans('admin::app.catalog.products.index.datagrid.inactive'),
                     'value' => 0,
                 ],
             ],
