@@ -65,7 +65,7 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
 
-        return redirect()->route('admin.customers.customer.review.index');
+        return redirect()->route('admin.customers.customers.review.index');
     }
 
     /**
@@ -125,7 +125,7 @@ class ReviewController extends Controller
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
-            return redirect()->route('admin.customers.customer.review.index');
+            return redirect()->route('admin.customers.customers.review.index');
         } else {
             session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
@@ -184,7 +184,7 @@ class ReviewController extends Controller
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
-            return redirect()->route('admin.customers.customer.review.index');
+            return redirect()->route('admin.customers.customers.review.index');
         } else {
             session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 

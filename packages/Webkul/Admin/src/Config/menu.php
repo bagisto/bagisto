@@ -82,14 +82,14 @@ return [
     ], [
         'key'        => 'customers',
         'name'       => 'admin::app.components.layouts.sidebar.customers',
-        'route'      => 'admin.customers.customer.index',
+        'route'      => 'admin.customers.customers.index',
         'sort'       => 4,
         'icon'       => 'icon-customer-2',
         'icon-class' => 'customer-icon',
     ], [
         'key'        => 'customers.customers',
         'name'       => 'admin::app.components.layouts.sidebar.customers',
-        'route'      => 'admin.customers.customer.index',
+        'route'      => 'admin.customers.customers.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
@@ -101,7 +101,7 @@ return [
     ], [
         'key'        => 'customers.reviews',
         'name'       => 'admin::app.components.layouts.sidebar.reviews',
-        'route'      => 'admin.customers.customer.review.index',
+        'route'      => 'admin.customers.customers.review.index',
         'sort'       => 3,
         'icon'       => '',
     ], [
