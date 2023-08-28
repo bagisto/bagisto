@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Customer;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\DataGrids\Customers\CustomerReviewDataGrid;
+use Webkul\Admin\DataGrids\Customers\ReviewDataGrid;
 use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
@@ -28,7 +28,7 @@ class ReviewController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CustomerReviewDataGrid::class)->toJson();
+            return app(ReviewDataGrid::class)->toJson();
         }
 
         return view('admin::customers.reviews.index');
@@ -65,7 +65,7 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
 
-        return redirect()->route('admin.customers.customer.review.index');
+        return redirect()->route('admin.customers.customers.review.index');
     }
 
     /**
@@ -125,7 +125,7 @@ class ReviewController extends Controller
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
-            return redirect()->route('admin.customers.customer.review.index');
+            return redirect()->route('admin.customers.customers.review.index');
         } else {
             session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
@@ -184,7 +184,7 @@ class ReviewController extends Controller
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
-            return redirect()->route('admin.customers.customer.review.index');
+            return redirect()->route('admin.customers.customers.review.index');
         } else {
             session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 

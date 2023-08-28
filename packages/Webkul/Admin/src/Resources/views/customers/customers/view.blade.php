@@ -29,7 +29,7 @@
             </p>
 
             {{-- Back Button --}}
-            <a href="{{ route('admin.customers.customer.index') }}">
+            <a href="{{ route('admin.customers.customers.index') }}">
                 <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                     @lang('admin::app.customers.view.back-btn')
                 </span>
@@ -57,7 +57,7 @@
               {{-- Delete Customer Account --}}
               <form 
                 method="post"
-                action="{{ route('admin.customers.customer.delete', $customer->id) }}" 
+                action="{{ route('admin.customers.customers.delete', $customer->id) }}" 
                 id="delete-account{{ $customer->id }}" 
             >
                 @csrf
@@ -576,7 +576,7 @@
 
                                     <form 
                                         method="post"
-                                        action="{{ route('admin.customers.customer.addresses.delete', $address->id) }}" 
+                                        action="{{ route('admin.customers.customers.addresses.delete', $address->id) }}" 
                                         id="delete-address{{ $address->id }}" 
                                     >
                                         @csrf
@@ -595,8 +595,8 @@
                                         <form
                                             class="hidden"
                                             method="post"
-                                            action="{{ route('admin.customers.customer.addresses.set_default', $customer->id) }}"
-                                            id="default-address{{ $address->id }}"
+                                            action="{{ route('admin.customers.customers.addresses.set_default', $customer->id) }}" 
+                                            id="default-address{{ $address->id }}" 
                                         >
                                             @csrf
 

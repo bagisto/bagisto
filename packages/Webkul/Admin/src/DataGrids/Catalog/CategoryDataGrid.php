@@ -53,7 +53,6 @@ class CategoryDataGrid extends DataGrid
             ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
             ->groupBy('cat.id', 'ct.locale');
 
-        $this->addFilter('status', 'cat.status');
         $this->addFilter('category_id', 'cat.id');
 
         return $queryBuilder;
@@ -97,7 +96,7 @@ class CategoryDataGrid extends DataGrid
             'index'      => 'status',
             'label'      => trans('admin::app.catalog.categories.index.datagrid.status'),
             'type'       => 'boolean',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {

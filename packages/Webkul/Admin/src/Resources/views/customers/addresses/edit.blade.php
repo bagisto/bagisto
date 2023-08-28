@@ -413,6 +413,28 @@
                     })
                         .then((response) => {
                             this.$refs.CustomerAddressEdit.toggle();
+                        streetLineCount: 0,
+                    };
+                },
+                mounted() {
+                    this.addressData = JSON.parse(this.address);
+                },
+                methods: {
+                    update(params, {resetForm, setErrors,}) {
+                        if(! params.default_address) {
+                            delete params.default_address;
+                        }
+                   
+                        let addressId = params.address_id;
+
+                        this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${addressId}`, params, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                            })
+
+                            .then((response) => {
+                                this.$refs.CustomerAddressEdit.toggle();
 
                             window.location.reload();
                             

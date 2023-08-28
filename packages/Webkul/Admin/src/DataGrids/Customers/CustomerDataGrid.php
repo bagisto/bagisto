@@ -54,12 +54,11 @@ class CustomerDataGrid extends DataGrid
             );
 
         $this->addFilter('customer_id', 'customers.id');
-        // $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
+        $this->addFilter('email', 'customers.email');
+        $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
         $this->addFilter('group', 'customer_groups.name');
         $this->addFilter('phone', 'customers.phone');
-        $this->addFilter('gender', 'customers.gender');
-        $this->addFilter('status', 'status');
-        $this->addFilter('is_suspended', 'customers.is_suspended');
+        $this->addFilter('status', 'customers.status');
 
         return $queryBuilder;
     }
@@ -84,7 +83,7 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'full_name',
             'label'      => trans('admin::app.customers.index.datagrid.name'),
             'type'       => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -93,7 +92,7 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'email',
             'label'      => trans('admin::app.customers.index.datagrid.email'),
             'type'       => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => false,
             'sortable'   => true,
         ]);
@@ -102,7 +101,7 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'phone',
             'label'      => trans('admin::app.customers.index.datagrid.phone'),
             'type'       => 'integer',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => false,
         ]);
@@ -190,7 +189,7 @@ class CustomerDataGrid extends DataGrid
             'title'  => trans('admin::app.customers.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.customers.customer.view', $row->customer_id);
+                return route('admin.customers.customers.view', $row->customer_id);
             },
         ]);
 
@@ -200,7 +199,7 @@ class CustomerDataGrid extends DataGrid
             'method' => 'GET',
             'target' => 'blank',
             'url'    => function ($row) {
-                return route('admin.customers.customer.login_as_customer', $row->customer_id);
+                return route('admin.customers.customers.login_as_customer', $row->customer_id);
             },
         ]);
 
@@ -209,7 +208,7 @@ class CustomerDataGrid extends DataGrid
             'title'  => trans('admin::app.customers.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.customers.customer.delete', $row->customer_id);
+                return route('admin.customers.customers.delete', $row->customer_id);
             },
         ]);
     }
@@ -224,13 +223,13 @@ class CustomerDataGrid extends DataGrid
         $this->addMassAction([
             'title'  => trans('admin::app.customers.index.datagrid.delete'),
             'method' => 'POST',
-            'url'    => route('admin.customers.customer.mass_delete'),
+            'url'    => route('admin.customers.customers.mass_delete'),
         ]);
 
         $this->addMassAction([
             'title'   => trans('admin::app.customers.index.datagrid.update-status'),
             'method'  => 'POST',
-            'url'     => route('admin.customers.customer.mass_update'),
+            'url'     => route('admin.customers.customers.mass_update'),
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,
                 trans('admin::app.datagrid.inactive')  => 0,

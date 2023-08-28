@@ -87,6 +87,8 @@ class ProductDataGrid extends DataGrid
         $queryBuilder->whereIn('product_flat.channel', $whereInChannels);
 
         $this->addFilter('product_id', 'product_flat.product_id');
+        $this->addFilter('name', 'product_flat.name');
+        $this->addFilter('type', 'product_flat.type');
         $this->addFilter('status', 'product_flat.status');
         $this->addFilter('attribute_family', 'attribute_families.name');
 
@@ -122,7 +124,7 @@ class ProductDataGrid extends DataGrid
             'index'      => 'attribute_family',
             'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
             'type'       => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
