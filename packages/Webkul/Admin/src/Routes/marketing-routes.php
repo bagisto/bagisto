@@ -14,127 +14,127 @@ use Webkul\Admin\Http\Controllers\Marketing\SitemapController;
  * Marketing routes.
  */
 Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
-    Route::prefix('promotions')->group(function () {
+    Route::prefix('marketing/promotions')->group(function () {
         /**
          * Cart rules routes.
          */
         Route::controller(CartRuleController::class)->prefix('cart-rules')->group(function () {
-            Route::get('', 'index')->name('admin.cart_rules.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.cart_rules.index');
 
-            Route::get('create', 'create')->name('admin.cart_rules.create');
+            Route::get('create', 'create')->name('admin.marketing.promotions.cart_rules.create');
 
-            Route::post('create', 'store')->name('admin.cart_rules.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.cart_rules.store');
 
-            Route::get('copy/{id}', 'copy')->name('admin.cart_rules.copy');
+            Route::get('copy/{id}', 'copy')->name('admin.marketing.promotions.cart_rules.copy');
 
-            Route::get('edit/{id}', 'edit')->name('admin.cart_rules.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.cart_rules.edit');
 
-            Route::post('edit/{id}', 'update')->name('admin.cart_rules.update');
+            Route::post('edit/{id}', 'update')->name('admin.marketing.promotions.cart_rules.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.cart_rules.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.cart_rules.delete');
         });
 
         /**
          * Cart rule coupons routes.
          */
         Route::controller(CartRuleCouponController::class)->prefix('cart-rules/coupons')->group(function () {
-            Route::get('{id}', 'index')->name('admin.cart_rules.coupons.index');
+            Route::get('{id}', 'index')->name('admin.marketing.promotions.cart_rules.coupons.index');
 
-            Route::post('{id}', 'store')->name('admin.cart_rules.coupons.store');
+            Route::post('{id}', 'store')->name('adadmin.marketing.promotions.cart_rules.coupons.store');
 
-            Route::post('mass-delete', 'massDelete')->name('admin.cart_rules.coupons.mass_delete');
+            Route::post('mass-delete', 'massDelete')->name('adadmin.marketing.promotions.cart_rules.coupons.mass_delete');
         });
 
         /**
          * Catalog rules routes.
          */
         Route::controller(CatalogRuleController::class)->prefix('catalog-rules')->group(function () {
-            Route::get('', 'index')->name('admin.catalog_rules.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.catalog_rules.index');
 
-            Route::get('create', 'create')->name('admin.catalog_rules.create');
+            Route::get('create', 'create')->name('admin.marketing.promotions.catalog_rules.create');
 
-            Route::post('create', 'store')->name('admin.catalog_rules.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.catalog_rules.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.catalog_rules.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.catalog_rules.edit');
 
-            Route::post('edit/{id}', 'update')->name('admin.catalog_rules.update');
+            Route::post('edit/{id}', 'update')->name('admin.marketing.promotions.catalog_rules.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.catalog_rules.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.catalog_rules.delete');
         });
 
         /**
          * Campaigns routes.
          */
         Route::controller(CampaignController::class)->prefix('campaigns')->group(function () {
-            Route::get('', 'index')->name('admin.campaigns.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.campaigns.index');
 
-            Route::get('create', 'create')->name('admin.campaigns.create');
+            Route::get('create', 'create')->name('admin.marketing.promotions.campaigns.create');
 
-            Route::post('create', 'store')->name('admin.campaigns.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.campaigns.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.campaigns.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.campaigns.edit');
 
-            Route::post('edit/{id}', 'update')->name('admin.campaigns.update');
+            Route::post('edit/{id}', 'update')->name('admin.marketing.promotions.campaigns.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.campaigns.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.campaigns.delete');
         });
 
         /**
          * Events routes.
          */
         Route::controller(EventController::class)->prefix('events')->group(function () {
-            Route::get('', 'index')->name('admin.events.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.events.index');
 
-            Route::post('create', 'store')->name('admin.events.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.events.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.events.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.events.edit');
 
-            Route::post('edit', 'update')->name('admin.events.update');
+            Route::post('edit', 'update')->name('admin.marketing.promotions.events.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.events.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.events.delete');
         });
 
         /**
          * subscribers routes.
          */
         Route::controller(SubscriptionController::class)->prefix('subscribers')->group(function () {
-            Route::get('', 'index')->name('admin.customers.subscribers.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.customers.subscribers.index');
 
-            Route::get('edit/{id}', 'edit')->name('admin.customers.subscribers.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.customers.subscribers.edit');
 
-            Route::post('edit', 'update')->name('admin.customers.subscribers.update');
+            Route::post('edit', 'update')->name('admin.marketing.promotions.customers.subscribers.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.customers.subscribers.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.customers.subscribers.delete');
         });
 
         /**
          * Emails templates routes.
          */
         Route::controller(TemplateController::class)->prefix('email-templates')->group(function () {
-            Route::get('', 'index')->name('admin.email_templates.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.email_templates.index');
 
-            Route::get('create', 'create')->name('admin.email_templates.create');
+            Route::get('create', 'create')->name('admin.marketing.promotions.email_templates.create');
 
-            Route::post('create', 'store')->name('admin.email_templates.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.email_templates.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.email_templates.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.email_templates.edit');
 
-            Route::post('edit/{id}', 'update')->name('admin.email_templates.update');
+            Route::post('edit/{id}', 'update')->name('admin.marketing.promotions.email_templates.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.email_templates.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.email_templates.delete');
         });
 
         /**
          * sitemaps routes.
          */
         Route::controller(SitemapController::class)->prefix('sitemaps')->group(function () {
-            Route::get('', 'index')->name('admin.sitemaps.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.sitemaps.index');
 
-            Route::post('create', 'store')->name('admin.sitemaps.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.sitemaps.store');
 
-            Route::post('edit', 'update')->name('admin.sitemaps.update');
+            Route::post('edit', 'update')->name('admin.marketing.promotions.sitemaps.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.sitemaps.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.sitemaps.delete');
         });
     });
 });

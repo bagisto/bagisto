@@ -72,7 +72,7 @@ class RoleController extends Controller
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Role']));
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('admin.settings.users.roles.index');
     }
 
     /**
@@ -112,7 +112,7 @@ class RoleController extends Controller
         ) {
             session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
 
-            return redirect()->route('admin.roles.index');
+            return redirect()->route('admin.settings.users.roles.index');
         }
 
         $data = array_merge(request()->only([
@@ -131,7 +131,7 @@ class RoleController extends Controller
 
         session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
 
-        return redirect()->route('admin.roles.index');
+        return redirect()->route('admin.settings.users.roles.index');
     }
 
     /**

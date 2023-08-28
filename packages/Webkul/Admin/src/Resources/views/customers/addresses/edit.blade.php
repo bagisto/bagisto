@@ -397,7 +397,7 @@
                    
                         let addressId = params.address_id;
 
-                        this.$axios.post(`{{ route('admin.customer.addresses.update', '') }}/${addressId}`, params, {
+                        this.$axios.post(`{{ route('admin.customers.customer.addresses.update', '') }}/${addressId}`, params, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }

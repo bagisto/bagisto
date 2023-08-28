@@ -12,7 +12,7 @@
         <script type="text/x-template" id="v-catalog-rule-edit-form-template">
             <div>
                 <x-admin::form 
-                    :action="route('admin.catalog_rules.update', $catalogRule->id)"
+                    :action="route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id)"
                     enctype="multipart/form-data"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
@@ -22,7 +22,7 @@
                 
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel Button -->
-                            <a href="{{ route('admin.catalog_rules.index') }}">
+                            <a href="{{ route('admin.marketing.promotions.catalog_rules.index') }}">
                                 <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                     @lang('admin::app.marketing.promotions.catalog-rules.edit.back-btn')
                                 </span>

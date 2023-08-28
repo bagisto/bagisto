@@ -348,7 +348,7 @@
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
-                                :href="'{{ route('admin.customer.view', ':id') }}'.replace(':id', customer.id)"
+                                :href="'{{ route('admin.customers.customer.view', ':id') }}'.replace(':id', customer.id)"
                                 class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
                                 v-for="customer in searchedResults.customers.data"
                             >
@@ -364,7 +364,7 @@
 
                         <div class="p-[12px] border-t-[1px] border-gray-300">
                             <a
-                                :href="'{{ route('admin.customer.index') }}?search=:query'.replace(':query', searchTerm)"
+                                :href="'{{ route('admin.customers.customer.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
@@ -409,7 +409,7 @@
                         customers: {
                             key: 'customers',
                             title: "@lang('admin::app.components.layouts.header.mega-search.customers')",
-                            endpoint: "{{ route('admin.customer.search') }}"
+                            endpoint: "{{ route('admin.customers.customer.search') }}"
                         }
                     },
 

@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.customer.index') }}" ref="customer_data" :isMultiRow="true">
+    <x-admin::datagrid src="{{ route('admin.customers.customer.index') }}" ref="customer_data" :isMultiRow="true">
         {{-- Datagrid Header --}}
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
@@ -237,7 +237,7 @@
                         </div>
                         <a 
                             class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
-                            :href=`{{ route('admin.customer.view', '') }}/${record.customer_id}`
+                            :href=`{{ route('admin.customers.customer.view', '') }}/${record.customer_id}`
                         >
                         </a>
                     </div>
@@ -481,7 +481,7 @@
                 methods: {
                     create(params, { resetForm, setErrors }) {
                     
-                        this.$axios.post("{{ route('admin.customer.store') }}", params)
+                        this.$axios.post("{{ route('admin.customers.customer.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.close();
 

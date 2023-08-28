@@ -90,7 +90,7 @@ class TaxRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create.create-success'));
 
-        return redirect()->route('admin.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
 
     /**
@@ -143,7 +143,7 @@ class TaxRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.taxes.tax-rates.edit.update-success'));
 
-        return redirect()->route('admin.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
 
     /**
@@ -321,6 +321,6 @@ class TaxRateController extends Controller
             }
         }
 
-        return redirect()->route('admin.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
 }

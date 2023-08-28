@@ -4,7 +4,7 @@
     </x-slot:title>
 
     {{-- Input Form --}}
-    <x-admin::form :action="route('admin.email_templates.store')">
+    <x-admin::form :action="route('admin.marketing.promotions.email_templates.store')">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.marketing.email-marketing.templates.create.title')
@@ -12,7 +12,7 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.email_templates.index') }}">
+                <a href="{{ route('admin.marketing.promotions.email_templates.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.marketing.email-marketing.templates.create.back-btn')
                     </span>

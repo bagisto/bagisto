@@ -13,7 +13,7 @@
             <div>
                 <x-admin::form 
                     method="PUT" 
-                    :action="route('admin.roles.update', $role->id)"
+                    :action="route('admin.settings.users.roles.update', $role->id)"
                 >
                 <div class="flex justify-between items-center">
                     <p class="text-[20px] text-gray-800 font-bold">
@@ -22,7 +22,7 @@
 
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Cancel Button -->
-                        <a href="{{ route('admin.roles.index') }}">
+                        <a href="{{ route('admin.settings.users.roles.index') }}">
                             <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                 @lang('admin::app.users.roles.edit.back-btn')
                             </span>
