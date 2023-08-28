@@ -228,7 +228,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
-                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="product in searchedResults.products.data"
                             >
                                 <!-- Left Information -->
@@ -274,8 +274,17 @@
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-if="searchedResults.products.data.length"
                             >
-                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
+                            </a>
+
+                            <a
+                                href="{{ route('admin.catalog.products.index') }}"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-else
+                            >
+                                @lang('admin::app.components.layouts.header.mega-search.explore-all-products')
                             </a>
                         </div>
                     </template>
@@ -290,7 +299,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
-                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="order in searchedResults.orders.data"
                             >
                                 <p class="text-[16x] text-gray-600 font-semibold">
@@ -307,8 +316,17 @@
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-if="searchedResults.orders.data.length"
                             >
-                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-orders')".replace(':query', searchTerm).replace(':count', searchedResults.orders.total) }}
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-orders')".replace(':query', searchTerm).replace(':count', searchedResults.orders.total) }}
+                            </a>
+
+                            <a
+                                href="{{ route('admin.sales.orders.index') }}"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-else
+                            >
+                                @lang('admin::app.components.layouts.header.mega-search.explore-all-orders')
                             </a>
                         </div>
                     </template>
@@ -323,7 +341,7 @@
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
-                                class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 font-semibold cursor-pointer hover:bg-gray-100"
+                                class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 font-semibold cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
@@ -334,8 +352,17 @@
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-if="searchedResults.categories.data.length"
                             >
-                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-categories')".replace(':query', searchTerm).replace(':count', searchedResults.categories.total) }}
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-categories')".replace(':query', searchTerm).replace(':count', searchedResults.categories.total) }}
+                            </a>
+
+                            <a
+                                href="{{ route('admin.catalog.categories.index') }}"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-else
+                            >
+                                @lang('admin::app.components.layouts.header.mega-search.explore-all-categories')
                             </a>
                         </div>
                     </template>
@@ -349,8 +376,8 @@
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
                             <a
-                                :href="'{{ route('admin.customers.customer.view', ':id') }}'.replace(':id', customer.id)"
-                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
+                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100 last:border-b-0"
                                 v-for="customer in searchedResults.customers.data"
                             >
                                 <p class="text-[16x] text-gray-600 font-semibold">
@@ -365,10 +392,19 @@
 
                         <div class="p-[12px] border-t-[1px] border-gray-300">
                             <a
-                                :href="'{{ route('admin.customers.customer.index') }}?search=:query'.replace(':query', searchTerm)"
+                                :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-if="searchedResults.customers.data.length"
                             >
-                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
+                            </a>
+
+                            <a
+                                href="{{ route('admin.customers.customers.index') }}"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                v-else
+                            >
+                                @lang('admin::app.components.layouts.header.mega-search.explore-all-customers')
                             </a>
                         </div>
                     </template>
@@ -410,7 +446,7 @@
                         customers: {
                             key: 'customers',
                             title: "@lang('admin::app.components.layouts.header.mega-search.customers')",
-                            endpoint: "{{ route('admin.customers.customer.search') }}"
+                            endpoint: "{{ route('admin.customers.customers.search') }}"
                         }
                     },
 

@@ -23,6 +23,6 @@
         </div>
     </div>
     
-    <x-admin::datagrid :src="route('admin.settings.channels.index')"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.settings.channels.index') }}"></x-admin::datagrid>
 
 </x-admin::layouts>

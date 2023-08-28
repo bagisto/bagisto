@@ -8,167 +8,171 @@ use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
 use Webkul\Admin\Http\Controllers\Settings\TaxCategoryController;
 use Webkul\Admin\Http\Controllers\Settings\TaxRateController;
-use Webkul\Admin\Http\Controllers\User\RoleController;
-use Webkul\Admin\Http\Controllers\User\UserController;
+use Webkul\Admin\Http\Controllers\Settings\RoleController;
+use Webkul\Admin\Http\Controllers\Settings\UserController;
 
 /**
  * Settings routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '/settings'], function () {
-    /**
-     * Channels routes.
-     */
-    Route::controller(ChannelController::class)->prefix('channels')->group(function () {
-        Route::get('', 'index')->name('admin.settings.channels.index');
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
+    Route::prefix('settings')->group(function () {
+        /**
+         * Channels routes.
+         */
+        Route::controller(ChannelController::class)->prefix('channels')->group(function () {
+            Route::get('', 'index')->name('admin.settings.channels.index');
 
-        Route::get('create', 'create')->name('admin.settings.channels.create');
+            Route::get('create', 'create')->name('admin.settings.channels.create');
 
-        Route::post('create', 'store')->name('admin.settings.channels.store');
+            Route::post('create', 'store')->name('admin.settings.channels.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.channels.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.channels.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.settings.channels.update');
+            Route::put('edit/{id}', 'update')->name('admin.settings.channels.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.channels.delete');
-    });
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.channels.delete');
+        });
 
-    /**
-     * Currencies routes.
-     */
-    Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
-        Route::get('', 'index')->name('admin.settings.currencies.index');
+        /**
+         * Currencies routes.
+         */
+        Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
+            Route::get('', 'index')->name('admin.settings.currencies.index');
 
-        Route::get('create', 'create')->name('admin.settings.currencies.create');
+            Route::get('create', 'create')->name('admin.settings.currencies.create');
 
-        Route::post('create', 'store')->name('admin.settings.currencies.store');
+            Route::post('create', 'store')->name('admin.settings.currencies.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.currencies.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.currencies.edit');
 
-        Route::post('edit', 'update')->name('admin.settings.currencies.update');
+            Route::post('edit', 'update')->name('admin.settings.currencies.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.currencies.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.currencies.delete');
 
-        Route::post('mass-delete', 'massDestroy')->name('admin.settings.currencies.mass_delete');
-    });
+            Route::post('mass-delete', 'massDestroy')->name('admin.settings.currencies.mass_delete');
+        });
 
-    /**
-     * Exchange rates routes.
-     */
-    Route::controller(ExchangeRateController::class)->prefix('exchange-rates')->group(function () {
-        Route::get('', 'index')->name('admin.settings.exchange_rates.index');
+        /**
+         * Exchange rates routes.
+         */
+        Route::controller(ExchangeRateController::class)->prefix('exchange-rates')->group(function () {
+            Route::get('', 'index')->name('admin.settings.exchange_rates.index');
 
-        Route::post('create', 'store')->name('admin.settings.exchange_rates.store');
+            Route::post('create', 'store')->name('admin.settings.exchange_rates.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.exchange_rates.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.exchange_rates.edit');
 
-        Route::get('update-rates', 'updateRates')->name('admin.settings.exchange_rates.update_rates');
+            Route::get('update-rates', 'updateRates')->name('admin.settings.exchange_rates.update_rates');
 
-        Route::post('edit', 'update')->name('admin.settings.exchange_rates.update');
+            Route::post('edit', 'update')->name('admin.settings.exchange_rates.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.exchange_rates.delete');
-    });
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.exchange_rates.delete');
+        });
 
-    /**
-     * Locales routes.
-     */
-    Route::controller(LocaleController::class)->prefix('locales')->group(function () {
-        Route::get('', 'index')->name('admin.settings.locales.index');
+        /**
+         * Locales routes.
+         */
+        Route::controller(LocaleController::class)->prefix('locales')->group(function () {
+            Route::get('', 'index')->name('admin.settings.locales.index');
 
-        Route::get('create', 'create')->name('admin.settings.locales.create');
+            Route::get('create', 'create')->name('admin.settings.locales.create');
 
-        Route::post('create', 'store')->name('admin.settings.locales.store');
+            Route::post('create', 'store')->name('admin.settings.locales.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.locales.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.locales.edit');
 
-        Route::post('edit', 'update')->name('admin.settings.locales.update');
+            Route::post('edit', 'update')->name('admin.settings.locales.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.locales.delete');
-    });
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.locales.delete');
+        });
 
-    /**
-     * Inventory sources routes.
-     */
-    Route::controller(InventorySourceController::class)->prefix('inventory-sources')->group(function () {
-        Route::get('', 'index')->name('admin.settings.inventory_sources.index');
+        /**
+         * Inventory sources routes.
+         */
+        Route::controller(InventorySourceController::class)->prefix('inventory-sources')->group(function () {
+            Route::get('', 'index')->name('admin.settings.inventory_sources.index');
 
-        Route::get('create', 'create')->name('admin.settings.inventory_sources.create');
+            Route::get('create', 'create')->name('admin.settings.inventory_sources.create');
 
-        Route::post('create', 'store')->name('admin.settings.inventory_sources.store');
+            Route::post('create', 'store')->name('admin.settings.inventory_sources.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.inventory_sources.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.inventory_sources.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.settings.inventory_sources.update');
+            Route::put('edit/{id}', 'update')->name('admin.settings.inventory_sources.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.inventory_sources.delete');
-    });
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.inventory_sources.delete');
+        });
 
-    /**
-     * Tax categories routes.
-     */
-    Route::controller(TaxCategoryController::class)->prefix('taxes/tax-categories')->group(function () {
-        Route::get('', 'index')->name('admin.settings.taxes.tax_categories.index');
+        Route::prefix('taxes')->group(function () {
+            /**
+             * Tax categories routes.
+             */
+            Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.tax_categories.index');
 
-        Route::post('', 'store')->name('admin.settings.taxes.tax_categories.store');
+                Route::post('', 'store')->name('admin.settings.taxes.tax_categories.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_categories.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_categories.edit');
 
-        Route::post('edit', 'update')->name('admin.settings.taxes.tax_categories.update');
+                Route::post('edit', 'update')->name('admin.settings.taxes.tax_categories.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_categories.delete');
-    });
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_categories.delete');
+            });
 
-    /**
-     * Tax rates routes.
-     */
-    Route::controller(TaxRateController::class)->prefix('tax-rates')->group(function () {
-        Route::get('', 'index')->name('admin.settings.taxes.tax_rates.index');
+            /**
+             * Tax rates routes.
+             */
+            Route::controller(TaxRateController::class)->prefix('tax-rates')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.tax_rates.index');
 
-        Route::get('create', 'show')->name('admin.settings.taxes.tax_rates.create');
+                Route::get('create', 'show')->name('admin.settings.taxes.tax_rates.create');
 
-        Route::post('create', 'create')->name('admin.settings.taxes.tax_rates.store');
+                Route::post('create', 'create')->name('admin.settings.taxes.tax_rates.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_rates.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_rates.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.settings.taxes.tax_rates.update');
+                Route::put('edit/{id}', 'update')->name('admin.settings.taxes.tax_rates.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_rates.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_rates.delete');
 
-        Route::post('import', 'import')->name('admin.settings.taxes.tax_rates.import');
-    });
+                Route::post('import', 'import')->name('admin.settings.taxes.tax_rates.import');
+            });
+        });
 
-    /**
-     * Roles routes.
-     */
-    Route::controller(RoleController::class)->prefix('roles')->group(function () {
-        Route::get('', 'index')->name('admin.settings.users.roles.index');
+        /**
+         * Roles routes.
+         */
+        Route::controller(RoleController::class)->prefix('roles')->group(function () {
+            Route::get('', 'index')->name('admin.settings.roles.index');
 
-        Route::get('create', 'create')->name('admin.settings.users.roles.create');
+            Route::get('create', 'create')->name('admin.settings.roles.create');
 
-        Route::post('create', 'store')->name('admin.settings.users.roles.store');
+            Route::post('create', 'store')->name('admin.settings.roles.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.users.roles.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.roles.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.settings.users.roles.update');
+            Route::put('edit/{id}', 'update')->name('admin.settings.roles.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.roles.delete');
-    });
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.roles.delete');
+        });
 
-    /**
-     * Users routes.
-     */
-    Route::controller(UserController::class)->prefix('users')->group(function () {
-        Route::get('', 'index')->name('admin.settings.users.index');
+        /**
+         * Users routes.
+         */
+        Route::controller(UserController::class)->prefix('users')->group(function () {
+            Route::get('', 'index')->name('admin.settings.users.index');
 
-        Route::post('create', 'store')->name('admin.settings.users.store');
+            Route::post('create', 'store')->name('admin.settings.users.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.settings.users.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.settings.users.edit');
 
-        Route::post('edit', 'update')->name('admin.settings.users.update');
+            Route::post('edit', 'update')->name('admin.settings.users.update');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
 
-        Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
+            Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
 
-        Route::post('confirm/{id}', 'destroySelf')->name('admin.settings.users.destroy');
+            Route::post('confirm/{id}', 'destroySelf')->name('admin.settings.users.destroy');
+        });
     });
 });

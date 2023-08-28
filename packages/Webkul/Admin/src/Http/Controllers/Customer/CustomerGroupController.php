@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
-use Webkul\Admin\DataGrids\Customers\CustomerGroupDataGrid;
+use Webkul\Admin\DataGrids\Customers\GroupDataGrid;
 use Webkul\Core\Rules\Code;
 
 class CustomerGroupController extends Controller
@@ -29,7 +29,7 @@ class CustomerGroupController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CustomerGroupDataGrid::class)->toJson();
+            return app(GroupDataGrid::class)->toJson();
         }
 
         return view('admin::customers.groups.index');

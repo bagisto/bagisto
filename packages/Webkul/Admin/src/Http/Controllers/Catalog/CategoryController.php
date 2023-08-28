@@ -117,7 +117,7 @@ class CategoryController extends Controller
     public function products($id)
     {
         if (request()->ajax()) {
-            return app(CategoryProductDataGrid::class)->toJson();
+            return app(ProductDataGrid::class)->toJson();
         }
     }
 

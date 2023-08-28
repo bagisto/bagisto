@@ -171,7 +171,7 @@ class CustomerController extends Controller
 
             session()->flash('success', trans('admin::app.customers.view.delete-success'));
 
-            return redirect(route('admin.customers.customer.index'));
+            return redirect(route('admin.customers.customers.index'));
         }
 
         session()->flash('success', trans('admin::app.customers.view.order-pending'));

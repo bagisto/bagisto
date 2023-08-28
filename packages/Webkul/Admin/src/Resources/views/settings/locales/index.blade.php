@@ -228,9 +228,22 @@
                                         type="image"
                                         name="logo_path[image_1]"
                                         id="direction"
+                                        v-if="id"
+                                        ref="image"
                                         :label="trans('admin::app.settings.locales.index.create.locale-logo')"
                                         accepted-types="image/*"
+                                        ::src="image.src"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.control
+                                        type="image"
+                                        name="logo_path[image_1]"
+                                        id="direction"
+                                        v-if="! id"
                                         ref="image"
+                                        :label="trans('admin::app.settings.locales.index.create.locale-logo')"
+                                        accepted-types="image/*"
                                     >
                                     </x-admin::form.control-group.control>
 

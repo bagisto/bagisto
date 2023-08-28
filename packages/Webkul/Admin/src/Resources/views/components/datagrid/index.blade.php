@@ -103,7 +103,11 @@
                         },
 
                         filters: {
-                            columns: [],
+                            columns: [{
+                                index: 'all',
+
+                                value: @json(request()->has('search') ? [request()->get('search')] : []),
+                            }],
                         },
                     },
                 };
