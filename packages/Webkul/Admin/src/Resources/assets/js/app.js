@@ -103,14 +103,12 @@ import Axios from "./plugins/axios";
 import CreateElement from "./plugins/createElement";
 import Emitter from "./plugins/emitter";
 import Admin from "./plugins/admin";
-import Debounce from "./plugins/debounce";
 
 [
     Axios,
     CreateElement,
     Emitter,
-    Admin,
-    Debounce
+    Admin
 ].forEach((plugin) => app.use(plugin));
 
 /**
@@ -129,9 +127,11 @@ app.component("draggable", Draggable);
  */
 import Slugify from "./directives/slugify";
 import SlugifyTarget from "./directives/slugify-target";
+import Debounce from "./directives/debounce";
 
 app.directive("slugify", Slugify);
 app.directive("slugify-target", SlugifyTarget);
+app.directive("debounce", Debounce);
 
 import Flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.css';
