@@ -48,7 +48,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'admin_name',
-            'label'      => trans('admin::app.name'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -57,7 +57,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'type',
-            'label'      => trans('admin::app.type'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.type'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -66,7 +66,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'is_required',
-            'label'      => trans('admin::app.required'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.required'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
@@ -75,7 +75,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'is_unique',
-            'label'      => trans('admin::app.unique'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.unique'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
@@ -84,7 +84,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'value_per_locale',
-            'label'      => trans('admin::app.locale-based'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.locale-based'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
@@ -93,7 +93,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'value_per_channel',
-            'label'      => trans('admin::app.channel-based'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.channel-based'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
@@ -102,7 +102,7 @@ class AttributeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('Created At'),
+            'label'      => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
             'type'       => 'date_range',
             'searchable' => true,
             'filterable' => true,

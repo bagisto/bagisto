@@ -28,7 +28,7 @@ class RolesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.roles.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'width'      => '40px',
@@ -38,7 +38,7 @@ class RolesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.settings.roles.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -47,7 +47,7 @@ class RolesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'permission_type',
-            'label'      => trans('admin::app.datagrid.permission-type'),
+            'label'      => trans('admin::app.settings.roles.index.datagrid.permission-type'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -64,7 +64,7 @@ class RolesDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.roles.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.settings.roles.edit', $row->id);
@@ -73,7 +73,7 @@ class RolesDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.settings.roles.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.settings.roles.delete', $row->id);
