@@ -9,7 +9,10 @@
 {{-- Customer Address Modal --}}
 @pushOnce('scripts')
     <!-- Customer Address Form -->
-    <script type="text/x-template" id="v-create-customer-address-template">
+    <script
+        type="text/x-template"
+        id="v-create-customer-address-template"
+    >
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
@@ -29,7 +32,6 @@
             <form @submit="handleSubmit($event, create)">
                 <!-- Address Create Modal -->
                 <x-admin::modal ref="CustomerAddress">
-                
                     <x-slot:header>
                         <!-- Modal Header -->
                         <p class="text-[18px] text-gray-800 font-bold">
