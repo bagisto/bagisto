@@ -255,7 +255,7 @@ class ProductDataGrid extends DataGrid
                     'value' => 1,
                 ],
                 [
-                    'name' => trans('admin::app.catalog.products.index.datagrid.inactive'),
+                    'name' => trans('admin::app.catalog.products.index.datagrid.disable'),
                     'value' => 0,
                 ],
             ],
