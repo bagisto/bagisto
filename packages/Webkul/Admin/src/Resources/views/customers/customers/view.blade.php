@@ -28,7 +28,7 @@
                 @endif
             </p>
             {{-- Back Button --}}
-            <a href="{{ route('admin.customer.index') }}">
+            <a href="{{ route('admin.customers.customer.index') }}">
                 <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                     @lang('admin::app.customers.view.back-btn')
                 </span>
@@ -57,7 +57,7 @@
        
               <form 
                 method="post"
-                action="{{ route('admin.customer.delete', $customer->id) }}" 
+                action="{{ route('admin.customers.customer.delete', $customer->id) }}" 
                 id="delete-account{{ $customer->id }}" 
             >
                 @csrf
@@ -493,7 +493,7 @@
                         </p>
     
                         {{--Customer Edit Component --}}
-                       @include('admin::customers.edit', ['groups' => $groups])
+                       @include('admin::customers.customers.edit', ['groups' => $groups])
                     </div>
                 </x-slot:header>
 
@@ -583,7 +583,7 @@
 
                                     <form 
                                         method="post"
-                                        action="{{ route('admin.customer.addresses.delete', $address->id) }}" 
+                                        action="{{ route('admin.customers.customer.addresses.delete', $address->id) }}" 
                                         id="delete-address{{ $address->id }}" 
                                     >
                                         @csrf
@@ -602,7 +602,7 @@
                                         <form 
                                             class="hidden"
                                             method="post"
-                                            action="{{ route('admin.customer.addresses.set_default', $customer->id) }}" 
+                                            action="{{ route('admin.customers.customer.addresses.set_default', $customer->id) }}" 
                                             id="default-address{{ $address->id }}" 
                                         >
                                             @csrf

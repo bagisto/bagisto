@@ -65,6 +65,17 @@
                     </div>
                 </div>
             @endforeach
+
+            <v-error-message
+                name="links[]"
+                v-slot="{ message }"
+            >
+                <p
+                    class="mt-1 text-red-500 text-xs italic"
+                    v-text="message"
+                >
+                </p>
+            </v-error-message>
         </div>
     @endif
 

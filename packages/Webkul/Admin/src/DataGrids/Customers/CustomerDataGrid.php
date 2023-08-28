@@ -190,7 +190,7 @@ class CustomerDataGrid extends DataGrid
             'title'  => trans('admin::app.customers.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.customer.view', $row->customer_id);
+                return route('admin.customers.customer.view', $row->customer_id);
             },
         ]);
 
@@ -200,7 +200,7 @@ class CustomerDataGrid extends DataGrid
             'method' => 'GET',
             'target' => 'blank',
             'url'    => function ($row) {
-                return route('admin.customer.login_as_customer', $row->customer_id);
+                return route('admin.customers.customer.login_as_customer', $row->customer_id);
             },
         ]);
 
@@ -209,7 +209,7 @@ class CustomerDataGrid extends DataGrid
             'title'  => trans('admin::app.customers.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.customer.delete', $row->customer_id);
+                return route('admin.customers.customer.delete', $row->customer_id);
             },
         ]);
     }
@@ -224,13 +224,13 @@ class CustomerDataGrid extends DataGrid
         $this->addMassAction([
             'title'  => trans('admin::app.customers.index.datagrid.delete'),
             'method' => 'POST',
-            'url'    => route('admin.customer.mass_delete'),
+            'url'    => route('admin.customers.customer.mass_delete'),
         ]);
 
         $this->addMassAction([
             'title'   => trans('admin::app.customers.index.datagrid.update-status'),
             'method'  => 'POST',
-            'url'     => route('admin.customer.mass_update'),
+            'url'     => route('admin.customers.customer.mass_update'),
             'options' => [
                 [
                     'name' => trans('admin::app.customers.index.datagrid.active'),

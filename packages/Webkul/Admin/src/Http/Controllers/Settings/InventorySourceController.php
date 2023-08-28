@@ -77,7 +77,7 @@ class InventorySourceController extends Controller
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
 
-        return redirect()->route('admin.inventory_sources.index');
+        return redirect()->route('admin.settings.inventory_sources.index');
     }
 
     /**
@@ -128,7 +128,7 @@ class InventorySourceController extends Controller
 
         session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
 
-        return redirect()->route('admin.inventory_sources.index');
+        return redirect()->route('admin.settings.inventory_sources.index');
     }
 
     /**

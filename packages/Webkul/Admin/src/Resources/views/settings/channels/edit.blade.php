@@ -12,7 +12,7 @@
 
     {{-- Channeld Edit Form --}}
     <x-admin::form  
-        :action="route('admin.channels.update', ['id' => $channel->id, 'locale' => $locale])"
+        :action="route('admin.settings.channels.update', ['id' => $channel->id, 'locale' => $locale])"
         enctype="multipart/form-data"
     >
         @method('PUT')
@@ -23,7 +23,7 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <a href="{{ route('admin.channels.index') }}">
+                <a href="{{ route('admin.settings.channels.index') }}">
                     <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                         @lang('admin::app.settings.channels.edit.back-btn')
                     </span>

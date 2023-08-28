@@ -9,14 +9,14 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>
-                    <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customer.index') }}'"></i>
+                    <i class="icon angle-left-icon back-link" onclick="window.location = '{{ route('admin.customers.customer.index') }}'"></i>
                     {{ __('admin::app.users.users.confirm-delete-title') }}
                 </h1>
             </div>
         </div>
 
         <div class="page-content">
-            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" @submit.prevent="onSubmit">
+            <form action="{{ route('admin.settings.users.destroy', $user->id) }}" method="POST" @submit.prevent="onSubmit">
                 @csrf
                 <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                     <label for="password" class="required">

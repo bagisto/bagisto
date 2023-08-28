@@ -73,7 +73,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.exchange-rates.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.exchange_rates.edit', $row->currency_exchange_id);
+                return route('admin.settings.exchange_rates.edit', $row->currency_exchange_id);
             },
         ]);
 
@@ -82,7 +82,7 @@ class ExchangeRatesDataGrid extends DataGrid
             'title'   => trans('admin::app.settings.exchange-rates.index.datagrid.delete'),
             'method'  => 'DELETE',
             'url'     => function ($row) {
-                return route('admin.exchange_rates.delete', $row->currency_exchange_id);
+                return route('admin.settings.exchange_rates.delete', $row->currency_exchange_id);
             },
         ]);
     }

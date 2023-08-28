@@ -14,7 +14,7 @@
             {{-- Add Role Button --}}
             @if (bouncer()->hasPermission('settings.users.roles.create')) 
                 <a 
-                    href="{{ route('admin.roles.create') }}"
+                    href="{{ route('admin.settings.users.roles.create') }}"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.users.roles.index.create-btn')
@@ -23,5 +23,5 @@
         </div>
     </div>
     
-    <x-admin::datagrid src="{{ route('admin.roles.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.users.roles.index')"></x-admin::datagrid>
 </x-admin::layouts>

@@ -66,7 +66,7 @@ class TaxCategoryDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.taxes.tax-categories.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.tax_categories.edit', $row->id);
+                return route('admin.settings.taxes.tax_categories.edit', $row->id);
             },
         ]);
 
@@ -75,7 +75,7 @@ class TaxCategoryDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.taxes.tax-categories.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.tax_categories.delete', $row->id);
+                return route('admin.settings.taxes.tax_categories.delete', $row->id);
             },
         ]);
     }

@@ -92,7 +92,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-create'));
 
-        return redirect()->route('admin.customer.view', ['id' => request('customer_id')]);
+        return redirect()->route('admin.customers.customer.view', ['id' => request('customer_id')]);
     }
 
     /**
@@ -152,7 +152,7 @@ class AddressController extends Controller
 
         session()->flash('success', trans('admin::app.customers.addresses.success-update'));
 
-        return redirect()->route('admin.customer.view', ['id' => $customerAddress->customer_id]);
+        return redirect()->route('admin.customers.customer.view', ['id' => $customerAddress->customer_id]);
     }
 
     /**

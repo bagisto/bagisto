@@ -11,7 +11,7 @@
         <div class="flex gap-x-[10px] items-center">
             @if (bouncer()->hasPermission('marketing.promotions.cart-rules.create'))
                 <a 
-                    href="{{ route('admin.cart_rules.create') }}"
+                    href="{{ route('admin.marketing.promotions.cart_rules.create') }}"
                     class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                 >
                     @lang('admin::app.marketing.promotions.cart-rules.index.create-btn')
@@ -20,5 +20,5 @@
         </div>
     </div>
     
-    <x-admin::datagrid src="{{ route('admin.cart_rules.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.marketing.promotions.cart_rules.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

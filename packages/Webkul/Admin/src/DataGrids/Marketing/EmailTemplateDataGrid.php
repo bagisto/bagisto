@@ -77,7 +77,7 @@ class EmailTemplateDataGrid extends DataGrid
             'title'  => trans('admin::app.marketing.email-marketing.templates.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.email_templates.edit', $row->id);
+                return route('admin.marketing.promotions.email_templates.edit', $row->id);
             },
         ]);
 
@@ -86,7 +86,7 @@ class EmailTemplateDataGrid extends DataGrid
             'title'   => trans('admin::app.marketing.email-marketing.templates.index.datagrid.delete'),
             'method'  => 'POST',
             'url'     => function ($row) {
-                return route('admin.email_templates.delete', $row->id);
+                return route('admin.marketing.promotions.email_templates.delete', $row->id);
             },
         ]);
     }

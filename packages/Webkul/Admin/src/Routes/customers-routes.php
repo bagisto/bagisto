@@ -9,58 +9,58 @@ use Webkul\Admin\Http\Controllers\Customer\ReviewController;
 /**
  * Customers routes.
  */
-Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], function () {
-    /**
-     * Customer management routes.
-     */
-    Route::controller(CustomerController::class)->prefix('customers')->group(function () {
-        Route::get('', 'index')->name('admin.customer.index');
+Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '/customers'], function () {
+    Route::prefix('customers')->group(function () {
+        /**
+         * Customer management routes.
+         */
+        Route::controller(CustomerController::class)->group(function () {
+            Route::get('', 'index')->name('admin.customers.customer.index');
 
-        Route::get('view/{id}', 'show')->name('admin.customer.view');
+            Route::get('view/{id}', 'show')->name('admin.customers.customer.view');
 
-        Route::post('create', 'store')->name('admin.customer.store');
+            Route::post('create', 'store')->name('admin.customers.customer.store');
 
-        Route::get('edit/{id}', 'edit')->name('admin.customer.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.customers.customer.edit');
 
-        Route::get('search', 'search')->name('admin.customer.search');
+            Route::get('search', 'search')->name('admin.customers.customer.search');
 
-        Route::get('login-as-customer/{id}', 'login_as_customer')->name('admin.customer.login_as_customer');
+            Route::get('login-as-customer/{id}', 'login_as_customer')->name('admin.customers.customer.login_as_customer');
 
-        Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
+            Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 
-        Route::post('edit/{id}', 'update')->name('admin.customer.update');
+            Route::post('edit/{id}', 'update')->name('admin.customers.customer.update');
 
-        Route::post('/{id}', 'destroy')->name('admin.customer.delete');
+            Route::post('/{id}', 'destroy')->name('admin.customers.customer.delete');
 
-        Route::post('mass-delete', 'massDestroy')->name('admin.customer.mass_delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.customers.customer.mass_delete');
 
-        Route::post('mass-update', 'massUpdate')->name('admin.customer.mass_update');
+            Route::post('mass-update', 'massUpdate')->name('admin.customers.customer.mass_update');
 
-        Route::get('{id}/invoices', 'invoices')->name('admin.customer.invoices.data');
-
-        Route::get('{id}/orders', 'orders')->name('admin.customer.orders.data');
-    });
-
-    /**
-     * Customer's addresses routes.
-     */
-    Route::controller(AddressController::class)->prefix('customers')->group(function () {
-        Route::prefix('{id}/addresses')->group(function () {
-            Route::get('', 'index')->name('admin.customer.addresses.index');
-
-            Route::get('create', 'create')->name('admin.customer.addresses.create');
-
-            Route::post('create', 'store')->name('admin.customer.addresses.store');
+            Route::get('{id}/orders', 'orders')->name('admin.customers.customer.orders.data');
         });
 
-        Route::prefix('addresses')->group(function () {
-            Route::get('edit/{id}', 'edit')->name('admin.customer.addresses.edit');
+        /**
+         * Customer's addresses routes.
+         */
+        Route::controller(AddressController::class)->group(function () {
+            Route::prefix('{id}/addresses')->group(function () {
+                Route::get('', 'index')->name('admin.customers.customer.addresses.index');
 
-            Route::post('edit/{id}', 'update')->name('admin.customer.addresses.update');
+                Route::get('create', 'create')->name('admin.customers.customer.addresses.create');
+                
+                Route::post('create', 'store')->name('admin.customers.customer.addresses.store');
+            });
 
-            Route::post('default/{id}', 'makeDefault')->name('admin.customer.addresses.set_default');
+            Route::prefix('addresses')->group(function () {
+                Route::get('edit/{id}', 'edit')->name('admin.customers.customer.addresses.edit');
 
-            Route::post('delete/{id}', 'destroy')->name('admin.customer.addresses.delete');
+                Route::post('edit/{id}', 'update')->name('admin.customers.customer.addresses.update');
+
+                Route::post('default/{id}', 'makeDefault')->name('admin.customers.customer.addresses.set_default');
+
+                Route::post('delete/{id}', 'destroy')->name('admin.customers.customer.addresses.delete');
+            });
         });
     });
 
@@ -68,29 +68,29 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
      * Customer's reviews routes.
      */
     Route::controller(ReviewController::class)->prefix('reviews')->group(function () {
-        Route::get('', 'index')->name('admin.customer.review.index');
+        Route::get('', 'index')->name('admin.customers.customer.review.index');
 
-        Route::get('edit/{id}', 'edit')->name('admin.customer.review.edit');
+        Route::get('edit/{id}', 'edit')->name('admin.customers.customer.review.edit');
 
-        Route::post('edit/{id}', 'update')->name('admin.customer.review.update');
+        Route::post('edit/{id}', 'update')->name('admin.customers.customer.review.update');
 
-        Route::delete('/{id}', 'destroy')->name('admin.customer.review.delete');
+        Route::delete('/{id}', 'destroy')->name('admin.customers.customer.review.delete');
 
-        Route::post('mass-delete', 'massDestroy')->name('admin.customer.review.mass_delete');
+        Route::post('mass-delete', 'massDestroy')->name('admin.customers.customer.review.mass_delete');
 
-        Route::post('mass-update', 'massUpdate')->name('admin.customer.review.mass_update');
+        Route::post('mass-update', 'massUpdate')->name('admin.customers.customer.review.mass_update');
     });
 
     /**
      * Customer groups routes.
      */
     Route::controller(CustomerGroupController::class)->prefix('groups')->group(function () {
-        Route::get('', 'index')->name('admin.groups.index');
+        Route::get('', 'index')->name('admin.customers.groups.index');
 
-        Route::post('create', 'store')->name('admin.groups.store');
+        Route::post('create', 'store')->name('admin.customers.groups.store');
 
-        Route::post('edit', 'update')->name('admin.groups.update');
+        Route::post('edit', 'update')->name('admin.customers.groups.update');
 
-        Route::delete('delete/{id}', 'destroy')->name('admin.groups.delete');
+        Route::delete('delete/{id}', 'destroy')->name('admin.customers.groups.delete');
     });
 });

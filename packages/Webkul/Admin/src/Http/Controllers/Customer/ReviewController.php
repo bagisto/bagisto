@@ -35,7 +35,7 @@ class ReviewController extends Controller
         return view('admin::customers.reviews.index');
     }
 
-     /**
+    /**
      * Review Details
      *
      * @param  int  $id
@@ -46,7 +46,7 @@ class ReviewController extends Controller
         $review = $this->productReviewRepository->with(['images', 'product'])->findOrFail($id);
 
         $review->date = $review->created_at->format('Y-m-d');
-        
+
         return new JsonResource($review);
     }
 
@@ -66,7 +66,7 @@ class ReviewController extends Controller
 
         session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
 
-        return redirect()->route('admin.customer.review.index');
+        return redirect()->route('admin.customers.customer.review.index');
     }
 
     /**
@@ -126,8 +126,7 @@ class ReviewController extends Controller
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
-            return redirect()->route('admin.customer.review.index');
-
+            return redirect()->route('admin.customers.customer.review.index');
         } else {
             session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
@@ -186,7 +185,7 @@ class ReviewController extends Controller
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
-            return redirect()->route('admin.customer.review.index');
+            return redirect()->route('admin.customers.customer.review.index');
         } else {
             session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 

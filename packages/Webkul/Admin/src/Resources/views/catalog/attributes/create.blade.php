@@ -134,9 +134,9 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="swatchType"
+                                            name="swatch_type"
                                             id="swatchType"
-                                            :value="old('swatchType')"
+                                            :value="old('swatch_type')"
                                             v-model="swatchType"
                                             @change="showSwatch=true"
                                         >

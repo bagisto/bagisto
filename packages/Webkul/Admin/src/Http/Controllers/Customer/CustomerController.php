@@ -42,7 +42,7 @@ class CustomerController extends Controller
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::customers.index', compact('groups'));
+        return view('admin::customers.customers.index', compact('groups'));
     }
 
     /**
@@ -107,7 +107,7 @@ class CustomerController extends Controller
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::customers.edit', compact('customer', 'groups'));
+        return view('admin::customers.customers.edit', compact('customer', 'groups'));
     }
 
     /**
@@ -171,7 +171,7 @@ class CustomerController extends Controller
 
             session()->flash('success', trans('admin::app.customers.view.delete-success'));
 
-            return redirect(route('admin.customer.index'));
+            return redirect(route('admin.customers.customer.index'));
         }
 
         session()->flash('success', trans('admin::app.customers.view.order-pending'));
@@ -243,7 +243,25 @@ class CustomerController extends Controller
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::customers.view', compact('customer', 'groups'));
+        return view('admin::customers.customers.view', compact('customer', 'groups'));
+    }
+
+    /**
+     * Result of search customer.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search()
+    {
+        $results = [];
+
+        $customers = $this->customerRepository->scopeQuery(function($query) {
+            return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
+                ->orderBy('created_at', 'desc');
+        })->paginate(10);
+
+        return response()->json($customers);
     }
 
     /**
@@ -298,23 +316,5 @@ class CustomerController extends Controller
         session()->flash('error', trans('admin::app.customers.order-pending'));
 
         return redirect()->back();
-    }
-
-    /**
-     * Result of search customer.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function search()
-    {
-        $results = [];
-
-        $customers = $this->customerRepository->scopeQuery(function($query) {
-            return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
-                ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
-                ->orderBy('created_at', 'desc');
-        })->paginate(10);
-
-        return response()->json($customers);
     }
 }

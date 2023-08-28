@@ -1,7 +1,7 @@
 @if ($product->type == 'bundle')
     {!! view_render_event('bagisto.shop.products.view.bundle-options.before', ['product' => $product]) !!}
 
-    <v-product-bundle-options></v-product-bundle-options>
+    <v-product-bundle-options :errors="errors"></v-product-bundle-options>
 
     {!! view_render_event('bagisto.shop.products.view.bundle-options.after', ['product' => $product]) !!}
 
@@ -11,6 +11,7 @@
                 <v-product-bundle-option-item
                     v-for="(option, index) in options"
                     :option="option"
+                    :errors="errors"
                     :key="index"
                     @onProductSelected="productSelected(option, $event)">
                 </v-product-bundle-option-item>
@@ -21,7 +22,7 @@
                     </p>
 
                     <p class="text-[18px] font-medium">
-                        @{{ formatted_total_price }}
+                        @{{ formattedTotalPrice }}
                     </p>
                 </div>
 
@@ -52,10 +53,14 @@
                     </label>
 
                     <div v-if="option.type == 'select'">
-                        <select
+                        <v-field
+                            as="select"
                             :name="'bundle_options[' + option.id + '][]'"
                             class="custom-select block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#7D7D7D] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
-                            v-model="selected_product"
+                            :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
+                            :rules="{'required': option.is_required}"
+                            v-model="selectedProduct"
+                            :label="option.label"
                         >
                             <option
                                 value="0"
@@ -70,64 +75,72 @@
                             >
                                 @{{ product.name + ' + ' + product.price.final.formatted_price }}
                             </option>
-                        </select>
+                        </v-field>
                     </div>
 
                     <div v-if="option.type == 'radio'">
-                        <span
-                            class="flex"
-                            v-if="! option.is_required"
-                        >
-                            <input
-                                type="radio"
-                                :name="'bundle_options[' + option.id + '][]'"
-                                value="0"
-                                :id="'bundle_options[' + option.id + '][]'"
-                                class="hidden peer"
-                                v-model="selected_product"
+                        <div class="grid gap-[10px]">
+                            <span
+                                class="flex"
+                                v-if="! option.is_required"
                             >
+                                <input
+                                    type="radio"
+                                    :name="'bundle_options[' + option.id + '][]'"
+                                    value="0"
+                                    :id="'bundle_options[' + option.id + '][]'"
+                                    class="hidden peer"
+                                    v-model="selectedProduct"
+                                >
 
-                            <span class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"></span>
+                                <span class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"></span>
 
-                            <label
-                                class="text-[#7D7D7D]"
-                                :for="'bundle_options[' + option.id + '][]'"
+                                <label
+                                    class="text-[#7D7D7D]"
+                                    :for="'bundle_options[' + option.id + '][]'"
+                                >
+                                    @lang('shop::app.products.view.type.bundle.none')
+                                </label>
+                            </span>
+
+                            <span
+                                class="flex gap-x-[15px] select-none"
+                                v-for="(product, index) in option.products"
                             >
-                                @lang('shop::app.products.view.type.bundle.none')
-                            </label>
-                        </span>
-
-                        <span
-                            class="flex"
-                            v-for="(product, index) in option.products"
-                        >
-                            <div class="grid gap-[10px]">
-                                <div class="select-none flex gap-x-[15px]">
+                                <v-field
+                                    type="radio"
+                                    :name="'bundle_options[' + option.id + '][]'"
+                                    v-slot="{ field }"
+                                    :value="product.id"
+                                    v-model="selectedProduct"
+                                    :rules="{'required': option.is_required}"
+                                    :label="option.label"
+                                >
                                     <input
                                         type="radio"
                                         :name="'bundle_options[' + option.id + '][]'"
+                                        v-bind="field"
                                         :value="product.id"
                                         :id="'bundle_options[' + option.id + '][' + index + ']'"
-                                        class="hidden peer"
-                                        v-model="selected_product"
-                                    >
+                                        class="sr-only peer"
+                                    />
+                                </v-field>
 
-                                    <label
-                                        class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select"
-                                        :for="'bundle_options[' + option.id + '][' + index + ']'"
-                                    >
-                                    </label>
+                                <label
+                                    class="icon-radio-unselect text-[24px] text-navyBlue peer-checked:icon-radio-select cursor-pointer"
+                                    :for="'bundle_options[' + option.id + '][' + index + ']'"
+                                >
+                                </label>
 
-                                    <label class="text-[#7D7D7D]" :for="'bundle_options[' + option.id + '][' + index + ']'">
-                                        @{{ product.name }}
+                                <label class="text-[#7D7D7D]" :for="'bundle_options[' + option.id + '][' + index + ']'">
+                                    @{{ product.name }}
 
-                                        <span class="text-[#000000]">
-                                            @{{ '+ ' + product.price.final.formatted_price }}
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </span>
+                                    <span class="text-[#000000]">
+                                        @{{ '+ ' + product.price.final.formatted_price }}
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
                     </div>
 
                     <div v-if="option.type == 'checkbox'">
@@ -136,14 +149,24 @@
                                 class="flex gap-x-[15px] select-none"
                                 v-for="(product, index) in option.products"
                             >
-                                <input
+                                <v-field
                                     type="checkbox"
                                     :name="'bundle_options[' + option.id + '][]'"
+                                    v-slot="{ field }"
                                     :value="product.id"
-                                    :id="'bundle_options[' + option.id + '][' + index + ']'"
-                                    class="hidden peer"
-                                    v-model="selected_product"
+                                    v-model="selectedProduct"
+                                    :rules="{'required': option.is_required}"
+                                    :label="option.label"
                                 >
+                                    <input
+                                        type="checkbox"
+                                        :name="'bundle_options[' + option.id + '][]'"
+                                        v-bind="field"
+                                        :value="product.id"
+                                        :id="'bundle_options[' + option.id + '][' + index + ']'"
+                                        class="sr-only peer"
+                                    />
+                                </v-field>
 
                                 <label
                                     class="icon-uncheck text-[24px] text-navyBlue peer-checked:icon-check-box peer-checked:text-navyBlue cursor-pointer"
@@ -166,11 +189,15 @@
                     </div>
 
                     <div v-if="option.type == 'multiselect'">
-                        <select
-                            :name="'bundle_options[' + option.id + '][]'"
-                            class="w-full overflow-y-auto overflow-x-hidden journal-scroll px-[15px] py-[10px] border border-[#E9E9E9] rounded-[2px] text-[#7D7D7D] text-[16px] focus:ring-2 focus:outline-none focus:ring-black"
-                            v-model="selected_product"
+                        <v-field
+                            as="select"
                             multiple
+                            :name="'bundle_options[' + option.id + '][]'"
+                            class="block w-full p-[14px] pr-[36px] bg-white border border-[#E9E9E9] rounded-lg text-[16px] text-[#7D7D7D] focus:ring-blue-500 focus:border-blue-500 max-md:border-0 max-md:outline-none max-md:w-[110px] cursor-pointer"
+                            :class="[errors['bundle_options[' + option.id + '][]'] ? 'border border-red-500' : '']"
+                            :rules="{'required': option.is_required}"
+                            v-model="selectedProduct"
+                            :label="option.label"
                         >
                             <option
                                 value="0"
@@ -189,14 +216,25 @@
                                     @{{ '+ ' + product.price.final.formatted_price }}
                                 </span>
                             </option>
-                        </select>
+                        </v-field>
                     </div>
+
+                    <v-error-message
+                        :name="'bundle_options[' + option.id + '][]'"
+                        v-slot="{ message }"
+                    >
+                        <p
+                            class="mt-1 text-red-500 text-xs italic"
+                            v-text="message"
+                        >
+                        </p>
+                    </v-error-message>
                 </div>
 
                 <div v-if="option.type == 'select' || option.type == 'radio'">
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
-                        ::value="product_qty"
+                        ::value="productQty"
                         class="gap-x-[16px] w-max rounded-[12px] py-[10px] px-[17px] mt-5 !border-[#E9E9E9]"
                         @change="qtyUpdated($event)"
                     >
@@ -209,6 +247,8 @@
             app.component('v-product-bundle-options', {
                 template: '#v-product-bundle-options-template',
 
+                props: ['errors'],
+
                 data: function() {
                     return {
                         config: @json(app('Webkul\Product\Helpers\BundleOption')->getBundleConfig($product)),
@@ -219,7 +259,7 @@
                 },
 
                 computed: {
-                    formatted_total_price: function() {
+                    formattedTotalPrice: function() {
                         var total = 0;
 
                         for (var key in this.options) {
@@ -255,20 +295,20 @@
             app.component('v-product-bundle-option-item', {
                 template: '#v-product-bundle-option-item-template',
 
-                props: ['option'],
+                props: ['option', 'errors'],
 
                 data: function() {
                     return {
-                        selected_product: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
+                        selectedProduct: (this.option.type == 'checkbox' || this.option.type == 'multiselect')  ? [] : null,
                     };
                 },
 
                 computed: {
-                    product_qty: function() {
+                    productQty: function() {
                         let qty = 0;
 
                         this.option.products.forEach((product, key) => {
-                            if (this.selected_product == product.id) {
+                            if (this.selectedProduct == product.id) {
                                 qty =  this.option.products[key].qty;
                             }
                         });
@@ -278,31 +318,31 @@
                 },
 
                 watch: {
-                    selected_product: function (value) {
+                    selectedProduct: function (value) {
                         this.$emit('onProductSelected', value);
                     }
                 },
 
                 created: function() {
-                    for (var key1 in this.option.products) {
-                        if (! this.option.products[key1].is_default)
+                    for (var key in this.option.products) {
+                        if (! this.option.products[key].is_default)
                             continue;
 
                         if (this.option.type == 'checkbox' || this.option.type == 'multiselect') {
-                            this.selected_product.push(this.option.products[key1].id)
+                            this.selectedProduct.push(this.option.products[key].id)
                         } else {
-                            this.selected_product = this.option.products[key1].id
+                            this.selectedProduct = this.option.products[key].id
                         }
                     }
                 },
 
                 methods: {
                     qtyUpdated: function(qty) {
-                        if (! this.option.products.find(data => data.id == this.selected_product)) {
+                        if (! this.option.products.find(data => data.id == this.selectedProduct)) {
                             return;
                         }
 
-                        this.option.products.find(data => data.id == this.selected_product).qty = qty;
+                        this.option.products.find(data => data.id == this.selectedProduct).qty = qty;
                     }
                 }
             });

@@ -92,7 +92,7 @@ class CartRuleController extends Controller
 
             session()->flash('success', trans('admin::app.marketing.promotions.cart-rules.create.create-success'));
 
-            return redirect()->route('admin.cart_rules.index');
+            return redirect()->route('admin.marketing.promotions.cart_rules.index');
         } catch (ValidationException $e) {
             if ($firstError = collect($e->errors())->first()) {
                 session()->flash('error', $firstError[0]);
@@ -146,7 +146,7 @@ class CartRuleController extends Controller
 
             session()->flash('success', trans('admin::app.promotions.cart-rules.edit.update-success'));
 
-            return redirect()->route('admin.cart_rules.index');
+            return redirect()->route('admin.marketing.promotions.cart_rules.index');
         } catch (ValidationException $e) {
             if ($firstError = collect($e->errors())->first()) {
                 session()->flash('error', $firstError[0]);

@@ -67,7 +67,7 @@ class TemplateController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.email-marketing.templates.create.create-success'));
 
-        return redirect()->route('admin.email_templates.index');
+        return redirect()->route('admin.marketing.promotions.email_templates.index');
     }
 
     /**
@@ -109,7 +109,7 @@ class TemplateController extends Controller
 
         session()->flash('success', trans('admin::app.marketing.email-marketing.templates.edit.update-success'));
 
-        return redirect()->route('admin.email_templates.index');
+        return redirect()->route('admin.marketing.promotions.email_templates.index');
     }
 
     /**

@@ -71,7 +71,7 @@ class CurrencyDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.currencies.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.currencies.edit', $row->id);
+                return route('admin.settings.currencies.edit', $row->id);
             },
         ]);
 
@@ -80,7 +80,7 @@ class CurrencyDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.currencies.delete', $row->id);
+                return route('admin.settings.currencies.delete', $row->id);
             },
         ]);
     }
@@ -95,7 +95,7 @@ class CurrencyDataGrid extends DataGrid
         $this->addMassAction([
             'title'  => trans('admin::app.settings.currencies.index.datagrid.delete'),
             'method' => 'POST',
-            'url'    => route('admin.currencies.mass_delete'),
+            'url'    => route('admin.settings.currencies.mass_delete'),
         ]);
     }
 }

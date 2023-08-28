@@ -82,7 +82,7 @@ class LocalesDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.locales.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.locales.edit', $row->id);
+                return route('admin.settings.locales.edit', $row->id);
             },
         ]);
 
@@ -91,7 +91,7 @@ class LocalesDataGrid extends DataGrid
             'title'  => trans('admin::app.settings.locales.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.locales.delete', $row->id);
+                return route('admin.settings.locales.delete', $row->id);
             },
         ]);
     }

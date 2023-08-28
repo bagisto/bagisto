@@ -125,6 +125,7 @@ abstract class DataGrid
             title: $massAction['title'],
             method: $massAction['method'],
             url: $massAction['url'],
+            options: $massAction['options'] ?? [],
         );
     }
 
@@ -179,7 +180,7 @@ abstract class DataGrid
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
                             ->filter(fn ($column) => $column->searchable && $column->type !== ColumnTypeEnum::BOOLEAN->value)
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->databaseColumnName, $value));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value));
                     }
                 });
             } else {
@@ -190,7 +191,7 @@ abstract class DataGrid
                     case ColumnTypeEnum::DATE_TIME_RANGE->value:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->whereBetween($column->databaseColumnName, [$value[0] ?? '', $value[1] ?? '']);
+                                $scopeQueryBuilder->whereBetween($column->getDatabaseColumnName(), [$value[0] ?? '', $value[1] ?? '']);
                             }
                         });
 
@@ -199,7 +200,7 @@ abstract class DataGrid
                     default:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->databaseColumnName, $value);
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
                             }
                         });
 
@@ -257,6 +258,15 @@ abstract class DataGrid
     public function formatData(): array
     {
         $paginator = $this->paginator->toArray();
+
+        /**
+         * TODO: need to handle this...
+         */
+        foreach ($this->columns as $column) {
+            $column->input_type = $column->getFormInputType();
+
+            $column->options = $column->getFormOptions();
+        }
 
         foreach ($paginator['data'] as $record) {
             foreach ($this->columns as $column) {

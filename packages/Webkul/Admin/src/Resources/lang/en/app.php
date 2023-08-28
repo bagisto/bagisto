@@ -60,7 +60,7 @@ return [
                 'price'                 => 'Price',
                 'tax'                   => 'Tax',
                 'sub-total'             => 'Sub Total',
-                'discount'              =>  'Discount',
+                'discount'              => 'Discount',
                 'shipping-and-handling' => 'Shipping and Handling',
                 'total-paid'            => 'Total Paid',
                 'total-refund'          => 'Total Refund',
@@ -135,7 +135,7 @@ return [
                 'item-refunded'         => 'Refunded (:qty_refunded)',
                 'qty-to-ship'           => 'Qty. To Ship',
                 'qty-available'         => 'Qty. Available',
-                'create-success'        => 'Shipment created successfully'
+                'create-success'        => 'Shipment created successfully',
             ],
 
             'view' => [
@@ -234,7 +234,6 @@ return [
                 'create-success'              => 'Refund created successfully',
                 'invalid-refund-amount-error' => 'Refund amount should be non zero.',
 
-
             ],
         ],
 
@@ -314,8 +313,8 @@ return [
         'index'  => [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
- 
-            'datagrid'  => [ 
+
+            'datagrid'  => [
                 'id'             => 'Customer ID',
                 'order'          => ':order Order(s)',
                 'address'        => ':address  Address(s)',
@@ -380,7 +379,7 @@ return [
 
         'view' => [
             'address'                 => 'Address',
-            'back-btn'                =>'Back',
+            'back-btn'                => 'Back',
             'add-note'                => 'Add Note',
             'active'                  => 'Active',
             'address-delete-success'  => 'Address Deleted Successfully',
@@ -449,11 +448,11 @@ return [
                     'group-default'   => 'Default Group Can not be Deleted',
                 ],
 
-                'datagrid'  =>  [
-                    'code'  => 'Code',
-                    'id'    => 'ID',
-                    'name'  => 'Name',
-                    'edit'  => 'Edit',
+                'datagrid'  => [
+                    'code'   => 'Code',
+                    'id'     => 'ID',
+                    'name'   => 'Name',
+                    'edit'   => 'Edit',
                     'delete' => 'Delete',
                 ],
             ],
@@ -488,7 +487,7 @@ return [
                     'update-success' => 'Update Successfully',
                 ],
 
-                'datagrid'   =>  [
+                'datagrid'   => [
                     'customer_names' => 'Name',
                     'comment'        => 'Comment',
                     'date'           => 'Date',
@@ -519,7 +518,7 @@ return [
                 'address-2'          => 'Address 2',
                 'city'               => 'City',
                 'state'              => 'State',
-                'select-country'     => "Select Country",
+                'select-country'     => 'Select Country',
                 'country'            => 'Country',
                 'default-address'    => 'Default Address',
                 'first-name'         => 'First Name',
@@ -539,7 +538,7 @@ return [
                 'address-2'        => 'Address 2',
                 'city'             => 'City',
                 'state'            => 'State',
-                'select-country'   => "Select Country",
+                'select-country'   => 'Select Country',
                 'country'          => 'Country',
                 'default-address'  => 'Default Address',
                 'first-name'       => 'First Name',
@@ -573,7 +572,7 @@ return [
                     'delete'    => 'Delete',
                 ],
 
-                'create'  =>  [
+                'create'  => [
                     'code'              => 'Code',
                     'name'              => 'Name',
                     'direction'         => 'Direction',
@@ -624,14 +623,11 @@ return [
                 ],
 
                 'edit' => [
-                    'title'     => 'Edit Currency',
-                    'success'   => 'Currency updated successfully.',
+                    'title'          => 'Edit Currency',
+                    'success'        => 'Currency updated successfully.',
                     'delete-success' => 'Currency deleted successfully.',
                 ],
             ],
-
-
-
 
         ],
 
@@ -747,16 +743,16 @@ return [
         'taxes' => [
             'tax-categories' => [
                 'index' => [
-                    'title'        => 'Tax Categories',
-                    'tax-category' => 'Tax Category',
+                    'title'          => 'Tax Categories',
+                    'tax-category'   => 'Tax Category',
                     'delete-success' => 'Tax Category Deleted Successfully',
 
                     'datagrid' => [
-                        'id'     => 'ID',
-                        'name'   => 'Name',
-                        'code'   => 'Code',
-                        'edit'   => 'Edit',
-                        'delete' => 'Delete',
+                        'id'      => 'ID',
+                        'name'    => 'Name',
+                        'code'    => 'Code',
+                        'edit'    => 'Edit',
+                        'delete'  => 'Delete',
                         'actions' => 'Actions',
                     ],
 
@@ -771,7 +767,7 @@ return [
                         'title'           => 'Tax Categories',
                         'add-tax-rates'   => 'Add Tax Rates',
                         'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
-                        'success'  => 'New Tax Category Created',
+                        'success'         => 'New Tax Category Created',
                     ],
 
                     'edit'  => [
@@ -960,8 +956,8 @@ return [
 
                 'edit'  => [
                     'title'    => 'Edit User',
-                    'success'  => 'User updated successfully.'
-                ]
+                    'success'  => 'User updated successfully.',
+                ],
             ],
 
             'edit'  => [
@@ -1498,7 +1494,6 @@ return [
                     'update-status'  => 'Update Status',
                     'delete-success' => 'Selected :resource were successfully deleted',
 
-
                 ],
             ],
 
@@ -1859,13 +1854,13 @@ return [
                     'path-info'      => 'Example: "/sitemap/" or "/" for base path',
                     'save-btn'       => 'Save Sitemap',
                     'title'          => 'Create Sitemap',
-                    'success'        => 'Sitemap created successfully'
+                    'success'        => 'Sitemap created successfully',
                 ],
 
-                'edit'  =>  [
-                    'title'   => 'Edit Sitemap',
-                    'success' => 'Sitemap Updated successfully',
-                    'delete-success' => 'Sitemap Deleted successfully'
+                'edit'  => [
+                    'title'          => 'Edit Sitemap',
+                    'success'        => 'Sitemap Updated successfully',
+                    'delete-success' => 'Sitemap Deleted successfully',
                 ],
             ],
 
@@ -2306,7 +2301,7 @@ return [
             ],
 
             'sidebar' => [
-                'collapse' => 'Collapse',
+                'collapse'                 => 'Collapse',
                 'dashboard'                => 'Dashboard',
                 'sales'                    => 'Sales',
                 'orders'                   => 'Orders',
@@ -2370,14 +2365,23 @@ return [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
                 ],
+
+                'date-options' => [
+                    'today'             => 'Today',
+                    'yesterday'         => 'Yesterday',
+                    'this-week'         => 'This Week',
+                    'this-month'        => 'This Month',
+                    'last-month'        => 'Last Month',
+                    'last-three-months' => 'Last 3 Months',
+                    'last-six-months'   => 'Last 6 Months',
+                    'this-year'         => 'This Year',
+                ],
             ],
 
             'table' => [
-                'actions' => 'Actions',
-                'no-records-available' => 'No Records Available.'
+                'actions'              => 'Actions',
+                'no-records-available' => 'No Records Available.',
             ],
-
-
         ],
 
         'products' => [
@@ -2391,7 +2395,6 @@ return [
             ],
         ],
     ],
-
 
     'save'          => 'Save',
     'copy-of'       => 'Copy of :value',
@@ -2477,8 +2480,7 @@ return [
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
-
-   // Need to CHECK AND REMOVE remove
+    // Need to CHECK AND REMOVE remove
 
     'sales-old' => [
         'orders' => [
@@ -3176,7 +3178,6 @@ return [
         'illegal-format'   => 'Error! This type of format is either not supported or its illegal format',
     ],
 
- 
     'cms-old' => [
         'pages' => [
             'general'          => 'General',
@@ -3250,7 +3251,7 @@ return [
             'email'                   => 'Email',
             'notification_label'      => 'Notifications',
             'notification_label-info' => '"Notification" is a message or alert that informs users about events, updates, or actions, enhancing user engagement and awareness.',
-            'notifications'      => [
+            'notifications'           => [
                 'verification'                                     => 'Send a verification e-mail after customer registration',
                 'registration'                                     => 'Send a confirmation e-mail after customer registration',
                 'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',

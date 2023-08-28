@@ -14,7 +14,7 @@
         >
             <div>
                 <x-admin::form 
-                    :action="route('admin.cart_rules.update', $cartRule->id)"
+                    :action="route('admin.marketing.promotions.cart_rules.update', $cartRule->id)"
                     enctype="multipart/form-data"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
@@ -24,7 +24,7 @@
                 
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel Button -->
-                            <a href="{{ route('admin.cart_rules.index') }}">
+                            <a href="{{ route('admin.marketing.promotions.cart_rules.index') }}">
                                 <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.back-btn')
                                 </span>
@@ -1377,7 +1377,7 @@
 
                 methods: {
                     store(params, { resetForm, setErrors }) {
-                        this.$axios.post('{{ route('admin.cart_rules.coupons.store', $cartRule->id) }}', params)
+                        this.$axios.post('{{ route('adadmin.marketing.promotions.cart_rules.coupons.store', $cartRule->id) }}', params)
                             .then((response) => {
                                 alert(response.data.message);
 
