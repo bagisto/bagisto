@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Customer;
+namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -121,7 +121,7 @@ class ReviewController extends Controller
                 }
             }
 
-            if (! $suppressFlash) {
+            if (!$suppressFlash) {
                 session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.delete-success', ['resource' => 'Reviews']));
             } else {
                 session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));

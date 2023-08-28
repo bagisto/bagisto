@@ -11,11 +11,15 @@ return [
         ],
 
         'forget-password' => [
-            'page-title'   => 'Forget Password',
-            'title'        => 'Recover Password',
-            'email'        => 'Registered Email',
-            'sign-in-link' => 'Back to Sign In ?',
-            'submit-btn'   => 'Reset',
+            'create'  =>  [
+                'page-title'       => 'Forget Password',
+                'title'            => 'Recover Password',
+                'email'            => 'Registered Email',
+                'sign-in-link'     => 'Back to Sign In ?',
+                'submit-btn'       => 'Reset',
+                'reset_link_sent'  => 'Reset Password link sent',
+                'email_not_exist'  => 'Email Not Exists',
+            ],
         ],
 
         'reset-password' => [
@@ -1892,11 +1896,13 @@ return [
                     'save-btn'          => 'Save Locale',
                     'success'           => 'Locale created successfully.',
                     'delete-success'    => 'Locale deleted successfully.',
+                    'delete-failed'     => ':name deleted Failed',
                 ],
 
                 'edit'  => [
                     'title'   => 'Edit Locales',
                     'success' => 'Locale updated successfully.',
+                    'last-delete-error'  => 'Last Locale Can Not Be Deleted.',
                 ],
             ],
         ],
@@ -1934,9 +1940,11 @@ return [
                 ],
 
                 'edit' => [
-                    'title'     => 'Edit Currency',
-                    'success'   => 'Currency updated successfully.',
-                    'delete-success' => 'Currency deleted successfully.',
+                    'title'              => 'Edit Currency',
+                    'success'            => 'Currency updated successfully.',
+                    'delete-success'     => 'Currency deleted successfully.',
+                    'last-delete-error'  => 'Last Currency Can Not Deleted',
+                    'delete-failed'      => 'Currency Deleted Failed',
                 ],
             ],
 
@@ -1964,6 +1972,7 @@ return [
                     'title'   => 'Edit Exchange Rates',
                     'success' => 'Exchange Rate Updated Successfully',
                     'delete'  => 'Exchange Rate Deleted Successfully',
+                    'delete-error'  => 'Exchange Rate Deleted Error'
                 ],
 
                 'datagrid' => [
@@ -2020,37 +2029,42 @@ return [
                 'select-state'   => 'Select State',
                 'city'           => 'City',
                 'street'         => 'Street',
+                'success'        => 'Inventory Source Created Successfully',
                 'postcode'       => 'Postcode',
                 'settings'       => 'Settings',
             ],
 
             'edit' => [
-                'title'          => 'Edit Inventory Sources',
-                'general'        => 'General',
-                'save-btn'       => 'Save Inventory Sources',
-                'back-btn'       => 'Back',
-                'general'        => 'General',
-                'code'           => 'Code',
-                'name'           => 'Name',
-                'description'    => 'Description',
-                'latitude'       => 'Latitude',
-                'longitude'      => 'Longitude',
-                'priority'       => 'Priority',
-                'status'         => 'Status',
-                'contact-info'   => 'Contact Information',
-                'contact-name'   => 'Name',
-                'contact-email'  => 'Email',
-                'contact-number' => 'Contact Number',
-                'contact-fax'    => 'Fax',
-                'source-address' => 'Source Address',
-                'country'        => 'Country',
-                'select-country' => 'Select Country',
-                'state'          => 'State',
-                'select-state'   => 'Select State',
-                'city'           => 'City',
-                'street'         => 'Street',
-                'postcode'       => 'Postcode',
-                'settings'       => 'Settings',
+                'title'             => 'Edit Inventory Sources',
+                'general'           => 'General',
+                'save-btn'          => 'Save Inventory Sources',
+                'back-btn'          => 'Back',
+                'general'           => 'General',
+                'code'              => 'Code',
+                'name'              => 'Name',
+                'description'       => 'Description',
+                'latitude'          => 'Latitude',
+                'longitude'         => 'Longitude',
+                'priority'          => 'Priority',
+                'status'            => 'Status',
+                'contact-info'      => 'Contact Information',
+                'contact-name'      => 'Name',
+                'contact-email'     => 'Email',
+                'contact-number'    => 'Contact Number',
+                'contact-fax'       => 'Fax',
+                'source-address'    => 'Source Address',
+                'country'           => 'Country',
+                'select-country'    => 'Select Country',
+                'state'             => 'State',
+                'select-state'      => 'Select State',
+                'city'              => 'City',
+                'street'            => 'Street',
+                'postcode'          => 'Postcode',
+                'settings'          => 'Settings',
+                'update-success'    => 'Inventory Sources Updated Successfully',
+                'delete-success'    => 'Inventory Sources Deleted Successfully',
+                'last-delete-error' => 'Last Inventory Sources Can Not Deleted',
+                'delete-failed'     => 'Inventory Sources Delete Failed',
             ],
         ],
 
@@ -2059,7 +2073,6 @@ return [
                 'index' => [
                     'title'        => 'Tax Categories',
                     'tax-category' => 'Tax Category',
-                    'delete-success' => 'Tax Category Deleted Successfully',
 
                     'datagrid' => [
                         'id'     => 'ID',
@@ -2085,8 +2098,10 @@ return [
                     ],
 
                     'edit'  => [
-                        'title'    => 'Edit Tax Categories',
-                        'success'  => 'Successfully Updated Tax Category',
+                        'title'          => 'Edit Tax Categories',
+                        'success'        => 'Successfully Updated Tax Category',
+                        'delete-success' => ':name Deleted Successfully',
+                        'delete-failed'  => ':name Deleted Failed',
                     ],
                 ],
             ],
@@ -2094,6 +2109,7 @@ return [
             'tax-rates'   => [
                 'index' => [
                     'title'        => 'Tax Rates',
+                    'tax-rate'     => 'Tax Rate',
                     'button-title' => 'Create Tax Rates',
 
                     'datagrid' => [
@@ -2145,6 +2161,8 @@ return [
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
                     'update-success' => 'Tax Rate Update Successfully',
+                    'delete-failed'  => ':name deleted failed',
+                    'delete-success' => ':name deleted successfully',
                 ],
             ],
         ],
@@ -2232,6 +2250,10 @@ return [
                 'status'                 => 'Status',
                 'maintenance-mode-text'  => 'Message',
                 'update-success'         => 'Channel updated successfully.',
+                'delete-failed'          => ':name Delete Failed',
+                'delete-success'         => 'Channel deleted successfully.',
+                'last-delete-error'      => 'Last Channel deleted failed.',
+                'update-success'         => 'Update Channel Successfully',
             ],
         ],
 
@@ -2267,7 +2289,9 @@ return [
 
                 'edit'  => [
                     'title'    => 'Edit User',
-                    'success'  => 'User updated successfully.'
+                    'success'  => 'User updated successfully.',
+                    'incorrect-password' => 'Incorrect password',
+                    'delete-success'     => 'User deleted successfully.',
                 ]
             ],
 
@@ -2289,6 +2313,8 @@ return [
         'roles' => [
             'index' => [
                 'title'      => 'Roles',
+                'role'       => 'Role',
+                'admin-user' => 'Admin User',
                 'create-btn' => 'Create Role',
 
                 'datagrid'  =>  [
@@ -2311,6 +2337,7 @@ return [
                 'permissions'     => 'Permissions',
                 'custom'          => 'Custom',
                 'all'             => 'All',
+                'success'         => 'Roles Created Successfully',
             ],
 
             'edit' => [
@@ -2324,6 +2351,11 @@ return [
                 'permissions'     => 'Permissions',
                 'custom'          => 'Custom',
                 'all'             => 'All',
+                'being-used'      => ':name is already used in :admin-user',
+                'update-success'  => 'Roles is updated successfully',
+                'last-delete-error'  => 'Last :name can not be deleted',
+                'delete-success'   => ':name is deleted successfully',
+                'delete-failed'    => ':name is deleted failed'
             ],
         ],
     ],
@@ -2335,8 +2367,8 @@ return [
         'yes'                         => 'Yes',
         'no'                          => 'No',
         'delete'                      => 'Delete',
-        'enable-atleast-one-shipping' => 'Enable at least one shipping method.',
-        'enable-atleast-one-payment'  => 'Enable at least one payment method.',
+        'enable-at-least-one-shipping' => 'Enable at least one shipping method.',
+        'enable-at-least-one-payment'  => 'Enable at least one payment method.',
 
         'emails' => [
             'email'                   => 'Email',
@@ -2801,6 +2833,7 @@ return [
         'xls'              => 'XLS',
         'file'             => 'File',
         'upload-error'     => 'The file must be a file of type: xls, xlsx, csv.',
+        'upload-success'   => ':name Uploaded successfully',
         'duplicate-error'  => 'Identifier must be unique, duplicate identifier :identifier at row :position.',
         'enough-row-error' => 'file has not enough rows',
         'allowed-type'     => 'Allowed Type :',

@@ -751,8 +751,8 @@ return [
         'yes'                         => 'হ্যাঁ',
         'no'                          => 'না',
         'delete'                      => 'মুছে ফেলা',
-        'enable-atleast-one-shipping' => 'অন্তত একটি শিপিং পদ্ধতি সক্রিয় করুন.',
-        'enable-atleast-one-payment'  => 'অন্তত একটি পেমেন্ট পদ্ধতি সক্রিয় করুন.',
+        'enable-at-least-one-shipping' => 'অন্তত একটি শিপিং পদ্ধতি সক্রিয় করুন.',
+        'enable-at-least-one-payment'  => 'অন্তত একটি পেমেন্ট পদ্ধতি সক্রিয় করুন.',
 
         'tax-categories' => [
             'title'           => 'ট্যাক্স বিভাগ',

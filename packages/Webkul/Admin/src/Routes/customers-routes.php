@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\Customer\AddressController;
-use Webkul\Admin\Http\Controllers\Customer\CustomerController;
-use Webkul\Admin\Http\Controllers\Customer\CustomerGroupController;
-use Webkul\Admin\Http\Controllers\Customer\ReviewController;
+use Webkul\Admin\Http\Controllers\Customers\AddressController;
+use Webkul\Admin\Http\Controllers\Customers\CustomerController;
+use Webkul\Admin\Http\Controllers\Customers\CustomerGroupController;
+use Webkul\Admin\Http\Controllers\Customers\ReviewController;
 
 /**
  * Customers routes.

@@ -18,7 +18,8 @@ class RoleController extends Controller
     public function __construct(
         protected RoleRepository $roleRepository,
         protected AdminRepository $adminRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -70,7 +71,7 @@ class RoleController extends Controller
 
         Event::dispatch('user.role.create.after', $role);
 
-        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Role']));
+        session()->flash('success', trans('admin::app.settings.roles.create.success', ['name' => 'admin::app.settings.roles.index.role']));
 
         return redirect()->route('admin.settings.roles.index');
     }
@@ -110,7 +111,10 @@ class RoleController extends Controller
             $isChangedFromAll
             && $this->adminRepository->countAdminsWithAllAccess() === 1
         ) {
-            session()->flash('error', trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User']));
+            session()->flash('error', trans('admin::app.settings.roles.edit.being-used', [
+                'name' => 'admin::app.settings.roles.index.title',
+                'source' => 'admin::app.settings.roles.index.admin-user'
+            ]));
 
             return redirect()->route('admin.settings.roles.index');
         }
@@ -129,7 +133,7 @@ class RoleController extends Controller
 
         Event::dispatch('user.role.update.after', $role);
 
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Role']));
+        session()->flash('success', trans('admin::app.settings.roles.edit.update-success', ['name' => 'admin::app.settings.roles.index.role']));
 
         return redirect()->route('admin.settings.roles.index');
     }
@@ -145,11 +149,14 @@ class RoleController extends Controller
         $role = $this->roleRepository->findOrFail($id);
 
         if ($role->admins->count() >= 1) {
-            return response()->json(['message' => trans('admin::app.response.being-used', ['name' => 'Role', 'source' => 'Admin User'])], 400);
+            return response()->json(['message' => trans('admin::app.settings.roles.edit.being-used', [
+                'name'   => 'admin::app.settings.roles.index.title',
+                'source' => 'admin::app.settings.roles.index.admin-user'
+            ])], 400);
         }
 
         if ($this->roleRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'Role'])], 400);
+            return response()->json(['message' => trans('admin::app.settings.roles.edit.last-delete-error', ['name' => 'admin::app.settings.roles.index.title'])], 400);
         }
 
         try {
@@ -159,10 +166,10 @@ class RoleController extends Controller
 
             Event::dispatch('user.role.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Role'])]);
+            return response()->json(['message' => trans('admin::app.settings.roles.edit.delete-success', ['name' => 'admin::app.settings.roles.index.role'])]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Role'])], 500);
+        return response()->json(['message' => trans('admin::app.settings.roles.edit.delete-failed', ['name' => 'admin::app.settings.roles.index.role'])], 500);
     }
 }

@@ -739,8 +739,8 @@ return [
         'yes'                         => 'Ja',
         'no'                          => 'Nee',
         'delete'                      => 'Verwijder',
-        'enable-atleast-one-shipping' => 'Schakel ten minste één verzendmethode in.',
-        'enable-atleast-one-payment'  => 'Schakel ten minste één betaalmethode in.',
+        'enable-at-least-one-shipping' => 'Schakel ten minste één verzendmethode in.',
+        'enable-at-least-one-payment'  => 'Schakel ten minste één betaalmethode in.',
 
         'tax-categories' => [
             'title'           => 'BTW categorieën',
@@ -1038,7 +1038,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'login as customer',
-            'login-message'=> 'you login as :customer_name',
+            'login-message' => 'you login as :customer_name',
         ],
 
         'note' => [

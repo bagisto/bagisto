@@ -194,12 +194,12 @@ class UserController extends Controller
 
                 Event::dispatch('user.admin.delete.after', $id);
 
-                session()->flash('success', trans('admin::app.settings.users.delete-success'));
+                session()->flash('success', trans('admin::app.settings.users.edit.delete-success'));
 
                 return redirect()->route('admin.session.create');
             }
         } else {
-            session()->flash('warning', trans('admin::app.settings.users.incorrect-password'));
+            session()->flash('warning', trans('admin::app.settings.users.edit.incorrect-password'));
 
             return redirect()->route('admin.settings.users.index');
         }

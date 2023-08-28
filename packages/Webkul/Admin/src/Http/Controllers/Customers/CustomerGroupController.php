@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Customer;
+namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -105,7 +105,7 @@ class CustomerGroupController extends Controller
     {
         $customerGroup = $this->customerGroupRepository->findOrFail($id);
 
-        if (! $customerGroup->is_user_defined) {
+        if (!$customerGroup->is_user_defined) {
             return new JsonResource([
                 'message' => trans('admin::app.customers.groups.index.edit.group-default'),
             ], 400);

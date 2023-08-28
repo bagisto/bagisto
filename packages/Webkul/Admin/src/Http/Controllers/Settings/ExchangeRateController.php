@@ -19,7 +19,8 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -151,7 +152,7 @@ class ExchangeRateController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-error', ['name' => trans('admin::app.settings.exchange-rates.index.exchange-rate')], 500),
+            'message' => trans('admin::app.settings.exchange-rates.index.edit.delete-error', ['name' => trans('admin::app.settings.exchange-rates.index.exchange-rate')], 500),
         ]);
     }
 }

@@ -113,7 +113,7 @@ class LocaleController extends Controller
 
         if ($this->localeRepository->count() == 1) {
             return new JsonResource([
-                'message' => trans('admin::app.settings.locales.last-delete-error'),
+                'message' => trans('admin::app.settings.locales.index.edit.last-delete-error'),
             ], 400);
         }
 
@@ -127,7 +127,7 @@ class LocaleController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.locales.index.locales')]),
+            'message' => trans('admin::app.settings.locales.index.edit.delete-failed', ['name' => trans('admin::app.settings.locales.index.locales')]),
         ], 500);
     }
 }

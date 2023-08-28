@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Customer;
+namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
@@ -25,8 +25,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected CustomerNoteRepository $customerNoteRepository
-    ) 
-    {
+    ) {
     }
 
     /**
@@ -255,7 +254,7 @@ class CustomerController extends Controller
     {
         $results = [];
 
-        $customers = $this->customerRepository->scopeQuery(function($query) {
+        $customers = $this->customerRepository->scopeQuery(function ($query) {
             return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orderBy('created_at', 'desc');
