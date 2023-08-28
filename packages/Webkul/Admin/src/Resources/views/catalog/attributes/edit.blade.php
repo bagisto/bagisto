@@ -143,7 +143,7 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="swatchType"
+                                            name="swatch_type"
                                             id="swatchType"
                                             v-model="swatchType"
                                             @change="showSwatch=true"
@@ -850,7 +850,7 @@
 
                         showSwatch: "{{ $attribute->type == 'select' ? true : false  }}",
 
-                        swatchType: "{{ $attribute->swatchType == '' ? 'dropdown' : $attribute->swatchType }}",
+                        swatchType: "{{ $attribute->swatch_type == '' ? 'dropdown' : $attribute->swatch_type }}",
 
                         validationType: "{{ $attribute->validation }}",
 

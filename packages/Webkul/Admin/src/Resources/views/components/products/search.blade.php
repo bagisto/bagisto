@@ -174,7 +174,7 @@
                 },
 
                 search() {
-                    if (! this.searchTerm.length <= 1) {
+                    if (this.searchTerm.length <= 1) {
                         this.searchedProducts = [];
 
                         return;
