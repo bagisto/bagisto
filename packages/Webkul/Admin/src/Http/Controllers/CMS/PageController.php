@@ -3,9 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\CMS;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 
 
 class PageController extends Controller
@@ -150,23 +151,21 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDelete()
+    public function massDelete(MassDestroyRequest $massDestroyRequest)
     {
-        if (request()->input('mass-action-type') == 'delete') {
-            $indexes = explode(',', request()->input('indexes'));
+        $indices = $massDestroyRequest->input('indices');
 
-            foreach ($indexes as $index) {
-                Event::dispatch('cms.pages.delete.before', $index);
+        foreach ($indices as $index) {
+            Event::dispatch('cms.pages.delete.before', $index);
 
-                $this->cmsRepository->delete($index);
+            $this->cmsRepository->delete($index);
 
-                Event::dispatch('cms.pages.delete.after', $index);
-            }
-
-            session()->flash('success', trans('admin::app.cms.index.delete-success'));
-
-            return redirect()->route('admin.cms.index');
+            Event::dispatch('cms.pages.delete.after', $index);
         }
+
+        session()->flash('success', trans('admin::app.cms.index.delete-success'));
+
+        return redirect()->route('admin.cms.index');
 
         session()->flash('success', trans('admin::app.cms.index.no-resource'));
 

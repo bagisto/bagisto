@@ -9,7 +9,6 @@ use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Admin\DataGrids\Customers\AddressDataGrid;
 
 class AddressController extends Controller
 {
@@ -32,10 +31,6 @@ class AddressController extends Controller
      */
     public function index($id)
     {
-        if (request()->ajax()) {
-            return app(AddressDataGrid::class)->toJson();
-        }
-
         $customer = $this->customerRepository->find($id);
 
         return view('admin::customers.addresses.index', compact('customer'));
