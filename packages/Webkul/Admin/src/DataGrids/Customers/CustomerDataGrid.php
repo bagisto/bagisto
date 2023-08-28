@@ -232,8 +232,14 @@ class CustomerDataGrid extends DataGrid
             'method'  => 'POST',
             'url'     => route('admin.customer.mass_update'),
             'options' => [
-                trans('admin::app.datagrid.active')    => 1,
-                trans('admin::app.datagrid.inactive')  => 0,
+                [
+                    'name' => trans('admin::app.customers.index.datagrid.active'),
+                    'value' => 1,
+                ],
+                [
+                    'name' => trans('admin::app.customers.index.datagrid.inactive'),
+                    'value' => 0,
+                ],
             ],
         ]);
     }
