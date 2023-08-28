@@ -228,12 +228,12 @@ return [
     [
         'key'   => 'customers',
         'name'  => 'admin::app.acl.customers',
-        'route' => 'admin.customers.customer.index',
+        'route' => 'admin.customers.customers.index',
         'sort'  => 4,
     ], [
         'key'   => 'customers.customers',
         'name'  => 'admin::app.acl.customers',
-        'route' => 'admin.customers.customer.index',
+        'route' => 'admin.customers.customers.index',
         'sort'  => 1,
     ], [
         'key'   => 'customers.customers.create',
@@ -243,42 +243,42 @@ return [
     ], [
         'key'   => 'customers.customers.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.customers.customer.edit',
+        'route' => 'admin.customers.customers.edit',
         'sort'  => 2,
     ], [
         'key'   => 'customers.customers.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.customers.customer.delete',
+        'route' => 'admin.customers.customers.delete',
         'sort'  => 3,
     ], [
         'key'   => 'customers.customers.mass-update',
         'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.customers.customer.mass_update',
+        'route' => 'admin.customers.customers.mass_update',
         'sort'  => 4,
     ], [
         'key'   => 'customers.customers.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.customers.customer.mass_delete',
+        'route' => 'admin.customers.customers.mass_delete',
         'sort'  => 5,
     ], [
         'key'   => 'customers.addresses',
         'name'  => 'admin::app.acl.addresses',
-        'route' => 'admin.customers.customer.addresses.index',
+        'route' => 'admin.customers.customers.addresses.index',
         'sort'  => 2,
     ], [
         'key'   => 'customers.addresses.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.customers.customer.addresses.create',
+        'route' => 'admin.customers.customers.addresses.create',
         'sort'  => 1,
     ], [
         'key'   => 'customers.addresses.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.customers.customer.addresses.edit',
+        'route' => 'admin.customers.customers.addresses.edit',
         'sort'  => 2,
     ], [
         'key'   => 'customers.addresses.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.customers.customer.addresses.delete',
+        'route' => 'admin.customers.customers.addresses.delete',
         'sort'  => 3,
     ], [
         'key'   => 'customers.note',
@@ -308,32 +308,32 @@ return [
     ], [
         'key'   => 'customers.reviews',
         'name'  => 'admin::app.acl.reviews',
-        'route' => 'admin.customers.customer.review.index',
+        'route' => 'admin.customers.customers.review.index',
         'sort'  => 5,
     ], [
         'key'   => 'customers.reviews.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.customers.customer.review.edit',
+        'route' => 'admin.customers.customers.review.edit',
         'sort'  => 1,
     ], [
         'key'   => 'customers.reviews.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.customers.customer.review.delete',
+        'route' => 'admin.customers.customers.review.delete',
         'sort'  => 2,
     ], [
         'key'   => 'customers.reviews.mass-update',
         'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.customers.customer.review.mass_update',
+        'route' => 'admin.customers.customers.review.mass_update',
         'sort'  => 3,
     ], [
         'key'   => 'customers.reviews.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.customers.customer.review.mass_delete',
+        'route' => 'admin.customers.customers.review.mass_delete',
         'sort'  => 4,
     ], [
         'key'   => 'customers.orders',
         'name'  => 'admin::app.acl.orders',
-        'route' => 'admin.customers.customer.orders.data',
+        'route' => 'admin.customers.customers.orders.data',
         'sort'  => 7,
     ],
 
