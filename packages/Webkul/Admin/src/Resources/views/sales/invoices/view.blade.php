@@ -121,8 +121,8 @@
         {{-- Left sub-component --}}
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
-            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+            <div class="bg-white rounded-[4px] box-shadow">
+                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
@@ -218,7 +218,7 @@
                 </div>
 
                 {{--Sale Summary --}}
-                <div class="flex w-full gap-[10px] justify-end mt-[16px]">
+                <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total')

@@ -1,29 +1,21 @@
 <div class="flex flex-col">
-    <p class="text-gray-600">
+    <p class="text-gray-800 font-semibold">
         {{ $address->company_name ?? '' }}
     </p>
 
-    <p class="text-gray-600">
+    <p class="text-gray-800 font-semibold">
         {{ $address->name }}
     </p>
-
+    
     <p class="text-gray-600">
-        {{ $address->address1 }}
-    </p>
+        {{ $address->address1 }}<br>
 
-    <p class="text-gray-600">
-        {{ $address->postcode }} {{ $address->city }}
-    </p>
+        {{ $address->postcode }} {{ $address->city }}<br>
 
-    <p class="text-gray-600">
-        {{ $address->state }}
-    </p>
+        {{ $address->state }}<br>
 
-    <p class="text-gray-600">
-        {{ core()->country_name($address->country) }}
-    </p>
+        {{ core()->country_name($address->country) }}<br>
 
-    <p class="text-gray-600">
-        @lang('admin::app.sales.orders.view.contact') : {{ $address->phone }}
+        {{ __('admin::app.sales.orders.view.contact') }} : {{ $address->phone }}
     </p>
 </div>

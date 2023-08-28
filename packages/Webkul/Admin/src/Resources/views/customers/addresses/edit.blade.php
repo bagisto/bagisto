@@ -406,7 +406,7 @@
                         delete params.default_address;
                     }
                 
-                    this.$axios.post(`{{ route('admin.customers.customer.addresses.update', '') }}/${params.address_id}`, params, {
+                    this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${params.address_id}`, params, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
