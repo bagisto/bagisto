@@ -15,6 +15,7 @@ class MassAction
         public string $title,
         public string $method,
         public mixed $url,
+        public array $options = [],
     ) {
     }
 }
