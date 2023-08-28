@@ -56,7 +56,7 @@ class EventDataGrid extends DataGrid
             'title'  => trans('admin::app.marketing.email-marketing.events.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.events.edit', $row->id);
+                return route('admin.marketing.promotions.events.edit', $row->id);
             },
         ]);
 
@@ -65,7 +65,7 @@ class EventDataGrid extends DataGrid
             'title'   => trans('admin::app.marketing.email-marketing.events.index.datagrid.delete'),
             'method'  => 'POST',
             'url'     => function ($row) {
-                return route('admin.events.delete', $row->id);
+                return route('admin.marketing.promotions.events.delete', $row->id);
             },
         ]);
     }

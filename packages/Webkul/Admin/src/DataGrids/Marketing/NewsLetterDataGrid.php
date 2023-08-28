@@ -80,7 +80,7 @@ class NewsLetterDataGrid extends DataGrid
             'title'  => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.customers.subscribers.edit', $row->id);
+                return route('admin.marketing.promotions.customers.subscribers.edit', $row->id);
             },
         ]);
 
@@ -89,7 +89,7 @@ class NewsLetterDataGrid extends DataGrid
             'title'        => trans('admin::app.marketing.email-marketing.newsletters.index.datagrid.delete'),
             'method'       => 'DELETE',
             'url'          => function ($row) {
-                return route('admin.customers.subscribers.delete', $row->id);
+                return route('admin.marketing.promotions.customers.subscribers.delete', $row->id);
             },
         ]);
     }

@@ -41,7 +41,7 @@
             </div>
 
             <x-admin::datagrid
-                src="{{ route('admin.sitemaps.index') }}"
+                src="{{ route('admin.marketing.promotions.sitemaps.index') }}"
                 ref="datagrid"
             >
                 <!-- Datagrid Header -->
@@ -236,7 +236,7 @@
                 methods: {
                     create(params, { resetForm, setErrors }) {
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.sitemaps.update') }}", params )
+                            this.$axios.post("{{ route('admin.marketing.promotions.sitemaps.update') }}", params )
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
@@ -252,7 +252,7 @@
                                     }
                                 });
                         } else {
-                            this.$axios.post("{{ route('admin.sitemaps.store') }}", params )
+                            this.$axios.post("{{ route('admin.marketing.promotions.sitemaps.store') }}", params )
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 

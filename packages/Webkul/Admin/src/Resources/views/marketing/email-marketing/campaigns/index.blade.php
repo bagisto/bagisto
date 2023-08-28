@@ -10,7 +10,7 @@
         </p>
 
         <div class="flex gap-x-[10px] items-center">
-            <a href="{{ route('admin.campaigns.create') }}">
+            <a href="{{ route('admin.marketing.promotions.campaigns.create') }}">
                 <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
                     @lang('admin::app.marketing.email-marketing.campaigns.index.create-btn')
                 </div>
@@ -18,5 +18,5 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.campaigns.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.marketing.promotions.campaigns.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

@@ -20,7 +20,7 @@
             <div>
                 <!-- DataGrid -->
                 <x-admin::datagrid
-                    src="{{ route('admin.customers.subscribers.index') }}"
+                    src="{{ route('admin.marketing.promotions.customers.subscribers.index') }}"
                     ref="datagrid"
                 >
                     <!-- DataGrid Header -->
@@ -207,7 +207,7 @@
 
                 methods: {
                     create(params, { resetForm, setErrors  }) {
-                        this.$axios.post("{{ route('admin.customers.subscribers.update') }}", params)
+                        this.$axios.post("{{ route('admin.marketing.promotions.customers.subscribers.update') }}", params)
                         .then((response) => {
                             this.$refs.groupCreateModal.close();
 
@@ -226,7 +226,7 @@
 
                     editModal(id) {
 
-                        this.$axios.get(`{{ route('admin.customers.subscribers.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.marketing.promotions.customers.subscribers.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.id,

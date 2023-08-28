@@ -45,7 +45,7 @@
 
             <!-- Datagrid -->
             <x-admin::datagrid
-                src="{{ route('admin.events.index') }}"
+                src="{{ route('admin.marketing.promotions.events.index') }}"
                 ref="datagrid"
             >
                 <!-- Datagrid Header -->
@@ -243,7 +243,7 @@
                 methods: {
                     createEmailEvents(params, { resetForm, setErrors }) {
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.events.update')}}", params)
+                            this.$axios.post("{{ route('admin.marketing.promotions.events.update')}}", params)
                                 .then((response) => {
                                     this.$refs.emailEvents.toggle();
 
@@ -258,7 +258,7 @@
                                 });
                             
                         } else {
-                            this.$axios.post("{{ route('admin.events.store') }}", params)
+                            this.$axios.post("{{ route('admin.marketing.promotions.events.store') }}", params)
                                 .then((response) => {
                                     this.$refs.emailEvents.toggle();
     
@@ -277,7 +277,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.events.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.marketing.promotions.events.edit', '') }}/${id}`)
                             .then((response) => {
 
                                 let values = {

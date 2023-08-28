@@ -49,7 +49,7 @@
 
             <!-- Datagrid -->
             <x-admin::datagrid
-                src="{{ route('admin.users.index') }}"
+                :src="route('admin.settings.users.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
@@ -387,7 +387,7 @@
                     create(params, { resetForm, setErrors }) {
                         console.log(params);
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.users.update') }}", params)
+                            this.$axios.post("{{ route('admin.settings.users.update') }}", params)
                                 .then((response) => {
                                     this.$refs.customerCreateModal.close();
 
@@ -403,7 +403,7 @@
                                     }
                                 });
                         } else {
-                            this.$axios.post("{{ route('admin.users.store') }}", params)
+                            this.$axios.post("{{ route('admin.settings.users.store') }}", params)
                                 .then((response) => {
                                     this.$refs.customerCreateModal.close();
 
@@ -422,7 +422,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.users.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.users.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.user.id,

@@ -84,7 +84,7 @@ class CampaignDataGrid extends DataGrid
             'title'  => trans('admin::app.marketing.email-marketing.campaigns.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.campaigns.edit', $row->id);
+                return route('admin.marketing.promotions.campaigns.edit', $row->id);
             },
         ]);
 
@@ -94,7 +94,7 @@ class CampaignDataGrid extends DataGrid
             'method'       => 'DELETE',
             'confirm_text' => trans('ui::app.datagrid.mass-action.delete', ['resource' => 'Campaign']),
             'url'          => function ($row) {
-                return route('admin.campaigns.delete', $row->id);
+                return route('admin.marketing.promotions.campaigns.delete', $row->id);
             },
         ]);
     }

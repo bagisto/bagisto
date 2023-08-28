@@ -67,7 +67,7 @@ class RolesDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.roles.edit', $row->id);
+                return route('admin.settings.users.roles.edit', $row->id);
             },
         ]);
 
@@ -76,7 +76,7 @@ class RolesDataGrid extends DataGrid
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.roles.delete', $row->id);
+                return route('admin.settings.users.roles.delete', $row->id);
             },
         ]);
     }

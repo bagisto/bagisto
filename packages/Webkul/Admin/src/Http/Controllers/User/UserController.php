@@ -138,7 +138,7 @@ class UserController extends Controller
 
         if (auth()->guard('admin')->user()->id == $id) {
             return response()->json([
-                'redirect' => route('super.users.confirm', ['id' => $id]),
+                'redirect' => route('super.settings.users.confirm', ['id' => $id]),
             ]);
         }
 
@@ -170,7 +170,7 @@ class UserController extends Controller
     {
         $user = $this->adminRepository->findOrFail($id);
 
-        return view('admin::customers.confirm-password', compact('user'));
+        return view('admin::customers.customers.confirm-password', compact('user'));
     }
 
     /**
@@ -201,7 +201,7 @@ class UserController extends Controller
         } else {
             session()->flash('warning', trans('admin::app.users.users.incorrect-password'));
 
-            return redirect()->route('admin.users.index');
+            return redirect()->route('admin.settings.users.index');
         }
     }
 
@@ -268,6 +268,6 @@ class UserController extends Controller
             'name' => $columnName,
         ]));
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.settings.users.index');
     }
 }

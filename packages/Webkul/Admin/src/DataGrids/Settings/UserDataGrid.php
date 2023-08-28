@@ -126,7 +126,7 @@ class UserDataGrid extends DataGrid
             'title'  => trans('admin::app.users.users.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.users.edit', $row->user_id);
+                return route('admin.settings.users.edit', $row->user_id);
             },
         ]);
 
@@ -135,7 +135,7 @@ class UserDataGrid extends DataGrid
             'title'  => trans('admin::app.users.users.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.users.delete', $row->user_id);
+                return route('admin.settings.users.delete', $row->user_id);
             },
         ]);
     }

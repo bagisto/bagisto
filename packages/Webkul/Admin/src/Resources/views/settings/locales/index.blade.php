@@ -41,7 +41,7 @@
                 </div>
             </div>
     
-            <x-admin::datagrid :src="route('admin.locales.index')" ref="datagrid">
+            <x-admin::datagrid :src="route('admin.settings.locales.index')" ref="datagrid">
                 <!-- DataGrid Header -->
                 <template #header="{ columns, records, sortPage, applied}">
                     <div class="row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
@@ -273,7 +273,7 @@
                 methods: {
                     create(params, { resetForm, setErrors  }) {
                         if (params.id) {
-                            this.$axios.post('{{ route('admin.locales.update') }}', params, {
+                            this.$axios.post('{{ route('admin.settings.locales.update') }}', params, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
@@ -293,7 +293,7 @@
                                 }
                             });
                         } else {
-                            this.$axios.post('{{ route('admin.locales.store') }}', params , {
+                            this.$axios.post('{{ route('admin.settings.locales.store') }}', params , {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }
@@ -315,7 +315,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.locales.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.locales.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.id,

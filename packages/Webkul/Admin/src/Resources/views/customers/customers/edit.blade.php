@@ -296,7 +296,7 @@
             methods: {
                 update(params, { resetForm, setErrors }) {
                 
-                    this.$axios.post("{{ route('admin.customer.update', $customer->id) }}", params)
+                    this.$axios.post("{{ route('admin.customers.customer.update', $customer->id) }}", params)
                         .then((response) => {
                             this.$refs.customerEditModal.toggle();
 
