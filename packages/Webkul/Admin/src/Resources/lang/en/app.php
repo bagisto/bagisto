@@ -142,6 +142,14 @@ return [
                     'view'         => 'View',
                     'id'           => '#:id',
                     'images'       => 'Images',
+                    'processing'   => 'Processing',
+                    'completed'    => 'Completed',
+                    'canceled'     => 'Canceled',
+                    'closed'       => 'Closed',
+                    'pending'      => 'Pending',
+                    'pending-payment'  => 'Pending Payment',
+                    'fraud'        => 'Fraud',
+                    'success'      => 'Success',
                 ],
             ],
 
@@ -394,6 +402,13 @@ return [
                 'product-error'          => 'Invoice can not be created without products.',
                 'create-success'         => 'Invoice created successfully',
             ],
+        ],
+
+        'invoice-transaction'  =>  [
+            'view'   => 'View',
+            'transaction-date'   => 'Transaction Date',
+            'transaction-id'     => 'Transaction ID',
+            'id'                 => 'ID',
         ],
 
         'transactions' => [
@@ -1040,8 +1055,8 @@ return [
         'index'  => [
             'login-message' => 'you logged in as :customer_name',
             'title'         => 'Customers',
- 
-            'datagrid'  => [ 
+
+            'datagrid'  => [
                 'id'             => 'Customer ID',
                 'order'          => ':order Order(s)',
                 'address'        => ':address  Address(s)',
@@ -2278,6 +2293,14 @@ return [
             'index' => [
                 'title'      => 'Roles',
                 'create-btn' => 'Create Role',
+
+                'datagrid'  =>  [
+                    'delete'            => 'Delete',
+                    'edit'              => 'Edit',
+                    'id'                => 'Id',
+                    'name'              => 'Name',
+                    'permission-type'   => 'Permission Type',
+                ],
             ],
 
             'create' => [
@@ -2317,7 +2340,7 @@ return [
         'delete'                      => 'Delete',
         'enable-atleast-one-shipping' => 'Enable at least one shipping method.',
         'enable-atleast-one-payment'  => 'Enable at least one payment method.',
-        
+
         'emails' => [
             'email'                   => 'Email',
             'notification_label'      => 'Notifications',
