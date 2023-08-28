@@ -298,7 +298,7 @@ return [
     ], [
         'key'   => 'customers.groups.edit',
         'name'  => 'admin::app.acl.edit',
-        // 'route' => 'admin.groups.edit',
+        'route' => 'admin.groups.update',
         'sort'  => 2,
     ], [
         'key'   => 'customers.groups.delete',
@@ -433,7 +433,7 @@ return [
     ], [
         'key'   => 'marketing.email-marketing.events.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.events.create',
+        'route' => 'admin.events.update',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.email-marketing.events.edit',
@@ -488,12 +488,12 @@ return [
     ], [
         'key'   => 'marketing.sitemaps.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sitemaps.create',
+        'route' => 'admin.sitemaps.update',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.sitemaps.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.sitemaps.edit',
+        'route' => 'admin.sitemaps.update',
         'sort'  => 2,
     ], [
         'key'   => 'marketing.sitemaps.delete',
@@ -512,7 +512,7 @@ return [
     */
     [
         'key'   => 'cms',
-        'name'  => 'admin::app.layouts.cms',
+        'name'  => 'admin::app.acl.cms',
         'route' => 'admin.cms.index',
         'sort'  => 7,
     ], [
@@ -668,7 +668,7 @@ return [
     ], [
         'key'   => 'settings.users.users.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.users.create',
+        'route' => 'admin.users.store',
         'sort'  => 1,
     ], [
         'key'   => 'settings.users.users.edit',

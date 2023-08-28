@@ -160,8 +160,6 @@
                                 meta
                             } = response.data;
 
-                            this.isLoading = false;
-
                             this.available.columns = columns;
 
                             this.available.actions = actions;
@@ -173,6 +171,8 @@
                             this.available.meta = meta;
 
                             this.setCurrentSelectionMode();
+
+                            this.isLoading = false;
                         });
                 },
 
@@ -467,14 +467,6 @@
                     }
                 },
 
-                setupMassAction(action) {
-                    this.applied.massActions.meta.action = action;
-                },
-
-                setupMassActionOption(option) {
-                    this.applied.massActions.value = option.value;
-                },
-
                 validateMassAction() {
                     if (!this.applied.massActions.indices.length) {
                         alert('No records have been selected.');
@@ -490,17 +482,27 @@
 
                     if (
                         this.applied.massActions.meta.action?.options?.length &&
-                        !this.applied.massActions.value
+                        this.applied.massActions.value === null
                     ) {
                         alert('You must select a mass action\'s option.');
 
                         return false;
                     }
 
+                    if (! confirm('Are you sure you want to perform this action?')) {
+                        return false;
+                    }
+
                     return true;
                 },
 
-                performMassAction() {
+                performMassAction(currentAction, currentOption = null) {
+                    this.applied.massActions.meta.action = currentAction;
+
+                    if (currentOption) {
+                        this.applied.massActions.value = currentOption.value;
+                    }
+
                     if (!this.validateMassAction()) {
                         return;
                     }
@@ -515,7 +517,7 @@
                         case 'post':
                         case 'put':
                         case 'patch':
-                            this.$axios[method](action.action, {
+                            this.$axios[method](action.url, {
                                     indices: this.applied.massActions.indices,
                                     value: this.applied.massActions.value,
                                 })

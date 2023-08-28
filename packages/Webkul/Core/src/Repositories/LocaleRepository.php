@@ -105,7 +105,7 @@ class LocaleRepository extends Repository
             }
             
             $locale->logo_path = $image->storeAs(
-                'locales', 
+                'locales',
                 $locale->code . '.' . $image->getClientOriginalExtension()
             );
 

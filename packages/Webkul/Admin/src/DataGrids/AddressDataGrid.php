@@ -187,7 +187,7 @@ class AddressDataGrid extends DataGrid
     {
         $this->addMassAction([
             'title'  => trans('admin::app.customers.addresses.delete'),
-            'action' => route('admin.customer.addresses.mass_delete', request('id')),
+            'url'    => route('admin.customer.addresses.mass_delete', request('id')),
             'method' => 'POST',
         ]);
     }

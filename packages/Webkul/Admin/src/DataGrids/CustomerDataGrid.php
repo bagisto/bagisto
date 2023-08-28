@@ -26,25 +26,25 @@ class CustomerDataGrid extends DataGrid
                 $join->on('customers.id', '=', 'addresses.customer_id')
                     ->where('addresses.address_type', '=', 'customer');
             })
-            ->addSelect('customers.id as customer_id') 
+            ->addSelect('customers.id as customer_id')
             ->addSelect(DB::raw('COUNT(DISTINCT addresses.id) as address_count'))
-            ->groupBy('customers.id') 
+            ->groupBy('customers.id')
 
             ->leftJoin('orders', function ($join) {
                 $join->on('customers.id', '=', 'orders.customer_id');
             })
-            ->addSelect('customers.id as customer_id') 
+            ->addSelect('customers.id as customer_id')
             ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as order_count'))
-            
+
             // ->whereNotIn("orders.status", ['closed', 'canceled'])
             ->addSelect(
-                DB::raw("(
+                DB::raw('(
                     SUM(DISTINCT base_grand_total) -
                     SUM(IFNULL((SELECT SUM(base_grand_total) FROM  refunds WHERE refunds.order_id = orders.id),0))
-                    ) as total_base_grand_total"),
-                )
-            ->groupBy('customers.id') 
-            
+                    ) as total_base_grand_total'),
+            )
+            ->groupBy('customers.id')
+
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect(
                 'customers.id as customer_id',
@@ -139,7 +139,7 @@ class CustomerDataGrid extends DataGrid
             'filterable' => true,
             'sortable'   => true,
         ]);
-     
+
         $this->addColumn([
             'index'       => 'is_suspended',
             'label'       => trans('admin::app.customers.index.datagrid.suspended'),
@@ -224,13 +224,13 @@ class CustomerDataGrid extends DataGrid
         $this->addMassAction([
             'title'  => trans('admin::app.customers.index.datagrid.delete'),
             'method' => 'POST',
-            'action' => route('admin.customer.mass_delete'),
+            'url'    => route('admin.customer.mass_delete'),
         ]);
 
         $this->addMassAction([
             'title'   => trans('admin::app.customers.index.datagrid.update-status'),
             'method'  => 'POST',
-            'action'  => route('admin.customer.mass_update'),
+            'url'     => route('admin.customer.mass_update'),
             'options' => [
                 trans('admin::app.datagrid.active')    => 1,
                 trans('admin::app.datagrid.inactive')  => 0,

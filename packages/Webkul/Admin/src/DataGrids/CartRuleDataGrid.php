@@ -104,7 +104,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -113,7 +113,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -122,7 +122,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'coupon_code',
-            'label'      => trans('admin::app.datagrid.coupon-code'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.coupon-code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -134,7 +134,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'starts_from',
-            'label'      => trans('admin::app.datagrid.start'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.start'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -146,7 +146,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'ends_till',
-            'label'      => trans('admin::app.datagrid.end'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.end'),
             'type'       => 'datetime',
             'searchable' => false,
             'filterable' => true,
@@ -165,18 +165,18 @@ class CartRuleDataGrid extends DataGrid
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status == 1) {
-                    return trans('admin::app.datagrid.active');
+                    return trans('admin::app.marketing.promotions.cart-rules.index.datagrid.active');
                 } elseif ($value->status == 0) {
-                    return trans('admin::app.datagrid.inactive');
+                    return trans('admin::app.marketing.promotions.cart-rules.index.datagrid.inactive');
                 }
 
-                return trans('admin::app.datagrid.draft');
+                return trans('admin::app.marketing.promotions.cart-rules.index.datagrid.draft');
             },
         ]);
 
         $this->addColumn([
             'index'      => 'sort_order',
-            'label'      => trans('admin::app.datagrid.priority'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.priority'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -193,7 +193,7 @@ class CartRuleDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.cart_rules.edit', $row->id);
@@ -202,7 +202,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.datagrid.copy'),
+            'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.cart_rules.copy', $row->id);
@@ -211,7 +211,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.cart_rules.delete', $row->id);

@@ -35,7 +35,7 @@ class InventorySourcesDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.inventory-sources.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -44,7 +44,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.datagrid.code'),
+            'label'      => trans('admin::app.settings.inventory-sources.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -53,7 +53,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.settings.inventory-sources.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -62,7 +62,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'priority',
-            'label'      => trans('admin::app.datagrid.priority'),
+            'label'      => trans('admin::app.settings.inventory-sources.index.datagrid.priority'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -71,17 +71,17 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.datagrid.status'),
+            'label'      => trans('admin::app.settings.inventory-sources.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.datagrid.active');
+                    return trans('admin::app.settings.inventory-sources.index.datagrid.active');
                 }
 
-                return trans('admin::app.datagrid.inactive');
+                return trans('admin::app.settings.inventory-sources.index.datagrid.inactive');
             },
         ]);
     }
@@ -95,7 +95,7 @@ class InventorySourcesDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.inventory-sources.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.inventory_sources.edit', $row->id);
@@ -104,7 +104,7 @@ class InventorySourcesDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.settings.inventory-sources.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.inventory_sources.delete', $row->id);

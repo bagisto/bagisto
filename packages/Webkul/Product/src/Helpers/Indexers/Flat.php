@@ -91,6 +91,7 @@ class Flat
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->updateOrCreate([
                         'type'                => $product->type,
+                        'sku'                 => $product->sku,
                         'attribute_family_id' => $product->attribute_family_id,
                         'product_id'          => $product->id,
                         'channel'             => $channel->code,
@@ -107,6 +108,7 @@ class Flat
                                 ))
                             )
                             || ! in_array($attribute->code, $this->flatColumns)
+                            || $attribute->code == 'sku'
                         ) {
                             continue;
                         }

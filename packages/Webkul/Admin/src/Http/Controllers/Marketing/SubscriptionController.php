@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Admin\DataGrids\NewsLetterDataGrid;
@@ -32,31 +33,34 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * To unsubscribe the user without deleting the resource of the subscribed user.
+     * Subscriber Details
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
-        return view('admin::marketing.email-marketing.subscribers.edit')->with('subscriber', $subscriber);
+        return new JsonResource([
+            'data'  =>  $subscriber,
+        ]);
     }
 
     /**
-     * To unsubscribe the user without deleting the resource of the subscribed user.
+     * To unsubscribe the user without deleting the resource of the subscribed
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
-    public function update($id)
+    public function update(): JsonResource
     {
+        $id = request()->only('id');
+
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         $customer = $subscriber->customer;
 
-        if (! is_null($customer)) {
+        if (!is_null($customer)) {
             $customer->subscribed_to_news_letter = request('is_subscribed');
 
             $customer->save();
@@ -65,32 +69,38 @@ class SubscriptionController extends Controller
         $result = $subscriber->update(request()->only(['status']));
 
         if ($result) {
-            session()->flash('success', trans('admin::app.customers.subscribers.update-success'));
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.email-marketing.newsletters.index.edit.success'),
+            ]);
         } else {
-            session()->flash('error', trans('admin::app.customers.subscribers.update-failed'));
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.email-marketing.newsletters.index.edit.update-failed'),
+            ]);
         }
-
-        return redirect()->route('admin.customers.subscribers.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         try {
             $this->subscribersListRepository->delete($id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Subscriber'])]);
+            return new JsonResource([
+                'message' => trans('admin::app.response.delete-success', ['name' => 'Subscriber']),
+            ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Subscriber'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.response.delete-failed', ['name' => 'Subscriber']),
+        ], 500);
     }
 }

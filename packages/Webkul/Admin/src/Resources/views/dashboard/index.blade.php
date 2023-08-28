@@ -26,7 +26,7 @@
                     @lang('admin::app.dashboard.index.overall-details')
                 </p>
 
-                <div class="p-[16px] border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
+                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
                         <div class="flex gap-[10px] flex-1">
@@ -224,7 +224,7 @@
                     @lang('admin::app.dashboard.index.today-details')
                 </p>
 
-                <div class="border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
+                <div class="bg-white rounded-[4px] box-shadow">
                     <div class="flex gap-[16px] flex-wrap p-[16px] border-b-[1px] border-gray-300">
                         {{-- Today's Sales --}}
                         <div class="flex gap-[10px] flex-1">
@@ -488,7 +488,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -504,7 +504,7 @@
                 </p>
 
                 {{-- Products List --}}
-                <div class="border-[1px] border-gray-300 bg-white rounded-[4px] box-shadow">
+                <div class="bg-white rounded-[4px] box-shadow">
                     @foreach ($statistics['stock_threshold'] as $item)
                         <!-- Single Product -->
                         <div class="relative">
@@ -569,7 +569,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -594,11 +594,11 @@
     </div>
     
     @push('scripts')
-        <script src="{{ bagisto_asset('js/chart.js') }}"></script>
+        <script type="module" src="{{ bagisto_asset('js/chart.js') }}"></script>
 
         <script type="text/x-template" id="v-store-stats-template">
             <x-admin::form :action="route('admin.catalog.categories.store')">
-                <div class="bg-white rounded-[4px] box-shadow border-[1px] border-gray-300 box-shadow">
+                <div class="bg-white rounded-[4px] box-shadow box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
                         <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard.right.total-sales>
@@ -708,7 +708,7 @@
                                     <!-- Product Image -->
                                     <div class="flex gap-[10px]">
                                         <img
-                                            v-if="item?.product?.images"
+                                            v-if="item?.product?.images.length"
                                             class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
                                             :src="item?.product?.images[0]?.url"
                                         />
@@ -904,11 +904,11 @@
 
                         start: "{{ $startDate->format('Y-m-d') }}",
 
-                        formatStart: "{{ $startDate->format('d M') }}",
+                        formatStart: "",
 
                         end: "{{ $endDate->format('Y-m-d') }}",
 
-                        formatEnd: "{{ $endDate->format('d M') }}",
+                        formatEnd: "",
 
                         statistics: {},
                     }
@@ -917,6 +917,10 @@
                 mounted() {
                     this.$axios.get("{{ route('admin.dashboard.index') }}")
                         .then((response) => {
+                            this.formatStart = response.data.startDate;
+
+                            this.formatEnd = response.data.endDate;
+
                             this.statistics = response.data.statistics;
 
                             this.isLoading = ! this.isLoading;
@@ -941,6 +945,10 @@
 
                         this.$axios.get("{{ route('admin.dashboard.index') }}" + queryParams)
                             .then((response) => {
+                                this.formatStart = response.data.startDate;
+
+                                this.formatEnd = response.data.endDate;
+
                                 this.statistics = response.data.statistics;
                             })
                             .catch(error => {

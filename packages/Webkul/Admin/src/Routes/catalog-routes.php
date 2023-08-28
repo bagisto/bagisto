@@ -74,6 +74,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::post('mass-update', 'massUpdate')->name('admin.catalog.categories.mass_update');
 
             Route::post('product/count', 'categoryProductCount')->name('admin.catalog.categories.product.count');
+
+            Route::get('search', 'search')->name('admin.catalog.categories.search');
         });
 
         /**

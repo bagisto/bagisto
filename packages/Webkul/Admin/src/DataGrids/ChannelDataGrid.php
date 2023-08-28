@@ -39,7 +39,7 @@ class ChannelDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.settings.channels.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -48,7 +48,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.datagrid.code'),
+            'label'      => trans('admin::app.settings.channels.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -57,7 +57,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'translated_name',
-            'label'      => trans('admin::app.datagrid.name'),
+            'label'      => trans('admin::app.settings.channels.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -66,7 +66,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'hostname',
-            'label'      => trans('admin::app.datagrid.hostname'),
+            'label'      => trans('admin::app.settings.channels.index.datagrid.host-name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -78,7 +78,7 @@ class ChannelDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.settings.channels.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.channels.edit', $row->id);
@@ -87,7 +87,7 @@ class ChannelDataGrid extends DataGrid
 
         $this->addAction([
             'icon'         => 'icon-delete',
-            'title'        => trans('admin::app.datagrid.delete'),
+            'title'        => trans('admin::app.settings.channels.index.datagrid.delete'),
             'method'       => 'POST',
             'url'          => function ($row) {
                 return route('admin.channels.delete', $row->id);

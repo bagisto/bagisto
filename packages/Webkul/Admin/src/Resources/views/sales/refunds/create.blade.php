@@ -1,9 +1,15 @@
-<v-create-refund></v-create-refund>
+<v-create-refund>
+    <div class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
+        <span class="icon-cancel text-[24px]"></span> 
+
+        @lang('admin::app.sales.orders.view.refund')     
+    </div>
+</v-create-refund>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-create-refund-template">
         <div
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
             @click="$refs.refund.open()"
         >
             <span class="icon-cancel text-[24px]"></span> 
@@ -53,7 +59,7 @@
                                 @foreach ($order->items as $item)
                                     <div class="flex gap-[10px] justify-between py-[16px]">
                                         <div class="flex gap-[10px]">
-                                            @if ($item->product)
+                                            @if ($item->product->base_image_url)
                                                 <img
                                                     class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
                                                     src="{{ $item->product->base_image_url }}"

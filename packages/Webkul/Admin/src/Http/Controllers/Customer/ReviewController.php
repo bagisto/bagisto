@@ -3,9 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Admin\DataGrids\CustomerReviewDataGrid;
+use Webkul\Product\Repositories\ProductReviewRepository;
 
 class ReviewController extends Controller
 {
@@ -33,17 +34,19 @@ class ReviewController extends Controller
         return view('admin::customers.reviews.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
+     /**
+     * Review Details
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return JsonResource
      */
-    public function edit($id)
+    public function edit($id): JsonResource
     {
-        $review = $this->productReviewRepository->findOrFail($id);
+        $review = $this->productReviewRepository->with(['images', 'product'])->findOrFail($id);
 
-        return view('admin::customers.reviews.edit', compact('review'));
+        $review->date = $review->created_at->format('Y-m-d');
+        
+        return new JsonResource($review);
     }
 
     /**
@@ -117,15 +120,15 @@ class ReviewController extends Controller
             }
 
             if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Reviews']));
+                session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.delete-success', ['resource' => 'Reviews']));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+                session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
             return redirect()->route('admin.customer.review.index');
 
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
             return redirect()->back();
         }
@@ -177,14 +180,14 @@ class ReviewController extends Controller
             }
 
             if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.update-success', ['resource' => 'Reviews']));
+                session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.update-success', ['resource' => 'Reviews']));
             } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Reviews']));
+                session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
             }
 
             return redirect()->route('admin.customer.review.index');
         } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+            session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
 
             return redirect()->back();
         }

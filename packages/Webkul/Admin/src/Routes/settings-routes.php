@@ -45,7 +45,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.currencies.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.currencies.update');
+        Route::post('edit', 'update')->name('admin.currencies.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.currencies.delete');
 
@@ -64,7 +64,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('update-rates', 'updateRates')->name('admin.exchange_rates.update_rates');
 
-        Route::put('edit/{id}', 'update')->name('admin.exchange_rates.update');
+        Route::post('edit', 'update')->name('admin.exchange_rates.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.exchange_rates.delete');
     });
@@ -81,7 +81,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.locales.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.locales.update');
+        Route::post('edit', 'update')->name('admin.locales.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.locales.delete');
     });
@@ -113,7 +113,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.tax_categories.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.tax_categories.update');
+        Route::post('edit', 'update')->name('admin.tax_categories.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.tax_categories.delete');
     });
@@ -160,13 +160,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('', 'index')->name('admin.users.index');
 
-        Route::get('create', 'create')->name('admin.users.create');
-
         Route::post('create', 'store')->name('admin.users.store');
 
         Route::get('edit/{id}', 'edit')->name('admin.users.edit');
 
-        Route::put('edit/{id}', 'update')->name('admin.users.update');
+        Route::post('edit', 'update')->name('admin.users.update');
 
         Route::delete('edit/{id}', 'destroy')->name('admin.users.delete');
 

@@ -1,11 +1,3 @@
-@php
-    $tree = \Webkul\Core\Tree::create();
-
-    foreach (config('core') as $item) {
-        $tree->add($item);
-    }
-@endphp
-
 <div class="fixed top-[57px] h-full bg-white pt-[8px] w-[270px] shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)] z-[1000] max-lg:hidden transition-all duration-300 group-[.sidebar-collapsed]/container:w-[70px]">
     <div class="h-[calc(100vh-100px)] overflow-auto journal-scroll group-[.sidebar-collapsed]/container:overflow-visible">
         <nav class="grid gap-[7px] w-full">
@@ -19,12 +11,12 @@
                         <span class="{{ $menuItem['icon'] }} text-[24px] {{ $menu->getActive($menuItem) ? 'text-white' : ''}}"></span>
                         
                         <p class="text-gray-600 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $menu->getActive($menuItem) ? 'text-white' : ''}}">
-                            @lang($menuItem['name']) 
+                            @lang($menuItem['name'])
                         </p>
                     </a>
 
                     @if (count($menuItem['children']))
-                        <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] pl-[40px] pb-[7px] rounded-b-[8px] z-[100] group-[.sidebar-collapsed]/container:!hidden group-[.sidebar-collapsed]/container:absolute group-[.sidebar-collapsed]/container:top-0 group-[.sidebar-collapsed]/container:left-[70px] group-[.sidebar-collapsed]/container:p-[0] group-[.sidebar-collapsed]/container:bg-white group-[.sidebar-collapsed]/container:border-l-[1px] group-[.sidebar-collapsed]/container:border-gray-300 group-[.sidebar-collapsed]/container:rounded-none group-[.sidebar-collapsed]/container:shadow-[2px_1px_3px_rgba(0,0,0,0.1)] group-[.sidebar-collapsed]/container:group-hover/item:!grid">
+                        <div class="{{ $menu->getActive($menuItem) ? ' !grid bg-gray-100' : '' }} hidden min-w-[180px] pl-[40px] pb-[7px] rounded-b-[8px] z-[100] overflow-hidden group-[.sidebar-collapsed]/container:!hidden group-[.sidebar-collapsed]/container:absolute group-[.sidebar-collapsed]/container:top-0 group-[.sidebar-collapsed]/container:left-[70px] group-[.sidebar-collapsed]/container:p-[0] group-[.sidebar-collapsed]/container:bg-white group-[.sidebar-collapsed]/container:border-[1px] group-[.sidebar-collapsed]/container:rounded-r-[8px] group-[.sidebar-collapsed]/container:border-gray-300 group-[.sidebar-collapsed]/container:rounded-none group-[.sidebar-collapsed]/container:shadow-[34px_10px_14px_rgba(0,0,0,0.01),19px_6px_12px_rgba(0,0,0,0.03),9px_3px_9px_rgba(0,0,0,0.04),2px_1px_5px_rgba(0,0,0,0.05),0px_0px_0px_rgba(0,0,0,0.05)] group-[.sidebar-collapsed]/container:group-hover/item:!grid">
                             @foreach ($menuItem['children'] as $subMenuItem)
                                 <a
                                     href="{{ $subMenuItem['url'] }}"

@@ -30,7 +30,7 @@
             {{-- Back Button --}}
             <a href="{{ route('admin.customer.index') }}">
                 <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                    @lang('admin::app.customers.groups.edit.back-btn')
+                    @lang('admin::app.customers.view.back-btn')
                 </span>
             </a>   
         </div>
@@ -43,7 +43,7 @@
         @include('admin::customers.addresses.create')
        
         <div 
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
+            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
             onclick="if (confirm('@lang('admin::app.customers.view.delete-confirmation')')) {
                 event.preventDefault();
                 document.getElementById('delete-account{{ $customer->id }}').submit();
@@ -504,11 +504,11 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.phone') - {{ $customer->phone }}
+                            @lang('admin::app.customers.view.phone') - {{ $customer->phone ?? 'N/A' }}
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.gender') - {{ $customer->gender }}
+                            @lang('admin::app.customers.view.gender') - {{ $customer->gender ?? 'N/A' }}
                         </p>
 
                         <p class="text-gray-600">
@@ -517,7 +517,7 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.group') - {{ $customer->group->code }}
+                            @lang('admin::app.customers.view.group') - {{ $customer->group->code ?? 'N/A' }}
                         </p>
                     </div>
                 </x-slot:content>
