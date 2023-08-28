@@ -1066,6 +1066,8 @@ return [
                 'phone'          => 'Contact Number',
                 'gender'         => 'Gender',
                 'status'         => 'Status',
+                'active'         => 'Active',
+                'inactive'       => 'Inactive',
                 'suspended'      => 'Suspended',
                 'revenue'        => 'Revenue',
                 'address-count'  => 'Address Count',

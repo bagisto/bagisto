@@ -3,10 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\DataGrids\Customers\ReviewDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Admin\DataGrids\Customers\ReviewDataGrid;
 
 class ReviewController extends Controller
 {
@@ -98,14 +100,14 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
         $suppressFlash = false;
 
         if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
+            $indices = $massDestroyRequest->input('indices');
 
-            foreach ($indexes as $index) {
+            foreach ($indices as $index) {
                 try {
                     Event::dispatch('customer.review.delete.before', $index);
 
@@ -138,57 +140,28 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $suppressFlash = false;
+        $indices = $massUpdateRequest->input('indices');
+        $validStatuses = [0 => 'pending', 1 => 'approved', 2 => 'disapproved'];
 
-        if (request()->isMethod('post')) {
-            $data = request()->all();
+        foreach ($indices as $value) {
+            $review = $this->productReviewRepository->find($value);
 
-            $indexes = explode(',', request()->input('indexes'));
+            $newStatus = $validStatuses[$massUpdateRequest->input('value')] ?? null;
 
-            foreach ($indexes as $key => $value) {
-                $review = $this->productReviewRepository->find($value);
-
+            if ($newStatus !== null) {
                 try {
-                    if (
-                        ! isset($data['mass-action-type'])
-                        || $data['mass-action-type'] != 'update'
-                    ) {
-                        return redirect()->back();
-                    }
-
-                    if ($data['update-options'] == 1) {
+                    if ($newStatus === 'approved') {
                         Event::dispatch('customer.review.update.before', $value);
-
-                        $review->update(['status' => 'approved']);
-
                         Event::dispatch('customer.review.update.after', $review);
-                    } elseif ($data['update-options'] == 0) {
-                        $review->update(['status' => 'pending']);
-                    } elseif ($data['update-options'] == 2) {
-                        $review->update(['status' => 'disapproved']);
-                    } else {
-                        continue;
                     }
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
 
-                    continue;
+                    $review->update(['status' => $newStatus]);
+                } catch (\Exception $e) {
+                    // Handle the exception if needed
                 }
             }
-
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.update-success', ['resource' => 'Reviews']));
-            } else {
-                session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
-            }
-
-            return redirect()->route('admin.customers.customers.review.index');
-        } else {
-            session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
-
-            return redirect()->back();
         }
     }
 }

@@ -466,6 +466,11 @@ return [
         'route' => 'admin.marketing.communications.campaigns.delete',
         'sort'  => 3,
     ], [
+        'key'   => 'marketing.communications.subscribers',
+        'name'  => 'admin::app.acl.subscribers',
+        'route' => 'admin.marketing.communications.subscribers.index',
+        'sort'  => 3,
+    ], [
         'key'   => 'marketing.communications.subscribers.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.marketing.communications.subscribers.edit',

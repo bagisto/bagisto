@@ -170,9 +170,18 @@ class ReviewDataGrid extends DataGrid
             'method'  => 'POST',
             'url'     => route('admin.customers.customers.review.mass_update'),
             'options' => [
-                trans('admin::app.customers.reviews.index.datagrid.pending')     => 0,
-                trans('admin::app.customers.reviews.index.datagrid.approved')    => 1,
-                trans('admin::app.customers.reviews.index.datagrid.disapproved') => 2,
+                [
+                    'name' => trans('admin::app.customers.reviews.index.datagrid.pending'),
+                    'value' => 0,
+                ],
+                [
+                    'name' => trans('admin::app.customers.reviews.index.datagrid.approved'),
+                    'value' => 1,
+                ],
+                [
+                    'name' => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
+                    'value' => 2,
+                ],
             ],
         ]);
     }

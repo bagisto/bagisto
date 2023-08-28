@@ -19,6 +19,8 @@ use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Admin\Http\Resources\AttributeResource;
 use Webkul\Admin\DataGrids\Catalog\ProductDataGrid;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Facades\ProductImage;
@@ -274,9 +276,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
-        $productIds = explode(',', request()->input('indexes'));
+        $productIds = $massDestroyRequest->input('indices');
 
         foreach ($productIds as $productId) {
             $product = $this->productRepository->find($productId);
@@ -290,8 +292,6 @@ class ProductController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
-
         return redirect()->route('admin.catalog.products.index');
     }
 
@@ -300,34 +300,21 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $data = request()->all();
+        $data = $massUpdateRequest->all();
 
-        if (
-            ! isset($data['mass-action-type'])
-            || $data['mass-action-type'] != 'update'
-        ) {
-            return redirect()->back();
-        }
-
-        $productIds = explode(',', $data['indexes']);
+        $productIds = $data['indices'];
 
         foreach ($productIds as $productId) {
             Event::dispatch('catalog.product.update.before', $productId);
 
             $product = $this->productRepository->update([
-                'channel' => $data['channel'],
-                'locale'  => $data['locale'],
-                'status'  => $data['update-options'],
+                'status'  => $massUpdateRequest->input('value'),
             ], $productId);
 
             Event::dispatch('catalog.product.update.after', $product);
-        }
-
-        session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
-
-        return redirect()->route('admin.catalog.products.index');
+        } 
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 
@@ -56,9 +57,9 @@ class CartRuleCouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function massDelete()
+    public function massDelete(MassDestroyRequest $massDestroyRequest)
     {
-        $couponIds = explode(',', request()->input('indexes'));
+        $couponIds = $massDestroyRequest->input('indices');
 
         foreach ($couponIds as $couponId) {
             $coupon = $this->cartRuleCouponRepository->find($couponId);

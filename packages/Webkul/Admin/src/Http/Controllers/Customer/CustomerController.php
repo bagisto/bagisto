@@ -10,6 +10,8 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Admin\Mail\CustomerNoteNotification;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
@@ -228,60 +230,6 @@ class CustomerController extends Controller
     }
 
     /**
-     * To mass update the customer.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massUpdate()
-    {
-        $customerIds = explode(',', request()->input('indexes'));
-
-        $updateOption = request()->input('update-options');
-
-        foreach ($customerIds as $customerId) {
-            Event::dispatch('customer.update.before', $customerId);
-
-            $customer = $this->customerRepository->update([
-                'status' => $updateOption,
-            ], $customerId);
-
-            Event::dispatch('customer.update.after', $customer);
-        }
-
-        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
-
-        return redirect()->back();
-    }
-
-    /**
-     * To mass delete the customer.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy()
-    {
-        $customerIds = explode(',', request()->input('indexes'));
-
-        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
-            foreach ($customerIds as $customerId) {
-                Event::dispatch('customer.delete.before', $customerId);
-
-                $this->customerRepository->delete($customerId);
-
-                Event::dispatch('customer.delete.after', $customerId);
-            }
-
-            session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
-
-            return redirect()->back();
-        }
-
-        session()->flash('error', trans('admin::app.customers.order-pending'));
-
-        return redirect()->back();
-    }
-
-    /**
      * View all details of customer.
      *
      * @param  int  $id
@@ -314,5 +262,53 @@ class CustomerController extends Controller
         })->paginate(10);
 
         return response()->json($customers);
+    }
+
+    /**
+     * To mass update the customer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
+    {
+        $customerIds = $massUpdateRequest->input('indices');
+
+        foreach ($customerIds as $customerId) {
+            Event::dispatch('customer.update.before', $customerId);
+
+            $customer = $this->customerRepository->update([
+                'status' => $massUpdateRequest->input('value'),
+            ], $customerId);
+
+            Event::dispatch('customer.update.after', $customer);
+        }
+    }
+
+    /**
+     * To mass delete the customer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    {
+        $customerIds = $massDestroyRequest->input('indices');
+
+        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
+            foreach ($customerIds as $customerId) {
+                Event::dispatch('customer.delete.before', $customerId);
+
+                $this->customerRepository->delete($customerId);
+
+                Event::dispatch('customer.delete.after', $customerId);
+            }
+
+            session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
+
+            return redirect()->back();
+        }
+
+        session()->flash('error', trans('admin::app.customers.order-pending'));
+
+        return redirect()->back();
     }
 }
