@@ -103,11 +103,12 @@
                         },
 
                         filters: {
-                            columns: [{
-                                index: 'all',
-
-                                value: @json(request()->has('search') ? [request()->get('search')] : []),
-                            }],
+                            columns: [
+                                {
+                                    index: 'all',
+                                    value: @json(request()->has('search') ? [request()->get('search')] : []),
+                                },
+                            ],
                         },
                     },
                 };
@@ -199,7 +200,7 @@
                     } else if (direction === 'next') {
                         newPage = this.available.meta.current_page + 1;
                     } else {
-                        console.error('Invalid direction provided: ' + direction);
+                        console.error('Invalid Direction Provided : ' + direction);
 
                         return;
                     }
@@ -428,6 +429,10 @@
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
+                    if (!this.available.records.length) {
+                        return;
+                    }
+
                     let selectionCount = 0;
 
                     this.available.records.forEach(record => {
@@ -493,7 +498,7 @@
                         return false;
                     }
 
-                    if (! confirm('Are you sure you want to perform this action?')) {
+                    if (!confirm('Are you sure you want to perform this action?')) {
                         return false;
                     }
 
@@ -547,6 +552,76 @@
                             break;
                     }
                 },
+
+                //================================================================
+                // Datagrid Persistent Support.
+                //================================================================
+
+                // getDatagridsStorageKey() {
+                //     return 'datagrids';
+                // },
+
+                // analyzeDatagridsInfo() {
+                //     let datagridsInfo = this.getDatagridsInfo();
+
+                //     if (datagridsInfo?.length) {
+                //         if (this.isCurrentDatagridInfoExists()) {
+                //             datagridsInfo = datagridsInfo.map(datagrid => {
+                //                 if (datagrid.hash === this.hash) {
+                //                     return this.getDatagridsInfoDefaults();
+                //                 }
+
+                //                 return datagrid;
+                //             });
+                //         } else {
+                //             datagridsInfo.push(this.getDatagridsInfoDefaults());
+                //         }
+                //     } else {
+                //         datagridsInfo = [this.getDatagridsInfoDefaults()];
+                //     }
+
+                //     this.setDatagridsInfo(datagridsInfo);
+                // },
+
+                // isCurrentDatagridInfoExists() {
+                //     let datagridsInfo = this.getDatagridsInfo();
+
+                //     return !!datagridsInfo.find(({
+                //         hash
+                //     }) => hash === this.hash);
+                // },
+
+                // getCurrentDatagridInfo() {
+                //     let datagridsInfo = this.getDatagridsInfo();
+
+                //     return this.isCurrentDatagridInfoExists() ?
+                //         datagridsInfo.find(({
+                //             hash
+                //         }) => hash === this.hash) :
+                //         null;
+                // },
+
+                // getDatagridsInfoDefaults() {
+                //     return {
+                //         hash: this.hash,
+                //         applied: this.applied
+                //     };
+                // },
+
+                // getDatagridsInfo() {
+                //     let storageInfo = localStorage.getItem(
+                //         this.getDatagridsStorageKey()
+                //     );
+
+                //     return JSON.parse(storageInfo) ?? [];
+                // },
+
+                // setDatagridsInfo(info) {
+                //     localStorage.setItem(
+                //         this.getDatagridsStorageKey(),
+                //         JSON.stringify(info)
+                //     );
+                // },
 
                 //================================================================
                 // Remaining logic, will check.
