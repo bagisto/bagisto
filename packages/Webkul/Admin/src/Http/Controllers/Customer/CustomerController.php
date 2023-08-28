@@ -273,21 +273,15 @@ class CustomerController extends Controller
     {
         $customerIds = $massUpdateRequest->input('indices');
 
-        $updateOption = request()->input('update-options');
-
         foreach ($customerIds as $customerId) {
             Event::dispatch('customer.update.before', $customerId);
 
             $customer = $this->customerRepository->update([
-                'status' => $updateOption,
+                'status' => $massUpdateRequest->input('value'),
             ], $customerId);
 
             Event::dispatch('customer.update.after', $customer);
         }
-
-        session()->flash('success', trans('admin::app.customers.customers.mass-update-success'));
-
-        return redirect()->back();
     }
 
     /**

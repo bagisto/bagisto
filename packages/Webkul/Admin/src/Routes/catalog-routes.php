@@ -107,9 +107,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('mass-action', 'massUpdate')->name('admin.catalog.products.mass_action');
 
+            Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
+            
             Route::post('mass-delete', 'massDestroy')->name('admin.catalog.products.mass_delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.catalog.products.mass_update');
 
             Route::get('search', 'search')->name('admin.catalog.products.search');
 

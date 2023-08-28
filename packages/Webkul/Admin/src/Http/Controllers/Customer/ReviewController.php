@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Admin\DataGrids\Customers\CustomerReviewDataGrid;
 
@@ -139,12 +140,12 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
         $suppressFlash = false;
 
         if (request()->isMethod('post')) {
-            $data = request()->all();
+            $data = $massUpdateRequest->all();
 
             $indices = request()->input('indices');
 
@@ -162,7 +163,7 @@ class ReviewController extends Controller
                     if ($data['update-options'] == 1) {
                         Event::dispatch('customer.review.update.before', $value);
 
-                        $review->update(['status' => 'approved']);
+                        $review->update(['status' => $massUpdateRequest->input('value')]);
 
                         Event::dispatch('customer.review.update.after', $review);
                     } elseif ($data['update-options'] == 0) {

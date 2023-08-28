@@ -31,11 +31,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
             Route::post('edit/{id}', 'update')->name('admin.customers.customer.update');
 
-            Route::post('/{id}', 'destroy')->name('admin.customers.customer.delete');
-
             Route::post('mass-delete', 'massDestroy')->name('admin.customers.customer.mass_delete');
 
             Route::post('mass-update', 'massUpdate')->name('admin.customers.customer.mass_update');
+
+            Route::post('/{id}', 'destroy')->name('admin.customers.customer.delete');
 
             Route::get('{id}/orders', 'orders')->name('admin.customers.customer.orders.data');
         });

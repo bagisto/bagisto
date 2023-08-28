@@ -222,13 +222,6 @@ class CategoryController extends Controller
     {
         $data = $massUpdateRequest->all();
 
-        if (
-            ! isset($data['mass-action-type'])
-            || $data['mass-action-type'] != 'update'
-        ) {
-            return redirect()->back();
-        }
-
         $categoryIds = $data['indices'];
 
         foreach ($categoryIds as $categoryId) {
@@ -236,15 +229,12 @@ class CategoryController extends Controller
 
             $category = $this->categoryRepository->find($categoryId);
 
-            $category->status = $data['update-options'];
+            $category->status = $massUpdateRequest->input('value');
+            
             $category->save();
 
             Event::dispatch('catalog.categories.mass-update.after', $category);
         }
-
-        session()->flash('success', trans('admin::app.catalog.categories.mass-update-success'));
-
-        return redirect()->route('admin.catalog.categories.index');
     }
 
     /**

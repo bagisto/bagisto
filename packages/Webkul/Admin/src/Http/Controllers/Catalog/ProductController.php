@@ -292,8 +292,6 @@ class ProductController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
-
         return redirect()->route('admin.catalog.products.index');
     }
 
@@ -304,26 +302,19 @@ class ProductController extends Controller
      */
     public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $data = $massUpdateRequest()->all();
+        $data = $massUpdateRequest->all();
 
-
-        $productIds = $data['indexes'];
+        $productIds = $data['indices'];
 
         foreach ($productIds as $productId) {
             Event::dispatch('catalog.product.update.before', $productId);
 
             $product = $this->productRepository->update([
-                'channel' => $data['channel'],
-                'locale'  => $data['locale'],
-                'status'  => $data['update-options'],
+                'status'  => $massUpdateRequest->input('value'),
             ], $productId);
 
             Event::dispatch('catalog.product.update.after', $product);
-        }
-
-        session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
-
-        return redirect()->route('admin.catalog.products.index');
+        } 
     }
 
     /**
