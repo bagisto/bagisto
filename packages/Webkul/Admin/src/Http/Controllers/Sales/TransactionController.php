@@ -8,7 +8,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
-use Webkul\Admin\DataGrids\OrderTransactionsDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderTransactionsDataGrid;
 use Webkul\Payment\Facades\Payment;
 
 class TransactionController extends Controller

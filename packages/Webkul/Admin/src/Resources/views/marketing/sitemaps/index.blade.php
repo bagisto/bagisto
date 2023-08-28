@@ -184,7 +184,7 @@
 
                                 </x-admin::form.control-group>
         
-                                <!---- File Path -->
+                                <!-- File Path -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.sitemaps.index.create.path')

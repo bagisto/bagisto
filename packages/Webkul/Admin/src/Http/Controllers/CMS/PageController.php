@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\CMS;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
-use Webkul\Admin\DataGrids\CMSPageDataGrid;
+use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
 
 
 class PageController extends Controller
@@ -103,7 +103,7 @@ class PageController extends Controller
 
         $this->validate(request(), [
             $locale . '.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->cmsRepository->isUrlKeyUnique($id, $value)) {
+                if (!$this->cmsRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.response.already-taken', ['name' => 'Page']));
                 }
             }],

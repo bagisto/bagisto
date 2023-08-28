@@ -6,7 +6,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
-use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderShipmentsDataGrid;
 
 class ShipmentController extends Controller
 {

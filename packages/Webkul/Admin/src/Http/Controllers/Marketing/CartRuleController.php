@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CartRule\Repositories\CartRuleRepository;
-use Webkul\Admin\DataGrids\CartRuleDataGrid;
+use Webkul\Admin\DataGrids\Marketing\CartRuleDataGrid;
 use Webkul\CartRule\Http\Requests\CartRuleRequest;
 
 class CartRuleController extends Controller
