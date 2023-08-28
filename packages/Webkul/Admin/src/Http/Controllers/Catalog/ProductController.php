@@ -357,18 +357,23 @@ class ProductController extends Controller
             'order' => 'desc',
         ]);
 
-        foreach ($this->productRepository->getAll() as $product) {
+        $products = $this->productRepository->getAll();
+
+        foreach ($products as $product) {
             $results[] = [
-                'id'          => $product->id,
-                'sku'         => $product->sku,
-                'name'        => $product->name,
-                'price'       => $product->price,
-                'images'      => $product->images,
-                'inventories' => $product->inventories,
+                'id'              => $product->id,
+                'sku'             => $product->sku,
+                'name'            => $product->name,
+                'price'           => $product->price,
+                'formatted_price' => core()->formatBasePrice($product->price),
+                'images'          => $product->images,
+                'inventories'     => $product->inventories,
             ];
         }
 
-        return response()->json($results);
+        $products->setCollection(collect($results));
+
+        return response()->json($products);
     }
 
     /**

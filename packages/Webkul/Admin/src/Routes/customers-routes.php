@@ -22,6 +22,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.customer.edit');
 
+        Route::get('search', 'search')->name('admin.customer.search');
+
         Route::get('login-as-customer/{id}', 'login_as_customer')->name('admin.customer.login_as_customer');
 
         Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');

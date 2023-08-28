@@ -2283,15 +2283,25 @@ return [
     'components' => [
         'layouts' => [
             'header' => [
-                'search'        => 'Search',
-                'mega-search'   => 'Mega Search',
                 'notifications' => 'Notifications',
-                'visit-shop'    => 'Visit Shop',
                 'app-version'   => 'Version : :version',
                 'account-title' => 'Account',
                 'my-account'    => 'My Account',
                 'logout'        => 'Logout',
                 'visit-shop'    => 'Visit Shop',
+
+                'mega-search' => [
+                    'title'                  => 'Mega Search',
+                    'products'               => 'Products',
+                    'orders'                 => 'Orders',
+                    'categories'             => 'Categories',
+                    'customers'              => 'Customers',
+                    'sku'                    => 'SKU: :sku',
+                    'explore-all-products'   => 'Explore all products matching “:query” (:count)',
+                    'explore-all-orders'     => 'Explore all Orders matching “:query” (:count)',
+                    'explore-all-categories' => 'Explore all categories matching “:query” (:count)',
+                    'explore-all-customers'  => 'Explore all customers matching “:query” (:count)',
+                ],
             ],
 
             'sidebar' => [

@@ -2,6 +2,10 @@
 
 namespace Webkul\DataGrid;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Webkul\DataGrid\Enums\ColumnTypeEnum;
+
 abstract class DataGrid
 {
     /**
@@ -54,6 +58,11 @@ abstract class DataGrid
     protected $queryBuilder;
 
     /**
+     * Paginator instance.
+     */
+    protected LengthAwarePaginator $paginator;
+
+    /**
      * Prepare query builder.
      */
     abstract public function prepareQueryBuilder();
@@ -78,39 +87,19 @@ abstract class DataGrid
     }
 
     /**
-     * Map your filter.
-     */
-    public function addFilter(string $datagridColumn, string $queryColumn): void
-    {
-        foreach ($this->columns as &$column) {
-            if ($column['index'] === $datagridColumn) {
-                $column['column_name'] = $queryColumn;
-                break;
-            }
-        }
-    }
-
-    /**
      * Add column.
-     *
-     * @param  array  $column
-     * @return void
      */
-    public function addColumn($column)
+    public function addColumn(array $column): void
     {
-        $column['column_name'] = $column['index'];
-
-        if ($column['type'] === 'date_range') {
-            $column['input_type'] = 'date';
-
-            $column['options'] = $this->getDateOptions();
-        } elseif ($column['type'] === 'datetime_range') {
-            $column['input_type'] = 'datetime-local';
-
-            $column['options'] = $this->getDateOptions('Y-m-d H:i:s');
-        }
-
-        $this->columns[] = $column;
+        $this->columns[] = new Column(
+            index: $column['index'],
+            label: $column['label'],
+            type: $column['type'],
+            searchable: $column['searchable'],
+            filterable: $column['filterable'],
+            sortable: $column['sortable'],
+            closure: $column['closure'] ?? null,
+        );
     }
 
     /**
@@ -118,7 +107,12 @@ abstract class DataGrid
      */
     public function addAction(array $action): void
     {
-        $this->actions[] = $action;
+        $this->actions[] = new Action(
+            icon: $action['icon'] ?? '',
+            title: $action['title'],
+            method: $action['method'],
+            url: $action['url'],
+        );
     }
 
     /**
@@ -126,95 +120,173 @@ abstract class DataGrid
      */
     public function addMassAction(array $massAction): void
     {
-        $this->massActions[] = $massAction;
+        $this->massActions[] = new MassAction(
+            icon: $massAction['icon'] ?? '',
+            title: $massAction['title'],
+            method: $massAction['method'],
+            url: $massAction['url'],
+        );
     }
 
     /**
-     * Prepare data for json response.
-     *
-     * @return array
+     * Map your filter.
      */
-    public function prepareData()
+    public function addFilter(string $datagridColumn, string $queryColumn): void
     {
-        // need to refactor
-        $queryBuilder = $this->queryBuilder;
+        foreach ($this->columns as $column) {
+            if ($column->index === $datagridColumn) {
+                $column->setDatabaseColumnName($queryColumn);
 
-        $requestedFilters = request('filters', []);
+                break;
+            }
+        }
+    }
 
+    /**
+     * Set query builder.
+     *
+     * @param  mixed  $queryBuilder
+     */
+    public function setQueryBuilder($queryBuilder = null): void
+    {
+        $this->queryBuilder = $queryBuilder ?: $this->prepareQueryBuilder();
+    }
+
+    /**
+     * Validated request.
+     */
+    public function validatedRequest(): array
+    {
+        request()->validate([
+            'filters'     => ['sometimes', 'required', 'array'],
+            'sort'        => ['sometimes', 'required', 'array'],
+            'pagination'  => ['sometimes', 'required', 'array'],
+        ]);
+
+        return request()->only(['filters', 'sort', 'pagination']);
+    }
+
+    /**
+     * Process all requested filters.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function processRequestedFilters(array $requestedFilters)
+    {
         foreach ($requestedFilters as $requestedColumn => $requestedValues) {
             if ($requestedColumn === 'all') {
-                $queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
+                $this->queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
-                            ->filter(fn ($column) => $column['searchable'] && $column['type'] !== 'boolean')
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column['column_name'], $value));
+                            ->filter(fn ($column) => $column->searchable && $column->type !== ColumnTypeEnum::BOOLEAN->value)
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->databaseColumnName, $value));
                     }
                 });
             } else {
-                $column = collect($this->columns)->first(fn ($c) => $c['index'] === $requestedColumn);
+                $column = collect($this->columns)->first(fn ($c) => $c->index === $requestedColumn);
 
-                switch ($column['type']) {
-                    case 'date_range':
-                    case 'datetime_range':
-                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                switch ($column->type) {
+                    case ColumnTypeEnum::DATE_RANGE->value:
+                    case ColumnTypeEnum::DATE_TIME_RANGE->value:
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->whereBetween($column['column_name'], [$value[0] ?? '', $value[1] ?? '']);
+                                $scopeQueryBuilder->whereBetween($column->databaseColumnName, [$value[0] ?? '', $value[1] ?? '']);
                             }
                         });
+
                         break;
 
                     default:
-                        $queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
+                        $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column['column_name'], $value);
+                                $scopeQueryBuilder->orWhere($column->databaseColumnName, $value);
                             }
                         });
+
                         break;
                 }
             }
         }
 
-        // need to make good search column method, currently this is working but still need work here...
-        $queryBuilder->orderBy(request('sort.column', $this->primaryColumn), request('sort.order', $this->sortOrder));
+        return $this->queryBuilder;
+    }
 
-        $paginator = $queryBuilder->paginate(
-            request('pagination.per_page', $this->itemsPerPage),
+    /**
+     * Process requested sorting.
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function processRequestedSorting($requestedSort)
+    {
+        return $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->primaryColumn, $requestedSort['order'] ?? $this->sortOrder);
+    }
+
+    /**
+     * Process requested pagination.
+     */
+    public function processRequestedPagination($requestedPagination): LengthAwarePaginator
+    {
+        return $this->queryBuilder->paginate(
+            $requestedPagination['per_page'] ?? $this->itemsPerPage,
             ['*'],
             'page',
-            request('pagination.page', 1)
-        )->toArray();
+            $requestedPagination['page'] ?? 1
+        );
+    }
 
-        foreach ($paginator['data'] as $data) {
+    /**
+     * Process request.
+     */
+    public function processRequest(): void
+    {
+        /**
+         * Store all request parameters in this variable; avoid using direct request helpers afterward.
+         */
+        $requestedParams = $this->validatedRequest();
+
+        $this->queryBuilder = $this->processRequestedFilters($requestedParams['filters'] ?? []);
+
+        $this->queryBuilder = $this->processRequestedSorting($requestedParams['sort'] ?? []);
+
+        $this->paginator = $this->processRequestedPagination($requestedParams['pagination'] ?? []);
+    }
+
+    /**
+     * Format data.
+     */
+    public function formatData(): array
+    {
+        $paginator = $this->paginator->toArray();
+
+        foreach ($paginator['data'] as $record) {
             foreach ($this->columns as $column) {
-                if (isset($column['closure'])) {
-                    $data->{$column['index']} = $column['closure']($data);
-                    
-                    $data->is_closure = true;
+                if ($closure = $column->closure) {
+                    $record->{$column->index} = $closure($record);
+
+                    $record->is_closure = true;
                 }
             }
 
-            $data->actions = [];
+            $record->actions = [];
 
             foreach ($this->actions as $action) {
-                $data->actions[] = [
-                    ...$action,
+                $getUrl = $action->url;
 
-                    'url' => $action['url']($data),
+                $record->actions[] = [
+                    'icon'   => $action->icon,
+                    'title'  => $action->title,
+                    'method' => $action->method,
+                    'url'    => $getUrl($record),
                 ];
             }
         }
 
-        // refactor
         return [
-            'columns' => $this->columns,
-
-            'actions' => $this->actions,
-
+            'columns'      => $this->columns,
+            'actions'      => $this->actions,
             'mass_actions' => $this->massActions,
-
-            'records' => $paginator['data'],
-
-            'meta' => [
+            'records'      => $paginator['data'],
+            'meta'         => [
                 'primary_column'   => $this->primaryColumn,
                 'from'             => $paginator['from'],
                 'to'               => $paginator['to'],
@@ -229,10 +301,8 @@ abstract class DataGrid
 
     /**
      * Get json data.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function toJson()
+    public function toJson(): JsonResponse
     {
         $this->prepareColumns();
 
@@ -240,67 +310,10 @@ abstract class DataGrid
 
         $this->prepareMassActions();
 
-        $this->queryBuilder = $this->prepareQueryBuilder();
+        $this->setQueryBuilder();
 
-        return response()->json($this->prepareData());
-    }
+        $this->processRequest();
 
-    /**
-     * Get date options.
-     *
-     * @return array
-     */
-    public function getDateOptions($format = 'Y-m-d')
-    {
-        return [
-            [
-                'name'  => 'today',
-                'label' => 'Today',
-                'from'  => now()->today()->format($format),
-                'to'    => now()->today()->format($format),
-            ],
-            [
-                'name'  => 'yesterday',
-                'label' => 'Yesterday',
-                'from'  => now()->yesterday()->format($format),
-                'to'    => now()->yesterday()->format($format),
-            ],
-            [
-                'name'  => 'this_week',
-                'label' => 'This Week',
-                'from'  => now()->startOfWeek()->format($format),
-                'to'    => now()->endOfWeek()->format($format),
-            ],
-            [
-                'name'  => 'this_month',
-                'label' => 'This Month',
-                'from'  => now()->startOfMonth()->format($format),
-                'to'    => now()->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => 'last_month',
-                'label' => 'Last Month',
-                'from'  => now()->subMonth(1)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => 'last_three_months',
-                'label' => 'Last 3 Months',
-                'from'  => now()->subMonth(3)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => 'last_six_months',
-                'label' => 'Last 6 Months',
-                'from'  => now()->subMonth(6)->startOfMonth()->format($format),
-                'to'    => now()->subMonth(1)->endOfMonth()->format($format),
-            ],
-            [
-                'name'  => 'this_year',
-                'label' => 'This Year',
-                'from'  => now()->startOfYear()->format($format),
-                'to'    => now()->endOfYear()->format($format),
-            ],
-        ];
+        return response()->json($this->formatData());
     }
 }
