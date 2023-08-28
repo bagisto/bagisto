@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sitemap\Repositories\SitemapRepository;
-use Webkul\Admin\DataGrids\SitemapDataGrid;
+use Webkul\Admin\DataGrids\Marketing\SitemapDataGrid;
 
 class SitemapController extends Controller
 {

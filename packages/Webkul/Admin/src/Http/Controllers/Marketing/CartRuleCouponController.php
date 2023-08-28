@@ -2,9 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing;
 
-use Webkul\Admin\DataGrids\CartRuleCouponDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
+use Webkul\Admin\DataGrids\Marketing\CartRuleCouponDataGrid;
 
 class CartRuleCouponController extends Controller
 {

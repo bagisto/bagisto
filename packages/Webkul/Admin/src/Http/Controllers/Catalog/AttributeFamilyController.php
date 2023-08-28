@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
-use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
+use Webkul\Admin\DataGrids\Catalog\AttributeFamilyDataGrid;
 use Webkul\Core\Rules\Code;
 
 class AttributeFamilyController extends Controller

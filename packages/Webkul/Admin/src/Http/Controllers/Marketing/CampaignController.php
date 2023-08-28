@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\CampaignRepository;
 use Webkul\Marketing\Repositories\TemplateRepository;
-use Webkul\Admin\DataGrids\CampaignDataGrid;
+use Webkul\Admin\DataGrids\Marketing\CampaignDataGrid;
 
 class CampaignController extends Controller
 {

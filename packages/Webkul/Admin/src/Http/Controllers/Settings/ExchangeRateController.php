@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
-use Webkul\Admin\DataGrids\ExchangeRatesDataGrid;
+use Webkul\Admin\DataGrids\Settings\ExchangeRatesDataGrid;
 
 class ExchangeRateController extends Controller
 {

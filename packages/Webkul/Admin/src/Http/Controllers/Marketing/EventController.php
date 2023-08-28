@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\EventRepository;
-use Webkul\Admin\DataGrids\EventDataGrid;
+use Webkul\Admin\DataGrids\Marketing\EventDataGrid;
 
 class EventController extends Controller
 {

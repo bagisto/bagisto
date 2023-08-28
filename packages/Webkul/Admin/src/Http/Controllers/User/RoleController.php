@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\User\Repositories\RoleRepository;
 use Webkul\User\Repositories\AdminRepository;
-use Webkul\Admin\DataGrids\RolesDataGrid;
+use Webkul\Admin\DataGrids\Settings\RolesDataGrid;
 
 class RoleController extends Controller
 {
@@ -64,7 +64,7 @@ class RoleController extends Controller
             "description",
             "permission_type",
             "permissions"
-         ]);
+        ]);
 
         $role = $this->roleRepository->create($data);
 
@@ -119,9 +119,9 @@ class RoleController extends Controller
             "name",
             "description",
             "permission_type",
-         ]), [
+        ]), [
             'permissions' => request()->has('permissions') ? request('permissions') : [],
-         ]);
+        ]);
 
         Event::dispatch('user.role.update.before', $id);
 

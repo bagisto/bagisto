@@ -3,12 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\catalog;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\DataGrids\AttributeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Core\Rules\Code;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Admin\DataGrids\Catalog\AttributeDataGrid;
 
 class AttributeController extends Controller
 {

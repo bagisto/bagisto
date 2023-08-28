@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CurrencyRepository;
-use Webkul\Admin\DataGrids\CurrencyDataGrid;
+use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 
 class CurrencyController extends Controller
 {

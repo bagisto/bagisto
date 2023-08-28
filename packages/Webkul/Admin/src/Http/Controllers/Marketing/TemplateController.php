@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Marketing;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\TemplateRepository;
-use Webkul\Admin\DataGrids\EmailTemplateDataGrid;
+use Webkul\Admin\DataGrids\Marketing\EmailTemplateDataGrid;
 
 class TemplateController extends Controller
 {

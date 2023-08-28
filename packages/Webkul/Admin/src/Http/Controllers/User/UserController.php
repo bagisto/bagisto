@@ -10,7 +10,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
 use Webkul\User\Http\Requests\UserForm;
-use Webkul\Admin\DataGrids\UserDataGrid;
+use Webkul\Admin\DataGrids\Settings\UserDataGrid;
 
 class UserController extends Controller
 {
