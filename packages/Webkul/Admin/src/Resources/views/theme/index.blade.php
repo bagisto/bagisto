@@ -18,7 +18,7 @@
                 <div class="flex gap-[10px]">
                     <div 
                         class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2 box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentSwitcher == 'v-slider-theme'}"
+                        :class="{'border-blue-600': componentName == 'v-slider-theme'}"
                         @click="switchComponent('v-slider-theme')"
                     >
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
@@ -33,7 +33,7 @@
                 
                     <div    
                         class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentSwitcher == 'v-product-theme'}"
+                        :class="{'border-blue-600': componentName == 'v-product-theme'}"
                         @click="switchComponent('v-product-theme')"
                     >   
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
@@ -48,7 +48,7 @@
                 
                     <div    
                         class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentSwitcher == 'v-static-theme'}"
+                        :class="{'border-blue-600': componentName == 'v-static-theme'}"
                         @click="switchComponent('v-static-theme')"
                     >   
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
@@ -63,7 +63,7 @@
                 
                     <div    
                         class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentSwitcher == 'v-content-theme'}"
+                        :class="{'border-blue-600': componentName == 'v-content-theme'}"
                         @click="switchComponent('v-content-theme')"
                     >   
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <component :is="componentSwitcher"></component>
+                <component :is="componentName"></component>
             </div>
         </script>
 
@@ -87,13 +87,13 @@
 
                 data() {
                     return {
-                        componentSwitcher: 'v-slider-theme',
+                        componentName: 'v-slider-theme',
                     }
                 },
 
                 methods: {
                     switchComponent(component) {
-                        this.componentSwitcher = component;
+                        this.componentName = component;
                     }
                 },
             })
@@ -207,7 +207,7 @@
 
                 methods: {
                     get() {
-                        this.$axios.get("{{ route('admin.theme.themes') }}", {
+                        this.$axios.get('{{ route('admin.theme.themes') }}', {
                                 params: {
                                     type: 'image_carousel'
                                 }
