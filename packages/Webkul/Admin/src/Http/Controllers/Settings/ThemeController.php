@@ -40,4 +40,25 @@ class ThemeController extends Controller
 
         return new JsonResource($themes);
     }
+
+
+    /**
+     * Store the newly created theme
+     *
+     * @return void
+     */
+    public function store()
+    {
+        $this->themeCustomizationRepository->create([
+            'type'       => request()->input('type'),
+            'name'       => request()->input('name'),
+            'sort_order' => request()->input('sort_order'),
+            'options'    => request()->only('css', 'html'),
+            'status'     => request()->input('status', 1),
+        ]);
+
+        return response()->json([
+            'message' => 'Static content created successfully.'
+        ]);
+    }
 }

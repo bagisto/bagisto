@@ -1,4 +1,20 @@
 <x-admin::layouts>
+    @pushOnce('styles')
+        <link 
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"
+        >
+        </link>
+    @endPushOnce
+
+    @pushOnce('scripts')
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"
+        >
+        </script>
+    @endPushOnce
+
     <x-slot:title>
         Theme Customization
     </x-slot:title>
@@ -87,7 +103,7 @@
 
                 data() {
                     return {
-                        componentName: 'v-slider-theme',
+                        componentName: 'v-static-theme',
                     }
                 },
 
@@ -312,9 +328,12 @@
                                     Static related theme customization
                                 </p>
                             </div>
-            
-                            <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Static
+
+                            <div
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
+                            >
+                                Add Static Content
                             </div>
                         </div>
 
@@ -329,10 +348,120 @@
                             </div>
             
                             <div
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Variant
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
+                            >
+                                Add Static Content
                             </div>
                         </div>
+
+
+                        <!-- Edit Drawer -->
+                        <x-admin::form
+                            v-slot="{ meta, errors, handleSubmit }"
+                            as="div"
+                        >
+                            <form @submit="handleSubmit($event, store)">
+                                <!-- Edit Drawer -->
+                                <x-admin::drawer
+                                    ref="openStatisContentDrawer"
+                                    class="text-left"
+                                >
+                                    <!-- Drawer Header -->
+                                    <x-slot:header>
+                                        <div class="flex justify-between items-center">
+                                            <p class="text-[20px] font-medium">
+                                                @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
+                                            </p>
+
+                                            <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                                @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
+                                            </button>
+                                        </div>
+                                    </x-slot:header>
+
+                                    <!-- Drawer Content -->
+
+                                    <x-slot:content>
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            name="id"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                Name
+                                            </x-admin::form.control-group.label>
+                
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="name"
+                                                rules="required"
+                                                label="Name"
+                                            >
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error control-name="name"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label class="required">
+                                                Sort Order
+                                            </x-admin::form.control-group.label>
+                
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="sort_order"
+                                                rules="required"
+                                                label="Sort Order"
+                                                rules="numeric"
+                                            >
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error control-name="sort_order"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label for="status">
+                                                Status
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.control
+                                                type="switch"
+                                                name="status"
+                                                :value="1"
+                                                label="status"
+                                                :checked="true"
+                                            >
+                                            </x-admin::form.control-group.control>
+                
+                                            <x-admin::form.control-group.error control-name="status"></x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label for="status">
+                                                HTML
+                                            </x-admin::form.control-group.label>
+    
+                                            <div ref="html"></div>
+                
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group>
+                                            <x-admin::form.control-group.label for="status">
+                                                CSS
+                                            </x-admin::form.control-group.label>
+    
+                                            <div ref="css"></div>
+                
+                                        </x-admin::form.control-group>
+                                       
+                                    </x-slot:content>
+                                </x-admin::drawer>
+                            </form>
+                        </x-admin::form>
                     </div>
                 </div>
             
@@ -369,7 +498,66 @@
 
         <script type="module">
             app.component('v-static-theme', {
-                template: '#v-static-theme-template'
+                template: '#v-static-theme-template',
+
+                data() {
+                    return {
+                        html: '',
+                        css: '',
+                    };
+                },
+
+                methods: {
+                    initHtmlEditor() {
+                        setTimeout(() => {
+                            this._html = new CodeMirror(this.$refs.html, {
+                                lineNumbers: true,
+                                tabSize: 2,
+                                value: this.html,
+                                mode: 'html',
+                                theme: 'monokai'
+                            });
+
+                            this._html.on('changes', () => {
+                                this.html = this._html.getValue();
+                            });
+                        }, 0);
+                    },
+
+                    initCssEditor() {
+                        setTimeout(() => {
+                            this._css = new CodeMirror(this.$refs.css, {
+                                lineNumbers: true,
+                                tabSize: 2,
+                                value: this.css,
+                                mode: 'css',
+                                theme: 'monokai'
+                            });
+
+                            this._css.on('changes', () => {
+                                this.css = this._css.getValue();
+                            });
+                        }, 0);
+                    },
+
+                    store(params) {
+                        params.html = this.html;
+
+                        params.css = this.css;
+
+                        params.type = 'static_content';
+
+                        this.$axios.post('{{ route('admin.theme.store') }}', params)
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                $refs.openStatisContentDrawer.close();
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                    }
+                }
             });
         </script>
 

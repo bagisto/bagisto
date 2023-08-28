@@ -1,6 +1,6 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-5bfd4180.css",
+    "file": "assets/app-e9bdc120.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
@@ -164,6 +164,10 @@
     "file": "assets/shipping-7963bb7e.png",
     "src": "src/Resources/assets/images/shipping.png"
   },
+  "src/Resources/assets/images/slider.png": {
+    "file": "assets/slider-77e7bd5f.png",
+    "src": "src/Resources/assets/images/slider.png"
+  },
   "src/Resources/assets/images/store-information.svg": {
     "file": "assets/store-information-8d27c0df.svg",
     "src": "src/Resources/assets/images/store-information.svg"
@@ -193,14 +197,14 @@
     "src": "src/Resources/assets/images/user-owner.svg"
   },
   "src/Resources/assets/js/app.css": {
-    "file": "assets/app-c04ede37.css",
+    "file": "assets/app-05f8acf7.css",
     "src": "src/Resources/assets/js/app.css"
   },
   "src/Resources/assets/js/app.js": {
     "css": [
-      "assets/app-c04ede37.css"
+      "assets/app-05f8acf7.css"
     ],
-    "file": "assets/app-7e7a20dc.js",
+    "file": "assets/app-5d68248b.js",
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

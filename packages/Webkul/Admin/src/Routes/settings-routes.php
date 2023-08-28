@@ -178,5 +178,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::get('', 'index')->name('admin.theme.index');
 
         Route::get('all', 'getThemes')->name('admin.theme.themes');
+
+        Route::post('create', 'store')->name('admin.theme.store');
     });
 });
