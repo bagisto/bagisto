@@ -45,53 +45,41 @@
                 ref="datagrid"
             >
                 <!-- Datagrid Header -->
-                <template #header="{ columns, records, sortPage }">
-                    <div class="row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
-                        <!-- ID -->
+                <template #header="{ columns, records, sortPage, applied }">
+                    <div class="row grid grid-cols-5 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'id'))"
+                            v-for="(columnGroup, index) in ['id', 'file_name', 'path', 'url']"
                         >
                             <p class="text-gray-600">
-                                @lang('admin::app.marketing.sitemaps.index.datagrid.id')
-                            </p>
-                        </div>
+                                <span class="[&>*]:after:content-['_/_']">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == columnGroup,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
+                                    </span>
+                                </span>
 
-                        <!-- File Name -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'name'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.marketing.sitemaps.index.datagrid.file-name')
-                            </p>
-                        </div>
-
-                        <!-- Date -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'date'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.marketing.sitemaps.index.datagrid.path')
+                                <!-- Filter Arrow Icon -->
+                                <i
+                                    class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                    v-if="columnGroup.includes(applied.sort.column)"
+                                ></i>
                             </p>
                         </div>
 
                         <!-- Actions -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'date'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.marketing.sitemaps.index.datagrid.link-for-google')
-                            </p>
-                        </div>
-
-                        <div class="cursor-pointer flex justify-end">
-                            <p class="text-gray-600">
-                                @lang('admin::app.marketing.sitemaps.index.datagrid.actions')
-                            </p>
-                        </div>
+                        <p class="col-start-[none]">
+                            @lang('admin::app.components.datagrid.table.actions')
+                        </p>
                     </div>
                 </template>
 
@@ -112,7 +100,7 @@
                         <p v-text="record.path"></p>
 
                         <!-- URL -->
-                        <p v-text="record.url">
+                        <p>
                             <a :href="record.url" target="_blank">
                                 @{{ record.url}}
                             </a>
