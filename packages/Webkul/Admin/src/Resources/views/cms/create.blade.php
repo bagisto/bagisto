@@ -168,7 +168,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between p-[6px]">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.users.roles.create.general')
+                                    @lang('admin::app.settings.users.create.general')
                                 </p>
                             </div>
                         </x-slot:header>

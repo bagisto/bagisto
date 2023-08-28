@@ -54,12 +54,11 @@ class CustomerDataGrid extends DataGrid
             );
 
         $this->addFilter('customer_id', 'customers.id');
-        // $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
+        $this->addFilter('email', 'customers.email');
+        $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));
         $this->addFilter('group', 'customer_groups.name');
         $this->addFilter('phone', 'customers.phone');
-        $this->addFilter('gender', 'customers.gender');
-        $this->addFilter('status', 'status');
-        $this->addFilter('is_suspended', 'customers.is_suspended');
+        $this->addFilter('status', 'customers.status');
 
         return $queryBuilder;
     }
@@ -84,7 +83,7 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'full_name',
             'label'      => trans('admin::app.customers.index.datagrid.name'),
             'type'       => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -93,7 +92,7 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'email',
             'label'      => trans('admin::app.customers.index.datagrid.email'),
             'type'       => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => false,
             'sortable'   => true,
         ]);
@@ -102,7 +101,7 @@ class CustomerDataGrid extends DataGrid
             'index'      => 'phone',
             'label'      => trans('admin::app.customers.index.datagrid.phone'),
             'type'       => 'integer',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => false,
         ]);

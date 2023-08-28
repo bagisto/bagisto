@@ -1377,7 +1377,7 @@
 
                 methods: {
                     store(params, { resetForm, setErrors }) {
-                        this.$axios.post('{{ route('adadmin.marketing.promotions.cart_rules.coupons.store', $cartRule->id) }}', params)
+                        this.$axios.post('{{ route('admin.marketing.promotions.cart_rules.coupons.store', $cartRule->id) }}', params)
                             .then((response) => {
                                 alert(response.data.message);
 

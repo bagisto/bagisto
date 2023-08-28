@@ -150,7 +150,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 hover:bg-gray-100"
+                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
                     v-for="record in records"
                 >
                     <div class="flex gap-[10px]">
@@ -239,7 +239,7 @@
                             </p>
                         </div>
                         <a 
-                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
+                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
                             :href=`{{ route('admin.customers.customer.view', '') }}/${record.customer_id}`
                         >
                         </a>

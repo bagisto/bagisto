@@ -9,7 +9,7 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Http\Requests\CategoryRequest;
 use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
-use Webkul\Admin\DataGrids\Catalog\CategoryProductDataGrid;
+use Webkul\Admin\DataGrids\Catalog\Category\ProductDataGrid;
 
 class CategoryController extends Controller
 {
@@ -115,7 +115,7 @@ class CategoryController extends Controller
     public function products($id)
     {
         if (request()->ajax()) {
-            return app(CategoryProductDataGrid::class)->toJson();
+            return app(ProductDataGrid::class)->toJson();
         }
     }
 

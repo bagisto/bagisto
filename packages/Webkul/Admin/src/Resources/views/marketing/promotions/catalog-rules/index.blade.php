@@ -18,5 +18,5 @@
         </div>
     </div>
     
-    <x-admin::datagrid :src="route('admin.marketing.promotions.catalog_rules.index')"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.marketing.promotions.catalog_rules.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

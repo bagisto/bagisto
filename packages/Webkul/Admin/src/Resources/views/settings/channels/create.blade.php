@@ -4,10 +4,7 @@
         @lang('admin::app.settings.channels.create.title')
     </x-slot:title>
 
-    <x-admin::form 
-        :action="route('admin.settings.channels.store')"
-        enctype="multipart/form-data"
-    >
+    <x-admin::form  action="{{ route('admin.settings.channels.store') }}" enctype="multipart/form-data">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.settings.channels.create.title')

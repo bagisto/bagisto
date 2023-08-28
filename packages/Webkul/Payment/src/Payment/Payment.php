@@ -134,7 +134,7 @@ abstract class Payment
         }
 
         return [
-            'title' => trans('admin::app.admin.system.instructions'),
+            'title' => trans('admin::app.configuration.instructions'),
             'value' => $this->getConfigData('instructions'),
         ];
     }

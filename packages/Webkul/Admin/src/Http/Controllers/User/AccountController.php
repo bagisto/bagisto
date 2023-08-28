@@ -48,7 +48,7 @@ class AccountController extends Controller
         ]);
 
         if (! Hash::check($data['current_password'], $user->password)) {
-            session()->flash('warning', trans('admin::app.users.users.password-match'));
+            session()->flash('warning', trans('admin::app.settings.users.password-match'));
 
             return redirect()->back();
         }
@@ -74,7 +74,7 @@ class AccountController extends Controller
             Event::dispatch('user.admin.update-password', $user);
         }
 
-        session()->flash('success', trans('admin::app.users.users.account-save'));
+        session()->flash('success', trans('admin::app.settings.users.account-save'));
 
         return back();
     }
