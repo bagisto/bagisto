@@ -225,9 +225,10 @@
 
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
-                            <div
+                            <a
+                                :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
                                 class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
-                                v-for="product in searchedResults.products"
+                                v-for="product in searchedResults.products.data"
                             >
                                 <!-- Left Information -->
                                 <div class="flex gap-[10px]">
@@ -262,17 +263,19 @@
                                 <!-- Right Information -->
                                 <div class="grid gap-[4px] place-content-center text-right">
                                     <p class="text-gray-600 font-semibold">
-                                        @{{ $admin.formatPrice(product.price) }}
+                                        @{{ product.formatted_price }}
                                     </p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        
 
-                        <div class="p-[16px]">
-                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
-                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
-                            </span>
+                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                            <a
+                                :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            >
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
+                            </a>
                         </div>
                     </template>
                 </template>
@@ -284,9 +287,10 @@
 
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
-                            <div
-                                class="grid gap-[6px] place-content-start  p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
-                                v-for="order in searchedResults.orders"
+                            <a
+                                :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
+                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                v-for="order in searchedResults.orders.data"
                             >
                                 <p class="text-[16x] text-gray-600 font-semibold">
                                     #@{{ order.increment_id }}
@@ -295,13 +299,16 @@
                                 <p class="text-gray-500">
                                     @{{ order.formatted_created_at + ', ' + order.status_label + ', ' + order.customer_full_name }}
                                 </p>
-                            </div>
+                            </a>
                         </div>
 
-                        <div class="p-[16px]">
-                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
-                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
-                            </span>
+                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                            <a
+                                :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            >
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-orders')".replace(':query', searchTerm).replace(':count', searchedResults.orders.total) }}
+                            </a>
                         </div>
                     </template>
                 </template>
@@ -313,18 +320,22 @@
 
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
-                            <div
+                            <a
+                                :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
                                 class="p-[16px] border-b-[1px] border-gray-300 text-[14px] text-gray-600 font-semibold cursor-pointer hover:bg-gray-100"
-                                v-for="category in searchedResults.categories"
+                                v-for="category in searchedResults.categories.data"
                             >
                                 @{{ category.name }}
-                            </div>
+                            </a>
                         </div>
 
-                        <div class="p-[16px]">
-                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
-                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
-                            </span>
+                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                            <a
+                                :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            >
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-categories')".replace(':query', searchTerm).replace(':count', searchedResults.categories.total) }}
+                            </a>
                         </div>
                     </template>
                 </template>
@@ -336,9 +347,10 @@
 
                     <template v-else>
                         <div class="grid max-h-[400px] overflow-y-auto">
-                            <div
-                                class="grid gap-[6px] place-content-start  p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
-                                v-for="customer in searchedResults.customers"
+                            <a
+                                :href="'{{ route('admin.customer.view', ':id') }}'.replace(':id', customer.id)"
+                                class="grid gap-[6px] place-content-start p-[16px] border-b-[1px] border-slate-300 cursor-pointer hover:bg-gray-100"
+                                v-for="customer in searchedResults.customers.data"
                             >
                                 <p class="text-[16x] text-gray-600 font-semibold">
                                     @{{ customer.first_name + ' ' + customer.last_name }}
@@ -347,13 +359,16 @@
                                 <p class="text-gray-500">
                                     @{{ customer.email }}
                                 </p>
-                            </div>
+                            </a>
                         </div>
 
-                        <div class="p-[16px]">
-                            <span class=" text-[12px] text-blue-600 font-semibold cursor-pointer">
-                                @lang('admin::app.components.layouts.header.mega-search.clear-all')
-                            </span>
+                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                            <a
+                                :href="'{{ route('admin.customer.index') }}?search=:query'.replace(':query', searchTerm)"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            >
+                                @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
+                            </a>
                         </div>
                     </template>
                 </template>
@@ -367,8 +382,6 @@
 
             data() {
                 return {
-                    recentSearches: [],
-
                     activeTab: 'products',
 
                     isDropdownOpen: false,
@@ -441,7 +454,7 @@
                             params: {query: this.searchTerm}
                         })
                         .then(function(response) {
-                            self.searchedResults[self.activeTab] = response.data.data;
+                            self.searchedResults[self.activeTab] = response.data;
 
                             self.isLoading = false;
                         })
