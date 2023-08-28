@@ -270,7 +270,7 @@
                             </a>
                         </div>
 
-                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
@@ -312,7 +312,7 @@
                             </a>
                         </div>
 
-                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
@@ -348,7 +348,7 @@
                             </a>
                         </div>
 
-                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
@@ -390,7 +390,7 @@
                             </a>
                         </div>
 
-                        <div class="p-[12px] border-t-[1px] border-gray-300">
+                        <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"

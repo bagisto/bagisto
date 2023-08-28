@@ -107,8 +107,8 @@
         <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
             {{-- Left Component --}}
             <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                    <div class="flex justify-between">
+                <div class="bg-white rounded-[4px] box-shadow">
+                    <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                             @lang('Order Items') ({{ count($order->items) }})
                         </p>
@@ -207,7 +207,7 @@
                         @endforeach
                     </div>
 
-                    <div class="flex w-full gap-[10px] justify-end mt-[16px]">
+                    <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600 font-semibold">
                                 @lang('admin::app.sales.orders.view.sub-total')
@@ -371,7 +371,7 @@
 
                     <x-slot:content>
                         <div class="{{ $order->billing_address ? 'pb-[16px]' : '' }}">
-                            <div class="flex flex-col">
+                            <div class="flex flex-col gap-[5px]">
                                 <p class="text-gray-800 font-semibold">
                                     {{ $order->customer_full_name }}
                                 </p>
@@ -479,6 +479,76 @@
                     </x-slot:content>
                 </x-admin::accordion> 
 
+                {{-- Payment and Shipping Information--}}    
+                <x-admin::accordion>
+                    <x-slot:header>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                            @lang('admin::app.sales.orders.view.payment-and-shipping')
+                        </p>
+                    </x-slot:header>
+
+                    <x-slot:content>
+                        <div>
+                            {{-- Payment method --}}
+                            <p class="text-gray-800 font-semibold">
+                                {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.payment-method')
+                            </p>
+
+                            {{-- Currency --}}
+                            <p class="pt-[16px] text-gray-800 font-semibold">
+                                {{ $order->order_currency_code }}
+                            </p>
+
+                            <p class="text-gray-600">
+                                @lang('admin::app.sales.orders.view.currency')
+                            </p>
+
+                            @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
+
+                            {{-- Addtional details --}}
+                            @if (! empty($additionalDetails))
+                                <p class="pt-[16px] text-gray-800 font-semibold">
+                                    {{ $additionalDetails['title'] }}
+                                </p>
+
+                                <p class="text-gray-600">
+                                    {{ $additionalDetails['value'] }}
+                                </p>
+                            @endif
+
+                            {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
+                        </div>
+
+                        {{-- Shipping Method and Price Details --}}
+                        @if ($order->shipping_address)
+                            <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
+                            <div class="pt-[16px]">
+                                <p class="text-gray-800 font-semibold">
+                                    {{ $order->shipping_title }}
+                                </p>
+
+                                <p class="text-gray-600">
+                                    @lang('admin::app.sales.orders.view.shipping-method')
+                                </p>
+
+                                <p class="pt-[16px] text-gray-800 font-semibold">
+                                    {{ core()->formatBasePrice($order->base_shipping_amount) }}
+                                </p>
+
+                                <p class="text-gray-600">
+                                    @lang('admin::app.sales.orders.view.shipping-price')
+                                </p>
+                            </div>
+
+                            {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
+                        @endif
+                    </x-slot:content>
+                </x-admin::accordion> 
+
                 {{-- Invoice Information--}}    
                 <x-admin::accordion>
                     <x-slot:header>
@@ -565,76 +635,6 @@
                                 @lang('admin::app.sales.orders.view.no-shipment-found')
                             </p>
                         @endforelse
-                    </x-slot:content>
-                </x-admin::accordion> 
-
-                {{-- Payment and Shipping Information--}}    
-                <x-admin::accordion>
-                    <x-slot:header>
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
-                            @lang('admin::app.sales.orders.view.payment-and-shipping')
-                        </p>
-                    </x-slot:header>
-
-                    <x-slot:content>
-                        <div>
-                            {{-- Payment method --}}
-                            <p class="text-gray-800 font-semibold">
-                                {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
-                            </p>
-
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.orders.view.payment-method')
-                            </p>
-
-                            {{-- Currency --}}
-                            <p class="pt-[16px] text-gray-800 font-semibold">
-                                {{ $order->order_currency_code }}
-                            </p>
-
-                            <p class="text-gray-600">
-                                @lang('admin::app.sales.orders.view.currency')
-                            </p>
-
-                            @php $additionalDetails = \Webkul\Payment\Payment::getAdditionalDetails($order->payment->method); @endphp
-
-                            {{-- Addtional details --}}
-                            @if (! empty($additionalDetails))
-                                <p class="pt-[16px] text-gray-800 font-semibold">
-                                    {{ $additionalDetails['title'] }}
-                                </p>
-
-                                <p class="text-gray-600">
-                                    {{ $additionalDetails['value'] }}
-                                </p>
-                            @endif
-
-                            {!! view_render_event('sales.order.payment-method.after', ['order' => $order]) !!}
-                        </div>
-
-                        {{-- Shipping Method and Price Details --}}
-                        @if ($order->shipping_address)
-                            <span class="block w-full mt-[16px] border-b-[1px] border-gray-300"></span>
-                            <div class="pt-[16px]">
-                                <p class="text-gray-800 font-semibold">
-                                    {{ $order->shipping_title }}
-                                </p>
-
-                                <p class="text-gray-600">
-                                    @lang('admin::app.sales.orders.view.shipping-method')
-                                </p>
-
-                                <p class="pt-[16px] text-gray-800 font-semibold">
-                                    {{ core()->formatBasePrice($order->base_shipping_amount) }}
-                                </p>
-
-                                <p class="text-gray-600">
-                                    @lang('admin::app.sales.orders.view.shipping-price')
-                                </p>
-                            </div>
-
-                            {!! view_render_event('sales.order.shipping-method.after', ['order' => $order]) !!}
-                        @endif
                     </x-slot:content>
                 </x-admin::accordion> 
 

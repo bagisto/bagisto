@@ -28,8 +28,8 @@
         {{-- Left sub-component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- General --}}
-            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+            <div class="bg-white rounded-[4px] box-shadow">
+                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
 
