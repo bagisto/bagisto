@@ -27,7 +27,7 @@
                             @lang('admin::app.customers.edit.title')
                         </p>    
                     </x-slot:header>
-    
+
                     <x-slot:content>
                         <!-- Modal Content -->
                         {!! view_render_event('bagisto.admin.customers.edit.before') !!}
@@ -39,7 +39,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.edit.first-name')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="first_name" 
@@ -50,19 +50,19 @@
                                         :placeholder="trans('admin::app.customers.edit.first-name')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="first_name"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                    <!--Last Name -->
+                                <!--Last Name -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.edit.last-name')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="last_name" 
@@ -73,7 +73,7 @@
                                         :placeholder="trans('admin::app.customers.edit.last-name')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="last_name"
                                     >
@@ -86,7 +86,7 @@
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.customers.edit.email')
                                 </x-admin::form.control-group.label>
-    
+
                                 <x-admin::form.control-group.control
                                     type="email"
                                     name="email"
@@ -97,7 +97,7 @@
                                     placeholder="email@example.com"
                                 >
                                 </x-admin::form.control-group.control>
-    
+
                                 <x-admin::form.control-group.error
                                     control-name="email"
                                 >
@@ -110,7 +110,7 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.edit.contact-number')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="phone"
@@ -121,19 +121,19 @@
                                         :placeholder="trans('admin::app.customers.edit.contact-number')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="phone"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-        
+
                                 <!-- Date -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.edit.date-of-birth')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="date"
                                         name="date_of_birth" 
@@ -143,21 +143,21 @@
                                         :placeholder="trans('admin::app.customers.edit.date-of-birth')"
                                     >
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="date_of_birth"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
                             </div>
-    
+
                             <div class="flex gap-[16px] max-sm:flex-wrap">
                                 <!-- Gender -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.customers.edit.gender')
                                     </x-admin::form.control-group.label>
-        
+
                                     <x-admin::form.control-group.control
                                         type="select"
                                         name="gender"
@@ -169,7 +169,7 @@
                                         <option value="Male">
                                             @lang('admin::app.customers.edit.male')
                                         </option>
-                                        
+
                                         <option value="Female">
                                             @lang('admin::app.customers.edit.female')
                                         </option>
@@ -178,19 +178,19 @@
                                             @lang('admin::app.customers.edit.other')
                                         </option>
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="gender"
                                     >
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
-    
+
                                 <!-- Customer Group -->
                                 <x-admin::form.control-group class="w-full">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.customers.edit.customer-group')
                                     </x-admin::form.control-group.label>
-        
+
                                     @php
                                         $selectedCustomerOption = !is_null($customer->customer_group_id) ? $customer->group->id : '';
                                     @endphp
@@ -208,7 +208,7 @@
                                             </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
-        
+
                                     <x-admin::form.control-group.error
                                         control-name="customer_group_id"
                                     >
@@ -272,7 +272,7 @@
 
                         </div>
                     </x-slot:content>
-    
+
                     <x-slot:footer>
                         <!-- Modal Submission -->
                         <div class="flex gap-x-[10px] items-center">

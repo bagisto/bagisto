@@ -234,6 +234,7 @@
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.customers.index.datagrid.order')".replace(':order', record.order_count) }}
                             </p>
+
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
                             </p>
