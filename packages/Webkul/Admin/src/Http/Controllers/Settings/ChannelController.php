@@ -90,7 +90,7 @@ class ChannelController extends Controller
 
         session()->flash('success', trans('admin::app.settings.channels.create.create-success'));
 
-        return redirect()->route('admin.channels.index');
+        return redirect()->route('admin.settings.channels.index');
     }
 
     /**
@@ -161,7 +161,7 @@ class ChannelController extends Controller
 
         session()->flash('success', trans('admin::app.settings.channels.update-success'));
 
-        return redirect()->route('admin.channels.index');
+        return redirect()->route('admin.settings.channels.index');
     }
 
     /**

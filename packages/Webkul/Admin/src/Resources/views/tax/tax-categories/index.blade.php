@@ -52,7 +52,7 @@
 
             <!-- Datagrid -->
             <x-admin::datagrid
-                src="{{ route('admin.tax_categories.index') }}"
+                src="{{ route('admin.settings.tax_categories.index') }}"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
@@ -313,7 +313,7 @@
                 methods: {
                     store(params, { resetForm, setErrors }) {
                         if (params.id) {
-                            this.$axios.post('{{ route('admin.tax_categories.update') }}', params,{
+                            this.$axios.post('{{ route('admin.settings.tax_categories.update') }}', params,{
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                                 }
@@ -333,7 +333,7 @@
                                     }
                                 });
                         } else {
-                            this.$axios.post('{{ route('admin.tax_categories.store') }}', params,{
+                            this.$axios.post('{{ route('admin.settings.tax_categories.store') }}', params,{
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                                 }
@@ -356,7 +356,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.tax_categories.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.tax_categories.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.id,

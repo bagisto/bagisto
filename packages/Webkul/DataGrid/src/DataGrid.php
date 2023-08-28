@@ -131,7 +131,7 @@ abstract class DataGrid
     /**
      * Map your filter.
      */
-    public function addFilter(string $datagridColumn, string $queryColumn): void
+    public function addFilter(string $datagridColumn, mixed $queryColumn): void
     {
         foreach ($this->columns as $column) {
             if ($column->index === $datagridColumn) {

@@ -40,7 +40,7 @@
                                         <select class="control" id="channel-switcher" name="channel"
                                                 onchange="reloadPage('channel', this.value)">
                                             <option value="all" {{ ! isset($channel) ? 'selected' : '' }}>
-                                                {{ __('admin::app.admin.system.all-channels') }}
+                                                {{ __('admin::app.configuration.all-channels') }}
                                             </option>
                                             @foreach ($results['extraFilters']['channels'] as $channelModel)
                                                 <option
@@ -60,7 +60,7 @@
                                         <select class="control" id="locale-switcher" name="locale"
                                                 onchange="reloadPage('locale', this.value)">
                                             <option value="all" {{ ! isset($locale) ? 'selected' : '' }}>
-                                                {{ __('admin::app.admin.system.all-locales') }}
+                                                {{ __('admin::app.configuration.all-locales') }}
                                             </option>
                                             @foreach ($locales as $localeModel)
                                                 <option
@@ -79,7 +79,7 @@
                                         <select class="control" id="customer-group-switcher" name="customer_group"
                                                 onchange="reloadPage('customer_group', this.value)">
                                             <option value="all" {{ ! isset($customer_group) ? 'selected' : '' }}>
-                                                {{ __('admin::app.admin.system.all-customer-groups') }}
+                                                {{ __('admin::app.configuration.all-customer-groups') }}
                                             </option>
                                             @foreach ($results['extraFilters']['customer_groups'] as $customerGroupModel)
                                                 <option
@@ -263,7 +263,7 @@
 
                     <div class="records-count-container">
                         <span class="datagrid-count">
-                            {{ $results['records']->total()  }}   {{ __('admin::app.admin.system.records-found') }}
+                            {{ $results['records']->total()  }}   {{ __('admin::app.configuration.records-found') }}
                         </span>
                     </div>
                 </div>

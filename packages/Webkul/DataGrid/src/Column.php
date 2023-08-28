@@ -9,7 +9,7 @@ class Column
     /**
      * Fully qualified database column name.
      */
-    public ?string $databaseColumnName;
+    public $databaseColumnName;
 
     /**
      * Form input type.
@@ -42,7 +42,7 @@ class Column
      * Define the database column name. Initially, it will match the index. However, after adding an alias,
      * the column name may change.
      */
-    public function setDatabaseColumnName(?string $databaseColumnName = null): void
+    public function setDatabaseColumnName(mixed $databaseColumnName = null): void
     {
         $this->databaseColumnName = $databaseColumnName ?: $this->index;
     }

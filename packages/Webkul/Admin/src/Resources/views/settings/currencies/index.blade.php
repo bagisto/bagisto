@@ -47,7 +47,7 @@
             </div>
     
             <x-admin::datagrid
-                src="{{ route('admin.currencies.index') }}"
+                src="{{ route('admin.settings.currencies.index') }}"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
@@ -270,7 +270,7 @@
                 methods: {
                     create(params, { resetForm, setErrors  }) {
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.currencies.update') }}", params)
+                            this.$axios.post("{{ route('admin.settings.currencies.update') }}", params)
                             .then((response) => {
                                 this.$refs.currencyModal.close();
     
@@ -286,7 +286,7 @@
                                 }
                             });
                         } else {
-                            this.$axios.post('{{ route('admin.currencies.store') }}', params)
+                            this.$axios.post('{{ route('admin.settings.currencies.store') }}', params)
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
@@ -304,7 +304,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.currencies.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.currencies.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.id,

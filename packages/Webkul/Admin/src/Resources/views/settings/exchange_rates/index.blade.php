@@ -50,7 +50,7 @@
             </div>
 
             <x-admin::datagrid
-                src="{{ route('admin.exchange_rates.index') }}"
+                src="{{ route('admin.settings.exchange_rates.index') }}"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
@@ -255,7 +255,7 @@
                 methods: {
                     create(params, { resetForm, setErrors }) {
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.exchange_rates.update')  }}", params)
+                            this.$axios.post("{{ route('admin.settings.exchange_rates.update')  }}", params)
                                 .then((response) => {
                                     this.$refs.exchangeRate.close();
     
@@ -271,7 +271,7 @@
                                     }
                                 });
                         } else {
-                            this.$axios.post("{{ route('admin.exchange_rates.store')  }}", params)
+                            this.$axios.post("{{ route('admin.settings.exchange_rates.store')  }}", params)
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
@@ -290,7 +290,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.exchange_rates.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.exchange_rates.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.exchangeRate.id,

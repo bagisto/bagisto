@@ -50,7 +50,7 @@ class UserDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'user_id',
-            'label'      => trans('admin::app.users.users.index.datagrid.id'),
+            'label'      => trans('admin::app.settings.users.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -59,7 +59,7 @@ class UserDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'user_name',
-            'label'      => trans('admin::app.users.users.index.datagrid.name'),
+            'label'      => trans('admin::app.settings.users.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -68,7 +68,7 @@ class UserDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'user_img',
-            'label'      => trans('admin::app.users.users.index.datagrid.name'),
+            'label'      => trans('admin::app.settings.users.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -81,23 +81,23 @@ class UserDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.users.users.index.datagrid.status'),
+            'label'      => trans('admin::app.settings.users.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return trans('admin::app.users.users.index.datagrid.active');
+                    return trans('admin::app.settings.users.index.datagrid.active');
                 }
 
-                return trans('admin::app.users.users.index.datagrid.inactive');
+                return trans('admin::app.settings.users.index.datagrid.inactive');
             },
         ]);
 
         $this->addColumn([
             'index'      => 'email',
-            'label'      => trans('admin::app.users.users.index.datagrid.email'),
+            'label'      => trans('admin::app.settings.users.index.datagrid.email'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -106,7 +106,7 @@ class UserDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'role_name',
-            'label'      => trans('admin::app.users.users.index.datagrid.role'),
+            'label'      => trans('admin::app.settings.users.index.datagrid.role'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -123,19 +123,19 @@ class UserDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.users.users.index.datagrid.edit'),
+            'title'  => trans('admin::app.settings.users.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.users.edit', $row->user_id);
+                return route('admin.settings.users.edit', $row->user_id);
             },
         ]);
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.users.users.index.datagrid.delete'),
+            'title'  => trans('admin::app.settings.users.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.users.delete', $row->user_id);
+                return route('admin.settings.users.delete', $row->user_id);
             },
         ]);
     }

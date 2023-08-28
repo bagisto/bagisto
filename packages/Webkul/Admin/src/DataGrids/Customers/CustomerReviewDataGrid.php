@@ -5,7 +5,7 @@ namespace Webkul\Admin\DataGrids\Customers;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
-class CustomerReviewDataGrid extends DataGrid
+class ReviewDataGrid extends DataGrid
 {
     /**
      * Prepare query builder.

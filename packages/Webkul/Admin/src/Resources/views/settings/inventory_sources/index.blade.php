@@ -10,12 +10,12 @@
         </p>
 
         {{-- Create Button --}}
-        <a href="{{ route('admin.inventory_sources.create') }}">
+        <a href="{{ route('admin.settings.inventory_sources.create') }}">
             <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
                 @lang('admin::app.settings.inventory-sources.index.create-btn')
             </div>
         </a>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.inventory_sources.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.settings.inventory_sources.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

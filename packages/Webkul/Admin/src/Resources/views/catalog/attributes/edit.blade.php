@@ -830,7 +830,7 @@
                                 type="submit" 
                                 class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                             >
-                                @lang('admin::app.marketing.email-marketing.events.edit.save-btn')
+                                @lang('admin::app.marketing.communications.events.edit.save-btn')
                             </button>
                         </x-slot:footer>
                     </x-admin::modal>
