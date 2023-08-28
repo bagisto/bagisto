@@ -3,10 +3,11 @@
 namespace Webkul\Admin\Http\Controllers\Customer;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
-use Webkul\Admin\DataGrids\Customers\CustomerReviewDataGrid;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Product\Repositories\ProductReviewRepository;
+use Webkul\Admin\DataGrids\Customers\CustomerReviewDataGrid;
 
 class ReviewController extends Controller
 {
@@ -98,14 +99,14 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
         $suppressFlash = false;
 
         if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
+            $indices = $massDestroyRequest->input('indices');
 
-            foreach ($indexes as $index) {
+            foreach ($indices as $index) {
                 try {
                     Event::dispatch('customer.review.delete.before', $index);
 
@@ -146,9 +147,9 @@ class ReviewController extends Controller
         if (request()->isMethod('post')) {
             $data = request()->all();
 
-            $indexes = explode(',', request()->input('indexes'));
+            $indices = request()->input('indices');
 
-            foreach ($indexes as $key => $value) {
+            foreach ($indices as $key => $value) {
                 $review = $this->productReviewRepository->find($value);
 
                 try {

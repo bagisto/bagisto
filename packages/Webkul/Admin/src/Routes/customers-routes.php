@@ -51,8 +51,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::get('create', 'create')->name('admin.customer.addresses.create');
 
             Route::post('create', 'store')->name('admin.customer.addresses.store');
-
-            Route::post('mass-delete', 'massDestroy')->name('admin.customer.addresses.mass_delete');
         });
 
         Route::prefix('addresses')->group(function () {

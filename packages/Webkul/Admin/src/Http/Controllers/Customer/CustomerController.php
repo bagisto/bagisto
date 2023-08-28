@@ -10,6 +10,8 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Admin\Mail\CustomerNoteNotification;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
@@ -228,13 +230,30 @@ class CustomerController extends Controller
     }
 
     /**
+     * View all details of customer.
+     *
+     * @param  int  $id
+     * @return
+     */
+    public function show($id)
+    {
+        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses' => function ($query) {
+            $query->orderBy('default_address', 'desc');
+        }])->findOrFail($id);
+
+        $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
+
+        return view('admin::customers.view', compact('customer', 'groups'));
+    }
+
+    /**
      * To mass update the customer.
      *
      * @return \Illuminate\Http\Response
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $customerIds = explode(',', request()->input('indexes'));
+        $customerIds = $massUpdateRequest->input('indices');
 
         $updateOption = request()->input('update-options');
 
@@ -258,9 +277,9 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
-        $customerIds = explode(',', request()->input('indexes'));
+        $customerIds = $massDestroyRequest->input('indices');
 
         if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
             foreach ($customerIds as $customerId) {
@@ -279,23 +298,6 @@ class CustomerController extends Controller
         session()->flash('error', trans('admin::app.customers.order-pending'));
 
         return redirect()->back();
-    }
-
-    /**
-     * View all details of customer.
-     *
-     * @param  int  $id
-     * @return
-     */
-    public function show($id)
-    {
-        $customer = $this->customerRepository->with(['orders', 'invoices', 'reviews', 'notes', 'addresses' => function ($query) {
-            $query->orderBy('default_address', 'desc');
-        }])->findOrFail($id);
-
-        $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
-
-        return view('admin::customers.view', compact('customer', 'groups'));
     }
 
     /**

@@ -5,10 +5,12 @@ namespace Webkul\Admin\Http\Controllers\Catalog;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Category\Http\Requests\CategoryRequest;
 use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Admin\DataGrids\Catalog\CategoryProductDataGrid;
 
 class CategoryController extends Controller
@@ -171,12 +173,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
         $suppressFlash = true;
 
-        $categoryIds = explode(',', request()->input('indexes'));
-
+        $categoryIds = $massDestroyRequest->input('indices');
+        
         foreach ($categoryIds as $categoryId) {
             $category = $this->categoryRepository->find($categoryId);
 
@@ -216,9 +218,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $data = request()->all();
+        $data = $massUpdateRequest->all();
 
         if (
             ! isset($data['mass-action-type'])
@@ -227,7 +229,7 @@ class CategoryController extends Controller
             return redirect()->back();
         }
 
-        $categoryIds = explode(',', $data['indexes']);
+        $categoryIds = $data['indices'];
 
         foreach ($categoryIds as $categoryId) {
             Event::dispatch('catalog.categories.mass-update.before', $categoryId);
@@ -254,9 +256,9 @@ class CategoryController extends Controller
     {
         $productCount = 0;
 
-        $indexes = explode(',', request()->input('indexes'));
+        $indices = request()->input('indices');
 
-        foreach ($indexes as $index) {
+        foreach ($indices as $index) {
             $category = $this->categoryRepository->find($index);
 
             $productCount += $category->products->count();

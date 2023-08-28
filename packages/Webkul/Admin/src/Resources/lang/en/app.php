@@ -1077,6 +1077,7 @@ return [
                     'id-value'               => 'Id - :id',
                     'status'                 => 'Status',
                     'active'                 => 'Active',
+                    'inactive'               => 'Inactive',
                     'disable'                => 'Disable',
                     'category'               => 'Category',
                     'type'                   => 'Type',

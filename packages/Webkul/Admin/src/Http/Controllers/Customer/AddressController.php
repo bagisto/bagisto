@@ -9,7 +9,6 @@ use Webkul\Customer\Rules\VatIdRule;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
-use Webkul\Admin\DataGrids\Customers\AddressDataGrid;
 
 class AddressController extends Controller
 {
@@ -32,10 +31,6 @@ class AddressController extends Controller
      */
     public function index($id)
     {
-        if (request()->ajax()) {
-            return app(AddressDataGrid::class)->toJson();
-        }
-
         $customer = $this->customerRepository->find($id);
 
         return view('admin::customers.addresses.index', compact('customer'));
@@ -203,28 +198,5 @@ class AddressController extends Controller
         session()->flash('success', trans('admin::app.customers.view.address-delete-success'));
 
         return redirect()->back();
-    }
-
-    /**
-     * Mass delete the customer's addresses.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy($id)
-    {
-        $addressIds = explode(',', request()->input('indexes'));
-
-        foreach ($addressIds as $addressId) {
-            Event::dispatch('customer.addresses.delete.before', $addressId);
-
-            $this->customerAddressRepository->delete($addressId);
-
-            Event::dispatch('customer.addresses.delete.after', $addressId);
-        }
-
-        session()->flash('success', trans('admin::app.customers.addresses.success-mass-delete'));
-
-        return redirect()->route('admin.customer.addresses.index', ['id' => $id]);
     }
 }
