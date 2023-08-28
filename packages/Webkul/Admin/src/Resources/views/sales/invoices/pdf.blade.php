@@ -207,11 +207,11 @@
                             </div>
                             <div class="merchant-details">
                                 @if (core()->getConfigData('sales.shipping.origin.contact'))
-                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.contact-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
+                                    <div><span class="merchant-details-title">{{ __('admin::app.configuration.contact-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.contact') }}</div>
                                 @endif
 
                                 @if (core()->getConfigData('sales.shipping.origin.vat_number'))
-                                    <div><span class="merchant-details-title">{{ __('admin::app.admin.system.vat-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
+                                    <div><span class="merchant-details-title">{{ __('admin::app.configuration.vat-number') }}: </span> {{ core()->getConfigData('sales.shipping.origin.vat_number') }}</div>
                                 @endif
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                             @if (core()->getConfigData('sales.shipping.origin.bank_details'))
                                 <div class="row" style="padding-top: 20px">
                                     <span class="merchant-details-title">
-                                        {{ __('admin::app.admin.system.bank-details') }}:
+                                        {{ __('admin::app.configuration.bank-details') }}:
                                     </span> 
                                     <div>{{ core()->getConfigData('sales.shipping.origin.bank_details') }}</div>
                                 </div>

@@ -37,13 +37,10 @@ class OrderDataGrid extends DataGrid
                 'customer_email',
                 'orders.cart_id as image',
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name) as full_name'),
-                DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, ", ", ' . DB::getTablePrefix() . 'order_address_billing.state,", ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location'),
-                DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to')
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.city, ", ", ' . DB::getTablePrefix() . 'order_address_billing.state,", ", ' . DB::getTablePrefix() . 'order_address_billing.country) as location')
             );
 
-        // $this->addFilter('billed_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name)'));
-        // $this->addFilter('shipped_to', DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name)'));
-        $this->addFilter('increment_id', 'orders.increment_id');
+        $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'orders.customer_first_name, " ", ' . DB::getTablePrefix() . 'orders.customer_last_name)'));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
@@ -60,7 +57,7 @@ class OrderDataGrid extends DataGrid
             'index'      => 'increment_id',
             'label'      => trans('admin::app.sales.orders.index.datagrid.order-id'),
             'type'       => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -129,7 +126,7 @@ class OrderDataGrid extends DataGrid
             'index'      => 'method',
             'label'      => trans('admin::app.sales.orders.index.datagrid.pay-via'),
             'type'       => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => false,
         ]);
@@ -138,7 +135,7 @@ class OrderDataGrid extends DataGrid
             'index'      => 'channel_name',
             'label'      => trans('admin::app.sales.orders.index.datagrid.channel-name'),
             'type'       => 'string',
-            'searchable' => true,
+            'searchable' => false,
             'filterable' => true,
             'sortable'   => false,
         ]);
@@ -156,7 +153,7 @@ class OrderDataGrid extends DataGrid
             'index'      => 'customer_email',
             'label'      => trans('admin::app.sales.orders.index.datagrid.email'),
             'type'       => 'string',
-            'searchable' => false,
+            'searchable' => true,
             'filterable' => true,
             'sortable'   => false,
         ]);

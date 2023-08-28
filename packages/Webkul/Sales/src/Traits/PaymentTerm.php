@@ -40,11 +40,11 @@ trait PaymentTerm
         $dueDuration = $this->getPaymentTerm();
 
         if ($dueDuration > 1) {
-            return __('admin::app.admin.system.due-duration-days', ['due-duration' => $dueDuration]);
+            return __('admin::app.configuration.due-duration-days', ['due-duration' => $dueDuration]);
         }
 
         return $dueDuration
-            ? __('admin::app.admin.system.due-duration-day', ['due-duration' => $dueDuration])
-            : __('admin::app.admin.system.due-duration-day', ['due-duration' => 0]);
+            ? __('admin::app.configuration.due-duration-day', ['due-duration' => $dueDuration])
+            : __('admin::app.configuration.due-duration-day', ['due-duration' => 0]);
     }
 }

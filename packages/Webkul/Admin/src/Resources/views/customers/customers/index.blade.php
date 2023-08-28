@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.customers.customer.index') }}" ref="customer_data" :isMultiRow="true">
+    <x-admin::datagrid src="{{ route('admin.customers.customers.index') }}" ref="customer_data" :isMultiRow="true">
         {{-- Datagrid Header --}}
         <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
             <template v-if="! isLoading">
@@ -150,7 +150,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 hover:bg-gray-100"
+                    class="row grid grid-cols-[minmax(150px,_2fr)_1fr_1fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
                     v-for="record in records"
                 >
                     <div class="flex gap-[10px]">
@@ -239,8 +239,8 @@
                             </p>
                         </div>
                         <a 
-                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"
-                            :href=`{{ route('admin.customers.customer.view', '') }}/${record.customer_id}`
+                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                            :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
                         >
                         </a>
                     </div>
@@ -484,7 +484,7 @@
                 methods: {
                     create(params, { resetForm, setErrors }) {
                     
-                        this.$axios.post("{{ route('admin.customers.customer.store') }}", params)
+                        this.$axios.post("{{ route('admin.customers.customers.store') }}", params)
                             .then((response) => {
                                 this.$refs.customerCreateModal.close();
 

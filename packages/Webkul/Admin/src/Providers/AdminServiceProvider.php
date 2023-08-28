@@ -121,7 +121,7 @@ class AdminServiceProvider extends ServiceProvider
             $view->with('menu', $tree);
         });
 
-        view()->composer(['admin::users.roles.create', 'admin::users.roles.edit'], function ($view) {
+        view()->composer(['admin::settings.roles.create', 'admin::settings.roles.edit'], function ($view) {
             $view->with('acl', $this->createACL());
         });
     }
