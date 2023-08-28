@@ -82,26 +82,26 @@ return [
     ], [
         'key'        => 'customers',
         'name'       => 'admin::app.components.layouts.sidebar.customers',
-        'route'      => 'admin.customer.index',
+        'route'      => 'admin.customers.customer.index',
         'sort'       => 4,
         'icon'       => 'icon-customer-2',
         'icon-class' => 'customer-icon',
     ], [
         'key'        => 'customers.customers',
         'name'       => 'admin::app.components.layouts.sidebar.customers',
-        'route'      => 'admin.customer.index',
+        'route'      => 'admin.customers.customer.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
         'key'        => 'customers.groups',
         'name'       => 'admin::app.components.layouts.sidebar.groups',
-        'route'      => 'admin.groups.index',
+        'route'      => 'admin.customers.groups.index',
         'sort'       => 2,
         'icon'       => '',
     ], [
         'key'        => 'customers.reviews',
         'name'       => 'admin::app.components.layouts.sidebar.reviews',
-        'route'      => 'admin.customer.review.index',
+        'route'      => 'admin.customers.customer.review.index',
         'sort'       => 3,
         'icon'       => '',
     ], [
@@ -163,19 +163,19 @@ return [
     ], [
         'key'        => 'settings.taxes',
         'name'       => 'admin::app.components.layouts.sidebar.taxes',
-        'route'      => 'admin.settings.tax_categories.index',
+        'route'      => 'admin.settings.taxes.tax_categories.index',
         'sort'       => 8,
         'icon'       => '',
     ], [
         'key'        => 'settings.taxes.tax-categories',
         'name'       => 'admin::app.components.layouts.sidebar.tax-categories',
-        'route'      => 'admin.settings.tax_categories.index',
+        'route'      => 'admin.settings.taxes.tax_categories.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
         'key'        => 'settings.taxes.tax-rates',
         'name'       => 'admin::app.components.layouts.sidebar.tax-rates',
-        'route'      => 'admin.settings.tax_rates.index',
+        'route'      => 'admin.settings.taxes.tax_rates.index',
         'sort'       => 2,
         'icon'       => '',
     ], [
@@ -236,7 +236,7 @@ return [
     ], [
         'key'        => 'marketing.sitemaps',
         'name'       => 'admin::app.components.layouts.sidebar.sitemaps',
-        'route'      => 'admin.sitemaps.index',
+        'route'      => 'admin.marketing.promotions.sitemaps.index',
         'sort'       => 3,
         'icon'       => '',
     ], [

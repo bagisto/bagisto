@@ -170,7 +170,7 @@ class UserController extends Controller
     {
         $user = $this->adminRepository->findOrFail($id);
 
-        return view('admin::customers.confirm-password', compact('user'));
+        return view('admin::customers.customers.confirm-password', compact('user'));
     }
 
     /**

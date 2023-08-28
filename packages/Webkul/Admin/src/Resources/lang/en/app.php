@@ -165,7 +165,7 @@ return [
                 'price'                 => 'Price',
                 'tax'                   => 'Tax',
                 'sub-total'             => 'Sub Total',
-                'discount'              =>  'Discount',
+                'discount'              => 'Discount',
                 'shipping-and-handling' => 'Shipping and Handling',
                 'total-paid'            => 'Total Paid',
                 'total-refund'          => 'Total Refund',
@@ -240,7 +240,7 @@ return [
                 'item-refunded'         => 'Refunded (:qty_refunded)',
                 'qty-to-ship'           => 'Qty. To Ship',
                 'qty-available'         => 'Qty. Available',
-                'create-success'        => 'Shipment created successfully'
+                'create-success'        => 'Shipment created successfully',
             ],
 
             'view' => [
@@ -338,7 +338,6 @@ return [
                 'grand-total'                 => 'Grand Total',
                 'create-success'              => 'Refund created successfully',
                 'invalid-refund-amount-error' => 'Refund amount should be non zero.',
-
 
             ],
         ],
@@ -495,7 +494,7 @@ return [
                 'inventories' => [
                     'title'                    => 'Inventories',
                     'pending-ordered-qty'      => 'Pending Ordered Qty: :qty',
-                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory soruce after the shipment. In case of cancellation pending quantity will be available for sale.',
+                    'pending-ordered-qty-info' => 'Pending Ordered quantity will be deducted from the respective inventory source after the shipment. In case of cancellation pending quantity will be available for sale.',
                 ],
 
                 'categories' => [
@@ -2311,8 +2310,8 @@ return [
         'yes'                         => 'Yes',
         'no'                          => 'No',
         'delete'                      => 'Delete',
-        'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
-        'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
+        'enable-atleast-one-shipping' => 'Enable at least one shipping method.',
+        'enable-atleast-one-payment'  => 'Enable at least one payment method.',
         
         'emails' => [
             'email'                   => 'Email',
@@ -2349,7 +2348,7 @@ return [
         'homepage-info'                         => 'Homepage configuration involves customizing the layout, content, and design of a website\'s main page to present desired information effectively.',
         'product-view-page'                     => 'Product view page configuration',
         'product-view-page-info'                => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation.',
-        'cart-view-page'                        => 'Cart view page confguration',
+        'cart-view-page'                        => 'Cart view page configuration',
         'cart-view-page-info'                   => 'Cart view page configuration involves arranging items, details, and options on the shopping cart page, improving user interaction and purchase flow.',
         'allow-out-of-stock-items'              => 'Allow out of stock items',
         'products'                              => 'Products',
@@ -2367,16 +2366,16 @@ return [
         'review-info'                           => 'Evaluation or assessment of something, often involving opinions and feedback.',
         'allow-guest-review'                    => 'Allow Guest Review',
         'inventory'                             => 'Inventory',
-        'inventory-info'                        => 'Set backorders',
+        'inventory-info'                        => 'Set back orders',
         'stock-options'                         => 'Stock Options',
         'stock-options-info'                    => 'Stock options are investment contracts that grant the right to buy or sell company shares at a predetermined price, influencing potential profits.',
-        'allow-backorders'                      => 'Allow Backorders',
+        'allow-backorders'                      => 'Allow Back orders',
         'customer'                              => 'Customer',
         'wishlist'                              => 'Wishlist',
         'wishlist-info'                         => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
         'wishlist-share'                        => 'Enable Sharing',
         'settings'                              => 'Settings',
-        'settings-info'                         => 'Set wishlist, newsletter subscriptions, email varifications and social login.',
+        'settings-info'                         => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
         'address'                               => 'Address',
         'address-info'                          => 'Set country, state, zip and lines in a street address.',
         'street-lines'                          => 'Lines in a Street Address',
@@ -2385,10 +2384,10 @@ return [
         'shipping-methods-info'                 => 'Set shipping methods information',
         'free-shipping'                         => 'Free Shipping',
         'free-shipping-info'                    => '"Free shipping" refers to a shipping method where the cost of shipping is waived, and the seller covers the shipping expenses for delivering goods to the buyer.',
-        'flate-rate-shipping'                   => 'Flat Rate Shipping',
-        'flate-rate-shipping-info'              => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
+        'flat-rate-shipping'                    => 'Flat Rate Shipping',
+        'flat-rate-shipping-info'               => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
         'shipping'                              => 'Shipping',
-        'shipping-info'                         => 'Set shipping informations.',
+        'shipping-info'                         => 'Set shipping information.',
         'origin'                                => 'Origin',
         'origin-info'                           => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
         'requirements'                          => 'Requirements',
@@ -2444,7 +2443,7 @@ return [
         'admin-email-tip'                       => 'The email address of the admin for this channel to receive emails',
         'admin-page-limit'                      => 'Default Items Per Page (Admin)',
         'design'                                => 'Design',
-        'design-info'                           => 'Set logo and fevicon icon.',
+        'design-info'                           => 'Set logo and favicon icon.',
         'admin-logo'                            => 'Admin Logo',
         'admin-logo-info'                       => 'Admin logo is the distinctive image or emblem representing the administration interface of a system or website, often customizable.',
         'logo-image'                            => 'Logo Image',
@@ -2590,7 +2589,7 @@ return [
             ],
 
             'sidebar' => [
-                'collapse' => 'Collapse',
+                'collapse'                 => 'Collapse',
                 'dashboard'                => 'Dashboard',
                 'sales'                    => 'Sales',
                 'orders'                   => 'Orders',
@@ -2654,14 +2653,23 @@ return [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
                 ],
+
+                'date-options' => [
+                    'today'             => 'Today',
+                    'yesterday'         => 'Yesterday',
+                    'this-week'         => 'This Week',
+                    'this-month'        => 'This Month',
+                    'last-month'        => 'Last Month',
+                    'last-three-months' => 'Last 3 Months',
+                    'last-six-months'   => 'Last 6 Months',
+                    'this-year'         => 'This Year',
+                ],
             ],
 
             'table' => [
-                'actions' => 'Actions',
-                'no-records-available' => 'No Records Available.'
+                'actions'              => 'Actions',
+                'no-records-available' => 'No Records Available.',
             ],
-
-
         ],
 
         'products' => [
@@ -2736,7 +2744,7 @@ return [
             'page-title' => '404 Page not found',
             'name'       => '404',
             'title'      => 'Page Not found',
-            'message'    => 'The Page you are looking for does not exist or have been moved. Navigate using sidemenu.',
+            'message'    => 'The Page you are looking for does not exist or have been moved. Navigate using side menu.',
         ],
         '403' => [
             'page-title' => '403 forbidden Error',

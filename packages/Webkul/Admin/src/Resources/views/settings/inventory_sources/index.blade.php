@@ -17,5 +17,5 @@
         </a>
     </div>
 
-    <x-admin::datagrid src="{{ route('admin.settings.inventory_sources.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid :src="route('admin.settings.inventory_sources.index')"></x-admin::datagrid>
 </x-admin::layouts>

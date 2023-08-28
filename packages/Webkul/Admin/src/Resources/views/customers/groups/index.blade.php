@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- DataGrid -->
-                <x-admin::datagrid src="{{ route('admin.groups.index') }}" ref="datagrid">
+                <x-admin::datagrid src="{{ route('admin.customers.groups.index') }}" ref="datagrid">
                     <!-- DataGrid Header -->
                     <template #header="{ columns, records, sortPage, applied}">
                         <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
@@ -220,7 +220,7 @@
                 methods: {
                     create(params, { resetForm, setErrors  }) {
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.groups.update') }}", params)
+                            this.$axios.post("{{ route('admin.customers.groups.update') }}", params)
                                 .then((response) => {
                                     this.$refs.groupCreateModal.close();
 
@@ -236,7 +236,7 @@
                                     }
                                 });
                         } else {
-                            this.$axios.post("{{ route('admin.groups.store') }}", params)
+                            this.$axios.post("{{ route('admin.customers.groups.store') }}", params)
                             .then((response) => {
                                 this.$refs.groupCreateModal.close();
 

@@ -47,7 +47,7 @@
             </div>
     
             <x-admin::datagrid
-                src="{{ route('admin.settings.currencies.index') }}"
+                :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->

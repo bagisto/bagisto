@@ -377,7 +377,7 @@
 
             methods: {
                 create(params, { resetForm, setErrors }) {
-                    this.$axios.post('{{ route("admin.customer.addresses.store", $customer->id) }}', params,
+                    this.$axios.post('{{ route("admin.customers.customer.addresses.store", $customer->id) }}', params,
                         {
                             headers: {
                                 'Content-Type': 'multipart/form-data'

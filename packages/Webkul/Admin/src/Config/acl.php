@@ -228,12 +228,12 @@ return [
     [
         'key'   => 'customers',
         'name'  => 'admin::app.acl.customers',
-        'route' => 'admin.customer.index',
+        'route' => 'admin.customers.customer.index',
         'sort'  => 4,
     ], [
         'key'   => 'customers.customers',
         'name'  => 'admin::app.acl.customers',
-        'route' => 'admin.customer.index',
+        'route' => 'admin.customers.customer.index',
         'sort'  => 1,
     ], [
         'key'   => 'customers.customers.create',
@@ -243,42 +243,42 @@ return [
     ], [
         'key'   => 'customers.customers.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.customer.edit',
+        'route' => 'admin.customers.customer.edit',
         'sort'  => 2,
     ], [
         'key'   => 'customers.customers.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.customer.delete',
+        'route' => 'admin.customers.customer.delete',
         'sort'  => 3,
     ], [
         'key'   => 'customers.customers.mass-update',
         'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.customer.mass_update',
+        'route' => 'admin.customers.customer.mass_update',
         'sort'  => 4,
     ], [
         'key'   => 'customers.customers.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.customer.mass_delete',
+        'route' => 'admin.customers.customer.mass_delete',
         'sort'  => 5,
     ], [
         'key'   => 'customers.addresses',
         'name'  => 'admin::app.acl.addresses',
-        'route' => 'admin.customer.addresses.index',
+        'route' => 'admin.customers.customer.addresses.index',
         'sort'  => 2,
     ], [
         'key'   => 'customers.addresses.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.customer.addresses.create',
+        'route' => 'admin.customers.customer.addresses.create',
         'sort'  => 1,
     ], [
         'key'   => 'customers.addresses.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.customer.addresses.edit',
+        'route' => 'admin.customers.customer.addresses.edit',
         'sort'  => 2,
     ], [
         'key'   => 'customers.addresses.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.customer.addresses.delete',
+        'route' => 'admin.customers.customer.addresses.delete',
         'sort'  => 3,
     ], [
         'key'   => 'customers.note',
@@ -288,7 +288,7 @@ return [
     ], [
         'key'   => 'customers.groups',
         'name'  => 'admin::app.acl.groups',
-        'route' => 'admin.groups.index',
+        'route' => 'admin.customers.groups.index',
         'sort'  => 4,
     ], [
         'key'   => 'customers.groups.create',
@@ -298,42 +298,42 @@ return [
     ], [
         'key'   => 'customers.groups.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.groups.update',
+        'route' => 'admin.customers.groups.update',
         'sort'  => 2,
     ], [
         'key'   => 'customers.groups.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.groups.delete',
+        'route' => 'admin.customers.groups.delete',
         'sort'  => 3,
     ], [
         'key'   => 'customers.reviews',
         'name'  => 'admin::app.acl.reviews',
-        'route' => 'admin.customer.review.index',
+        'route' => 'admin.customers.customer.review.index',
         'sort'  => 5,
     ], [
         'key'   => 'customers.reviews.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.customer.review.edit',
+        'route' => 'admin.customers.customer.review.edit',
         'sort'  => 1,
     ], [
         'key'   => 'customers.reviews.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.customer.review.delete',
+        'route' => 'admin.customers.customer.review.delete',
         'sort'  => 2,
     ], [
         'key'   => 'customers.reviews.mass-update',
         'name'  => 'admin::app.acl.mass-update',
-        'route' => 'admin.customer.review.mass_update',
+        'route' => 'admin.customers.customer.review.mass_update',
         'sort'  => 3,
     ], [
         'key'   => 'customers.reviews.mass-delete',
         'name'  => 'admin::app.acl.mass-delete',
-        'route' => 'admin.customer.review.mass_delete',
+        'route' => 'admin.customers.customer.review.mass_delete',
         'sort'  => 4,
     ], [
         'key'   => 'customers.orders',
         'name'  => 'admin::app.acl.orders',
-        'route' => 'admin.customer.orders.data',
+        'route' => 'admin.customers.customer.orders.data',
         'sort'  => 7,
     ],
 
@@ -466,11 +466,6 @@ return [
         'route' => 'admin.marketing.communications.campaigns.delete',
         'sort'  => 3,
     ], [
-        'key'   => 'marketing.communications.subscribers',
-        'name'  => 'admin::app.acl.subscribers',
-        'route' => 'admin.marketing.communications.subscribers.index',
-        'sort'  => 4,
-    ], [
         'key'   => 'marketing.communications.subscribers.edit',
         'name'  => 'admin::app.acl.edit',
         'route' => 'admin.marketing.communications.subscribers.edit',
@@ -483,22 +478,22 @@ return [
     ], [
         'key'   => 'marketing.sitemaps',
         'name'  => 'admin::app.acl.sitemaps',
-        'route' => 'admin.sitemaps.index',
+        'route' => 'admin.marketing.promotions.sitemaps.index',
         'sort'  => 3,
     ], [
         'key'   => 'marketing.sitemaps.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.sitemaps.update',
+        'route' => 'admin.marketing.promotions.sitemaps.update',
         'sort'  => 1,
     ], [
         'key'   => 'marketing.sitemaps.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.sitemaps.update',
+        'route' => 'admin.marketing.promotions.sitemaps.update',
         'sort'  => 2,
     ], [
         'key'   => 'marketing.sitemaps.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.sitemaps.delete',
+        'route' => 'admin.marketing.promotions.sitemaps.delete',
         'sort'  => 3,
     ],
 
@@ -698,48 +693,43 @@ return [
     ], [
         'key'   => 'settings.taxes',
         'name'  => 'admin::app.acl.taxes',
-        'route' => 'admin.settings.tax_categories.index',
+        'route' => 'admin.settings.taxes.tax_categories.index',
         'sort'  => 7,
     ], [
         'key'   => 'settings.taxes.tax-categories',
         'name'  => 'admin::app.acl.tax-categories',
-        'route' => 'admin.settings.tax_categories.index',
+        'route' => 'admin.settings.taxes.tax_categories.index',
         'sort'  => 1,
     ], [
         'key'   => 'settings.taxes.tax-categories.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.settings.tax_categories.create',
+        'route' => 'admin.settings.taxes.tax_categories.create',
         'sort'  => 1,
     ], [
         'key'   => 'settings.taxes.tax-categories.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.settings.tax_categories.edit',
+        'route' => 'admin.settings.taxes.tax_categories.edit',
         'sort'  => 2,
     ], [
         'key'   => 'settings.taxes.tax-categories.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.settings.tax_categories.delete',
+        'route' => 'admin.settings.taxes.tax_categories.delete',
         'sort'  => 3,
     ], [
         'key'   => 'settings.taxes.tax-rates',
         'name'  => 'admin::app.acl.tax-rates',
-        'route' => 'admin.settings.tax_rates.index',
+        'route' => 'admin.settings.taxes.tax_rates.index',
         'sort'  => 2,
     ], [
         'key'   => 'settings.taxes.tax-rates.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.settings.tax_rates.create',
+        'route' => 'admin.settings.taxes.tax_rates.create',
         'sort'  => 1,
     ], [
         'key'   => 'settings.taxes.tax-rates.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.settings.tax_rates.edit',
+        'route' => 'admin.settings.taxes.tax_rates.edit',
         'sort'  => 2,
-    ], [
-        'key'   => 'settings.taxes.tax-rates.delete',
-        'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.settings.tax_rates.delete',
-        'sort'  => 3,
     ],
 
     /*

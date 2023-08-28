@@ -103,38 +103,40 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.inventory_sources.delete');
         });
 
-        /**
-         * Tax categories routes.
-         */
-        Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
-            Route::get('', 'index')->name('admin.settings.tax_categories.index');
+        Route::prefix('taxes')->group(function () {
+            /**
+             * Tax categories routes.
+             */
+            Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
+                Route::get('', 'index')->name('admin.settings.texes.tax_categories.index');
 
-            Route::post('', 'store')->name('admin.settings.tax_categories.store');
+                Route::post('', 'store')->name('admin.settings.texes.tax_categories.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.settings.tax_categories.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.texes.tax_categories.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.tax_categories.update');
+                Route::post('edit', 'update')->name('admin.settings.texes.tax_categories.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.settings.tax_categories.delete');
-        });
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.texes.tax_categories.delete');
+            });
 
-        /**
-         * Tax rates routes.
-         */
-        Route::controller(TaxRateController::class)->prefix('tax-rates')->group(function () {
-            Route::get('', 'index')->name('admin.settings.tax_rates.index');
+            /**
+             * Tax rates routes.
+             */
+            Route::controller(TaxRateController::class)->prefix('tax-rates')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.tax_rates.index');
 
-            Route::get('create', 'show')->name('admin.settings.tax_rates.create');
+                Route::get('create', 'show')->name('admin.settings.taxes.tax_rates.create');
 
-            Route::post('create', 'create')->name('admin.settings.tax_rates.store');
+                Route::post('create', 'create')->name('admin.settings.taxes.tax_rates.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.settings.tax_rates.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_rates.edit');
 
-            Route::put('edit/{id}', 'update')->name('admin.settings.tax_rates.update');
+                Route::put('edit/{id}', 'update')->name('admin.settings.taxes.tax_rates.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.settings.tax_rates.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_rates.delete');
 
-            Route::post('import', 'import')->name('admin.settings.tax_rates.import');
+                Route::post('import', 'import')->name('admin.settings.taxes.tax_rates.import');
+            });
         });
 
         /**

@@ -138,7 +138,7 @@ class ReviewDataGrid extends DataGrid
             'title'  => trans('admin::app.customers.reviews.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.customer.review.edit', $row->product_review_id);
+                return route('admin.customers.customer.review.edit', $row->product_review_id);
             },
         ]);
 
@@ -147,7 +147,7 @@ class ReviewDataGrid extends DataGrid
             'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.customer.review.delete', $row->product_review_id);
+                return route('admin.customers.customer.review.delete', $row->product_review_id);
             },
         ]);
     }
@@ -161,14 +161,14 @@ class ReviewDataGrid extends DataGrid
     {
         $this->addMassAction([
             'title'  => trans('admin::app.customers.reviews.index.datagrid.delete'),
-            'url'    => route('admin.customer.review.mass_delete'),
+            'url'    => route('admin.customers.customer.review.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
             'title'   => trans('admin::app.customers.reviews.index.datagrid.update-status'),
             'method'  => 'POST',
-            'url'     => route('admin.customer.review.mass_update'),
+            'url'     => route('admin.customers.customer.review.mass_update'),
             'options' => [
                 trans('admin::app.customers.reviews.index.datagrid.pending')     => 0,
                 trans('admin::app.customers.reviews.index.datagrid.approved')    => 1,

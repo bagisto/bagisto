@@ -50,7 +50,7 @@
             </div>
 
             <x-admin::datagrid
-                src="{{ route('admin.settings.exchange_rates.index') }}"
+                :src="route('admin.settings.exchange_rates.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->

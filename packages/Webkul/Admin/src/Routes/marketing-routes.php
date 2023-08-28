@@ -138,13 +138,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          * sitemaps routes.
          */
         Route::controller(SitemapController::class)->prefix('sitemaps')->group(function () {
-            Route::get('', 'index')->name('admin.sitemaps.index');
+            Route::get('', 'index')->name('admin.marketing.promotions.sitemaps.index');
 
-            Route::post('create', 'store')->name('admin.sitemaps.store');
+            Route::post('create', 'store')->name('admin.marketing.promotions.sitemaps.store');
 
-            Route::post('edit', 'update')->name('admin.sitemaps.update');
+            Route::post('edit', 'update')->name('admin.marketing.promotions.sitemaps.update');
 
-            Route::delete('edit/{id}', 'destroy')->name('admin.sitemaps.delete');
+            Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.sitemaps.delete');
         });
     });
 });

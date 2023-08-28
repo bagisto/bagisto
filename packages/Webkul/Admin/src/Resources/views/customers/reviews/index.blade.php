@@ -14,7 +14,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-review-edit-drawer-template">
             <x-admin::datagrid
-                src="{{ route('admin.customer.review.index') }}"
+                src="{{ route('admin.customers.customer.review.index') }}"
                 :isMultiRow="true"
                 ref="review_data"
             >
@@ -379,7 +379,7 @@
 
                 methods: {
                     edit(id) {
-                        this.$axios.get(`{{ route('admin.customer.review.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.customers.customer.review.edit', '') }}/${id}`)
                             .then((response) => {
                                 this.$refs.review.open(),
 
@@ -394,7 +394,7 @@
                     },
 
                     update(params) {
-                        this.$axios.post(`{{ route('admin.customer.review.update', '') }}/${params.id}`, params)
+                        this.$axios.post(`{{ route('admin.customers.customer.review.update', '') }}/${params.id}`, params)
                             .then((response) => {
                                 this.$refs.review.close();
 
