@@ -78,7 +78,11 @@
                             @lang('admin::app.customers.view.orders') ({{ $totalOrderCount }})
                         </p>
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.total-revenue') - {{ core()->currency($customer->orders->sum('grand_total')) }}
+                            @lang('admin::app.customers.view.total-revenue') - 
+                            {{ core()->currency($customer->orders
+                                ->whereNotIn('status', ['canceled', 'closed'])
+                                ->sum('grand_total'))
+                            }}
                         </p>
                     </div>
 
@@ -266,7 +270,7 @@
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
                             <img
-                                src="{{ bagisto_asset('images/empty-order.png') }}"
+                                src="{{ bagisto_asset('images/invoice-setting.png') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
                             />
 

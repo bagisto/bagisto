@@ -4,6 +4,7 @@ namespace Webkul\Admin\DataGrids\Customers;
 
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Sales\Repositories\OrderRepository;
 
 class CustomerDataGrid extends DataGrid
 {
@@ -36,13 +37,6 @@ class CustomerDataGrid extends DataGrid
             ->addSelect('customers.id as customer_id')
             ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as order_count'))
 
-            // ->whereNotIn("orders.status", ['closed', 'canceled'])
-            ->addSelect(
-                DB::raw('(
-                    SUM(DISTINCT base_grand_total) -
-                    SUM(IFNULL((SELECT SUM(base_grand_total) FROM  refunds WHERE refunds.order_id = orders.id),0))
-                    ) as total_base_grand_total'),
-            )
             ->groupBy('customers.id')
 
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
@@ -110,7 +104,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -137,7 +131,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -156,7 +150,13 @@ class CustomerDataGrid extends DataGrid
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
-            'sortable'    => true,
+            'sortable'    => false,
+            'closure'     => function($row) {
+                return app(OrderRepository::class)->scopeQuery(function($q) use($row) {
+                    return $q->whereNotIn('status', ['canceled', 'closed'])
+                        ->where('customer_id', $row->customer_id);
+                })->sum('grand_total');
+            }
         ]);
 
         $this->addColumn([
