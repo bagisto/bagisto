@@ -200,7 +200,7 @@ class ProductDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'     => 'icon-edit',
-            'title'    => trans('admin::app.datagrid.edit'),
+            'title'    => trans('admin::app.catalog.products.index.datagrid.edit'),
             'method'   => 'GET',
             'url'      => function ($row) {
                 return route('admin.catalog.products.edit', $row->product_id);
@@ -213,7 +213,7 @@ class ProductDataGrid extends DataGrid
 
         $this->addAction([
             'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.datagrid.delete'),
+            'title'   => trans('admin::app.catalog.products.index.datagrid.delete'),
             'method'  => 'DELETE',
             'url'     => function ($row) {
                 return route('admin.catalog.products.delete', $row->product_id);
@@ -222,7 +222,7 @@ class ProductDataGrid extends DataGrid
 
         $this->addAction([
             'icon'   => 'icon-copy',
-            'title'  => trans('admin::app.datagrid.copy'),
+            'title'  => trans('admin::app.catalog.products.index.datagrid.copy'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.catalog.products.copy', $row->product_id);
@@ -238,18 +238,18 @@ class ProductDataGrid extends DataGrid
     public function prepareMassActions()
     {
         $this->addMassAction([
-            'title'  => trans('admin::app.datagrid.delete'),
+            'title'  => trans('admin::app.catalog.products.index.datagrid.delete'),
             'url'    => route('admin.catalog.products.mass_delete'),
             'method' => 'POST',
         ]);
 
         $this->addMassAction([
-            'title'   => trans('admin::app.datagrid.update-status'),
+            'title'   => trans('admin::app.catalog.products.index.datagrid.update-status'),
             'url'     => route('admin.catalog.products.mass_update'),
             'method'  => 'POST',
             'options' => [
-                trans('admin::app.datagrid.active')    => 1,
-                trans('admin::app.datagrid.inactive')  => 0,
+                trans('admin::app.catalog.products.index.datagrid.active')    => 1,
+                trans('admin::app.catalog.products.index.datagrid.disable')  => 0,
             ],
         ]);
     }

@@ -1081,6 +1081,8 @@ return [
                     'category'               => 'Category',
                     'type'                   => 'Type',
                     'product-image'          => 'Product Image',
+                    'delete'                 => 'Delete',
+                    'update-status'          => 'Update Status',
                 ],
             ],
 

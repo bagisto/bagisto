@@ -104,7 +104,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -131,7 +131,7 @@ class CustomerDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
-            'sortable'   => true,
+            'sortable'   => false,
         ]);
 
         $this->addColumn([
@@ -150,7 +150,7 @@ class CustomerDataGrid extends DataGrid
             'type'        => 'integer',
             'searchable'  => false,
             'filterable'  => false,
-            'sortable'    => true,
+            'sortable'    => false,
             'closure'     => function($row) {
                 return app(OrderRepository::class)->scopeQuery(function($q) use($row) {
                     return $q->whereNotIn('status', ['canceled', 'closed'])
