@@ -400,7 +400,7 @@
                             </a>
 
                             <a
-                                href="{{ route('admin.customer.index') }}"
+                                href="{{ route('admin.customers.customer.index') }}"
                                 class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
                                 v-else
                             >

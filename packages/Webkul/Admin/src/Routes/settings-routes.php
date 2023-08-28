@@ -108,15 +108,15 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
              * Tax categories routes.
              */
             Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
-                Route::get('', 'index')->name('admin.settings.texes.tax_categories.index');
+                Route::get('', 'index')->name('admin.settings.taxes.tax_categories.index');
 
-                Route::post('', 'store')->name('admin.settings.texes.tax_categories.store');
+                Route::post('', 'store')->name('admin.settings.taxes.tax_categories.store');
 
-                Route::get('edit/{id}', 'edit')->name('admin.settings.texes.tax_categories.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_categories.edit');
 
-                Route::post('edit', 'update')->name('admin.settings.texes.tax_categories.update');
+                Route::post('edit', 'update')->name('admin.settings.taxes.tax_categories.update');
 
-                Route::delete('edit/{id}', 'destroy')->name('admin.settings.texes.tax_categories.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_categories.delete');
             });
 
             /**
