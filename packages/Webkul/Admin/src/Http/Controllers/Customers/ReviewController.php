@@ -102,36 +102,24 @@ class ReviewController extends Controller
      */
     public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
-        $suppressFlash = false;
+        $indices = $massDestroyRequest->input('indices');
 
-        if (request()->isMethod('post')) {
-            $indices = $massDestroyRequest->input('indices');
-
+        try {
             foreach ($indices as $index) {
-                try {
-                    Event::dispatch('customer.review.delete.before', $index);
+                Event::dispatch('customer.review.delete.before', $index);
 
-                    $this->productReviewRepository->delete($index);
+                $this->productReviewRepository->delete($index);
 
-                    Event::dispatch('customer.review.delete.after', $index);
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
-                }
+                Event::dispatch('customer.review.delete.after', $index);
             }
 
-            if (!$suppressFlash) {
-                session()->flash('success', trans('admin::app.customers.reviews.index.datagrid.delete-success', ['resource' => 'Reviews']));
-            } else {
-                session()->flash('info', trans('admin::app.customers.reviews.index.datagrid.partial-action', ['resource' => 'Reviews']));
-            }
-
-            return redirect()->route('admin.customers.customers.review.index');
-        } else {
-            session()->flash('error', trans('admin::app.customers.reviews.index.datagrid.method-error'));
-
-            return redirect()->back();
+            return response()->json([
+                'message' => trans('admin::app.customers.reviews.index.datagrid.mass-delete-success')
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -151,17 +139,17 @@ class ReviewController extends Controller
             $newStatus = $validStatuses[$massUpdateRequest->input('value')] ?? null;
 
             if ($newStatus !== null) {
-                try {
-                    if ($newStatus === 'approved') {
-                        Event::dispatch('customer.review.update.before', $value);
-                        Event::dispatch('customer.review.update.after', $review);
-                    }
-
-                    $review->update(['status' => $newStatus]);
-                } catch (\Exception $e) {
-                    // Handle the exception if needed
+                if ($newStatus === 'approved') {
+                    Event::dispatch('customer.review.update.before', $value);
+                    Event::dispatch('customer.review.update.after', $review);
                 }
+
+                $review->update(['status' => $newStatus]);
             }
         }
+
+        return response()->json([
+            'message' => trans('admin::app.customers.reviews.index.datagrid.mass-update-success')
+        ], 200);
     }
 }

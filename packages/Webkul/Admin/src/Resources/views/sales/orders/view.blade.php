@@ -51,7 +51,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.sales.orders.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>

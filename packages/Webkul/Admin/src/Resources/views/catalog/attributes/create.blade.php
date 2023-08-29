@@ -31,7 +31,7 @@
                         <!-- Cancel Button -->
                         <a
                             href="{{ route('admin.catalog.attributes.index') }}"
-                            class="transparent-button"
+                            class="transparent-button hover:bg-gray-200"
                         >
                             @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
@@ -335,7 +335,7 @@
                                 <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                     <!-- Attribute Option Image -->
                                     <img 
-                                        class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
+                                        class="w-[120px] h-[120px]" 
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
                                     >

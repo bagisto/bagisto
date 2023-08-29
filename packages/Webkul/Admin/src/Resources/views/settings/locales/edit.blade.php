@@ -18,7 +18,7 @@
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.settings.locales.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.settings.locales.edit.back-btn')
                 </a>

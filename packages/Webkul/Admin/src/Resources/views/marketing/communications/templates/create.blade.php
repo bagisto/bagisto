@@ -14,7 +14,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.marketing.communications.email_templates.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.marketing.communications.templates.create.back-btn')
                 </a>

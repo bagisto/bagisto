@@ -10,7 +10,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.catalog.families.create.back-btn')
                 </a>
@@ -28,7 +28,7 @@
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
             <div class="flex flex-col gap-[8px] flex-1 bg-white box-shadow">
-                <v-testing></v-testing>
+                <v-family-attributes></v-family-attributes>
             </div>
 
             {{-- Right Container --}}
@@ -99,7 +99,7 @@
     @pushOnce('scripts')
         <script 
             type="text/x-template" 
-            id="v-testing-template"
+            id="v-family-attributes-template"
         >
             <div>
                 <!-- Panel Header -->
@@ -394,8 +394,8 @@
         </script>
 
         <script type="module">
-            app.component('v-testing', {
-                template: '#v-testing-template',
+            app.component('v-family-attributes', {
+                template: '#v-family-attributes-template',
 
                 data: function () {
                     return {

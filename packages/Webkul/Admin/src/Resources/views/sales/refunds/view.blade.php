@@ -17,7 +17,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.sales.refunds.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>

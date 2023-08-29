@@ -50,7 +50,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                    class="w-[80px] h-[80px]"
                 />
 
                 <!-- Add Variants Information -->
@@ -244,7 +244,7 @@
                 <div class="flex gap-[10px]">
                     <!-- Remove -->
                     <p
-                        class="text-red-600 cursor-pointer"
+                        class="text-red-600 cursor-pointer hover:underline"
                         @click="remove"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.delete-btn')

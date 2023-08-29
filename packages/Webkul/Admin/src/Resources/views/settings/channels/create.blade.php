@@ -14,7 +14,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.settings.channels.create.cancel')
                 </a>
