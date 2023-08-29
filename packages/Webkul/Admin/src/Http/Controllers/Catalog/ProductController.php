@@ -280,19 +280,27 @@ class ProductController extends Controller
     {
         $productIds = $massDestroyRequest->input('indices');
 
-        foreach ($productIds as $productId) {
-            $product = $this->productRepository->find($productId);
-
-            if (isset($product)) {
-                Event::dispatch('catalog.product.delete.before', $productId);
-
-                $this->productRepository->delete($productId);
-
-                Event::dispatch('catalog.product.delete.after', $productId);
+        try {
+            foreach ($productIds as $productId) {
+                $product = $this->productRepository->find($productId);
+    
+                if (isset($product)) {
+                    Event::dispatch('catalog.product.delete.before', $productId);
+    
+                    $this->productRepository->delete($productId);
+    
+                    Event::dispatch('catalog.product.delete.after', $productId);
+                }
             }
-        }
 
-        return redirect()->route('admin.catalog.products.index');
+            return response()->json([
+                'message' => trans('admin::app.catalog.products.index.datagrid.mass-delete-success')
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -314,7 +322,11 @@ class ProductController extends Controller
             ], $productId);
 
             Event::dispatch('catalog.product.update.after', $product);
-        } 
+        }
+        
+        return response()->json([
+            'message' => trans('admin::app.catalog.products.index.datagrid.mass-update-success')
+        ], 200);
     }
 
     /**

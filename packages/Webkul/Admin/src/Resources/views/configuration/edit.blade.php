@@ -46,7 +46,10 @@
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
                     {{-- Dropdown Toggler --}}
                     <x-slot:toggle>
-                        <div class="inline-flex gap-x-[8px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                        <button
+                            type="button"
+                            class="inline-flex gap-x-[4px] items-center justify-between w-full max-w-max text-gray-600 font-semibold px-[4px] py-[6px] rounded-[6px] text-center cursor-pointer marker:shadow appearance-none hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-gratext-gray-600"
+                        >
                             <span class="icon-store text-[24px] "></span>
                             
                             {{ $currentChannel->name }}
@@ -54,7 +57,7 @@
                             <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
 
                             <span class="icon-sort-down text-[24px]"></span>
-                        </div>
+                        </button>
                     </x-slot:toggle>
 
                     {{-- Dropdown Content --}}
@@ -74,7 +77,10 @@
                 <x-admin::dropdown>
                     {{-- Dropdown Toggler --}}
                     <x-slot:toggle>
-                        <div class="inline-flex gap-x-[4px] items-center justify-between text-gray-600 font-semibold px-[4px] py-[6px] text-center w-full max-w-max cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
+                        <button
+                            type="button"
+                            class="inline-flex gap-x-[4px] items-center justify-between w-full max-w-max text-gray-600 font-semibold px-[4px] py-[6px] rounded-[6px] text-center cursor-pointer marker:shadow appearance-none hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-gratext-gray-600"
+                        >
                             <span class="icon-language text-[24px] "></span>
 
                             {{ $currentLocale->name }}
@@ -82,7 +88,7 @@
                             <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
 
                             <span class="icon-sort-down text-[24px]"></span>
-                        </div>
+                        </button>
                     </x-slot:toggle>
 
                     {{-- Dropdown Content --}}

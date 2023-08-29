@@ -110,7 +110,7 @@
                             <a @click="id=1; editModal(record.id)">
                                 <span
                                     :class="record.actions['0'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
                                     :title="record.actions['0'].title"
                                 >
                                 </span>
@@ -119,7 +119,7 @@
                             <a @click="deleteModal(record.actions['1']?.url)">
                                 <span
                                     :class="record.actions['1'].icon"
-                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                    class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
                                     :title="record.actions['1'].title"
                                 >
                                 </span>

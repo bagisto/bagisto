@@ -21,7 +21,7 @@
                 {{-- Cancel Button --}}
                 <a
                     href="{{ route('admin.cms.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.account.edit.back-btn')
                 </a>
@@ -169,7 +169,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between p-[6px]">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.users.create.general')
+                                    @lang('admin::app.cms.create.general')
                                 </p>
                             </div>
                         </x-slot:header>

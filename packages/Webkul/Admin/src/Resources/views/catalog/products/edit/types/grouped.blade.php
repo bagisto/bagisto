@@ -110,7 +110,7 @@
                                 </x-admin::form.control-group>
 
                                 <p
-                                    class="text-red-600 cursor-pointer"
+                                    class="text-red-600 cursor-pointer hover:underline"
                                     @click="remove(element)"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.grouped.delete')
@@ -129,7 +129,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                    class="w-[80px] h-[80px]"
                 />
 
                 <!-- Add Variants Information -->

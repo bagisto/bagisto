@@ -526,7 +526,12 @@
                                     value: this.applied.massActions.value,
                                 })
                                 .then(response => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
                                     this.get();
+                                })
+                                .catch((error) => {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                                 });
 
                             break;

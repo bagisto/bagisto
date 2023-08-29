@@ -26,7 +26,7 @@
                             <!-- Cancel button -->
                             <a
                                 href="{{ route('admin.marketing.promotions.cart_rules.index') }}"
-                                class="transparent-button"
+                                class="transparent-button hover:bg-gray-200"
                             >
                                 @lang('admin::app.account.edit.back-btn')
                             </a>
