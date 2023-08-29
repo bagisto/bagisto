@@ -312,6 +312,18 @@
         @apply outline-none;
     }
 
+    .primary-button {
+        @apply px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold  cursor-pointer transition-all hover:opacity-[0.9];
+    }
+
+    .secondary-button {
+        @apply px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-[#eff6ff61];
+    }
+
+    .transparent-button {
+        @apply px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap cursor-pointer transition-all hover:bg-gray-100;
+    }
+
     .journal-scroll::-webkit-scrollbar {
         width: 14px;
         cursor: pointer;

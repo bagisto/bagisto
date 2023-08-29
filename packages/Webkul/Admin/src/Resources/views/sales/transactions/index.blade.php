@@ -66,7 +66,7 @@
                                     <!-- Save Button -->
                                     <button
                                         type="submit" 
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('Export')
                                     </button>
@@ -79,7 +79,7 @@
 
             <a 
                 href="{{ route('admin.sales.transactions.create') }}"
-                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                class="primary-button"
             >
                 @lang('admin::app.sales.transactions.index.create-btn')
             </a>

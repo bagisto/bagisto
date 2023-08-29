@@ -29,10 +29,11 @@
             </p>
 
             {{-- Back Button --}}
-            <a href="{{ route('admin.customers.customers.index') }}">
-                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                    @lang('admin::app.customers.view.back-btn')
-                </span>
+            <a
+                href="{{ route('admin.customers.customers.index') }}"
+                class="transparent-button"
+            >
+                @lang('admin::app.customers.view.back-btn')
             </a>
         </div>
     </div>
@@ -445,7 +446,7 @@
                             {{--Note Submit Button --}}
                             <button
                                 type="submit"
-                                class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                class="secondary-button"
                             >
                                 @lang('admin::app.customers.view.submit-btn-title')
                             </button>

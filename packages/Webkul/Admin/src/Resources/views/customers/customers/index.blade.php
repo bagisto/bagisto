@@ -53,7 +53,7 @@
                                     <!-- Save Button -->
                                     <button
                                         type="submit" 
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('Export')
                                     </button>
@@ -69,7 +69,7 @@
                 <v-create-customer-form>
                     <button
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                     >
                         @lang('admin::app.customers.index.create.create-btn')
                     </button>
@@ -262,7 +262,7 @@
                 @if (bouncer()->hasPermission('customers.customers.create'))
                     <button
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                         @click="$refs.customerCreateModal.toggle()"
                     >
                         @lang('admin::app.customers.index.create.create-btn')
@@ -466,7 +466,7 @@
                                     <!-- Save Button -->
                                     <button 
                                         type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('admin::app.customers.index.create.save-btn')
                                     </button>

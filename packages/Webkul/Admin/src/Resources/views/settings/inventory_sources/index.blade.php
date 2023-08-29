@@ -11,7 +11,7 @@
 
         {{-- Create Button --}}
         <a href="{{ route('admin.settings.inventory_sources.create') }}">
-            <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+            <div class="primary-button">
                 @lang('admin::app.settings.inventory-sources.index.create-btn')
             </div>
         </a>

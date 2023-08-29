@@ -10,14 +10,14 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.catalog.families.index') }}"
-                    class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer"
+                    class="transparent-button"
                 >
                     @lang('admin::app.catalog.families.create.back-btn')
                 </a>
 
                 <button
                     type="submit"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.catalog.families.create.save-btn')
                 </button>
@@ -127,7 +127,7 @@
 
                         <!-- Add Group Button -->
                         <div
-                            class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                            class="secondary-button"
                             @click="$refs.addGroupModal.open()"
                         >
                             @lang('admin::app.catalog.families.create.add-group-btn')
@@ -381,7 +381,7 @@
                                     <!-- Add Group Button -->
                                     <button 
                                         type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('admin::app.catalog.families.create.add-group-btn')
                                     </button>

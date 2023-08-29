@@ -22,13 +22,14 @@
                 </div>
 
                 <div class="flex gap-x-[10px] items-center">
-                    <a href="{{ route('admin.catalog.products.index') }}">
-                        <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                            @lang('admin::app.account.edit.back-btn')
-                        </span>
+                    <a
+                        href="{{ route('admin.catalog.products.index') }}"
+                        class="transparent-button"
+                    >
+                        @lang('admin::app.account.edit.back-btn')
                     </a>
 
-                    <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                    <button class="primary-button">
                         @lang('admin::app.catalog.products.edit.save-btn')
                     </button>
                 </div>
