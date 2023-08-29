@@ -1,13 +1,13 @@
 <x-admin::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        @lang('admin::app.settings.taxes.tax-categories.index.title')
+        @lang('admin::app.settings.taxes.categories.index.title')
     </x-slot:title>
 
     <v-tax-categories>
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
-                @lang('admin::app.settings.taxes.tax-categories.index.title')
+                @lang('admin::app.settings.taxes.categories.index.title')
             </p>
             
             <div class="flex gap-x-[10px] items-center">
@@ -17,7 +17,7 @@
                         type="button"
                         class="primary-button"
                     >
-                        @lang('admin::app.settings.taxes.tax-categories.index.create.title')
+                        @lang('admin::app.settings.taxes.categories.index.create.title')
                     </button>
                 </div>
             </div>
@@ -31,19 +31,19 @@
         <script type="text/x-template" id="v-tax-categories-template">
             <div class="flex justify-between items-center">
                 <p class="text-[20px] text-gray-800 font-bold">
-                    @lang('admin::app.settings.taxes.tax-categories.index.title')
+                    @lang('admin::app.settings.taxes.categories.index.title')
                 </p>
                 
                 <div class="flex gap-x-[10px] items-center">
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Create Tax Category Button -->
-                        @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
+                        @if (bouncer()->hasPermission('settings.taxes.categories.create'))
                             <button
                                 type="button"
                                 class="primary-button"
                                 @click="id=0; $refs.taxCategory.toggle()"
                             >
-                                @lang('admin::app.settings.taxes.tax-categories.index.create.title')
+                                @lang('admin::app.settings.taxes.categories.index.create.title')
                             </button>
                         @endif
                     </div>
@@ -52,7 +52,7 @@
 
             <!-- Datagrid -->
             <x-admin::datagrid
-                :src="route('admin.settings.taxes.tax_categories.index')"
+                :src="route('admin.settings.taxes.categories.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
@@ -147,11 +147,11 @@
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 <span v-if="id">
-                                    @lang('admin::app.settings.taxes.tax-categories.index.edit.title')
+                                    @lang('admin::app.settings.taxes.categories.index.edit.title')
                                 </span>
 
                                 <span v-else>
-                                    @lang('admin::app.settings.taxes.tax-categories.index.create.title')
+                                    @lang('admin::app.settings.taxes.categories.index.create.title')
                                 </span>
                             </p>
                         </x-slot:header>
@@ -161,7 +161,7 @@
                                 <!-- Code -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.tax-categories.index.create.code')
+                                        @lang('admin::app.settings.taxes.categories.index.create.code')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -170,8 +170,8 @@
                                         :value="old('code')"
                                         id="code"
                                         rules="required"
-                                        :label="trans('admin::app.settings.taxes.tax-categories.index.create.code')"
-                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.index.create.code')"
+                                        :label="trans('admin::app.settings.taxes.categories.index.create.code')"
+                                        :placeholder="trans('admin::app.settings.taxes.categories.index.create.code')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -184,7 +184,7 @@
                                 <!-- Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.tax-categories.index.create.name')
+                                        @lang('admin::app.settings.taxes.categories.index.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -193,8 +193,8 @@
                                         :value="old('name')"
                                         id="name"
                                         rules="required"
-                                        :label="trans('admin::app.settings.taxes.tax-categories.index.create.name')"
-                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.index.create.name')"
+                                        :label="trans('admin::app.settings.taxes.categories.index.create.name')"
+                                        :placeholder="trans('admin::app.settings.taxes.categories.index.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -207,7 +207,7 @@
                                 <!-- Description -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
-                                        @lang('admin::app.settings.taxes.tax-categories.index.create.description')
+                                        @lang('admin::app.settings.taxes.categories.index.create.description')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
@@ -216,8 +216,8 @@
                                         :value="old('description')"
                                         id="description"
                                         rules="required"
-                                        :label="trans('admin::app.settings.taxes.tax-categories.index.create.description')"
-                                        :placeholder="trans('admin::app.settings.taxes.tax-categories.index.create.description')"
+                                        :label="trans('admin::app.settings.taxes.categories.index.create.description')"
+                                        :placeholder="trans('admin::app.settings.taxes.categories.index.create.description')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -233,7 +233,7 @@
 
                                 <!-- Select Tax Rates -->
                                 <p class="required block leading-[24px] text-gray-800 font-medium">
-                                    @lang('admin::app.settings.taxes.tax-categories.index.create.tax-rates')
+                                    @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
                                 </p>
 
                                 @if(! count($taxRates))
@@ -244,10 +244,10 @@
                                                 >
                                         <div class="flex flex-col gap-[6px]">
                                             <p class="text-[16px] text-gray-400 font-semibold">
-                                                @lang('admin::app.settings.taxes.tax-categories.index.create.add-tax-rates')
+                                                @lang('admin::app.settings.taxes.categories.index.create.add-tax-rates')
                                             </p>
                                             <p class="text-gray-400"> 
-                                                @lang('admin::app.settings.taxes.tax-categories.index.create.empty-text')
+                                                @lang('admin::app.settings.taxes.categories.index.create.empty-text')
                                             </p>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
                                                 :id="'taxrates_' . $taxRate->id"
                                                 :for="'taxrates_' . $taxRate->id"
                                                 rules="required"
-                                                :label="trans('admin::app.settings.taxes.tax-categories.index.create.tax-rates')"
+                                                :label="trans('admin::app.settings.taxes.categories.index.create.tax-rates')"
                                                 :checked="in_array($taxRate['id'], $selectedOptions)"
                                             >
                                             </x-admin::form.control-group.control>
@@ -291,7 +291,7 @@
                                     type="submit"
                                     class="primary-button"
                                 >
-                                    @lang('admin::app.settings.taxes.tax-categories.index.create.save-btn')
+                                    @lang('admin::app.settings.taxes.categories.index.create.save-btn')
                                 </button>
                             </div>
                         </x-slot:footer>
@@ -313,7 +313,7 @@
                 methods: {
                     store(params, { resetForm, setErrors }) {
                         if (params.id) {
-                            this.$axios.post('{{ route('admin.settings.taxes.tax_categories.update') }}', params,{
+                            this.$axios.post('{{ route('admin.settings.taxes.categories.update') }}', params,{
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                                 }
@@ -333,7 +333,7 @@
                                     }
                                 });
                         } else {
-                            this.$axios.post('{{ route('admin.settings.taxes.tax_categories.store') }}', params,{
+                            this.$axios.post('{{ route('admin.settings.taxes.categories.store') }}', params,{
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                                 }
@@ -356,7 +356,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.settings.taxes.tax_categories.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.taxes.categories.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.id,

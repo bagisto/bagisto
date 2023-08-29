@@ -12,10 +12,10 @@
             @endif
 
             <div class="relative">
-                @if($item->product->base_image_url)
+                @if($item->product?->base_image_url)
                     <img
                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
-                        src="{{ $item->product->base_image_url }}"
+                        src="{{ $item->product?->base_image_url }}"
                     >
                 @else
                     <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
@@ -29,7 +29,7 @@
 
                 <span
                     class="absolute bottom-[1px] left-[1px] text-[12px] font-bold text-white bg-darkPink rounded-full px-[6px]">
-                    {{ $item->product->images->count() }}
+                    {{ $item->product?->images->count() }}
                 </span>
             </div> 
 

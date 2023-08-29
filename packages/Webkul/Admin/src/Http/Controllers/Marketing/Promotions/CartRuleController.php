@@ -145,7 +145,7 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.update.after', $cartRule);
 
-            session()->flash('success', trans('admin::app.promotions.cart-rules.edit.update-success'));
+            session()->flash('success', trans('admin::app.marketing.promotions.cart-rules.edit.update-success'));
 
             return redirect()->route('admin.marketing.promotions.cart_rules.index');
         } catch (ValidationException $e) {
@@ -175,13 +175,13 @@ class CartRuleController extends Controller
             Event::dispatch('promotions.cart_rule.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.promotions.cart-rules.delete-success'
+                'message' => trans('admin::app.marketing.promotions.cart-rules.delete-success'
             )]);
         } catch (Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.promotions.cart-rules.delete-failed'
+            'message' => trans('admin::app.marketing.promotions.cart-rules.delete-failed'
         )], 400);
     }
 }

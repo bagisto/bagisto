@@ -108,35 +108,35 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             /**
              * Tax categories routes.
              */
-            Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
-                Route::get('', 'index')->name('admin.settings.taxes.tax_categories.index');
+            Route::controller(TaxCategoryController::class)->prefix('categories')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.categories.index');
 
-                Route::post('', 'store')->name('admin.settings.taxes.tax_categories.store');
+                Route::post('', 'store')->name('admin.settings.taxes.categories.store');
 
-                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_categories.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.categories.edit');
 
-                Route::post('edit', 'update')->name('admin.settings.taxes.tax_categories.update');
+                Route::post('edit', 'update')->name('admin.settings.taxes.categories.update');
 
-                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_categories.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.categories.delete');
             });
 
             /**
              * Tax rates routes.
              */
-            Route::controller(TaxRateController::class)->prefix('tax-rates')->group(function () {
-                Route::get('', 'index')->name('admin.settings.taxes.tax_rates.index');
+            Route::controller(TaxRateController::class)->prefix('rates')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.rates.index');
 
-                Route::get('create', 'show')->name('admin.settings.taxes.tax_rates.create');
+                Route::get('create', 'show')->name('admin.settings.taxes.rates.create');
 
-                Route::post('create', 'create')->name('admin.settings.taxes.tax_rates.store');
+                Route::post('create', 'create')->name('admin.settings.taxes.rates.store');
 
-                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_rates.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.rates.edit');
 
-                Route::put('edit/{id}', 'update')->name('admin.settings.taxes.tax_rates.update');
+                Route::put('edit/{id}', 'update')->name('admin.settings.taxes.rates.update');
 
-                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_rates.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.rates.delete');
 
-                Route::post('import', 'import')->name('admin.settings.taxes.tax_rates.import');
+                Route::post('import', 'import')->name('admin.settings.taxes.rates.import');
             });
         });
 
@@ -173,7 +173,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
 
-            Route::post('confirm/{id}', 'destroySelf')->name('admin.settings.users.destroy');
+            Route::post('confirm/{id}', 'destroy')->name('admin.settings.users.destroy');
         });
     });
 

@@ -96,6 +96,10 @@
     "file": "assets/empty-review-20ca8784.png",
     "src": "src/Resources/assets/images/empty-review.png"
   },
+  "src/Resources/assets/images/error.svg": {
+    "file": "assets/error-4179d5c7.svg",
+    "src": "src/Resources/assets/images/error.svg"
+  },
   "src/Resources/assets/images/group.png": {
     "file": "assets/group-a995d3da.png",
     "src": "src/Resources/assets/images/group.png"

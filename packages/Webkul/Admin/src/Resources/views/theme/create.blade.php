@@ -141,7 +141,7 @@
 
                 data() {
                     return {
-                        componentName: 'v-static-theme',
+                        componentName: 'v-slider-theme',
                     }
                 },
 

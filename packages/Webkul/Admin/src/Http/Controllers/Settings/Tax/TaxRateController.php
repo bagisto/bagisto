@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Settings;
+namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
@@ -33,7 +33,7 @@ class TaxRateController extends Controller
             return app(TaxRateDataGrid::class)->toJson();
         }
 
-        return view('admin::tax.tax-rates.index');
+        return view('admin::tax.rates.index');
     }
 
     /**
@@ -47,7 +47,7 @@ class TaxRateController extends Controller
             return app(TaxRateDataGrid::class)->toJson();
         }
 
-        return view('admin::tax.tax-rates.create');
+        return view('admin::tax.rates.create');
     }
 
     /**
@@ -83,15 +83,15 @@ class TaxRateController extends Controller
             $data['is_zip'] = 1;
         }
 
-        Event::dispatch('tax.tax_rate.create.before');
+        Event::dispatch('tax.rate.create.before');
 
         $taxRate = $this->taxRateRepository->create($data);
 
-        Event::dispatch('tax.tax_rate.create.after', $taxRate);
+        Event::dispatch('tax.rate.create.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.rates.create-success'));
 
-        return redirect()->route('admin.settings.taxes.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.rates.index');
     }
 
     /**
@@ -104,7 +104,7 @@ class TaxRateController extends Controller
     {
         $taxRate = $this->taxRateRepository->findOrFail($id);
 
-        return view('admin::tax.tax-rates.edit')->with('taxRate', $taxRate);
+        return view('admin::tax.rates.edit')->with('taxRate', $taxRate);
     }
 
     /**
@@ -125,7 +125,7 @@ class TaxRateController extends Controller
             'tax_rate'   => 'required|numeric|min:0.0001',
         ]);
 
-        Event::dispatch('tax.tax_rate.update.before', $id);
+        Event::dispatch('tax.rate.update.before', $id);
 
         $data = request()->only([
             'identifier',
@@ -140,11 +140,11 @@ class TaxRateController extends Controller
 
         $taxRate = $this->taxRateRepository->update($data, $id);
 
-        Event::dispatch('tax.tax_rate.update.after', $taxRate);
+        Event::dispatch('tax.rate.update.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.update-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.rates.update-success'));
 
-        return redirect()->route('admin.settings.taxes.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.rates.index');
     }
 
     /**
@@ -158,19 +158,21 @@ class TaxRateController extends Controller
         $this->taxRateRepository->findOrFail($id);
 
         try {
-            Event::dispatch('tax.tax_rate.delete.before', $id);
+            Event::dispatch('tax.rate.delete.before', $id);
 
             $this->taxRateRepository->delete($id);
 
-            Event::dispatch('tax.tax_rate.delete.after', $id);
+            Event::dispatch('tax.rate.delete.after', $id);
 
-            return new JsonResource(['message' => trans('admin::app.settings.taxes.tax-rates.delete-success')]);
+            return new JsonResource(['message' => trans('admin::app.settings.taxes.rates.delete-success')]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-rates.delete-failed'
-        )], 500);
+            'message' => trans(
+                'admin::app.settings.taxes.rates.delete-failed'
+            )
+        ], 500);
     }
 
     /**
@@ -324,6 +326,6 @@ class TaxRateController extends Controller
             }
         }
 
-        return redirect()->route('admin.settings.taxes.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.rates.index');
     }
 }

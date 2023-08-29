@@ -225,20 +225,29 @@ class CategoryController extends Controller
      */
     public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $data = $massUpdateRequest->all();
-
-        $categoryIds = $data['indices'];
-
-        foreach ($categoryIds as $categoryId) {
-            Event::dispatch('catalog.categories.mass-update.before', $categoryId);
-
-            $category = $this->categoryRepository->find($categoryId);
-
-            $category->status = $massUpdateRequest->input('value');
-            
-            $category->save();
-
-            Event::dispatch('catalog.categories.mass-update.after', $category);
+        try {
+            $data = $massUpdateRequest->all();
+    
+            $categoryIds = $data['indices'];
+    
+            foreach ($categoryIds as $categoryId) {
+                Event::dispatch('catalog.categories.mass-update.before', $categoryId);
+    
+                $category = $this->categoryRepository->find($categoryId);
+    
+                $category->status = $massUpdateRequest->input('value');
+                
+                $category->save();
+    
+                Event::dispatch('catalog.categories.mass-update.after', $category);
+            }
+    
+            return new JsonResource([
+                'message' => trans('admin::app.catalog.categories.update-success')]);
+        } catch (\Exception $e) {
+            return new JsonResource([
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 

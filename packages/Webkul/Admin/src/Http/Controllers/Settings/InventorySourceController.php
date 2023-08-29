@@ -76,7 +76,7 @@ class InventorySourceController extends Controller
 
         Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
+        session()->flash('success', trans('admin::app.settings.inventory-sources.create-success'));
 
         return redirect()->route('admin.settings.inventory_sources.index');
     }
@@ -103,6 +103,10 @@ class InventorySourceController extends Controller
     public function update(InventorySourceRequest $inventorySourceRequest, $id)
     {
         Event::dispatch('inventory.inventory_source.update.before', $id);
+
+        if (! $inventorySourceRequest->status) {
+            $inventorySourceRequest['status'] = 0;
+        }
 
         $data = $inventorySourceRequest->only([
             'code',

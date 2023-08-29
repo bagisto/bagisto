@@ -112,10 +112,7 @@ class RoleController extends Controller
             $isChangedFromAll
             && $this->adminRepository->countAdminsWithAllAccess() === 1
         ) {
-            session()->flash('error', trans('admin::app.settings.roles.edit.being-used', [
-                'name' => 'admin::app.settings.roles.index.title',
-                'source' => 'admin::app.settings.roles.index.admin-user'
-            ]));
+            session()->flash('error', trans('admin::app.settings.roles.being-used'));
 
             return redirect()->route('admin.settings.roles.index');
         }
@@ -158,8 +155,10 @@ class RoleController extends Controller
 
         if ($this->roleRepository->count() == 1) {
             return new JsonResource([
-                'message' => trans('admin::app.settings.roles.last-delete-error'
-            )], 400);
+                'message' => trans(
+                    'admin::app.settings.roles.last-delete-error'
+                )
+            ], 400);
         }
 
         try {
@@ -174,7 +173,9 @@ class RoleController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.roles.delete-failed'
-        )], 500);
+            'message' => trans(
+                'admin::app.settings.roles.delete-failed'
+            )
+        ], 500);
     }
 }

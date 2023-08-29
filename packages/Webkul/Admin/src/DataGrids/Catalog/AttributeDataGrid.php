@@ -129,7 +129,7 @@ class AttributeDataGrid extends DataGrid
         $this->addAction([
             'icon'   => 'icon-delete',
             'title'  => trans('admin::app.catalog.attributes.index.datagrid.delete'),
-            'method' => 'POST',
+            'method' => 'DELETE',
             'url'    => function ($row) {
                 return route('admin.catalog.attributes.delete', $row->id);
             },
