@@ -2,27 +2,16 @@
 
 namespace Webkul\Core\Exceptions;
 
-use App\Exceptions\Handler as AppExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use PDOException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Request;
+use App\Exceptions\Handler as BaseHandler;
+use PDOException;
 use Throwable;
 
-class Handler extends AppExceptionHandler
+class Handler extends BaseHandler
 {
-    /**
-     * Json errors.
-     *
-     * @var array
-     */
-    protected $jsonErrorMessages = [
-        404 => 'Resource Not Found',
-        403 => '403 Forbidden Error',
-        401 => 'Unauthenticated',
-        500 => '500 Internal Server Error',
-    ];
-
     /**
      * Render an exception into an HTTP response.
      *
@@ -48,11 +37,17 @@ class Handler extends AppExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        $path = $this->isAdminUri() ? 'admin' : 'shop';
+
         if ($request->expectsJson()) {
-            return response()->json(['error' => $this->jsonErrorMessages[401]], 401);
+            return response()->json(['error' => trans("{$path}::app.errors.401.description")], 401);
         }
 
-        return redirect()->guest(route('shop.customer.session.index'));
+        if ($path == 'admin') {
+            return redirect()->guest(route('admin.session.create'));
+        } else {
+            return redirect()->guest(route('shop.customer.session.index'));
+        }
     }
 
     /**
@@ -62,7 +57,7 @@ class Handler extends AppExceptionHandler
      */
     private function isAdminUri()
     {
-        return strpos(\Illuminate\Support\Facades\Request::path(), 'admin') !== false;
+        return strpos(Request::path(), 'admin') !== false;
     }
 
     /**
@@ -95,17 +90,17 @@ class Handler extends AppExceptionHandler
      * Response.
      *
      * @param  string  $path
-     * @param  int  $statusCode
+     * @param  int  $errorCode
      * @return \Illuminate\Http\Response
      */
-    private function response($path, $statusCode)
+    private function response($path, $errorCode)
     {
         if (request()->expectsJson()) {
             return response()->json([
-                'error' => $this->jsonErrorMessages[$statusCode] ?? 'Something went wrong, please try again later.',
-            ], $statusCode);
+                'error' => trans("{$path}::app.errors.{$errorCode}.description"),
+            ], $errorCode);
         }
 
-        return response()->view("{$path}::errors.{$statusCode}", [], $statusCode);
+        return response()->view("{$path}::errors.index", compact('errorCode'));
     }
 }

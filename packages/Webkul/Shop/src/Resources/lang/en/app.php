@@ -616,10 +616,33 @@ return [
         ],
     ],
 
-    'error' => [
-        'home'        => 'Go To Home',
-        'page-lost'   => 'Page lost content',
-        'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below.",
+    'errors' => [
+        'go-to-home'   => 'Go To Home',
+        
+        '404' => [
+            'title'       => '404 Page Not Found',
+            'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
+        ],
+        
+        '401' => [
+            'title'       => '401 Unauthorized',
+            'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
+        ],
+        
+        '403' => [
+            'title'       => '403 Forbidden',
+            'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
+        ],
+
+        '500' => [
+            'title'       => '500 Internal Server Error',
+            'description' => 'Oops! Something went wrong. It seems we\'re having trouble loading the page you\'re looking for.',
+        ],
+
+        '503' => [
+            'title'       => '503 Service Unavailable',
+            'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
+        ]
     ],
 
     'layouts' => [

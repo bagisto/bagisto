@@ -2763,35 +2763,35 @@ return [
         'newsletter-subscriptions' => 'Newsletter Subscriptions',
     ],
 
-    'error' => [
-        'go-to-home'     => 'GO TO HOME',
-        'in-maintenance' => 'In Maintenance',
-        'right-back'     => 'Be Right Back',
-
+    'errors' => [
+        'go-back'   => 'Go Back',
+        'dashboard' => 'Dashboard',
+        'support'   => 'If the problem persists, reach out to us at <a href=":link" class=":class">:email</a> for assistance.',
+        
         '404' => [
-            'page-title' => '404 Page not found',
-            'name'       => '404',
-            'title'      => 'Page Not found',
-            'message'    => 'The Page you are looking for does not exist or have been moved. Navigate using side menu.',
+            'title'       => '404 Page Not Found',
+            'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
         ],
-        '403' => [
-            'page-title' => '403 forbidden Error',
-            'name'       => '403',
-            'title'      => 'Forbidden error',
-            'message'    => 'You do not have permission to access this page',
-        ],
-        '500' => [
-            'page-title' => '500 Internal Server Error',
-            'name'       => '500',
-            'title'      => 'Internal Server Error',
-            'message'    => 'The Server Encountered an internal error.',
-        ],
+        
         '401' => [
-            'page-title' => '401 Unauthorized Error',
-            'name'       => '401',
-            'title'      => 'Unauthorized Error',
-            'message'    => 'The request has not been applied because it lacks valid authentication credentials for the target resource.',
+            'title'       => '401 Unauthorized',
+            'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
         ],
+        
+        '403' => [
+            'title'       => '403 Forbidden',
+            'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
+        ],
+
+        '500' => [
+            'title'       => '500 Internal Server Error',
+            'description' => 'Oops! Something went wrong. It seems we\'re having trouble loading the page you\'re looking for.',
+        ],
+
+        '503' => [
+            'title'       => '503 Service Unavailable',
+            'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
+        ]
     ],
 
     'export' => [
