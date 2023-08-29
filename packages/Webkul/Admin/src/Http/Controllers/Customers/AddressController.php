@@ -20,7 +20,8 @@ class AddressController extends Controller
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected CustomerAddressRepository $customerAddressRepository
-    ) {
+    )
+    {
     }
 
     /**

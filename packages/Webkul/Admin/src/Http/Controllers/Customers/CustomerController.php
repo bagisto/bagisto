@@ -25,7 +25,8 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected CustomerNoteRepository $customerNoteRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -145,7 +146,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.after', $customer);
 
-        session()->flash('success', trans('admin::app.customers.index.edit.edit-success'));
+        session()->flash('success', trans('admin::app.customers.update-success'));
 
         return redirect()->back();
     }
@@ -160,15 +161,15 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->findorFail($id);
 
-        if (!$customer) {
+        if (! $customer) {
             return response()->json(['message' => trans('admin::app.customers.delete-failed')], 400);
         }
 
-        if (!$this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+        if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
 
             $this->customerRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.customers.view.delete-success'));
+            session()->flash('success', trans('admin::app.customers.delete-success'));
 
             return redirect(route('admin.customers.customers.index'));
         }

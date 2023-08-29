@@ -129,10 +129,10 @@ class TemplateController extends Controller
 
             Event::dispatch('marketing.templates.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.marketing.templates.delete-success')]);
+            return response()->json(['message' => trans('admin::app.marketing.communications.templates.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Email Template'])], 400);
+        return response()->json(['message' => trans('admin::app.marketing.communications.templates.delete-failed', ['name' => 'admin::app.marketing.communications.templates.email-template'])], 400);
     }
 }

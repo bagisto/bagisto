@@ -19,7 +19,8 @@ class CatalogRuleController extends Controller
     public function __construct(
         protected CatalogRuleRepository $catalogRuleRepository,
         protected CatalogRuleIndex $catalogRuleIndexHelper
-    ) {
+    )
+    {
     }
 
     /**

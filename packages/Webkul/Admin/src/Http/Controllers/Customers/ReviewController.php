@@ -65,7 +65,7 @@ class ReviewController extends Controller
 
         Event::dispatch('customer.review.update.after', $review);
 
-        session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
+        session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'admin::app.customers.reviews.review']));
 
         return redirect()->route('admin.customers.customers.review.index');
     }

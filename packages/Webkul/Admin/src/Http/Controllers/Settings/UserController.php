@@ -22,7 +22,8 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -133,7 +134,7 @@ class UserController extends Controller
     public function destroy($id): JsonResource
     {
         if ($this->adminRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'admin::app.settings.users.index.admin'])], 400);
+            return response()->json(['message' => trans('admin::app.settings.users.edit.last-delete-error', ['name' => 'admin::app.settings.users.index.admin'])], 400);
         }
 
         if (auth()->guard('admin')->user()->id == $id) {
@@ -150,13 +151,13 @@ class UserController extends Controller
             Event::dispatch('user.admin.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.response.delete-success', ['name' => trans('admin::app.settings.users.index.admin')]),
+                'message' => trans('admin::app.settings.users.edit.delete-success', ['name' => trans('admin::app.settings.users.index.admin')]),
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.users.index.admin')]),
+            'message' => trans('admin::app.settings.users.edit.delete-failed', ['name' => trans('admin::app.settings.users.index.admin')]),
         ], 500);
     }
 
@@ -194,7 +195,7 @@ class UserController extends Controller
 
                 Event::dispatch('user.admin.delete.after', $id);
 
-                session()->flash('success', trans('admin::app.settings.users.edit.delete-success'));
+                session()->flash('success', trans('admin::app.settings.users.edit.delete-success', ['name' => trans('admin::app.settings.users.index.admin')]));
 
                 return redirect()->route('admin.session.create');
             }
@@ -264,7 +265,7 @@ class UserController extends Controller
      */
     private function cannotChangeRedirectResponse(string $columnName): \Illuminate\Http\RedirectResponse
     {
-        session()->flash('error', trans('admin::app.response.cannot-change', [
+        session()->flash('error', trans('admin::app.settings.users.edit.cannot-change', [
             'name' => $columnName,
         ]));
 

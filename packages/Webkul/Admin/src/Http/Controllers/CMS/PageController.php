@@ -74,7 +74,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.create.after', $page);
 
-        session()->flash('success', trans('admin::app.cms.create.create-success'));
+        session()->flash('success', trans('admin::app.cms.create-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -124,7 +124,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.update.after', $page);
 
-        session()->flash('success', trans('admin::app.cms.edit.edit-success'));
+        session()->flash('success', trans('admin::app.cms.update-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -143,7 +143,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.delete.after', $id);
 
-        return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
+        return response()->json(['message' => trans('admin::app.cms.delete-success')]);
     }
 
     /**
@@ -163,11 +163,11 @@ class PageController extends Controller
             Event::dispatch('cms.pages.delete.after', $index);
         }
 
-        session()->flash('success', trans('admin::app.cms.index.delete-success'));
+        session()->flash('success', trans('admin::app.cms.delete-success'));
 
         return redirect()->route('admin.cms.index');
 
-        session()->flash('success', trans('admin::app.cms.index.no-resource'));
+        session()->flash('success', trans('admin::app.cms.no-resource'));
 
         return redirect()->route('admin.cms.index');
     }
