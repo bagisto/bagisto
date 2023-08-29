@@ -462,7 +462,7 @@
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="status"
-                                            :value="old('status') ?? $inventorySource->status"
+                                            :value="old('status') ?? ($inventorySource->status)"
                                             :label="trans('admin::app.settings.inventory-sources.edit.status')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.status')"
                                             :checked="(boolean) $selectedValue"

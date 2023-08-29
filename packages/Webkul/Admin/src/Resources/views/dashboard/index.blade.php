@@ -478,11 +478,13 @@
                                             $item->items->count() - 3 
                                             && $item->items->count() > 4
                                         )
-                                            <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                                <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
-                                                    @lang('admin::app.dashboard.index.more-products', ['product_count' => $item->items->count() - 3 ])
-                                                </p>
-                                            </div>
+                                            <a href="{{ route('admin.sales.orders.view', $item->id) }}">
+                                                <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
+                                                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
+                                                        @lang('admin::app.dashboard.index.more-products', ['product_count' => $item->items->count() - 3 ])
+                                                    </p>
+                                                </div>
+                                            </a>
                                         @endif
                                     </div>
 

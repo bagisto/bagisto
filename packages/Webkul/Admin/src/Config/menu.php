@@ -163,19 +163,19 @@ return [
     ], [
         'key'        => 'settings.taxes',
         'name'       => 'admin::app.components.layouts.sidebar.taxes',
-        'route'      => 'admin.settings.taxes.tax_categories.index',
+        'route'      => 'admin.settings.taxes.categories.index',
         'sort'       => 8,
         'icon'       => '',
     ], [
         'key'        => 'settings.taxes.tax-categories',
         'name'       => 'admin::app.components.layouts.sidebar.tax-categories',
-        'route'      => 'admin.settings.taxes.tax_categories.index',
+        'route'      => 'admin.settings.taxes.categories.index',
         'sort'       => 1,
         'icon'       => '',
     ], [
         'key'        => 'settings.taxes.tax-rates',
         'name'       => 'admin::app.components.layouts.sidebar.tax-rates',
-        'route'      => 'admin.settings.taxes.tax_rates.index',
+        'route'      => 'admin.settings.taxes.rates.index',
         'sort'       => 2,
         'icon'       => '',
     ], [

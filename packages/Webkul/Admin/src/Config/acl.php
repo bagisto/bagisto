@@ -698,12 +698,12 @@ return [
     ], [
         'key'   => 'settings.taxes',
         'name'  => 'admin::app.acl.taxes',
-        'route' => 'admin.settings.taxes.tax_categories.index',
+        'route' => 'admin.settings.taxes.categories.index',
         'sort'  => 7,
     ], [
         'key'   => 'settings.taxes.tax-categories',
         'name'  => 'admin::app.acl.tax-categories',
-        'route' => 'admin.settings.taxes.tax_categories.index',
+        'route' => 'admin.settings.taxes.categories.index',
         'sort'  => 1,
     ], [
         'key'   => 'settings.taxes.tax-categories.create',
@@ -713,27 +713,27 @@ return [
     ], [
         'key'   => 'settings.taxes.tax-categories.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.settings.taxes.tax_categories.edit',
+        'route' => 'admin.settings.taxes.categories.edit',
         'sort'  => 2,
     ], [
         'key'   => 'settings.taxes.tax-categories.delete',
         'name'  => 'admin::app.acl.delete',
-        'route' => 'admin.settings.taxes.tax_categories.delete',
+        'route' => 'admin.settings.taxes.categories.delete',
         'sort'  => 3,
     ], [
         'key'   => 'settings.taxes.tax-rates',
         'name'  => 'admin::app.acl.tax-rates',
-        'route' => 'admin.settings.taxes.tax_rates.index',
+        'route' => 'admin.settings.taxes.rates.index',
         'sort'  => 2,
     ], [
         'key'   => 'settings.taxes.tax-rates.create',
         'name'  => 'admin::app.acl.create',
-        'route' => 'admin.settings.taxes.tax_rates.create',
+        'route' => 'admin.settings.taxes.rates.create',
         'sort'  => 1,
     ], [
         'key'   => 'settings.taxes.tax-rates.edit',
         'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.settings.taxes.tax_rates.edit',
+        'route' => 'admin.settings.taxes.rates.edit',
         'sort'  => 2,
     ],
 
