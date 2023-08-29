@@ -163,12 +163,8 @@ class PageController extends Controller
             Event::dispatch('cms.pages.delete.after', $index);
         }
 
-        session()->flash('success', trans('admin::app.cms.index.delete-success'));
-
-        return redirect()->route('admin.cms.index');
-
-        session()->flash('success', trans('admin::app.cms.index.no-resource'));
-
-        return redirect()->route('admin.cms.index');
+        return response()->json([
+            'message' => trans('admin::app.cms.index.datagrid.mass-delete-success')
+        ]);
     }
 }
