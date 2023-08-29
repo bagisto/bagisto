@@ -177,29 +177,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         });
     });
 
-
     Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
         Route::get('', 'index')->name('admin.theme.index');
 
-        Route::get('all', 'getThemes')->name('admin.theme.themes');
+        Route::get('create', 'create')->name('admin.theme.create');
 
-        /**
-         * Static Content related routes
-         */
-        Route::post('create-static-content', 'storeStaticContent')->name('admin.theme.store_static_content');
-
-        Route::post('edit-static-content/{id}', 'updateStaticContent')->name('admin.theme.update_static_content');
-
-        Route::delete('edit-static_content/{id}', 'destroyStaticContent')->name('admin.theme.delete_static_content');
-
-
-        /**
-         * Product and Category Carousels related routes
-         */
-        Route::post('store-product-and-category-carousel', 'storeProductAndCategoryCarousel')->name('admin.theme.store_product_and_category_carousel');
-
-        Route::post('edit-product-and-category-carousel/{id}', 'updateProductAndCategoryCarousel')->name('admin.theme.update_product_and_category_carousel');
-
-        Route::delete('edit-product-and-category-carousel/{id}', 'destroyProductAndCategoryCarousel')->name('admin.theme.delete_product_and_category_carousel');
+        Route::post('store', 'store')->name('admin.theme.store');
     });
 });

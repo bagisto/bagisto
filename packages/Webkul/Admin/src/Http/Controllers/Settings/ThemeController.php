@@ -2,7 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
 
@@ -24,130 +24,40 @@ class ThemeController extends Controller
      */
     public function index()
     {
+        if (request()->ajax()) {
+            return app(ThemeDatagrid::class)->toJson();
+        }
+
         return view('admin::theme.index');
     }
 
     /**
-     * Get Themes
+     * Create a new theme
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return \Illuminate\View\View
      */
-    public function getThemes(): JsonResource
+    public function create()
     {
-        $themes = $this->themeCustomizationRepository->scopeQuery(function($query) {
-            return $query->where('type', request()->input('type'))
-                ->orderBy('sort_order', 'asc');
-        })->get();
-
-        return new JsonResource($themes);
+        return view('admin::theme.create');
     }
 
     /**
-     * Store the newly created theme
+     * Store theme
      *
      * @return void
      */
-    public function storeStaticContent()
+    public function store()
     {
-        $htmlCss = array_map(function ($value) {
-            return preg_replace('/\s+/', ' ', $value);
-        }, request()->only('css', 'html'));
-        
-        $this->themeCustomizationRepository->create([
-            'type'       => request()->input('type'),
-            'name'       => request()->input('name'),
-            'sort_order' => request()->input('sort_order'),
-            'options'    => $htmlCss,
-            'status'     => request()->input('status', 1),
-        ]);
+        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
-        return response()->json([
-            'message' => 'Static content created successfully.'
-        ], 200);
-    }
+        if (request()->input('type') == 'static_content') {
+            $data['options'] = request()->only('css', 'html');
+        }
 
-    /**
-     * Update the specified Theme
-     *
-     * @return void
-     */
-    public function updateStaticContent($id)
-    {
-        $htmlCss = array_map(function ($value) {
-            return preg_replace('/\s+/', ' ', $value);
-        }, request()->only('css', 'html'));
-        
-        $this->themeCustomizationRepository->update([
-            'type'       => request()->input('type'),
-            'name'       => request()->input('name'),
-            'sort_order' => request()->input('sort_order'),
-            'options'    => $htmlCss,
-            'status'     => request()->input('status', 1),
-        ], $id);
+        $this->themeCustomizationRepository->create($data);
 
-        return response()->json([
-            'message' => 'Theme updated successfully',
-        ], 200);
-    }
+        session()->flash('success', 'Carousel created successfully');
 
-    /**
-     * Delete theme
-     *
-     * @param integer $id
-     * @return void
-     */
-    public function destroyStaticContent($id)
-    {
-        $this->themeCustomizationRepository->deleteWhere([
-            'id'   => $id,
-            'type' => 'static_content'
-        ]);
-
-        return response()->json([
-            'message' => 'Static content deleted successfully.'
-        ], 200);
-    }
-
-
-    public function storeProductAndCategoryCarousel()
-    {
-        $this->themeCustomizationRepository->create([
-            'type'       => request()->input('type'),
-            'name'       => request()->input('name'),
-            'options'    => request()->input('options'),
-            'sort_order' => request()->input('sort_order'),
-            'status'     => request()->input('theme_status'),
-        ]);
-
-        return response()->json([
-            'message' => 'Product Carousel created successfully'
-        ], 200);
-    }
-
-    public function updateProductAndCategoryCarousel($id) 
-    {
-        $this->themeCustomizationRepository->update([
-            'type'       => request()->input('type'),
-            'name'       => request()->input('name'),
-            'options'    => request()->input('options'),
-            'sort_order' => request()->input('sort_order'),
-            'status'     => request()->input('theme_status'),
-        ], $id);
-
-        return response()->json([
-            'message' => 'Product Carousel updated successfully',
-        ], 200);
-    }
-
-    public function destroyProductAndCategoryCarousel($id) 
-    {
-        $this->themeCustomizationRepository->deleteWhere([
-            'id'   => $id,
-            'type' => request()->input('type')
-        ]);
-
-        return response()->json([
-            'message' => 'Static content deleted successfully.'
-        ], 200);
+        return redirect()->back();
     }
 }
