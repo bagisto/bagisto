@@ -18,7 +18,7 @@
                 <!-- Cancel Button -->
                 <a
                     href="{{ route('admin.catalog.categories.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.catalog.categories.create.back-btn')
                 </a>

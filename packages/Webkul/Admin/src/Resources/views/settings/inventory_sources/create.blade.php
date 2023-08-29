@@ -23,7 +23,7 @@
                             <!-- Cancel Button -->
                             <a
                                 href="{{ route('admin.settings.inventory_sources.index') }}"
-                                class="transparent-button"
+                                class="transparent-button hover:bg-gray-200"
                             >
                                 @lang('admin::app.marketing.communications.campaigns.create.back-btn')
                             </a>

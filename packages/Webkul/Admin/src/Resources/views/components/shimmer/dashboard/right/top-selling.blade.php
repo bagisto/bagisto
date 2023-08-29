@@ -1,8 +1,8 @@
-<div class="flex flex-col gap-[32px] p-[16px]">
+<div class="flex flex-col">
     @for ($i = 1; $i <= 3; $i++)
-        <div class="flex gap-[10px] h-[65px]">
+        <div class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0">
             {{-- Product Image --}}
-            <div class="shimmer w-[65px] h-full rounded-[4px]"></div>
+            <div class="shimmer w-[65px] h-[65px] rounded-[4px]"></div>
 
             <!-- Product Detailes -->
             <div class="flex flex-col gap-[6px] w-[251px]">

@@ -146,7 +146,7 @@
 
         <!-- Right Toolbar -->
         <div class="flex gap-x-[16px]">
-            <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100"></span>
+            <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200"></span>
 
             <div class="flex items-center gap-x-[8px]">
                 <x-admin::dropdown>
@@ -187,14 +187,14 @@
                 <!-- Pagination -->
                 <div class="flex items-center gap-[4px]">
                     <div
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                         @click="changePage('previous')"
                     >
                         <span class="icon-sort-left text-[24px]"></span>
                     </div>
 
                     <div
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
                         @click="changePage('next')"
                     >
                         <span class="icon-sort-right text-[24px]"></span>

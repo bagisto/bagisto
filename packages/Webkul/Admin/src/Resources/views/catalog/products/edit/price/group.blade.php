@@ -17,7 +17,7 @@
                 </p>
 
                 <p
-                    class="text-blue-600 cursor-pointer"
+                    class="text-blue-600 cursor-pointer hover:underline"
                     @click="resetForm(); $refs.groupPriceCreateModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.price.group.create-btn')
@@ -46,7 +46,7 @@
                         </p>
 
                         <p
-                            class="text-blue-600 cursor-pointer"
+                            class="text-blue-600 cursor-pointer hover:underline"
                             @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
