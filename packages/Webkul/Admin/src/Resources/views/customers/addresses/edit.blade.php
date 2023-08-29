@@ -7,7 +7,7 @@
             <!-- Address Edit Button -->
             @if (bouncer()->hasPermission('customers.addresses.edit'))
                 <p 
-                    class="text-blue-600 cursor-pointer"
+                    class="text-blue-600 cursor-pointer hover:underline"
                     @click="$refs.CustomerAddressEdit.toggle()"
                 >
                     @lang('admin::app.customers.view.edit')

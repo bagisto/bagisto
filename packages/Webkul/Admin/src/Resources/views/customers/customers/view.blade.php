@@ -31,7 +31,7 @@
             {{-- Back Button --}}
             <a
                 href="{{ route('admin.customers.customers.index') }}"
-                class="transparent-button"
+                class="transparent-button hover:bg-gray-200"
             >
                 @lang('admin::app.customers.view.back-btn')
             </a>
@@ -564,7 +564,7 @@
 
                                     {{-- Delete Address --}}
                                     <p 
-                                        class="text-blue-600 cursor-pointer"
+                                        class="text-blue-600 cursor-pointer hover:underline"
                                         onclick="event.preventDefault();
                                         document.getElementById('delete-address{{ $address->id }}').submit();"
                                     >
@@ -582,7 +582,7 @@
                                     {{-- Set Default Address --}}
                                     @if (! $address->default_address )
                                         <p 
-                                            class="text-blue-600 cursor-pointer"
+                                            class="text-blue-600 cursor-pointer hover:underline"
                                             onclick="event.preventDefault();
                                             document.getElementById('default-address{{ $address->id }}').submit();"
                                         >

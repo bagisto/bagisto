@@ -21,7 +21,7 @@
                     <div class="flex gap-x-[10px] items-center">
                         <a
                             href="{{ route('admin.settings.taxes.tax_rates.index') }}"
-                            class="transparent-button"
+                            class="transparent-button hover:bg-gray-200"
                         >
                             @lang('admin::app.settings.taxes.tax-rates.create.back-btn')
                         </a>

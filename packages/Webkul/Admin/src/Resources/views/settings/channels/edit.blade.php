@@ -25,7 +25,7 @@
             <div class="flex gap-x-[10px] items-center">
                 <a
                     href="{{ route('admin.settings.channels.index') }}"
-                    class="transparent-button"
+                    class="transparent-button hover:bg-gray-200"
                 >
                     @lang('admin::app.settings.channels.edit.back-btn')
                 </a>

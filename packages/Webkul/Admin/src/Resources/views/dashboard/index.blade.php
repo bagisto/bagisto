@@ -508,7 +508,7 @@
                     @foreach ($statistics['stock_threshold'] as $item)
                         <!-- Single Product -->
                         <div class="relative">
-                            <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-sm:grid-cols-[1fr_auto]">
+                            <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-sm:grid-cols-[1fr_auto]">
                                 <div class="flex gap-[10px]">
                                     @if ($item->product->base_image_url)
                                         <div class="">
@@ -569,7 +569,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -680,7 +680,7 @@
 
                     <!-- Top Selling Products -->
                     <div class="border-b border-gray-300">
-                        <div class="flex items-center justify-between p-[16px] pb-0">
+                        <div class="flex items-center justify-between p-[16px]">
                             <p class="text-gray-600 text-[16px] font-semibold">
                                 @lang('admin::app.dashboard.index.top-selling-products')
                             </p>
@@ -691,60 +691,59 @@
                         </div>
 
                         <!-- Top Selling Products Shimmer -->
-                        <div v-if="isLoading">
+                        <template v-if="isLoading">
                             <x-admin::shimmer.dashboard.right.top-selling></x-admin::shimmer.dashboard.right.top-selling>
-                        </div>
+                        </template>
 
                         <!-- Top Selling Products Detailes -->
-                        <div v-else>
+                        <template v-else>
                             <div
-                                class="flex flex-col gap-[32px] p-[16px]"
+                                class="flex flex-col"
                                 v-if="statistics?.top_selling_products?.length"
                             >
                                 <a
-                                    v-for="item in statistics.top_selling_products"
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
+                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-100"
+                                    v-for="item in statistics.top_selling_products"
                                 >
-                                    <!-- Product Image -->
-                                    <div class="flex gap-[10px]">
-                                        <img
-                                            v-if="item?.product?.images.length"
-                                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
-                                            :src="item?.product?.images[0]?.url"
-                                        />
-    
-                                        <div
-                                            v-else
-                                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
+                                    <!-- Product Item -->
+                                    <img
+                                        v-if="item?.product?.images.length"
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
+                                        :src="item?.product?.images[0]?.url"
+                                    />
+
+                                    <div
+                                        v-else
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
+                                    >
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                        
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                            @lang('admin::app.dashboard.index.product-image')
+                                        </p>
+                                    </div>
+
+                                    <!-- Product Detailes -->
+                                    <div class="flex flex-col gap-[6px] w-full">
+                                        <p
+                                            class="text-gray-600"
+                                            v-text="item.name"
                                         >
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-                                            
-                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                                @lang('admin::app.dashboard.index.product-image')
-                                            </p>
-                                        </div>
-    
-                                        <!-- Product Detailes -->
-                                        <div class="flex flex-col gap-[6px] w-full">
+                                        </p>
+
+                                        <div class="flex justify-between">
                                             <p
-                                                class="text-gray-600"
-                                                v-text="item.name"
+                                                class="text-gray-600 font-semibold"
+                                                v-text="item.formatted_price"
                                             >
                                             </p>
-    
-                                            <div class="flex justify-between">
-                                                <p
-                                                    class="text-gray-600 font-semibold"
-                                                    v-text="item.formatted_price"
-                                                >
-                                                </p>
-    
-                                                <p
-                                                    class="text-[16px] text-gray-800 font-semibold"
-                                                    v-text="item.formatted_total"
-                                                >
-                                                </p>
-                                            </div>
+
+                                            <p
+                                                class="text-[16px] text-gray-800 font-semibold"
+                                                v-text="item.formatted_total"
+                                            >
+                                            </p>
                                         </div>
                                     </div>
                                 </a>
@@ -759,7 +758,7 @@
                                     <!-- Placeholder Image -->
                                     <img
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                        class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                        class="w-[80px] h-[80px]"
                                     >
     
                                     <!-- Add Variants Information -->
@@ -774,11 +773,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
 
                     <!-- Top Customers -->
-                    <div class="flex items-center justify-between p-[16px] pb-0">
+                    <div class="flex items-center justify-between p-[16px]">
                         <p class="text-gray-600 text-[16px] font-semibold">
                             @lang('admin::app.dashboard.index.customer-with-most-sales')
                         </p>
@@ -797,7 +796,7 @@
                     <template v-else>
                         <!-- Customers Lists -->
                         <div
-                            class="flex flex-col gap-[32px] p-[16px]"
+                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-100"
                             v-if="statistics?.customer_with_most_sales?.length"
                             v-for="item in statistics.customer_with_most_sales"
                         >
@@ -874,7 +873,7 @@
                                 <!-- Placeholder Image -->
                                 <img
                                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                    class="w-[80px] h-[80px]"
                                 />
 
                                 <!-- Add Variants Information -->

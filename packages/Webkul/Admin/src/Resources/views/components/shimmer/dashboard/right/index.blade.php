@@ -4,7 +4,7 @@
 
     <!-- Top Selling Products -->
     <div class="border-b border-gray-300">
-        <div class="flex items-center justify-between p-[16px] pb-0">
+        <div class="flex items-center justify-between p-[16px]">
             <div class="shimmer w-[157px] h-[17px]"></div>
 
             <div class="shimmer w-[83px] h-[17px]"></div>
@@ -14,7 +14,7 @@
         <x-admin::shimmer.dashboard.right.top-selling></x-admin::shimmer.dashboard.right.top-selling>
 
         <!-- Top Customers -->
-        <div class="flex items-center justify-between p-[16px] pb-0">
+        <div class="flex items-center justify-between p-[16px]">
             <div class="shimmer w-[201px] h-[17px]"></div>
 
             <div class="shimmer w-[83px] h-[17px]"></div>

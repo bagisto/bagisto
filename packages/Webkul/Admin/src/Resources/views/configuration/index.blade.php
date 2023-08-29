@@ -11,7 +11,7 @@
         </p>
 
         <div class="flex gap-x-[10px] items-center">
-            <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-100"></span>
+            <span class="icon-settings p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
         </div>
     </div>
 
