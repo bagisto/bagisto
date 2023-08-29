@@ -7,9 +7,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Webkul\Core\Exceptions\Handler as WebkulCoreHandler;
 use Webkul\Core\Tree;
-use Webkul\Shop\Exceptions\Handler;
 use Webkul\Shop\Http\Middleware\AuthenticateCustomer;
 use Webkul\Shop\Http\Middleware\Currency;
 use Webkul\Shop\Http\Middleware\Locale;
@@ -40,8 +38,6 @@ class ShopServiceProvider extends ServiceProvider
 
         /* View Composers */
         $this->composeView();
-
-        $this->app->bind(WebkulCoreHandler::class, Handler::class);
 
         /* Paginator */
         Paginator::defaultView('shop::partials.pagination');
