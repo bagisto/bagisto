@@ -1,20 +1,4 @@
 <x-admin::layouts>
-    @pushOnce('styles')
-        <link 
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"
-        >
-        </link>
-    @endPushOnce
-
-    @pushOnce('scripts')
-        <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"
-        >
-        </script>
-    @endPushOnce
-
     <x-slot:title>
         Theme Customization
     </x-slot:title>
@@ -95,7 +79,7 @@
                                 src="{{ bagisto_asset('images/inactive_category.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Product Carousel</p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Category Carousel</p>
                         </div>
                     </div>
                 
@@ -155,7 +139,7 @@
 
                 data() {
                     return {
-                        componentName: 'v-category-theme',
+                        componentName: 'v-product-theme',
                     }
                 },
 
@@ -315,7 +299,11 @@
                             </div>
                         </div>
 
-                        <div v-if="productCarousels.length">
+                        <template v-if="isLoading">
+                            <x-admin::shimmer.theme.product-carousel></x-admin::shimmer.theme.product-carousel>
+                        </template>
+
+                        <div v-if="productCarousels.length && ! isLoading">
                             <div
                                 class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
                                 v-for="productCarousel in productCarousels"
@@ -324,7 +312,10 @@
                                 <div class="flex gap-[10px]">
                                     <!-- Image -->
                                     <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
-                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+                                        <img 
+                                            class="w-[57px] h-[57px]"
+                                            src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                        >
 
                                         <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
                                     </div>
@@ -354,40 +345,19 @@
                                 <!-- Actions -->
                                 <div class="flex gap-[4px] place-content-start text-right">
                                     <p
-                                        class="text-blue-600 cursor-pointer"
+                                        class="text-blue-600 cursor-pointer hover:underline"
                                         @click="edit(productCarousel);"
                                     >
                                         Edit
                                     </p>
 
                                     <p
-                                        class="text-red-600 cursor-pointer"
+                                        class="text-red-600 cursor-pointer hover:underline"
                                         @click="remove(productCarousel)"
                                     >
                                         Delete
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                            v-else
-                        >
-                            <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
-                                alt="add-product-to-store">
-            
-                            <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Static Content</p>
-                                <p class="text-gray-400">Insert concise static content to enhance webpage engagement and readability..</p>
-                            </div>
-            
-                            <div
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
-                            >
-                                Add Static Content
                             </div>
                         </div>
                     </div>
@@ -567,7 +537,6 @@
                         </x-admin::modal>
                     </form>
                 </x-admin::form>
-               
             </div>
         </script>
 
@@ -580,6 +549,8 @@
                         productCarousels: {},
 
                         id: null,
+
+                        isLoading: true,
                     };
                 },
 
@@ -596,6 +567,8 @@
                             })
                             .then((response) => {
                                 this.productCarousels = response.data.data;
+
+                                this.isLoading = false;
                             })
                             .catch((error) => {
                                 console.log(error);
@@ -681,7 +654,11 @@
                             </div>
                         </div>
 
-                        <div v-if="categoryCarousels.length">
+                        <template v-if="isLoading">
+                            <x-admin::shimmer.theme.category-carousel></x-admin::shimmer.theme.category-carousel>
+                        </template>
+
+                        <div v-if="categoryCarousels.length && ! isLoading">
                             <div
                                 class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
                                 v-for="categoryCarousel in categoryCarousels"
@@ -720,40 +697,19 @@
                                 <!-- Actions -->
                                 <div class="flex gap-[4px] place-content-start text-right">
                                     <p
-                                        class="text-blue-600 cursor-pointer"
+                                        class="text-blue-600 cursor-pointer hover:underline"
                                         @click="edit(categoryCarousel);"
                                     >
                                         Edit
                                     </p>
 
                                     <p
-                                        class="text-red-600 cursor-pointer"
+                                        class="text-red-600 cursor-pointer hover:underline"
                                         @click="remove(categoryCarousel)"
                                     >
                                         Delete
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                            v-else
-                        >
-                            <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-category-to-store.png"
-                                alt="add-category-to-store">
-            
-                            <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Static Content</p>
-                                <p class="text-gray-400">Insert concise static content to enhance webpage engagement and readability..</p>
-                            </div>
-            
-                            <div
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
-                            >
-                                Add Static Content
                             </div>
                         </div>
                     </div>
@@ -946,6 +902,8 @@
                         categoryCarousels: {},
 
                         id: null,
+
+                        isLoading: true,
                     };
                 },
 
@@ -962,6 +920,8 @@
                             })
                             .then((response) => {
                                 this.categoryCarousels = response.data.data;
+
+                                this.isLoading = false;
                             })
                             .catch((error) => {
                                 console.log(error);
@@ -1047,7 +1007,11 @@
                             </div>
                         </div>
 
-                        <div v-if="staticContents.length">
+                        <template v-if="isLoading">
+                            <x-admin::shimmer.theme.category-carousel></x-admin::shimmer.theme.category-carousel>
+                        </template>
+
+                        <div v-if="staticContents.length && ! isLoading">
                             <div
                                 class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
                                 v-for="staticContent in staticContents"
@@ -1099,27 +1063,6 @@
                                         Delete
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                            v-else
-                        >
-                            <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
-                                alt="add-product-to-store">
-            
-                            <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Static Content</p>
-                                <p class="text-gray-400">Insert concise static content to enhance webpage engagement and readability..</p>
-                            </div>
-            
-                            <div
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
-                            >
-                                Add Static Content
                             </div>
                         </div>
 
@@ -1252,9 +1195,14 @@
                 data() {
                     return {
                         html: '',
+
                         css: '',
+
                         staticContents: {},
+
                         id: null,
+
+                        isLoading: true,
                     };
                 },
 
@@ -1303,6 +1251,8 @@
                             })
                             .then((response) => {
                                 this.staticContents = response.data.data;
+
+                                this.isLoading = false;
                             })
                             .catch((error) => {
                                 console.log(error);
@@ -1445,6 +1395,19 @@
                 template: '#v-footer-link-theme-template'
             });
         </script>
+
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"
+        >
+        </script>
     @endPushOnce
-    
+
+    @pushOnce('styles')
+        <link 
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"
+        >
+        </link>
+    @endPushOnce
 </x-admin::layouts>

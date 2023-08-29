@@ -183,7 +183,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('all', 'getThemes')->name('admin.theme.themes');
 
-
         /**
          * Static Content related routes
          */
@@ -197,11 +196,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         /**
          * Product and Category Carousels related routes
          */
+        Route::post('store-product-and-category-carousel', 'storeProductAndCategoryCarousel')->name('admin.theme.store_product_and_category_carousel');
 
-        Route::post('store-product-carousel', 'storeProductAndCategoryCarousel')->name('admin.theme.store_product_and_category_carousel');
+        Route::post('edit-product-and-category-carousel/{id}', 'updateProductAndCategoryCarousel')->name('admin.theme.update_product_and_category_carousel');
 
-        Route::post('edit-product-carousel/{id}', 'updateProductAndCategoryCarousel')->name('admin.theme.update_product_and_category_carousel');
-
-        Route::delete('edit-product-carousel/{id}', 'destroyProductAndCategoryCarousel')->name('admin.theme.delete_product_and_category_carousel');
+        Route::delete('edit-product-and-category-carousel/{id}', 'destroyProductAndCategoryCarousel')->name('admin.theme.delete_product_and_category_carousel');
     });
 });
