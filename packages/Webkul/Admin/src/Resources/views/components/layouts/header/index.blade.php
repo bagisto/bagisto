@@ -50,7 +50,7 @@
             </span>
         </a>
 
-       {{-- Notificatin Component --}}
+       {{-- Notification Component --}}
         <v-notification {{ $attributes }}>
             <span class="relative">
                 <span 
