@@ -43,7 +43,7 @@
                                 src="{{ bagisto_asset('images/slider.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold"> Slider </p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Slider </p>
                         </div>
                     </div>
                 
@@ -52,13 +52,13 @@
                         :class="{'border-blue-600': componentName == 'v-product-theme'}"
                         @click="switchComponent('v-product-theme')"
                     >   
-                        <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
+                        <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
                                 class="w-[80px] h-[80px]"
                                 src="{{ bagisto_asset('images/slider.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold"> Product </p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Product Carousel</p>
                         </div>
                     </div>
                 
@@ -67,20 +67,20 @@
                         :class="{'border-blue-600': componentName == 'v-static-theme'}"
                         @click="switchComponent('v-static-theme')"
                     >   
-                        <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
+                        <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
                                 class="w-[80px] h-[80px]"
                                 src="{{ bagisto_asset('images/slider.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold"> Static </p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Static Content </p>
                         </div>
                     </div>
                 
                     <div    
                         class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentName == 'v-content-theme'}"
-                        @click="switchComponent('v-content-theme')"
+                        :class="{'border-blue-600': componentName == 'v-footer-link-theme'}"
+                        @click="switchComponent('v-footer-link-theme')"
                     >   
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
@@ -88,7 +88,7 @@
                                 src="{{ bagisto_asset('images/slider.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold"> Content </p>
+                            <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold">Footer Link</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
 
                 data() {
                     return {
-                        componentName: 'v-static-theme',
+                        componentName: 'v-product-theme',
                     }
                 },
 
@@ -255,29 +255,258 @@
                                 </p>
                             </div>
             
-                            <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                            <div
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.productCarouselModal.toggle()"
+                            >
                                 Add Product
                             </div>
                         </div>
 
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                        <div v-if="productCarousels.length">
+                            <div
+                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
+                                v-for="productCarousel in productCarousels"
+                            >
+                                <!-- Information -->
+                                <div class="flex gap-[10px]">
+                                    <!-- Image -->
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ productCarousel.name }}
+                                        </p>
+
+                                        <p 
+                                            v-if="productCarousel.status"
+                                            class="label-processing text-white"
+                                        >
+                                            Active
+                                        </p>
+
+                                        <p 
+                                            v-else
+                                            class="label-pending text-white"
+                                        >
+                                            Inactive
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-[4px] place-content-start text-right">
+                                    <p
+                                        class="text-blue-600 cursor-pointer"
+                                        @click="edit(productCarousel);this.initHtmlEditor();this.initCssEditor();"
+                                    >
+                                        Edit
+                                    </p>
+
+                                    <p
+                                        class="text-red-600 cursor-pointer"
+                                        @click="remove(productCarousel)"
+                                    >
+                                        Delete
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            v-else
+                        >
                             <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
                                 src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
                                 alt="add-product-to-store">
             
                             <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Product Variant</p>
-                                <p class="text-gray-400">To create various combination of product on a go.</p>
+                                <p class="text-[16px] text-gray-400 font-semibold">Add Static Content</p>
+                                <p class="text-gray-400">Insert concise static content to enhance webpage engagement and readability..</p>
                             </div>
             
                             <div
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Variant
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
+                            >
+                                Add Static Content
                             </div>
                         </div>
                     </div>
                 </div>
             
+                <!-- Model Form -->
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                    ref="productCarouselform"
+                >
+                    <form @submit="handleSubmit($event, storeOrUpdate)">
+                        <x-admin::modal ref="productCarouselModal">
+                            <x-slot:header>
+                                <p      
+                                    v-if="id"
+                                    class="text-[18px] text-gray-800 font-bold"
+                                >
+                                    Update Product Carousel
+                                </p>
+
+                                <p      
+                                    v-else
+                                    class="text-[18px] text-gray-800 font-bold"
+                                >
+                                    Create Product Carousel
+                                </p>
+                            </x-slot:header>
+
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="id"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    {{-- Name --}}
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Name
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="name"
+                                            :label="trans('Name')"
+                                            :placeholder="trans('Name')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="name"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Sort By
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort"
+                                            :label="trans('Sort')"
+                                            :placeholder="trans('Sort')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="sort"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Limit
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="limit"
+                                            rules="numeric"
+                                            :label="trans('limit')"
+                                            :placeholder="trans('limit')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="limit"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Status
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="status"
+                                            :value="1"
+                                            label="Status"
+                                            :checked="(boolean) true"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Theme Sort Order
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            label="Sort Order"
+                                            rules="numeric|required"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Theme Status
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="theme_status"
+                                            :value="1"
+                                            label="Theme Status"
+                                            :checked="(boolean) true"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="theme_status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <!-- Save Button -->
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        Save 
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
                 <!-- General -->
                 <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                     <div class="bg-white rounded-[4px] box-shadow">
@@ -311,7 +540,59 @@
 
         <script type="module">
             app.component('v-product-theme', {
-                template: '#v-product-theme-template'
+                template: '#v-product-theme-template',
+
+                data() {
+                    return {
+                        productCarousels: {},
+
+                        id: null,
+                    };
+                },
+
+                created() {
+                    this.get();
+                },
+
+                methods: {
+                    get() {
+                        this.$axios.get('{{ route('admin.theme.themes') }}', {
+                                params: {
+                                    type: 'product_carousel',
+                                }
+                            })
+                            .then((response) => {
+                                this.productCarousels = response.data.data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    },
+
+                    storeOrUpdate(params) {
+                        this.$axios.post('{{ route('admin.theme.store_product_carousel') }}', params)
+                                .then((response) => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                    this.get();
+
+                                    this.$refs.productCarouselModal.toggle();
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                    },
+
+                    edit(productCarousel) {
+
+                    },
+
+                    remove(productCarousel) {
+                        this.id = productCarousel.id;
+
+                        console.log(this.$refs.productCarouselform.setValues(productCarousel));
+                    }
+                }
             });
         </script>
 
@@ -337,14 +618,72 @@
                             </div>
                         </div>
 
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                        <div v-if="staticContents.length">
+                            <div
+                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
+                                v-for="staticContent in staticContents"
+                            >
+                                <!-- Information -->
+                                <div class="flex gap-[10px]">
+                                    <!-- Image -->
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">Product Image</p>
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ staticContent.name }}
+                                        </p>
+
+                                        <p 
+                                            v-if="staticContent.status"
+                                            class="label-processing text-white"
+                                        >
+                                            Active
+                                        </p>
+
+                                        <p 
+                                            v-else
+                                            class="label-pending text-white"
+                                        >
+                                            Inactive
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-[4px] place-content-start text-right">
+                                    <p
+                                        class="text-blue-600 cursor-pointer"
+                                        @click="edit(staticContent);this.initHtmlEditor();this.initCssEditor();"
+                                    >
+                                        Edit
+                                    </p>
+
+                                    <p
+                                        class="text-red-600 cursor-pointer"
+                                        @click="remove(staticContent)"
+                                    >
+                                        Delete
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            v-else
+                        >
                             <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
                                 src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
                                 alt="add-product-to-store">
             
                             <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Product Variant</p>
-                                <p class="text-gray-400">To create various combination of product on a go.</p>
+                                <p class="text-[16px] text-gray-400 font-semibold">Add Static Content</p>
+                                <p class="text-gray-400">Insert concise static content to enhance webpage engagement and readability..</p>
                             </div>
             
                             <div
@@ -355,13 +694,13 @@
                             </div>
                         </div>
 
-
                         <!-- Edit Drawer -->
                         <x-admin::form
                             v-slot="{ meta, errors, handleSubmit }"
+                            ref="staticContentForm"
                             as="div"
                         >
-                            <form @submit="handleSubmit($event, store)">
+                            <form @submit="handleSubmit($event, storeOrUpdate)">
                                 <!-- Edit Drawer -->
                                 <x-admin::drawer
                                     ref="openStatisContentDrawer"
@@ -370,8 +709,18 @@
                                     <!-- Drawer Header -->
                                     <x-slot:header>
                                         <div class="flex justify-between items-center">
-                                            <p class="text-[20px] font-medium">
-                                                @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
+                                            <p 
+                                                v-if="id"
+                                                class="text-[20px] font-medium"
+                                            >
+                                                Update Static Content
+                                            </p>
+
+                                            <p 
+                                                v-else
+                                                class="text-[20px] font-medium"
+                                            >
+                                                Create Static Content
                                             </p>
 
                                             <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
@@ -464,35 +813,6 @@
                         </x-admin::form>
                     </div>
                 </div>
-            
-                <!-- General -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                    <div class="bg-white rounded-[4px] box-shadow">
-                        <div class="flex items-center justify-between p-[6px]">
-                            <p class="text-gray-600 text-[16px] p-[10px] font-semibold">General</p>
-                            <span
-                                class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                        </div>
-            
-                        <!-- Price -->
-                        <div class="p-[16px]">
-                            <div class="mb-[10px]">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Name*
-                                </label>
-                                <input
-                                    class="text-[20px] text-gray-600 font-bold appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="$ 10.00">
-                            </div>
-                            <div class="">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Cost
-                                    Price* </label>
-                                <input
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="8.00">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </script>
 
@@ -504,7 +824,13 @@
                     return {
                         html: '',
                         css: '',
+                        staticContents: {},
+                        id: null,
                     };
+                },
+
+                created() {
+                    this.get();
                 },
 
                 methods: {
@@ -540,29 +866,85 @@
                         }, 0);
                     },
 
-                    store(params) {
+                    get() {
+                        this.$axios.get('{{ route('admin.theme.themes') }}', {
+                                params: {
+                                    type: 'static_content'
+                                }
+                            })
+                            .then((response) => {
+                                this.staticContents = response.data.data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    },
+
+                    remove(staticContent) {
+                        if (! confirm('Are you sure you want to remove')) {
+                            return;
+                        }
+
+                        this.$axios.delete(`{{ route('admin.theme.delete_static_content', '') }}/${staticContent.id}`)
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                this.get();
+                            })
+                            .catch((error) => {});
+                    },
+
+                    storeOrUpdate(params) {
                         params.html = this.html;
 
                         params.css = this.css;
 
                         params.type = 'static_content';
 
-                        this.$axios.post('{{ route('admin.theme.store') }}', params)
-                            .then((response) => {
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                        if (params.id) {
+                            this.$axios.post(`{{ route('admin.theme.update_static_content', '') }}/${params.id}`, params)
+                                .then((response) => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
-                                $refs.openStatisContentDrawer.close();
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            })
+                                    this.get();
+
+                                    this.$refs.openStatisContentDrawer.close();
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        } else {
+                            this.$axios.post('{{ route('admin.theme.store_static_content') }}', params)
+                                .then((response) => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                    this.get();
+
+                                    this.$refs.openStatisContentDrawer.close();
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        }
+                    },
+
+                    edit(staticContent) {
+                        this.id = staticContent.id;
+
+                        this.$refs.staticContentForm.setValues(staticContent);
+
+                        this.html = staticContent.options.html;
+
+                        this.css = staticContent.options.css;
+
+                        this.$refs.openStatisContentDrawer.open();
                     }
-                }
+                },
             });
         </script>
 
           {{-- Static Theme --}}
-        <script type="text/x-template" id="v-content-theme-template">
+        <script type="text/x-template" id="v-footer-link-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
@@ -630,8 +1012,8 @@
         </script>
 
         <script type="module">
-            app.component('v-content-theme', {
-                template: '#v-content-theme-template'
+            app.component('v-footer-link-theme', {
+                template: '#v-footer-link-theme-template'
             });
         </script>
     @endPushOnce

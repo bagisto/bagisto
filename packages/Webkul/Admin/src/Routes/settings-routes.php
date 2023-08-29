@@ -179,6 +179,21 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('all', 'getThemes')->name('admin.theme.themes');
 
-        Route::post('create', 'store')->name('admin.theme.store');
+
+        /**
+         * Static Content related routes
+         */
+        Route::post('create-static-content', 'storeStaticContent')->name('admin.theme.store_static_content');
+
+        Route::post('edit-static-content/{id}', 'updateStaticContent')->name('admin.theme.update_static_content');
+
+        Route::delete('edit-static_content/{id}', 'destroyStaticContent')->name('admin.theme.delete_static_content');
+
+
+        /**
+         * Product Carousels related routes
+         */
+
+        Route::post('admin.theme.store_product_carousel', 'storeProductCarousel')->name('admin.theme.store_product_carousel');
     });
 });
