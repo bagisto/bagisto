@@ -28,7 +28,7 @@ class TaxCategoryDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.settings.taxes.tax-categories.index.datagrid.id'),
+            'label'      => trans('admin::app.settings.taxes.categories.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -37,7 +37,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('admin::app.settings.taxes.tax-categories.index.datagrid.name'),
+            'label'      => trans('admin::app.settings.taxes.categories.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -46,7 +46,7 @@ class TaxCategoryDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'code',
-            'label'      => trans('admin::app.settings.taxes.tax-categories.index.datagrid.code'),
+            'label'      => trans('admin::app.settings.taxes.categories.index.datagrid.code'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -63,19 +63,19 @@ class TaxCategoryDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.settings.taxes.tax-categories.index.datagrid.edit'),
+            'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return route('admin.settings.taxes.tax_categories.edit', $row->id);
+                return route('admin.settings.taxes.categories.edit', $row->id);
             },
         ]);
 
         $this->addAction([
             'icon'   => 'icon-delete',
-            'title'  => trans('admin::app.settings.taxes.tax-categories.index.datagrid.delete'),
+            'title'  => trans('admin::app.settings.taxes.categories.index.datagrid.delete'),
             'method' => 'DELETE',
             'url'    => function ($row) {
-                return route('admin.settings.taxes.tax_categories.delete', $row->id);
+                return route('admin.settings.taxes.categories.delete', $row->id);
             },
         ]);
     }

@@ -429,12 +429,12 @@ return [
 
                 'datagrid' => [
                     'id'                 => 'ID',
-                    'invoice-id'         => 'Invoice Number',
+                    'invoice-id'         => 'Invoice ID',
                     'order-id'           => 'Order ID',
                     'status'             => 'Status',
                     'transaction-id'     => 'Transaction ID',
-                    'transaction-date'   => 'Transaction Date',
-                    'transaction-amount' => 'Transaction Amount',
+                    'transaction-date'   => 'Date',
+                    'transaction-amount' => 'Amount',
                 ],
 
                 'edit'  =>  [
@@ -769,7 +769,7 @@ return [
                     'created-at'          => 'Created At',
                     'edit'                => 'Edit',
                     'delete'              => 'Delete',
-                    'mass-delete-success' => 'Selected Attribute Deleted Successfully', 
+                    'mass-delete-success' => 'Selected Attribute Deleted Successfully',
                 ],
             ],
 
@@ -903,8 +903,8 @@ return [
             'create-success'     => 'Attribute Created Successfully',
             'update-success'     => 'Attribute Updated Successfully',
             'user-define-error'  => 'Can not delete system Attribute',
-            'delete-success'  => 'Attribute Deleted Successfully',
-            'delete-failed'   => 'Attribute Deleted Failed',
+            'delete-success'     => 'Attribute Deleted Successfully',
+            'delete-failed'      => 'Attribute Deleted Failed',
         ],
 
         'categories'  => [
@@ -1115,7 +1115,7 @@ return [
                 'delete-success' => 'Selected data successfully deleted',
                 'order-pending'  => 'Customer have pending order',
                 'partial-action' => 'Some actions were not performed due restricted system constraints on :resource',
-                'update-success' => 'Selected data were successfully updated',
+                'update-success' => 'Selected Customers successfully updated',
                 'no-resource'    => 'The resource provided for insufficient for the action',
                 'method-error'   => 'Error! Wrong method detected, please check mass action configuration',
             ],
@@ -1278,8 +1278,8 @@ return [
                     'images'         => 'Images',
                     'update-success' => 'Update Successfully',
                 ],
-                
-                'datagrid'   =>  [  
+
+                'datagrid'   =>  [
                     'customer_names'            => 'Name',
                     'comment'                   => 'Comment',
                     'date'                      => 'Date',
@@ -1299,8 +1299,8 @@ return [
                     'mass-delete-success'       => 'Selected Review Deleted Successfully',
                     'mass-delete-error'         => 'Something went wrong',
                     'mass-update-success'       => 'Selected Review Updated Successfully',
-                ],      
-            ],      
+                ],
+            ],
         ],
 
         'addresses' => [
@@ -1788,7 +1788,6 @@ return [
                     'attribute_family'         => 'Attribute Family',
                     'product-attribute'        => 'Product attribute',
                     'action-type'              => 'Action Type',
-                    'create-success'           => 'Catalog rule created successfully',
                 ],
 
                 'edit' => [
@@ -1832,8 +1831,11 @@ return [
                     'attribute_family'         => 'Attribute Family',
                     'product-attribute'        => 'Product attribute',
                     'action-type'              => 'Action Type',
-                    'update-success'           => 'Catalog rule updated successfully',
                 ],
+
+                'create-success'           => 'Catalog rule created successfully',
+                'delete-success'           => 'Catalog rule deleted successfully',
+                'update-success'           => 'Catalog rule updated successfully',
             ],
 
             'cart-rules-coupons' => [
@@ -2146,7 +2148,7 @@ return [
         ],
 
         'taxes' => [
-            'tax-categories' => [
+            'categories' => [
                 'index' => [
                     'title'        => 'Tax Categories',
                     'tax-category' => 'Tax Category',
@@ -2179,12 +2181,12 @@ return [
 
                     'create-success'  => 'New Tax Category Created',
                     'update-success'  => 'Tax Category Successfully Updated',
-                    'delete-success' => ':name Deleted Successfully',
-                    'delete-failed'  => ':name Deleted Failed',
+                    'delete-success' => 'Tax Category Deleted Successfully',
+                    'delete-failed'  => 'Tax Category Deleted Failed',
                 ],
             ],
 
-            'tax-rates'   => [
+            'rates'   => [
                 'index' => [
                     'title'        => 'Tax Rates',
                     'tax-rate'     => 'Tax Rate',
@@ -2371,12 +2373,14 @@ return [
                     'title'    => 'Edit User',
                 ],
 
+                'activate-warning'   => 'Your account is yet to be activated, please contact administrator.',
                 'create-success'     => 'User created successfully.',
                 'cannot-change'      => 'User cannot be changed',
                 'delete-failed'      => 'User deleted failed.',
                 'delete-success'     => 'User deleted successfully.',
                 'incorrect-password' => 'Incorrect password',
                 'last-delete-error'  => 'Last User delete failed',
+                'login-error'        => 'Please check your credentials and try again.',
                 'update-success'     => 'User updated successfully.',
             ],
 
@@ -2391,15 +2395,16 @@ return [
                 'role'             => 'Role',
                 'status'           => 'Status',
                 'save-btn'         => 'Save User',
-                'update-success'   => 'User updated successfully.',
             ],
+
+            'update-success'   => 'User updated successfully.',
+            'delete-success'   => 'User deleted successfully.',
+
         ],
 
         'roles' => [
             'index' => [
                 'title'      => 'Roles',
-                'role'       => 'Role',
-                'admin-user' => 'Admin User',
                 'create-btn' => 'Create Role',
 
                 'datagrid'  =>  [
@@ -2437,12 +2442,12 @@ return [
                 'all'             => 'All',
             ],
 
-            'success'            => 'Roles Created Successfully',
+            'create-success'     => 'Roles Created Successfully',
             'update-success'     => 'Roles is updated successfully',
             'last-delete-error'  => 'Last Roles can not be deleted',
             'delete-success'     => 'Roles is deleted successfully',
             'delete-failed'      => 'Roles is deleted failed',
-            'being-used'         => ':name is already used in :admin-user',
+            'being-used'         => 'Role is already used in Admin User',
         ],
     ],
 

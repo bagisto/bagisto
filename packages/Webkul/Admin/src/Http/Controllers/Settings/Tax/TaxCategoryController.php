@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Settings;
+namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -33,7 +33,7 @@ class TaxCategoryController extends Controller
             return app(TaxCategoryDataGrid::class)->toJson();
         }
 
-        return view('admin::tax.tax-categories.index')->with('taxRates', $this->taxRateRepository->all());;
+        return view('admin::tax.categories.index')->with('taxRates', $this->taxRateRepository->all());;
     }
 
     /**
@@ -50,7 +50,7 @@ class TaxCategoryController extends Controller
             'taxrates'    => 'array|required',
         ]);
 
-        Event::dispatch('tax.tax_category.create.before');
+        Event::dispatch('tax.category.create.before');
 
         $data = request()->only([
             'code',
@@ -63,10 +63,10 @@ class TaxCategoryController extends Controller
 
         $taxCategory->tax_rates()->sync($data['taxrates']);
 
-        Event::dispatch('tax.tax_category.create.after', $taxCategory);
+        Event::dispatch('tax.category.create.after', $taxCategory);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.index.create-success'),
+            'message' => trans('admin::app.settings.taxes.categories.index.create-success'),
         ]);
     }
 
@@ -99,7 +99,7 @@ class TaxCategoryController extends Controller
             'taxrates'    => 'array|required',
         ]);
 
-        Event::dispatch('tax.tax_category.update.before', $id);
+        Event::dispatch('tax.category.update.before', $id);
 
         $data = request()->only([
             'code',
@@ -112,10 +112,10 @@ class TaxCategoryController extends Controller
 
         $taxCategory->tax_rates()->sync($data['taxrates']);
 
-        Event::dispatch('tax.tax_category.update.after', $taxCategory);
+        Event::dispatch('tax.category.update.after', $taxCategory);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.index.update-success'),
+            'message' => trans('admin::app.settings.taxes.categories.index.update-success'),
         ]);
     }
 
@@ -130,20 +130,20 @@ class TaxCategoryController extends Controller
         $this->taxCategoryRepository->findOrFail($id);
 
         try {
-            Event::dispatch('tax.tax_category.delete.before', $id);
+            Event::dispatch('tax.category.delete.before', $id);
 
             $this->taxCategoryRepository->delete($id);
 
-            Event::dispatch('tax.tax_category.delete.after', $id);
+            Event::dispatch('tax.category.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.settings.taxes.tax-categories.index.delete-success'),
+                'message' => trans('admin::app.settings.taxes.categories.index.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.index.delete-failed'),
+            'message' => trans('admin::app.settings.taxes.categories.index.delete-failed'),
         ], 500);
     }
 }

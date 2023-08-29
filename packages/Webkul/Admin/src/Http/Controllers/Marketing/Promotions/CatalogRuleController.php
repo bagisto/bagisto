@@ -63,7 +63,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.create.create-success'));
+        session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.create-success'));
 
         return redirect()->route('admin.marketing.promotions.catalog_rules.index');
     }
@@ -99,7 +99,7 @@ class CatalogRuleController extends Controller
 
         $this->catalogRuleIndexHelper->reIndexComplete();
 
-        session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.edit.update-success'));
+        session()->flash('success', trans('admin::app.marketing.promotions.catalog-rules.update-success'));
 
         return redirect()->route('admin.marketing.promotions.catalog_rules.index');
     }

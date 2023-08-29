@@ -187,7 +187,7 @@ class AttributeController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.customers.reviews.index.datagrid.mass-delete-success')
+            'message' => trans('admin::app.catalog.attributes.index.datagrid.mass-delete-success')
         ]);
     }
 
