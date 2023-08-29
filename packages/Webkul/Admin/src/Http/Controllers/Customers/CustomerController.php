@@ -253,8 +253,6 @@ class CustomerController extends Controller
      */
     public function search()
     {
-        $results = [];
-
         $customers = $this->customerRepository->scopeQuery(function ($query) {
             return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
@@ -267,9 +265,10 @@ class CustomerController extends Controller
     /**
      * To mass update the customer.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassUpdateRequest $massUpdateRequest
+     * @return JsonResource
      */
-    public function massUpdate(MassUpdateRequest $massUpdateRequest)
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
     {
         $selectedCustomerIds = $massUpdateRequest->input('indices');
     
@@ -283,7 +282,7 @@ class CustomerController extends Controller
             Event::dispatch('customer.update.after', $customer);
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.customers.index.datagrid.update-success')
         ]);
     }
@@ -291,9 +290,10 @@ class CustomerController extends Controller
     /**
      * To mass delete the customer.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResource
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
     {
         $customerIds = $massDestroyRequest->input('indices');
 
@@ -307,11 +307,11 @@ class CustomerController extends Controller
                     Event::dispatch('customer.delete.after', $customerId);
                 }
     
-                return response()->json([
+                return new JsonResource([
                     'message' => trans('admin::app.customers.index.datagrid.delete-success')
                 ]);
             } catch (\Exception $e) {
-                return response()->json([
+                return new JsonResource([
                     'message' => $e->getMessage()
                 ]);
             }

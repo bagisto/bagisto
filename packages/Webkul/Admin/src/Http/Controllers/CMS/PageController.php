@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\CMS;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\CMS\Repositories\CmsRepository;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -132,10 +133,10 @@ class PageController extends Controller
     /**
      * To delete the previously create CMS page.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function delete($id)
+    public function delete($id): JsonResource
     {
         Event::dispatch('cms.pages.delete.before', $id);
 
@@ -143,15 +144,16 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.delete.after', $id);
 
-        return response()->json(['message' => trans('admin::app.cms.delete-success')]);
+        return new JsonResource(['message' => trans('admin::app.cms.delete-success')]);
     }
 
     /**
      * To mass delete the CMS resource from storage.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResource
      */
-    public function massDelete(MassDestroyRequest $massDestroyRequest)
+    public function massDelete(MassDestroyRequest $massDestroyRequest): JsonResource
     {
         $indices = $massDestroyRequest->input('indices');
 
@@ -163,7 +165,7 @@ class PageController extends Controller
             Event::dispatch('cms.pages.delete.after', $index);
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.cms.index.datagrid.mass-delete-success')
         ], 200);
     }

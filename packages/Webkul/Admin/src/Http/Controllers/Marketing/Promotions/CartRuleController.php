@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Exception;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -54,12 +55,12 @@ class CartRuleController extends Controller
      */
     public function copy(int $cartRuleId)
     {
-        $cartRule = $this->cartRuleRepository->with(['channels','customer_groups',])->findOrFail($cartRuleId);
+        $cartRule = $this->cartRuleRepository->with(['channels', 'customer_groups',])->findOrFail($cartRuleId);
 
         $copiedCartRule = $cartRule->replicate()->fill([
-                'status' => 0,
-                'name'   => trans('admin::app.copy-of', ['value' => $cartRule->name]),
-            ]);
+            'status' => 0,
+            'name'   => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]),
+        ]);
 
         $copiedCartRule->save();
 
@@ -159,10 +160,10 @@ class CartRuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->cartRuleRepository->findOrFail($id);
 
@@ -173,10 +174,14 @@ class CartRuleController extends Controller
 
             Event::dispatch('promotions.cart_rule.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.promotions.cart-rules.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.promotions.cart-rules.delete-success'
+            )]);
         } catch (Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.promotions.cart-rules.delete-failed')], 400);
+        return new JsonResource([
+            'message' => trans('admin::app.promotions.cart-rules.delete-failed'
+        )], 400);
     }
 }

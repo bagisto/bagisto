@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -116,7 +117,7 @@ class AttributeController extends Controller
 
         Event::dispatch('catalog.attribute.update.before', $id);
 
-        $attribute = $this->attributeRepository->update(request()->all(), $id);       
+        $attribute = $this->attributeRepository->update(request()->all(), $id);
 
         Event::dispatch('catalog.attribute.update.after', $attribute);
 
@@ -128,14 +129,14 @@ class AttributeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $attribute = $this->attributeRepository->findOrFail($id);
 
-        if (! $attribute->is_user_defined) {
+        if (!$attribute->is_user_defined) {
             return response()->json([
                 'message' => trans('admin::app.catalog.attributes.user-define-error'),
             ], 400);
@@ -148,26 +149,31 @@ class AttributeController extends Controller
 
             Event::dispatch('catalog.attribute.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.catalog.attributes.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.catalog.attributes.delete-success')
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.catalog.attributes.delete-failed')], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.catalog.attributes.delete-failed')
+        ], 500);
     }
 
     /**
      * Remove the specified resources from database.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResource
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
     {
         $indices = $massDestroyRequest->input('indices');
 
         foreach ($indices as $index) {
             $attribute = $this->attributeRepository->find($index);
 
-            if (! $attribute->is_user_defined) {
+            if (!$attribute->is_user_defined) {
                 return response()->json([], 422);
             }
         }
@@ -180,7 +186,7 @@ class AttributeController extends Controller
             Event::dispatch('catalog.attribute.delete.after', $index);
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.customers.reviews.index.datagrid.mass-delete-success')
         ]);
     }

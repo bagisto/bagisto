@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Validators\Failure;
@@ -88,7 +89,7 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.tax_rate.create.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create.create-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create-success'));
 
         return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
@@ -141,7 +142,7 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.edit.update-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.update-success'));
 
         return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
@@ -149,10 +150,10 @@ class TaxRateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->taxRateRepository->findOrFail($id);
 
@@ -163,11 +164,13 @@ class TaxRateController extends Controller
 
             Event::dispatch('tax.tax_rate.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-success', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])]);
+            return new JsonResource(['message' => trans('admin::app.settings.taxes.tax-rates.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-failed', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.settings.taxes.tax-rates.delete-failed'
+        )], 500);
     }
 
     /**

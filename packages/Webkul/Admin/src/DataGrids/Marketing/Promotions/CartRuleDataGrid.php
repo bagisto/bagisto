@@ -158,7 +158,7 @@ class CartRuleDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.status'),
+            'label'      => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'filterable' => true,

@@ -54,7 +54,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->create($data);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.index.create.success'),
+            'message' => trans('admin::app.settings.currencies.index.create-success'),
         ]);
     }
 
@@ -95,7 +95,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->update($data, $id);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.index.edit.success'),
+            'message' => trans('admin::app.settings.currencies.index.update-success'),
         ]);
     }
 
@@ -110,21 +110,21 @@ class CurrencyController extends Controller
         $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.currencies.index.edit.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.currencies.index.last-delete-error')], 400);
         }
 
         try {
             $this->currencyRepository->delete($id);
 
             return new JsonResource([
-                'message' => trans('admin::app.settings.currencies.index.edit.delete-success'),
+                'message' => trans('admin::app.settings.currencies.index.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.index.edit.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
+            'message' => trans('admin::app.settings.currencies.index.delete-failed')
         ], 500);
     }
 }
