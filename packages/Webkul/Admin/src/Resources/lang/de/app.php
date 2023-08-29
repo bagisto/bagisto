@@ -737,8 +737,8 @@ return [
         'yes'            => 'Ja',
         'no'             => 'Nein',
         'delete'         => 'Löschen',
-        'enable-atleast-one-shipping' => 'Aktivieren Sie mindestens eine Versandart.',
-        'enable-atleast-one-payment'  => 'Aktivieren Sie mindestens eine Zahlungsmethode.',
+        'enable-at-least-one-shipping' => 'Aktivieren Sie mindestens eine Versandart.',
+        'enable-at-least-one-payment'  => 'Aktivieren Sie mindestens eine Zahlungsmethode.',
 
         'tax-categories' =>
         [
@@ -1039,8 +1039,8 @@ return [
         ],
 
         'login-as-customer' => [
-            'grid-title'=>'inloggen als klant',
-            'login-message'=>'je bent ingelogd als :customer_name'
+            'grid-title' => 'inloggen als klant',
+            'login-message' => 'je bent ingelogd als :customer_name'
         ],
 
         'note'        =>

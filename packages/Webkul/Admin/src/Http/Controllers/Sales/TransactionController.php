@@ -14,13 +14,6 @@ use Webkul\Payment\Facades\Payment;
 class TransactionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return array
-     */
-    protected $_config;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -30,8 +23,8 @@ class TransactionController extends Controller
         protected InvoiceRepository $invoiceRepository,
         protected ShipmentRepository $shipmentRepository,
         protected OrderTransactionRepository $orderTransactionRepository
-    ) {
-        $this->_config = request('_config');
+    )
+    {
     }
 
     /**
@@ -76,7 +69,7 @@ class TransactionController extends Controller
         $invoice = $this->invoiceRepository->where('increment_id', $request->invoice_id)->first();
 
         if (! $invoice) {
-            session()->flash('error', trans('admin::app.sales.transactions.response.invoice-missing'));
+            session()->flash('error', trans('admin::app.sales.transactions.edit.invoice-missing'));
 
             return redirect()->back();
         }
@@ -86,19 +79,19 @@ class TransactionController extends Controller
         $transactionAmtFinal = $request->amount + $transactionAmtBefore;
 
         if ($invoice->state == 'paid') {
-            session()->flash('info', trans('admin::app.sales.transactions.response.already-paid'));
+            session()->flash('info', trans('admin::app.sales.transactions.edit.already-paid'));
 
             return redirect(route('admin.sales.transactions.index'));
         }
 
         if ($transactionAmtFinal > $invoice->base_grand_total) {
-            session()->flash('info', trans('admin::app.sales.transactions.response.transaction-amount-exceeds'));
+            session()->flash('info', trans('admin::app.sales.transactions.edit.transaction-amount-exceeds'));
 
             return redirect(route('admin.sales.transactions.create'));
         }
 
         if ($request->amount <= 0) {
-            session()->flash('info', trans('admin::app.sales.transactions.response.transaction-amount-zero'));
+            session()->flash('info', trans('admin::app.sales.transactions.edit.transaction-amount-zero'));
 
             return redirect(route('admin.sales.transactions.create'));
         }
@@ -134,7 +127,7 @@ class TransactionController extends Controller
             $this->invoiceRepository->updateState($invoice, 'paid');
         }
 
-        session()->flash('success', trans('admin::app.sales.transactions.response.transaction-saved'));
+        session()->flash('success', trans('admin::app.sales.transactions.edit.transaction-saved'));
 
         return redirect(route('admin.sales.transactions.index'));
     }

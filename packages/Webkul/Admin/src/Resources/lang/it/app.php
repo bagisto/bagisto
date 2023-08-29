@@ -740,8 +740,8 @@ return [
         'yes'                         => 'Sì',
         'no'                          => 'No',
         'delete'                      => 'Elimina',
-        'enable-atleast-one-shipping' => 'Abilita almeno un metodo di spedizione.',
-        'enable-atleast-one-payment'  => 'Abilita almeno un metodo di pagamento.',
+        'enable-at-least-one-shipping' => 'Abilita almeno un metodo di spedizione.',
+        'enable-at-least-one-payment'  => 'Abilita almeno un metodo di pagamento.',
 
         'tax-categories' => [
             'title'           => 'Categorie IVA',
@@ -1039,7 +1039,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'accedi come cliente',
-            'login-message'=> 'hai effettuato l accesso come :customer_name',
+            'login-message' => 'hai effettuato l accesso come :customer_name',
         ],
 
         'note' => [

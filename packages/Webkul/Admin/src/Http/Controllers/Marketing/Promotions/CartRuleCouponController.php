@@ -42,13 +42,13 @@ class CartRuleCouponController extends Controller
             'code_format' => 'required',
         ]);
 
-        if (! request('id')) {
-            return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defined-error')], 400);
+        if (!request('id')) {
+            return response()->json(['message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error')], 400);
         }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
-        return response()->json(['message' => trans('admin::app.response.create-success', ['name' => 'Cart rule coupons'])]);
+        return response()->json(['message' => trans('admin::app.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons'])]);
     }
 
     /**
@@ -69,7 +69,7 @@ class CartRuleCouponController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.promotions.cart-rules.mass-delete-success'));
+        session()->flash('success', trans('admin::app.promotions.cart-rules-coupons.mass-delete-success'));
 
         return redirect()->back();
     }

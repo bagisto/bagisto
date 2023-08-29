@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Customer;
+namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
@@ -25,7 +25,7 @@ class CustomerController extends Controller
         protected CustomerRepository $customerRepository,
         protected CustomerGroupRepository $customerGroupRepository,
         protected CustomerNoteRepository $customerNoteRepository
-    ) 
+    )
     {
     }
 
@@ -146,7 +146,7 @@ class CustomerController extends Controller
 
         Event::dispatch('customer.update.after', $customer);
 
-        session()->flash('success', trans('admin::app.customers.index.edit.edit-success'));
+        session()->flash('success', trans('admin::app.customers.update-success'));
 
         return redirect()->back();
     }
@@ -161,15 +161,15 @@ class CustomerController extends Controller
     {
         $customer = $this->customerRepository->findorFail($id);
 
-        if (!$customer) {
+        if (! $customer) {
             return response()->json(['message' => trans('admin::app.customers.delete-failed')], 400);
         }
 
-        if (!$this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
+        if (! $this->customerRepository->checkIfCustomerHasOrderPendingOrProcessing($customer)) {
 
             $this->customerRepository->delete($id);
 
-            session()->flash('success', trans('admin::app.customers.view.delete-success'));
+            session()->flash('success', trans('admin::app.customers.delete-success'));
 
             return redirect(route('admin.customers.customers.index'));
         }
@@ -255,7 +255,7 @@ class CustomerController extends Controller
     {
         $results = [];
 
-        $customers = $this->customerRepository->scopeQuery(function($query) {
+        $customers = $this->customerRepository->scopeQuery(function ($query) {
             return $query->where('email', 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orWhere(DB::raw('CONCAT(' . DB::getTablePrefix() . 'first_name, " ", ' . DB::getTablePrefix() . 'last_name)'), 'like', '%' . urldecode(request()->input('query')) . '%')
                 ->orderBy('created_at', 'desc');

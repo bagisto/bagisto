@@ -76,13 +76,6 @@
                     </div>
                 </x-slot:content>
             </x-admin::dropdown>
-
-            <a 
-                href="{{ route('admin.sales.transactions.create') }}"
-                class="primary-button"
-            >
-                @lang('admin::app.sales.transactions.index.create-btn')
-            </a>
         </div>
     </div>
     

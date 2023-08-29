@@ -70,7 +70,7 @@ class EventController extends Controller
     public function edit($id): JsonResource
     {
         if ($id == 1) {
-            session()->flash('error', trans('admin::app.marketing.events.edit-error'));
+            session()->flash('error', trans('admin::app.marketing.communications.events.edit-error'));
 
             return redirect()->back();
         }
@@ -130,13 +130,13 @@ class EventController extends Controller
             Event::dispatch('marketing.events.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.marketing.communications.events.index.edit.delete-success'),
+                'message' => trans('admin::app.marketing.communications.events.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name'  =>  'admin::app.marketing.communications.events.index.event']),
+            'message' => trans('admin::app.marketing.communications.events.delete-failed', ['name'  =>  'admin::app.marketing.communications.events.index.event']),
         ], 500);
     }
 }

@@ -163,11 +163,11 @@ class TaxRateController extends Controller
 
             Event::dispatch('tax.tax_rate.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Tax Rate'])]);
+            return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-success', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Tax Rate'])], 500);
+        return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-failed', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])], 500);
     }
 
     /**
@@ -309,7 +309,7 @@ class TaxRateController extends Controller
                             }
                         }
 
-                        session()->flash('success', trans('admin::app.response.upload-success', ['name' => 'Tax Rate']));
+                        session()->flash('success', trans('admin::app.export.upload-success', ['name' => 'Tax Rate']));
                     }
                 }
             } catch (\Exception $e) {

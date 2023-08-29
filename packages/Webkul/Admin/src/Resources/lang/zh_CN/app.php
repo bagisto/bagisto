@@ -730,8 +730,8 @@ return [
         'yes'                         => '是的',
         'no'                          => '不',
         'delete'                      => '删除',
-        'enable-atleast-one-shipping' => '啟用至少一種運輸方式',
-        'enable-atleast-one-payment'  => '啟用至少一種付款方式。',
+        'enable-at-least-one-shipping' => '啟用至少一種運輸方式',
+        'enable-at-least-one-payment'  => '啟用至少一種付款方式。',
 
         'tax-categories' => [
             'title'           => '税分类',
@@ -1020,7 +1020,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => '以客户身份登录',
-            'login-message'=> '您登录为 :customer_name',
+            'login-message' => '您登录为 :customer_name',
         ],
 
         'note' => [

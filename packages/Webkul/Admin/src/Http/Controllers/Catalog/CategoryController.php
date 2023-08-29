@@ -161,11 +161,15 @@ class CategoryController extends Controller
 
             Event::dispatch('catalog.category.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.catalog.categories.delete-success')]);
+            return response()->json([
+                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category'
+            ])]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.catalog.categories.delete-failed')], 500);
+        return response()->json([
+            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'
+        ])], 500);
     }
 
     /**
@@ -186,7 +190,7 @@ class CategoryController extends Controller
                 if ($this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
 
-                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
+                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'admin::app.catalog.categories.category']));
                 } else {
                     try {
                         $suppressFlash = true;
@@ -197,7 +201,7 @@ class CategoryController extends Controller
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
-                        session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
+                        session()->flash('error', trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category']));
                     }
                 }
             }
@@ -207,7 +211,7 @@ class CategoryController extends Controller
             count($categoryIds) != 1
             || $suppressFlash == true
         ) {
-            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'Category']));
+            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category']));
         }
 
         return redirect()->route('admin.catalog.categories.index');
