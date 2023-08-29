@@ -245,10 +245,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $product = $this->productRepository->findOrFail($id);
 
@@ -259,14 +259,14 @@ class ProductController extends Controller
 
             Event::dispatch('catalog.product.delete.after', $id);
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.products.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.catalog.products.delete-failed'),
         ], 500);
     }
@@ -274,9 +274,10 @@ class ProductController extends Controller
     /**
      * Mass delete the products.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResource
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
     {
         $productIds = $massDestroyRequest->input('indices');
 
@@ -293,11 +294,11 @@ class ProductController extends Controller
                 }
             }
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.products.index.datagrid.mass-delete-success')
             ]);
         } catch (\Exception $e) {
-            return response()->json([
+            return new JsonResource([
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -306,9 +307,10 @@ class ProductController extends Controller
     /**
      * Mass update the products.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassUpdateRequest $massUpdateRequest
+     * @return JsonResource
      */
-    public function massUpdate(MassUpdateRequest $massUpdateRequest)
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
     {
         $data = $massUpdateRequest->all();
 
@@ -324,7 +326,7 @@ class ProductController extends Controller
             Event::dispatch('catalog.product.update.after', $product);
         }
         
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.catalog.products.index.datagrid.mass-update-success')
         ], 200);
     }

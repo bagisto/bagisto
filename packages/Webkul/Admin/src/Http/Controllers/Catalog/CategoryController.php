@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -143,15 +144,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $category = $this->categoryRepository->findOrFail($id);
 
         if ($this->isCategoryDeletable($category)) {
-            return response()->json(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
+            return new JsonResource(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
         }
 
         try {
@@ -161,13 +162,13 @@ class CategoryController extends Controller
 
             Event::dispatch('catalog.category.delete.after', $id);
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category'
             ])]);
         } catch (\Exception $e) {
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'
         ])], 500);
     }

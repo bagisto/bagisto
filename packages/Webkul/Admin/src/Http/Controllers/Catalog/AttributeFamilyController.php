@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -124,21 +125,21 @@ class AttributeFamilyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $attributeFamily = $this->attributeFamilyRepository->findOrFail($id);
 
         if ($this->attributeFamilyRepository->count() == 1) {
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.families.last-delete-error'),
             ], 400);
         }
 
         if ($attributeFamily->products()->count()) {
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.families.attribute-product-error'),
             ], 400);
         }
@@ -150,14 +151,15 @@ class AttributeFamilyController extends Controller
 
             Event::dispatch('catalog.attribute_family.delete.after', $id);
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.families.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
+        
+        return new JsonResource([
             'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'admin::app.catalog.families.family']),
         ], 500);
     }
