@@ -1,5 +1,5 @@
 <template v-if="isLoading">
-    <x-admin::shimmer.datagrid.toolbar></x-admin::shimmer.datagrid.toolbar>
+    <x-shop::shimmer.datagrid.toolbar></x-shop::shimmer.datagrid.toolbar>
 </template>
 
 <template v-else>
@@ -12,12 +12,12 @@
                 v-if="applied.massActions.indices.length"
             >
                 <!-- Mass Action Dropdown -->
-                <x-admin::dropdown>
+                <x-shop::dropdown>
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400 focus:ring-black">
                             <span>
-                                @lang('admin::app.components.datagrid.toolbar.mass-actions.select-action')
+                                @lang('shop::app.components.datagrid.toolbar.mass-actions.select-action')
                             </span>
 
                             <span class="icon-sort-down text-[24px]"></span>
@@ -25,14 +25,14 @@
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
-                    <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] border-gray-300">
+                    <x-slot:menu class="border-gray-300 !p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)]">
                         <template v-for="massAction in available.massActions">
                             <li
                                 class="group/item relative overflow-visible"
                                 v-if="massAction?.options?.length"
                             >
                                 <a
-                                    class="flex gap-[5px] justify-between whitespace-no-wrap cursor-not-allowed rounded-t px-4 py-2 hover:bg-gray-100"
+                                    class="whitespace-no-wrap flex cursor-not-allowed justify-between gap-[5px] rounded-t px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                 >
                                     <i
@@ -46,10 +46,10 @@
                                         @{{ massAction.title }}
                                     </span>
 
-                                    <i class="icon-arrow-right text-[24px] !icon-arrow-left"></i>
+                                    <i class="icon-arrow-right !icon-arrow-left text-[24px]"></i>
                                 </a>
 
-                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] border border-gray-300 rounded-[4px] bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
+                                <ul class="absolute left-full top-0 z-10 hidden w-max min-w-[150px] rounded-[4px] border border-gray-300 bg-white shadow-[0_5px_20px_rgba(0,0,0,0.15)] group-hover/item:block">
                                     <li v-for="option in massAction.options">
                                         <a
                                             class="whitespace-no-wrap block rounded-t px-4 py-2 hover:bg-gray-100"
@@ -64,7 +64,7 @@
 
                             <li v-else>
                                 <a
-                                    class="flex gap-[5px] whitespace-no-wrap rounded-b px-4 py-2 hover:bg-gray-100"
+                                    class="whitespace-no-wrap flex gap-[5px] rounded-b px-4 py-2 hover:bg-gray-100"
                                     href="javascript:void(0);"
                                     @click="performMassAction(massAction)"
                                 >
@@ -80,7 +80,7 @@
                             </li>
                         </template>
                     </x-slot:menu>
-                </x-admin::dropdown>
+                </x-shop::dropdown>
 
                 <div class="pl-[10px]">
                     <p class="text-[14px] font-light text-gray-800">
@@ -101,101 +101,45 @@
                         <input
                             type="text"
                             name="search"
+                            class="block w-full rounded-lg border border-gray-300 bg-white p-[14px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             :value="getAppliedColumnValues('all')"
-                            class="block w-full rounded-lg border border-gray-300 bg-white py-[6px] pl-[12px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                            placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
+                            placeholder="@lang('shop::app.components.datagrid.toolbar.search.title')"
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute right-[10px] top-[8px] flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute right-[10px] top-[16px] flex items-center text-[22px]">
                         </div>
                     </div>
-                </div>
-
-                <!-- Information Panel -->
-                <div class="pl-[10px]">
-                    <p class="text-[14px] font-light text-gray-800">
-                        <!-- Need to manage this translation. -->
-                        @{{ available.meta.total }} Results
-                    </p>
                 </div>
             </div>
         </div>
 
         <!-- Right Toolbar -->
         <div class="flex gap-x-[16px]">
-            <!-- Filters Activation Button -->
-            <x-admin::drawer width="350px">
-                <x-slot:toggle>
-                    <div>
-                        <div
-                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-400 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow focus:outline-none focus:ring-2"
-                        >
-                            <span class="icon-filter text-[24px]"></span>
-
-                            <span>
-                                @lang('admin::app.components.datagrid.toolbar.filter.title')
-                            </span>
-
-                            <span class="icon-arrow-up text-[24px]"></span>
-                        </div>
-
-                        <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow">
-                        </div>
-                    </div>
-                </x-slot:toggle>
-
-                <!-- Drawer Header -->
-                <x-slot:header>
-                    <div class="flex justify-between items-center p-3">
-                        <p class="text-[20px] font-medium">
-                            @lang('admin::app.components.datagrid.filters.title')
-                        </p>
-                    </div>
-                </x-slot:header>
-
-                <!-- Drawer Content -->
-                <x-slot:content>
-                    <x-admin::datagrid.filters></x-admin::datagrid.filters>
-                </x-slot:content>
-            </x-admin::drawer>
+            <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200"></span>
 
             <div class="flex items-center gap-x-[8px]">
-                <x-admin::dropdown>
+                <!-- Items Per Page Dropdown -->
+                <x-shop::dropdown position="bottom-left">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[8px] rounded-[6px] border border-gray-300 bg-white px-[10px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:border-gray-400">
+                        <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
                             <span v-text="applied.pagination.perPage"></span>
 
-                            <span class="icon-sort-down text-[24px]"></span>
+                            <span class="icon-arrow-down text-[24px]"></span>
                         </button>
                     </x-slot:toggle>
 
                     <!-- Dropdown Content -->
                     <x-slot:menu>
-                        <x-admin::dropdown.menu.item
+                        <x-shop::dropdown.menu.item
                             v-for="perPageOption in available.meta.per_page_options"
                             v-text="perPageOption"
                             @click="changePerPageOption(perPageOption)"
                         >
-                        </x-admin::dropdown.menu.item>
+                        </x-shop::dropdown.menu.item>
                     </x-slot:menu>
-                </x-admin::dropdown>
-
-                <p class="whitespace-nowrap text-gray-600 max-sm:hidden">per page</p>
-
-                <input
-                    type="text"
-                    class="ml-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
-                    :value="available.meta.current_page"
-                    @change="changePage(parseInt($event.target.value))"
-                >
-
-                <div class="whitespace-nowrap text-gray-600">
-                    <span>of </span>
-
-                    <span v-text="available.meta.last_page"></span>
-                </div>
+                </x-shop::dropdown>
 
                 <!-- Pagination -->
                 <div class="flex items-center gap-[4px]">
@@ -214,6 +158,29 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Filters Activation Button -->
+            <x-shop::drawer width="350px">
+                <x-slot:toggle>
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <span class="flex justify-between items-center gap-[5px]">
+                            <span class="icon-filter text-[24px]"></span>
+
+                            @lang('shop::app.components.datagrid.toolbar.filter.title')
+                        </span>
+
+                        <span class="icon-arrow-up text-[24px]"></span>
+                    </button>
+                </x-slot:toggle>
+
+                <x-slot:header>
+                    @lang('shop::app.components.datagrid.filters.title')
+                </x-slot:header>
+
+                <x-slot:content>
+                    <x-shop::datagrid.filters></x-shop::datagrid.filters>
+                </x-slot:content>
+            </x-shop::drawer>
         </div>
     </div>
 </template>

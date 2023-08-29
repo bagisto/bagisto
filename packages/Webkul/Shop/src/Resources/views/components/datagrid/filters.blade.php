@@ -1,19 +1,19 @@
 <div>
     <!-- Custom Filter -->
-    <x-admin::accordion class="w-full rounded-[4px] border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
+    <x-shop::accordion>
         <x-slot:header>
-            <p class="p-[10px] text-gray-800 text-[16px] font-medium">
-                @lang('admin::app.components.datagrid.filters.custom-filters.title')
+            <p class="text-[16px] font-medium text-gray-800">
+                @lang('shop::app.components.datagrid.filters.custom-filters.title')
             </p>
         </x-slot:header>
 
         <x-slot:content>
             <div v-for="column in available.columns">
-                <!-- Date Range -->
+                {{-- Date Range --}}
                 <div v-if="column.type === 'date_range'">
                     <div class="flex items-center justify-between">
                         <p
-                            class="font-medium leading-[24px] text-gray-800"
+                            class="text-[14px] font-medium leading-[24px] text-gray-800"
                             v-text="column.label"
                         >
                         </p>
@@ -26,7 +26,7 @@
                                 class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
                                 v-if="hasAnyAppliedColumnValues(column.index)"
                             >
-                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
                             </p>
                         </div>
                     </div>
@@ -44,10 +44,10 @@
                         >
                         </p>
 
-                        <x-admin::flat-picker.date ::allow-input="false">
+                        <x-shop::flat-picker.date ::allow-input="false">
                             <input
                                 value=""
-                                class="flex w-full min-h-[39px] py-2 rounded-[6px] border px-3 text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                 :type="column.input_type"
                                 :name="`${column.index}[from]`"
                                 :placeholder="column.label"
@@ -58,13 +58,13 @@
                                     { range: { name: 'from' }, quickFilter: { isActive: false } }
                                 )"
                             />
-                        </x-admin::flat-picker.date>
+                        </x-shop::flat-picker.date>
 
-                        <x-admin::flat-picker.date ::allow-input="false">
+                        <x-shop::flat-picker.date ::allow-input="false">
                             <input
                                 type="column.input_type"
                                 value=""
-                                class="flex min-h-[39px] w-full px-3 py-2 rounded-[6px] border text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                 :name="`${column.index}[to]`"
                                 :placeholder="column.label"
                                 :ref="`${column.index}[from]`"
@@ -74,17 +74,17 @@
                                     { range: { name: 'to' }, quickFilter: { isActive: false } }
                                 )"
                             />
-                        </x-admin::flat-picker.date>
+                        </x-shop::flat-picker.date>
 
-                        <div class="flex gap-2 mb-[16px]">
+                        <div class="mb-[16px] flex gap-2">
                             <p
-                                class="flex items-center px-[8px] py-[3px] rounded-[3px] bg-gray-600 font-semibold text-white"
+                                class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                             >
                                 <span v-text="appliedColumnValue.join(' to ')"></span>
 
                                 <span
-                                    class="icon-cross ml-[5px] cursor-pointer text-[18px] text-white"
+                                    class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                                 >
                                 </span>
@@ -93,11 +93,11 @@
                     </div>
                 </div>
 
-                <!-- Date Time Range -->
+                {{-- Date Time Range --}}
                 <div v-else-if="column.type === 'datetime_range'">
                     <div class="flex items-center justify-between">
                         <p
-                            class="font-medium leading-[24px] text-gray-800"
+                            class="text-[14px] font-medium leading-[24px] text-gray-800"
                             v-text="column.label"
                         >
                         </p>
@@ -110,14 +110,14 @@
                                 class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
                                 v-if="hasAnyAppliedColumnValues(column.index)"
                             >
-                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
                             </p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-[5px] my-[16px]">
+                    <div class="my-[16px] grid grid-cols-2 gap-[5px]">
                         <p
-                            class="px-[8px] py-[6px] cursor-pointer rounded-[6px] border border-gray-300 text-center font-medium leading-[24px] text-gray-600"
+                            class="cursor-pointer rounded-[6px] border border-gray-300 px-[8px] py-[6px] text-center font-medium leading-[24px] text-gray-600"
                             v-for="option in column.options"
                             v-text="option.label"
                             @click="filterPage(
@@ -128,10 +128,10 @@
                         >
                         </p>
 
-                        <x-admin::flat-picker.datetime ::allow-input="false">
+                        <x-shop::flat-picker.datetime ::allow-input="false">
                             <input
                                 value=""
-                                class="flex w-full min-h-[39px] px-3 py-2 rounded-[6px] border text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                 :type="column.input_type"
                                 :name="`${column.index}[from]`"
                                 :placeholder="column.label"
@@ -142,13 +142,13 @@
                                     { range: { name: 'from' }, quickFilter: { isActive: false } }
                                 )"
                             />
-                        </x-admin::flat-picker.datetime>
+                        </x-shop::flat-picker.datetime>
 
-                        <x-admin::flat-picker.datetime ::allow-input="false">
+                        <x-shop::flat-picker.datetime ::allow-input="false">
                             <input
                                 type="column.input_type"
                                 value=""
-                                class="flex w-full min-h-[39px] px-3 py-2 rounded-[6px] border text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                                class="flex min-h-[39px] w-full rounded-[6px] border px-3 py-2 text-[14px] text-gray-600 transition-all hover:border-gray-400"
                                 :name="`${column.index}[to]`"
                                 :placeholder="column.label"
                                 :ref="`${column.index}[from]`"
@@ -158,17 +158,17 @@
                                     { range: { name: 'to' }, quickFilter: { isActive: false } }
                                 )"
                             />
-                        </x-admin::flat-picker.datetime>
+                        </x-shop::flat-picker.datetime>
 
-                        <div class="flex gap-2 mb-[16px]">
+                        <div class="mb-[16px] flex gap-2">
                             <p
-                                class="flex px-[8px] py-[3px] items-center rounded-[3px] bg-gray-600 font-semibold text-white"
+                                class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                                 v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                             >
                                 <span v-text="appliedColumnValue.join(' to ')"></span>
 
                                 <span
-                                    class="icon-cross ml-[5px] cursor-pointer text-[18px] text-white"
+                                    class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
                                     @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                                 >
                                 </span>
@@ -177,11 +177,11 @@
                     </div>
                 </div>
 
-                <!-- Rest -->
+                {{-- Rest --}}
                 <div v-else>
                     <div class="flex items-center justify-between">
                         <p
-                            class="text-[12px] font-medium leading-[24px] text-gray-800"
+                            class="text-[14px] font-medium leading-[24px] text-gray-800"
                             v-text="column.label"
                         >
                         </p>
@@ -194,30 +194,30 @@
                                 class="cursor-pointer text-[12px] font-medium leading-[24px] text-blue-600"
                                 v-if="hasAnyAppliedColumnValues(column.index)"
                             >
-                                @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                                @lang('shop::app.components.datagrid.filters.custom-filters.clear-all')
                             </p>
                         </div>
                     </div>
 
-                    <div class="mt-[5px] mb-[8px] grid">
+                    <div class="mb-[8px] mt-[5px] grid">
                         <input
                             type="text"
-                            class="block w-full px-[8px] py-[6px] rounded-[6px] border border-gray-300 bg-white text-[14px] leading-[24px] text-gray-400"
+                            class="w-full mb-3 py-2 px-3 shadow border rounded text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             :name="column.index"
                             :placeholder="column.label"
                             @keyup.enter="filterPage($event, column)"
                         />
                     </div>
 
-                    <div class="flex gap-2 mb-[16px]">
+                    <div class="mb-[16px] flex gap-2">
                         <p
-                            class="flex px-[8px] py-[3px] items-center rounded-[3px] bg-gray-600 font-semibold text-white"
+                            class="flex items-center rounded-[3px] bg-gray-600 px-[8px] py-[3px] font-semibold text-white"
                             v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                         >
                             <span v-text="appliedColumnValue"></span>
 
                             <span
-                                class="icon-cross ml-[5px] cursor-pointer text-[18px] text-white"
+                                class="icon-cancel ml-[5px] cursor-pointer text-[18px] text-white"
                                 @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                             >
                             </span>
@@ -226,5 +226,5 @@
                 </div>
             </div>
         </x-slot:content>
-    </x-admin::accordion>
+    </x-shop::accordion>
 </div>

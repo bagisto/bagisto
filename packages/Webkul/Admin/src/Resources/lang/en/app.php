@@ -2846,6 +2846,8 @@ return [
             ],
 
             'filters' => [
+                'title' => 'Apply Filter',
+                
                 'custom-filters' => [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',

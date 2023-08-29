@@ -103,7 +103,7 @@ class AttributeDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'created_at',
             'label'      => trans('admin::app.catalog.attributes.index.datagrid.created-at'),
-            'type'       => 'date_range',
+            'type'       => 'datetime_range',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
