@@ -1,7 +1,5 @@
 @php
     $admin = auth()->guard('admin')->user();
-
-    $allLocales = core()->getAllLocales()->pluck('name', 'code');
 @endphp
 
 <header class="flex justify-between items-center px-[16px] py-[10px] bg-white border-b-[1px] border-gray-300 sticky top-0 z-10">
