@@ -365,7 +365,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.customers.addresses.edit.save-btn-title') 
                                 </button>
@@ -390,67 +390,44 @@
             data() {
                 return {
                     addressData: {},
-
                     countryStates: @json(core()->groupedStatesByCountries()),
-
                     streetLineCount: 0,
                 };
             },
+
             mounted() {
                 this.addressData = JSON.parse(this.address);
             },
 
             methods: {
-                update(params, {resetForm, setErrors,}) {
-                    if(! params.default_address) {
+                update(params, { resetForm, setErrors }) {
+                    if (! params.default_address) {
                         delete params.default_address;
                     }
-                
-                    this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${params.address_id}`, params, {
+
+                    let addressId = params.address_id;
+
+                    this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${addressId}`, params, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
                     })
-                        .then((response) => {
-                            this.$refs.CustomerAddressEdit.toggle();
-                        streetLineCount: 0,
-                    };
-                },
-                mounted() {
-                    this.addressData = JSON.parse(this.address);
-                },
-                methods: {
-                    update(params, {resetForm, setErrors,}) {
-                        if(! params.default_address) {
-                            delete params.default_address;
+                    .then((response) => {
+                        this.$refs.CustomerAddressEdit.toggle();
+                        window.location.reload();
+                        resetForm();
+                    })
+                    .catch(error => {
+                        if (error.response.status == 422) {
+                            setErrors(error.response.data.errors);
                         }
-                   
-                        let addressId = params.address_id;
-
-                        this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${addressId}`, params, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                            })
-
-                            .then((response) => {
-                                this.$refs.CustomerAddressEdit.toggle();
-
-                            window.location.reload();
-                            
-                            resetForm();
-                        })
-                        .catch(error => {
-                            if (error.response.status == 422) {
-                                setErrors(error.response.data.errors);
-                            }
-                        });
+                    });
                 },
 
-                haveStates: function () {
+                haveStates() {
                     return !!this.countryStates[this.addressData.country]?.length;
-                },
+                }
             }
-        })
+        });
     </script>
 @endPushOnce

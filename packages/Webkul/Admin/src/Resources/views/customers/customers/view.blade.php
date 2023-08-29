@@ -29,10 +29,11 @@
             </p>
 
             {{-- Back Button --}}
-            <a href="{{ route('admin.customers.customers.index') }}">
-                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                    @lang('admin::app.customers.view.back-btn')
-                </span>
+            <a
+                href="{{ route('admin.customers.customers.index') }}"
+                class="transparent-button"
+            >
+                @lang('admin::app.customers.view.back-btn')
             </a>
         </div>
     </div>
@@ -97,7 +98,7 @@
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
                                             <p class="text-[16px] text-gray-800 font-semibold">
-                                                @lang('admin::app.customers.view.increment_id', ['increment_id' => $order->increment_id])
+                                                @lang('admin::app.customers.view.increment-id', ['increment_id' => $order->increment_id])
                                             </p>
 
                                             <p class="text-gray-600">
@@ -183,9 +184,6 @@
 
                             <span class="block w-full border-b-[1px] border-gray-300"></span>
                         @endforeach
-
-                        {{-- single row --}}
-                        {{-- <span class="border-b-[1px] border-gray-300"></span> --}}
                     </div>
                 @else
                     {{-- Empty Container --}} 
@@ -240,7 +238,7 @@
                                     {{-- Invoice Details --}}
                                     <tr class="bg-white border-b ">
                                         <td class="px-6 py-[16px] text-gray-600">
-                                            @lang('admin::app.customers.view.invoice_id', ['invoice_id' => $invoice->id] )
+                                            @lang('admin::app.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">
@@ -252,7 +250,7 @@
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600">
-                                            @lang('admin::app.customers.view.order_id', ['order_id' => $invoice->order_id] )
+                                            @lang('admin::app.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
                                         </td>
                                     </tr>
                                 </tbody>
@@ -269,7 +267,7 @@
 
                     <div class="table-responsive grid w-full">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
-                            <!-- Placeholder Image -->
+                            {{-- Placeholder Image --}}
                             <img
                                 src="{{ bagisto_asset('images/invoice-setting.png') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
@@ -448,7 +446,7 @@
                             {{--Note Submit Button --}}
                             <button
                                 type="submit"
-                                class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                class="secondary-button"
                             >
                                 @lang('admin::app.customers.view.submit-btn-title')
                             </button>
@@ -514,8 +512,7 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.date-of-birth') -
-                            {{ $customer->date_of_birth ?? 'N/A' }}   
+                            @lang('admin::app.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">

@@ -271,16 +271,20 @@ class CustomerController extends Controller
      */
     public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $customerIds = $massUpdateRequest->input('indices');
-
-        foreach ($customerIds as $customerId) {
-            Event::dispatch('customer.update.before', $customerId);
-
-            $customer = $this->customerRepository->update([
-                'status' => $massUpdateRequest->input('value'),
-            ], $customerId);
-
-            Event::dispatch('customer.update.after', $customer);
+        $selectedCustomerIds = $massUpdateRequest->input('indices');
+    
+        foreach ($selectedCustomerIds as $customerId) {
+            try {
+                Event::dispatch('customer.update.before', $customerId);
+    
+                $customer = $this->customerRepository->update([
+                    'status' => $massUpdateRequest->input('value'),
+                ], $customerId);
+    
+                Event::dispatch('customer.update.after', $customer);
+            } catch (\Exception $e) {
+                // Handle the exception if needed
+            }
         }
     }
 
@@ -301,14 +305,6 @@ class CustomerController extends Controller
 
                 Event::dispatch('customer.delete.after', $customerId);
             }
-
-            session()->flash('success', trans('admin::app.customers.customers.mass-destroy-success'));
-
-            return redirect()->back();
         }
-
-        session()->flash('error', trans('admin::app.customers.order-pending'));
-
-        return redirect()->back();
     }
 }

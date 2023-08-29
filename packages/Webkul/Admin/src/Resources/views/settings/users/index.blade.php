@@ -14,7 +14,7 @@
                 {{-- Create User Button --}}
                 <button
                     type="button"
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.settings.users.index.create.title')
                 </button>
@@ -38,7 +38,7 @@
                     @if (bouncer()->hasPermission('settings.users.users.create'))
                         <button
                             type="button"
-                            class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                            class="primary-button"
                             @click="$refs.customerCreateModal.open()"
                         >
                             @lang('admin::app.settings.users.index.create.title')
@@ -360,7 +360,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.settings.users.index.create.save-btn')
                                 </button>

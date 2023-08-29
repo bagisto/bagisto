@@ -100,7 +100,10 @@
                     class=""
                     @click="toggleFilters"
                 >
-                    <div class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center font-semibold text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2">
+                    <div
+                        class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center font-semibold text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
+                        :class="{'border-gray-400': showFilters}"
+                    >
                         <span class="icon-filter text-[24px]"></span>
 
                         <span>

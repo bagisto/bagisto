@@ -13,7 +13,7 @@
                 <!-- Craete currency Button -->
                 <button 
                     type="button"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.settings.currencies.index.create-btn')
                 </button>
@@ -38,7 +38,7 @@
                     <!-- Craete currency Button -->
                     <button 
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                         @click="id=0; $refs.currencyModal.toggle()"
                     >
                         @lang('admin::app.settings.currencies.index.create-btn')
@@ -246,7 +246,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.settings.currencies.index.create.save-btn')
                                 </button>
