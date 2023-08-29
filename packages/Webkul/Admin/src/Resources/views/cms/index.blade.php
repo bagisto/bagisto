@@ -67,7 +67,7 @@
                                     <!-- Save Button -->
                                     <button
                                         type="submit" 
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('Export')
                                     </button>
@@ -82,7 +82,7 @@
             @if (bouncer()->hasPermission('cms.pages.create'))
                 <a 
                     href="{{ route('admin.cms.create') }}" 
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.cms.index.create-btn')
                 </a>

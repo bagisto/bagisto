@@ -24,16 +24,17 @@
                 
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel button -->
-                            <a href="{{ route('admin.marketing.promotions.cart_rules.index') }}">
-                                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                    @lang('admin::app.account.edit.back-btn')
-                                </span>
+                            <a
+                                href="{{ route('admin.marketing.promotions.cart_rules.index') }}"
+                                class="transparent-button"
+                            >
+                                @lang('admin::app.account.edit.back-btn')
                             </a>
 
                             <!-- Save button -->
                             <button 
                                 type="submit"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.marketing.promotions.cart-rules.create.save-btn')
                             </button>

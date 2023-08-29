@@ -26,7 +26,7 @@
                     <!-- Add Button -->
                     <div class="flex gap-x-[4px] items-center">
                         <div
-                            class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                            class="secondary-button"
                             @click="selectedType = type.key; $refs.productSearch.openDrawer()"
                         >
                             @lang('admin::app.catalog.products.edit.links.add-btn')
@@ -116,7 +116,7 @@
                     </div>
 
                     <div
-                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                        class="secondary-button text-[14px]"
                         @click="selectedType = type.key; $refs.productSearch.openDrawer()"
                     >
                         @lang('admin::app.catalog.products.edit.links.add-btn')

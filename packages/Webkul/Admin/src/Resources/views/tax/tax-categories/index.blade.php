@@ -15,7 +15,7 @@
                     {{-- Create Tax Category Button --}}
                     <button
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                     >
                         @lang('admin::app.settings.taxes.tax-categories.index.create.title')
                     </button>
@@ -40,7 +40,7 @@
                         @if (bouncer()->hasPermission('settings.taxes.tax-categories.create'))
                             <button
                                 type="button"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                                 @click="id=0; $refs.taxCategory.toggle()"
                             >
                                 @lang('admin::app.settings.taxes.tax-categories.index.create.title')
@@ -289,7 +289,7 @@
                                 <!-- Save Button -->
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.settings.taxes.tax-categories.index.create.save-btn')
                                 </button>
