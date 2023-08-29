@@ -248,10 +248,10 @@
                     <div class="p-[16px] bg-white rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">Products</p>
+                                <p class="text-[16px] text-gray-800 font-semibold">Product Carousels</p>
 
                                 <p class="text-[12px] text-gray-500 font-medium">
-                                    Product related theme customization
+                                    Product Carousel related theme customization
                                 </p>
                             </div>
             
@@ -303,7 +303,7 @@
                                 <div class="flex gap-[4px] place-content-start text-right">
                                     <p
                                         class="text-blue-600 cursor-pointer"
-                                        @click="edit(productCarousel);this.initHtmlEditor();this.initCssEditor();"
+                                        @click="edit(productCarousel);"
                                     >
                                         Edit
                                     </p>
@@ -351,15 +351,15 @@
                         <x-admin::modal ref="productCarouselModal">
                             <x-slot:header>
                                 <p      
-                                    v-if="id"
                                     class="text-[18px] text-gray-800 font-bold"
+                                    v-if="id"
                                 >
                                     Update Product Carousel
                                 </p>
 
                                 <p      
-                                    v-else
                                     class="text-[18px] text-gray-800 font-bold"
+                                    v-else
                                 >
                                     Create Product Carousel
                                 </p>
@@ -383,6 +383,7 @@
                                             type="text"
                                             name="name"
                                             :label="trans('Name')"
+                                            rules="required"
                                             :placeholder="trans('Name')"
                                         >
                                         </x-admin::form.control-group.control>
@@ -400,14 +401,14 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="sort"
+                                            name="options.sort"
                                             :label="trans('Sort')"
                                             :placeholder="trans('Sort')"
                                         >
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
-                                            control-name="sort"
+                                            control-name="options.sort"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -419,7 +420,7 @@
 
                                         <x-admin::form.control-group.control
                                             type="text"
-                                            name="limit"
+                                            name="options.limit"
                                             rules="numeric"
                                             :label="trans('limit')"
                                             :placeholder="trans('limit')"
@@ -427,7 +428,7 @@
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
-                                            control-name="limit"
+                                            control-name="options.limit"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -439,7 +440,7 @@
 
                                         <x-admin::form.control-group.control
                                             type="switch"
-                                            name="status"
+                                            name="options.status"
                                             :value="1"
                                             label="Status"
                                             :checked="(boolean) true"
@@ -447,7 +448,7 @@
                                         </x-admin::form.control-group.control>
 
                                         <x-admin::form.control-group.error
-                                            control-name="status"
+                                            control-name="options.status"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -507,34 +508,7 @@
                         </x-admin::modal>
                     </form>
                 </x-admin::form>
-                <!-- General -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                    <div class="bg-white rounded-[4px] box-shadow">
-                        <div class="flex items-center justify-between p-[6px]">
-                            <p class="text-gray-600 text-[16px] p-[10px] font-semibold">General</p>
-                            <span
-                                class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                        </div>
-            
-                        <!-- Price -->
-                        <div class="p-[16px]">
-                            <div class="mb-[10px]">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Name*
-                                </label>
-                                <input
-                                    class="text-[20px] text-gray-600 font-bold appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="$ 10.00">
-                            </div>
-                            <div class="">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Cost
-                                    Price* </label>
-                                <input
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="8.00">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </script>
 
@@ -570,7 +544,8 @@
                     },
 
                     storeOrUpdate(params) {
-                        this.$axios.post('{{ route('admin.theme.store_product_carousel') }}', params)
+                        if (params.id) {
+                            this.$axios.post(`{{ route('admin.theme.update_product_carousel', '') }}/${params.id}`, params)
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -581,16 +556,41 @@
                                 .catch((error) => {
                                     console.log(error);
                                 })
+                        } else {
+                            this.$axios.post('{{ route('admin.theme.store_product_carousel') }}', params)
+                                .then((response) => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                    this.get();
+
+                                    this.$refs.productCarouselModal.toggle();
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        }
                     },
 
                     edit(productCarousel) {
+                        this.id = productCarousel.id;
 
+                        this.$refs.productCarouselform.setValues(productCarousel);
+
+                        this.$refs.productCarouselModal.toggle();
                     },
 
                     remove(productCarousel) {
-                        this.id = productCarousel.id;
+                        if (! confirm('Are you sure you want to remove')) {
+                            return;
+                        }
 
-                        console.log(this.$refs.productCarouselform.setValues(productCarousel));
+                        this.$axios.delete(`{{ route('admin.theme.delete_product_carousel', '') }}/${productCarousel.id}`)
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                this.get();
+                            })
+                            .catch((error) => {});
                     }
                 }
             });
@@ -603,10 +603,10 @@
                     <div class="p-[16px] bg-white rounded box-shadow">
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">Static</p>
+                                <p class="text-[16px] text-gray-800 font-semibold">Static Content</p>
 
                                 <p class="text-[12px] text-gray-500 font-medium">
-                                    Static related theme customization
+                                    Static Content related theme customization
                                 </p>
                             </div>
 

@@ -98,7 +98,10 @@ class ThemeController extends Controller
      */
     public function destroyStaticContent($id)
     {
-        $this->themeCustomizationRepository->delete($id);
+        $this->themeCustomizationRepository->deleteWhere([
+            'id'   => $id,
+            'type' => 'static_content'
+        ]);
 
         return response()->json([
             'message' => 'Static content deleted successfully.'
@@ -111,13 +114,40 @@ class ThemeController extends Controller
         $this->themeCustomizationRepository->create([
             'type'       => 'product_carousel',
             'name'       => request()->input('name'),
-            'options'    => request()->only('sort', 'limit', 'status'),
+            'options'    => request()->input('options'),
             'sort_order' => request()->input('sort_order'),
             'status'     => request()->input('theme_status'),
         ]);
 
         return response()->json([
             'message' => 'Product Carousel created successfully'
+        ], 200);
+    }
+
+    public function updateProductCarousel($id) 
+    {
+        $this->themeCustomizationRepository->update([
+            'type'       => 'product_carousel',
+            'name'       => request()->input('name'),
+            'options'    => request()->input('options'),
+            'sort_order' => request()->input('sort_order'),
+            'status'     => request()->input('theme_status'),
+        ], $id);
+
+        return response()->json([
+            'message' => 'Product Carousel updated successfully',
+        ], 200);
+    }
+
+    public function destroyProductCarousel($id) 
+    {
+        $this->themeCustomizationRepository->deleteWhere([
+            'id'   => $id,
+            'type' => 'product_carousel'
+        ]);
+
+        return response()->json([
+            'message' => 'Static content deleted successfully.'
         ], 200);
     }
 }

@@ -199,5 +199,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
          */
 
         Route::post('admin.theme.store_product_carousel', 'storeProductCarousel')->name('admin.theme.store_product_carousel');
+
+        Route::post('edit-product-carousel/{id}', 'updateProductCarousel')->name('admin.theme.update_product_carousel');
+
+        Route::delete('edit-product-carousel/{id}', 'destroyProductCarousel')->name('admin.theme.delete_product_carousel');
     });
 });
