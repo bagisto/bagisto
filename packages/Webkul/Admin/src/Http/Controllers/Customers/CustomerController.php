@@ -274,18 +274,18 @@ class CustomerController extends Controller
         $selectedCustomerIds = $massUpdateRequest->input('indices');
     
         foreach ($selectedCustomerIds as $customerId) {
-            try {
-                Event::dispatch('customer.update.before', $customerId);
-    
-                $customer = $this->customerRepository->update([
-                    'status' => $massUpdateRequest->input('value'),
-                ], $customerId);
-    
-                Event::dispatch('customer.update.after', $customer);
-            } catch (\Exception $e) {
-                // Handle the exception if needed
-            }
+            Event::dispatch('customer.update.before', $customerId);
+
+            $customer = $this->customerRepository->update([
+                'status' => $massUpdateRequest->input('value'),
+            ], $customerId);
+
+            Event::dispatch('customer.update.after', $customer);
         }
+
+        return response()->json([
+            'message' => trans('admin::app.customers.index.datagrid.update-success')
+        ]);
     }
 
     /**
@@ -297,14 +297,26 @@ class CustomerController extends Controller
     {
         $customerIds = $massDestroyRequest->input('indices');
 
-        if (!$this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
-            foreach ($customerIds as $customerId) {
-                Event::dispatch('customer.delete.before', $customerId);
-
-                $this->customerRepository->delete($customerId);
-
-                Event::dispatch('customer.delete.after', $customerId);
+        if (! $this->customerRepository->checkBulkCustomerIfTheyHaveOrderPendingOrProcessing($customerIds)) {
+            try {
+                foreach ($customerIds as $customerId) {
+                    Event::dispatch('customer.delete.before', $customerId);
+    
+                    $this->customerRepository->delete($customerId);
+    
+                    Event::dispatch('customer.delete.after', $customerId);
+                }
+    
+                return response()->json([
+                    'message' => trans('admin::app.customers.index.datagrid.delete-success')
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => $e->getMessage()
+                ]);
             }
         }
+
+        throw new \Exception(trans('admin::app.customers.index.datagrid.order-pending'));
     }
 }

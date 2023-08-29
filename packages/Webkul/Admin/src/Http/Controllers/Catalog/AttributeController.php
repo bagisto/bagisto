@@ -180,7 +180,9 @@ class AttributeController extends Controller
             Event::dispatch('catalog.attribute.delete.after', $index);
         }
 
-        return response()->json([]);
+        return response()->json([
+            'message' => trans('admin::app.customers.reviews.index.datagrid.mass-delete-success')
+        ]);
     }
 
     /**
