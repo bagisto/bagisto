@@ -652,29 +652,6 @@
 
             mounted() {
                 this.getNotification();
-
-                // todo echo @suraj-webkul need discussion with @devash sir
-
-                // if (this.pusherKey != undefined && this.pusherCluster != undefined) {
-                //     Echo = new Echo({
-                //         broadcaster: 'pusher',
-                //         key: this.pusherKey,
-                //         cluster: this.pusherCluster,
-                //         encrypted: true
-                //     });
-
-                //     Echo.channel('notification').listen('.create-notification', (e) => {
-                //         this.getNotification();
-                //     });
-
-                //     Echo.channel('notification').listen('.update-notification', (e) => {
-                //         this.notifications.forEach((notification) => {
-                //             if (notification.order_id == e.id) {
-                //                 notification.order.status = e.status;
-                //             }
-                //         });
-                //     });
-                // }
             },
 
             methods: {
