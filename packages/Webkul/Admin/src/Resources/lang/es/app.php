@@ -768,8 +768,8 @@ return [
         'yes'                         => 'Sí',
         'no'                          => 'No',
         'delete'                      => 'Borrar',
-        'enable-atleast-one-shipping' => 'Habilite al menos un método de envío.',
-        'enable-atleast-one-payment'  => 'Habilite al menos un método de pago.',
+        'enable-at-least-one-shipping' => 'Habilite al menos un método de envío.',
+        'enable-at-least-one-payment'  => 'Habilite al menos un método de pago.',
 
         'tax-categories' => [
             'title'           => 'Categorías de impuestos',
@@ -1064,7 +1064,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'logige sisse kliendina',
-            'login-message'=> 'logisite sisse kui :customer_name',
+            'login-message' => 'logisite sisse kui :customer_name',
         ],
 
         'note' => [

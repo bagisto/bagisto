@@ -747,8 +747,8 @@ return [
         'yes'                         => 'हां',
         'no'                          => 'नहीं',
         'delete'                      => 'हटाएं',
-        'enable-atleast-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
-        'enable-atleast-one-payment'  => 'कम से कम एक भुगतान विधि सक्षम करें।',
+        'enable-at-least-one-shipping' => 'कम से कम एक शिपिंग विधि सक्षम करें।',
+        'enable-at-least-one-payment'  => 'कम से कम एक भुगतान विधि सक्षम करें।',
 
         'tax-categories' => [
             'title'           => 'कर श्रेणियाँ',
@@ -1042,7 +1042,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'ग्राहक के रूप में लॉगिन करें',
-            'login-message'=> 'आप के रूप में लॉग इन किया :customer_name',
+            'login-message' => 'आप के रूप में लॉग इन किया :customer_name',
         ],
 
         'note' => [

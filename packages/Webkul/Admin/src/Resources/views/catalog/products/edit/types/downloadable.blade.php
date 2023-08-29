@@ -24,7 +24,7 @@
                 <!-- Add Button -->
                 <div class="flex gap-x-[4px] items-center">
                     <div
-                        class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                        class="secondary-button"
                         @click="resetForm(); $refs.updateCreateLinkDrawer.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.downloadable.links.add-btn')
@@ -207,7 +207,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                    class="secondary-button text-[14px]"
                     @click="resetForm(); $refs.updateCreateLinkDrawer.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.downloadable.links.add-btn')
@@ -231,7 +231,7 @@
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.title')
                                     </p>
 
-                                    <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                    <button class="mr-[45px] primary-button">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.save-btn')
                                     </button>
                                 </div>
@@ -506,7 +506,7 @@
                 <!-- Add Button -->
                 <div class="flex gap-x-[4px] items-center">
                     <div
-                        class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                        class="secondary-button"
                         @click="resetForm(); $refs.updateCreateSampleDrawer.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.add-btn')
@@ -636,7 +636,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                    class="secondary-button text-[14px]"
                     @click="resetForm(); $refs.updateCreateSampleDrawer.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.downloadable.samples.add-btn')
@@ -660,7 +660,7 @@
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.title')
                                     </p>
 
-                                    <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                    <button class="mr-[45px] primary-button">
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.save-btn')
                                     </button>
                                 </div>

@@ -12,7 +12,7 @@
     
             <div class="flex gap-x-[10px] items-center">
                 <!-- Create Button -->
-                <div class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                <div class="primary-button">
                     @lang('admin::app.marketing.communications.events.index.create-btn')
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="flex gap-x-[10px] items-center">
                     <!-- Create Button -->
                     <div
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                         @click="id=0; $refs.emailEvents.toggle()"
                     >
                         @lang('admin::app.marketing.communications.events.index.create-btn')
@@ -221,7 +221,7 @@
                         
                         <x-slot:footer>
                             <!-- Save Button -->
-                            <button class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                            <button class="primary-button">
                                 @lang('admin::app.marketing.communications.events.index.create.save-btn')
                             </button>
                         </x-slot:footer>

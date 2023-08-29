@@ -728,8 +728,8 @@ return [
         'yes'                         => 'Sim',
         'no'                          => 'Não',
         'delete'                      => 'Deletar',
-        'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
-        'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
+        'enable-at-least-one-shipping' => 'Enable atleast one shipping method.',
+        'enable-at-least-one-payment'  => 'Enable atleast one payment method.',
 
         'tax-categories' => [
             'title'           => 'Categorias de Imposto',
@@ -1022,7 +1022,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'entrar como cliente',
-            'login-message'=> 'você se conectou como :customer_name',
+            'login-message' => 'você se conectou como :customer_name',
         ],
 
         'note' => [

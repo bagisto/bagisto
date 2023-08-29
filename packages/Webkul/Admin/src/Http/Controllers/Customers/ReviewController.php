@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Http\Controllers\Customer;
+namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -65,7 +65,7 @@ class ReviewController extends Controller
 
         Event::dispatch('customer.review.update.after', $review);
 
-        session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'Review']));
+        session()->flash('success', trans('admin::app.customers.reviews.update-success', ['name' => 'admin::app.customers.reviews.review']));
 
         return redirect()->route('admin.customers.customers.review.index');
     }
@@ -115,11 +115,11 @@ class ReviewController extends Controller
 
             return response()->json([
                 'message' => trans('admin::app.customers.reviews.index.datagrid.mass-delete-success')
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
-            ]);
+            ], 500);
         }
     }
 
@@ -150,6 +150,6 @@ class ReviewController extends Controller
 
         return response()->json([
             'message' => trans('admin::app.customers.reviews.index.datagrid.mass-update-success')
-        ]);
+        ], 200);
     }
 }

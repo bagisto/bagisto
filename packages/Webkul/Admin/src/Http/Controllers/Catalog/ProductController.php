@@ -224,7 +224,7 @@ class ProductController extends Controller
             return redirect()->to(route('admin.catalog.products.index'));
         }
 
-        session()->flash('success', trans('admin::app.response.product-copied'));
+        session()->flash('success', trans('admin::app.catalog.products.product-copied'));
 
         return redirect()->route('admin.catalog.products.edit', $product->id);
     }
@@ -299,7 +299,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
-            ]);
+            ], 500);
         }
     }
 
@@ -326,7 +326,7 @@ class ProductController extends Controller
         
         return response()->json([
             'message' => trans('admin::app.catalog.products.index.datagrid.mass-update-success')
-        ]);
+        ], 200);
     }
 
     /**

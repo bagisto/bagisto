@@ -110,7 +110,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.currencies.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.currencies.index.edit.last-delete-error')], 400);
         }
 
         try {
@@ -124,7 +124,7 @@ class CurrencyController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
+            'message' => trans('admin::app.settings.currencies.index.edit.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
         ], 500);
     }
 }

@@ -115,7 +115,7 @@ class SitemapController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
+            'message' => trans('admin::app.marketing.sitemaps.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
         ], 500);
     }
 }
