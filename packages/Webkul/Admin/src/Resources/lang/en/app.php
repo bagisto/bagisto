@@ -477,6 +477,8 @@ return [
                     'attribute-family-value' => 'Attribute Family - :attribute_family',
                     'active'                 => 'Active',
                     'category'               => 'Category',
+                    'copy-of'                => ':value',
+                    'copy-of-slug'           => ':value',
                     'disable'                => 'Disable',
                     'delete'                 => 'Delete',
                     'image'                  => 'Image',
@@ -1480,7 +1482,7 @@ return [
                         'general'        => 'General',
                         'name'           => 'Name',
                         'save-btn'       => 'Save Event',
-                        'title'          => 'Events',
+                        'title'          => 'Create Events',
                         'success'        => 'Events Created Successfully',
                     ],
 
@@ -1523,9 +1525,8 @@ return [
                     ],
                 ],
 
-                'subscriber'      => 'Subscriber',
-                'delete-success'  => ':name Deleted Successfully',
-                'delete-failed'   => ':name Deleted Failure',
+                'delete-success'  => 'Subscriber Deleted Successfully',
+                'delete-failed'   => 'Subscriber Deleted Failure',
             ],
         ],
 
@@ -1544,6 +1545,7 @@ return [
                         'id'            => 'ID',
                         'name'          => 'Name',
                         'coupon-code'   => 'Coupon Code',
+                        'copy-of'       => ':value',
                         'start'         => 'Start',
                         'end'           => 'End',
                         'status'        => 'Status',
@@ -1962,16 +1964,18 @@ return [
                     'locale-logo'       => 'Locale Logo',
                     'title'             => 'Create Locale',
                     'save-btn'          => 'Save Locale',
-                    'success'           => 'Locale created successfully.',
-                    'delete-success'    => 'Locale deleted successfully.',
-                    'delete-failed'     => ':name deleted Failed',
                 ],
 
                 'edit'  => [
                     'title'   => 'Edit Locales',
-                    'success' => 'Locale updated successfully.',
-                    'last-delete-error'  => 'Last Locale Can Not Be Deleted.',
                 ],
+
+                'create-success'    => 'Locale created successfully.',
+                'update-success'    => 'Locale updated successfully.',
+                'delete-success'    => 'Locale deleted successfully.',
+                'delete-failed'     => ':name deleted Failed',
+                'last-delete-error' => 'Last Locale Can Not Be Deleted.',
+
             ],
         ],
 
@@ -1995,30 +1999,27 @@ return [
                 ],
 
                 'create' => [
-                    'title'             => 'Create New Currency',
                     'create-btn'        => 'Create Currency',
-                    'save-btn'          => 'Create Currency',
-                    'general'           => 'General',
                     'code'              => 'Code',
-                    'name'              => 'Name',
-                    'symbol'            => 'Symbol',
                     'decimal'           => 'Decimal',
-                    'success'           => 'Currency created successfully.',
-                    'last-delete-error' => 'At least one Currency is required.',
+                    'general'           => 'General',
+                    'name'              => 'Name',
+                    'save-btn'          => 'Create Currency',
+                    'symbol'            => 'Symbol',
+                    'title'             => 'Create New Currency',
                 ],
 
                 'edit' => [
                     'title'              => 'Edit Currency',
-                    'success'            => 'Currency updated successfully.',
-                    'delete-success'     => 'Currency deleted successfully.',
-                    'last-delete-error'  => 'Last Currency Can Not Deleted',
-                    'delete-failed'      => 'Currency Deleted Failed',
                 ],
+
+                'create-success'     => 'Currency created successfully.',
+                'delete-success'     => 'Currency deleted successfully.',
+                'delete-failed'      => 'Currency Deleted Failed',
+                'last-delete-error'  => 'At least one Currency is required.',
+                'update-success'     => 'Currency updated successfully.',
+
             ],
-
-
-
-
         ],
 
         'exchange-rates'  => [
@@ -2033,14 +2034,10 @@ return [
                     'save-btn'         => 'Save Exchange Rate',
                     'source-currency'  => 'Source Currency',
                     'target-currency'  => 'Target Currency',
-                    'success'          => 'Exchange Rate Created Successfully',
                 ],
 
                 'edit' => [
                     'title'   => 'Edit Exchange Rates',
-                    'success' => 'Exchange Rate Updated Successfully',
-                    'delete'  => 'Exchange Rate Deleted Successfully',
-                    'delete-error'  => 'Exchange Rate Deleted Error'
                 ],
 
                 'datagrid' => [
@@ -2051,6 +2048,12 @@ return [
                     'delete'        => 'Delete',
                     'actions'       => 'Actions',
                 ],
+
+                'create-success'  => 'Exchange Rate Created Successfully',
+                'update-success'  => 'Exchange Rate Updated Successfully',
+                'delete-success'  => 'Exchange Rate Deleted Successfully',
+                'delete-error'    => 'Exchange Rate Deleted Error'
+
             ],
         ],
 
@@ -2097,7 +2100,6 @@ return [
                 'select-state'   => 'Select State',
                 'city'           => 'City',
                 'street'         => 'Street',
-                'success'        => 'Inventory Source Created Successfully',
                 'postcode'       => 'Postcode',
                 'settings'       => 'Settings',
             ],
@@ -2129,11 +2131,13 @@ return [
                 'street'            => 'Street',
                 'postcode'          => 'Postcode',
                 'settings'          => 'Settings',
-                'update-success'    => 'Inventory Sources Updated Successfully',
-                'delete-success'    => 'Inventory Sources Deleted Successfully',
-                'last-delete-error' => 'Last Inventory Sources Can Not Deleted',
-                'delete-failed'     => 'Inventory Sources Delete Failed',
             ],
+
+            'create-success'    => 'Inventory Source Created Successfully',
+            'delete-success'    => 'Inventory Sources Deleted Successfully',
+            'delete-failed'     => 'Inventory Sources Delete Failed',
+            'last-delete-error' => 'Last Inventory Sources Can Not Deleted',
+            'update-success'    => 'Inventory Sources Updated Successfully',
         ],
 
         'taxes' => [
@@ -2162,15 +2166,16 @@ return [
                         'title'           => 'Tax Categories',
                         'add-tax-rates'   => 'Add Tax Rates',
                         'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
-                        'success'  => 'New Tax Category Created',
                     ],
 
                     'edit'  => [
-                        'title'          => 'Edit Tax Categories',
-                        'success'        => 'Successfully Updated Tax Category',
-                        'delete-success' => ':name Deleted Successfully',
-                        'delete-failed'  => ':name Deleted Failed',
+                        'title'   => 'Edit Tax Categories',
                     ],
+
+                    'create-success'  => 'New Tax Category Created',
+                    'update-success'  => 'Tax Category Successfully Updated',
+                    'delete-success' => ':name Deleted Successfully',
+                    'delete-failed'  => ':name Deleted Failed',
                 ],
             ],
 
@@ -2210,7 +2215,6 @@ return [
                     'zip_code'       => 'Zip Code',
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
-                    'create-success' => 'Tax rate created successfully.',
                 ],
 
                 'edit'  => [
@@ -2228,10 +2232,13 @@ return [
                     'zip_code'       => 'Zip Code',
                     'zip_from'       => 'Zip From',
                     'zip_to'         => 'Zip To',
-                    'update-success' => 'Tax Rate Update Successfully',
-                    'delete-failed'  => ':name deleted failed',
-                    'delete-success' => ':name deleted successfully',
                 ],
+
+                'create-success' => 'Tax rate created successfully.',
+                'delete-failed'  => 'Tax rate deleted failed',
+                'delete-success' => 'Tax rate deleted successfully',
+                'update-success' => 'Tax Rate Update Successfully',
+
             ],
         ],
 
@@ -2282,7 +2289,6 @@ return [
                 'settings'               => 'Settings',
                 'status'                 => 'Status',
                 'maintenance-mode-text'  => 'Message',
-                'create-success'         => 'Channel created successfully.',
             ],
 
             'edit' => [
@@ -2317,12 +2323,14 @@ return [
                 'settings'               => 'Settings',
                 'status'                 => 'Status',
                 'maintenance-mode-text'  => 'Message',
-                'update-success'         => 'Channel updated successfully.',
-                'delete-failed'          => ':name Delete Failed',
-                'delete-success'         => 'Channel deleted successfully.',
-                'last-delete-error'      => 'Last Channel deleted failed.',
-                'update-success'         => 'Update Channel Successfully',
             ],
+
+            'create-success'         => 'Channel created successfully.',
+            'delete-success'         => 'Channel deleted successfully.',
+            'delete-failed'          => ':name Delete Failed',
+            'last-delete-error'      => 'Last Channel deleted failed.',
+            'update-success'         => 'Update Channel Successfully',
+
         ],
 
         'users' => [
@@ -2340,7 +2348,6 @@ return [
                     'role'             => 'Role',
                     'status'           => 'Status',
                     'save-btn'         => 'Save User',
-                    'success'          => 'User created successfully.',
                 ],
 
                 'datagrid' => [
@@ -2357,13 +2364,15 @@ return [
 
                 'edit'  => [
                     'title'    => 'Edit User',
-                    'success'  => 'User updated successfully.',
-                    'incorrect-password' => 'Incorrect password',
-                    'delete-failed'      => ':name deleted failed.',
-                    'delete-success'     => ':name deleted successfully.',
-                    'cannot-change'      => 'User cannot be changed',
-                    'last-delete-error'  => 'Last :name delete failed',
-                ]
+                ],
+
+                'create-success'     => 'User created successfully.',
+                'cannot-change'      => 'User cannot be changed',
+                'delete-failed'      => 'User deleted failed.',
+                'delete-success'     => 'User deleted successfully.',
+                'incorrect-password' => 'Incorrect password',
+                'last-delete-error'  => 'Last User delete failed',
+                'update-success'     => 'User updated successfully.',
             ],
 
             'edit'  => [
@@ -2408,7 +2417,6 @@ return [
                 'permissions'     => 'Permissions',
                 'custom'          => 'Custom',
                 'all'             => 'All',
-                'success'         => 'Roles Created Successfully',
             ],
 
             'edit' => [
@@ -2422,12 +2430,14 @@ return [
                 'permissions'     => 'Permissions',
                 'custom'          => 'Custom',
                 'all'             => 'All',
-                'being-used'      => ':name is already used in :admin-user',
-                'update-success'  => 'Roles is updated successfully',
-                'last-delete-error'  => 'Last :name can not be deleted',
-                'delete-success'   => ':name is deleted successfully',
-                'delete-failed'    => ':name is deleted failed'
             ],
+
+            'success'            => 'Roles Created Successfully',
+            'update-success'     => 'Roles is updated successfully',
+            'last-delete-error'  => 'Last Roles can not be deleted',
+            'delete-success'     => 'Roles is deleted successfully',
+            'delete-failed'      => 'Roles is deleted failed',
+            'being-used'         => ':name is already used in :admin-user',
         ],
     ],
 

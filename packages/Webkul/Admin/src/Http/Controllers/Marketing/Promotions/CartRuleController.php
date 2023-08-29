@@ -54,12 +54,12 @@ class CartRuleController extends Controller
      */
     public function copy(int $cartRuleId)
     {
-        $cartRule = $this->cartRuleRepository->with(['channels','customer_groups',])->findOrFail($cartRuleId);
+        $cartRule = $this->cartRuleRepository->with(['channels', 'customer_groups',])->findOrFail($cartRuleId);
 
         $copiedCartRule = $cartRule->replicate()->fill([
-                'status' => 0,
-                'name'   => trans('admin::app.copy-of', ['value' => $cartRule->name]),
-            ]);
+            'status' => 0,
+            'name'   => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]),
+        ]);
 
         $copiedCartRule->save();
 

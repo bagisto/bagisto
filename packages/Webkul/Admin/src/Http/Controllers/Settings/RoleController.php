@@ -71,7 +71,7 @@ class RoleController extends Controller
 
         Event::dispatch('user.role.create.after', $role);
 
-        session()->flash('success', trans('admin::app.settings.roles.create.success', ['name' => 'admin::app.settings.roles.index.role']));
+        session()->flash('success', trans('admin::app.settings.roles.create-success'));
 
         return redirect()->route('admin.settings.roles.index');
     }
@@ -133,7 +133,7 @@ class RoleController extends Controller
 
         Event::dispatch('user.role.update.after', $role);
 
-        session()->flash('success', trans('admin::app.settings.roles.edit.update-success', ['name' => 'admin::app.settings.roles.index.role']));
+        session()->flash('success', trans('admin::app.settings.roles.update-success'));
 
         return redirect()->route('admin.settings.roles.index');
     }
@@ -149,14 +149,16 @@ class RoleController extends Controller
         $role = $this->roleRepository->findOrFail($id);
 
         if ($role->admins->count() >= 1) {
-            return response()->json(['message' => trans('admin::app.settings.roles.edit.being-used', [
+            return response()->json(['message' => trans('admin::app.settings.roles.being-used', [
                 'name'   => 'admin::app.settings.roles.index.title',
                 'source' => 'admin::app.settings.roles.index.admin-user'
             ])], 400);
         }
 
         if ($this->roleRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.roles.edit.last-delete-error', ['name' => 'admin::app.settings.roles.index.title'])], 400);
+            return response()->json([
+                'message' => trans('admin::app.settings.roles.last-delete-error'
+            )], 400);
         }
 
         try {
@@ -166,10 +168,12 @@ class RoleController extends Controller
 
             Event::dispatch('user.role.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.roles.edit.delete-success', ['name' => 'admin::app.settings.roles.index.role'])]);
+            return response()->json(['message' => trans('admin::app.settings.roles.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.settings.roles.edit.delete-failed', ['name' => 'admin::app.settings.roles.index.role'])], 500);
+        return response()->json([
+            'message' => trans('admin::app.settings.roles.delete-failed'
+        )], 500);
     }
 }

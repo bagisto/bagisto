@@ -88,7 +88,7 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.tax_rate.create.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create.create-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create-success'));
 
         return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
@@ -141,7 +141,7 @@ class TaxRateController extends Controller
 
         Event::dispatch('tax.tax_rate.update.after', $taxRate);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.edit.update-success'));
+        session()->flash('success', trans('admin::app.settings.taxes.tax-rates.update-success'));
 
         return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
@@ -163,11 +163,13 @@ class TaxRateController extends Controller
 
             Event::dispatch('tax.tax_rate.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-success', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])]);
+            return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-failed', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])], 500);
+        return response()->json([
+            'message' => trans('admin::app.settings.taxes.tax-rates.delete-failed'
+        )], 500);
     }
 
     /**

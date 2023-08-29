@@ -93,14 +93,14 @@ class SubscriptionController extends Controller
             $this->subscribersListRepository->delete($id);
 
             return new JsonResource([
-                'message' => trans('admin::app.marketing.communications.subscribers.delete-success', ['name' => 'admin::app.marketing.communications.subscribers.subscriber']),
+                'message' => trans('admin::app.marketing.communications.subscribers.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.marketing.communications.subscribers.delete-failed', ['name' => 'admin::app.marketing.communications.subscribers.subscriber']),
+            'message' => trans('admin::app.marketing.communications.subscribers.delete-failed'),
         ], 500);
     }
 }

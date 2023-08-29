@@ -57,7 +57,7 @@ class CampaignDataGrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('admin::app.status'),
+            'label'      => trans('admin::app.marketing.communications.campaigns.index.datagrid.status'),
             'type'       => 'boolean',
             'searchable' => true,
             'sortable'   => true,

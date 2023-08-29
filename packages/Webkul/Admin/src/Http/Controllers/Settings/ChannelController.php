@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
@@ -88,7 +89,7 @@ class ChannelController extends Controller
 
         Event::dispatch('core.channel.create.after', $channel);
 
-        session()->flash('success', trans('admin::app.settings.channels.create.create-success'));
+        session()->flash('success', trans('admin::app.settings.channels.create-success'));
 
         return redirect()->route('admin.settings.channels.index');
     }
@@ -167,15 +168,15 @@ class ChannelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $channel = $this->channelRepository->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            return response()->json(['message' => trans('admin::app.settings.channels.edit.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.channels.last-delete-error')], 400);
         }
 
         try {
@@ -185,11 +186,13 @@ class ChannelController extends Controller
 
             Event::dispatch('core.channel.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.channels.edit.delete-success')]);
+            return response()->json(['message' => trans('admin::app.settings.channels.delete-success')]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.settings.channels.edit.delete-failed', ['name' => 'Channel'])], 400);
+        return new JsonResource([
+            'message' => trans('admin::app.settings.channels.delete-failed')
+        ], 400);
     }
 
     /**
