@@ -124,7 +124,7 @@
                                 src="{{ bagisto_asset('images/inactive_footer_link.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold">Footer Link</p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">Footer Link</p>
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
 
                 data() {
                     return {
-                        componentName: 'v-product-theme',
+                        componentName: 'v-footer-link-theme',
                     }
                 },
 
@@ -295,7 +295,7 @@
                                 class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                 @click="$refs.productCarouselModal.toggle()"
                             >
-                                Add Product
+                                Create Product Carousel
                             </div>
                         </div>
 
@@ -402,7 +402,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    {{-- Name --}}
+                                    <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             Name
@@ -650,7 +650,7 @@
                                 class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                 @click="$refs.categoryCarouselModal.toggle()"
                             >
-                                Add category
+                                Create Category Carousel
                             </div>
                         </div>
 
@@ -754,7 +754,7 @@
                                     >
                                     </x-admin::form.control-group.control>
 
-                                    {{-- Name --}}
+                                    <!-- Name -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             Name
@@ -1322,7 +1322,7 @@
             });
         </script>
 
-          {{-- Static Theme --}}
+        {{-- Footer Link --}}
         <script type="text/x-template" id="v-footer-link-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -1392,10 +1392,37 @@
 
         <script type="module">
             app.component('v-footer-link-theme', {
-                template: '#v-footer-link-theme-template'
+                template: '#v-footer-link-theme-template',
+
+                data() {
+                    return {
+                        footerLinks: {},
+                    };
+                },
+
+                created() {
+                    this.get();
+                },
+
+                methods: {
+                    get() {
+                        this.$axios.get('{{ route('admin.theme.themes') }}', {
+                                params: {
+                                    type: 'footer_links'
+                                }
+                            })
+                            .then((response) => {
+                                this.footerLinks = response.data.data[0].options;
+
+                                console.log(this.footerLinks);
+                            })
+                            .catch((error) => {})
+                    }
+                },
             });
         </script>
 
+        {{-- Code mirror CDN --}}
         <script
             type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"

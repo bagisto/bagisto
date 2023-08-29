@@ -56,8 +56,6 @@
                 @break
 
             @case ($customization::CATEGORY_CAROUSEL)
-                    
-                    {{ print_r($data) }}
                 {{-- Categories carousel --}}
                 <x-shop::categories.carousel
                     :title="$customization->name"

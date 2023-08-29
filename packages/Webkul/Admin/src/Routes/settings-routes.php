@@ -178,7 +178,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     });
 
 
-    Route::controller(ThemeController::class)->prefix('themes')->group(function () {
+    Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
         Route::get('', 'index')->name('admin.theme.index');
 
         Route::get('all', 'getThemes')->name('admin.theme.themes');
