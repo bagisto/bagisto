@@ -109,10 +109,10 @@ class ThemeController extends Controller
     }
 
 
-    public function storeProductCarousel()
+    public function storeProductAndCategoryCarousel()
     {
         $this->themeCustomizationRepository->create([
-            'type'       => 'product_carousel',
+            'type'       => request()->input('type'),
             'name'       => request()->input('name'),
             'options'    => request()->input('options'),
             'sort_order' => request()->input('sort_order'),
@@ -124,10 +124,10 @@ class ThemeController extends Controller
         ], 200);
     }
 
-    public function updateProductCarousel($id) 
+    public function updateProductAndCategoryCarousel($id) 
     {
         $this->themeCustomizationRepository->update([
-            'type'       => 'product_carousel',
+            'type'       => request()->input('type'),
             'name'       => request()->input('name'),
             'options'    => request()->input('options'),
             'sort_order' => request()->input('sort_order'),
@@ -139,11 +139,11 @@ class ThemeController extends Controller
         ], 200);
     }
 
-    public function destroyProductCarousel($id) 
+    public function destroyProductAndCategoryCarousel($id) 
     {
         $this->themeCustomizationRepository->deleteWhere([
             'id'   => $id,
-            'type' => 'product_carousel'
+            'type' => request()->input('type')
         ]);
 
         return response()->json([

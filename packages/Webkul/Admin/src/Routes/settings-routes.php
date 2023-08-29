@@ -195,13 +195,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
 
         /**
-         * Product Carousels related routes
+         * Product and Category Carousels related routes
          */
 
-        Route::post('admin.theme.store_product_carousel', 'storeProductCarousel')->name('admin.theme.store_product_carousel');
+        Route::post('store-product-carousel', 'storeProductAndCategoryCarousel')->name('admin.theme.store_product_and_category_carousel');
 
-        Route::post('edit-product-carousel/{id}', 'updateProductCarousel')->name('admin.theme.update_product_carousel');
+        Route::post('edit-product-carousel/{id}', 'updateProductAndCategoryCarousel')->name('admin.theme.update_product_and_category_carousel');
 
-        Route::delete('edit-product-carousel/{id}', 'destroyProductCarousel')->name('admin.theme.delete_product_carousel');
+        Route::delete('edit-product-carousel/{id}', 'destroyProductAndCategoryCarousel')->name('admin.theme.delete_product_and_category_carousel');
     });
 });

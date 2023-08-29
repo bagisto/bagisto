@@ -39,9 +39,17 @@
                     >
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
+                                v-if="componentName == 'v-slider-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/slider.png') }}"
+                                src="{{ bagisto_asset('images/active_slider.png') }}"
                             >
+
+                            <img
+                                v-else
+                                class="w-[80px] h-[80px]"
+                                src="{{ bagisto_asset('images/inactive_slider.png') }}"
+                            >
+                
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Slider </p>
                         </div>
@@ -54,8 +62,15 @@
                     >   
                         <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
+                                v-if="componentName == 'v-product-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/slider.png') }}"
+                                src="{{ bagisto_asset('images/product_carousel.png') }}"
+                            >
+
+                            <img
+                                v-else
+                                class="w-[80px] h-[80px]"
+                                src="{{ bagisto_asset('images/inactive_product_carousel.png') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Product Carousel</p>
@@ -64,13 +79,43 @@
                 
                     <div    
                         class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
+                        :class="{'border-blue-600': componentName == 'v-category-theme'}"
+                        @click="switchComponent('v-category-theme')"
+                    >   
+                        <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
+                            <img
+                                v-if="componentName == 'v-category-theme'"
+                                class="w-[80px] h-[80px]"
+                                src="{{ bagisto_asset('images/active_category.png') }}"
+                            >
+
+                            <img
+                                v-else
+                                class="w-[80px] h-[80px]"
+                                src="{{ bagisto_asset('images/inactive_category.png') }}"
+                            >
+                
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Product Carousel</p>
+                        </div>
+                    </div>
+                
+
+                    <div    
+                        class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
                         :class="{'border-blue-600': componentName == 'v-static-theme'}"
                         @click="switchComponent('v-static-theme')"
                     >   
                         <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
+                                v-if="componentName == 'v-static-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/slider.png') }}"
+                                src="{{ bagisto_asset('images/active_static_content.png') }}"
+                            >
+
+                            <img
+                                v-else
+                                class="w-[80px] h-[80px]"
+                                src="{{ bagisto_asset('images/inactive_static_content.png') }}"
                             >
                 
                             <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Static Content </p>
@@ -84,8 +129,15 @@
                     >   
                         <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
                             <img
+                                v-if="componentName == 'v-footer-link-theme'"
                                 class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/slider.png') }}"
+                                src="{{ bagisto_asset('images/active_footer_link.png') }}"
+                            >
+
+                            <img
+                                v-else
+                                class="w-[80px] h-[80px]"
+                                src="{{ bagisto_asset('images/inactive_footer_link.png') }}"
                             >
                 
                             <p class="mb-[5px] text-[16px] top-[134px] text-center text-gray-800 font-semibold">Footer Link</p>
@@ -103,7 +155,7 @@
 
                 data() {
                     return {
-                        componentName: 'v-product-theme',
+                        componentName: 'v-category-theme',
                     }
                 },
 
@@ -373,6 +425,13 @@
                                     >
                                     </x-admin::form.control-group.control>
 
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="type"
+                                        value="product_carousel"
+                                    >
+                                    </x-admin::form.control-group.control>
+
                                     {{-- Name --}}
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
@@ -545,7 +604,7 @@
 
                     storeOrUpdate(params) {
                         if (params.id) {
-                            this.$axios.post(`{{ route('admin.theme.update_product_carousel', '') }}/${params.id}`, params)
+                            this.$axios.post(`{{ route('admin.theme.update_product_and_category_carousel', '') }}/${params.id}`, params)
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -557,7 +616,7 @@
                                     console.log(error);
                                 })
                         } else {
-                            this.$axios.post('{{ route('admin.theme.store_product_carousel') }}', params)
+                            this.$axios.post('{{ route('admin.theme.store_product_and_category_carousel') }}', params)
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -584,7 +643,377 @@
                             return;
                         }
 
-                        this.$axios.delete(`{{ route('admin.theme.delete_product_carousel', '') }}/${productCarousel.id}`)
+                        this.$axios.delete(`{{ route('admin.theme.delete_product_and_category_carousel', '') }}/${productCarousel.id}`, {
+                                params: {
+                                    type: 'product_carousel'
+                                }
+                            })
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                this.get();
+                            })
+                            .catch((error) => {});
+                    }
+                }
+            });
+        </script>
+
+        {{-- Category Theme --}}
+        <script type="text/x-template" id="v-category-theme-template">
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded box-shadow">
+                        <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex flex-col gap-[4px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">Category Carousels</p>
+
+                                <p class="text-[12px] text-gray-500 font-medium">
+                                    Category Carousel related theme customization
+                                </p>
+                            </div>
+            
+                            <div
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.categoryCarouselModal.toggle()"
+                            >
+                                Add category
+                            </div>
+                        </div>
+
+                        <div v-if="categoryCarousels.length">
+                            <div
+                                class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300"
+                                v-for="categoryCarousel in categoryCarousels"
+                            >
+                                <!-- Information -->
+                                <div class="flex gap-[10px]">
+                                    <!-- Image -->
+                                    <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden">
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
+
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">category Image</p>
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ categoryCarousel.name }}
+                                        </p>
+
+                                        <p 
+                                            v-if="categoryCarousel.status"
+                                            class="label-processing text-white"
+                                        >
+                                            Active
+                                        </p>
+
+                                        <p 
+                                            v-else
+                                            class="label-pending text-white"
+                                        >
+                                            Inactive
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-[4px] place-content-start text-right">
+                                    <p
+                                        class="text-blue-600 cursor-pointer"
+                                        @click="edit(categoryCarousel);"
+                                    >
+                                        Edit
+                                    </p>
+
+                                    <p
+                                        class="text-red-600 cursor-pointer"
+                                        @click="remove(categoryCarousel)"
+                                    >
+                                        Delete
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            v-else
+                        >
+                            <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-category-to-store.png"
+                                alt="add-category-to-store">
+            
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold">Add Static Content</p>
+                                <p class="text-gray-400">Insert concise static content to enhance webpage engagement and readability..</p>
+                            </div>
+            
+                            <div
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.openStatisContentDrawer.open();this.initHtmlEditor();this.initCssEditor();"
+                            >
+                                Add Static Content
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Model Form -->
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                    ref="categoryCarouselform"
+                >
+                    <form @submit="handleSubmit($event, storeOrUpdate)">
+                        <x-admin::modal ref="categoryCarouselModal">
+                            <x-slot:header>
+                                <p      
+                                    class="text-[18px] text-gray-800 font-bold"
+                                    v-if="id"
+                                >
+                                    Update category Carousel
+                                </p>
+
+                                <p      
+                                    class="text-[18px] text-gray-800 font-bold"
+                                    v-else
+                                >
+                                    Create category Carousel
+                                </p>
+                            </x-slot:header>
+
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="id"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="type"
+                                        value="category_carousel"
+                                    >
+                                    </x-admin::form.control-group.control>
+
+                                    {{-- Name --}}
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Name
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="name"
+                                            :label="trans('Name')"
+                                            rules="required"
+                                            :placeholder="trans('Name')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="name"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Sort By
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="options.sort"
+                                            :label="trans('Sort')"
+                                            :placeholder="trans('Sort')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="options.sort"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Limit
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="options.limit"
+                                            rules="numeric"
+                                            :label="trans('limit')"
+                                            :placeholder="trans('limit')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="options.limit"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Status
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="options.status"
+                                            :value="1"
+                                            label="Status"
+                                            :checked="(boolean) true"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="options.status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Theme Sort Order
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            label="Sort Order"
+                                            rules="numeric|required"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Theme Status
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="theme_status"
+                                            :value="1"
+                                            label="Theme Status"
+                                            :checked="(boolean) true"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="theme_status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <!-- Save Button -->
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        Save 
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
+               
+            </div>
+        </script>
+
+        <script type="module">
+            app.component('v-category-theme', {
+                template: '#v-category-theme-template',
+
+                data() {
+                    return {
+                        categoryCarousels: {},
+
+                        id: null,
+                    };
+                },
+
+                created() {
+                    this.get();
+                },
+
+                methods: {
+                    get() {
+                        this.$axios.get('{{ route('admin.theme.themes') }}', {
+                                params: {
+                                    type: 'category_carousel',
+                                }
+                            })
+                            .then((response) => {
+                                this.categoryCarousels = response.data.data;
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    },
+
+                    storeOrUpdate(params) {
+                        if (params.id) {
+                            this.$axios.post(`{{ route('admin.theme.update_product_and_category_carousel', '') }}/${params.id}`, params)
+                                .then((response) => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                    this.get();
+
+                                    this.$refs.categoryCarouselModal.toggle();
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        } else {
+                            this.$axios.post('{{ route('admin.theme.store_product_and_category_carousel') }}', params)
+                                .then((response) => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+
+                                    this.get();
+
+                                    this.$refs.categoryCarouselModal.toggle();
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                        }
+                    },
+
+                    edit(categoryCarousel) {
+                        this.id = categoryCarousel.id;
+
+                        this.$refs.categoryCarouselform.setValues(categoryCarousel);
+
+                        this.$refs.categoryCarouselModal.toggle();
+                    },
+
+                    remove(categoryCarousel) {
+                        if (! confirm('Are you sure you want to remove')) {
+                            return;
+                        }
+
+                        this.$axios.delete(`{{ route('admin.theme.delete_product_and_category_carousel', '') }}/${categoryCarousel.id}`, {
+                                params: {
+                                    type: 'category_carousel'
+                                }
+                            })
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
