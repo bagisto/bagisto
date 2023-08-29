@@ -14,8 +14,8 @@ return [
      */
     [
         'key'  => 'sales',
-        'name' => 'admin::app.configuration.sales',
-        'info' => 'admin::app.configuration.sales',
+        'name' => 'admin::app.configuration.index.sales.title',
+        'info' => 'admin::app.configuration.index.sales.info',
         'sort' => 5,
     ],
 
@@ -24,19 +24,19 @@ return [
      */
     [
         'key'  => 'sales.orderSettings',
-        'name' => 'admin::app.configuration.order-settings',
-        'info' => 'admin::app.configuration.order-settings-info',
+        'name' => 'admin::app.configuration.index.sales.order-settings.title',
+        'info' => 'admin::app.configuration.index.sales.order-settings.info',
         'icon' => 'order-setting.png',
         'sort' => 4,
     ], [
         'key'    => 'sales.orderSettings.order_number',
-        'name'   => 'admin::app.configuration.order-number',
-        'info'   => 'admin::app.configuration.order-number-info',
+        'name'   => 'admin::app.configuration.index.sales.order-settings.order-number',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.order-number-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'order_number_prefix',
-                'title'         => 'admin::app.configuration.order-number-prefix',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-prefix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -44,7 +44,7 @@ return [
             ],
             [
                 'name'          => 'order_number_length',
-                'title'         => 'admin::app.configuration.order-number-length',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-length',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
@@ -52,7 +52,7 @@ return [
             ],
             [
                 'name'          => 'order_number_suffix',
-                'title'         => 'admin::app.configuration.order-number-suffix',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-suffix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -60,7 +60,7 @@ return [
             ],
             [
                 'name'          => 'order_number_generator_class',
-                'title'         => 'admin::app.configuration.order-number-generator-class',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.order-number-generator-class',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -69,13 +69,13 @@ return [
         ],
     ], [
         'key'    => 'sales.orderSettings.minimum-order',
-        'name'   => 'admin::app.configuration.minimum-order',
-        'info'   => 'admin::app.configuration.minimum-order-info',
+        'name'   => 'admin::app.configuration.index.sales.order-settings.minimum-order',
+        'info'   => 'admin::app.configuration.index.sales.order-settings.minimum-order-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'minimum_order_amount',
-                'title'         => 'admin::app.configuration.minimum-order-amount',
+                'title'         => 'admin::app.configuration.index.sales.order-settings.minimum-order-amount',
                 'type'          => 'number',
                 'validation'    => 'regex:^-?\d+(\.\d+)?$',
                 'channel_based' => true,
@@ -89,19 +89,19 @@ return [
      */
     [
         'key'  => 'sales.invoice_settings',
-        'name' => 'admin::app.configuration.invoice-settings',
-        'info' => 'admin::app.configuration.invoice-settings-info',
+        'name' => 'admin::app.configuration.index.sales.invoice-settings.title',
+        'info' => 'admin::app.configuration.index.sales.invoice-settings.info',
         'icon' => 'invoice-setting.png',
         'sort' => 5,
     ], [
         'key'    => 'sales.invoice_settings.invoice_number',
-        'name'   => 'admin::app.configuration.invoice-number',
-        'info'   => 'admin::app.configuration.invoice-number-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-info',
         'sort'   => 0,
         'fields' => [
             [
                 'name'          => 'invoice_number_prefix',
-                'title'         => 'admin::app.configuration.invoice-number-prefix',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-prefix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -109,7 +109,7 @@ return [
             ],
             [
                 'name'          => 'invoice_number_length',
-                'title'         => 'admin::app.configuration.invoice-number-length',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-length',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
@@ -117,7 +117,7 @@ return [
             ],
             [
                 'name'          => 'invoice_number_suffix',
-                'title'         => 'admin::app.configuration.invoice-number-suffix',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-suffix',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -125,7 +125,7 @@ return [
             ],
             [
                 'name'          => 'invoice_number_generator_class',
-                'title'         => 'admin::app.configuration.invoice-number-generator-class',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.invoice-number-generator-class',
                 'type'          => 'text',
                 'validation'    => false,
                 'channel_based' => true,
@@ -134,13 +134,13 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.payment_terms',
-        'name'   => 'admin::app.configuration.payment-terms',
-        'info'   => 'admin::app.configuration.payment-terms-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.payment-terms-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'due_duration',
-                'title'         => 'admin::app.configuration.due-duration',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.due-duration',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
@@ -148,13 +148,13 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.invoice_slip_design',
-        'name'   => 'admin::app.configuration.invoice-slip-design',
-        'info'   => 'admin::app.configuration.invoice-slip-design-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-slip-design-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'logo',
-                'title'         => 'admin::app.configuration.logo',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.logo',
                 'type'          => 'image',
                 'validation'    => 'mimes:bmp,jpeg,jpg,png,webp',
                 'channel_based' => true,
@@ -162,20 +162,20 @@ return [
         ],
     ], [
         'key'    => 'sales.invoice_settings.invoice_reminders',
-        'name'   => 'admin::app.configuration.invoice-reminders',
-        'info'   => 'admin::app.configuration.invoice-reminders-info',
+        'name'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders',
+        'info'   => 'admin::app.configuration.index.sales.invoice-settings.invoice-reminders-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'reminders_limit',
-                'title'         => 'admin::app.configuration.maximum-limit-of-reminders',
+                'title'         => 'admin::app.configuration.index.sales.invoice-settings.maximum-limit-of-reminders',
                 'type'          => 'text',
                 'validation'    => 'numeric',
                 'channel_based' => true,
             ],
             [
                 'name'    => 'interval_between_reminders',
-                'title'   => 'admin::app.configuration.interval-between-reminders',
+                'title'   => 'admin::app.configuration.index.sales.invoice-settings.interval-between-reminders',
                 'type'    => 'select',
                 'options' => [
                     [

@@ -35,7 +35,7 @@
                     type="submit"
                     class="primary-button"
                 >
-                    @lang('admin::app.configuration.save-btn')
+                    @lang('admin::app.configuration.index.save-btn')
                 </button>
             </div>
         </div>

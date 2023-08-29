@@ -236,7 +236,7 @@
                         class="cursor-pointer"
                         :for="$name.'[delete]'"
                     >
-                        @lang('admin::app.configuration.delete')
+                        @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
                 </div>
             @endif
@@ -280,7 +280,7 @@
                         class="cursor-pointer"
                         :for="$name.'[delete]'"
                     >
-                        @lang('admin::app.configuration.delete')
+                        @lang('admin::app.configuration.index.delete')
                     </x-admin::form.control-group.label>
                 </div>
             @endif
