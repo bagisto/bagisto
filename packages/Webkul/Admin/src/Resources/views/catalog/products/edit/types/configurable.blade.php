@@ -22,7 +22,7 @@
                 <!-- Add Button -->
                 <div class="flex gap-x-[4px] items-center">
                     <div
-                        class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                        class="secondary-button"
                         @click="$refs.variantCreateModal.open()"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.add-btn')
@@ -66,7 +66,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                    class="secondary-button text-[14px]"
                     @click="$refs.variantCreateModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.types.configurable.add-btn')
@@ -133,7 +133,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.configurable.create.save-btn')
                                 </button>
@@ -277,7 +277,7 @@
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.title')
                                             </p>
 
-                                            <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                            <button class="mr-[45px] primary-button">
                                                 @lang('admin::app.catalog.products.edit.types.configurable.edit.save-btn')
                                             </button>
                                         </div>

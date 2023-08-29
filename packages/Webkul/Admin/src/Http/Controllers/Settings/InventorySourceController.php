@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Admin\DataGrids\InventorySourcesDataGrid;
+use Webkul\Admin\DataGrids\Settings\InventorySourcesDataGrid;
 use Webkul\Inventory\Http\Requests\InventorySourceRequest;
 
 class InventorySourceController extends Controller
@@ -75,9 +75,9 @@ class InventorySourceController extends Controller
 
         Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
+        session()->flash('success', trans('admin::app.settings.inventory_sources.create.success'));
 
-        return redirect()->route('admin.inventory_sources.index');
+        return redirect()->route('admin.settings.inventory_sources.index');
     }
 
     /**
@@ -126,9 +126,9 @@ class InventorySourceController extends Controller
 
         Event::dispatch('inventory.inventory_source.update.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
+        session()->flash('success', trans('admin::app.settings.inventory_sources.edit.update-success'));
 
-        return redirect()->route('admin.inventory_sources.index');
+        return redirect()->route('admin.settings.inventory_sources.index');
     }
 
     /**
@@ -142,7 +142,7 @@ class InventorySourceController extends Controller
         $this->inventorySourceRepository->findOrFail($id);
 
         if ($this->inventorySourceRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.inventory_sources.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.inventory_sources.edit.last-delete-error')], 400);
         }
 
         try {
@@ -152,11 +152,11 @@ class InventorySourceController extends Controller
 
             Event::dispatch('inventory.inventory_source.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.inventory_sources.delete-success')]);
+            return response()->json(['message' => trans('admin::app.settings.inventory_sources.edit.delete-success')]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Inventory source'])], 500);
+        return response()->json(['message' => trans('admin::app.settings.inventory_sources.edit.delete-failed', ['name' => 'admin::app.settings.inventory_sources.index.title'])], 500);
     }
 }

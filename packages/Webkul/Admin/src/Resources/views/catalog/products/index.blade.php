@@ -66,7 +66,7 @@
                                     <!-- Save Button -->
                                     <button
                                         type="submit" 
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('Export')
                                     </button>
@@ -83,7 +83,7 @@
                 <v-create-product-form>
                     <button 
                         type="button"
-                        class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                        class="primary-button"
                     >
                         @lang('admin::app.catalog.products.index.create-btn')
                     </button>
@@ -169,7 +169,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                    class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
                     v-for="record in records"
                 >
                     {{-- Name, SKU, Attribute Family Columns --}}
@@ -285,7 +285,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
-                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
                         </a>
 
                     </div>
@@ -308,7 +308,7 @@
                 @if (bouncer()->hasPermission('catalog.products.create'))
                     <button 
                         type="button"
-                        class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                        class="primary-button"
                         @click="$refs.productCreateModal.toggle()"
                     >
                         @lang('admin::app.catalog.products.index.create-btn')
@@ -442,7 +442,7 @@
                                 <div class="flex gap-x-[10px] items-center">
                                     <button
                                         type="button"
-                                        class="text-gray-600 font-semibold whitespace-nowrap px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] transition-all hover:bg-gray-100 cursor-pointer"
+                                        class="transparent-button"
                                         v-if="attributes.length"
                                         @click="attributes = []"
                                     >
@@ -451,7 +451,7 @@
 
                                     <button 
                                         type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('admin::app.catalog.products.index.create.save-btn')
                                     </button>

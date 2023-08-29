@@ -12,7 +12,7 @@
         <script type="text/x-template" id="v-catalog-rule-create-form-template">
             <div>
                 <x-admin::form 
-                    :action="route('admin.catalog_rules.store')"
+                    :action="route('admin.marketing.promotions.catalog_rules.store')"
                     enctype="multipart/form-data"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">
@@ -22,16 +22,17 @@
                 
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel Button -->
-                            <a href="{{ route('admin.catalog_rules.index') }}">
-                                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                    @lang('admin::app.marketing.promotions.catalog-rules.create.back-btn')
-                                </span>
+                            <a
+                                href="{{ route('admin.marketing.promotions.catalog_rules.index') }}"
+                                class="transparent-button"
+                            >
+                                @lang('admin::app.marketing.promotions.catalog-rules.create.back-btn')
                             </a>
 
                             <!-- Save Button -->
                             <button 
                                 type="submit"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.marketing.promotions.catalog-rules.create.save-btn')
                             </button>

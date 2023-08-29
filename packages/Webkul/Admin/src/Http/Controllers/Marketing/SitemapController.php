@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sitemap\Repositories\SitemapRepository;
-use Webkul\Admin\DataGrids\SitemapDataGrid;
+use Webkul\Admin\DataGrids\Marketing\SitemapDataGrid;
 
 class SitemapController extends Controller
 {
@@ -115,7 +115,7 @@ class SitemapController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
+            'message' => trans('admin::app.marketing.sitemaps.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
         ], 500);
     }
 }

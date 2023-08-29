@@ -6,7 +6,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
-use Webkul\Admin\DataGrids\OrderShipmentsDataGrid;
+use Webkul\Admin\DataGrids\Sales\OrderShipmentsDataGrid;
 
 class ShipmentController extends Controller
 {
@@ -19,7 +19,8 @@ class ShipmentController extends Controller
         protected OrderRepository $orderRepository,
         protected OrderItemRepository $orderItemRepository,
         protected ShipmentRepository $shipmentRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -46,8 +47,8 @@ class ShipmentController extends Controller
     {
         $order = $this->orderRepository->findOrFail($orderId);
 
-        if (! $order->channel || ! $order->canShip()) {
-            session()->flash('error', trans('admin::app.sales.shipments.creation-error'));
+        if (!$order->channel || !$order->canShip()) {
+            session()->flash('error', trans('admin::app.sales.shipments.create.creation-error'));
 
             return redirect()->back();
         }
@@ -65,8 +66,8 @@ class ShipmentController extends Controller
     {
         $order = $this->orderRepository->findOrFail($orderId);
 
-        if (! $order->canShip()) {
-            session()->flash('error', trans('admin::app.sales.shipments.order-error'));
+        if (!$order->canShip()) {
+            session()->flash('error', trans('admin::app.sales.shipments.create.order-error'));
 
             return redirect()->back();
         }
@@ -78,8 +79,8 @@ class ShipmentController extends Controller
 
         $data = request()->only(['shipment', 'carrier_name']);
 
-        if (! $this->isInventoryValidate($data)) {
-            session()->flash('error', trans('admin::app.sales.shipments.quantity-invalid'));
+        if (!$this->isInventoryValidate($data)) {
+            session()->flash('error', trans('admin::app.sales.shipments.create.quantity-invalid'));
 
             return redirect()->back();
         }
@@ -88,7 +89,7 @@ class ShipmentController extends Controller
             'order_id' => $orderId,
         ]));
 
-        session()->flash('success', trans('admin::app.sales.shipments.create.create-success'));
+        session()->flash('success', trans('admin::app.sales.shipments.create.success'));
 
         return redirect()->route('admin.sales.orders.view', $orderId);
     }
@@ -101,7 +102,7 @@ class ShipmentController extends Controller
      */
     public function isInventoryValidate(&$data)
     {
-        if (! isset($data['shipment']['items'])) {
+        if (!isset($data['shipment']['items'])) {
             return;
         }
 
@@ -121,7 +122,7 @@ class ShipmentController extends Controller
 
                 if ($orderItem->getTypeInstance()->isComposite()) {
                     foreach ($orderItem->children as $child) {
-                        if (! $child->qty_ordered) {
+                        if (!$child->qty_ordered) {
                             continue;
                         }
 

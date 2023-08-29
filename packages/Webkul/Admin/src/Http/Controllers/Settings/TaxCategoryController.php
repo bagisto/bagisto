@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
-use Webkul\Admin\DataGrids\TaxCategoryDataGrid;
+use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
 
 class TaxCategoryController extends Controller
 {
@@ -139,13 +139,13 @@ class TaxCategoryController extends Controller
             Event::dispatch('tax.tax_category.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.response.delete-success', ['name' => trans('admin::app.settings.taxes.tax-categories.index.delete-success')]),
+                'message' => trans('admin::app.settings.taxes.tax-categories.edit.delete-success', ['name' => trans('admin::app.settings.taxes.tax-categories.index.tax-category')]),
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.taxes.tax-categories.index.tax-category')]),
+            'message' => trans('admin::app.settings.taxes.tax-categories.edit.delete-failed', ['name' => trans('admin::app.settings.taxes.tax-categories.index.tax-category')]),
         ], 500);
     }
 }

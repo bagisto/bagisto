@@ -25,10 +25,11 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.sales.invoices.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.sales.invoices.index') }}"
+                    class="transparent-button"
+                >
+                    @lang('admin::app.account.edit.back-btn')
                 </a>
             </div>
         </div>
@@ -101,7 +102,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.sales.invoices.view.send')
                                 </button>
@@ -121,8 +122,8 @@
         {{-- Left sub-component --}}
         <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- Invoice Item Section --}}
-            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+            <div class="bg-white rounded-[4px] box-shadow">
+                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.invoices.view.invoice-items') ({{ count($invoice->items) }})
                 </p>
 
@@ -132,7 +133,7 @@
                         <div class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300">
                             <div class="flex gap-[10px]">
                                 {{-- Product Image --}}
-                                @if ($item->product)
+                                @if ($item->product->base_image_url)
                                     <img
                                         class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
                                         src="{{ $item->product->base_image_url }}"
@@ -218,7 +219,7 @@
                 </div>
 
                 {{--Sale Summary --}}
-                <div class="flex w-full gap-[10px] justify-end mt-[16px]">
+                <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 font-semibold">
                             @lang('admin::app.sales.invoices.view.sub-total')

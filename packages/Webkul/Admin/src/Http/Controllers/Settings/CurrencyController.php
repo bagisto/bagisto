@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\CurrencyRepository;
-use Webkul\Admin\DataGrids\CurrencyDataGrid;
+use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 
 class CurrencyController extends Controller
 {
@@ -110,7 +110,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.currencies.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.currencies.index.edit.last-delete-error')], 400);
         }
 
         try {
@@ -124,43 +124,7 @@ class CurrencyController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
+            'message' => trans('admin::app.settings.currencies.index.edit.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
         ], 500);
-    }
-
-    /**
-     * Remove the specified resources from database.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy()
-    {
-        $suppressFlash = false;
-
-        if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
-
-            foreach ($indexes as $key => $value) {
-                try {
-                    $this->currencyRepository->delete($value);
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
-                }
-            }
-
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.settings.currencies.index.datagrid.delete-success', ['resource' => 'currencies']));
-            } else {
-                session()->flash('info', trans('admin::app.settings.currencies.index.datagrid.partial-action', ['resource' => 'currencies']));
-            }
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.settings.currencies.index.datagrid.method-error'));
-
-            return redirect()->back();
-        }
     }
 }

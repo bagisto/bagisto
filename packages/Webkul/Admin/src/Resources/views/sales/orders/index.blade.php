@@ -66,7 +66,7 @@
                                     <!-- Save Button -->
                                     <button
                                         type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('Export')
                                     </button>
@@ -125,7 +125,7 @@
         <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
             <template v-if="! isLoading">
                 <div
-                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                    class="row grid grid-cols-4 px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
                     v-for="record in records"
                 > 
                     {{-- Order Id, Created, Status Section --}}
@@ -221,7 +221,7 @@
                         </div>
 
                         <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
-                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                            <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
                         </a>
                     </div>
                 </div>

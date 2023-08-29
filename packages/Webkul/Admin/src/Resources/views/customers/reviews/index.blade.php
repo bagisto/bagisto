@@ -14,7 +14,7 @@
     @pushOnce('scripts')
         <script type="text/x-template" id="v-review-edit-drawer-template">
             <x-admin::datagrid
-                src="{{ route('admin.customer.review.index') }}"
+                src="{{ route('admin.customers.customers.review.index') }}"
                 :isMultiRow="true"
                 ref="review_data"
             >
@@ -89,7 +89,7 @@
                 <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
                     <template v-if="! isLoading">
                         <div
-                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300"
+                            class="row grid grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] px-[16px] py-[10px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100"
                             v-for="record in records"
                         >
                             <!-- Name, Product, Description -->
@@ -175,13 +175,13 @@
                                 <!-- Review Delete Button -->
                                 <a  
                                     @click="deleteReview(record.actions['1']?.url)">
-                                    <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                                    <span class="icon-delete text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
                                 </a>
 
                                 <!-- View Button -->
                                 <span 
                                     @click="edit(record.product_review_id)" 
-                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"
+                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
                                 >
                                 </span>
                             </div>
@@ -210,7 +210,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
-                                    <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                    <button class="mr-[45px] primary-button">
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
@@ -379,7 +379,7 @@
 
                 methods: {
                     edit(id) {
-                        this.$axios.get(`{{ route('admin.customer.review.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.customers.customers.review.edit', '') }}/${id}`)
                             .then((response) => {
                                 this.$refs.review.open(),
 
@@ -394,7 +394,7 @@
                     },
 
                     update(params) {
-                        this.$axios.post(`{{ route('admin.customer.review.update', '') }}/${params.id}`, params)
+                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, params)
                             .then((response) => {
                                 this.$refs.review.close();
 

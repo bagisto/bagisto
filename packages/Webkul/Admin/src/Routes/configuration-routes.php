@@ -10,7 +10,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
     Route::controller(ConfigurationController::class)->prefix('configuration/{slug?}/{slug2?}')->group(function () {
         Route::get('', 'index')->name('admin.configuration.index');
 
-        Route::post('', 'store')->name('admin.configuration.index.store');
+        Route::post('', 'store')->name('admin.configuration.store');
 
         Route::get('{path}', 'download')->defaults('_config', [
             'redirect' => 'admin.configuration.index',

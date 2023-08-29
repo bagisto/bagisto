@@ -16,7 +16,7 @@
                         </p>
 
                         <div
-                            class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="mr-[45px] primary-button"
                             @click="addSelected"
                         >
                             @lang('admin::app.components.products.search.add-btn')
@@ -28,8 +28,8 @@
                             type="text"
                             class="bg-white border border-gray-300 rounded-lg block w-full pl-[12px] pr-[40px] py-[5px] leading-6 text-gray-600 transition-all hover:border-gray-400"
                             placeholder="Search by name"
-                            v-model="searchTerm"
-                            @input="search"
+                            v-model.lazy="searchTerm"
+                            v-debounce="500"
                         />
 
                         <span class="icon-search text-[22px] absolute right-[12px] top-[6px] flex items-center pointer-events-none"></span>
@@ -96,7 +96,7 @@
                         <!-- Actions -->
                         <div class="grid gap-[4px] place-content-start text-right">
                             <p class="text-gray-800 font-semibold">
-                                @{{ $admin.formatPrice(product.price) }}
+                                @{{ product.formatted_price }}
                             </p>
 
                             <p class="text-green-600">
@@ -162,13 +162,19 @@
                 }
             },
 
+            watch: {
+                searchTerm: function(newVal, oldVal) {
+                    this.search()
+                }
+            },
+
             methods: {
                 openDrawer() {
                     this.$refs.searchProductDrawer.open();
                 },
 
                 search() {
-                    if (! this.searchTerm.length) {
+                    if (this.searchTerm.length <= 1) {
                         this.searchedProducts = [];
 
                         return;

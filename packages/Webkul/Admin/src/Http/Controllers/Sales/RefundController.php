@@ -2,11 +2,11 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
-use Webkul\Admin\DataGrids\OrderRefundDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\RefundRepository;
+use Webkul\Admin\DataGrids\Sales\OrderRefundDataGrid;
 
 class RefundController extends Controller
 {
@@ -61,7 +61,7 @@ class RefundController extends Controller
         $order = $this->orderRepository->findOrFail($orderId);
 
         if (! $order->canRefund()) {
-            session()->flash('error', trans('admin::app.sales.refunds.creation-error'));
+            session()->flash('error', trans('admin::app.sales.refunds.create.creation-error'));
 
             return redirect()->back();
         }
@@ -79,7 +79,7 @@ class RefundController extends Controller
         $totals = $this->refundRepository->getOrderItemsRefundSummary($data['refund']['items'], $orderId);
 
         if (! $totals) {
-            session()->flash('error', trans('admin::app.sales.refunds.invalid-qty'));
+            session()->flash('error', trans('admin::app.sales.refunds.create.invalid-qty'));
 
             return redirect()->back();
         }
@@ -95,7 +95,7 @@ class RefundController extends Controller
         }
 
         if ($refundAmount > $maxRefundAmount) {
-            session()->flash('error', trans('admin::app.sales.refunds.refund-limit-error', ['amount' => core()->formatBasePrice($maxRefundAmount)]));
+            session()->flash('error', trans('admin::app.sales.refunds.create.refund-limit-error', ['amount' => core()->formatBasePrice($maxRefundAmount)]));
 
             return redirect()->back();
         }

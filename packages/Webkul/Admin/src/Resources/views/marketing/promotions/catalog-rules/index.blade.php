@@ -10,13 +10,13 @@
 
         <div class="flex gap-x-[10px] items-center">
             <a 
-                href="{{ route('admin.catalog_rules.create') }}"
-                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                href="{{ route('admin.marketing.promotions.catalog_rules.create') }}"
+                class="primary-button"
             >
                 @lang('admin::app.marketing.promotions.catalog-rules.index.create-btn')
             </a>
         </div>
     </div>
     
-    <x-admin::datagrid src="{{ route('admin.catalog_rules.index') }}"></x-admin::datagrid>
+    <x-admin::datagrid src="{{ route('admin.marketing.promotions.catalog_rules.index') }}"></x-admin::datagrid>
 </x-admin::layouts>

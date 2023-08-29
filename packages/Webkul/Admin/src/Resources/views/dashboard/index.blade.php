@@ -802,7 +802,7 @@
                             v-for="item in statistics.customer_with_most_sales"
                         >
                             <a
-                                :href="`{{ route('admin.customer.view', '') }}/${item.customer_id}`"
+                                :href="`{{ route('admin.customers.customers.view', '') }}/${item.customer_id}`"
                                 v-if="item.customer_id"
                             >
                                 <div class="flex justify-between gap-[6px]">

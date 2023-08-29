@@ -13,7 +13,7 @@
                 <!-- Craete currency Button -->
                 <button 
                     type="button"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.settings.currencies.index.create-btn')
                 </button>
@@ -38,7 +38,7 @@
                     <!-- Craete currency Button -->
                     <button 
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                         @click="id=0; $refs.currencyModal.toggle()"
                     >
                         @lang('admin::app.settings.currencies.index.create-btn')
@@ -47,48 +47,45 @@
             </div>
     
             <x-admin::datagrid
-                src="{{ route('admin.currencies.index') }}"
+                :src="route('admin.settings.currencies.index')"
                 ref="datagrid"
             >
                 <!-- DataGrid Header -->
-                <template #header="{ columns, records, sortPage}">
-                    <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] text-gray-600 bg-gray-50 font-semibold">
-                        <!-- ID -->
+                <template #header="{ columns, records, sortPage, applied}">
+                    <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'id'))"
+                            v-for="(columnGroup, index) in ['id', 'code', 'name']"
                         >
                             <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.id')
-                            </p>
-                        </div>
+                                <span class="[&>*]:after:content-['_/_']">
+                                    <span
+                                        class="after:content-['/'] last:after:content-['']"
+                                        :class="{
+                                            'text-gray-800 font-medium': applied.sort.column == columnGroup,
+                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                        }"
+                                        @click="
+                                            columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
+                                        "
+                                    >
+                                        @{{ columns.find(columnTemp => columnTemp.index === columnGroup)?.label }}
+                                    </span>
+                                </span>
 
-                        <!-- Code -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'code'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.code')
-                            </p>
-                        </div>
-
-                        <!-- Name -->
-                        <div
-                            class="cursor-pointer"
-                            @click="sortPage(columns.find(column => column.index === 'name'))"
-                        >
-                            <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.name')
+                                <!-- Filter Arrow Icon -->
+                                <i
+                                    class="ml-[5px] text-[16px] text-gray-800 align-text-bottom"
+                                    :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                    v-if="columnGroup.includes(applied.sort.column)"
+                                ></i>
                             </p>
                         </div>
 
                         <!-- Actions -->
-                        <div class="cursor-pointer flex justify-end">
-                            <p class="text-gray-600">
-                                @lang('admin::app.settings.currencies.index.datagrid.actions')
-                            </p>
-                        </div>
+                        <p class="flex gap-[10px] justify-end">
+                            @lang('admin::app.components.datagrid.table.actions')
+                        </p>
                     </div>
                 </template>
 
@@ -249,7 +246,7 @@
                             <div class="flex gap-x-[10px] items-center">
                                <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.settings.currencies.index.create.save-btn')
                                 </button>
@@ -273,7 +270,7 @@
                 methods: {
                     create(params, { resetForm, setErrors  }) {
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.currencies.update') }}", params)
+                            this.$axios.post("{{ route('admin.settings.currencies.update') }}", params)
                             .then((response) => {
                                 this.$refs.currencyModal.close();
     
@@ -289,7 +286,7 @@
                                 }
                             });
                         } else {
-                            this.$axios.post('{{ route('admin.currencies.store') }}', params)
+                            this.$axios.post('{{ route('admin.settings.currencies.store') }}', params)
                                 .then((response) => {
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
@@ -307,7 +304,7 @@
                     },
 
                     editModal(id) {
-                        this.$axios.get(`{{ route('admin.currencies.edit', '') }}/${id}`)
+                        this.$axios.get(`{{ route('admin.settings.currencies.edit', '') }}/${id}`)
                             .then((response) => {
                                 let values = {
                                     id: response.data.data.id,

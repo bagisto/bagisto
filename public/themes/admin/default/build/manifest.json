@@ -204,7 +204,11 @@
     "css": [
       "assets/app-05f8acf7.css"
     ],
+<<<<<<< HEAD
     "file": "assets/app-5d68248b.js",
+=======
+    "file": "assets/app-b5741f9c.js",
+>>>>>>> upstream/2.x
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

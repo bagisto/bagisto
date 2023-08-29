@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
-use Webkul\Admin\DataGrids\ExchangeRatesDataGrid;
+use Webkul\Admin\DataGrids\Settings\ExchangeRatesDataGrid;
 
 class ExchangeRateController extends Controller
 {
@@ -19,7 +19,8 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -151,7 +152,7 @@ class ExchangeRateController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-error', ['name' => trans('admin::app.settings.exchange-rates.index.exchange-rate')], 500),
+            'message' => trans('admin::app.settings.exchange-rates.index.edit.delete-error', ['name' => trans('admin::app.settings.exchange-rates.index.exchange-rate')], 500),
         ]);
     }
 }

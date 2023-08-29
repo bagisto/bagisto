@@ -22,17 +22,18 @@
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Cancel Button -->
-                <a href="{{ route('admin.cms.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.cms.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.cms.index') }}"
+                    class="transparent-button"
+                >
+                    @lang('admin::app.cms.edit.back-btn')
                 </a>
 
                 {{-- Preview Button --}}
                 @if ($page->translate($locale))
                     <a
                         href="{{ route('shop.cms.page', $page->translate($locale)['url_key']) }}"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                         target="_blank"
                     >
                         @lang('admin::app.cms.edit.preview-btn')
@@ -42,7 +43,7 @@
                 {{--Save Button --}}
                 <button
                     type="submit"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.cms.edit.save-btn')
                 </button>
@@ -188,7 +189,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between p-[6px]">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.users.roles.create.general')
+                                    @lang('admin::app.settings.users.create.general')
                                 </p>
                             </div>
                         </x-slot:header>

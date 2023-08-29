@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Validators\Failure;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Tax\Repositories\TaxRateRepository;
 use Webkul\Admin\Imports\DataGridImport;
-use Webkul\Admin\DataGrids\TaxRateDataGrid;
+use Webkul\Admin\DataGrids\Settings\TaxRateDataGrid;
 
 class TaxRateController extends Controller
 {
@@ -77,11 +77,11 @@ class TaxRateController extends Controller
             'zip_to',
         ]);
 
-        
+
         if ($data['is_zip'] ?? false) {
             $data['is_zip'] = 1;
         }
-        
+
         Event::dispatch('tax.tax_rate.create.before');
 
         $taxRate = $this->taxRateRepository->create($data);
@@ -89,8 +89,8 @@ class TaxRateController extends Controller
         Event::dispatch('tax.tax_rate.create.after', $taxRate);
 
         session()->flash('success', trans('admin::app.settings.taxes.tax-rates.create.create-success'));
-        
-        return redirect()->route('admin.tax_rates.index');
+
+        return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
 
     /**
@@ -143,7 +143,7 @@ class TaxRateController extends Controller
 
         session()->flash('success', trans('admin::app.settings.taxes.tax-rates.edit.update-success'));
 
-        return redirect()->route('admin.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
 
     /**
@@ -163,11 +163,11 @@ class TaxRateController extends Controller
 
             Event::dispatch('tax.tax_rate.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Tax Rate'])]);
+            return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-success', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Tax Rate'])], 500);
+        return response()->json(['message' => trans('admin::app.settings.taxes.tax-rates.edit.delete-failed', ['name' => 'admin::app.settings.taxes.tax-rates.index.tax-rate'])], 500);
     }
 
     /**
@@ -179,7 +179,7 @@ class TaxRateController extends Controller
     {
         $valid_extension = ['xlsx', 'csv', 'xls'];
 
-        if (! in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
+        if (!in_array(request()->file('file')->getClientOriginalExtension(), $valid_extension)) {
             session()->flash('error', trans('admin::app.export.upload-error'));
         } else {
             try {
@@ -192,8 +192,8 @@ class TaxRateController extends Controller
                         }
 
                         if (
-                            ! is_null($uploadData['zip_from'])
-                            && ! is_null($uploadData['zip_to'])
+                            !is_null($uploadData['zip_from'])
+                            && !is_null($uploadData['zip_to'])
                         ) {
                             $uploadData['is_zip'] = 1;
                         }
@@ -263,7 +263,6 @@ class TaxRateController extends Controller
                                 case 'zip_to':
                                     $errorMsg[$column] = $fail->first('zip_to');
                                     break;
-
                             }
                         }
 
@@ -289,8 +288,8 @@ class TaxRateController extends Controller
                                 }
 
                                 if (
-                                    ! is_null($uploadData['zip_from'])
-                                    && ! is_null($uploadData['zip_to'])
+                                    !is_null($uploadData['zip_from'])
+                                    && !is_null($uploadData['zip_to'])
                                 ) {
                                     $uploadData['is_zip'] = 1;
                                     $uploadData['zip_code'] = null;
@@ -310,7 +309,7 @@ class TaxRateController extends Controller
                             }
                         }
 
-                        session()->flash('success', trans('admin::app.response.upload-success', ['name' => 'Tax Rate']));
+                        session()->flash('success', trans('admin::app.export.upload-success', ['name' => 'Tax Rate']));
                     }
                 }
             } catch (\Exception $e) {
@@ -322,6 +321,6 @@ class TaxRateController extends Controller
             }
         }
 
-        return redirect()->route('admin.tax_rates.index');
+        return redirect()->route('admin.settings.taxes.tax_rates.index');
     }
 }

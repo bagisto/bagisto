@@ -3,9 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\CMS;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CMS\Repositories\CmsRepository;
-use Webkul\Admin\DataGrids\CMSPageDataGrid;
+use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 
 
 class PageController extends Controller
@@ -73,7 +74,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.create.after', $page);
 
-        session()->flash('success', trans('admin::app.cms.create.create-success'));
+        session()->flash('success', trans('admin::app.cms.create-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -103,7 +104,7 @@ class PageController extends Controller
 
         $this->validate(request(), [
             $locale . '.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (! $this->cmsRepository->isUrlKeyUnique($id, $value)) {
+                if (!$this->cmsRepository->isUrlKeyUnique($id, $value)) {
                     $fail(trans('admin::app.response.already-taken', ['name' => 'Page']));
                 }
             }],
@@ -123,7 +124,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.update.after', $page);
 
-        session()->flash('success', trans('admin::app.cms.edit.edit-success'));
+        session()->flash('success', trans('admin::app.cms.update-success'));
 
         return redirect()->route('admin.cms.index');
     }
@@ -142,7 +143,7 @@ class PageController extends Controller
 
         Event::dispatch('cms.pages.delete.after', $id);
 
-        return response()->json(['message' => trans('admin::app.cms.pages.delete-success')]);
+        return response()->json(['message' => trans('admin::app.cms.delete-success')]);
     }
 
     /**
@@ -150,25 +151,23 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDelete()
+    public function massDelete(MassDestroyRequest $massDestroyRequest)
     {
-        if (request()->input('mass-action-type') == 'delete') {
-            $indexes = explode(',', request()->input('indexes'));
+        $indices = $massDestroyRequest->input('indices');
 
-            foreach ($indexes as $index) {
-                Event::dispatch('cms.pages.delete.before', $index);
+        foreach ($indices as $index) {
+            Event::dispatch('cms.pages.delete.before', $index);
 
-                $this->cmsRepository->delete($index);
+            $this->cmsRepository->delete($index);
 
-                Event::dispatch('cms.pages.delete.after', $index);
-            }
-
-            session()->flash('success', trans('admin::app.cms.index.delete-success'));
-
-            return redirect()->route('admin.cms.index');
+            Event::dispatch('cms.pages.delete.after', $index);
         }
 
-        session()->flash('success', trans('admin::app.cms.index.no-resource'));
+        session()->flash('success', trans('admin::app.cms.delete-success'));
+
+        return redirect()->route('admin.cms.index');
+
+        session()->flash('success', trans('admin::app.cms.no-resource'));
 
         return redirect()->route('admin.cms.index');
     }

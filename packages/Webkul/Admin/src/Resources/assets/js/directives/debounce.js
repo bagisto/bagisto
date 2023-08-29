@@ -1,11 +1,17 @@
-import debounce from '../plugins/debounce';
+var timeoutID = null;
 
 export default {
-    bind(el, binding, vnode) {
-        if (binding.value !== binding.oldValue) {
-            el.oninput = debounce(function (evt) {
-                el.dispatchEvent(new Event('change'))
-            }, parseInt(binding.value) || 500)
-        }
+    mounted(el, binding) {
+        let handler = function (e) {
+            if (binding.value !== binding.oldValue) {
+                clearTimeout(timeoutID)
+                
+                timeoutID = setTimeout(function () {
+                    el.dispatchEvent(new Event('change'))
+                }, binding.value || 500)
+            }
+        };
+
+        el.addEventListener('input', handler);
     }
 }

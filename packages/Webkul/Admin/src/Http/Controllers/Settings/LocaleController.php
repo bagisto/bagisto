@@ -5,7 +5,7 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\LocaleRepository;
-use Webkul\Admin\DataGrids\LocalesDataGrid;
+use Webkul\Admin\DataGrids\Settings\LocalesDataGrid;
 
 class LocaleController extends Controller
 {
@@ -113,7 +113,7 @@ class LocaleController extends Controller
 
         if ($this->localeRepository->count() == 1) {
             return new JsonResource([
-                'message' => trans('admin::app.settings.locales.last-delete-error'),
+                'message' => trans('admin::app.settings.locales.index.edit.last-delete-error'),
             ], 400);
         }
 
@@ -127,7 +127,7 @@ class LocaleController extends Controller
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.locales.index.locales')]),
+            'message' => trans('admin::app.settings.locales.index.edit.delete-failed', ['name' => trans('admin::app.settings.locales.index.locales')]),
         ], 500);
     }
 }

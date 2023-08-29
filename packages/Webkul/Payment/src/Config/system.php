@@ -10,19 +10,19 @@ return [
      */
     [
         'key'  => 'sales.paymentmethods',
-        'name' => 'admin::app.admin.system.payment-methods',
-        'info' => 'admin::app.admin.system.payment-methods-info',
+        'name' => 'admin::app.configuration.payment-methods',
+        'info' => 'admin::app.configuration.payment-methods-info',
         'icon' => 'payment-method.png',
         'sort' => 3,
     ], [
         'key'    => 'sales.paymentmethods.cashondelivery',
-        'name'   => 'admin::app.admin.system.cash-on-delivery',
-        'info'   => 'admin::app.admin.system.cash-on-delivery-info',
+        'name'   => 'admin::app.configuration.cash-on-delivery',
+        'info'   => 'admin::app.configuration.cash-on-delivery-info',
         'sort'   => 1,
         'fields' => [
             [
                 'name'          => 'title',
-                'title'         => 'admin::app.admin.system.title',
+                'title'         => 'admin::app.configuration.title',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -30,26 +30,26 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
-                'title'         => 'admin::app.admin.system.description',
+                'title'         => 'admin::app.configuration.description',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'instructions',
-                'title'         => 'admin::app.admin.system.instructions',
+                'title'         => 'admin::app.configuration.instructions',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'generate_invoice',
-                'title'         => 'admin::app.admin.system.generate-invoice',
+                'title'         => 'admin::app.configuration.generate-invoice',
                 'type'          => 'boolean',
                 'default_value' => false,
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'invoice_status',
-                'title'         => 'admin::app.admin.system.set-invoice-status',
+                'title'         => 'admin::app.configuration.set-invoice-status',
                 'validation'    => 'required_if:generate_invoice,1',
                 'type'          => 'select',
                 'options'       => [
@@ -61,12 +61,12 @@ return [
                         'value' => 'paid',
                     ],
                 ],
-                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'info'          => 'admin::app.configuration.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'order_status',
-                'title'         => 'admin::app.admin.system.set-order-status',
+                'title'         => 'admin::app.configuration.set-order-status',
                 'type'          => 'select',
                 'options'       => [
                     [
@@ -80,19 +80,19 @@ return [
                         'value' => 'processing',
                     ],
                 ],
-                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'info'          => 'admin::app.configuration.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'active',
-                'title'         => 'admin::app.admin.system.status',
+                'title'         => 'admin::app.configuration.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'sort',
-                'title'   => 'admin::app.admin.system.sort_order',
+                'title'   => 'admin::app.configuration.sort_order',
                 'type'    => 'select',
                 'options' => [
                     [
@@ -113,13 +113,13 @@ return [
         ],
     ], [
         'key'    => 'sales.paymentmethods.moneytransfer',
-        'name'   => 'admin::app.admin.system.money-transfer',
-        'info'   => 'admin::app.admin.system.money-transfer-info',
+        'name'   => 'admin::app.configuration.money-transfer',
+        'info'   => 'admin::app.configuration.money-transfer-info',
         'sort'   => 2,
         'fields' => [
             [
                 'name'          => 'title',
-                'title'         => 'admin::app.admin.system.title',
+                'title'         => 'admin::app.configuration.title',
                 'type'          => 'depends',
                 'depend'        => 'active:1',
                 'validation'    => 'required_if:active,1',
@@ -127,7 +127,7 @@ return [
                 'locale_based'  => true,
             ], [
                 'name'          => 'description',
-                'title'         => 'admin::app.admin.system.description',
+                'title'         => 'admin::app.configuration.description',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
@@ -151,7 +151,7 @@ return [
                         'value' => 'paid',
                     ],
                 ],
-                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'info'          => 'admin::app.configuration.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
@@ -170,25 +170,25 @@ return [
                         'value' => 'processing',
                     ],
                 ],
-                'info'          => 'admin::app.admin.system.generate-invoice-applicable',
+                'info'          => 'admin::app.configuration.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'          => 'mailing_address',
-                'title'         => 'admin::app.admin.system.mailing-address',
+                'title'         => 'admin::app.configuration.mailing-address',
                 'type'          => 'textarea',
                 'channel_based' => true,
                 'locale_based'  => true,
             ], [
                 'name'          => 'active',
-                'title'         => 'admin::app.admin.system.status',
+                'title'         => 'admin::app.configuration.status',
                 'type'          => 'boolean',
                 'validation'    => 'required',
                 'channel_based' => true,
                 'locale_based'  => false,
             ], [
                 'name'    => 'sort',
-                'title'   => 'admin::app.admin.system.sort_order',
+                'title'   => 'admin::app.configuration.sort_order',
                 'type'    => 'select',
                 'options' => [
                     [

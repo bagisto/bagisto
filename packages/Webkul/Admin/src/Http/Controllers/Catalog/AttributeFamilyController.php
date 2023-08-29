@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
-use Webkul\Admin\DataGrids\AttributeFamilyDataGrid;
+use Webkul\Admin\DataGrids\Catalog\AttributeFamilyDataGrid;
 use Webkul\Core\Rules\Code;
 
 class AttributeFamilyController extends Controller
@@ -19,7 +19,8 @@ class AttributeFamilyController extends Controller
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -159,46 +160,5 @@ class AttributeFamilyController extends Controller
         return response()->json([
             'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'admin::app.catalog.families.family']),
         ], 500);
-    }
-
-    /**
-     * Remove the specified resources from database.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy()
-    {
-        $suppressFlash = false;
-
-        if (request()->isMethod('delete')) {
-            $indexes = explode(',', request()->input('indexes'));
-
-            foreach ($indexes as $index) {
-                try {
-                    Event::dispatch('catalog.attribute_family.delete.before', $index);
-
-                    $this->attributeFamilyRepository->delete($index);
-
-                    Event::dispatch('catalog.attribute_family.delete.after', $index);
-                } catch (\Exception $e) {
-                    report($e);
-                    $suppressFlash = true;
-
-                    continue;
-                }
-            }
-
-            if (! $suppressFlash) {
-                session()->flash('success', ('admin::app.catalog.families.index.datagrid.delete-success'));
-            } else {
-                session()->flash('info', trans('admin::app.catalog.families.index.datagrid.partial-action', ['resource' => trans('admin::app.catalog.families.attribute-family')]));
-            }
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.catalog.families.index.datagrid.method-error'));
-
-            return redirect()->back();
-        }
     }
 }

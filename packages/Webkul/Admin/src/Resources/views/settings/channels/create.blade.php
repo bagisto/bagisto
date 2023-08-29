@@ -4,7 +4,7 @@
         @lang('admin::app.settings.channels.create.title')
     </x-slot:title>
 
-    <x-admin::form  action="{{ route('admin.channels.store') }}" enctype="multipart/form-data">
+    <x-admin::form  action="{{ route('admin.settings.channels.store') }}" enctype="multipart/form-data">
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.settings.channels.create.title')
@@ -12,16 +12,17 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.channels.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.settings.channels.create.cancel')
-                    </span>
+                <a
+                    href="{{ route('admin.settings.channels.index') }}"
+                    class="transparent-button"
+                >
+                    @lang('admin::app.settings.channels.create.cancel')
                 </a>
 
                 {{-- Save Button --}}
                 <button 
                     type="submit" 
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.settings.channels.create.save-btn')
                 </button>

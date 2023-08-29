@@ -29,16 +29,17 @@
         
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Cancel Button -->
-                        <a href="{{ route('admin.catalog.attributes.index') }}">
-                            <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                @lang('admin::app.catalog.attributes.create.back-btn')
-                            </span>
+                        <a
+                            href="{{ route('admin.catalog.attributes.index') }}"
+                            class="transparent-button"
+                        >
+                            @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
 
                         <!-- Save Button -->
                         <button
                             type="submit"
-                            class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="primary-button"
                         >
                             @lang('admin::app.catalog.attributes.create.save-btn')
                         </button>
@@ -117,7 +118,7 @@
 
                                 <!-- Add Row Button -->
                                 <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="secondary-button text-[14px]"
                                     @click="$refs.addOptionsRow.toggle()"
                                 >
                                     @lang('admin::app.catalog.attributes.create.add-row')
@@ -134,9 +135,9 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="swatchType"
+                                            name="swatch_type"
                                             id="swatchType"
-                                            :value="old('swatchType')"
+                                            :value="old('swatch_type')"
                                             v-model="swatchType"
                                             @change="showSwatch=true"
                                         >
@@ -352,7 +353,7 @@
 
                                     <!-- Add Row Button -->
                                     <div 
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        class="secondary-button text-[14px]"
                                         @click="$refs.addOptionsRow.toggle()"
                                     >
                                         @lang('admin::app.catalog.attributes.create.add-row')
@@ -737,7 +738,7 @@
                             <!-- Save Button -->
                             <button
                                 type="submit" 
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.catalog.attributes.create.option.save-btn')
                             </button>

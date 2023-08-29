@@ -14,7 +14,7 @@
                 id="{{ $attribute->code }}"
                 v-bind="field"
                 :class="[errors['{{ $attribute->code }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400"
+                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                 @if ($attribute->code == 'url_key') v-slugify @endif
                 @if ($attribute->code == 'name') v-slugify-target:url_key @endif
             >

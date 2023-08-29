@@ -9,7 +9,10 @@
 {{-- Customer Address Modal --}}
 @pushOnce('scripts')
     <!-- Customer Address Form -->
-    <script type="text/x-template" id="v-create-customer-address-template">
+    <script
+        type="text/x-template"
+        id="v-create-customer-address-template"
+    >
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
@@ -29,7 +32,6 @@
             <form @submit="handleSubmit($event, create)">
                 <!-- Address Create Modal -->
                 <x-admin::modal ref="CustomerAddress">
-                
                     <x-slot:header>
                         <!-- Modal Header -->
                         <p class="text-[18px] text-gray-800 font-bold">
@@ -348,7 +350,7 @@
                         <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.customers.addresses.create.save-btn-title') 
                             </button>
@@ -377,7 +379,7 @@
 
             methods: {
                 create(params, { resetForm, setErrors }) {
-                    this.$axios.post('{{ route("admin.customer.addresses.store", $customer->id) }}', params,
+                    this.$axios.post('{{ route("admin.customers.customers.addresses.store", $customer->id) }}', params,
                         {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
