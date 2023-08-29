@@ -3,8 +3,8 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
-use Webkul\Admin\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Core\Http\Requests\MassUpdateRequest;
 use Webkul\Product\Repositories\ProductReviewRepository;
@@ -73,10 +73,10 @@ class ReviewController extends Controller
     /**
      * Delete the review of the current product
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->productReviewRepository->findOrFail($id);
 
@@ -87,20 +87,21 @@ class ReviewController extends Controller
 
             Event::dispatch('customer.review.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.customers.reviews.delete-success', ['name' => 'Review'])]);
+            return new JsonResource(['message' => trans('admin::app.customers.reviews.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])], 500);
+        return new JsonResource(['message' => trans('admin::app.response.delete-failed', ['name' => 'Review'])], 500);
     }
 
     /**
      * Mass delete the reviews on the products.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResource
      */
-    public function massDestroy(MassDestroyRequest $massDestroyRequest)
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
     {
         $indices = $massDestroyRequest->input('indices');
 
@@ -113,11 +114,11 @@ class ReviewController extends Controller
                 Event::dispatch('customer.review.delete.after', $index);
             }
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.customers.reviews.index.datagrid.mass-delete-success')
             ], 200);
         } catch (\Exception $e) {
-            return response()->json([
+            return new JsonResource([
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -126,9 +127,10 @@ class ReviewController extends Controller
     /**
      * Mass approve the reviews on the products.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassUpdateRequest $massUpdateRequest
+     * @return JsonResource
      */
-    public function massUpdate(MassUpdateRequest $massUpdateRequest)
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
     {
         $indices = $massUpdateRequest->input('indices');
         $validStatuses = [0 => 'pending', 1 => 'approved', 2 => 'disapproved'];
@@ -148,7 +150,7 @@ class ReviewController extends Controller
             }
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.customers.reviews.index.datagrid.mass-update-success')
         ], 200);
     }

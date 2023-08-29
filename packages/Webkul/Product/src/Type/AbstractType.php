@@ -336,14 +336,14 @@ abstract class AbstractType
             $value = null;
 
             if ($attribute->code == 'name') {
-                $value = trans('admin::app.copy-of', ['value' => $this->product->name]);
+                $value = trans('admin::app.catalog.products.index.datagrid.copy-of', ['value' => $this->product->name]);
             } elseif ($attribute->code == 'url_key') {
-                $value = trans('admin::app.copy-of-slug', ['value' => $this->product->url_key]);
+                $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->url_key]);
             } elseif ($attribute->code == 'sku') {
                 $value = $product->sku;
             } elseif ($attribute->code === 'product_number') {
-                if (! empty($this->product->product_number)) {
-                    $value = trans('admin::app.copy-of-slug', ['value' => $this->product->product_number]);
+                if (!empty($this->product->product_number)) {
+                    $value = trans('admin::app.catalog.products.index.datagrid.copy-of-slug', ['value' => $this->product->product_number]);
                 }
             } elseif ($attribute->code == 'status') {
                 $value = 0;
@@ -1082,7 +1082,7 @@ abstract class AbstractType
                         return true;
                     }
                 }
-                
+
                 break;
 
             case 'configurable':

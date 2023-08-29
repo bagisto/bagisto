@@ -103,21 +103,49 @@
                         },
 
                         filters: {
-                            columns: [{
-                                index: 'all',
-
-                                value: @json(request()->has('search') ? [request()->get('search')] : []),
-                            }],
+                            columns: [
+                                {
+                                    index: 'all',
+                                    value: @json(request()->has('search') ? [request()->get('search')] : []),
+                                },
+                            ],
                         },
                     },
                 };
             },
 
             mounted() {
-                this.get();
+                this.boot();
             },
 
             methods: {
+                /**
+                 * Initialization: This function checks for any previously saved filters in local storage and applies them as needed.
+                 *
+                 * @returns {void}
+                 */
+                boot() {
+                    let datagrids = this.getDatagrids();
+
+                    if (datagrids?.length) {
+                        const currentDatagrid = datagrids.find(({ src }) => src === this.src);
+
+                        if (currentDatagrid) {
+                            this.applied.pagination = currentDatagrid.applied.pagination;
+
+                            this.applied.sort = currentDatagrid.applied.sort;
+
+                            this.applied.filters = currentDatagrid.applied.filters;
+
+                            this.get();
+
+                            return;
+                        }
+                    }
+
+                    this.get();
+                },
+
                 /**
                  * Get. This will prepare params from the `applied` props and fetch the data from the backend.
                  *
@@ -176,6 +204,8 @@
 
                             this.setCurrentSelectionMode();
 
+                            this.updateDatagrids();
+
                             this.isLoading = false;
                         });
                 },
@@ -199,7 +229,7 @@
                     } else if (direction === 'next') {
                         newPage = this.available.meta.current_page + 1;
                     } else {
-                        console.error('Invalid direction provided: ' + direction);
+                        console.error('Invalid Direction Provided : ' + direction);
 
                         return;
                     }
@@ -428,6 +458,10 @@
                 setCurrentSelectionMode() {
                     this.applied.massActions.meta.mode = 'none';
 
+                    if (!this.available.records.length) {
+                        return;
+                    }
+
                     let selectionCount = 0;
 
                     this.available.records.forEach(record => {
@@ -493,7 +527,7 @@
                         return false;
                     }
 
-                    if (! confirm('Are you sure you want to perform this action?')) {
+                    if (!confirm('Are you sure you want to perform this action?')) {
                         return false;
                     }
 
@@ -551,6 +585,67 @@
 
                             break;
                     }
+                },
+
+                //=======================================================================================
+                // Support for previous applied values in datagrids. All code is based on local storage.
+                //=======================================================================================
+
+                updateDatagrids() {
+                    let datagrids = this.getDatagrids();
+
+                    if (datagrids?.length) {
+                        const currentDatagrid = datagrids.find(({ src }) => src === this.src);
+
+                        if (currentDatagrid) {
+                            datagrids = datagrids.map(datagrid => {
+                                if (datagrid.src === this.src) {
+                                    return {
+                                        ...datagrid,
+                                        requestCount: ++datagrid.requestCount,
+                                        available: this.available,
+                                        applied: this.applied,
+                                    };
+                                }
+
+                                return datagrid;
+                            });
+                        } else {
+                            datagrids.push(this.getDatagridInitialProperties());
+                        }
+                    } else {
+                        datagrids = [this.getDatagridInitialProperties()];
+                    }
+
+                    this.setDatagrids(datagrids);
+                },
+
+                getDatagridInitialProperties() {
+                    return {
+                        src: this.src,
+                        requestCount: 0,
+                        available: this.available,
+                        applied: this.applied,
+                    };
+                },
+
+                getDatagridsStorageKey() {
+                    return 'datagrids';
+                },
+
+                getDatagrids() {
+                    let datagrids = localStorage.getItem(
+                        this.getDatagridsStorageKey()
+                    );
+
+                    return JSON.parse(datagrids) ?? [];
+                },
+
+                setDatagrids(datagrids) {
+                    localStorage.setItem(
+                        this.getDatagridsStorageKey(),
+                        JSON.stringify(datagrids)
+                    );
                 },
 
                 //================================================================

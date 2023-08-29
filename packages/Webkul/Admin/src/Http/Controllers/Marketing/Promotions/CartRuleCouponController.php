@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
@@ -32,9 +33,10 @@ class CartRuleCouponController extends Controller
     /**
      * Generate coupon code for cart rule.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $id
+     * @return JsonResource
      */
-    public function store($id)
+    public function store($id):JsonResource
     {
         $this->validate(request(), [
             'coupon_qty'  => 'required|integer|min:1',
@@ -43,12 +45,16 @@ class CartRuleCouponController extends Controller
         ]);
 
         if (!request('id')) {
-            return response()->json(['message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error')], 400);
+            return new JsonResource([
+                'message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error'
+            )], 400);
         }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
-        return response()->json(['message' => trans('admin::app.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons'])]);
+        return new JsonResource([
+            'message' => trans('admin::app.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
+        )]);
     }
 
     /**

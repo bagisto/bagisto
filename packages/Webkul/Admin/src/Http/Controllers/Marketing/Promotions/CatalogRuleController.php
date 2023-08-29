@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
@@ -106,10 +107,10 @@ class CatalogRuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->catalogRuleRepository->findOrFail($id);
 
@@ -120,10 +121,14 @@ class CatalogRuleController extends Controller
 
             Event::dispatch('promotions.catalog_rule.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.marketing.promotions.catalog-rules.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.promotions.catalog-rules.delete-success')
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.marketing.promotions.catalog-rules.delete-failed')], 400);
+        return new JsonResource([
+            'message' => trans('admin::app.marketing.promotions.catalog-rules.delete-failed'
+        )], 400);
     }
 }

@@ -180,7 +180,7 @@ abstract class DataGrid
                     foreach ($requestedValues as $value) {
                         collect($this->columns)
                             ->filter(fn ($column) => $column->searchable && $column->type !== ColumnTypeEnum::BOOLEAN->value)
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%' . $value . '%'));
                     }
                 });
             } else {
@@ -200,7 +200,7 @@ abstract class DataGrid
                     default:
                         $this->queryBuilder->where(function ($scopeQueryBuilder) use ($column, $requestedValues) {
                             foreach ($requestedValues as $value) {
-                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), $value);
+                                $scopeQueryBuilder->orWhere($column->getDatabaseColumnName(), 'LIKE', '%' . $value . '%');
                             }
                         });
 

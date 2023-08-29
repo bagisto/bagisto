@@ -66,7 +66,7 @@ class TaxCategoryController extends Controller
         Event::dispatch('tax.tax_category.create.after', $taxCategory);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.index.create.success'),
+            'message' => trans('admin::app.settings.taxes.tax-categories.index.create-success'),
         ]);
     }
 
@@ -114,10 +114,8 @@ class TaxCategoryController extends Controller
 
         Event::dispatch('tax.tax_category.update.after', $taxCategory);
 
-        session()->flash('success', trans('admin::app.settings.taxes.tax-categories.edit.update-success'));
-
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.index.edit.success'),
+            'message' => trans('admin::app.settings.taxes.tax-categories.index.update-success'),
         ]);
     }
 
@@ -139,13 +137,13 @@ class TaxCategoryController extends Controller
             Event::dispatch('tax.tax_category.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.settings.taxes.tax-categories.edit.delete-success', ['name' => trans('admin::app.settings.taxes.tax-categories.index.tax-category')]),
+                'message' => trans('admin::app.settings.taxes.tax-categories.index.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.taxes.tax-categories.edit.delete-failed', ['name' => trans('admin::app.settings.taxes.tax-categories.index.tax-category')]),
+            'message' => trans('admin::app.settings.taxes.tax-categories.index.delete-failed'),
         ], 500);
     }
 }

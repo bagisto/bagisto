@@ -72,7 +72,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.index.create.success'),
+            'message' => trans('admin::app.settings.users.index.create-success'),
         ]);
     }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
         Event::dispatch('user.admin.update.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.index.edit.success', ['name' => trans('admin::app.settings.users.index.user')]),
+            'message' => trans('admin::app.settings.users.index.update-success'),
         ]);
     }
 
@@ -134,7 +134,9 @@ class UserController extends Controller
     public function destroy($id): JsonResource
     {
         if ($this->adminRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.users.edit.last-delete-error', ['name' => 'admin::app.settings.users.index.admin'])], 400);
+            return response()->json([
+                'message' => trans('admin::app.settings.users.last-delete-error'
+            )], 400);
         }
 
         if (auth()->guard('admin')->user()->id == $id) {
@@ -151,13 +153,13 @@ class UserController extends Controller
             Event::dispatch('user.admin.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.settings.users.edit.delete-success', ['name' => trans('admin::app.settings.users.index.admin')]),
+                'message' => trans('admin::app.settings.users.delete-success')
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.edit.delete-failed', ['name' => trans('admin::app.settings.users.index.admin')]),
+            'message' => trans('admin::app.settings.users.delete-failed'),
         ], 500);
     }
 
@@ -195,12 +197,12 @@ class UserController extends Controller
 
                 Event::dispatch('user.admin.delete.after', $id);
 
-                session()->flash('success', trans('admin::app.settings.users.edit.delete-success', ['name' => trans('admin::app.settings.users.index.admin')]));
+                session()->flash('success', trans('admin::app.settings.users.delete-success'));
 
                 return redirect()->route('admin.session.create');
             }
         } else {
-            session()->flash('warning', trans('admin::app.settings.users.edit.incorrect-password'));
+            session()->flash('warning', trans('admin::app.settings.users.incorrect-password'));
 
             return redirect()->route('admin.settings.users.index');
         }
@@ -265,7 +267,7 @@ class UserController extends Controller
      */
     private function cannotChangeRedirectResponse(string $columnName): \Illuminate\Http\RedirectResponse
     {
-        session()->flash('error', trans('admin::app.settings.users.edit.cannot-change', [
+        session()->flash('error', trans('admin::app.settings.users.cannot-change', [
             'name' => $columnName,
         ]));
 
