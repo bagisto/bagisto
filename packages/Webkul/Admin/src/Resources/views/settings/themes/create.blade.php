@@ -2,18 +2,22 @@
     <x-slot:title>
         @lang('admin::app.settings.themes.create.title')
     </x-slot:title>
-   
+
     <div class="flex justify-between items-center">
         <p class="text-[20px] text-gray-800 font-bold">
             @lang('admin::app.settings.themes.create.title')
         </p>
         
         <div class="flex gap-x-[10px] items-center">
-            <div class="flex gap-x-[10px] items-center h-[38px]">
-            </div>
+            <button 
+                type="button"
+                class="primary-button"
+            >
+                @lang('admin::app.settings.themes.create.save-btn')
+            </button>
         </div>
     </div>
-    
+
     <v-theme-customizer></v-theme-customizer>
 
     @pushOnce('scripts')

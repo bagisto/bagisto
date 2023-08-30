@@ -50,9 +50,11 @@ class ThemeController extends Controller
     {
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
+        dd(request()->all());
+
         $this->themeCustomizationRepository->create($data);
 
-        session()->flash('success', 'Theme created successfully');
+        session()->flash('success', 'admin::app.settings.themes.create-success');
 
         return redirect()->route('admin.theme.index');
     }
@@ -82,7 +84,7 @@ class ThemeController extends Controller
 
         $this->themeCustomizationRepository->update($data, $id);
 
-        session()->flash('success', 'Theme updated successfully');
+        session()->flash('success', 'admin::app.settings.themes.update-success');
 
         return redirect()->route('admin.theme.index');
     }
@@ -97,7 +99,7 @@ class ThemeController extends Controller
         $this->themeCustomizationRepository->delete($id);
 
         return response()->json([
-            'message' => 'Theme deleted successfully',
+            'message' => 'admin::app.settings.themes.delete-success',
         ], 200);
     }
 }

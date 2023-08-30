@@ -2536,6 +2536,10 @@ return [
                 'css'                           => 'css',
                 'add-footer-link-btn'           => 'Add Footer Link',
             ],
+
+            'create-success' => 'Theme created successfully',
+            'update-success' => 'Theme updated successfully',
+            'delete-success' => 'Theme deleted successfully',
         ],
     ],
 
