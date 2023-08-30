@@ -1,12 +1,17 @@
 <x-admin::layouts>
     <x-slot:title>
-        Theme Customization
+        @lang('admin::app.settings.themes.create.title')
     </x-slot:title>
    
     <div class="flex justify-between items-center">
-        <p class="text-[20px] px-[12px] py-[6px] text-gray-800 font-bold">
-            Theme Customization
+        <p class="text-[20px] text-gray-800 font-bold">
+            @lang('admin::app.settings.themes.create.title')
         </p>
+        
+        <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-[10px] items-center h-[38px]">
+            </div>
+        </div>
     </div>
     
     <v-theme-customizer></v-theme-customizer>
@@ -35,7 +40,9 @@
                             >
                 
                 
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Slider </p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
+                                @lang('admin::app.settings.themes.create.slider')
+                            </p>
                         </div>
                     </div>
                 
@@ -57,7 +64,9 @@
                                 src="{{ bagisto_asset('images/inactive_product_carousel.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Product Carousel</p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
+                                @lang('admin::app.settings.themes.create.product-carousel')    
+                            </p>
                         </div>
                     </div>
                 
@@ -79,7 +88,9 @@
                                 src="{{ bagisto_asset('images/inactive_category.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Category Carousel</p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
+                                @lang('admin::app.settings.themes.create.category-carousel')    
+                            </p>
                         </div>
                     </div>
                 
@@ -102,7 +113,9 @@
                                 src="{{ bagisto_asset('images/inactive_static_content.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> Static Content </p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
+                                @lang('admin::app.settings.themes.create.static-content')    
+                            </p>
                         </div>
                     </div>
                 
@@ -124,7 +137,9 @@
                                 src="{{ bagisto_asset('images/inactive_footer_link.png') }}"
                             >
                 
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">Footer Link</p>
+                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
+                                @lang('admin::app.settings.themes.create.footer-link')    
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -155,93 +170,161 @@
 
         {{-- Slider theme --}}
         <script type="text/x-template" id="v-slider-theme-template">
-            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
-                            <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">Slider</p>
-                                <p class="text-[12px] text-gray-500 font-medium">
-                                    Slider related theme customization
-                                </p>
-                            </div>
-            
-                            <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Slider
-                            </div>
-                        </div>
-            
-                        <div    
-                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                            v-if="! sliders.length"
-                        >
-                            <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
-                                alt="add-product-to-store">
-            
-                            <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Product Variant</p>
-                                <p class="text-gray-400">To create various combination of product on a go.</p>
-                            </div>
-            
-                            <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Variant
-                            </div>
-                        </div>
+            <div>
+                <x-admin::form :action="''">
+                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                            <div class="p-[16px] bg-white rounded box-shadow">
+                                <div class="flex gap-x-[10px] justify-between items-center">
+                                    <div class="flex flex-col gap-[4px]">
+                                        <p class="text-[16px] text-gray-800 font-semibold">@lang('admin::app.settings.themes.create.slider')</p>
+                                        <p class="text-[12px] text-gray-500 font-medium">
+                                            @lang('admin::app.settings.themes.create.slider-description')
+                                        </p>
+                                    </div>
+                    
+                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                        @lang('admin::app.settings.themes.create.slider-add-btn')
+                                    </div>
+                                </div>
+                    
+                                <div    
+                                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                                    v-if="! sliders.length"
+                                >
+                                    <img    
+                                        class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                        src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
+                                        alt="add-product-to-store"
+                                    >
+                    
+                                    <div class="flex flex-col items-center">
+                                        <p class="text-[16px] text-gray-400 font-semibold">
+                                            @lang('admin::app.settings.themes.create.slider-add-btn')
+                                        </p>
+                                        
+                                        <p class="text-gray-400">
+                                            @lang('admin::app.settings.themes.create.slider-description')
+                                        </p>
+                                    </div>
+                    
+                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                        @lang('admin::app.settings.themes.create.slider-add-btn')
+                                    </div>
+                                </div>
+        
+                                <div class="grid">
+                                    <!-- Single product column -->
+                                    <div    
+                                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
+                                        v-for="image in sliders"
+                                    >
+                                        <div class="flex items-center gap-[10px]">
+                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                                <img class="w-[20px]" :src="image">
+                                                
+                                                <p class="text-[6px] text-gray-400 font-semibold">Product Image</p>
+                                            </div>
 
-                        <div class="grid">
-                            <!-- Single product column -->
-                            <div    
-                                class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
-                                v-for="image in sliders"
-                            >
-                                <div class="flex items-center gap-[10px]">
-                                    <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                        <img class="w-[20px]" :src="image">
-                                        <p class="text-[6px] text-gray-400 font-semibold">Product Image</p>
-                                    </div>
-                                    <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-800 font-semibold">Image carousel</p>
-                                    </div>
-                                </div>
-                                <div class="grid gap-[4px] place-content-start">
-                                    <div class="flex gap-[10px]">
-                                        <p class="text-red-600 cursor-pointer">Delete</p>
+                                            <div class="grid gap-[6px] place-content-start">
+                                                <p class="text-[16x] text-gray-800 font-semibold">Image carousel</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="grid gap-[4px] place-content-start">
+                                            <div class="flex gap-[10px]">
+                                                <p class="text-red-600 cursor-pointer">Delete</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            
-                <!-- General -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                    <div class="bg-white rounded-[4px] box-shadow">
-                        <div class="flex items-center justify-between p-[6px]">
-                            <p class="text-gray-600 text-[16px] p-[10px] font-semibold">General</p>
-                            <span
-                                class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
+                    
+                        <!-- General -->
+                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                            <x-admin::accordion>
+                                <x-slot:header>
+                                    <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                        @lang('admin::app.settings.themes.create.general')
+                                    </p>
+                                </x-slot:header>
+                            
+                                <x-slot:content>
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            name="type"
+                                            value="slider_carousel"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.create.name')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="name"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.create.name')"
+                                            :placeholder="trans('admin::app.settings.themes.create.name')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="name"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.create.sort-order')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.create.sort-order')"
+                                            :placeholder="trans('admin::app.settings.themes.create.sort-order')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.create.status')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="status"
+                                            :value="1"
+                                            :label="trans('admin::app.settings.themes.create.status')"
+                                            :placeholder="trans('admin::app.settings.themes.create.status')"
+                                            :checked="true"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </x-slot:content>
+                            </x-admin::accordion>
                         </div>
-            
-                        <!-- Price -->
-                        <div class="p-[16px]">
-                            <div class="mb-[10px]">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Price*
-                                </label>
-                                <input
-                                    class="text-[20px] text-gray-600 font-bold appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="$ 10.00">
-                            </div>
-                            <div class="">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Cost
-                                    Price* </label>
-                                <input
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="8.00">
-                            </div>
-                        </div>
                     </div>
-                </div>
+                </x-admin::form>
             </div>
         </script>
 
@@ -254,16 +337,6 @@
                         sliders: [],
                     };
                 },
-
-                mounted() {
-                    this.get();
-                },
-
-                methods: {
-                    get() {
-                       
-                    }
-                }
             });
         </script>
 
@@ -278,10 +351,12 @@
                         <div class="p-[16px] bg-white rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">Product Carousel</p>
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.create.product-carousel')
+                                    </p>
 
                                     <p class="text-[12px] text-gray-500 font-medium">
-                                        Showcase products elegantly with a dynamic and responsive product carousel.
+                                        @lang('admin::app.settings.themes.create.product-carousel-description')
                                     </p>
                                 </div>
                 
@@ -290,29 +365,29 @@
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         @click="$refs.productFilterModal.toggle()"
                                     >
-                                        Add Filter
+                                        @lang('admin::app.settings.themes.create.add-filter-btn')
                                     </div>
 
                                     <button
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         type="submit"
                                     >
-                                        Save
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </div>
 
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Title
+                                    @lang('admin::app.settings.themes.create.filter-title')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[title]"
                                     rules="required"
-                                    :label="trans('Title')"
-                                    :placeholder="trans('Title')"
+                                    :label="trans('admin::app.settings.themes.create.filter-title')"
+                                    :placeholder="trans('admin::app.settings.themes.create.filter-title')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -324,18 +399,18 @@
 
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Sort
+                                    @lang('admin::app.settings.themes.create.sort')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="options[sort]"
                                     rules="required"
-                                    :label="trans('Sort')"
-                                    :placeholder="trans('Sort')"
+                                    :label="trans('admin::app.settings.themes.create.sort')"
+                                    :placeholder="trans('admin::app.settings.themes.create.sort')"
                                 >
-                                    <option value="desc">Desc</option>
-                                    <option value="asc">Asc</option>
+                                    <option value="desc">@lang('admin::app.settings.themes.create.desc')</option>
+                                    <option value="asc">@lang('admin::app.settings.themes.create.asc')</option>
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error
@@ -346,15 +421,15 @@
 
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Limit
+                                    @lang('admin::app.settings.themes.create.limit')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[limit]"
                                     rules="required"
-                                    :label="trans('Limit')"
-                                    :placeholder="trans('Limit')"
+                                    :label="trans('admin::app.settings.themes.create.limit')"
+                                    :placeholder="trans('admin::app.settings.themes.create.limit')"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -376,11 +451,11 @@
                                         <!-- Details -->
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-[16x] text-gray-800 font-semibold">
-                                                Key: @{{ filter.key }}
+                                                @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
                                             </p>
 
                                             <p class="text-[16x] text-gray-800 font-semibold">
-                                                Value: @{{ filter.value }}
+                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
                                             </p>
                                         </div>
                                     </div>
@@ -391,7 +466,7 @@
                                             class="text-red-600 cursor-pointer hover:underline"
                                             @click="remove(filter)"
                                         >
-                                            Delete
+                                            @lang('admin::app.settings.themes.create.delete')
                                         </p>
                                     </div>
                                 </div>
@@ -408,15 +483,20 @@
                                 >
                 
                                 <div class="flex flex-col items-center">
-                                    <p class="text-[16px] text-gray-400 font-semibold">Add Product Carousel</p>
-                                    <p class="text-gray-400">Product Carousel related theme customization.</p>
+                                    <p class="text-[16px] text-gray-400 font-semibold">
+                                        @lang('admin::app.settings.themes.create.product-carousel')
+                                    </p>
+
+                                    <p class="text-gray-400">
+                                        @lang('admin::app.settings.themes.create.product-carousel-description')
+                                    </p>
                                 </div>
                 
                                 <div 
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.productFilterModal.toggle()"
                                 >
-                                    Add Filter
+                                    @lang('admin::app.settings.themes.create.add-filter-btn')
                                 </div>
                             </div>
                         </div>
@@ -427,7 +507,7 @@
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    General
+                                    @lang('admin::app.settings.themes.create.general')
                                 </p>
                             </x-slot:header>
                         
@@ -443,15 +523,15 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        Name
+                                        @lang('admin::app.settings.themes.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
                                         rules="required"
-                                        :label="trans('Name')"
-                                        :placeholder="trans('Name')"
+                                        :label="trans('admin::app.settings.themes.create.name')"
+                                        :placeholder="trans('admin::app.settings.themes.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -463,15 +543,15 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        Sort Order
+                                        @lang('admin::app.settings.themes.create.sort-order')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="sort_order"
                                         rules="required"
-                                        :label="trans('Sort Order')"
-                                        :placeholder="trans('Sort Order')"
+                                        :label="trans('admin::app.settings.themes.create.sort-order')"
+                                        :placeholder="trans('admin::app.settings.themes.create.sort-order')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -483,15 +563,15 @@
 
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        Status
+                                        @lang('admin::app.settings.themes.create.status')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
                                         :value="1"
-                                        :label="trans('Status')"
-                                        :placeholder="trans('Status')"
+                                        :label="trans('admin::app.settings.themes.create.status')"
+                                        :placeholder="trans('admin::app.settings.themes.create.status')"
                                         :checked="true"
                                     >
                                     </x-admin::form.control-group.control>
@@ -510,13 +590,12 @@
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
-                    ref="categoryCarouselform"
                 >
                     <form @submit="handleSubmit($event, addFilter)">
                         <x-admin::modal ref="productFilterModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                   Add Filter
+                                    @lang('admin::app.settings.themes.create.create-filter')
                                 </p>
                             </x-slot:header>
         
@@ -525,15 +604,15 @@
                                     <!-- Key -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            Key
+                                            @lang('admin::app.settings.themes.create.key-input')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="key"
-                                            :label="trans('Key')"
                                             rules="required"
-                                            :placeholder="trans('Key')"
+                                            :label="trans('admin::app.settings.themes.create.key-input')"
+                                            :placeholder="trans('admin::app.settings.themes.create.key-input')"
                                         >
                                         </x-admin::form.control-group.control>
         
@@ -546,15 +625,15 @@
                                     <!-- Value -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            Value
+                                            @lang('admin::app.settings.themes.create.value-input')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="value"
-                                            :label="trans('Value')"
                                             rules="required"
-                                            :placeholder="trans('Value')"
+                                            :label="trans('admin::app.settings.themes.create.value-input')"
+                                            :placeholder="trans('admin::app.settings.themes.create.value-input')"
                                         >
                                         </x-admin::form.control-group.control>
         
@@ -573,7 +652,7 @@
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        Save 
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>
@@ -622,10 +701,12 @@
                         <div class="p-[16px] bg-white rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">Category Carousel</p>
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.create.category-carousel')
+                                    </p>
     
                                     <p class="text-[12px] text-gray-500 font-medium">
-                                        Display dynamic categories attractively using a responsive category carousel.
+                                        @lang('admin::app.settings.themes.create.category-carousel-description')
                                     </p>
                                 </div>
                 
@@ -634,29 +715,29 @@
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         @click="$refs.categoryFilterModal.toggle()"
                                     >
-                                        Add Filter
+                                        @lang('admin::app.settings.themes.create.add-filter-btn')
                                     </div>
     
                                     <button
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         type="submit"
                                     >
-                                        Save
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </div>
     
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Title
+                                    @lang('admin::app.settings.themes.create.filter-title')
                                 </x-admin::form.control-group.label>
     
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[title]"
                                     rules="required"
-                                    :label="trans('Title')"
-                                    :placeholder="trans('Title')"
+                                    :label="trans('admin::app.settings.themes.create.filter-title')"
+                                    :placeholder="trans('admin::app.settings.themes.create.filter-title')"
                                 >
                                 </x-admin::form.control-group.control>
     
@@ -668,18 +749,18 @@
     
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Sort
+                                    @lang('admin::app.settings.themes.create.sort')
                                 </x-admin::form.control-group.label>
     
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="options[sort]"
                                     rules="required"
-                                    :label="trans('Sort')"
-                                    :placeholder="trans('Sort')"
+                                    :label="trans('admin::app.settings.themes.create.sort')"
+                                    :placeholder="trans('admin::app.settings.themes.create.sort')"
                                 >
-                                    <option value="desc">Desc</option>
-                                    <option value="asc">Asc</option>
+                                    <option value="desc">@lang('admin::app.settings.themes.create.desc')</option>
+                                    <option value="asc">@lang('admin::app.settings.themes.create.asc')</option>
                                 </x-admin::form.control-group.control>
     
                                 <x-admin::form.control-group.error
@@ -690,15 +771,15 @@
     
                             <x-admin::form.control-group class="mb-[10px]">
                                 <x-admin::form.control-group.label>
-                                    Limit
+                                    @lang('admin::app.settings.themes.create.limit')
                                 </x-admin::form.control-group.label>
     
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[limit]"
                                     rules="required"
-                                    :label="trans('Limit')"
-                                    :placeholder="trans('Limit')"
+                                    :label="trans('admin::app.settings.themes.create.limit')"
+                                    :placeholder="trans('admin::app.settings.themes.create.limit')"
                                 >
                                 </x-admin::form.control-group.control>
     
@@ -720,11 +801,11 @@
                                         <!-- Details -->
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-[16x] text-gray-800 font-semibold">
-                                                Key: @{{ filter.key }}
+                                                @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
                                             </p>
-    
+        
                                             <p class="text-[16x] text-gray-800 font-semibold">
-                                                Value: @{{ filter.value }}
+                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
                                             </p>
                                         </div>
                                     </div>
@@ -735,7 +816,7 @@
                                             class="text-red-600 cursor-pointer hover:underline"
                                             @click="remove(filter)"
                                         >
-                                            Delete
+                                            @lang('admin::app.settings.themes.create.delete')
                                         </p>
                                     </div>
                                 </div>
@@ -750,17 +831,23 @@
                                     src="{{ bagisto_asset('images/empty_theme.png') }}"
                                     alt="add-category-to-store"
                                 >
-                
+   
                                 <div class="flex flex-col items-center">
-                                    <p class="text-[16px] text-gray-400 font-semibold">Add Category Carousel</p>
-                                    <p class="text-gray-400">Category Carousel related theme customization.</p>
+                                    <p class="text-[16px] text-gray-400 font-semibold">
+                                        @lang('admin::app.settings.themes.create.category-carousel')
+                                    </p>
+
+                                    <p class="text-gray-400">
+                                        @lang('admin::app.settings.themes.create.category-carousel-description')
+
+                                    </p>
                                 </div>
                 
                                 <div 
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.categoryFilterModal.toggle()"
                                 >
-                                    Add Filter
+                                    @lang('admin::app.settings.themes.create.add-filter-btn')
                                 </div>
                             </div>
                         </div>
@@ -771,7 +858,7 @@
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    General
+                                    @lang('admin::app.settings.themes.create.general')
                                 </p>
                             </x-slot:header>
                         
@@ -787,15 +874,15 @@
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        Name
+                                        @lang('admin::app.settings.themes.create.name')
                                     </x-admin::form.control-group.label>
     
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
                                         rules="required"
-                                        :label="trans('Name')"
-                                        :placeholder="trans('Name')"
+                                        :label="trans('admin::app.settings.themes.create.name')"
+                                        :placeholder="trans('admin::app.settings.themes.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
     
@@ -807,15 +894,15 @@
     
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        Sort Order
+                                        @lang('admin::app.settings.themes.create.sort-order')
                                     </x-admin::form.control-group.label>
     
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="sort_order"
                                         rules="required"
-                                        :label="trans('Sort Order')"
-                                        :placeholder="trans('Sort Order')"
+                                        :label="trans('admin::app.settings.themes.create.sort-order')"
+                                        :placeholder="trans('admin::app.settings.themes.create.sort-order')"
                                     >
                                     </x-admin::form.control-group.control>
     
@@ -827,15 +914,15 @@
     
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        Status
+                                        @lang('admin::app.settings.themes.create.status')
                                     </x-admin::form.control-group.label>
     
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
                                         :value="1"
-                                        :label="trans('Status')"
-                                        :placeholder="trans('Status')"
+                                        :label="trans('admin::app.settings.themes.create.status')"
+                                        :placeholder="trans('admin::app.settings.themes.create.status')"
                                         :checked="true"
                                     >
                                     </x-admin::form.control-group.control>
@@ -854,13 +941,12 @@
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
-                    ref="categoryCarouselform"
                 >
                     <form @submit="handleSubmit($event, addFilter)">
                         <x-admin::modal ref="categoryFilterModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                   Add Filter
+                                    @lang('admin::app.settings.themes.create.create-filter')
                                 </p>
                             </x-slot:header>
         
@@ -869,15 +955,15 @@
                                     <!-- Key -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            Key
+                                            @lang('admin::app.settings.themes.create.key-input')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="key"
-                                            :label="trans('Key')"
                                             rules="required"
-                                            :placeholder="trans('Key')"
+                                            :label="trans('admin::app.settings.themes.create.key-input')"
+                                            :placeholder="trans('admin::app.settings.themes.create.key-input')"
                                         >
                                         </x-admin::form.control-group.control>
         
@@ -890,15 +976,15 @@
                                     <!-- Value -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            Value
+                                            @lang('admin::app.settings.themes.create.value-input')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="value"
-                                            :label="trans('Value')"
                                             rules="required"
-                                            :placeholder="trans('Value')"
+                                            :label="trans('admin::app.settings.themes.create.value-input')"
+                                            :placeholder="trans('admin::app.settings.themes.create.value-input')"
                                         >
                                         </x-admin::form.control-group.control>
         
@@ -917,7 +1003,7 @@
                                         type="submit"
                                         class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
                                     >
-                                        Save 
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </x-slot:footer>
@@ -966,10 +1052,12 @@
                         <div class="p-[16px] bg-white rounded box-shadow">
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">Static Content</p>
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.create.static-content')
+                                    </p>
     
                                     <p class="text-[12px] text-gray-500 font-medium">
-                                        Improve engagement with concise, informative static content for your audience.
+                                        @lang('admin::app.settings.themes.create.static-content-description')
                                     </p>
                                 </div>
                 
@@ -978,14 +1066,14 @@
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         type="submit"
                                     >
-                                        Save
+                                        @lang('admin::app.settings.themes.create.save-btn')
                                     </button>
                                 </div>
                             </div>
     
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label for="status">
-                                    HTML
+                                    @lang('admin::app.settings.themes.create.html')
                                 </x-admin::form.control-group.label>
 
                                 <div ref="html"></div>
@@ -1001,7 +1089,7 @@
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
-                                    CSS
+                                    @lang('admin::app.settings.themes.create.css')
                                 </x-admin::form.control-group.label>
 
                                 <div ref="css"></div>
@@ -1022,7 +1110,7 @@
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    General
+                                    @lang('admin::app.settings.themes.create.general')
                                 </p>
                             </x-slot:header>
                         
@@ -1038,15 +1126,15 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        Name
+                                        @lang('admin::app.settings.themes.create.name')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
                                         rules="required"
-                                        :label="trans('Name')"
-                                        :placeholder="trans('Name')"
+                                        :label="trans('admin::app.settings.themes.create.name')"
+                                        :placeholder="trans('admin::app.settings.themes.create.name')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -1058,15 +1146,15 @@
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label>
-                                        Sort Order
+                                        @lang('admin::app.settings.themes.create.sort-order')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="sort_order"
                                         rules="required"
-                                        :label="trans('Sort Order')"
-                                        :placeholder="trans('Sort Order')"
+                                        :label="trans('admin::app.settings.themes.create.sort-order')"
+                                        :placeholder="trans('admin::app.settings.themes.create.sort-order')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -1078,15 +1166,15 @@
 
                                 <x-admin::form.control-group>
                                     <x-admin::form.control-group.label>
-                                        Status
+                                        @lang('admin::app.settings.themes.create.status')
                                     </x-admin::form.control-group.label>
 
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
                                         :value="1"
-                                        :label="trans('Status')"
-                                        :placeholder="trans('Status')"
+                                        :label="trans('admin::app.settings.themes.create.status')"
+                                        :placeholder="trans('admin::app.settings.themes.create.status')"
                                         :checked="true"
                                     >
                                     </x-admin::form.control-group.control>
@@ -1160,69 +1248,145 @@
 
         {{-- Footer Link --}}
         <script type="text/x-template" id="v-footer-link-theme-template">
-            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                    <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
-                            <div class="flex flex-col gap-[4px]">
-                                <p class="text-[16px] text-gray-800 font-semibold">Content</p>
+            <div>
+                <x-admin::form :action="''">
+                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                            <div class="p-[16px] bg-white rounded box-shadow">
+                                <div class="flex gap-x-[10px] justify-between items-center">
+                                    <div class="flex flex-col gap-[4px]">
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            @lang('admin::app.settings.themes.create.footer-link')
+                                        </p>
+        
+                                        <p class="text-[12px] text-gray-500 font-medium">
+                                            @lang('admin::app.settings.themes.create.footer-link-description')
+                                        </p>
+                                    </div>
 
-                                <p class="text-[12px] text-gray-500 font-medium">
-                                    Static related theme customization
-                                </p>
-                            </div>
-            
-                            <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Static
+                                    <div class="flex gap-[10px]">
+                                        <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                            @lang('admin::app.settings.themes.create.add-footer-link-btn')
+                                        </div>
+        
+                                        <button
+                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                            type="submit"
+                                        >
+                                            @lang('admin::app.settings.themes.create.save-btn')
+                                        </button>
+                                    </div>
+                                </div>
+        
+                                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                                    <img
+                                        class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                        src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
+                                        alt="add-product-to-store"
+                                    >
+                    
+                                    <div class="flex flex-col items-center">
+                                        <p class="text-[16px] text-gray-400 font-semibold">
+                                            @lang('admin::app.settings.themes.create.footer-link')
+                                            
+                                        </p>
+        
+                                        <p class="text-gray-400">
+                                            @lang('admin::app.settings.themes.create.footer-link-description')
+                                        </p>
+                                    </div>
+                    
+                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                        @lang('admin::app.settings.themes.create.add-footer-link-btn')
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
-                            <img class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
-                                alt="add-product-to-store">
-            
-                            <div class="flex flex-col items-center">
-                                <p class="text-[16px] text-gray-400 font-semibold">Add Product Variant</p>
-                                <p class="text-gray-400">To create various combination of product on a go.</p>
-                            </div>
-            
-                            <div
-                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                Add Variant
-                            </div>
+                    
+                        <!-- General -->
+                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                            <x-admin::accordion>
+                                <x-slot:header>
+                                    <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                        @lang('admin::app.settings.themes.create.general')
+                                    </p>
+                                </x-slot:header>
+                            
+                                <x-slot:content>
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.control
+                                            type="hidden"
+                                            name="type"
+                                            value="slider_carousel"
+                                        >
+                                        </x-admin::form.control-group.control>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.create.name')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="name"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.create.name')"
+                                            :placeholder="trans('admin::app.settings.themes.create.name')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="name"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.create.sort-order')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.create.sort-order')"
+                                            :placeholder="trans('admin::app.settings.themes.create.sort-order')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.create.status')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="switch"
+                                            name="status"
+                                            :value="1"
+                                            :label="trans('admin::app.settings.themes.create.status')"
+                                            :placeholder="trans('admin::app.settings.themes.create.status')"
+                                            :checked="true"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="status"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </x-slot:content>
+                            </x-admin::accordion>
                         </div>
                     </div>
-                </div>
-            
-                <!-- General -->
-                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                    <div class="bg-white rounded-[4px] box-shadow">
-                        <div class="flex items-center justify-between p-[6px]">
-                            <p class="text-gray-600 text-[16px] p-[10px] font-semibold">General</p>
-                            <span
-                                class="icon-arrow-up text-[24px] p-[6px]  rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"></span>
-                        </div>
-            
-                        <!-- Price -->
-                        <div class="p-[16px]">
-                            <div class="mb-[10px]">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Name*
-                                </label>
-                                <input
-                                    class="text-[20px] text-gray-600 font-bold appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="$ 10.00">
-                            </div>
-                            <div class="">
-                                <label class="block text-[12px]  text-gray-800 font-medium leading-[24px]" for="username"> Cost
-                                    Price* </label>
-                                <input
-                                    class="text-[14px] text-gray-600 appearance-none border rounded-[6px] w-full py-2 px-3 transition-all hover:border-gray-400"
-                                    type="text" placeholder="8.00">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </x-admin::form>
             </div>
         </script>
 

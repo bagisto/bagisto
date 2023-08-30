@@ -35,7 +35,7 @@ class ThemeDatagrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.settings.channels.index.datagrid.id'),
+            'label'      => trans('admin::app.settings.themes.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -44,7 +44,7 @@ class ThemeDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'type',
-            'label'      => trans('Type'),
+            'label'      => trans('admin::app.settings.themes.index.datagrid.type'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -53,7 +53,7 @@ class ThemeDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'name',
-            'label'      => trans('Name'),
+            'label'      => trans('admin::app.settings.themes.index.datagrid.name'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -62,7 +62,7 @@ class ThemeDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'sort_order',
-            'label'      => trans('Sort Order'),
+            'label'      => trans('admin::app.settings.themes.index.datagrid.sort-order'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
@@ -71,17 +71,17 @@ class ThemeDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'status',
-            'label'      => trans('Status'),
+            'label'      => trans('admin::app.settings.themes.index.datagrid.status'),
             'type'       => 'string',
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($value) {
                 if ($value->status) {
-                    return '<p class="label-processing">' . trans('Active') . '</p>';
+                    return '<p class="label-processing">' . trans('admin::app.settings.themes.index.datagrid.active') . '</p>';
                 }
 
-                return '<p class="label-pending">' . trans('Inactive') . '</p>';
+                return '<p class="label-pending">' . trans('admin::app.settings.themes.index.datagrid.inactive') . '</p>';
             },
         ]);
     }
@@ -90,7 +90,7 @@ class ThemeDatagrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.sales.orders.index.datagrid.view'),
+            'title'  => trans('admin::app.settings.themes.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.theme.edit', $row->id);
@@ -99,7 +99,7 @@ class ThemeDatagrid extends DataGrid
 
         $this->addAction([
             'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.catalog.products.index.datagrid.delete'),
+            'title'   => trans('admin::app.settings.themes.index.datagrid.delete'),
             'method'  => 'DELETE',
             'url'     => function ($row) {
                 return route('admin.theme.delete', $row->id);

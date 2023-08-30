@@ -1,11 +1,11 @@
 <x-admin::layouts>
     <x-slot:title>
-        Theme Customization
+        @lang('admin::app.settings.themes.index.title')
     </x-slot:title>
    
     <div class="flex justify-between items-center">
         <p class="text-[20px] text-gray-800 font-bold">
-            Theme Customization
+            @lang('admin::app.settings.themes.index.title')
         </p>
         
         <div class="flex gap-x-[10px] items-center">
@@ -15,7 +15,7 @@
                     href="{{ route('admin.theme.create') }}"
                     class="primary-button"
                 >
-                    Create Theme
+                    @lang('admin::app.settings.themes.index.create-btn')
                 </a>
             </div>
         </div>
