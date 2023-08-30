@@ -76,7 +76,7 @@
                             ref="password"
                             rules="required|min:6"
                             :label="trans('shop::app.customers.reset-password.password')"
-                            :placeholder="trans('shop::app.customers.reset-password.password')""
+                            :placeholder="trans('shop::app.customers.reset-password.password')"
                         >
                         </x-shop::form.control-group.control>
 

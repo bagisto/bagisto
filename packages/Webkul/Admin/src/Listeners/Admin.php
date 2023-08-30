@@ -16,10 +16,5 @@ class Admin
     public function afterPasswordUpdated($admin)
     {
         return;
-        try {
-            Mail::queue(new UpdatePasswordNotification($admin));
-        } catch (\Exception $e) {
-            report($e);
-        }
     }
 }

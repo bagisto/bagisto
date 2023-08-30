@@ -723,21 +723,21 @@ return [
             'shipped' => [
                 'subject'  => 'New Shipment Confirmation',
                 'title'    => 'Order Shipped!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'Your order :order_id placed on :created_at has been shipped',
                 'summary'  => 'Summary of Shipment',
             ],
 
             'refunded' => [
                 'subject'  => 'New Refund Confirmation',
                 'title'    => 'Order Refunded!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'Refund has been initiated for the :order_id placed on :created_at',
                 'summary'  => 'Summary of Refund',
             ],
 
             'canceled' => [
                 'subject'  => 'New Order Canceled',
                 'title'    => 'Order Canceled!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'Your Order :order_id placed on :created_at has been canceled',
                 'summary'  => 'Summary of Order',
             ],
 

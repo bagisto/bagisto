@@ -15,7 +15,7 @@
 
     <div style="display: flex;margin-bottom: 95px">
         <a
-            href="{{ route('shop.customer.reset_password.create', $token) }}"
+            href="{{ route('shop.customers.reset_password.create', $token) }}"
             style="padding: 16px 45px;justify-content: center;align-items: center;gap: 10px;border-radius: 2px;background: #060C3B;color: #FFFFFF;text-decoration: none;text-transform: uppercase;font-weight: 700;"
         >
             @lang('shop::app.emails.customers.forgot-password.reset-password')
