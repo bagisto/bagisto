@@ -48,6 +48,13 @@ class ThemeController extends Controller
      */
     public function store()
     {
+        $this->validate(request(), [
+            'type'    => 'required',
+            'name'    => 'required',
+            'status'  => 'required',
+            'options' => 'required',
+        ]);
+
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
         dd(request()->all());

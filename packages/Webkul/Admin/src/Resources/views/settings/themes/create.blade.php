@@ -365,13 +365,6 @@
                                 </div>
                 
                                 <div class="flex gap-[10px]">
-                                    <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        @click="$refs.productFilterModal.toggle()"
-                                    >
-                                        @lang('admin::app.settings.themes.create.add-filter-btn')
-                                    </div>
-
                                     <button
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         type="submit"
@@ -442,6 +435,23 @@
                                 >
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
+
+                            <div class="flex gap-x-[10px] justify-between items-center mt-2">
+                                <div class="flex flex-col gap-[4px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.create.filters')
+                                    </p>
+                                </div>
+                
+                                <div class="flex gap-[10px]">
+                                    <div
+                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        @click="$refs.productFilterModal.toggle()"
+                                    >
+                                        @lang('admin::app.settings.themes.create.add-filter-btn')
+                                    </div>
+                                </div>
+                            </div>
 
                             <div v-if="options.filters.length">
                                 <div
@@ -715,13 +725,6 @@
                                 </div>
                 
                                 <div class="flex gap-[10px]">
-                                    <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        @click="$refs.categoryFilterModal.toggle()"
-                                    >
-                                        @lang('admin::app.settings.themes.create.add-filter-btn')
-                                    </div>
-    
                                     <button
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         type="submit"
@@ -793,6 +796,23 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
     
+                            <div class="flex gap-x-[10px] justify-between items-center mt-2">
+                                <div class="flex flex-col gap-[4px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.create.filters')
+                                    </p>
+                                </div>
+                
+                                <div class="flex gap-[10px]">
+                                    <div
+                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        @click="$refs.filterModal.toggle()"
+                                    >
+                                        @lang('admin::app.settings.themes.create.add-filter-btn')
+                                    </div>
+                                </div>
+                            </div>
+
                             <div v-if="options.filters.length">
                                 <div
                                     class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
@@ -849,7 +869,7 @@
                 
                                 <div 
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                    @click="$refs.categoryFilterModal.toggle()"
+                                    @click="$refs.filterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.create.add-filter-btn')
                                 </div>
@@ -947,7 +967,7 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, addFilter)">
-                        <x-admin::modal ref="categoryFilterModal">
+                        <x-admin::modal ref="filterModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.settings.themes.create.create-filter')
@@ -1033,7 +1053,7 @@
                     addFilter(params) {
                         this.options.filters.push(params);
     
-                        this.$refs.categoryFilterModal.toggle();
+                        this.$refs.filterModal.toggle();
                     },
     
                     remove(filter) {

@@ -2500,6 +2500,7 @@ return [
                 'html'                          => 'html',
                 'css'                           => 'css',
                 'add-footer-link-btn'           => 'Add Footer Link',
+                'filters'                       => 'Filters',
             ],
 
             'edit' => [
