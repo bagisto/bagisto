@@ -1239,6 +1239,8 @@ return [
             'phone'                   => 'Phone - :phone',
             'pay-by'                  => 'Pay By',
             'reviews'                 => 'Reviews',
+            'approved'                => 'Approved',
+            'disapproved'             => 'Disapproved',
             'suspended'               => 'Suspended',
             'set-default-success'     => 'Default Address Updated Successfully',
             'submit-btn-title'        => 'Submit Note',

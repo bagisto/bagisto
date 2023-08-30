@@ -171,7 +171,7 @@
                                             @if($order->billingAddress->address1)
                                                 {{ $order->billingAddress->address1 }},
                                             @endif
-                                            
+
                                             @if($order->billingAddress->city)
                                                 {{ $order->billingAddress->city }},
                                             @endif
@@ -318,19 +318,19 @@
                                     @switch($review->status)
                                         @case('approved')
                                             <p class="label-active">
-                                                {{ $review->status }}
+                                                @lang('admin::app.customers.view.approved')
                                             </p>
                                             @break
 
                                         @case('pending')
                                             <p class="label-pending">
-                                                {{ $review->status }}
+                                                @lang('admin::app.customers.view.pending')
                                             </p>
                                             @break
 
                                         @case('disapproved')
                                             <p class="label-cancelled">
-                                                {{ $review->status }}
+                                                @lang('admin::app.customers.view.disapproved')
                                             </p>
                                             @break
 

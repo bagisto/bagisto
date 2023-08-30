@@ -121,15 +121,7 @@
                                     >
                                     </p>
 
-                                    <p
-                                        :class="{
-                                            'label-cancelled': record.product_review_status === 'disapproved',
-                                            'label-pending': record.product_review_status === 'pending',
-                                            'label-active': record.product_review_status === 'approved',
-                                        }"
-                                        v-text="record.product_review_status"
-                                    >
-                                    </p>
+                                    <p v-html="record.product_review_status"></p>
                                 </div>
                             </div>
 
