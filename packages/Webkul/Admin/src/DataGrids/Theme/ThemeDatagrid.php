@@ -89,11 +89,20 @@ class ThemeDatagrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'icon'   => 'icon-view',
+            'icon'   => 'icon-edit',
             'title'  => trans('admin::app.sales.orders.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
-                return '#';
+                return route('admin.theme.edit', $row->id);
+            },
+        ]);
+
+        $this->addAction([
+            'icon'    => 'icon-delete',
+            'title'   => trans('admin::app.catalog.products.index.datagrid.delete'),
+            'method'  => 'DELETE',
+            'url'     => function ($row) {
+                return route('admin.theme.delete', $row->id);
             },
         ]);
     }

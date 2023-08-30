@@ -142,13 +142,19 @@
                 data() {
                     return {
                         componentName: 'v-slider-theme',
+
+                        themeType: {
+                            product_carousel: 'v-product-theme',
+                            category_carousel: 'v-category-theme',
+                            static_content: 'v-static-theme',
+                            image_carousel: 'v-slider-theme',
+                            footer_links: 'v-footer-link-theme-template',
+                        } 
                     }
                 },
 
-                methods: {
-                    switchComponent(component) {
-                        this.componentName = component;
-                    }
+                created(){
+                    this.componentName = this.themeType["{{ $theme->type }}"];
                 },
             })
         </script>
@@ -271,7 +277,7 @@
         <script type="text/x-template" id="v-product-theme-template">
             <div>
                 <x-admin::form 
-                    :action="route('admin.theme.store')"
+                    :action="route('admin.theme.update', $theme->id)"
                     class="flex gap-[10px] mt-[14px] max-xl:flex-wrap"
                 >
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -310,6 +316,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[title]"
+                                    ::value="options.title"
                                     rules="required"
                                     :label="trans('Title')"
                                     :placeholder="trans('Title')"
@@ -330,6 +337,7 @@
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="options[sort]"
+                                    ::value="options.sort"
                                     rules="required"
                                     :label="trans('Sort')"
                                     :placeholder="trans('Sort')"
@@ -352,6 +360,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[limit]"
+                                    ::value="options.limit"
                                     rules="required"
                                     :label="trans('Limit')"
                                     :placeholder="trans('Limit')"
@@ -450,6 +459,7 @@
                                         type="text"
                                         name="name"
                                         rules="required"
+                                        :value="$theme->name"
                                         :label="trans('Name')"
                                         :placeholder="trans('Name')"
                                     >
@@ -470,6 +480,7 @@
                                         type="text"
                                         name="sort_order"
                                         rules="required"
+                                        :value="$theme->sort_order"
                                         :label="trans('Sort Order')"
                                         :placeholder="trans('Sort Order')"
                                     >
@@ -489,7 +500,7 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
-                                        :value="1"
+                                        :value="$theme->status"
                                         :label="trans('Status')"
                                         :placeholder="trans('Status')"
                                         :checked="true"
@@ -589,10 +600,19 @@
 
                 data() {
                     return {
-                        options: {
-                            filters: [],
-                        },
+                        options: @json($theme->options),
                     };
+                },
+
+                created() {
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters).map(key => ({
+                        key: key,
+                        value: this.options.filters[key]
+                    }));
                 },
 
                 methods: {
@@ -654,6 +674,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[title]"
+                                    ::value="options.title"
                                     rules="required"
                                     :label="trans('Title')"
                                     :placeholder="trans('Title')"
@@ -674,6 +695,7 @@
                                 <x-admin::form.control-group.control
                                     type="select"
                                     name="options[sort]"
+                                    ::value="options.sort"
                                     rules="required"
                                     :label="trans('Sort')"
                                     :placeholder="trans('Sort')"
@@ -696,6 +718,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="options[limit]"
+                                    ::value="options.limit"
                                     rules="required"
                                     :label="trans('Limit')"
                                     :placeholder="trans('Limit')"
@@ -793,6 +816,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
+                                        :value="$theme->name"
                                         rules="required"
                                         :label="trans('Name')"
                                         :placeholder="trans('Name')"
@@ -813,6 +837,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="sort_order"
+                                        :value="$theme->sort_order"
                                         rules="required"
                                         :label="trans('Sort Order')"
                                         :placeholder="trans('Sort Order')"
@@ -833,7 +858,7 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
-                                        :value="1"
+                                        :value="$theme->status"
                                         :label="trans('Status')"
                                         :placeholder="trans('Status')"
                                         :checked="true"
@@ -933,12 +958,21 @@
     
                 data() {
                     return {
-                        options: {
-                            filters: [],
-                        },
+                        options: @json($theme->options),
                     };
                 },
     
+                created() {
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters).map(key => ({
+                        key: key,
+                        value: this.options.filters[key]
+                    }));
+                },
+                
                 methods: {
                     addFilter(params) {
                         this.options.filters.push(params);
@@ -959,7 +993,7 @@
         <script type="text/x-template" id="v-static-theme-template">
             <div>
                 <x-admin::form 
-                    :action="route('admin.theme.store')"
+                    :action="route('admin.theme.update', $theme->id)"
                     class="flex gap-[10px] mt-[14px] max-xl:flex-wrap"
                 >
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -1044,6 +1078,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
+                                        :value="$theme->name"
                                         rules="required"
                                         :label="trans('Name')"
                                         :placeholder="trans('Name')"
@@ -1064,6 +1099,7 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="sort_order"
+                                        :value="$theme->sort_order"
                                         rules="required"
                                         :label="trans('Sort Order')"
                                         :placeholder="trans('Sort Order')"
@@ -1084,7 +1120,7 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
-                                        :value="1"
+                                        :value="$theme->status"
                                         :label="trans('Status')"
                                         :placeholder="trans('Status')"
                                         :checked="true"
@@ -1109,10 +1145,7 @@
 
                 data() {
                     return {
-                        options:{
-                            html: '',
-                            css: '',
-                        }
+                        options: @json($theme->options),
                     };
                 },
 

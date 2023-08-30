@@ -2,9 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
-use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Admin\DataGrids\Theme\ThemeDatagrid;
 
 class ThemeController extends Controller
 {
@@ -44,20 +44,60 @@ class ThemeController extends Controller
     /**
      * Store theme
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
     {
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
-        if (request()->input('type') == 'static_content') {
-            $data['options'] = request()->only('css', 'html');
-        }
-
         $this->themeCustomizationRepository->create($data);
 
-        session()->flash('success', 'Carousel created successfully');
+        session()->flash('success', 'Theme created successfully');
 
-        return redirect()->back();
+        return redirect()->route('admin.theme.index');
+    }
+
+    /**
+     * Edit the theme
+     *
+     * @param integer $id
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $theme = $this->themeCustomizationRepository->find($id);
+
+        return view('admin::theme.edit', compact('theme'));
+    }
+
+    /**
+     * Update the specified resource
+     *
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($id)
+    {
+        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
+
+        $this->themeCustomizationRepository->update($data, $id);
+
+        session()->flash('success', 'Theme updated successfully');
+
+        return redirect()->route('admin.theme.index');
+    }
+
+    /**
+     * Delete a specified theme
+     *
+     * @return void
+     */
+    public function destroy($id)
+    {
+        $this->themeCustomizationRepository->delete($id);
+
+        return response()->json([
+            'message' => 'Theme deleted successfully',
+        ], 200);
     }
 }

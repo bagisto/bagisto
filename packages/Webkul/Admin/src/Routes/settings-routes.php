@@ -182,6 +182,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('create', 'create')->name('admin.theme.create');
 
+        Route::get('edit/{id}', 'edit')->name('admin.theme.edit');
+
         Route::post('store', 'store')->name('admin.theme.store');
+
+        Route::post('edit/{id}', 'update')->name('admin.theme.update');
+
+        Route::delete('edit/{id}', 'destroy')->name('admin.theme.delete');
     });
 });
