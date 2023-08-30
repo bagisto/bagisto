@@ -129,15 +129,13 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-400 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow focus:outline-none focus:ring-2"
+                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max pl-[12px] pr-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-400 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow focus:outline-none focus:ring-2"
                         >
-                            <span class="icon-filter text-[24px]"></span>
+                            <span class="icon-filter text-[22px]"></span>
 
                             <span>
                                 @lang('admin::app.components.datagrid.toolbar.filter.title')
                             </span>
-
-                            <span class="icon-arrow-up text-[24px]"></span>
                         </div>
 
                         <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow">
@@ -148,7 +146,7 @@
                 <!-- Drawer Header -->
                 <x-slot:header>
                     <div class="flex justify-between items-center p-3">
-                        <p class="text-[20px] font-medium">
+                        <p class="text-[16px] text-gray-800 font-semibold">
                             @lang('admin::app.components.datagrid.filters.title')
                         </p>
                     </div>
