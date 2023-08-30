@@ -99,10 +99,12 @@
                         },
 
                         filters: {
-                            columns: [{
-                                index: 'all',
-                                value: @json(request()->has('search') ? [request()->get('search')] : []),
-                            }, ],
+                            columns: [
+                                {
+                                    index: 'all',
+                                    value: @json(request()->has('search') ? [request()->get('search')] : []),
+                                },
+                            ],
                         },
                     },
                 };
@@ -217,7 +219,7 @@
                  * @param {string|integer} directionOrPageNumber
                  * @returns {void}
                  */
-                 changePage(directionOrPageNumber) {
+                changePage(directionOrPageNumber) {
                     let newPage;
 
                     if (typeof directionOrPageNumber === 'string') {
@@ -230,7 +232,7 @@
 
                             return;
                         }
-                    }  else if (typeof directionOrPageNumber === 'number') {
+                    } else if (typeof directionOrPageNumber === 'number') {
                         newPage = directionOrPageNumber;
                     } else {
                         console.warn('Invalid Input Provided: ' + directionOrPageNumber);

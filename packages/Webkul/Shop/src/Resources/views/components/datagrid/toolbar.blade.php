@@ -116,48 +116,27 @@
 
         <!-- Right Toolbar -->
         <div class="flex gap-x-[16px]">
-            <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200"></span>
+            <!-- Items Per Page Dropdown -->
+            <x-shop::dropdown position="bottom-left">
+                <!-- Dropdown Toggler -->
+                <x-slot:toggle>
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                        <span v-text="applied.pagination.perPage"></span>
 
-            <div class="flex items-center gap-x-[8px]">
-                <!-- Items Per Page Dropdown -->
-                <x-shop::dropdown position="bottom-left">
-                    <!-- Dropdown Toggler -->
-                    <x-slot:toggle>
-                        <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
-                            <span v-text="applied.pagination.perPage"></span>
+                        <span class="icon-arrow-down text-[24px]"></span>
+                    </button>
+                </x-slot:toggle>
 
-                            <span class="icon-arrow-down text-[24px]"></span>
-                        </button>
-                    </x-slot:toggle>
-
-                    <!-- Dropdown Content -->
-                    <x-slot:menu>
-                        <x-shop::dropdown.menu.item
-                            v-for="perPageOption in available.meta.per_page_options"
-                            v-text="perPageOption"
-                            @click="changePerPageOption(perPageOption)"
-                        >
-                        </x-shop::dropdown.menu.item>
-                    </x-slot:menu>
-                </x-shop::dropdown>
-
-                <!-- Pagination -->
-                <div class="flex items-center gap-[4px]">
-                    <div
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
-                        @click="changePage('previous')"
+                <!-- Dropdown Content -->
+                <x-slot:menu>
+                    <x-shop::dropdown.menu.item
+                        v-for="perPageOption in available.meta.per_page_options"
+                        v-text="perPageOption"
+                        @click="changePerPageOption(perPageOption)"
                     >
-                        <span class="icon-sort-left text-[24px]"></span>
-                    </div>
-
-                    <div
-                        class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-transparent p-[6px] text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
-                        @click="changePage('next')"
-                    >
-                        <span class="icon-sort-right text-[24px]"></span>
-                    </div>
-                </div>
-            </div>
+                    </x-shop::dropdown.menu.item>
+                </x-slot:menu>
+            </x-shop::dropdown>
 
             <!-- Filters Activation Button -->
             <x-shop::drawer width="350px">

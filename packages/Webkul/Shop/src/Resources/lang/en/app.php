@@ -330,7 +330,7 @@ return [
             ],
 
             'filters' => [
-                'title' => 'Apply Filter',
+                'title' => 'Apply Filters',
 
                 'custom-filters' => [
                     'title'     => 'Custom Filters',

@@ -155,7 +155,7 @@
                 </x-slot:header>
 
                 <!-- Drawer Content -->
-                <x-slot:content>
+                <x-slot:content class="!p-[4px]">
                     <x-admin::datagrid.filters></x-admin::datagrid.filters>
                 </x-slot:content>
             </x-admin::drawer>
