@@ -168,9 +168,17 @@
                                         </p>
 
                                         <p class="text-gray-600">
-                                            {{ $order->billingAddress->address1 }},
-                                            {{ $order->billingAddress->city }},
-                                            {{ $order->billingAddress->state  }}
+                                            @if($order->billingAddress->address1)
+                                                {{ $order->billingAddress->address1 }},
+                                            @endif
+                                            
+                                            @if($order->billingAddress->city)
+                                                {{ $order->billingAddress->city }},
+                                            @endif
+
+                                            @if($order->billingAddress->state)
+                                                {{ $order->billingAddress->state  }}
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
