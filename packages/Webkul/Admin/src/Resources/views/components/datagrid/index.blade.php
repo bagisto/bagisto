@@ -275,6 +275,11 @@
                             order: this.applied.sort.order === 'asc' ? 'desc' : 'asc',
                         };
 
+                        /**
+                         * When the sorting changes, we need to reset the page.
+                         */
+                        this.applied.pagination.page = 1;
+
                         this.get();
                     }
                 },
@@ -579,7 +584,12 @@
                                     indices: this.applied.massActions.indices
                                 })
                                 .then(response => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
                                     this.get();
+                                })
+                                .catch((error) => {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
                                 });
 
                             break;

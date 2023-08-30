@@ -277,6 +277,11 @@
                             order: this.applied.sort.order === 'asc' ? 'desc' : 'asc',
                         };
 
+                        /**
+                         * When the sorting changes, we need to reset the page.
+                         */
+                        this.applied.pagination.page = 1;
+
                         this.get();
                     }
                 },
