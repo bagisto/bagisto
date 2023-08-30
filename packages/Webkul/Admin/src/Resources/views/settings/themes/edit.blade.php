@@ -182,7 +182,10 @@
         {{-- Slider theme --}}
         <script type="text/x-template" id="v-slider-theme-template">
             <div>
-                <x-admin::form action="">
+                <x-admin::form 
+                    :action="route('admin.theme.update', $theme->id)"
+                    enctype="multipart/form-data"
+                >
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded box-shadow">
@@ -194,14 +197,67 @@
                                         </p>
                                     </div>
                     
-                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                        @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                    
+                                    <div class="flex gap-[10px]">
+                                        <div
+                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                            @click="$refs.addSliderModal.toggle()"
+                                        >
+                                            @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                        </div>
+
+                                        <button
+                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                            type="submit"
+                                        >
+                                            @lang('admin::app.settings.themes.edit.save-btn')
+                                        </button>
                                     </div>
                                 </div>
-                    
+
+                                <template v-for="removeImage in removedImages">
+                                    <input type="text" class="hidden" :name="'removeImages[]'" :value="removeImage"/>    
+                                </template>
+
+                                <div
+                                    class="grid"
+                                    v-if="sliders.images.length"
+                                >
+                                    <!-- Single product column -->
+                                    <div    
+                                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
+                                        v-for="(image, index) in sliders.images"
+                                    >
+                                        <input type="file" class="hidden" :name="'options[]'" :ref="'imageInput_' + index"/>    
+
+                                        <div class="flex items-center gap-[10px]">
+                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                                <img 
+                                                    :src="'../../../../' + image"
+                                                    :ref="'image_' + index"
+                                                    class="w-[20px]"
+                                                >
+                                                
+                                                <p class="text-[6px] text-gray-400 font-semibold">Slider Image</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="grid gap-[4px] place-content-start">
+                                            <div class="flex gap-[10px]">
+                                                <p 
+                                                    class="text-red-600 cursor-pointer"
+                                                    @click="remove(image)"
+                                                >
+                                                    Delete
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div    
                                     class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                                    v-if="! sliders.length"
+                                    v-else
                                 >
                                     <img    
                                         class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
@@ -218,35 +274,9 @@
                                             @lang('admin::app.settings.themes.edit.slider-description')
                                         </p>
                                     </div>
-                                    
+                    
                                     <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
-                                    </div>
-                                </div>
-        
-                                <div class="grid">
-                                    <!-- Single product column -->
-                                    <div    
-                                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
-                                        v-for="image in sliders"
-                                    >
-                                        <div class="flex items-center gap-[10px]">
-                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                                <img class="w-[20px]" :src="image">
-                                                
-                                                <p class="text-[6px] text-gray-400 font-semibold">Product Image</p>
-                                            </div>
-        
-                                            <div class="grid gap-[6px] place-content-start">
-                                                <p class="text-[16x] text-gray-800 font-semibold">Image carousel</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="grid gap-[4px] place-content-start">
-                                            <div class="flex gap-[10px]">
-                                                <p class="text-red-600 cursor-pointer">Delete</p>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +296,7 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="type"
-                                            value="slider_carousel"
+                                            value="image_carousel"
                                         >
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
@@ -279,6 +309,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="name"
+                                            :value="$theme->name"
                                             rules="required"
                                             :label="trans('admin::app.settings.themes.edit.name')"
                                             :placeholder="trans('admin::app.settings.themes.edit.name')"
@@ -299,6 +330,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="sort_order"
+                                            :value="$theme->sort_order"
                                             rules="required"
                                             :label="trans('admin::app.settings.themes.edit.sort-order')"
                                             :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
@@ -319,7 +351,7 @@
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="status"
-                                            :value="1"
+                                            :value="$theme->status"
                                             :label="trans('admin::app.settings.themes.edit.status')"
                                             :placeholder="trans('admin::app.settings.themes.edit.status')"
                                             :checked="true"
@@ -336,6 +368,59 @@
                         </div>
                     </div>
                 </x-admin::form>
+
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form 
+                        @submit="handleSubmit($event, saveSliderImage)"
+                        enctype="multipart/form-data"
+                    >
+                        <x-admin::modal ref="addSliderModal">
+                            <x-slot:header>
+                                <p class="text-[18px] text-gray-800 font-bold">
+                                    Update Slider
+                                </p>
+                            </x-slot:header>
+        
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Slider Image
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="image"
+                                            name="slider_image"
+                                            :label="trans('admin::app.catalog.categories.create.add-logo')"
+                                            :is-multiple="false"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="title"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+        
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <!-- Save Button -->
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        @lang('admin::app.settings.themes.edit.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                          </x-admin::modal>
+                      </form>
+                </x-admin::form>
             </div>
         </script>
 
@@ -345,8 +430,45 @@
 
                 data() {
                     return {
-                        sliders: [],
+                        sliders: @json($theme->options),
+
+                        removedImages: [],
                     };
+                },
+
+                created(){
+                    console.log(this.sliders);  
+                },
+                methods: {
+                    saveSliderImage(params) {
+                        this.sliders.images.push(params);
+
+                        if (params.slider_image instanceof File) {
+                            this.setFile(params, this.sliders.images.length - 1);
+                        }
+
+                        this.$refs.addSliderModal.toggle();
+                    },
+
+                    setFile(event, index) {
+                        let dataTransfer = new DataTransfer();
+
+                        dataTransfer.items.add(event.slider_image);
+
+                        setTimeout(() => {
+                            this.$refs['image_' + index][0].src =  URL.createObjectURL(event.slider_image);
+
+                            this.$refs['imageInput_' + index][0].files = dataTransfer.files;
+                        }, 0);
+                    },
+
+                    remove(image) {
+                        this.removedImages.push(image);
+
+                        let index = this.sliders.images.indexOf(image);
+
+                        this.sliders.images.splice(image, 1);
+                    }
                 }
             });
         </script>

@@ -175,7 +175,10 @@
         {{-- Slider theme --}}
         <script type="text/x-template" id="v-slider-theme-template">
             <div>
-                <x-admin::form :action="''">
+                <x-admin::form 
+                    :action="route('admin.theme.store')"
+                    enctype="multipart/form-data"
+                >
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded box-shadow">
@@ -187,14 +190,67 @@
                                         </p>
                                     </div>
                     
-                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                        @lang('admin::app.settings.themes.create.slider-add-btn')
+                                    <div class="flex gap-[10px]">
+                                        <div
+                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                            @click="$refs.addSliderModal.toggle()"
+                                        >
+                                            @lang('admin::app.settings.themes.create.slider-add-btn')
+                                        </div>
+
+                                        <button
+                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                            type="submit"
+                                        >
+                                            @lang('admin::app.settings.themes.create.save-btn')
+                                        </button>
                                     </div>
                                 </div>
                     
+                                <div
+                                    class="grid"
+                                    v-if="sliders.length"
+                                >
+                                    <!-- Single product column -->
+                                    <div    
+                                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
+                                        v-for="(image, index) in sliders"
+                                    >
+                                        <input
+                                            type="file"
+                                            class="hidden"
+                                            :name="'options[]'"
+                                            :ref="'imageInput_' + index"
+                                        />    
+
+                                        <div class="flex items-center gap-[10px]">
+                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                                <img 
+                                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                                    :ref="'image_' + index"
+                                                    class="w-[20px]"
+                                                >
+                                                
+                                                <p class="text-[6px] text-gray-400 font-semibold">Product Image</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="grid gap-[4px] place-content-start">
+                                            <div class="flex gap-[10px]">
+                                                <p
+                                                    class="text-red-600 cursor-pointer"
+                                                    @click="remove(image)"
+                                                >
+                                                    Delete
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div    
                                     class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                                    v-if="! sliders.length"
+                                    v-else
                                 >
                                     <img    
                                         class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
@@ -216,32 +272,6 @@
                                         @lang('admin::app.settings.themes.create.slider-add-btn')
                                     </div>
                                 </div>
-        
-                                <div class="grid">
-                                    <!-- Single product column -->
-                                    <div    
-                                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
-                                        v-for="image in sliders"
-                                    >
-                                        <div class="flex items-center gap-[10px]">
-                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                                <img class="w-[20px]" :src="image">
-                                                
-                                                <p class="text-[6px] text-gray-400 font-semibold">Product Image</p>
-                                            </div>
-
-                                            <div class="grid gap-[6px] place-content-start">
-                                                <p class="text-[16x] text-gray-800 font-semibold">Image carousel</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="grid gap-[4px] place-content-start">
-                                            <div class="flex gap-[10px]">
-                                                <p class="text-red-600 cursor-pointer">Delete</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     
@@ -259,16 +289,16 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="type"
-                                            value="slider_carousel"
+                                            value="image_carousel"
                                         >
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
-        
+    
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.themes.create.name')
                                         </x-admin::form.control-group.label>
-        
+    
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="name"
@@ -277,18 +307,18 @@
                                             :placeholder="trans('admin::app.settings.themes.create.name')"
                                         >
                                         </x-admin::form.control-group.control>
-        
+    
                                         <x-admin::form.control-group.error
                                             control-name="name"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-        
+    
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.themes.create.sort-order')
                                         </x-admin::form.control-group.label>
-        
+    
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="sort_order"
@@ -297,18 +327,18 @@
                                             :placeholder="trans('admin::app.settings.themes.create.sort-order')"
                                         >
                                         </x-admin::form.control-group.control>
-        
+    
                                         <x-admin::form.control-group.error
                                             control-name="sort_order"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
-        
+    
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.themes.create.status')
                                         </x-admin::form.control-group.label>
-        
+    
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="status"
@@ -318,7 +348,7 @@
                                             :checked="true"
                                         >
                                         </x-admin::form.control-group.control>
-        
+    
                                         <x-admin::form.control-group.error
                                             control-name="status"
                                         >
@@ -328,6 +358,60 @@
                             </x-admin::accordion>
                         </div>
                     </div>
+                </x-admin::form>
+
+                <!-- For Fitler Form -->
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form 
+                        @submit="handleSubmit($event, saveSliderImage)"
+                        enctype="multipart/form-data"
+                    >
+                        <x-admin::modal ref="addSliderModal">
+                            <x-slot:header>
+                                <p class="text-[18px] text-gray-800 font-bold">
+                                    Create Slider
+                                </p>
+                            </x-slot:header>
+        
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Slider Image
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="image"
+                                            name="slider_image"
+                                            :label="trans('admin::app.catalog.categories.create.add-logo')"
+                                            :is-multiple="false"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="title"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+        
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <!-- Save Button -->
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        @lang('admin::app.settings.themes.create.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
                 </x-admin::form>
             </div>
         </script>
@@ -341,6 +425,36 @@
                         sliders: [],
                     };
                 },
+
+                methods: {
+                    saveSliderImage(params) {
+                        this.sliders.push(params);
+
+                        if (params.slider_image instanceof File) {
+                            this.setFile(params, this.sliders.length - 1);
+                        }
+
+                        this.$refs.addSliderModal.toggle();
+                    },
+
+                    setFile(event, index) {
+                        let dataTransfer = new DataTransfer();
+
+                        dataTransfer.items.add(event.slider_image);
+
+                        setTimeout(() => {
+                            this.$refs['image_' + index][0].src =  URL.createObjectURL(event.slider_image);
+
+                            this.$refs['imageInput_' + index][0].files = dataTransfer.files;
+                        }, 0);
+                    },
+
+                    remove(image) {
+                        let index = this.sliders.indexOf(image);
+
+                        this.sliders.splice(image, 1);
+                    }
+                }
             });
         </script>
 
@@ -436,7 +550,9 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
-                            <div class="flex gap-x-[10px] justify-between items-center mt-2">
+                            <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+
+                            <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">
                                         @lang('admin::app.settings.themes.create.filters')
@@ -796,7 +912,9 @@
                                 </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
     
-                            <div class="flex gap-x-[10px] justify-between items-center mt-2">
+                            <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+
+                            <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">
                                         @lang('admin::app.settings.themes.create.filters')
@@ -806,7 +924,7 @@
                                 <div class="flex gap-[10px]">
                                     <div
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        @click="$refs.filterModal.toggle()"
+                                        @click="$refs.categoryFilterModal.toggle()"
                                     >
                                         @lang('admin::app.settings.themes.create.add-filter-btn')
                                     </div>
@@ -869,7 +987,7 @@
                 
                                 <div 
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                    @click="$refs.filterModal.toggle()"
+                                    @click="$refs.categoryFilterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.create.add-filter-btn')
                                 </div>
@@ -967,7 +1085,7 @@
                     as="div"
                 >
                     <form @submit="handleSubmit($event, addFilter)">
-                        <x-admin::modal ref="filterModal">
+                        <x-admin::modal ref="categoryFilterModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
                                     @lang('admin::app.settings.themes.create.create-filter')
@@ -1053,7 +1171,7 @@
                     addFilter(params) {
                         this.options.filters.push(params);
     
-                        this.$refs.filterModal.toggle();
+                        this.$refs.categoryFilterModal.toggle();
                     },
     
                     remove(filter) {
@@ -1273,7 +1391,9 @@
         {{-- Footer Link --}}
         <script type="text/x-template" id="v-footer-link-theme-template">
             <div>
-                <x-admin::form :action="''">
+                <x-admin::form 
+                    :action="route('admin.theme.store')"
+                >
                     <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                             <div class="p-[16px] bg-white rounded box-shadow">
@@ -1289,10 +1409,7 @@
                                     </div>
 
                                     <div class="flex gap-[10px]">
-                                        <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                            @lang('admin::app.settings.themes.create.add-footer-link-btn')
-                                        </div>
-        
+                                      
                                         <button
                                             class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                             type="submit"
@@ -1301,8 +1418,72 @@
                                         </button>
                                     </div>
                                 </div>
+
+                                <!-- Add Links-->
+                                <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+
+                                <div class="flex gap-x-[10px] justify-between items-center">
+                                    <div class="flex flex-col gap-[4px]">
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            @lang('admin::app.settings.themes.create.filters')
+                                        </p>
+                                    </div>
+                    
+                                    <div class="flex gap-[10px]">
+                                        <div
+                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                            @click="$refs.addLinksModal.toggle()"
+                                        >
+                                            @lang('Add Links')
+                                        </div>
+                                    </div>
+                                </div>
         
-                                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
+                                @{{ footerLinks }}
+                                <div v-if="footerLinks.length">
+                                    <div
+                                        class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                        v-for="(footerLink, index) in footerLinks"
+                                    >
+                                        <input type="hidden" :name="'options[column_' + footerLink.column + '][' + index +']'" :value="footerLink.column"> 
+                                        <input type="hidden" :name="'options[column_' + footerLink.column + '][' + index +'][url]'" :value="footerLink.url"> 
+                                        <input type="hidden" :name="'options[column_' + footerLink.column + '][' + index +'][title]'" :value="footerLink.title"> 
+                                        <input type="hidden" :name="'options[column_' + footerLink.column + '][' + index +'][sort_order]'" :value="footerLink.sort_order"> 
+                                    
+                                        <!-- Information -->
+                                        <div class="flex gap-[10px]">
+                                            <!-- Details -->
+                                            <div class="grid gap-[6px] place-content-start">
+                                                <p class="text-[16x] text-gray-800 font-semibold">
+                                                    Link: @{{ footerLink.url }}
+                                                </p>
+    
+                                                <p class="text-[16x] text-gray-800 font-semibold">
+                                                    Title: @{{ footerLink.title }}
+                                                </p>
+
+                                                <p class="text-[16x] text-gray-800 font-semibold">
+                                                    Sort Order: @{{ footerLink.sort_order }}
+                                                </p>
+                                            </div>
+                                        </div>
+        
+                                        <!-- Actions -->
+                                        <div class="flex gap-[4px] place-content-start text-right">
+                                            <p
+                                                class="text-red-600 cursor-pointer hover:underline"
+                                                @click="remove(footerLink)"
+                                            >
+                                                @lang('admin::app.settings.themes.create.delete')
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div   
+                                    v-else
+                                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                                >
                                     <img
                                         class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
                                         src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
@@ -1341,7 +1522,7 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="type"
-                                            value="slider_carousel"
+                                            value="footer_links"
                                         >
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
@@ -1411,6 +1592,124 @@
                         </div>
                     </div>
                 </x-admin::form>
+
+
+                <!-- For Fitler Form -->
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                >
+                    <form @submit="handleSubmit($event, saveFooterLinks)">
+                        <x-admin::modal ref="addLinksModal">
+                            <x-slot:header>
+                                <p class="text-[18px] text-gray-800 font-bold">
+                                    @lang('admin::app.settings.themes.create.create-filter')
+                                </p>
+                            </x-slot:header>
+        
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Column
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="select"
+                                            name="column"
+                                            rules="required"
+                                            :label="trans('Title')"
+                                            :placeholder="trans('Title')"
+                                        >
+                                            <option value="column_1">1</option>
+                                            <option value="column_2">2</option>
+                                            <option value="column_3">3</option>
+                                            <option value="column_4">4</option>
+                                            <option value="column_5">5</option>
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="column"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Title
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="title"
+                                            rules="required"
+                                            :label="trans('Title')"
+                                            :placeholder="trans('Title')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="title"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            URL
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="url"
+                                            rules="required"
+                                            :label="trans('URL')"
+                                            :placeholder="trans('URL')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="url"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            Sort Order
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="sort_order"
+                                            rules="required|numeric"
+                                            :label="trans('Sort Order')"
+                                            :placeholder="trans('Sort Order')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="sort_order"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+        
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <!-- Save Button -->
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        @lang('admin::app.settings.themes.create.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
+                </x-admin::form>
             </div>
         </script>
 
@@ -1420,9 +1719,23 @@
 
                 data() {
                     return {
-                        footerLinks: {},
+                        footerLinks: []
                     };
                 },
+
+                methods: {
+                    saveFooterLinks(params) {
+                        this.footerLinks.push(params);
+
+                        this.$refs.addLinksModal.toggle();
+                    },
+
+                    remove(footerLink) {
+                        let index = this.footerLinks.indexOf(footerLink);
+
+                        this.footerLinks.splice(index, 1);
+                    }
+                }
             });
         </script>
 

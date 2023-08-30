@@ -48,18 +48,13 @@ class ThemeController extends Controller
      */
     public function store()
     {
-        $this->validate(request(), [
-            'type'    => 'required',
-            'name'    => 'required',
-            'status'  => 'required',
-            'options' => 'required',
-        ]);
-
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
-        dd(request()->all());
+        $theme = $this->themeCustomizationRepository->create($data);
 
-        $this->themeCustomizationRepository->create($data);
+        if ($data['type'] == 'image_carousel') {
+            $this->themeCustomizationRepository->uploadImage(request()->file('options'), $theme);
+        }
 
         session()->flash('success', 'admin::app.settings.themes.create-success');
 
@@ -89,7 +84,19 @@ class ThemeController extends Controller
     {
         $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
-        $this->themeCustomizationRepository->update($data, $id);
+        if ($data['type'] == 'image_carousel') {
+            unset($data['options']);
+        }
+
+        $theme = $this->themeCustomizationRepository->update($data, $id);
+
+        if ($data['type'] == 'image_carousel') {
+            $this->themeCustomizationRepository->uploadImage(
+                request()->file('options'), 
+                $theme,
+                request()->input('removeImages')
+            );
+        }
 
         session()->flash('success', 'admin::app.settings.themes.update-success');
 
