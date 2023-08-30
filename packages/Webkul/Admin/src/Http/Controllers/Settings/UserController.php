@@ -115,7 +115,7 @@ class UserController extends Controller
         $admin = $this->adminRepository->update($data, $id);
 
         if (!empty($data['password'])) {
-            Event::dispatch('user.admin.update-password', $admin);
+            Event::dispatch('admin.password.update.after', $admin);
         }
 
         Event::dispatch('user.admin.update.after', $admin);

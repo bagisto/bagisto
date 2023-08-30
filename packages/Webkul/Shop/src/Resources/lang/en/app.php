@@ -661,13 +661,107 @@ return [
         'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
     ],
 
-    'email' => [
-        'customer' => [
-            'note' =>[
-                'dear'          => 'Dear',
-                'subject'       => 'You Added a Note',
-                'description'   => 'Your note is',
+    'emails' => [
+        'dear'   => 'Dear :customer_name',
+        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+
+        'customers' => [
+            'registration' => [
+                'subject'     => 'New Customer Registration',
+                'greeting'    => 'Welcome and thank you for registering with us!',
+                'description' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
+                'sign-in'    => 'Sign in'
             ],
+
+            'forgot-password' => [
+                'subject'        => 'Reset Password Email',
+                'greeting'       => 'Forgot Password!',
+                'description'    => 'You are receiving this email because we received a password reset request for your account.',
+                'reset-password' => 'Reset Password'
+            ],
+
+            'update-password' => [
+                'subject'     => 'Password Updated',
+                'greeting'    => 'Password Updated!',
+                'description' => 'You are receiving this email because you have updated your password.',
+            ],
+
+            'verification' => [
+                'subject'        => 'Account Verification Email',
+                'greeting'       => 'Welcome!',
+                'description'    => 'Please click the button below to verify your email address.',
+                'verify-email'   => 'Verify Email Address'
+            ],
+
+            'commented' => [
+                'subject' => 'New comment Added',
+            ],
+
+            'subscribed' => [
+                'subject'     => 'You! Subscribe to Our Newsletter',
+                'greeting'    => 'Welcome to our newsletter!',
+                'description' => 'Congratulations and welcome to our newsletter community! We\'re excited to have you on board and keep you updated with the latest news, trends, and exclusive offers.',
+                'unsubscribe' => 'Unsubscribe'
+            ]
+        ],
+
+        'orders' => [
+            'created' => [
+                'subject'  => 'New Order Confirmation',
+                'title'    => 'Order Confirmation!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'invoiced' => [
+                'subject'  => 'New Invoice Confirmation',
+                'title'    => 'Invoice Confirmation!',
+                'greeting' => 'Your invoice #:invoice_id for Order :order_id created on :created_at',
+                'summary'  => 'Summary of Invoice',
+            ],
+
+            'shipped' => [
+                'subject'  => 'New Shipment Confirmation',
+                'title'    => 'Order Shipped!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Shipment',
+            ],
+
+            'refunded' => [
+                'subject'  => 'New Refund Confirmation',
+                'title'    => 'Order Refunded!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Refund',
+            ],
+
+            'canceled' => [
+                'subject'  => 'New Order Canceled',
+                'title'    => 'Order Canceled!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'commented' => [
+                'subject' => 'New comment Added',
+                'title'   => 'New comment added to your order :order_id placed on :created_at',
+            ],
+
+            'shipping-address'  => 'Shipping Address',
+            'carrier'           => 'Carrier',
+            'tracking-number'   => 'Tracking Number',
+            'billing-address'   => 'Billing Address',
+            'contact'           => 'Contact',
+            'shipping'          => 'Shipping',
+            'payment'           => 'Payment',
+            'sku'               => 'SKU',
+            'name'              => 'Name',
+            'price'             => 'Price',
+            'qty'               => 'Qty',
+            'subtotal'          => 'Subtotal',
+            'shipping-handling' => 'Shipping Handling',
+            'tax'               => 'Tax',
+            'discount'          => 'Discount',
+            'grand-total'       => 'Grand Total',
         ],
     ],
 ];

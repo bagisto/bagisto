@@ -8,12 +8,11 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Admin\DataGrids\Sales\OrderInvoicesDataGrid;
 use Webkul\Admin\DataGrids\Sales\InvoicesTransactionsDatagrid;
-use Webkul\Admin\Traits\Mails;
 use Webkul\Core\Traits\PDFHandler;
 
 class InvoiceController extends Controller
 {
-    use Mails, PDFHandler;
+    use PDFHandler;
 
     /**
      * Create a new controller instance.
@@ -137,7 +136,7 @@ class InvoiceController extends Controller
 
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        $this->sendDuplicateInvoiceMail($invoice, $request->email);
+        //$this->sendDuplicateInvoiceMail($invoice, $request->email);
 
         session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 
