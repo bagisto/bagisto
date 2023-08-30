@@ -1,7 +1,7 @@
 @props(['isMultiRow' => false])
 
 <v-datagrid {{ $attributes }}>
-    <x-admin::shimmer.datagrid :isMultiRow="$isMultiRow"></x-admin::shimmer.datagrid>
+    <x-shop::shimmer.datagrid :isMultiRow="$isMultiRow"></x-shop::shimmer.datagrid>
 
     {{ $slot }}
 </v-datagrid>
@@ -12,10 +12,10 @@
         id="v-datagrid-template"
     >
         <div>
-            <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
+            <x-shop::datagrid.toolbar></x-shop::datagrid.toolbar>
 
             <div class="flex mt-[16px]">
-                <x-admin::datagrid.table :isMultiRow="$isMultiRow">
+                <x-shop::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
                             name="header"
@@ -46,7 +46,7 @@
                         >
                         </slot>
                     </template>
-                </x-admin::datagrid.table>
+                </x-shop::datagrid.table>
             </div>
         </div>
     </script>
@@ -124,7 +124,9 @@
                     let datagrids = this.getDatagrids();
 
                     if (datagrids?.length) {
-                        const currentDatagrid = datagrids.find(({ src }) => src === this.src);
+                        const currentDatagrid = datagrids.find(({
+                            src
+                        }) => src === this.src);
 
                         if (currentDatagrid) {
                             this.applied.pagination = currentDatagrid.applied.pagination;
@@ -230,7 +232,7 @@
 
                             return;
                         }
-                    }  else if (typeof directionOrPageNumber === 'number') {
+                    } else if (typeof directionOrPageNumber === 'number') {
                         newPage = directionOrPageNumber;
                     } else {
                         console.warn('Invalid Input Provided: ' + directionOrPageNumber);
@@ -569,12 +571,18 @@
                                     value: this.applied.massActions.value,
                                 })
                                 .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'success',
+                                        message: response.data.message
+                                    });
 
                                     this.get();
                                 })
                                 .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'error',
+                                        message: error.response.data.message
+                                    });
                                 });
 
                             break;
@@ -584,12 +592,7 @@
                                     indices: this.applied.massActions.indices
                                 })
                                 .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
                                     this.get();
-                                })
-                                .catch((error) => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
                                 });
 
                             break;
@@ -609,7 +612,9 @@
                     let datagrids = this.getDatagrids();
 
                     if (datagrids?.length) {
-                        const currentDatagrid = datagrids.find(({ src }) => src === this.src);
+                        const currentDatagrid = datagrids.find(({
+                            src
+                        }) => src === this.src);
 
                         if (currentDatagrid) {
                             datagrids = datagrids.map(datagrid => {
@@ -686,8 +691,6 @@
 
                             this.$axios[method](action.url)
                                 .then(response => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
                                     this.get();
                                 });
 

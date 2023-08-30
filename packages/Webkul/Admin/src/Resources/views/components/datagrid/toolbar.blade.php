@@ -90,33 +90,11 @@
                 </div>
             </div>
 
-            <!-- Filters And Search Panel -->
+            <!-- Search Panel -->
             <div
                 class="flex w-full items-center gap-x-[4px]"
                 v-else
             >
-                <!-- Filters Activation Button -->
-                <div
-                    class=""
-                    @click="toggleFilters"
-                >
-                    <div
-                        class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center font-semibold text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
-                        :class="{'border-gray-400': showFilters}"
-                    >
-                        <span class="icon-filter text-[24px]"></span>
-
-                        <span>
-                            @lang('admin::app.components.datagrid.toolbar.filter.title')
-                        </span>
-
-                        <span class="icon-arrow-up text-[24px]"></span>
-                    </div>
-
-                    <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow">
-                    </div>
-                </div>
-
                 <!-- Search Panel -->
                 <div class="flex max-w-[445px] items-center max-sm:w-full max-sm:max-w-full">
                     <div class="relative w-full">
@@ -146,7 +124,41 @@
 
         <!-- Right Toolbar -->
         <div class="flex gap-x-[16px]">
-            <span class="icon-settings cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200"></span>
+            <!-- Filters Activation Button -->
+            <x-admin::drawer width="350px">
+                <x-slot:toggle>
+                    <div>
+                        <div
+                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-400 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow focus:outline-none focus:ring-2"
+                        >
+                            <span class="icon-filter text-[24px]"></span>
+
+                            <span>
+                                @lang('admin::app.components.datagrid.toolbar.filter.title')
+                            </span>
+
+                            <span class="icon-arrow-up text-[24px]"></span>
+                        </div>
+
+                        <div class="z-10 hidden w-full divide-y divide-gray-100 rounded bg-white shadow">
+                        </div>
+                    </div>
+                </x-slot:toggle>
+
+                <!-- Drawer Header -->
+                <x-slot:header>
+                    <div class="flex justify-between items-center p-3">
+                        <p class="text-[20px] font-medium">
+                            @lang('admin::app.components.datagrid.filters.title')
+                        </p>
+                    </div>
+                </x-slot:header>
+
+                <!-- Drawer Content -->
+                <x-slot:content class="!p-[4px]">
+                    <x-admin::datagrid.filters></x-admin::datagrid.filters>
+                </x-slot:content>
+            </x-admin::drawer>
 
             <div class="flex items-center gap-x-[8px]">
                 <x-admin::dropdown>
@@ -172,11 +184,12 @@
 
                 <p class="whitespace-nowrap text-gray-600 max-sm:hidden">per page</p>
 
-                <div
-                    class="ml-[8px] inline-flex min-h-[38px] w-full min-w-[40px] max-w-max appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
-                    v-text="available.meta.current_page"
+                <input
+                    type="text"
+                    class="ml-[8px] inline-flex min-h-[38px] max-w-[40px] appearance-none items-center justify-center gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[12px] py-[6px] text-center leading-[24px] text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black max-sm:hidden"
+                    :value="available.meta.current_page"
+                    @change="changePage(parseInt($event.target.value))"
                 >
-                </div>
 
                 <div class="whitespace-nowrap text-gray-600">
                     <span>of </span>

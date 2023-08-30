@@ -68,9 +68,9 @@ return [
         ],
 
         'account' => [
-            'home' => 'Home',
-            'profile'   => [  
-                'title'                   => 'Profile',    
+            'home'      => 'Home',
+            'profile'   => [
+                'title'                   => 'Profile',
                 'first-name'              => 'First Name',
                 'last-name'               => 'Last Name',
                 'gender'                  => 'Gender',
@@ -95,8 +95,8 @@ return [
                 'other'                   => 'Other',
                 'save'                    => 'Save',
             ],
- 
-            'addresses' => [ 
+
+            'addresses' => [
                 'title'            => 'Address',
                 'edit'             => 'Edit',
                 'edit-address'     => 'Edit Address',
@@ -109,7 +109,7 @@ return [
                 'address-2'        => 'Address 2',
                 'city'             => 'City',
                 'state'            => 'State',
-                'select-country'   => "Select Country",
+                'select-country'   => 'Select Country',
                 'country'          => 'Country',
                 'default-address'  => 'Default Address',
                 'first-name'       => 'First Name',
@@ -128,11 +128,25 @@ return [
 
             'orders' => [
                 'title'         => 'Orders',
-                'order_id'      => 'Order Id',
+                'order_id'      => 'Order ID',
                 'order'         => 'Order',
                 'order_date'    => 'Order Date',
                 'total'         => 'Total',
-                'status'        => 'Status',
+
+                'status'        => [
+                    'title' => 'Status',
+
+                    'options' => [
+                        'processing'      => 'Processing',
+                        'completed'       => 'Completed',
+                        'canceled'        => 'Canceled',
+                        'closed'          => 'Closed',
+                        'pending'         => 'Pending',
+                        'pending-payment' => 'Pending Payment',
+                        'fraud'           => 'Fraud',
+                    ],
+                ],
+
                 'action'        => 'Action',
                 'empty-order'   => 'You have not ordered any product yet',
 
@@ -298,6 +312,49 @@ return [
             ],
         ],
 
+        'datagrid' => [
+            'toolbar' => [
+                'mass-actions' => [
+                    'select-action' => 'Select Action',
+                    'select-option' => 'Select Option',
+                    'submit'        => 'Submit',
+                ],
+
+                'filter' => [
+                    'title' => 'Filter',
+                ],
+
+                'search' => [
+                    'title' => 'Search',
+                ],
+            ],
+
+            'filters' => [
+                'title' => 'Apply Filters',
+
+                'custom-filters' => [
+                    'title'     => 'Custom Filters',
+                    'clear-all' => 'Clear All',
+                ],
+
+                'date-options' => [
+                    'today'             => 'Today',
+                    'yesterday'         => 'Yesterday',
+                    'this-week'         => 'This Week',
+                    'this-month'        => 'This Month',
+                    'last-month'        => 'Last Month',
+                    'last-three-months' => 'Last 3 Months',
+                    'last-six-months'   => 'Last 6 Months',
+                    'this-year'         => 'This Year',
+                ],
+            ],
+
+            'table' => [
+                'actions'              => 'Actions',
+                'no-records-available' => 'No Records Available.',
+            ],
+        ],
+
         'products'   => [
             'card' => [
                 'new'                => 'New',
@@ -369,9 +426,9 @@ return [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Please select an option',
-                    'select-above-options' => 'Please select above options'
+                    'select-above-options' => 'Please select above options',
                 ],
-                
+
                 'bundle' => [
                     'none' => 'None',
                 ],
@@ -397,7 +454,7 @@ return [
         'configurations' => [
             'compare_options'     => 'Compare options',
             'wishlist-options'    => 'Wishlist options',
-        ]
+        ],
     ],
 
     'categories' => [
@@ -422,7 +479,7 @@ return [
         'title'          => 'Search results for : :query',
         'configurations' => [
             'image-search-option' => 'Image Search Option',
-        ]
+        ],
     ],
 
     'compare'  => [
@@ -462,7 +519,7 @@ return [
             'illegal'                   => 'Quantity cannot be lesser than one.',
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
 
-            'index' => [ 
+            'index' => [
                 'home'                     => 'Home',
                 'cart'                     => 'Cart',
                 'view-cart'                => 'View Cart',
@@ -618,17 +675,17 @@ return [
 
     'errors' => [
         'go-to-home'   => 'Go To Home',
-        
+
         '404' => [
             'title'       => '404 Page Not Found',
             'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
         ],
-        
+
         '401' => [
             'title'       => '401 Unauthorized',
             'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
         ],
-        
+
         '403' => [
             'title'       => '403 Forbidden',
             'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',

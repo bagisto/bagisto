@@ -2846,6 +2846,8 @@ return [
             ],
 
             'filters' => [
+                'title' => 'Apply Filters',
+
                 'custom-filters' => [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
@@ -2936,17 +2938,17 @@ return [
         'go-back'   => 'Go Back',
         'dashboard' => 'Dashboard',
         'support'   => 'If the problem persists, reach out to us at <a href=":link" class=":class">:email</a> for assistance.',
-        
+
         '404' => [
             'title'       => '404 Page Not Found',
             'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
         ],
-        
+
         '401' => [
             'title'       => '401 Unauthorized',
             'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
         ],
-        
+
         '403' => [
             'title'       => '403 Forbidden',
             'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
