@@ -36,16 +36,18 @@ return [
         'no-record'                   => 'No Record Found',
         'notification-title'          => 'Notification',
         'notification-marked-success' => 'Notification Marked Successfully',
-        'order-status-messages'       => [
-            'completed'       => 'Order Completed',
-            'closed'          => 'Order Closed',
-            'canceled'        => 'Order Canceled',
-            'pending'         => 'Order Pending',
-            'processing'      => 'Order Processing',
-            'pending_payment' => 'Pending Payment',
-        ],
+        'read-all'                    => 'Mark as Read',
+        'title-plural'                => 'Notifications',
+        'view-all'                    => 'View All Notifications',
 
-        'read-all' => 'Mark as Read',
+        'order-status-messages'       => [
+        'completed'       => 'Order Completed',
+        'closed'          => 'Order Closed',
+        'canceled'        => 'Order Canceled',
+        'pending'         => 'Order Pending',
+        'processing'      => 'Order Processing',
+        'pending_payment' => 'Pending Payment',
+        ],
 
         'status'  => [
             'all'        => 'All',
@@ -55,8 +57,6 @@ return [
             'closed'     => 'Closed',
             'completed'  => 'Completed',
         ],
-        'title-plural'   => 'Notifications',
-        'view-all'       => 'View All Notifications',
     ],
 
     'account' => [
