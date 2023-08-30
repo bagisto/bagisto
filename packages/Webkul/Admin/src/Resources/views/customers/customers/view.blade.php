@@ -108,31 +108,31 @@
                                             @switch($order->status)
                                                 @case('processing')
                                                     <p class="label-active">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.processing')
                                                     </p>
                                                     @break
 
                                                 @case('completed')
                                                     <p class="label-active">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.completed')
                                                     </p>
                                                     @break
 
                                                 @case('pending')
                                                     <p class="label-pending">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.pending')
                                                     </p>
                                                     @break
 
                                                 @case('canceled')
                                                     <p class="label-cancelled">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.canceled')
                                                     </p>
                                                     @break
 
                                                 @case('closed')
                                                     <p class="label-closed">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.closed')
                                                     </p>
                                                     @break
 
@@ -170,7 +170,7 @@
                                         <p class="text-gray-600">
                                             {{ $order->billingAddress->address1 }},
                                             {{ $order->billingAddress->city }},
-                                            {{ $order->billingAddress->state }}
+                                            {{ $order->billingAddress->state  }}
                                         </p>
                                     </div>
                                 </div>
