@@ -41,12 +41,12 @@ return [
         'view-all'                    => 'View All Notifications',
 
         'order-status-messages'       => [
-        'completed'       => 'Order Completed',
-        'closed'          => 'Order Closed',
-        'canceled'        => 'Order Canceled',
-        'pending'         => 'Order Pending',
-        'processing'      => 'Order Processing',
-        'pending_payment' => 'Pending Payment',
+            'completed'       => 'Order Completed',
+            'closed'          => 'Order Closed',
+            'canceled'        => 'Order Canceled',
+            'pending'         => 'Order Pending',
+            'processing'      => 'Order Processing',
+            'pending_payment' => 'Pending Payment',
         ],
 
         'status'  => [
