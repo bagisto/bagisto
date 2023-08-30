@@ -21,10 +21,10 @@ class ResetPasswordNotification extends ResetPassword
 
         return (new MailMessage)
             ->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->subject(__('shop::app.emails.customers.forget-password.subject') )
-            ->view('shop::emails.customers.forget-password', [
+            ->subject(__('shop::app.emails.customers.forgot-password.subject') )
+            ->view('shop::emails.customers.forgot-password', [
                 'userName' => $notifiable->name,
-                'token'     => $this->token,
+                'token'    => $this->token,
             ]);
     }
 }

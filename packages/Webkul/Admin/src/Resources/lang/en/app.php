@@ -3035,35 +3035,42 @@ return [
             'created' => [
                 'subject'  => 'New Order Confirmation',
                 'title'    => 'Order Confirmation!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'You have a new Order :order_id placed on :created_at',
                 'summary'  => 'Summary of Order',
             ],
 
             'invoiced' => [
                 'subject'  => 'New Invoice Confirmation',
                 'title'    => 'Invoice Confirmation!',
-                'greeting' => 'Your invoice #:invoice_id for Order :order_id created on :created_at',
+                'greeting' => 'Your invoice #:invoice_id for order :order_id created on :created_at',
                 'summary'  => 'Summary of Invoice',
             ],
 
             'shipped' => [
                 'subject'  => 'New Shipment Confirmation',
                 'title'    => 'Order Shipped!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'You have shipped the order :order_id placed on :created_at',
+                'summary'  => 'Summary of Shipment',
+            ],
+
+            'inventory-source' => [
+                'subject'  => 'New Shipment Confirmation',
+                'title'    => 'Order Shipped!',
+                'greeting' => 'You have shipped the order :order_id placed on :created_at',
                 'summary'  => 'Summary of Shipment',
             ],
 
             'refunded' => [
                 'subject'  => 'New Refund Confirmation',
                 'title'    => 'Order Refunded!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'You have refunded for order :order_id placed on :created_at',
                 'summary'  => 'Summary of Refund',
             ],
 
             'canceled' => [
                 'subject'  => 'New Order Canceled',
                 'title'    => 'Order Canceled!',
-                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'greeting' => 'You have canceled the order :order_id placed on :created_at',
                 'summary'  => 'Summary of Order',
             ],
 

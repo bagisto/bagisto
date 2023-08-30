@@ -7,21 +7,17 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class InvoicedNotification extends Mailable
+class InventorySourceNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      *
-     * @param  \Webkul\Customer\Contracts\Invoice  $invoice
-     * @param  string  $email
+     * @param  \Webkul\Sales\Contracts\Shipment  $shipment
      * @return void
      */
-    public function __construct(
-        public $invoice,
-        public $email = null
-    )
+    public function __construct(public $shipment)
     {
     }
 
@@ -32,9 +28,13 @@ class InvoicedNotification extends Mailable
      */
     public function build()
     {
+        $order = $this->shipment->order;
+        
+        $inventory = $this->shipment->inventory_source;
+
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
-            ->to($this->email ?? $this->invoice->order->customer_email, $this->invoice->order->customer_full_name)
-            ->subject(trans('admin::app.emails.orders.invoiced.subject'))
-            ->view('admin::emails.orders.invoiced');
+            ->to($inventory->contact_email, $inventory->name)
+            ->subject(trans('admin::app.emails.order.inventory-source.subject'))
+            ->view('admin::emails.orders.inventory-source');
     }
 }

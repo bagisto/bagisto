@@ -66,7 +66,9 @@ class RegistrationController extends Controller
         $customer = $this->customerRepository->create($data);
 
         if (isset($data['subscribed_to_news_letter'])) {
-            $this->subscriptionRepository->updateOrCreate([
+            Event::dispatch('customer.subscription.before');
+
+            $subscription = $this->subscriptionRepository->updateOrCreate([
                 'email'      => $data['email'],
                 'channel_id' => core()->getCurrentChannel()->id,
             ], [
@@ -74,6 +76,8 @@ class RegistrationController extends Controller
                 'is_subscribed' => 1,
                 'token'         => uniqid(),
             ]);
+
+            Event::dispatch('customer.subscription.after', $subscription);
         }
 
         Event::dispatch('customer.registration.after', $customer);

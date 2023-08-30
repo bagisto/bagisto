@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
 class SubscriptionController extends Controller
@@ -35,12 +36,16 @@ class SubscriptionController extends Controller
             return redirect()->back();
         }
 
-        $this->subscriptionRepository->create([
+        Event::dispatch('customer.subscription.before');
+
+        $subscription = $this->subscriptionRepository->create([
             'email'         => $email,
             'channel_id'    => core()->getCurrentChannel()->id,
             'is_subscribed' => 1,
             'token'         => uniqid(),
         ]);
+
+        Event::dispatch('customer.subscription.after', $subscription);
 
         session()->flash('success', trans('shop::app.subscription.subscribe-success'));
 
