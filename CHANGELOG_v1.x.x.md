@@ -2,6 +2,65 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.0.0 - Beta-1 (30th of August 2023)** - *Release*
+
+* Beta Release
+
+* Improved ===========================================
+
+* Revamped the visual appearance of both the admin and shop sections with new themes.
+
+* Applied a fresh and modern theme to the admin section, enhancing the user interface and user experience.
+
+* Transformed the shop section with a new theme, enhancing the user interface and user experience.
+
+* Reimagined the product pages, category listings,cart-page,compare-page, review section, mini-cart and checkout process to create a cohesive shopping experience.
+
+* Integration of Tailwind CSS: We've migrated our styling approach from traditional CSS to the Tailwind CSS framework. This change brings a more utility-first and responsive design system to our application.
+
+* Blade Components: We've integrated Blade components into our application's UI rendering.
+
+* Reusable Blade Components: We're excited to introduce a new set of reusable Blade components that significantly enhance the customization options of our application. 
+
+* Added Vite configuration file (vite.config.js) for project setup with Vite.
+
+* Utilized Vite's features for fast development and efficient module handling.
+
+* Implemented customized data grids for enhanced data visualization and interaction.
+
+* Enhanced filter functionality for a more refined data exploration experience.
+
+* Added advanced filter options that allow users to narrow down data based on multiple criteria.
+
+* Introduced Mega Search functionality to the admin panel for enhanced data discovery.
+
+* Restructured the controllers directory to group related controllers and improve code recoverability.
+
+* Moved controllers into more appropriate subdirectories.
+
+* Improved separation of concerns by aligning data-grids with their respective views and sections.
+
+* Improved blade files based on the related views or functionalities they serve.
+
+* Improved routes based on their blade files .
+
+* Improved routes url based on directory.
+
+* Refactored the language files structure to enhance localization management.
+
+* Organized language files into a hierarchy that corresponds to views.
+
+* Removed ==========================================
+
+* Custom CSS Stylesheets: As part of the transition to Tailwind CSS, we have phased out our custom CSS stylesheets. This simplifies our codebase and reduces the complexity of managing styles.
+
+* Vue.js Components: In this release, we've replaced Vue.js components with Blade components.
+
+* Removed webpack related dependencies from package.json.
+
+* Deleted webpack.config.js as it is no longer needed with the Vite setup.
+
+
 ## **v1.5.1 (27th of April 2023)** - *Release*
 
 * Fixed performance issue which is caused due to the translatable model class.
@@ -20,7 +79,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #7182 [feature] - The sub-categories should be visible on the product list page.
 
-* #7139 [feature] - Add customer loging to the admin panel.
+* #7139 [feature] - Add customer login to the admin panel.
 
 * #7096 [feature] - Add decimal to currency.
 
@@ -58,7 +117,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #7194 [enhancement] - Login as customer icon should be change in the admin panel.
 
-* #6893 [enhancement] - Ukrainian localisation for all apps does not exist.
+* #6893 [enhancement] - Ukrainian localization for all apps does not exist.
 
 * #6895 [enhancement] - Localisation of Admin app does not exist.
 
@@ -110,7 +169,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #7452 [fixed] - In Checkout Page, after address change we are able to place order without selecting the Select Shipping Method.
 
-* #7371 [fixed] - On the admin panel in the Attribute family set the aligment of the name and type column.
+* #7371 [fixed] - On the admin panel in the Attribute family set the alignment of the name and type column.
 
 * #7370 [fixed] - Calendar should be same for new or edit the customer from admin panel.
 
