@@ -28,7 +28,7 @@ class ThemeController extends Controller
             return app(ThemeDatagrid::class)->toJson();
         }
 
-        return view('admin::theme.index');
+        return view('admin::settings.theme.index');
     }
 
     /**
@@ -38,7 +38,7 @@ class ThemeController extends Controller
      */
     public function create()
     {
-        return view('admin::theme.create');
+        return view('admin::settings.theme.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class ThemeController extends Controller
     {
         $theme = $this->themeCustomizationRepository->find($id);
 
-        return view('admin::theme.edit', compact('theme'));
+        return view('admin::settings.theme.edit', compact('theme'));
     }
 
     /**
