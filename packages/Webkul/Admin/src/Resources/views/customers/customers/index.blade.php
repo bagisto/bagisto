@@ -239,11 +239,19 @@
                                 @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
                             </p>
                         </div>
-                        <a 
-                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
-                            :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
-                        >
-                        </a>
+                        <div class="flex items-center">
+                            <a 
+                                class="icon-store text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                                :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
+                            >
+                            </a>
+
+                            <a 
+                                class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                                :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
+                            >
+                            </a>
+                        </div>    
                     </div>
                 </div>
             </template>

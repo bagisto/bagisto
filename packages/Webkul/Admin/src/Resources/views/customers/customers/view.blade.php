@@ -108,31 +108,31 @@
                                             @switch($order->status)
                                                 @case('processing')
                                                     <p class="label-active">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.processing')
                                                     </p>
                                                     @break
 
                                                 @case('completed')
                                                     <p class="label-active">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.completed')
                                                     </p>
                                                     @break
 
                                                 @case('pending')
                                                     <p class="label-pending">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.pending')
                                                     </p>
                                                     @break
 
                                                 @case('canceled')
                                                     <p class="label-cancelled">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.canceled')
                                                     </p>
                                                     @break
 
                                                 @case('closed')
                                                     <p class="label-closed">
-                                                        {{ $order->status }}
+                                                        @lang('admin::app.customers.view.closed')
                                                     </p>
                                                     @break
 
@@ -168,9 +168,17 @@
                                         </p>
 
                                         <p class="text-gray-600">
-                                            {{ $order->billingAddress->address1 }},
-                                            {{ $order->billingAddress->city }},
-                                            {{ $order->billingAddress->state }}
+                                            @if($order->billingAddress->address1)
+                                                {{ $order->billingAddress->address1 }},
+                                            @endif
+
+                                            @if($order->billingAddress->city)
+                                                {{ $order->billingAddress->city }},
+                                            @endif
+
+                                            @if($order->billingAddress->state)
+                                                {{ $order->billingAddress->state  }}
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
@@ -310,19 +318,19 @@
                                     @switch($review->status)
                                         @case('approved')
                                             <p class="label-active">
-                                                {{ $review->status }}
+                                                @lang('admin::app.customers.view.approved')
                                             </p>
                                             @break
 
                                         @case('pending')
                                             <p class="label-pending">
-                                                {{ $review->status }}
+                                                @lang('admin::app.customers.view.pending')
                                             </p>
                                             @break
 
                                         @case('disapproved')
                                             <p class="label-cancelled">
-                                                {{ $review->status }}
+                                                @lang('admin::app.customers.view.disapproved')
                                             </p>
                                             @break
 

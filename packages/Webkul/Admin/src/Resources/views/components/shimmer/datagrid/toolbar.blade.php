@@ -3,11 +3,6 @@
     <div class="flex gap-x-[4px]">
         <!-- Mass Actions Panel --><!-- Filters And Search Panel -->
         <div class="flex gap-x-[4px] w-full items-center">
-            <!-- Filters Activation Button -->
-            <div class="">
-                <div class="shimmer w-[108px] h-[38px] rounded-[6px]"></div>
-            </div>
-
             <!-- Search Panel -->
             <div class="shimmer w-[262px] h-[38px]"></div>
 
@@ -20,7 +15,10 @@
 
     <!-- Right Toolbar -->
     <div class="flex gap-x-[16px]">
-        <span class="shimmer w-[36px] h-[38px]"></span>
+        <!-- Filters Activation Button -->
+        <div class="">
+            <div class="shimmer w-[94px] h-[38px] rounded-[6px]"></div>
+        </div>
 
         <div class="flex items-center gap-x-[8px]">
             <div class="shimmer w-[72px] h-[38px] rounded-[6px]"></div>

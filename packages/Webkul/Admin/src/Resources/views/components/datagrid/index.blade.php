@@ -15,8 +15,6 @@
             <x-admin::datagrid.toolbar></x-admin::datagrid.toolbar>
 
             <div class="flex mt-[16px]">
-                <x-admin::datagrid.filters></x-admin::datagrid.filters>
-
                 <x-admin::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot
@@ -62,8 +60,6 @@
             data() {
                 return {
                     isLoading: false,
-
-                    showFilters: false,
 
                     available: {
                         columns: [],
@@ -218,18 +214,26 @@
                  * the addition of a `url` prop. Instead, by using the numeric approach, we can let Axios handle all the query parameters
                  * using the `applied` prop. This allows for a cleaner and more straightforward implementation.
                  *
-                 * @param {string} direction
+                 * @param {string|integer} directionOrPageNumber
                  * @returns {void}
                  */
-                changePage(direction) {
+                changePage(directionOrPageNumber) {
                     let newPage;
 
-                    if (direction === 'previous') {
-                        newPage = this.available.meta.current_page - 1;
-                    } else if (direction === 'next') {
-                        newPage = this.available.meta.current_page + 1;
+                    if (typeof directionOrPageNumber === 'string') {
+                        if (directionOrPageNumber === 'previous') {
+                            newPage = this.available.meta.current_page - 1;
+                        } else if (directionOrPageNumber === 'next') {
+                            newPage = this.available.meta.current_page + 1;
+                        } else {
+                            console.warn('Invalid Direction Provided : ' + directionOrPageNumber);
+
+                            return;
+                        }
+                    }  else if (typeof directionOrPageNumber === 'number') {
+                        newPage = directionOrPageNumber;
                     } else {
-                        console.error('Invalid Direction Provided : ' + direction);
+                        console.warn('Invalid Input Provided: ' + directionOrPageNumber);
 
                         return;
                     }
@@ -242,7 +246,7 @@
 
                         this.get();
                     } else {
-                        console.warn('Invalid page provided: ' + newPage);
+                        console.warn('Invalid Page Provided: ' + newPage);
                     }
                 },
 
@@ -270,6 +274,11 @@
                             column: column.index,
                             order: this.applied.sort.order === 'asc' ? 'desc' : 'asc',
                         };
+
+                        /**
+                         * When the sorting changes, we need to reset the page.
+                         */
+                        this.applied.pagination.page = 1;
 
                         this.get();
                     }
@@ -575,7 +584,12 @@
                                     indices: this.applied.massActions.indices
                                 })
                                 .then(response => {
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
                                     this.get();
+                                })
+                                .catch((error) => {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.data.message });
                                 });
 
                             break;
@@ -684,10 +698,6 @@
 
                             break;
                     }
-                },
-
-                toggleFilters() {
-                    this.showFilters = !this.showFilters;
                 },
             },
         });

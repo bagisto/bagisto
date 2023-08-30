@@ -12,13 +12,13 @@
         {{-- Company Logo --}}
         <div class="flex gap-x-[54px] items-center max-[1180px]:gap-x-[35px]">
             <a
-                href="{{ route('shop.home.index') }}" 
+                href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
             >
                 <img src="{{ bagisto_asset('images/logo.svg') }}">
             </a>
         </div>
-        
+
         {{-- Form Container --}}
         <div
             class="w-full max-w-[870px] m-auto px-[90px] py-[60px] border border-[#E9E9E9] rounded-[12px] max-md:px-[30px] max-md:py-[30px]"
@@ -34,7 +34,7 @@
                     <x-shop::form.control-group.control
                         type="hidden"
                         name="token"
-                        :value="$token"       
+                        :value="$token"
                     >
                     </x-shop::form.control-group.control>
 
@@ -50,7 +50,7 @@
                             name="email"
                             class="!p-[20px_25px] rounded-lg"
                             :value="old('email')"
-                            id="email" 
+                            id="email"
                             rules="required|email"
                             :label="trans('shop::app.customers.reset-password.email')"
                             placeholder="email@example.com"
@@ -76,7 +76,7 @@
                             ref="password"
                             rules="required|min:6"
                             :label="trans('shop::app.customers.reset-password.password')"
-                            :placeholder="trans('shop::app.customers.reset-password.password')""
+                            :placeholder="trans('shop::app.customers.reset-password.password')"
                         >
                         </x-shop::form.control-group.control>
 

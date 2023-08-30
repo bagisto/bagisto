@@ -36,6 +36,10 @@ return [
         'no-record'                   => 'No Record Found',
         'notification-title'          => 'Notification',
         'notification-marked-success' => 'Notification Marked Successfully',
+        'read-all'                    => 'Mark as Read',
+        'title-plural'                => 'Notifications',
+        'view-all'                    => 'View All Notifications',
+
         'order-status-messages'       => [
             'completed'       => 'Order Completed',
             'closed'          => 'Order Closed',
@@ -45,8 +49,6 @@ return [
             'pending_payment' => 'Pending Payment',
         ],
 
-        'read-all' => 'Mark as Read',
-
         'status'  => [
             'all'        => 'All',
             'pending'    => 'Pending',
@@ -55,8 +57,6 @@ return [
             'closed'     => 'Closed',
             'completed'  => 'Completed',
         ],
-        'title-plural'   => 'Notifications',
-        'view-all'       => 'View All Notifications',
     ],
 
     'account' => [
@@ -412,6 +412,33 @@ return [
                 'create-success'         => 'Invoice created successfully',
                 'invalid-qty'            => 'We found an invalid quantity to invoice items.',
                 'product-error'          => 'Invoice can not be created without products.',
+            ],
+
+            'invoice-pdf' => [
+                'invoice'            => 'Invoice',
+                'date'               => 'Invoice Date',
+                'invoice-id'         => 'Invoice ID',
+                'order-id'           => 'Order ID',
+                'order-date'         => 'Order Date',
+                'bill-to'            => 'Bill to',
+                'ship-to'            => 'Ship to',
+                'contact'            => 'Contact',
+                'payment-method'     => 'Payment Method',
+                'shipping-method'    => 'Shipping Method',
+                'contact-number'     => 'Contact Number',
+                'vat-number'         => 'Vat Number',
+                'payment-terms'      => 'Payment Terms',
+                'bank-details'       => 'Bank Details',
+                'sku'                => 'SKU',
+                'product-name'       => 'Product Name',
+                'price'              => 'Price',
+                'qty'                => 'Quantity',
+                'subtotal'           => 'Subtotal',
+                'tax-amount'         => 'Tax Amount',
+                'grand-total'        => 'Grand Total',
+                'shipping-handling'  => 'Shipping Handling',
+                'tax'                => 'Tax',
+                'discount'           => 'Discount',
             ],
         ],
 
@@ -1204,9 +1231,16 @@ return [
             'orders'                  => 'Orders (:order_count)',
             'order-id'                => 'Order ID',
             'order-id-prefix'         => '# :order_id',
+            'processing'              => 'Processing',
+            'pending'                 => 'Pending',
+            'completed'               => 'Completed',
+            'canceled'                => 'Canceled',
+            'closed'                  => 'Closed',
             'phone'                   => 'Phone - :phone',
             'pay-by'                  => 'Pay By',
             'reviews'                 => 'Reviews',
+            'approved'                => 'Approved',
+            'disapproved'             => 'Disapproved',
             'suspended'               => 'Suspended',
             'set-default-success'     => 'Default Address Updated Successfully',
             'submit-btn-title'        => 'Submit Note',
@@ -2939,6 +2973,8 @@ return [
             ],
 
             'filters' => [
+                'title' => 'Apply Filters',
+
                 'custom-filters' => [
                     'title'     => 'Custom Filters',
                     'clear-all' => 'Clear All',
@@ -3029,17 +3065,17 @@ return [
         'go-back'   => 'Go Back',
         'dashboard' => 'Dashboard',
         'support'   => 'If the problem persists, reach out to us at <a href=":link" class=":class">:email</a> for assistance.',
-        
+
         '404' => [
             'title'       => '404 Page Not Found',
             'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
         ],
-        
+
         '401' => [
             'title'       => '401 Unauthorized',
             'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
         ],
-        
+
         '403' => [
             'title'       => '403 Forbidden',
             'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
@@ -3082,5 +3118,69 @@ return [
 
     'footer' => [
         'copy-right' => 'Powered by <a href="https://bagisto.com/" target="_blank">Bagisto</a>, A Community Project by <a href="https://webkul.com/" target="_blank">Webkul</a>',
+    ],
+
+    'emails' => [
+        'dear'   => 'Dear :customer_name',
+        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+
+        'orders' => [
+            'created' => [
+                'subject'  => 'New Order Confirmation',
+                'title'    => 'Order Confirmation!',
+                'greeting' => 'You have a new Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'invoiced' => [
+                'subject'  => 'New Invoice Confirmation',
+                'title'    => 'Invoice Confirmation!',
+                'greeting' => 'Your invoice #:invoice_id for order :order_id created on :created_at',
+                'summary'  => 'Summary of Invoice',
+            ],
+
+            'shipped' => [
+                'subject'  => 'New Shipment Confirmation',
+                'title'    => 'Order Shipped!',
+                'greeting' => 'You have shipped the order :order_id placed on :created_at',
+                'summary'  => 'Summary of Shipment',
+            ],
+
+            'inventory-source' => [
+                'subject'  => 'New Shipment Confirmation',
+                'title'    => 'Order Shipped!',
+                'greeting' => 'You have shipped the order :order_id placed on :created_at',
+                'summary'  => 'Summary of Shipment',
+            ],
+
+            'refunded' => [
+                'subject'  => 'New Refund Confirmation',
+                'title'    => 'Order Refunded!',
+                'greeting' => 'You have refunded for order :order_id placed on :created_at',
+                'summary'  => 'Summary of Refund',
+            ],
+
+            'canceled' => [
+                'subject'  => 'New Order Canceled',
+                'title'    => 'Order Canceled!',
+                'greeting' => 'You have canceled the order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'shipping-address'  => 'Shipping Address',
+            'billing-address'   => 'Billing Address',
+            'contact'           => 'Contact',
+            'shipping'          => 'Shipping',
+            'payment'           => 'Payment',
+            'sku'               => 'SKU',
+            'name'              => 'Name',
+            'price'             => 'Price',
+            'qty'               => 'Qty',
+            'subtotal'          => 'Subtotal',
+            'shipping-handling' => 'Shipping Handling',
+            'tax'               => 'Tax',
+            'discount'          => 'Discount',
+            'grand-total'       => 'Grand Total',
+        ],
     ],
 ];

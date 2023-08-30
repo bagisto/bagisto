@@ -15,7 +15,7 @@
 
             <div class="flex flex-col bg-white rounded-[6px] box-shadow">
                 {{-- Login Form --}}
-                <x-shop::form :action="route('admin.session.store')">
+                <x-admin::form :action="route('admin.session.store')">
                     <div class="p-[16px]  ">
                         <p class="text-[20px] text-gray-800 font-bold ">
                             @lang('admin::app.users.sessions.title')
@@ -92,7 +92,7 @@
                             @lang('admin::app.users.sessions.submit-btn')
                         </button>
                     </div>
-                </x-shop::form>
+                </x-admin::form>
             </div>
         </div>
     </div>

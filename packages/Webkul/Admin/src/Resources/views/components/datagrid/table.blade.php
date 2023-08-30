@@ -97,7 +97,6 @@
                                 </p>
 
                                 <!-- Columns -->
-                                
                                 <p
                                     v-if="record.is_closure"
                                     v-for="column in $parent.available.columns"
@@ -105,7 +104,7 @@
                                 >
                                 </p>
 
-                                <p  
+                                <p
                                     v-else
                                     v-for="column in $parent.available.columns"
                                     v-html="record[column.index]"

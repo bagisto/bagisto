@@ -71,7 +71,7 @@ class AccountController extends Controller
         $user->update($data);
 
         if ($isPasswordChanged) {
-            Event::dispatch('user.admin.update-password', $user);
+            Event::dispatch('admin.password.update.after', $user);
         }
 
         session()->flash('success', trans('admin::app.settings.users.account-save'));
