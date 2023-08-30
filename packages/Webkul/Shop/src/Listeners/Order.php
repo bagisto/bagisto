@@ -1,9 +1,10 @@
 <?php
 
-namespace Webkul\Admin\Listeners;
+namespace Webkul\Shop\Listeners;
 
-use Webkul\Admin\Mail\Order\CreatedNotification;
-use Webkul\Admin\Mail\Order\CanceledNotification;
+use Webkul\Shop\Mail\Order\CreatedNotification;
+use Webkul\Shop\Mail\Order\CanceledNotification;
+use Webkul\Shop\Mail\Order\CommentedNotification;
 
 class Order extends Base
 {
@@ -40,6 +41,28 @@ class Order extends Base
             }
 
             $this->prepareMail($order, new CanceledNotification($order));
+        } catch (\Exception $e) {
+            report($e);
+        }
+    }
+
+    /**
+     * Send order comment mail.
+     *
+     * @param  \Webkul\Sales\Contracts\OrderComment  $comment
+     * @return void
+     */
+    public function afterCommented($comment)
+    {
+        if (! $comment->customer_notified) {
+            return;
+        }
+
+        try {
+            /**
+             * Email to customer.
+             */
+            $this->prepareMail($comment, new CommentedNotification($comment));
         } catch (\Exception $e) {
             report($e);
         }

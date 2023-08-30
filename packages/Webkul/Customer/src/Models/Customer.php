@@ -11,7 +11,7 @@ use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\SubscribersListProxy;
 use Webkul\Customer\Contracts\Customer as CustomerContract;
 use Webkul\Customer\Database\Factories\CustomerFactory;
-use Webkul\Customer\Notifications\CustomerResetPassword;
+use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 use Webkul\Product\Models\ProductReviewProxy;
 use Webkul\Sales\Models\OrderProxy;
 use Webkul\Customer\Models\CustomerNoteProxy;
@@ -95,7 +95,7 @@ class Customer extends Authenticatable implements CustomerContract
      */
     public function sendPasswordResetNotification($token): void
     {
-        $this->notify(new CustomerResetPassword($token));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**

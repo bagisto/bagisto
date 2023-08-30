@@ -11,8 +11,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Shop\Http\Requests\Customer\RegistrationRequest;
-use Webkul\Shop\Mail\RegistrationEmail;
-use Webkul\Shop\Mail\VerificationEmail;
+use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 
 class RegistrationController extends Controller
 {
@@ -66,8 +65,6 @@ class RegistrationController extends Controller
 
         $customer = $this->customerRepository->create($data);
 
-        Event::dispatch('customer.registration.after', $customer);
-
         if (isset($data['subscribed_to_news_letter'])) {
             $this->subscriptionRepository->updateOrCreate([
                 'email'      => $data['email'],
@@ -79,35 +76,11 @@ class RegistrationController extends Controller
             ]);
         }
 
+        Event::dispatch('customer.registration.after', $customer);
+
         if (core()->getConfigData('customer.settings.email.verification')) {
-            try {
-                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.verification')) {
-                    Mail::queue(new VerificationEmail(['email' => $data['email'], 'token' => $data['token']]));
-                }
-
-                session()->flash('success', trans('shop::app.customers.signup-form.success-verify'));
-            } catch (\Exception $e) {
-                report($e);
-
-                session()->flash('info', trans('shop::app.customers.signup-form.success-verify-email-unsent'));
-            }
+            session()->flash('success', trans('shop::app.customers.signup-form.success-verify'));
         } else {
-            try {
-                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.registration')) {
-                    Mail::queue(new RegistrationEmail(request()->all(), 'customer'));
-                }
-
-                if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer-registration-confirmation-mail-to-admin')) {
-                    Mail::queue(new RegistrationEmail(request()->all(), 'admin'));
-                }
-
-                session()->flash('success', trans('shop::app.customers.signup-form.success-verify'));
-            } catch (\Exception $e) {
-                report($e);
-
-                session()->flash('info', trans('shop::app.customers.signup-form.success-verify-email-unsent'));
-            }
-
             session()->flash('success', trans('shop::app.customers.signup-form.success'));
         }
 
@@ -158,7 +131,7 @@ class RegistrationController extends Controller
         $this->customerRepository->update(['token' => $verificationData['token']], $customer->id);
 
         try {
-            Mail::queue(new VerificationEmail($verificationData));
+            Mail::queue(new EmailVerificationNotification($verificationData));
 
             if (Cookie::has('enable-resend')) {
                 \Cookie::queue(\Cookie::forget('enable-resend'));

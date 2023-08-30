@@ -2941,4 +2941,61 @@ return [
     'footer' => [
         'copy-right' => 'Powered by <a href="https://bagisto.com/" target="_blank">Bagisto</a>, A Community Project by <a href="https://webkul.com/" target="_blank">Webkul</a>',
     ],
+
+    'emails' => [
+        'dear'   => 'Dear :customer_name',
+        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+
+        'orders' => [
+            'created' => [
+                'subject'  => 'New Order Confirmation',
+                'title'    => 'Order Confirmation!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'invoiced' => [
+                'subject'  => 'New Invoice Confirmation',
+                'title'    => 'Invoice Confirmation!',
+                'greeting' => 'Your invoice #:invoice_id for Order :order_id created on :created_at',
+                'summary'  => 'Summary of Invoice',
+            ],
+
+            'shipped' => [
+                'subject'  => 'New Shipment Confirmation',
+                'title'    => 'Order Shipped!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Shipment',
+            ],
+
+            'refunded' => [
+                'subject'  => 'New Refund Confirmation',
+                'title'    => 'Order Refunded!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Refund',
+            ],
+
+            'canceled' => [
+                'subject'  => 'New Order Canceled',
+                'title'    => 'Order Canceled!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'shipping-address'  => 'Shipping Address',
+            'billing-address'   => 'Billing Address',
+            'contact'           => 'Contact',
+            'shipping'          => 'Shipping',
+            'payment'           => 'Payment',
+            'sku'               => 'SKU',
+            'name'              => 'Name',
+            'price'             => 'Price',
+            'qty'               => 'Qty',
+            'subtotal'          => 'Subtotal',
+            'shipping-handling' => 'Shipping Handling',
+            'tax'               => 'Tax',
+            'discount'          => 'Discount',
+            'grand-total'       => 'Grand Total',
+        ],
+    ],
 ];
