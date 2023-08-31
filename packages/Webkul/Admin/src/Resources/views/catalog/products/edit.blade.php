@@ -78,7 +78,7 @@
                     </x-slot:content>
                 </x-admin::dropdown>
 
-                {{-- Channel Switcher --}}
+                {{-- Locale Switcher --}}
                 <x-admin::dropdown>
                     {{-- Dropdown Toggler --}}
                     <x-slot:toggle>
@@ -138,7 +138,8 @@
                                 </p>
 
                                 @if ($group->name == 'Meta Description')
-                                    <v-product-seo></v-product-seo>
+                                    {{-- SEO Title & Description Blade Componnet --}}
+                                    <x-admin::seo/>
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
@@ -201,58 +202,4 @@
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
-
-    @pushOnce('scripts')
-        {{-- SEO Vue Component Template --}}
-        <script type="text/x-template" id="v-product-seo-template">
-            <div class="flex flex-col gap-[3px] mb-[30px]">
-                <p 
-                    class="text-[#161B9D]"
-                    v-text="metaTitle"
-                >
-                </p>
-
-                <!-- SEO Meta Title -->
-                <p 
-                    class="text-[#135F29]"
-                    v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
-                >
-                </p>
-
-                <!-- SEP Meta Description -->
-                <p 
-                    class="text-gray-600"
-                    v-text="metaDescription"
-                >
-                </p>
-            </div>
-        </script>
-
-        {{-- SEO Vue Component --}}
-        <script type="module">
-            app.component('v-product-seo', {
-                template: '#v-product-seo-template',
-
-                data() {
-                    return {
-                        metaTitle: this.$parent.getValues()['meta_title'],
-
-                        metaDescription: this.$parent.getValues()['meta_description'],
-                    }
-                },
-
-                mounted() {
-                    let self = this;
-
-                    document.getElementById('meta_title').addEventListener('input', function(e) {
-                        self.metaTitle = e.target.value;
-                    });
-
-                    document.getElementById('meta_description').addEventListener('input', function(e) {
-                        self.metaDescription = e.target.value;
-                    });
-                },
-            });
-        </script>
-    @endPushOnce
 </x-admin::layouts>

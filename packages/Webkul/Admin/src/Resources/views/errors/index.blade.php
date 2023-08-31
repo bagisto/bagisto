@@ -25,7 +25,7 @@
                     <div class="flex gap-[10px] items-center">
                         <a
                             onclick="history.back()"
-                            class="text-[14px] text-blue-600 font-semibold hover:underline"
+                            class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.go-back')
                         </a>
@@ -38,7 +38,7 @@
 
                         <a
                             href="{{ route('admin.dashboard.index') }}"
-                            class="text-[14px] text-blue-600 font-semibold hover:underline"
+                            class="text-[14px] text-blue-600 font-semibold transition-all hover:underline"
                         >
                             @lang('admin::app.errors.dashboard')
                         </a>
@@ -49,7 +49,7 @@
                     @lang('admin::app.errors.support', [
                         'link'  => 'mailto:support@example.com',
                         'email' => 'support@example.com',
-                        'class' => 'text-blue-600 font-semibold hover:underline',
+                        'class' => 'text-blue-600 font-semibold transition-all hover:underline',
                     ])
                 </p>
             </div>

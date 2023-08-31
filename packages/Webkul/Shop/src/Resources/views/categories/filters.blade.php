@@ -8,7 +8,7 @@
         @filter-clear="clearFilters('filter', $event)"
     >
         {{-- Category Filter Shimmer Effect --}}
-        <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+        <x-shop::shimmer.categories.filters/>
     </v-filters>
 </div>
 
@@ -59,7 +59,7 @@
                 @filter-clear="clearFilters('filter', $event)"
             >
                 {{-- Category Filter Shimmer Effect --}}
-                <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+                <x-shop::shimmer.categories.filters/>
             </v-filters>
         </x-slot:content>
     </x-shop::drawer>
@@ -108,7 +108,7 @@
     <script type="text/x-template" id="v-filters-template">
         <!-- Filter Shimmer Effect -->
         <template v-if="isLoading">
-            <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+            <x-shop::shimmer.categories.filters/>
         </template>
 
         <!-- Filters Container -->
@@ -208,7 +208,7 @@
 
             <!-- Price range filter shimmer -->
             <template v-if="isLoading">
-                <x-shop::shimmer.range-slider></x-shop::shimmer.range-slider>
+                <x-shop::shimmer.range-slider/>
             </template>
 
             <template v-else>

@@ -92,11 +92,11 @@
     </script>
 
     <script type="text/x-template" id="v-product-image-item-template">
-        <div class="grid justify-items-center max-w-[120px] min-w-[120px] max-h-[120px] relative rounded-[4px] overflow-hidden transition-all hover:border-gray-400 group cursor-pointer">
+        <div class="grid justify-items-center max-w-[120px] min-w-[120px] max-h-[120px] relative rounded-[4px] overflow-hidden transition-all hover:border-gray-400 group">
             <!-- Image Preview -->
             <img :src="image.url"/>
 
-            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white absolute top-0 bottom-0 opacity-80  transition-all group-hover:visible">
+            <div class="flex flex-col justify-between invisible w-full p-[11px] bg-white absolute top-0 bottom-0 opacity-80 transition-all group-hover:visible">
                 <!-- Image Name -->
                 <p class="text-[12px] text-gray-600 font-semibold break-all"></p>
 

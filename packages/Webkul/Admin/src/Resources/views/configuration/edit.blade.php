@@ -9,7 +9,7 @@
 <x-admin::layouts>
     {{-- Title of the page --}}
     <x-slot:title>
-        @if ($items = \Illuminate\Support\Arr::get($config->items, request()->route('slug') . '.children'))
+        @if ($items = Arr::get($config->items, request()->route('slug') . '.children'))
             @foreach ($items as $key => $item)
                 @if ( $key == request()->route('slug2'))
                     {{ $title = trans($item['name']) }}

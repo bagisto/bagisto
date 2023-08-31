@@ -5,13 +5,13 @@
         <div class="row grid grid-cols-6 gap-[10px] px-[16px] py-[16px] border-b-[1px] border-gray-300 text-gray-600">
             <div class="shimmer w-[24px] h-[24px] mb-[2px]"></div>
 
-            <div class="shimmer w-[100px] h-[17px]"></div>
+            <div class="shimmer w-[100px] h-[24px]"></div>
 
-            <div class="shimmer w-[100px] h-[17px]"></div>
+            <div class="shimmer w-[100px] h-[24px]"></div>
 
-            <div class="shimmer w-[100px] h-[17px]"></div>
+            <div class="shimmer w-[100px] h-[24px]"></div>
 
-            <div class="shimmer w-[100px] h-[17px]"></div>
+            <div class="shimmer w-[100px] h-[24px]"></div>
 
             <div class="flex gap-[10px] col-start-[none]">
                 <div class="shimmer w-[24px] h-[24px] p-[6px]"></div>
@@ -25,28 +25,28 @@
                 <div class="shimmer w-[24px] h-[24px]"></div>
 
                 <div class="flex flex-col gap-[6px]">
-                    <div class="shimmer w-[250px] h-[19px]"></div>
+                    <div class="shimmer w-[250px] h-[24px]"></div>
 
-                    <div class="shimmer w-[150px] h-[17px]"></div>
+                    <div class="shimmer w-[150px] h-[24px]"></div>
 
-                    <div class="shimmer w-[150px] h-[17px]"></div>
+                    <div class="shimmer w-[150px] h-[24px]"></div>
                 </div>
             </div>
 
             <div class="flex gap-[6px] flex-col">
                 <div class="shimmer w-[250px] h-[19px]"></div>
 
-                <div class="shimmer w-[150px] h-[17px]"></div>
+                <div class="shimmer w-[150px] h-[24px]"></div>
 
-                <div class="shimmer w-[150px] h-[17px]"></div>
+                <div class="shimmer w-[150px] h-[24px]"></div>
             </div>
 
             <div class="flex gap-[6px] flex-col">
                 <div class="shimmer w-[250px] h-[19px]"></div>
 
-                <div class="shimmer w-[150px] h-[17px]"></div>
+                <div class="shimmer w-[150px] h-[24px]"></div>
 
-                <div class="shimmer w-[150px] h-[17px]"></div>
+                <div class="shimmer w-[150px] h-[24px]"></div>
             </div>
         </div>
     @endif

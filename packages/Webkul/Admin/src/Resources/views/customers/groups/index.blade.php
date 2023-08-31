@@ -21,7 +21,7 @@
                                 <button 
                                     type="button"
                                     class="primary-button"
-                                    @click="id=0; $refs.groupCreateModal.open()"
+                                    @click="id=0; $refs.groupUpdateOrCreateModal.open()"
                                 >
                                     @lang('admin::app.customers.groups.index.create.create-btn')
                                 </button>
@@ -45,7 +45,7 @@
                                             class="after:content-['/'] last:after:content-['']"
                                             :class="{
                                                 'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                                'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                                'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                             }"
                                             @click="
                                                 columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -117,9 +117,9 @@
                     as="div"
                     ref="modalForm"
                 >
-                    <form @submit="handleSubmit($event, create)">
+                    <form @submit="handleSubmit($event, updateOrCreate)">
                         <!-- Create Group Modal -->
-                        <x-admin::modal ref="groupCreateModal">          
+                        <x-admin::modal ref="groupUpdateOrCreateModal">          
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
@@ -218,29 +218,10 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors  }) {
-                        if (params.id) {
-                            this.$axios.post("{{ route('admin.customers.groups.update') }}", params)
-                                .then((response) => {
-                                    this.$refs.groupCreateModal.close();
-
-                                    this.$refs.datagrid.get();
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status ==422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        } else {
-                            this.$axios.post("{{ route('admin.customers.groups.store') }}", params)
+                    updateOrCreate(params, { resetForm, setErrors  }) {
+                        this.$axios.post(params.id ? "{{ route('admin.customers.groups.update') }}" : "{{ route('admin.customers.groups.store') }}", params)
                             .then((response) => {
-                                this.$refs.groupCreateModal.close();
-
-                                this.$refs.datagrid.get();
+                                this.$refs.groupUpdateOrCreateModal.close();
 
                                 this.$refs.datagrid.get();
 
@@ -253,11 +234,10 @@
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                        }
                     },
 
                     editModal(value) {
-                        this.$refs.groupCreateModal.toggle();
+                        this.$refs.groupUpdateOrCreateModal.toggle();
 
                         this.$refs.modalForm.setValues(value);
                     },

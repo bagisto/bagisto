@@ -223,14 +223,14 @@
                 <!-- Add Button -->
                 <div class="flex gap-x-[20px] items-center">
                     <p
-                        class="text-blue-600 font-semibold cursor-pointer"
+                        class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         @click="$refs['productSearch' + option.id].openDrawer()"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.option.add-btn')
                     </p>
 
                     <p
-                        class="text-blue-600 font-semibold cursor-pointer"
+                        class="text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         @click="edit"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.option.edit-btn')
@@ -344,7 +344,7 @@
                                 </x-admin::form.control-group>
 
                                 <p
-                                    class="text-red-600 cursor-pointer hover:underline"
+                                    class="text-red-600 cursor-pointer transition-all hover:underline"
                                     @click="removeProduct(element)"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.bundle.option.delete-btn')

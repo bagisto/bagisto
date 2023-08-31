@@ -60,7 +60,7 @@
 
     {{-- Product Information Vue Component --}}
     <v-product :product-id="{{ $product->id }}">
-        <x-shop::shimmer.products.view></x-shop::shimmer.products.view>
+        <x-shop::shimmer.products.view/>
     </v-product>
 
     {{-- Information Section --}}

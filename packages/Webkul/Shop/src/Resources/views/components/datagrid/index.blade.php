@@ -14,7 +14,7 @@
         <div>
             <x-shop::datagrid.toolbar></x-shop::datagrid.toolbar>
 
-            <div class="flex mt-[16px]">
+            <div class="flex mt-[30px]">
                 <x-shop::datagrid.table :isMultiRow="$isMultiRow">
                     <template #header>
                         <slot

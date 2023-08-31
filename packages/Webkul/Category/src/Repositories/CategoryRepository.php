@@ -32,21 +32,27 @@ class CategoryRepository extends Repository
             switch ($key) {
                 case 'name':
                     $queryBuilder->where('category_translations.name', 'like', '%' . urldecode($value) . '%');
+
                     break;
                 case 'description':
                     $queryBuilder->where('category_translations.description', 'like', '%' . urldecode($value) . '%');
+
                     break;
                 case 'status':
                     $queryBuilder->where('categories.status', $value);
+
                     break;
                 case 'only_children':
                     $queryBuilder->whereNotNull('categories.parent_id');
+
                     break;
                 case 'parent_id':
                     $queryBuilder->where('categories.parent_id', $value);
+
                     break;
                 case 'locale':
                     $queryBuilder->where('category_translations.locale', $value);
+
                     break;
             }
         }
@@ -81,6 +87,7 @@ class CategoryRepository extends Repository
         $category = $this->model->create($data);
 
         $this->uploadImages($data, $category);
+        
         $this->uploadImages($data, $category, 'banner_path');
 
         if (isset($data['attributes'])) {
@@ -106,6 +113,7 @@ class CategoryRepository extends Repository
         $category->update($data);
 
         $this->uploadImages($data, $category);
+
         $this->uploadImages($data, $category, 'banner_path');
 
         if (isset($data['attributes'])) {

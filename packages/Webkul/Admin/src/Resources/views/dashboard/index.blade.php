@@ -590,7 +590,7 @@
 
             {{-- Store Stats --}}
             <v-store-stats>
-                <x-admin::shimmer.dashboard.right></x-admin::shimmer.dashboard.right>
+                <x-admin::shimmer.dashboard.right/>
             </v-store-stats>
         </div>
     </div>
@@ -603,7 +603,7 @@
                 <div class="bg-white rounded-[4px] box-shadow box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
-                        <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard.right.total-sales>
+                        <x-admin::shimmer.dashboard.right.total-sales/>
                     </template>
 
                     <template v-else>
@@ -694,7 +694,7 @@
 
                         <!-- Top Selling Products Shimmer -->
                         <template v-if="isLoading">
-                            <x-admin::shimmer.dashboard.right.top-selling></x-admin::shimmer.dashboard.right.top-selling>
+                            <x-admin::shimmer.dashboard.right.top-selling/>
                         </template>
 
                         <!-- Top Selling Products Detailes -->
@@ -792,7 +792,7 @@
                     <!-- Customers Shimmer -->
                     
                     <template v-if="isLoading">
-                        <x-admin::shimmer.dashboard.right.most-customer-sales></x-admin::shimmer.dashboard.right.most-customer-sales>
+                        <x-admin::shimmer.dashboard.right.most-customer-sales/>
                     </template>
 
                     <template v-else>

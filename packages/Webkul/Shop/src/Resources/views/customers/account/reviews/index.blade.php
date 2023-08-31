@@ -40,11 +40,9 @@
                                         </p>
 
                                         <div class="flex gap-[10px] items-center">
-                                            <x-shop::products.star-rating 
-                                                ::name="{{ json_encode($review->name) }}" 
-                                                ::value="{{ json_encode($review->rating) }}"
-                                            >
-                                            </x-shop::products.star-rating>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <span class="icon-star-fill text-[24px] {{ $review->rating >= $i ? 'text-[#ffb600]' : 'text-[#7d7d7d]' }}"></span>
+                                            @endfor
                                         </div>
                                     </div>
 

@@ -31,7 +31,9 @@
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
             <div class="flex flex-col gap-[8px] flex-1 bg-white box-shadow">
-                <v-family-attributes></v-family-attributes>
+                <v-family-attributes>
+                    <x-admin::shimmer.families.attributes-panel/>
+                </v-family-attributes>
             </div>
 
             {{-- Right Container --}}
@@ -130,7 +132,7 @@
 
                         <!-- Add Group Button -->
                         <div
-                            class="text-blue-600 font-semibold whitespace-nowrap px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] cursor-pointer"
+                            class="secondary-button"
                             @click="$refs.addGroupModal.open()"
                         >
                             @lang('admin::app.catalog.families.edit.add-group-btn')

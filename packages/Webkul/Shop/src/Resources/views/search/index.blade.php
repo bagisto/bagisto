@@ -14,7 +14,7 @@
         
     {{-- Product Listing --}}
     <v-search>
-        <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
+        <x-shop::shimmer.categories.view/>
     </v-search>
 
     @pushOnce('scripts')

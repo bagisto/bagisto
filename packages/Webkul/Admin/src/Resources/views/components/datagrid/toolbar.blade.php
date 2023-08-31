@@ -1,5 +1,5 @@
 <template v-if="isLoading">
-    <x-admin::shimmer.datagrid.toolbar></x-admin::shimmer.datagrid.toolbar>
+    <x-admin::shimmer.datagrid.toolbar/>
 </template>
 
 <template v-else>
@@ -129,7 +129,7 @@
                 <x-slot:toggle>
                     <div>
                         <div
-                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max pl-[12px] pr-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-400 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow focus:outline-none focus:ring-2"
+                            class="focus:ring-gratext-gray-600 inline-flex w-full max-w-max pl-[12px] pr-[16px] cursor-pointer select-none appearance-none items-center justify-between gap-x-[4px] rounded-[6px] border border-gray-300 bg-white px-[4px] py-[6px] text-center text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2"
                         >
                             <span class="icon-filter text-[22px]"></span>
 

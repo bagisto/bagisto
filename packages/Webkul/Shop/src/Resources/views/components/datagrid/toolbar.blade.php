@@ -1,5 +1,5 @@
 <template v-if="isLoading">
-    <x-shop::shimmer.datagrid.toolbar></x-shop::shimmer.datagrid.toolbar>
+    <x-shop::shimmer.datagrid.toolbar/>
 </template>
 
 <template v-else>
@@ -101,13 +101,13 @@
                         <input
                             type="text"
                             name="search"
-                            class="block w-full rounded-lg border border-gray-300 bg-white p-[14px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                            class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-[15px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             :value="getAppliedColumnValues('all')"
                             placeholder="@lang('shop::app.components.datagrid.toolbar.search.title')"
                             @keyup.enter="filterPage"
                         >
 
-                        <div class="icon-search pointer-events-none absolute right-[10px] top-[16px] flex items-center text-[22px]">
+                        <div class="icon-search pointer-events-none absolute right-[10px] top-[8px] flex items-center text-[22px]">
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
             <x-shop::dropdown position="bottom-left">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[15px] pr-[12px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
                         <span v-text="applied.pagination.perPage"></span>
 
                         <span class="icon-arrow-down text-[24px]"></span>
@@ -141,18 +141,16 @@
             <!-- Filters Activation Button -->
             <x-shop::drawer width="350px">
                 <x-slot:toggle>
-                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full p-[14px] rounded-lg bg-white border border-[#E9E9E9] text-[16px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
+                    <button class="flex justify-between items-center gap-[15px] max-w-[200px] w-full pl-[12px] pr-[15px] py-[7px] rounded-lg bg-white border border-[#E9E9E9] text-[14px] transition-all hover:border-gray-400 focus:border-gray-400 max-md:pr-[10px] max-md:pl-[10px] max-md:border-0 max-md:w-[110px] cursor-pointer">
                         <span class="flex justify-between items-center gap-[5px]">
                             <span class="icon-filter text-[24px]"></span>
 
                             @lang('shop::app.components.datagrid.toolbar.filter.title')
                         </span>
-
-                        <span class="icon-arrow-up text-[24px]"></span>
                     </button>
                 </x-slot:toggle>
 
-                <x-slot:header>
+                <x-slot:header class="border-b-[1px] border-[#E9E9E9]">
                     @lang('shop::app.components.datagrid.filters.title')
                 </x-slot:header>
 
