@@ -18,7 +18,7 @@
         </div>
 
         {{-- Added For Shimmer --}}
-        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+        <x-admin::shimmer.datagrid/>
     <v-create-sitemaps/>
     
     @pushOnce('scripts')
@@ -57,7 +57,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}

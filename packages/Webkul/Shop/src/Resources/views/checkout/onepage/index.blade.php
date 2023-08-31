@@ -28,7 +28,7 @@
 
         <v-checkout>
             {{-- Shimmer Effect --}}
-            <x-shop::shimmer.checkout.onepage></x-shop::shimmer.checkout.onepage>
+            <x-shop::shimmer.checkout.onepage/>
         </v-checkout>
     </div>
 

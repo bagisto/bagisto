@@ -42,7 +42,7 @@
 
             <a
                 href="{{ route('admin.sales.invoices.print', $invoice->id) }}"
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
             >
                 <span class="icon-printer text-[24px] "></span> 
 
@@ -53,7 +53,7 @@
             <div>
                 <button
                     type="button"
-                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+                    class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
                     @click="$refs.groupCreateModal.open()"
                 >
                     <span class="icon-cart text-[24px] "></span>
@@ -357,7 +357,7 @@
 
                         <div class="flex  flex-col gap-y-[6px]">
                             {{-- Order Id --}}
-                            <p class="text-blue-600 font-semibold">
+                            <p class="text-blue-600 font-semibold transition-all hover:underline">
                                 <a href="{{ route('admin.sales.orders.view', $order->id) }}">#{{ $order->increment_id }}</a>
                             </p>
 

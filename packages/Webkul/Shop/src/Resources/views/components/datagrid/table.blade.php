@@ -6,7 +6,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-table-template">
-        <div class="w-full mt-[30px] overflow-x-auto border rounded-[12px]">
+        <div class="w-full overflow-x-auto border rounded-[12px]">
             <!-- Main Table -->
             <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white overflow-hidden">
                 <slot name="header">
@@ -47,13 +47,14 @@
                             <p
                                 v-for="column in $parent.available.columns"
                                 v-if="$parent.available.actions.length"
-                                :class="{'cursor-pointer': column.sortable}"
+                                class="flex items-center gap-[5px]"
+                                :class="{'cursor-pointer select-none': column.sortable}"
                                 @click="$parent.sortPage(column)"
                             >
                                 @{{ column.label }}
 
                                 <i
-                                    class="ml-[5px] text-[16px] text-gray-600 align-text-bottom"
+                                    class="text-[16px] text-gray-800 align-text-bottom"
                                     :class="[$parent.applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                     v-if="column.index == $parent.applied.sort.column"
                                 ></i>
@@ -70,6 +71,8 @@
                 <slot name="body">
                     <template v-if="$parent.isLoading">
                         <x-shop::shimmer.datagrid.table.body :isMultiRow="$isMultiRow"></x-shop::shimmer.datagrid.table.body>
+
+                        <x-shop::shimmer.datagrid.table.footer/>
                     </template>
 
                     <template v-else>
@@ -130,7 +133,7 @@
                                 </div>
 
                                 <!-- Information Panel -->
-                                <div class="flex justify-between items-center p-[30px]">
+                                <div class="flex justify-between items-center p-[25px]">
                                     <p class="text-[12px] font-medium">
                                         Showing @{{ $parent.available.meta.from }} to @{{ $parent.available.meta.to }} of @{{ $parent.available.meta.total }} entries
                                     </p>
@@ -167,7 +170,7 @@
                                                 <input
                                                     type="text"
                                                     :value="$parent.available.meta.current_page"
-                                                    class="px-[15px] py-[6px] max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium hover:bg-gray-100"
+                                                    class="px-[15px] pt-[6px] pb-[5px] max-w-[42px] border border-[#E9E9E9] leading-normal text-black font-medium text-center hover:bg-gray-100"
                                                     @change="$parent.changePage(parseInt($event.target.value))"
                                                 >
                                             </li>

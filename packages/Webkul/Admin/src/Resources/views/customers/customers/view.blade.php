@@ -40,12 +40,11 @@
 
     {{-- Filters --}}
     <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
-
         {{--Address Create component --}}
         @include('admin::customers.addresses.create')
 
         <div 
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
             onclick="if (confirm('@lang('admin::app.customers.view.delete-confirmation')')) {
                 event.preventDefault();
                 document.getElementById('delete-account{{ $customer->id }}').submit();
@@ -93,7 +92,7 @@
                     {{-- Order Details --}}
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
-                            <div class="flex justify-between items-center px-[16px] py-[16px]">
+                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-100">
                                 <div class="row grid grid-cols-3 w-full">
                                     <div class="flex gap-[10px]">
                                         <div class="flex flex-col gap-[6px]">
@@ -185,7 +184,7 @@
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
                                 >
                                 </a>
                             </div>
@@ -244,7 +243,7 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white border-b ">
+                                    <tr class="bg-white border-b transition-all hover:bg-gray-100">
                                         <td class="px-6 py-[16px] text-gray-600">
                                             @lang('admin::app.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
@@ -301,7 +300,7 @@
 
                     @foreach($customer->reviews as $review)
                         {{-- Reviews Details --}}
-                        <div class="grid gap-y-[16px] p-[16px]">
+                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-100">
                             <div class="flex justify-start [&amp;>*]:flex-1">
                                 <div class="flex flex-col gap-[6px]">
                                     {{-- Review Name --}}
@@ -370,7 +369,7 @@
                                     </p>
                                 </div>
 
-                                <span class="icon-sort-right ml-[4px] text-[24px] cursor-pointer"></span>
+                                <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
                             </div>
                         </div>
 
@@ -572,7 +571,7 @@
 
                                     {{-- Delete Address --}}
                                     <p 
-                                        class="text-blue-600 cursor-pointer hover:underline"
+                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
                                         onclick="event.preventDefault();
                                         document.getElementById('delete-address{{ $address->id }}').submit();"
                                     >
@@ -590,7 +589,7 @@
                                     {{-- Set Default Address --}}
                                     @if (! $address->default_address )
                                         <p 
-                                            class="text-blue-600 cursor-pointer hover:underline"
+                                            class="text-blue-600 cursor-pointer transition-all hover:underline"
                                             onclick="event.preventDefault();
                                             document.getElementById('default-address{{ $address->id }}').submit();"
                                         >

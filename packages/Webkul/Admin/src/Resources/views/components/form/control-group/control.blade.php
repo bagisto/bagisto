@@ -225,12 +225,12 @@
         @break
 
     @case('image')
-        <x-admin::media
+        <x-admin::media.images
             name="{{ $name }}"
             ::class="[errors['{{ $name }}'] ? 'border border-red-600 hover:border-red-600' : '']"
             {{ $attributes }}
         >
-        </x-admin::media>
+        </x-admin::media.images>
 
         @break
 

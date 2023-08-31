@@ -102,7 +102,7 @@
                                                 <a
                                                     :href="element.file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 hover:underline"
+                                                    class="text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.file_name }}
                                                 </a>
@@ -116,7 +116,7 @@
                                                 <a
                                                     :href="element.url"
                                                     target="_blank"
-                                                    class="text-blue-600 hover:underline"
+                                                    class="text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.url }}
                                                 </a>
@@ -132,7 +132,7 @@
                                                 <a
                                                     :href="element.sample_file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 hover:underline"
+                                                    class="text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.sample_file_name }}
                                                 </a>
@@ -146,7 +146,7 @@
                                                 <a
                                                     :href="element.sample_url"
                                                     target="_blank"
-                                                    class="text-blue-600 hover:underline"
+                                                    class="text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.sample_url }}
                                                 </a>
@@ -164,14 +164,14 @@
 
                                 <div class="flex gap-x-[20px] items-center">
                                     <p
-                                        class="text-red-600 cursor-pointer hover:underline"
+                                        class="text-red-600 cursor-pointer transition-all hover:underline"
                                         @click="remove(element)"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.delete-btn')
                                     </p>
 
                                     <p
-                                        class="text-blue-600 cursor-pointer hover:underline"
+                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
                                         @click="selectedLink = element; $refs.updateCreateLinkDrawer.open()"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.links.edit-btn')
@@ -362,7 +362,7 @@
                                             <a
                                                 :href="selectedLink.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 hover:underline"
+                                                class="text-blue-600 transition-all hover:underline"
                                                 v-if="selectedLink.file_url"
                                             >
                                                 @{{ selectedLink.file_name }}
@@ -453,7 +453,7 @@
                                             <a
                                                 :href="selectedLink.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 hover:underline"
+                                                class="text-blue-600 transition-all hover:underline"
                                                 v-if="selectedLink.sample_file_url"
                                             >
                                                 @{{ selectedLink.sample_file_name }}
@@ -565,7 +565,7 @@
                                                 <a
                                                     :href="element.file_url"
                                                     target="_blank"
-                                                    class="text-blue-600 hover:underline"
+                                                    class="text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.file_name }}
                                                 </a>
@@ -579,7 +579,7 @@
                                                 <a
                                                     :href="element.url"
                                                     target="_blank"
-                                                    class="text-blue-600 hover:underline"
+                                                    class="text-blue-600 transition-all hover:underline"
                                                 >
                                                     @{{ element.url }}
                                                 </a>
@@ -593,14 +593,14 @@
                             <div class="grid gap-[4px] place-content-start text-right">
                                 <div class="flex gap-x-[20px] items-center">
                                     <p
-                                        class="text-red-600 cursor-pointer hover:underline"
+                                        class="text-red-600 cursor-pointer transition-all hover:underline"
                                         @click="remove(element)"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.delete-btn')
                                     </p>
 
                                     <p
-                                        class="text-blue-600 cursor-pointer hover:underline"
+                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
                                         @click="selectedSample = element; $refs.updateCreateSampleDrawer.open()"
                                     >
                                         @lang('admin::app.catalog.products.edit.types.downloadable.samples.edit-btn')
@@ -755,7 +755,7 @@
                                             <a
                                                 :href="selectedSample.sample_file_url"
                                                 target="_blank"
-                                                class="text-blue-600 hover:underline"
+                                                class="text-blue-600 transition-all hover:underline"
                                                 v-if="selectedSample.file_url"
                                             >
                                                 @{{ selectedSample.file_name }}

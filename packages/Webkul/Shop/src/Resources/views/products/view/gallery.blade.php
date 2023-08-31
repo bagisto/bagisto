@@ -1,5 +1,5 @@
 <v-product-gallery ref="gallery">
-    <x-shop::shimmer.products.gallery></x-shop::shimmer.products.gallery>
+    <x-shop::shimmer.products.gallery/>
 </v-product-gallery>
 
 @pushOnce('scripts')

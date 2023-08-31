@@ -47,23 +47,15 @@
 
                     {{-- Image --}}
                     <x-admin::form.control-group>
-                        <x-admin::form.control-group.control
-                            type="image"
-                            name="image"
-                            class="mb-0 !p-0 rounded-[12px] text-gray-700"
-                            :width="110"
-                            :height="110"
-                            :label="trans('admin::app.account.edit.profile-image')"
-                            :is-multiple="false"
-                            accepted-types="image/*"
-                            :src="isset($user) ? $user->image_url : ''"
-                        >
-                        </x-admin::form.control-group.control>
+                        @php
+                            $imageImages = $user->image ? [['id' => 'image', 'url' => $user->image_url]] : [];
+                        @endphp
 
-                        <x-admin::form.control-group.error
-                            control-name="image"
+                        <x-admin::media.images
+                            name="image"
+                            ::uploaded-images='{{ json_encode($imageImages) }}'
                         >
-                        </x-admin::form.control-group.error>
+                        </x-admin::media.images>
                     </x-admin::form.control-group>
 
                     <p class="my-5 text-[14px] text-gray-400">

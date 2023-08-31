@@ -21,7 +21,7 @@
         </div>
 
         {{-- DataGrid Shimmer --}}
-        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+        <x-admin::shimmer.datagrid/>
     </v-currencies>
 
     @pushOnce('scripts')
@@ -39,7 +39,7 @@
                     <button 
                         type="button"
                         class="primary-button"
-                        @click="id=0; $refs.currencyModal.toggle()"
+                        @click="id=0; $refs.currencyUpdateOrCreateModal.toggle()"
                     >
                         @lang('admin::app.settings.currencies.index.create-btn')
                     </button>
@@ -63,7 +63,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -135,8 +135,8 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, create)">
-                    <x-admin::modal ref="currencyModal">
+                <form @submit="handleSubmit($event, updateOrCreate)">
+                    <x-admin::modal ref="currencyUpdateOrCreateModal">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 <span v-if="id">
@@ -268,39 +268,22 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors  }) {
-                        if (params.id) {
-                            this.$axios.post("{{ route('admin.settings.currencies.update') }}", params)
-                            .then((response) => {
-                                this.$refs.currencyModal.close();
-    
-                                this.$refs.datagrid.get();
-    
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-    
-                                resetForm();
-                            })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                        } else {
-                            this.$axios.post('{{ route('admin.settings.currencies.store') }}', params)
-                                .then((response) => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                    updateOrCreate(params, { resetForm, setErrors  }) {
+                        this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : {{ route('admin.settings.currencies.store') }}, params)
+                        .then((response) => {
+                            this.$refs.currencyUpdateOrCreateModal.close();
 
-                                    this.$refs.currencyModal.close();
+                            this.$refs.datagrid.get();
 
-                                    this.$refs.datagrid.get();
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                                    resetForm();
-                                }).catch((error) =>{
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        }
+                            resetForm();
+                        })
+                        .catch(error => {
+                            if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                     },
 
                     editModal(id) {
@@ -314,7 +297,7 @@
                                     symbol: response.data.data.symbol,
                                 };
 
-                                this.$refs.currencyModal.toggle();
+                                this.$refs.currencyUpdateOrCreateModal.toggle();
 
                                 this.$refs.modalForm.setValues(values);
                             })

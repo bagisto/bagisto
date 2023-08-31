@@ -24,7 +24,7 @@
         </div>
 
         {{-- DataGrid Shimmer --}}
-        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+        <x-admin::shimmer.datagrid/>
     </v-tax-categories>
     
     @pushOnce('scripts')
@@ -68,7 +68,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -142,7 +142,7 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, store)">
+                <form @submit="handleSubmit($event, updateOrCreate)">
                     <x-admin::modal ref="taxCategory">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -311,48 +311,26 @@
                 },
 
                 methods: {
-                    store(params, { resetForm, setErrors }) {
-                        if (params.id) {
-                            this.$axios.post('{{ route('admin.settings.taxes.categories.update') }}', params,{
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                                }
+                    updateOrCreate(params, { resetForm, setErrors }) {
+                        this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}", params,{
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                            .then((response) => {
+                                this.$refs.taxCategory.toggle();
+
+                                this.$refs.datagrid.get();
+                                
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                                resetForm();
                             })
-                                .then((response) => {
-                                    this.$refs.taxCategory.toggle();
-
-                                    this.$refs.datagrid.get();
-                                    
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    resetForm();
-                                })
-                                .catch((error) =>{
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        } else {
-                            this.$axios.post('{{ route('admin.settings.taxes.categories.store') }}', params,{
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
+                            .catch((error) =>{
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
                                 }
-                            })
-                                .then((response) => {
-                                    this.$refs.taxCategory.toggle();
-
-                                    this.$refs.datagrid.get();
-                                    
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    resetForm();
-                                })
-                                .catch((error) =>{
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        }
+                            });
                     },
 
                     editModal(id) {

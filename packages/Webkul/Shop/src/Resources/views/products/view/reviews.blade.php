@@ -2,7 +2,7 @@
 
 <v-product-review :product-id="{{ $product->id }}">
     <div class="container max-1180:px-[20px]">
-        <x-shop::shimmer.products.reviews></x-shop::shimmer.products.reviews>
+        <x-shop::shimmer.products.reviews/>
     </div>
 </v-product-review>
 
@@ -139,7 +139,7 @@
             <div v-else>
                 <!-- Review Container Shimmer Effect -->
                 <template v-if="isLoading">
-                    <x-shop::shimmer.products.reviews></x-shop::shimmer.products.reviews>
+                    <x-shop::shimmer.products.reviews/>
                 </template>
 
                 <template v-else>

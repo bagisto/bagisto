@@ -84,7 +84,7 @@
                             </p>
 
                             <p
-                                class="text-red-600 cursor-pointer hover:underline"
+                                class="text-red-600 cursor-pointer transition-all hover:underline"
                                 @click="remove(type.key, product)"
                             >
                                 @lang('admin::app.catalog.products.edit.links.delete')

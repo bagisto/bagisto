@@ -22,7 +22,7 @@
         </div>
 
         {{-- DataGrid Shimmer --}}
-        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+        <x-admin::shimmer.datagrid/>
     </v-exchange-rates>
 
     @pushOnce('scripts')
@@ -41,7 +41,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="id=0; $refs.exchangeRate.toggle()"
+                            @click="id=0; $refs.exchangeRateUpdateOrCreateModal.toggle()"
                         >
                             @lang('admin::app.settings.exchange-rates.index.create-btn')
                         </button>
@@ -66,7 +66,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -138,9 +138,9 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, create)">
+                <form @submit="handleSubmit($event, updateOrCreate)">
                     <!-- Modal -->
-                    <x-admin::modal ref="exchangeRate">
+                    <x-admin::modal ref="exchangeRateUpdateOrCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -253,40 +253,22 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors }) {
-                        if (params.id) {
-                            this.$axios.post("{{ route('admin.settings.exchange_rates.update')  }}", params)
-                                .then((response) => {
-                                    this.$refs.exchangeRate.close();
-    
-                                    this.$refs.datagrid.get();
+                    updateOrCreate(params, { resetForm, setErrors }) {
+                        this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", params)
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-        
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        } else {
-                            this.$axios.post("{{ route('admin.settings.exchange_rates.store')  }}", params)
-                                .then((response) => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$refs.exchangeRateUpdateOrCreateModal.close();
 
-                                    this.$refs.exchangeRate.close();
+                                this.$refs.datagrid.get();
 
-                                    this.$refs.datagrid.get();
-    
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        }
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     editModal(id) {
@@ -298,7 +280,7 @@
                                     target_currency: response.data.data.exchangeRate.target_currency,
                                 };
 
-                                this.$refs.exchangeRate.toggle();
+                                this.$refs.exchangeRateUpdateOrCreateModal.toggle();
 
                                 this.$refs.modalForm.setValues(values);
                             })

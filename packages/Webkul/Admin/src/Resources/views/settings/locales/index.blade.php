@@ -20,7 +20,7 @@
         </div>
 
         {{-- DataGrid Shimmer --}}
-        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+        <x-admin::shimmer.datagrid/>
     </v-locales>
 
     @pushOnce('scripts')
@@ -34,7 +34,7 @@
                     <button 
                         type="button"
                         class="primary-button"
-                        @click="id=0; $refs.localeModal.toggle()"
+                        @click="id=0; $refs.localeUpdateOrCreateModal.toggle()"
                     >
                         @lang('admin::app.settings.locales.index.create-btn')
                     </button>
@@ -55,7 +55,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -130,8 +130,8 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, create)">
-                    <x-admin::modal ref="localeModal">
+                <form @submit="handleSubmit($event, updateOrCeate)">
+                    <x-admin::modal ref="localeUpdateOrCreateModal">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
                                 <span v-if="id">
@@ -284,47 +284,26 @@
                     }
                 },
                 methods: {
-                    create(params, { resetForm, setErrors  }) {
-                        if (params.id) {
-                            this.$axios.post('{{ route('admin.settings.locales.update') }}', params, {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
-                            })
-                            .then((response) => {
-                                this.$refs.localeModal.close();
-    
-                                this.$refs.datagrid.get();
-    
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-    
-                                resetForm();
-                            })
-                            .catch(error => {
-                                if (error.response.status ==422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                        } else {
-                            this.$axios.post('{{ route('admin.settings.locales.store') }}', params , {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
-                            })
-                            .then((response) => {
-                                this.$refs.localeModal.close();
-                                
-                                this.$refs.datagrid.get();
-                                
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                    updateOrCeate(params, { resetForm, setErrors  }) {
+                        this.$axios.post(params.id ? "{{ route('admin.settings.locales.update') }}" : "{{ route('admin.settings.locales.store') }}", params, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((response) => {
+                            this.$refs.localeUpdateOrCreateModal.close();
 
-                                resetForm();
-                            }).catch((error) => {
-                                if (error.response.status == 422) {
-                                    setErrors(error.response.data.errors);
-                                }
-                            });
-                        }
+                            this.$refs.datagrid.get();
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+
+                            resetForm();
+                        })
+                        .catch(error => {
+                            if (error.response.status ==422) {
+                                setErrors(error.response.data.errors);
+                            }
+                        });
                     },
 
                     editModal(id) {
@@ -343,7 +322,7 @@
                                     src: response.data.data.logo_url
                                 };
 
-                                this.$refs.localeModal.toggle();
+                                this.$refs.localeUpdateOrCreateModal.toggle();
 
                                 this.$refs.modalForm.setValues(values);
                             })

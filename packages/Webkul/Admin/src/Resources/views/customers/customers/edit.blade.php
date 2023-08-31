@@ -6,7 +6,7 @@
         @if (bouncer()->hasPermission('customers.customers.edit'))
             <button 
                 type="button"
-                class="flex gap-[6px] items-center justify-between px-[10px] text-blue-600 cursor-pointer"
+                class="flex gap-[6px] items-center justify-between px-[10px] text-blue-600 cursor-pointer transition-all hover:underline"
                 @click="$refs.customerEditModal.toggle()"
                 >
                 @lang('admin::app.customers.edit.edit-btn')

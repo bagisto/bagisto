@@ -6,7 +6,7 @@
 </div>
 
 {{-- Rating Shimmer --}}
-<x-shop::shimmer.products.reviews.ratings></x-shop::shimmer.products.reviews.ratings>
+<x-shop::shimmer.products.reviews.ratings/>
 
 {{-- Ratings By Individual Stars Shimmer --}}
 <div class="flex gap-x-[20px] items-center">

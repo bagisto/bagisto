@@ -2,7 +2,7 @@
 <span class="block w-full absolute left-0 my-[5px] border border-[#E9E9E9]"></span>
 
 <v-product-customer-group-price>
-    <x-admin::shimmer.products.edit.group-price></x-admin::shimmer.products.edit.group-price>
+    <x-admin::shimmer.products.edit.group-price/>
 </v-product-customer-group-price>
 
 @inject('customerGroupRepository', 'Webkul\Customer\Repositories\CustomerGroupRepository')
@@ -17,7 +17,7 @@
                 </p>
 
                 <p
-                    class="text-blue-600 cursor-pointer hover:underline"
+                    class="text-blue-600 cursor-pointer transition-all hover:underline"
                     @click="resetForm(); $refs.groupPriceCreateModal.open()"
                 >
                     @lang('admin::app.catalog.products.edit.price.group.create-btn')
@@ -46,7 +46,7 @@
                         </p>
 
                         <p
-                            class="text-blue-600 cursor-pointer hover:underline"
+                            class="text-blue-600 cursor-pointer transition-all hover:underline"
                             @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
