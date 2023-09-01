@@ -250,14 +250,6 @@
                                                 @lang('admin::app.settings.taxes.categories.index.create.empty-text')
                                             </p>
                                         </div>
-
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            name="taxrates[]" 
-                                            rules="required"
-                                            :label="trans('admin::app.settings.taxes.categories.index.create.tax-rates')"
-                                        >
-                                        </x-admin::form.control-group.control>
                                     </div>
                                 @else
                                     @foreach ($taxRates as $taxRate)
