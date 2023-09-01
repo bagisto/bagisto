@@ -1,4 +1,8 @@
 <x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.catalog.families.edit.title')
+    </x-slot:title>
+
     {{-- Input Form --}}
     <x-admin::form
         method="PUT"

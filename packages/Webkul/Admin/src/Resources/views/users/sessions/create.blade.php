@@ -13,7 +13,7 @@
                 alt="Bagisto Logo"
             >
 
-            <div class="flex flex-col bg-white rounded-[6px] box-shadow">
+            <div class="flex flex-col min-w-[300px] bg-white rounded-[6px] box-shadow">
                 {{-- Login Form --}}
                 <x-admin::form :action="route('admin.session.store')">
                     <div class="p-[16px]  ">

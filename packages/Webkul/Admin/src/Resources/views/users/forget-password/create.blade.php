@@ -13,7 +13,7 @@
                 alt="Bagisto Logo"
             >
 
-            <div class="flex flex-col bg-white rounded-[6px] box-shadow">
+            <div class="flex flex-colflex flex-col bg-white rounded-[6px] box-shadow box-shadow">
                 {{-- Forget Password Form --}}
                 <x-admin::form :action="route('admin.forget_password.store')">
                     <div class="p-[16px]  ">

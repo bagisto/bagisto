@@ -47,7 +47,7 @@
                                 v-for="column in $parent.available.columns"
                                 v-if="$parent.available.actions.length"
                                 class="flex gap-[5px] items-center"
-                                :class="{'cursor-pointer select-none': column.sortable}"
+                                :class="{'cursor-pointer select-none hover:text-gray-800': column.sortable}"
                                 @click="$parent.sortPage(column)"
                             >
                                 @{{ column.label }}
