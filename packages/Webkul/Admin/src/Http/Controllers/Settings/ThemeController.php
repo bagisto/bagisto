@@ -56,7 +56,7 @@ class ThemeController extends Controller
             $this->themeCustomizationRepository->uploadImage(request()->file('options'), $theme);
         }
 
-        session()->flash('success', 'admin::app.settings.themes.create-success');
+        session()->flash('success', trans('admin::app.settings.themes.create-success'));
 
         return redirect()->route('admin.theme.index');
     }
@@ -98,7 +98,7 @@ class ThemeController extends Controller
             );
         }
 
-        session()->flash('success', 'admin::app.settings.themes.update-success');
+        session()->flash('success', trans('admin::app.settings.themes.update-success'));
 
         return redirect()->route('admin.theme.index');
     }
@@ -113,7 +113,7 @@ class ThemeController extends Controller
         $this->themeCustomizationRepository->delete($id);
 
         return response()->json([
-            'message' => 'admin::app.settings.themes.delete-success',
+            'message' => trans('admin::app.settings.themes.delete-success'),
         ], 200);
     }
 }

@@ -3,18 +3,28 @@
         @lang('admin::app.settings.themes.edit.title')
     </x-slot:title>
    
-    <div class="flex justify-between items-center">
-        <p class="text-[20px] text-gray-800 font-bold">
-            @lang('admin::app.settings.themes.edit.title')
-        </p>
-        
-        <div class="flex gap-x-[10px] items-center">
-            <div class="flex gap-x-[10px] items-center h-[38px]">
+    <x-admin::form 
+        :action="route('admin.theme.update', $theme->id)"
+        enctype="multipart/form-data"
+        v-slot="{ errors }"
+    >
+        <div class="flex justify-between items-center">
+            <p class="text-[20px] text-gray-800 font-bold">
+                @lang('admin::app.settings.themes.edit.title')
+            </p>
+            
+            <div class="flex gap-x-[10px] items-center">
+                <button 
+                    type="submit"
+                    class="primary-button"
+                >
+                    @lang('admin::app.settings.themes.edit.save-btn')
+                </button>
             </div>
         </div>
-    </div>
-    
-    <v-theme-customizer></v-theme-customizer>
+
+        <v-theme-customizer :errors="errors"></v-theme-customizer>
+    </x-admin::form>
 
     @pushOnce('scripts')
         {{-- Customizer parent --}}
@@ -143,15 +153,19 @@
                     </div>
                 </div>
 
-                <KeepAlive>
-                    <component :is="componentName"></component>
-                </KeepAlive>
+                <component
+                    :errors="errors"
+                    :is="componentName"
+                >
+                </component>
             </div>
         </script>
 
         <script type="module">
             app.component('v-theme-customizer', {
                 template: '#v-theme-customizer-template',
+
+                props: ['errors'],
 
                 data() {
                     return {
@@ -182,192 +196,192 @@
         {{-- Slider theme --}}
         <script type="text/x-template" id="v-slider-theme-template">
             <div>
-                <x-admin::form 
-                    :action="route('admin.theme.update', $theme->id)"
-                    enctype="multipart/form-data"
-                >
-                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                            <div class="p-[16px] bg-white rounded box-shadow">
-                                <div class="flex gap-x-[10px] justify-between items-center">
-                                    <div class="flex flex-col gap-[4px]">
-                                        <p class="text-[16px] text-gray-800 font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
-                                        <p class="text-[12px] text-gray-500 font-medium">
-                                            @lang('admin::app.settings.themes.edit.slider-description')
-                                        </p>
-                                    </div>
-                    
+                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                        <div class="p-[16px] bg-white rounded box-shadow">
+                            <div class="flex gap-x-[10px] justify-between items-center">
+                                <div class="flex flex-col gap-[4px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">@lang('admin::app.settings.themes.edit.slider')</p>
                                     
-                                    <div class="flex gap-[10px]">
-                                        <div
-                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                            @click="$refs.addSliderModal.toggle()"
-                                        >
-                                            @lang('admin::app.settings.themes.edit.slider-add-btn')
-                                        </div>
-
-                                        <button
-                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                            type="submit"
-                                        >
-                                            @lang('admin::app.settings.themes.edit.save-btn')
-                                        </button>
-                                    </div>
+                                    <p class="text-[12px] text-gray-500 font-medium">
+                                        @lang('admin::app.settings.themes.edit.slider-description')
+                                    </p>
                                 </div>
-
-                                <template v-for="removeImage in removedImages">
-                                    <input type="text" class="hidden" :name="'removeImages[]'" :value="removeImage"/>    
-                                </template>
-
-                                <div
-                                    class="grid"
-                                    v-if="sliders.images.length"
-                                >
-                                    <!-- Single product column -->
-                                    <div    
-                                        class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
-                                        v-for="(image, index) in sliders.images"
+                
+                                
+                                <div class="flex gap-[10px]">
+                                    <div
+                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        @click="$refs.addSliderModal.toggle()"
                                     >
-                                        <input type="file" class="hidden" :name="'options[]'" :ref="'imageInput_' + index"/>    
-
-                                        <div class="flex items-center gap-[10px]">
-                                            <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                                <img 
-                                                    :src="'../../../../' + image"
-                                                    :ref="'image_' + index"
-                                                    class="w-[20px]"
-                                                >
-                                                
-                                                <p class="text-[6px] text-gray-400 font-semibold">Slider Image</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="grid gap-[4px] place-content-start">
-                                            <div class="flex gap-[10px]">
-                                                <p 
-                                                    class="text-red-600 cursor-pointer"
-                                                    @click="remove(image)"
-                                                >
-                                                    Delete
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div    
-                                    class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                                    v-else
-                                >
-                                    <img    
-                                        class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                        src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
-                                        alt="add-product-to-store"
-                                    >
-                    
-                                    <div class="flex flex-col items-center">
-                                        <p class="text-[16px] text-gray-400 font-semibold">
-                                            @lang('admin::app.settings.themes.edit.slider-add-btn')
-                                        </p>
-                                        
-                                        <p class="text-gray-400">
-                                            @lang('admin::app.settings.themes.edit.slider-description')
-                                        </p>
-                                    </div>
-                    
-                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
                                         @lang('admin::app.settings.themes.edit.slider-add-btn')
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    
-                          <!-- General -->
-                          <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                            <x-admin::accordion>
-                                <x-slot:header>
-                                    <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                        @lang('admin::app.settings.themes.edit.general')
+
+                            <template v-for="removeImage in removedImages">
+                                <input type="text" class="hidden" :name="'removeImages[]'" :value="removeImage"/>    
+                            </template>
+
+                            <div
+                                class="grid"
+                                v-if="sliders.images.length"
+                            >
+                                <!-- Single product column -->
+                                <div    
+                                    class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
+                                    v-for="(image, index) in sliders.images"
+                                >
+                                    <input type="file" class="hidden" :name="'options[]'" :ref="'imageInput_' + index"/>    
+
+                                    <div class="flex items-center gap-[10px]">
+                                        <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
+                                            <img 
+                                                :src="'../../../../' + image"
+                                                :ref="'image_' + index"
+                                                class="w-[20px]"
+                                            >
+                                            
+                                            <p class="text-[6px] text-gray-400 font-semibold">
+                                                @lang('admin::app.settings.themes.edit.slider-image')
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid gap-[4px] place-content-start">
+                                        <div class="flex gap-[10px]">
+                                            <p 
+                                                class="text-red-600 cursor-pointer"
+                                                @click="remove(image)"
+                                            >
+                                                @lang('admin::app.settings.themes.edit.delete')
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div    
+                                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                                v-else
+                            >
+                                <img    
+                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                    src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
+                                    alt="add-product-to-store"
+                                >
+                
+                                <div class="flex flex-col items-center">
+                                    <p class="text-[16px] text-gray-400 font-semibold">
+                                        @lang('admin::app.settings.themes.edit.slider-add-btn')
                                     </p>
-                                </x-slot:header>
-                            
-                                <x-slot:content>
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            name="type"
-                                            value="image_carousel"
-                                        >
-                                        </x-admin::form.control-group.control>
-                                    </x-admin::form.control-group>
-        
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.themes.edit.name')
-                                        </x-admin::form.control-group.label>
-        
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
-                                            :value="$theme->name"
-                                            rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.name')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.name')"
-                                        >
-                                        </x-admin::form.control-group.control>
-        
-                                        <x-admin::form.control-group.error
-                                            control-name="name"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-        
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.themes.edit.sort-order')
-                                        </x-admin::form.control-group.label>
-        
-                                        <x-admin::form.control-group.control
-                                            type="text"
-                                            name="sort_order"
-                                            :value="$theme->sort_order"
-                                            rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.sort-order')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                        >
-                                        </x-admin::form.control-group.control>
-        
-                                        <x-admin::form.control-group.error
-                                            control-name="sort_order"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-        
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.themes.edit.status')
-                                        </x-admin::form.control-group.label>
-        
-                                        <x-admin::form.control-group.control
-                                            type="switch"
-                                            name="status"
-                                            :value="$theme->status"
-                                            :label="trans('admin::app.settings.themes.edit.status')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.status')"
-                                            :checked="true"
-                                        >
-                                        </x-admin::form.control-group.control>
-        
-                                        <x-admin::form.control-group.error
-                                            control-name="status"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </x-slot:content>
-                            </x-admin::accordion>
+                                    
+                                    <p class="text-gray-400">
+                                        @lang('admin::app.settings.themes.edit.slider-description')
+                                    </p>
+                                </div>
+                
+                                <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                    @lang('admin::app.settings.themes.edit.slider-add-btn')
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </x-admin::form>
+                
+                        <!-- General -->
+                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                        <x-admin::accordion>
+                            <x-slot:header>
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.settings.themes.edit.general')
+                                </p>
+                            </x-slot:header>
+                        
+                            <x-slot:content>
+                                <input type="hidden" name="type" value="image_carousel">
+    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.themes.edit.name')
+                                    </x-admin::form.control-group.label>
+    
+                                    <v-field
+                                        type="text"
+                                        name="name"
+                                        value="{{ $theme->name }}"
+                                        rules="required"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                        label="@lang('admin::app.settings.themes.edit.name')"
+                                        placeholder="@lang('admin::app.settings.themes.edit.name')"
+                                    ></v-field>
+    
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.themes.edit.sort-order')
+                                    </x-admin::form.control-group.label>
+    
+                                    <v-field
+                                        type="text"
+                                        name="sort_order"
+                                        rules="required"
+                                        value="{{ $theme->sort_order }}"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                        label="@lang('admin::app.settings.themes.edit.sort-order')"
+                                        placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                    >
+                                    </v-field>
+    
+                                    <x-admin::form.control-group.error
+                                        control-name="sort_order"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+    
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.themes.edit.status')
+                                    </x-admin::form.control-group.label>
+    
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <v-field
+                                            type="checkbox"
+                                            name="status"
+                                            class="hidden"
+                                            v-slot="{ field }"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                name="status"
+                                                id="status"
+                                                value="{{ $theme->status }}"
+                                                class="sr-only peer"
+                                                v-bind="field"
+                                            />
+                                        </v-field>
+                            
+                                        <label
+                                            class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                            for="status"
+                                        ></label>
+                                    </label>
+    
+                                    <x-admin::form.control-group.error
+                                        control-name="status"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </x-slot:content>
+                        </x-admin::accordion>
+                    </div>
+                </div>
 
                 <x-admin::form
                     v-slot="{ meta, errors, handleSubmit }"
@@ -380,7 +394,8 @@
                         <x-admin::modal ref="addSliderModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    Update Slider
+                                    
+                                    @lang('admin::app.settings.themes.edit.update-slider')
                                 </p>
                             </x-slot:header>
         
@@ -388,7 +403,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            Slider Image
+                                            @lang('admin::app.settings.themes.edit.slider-image')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -427,6 +442,8 @@
         <script type="module">
             app.component('v-slider-theme', {
                 template: '#v-slider-theme-template',
+
+                props: ['errors'],
 
                 data() {
                     return {
@@ -475,254 +492,270 @@
 
         {{-- Product Theme --}}
         <script type="text/x-template" id="v-product-theme-template">
-            <div>
-                <x-admin::form 
-                    :action="route('admin.theme.update', $theme->id)"
-                    class="flex gap-[10px] mt-[14px] max-xl:flex-wrap"
-                >
-                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white rounded box-shadow">
-                            <div class="flex gap-x-[10px] justify-between items-center">
-                                <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
-                                        @lang('admin::app.settings.themes.edit.product-carousel')
-                                    </p>
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded box-shadow">
+                        <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex flex-col gap-[4px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.settings.themes.edit.product-carousel')
+                                </p>
 
-                                    <p class="text-[12px] text-gray-500 font-medium">
-                                        @lang('admin::app.settings.themes.edit.product-carousel-description')
-                                    </p>
-                                </div>
-                
-                                <div class="flex gap-[10px]">
-                                    <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        @click="$refs.productFilterModal.toggle()"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.add-filter-btn')
-                                    </div>
-
-                                    <button
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        type="submit"
-                                    >
-                                       @lang('admin::app.settings.themes.edit.save-btn')
-                                    </button>
-                                </div>
+                                <p class="text-[12px] text-gray-500 font-medium">
+                                    @lang('admin::app.settings.themes.edit.product-carousel-description')
+                                </p>
                             </div>
-
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.filter-title')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="options[title]"
-                                    ::value="options.title"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.filter-title')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.filter-title')"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="options[title]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.sort')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="options[sort]"
-                                    ::value="options.sort"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.sort')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.sort')"
-                                >
-                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
-                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="options[sort]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.limit')
-                                </x-admin::form.control-group.label>
-
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="options[limit]"
-                                    ::value="options.limit"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.limit')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.limit')"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="options[limit]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-
-                            <div v-if="options.filters.length">
+            
+                            <div class="flex gap-[10px]">
                                 <div
-                                    class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
-                                    v-for="filter in options.filters"
-                                >
-                                    <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
-
-                                    <!-- Information -->
-                                    <div class="flex gap-[10px]">
-                                        <!-- Details -->
-                                        <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-[16x] text-gray-800 font-semibold">
-                                                @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
-                                            </p>
-
-                                            <p class="text-[16x] text-gray-800 font-semibold">
-                                                @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
-                                            </p>
-                                        </div>
-                                    </div>
-    
-                                    <!-- Actions -->
-                                    <div class="flex gap-[4px] place-content-start text-right">
-                                        <p
-                                            class="text-red-600 cursor-pointer hover:underline"
-                                            @click="remove(filter)"
-                                        >
-                                            @lang('admin::app.settings.themes.edit.delete')
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div    
-                               class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                               v-else
-                            >
-                                <img
-                                    class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
-                                    src="{{ bagisto_asset('images/empty_theme.png') }}"
-                                    alt="add-product-to-store"
-                                >
-                
-                                <div class="flex flex-col items-center">
-                                    <p class="text-[16px] text-gray-400 font-semibold">
-                                        @lang('admin::app.settings.themes.edit.product-carousel')
-                                    </p>
-
-                                    <p class="text-gray-400">
-                                        @lang('admin::app.settings.themes.edit.product-carousel-description')
-                                    </p>
-                                </div>
-
-                                <div 
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.productFilterModal.toggle()"
                                 >
                                     @lang('admin::app.settings.themes.edit.add-filter-btn')
                                 </div>
+
+                                <button
+                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    type="submit"
+                                >
+                                    @lang('admin::app.settings.themes.edit.save-btn')
+                                </button>
+                            </div>
+                        </div>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.filter-title')
+                            </x-admin::form.control-group.label>
+
+                            <v-field
+                                type="text"
+                                name="options[title]"
+                                :value="options.title"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                rules="required"
+                                label="@lang('admin::app.settings.themes.edit.filter-title')"
+                                placeholder="@lang('admin::app.settings.themes.edit.filter-title')"
+                            >
+                            </v-field>
+
+                            <x-admin::form.control-group.error
+                                control-name="options[title]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.sort')
+                            </x-admin::form.control-group.label>
+
+                            <v-field
+                                name="options[sort]"
+                                v-slot="{ field }"
+                                rules="required"
+                                :value="options.sort"
+                                label="@lang('admin::app.settings.themes.edit.sort')"
+                            >
+                                <select
+                                    name="options[sort]"
+                                    v-bind="field"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                >
+                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
+                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
+                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
+                                </select>
+                            </v-field>
+
+                            <x-admin::form.control-group.error
+                                control-name="options[sort]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.limit')
+                            </x-admin::form.control-group.label>
+
+                            <v-field
+                                type="text"
+                                name="options[limit]"
+                                :value="options.limit"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                :class="[errors['options[limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                rules="required"
+                                label="@lang('admin::app.settings.themes.edit.limit')"
+                                placeholder="@lang('admin::app.settings.themes.edit.limit')"
+                            >
+                            </v-field>
+                            
+                            <x-admin::form.control-group.error
+                                control-name="options[limit]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div v-if="options.filters.length">
+                            <div
+                                class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                v-for="filter in options.filters"
+                            >
+                                <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+
+                                <!-- Information -->
+                                <div class="flex gap-[10px]">
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
+                                        </p>
+
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-[4px] place-content-start text-right">
+                                    <p
+                                        class="text-red-600 cursor-pointer hover:underline"
+                                        @click="remove(filter)"
+                                    >
+                                        @lang('admin::app.settings.themes.edit.delete')
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div    
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            v-else
+                        >
+                            <img
+                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
+                                src="{{ bagisto_asset('images/empty_theme.png') }}"
+                                alt="add-product-to-store"
+                            >
+            
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold">
+                                    @lang('admin::app.settings.themes.edit.product-carousel')
+                                </p>
+
+                                <p class="text-gray-400">
+                                    @lang('admin::app.settings.themes.edit.product-carousel-description')
+                                </p>
+                            </div>
+
+                            <div 
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.productFilterModal.toggle()"
+                            >
+                                @lang('admin::app.settings.themes.edit.add-filter-btn')
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- General -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                        <x-admin::accordion>
-                            <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.themes.edit.general')
-                                </p>
-                            </x-slot:header>
-                        
-                            <x-slot:content>
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="type"
-                                        value="product_carousel"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
+                <!-- General -->
+                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                    <x-admin::accordion>
+                        <x-slot:header>
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.themes.edit.general')
+                            </p>
+                        </x-slot:header>
+                    
+                        <x-slot:content>
+                            <input type="hidden" name="type" value="product_carousel">
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.name')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.name')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        rules="required"
-                                        :value="$theme->name"
-                                        :label="trans('admin::app.settings.themes.edit.name')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <v-field
+                                    type="text"
+                                    name="name"
+                                    value="{{ $theme->name }}"
+                                    rules="required"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    label="@lang('admin::app.settings.themes.edit.name')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.name')"
+                                >
+                                </v-field>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.sort-order')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.sort-order')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="sort_order"
-                                        rules="required"
-                                        :value="$theme->sort_order"
-                                        :label="trans('admin::app.settings.themes.edit.sort-order')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                <v-field
+                                    type="text"
+                                    name="sort_order"
+                                    value="{{ $theme->sort_order }}"
+                                    rules="required"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    label="@lang('admin::app.settings.themes.edit.sort-order')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                >
+                                </v-field>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
+                                <x-admin::form.control-group.error
+                                    control-name="sort_order"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.status')
-                                    </x-admin::form.control-group.label>
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.status')
+                                </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="switch"
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <v-field
+                                        type="checkbox"
                                         name="status"
-                                        :value="$theme->status"
-                                        :label="trans('admin::app.settings.themes.edit.status')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.status')"
-                                        :checked="true"
+                                        class="hidden"
+                                        v-slot="{ field }"
+                                        value="{{ $theme->status }}"
                                     >
-                                    </x-admin::form.control-group.control>
+                                        <input
+                                            type="checkbox"
+                                            name="status"
+                                            id="status"
+                                            class="sr-only peer"
+                                            v-bind="field"
+                                        />
+                                    </v-field>
+                        
+                                    <label
+                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                        for="status"
+                                    ></label>
+                                </label>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="status"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </x-slot:content>
-                        </x-admin::accordion>
-                    </div>
-                </x-admin::form>
+                                <x-admin::form.control-group.error
+                                    control-name="status"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </x-slot:content>
+                    </x-admin::accordion>
+                </div>
 
                 <!-- For Fitler Form -->
                 <x-admin::form
@@ -804,6 +837,8 @@
             app.component('v-product-theme', {
                 template: '#v-product-theme-template',
 
+                props: ['errors'],
+
                 data() {
                     return {
                         options: @json($theme->options),
@@ -839,161 +874,22 @@
 
         {{-- Category Theme --}}
         <script type="text/x-template" id="v-category-theme-template">
-            <div>
-                <x-admin::form 
-                    :action="route('admin.theme.update', $theme->id)"
-                    class="flex gap-[10px] mt-[14px] max-xl:flex-wrap"
-                >
-                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white rounded box-shadow">
-                            <div class="flex gap-x-[10px] justify-between items-center">
-                                <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
-                                        @lang('admin::app.settings.themes.edit.category-carousel')
-                                    </p>
-    
-                                    <p class="text-[12px] text-gray-500 font-medium">
-                                        @lang('admin::app.settings.themes.edit.category-carousel-description')
-                                    </p>
-                                </div>
-                
-                                <div class="flex gap-[10px]">
-                                    <div
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        @click="$refs.categoryFilterModal.toggle()"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.add-filter-btn')
-                                    </div>
-    
-                                    <button
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        type="submit"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.save-btn')
-                                    </button>
-                                </div>
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded box-shadow">
+                        <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex flex-col gap-[4px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.settings.themes.edit.category-carousel')
+                                </p>
+
+                                <p class="text-[12px] text-gray-500 font-medium">
+                                    @lang('admin::app.settings.themes.edit.category-carousel-description')
+                                </p>
                             </div>
-    
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.filter-title')
-                                </x-admin::form.control-group.label>
-    
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="options[title]"
-                                    ::value="options.title"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.filter-title')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.filter-title')"
-                                >
-                                </x-admin::form.control-group.control>
-    
-                                <x-admin::form.control-group.error
-                                    control-name="options[title]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-    
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.sort')
-                                </x-admin::form.control-group.label>
-    
-                                <x-admin::form.control-group.control
-                                    type="select"
-                                    name="options[sort]"
-                                    ::value="options.sort"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.sort')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.sort')"
-                                >
-                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
-                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
-                                </x-admin::form.control-group.control>
-    
-                                <x-admin::form.control-group.error
-                                    control-name="options[sort]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-    
-                            <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.limit')
-                                </x-admin::form.control-group.label>
-    
-                                <x-admin::form.control-group.control
-                                    type="text"
-                                    name="options[limit]"
-                                    ::value="options.limit"
-                                    rules="required"
-                                    :label="trans('admin::app.settings.themes.edit.limit')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.limit')"
-                                >
-                                </x-admin::form.control-group.control>
-    
-                                <x-admin::form.control-group.error
-                                    control-name="options[limit]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
-    
-                            <div v-if="options.filters.length">
+            
+                            <div class="flex gap-[10px]">
                                 <div
-                                    class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
-                                    v-for="filter in options.filters"
-                                >
-                                    <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
-    
-                                    <!-- Information -->
-                                    <div class="flex gap-[10px]">
-                                        <!-- Details -->
-                                        <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-[16x] text-gray-800 font-semibold">
-                                                @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
-                                            </p>
-        
-                                            <p class="text-[16x] text-gray-800 font-semibold">
-                                                @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
-                                            </p>
-                                        </div>
-                                    </div>
-    
-                                    <!-- Actions -->
-                                    <div class="flex gap-[4px] place-content-start text-right">
-                                        <p
-                                            class="text-red-600 cursor-pointer hover:underline"
-                                            @click="remove(filter)"
-                                        >
-                                            @lang('admin::app.settings.themes.edit.delete')
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div    
-                               class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
-                               v-else
-                            >
-                                <img
-                                    class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
-                                    src="{{ bagisto_asset('images/empty_theme.png') }}"
-                                    alt="add-category-to-store"
-                                >
-                
-                                <div class="flex flex-col items-center">
-                                    <p class="text-[16px] text-gray-400 font-semibold">
-                                        @lang('admin::app.settings.themes.edit.category-carousel')
-                                    </p>
-
-                                    <p class="text-gray-400">
-                                        @lang('admin::app.settings.themes.edit.category-carousel-description')
-
-                                    </p>
-                                </div>
-                
-                                <div 
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.categoryFilterModal.toggle()"
                                 >
@@ -1001,93 +897,242 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.filter-title')
+                            </x-admin::form.control-group.label>
+
+                            <v-field
+                                type="text"
+                                name="options[title]"
+                                :value="options.title"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                rules="required"
+                                label="@lang('admin::app.settings.themes.edit.filter-title')"
+                                placeholder="@lang('admin::app.settings.themes.edit.filter-title')"
+                            >
+                            </v-field>
+
+                            <x-admin::form.control-group.error
+                                control-name="options[title]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.sort')
+                            </x-admin::form.control-group.label>
+
+                            <v-field
+                                name="options[sort]"
+                                :value="options.sort"
+                                v-slot="{ field }"
+                                rules="required"
+                                label="@lang('admin::app.settings.themes.edit.sort')"
+                            >
+                                <select
+                                    name="options[sort]"
+                                    v-bind="field"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                >
+                                    <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
+                                    <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
+                                    <option value="asc">@lang('admin::app.settings.themes.edit.asc')</option>
+                                </select>
+                            </v-field>
+
+                            <x-admin::form.control-group.error
+                                control-name="options[sort]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.limit')
+                            </x-admin::form.control-group.label>
+
+                            <v-field
+                                type="text"
+                                name="options[limit]"
+                                :value="options.limit"
+                                class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                :class="[errors['options[limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                rules="required"
+                                label="@lang('admin::app.settings.themes.edit.limit')"
+                                placeholder="@lang('admin::app.settings.themes.edit.limit')"
+                            >
+                            </v-field>
+
+                            <x-admin::form.control-group.error
+                                control-name="options[limit]"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <div v-if="options.filters.length">
+                            <div
+                                class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                v-for="filter in options.filters"
+                            >
+                                <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+
+                                <!-- Information -->
+                                <div class="flex gap-[10px]">
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
+                                        </p>
     
-                    <!-- General -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                        <x-admin::accordion>
-                            <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.themes.edit.general')
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="flex gap-[4px] place-content-start text-right">
+                                    <p
+                                        class="text-red-600 cursor-pointer hover:underline"
+                                        @click="remove(filter)"
+                                    >
+                                        @lang('admin::app.settings.themes.edit.delete')
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div    
+                            class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            v-else
+                        >
+                            <img
+                                class="w-[120px] h-[120px] p-2 border border-dashed border-gray-300 rounded-[4px]"
+                                src="{{ bagisto_asset('images/empty_theme.png') }}"
+                                alt="add-category-to-store"
+                            >
+            
+                            <div class="flex flex-col items-center">
+                                <p class="text-[16px] text-gray-400 font-semibold">
+                                    @lang('admin::app.settings.themes.edit.category-carousel')
                                 </p>
-                            </x-slot:header>
-                        
-                            <x-slot:content>
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="type"
-                                        value="category_carousel"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
-    
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.name')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        :value="$theme->name"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.name')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-    
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.sort-order')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="sort_order"
-                                        :value="$theme->sort_order"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.sort-order')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                    >
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-    
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.status')
-                                    </x-admin::form.control-group.label>
-    
-                                    <x-admin::form.control-group.control
-                                        type="switch"
-                                        name="status"
-                                        :value="$theme->status"
-                                        :label="trans('admin::app.settings.themes.edit.status')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.status')"
-                                        :checked="true"
-                                    >
-                                    </x-admin::form.control-group.control>
-    
-                                    <x-admin::form.control-group.error
-                                        control-name="status"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </x-slot:content>
-                        </x-admin::accordion>
+
+                                <p class="text-gray-400">
+                                    @lang('admin::app.settings.themes.edit.category-carousel-description')
+
+                                </p>
+                            </div>
+            
+                            <div 
+                                class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                @click="$refs.categoryFilterModal.toggle()"
+                            >
+                                @lang('admin::app.settings.themes.edit.add-filter-btn')
+                            </div>
+                        </div>
                     </div>
-                </x-admin::form>
+                </div>
+
+                <!-- General -->
+                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                    <x-admin::accordion>
+                        <x-slot:header>
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.themes.edit.general')
+                            </p>
+                        </x-slot:header>
+                    
+                        <x-slot:content>
+                            <input type="hidden" name="type" value="category_carousel">
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.name')
+                                </x-admin::form.control-group.label>
+
+                                <v-field
+                                    type="text"
+                                    name="name"
+                                    value="{{ $theme->name }}"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    rules="required"
+                                    label="@lang('admin::app.settings.themes.edit.name')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.name')"
+                                >
+                                </v-field>
+
+                                <x-admin::form.control-group.error
+                                    control-name="name"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.sort-order')
+                                </x-admin::form.control-group.label>
+
+                                <v-field
+                                    type="text"
+                                    name="sort_order"
+                                    value="{{ $theme->sort_order }}"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    rules="required"
+                                    label="@lang('admin::app.settings.themes.edit.sort-order')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                >
+                                </v-field>
+
+                                <x-admin::form.control-group.error
+                                    control-name="sort_order"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.status')
+                                </x-admin::form.control-group.label>
+
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <v-field
+                                        type="checkbox"
+                                        name="status"
+                                        class="hidden"
+                                        v-slot="{ field }"
+                                        value="{{ $theme->sort_order }}"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            name="status"
+                                            id="status"
+                                            class="sr-only peer"
+                                            v-bind="field"
+                                            :checked="{{ $theme->sort_order }}"
+                                        />
+                                    </v-field>
+                        
+                                    <label
+                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                        for="status"
+                                    ></label>
+                                </label>
+
+                                <x-admin::form.control-group.error
+                                    control-name="status"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </x-slot:content>
+                    </x-admin::accordion>
+                </div>
     
                 <!-- For Fitler Form -->
                 <x-admin::form
@@ -1168,7 +1213,9 @@
         <script type="module">
             app.component('v-category-theme', {
                 template: '#v-category-theme-template',
-    
+
+                props: ['errors'],
+
                 data() {
                     return {
                         options: @json($theme->options),
@@ -1204,167 +1251,174 @@
 
         {{-- Static Theme --}}
         <script type="text/x-template" id="v-static-theme-template">
-            <div>
-                <x-admin::form 
-                    :action="route('admin.theme.update', $theme->id)"
-                    class="flex gap-[10px] mt-[14px] max-xl:flex-wrap"
-                >
-                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                        <div class="p-[16px] bg-white rounded box-shadow">
-                            <div class="flex gap-x-[10px] justify-between items-center">
-                                <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
-                                        @lang('admin::app.settings.themes.edit.static-content')
-                                    </p>
-    
-                                    <p class="text-[12px] text-gray-500 font-medium">
-                                        @lang('admin::app.settings.themes.edit.static-content-description')
-                                    </p>
-                                </div>
-                
-                                <div class="flex gap-[10px]">
-                                    <button
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                        type="submit"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.save-btn')
-                                    </button>
-                                </div>
+            <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                    <div class="p-[16px] bg-white rounded box-shadow">
+                        <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex flex-col gap-[4px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.settings.themes.edit.static-content')
+                                </p>
+
+                                <p class="text-[12px] text-gray-500 font-medium">
+                                    @lang('admin::app.settings.themes.edit.static-content-description')
+                                </p>
                             </div>
-    
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.label for="status">
-                                    @lang('admin::app.settings.themes.edit.html')
+            
+                            <div class="flex gap-[10px]">
+                                <button
+                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    type="submit"
+                                >
+                                    @lang('admin::app.settings.themes.edit.save-btn')
+                                </button>
+                            </div>
+                        </div>
+
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label for="status">
+                                @lang('admin::app.settings.themes.edit.html')
+                            </x-admin::form.control-group.label>
+
+                            <div
+                                class="max-w-[870px]"
+                                ref="html"
+                            >
+                            </div>
+
+                            <v-field
+                                type="hidden"
+                                name="options[html]"
+                                v-model="options.html"
+                            >
+                            </v-field>
+
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.settings.themes.edit.css')
+                            </x-admin::form.control-group.label>
+
+                            <div
+                                class="max-w-[870px]"
+                                ref="css"
+                            >
+                            </div>
+
+                            <v-field
+                                type="hidden"
+                                name="options[css]"
+                                v-model="options.css"
+                            >
+                            </v-field>
+                        </x-admin::form.control-group>
+                    </div>
+                </div>
+
+                <!-- General -->
+                <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                    <x-admin::accordion>
+                        <x-slot:header>
+                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                @lang('admin::app.settings.themes.edit.general')
+                            </p>
+                        </x-slot:header>
+                    
+                        <x-slot:content>
+                            <input type="hidden" name="type" value="static_content">
+
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
 
-                                <div
-                                    class="max-w-[870px]"
-                                    ref="html"
+                                <v-field
+                                    type="text"
+                                    name="name"
+                                    value="{{ $theme->name }}"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    rules="required"
+                                    label="@lang('admin::app.settings.themes.edit.name')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.name')"
                                 >
-                                </div>
+                                </v-field>
 
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="options[html]"
-                                    v-model="options.html"
+                                <x-admin::form.control-group.error
+                                    control-name="name"
                                 >
-                                </x-admin::form.control-group.control>
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
 
+                            <x-admin::form.control-group class="mb-[10px]">
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.themes.edit.sort-order')
+                                </x-admin::form.control-group.label>
+
+                                <v-field
+                                    type="text"
+                                    name="sort_order"
+                                    value="{{ $theme->sort_order }}"
+                                    rules="required"
+                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    label="@lang('admin::app.settings.themes.edit.sort-order')"
+                                    placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                >
+                                </v-field>
+
+                                <x-admin::form.control-group.error
+                                    control-name="sort_order"
+                                >
+                                </x-admin::form.control-group.error>
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
                                 <x-admin::form.control-group.label>
-                                    @lang('admin::app.settings.themes.edit.css')
+                                    @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
 
-                                <div
-                                    class="max-w-[870px]"
-                                    ref="css"
-                                >
-                                </div>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="options[css]"
-                                    v-model="options.css"
-                                >
-                                </x-admin::form.control-group.control>
-
-                            </x-admin::form.control-group>
-                        </div>
-                    </div>
-    
-                    <!-- General -->
-                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                        <x-admin::accordion>
-                            <x-slot:header>
-                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.themes.edit.general')
-                                </p>
-                            </x-slot:header>
-                        
-                            <x-slot:content>
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.control
-                                        type="hidden"
-                                        name="type"
-                                        value="static_content"
-                                    >
-                                    </x-admin::form.control-group.control>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.name')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="name"
-                                        :value="$theme->name"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.name')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.name')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="name"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.sort-order')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="text"
-                                        name="sort_order"
-                                        :value="$theme->sort_order"
-                                        rules="required"
-                                        :label="trans('admin::app.settings.themes.edit.sort-order')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
-                                    >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="sort_order"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-
-                                <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.themes.edit.status')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="switch"
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <v-field
+                                        type="checkbox"
                                         name="status"
-                                        :value="$theme->status"
-                                        :label="trans('admin::app.settings.themes.edit.status')"
-                                        :placeholder="trans('admin::app.settings.themes.edit.status')"
-                                        :checked="true"
+                                        class="hidden"
+                                        v-slot="{ field }"
+                                        value="{{ $theme->sort_order }}"
                                     >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="status"
-                                    >
-                                    </x-admin::form.control-group.error>
-                                </x-admin::form.control-group>
-                            </x-slot:content>
-                        </x-admin::accordion>
-                    </div>
-                </x-admin::form>
+                                        <input
+                                            type="checkbox"
+                                            name="status"
+                                            id="status"
+                                            class="sr-only peer"
+                                            v-bind="field"
+                                            :checked="{{ $theme->sort_order }}"
+                                        />
+                                    </v-field>
+                        
+                                    <label
+                                        class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                        for="status"
+                                    ></label>
+                                </label>
+                                
+                                <x-admin::form.control-group.error
+                                    control-name="status"
+                                >
+                                </x-admin::form.control-group.error>
+                            </x-admin::form.control-group>
+                        </x-slot:content>
+                    </x-admin::accordion>
+                </div>
             </div>
         </script>
 
         <script type="module">
             app.component('v-static-theme', {
                 template: '#v-static-theme-template',
+
+                props: ['erros'],
 
                 data() {
                     return {
@@ -1414,102 +1468,300 @@
             });
         </script>
 
-           {{-- Footer Link --}}
-           <script type="text/x-template" id="v-footer-link-theme-template">
+        {{-- Footer Link --}}
+        <script type="text/x-template" id="v-footer-link-theme-template">
             <div>
-                <x-admin::form :action="''">
-                    <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                        <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
-                            <div class="p-[16px] bg-white rounded box-shadow">
-                                <div class="flex gap-x-[10px] justify-between items-center">
-                                    <div class="flex flex-col gap-[4px]">
-                                        <p class="text-[16px] text-gray-800 font-semibold">
-                                            @lang('admin::app.settings.themes.edit.footer-link')
-                                        </p>
-        
-                                        <p class="text-[12px] text-gray-500 font-medium">
-                                            @lang('admin::app.settings.themes.edit.footer-link-description')
-                                        </p>
-                                    </div>
-
-                                    <div class="flex gap-[10px]">
-                                        <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                            @lang('admin::app.settings.themes.edit.add-footer-link-btn')
-                                        </div>
-        
-                                        <button
-                                            class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                            type="submit"
-                                        >
-                                            @lang('admin::app.settings.themes.edit.save-btn')
-                                        </button>
-                                    </div>
+                <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+                    <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                        <div class="p-[16px] bg-white rounded box-shadow">
+                            <div class="flex gap-x-[10px] justify-between items-center">
+                                <div class="flex flex-col gap-[4px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.edit.footer-link')
+                                    </p>
+    
+                                    <p class="text-[12px] text-gray-500 font-medium">
+                                        @lang('admin::app.settings.themes.edit.footer-link-description')
+                                    </p>
                                 </div>
-        
-                                <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
-                                    <img
-                                        class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
-                                        src="http://192.168.15.62/bagisto-admin-panel/resources/images/placeholder/add-product-to-store.png"
-                                        alt="add-product-to-store"
+                            </div>
+
+                            <!-- Add Links-->
+                            <div class="flex gap-x-[10px] justify-between items-center">
+                                <div class="flex flex-col gap-[4px]">
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        @lang('admin::app.settings.themes.edit.filters')
+                                    </p>
+                                </div>
+                
+                                <div class="flex gap-[10px]">
+                                    <div
+                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        @click="isUpdating=false;$refs.addLinksModal.toggle()"
                                     >
-                    
-                                    <div class="flex flex-col items-center">
-                                        <p class="text-[16px] text-gray-400 font-semibold">
-                                            @lang('admin::app.settings.themes.edit.footer-link')
-                                            
-                                        </p>
-        
-                                        <p class="text-gray-400">
-                                            @lang('admin::app.settings.themes.edit.footer-link-description')
-                                        </p>
-                                    </div>
-                    
-                                    <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
-                                        @lang('admin::app.settings.themes.edit.add-footer-link-btn')
+                                        @lang('admin::app.settings.themes.edit.add-links')
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    
-                        <!-- General -->
-                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                            <x-admin::accordion>
-                                <x-slot:header>
-                                    <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                        @lang('admin::app.settings.themes.edit.general')
-                                    </p>
-                                </x-slot:header>
-                            
-                                <x-slot:content>
-                                    <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.control
-                                            type="hidden"
-                                            name="type"
-                                            value="slider_carousel"
+    
+                            <div
+                                v-if="Object.keys(footerLinks).length"
+                                v-for="(footerLink, index) in footerLinks"
+                            >
+                                <!-- Information -->
+                                <div 
+                                    class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                    v-for="(link, key) in footerLink"
+                                >
+                                    <input type="hidden" :name="'options['+ link.column +'][' + key +']'" :value="link.column"> 
+                                    <input type="hidden" :name="'options['+ link.column +'][' + key +'][url]'" :value="link.url"> 
+                                    <input type="hidden" :name="'options['+ link.column +'][' + key +'][title]'" :value="link.title"> 
+                                    <input type="hidden" :name="'options['+ link.column +'][' + key +'][sort_order]'" :value="link.sort_order"> 
+                                
+                                    <!-- Details -->
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @lang('admin::app.settings.themes.edit.column'): @{{ link.column }}
+                                        </p>
+
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @lang('admin::app.settings.themes.edit.url'): @{{ link.url }}
+                                        </p>
+
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @lang('admin::app.settings.themes.edit.title'): @{{ link.title }}
+                                        </p>
+
+                                        <p class="text-[16x] text-gray-800 font-semibold">
+                                            @lang('admin::app.settings.themes.edit.sort-order'): @{{ link.sort_order }}
+                                        </p>
+                                    </div>
+
+                                    <div class="flex gap-[4px] place-content-start text-right">
+                                        <p
+                                            class="text-blue-600 cursor-pointer hover:underline"
+                                            @click="edit(link)"
                                         >
-                                        </x-admin::form.control-group.control>
-                                    </x-admin::form.control-group>
+                                            @lang('admin::app.settings.themes.edit.edit')
+                                        </p>
+
+                                        <p
+                                            class="text-red-600 cursor-pointer hover:underline"
+                                            @click="remove(link)"
+                                        >
+                                            @lang('admin::app.settings.themes.edit.delete')
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div   
+                                v-else
+                                class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
+                            >
+                                <img
+                                    class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]"
+                                    src="{{ bagisto_asset('images/empty_theme.png') }}"
+                                    alt="add-product-to-store"
+                                >
+                
+                                <div class="flex flex-col items-center">
+                                    <p class="text-[16px] text-gray-400 font-semibold">
+                                        @lang('admin::app.settings.themes.edit.footer-link')
+                                        
+                                    </p>
+    
+                                    <p class="text-gray-400">
+                                        @lang('admin::app.settings.themes.edit.footer-link-description')
+                                    </p>
+                                </div>
+                
+                                <div class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer">
+                                    @lang('admin::app.settings.themes.edit.add-footer-link-btn')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- General -->
+                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                        <x-admin::accordion>
+                            <x-slot:header>
+                                <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                    @lang('admin::app.settings.themes.edit.general')
+                                </p>
+                            </x-slot:header>
+                        
+                            <x-slot:content>
+                                <input type="hidden" name="type" value="footer_links">
+
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.themes.edit.name')
+                                    </x-admin::form.control-group.label>
+    
+                                    <v-field
+                                        type="text"
+                                        name="name"
+                                        value="{{ $theme->name }}"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                        rules="required"
+                                        label="@lang('admin::app.settings.themes.edit.name')"
+                                        placeholder="@lang('admin::app.settings.themes.edit.name')"
+                                    >
+                                    </v-field>
+    
+                                    <x-admin::form.control-group.error
+                                        control-name="name"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+    
+                                <x-admin::form.control-group class="mb-[10px]">
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.themes.edit.sort-order')
+                                    </x-admin::form.control-group.label>
+
+                                    <v-field
+                                        type="text"
+                                        name="sort_order"
+                                        value="{{ $theme->sort_order }}"
+                                        class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                        :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                        rules="required"
+                                        label="@lang('admin::app.settings.themes.edit.sort-order')"
+                                        placeholder="@lang('admin::app.settings.themes.edit.sort-order')"
+                                    >
+                                    </v-field>
+    
+                                    <x-admin::form.control-group.error
+                                        control-name="sort_order"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+    
+                                <x-admin::form.control-group>
+                                    <x-admin::form.control-group.label>
+                                        @lang('admin::app.settings.themes.edit.status')
+                                    </x-admin::form.control-group.label>
+    
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <v-field
+                                            type="checkbox"
+                                            name="status"
+                                            class="hidden"
+                                            v-slot="{ field }"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                name="status"
+                                                id="status"
+                                                value="{{ $theme->status }}"
+                                                class="sr-only peer"
+                                                v-bind="field"
+                                            />
+                                        </v-field>
+                            
+                                        <label
+                                            class="rounded-full dark:peer-focus:ring-blue-800 peer-checked:bg-blue-600 w-[36px] h-[20px] bg-gray-200 cursor-pointer peer-focus:ring-blue-300 after:bg-white after:border-gray-300 peer-checked:bg-navyBlue peer peer-checked:after:border-white peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] peer-focus:outline-none after:border after:rounded-full after:h-[16px] after:w-[16px] after:transition-all"
+                                            for="status"
+                                        ></label>
+                                    </label>
+    
+                                    <x-admin::form.control-group.error
+                                        control-name="status"
+                                    >
+                                    </x-admin::form.control-group.error>
+                                </x-admin::form.control-group>
+                            </x-slot:content>
+                        </x-admin::accordion>
+                    </div>
+                </div>
+
+                <!-- For Fitler Form -->
+                <x-admin::form
+                    v-slot="{ meta, errors, handleSubmit }"
+                    as="div"
+                    ref="footerLinkUpdateOrCreateModal"
+                >
+                    <form @submit="handleSubmit($event, updateOrCreate)">
+                        <x-admin::modal ref="addLinksModal">
+                            <x-slot:header>
+                                <p class="text-[18px] text-gray-800 font-bold">
+                                    @lang('admin::app.settings.themes.edit.create-filter')
+                                </p>
+                            </x-slot:header>
         
+                            <x-slot:content>
+                                <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.themes.edit.name')
+                                            @lang('admin::app.settings.themes.edit.column')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
-                                            type="text"
-                                            name="name"
+                                            type="select"
+                                            name="column"
                                             rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.name')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.name')"
+                                            :label="trans('admin::app.settings.themes.edit.column')"
+                                            :placeholder="trans('admin::app.settings.themes.edit.column')"
+                                            ::disabled="isUpdating"
                                         >
+                                            <option value="column_1">1</option>
+                                            <option value="column_2">2</option>
+                                            <option value="column_3">3</option>
+                                            <option value="column_4">4</option>
+                                            <option value="column_5">5</option>
                                         </x-admin::form.control-group.control>
         
                                         <x-admin::form.control-group.error
-                                            control-name="name"
+                                            control-name="column"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
         
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.edit.title')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="title"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.edit.title')"
+                                            :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="title"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+        
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.settings.themes.edit.url')
+                                        </x-admin::form.control-group.label>
+        
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="url"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.themes.edit.url')"
+                                            :placeholder="trans('admin::app.settings.themes.edit.url')"
+                                            ::disabled="isUpdating"
+                                        >
+                                        </x-admin::form.control-group.control>
+        
+                                        <x-admin::form.control-group.error
+                                            control-name="url"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.themes.edit.sort-order')
@@ -1518,7 +1770,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="sort_order"
-                                            rules="required"
+                                            rules="required|numeric"
                                             :label="trans('admin::app.settings.themes.edit.sort-order')"
                                             :placeholder="trans('admin::app.settings.themes.edit.sort-order')"
                                         >
@@ -1529,31 +1781,22 @@
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
         
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.themes.edit.status')
-                                        </x-admin::form.control-group.label>
-        
-                                        <x-admin::form.control-group.control
-                                            type="switch"
-                                            name="status"
-                                            :value="1"
-                                            :label="trans('admin::app.settings.themes.edit.status')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.status')"
-                                            :checked="true"
-                                        >
-                                        </x-admin::form.control-group.control>
-        
-                                        <x-admin::form.control-group.error
-                                            control-name="status"
-                                        >
-                                        </x-admin::form.control-group.error>
-                                    </x-admin::form.control-group>
-                                </x-slot:content>
-                            </x-admin::accordion>
-                        </div>
-                    </div>
+                            <x-slot:footer>
+                                <div class="flex gap-x-[10px] items-center">
+                                    <!-- Save Button -->
+                                    <button 
+                                        type="submit"
+                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    >
+                                        @lang('admin::app.settings.themes.edit.save-btn')
+                                    </button>
+                                </div>
+                            </x-slot:footer>
+                        </x-admin::modal>
+                    </form>
                 </x-admin::form>
             </div>
         </script>
@@ -1562,11 +1805,66 @@
             app.component('v-footer-link-theme', {
                 template: '#v-footer-link-theme-template',
 
+                props: ['errors'],
+
                 data() {
                     return {
-                        footerLinks: {},
+                        footerLinks: @json($theme->options),
+
+                        isUpdating: false,
                     };
                 },
+
+                mounted() {
+                    Object.keys(this.footerLinks).forEach(key => {
+                        this.footerLinks[key] = this.footerLinks[key].map(item => ({
+                            ...item,
+                            column: key
+                        }));
+                    });
+                },
+
+                methods: {
+                    updateOrCreate(params) {
+                        let updatedFooterLinks = this.footerLinks[params.column].map((item) => {
+                            if (item.url === params.url) {
+                                return params;
+                            }
+
+                            return item;
+                        });
+
+                        this.footerLinks[params.column] = updatedFooterLinks;
+
+                        if (! updatedFooterLinks.some((item) => item.url === params.url)) {
+                            if (!this.footerLinks.hasOwnProperty(params.column)) {
+                                this.footerLinks[params.column] = []; 
+                            }
+                            
+                            this.footerLinks[params.column].push(params);
+                        }
+
+                        this.$refs.addLinksModal.toggle();
+                    },
+
+                    remove(footerLink) {
+                        if (
+                            this.footerLinks.hasOwnProperty(footerLink.column) &&
+                            Array.isArray(this.footerLinks[footerLink.column]) &&
+                            this.footerLinks[footerLink.column].length > 0
+                        ) {
+                            this.footerLinks[footerLink.column].splice(0, 1);
+                        }
+                    },
+
+                    edit(footerLink) {
+                        this.isUpdating = true;
+
+                        this.$refs.footerLinkUpdateOrCreateModal.setValues(footerLink);
+
+                        this.$refs.addLinksModal.toggle();
+                    },
+                }
             });
         </script>
 

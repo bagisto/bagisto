@@ -2535,7 +2535,14 @@ return [
                 'css'                           => 'css',
                 'add-footer-link-btn'           => 'Add Footer Link',
                 'filters'                       => 'Filters',
-            ],
+                'edit'                          => 'Edit',
+                'url'                           => 'Url',
+                'add-links'                     => 'Add Links',
+                'create-slider'                 => 'Create Slider',
+                'slider-image'                  => 'Slider Image',
+                'column'                        => 'Column',
+                'select'                        => 'Select',
+             ],
 
             'edit' => [
                 'title'                         => 'Edit Theme',
@@ -2570,6 +2577,14 @@ return [
                 'html'                          => 'html',
                 'css'                           => 'css',
                 'add-footer-link-btn'           => 'Add Footer Link',
+                'filters'                       => 'Filters',
+                'slider-image'                  => 'Slider Image',
+                'update-slider'                 => 'Update Slider',
+                'select'                        => 'Select',
+                'add-links'                     => 'Add Links',
+                'column'                        => 'Column',
+                'url'                           => 'Url',
+                'edit'                          => 'Edit'
             ],
 
             'create-success' => 'Theme created successfully',
