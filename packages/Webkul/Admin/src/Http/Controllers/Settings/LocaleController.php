@@ -39,6 +39,8 @@ class LocaleController extends Controller
      */
     public function store(): JsonResource
     {
+        dd(request()->all());
+
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
             'name'      => 'required',
@@ -49,8 +51,9 @@ class LocaleController extends Controller
             'code',
             'name',
             'direction',
-            'logo_path'
         ]);
+        
+        $data['logo_path'] = request()->file('logo_path');
 
         $this->localeRepository->create($data);
 
@@ -81,6 +84,8 @@ class LocaleController extends Controller
      */
     public function update(): JsonResource
     {
+        dd(request()->all());
+
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code,' . request()->id, new \Webkul\Core\Rules\Code],
             'name'      => 'required',
@@ -91,8 +96,9 @@ class LocaleController extends Controller
             'code',
             'name',
             'direction',
-            'logo_path'
         ]);
+
+        $data['logo_path'] = request()->file('logo_path');
 
         $this->localeRepository->update($data, request()->id);
 
@@ -105,14 +111,14 @@ class LocaleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\Response|JsonResource
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->localeRepository->findOrFail($id);
 
         if ($this->localeRepository->count() == 1) {
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.settings.locales.index.last-delete-error'),
             ], 400);
         }
@@ -126,8 +132,8 @@ class LocaleController extends Controller
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.settings.locales.index.delete-failed', ['name' => trans('admin::app.settings.locales.index.locales')]),
+        return response()->json([
+            'message' => trans('admin::app.settings.locales.index.delete-failed'),
         ], 500);
     }
 }

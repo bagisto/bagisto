@@ -1986,7 +1986,6 @@ return [
                 'title'             => 'Locales',
                 'locale'            => 'Locale',
                 'create-btn'        => 'Create Locale',
-                'last-delete-error' => 'At least one Locale is required.',
 
                 'datagrid' => [
                     'actions'   => 'Actions',
@@ -2016,9 +2015,9 @@ return [
                 'create-success'    => 'Locale created successfully.',
                 'update-success'    => 'Locale updated successfully.',
                 'delete-success'    => 'Locale deleted successfully.',
-                'delete-failed'     => ':name deleted Failed',
-                'last-delete-error' => 'Last Locale Can Not Be Deleted.',
-
+                'last-delete-error' => 'At least one Locale is required.',
+                'delete-warning'    => 'Are you sure, you want to perform this action?',
+                'delete-failed'     => 'Locale deletion failed',
             ],
         ],
 

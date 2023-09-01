@@ -224,28 +224,11 @@
                                         @lang('admin::app.settings.locales.index.create.locale-logo')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
+                                    <x-admin::media.images
                                         name="logo_path[image_1]"
-                                        id="direction"
-                                        v-if="id"
-                                        ref="image"
-                                        :label="trans('admin::app.settings.locales.index.create.locale-logo')"
-                                        accepted-types="image/*"
-                                        ::src="image.src"
+                                        ::uploaded-images='image'
                                     >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.control
-                                        type="image"
-                                        name="logo_path[image_1]"
-                                        id="direction"
-                                        v-if="! id"
-                                        ref="image"
-                                        :label="trans('admin::app.settings.locales.index.create.locale-logo')"
-                                        accepted-types="image/*"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    </x-admin::media.images>
 
                                     <x-admin::form.control-group.error
                                         control-name="logo_path[image_1]"
@@ -280,7 +263,7 @@
                     return {
                         id: 0,
 
-                        image: {},
+                        image: [],
                     }
                 },
                 methods: {
@@ -300,7 +283,7 @@
                             resetForm();
                         })
                         .catch(error => {
-                            if (error.response.status ==422) {
+                            if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }
                         });
@@ -309,41 +292,34 @@
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.settings.locales.edit', '') }}/${id}`)
                             .then((response) => {
-                                let values = {
-                                    id: response.data.data.id,
-                                    code: response.data.data.code,
-                                    name: response.data.data.name,
-                                    direction: response.data.data.direction,
-                                    logo_path: response.data.data.logo_url,
-                                };
+                                this.image = [{
+                                    id: 'logo_path[image_1]',
+                                    url: response.data.data.logo_url
+                                }];
 
-                                this.image = {
-                                    id: response.data.data.id,
-                                    src: response.data.data.logo_url
-                                };
+                                this.$refs.modalForm.setValues(response.data.data);
 
                                 this.$refs.localeUpdateOrCreateModal.toggle();
-
-                                this.$refs.modalForm.setValues(values);
                             })
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm('@lang('admin::app.settings.locales.index.delete-warning')')) {
                             return;
                         }
 
-                        this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                        this.$axios.delete(url)
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
-                                if (error.response.status ==422) {
+                                if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
+                                } else if(error.response.status == 500) {
+                                    console.log(error.response.data.message);
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message});
                                 }
                             });
                     }
