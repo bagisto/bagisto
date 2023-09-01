@@ -18,13 +18,11 @@ if (! function_exists('bagisto_asset')) {
     /**
      * Bagisto asset.
      *
-     * @param  string  $path
-     * @param  string  $secure
      * @return string
      */
-    function bagisto_asset($path, $secure = null)
+    function bagisto_asset(string $path, ?string $namespace = null)
     {
-        return themes()->url($path, $secure);
+        return themes()->url($path, $namespace);
     }
 }
 
