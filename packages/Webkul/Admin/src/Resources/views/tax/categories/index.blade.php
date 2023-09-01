@@ -318,7 +318,6 @@
             </x-admin::form>
         </script>
 
-
         <script type="module">
             app.component('v-tax-categories', {
                 template: '#v-tax-categories-template',
@@ -332,8 +331,7 @@
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetFor
-m, setErrors }) {
+                    updateOrCreate(params, { resetForm, setErrors }) {
                         this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}", params,{
                             headers: {
                                 'Content-Type': 'multipart/form-data'
