@@ -13,7 +13,7 @@
     <script type="text/x-template" id="v-cart-summary-template">
         <template v-if="isCartLoading">
             <!-- onepage Summary Shimmer Effect -->
-            <x-shop::shimmer.checkout.onepage.cart-summary></x-shop::shimmer.checkout.onepage.cart-summary>
+            <x-shop::shimmer.checkout.onepage.cart-summary/>
         </template>
 
         <template v-else>

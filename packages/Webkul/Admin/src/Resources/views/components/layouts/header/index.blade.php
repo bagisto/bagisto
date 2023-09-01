@@ -41,7 +41,7 @@
         <a 
             href="{{ route('shop.home.index') }}" 
             target="_blank"
-            class="mt-[6px]"
+            class="flex"
         >
             <span 
                 class="icon-store p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100"
@@ -51,15 +51,15 @@
         </a>
 
        {{-- Notification Component --}}
-        <v-notification {{ $attributes }}>
-            <span class="relative">
+        <v-notifications {{ $attributes }}>
+            <span class="flex relative">
                 <span 
-                    class="icon-notification p-[6px] bg-gray-100 rounded-[6px] text-[24px] text-red cursor-pointer transition-all" 
+                    class="icon-notification p-[6px] rounded-[6px] text-[24px] cursor-pointer transition-all hover:bg-gray-100" 
                     title="@lang('admin::app.components.layouts.header.notifications')"
                 >
                 </span>
             </span>
-        </v-notification>
+        </v-notifications>
 
         {{-- Admin profile --}}
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
@@ -73,9 +73,9 @@
                     </div>
                 @else
                     <div class="profile-info-icon">
-                        <span class="px-[8px] py-[6px] bg-blue-400 rounded-full text-white font-semibold cursor-pointer leading-6">
+                        <button class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
                             {{ substr($admin->name, 0, 1) }}
-                        </span>
+                        </button>
                     </div>
                 @endif
             </x-slot:toggle>
@@ -206,7 +206,7 @@
                 <!-- Searched Results -->
                 <template v-if="activeTab == 'products'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.products></x-admin::shimmer.header.mega-search.products>
+                        <x-admin::shimmer.header.mega-search.products/>
                     </template>
 
                     <template v-else>
@@ -258,7 +258,7 @@
                         <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.catalog.products.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.products.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-products')".replace(':query', searchTerm).replace(':count', searchedResults.products.total) }}
@@ -266,7 +266,7 @@
 
                             <a
                                 href="{{ route('admin.catalog.products.index') }}"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-products')
@@ -277,7 +277,7 @@
 
                 <template v-if="activeTab == 'orders'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.orders></x-admin::shimmer.header.mega-search.orders>
+                        <x-admin::shimmer.header.mega-search.orders/>
                     </template>
 
                     <template v-else>
@@ -300,7 +300,7 @@
                         <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.sales.orders.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.orders.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-orders')".replace(':query', searchTerm).replace(':count', searchedResults.orders.total) }}
@@ -308,7 +308,7 @@
 
                             <a
                                 href="{{ route('admin.sales.orders.index') }}"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-orders')
@@ -319,7 +319,7 @@
 
                 <template v-if="activeTab == 'categories'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.categories></x-admin::shimmer.header.mega-search.categories>
+                        <x-admin::shimmer.header.mega-search.categories/>
                     </template>
 
                     <template v-else>
@@ -336,7 +336,7 @@
                         <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.catalog.categories.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.categories.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-categories')".replace(':query', searchTerm).replace(':count', searchedResults.categories.total) }}
@@ -344,7 +344,7 @@
 
                             <a
                                 href="{{ route('admin.catalog.categories.index') }}"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-categories')
@@ -355,7 +355,7 @@
 
                 <template v-if="activeTab == 'customers'">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.header.mega-search.customers></x-admin::shimmer.header.mega-search.customers>
+                        <x-admin::shimmer.header.mega-search.customers/>
                     </template>
 
                     <template v-else>
@@ -378,7 +378,7 @@
                         <div class="flex p-[12px] border-t-[1px] border-gray-300">
                             <a
                                 :href="'{{ route('admin.customers.customers.index') }}?search=:query'.replace(':query', searchTerm)"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-if="searchedResults.customers.data.length"
                             >
                                 @{{ "@lang('admin::app.components.layouts.header.mega-search.explore-all-matching-customers')".replace(':query', searchTerm).replace(':count', searchedResults.customers.total) }}
@@ -386,7 +386,7 @@
 
                             <a
                                 href="{{ route('admin.customers.customers.index') }}"
-                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer"
+                                class=" text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                                 v-else
                             >
                                 @lang('admin::app.components.layouts.header.mega-search.explore-all-customers')
@@ -501,20 +501,20 @@
 
     <script 
         type="text/x-template"
-        id="v-notification-template"
+        id="v-notifications-template"
     >
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <!-- Notification Toggle -->
             <x-slot:toggle>
-                <span class="relative">
+                <span class="flex relative">
                     <span
-                        class="icon-notification p-[6px] bg-gray-100 rounded-[6px] text-[24px] text-red cursor-pointer transition-all" 
+                        class="icon-notification p-[6px] rounded-[6px] text-[24px] text-red cursor-pointer transition-all hover:bg-gray-100" 
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
                 
                     <span
-                        class="absolute px-[7px] top-[-15px] left-[18px] py-[5px] bg-[#060C3B] rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px] cursor-pointer"
+                        class="flex justify-center items-center min-w-[20px] h-[20px] absolute top-[-8px] p-[5px] left-[18px] bg-[#060C3B] rounded-[44px] text-[#fff] text-[10px] font-semibold leading-[9px] cursor-pointer"
                         v-text="totalUnRead"
                         v-if="totalUnRead"
                     >
@@ -567,13 +567,13 @@
                     <div class="flex gap-[10px] justify-between p-[24px] border-t-[1px] border-b-[1px] border-gray-300">
                         <a
                             href="{{ route('admin.notification.index') }}"
-                            class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                         >
                             @lang('admin::app.notification.view-all')
                         </a>
 
                         <a
-                            class="text-[12px] text-blue-600 font-semibold cursor-pointer"
+                            class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
                             v-if="notifications?.length"
                             @click="readAll()"
                         >
@@ -586,8 +586,8 @@
         </script>
 
         <script type="module">
-        app.component('v-notification', {
-            template: '#v-notification-template',
+        app.component('v-notifications', {
+            template: '#v-notifications-template',
 
             props: [
                 'getReadAllUrl',

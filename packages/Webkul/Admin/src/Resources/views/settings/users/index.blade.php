@@ -22,7 +22,7 @@
         </div>
 
         {{-- DataGrid Shimmer --}}
-        <x-admin::shimmer.datagrid></x-admin::shimmer.datagrid>
+        <x-admin::shimmer.datagrid/>
     </v-users>
 
     @pushOnce('scripts')
@@ -39,7 +39,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="$refs.customerCreateModal.open()"
+                            @click="$refs.userUpdateOrCreateModal.open()"
                         >
                             @lang('admin::app.settings.users.index.create.title')
                         </button>
@@ -65,7 +65,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -159,9 +159,9 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, create)">
+                <form @submit="handleSubmit($event, updateOrCreate)">
                     <!-- User Create Modal -->
-                    <x-admin::modal ref="customerCreateModal">
+                    <x-admin::modal ref="userUpdateOrCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -384,41 +384,22 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors }) {
-                        console.log(params);
-                        if (params.id) {
-                            this.$axios.post("{{ route('admin.settings.users.update') }}", params)
-                                .then((response) => {
-                                    this.$refs.customerCreateModal.close();
+                    updateOrCreate(params, { resetForm, setErrors }) {
+                        this.$axios.post(params.id ? "{{ route('admin.settings.users.update') }}" : "{{ route('admin.settings.users.store') }}", params)
+                            .then((response) => {
+                                this.$refs.userUpdateOrCreateModal.close();
 
-                                    this.$refs.datagrid.get();
+                                this.$refs.datagrid.get();
 
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        } else {
-                            this.$axios.post("{{ route('admin.settings.users.store') }}", params)
-                                .then((response) => {
-                                    this.$refs.customerCreateModal.close();
-
-                                    this.$refs.datagrid.get();
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        }
+                                resetForm();
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     editModal(id) {
@@ -435,7 +416,7 @@
 
                                 this.user = response.data.data.user;
 
-                                this.$refs.customerCreateModal.toggle();
+                                this.$refs.userUpdateOrCreateModal.toggle();
 
                                 this.$refs.modalForm.setValues(values);
                             })

@@ -244,7 +244,7 @@
                 <div class="flex gap-[10px]">
                     <!-- Remove -->
                     <p
-                        class="text-red-600 cursor-pointer hover:underline"
+                        class="text-red-600 cursor-pointer transition-all hover:underline"
                         @click="remove"
                     >
                         @lang('admin::app.catalog.products.edit.types.configurable.delete-btn')
@@ -253,7 +253,7 @@
                     <!-- Edit -->
                     <div>
                         <p
-                            class="text-emerald-600 cursor-pointer"
+                            class="text-emerald-600 cursor-pointer transition-all hover:underline"
                             @click="$refs.editVariantDrawer.open()"
                         >
                             @lang('admin::app.catalog.products.edit.types.configurable.edit-btn')

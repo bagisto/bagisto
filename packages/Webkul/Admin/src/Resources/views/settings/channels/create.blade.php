@@ -225,22 +225,11 @@
                                         @lang('admin::app.settings.channels.create.logo')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.control
-                                            type="image"
-                                            name="logo[image_1]"
-                                            :label="trans('admin::app.settings.channels.create.logo')"
-                                            :is-multiple="false"
-                                            accepted-types="image/*"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                    </x-admin::form.control-group>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="logo[image_1]"
+                                    <x-admin::media.images
+                                        name="logo"
+                                        width="220px"
                                     >
-                                    </x-admin::form.control-group.error>
+                                    </x-admin::media.images>
                                 </x-admin::form.control-group>
                                 <p class="text-[12px] text-gray-600">
                                     @lang('admin::app.settings.channels.create.logo-size')
@@ -253,19 +242,11 @@
                                         @lang('admin::app.settings.channels.create.favicon')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
-                                        name="favicon[image_1]"
-                                        :label="trans('admin::app.settings.channels.create.favicon')"
-                                        :is-multiple="false"
-                                        accepted-types="image/*"
+                                    <x-admin::media.images
+                                        name="favicon"
+                                        width="220px"
                                     >
-                                    </x-admin::form.control-group.control>
-
-                                    <x-admin::form.control-group.error
-                                        control-name="favicon[image_1]"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    </x-admin::media.images>
                                 </x-admin::form.control-group>
                                 <p class="text-[12px] text-gray-600">
                                     @lang('admin::app.settings.channels.create.favicon-size')
@@ -281,6 +262,9 @@
                         @lang('admin::app.settings.channels.create.seo')
                     </p>
 
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
+
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
@@ -291,7 +275,7 @@
                                 type="text"
                                 name="seo_title" 
                                 :value="old('seo_title')"
-                                id="seo_title"
+                                id="meta_title"
                                 rules="required"
                                 :label="trans('admin::app.settings.channels.create.seo-title')"
                                 :placeholder="trans('admin::app.settings.channels.create.seo-title')"
@@ -300,28 +284,6 @@
 
                             <x-admin::form.control-group.error
                                 control-name="seo_title"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.channels.create.seo-description')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="textarea"
-                                name="seo_description"
-                                :value="old('seo_description')"
-                                id="seo_description"
-                                rules="required"
-                                :label="trans('admin::app.settings.channels.create.seo-description')"
-                                :placeholder="trans('admin::app.settings.channels.create.seo-description')"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="seo_description"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -344,6 +306,28 @@
 
                             <x-admin::form.control-group.error
                                 control-name="seo_keywords"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.create.seo-description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                name="seo_description"
+                                :value="old('seo_description')"
+                                id="meta_description"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.create.seo-description')"
+                                :placeholder="trans('admin::app.settings.channels.create.seo-description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_description"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>

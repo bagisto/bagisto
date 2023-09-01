@@ -1,6 +1,6 @@
 <div class="bg-white rounded-[4px] box-shadow">
     <!-- Total Sales Shimmer -->
-    <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard..right.total-sales>
+    <x-admin::shimmer.dashboard.right.total-sales/>
 
     <!-- Top Selling Products -->
     <div class="border-b border-gray-300">
@@ -11,7 +11,7 @@
         </div>
 
         <!-- Top Selling Products Shimmer -->
-        <x-admin::shimmer.dashboard.right.top-selling></x-admin::shimmer.dashboard.right.top-selling>
+        <x-admin::shimmer.dashboard.right.top-selling/>
 
         <!-- Top Customers -->
         <div class="flex items-center justify-between p-[16px]">
@@ -21,6 +21,6 @@
         </div>
 
         <!-- Top Customers Shimmer -->
-        <x-admin::shimmer.dashboard.right.most-customer-sales></x-admin::shimmer.dashboard.right.most-customer-sales>
+        <x-admin::shimmer.dashboard.right.most-customer-sales/>
     </div>
 </div>

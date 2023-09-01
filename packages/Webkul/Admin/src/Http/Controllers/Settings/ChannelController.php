@@ -68,7 +68,7 @@ class ChannelController extends Controller
             /* design */
             'theme'                 => 'nullable',
             'logo.*'                => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
-            'favicon.*'             => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'             => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
 
             /* seo */
             'seo_title'             => 'required|string',
@@ -135,7 +135,7 @@ class ChannelController extends Controller
             /* design */
             'theme'                            => 'nullable',
             'logo.*'                           => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
-            'favicon.*'                        => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'favicon.*'                        => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
 
             /* seo */
             $locale . '.seo_title'             => 'nullable',

@@ -73,7 +73,10 @@
                         @lang('admin::app.cms.create.seo')
                     </p>
 
-                    <div class="mb-[10px]">
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
+
+                    <div class="mb-[30px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.cms.create.meta-title')
@@ -161,6 +164,7 @@
                     </div>
                 </div>
             </div>
+
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}

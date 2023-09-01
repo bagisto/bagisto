@@ -28,7 +28,9 @@
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
             <div class="flex flex-col gap-[8px] flex-1 bg-white box-shadow">
-                <v-family-attributes></v-family-attributes>
+                <v-family-attributes>
+                    <x-admin::shimmer.families.attributes-panel/>
+                </v-family-attributes>
             </div>
 
             {{-- Right Container --}}

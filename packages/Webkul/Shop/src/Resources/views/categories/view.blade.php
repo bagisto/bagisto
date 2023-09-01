@@ -18,20 +18,32 @@
     </x-slot>
 
     {{-- Hero Image --}}
-    <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
-        <div>
-            <img
-                class="rounded-[12px]"
-                src='{{ bagisto_asset("images/product-hero.png") }}'
-            >
+    @if ($category->banner_path)
+        <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+            <div>
+                <img
+                    class="rounded-[12px]"
+                    src="{{ $category->banner_url }}"
+                >
+            </div>
         </div>
-    </div>
+    @endif
 
-    {{-- Category Vue Component --}}
-    <v-category>
-        {{-- Category Shimmer Effect --}}
-        <x-shop::shimmer.categories.view></x-shop::shimmer.categories.view>
-    </v-category>
+    @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
+        @if ($category->description)
+            <div class="container mt-[30px] px-[60px] max-lg:px-[30px]">
+                {!! $category->description !!}
+            </div>
+        @endif
+    @endif
+
+    @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+        {{-- Category Vue Component --}}
+        <v-category>
+            {{-- Category Shimmer Effect --}}
+            <x-shop::shimmer.categories.view/>
+        </v-category>
+    @endif
 
     @pushOnce('scripts')
         <script 

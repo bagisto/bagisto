@@ -110,7 +110,7 @@
                                 </x-admin::form.control-group>
 
                                 <p
-                                    class="text-red-600 cursor-pointer hover:underline"
+                                    class="text-red-600 cursor-pointer transition-all hover:underline"
                                     @click="remove(element)"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.grouped.delete')
