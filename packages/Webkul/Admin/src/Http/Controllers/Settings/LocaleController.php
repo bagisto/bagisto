@@ -39,8 +39,6 @@ class LocaleController extends Controller
      */
     public function store(): JsonResource
     {
-        dd(request()->all());
-
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code', new \Webkul\Core\Rules\Code],
             'name'      => 'required',
@@ -84,8 +82,6 @@ class LocaleController extends Controller
      */
     public function update(): JsonResource
     {
-        dd(request()->all());
-
         $this->validate(request(), [
             'code'      => ['required', 'unique:locales,code,' . request()->id, new \Webkul\Core\Rules\Code],
             'name'      => 'required',
