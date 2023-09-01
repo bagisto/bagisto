@@ -181,19 +181,19 @@
                                         <!-- Group Name -->
                                         <div
                                             class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer transition-all group-hover:text-gray-800"
-                                            :class="{'bg-blue-600 text-white group-hover:text-white': selectedGroup.id == element.id}"
+                                            :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
-                                            <i class="icon-drag text-[20px] pointer-events-none transition-all group-hover:text-gray-800"></i>
+                                            <i class="icon-drag text-[20px] text-inherit pointer-events-none transition-all group-hover:text-gray-800"></i>
 
                                             <i
-                                                class="text-[20px] pointer-events-none transition-all group-hover:text-gray-800"
+                                                class="text-[20px] text-inherit pointer-events-none transition-all group-hover:text-gray-800"
                                                 :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
                                             >
                                             </i>
 
                                             <span
-                                                class="text-[14px] font-regular pointer-events-none transition-all group-hover:text-gray-800"
+                                                class="text-[14px] text-inherit font-regular pointer-events-none transition-all group-hover:text-gray-800"
                                                 v-show="editableGroup.id != element.id"
                                                 v-text="element.name"
                                             >
@@ -202,7 +202,7 @@
                                             <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
-                                                class="group_node text-[14px] text-gray-600"
+                                                class="group_node text-[14px] !text-gray-600"
                                                 v-model="element.name"
                                                 v-show="editableGroup.id == element.id"
                                             />
@@ -210,14 +210,12 @@
                                             <input
                                                 type="hidden"
                                                 :name="'attribute_groups[' + element.id + '][position]'"
-                                                class="group_node text-[14px] text-gray-600"
                                                 :value="index + 1"
                                             />
 
                                             <input
                                                 type="hidden"
                                                 :name="'attribute_groups[' + element.id + '][column]'"
-                                                class="group_node text-[14px] text-gray-600"
                                                 :value="column"
                                             />
                                         </div>
