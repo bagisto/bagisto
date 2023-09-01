@@ -241,7 +241,7 @@
                         </div>
                         <div class="flex items-center">
                             <a 
-                                class="icon-store text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                                class="icon-login text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
                                 :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
                             >
                             </a>

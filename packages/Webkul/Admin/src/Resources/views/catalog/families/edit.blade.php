@@ -63,7 +63,6 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="code"
-                                class="!w-[284px]"
                                 value="{{ old('code') ?? $attributeFamily->code }}"
                                 disabled="disabled"
                                 rules="required"
@@ -88,7 +87,6 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                class="!w-[284px]"
                                 value="{{ old('name') ?? $attributeFamily->name }}"
                                 rules="required"
                                 :label="trans('admin::app.catalog.families.create.name')"
@@ -175,28 +173,28 @@
                             <template #item="{ element, index }">
                                 <div class="">
                                     <!-- Group Container -->
-                                    <div class="flex items-center">
+                                    <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"
+                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer"
+                                            class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] transition-all text-gray-600 group cursor-pointer"
                                             :class="{'bg-blue-600 text-white group-hover:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
-                                            <i class="icon-drag text-[20px] text-inherit transition-all pointer-events-none"></i>
+                                            <i class="icon-drag text-[20px] pointer-events-none transition-all group-hover:text-gray-800"></i>
 
                                             <i
-                                                class="text-[20px] text-inherit transition-all pointer-events-none"
+                                                class="text-[20px] pointer-events-none transition-all group-hover:text-gray-800"
                                                 :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
                                             ></i>
 
                                             <span
-                                                class="text-[14px] text-inherit font-regular transition-all pointer-events-none"
+                                                class="text-[14px] font-regular pointer-events-none transition-all group-hover:text-gray-800"
                                                 v-show="editableGroup.id != element.id"
                                             >
                                                 @{{ element.name }}
@@ -244,7 +242,7 @@
 
                                                 <i
                                                     class="text-[20px] transition-all group-hover:text-gray-700"
-                                                    :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
+                                                    :class="[parseInt(element.is_user_defined) ? 'icon-attribute' : 'icon-attribute-block']"
                                                 ></i>
                                                 
 
@@ -300,11 +298,7 @@
                                 <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
 
-                                    <i
-                                        class="text-[20px] transition-all group-hover:text-gray-700"
-                                        :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
-                                    ></i>
-                                    
+                                    <i class="icon-attribute text-[20px] transition-all group-hover:text-gray-700"></i>
 
                                     <span class="text-[14px] font-regular transition-all group-hover:text-gray-800 max-xl:text-[12px]">
                                         @{{ element.admin_name }}
