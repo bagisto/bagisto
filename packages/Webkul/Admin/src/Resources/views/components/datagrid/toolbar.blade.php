@@ -104,6 +104,7 @@
                             :value="getAppliedColumnValues('all')"
                             class="block w-full rounded-lg border border-gray-300 bg-white py-[6px] pl-[12px] leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                             placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
+                            autocomplete="off"
                             @keyup.enter="filterPage"
                         >
 
