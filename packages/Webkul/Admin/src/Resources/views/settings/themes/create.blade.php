@@ -1419,6 +1419,7 @@
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                         <div class="p-[16px] bg-white rounded box-shadow">
+                            <!-- Add Links-->
                             <div class="flex gap-x-[10px] justify-between items-center">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">
@@ -1427,15 +1428,6 @@
     
                                     <p class="text-[12px] text-gray-500 font-medium">
                                         @lang('admin::app.settings.themes.create.footer-link-description')
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Add Links-->
-                            <div class="flex gap-x-[10px] justify-between items-center">
-                                <div class="flex flex-col gap-[4px]">
-                                    <p class="text-[16px] text-gray-800 font-semibold">
-                                        @lang('admin::app.settings.themes.create.filters')
                                     </p>
                                 </div>
                 
@@ -1449,11 +1441,13 @@
                                 </div>
                             </div>
     
-                            <div v-for="(footerLink, index) in footerLinks">
+                            <div
+                                v-if="Object.keys(footerLinks).length"
+                                v-for="(footerLink, index) in footerLinks"
+                            >
                                 <!-- Information -->
                                 <div 
-                                    v-if="footerLink.length"
-                                    class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                    class="grid"
                                     v-for="(link, key) in footerLink"
                                 >
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +']'" :value="link.column"> 
@@ -1462,34 +1456,77 @@
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][sort_order]'" :value="link.sort_order"> 
                                 
                                     <!-- Details -->
-                                    <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @lang('admin::app.settings.themes.create.url'): @{{ link.url }}
-                                        </p>
+                                    <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer"><!-- Hidden Input -->
+                                        <div class="flex gap-[10px]"><!-- Drag Icon -->
+                                            <div class="grid gap-[6px] place-content-start">
+                                                <p class="text-gray-600">
+                                                    <div> 
+                                                        @lang('admin::app.settings.themes.edit.column'): 
 
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @lang('admin::app.settings.themes.create.filter-title'): @{{ link.title }}
-                                        </p>
+                                                        <span class="text-gray-600 transition-all">
+                                                            @{{ link.column }}
+                                                        </span>
+                                                    </div>
+                                                </p>
+    
+                                                <p class="text-gray-600">
+                                                    <div> 
+                                                        @lang('admin::app.settings.themes.edit.url'):
 
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @lang('admin::app.settings.themes.create.sort-order'): @{{ link.sort_order }}
-                                        </p>
-                                    </div>
+                                                        <a
+                                                            :href="link.url"
+                                                            target="_blank"
+                                                            class="text-blue-600 transition-all hover:underline"
+                                                            v-text="link.url"
+                                                        >
+                                                        </a>
+                                                    </div>
+                                                </p>
 
-                                    <div class="flex gap-[4px] place-content-start text-right">
-                                        <p
-                                            class="text-blue-600 cursor-pointer hover:underline"
-                                            @click="edit(link)"
-                                        >
-                                            @lang('admin::app.settings.themes.create.edit')
-                                        </p>
+                                                <p class="text-gray-600">
+                                                    <div> 
+                                                        @lang('admin::app.settings.themes.edit.filter-title'):
 
-                                        <p
-                                            class="text-red-600 cursor-pointer hover:underline"
-                                            @click="remove(link)"
-                                        >
-                                            @lang('admin::app.settings.themes.create.delete')
-                                        </p>
+                                                        <span
+                                                            class="text-gray-600 transition-all"
+                                                            v-text="link.title"
+                                                        >
+                                                        </span>
+                                                    </div>
+                                                </p>
+
+                                                <p class="text-gray-600">
+                                                    <div> 
+                                                        @lang('admin::app.settings.themes.edit.sort-order'):
+
+                                                        <span
+                                                            class="text-gray-600 transition-all"
+                                                            v-text="link.sort_order"
+                                                        >
+                                                        </span>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
+    
+                                        <!-- Actions -->
+                                        <div class="grid gap-[4px] place-content-start text-right">
+                                            <div class="flex gap-x-[20px] items-center">
+                                                <p 
+                                                    class="text-blue-600 cursor-pointer transition-all hover:underline"
+                                                    @click="edit(link)"
+                                                > 
+                                                    @lang('admin::app.settings.themes.edit.edit')
+                                                </p>
+
+                                                <p 
+                                                    class="text-red-600 cursor-pointer transition-all hover:underline"
+                                                    @click="remove(link)"
+                                                > 
+                                                    @lang('admin::app.settings.themes.edit.delete')
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1648,8 +1685,6 @@
                                             <option value="column_1">1</option>
                                             <option value="column_2">2</option>
                                             <option value="column_3">3</option>
-                                            <option value="column_4">4</option>
-                                            <option value="column_5">5</option>
                                         </x-admin::form.control-group.control>
         
                                         <x-admin::form.control-group.error
@@ -1750,8 +1785,6 @@
                             column_1: [],
                             column_2: [],
                             column_3: [],
-                            column_4: [],
-                            column_5: [],
                         },
 
                         isShowIllustrator: true,
