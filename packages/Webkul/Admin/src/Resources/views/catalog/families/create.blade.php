@@ -31,7 +31,7 @@
         {{-- Container --}}
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
-            <div class="flex flex-col gap-[8px] flex-1 bg-white box-shadow">
+            <div class="flex flex-col gap-[8px] flex-1 bg-white rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
