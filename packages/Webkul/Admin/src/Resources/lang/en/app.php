@@ -2188,6 +2188,7 @@ return [
                 'index' => [
                     'title'        => 'Tax Categories',
                     'tax-category' => 'Tax Category',
+                    'delete-warning'  => 'Are You sure you want to delete ?',
 
                     'datagrid' => [
                         'id'     => 'ID',
@@ -2206,7 +2207,7 @@ return [
                         'name'            => 'Name',
                         'save-btn'        => 'Save Tax Category',
                         'tax-rates'       => 'Tax Rates',
-                        'title'           => 'Tax Categories',
+                        'select'          => 'Select',
                         'add-tax-rates'   => 'Add Tax Rates',
                         'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
                     ],

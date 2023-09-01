@@ -8,6 +8,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 use Webkul\Tax\Repositories\TaxRateRepository;
 use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
+use Webkul\Admin\Http\Resources\TaxCategoryResource;
 
 class TaxCategoryController extends Controller
 {
@@ -74,13 +75,12 @@ class TaxCategoryController extends Controller
      * Tax Category Details
      *
      * @param int $id
-     * @return JsonResource
      */
-    public function edit($id): JsonResource
+    public function edit($id): TaxCategoryResource
     {
         $taxCategory = $this->taxCategoryRepository->findOrFail($id);
 
-        return new JsonResource($taxCategory);
+        return new TaxCategoryResource($taxCategory);
     }
 
     /**

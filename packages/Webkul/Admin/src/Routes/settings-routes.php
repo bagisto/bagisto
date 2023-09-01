@@ -108,7 +108,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.categories.edit');
 
-                Route::put('edit', 'update')->name('admin.settings.taxes.categories.update');
+                Route::post('edit', 'update')->name('admin.settings.taxes.categories.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.categories.delete');
             });
