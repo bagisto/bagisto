@@ -19,8 +19,9 @@ return [
             'views_path'  => 'resources/themes/default/views',
 
             'vite'        => [
-                'hot_file'        => 'shop-default-vite.hot',
-                'build_directory' => 'themes/shop/default/build',
+                'hot_file'                 => 'shop-default-vite.hot',
+                'build_directory'          => 'themes/shop/default/build',
+                'package_assets_directory' => 'src/Resources/assets',
             ],
         ],
     ],
@@ -43,8 +44,9 @@ return [
             'views_path'  => 'resources/admin-themes/default/views',
 
             'vite'        => [
-                'hot_file'        => 'admin-default-vite.hot',
-                'build_directory' => 'themes/admin/default/build',
+                'hot_file'                 => 'admin-default-vite.hot',
+                'build_directory'          => 'themes/admin/default/build',
+                'package_assets_directory' => 'src/Resources/assets',
             ],
         ],
     ],

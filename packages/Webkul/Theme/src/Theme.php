@@ -92,15 +92,12 @@ class Theme
         $url = trim($url, '/');
 
         /**
-         * Testing vite url, on monitoring.
-         */
-        $viteUrl = 'src/Resources/assets/' . $url;
-
-        /**
          * If the namespace is null, it means the theming system is activated. We use the request URI to
          * detect the theme and provide Vite assets based on the current theme.
          */
         if (empty($namespace)) {
+            $viteUrl = trim($this->vite['package_assets_directory'], '/') . '/' . $url;
+
             return Vite::useHotFile($this->vite['hot_file'])
                 ->useBuildDirectory($this->vite['build_directory'])
                 ->asset($viteUrl);
@@ -115,6 +112,8 @@ class Theme
         if (empty($viters[$namespace])) {
             throw new ViterNotFound($namespace);
         }
+
+        $viteUrl = trim($viters[$namespace]['package_assets_directory'], '/') . '/' . $url;
 
         return Vite::useHotFile($viters[$namespace]['hot_file'])
             ->useBuildDirectory($viters[$namespace]['build_directory'])
