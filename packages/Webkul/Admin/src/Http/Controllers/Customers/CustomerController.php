@@ -3,7 +3,6 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -13,7 +12,6 @@ use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
 use Webkul\Core\Http\Requests\MassUpdateRequest;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Mail\NewCustomerNotification;
-use Webkul\Admin\Mail\CustomerNoteNotification;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
 
 class CustomerController extends Controller
@@ -208,20 +206,14 @@ class CustomerController extends Controller
             'note' => 'string|required',
         ]);
 
-        $this->customerNoteRepository->create([
+        $customerNote = $this->customerNoteRepository->create([
             'customer_id'       => $id,
             'note'              => request()->input('note'),
             'customer_notified' => request()->input('customer_notified', 0),
         ]);
 
-        $customer = $this->customerRepository->find($id);
-
         if (request()->has('customer_notified')) {
-            try {
-                Mail::queue(new CustomerNoteNotification($customer, request()->input('note', 'email')));
-            } catch (\Exception $e) {
-                session()->flash('warning', $e->getMessage());
-            }
+            Event::dispatch('customer.note-created.after', $customerNote);
         }
 
         session()->flash('success', trans('admin::app.customers.view.note-created-success'));

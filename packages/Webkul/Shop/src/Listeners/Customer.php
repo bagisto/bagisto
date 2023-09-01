@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\Customer\RegistrationNotification;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\UpdatePasswordNotification;
+use Webkul\Shop\Mail\Customer\NoteNotification;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 
 class Customer extends Base
@@ -72,6 +73,23 @@ class Customer extends Base
             Mail::queue(new SubscriptionNotification($customer));
         } catch (\Exception $e) {
             report($e);
+        }
+    }
+
+    /**
+     * Send mail on creating Note
+     *
+     * @param  \Webkul\Customer\Models\Customer  $customer
+     * @return void
+     */
+    public function afterCustomerNoteCreated($note)
+    {
+        if (request()->has('customer_notified')) {
+            try {
+                Mail::send(new NoteNotification($note, request()->input('note', 'email')));
+            } catch (\Exception $e) {
+                session()->flash('warning', $e->getMessage());
+            }
         }
     }
 }
