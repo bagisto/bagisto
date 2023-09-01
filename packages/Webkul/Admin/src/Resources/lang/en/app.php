@@ -2587,6 +2587,7 @@ return [
                     'attribute-info'                     => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
                     'image-upload-size'                  => 'Allowed Image Upload Size (in Kb)',
                     'file-upload-size'                   => 'Allowed File Upload Size (in Kb)',
+                    'comma-separated'                    => 'Comma Separated',
 
                 ],
 
@@ -2630,15 +2631,16 @@ return [
 
                 'settings' =>[
                     'title'                   => 'Settings',
-                     'settings-info'          => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
-                     'wishlist'               => 'Wishlist',
-                     'wishlist-info'          => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
+                    'settings-info'           => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
+                    'wishlist'                => 'Wishlist',
+                    'wishlist-info'           => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
                     'wishlist-share'          => 'Enable Sharing',
                     'newsletter'              => 'Newsletter Subscription',
                     'newsletter-info'         => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
                     'newsletter-subscription' => 'Allow Newsletter Subscription',
                     'email'                   => 'Email Verification',
                     'email-info'              => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
+                    'email-verification'      => 'Allow Email Verification',
                 ],
             ],
 

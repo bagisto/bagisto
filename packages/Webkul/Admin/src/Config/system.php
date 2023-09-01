@@ -204,7 +204,7 @@ return [
                 'name'          => 'products_per_page',
                 'title'         => 'admin::app.configuration.index.catalog.products.products-per-page',
                 'type'          => 'text',
-                'info'          => 'admin::app.configuration.comma-separated',
+                'info'          => 'admin::app.configuration.index.catalog.products.comma-separated',
                 'channel_based' => true,
             ], [
                 'name'          => 'sort_by',

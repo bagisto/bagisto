@@ -770,11 +770,11 @@
                                     <!-- Add Variants Information -->
                                     <div class="flex flex-col items-center">
                                         <p class="text-[16px] text-gray-400 font-semibold">
-                                            @lang('admin::app.dahsboard.add-product')
+                                            @lang('admin::app.dashboard.index.add-product')
                                         </p>
     
                                         <p class="text-gray-400">
-                                            @lang('admin::app.dahsboard.product-info')
+                                            @lang('admin::app.dashboard.index.product-info')
                                         </p>
                                     </div>
                                 </div>
@@ -889,7 +889,7 @@
                                     </p>
 
                                     <p class="text-gray-400">
-                                        @lang('admin::app.dahsboard.index.customer-info')
+                                        @lang('admin::app.dashboard.index.customer-info')
                                     </p>
                                 </div>
                             </div>
