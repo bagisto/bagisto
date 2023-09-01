@@ -18,10 +18,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // $customer = \Webkul\Customer\Models\Customer::find(1);
-
-        // return view('shop::emails.customers.registration', compact('customer'));
-
         if (request()->ajax()) {
             $statistics = $this->dashboardService
                 ->setStartDate(request()->date('start'))
@@ -30,8 +26,8 @@ class DashboardController extends Controller
 
             return response()->json([
                 'statistics' => $statistics,
-                'startDate' => $this->dashboardService->getStartDate()->format('d M'),
-                'endDate' => $this->dashboardService->getEndDate()->format('d M'),
+                'startDate'  => $this->dashboardService->getStartDate()->format('d M'),
+                'endDate'    => $this->dashboardService->getEndDate()->format('d M'),
             ]);
         }
 
