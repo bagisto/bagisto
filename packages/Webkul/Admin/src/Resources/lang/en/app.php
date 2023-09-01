@@ -2383,14 +2383,15 @@ return [
                 'user'  => 'User',
 
                 'create'  => [
-                    'title'            => 'Create User',
-                    'name'             => 'Name',
-                    'email'            => 'Email',
-                    'password'         => 'Password',
-                    'confirm-password' => 'Confirm Password',
-                    'role'             => 'Role',
-                    'status'           => 'Status',
-                    'save-btn'         => 'Save User',
+                    'title'             => 'Create User',
+                    'name'              => 'Name',
+                    'email'             => 'Email',
+                    'password'          => 'Password',
+                    'confirm-password'  => 'Confirm Password',
+                    'role'              => 'Role',
+                    'status'            => 'Status',
+                    'save-btn'          => 'Save User',
+                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format'
                 ],
 
                 'datagrid' => [
@@ -2418,6 +2419,7 @@ return [
                 'last-delete-error'  => 'Last User delete failed',
                 'login-error'        => 'Please check your credentials and try again.',
                 'update-success'     => 'User updated successfully.',
+                'delete-warning'     =>'Are you sure, you want to perform this action?',
             ],
 
             'edit'  => [

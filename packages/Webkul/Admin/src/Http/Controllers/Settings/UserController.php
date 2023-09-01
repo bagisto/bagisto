@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
@@ -69,6 +70,12 @@ class UserController extends Controller
 
         $admin = $this->adminRepository->create($data);
 
+        if (request()->hasFile('image')) {
+            $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
+
+            $admin->save();
+        }
+
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResource([
@@ -113,6 +120,19 @@ class UserController extends Controller
         Event::dispatch('user.admin.update.before', $id);
 
         $admin = $this->adminRepository->update($data, $id);
+
+        $previousImage = $admin->image;
+
+        if (request()->hasFile('image')) {
+            $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
+
+        } else {
+            $admin->image = null;
+
+            Storage::delete((string)$previousImage);
+        }
+
+        $admin->save();
 
         if (!empty($data['password'])) {
             Event::dispatch('admin.password.update.after', $admin);
