@@ -190,7 +190,7 @@
 
                                             <i
                                                 class="text-[20px] text-inherit pointer-events-none transition-all group-hover:text-gray-800"
-                                                :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
+                                                :class="[element.is_user_defined ? 'icon-folder' : 'icon-folder-block']"
                                             ></i>
 
                                             <span
