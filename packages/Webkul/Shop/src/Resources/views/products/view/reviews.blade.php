@@ -49,9 +49,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label
-                                    class="mt-[0]"
-                                >
+                                <x-shop::form.control-group.label class="mt-[0] required">
                                     @lang('shop::app.products.rating')
                                 </x-shop::form.control-group.label>
 
@@ -71,7 +69,7 @@
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label>
+                                <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.products.title')
                                 </x-shop::form.control-group.label>
 
@@ -92,7 +90,7 @@
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label>
+                                <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.products.comment')
                                 </x-shop::form.control-group.label>
 

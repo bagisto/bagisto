@@ -439,4 +439,8 @@
     .break-word-custom {
         word-break: break-word;
     }
+
+    .required:after {
+        content: "*";
+    }
 }

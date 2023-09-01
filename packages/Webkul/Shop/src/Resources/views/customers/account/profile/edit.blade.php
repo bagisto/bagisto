@@ -39,7 +39,7 @@
         </x-shop::form.control-group>
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.first-name')
             </x-shop::form.control-group.label>
 
@@ -60,7 +60,7 @@
         </x-shop::form.control-group>
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.last-name')
             </x-shop::form.control-group.label>
 
@@ -81,7 +81,7 @@
         </x-shop::form.control-group>
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.email')
             </x-shop::form.control-group.label>
 
@@ -102,7 +102,7 @@
         </x-shop::form.control-group>
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.phone')
             </x-shop::form.control-group.label>
 
@@ -123,7 +123,7 @@
         </x-shop::form.control-group>
 
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.profile.gender')
             </x-shop::form.control-group.label>
 
