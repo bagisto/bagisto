@@ -1468,7 +1468,7 @@
                                         </p>
 
                                         <p class="text-[16x] text-gray-800 font-semibold">
-                                            @lang('admin::app.settings.themes.create.title'): @{{ link.title }}
+                                            @lang('admin::app.settings.themes.create.filter-title'): @{{ link.title }}
                                         </p>
 
                                         <p class="text-[16x] text-gray-800 font-semibold">

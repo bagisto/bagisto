@@ -1529,7 +1529,7 @@
                                         </p>
 
                                         <p class="text-[16x] text-gray-800 font-semibold">
-                                            @lang('admin::app.settings.themes.edit.title'): @{{ link.title }}
+                                            @lang('admin::app.settings.themes.edit.filter-title'): @{{ link.title }}
                                         </p>
 
                                         <p class="text-[16x] text-gray-800 font-semibold">
