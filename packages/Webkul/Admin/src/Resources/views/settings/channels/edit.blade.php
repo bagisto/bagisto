@@ -47,6 +47,7 @@
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
+                    
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">

@@ -252,6 +252,7 @@
                                 rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                v-slugify
                             >
                             </x-admin::form.control-group.control>
 

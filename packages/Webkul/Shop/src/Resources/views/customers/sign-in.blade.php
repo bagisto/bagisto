@@ -36,7 +36,7 @@
             <div class="mt-[60px] rounded max-sm:mt-[30px]">
                 <x-shop::form :action="route('shop.customer.session.create')">
                     <x-shop::form.control-group class="mb-4">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
                         </x-shop::form.control-group.label>
 
@@ -58,7 +58,7 @@
                     </x-shop::form.control-group>
 
                     <x-shop::form.control-group class="mb-4">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.password')
                         </x-shop::form.control-group.label>
 

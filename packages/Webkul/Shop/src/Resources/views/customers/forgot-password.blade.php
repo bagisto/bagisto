@@ -38,7 +38,7 @@
                     {!! view_render_event('bagisto.shop.customers.forget_password_form_controls.before') !!}
 
                     <x-shop::form.control-group class="mb-4">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.login-form.email')
                         </x-shop::form.control-group.label>
 

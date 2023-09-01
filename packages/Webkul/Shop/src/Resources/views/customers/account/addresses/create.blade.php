@@ -45,7 +45,7 @@
 
         {{-- First Name --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.first-name')
             </x-shop::form.control-group.label>
 
@@ -67,7 +67,7 @@
 
         {{-- Last Name  --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.last-name')
             </x-shop::form.control-group.label>
 
@@ -110,7 +110,7 @@
 
         {{-- Street Address --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.street-address')
             </x-shop::form.control-group.label>
 
@@ -132,7 +132,7 @@
 
         {{-- Country --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.country')
             </x-shop::form.control-group.label>
 
@@ -164,7 +164,7 @@
 
         {{-- State --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.state')
             </x-shop::form.control-group.label>
 
@@ -186,7 +186,7 @@
 
         {{-- City --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.city')
             </x-shop::form.control-group.label>
 
@@ -208,7 +208,7 @@
 
         {{-- Post Code --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.post-code')
             </x-shop::form.control-group.label>
 
@@ -230,7 +230,7 @@
 
         {{-- Contact --}}
         <x-shop::form.control-group class="mb-4">
-            <x-shop::form.control-group.label>
+            <x-shop::form.control-group.label class="required">
                 @lang('shop::app.customers.account.addresses.phone')
             </x-shop::form.control-group.label>
 
