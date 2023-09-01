@@ -231,14 +231,13 @@ class Themes
     }
 
     /**
-     * Return asset url of current theme.
+     * Return the asset URL of the current theme if a theme is found; otherwise, check from the namespace.
      *
-     * @param  string  $themeName
      * @return string
      */
-    public function url($filename)
+    public function url(string $filename, ?string $namespace)
     {
-        return $this->current()->url($filename);
+        return $this->current()->url($filename, $namespace);
     }
 
     /**

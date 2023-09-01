@@ -1,6 +1,15 @@
 <?php
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Shop Theme Configuration
+    |--------------------------------------------------------------------------
+    |
+    | All the configurations are related to the shop themes.
+    |
+    */
+
     'default' => 'default',
 
     'themes' => [
@@ -15,6 +24,15 @@ return [
             ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Theme Configuration
+    |--------------------------------------------------------------------------
+    |
+    | All the configurations are related to the admin themes.
+    |
+    */
 
     'admin-default' => 'default',
 
