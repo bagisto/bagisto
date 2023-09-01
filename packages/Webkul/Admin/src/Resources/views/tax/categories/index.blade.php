@@ -227,55 +227,52 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                @php 
-                                    $selectedOptions = old('taxrates') ?: [] 
-                                @endphp
-
                                 <!-- Select Tax Rates -->
                                 <p class="required block leading-[24px] text-gray-800 font-medium">
                                     @lang('admin::app.settings.taxes.categories.index.create.tax-rates')
                                 </p>
+                                
+                                <x-admin::form.control-group 
+                                    class="flex gap-[10px] !mb-0 p-[6px]"
+                                    v-if="taxRates.length"
+                                >
+                                    <x-admin::form.control-group.control
+                                        type="select"
+                                        name="taxrates[]" 
+                                        multiple
+                                    >
+                                        <option 
+                                            v-for="taxRate in taxRates"
+                                            :value="taxRate.id"
+                                            :text="taxRate.identifier"
+                                        >
+                                        </option>
+                                    </x-admin::form.control-group.control>
+                                        
+                                    <x-admin::form.control-group.label 
+                                        class="!text-[14px] !text-gray-600 cursor-pointer"
+                                    >
+                                    </x-admin::form.control-group.label>
 
-                                @if(! count($taxRates))
-                                    <div class="flex gap-[20px] items-center py-[10px]">
-                                        <img 
-                                            src="{{ bagisto_asset('images/tax.png') }}" 
-                                            class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
-                                                >
-                                        <div class="flex flex-col gap-[6px]">
-                                            <p class="text-[16px] text-gray-400 font-semibold">
-                                                @lang('admin::app.settings.taxes.categories.index.create.add-tax-rates')
-                                            </p>
-                                            <p class="text-gray-400"> 
-                                                @lang('admin::app.settings.taxes.categories.index.create.empty-text')
-                                            </p>
-                                        </div>
+                                </x-admin::form.control-group>
+
+                                <div 
+                                    class="flex gap-[20px] items-center py-[10px]"
+                                    v-else
+                                >
+                                    <img 
+                                        src="{{ bagisto_asset('images/tax.png') }}" 
+                                        class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                            >
+                                    <div class="flex flex-col gap-[6px]">
+                                        <p class="text-[16px] text-gray-400 font-semibold">
+                                            @lang('admin::app.settings.taxes.categories.index.create.add-tax-rates')
+                                        </p>
+                                        <p class="text-gray-400"> 
+                                            @lang('admin::app.settings.taxes.categories.index.create.empty-text')
+                                        </p>
                                     </div>
-                                @else
-                                    @foreach ($taxRates as $taxRate)
-                                        <x-admin::form.control-group class="flex gap-[10px] !mb-0 p-[6px]">
-                                            <x-admin::form.control-group.control
-                                                type="checkbox"
-                                                name="taxrates[]" 
-                                                :value="$taxRate->id"
-                                                :id="'taxrates_' . $taxRate->id"
-                                                :for="'taxrates_' . $taxRate->id"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.taxes.categories.index.create.tax-rates')"
-                                                :checked="in_array($taxRate['id'], $selectedOptions)"
-                                            >
-                                            </x-admin::form.control-group.control>
-                                                
-                                            <x-admin::form.control-group.label 
-                                                :for="'taxrates_' . $taxRate->id"
-                                                class="!text-[14px] !text-gray-600 cursor-pointer"
-                                            >
-                                                {{ $taxRate['identifier'] }}
-                                            </x-admin::form.control-group.label>
-    
-                                        </x-admin::form.control-group>
-                                    @endforeach 
-                                @endif
+                                </div>
                                 
                                 <x-admin::form.control-group.error
                                     control-name="taxrates[]"
@@ -307,16 +304,29 @@
                 data() {
                     return {
                         id: 0,
+
+                        taxRates: @json($taxRates),
                     }
                 },
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}", params,{
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
+                        let formData = new FormData();
+
+                        for (let key in params) {
+                            if (params.hasOwnProperty(key)) {
+                                formData.append(key, params[key]);
                             }
-                        })
+                        }
+
+                        this.$axios({
+                                method: params.id ? "PUT" : "POST",
+                                url: params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}",
+                                data: formData,
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                }
+                            })
                             .then((response) => {
                                 this.$refs.taxCategory.toggle();
 
@@ -336,16 +346,14 @@
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.settings.taxes.categories.edit', '') }}/${id}`)
                             .then((response) => {
-                                let values = {
+                                this.$refs.modalForm.setValues({
                                     id: response.data.data.id,
                                     name: response.data.data.name,
                                     code: response.data.data.code,
                                     description: response.data.data.description,
-                                };
+                                });
 
                                 this.$refs.taxCategory.toggle();
-
-                                this.$refs.modalForm.setValues(values);
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {
@@ -360,8 +368,8 @@
                         }
 
                         this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                                '_method': 'DELETE'
+                            })
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
