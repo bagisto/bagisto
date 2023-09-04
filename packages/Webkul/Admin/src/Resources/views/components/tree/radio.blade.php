@@ -6,7 +6,7 @@
     >
         <label
             :for="id"
-            class="inline-flex items-center w-max px-[4px] text-gray-600 cursor-pointer select-none"
+            class="inline-flex items-center w-max p-[6px] text-gray-600 cursor-pointer select-none"
         >
             <input
                 type="radio"
@@ -20,7 +20,7 @@
             <span class="icon-radio-normal mr-[4px] text-[24px] rounded-[6px] cursor-pointer peer-checked:icon-radio-selected peer-checked:text-blue-600"></span>
 
             <div 
-                class="text-[14px] cursor-pointer"
+                class="text-[14px] text-gray-600 cursor-pointer hover:text-gray-800"
                 v-text="label"
             >
             </div>

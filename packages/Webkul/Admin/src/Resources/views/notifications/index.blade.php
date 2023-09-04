@@ -1,6 +1,6 @@
 <x-admin::layouts>
     <x-slot:title>
-        @lang('admin::app.notification.notification-title')
+        @lang('admin::app.notifications.title')
     </x-slot:title>
 
     {{-- Vue Component --}}
@@ -14,7 +14,7 @@
                 <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
                     <div class="grid gap-[6px]">
                         <p class="pt-[6px] text-[20px] text-gray-800 font-bold leading-[24px]">
-                            @lang('admin::app.notification.notification-title')
+                            @lang('admin::app.notifications.title')
                         </p>
 
                         <p class="text-gray-600">List all the Notifications</p>
@@ -47,37 +47,33 @@
                         </div>
 
                         <div
-                            class="grid gap-[24px] px-[24px] py-[12px] max-h-[calc(100vh-330px)] overflow-auto journal-scroll"
+                            class="grid max-h-[calc(100vh-330px)] overflow-auto journal-scroll"
                             v-if="notifications.length"
                         >
-                            <div
-                                class="flex gap-[5px] items-start"
+                            <a
+                                :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
+                                class="flex  gap-[5px] p-[16px] items-start hover:bg-gray-100"
                                 v-for="notification in notifications"
                                 :class="notification.read ? 'opacity-50' : ''"
                             >
-                                <a
-                                    :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                                    class="flex gap-[5px]"    
+                                <span
+                                    v-if="notification.order.status in orderType"
+                                    class="h-fit text-[24px] rounded-full"
+                                    :class="orderType[notification.order.status].icon"
                                 >
-                                    <span
-                                        v-if="notification.order.status in orderType"
-                                        class="h-fit text-[24px] rounded-full"
-                                        :class="orderType[notification.order.status].icon"
-                                    >
-                                    </span>
+                                </span>
 
-                                    <div class="grid">
-                                        <p class="text-gray-800">
-                                            #@{{ notification.order.id }}
-                                            @{{ orderType[notification.order.status].message }}
-                                        </p>
-            
-                                        <p class="text-[12px] text-gray-600">
-                                            @{{ notification.order.datetime }}
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
+                                <div class="grid">
+                                    <p class="text-gray-800">
+                                        #@{{ notification.order.id }}
+                                        @{{ orderType[notification.order.status].message }}
+                                    </p>
+        
+                                    <p class="text-[12px] text-gray-600">
+                                        @{{ notification.order.datetime }}
+                                    </p>
+                                </div>
+                            </a>
                         </div>
 
                         <!-- For Empty Data -->
@@ -85,7 +81,7 @@
                             class="px-[24px] py-[12px] max-h-[calc(100vh-330px)]"
                             v-else
                         >
-                            @lang('admin::app.notification.no-record')
+                            @lang('admin::app.notifications.no-record')
                         </div>
                     </div>
 
@@ -136,20 +132,20 @@
                         status: 'all',
 
                         orderStatusMessages: {
-                            pending: "@lang('admin::app.notification.order-status-messages.pending')",
-                            canceled: "@lang('admin::app.notification.order-status-messages.canceled')",
-                            closed: "@lang('admin::app.notification.order-status-messages.closed')",
-                            completed: "@lang('admin::app.notification.order-status-messages.completed')",
-                            processing: "@lang('admin::app.notification.order-status-messages.processing')" 
+                            pending: "@lang('admin::app.notifications.order-status-messages.pending')",
+                            canceled: "@lang('admin::app.notifications.order-status-messages.canceled')",
+                            closed: "@lang('admin::app.notifications.order-status-messages.closed')",
+                            completed: "@lang('admin::app.notifications.order-status-messages.completed')",
+                            processing: "@lang('admin::app.notifications.order-status-messages.processing')" 
                         },
 
                         orderStatus: {
-                            all: "@lang('admin::app.notification.status.all')",
-                            pending: "@lang('admin::app.notification.status.pending')",
-                            canceled: "@lang('admin::app.notification.status.canceled')",
-                            closed: "@lang('admin::app.notification.status.closed')",
-                            completed: "@lang('admin::app.notification.status.completed')",
-                            processing: "@lang('admin::app.notification.status.processing')" 
+                            all: "@lang('admin::app.notifications.status.all')",
+                            pending: "@lang('admin::app.notifications.status.pending')",
+                            canceled: "@lang('admin::app.notifications.status.canceled')",
+                            closed: "@lang('admin::app.notifications.status.closed')",
+                            completed: "@lang('admin::app.notifications.status.completed')",
+                            processing: "@lang('admin::app.notifications.status.processing')" 
                         },
                         
                         orderType: {

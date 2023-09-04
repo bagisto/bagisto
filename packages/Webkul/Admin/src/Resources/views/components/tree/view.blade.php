@@ -6,6 +6,7 @@
     {{ $attributes->except('input-type') }}
     input-type="{{ $inputType }}"
 >
+    <x-admin::shimmer.tree/>
 </v-tree-view>
 
 @pushOnce('scripts')
