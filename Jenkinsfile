@@ -3,40 +3,30 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // ¼ì³ö´úÂë£¬ÕâÒ»²½¿ÉÒÔ¸ù¾İĞèÒªÅäÖÃSCMºÍ²Ö¿âURL
-                // ÀıÈç£¬¿ÉÒÔÊ¹ÓÃGit SCM²å¼ş
+                // æ£€å‡ºä»£ç ï¼Œè¿™ä¸€æ­¥å¯ä»¥æ ¹æ®éœ€è¦é…ç½®SCMå’Œä»“åº“URL
+                // ä¾‹å¦‚ï¼Œå¯ä»¥ä½¿ç”¨Git SCMæ’ä»¶
                 checkout([$class: 'GitSCM', branches: [[name: 'master']], 
                           userRemoteConfigs: [[url: 'https://github.com/Ryann727/bagisto.git']]])
             }
         }
         stage('Build') {
             steps {
-                // ÔÚÕâ¸ö½×¶ÎÖ´ĞĞ composer install ÃüÁî
+                // åœ¨è¿™ä¸ªé˜¶æ®µæ‰§è¡Œ composer install å‘½ä»¤
                 sh 'composer install'
             }
         }
         stage('Release') {
             steps {
-                // ÔÚÕâ¸ö½×¶ÎÖ´ĞĞ php artisan serve ÃüÁî£¨Ç°Ì¨ÔËĞĞ£©
+                // åœ¨è¿™ä¸ªé˜¶æ®µæ‰§è¡Œ php artisan serve å‘½ä»¤ï¼ˆå‰å°è¿è¡Œï¼‰
                 sh 'php artisan serve'
             }
         }
         stage('Unit Test') {
             steps {
-                // ÔÚÕâ¸ö½×¶ÎÖ´ĞĞµ¥Ôª²âÊÔ
+                // åœ¨è¿™ä¸ªé˜¶æ®µæ‰§è¡Œå•å…ƒæµ‹è¯•
                 sh 'php vendor/bin/codecept run unit'
             }
         }
-        // ¿ÉÒÔÌí¼Ó¸ü¶à½×¶Î£¬Èç²¿ÊğµÈ
-    }
-    post {
-        success {
-            // ¹¹½¨³É¹¦Ê±µÄ²Ù×÷
-            // ÔÚ´Ë´¦¿ÉÒÔ´¥·¢ÆäËû²Ù×÷»òÍ¨Öª
-        }
-        failure {
-            // ¹¹½¨Ê§°ÜÊ±µÄ²Ù×÷
-            // ÔÚ´Ë´¦¿ÉÒÔ´¥·¢ÆäËû²Ù×÷»òÍ¨Öª
-        }
+        // å¯ä»¥æ·»åŠ æ›´å¤šé˜¶æ®µï¼Œå¦‚éƒ¨ç½²ç­‰
     }
 }
