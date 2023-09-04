@@ -6,10 +6,11 @@ use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
-use Webkul\Admin\Http\Controllers\Settings\Tax\TaxCategoryController;
-use Webkul\Admin\Http\Controllers\Settings\Tax\TaxRateController;
-use Webkul\Admin\Http\Controllers\Settings\RoleController;
-use Webkul\Admin\Http\Controllers\Settings\UserController;
+use Webkul\Admin\Http\Controllers\Settings\TaxCategoryController;
+use Webkul\Admin\Http\Controllers\Settings\TaxRateController;
+use Webkul\Admin\Http\Controllers\Settings\ThemeController;
+use Webkul\Admin\Http\Controllers\User\RoleController;
+use Webkul\Admin\Http\Controllers\User\UserController;
 
 /**
  * Settings routes.
@@ -168,7 +169,21 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
 
-            Route::post('confirm/{id}', 'destroySelf')->name('admin.settings.users.destroy');
+            Route::post('confirm/{id}', 'destroy')->name('admin.settings.users.destroy');
         });
+    });
+
+    Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
+        Route::get('', 'index')->name('admin.theme.index');
+
+        Route::get('create', 'create')->name('admin.theme.create');
+
+        Route::get('edit/{id}', 'edit')->name('admin.theme.edit');
+
+        Route::post('store', 'store')->name('admin.theme.store');
+
+        Route::post('edit/{id}', 'update')->name('admin.theme.update');
+
+        Route::delete('edit/{id}', 'destroy')->name('admin.theme.delete');
     });
 });
