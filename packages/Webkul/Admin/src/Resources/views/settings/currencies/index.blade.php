@@ -135,7 +135,10 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, updateOrCreate)">
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="currencyCreateForm"
+                >
                     <x-admin::modal ref="currencyUpdateOrCreateModal">
                         <x-slot:header>
                             <p
@@ -281,7 +284,13 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", params)
+                        let formData = new FormData(this.$refs.currencyCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", formData)
                         .then((response) => {
                             this.$refs.currencyUpdateOrCreateModal.close();
 

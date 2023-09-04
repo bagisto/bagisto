@@ -193,7 +193,10 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, update)">
+                    <form
+                        @submit="handleSubmit($event, update)"
+                        ref="reviewCreateForm"
+                    >
                         <x-admin::drawer ref="review">
                             <!-- Drawer Header -->
                             <x-slot:header>
@@ -386,7 +389,11 @@
                     },
 
                     update(params) {
-                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, params)
+                        let formData = new FormData(this.$refs.reviewCreateForm);
+
+                        formData.append('_method', 'put');
+
+                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, formData)
                             .then((response) => {
                                 this.$refs.review.close();
 

@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="flex justify-between items-center px-[16px] py-[10px] bg-white border-b-[1px] border-gray-300 sticky top-0 z-10">
+<header class="flex justify-between items-center px-[16px] py-[10px] bg-white border-b-[1px] border-gray-300 sticky top-0 z-[10001]">
     <div class="flex gap-[6px] items-center">
         {{-- Hamburger Menu --}}
         <i
@@ -523,63 +523,58 @@
             </x-slot:toggle>
 
             <!-- Notification Content -->
-            <x-slot:content class="!p-0">
-                <div class="box-shadow max-w-[320px]">
-                    <div class="p-[24px]">
-                        <p class="text-[16px] text-gray-600 font-semibold mb-[12px]">
-                            @lang('admin::app.notification.notification-title', ['read' => 0])
-                        </p>
+            <x-slot:content class="!p-0 min-w-[250px] max-w-[250px]">
+                <!-- Header -->
+                <div class="text-[16px] p-[12px] text-gray-600 font-semibold  border-b-[1px]">
+                    @lang('admin::app.notifications.title', ['read' => 0])
+                </div>
 
-                        <div
-                            class="grid gap-[24px]"
-                            v-if="notifications?.length"
+                <!-- Content -->
+                <div class="grid">
+                    <a
+                        class="flex gap-[5px] items-start p-[12px] hover:bg-gray-100 border-b-[1px] last:border-b-0"
+                        v-for="notification in notifications"
+                        :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
+                    >
+                        <!-- Notification Icon -->
+                        <span
+                            v-if="notification.order.status in notificationStatusIcon"
+                            class="h-fit"
+                            :class="notificationStatusIcon[notification.order.status]"
                         >
-                            <a
-                                class="flex gap-[5px] items-start"
-                                v-for="notification in notifications"
-                                :href="'{{ route('admin.notification.viewed_notification', ':orderId') }}'.replace(':orderId', notification.order_id)"
-                            >
-                                <!-- Notification Icon -->
-                                <span
-                                    v-if="notification.order.status in notificationStatusIcon"
-                                    class="h-fit"
-                                    :class="notificationStatusIcon[notification.order.status]"
-                                >
-                                </span>
+                        </span>
 
-                                <div class="grid">
-                                    <!-- Order Id & Status -->
-                                    <p class="text-gray-800">
-                                        #@{{ notification.order.id }}
-                                        @{{ orderTypeMessages[notification.order.status] }}
-                                    </p>
+                        <div class="grid">
+                            <!-- Order Id & Status -->
+                            <p class="text-gray-800">
+                                #@{{ notification.order.id }}
+                                @{{ orderTypeMessages[notification.order.status] }}
+                            </p>
 
-                                    <!-- Craeted Date In humand Readable Format -->
-                                    <p class="text-[12px] text-gray-600">
-                                        @{{ notification.order.datetime }}
-                                    </p>
-                                </div>
-                            </a>
+                            <!-- Craeted Date In humand Readable Format -->
+                            <p class="text-[12px] text-gray-600">
+                                @{{ notification.order.datetime }}
+                            </p>
                         </div>
-                    </div>
+                    </a>
+                </div>
 
-                        <!-- Notification Footer -->
-                    <div class="flex gap-[10px] justify-between p-[24px] border-t-[1px] border-b-[1px] border-gray-300">
-                        <a
-                            href="{{ route('admin.notification.index') }}"
-                            class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
-                        >
-                            @lang('admin::app.notification.view-all')
-                        </a>
+                <!-- Footer -->
+                <div class="flex gap-[10px] justify-between p-[12px] border-t-[1px] border-gray-300">
+                    <a
+                        href="{{ route('admin.notification.index') }}"
+                        class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                    >
+                        @lang('admin::app.notifications.view-all')
+                    </a>
 
-                        <a
-                            class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
-                            v-if="notifications?.length"
-                            @click="readAll()"
-                        >
-                            @lang('admin::app.notification.read-all')
-                        </a>
-                    </div>
+                    <a
+                        class="text-[12px] text-blue-600 font-semibold cursor-pointer transition-all hover:underline"
+                        v-if="notifications?.length"
+                        @click="readAll()"
+                    >
+                        @lang('admin::app.notifications.read-all')
+                    </a>
                 </div>
             </x-slot:content>
         </x-admin::dropdown>
@@ -628,12 +623,12 @@
                     totalUnRead: 0,
 
                     orderTypeMessages: {
-                        'pending': "@lang('admin::app.notification.order-status-messages.pending')",
-                        'canceled': "@lang('admin::app.notification.order-status-messages.canceled')",
-                        'closed': "@lang('admin::app.notification.order-status-messages.closed')",
-                        'completed': "@lang('admin::app.notification.order-status-messages.completed')",
-                        'processing': "@lang('admin::app.notification.order-status-messages.processing')",
-                        'pending_payment': "@lang('admin::app.notification.order-status-messages.pending_payment')",
+                        'pending': "@lang('admin::app.notifications.order-status-messages.pending')",
+                        'canceled': "@lang('admin::app.notifications.order-status-messages.canceled')",
+                        'closed': "@lang('admin::app.notifications.order-status-messages.closed')",
+                        'completed': "@lang('admin::app.notifications.order-status-messages.completed')",
+                        'processing': "@lang('admin::app.notifications.order-status-messages.processing')",
+                        'pending_payment': "@lang('admin::app.notifications.order-status-messages.pending_payment')",
                     }
                 }
             },

@@ -32,13 +32,12 @@ return [
         ],
     ],
 
-    'notification' => [
-        'no-record'                   => 'No Record Found',
-        'notification-title'          => 'Notification',
-        'notification-marked-success' => 'Notification Marked Successfully',
-        'read-all'                    => 'Mark as Read',
-        'title-plural'                => 'Notifications',
-        'view-all'                    => 'View All Notifications',
+    'notifications' => [
+        'no-record'      => 'No Record Found',
+        'title'          => 'Notifications',
+        'marked-success' => 'Notification Marked Successfully',
+        'read-all'       => 'Mark as Read',
+        'view-all'       => 'View All',
 
         'order-status-messages'       => [
             'completed'       => 'Order Completed',
@@ -595,7 +594,7 @@ return [
 
                 'videos' => [
                     'add-video-btn'     => 'Add Video',
-                    'allowed-types'     => 'png, jpeg, jpg',
+                    'allowed-types'     => 'mp4, webm, mkv',
                     'info'              => 'Maximum video size should be like :size',
                     'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
                     'title'             => 'Videos',

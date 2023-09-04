@@ -69,12 +69,12 @@
                 <!-- Actions -->
                 <div class="flex justify-between">
                     <span
-                        class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-100"
+                        class="icon-delete text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200"
                         @click="remove"
                     ></span>
 
                     <label
-                        class="icon-edit text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-100"
+                        class="icon-edit text-[24px] p-[6px]  rounded-[6px] cursor-pointer hover:bg-gray-200"
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 
