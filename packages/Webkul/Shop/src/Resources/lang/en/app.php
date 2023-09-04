@@ -752,6 +752,7 @@ return [
 
             'commented' => [
                 'subject' => 'New comment Added',
+                'description' => 'Note Is - :note' 
             ],
 
             'subscribed' => [

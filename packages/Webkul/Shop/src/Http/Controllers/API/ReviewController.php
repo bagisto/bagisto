@@ -28,7 +28,7 @@ class ReviewController extends APIController
      */
     const STATUS_APPROVED = 'approved';
 
-    const STATUS_PENDING = ' pending';
+    const STATUS_PENDING = 'pending';
 
     /**
      * Product listings.

@@ -82,7 +82,7 @@ class ReviewDataGrid extends DataGrid
                 if ($value->product_review_status == 'approved') {
                     return '<p class="label-active">' . trans('admin::app.customers.reviews.index.datagrid.approved') . '</p>';
                 } elseif ($value->product_review_status == "pending") {
-                    return '<p label-pending">' . trans('admin::app.customers.reviews.index.datagrid.pending') . '</span>';
+                    return '<p class="label-pending">' . trans('admin::app.customers.reviews.index.datagrid.pending') . '</p>';
                 } elseif ($value->product_review_status == "disapproved") {  
                     return '<p class="label-cancelled">' . trans('admin::app.customers.reviews.index.datagrid.disapproved') . '</p>';
                 }

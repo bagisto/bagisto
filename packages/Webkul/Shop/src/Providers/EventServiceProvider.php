@@ -24,6 +24,10 @@ class EventServiceProvider extends ServiceProvider
             'Webkul\Shop\Listeners\Customer@afterSubscribed',
         ],
 
+        'customer.note-created.after' => [
+            'Webkul\Shop\Listeners\Customer@afterNoteCreated',
+        ],
+
         'checkout.order.save.after' => [
             'Webkul\Shop\Listeners\Order@afterCreated',
         ],
