@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Building'
                 bat 'composer install'
-                bat 'copy .env .env.testing'
+                bat 'copy .env.example .env.testing'
             }
         }
 
