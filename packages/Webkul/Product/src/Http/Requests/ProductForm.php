@@ -118,7 +118,7 @@ class ProductForm extends FormRequest
                             request($attribute->code)
                         )
                     ) {
-                        $fail(__('admin::app.response.already-taken', ['name' => ':attribute']));
+                        $fail(__('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']));
                     }
                 });
             }
@@ -137,7 +137,7 @@ class ProductForm extends FormRequest
     public function messages()
     {
         return [
-            'variants.*.sku.unique' => __('admin::app.response.already-taken', ['name' => ':attribute']),
+            'variants.*.sku.unique' => __('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']),
         ];
     }
 

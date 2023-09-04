@@ -299,7 +299,7 @@
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <!-- First Name -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
-                                            <x-admin::form.control-group.label>
+                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.first-name')
                                             </x-admin::form.control-group.label>
                 
@@ -321,7 +321,7 @@
         
                                         <!-- Last Name -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
-                                            <x-admin::form.control-group.label>
+                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.last-name')
                                             </x-admin::form.control-group.label>
                 
@@ -344,7 +344,7 @@
 
                                     <!-- Email -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.index.create.email')
                                         </x-admin::form.control-group.label>
             
@@ -366,7 +366,7 @@
 
                                     <!-- Contact Number -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.index.create.contact-number')
                                         </x-admin::form.control-group.label>
             
@@ -409,7 +409,7 @@
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <!-- Gender -->
                                         <x-admin::form.control-group class="w-full">
-                                            <x-admin::form.control-group.label>
+                                            <x-admin::form.control-group.label class="required"> 
                                                 @lang('admin::app.customers.index.create.gender')
                                             </x-admin::form.control-group.label>
                 

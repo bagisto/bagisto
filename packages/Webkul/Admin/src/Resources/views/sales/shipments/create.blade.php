@@ -166,7 +166,7 @@
 
                                                 <!-- Item SKU -->
                                                 <p class="text-gray-600">
-                                                    @lang('admin::app.sales.orders.view.sku') - {{ $item->sku }}
+                                                    @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
                                                 </p>
 
                                                 <!--Item Status -->
