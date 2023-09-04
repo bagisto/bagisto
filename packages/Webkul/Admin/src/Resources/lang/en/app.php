@@ -32,13 +32,12 @@ return [
         ],
     ],
 
-    'notification' => [
-        'no-record'                   => 'No Record Found',
-        'notification-title'          => 'Notification',
-        'notification-marked-success' => 'Notification Marked Successfully',
-        'read-all'                    => 'Mark as Read',
-        'title-plural'                => 'Notifications',
-        'view-all'                    => 'View All Notifications',
+    'notifications' => [
+        'no-record'      => 'No Record Found',
+        'title'          => 'Notifications',
+        'marked-success' => 'Notification Marked Successfully',
+        'read-all'       => 'Mark as Read',
+        'view-all'       => 'View All',
 
         'order-status-messages'       => [
             'completed'       => 'Order Completed',

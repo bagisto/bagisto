@@ -87,7 +87,7 @@ class NotificationController extends Controller
         return [
             'search_results'  => $searchResults,
             'total_unread'    => $this->notificationRepository->where('read', 0)->count(),
-            'success_message' => trans('admin::app.notification.notification-marked-success'),
+            'success_message' => trans('admin::app.notifications.marked-success'),
         ];
     }
 }
