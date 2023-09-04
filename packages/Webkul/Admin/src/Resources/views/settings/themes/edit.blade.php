@@ -1857,7 +1857,7 @@
                 data() {
                     return {
                         options:{
-                            html: "{!! $theme->options['html'] ?? '' !!}",
+                            html: `{!! $theme->options['html'] ?? '' !!}`,
                         }
                     };
                 },
@@ -1896,7 +1896,7 @@
                 data() {
                     return {
                         options:{
-                            css: "{!! $theme->options['css'] ?? '' !!}",
+                            css: `{!! $theme->options['css'] ?? '' !!}`,
                         }
                     };
                 },
