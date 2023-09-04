@@ -237,7 +237,7 @@
                     </p>
 
                     <p
-                        class="text-red-600 font-semibold cursor-pointer"
+                        class="text-red-600 font-semibold cursor-pointer transition-all hover:underline"
                         @click="remove"
                     >
                         @lang('admin::app.catalog.products.edit.types.bundle.option.delete-btn')

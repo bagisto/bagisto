@@ -76,7 +76,7 @@ class Column
     /**
      * Get the database column name.
      */
-    public function getDatabaseColumnName(): string
+    public function getDatabaseColumnName(): mixed
     {
         return $this->databaseColumnName;
     }

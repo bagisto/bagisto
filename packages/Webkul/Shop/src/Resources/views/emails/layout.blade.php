@@ -20,7 +20,7 @@
                             />
                         @else
                             <img
-                                src="{{ bagisto_asset('images/logo.svg') }}"
+                                src="{{ bagisto_asset('images/logo.svg', 'shop') }}"
                                 alt="{{ config('app.name') }}"
                                 style="width: 156px;height: 40px;"
                             />

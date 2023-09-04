@@ -89,6 +89,8 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(InventorySourceController::class)->prefix('inventory-sources')->group(function () {
             Route::get('', 'index')->name('admin.settings.inventory_sources.index');
 
+            Route::get('create', 'create')->name('admin.settings.inventory_sources.create');
+
             Route::post('create', 'store')->name('admin.settings.inventory_sources.store');
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.inventory_sources.edit');

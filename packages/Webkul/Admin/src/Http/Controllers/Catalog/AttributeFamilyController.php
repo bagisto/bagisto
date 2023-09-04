@@ -89,7 +89,7 @@ class AttributeFamilyController extends Controller
     {
         $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOrFail($id, ['*']);
 
-        $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
+        $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type', 'is_user_defined']);
 
         return view('admin::catalog.families.edit', compact('attributeFamily', 'customAttributes'));
     }

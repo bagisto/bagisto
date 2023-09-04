@@ -5,7 +5,7 @@
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-eebcd810.woff",
+    "file": "assets/bagisto-admin-e8103c2a.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/Accordion-Dark-Arrow-Down.svg": {
@@ -248,7 +248,11 @@
     "css": [
       "assets/app-05f8acf7.css"
     ],
+<<<<<<< HEAD
     "file": "assets/app-bf6a8088.js",
+=======
+    "file": "assets/app-30045f04.js",
+>>>>>>> upstream/2.x
     "isEntry": true,
     "src": "src/Resources/assets/js/app.js"
   },

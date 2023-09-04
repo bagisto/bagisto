@@ -3,6 +3,7 @@
 namespace Webkul\Theme;
 
 use Illuminate\Support\Facades\Vite;
+use Webkul\Theme\Exceptions\ViterNotFound;
 
 class Theme
 {
@@ -84,20 +85,38 @@ class Theme
     /**
      * Convert to asset url based on current theme.
      *
-     * @param  string  $url
      * @return string
      */
-    public function url($url)
+    public function url(string $url, ?string $namespace)
     {
         $url = trim($url, '/');
 
         /**
-         * Testing vite url, on monitoring.
+         * If the namespace is null, it means the theming system is activated. We use the request URI to
+         * detect the theme and provide Vite assets based on the current theme.
          */
-        $viteUrl = 'src/Resources/assets/' . $url;
+        if (empty($namespace)) {
+            $viteUrl = trim($this->vite['package_assets_directory'], '/') . '/' . $url;
 
-        return Vite::useHotFile($this->vite['hot_file'])
-            ->useBuildDirectory($this->vite['build_directory'])
+            return Vite::useHotFile($this->vite['hot_file'])
+                ->useBuildDirectory($this->vite['build_directory'])
+                ->asset($viteUrl);
+        }
+
+        /**
+         * If a namespace is provided, it means the developer knows what they are doing and must create the
+         * registry in the provided configuration. We will analyze based on that.
+         */
+        $viters = config('bagisto-vite.viters');
+
+        if (empty($viters[$namespace])) {
+            throw new ViterNotFound($namespace);
+        }
+
+        $viteUrl = trim($viters[$namespace]['package_assets_directory'], '/') . '/' . $url;
+
+        return Vite::useHotFile($viters[$namespace]['hot_file'])
+            ->useBuildDirectory($viters[$namespace]['build_directory'])
             ->asset($viteUrl);
     }
 

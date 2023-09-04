@@ -31,21 +31,23 @@
                                 @lang('admin::app.sales.refunds.create.title')
                             </p>
 
-                            <!-- Update Quantity Button -->
-                            <div 
-                                class="px-[12px] py-[6px] text-red-600 font-semibold cursor-pointer"
-                                @click="updateQty"
-                            >
-                                @lang('admin::app.sales.refunds.create.update-quantity-btn')
-                            </div>
+                            <div class="flex gap-x-[10px]">
+                                <!-- Update Quantity Button -->
+                                <div 
+                                    class="transparent-button text-red-600 hover:bg-gray-200"
+                                    @click="updateQty"
+                                >
+                                    @lang('admin::app.sales.refunds.create.update-quantity-btn')
+                                </div>
 
-                            <!-- Refund Submit Button -->
-                            <button
-                                type="submit"
-                                class="mr-[45px] primary-button"
-                            >
-                                @lang('admin::app.sales.refunds.create.refund-btn')
-                            </button>
+                                <!-- Refund Submit Button -->
+                                <button
+                                    type="submit"
+                                    class="mr-[45px] primary-button"
+                                >
+                                    @lang('admin::app.sales.refunds.create.refund-btn')
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </x-slot:header>

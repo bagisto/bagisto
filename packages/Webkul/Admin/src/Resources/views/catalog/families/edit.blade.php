@@ -1,4 +1,8 @@
 <x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.catalog.families.edit.title')
+    </x-slot:title>
+
     {{-- Input Form --}}
     <x-admin::form
         method="PUT"
@@ -30,7 +34,7 @@
         {{-- Container --}}
         <div class="flex gap-[10px] mt-[14px]">
             {{-- Left Container --}}
-            <div class="flex flex-col gap-[8px] flex-1 bg-white box-shadow">
+            <div class="flex flex-col gap-[8px] flex-1 bg-white rounded-[4px] box-shadow">
                 <v-family-attributes>
                     <x-admin::shimmer.families.attributes-panel/>
                 </v-family-attributes>
@@ -59,7 +63,6 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="code"
-                                class="!w-[284px]"
                                 value="{{ old('code') ?? $attributeFamily->code }}"
                                 disabled="disabled"
                                 rules="required"
@@ -84,7 +87,6 @@
                             <x-admin::form.control-group.control
                                 type="text"
                                 name="name"
-                                class="!w-[284px]"
                                 value="{{ old('name') ?? $attributeFamily->name }}"
                                 rules="required"
                                 :label="trans('admin::app.catalog.families.create.name')"
@@ -171,28 +173,28 @@
                             <template #item="{ element, index }">
                                 <div class="">
                                     <!-- Group Container -->
-                                    <div class="flex items-center">
+                                    <div class="flex items-center group">
                                         <!-- Toggle -->
                                         <i
-                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100"
+                                            class="icon-sort-down text-[20px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-100 group-hover:text-gray-800"
                                             @click="element.hide = ! element.hide"
                                         ></i>
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer"
-                                            :class="{'bg-blue-600 text-white group-hover:text-white': selectedGroup.id == element.id}"
+                                            class="group_node flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] transition-all text-gray-600 group cursor-pointer"
+                                            :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click="groupSelected(element)"
                                         >
-                                            <i class="icon-drag text-[20px] text-inherit transition-all pointer-events-none"></i>
+                                            <i class="icon-drag text-[20px] text-inherit pointer-events-none transition-all group-hover:text-gray-800"></i>
 
                                             <i
-                                                class="text-[20px] text-inherit transition-all pointer-events-none"
-                                                :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
+                                                class="text-[20px] text-inherit pointer-events-none transition-all group-hover:text-gray-800"
+                                                :class="[element.is_user_defined ? 'icon-folder' : 'icon-folder-block']"
                                             ></i>
 
                                             <span
-                                                class="text-[14px] text-inherit font-regular transition-all pointer-events-none"
+                                                class="text-[14px] text-inherit font-regular pointer-events-none transition-all group-hover:text-gray-800"
                                                 v-show="editableGroup.id != element.id"
                                             >
                                                 @{{ element.name }}
@@ -201,7 +203,7 @@
                                             <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
-                                                class="group_node text-[14px] text-gray-600"
+                                                class="group_node text-[14px] !text-gray-600"
                                                 v-model="element.name"
                                                 v-show="editableGroup.id == element.id"
                                             />
@@ -209,14 +211,12 @@
                                             <input
                                                 type="hidden"
                                                 :name="'attribute_groups[' + element.id + '][position]'"
-                                                class="group_node text-[14px] text-gray-600"
                                                 :value="index + 1"
                                             />
 
                                             <input
                                                 type="hidden"
                                                 :name="'attribute_groups[' + element.id + '][column]'"
-                                                class="group_node text-[14px] text-gray-600"
                                                 :value="column"
                                             />
                                         </div>
@@ -240,7 +240,7 @@
 
                                                 <i
                                                     class="text-[20px] transition-all group-hover:text-gray-700"
-                                                    :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
+                                                    :class="[parseInt(element.is_user_defined) ? 'icon-attribute' : 'icon-attribute-block']"
                                                 ></i>
                                                 
 
@@ -296,11 +296,7 @@
                                 <div class="flex gap-[6px] max-w-max py-[6px] pr-[6px] rounded-[4px] text-gray-600 group cursor-pointer">
                                     <i class="icon-drag text-[20px] transition-all group-hover:text-gray-700"></i>
 
-                                    <i
-                                        class="text-[20px] transition-all group-hover:text-gray-700"
-                                        :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
-                                    ></i>
-                                    
+                                    <i class="icon-attribute text-[20px] transition-all group-hover:text-gray-700"></i>
 
                                     <span class="text-[14px] font-regular transition-all group-hover:text-gray-800 max-xl:text-[12px]">
                                         @{{ element.admin_name }}

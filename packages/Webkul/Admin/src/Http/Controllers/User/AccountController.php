@@ -68,7 +68,9 @@ class AccountController extends Controller
             $data['image'] = current(request()->file('image'))->store('admins/' . $user->id);
         } else {
             if (! isset($data['image'])) {
-                Storage::delete($user->image);
+                if (! empty($data['image'])) {
+                    Storage::delete($user->image);
+                }
 
                 $data['image'] = null;
             } else {

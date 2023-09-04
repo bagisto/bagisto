@@ -45,8 +45,8 @@
         >
             <div class="flex gap-[10px] p-[6px] items-center">
                 <span
-                    class="icon-arrow-right text-[24px]"
-                    :class="{'!icon-arrow-left': isCollapsed}"
+                    class="icon-collapse text-[24px]"
+                    :class="{'rotate-[180deg]': isCollapsed}"
                 ></span>
 
                 <p
