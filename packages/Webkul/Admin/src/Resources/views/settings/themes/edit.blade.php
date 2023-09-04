@@ -1268,7 +1268,7 @@
                             >
                                 <!-- Information -->
                                 <div 
-                                    class="grid"
+                                    class="grid border-b-[1px] last:border-b-0 border-slate-300"
                                     v-for="(link, key) in footerLink"
                                 >
                                     <!-- Hidden Input -->
@@ -1277,8 +1277,8 @@
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][title]'" :value="link.title"> 
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][sort_order]'" :value="link.sort_order"> 
                                     
-                                    <div class="flex gap-[10px] justify-between border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                        <div class="flex gap-[10px]">
+                                    <div class="flex gap-[10px] justify-between py-5 cursor-pointer">
+                                        <div class="flex gap-[10px] ">
                                             <div class="grid gap-[6px] place-content-start">
                                                 <p class="text-gray-600">
                                                     <div> 
