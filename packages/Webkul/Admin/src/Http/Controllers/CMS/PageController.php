@@ -105,8 +105,8 @@ class PageController extends Controller
 
         $this->validate(request(), [
             $locale . '.url_key'      => ['required', new \Webkul\Core\Rules\Slug, function ($attribute, $value, $fail) use ($id) {
-                if (!$this->cmsRepository->isUrlKeyUnique($id, $value)) {
-                    $fail(trans('admin::app.response.already-taken', ['name' => 'Page']));
+                if (! $this->cmsRepository->isUrlKeyUnique($id, $value)) {
+                    $fail(trans('admin::app.cms.index.already-taken', ['name' => 'Page']));
                 }
             }],
             $locale . '.page_title'   => 'required',

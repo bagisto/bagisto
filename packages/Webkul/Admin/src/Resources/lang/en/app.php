@@ -480,8 +480,9 @@ return [
     'catalog' => [
         'products' => [
             'index' => [
-                'create-btn' => 'Create Product',
-                'title'      => 'Products',
+                'create-btn'                => 'Create Product',
+                'title'                     => 'Products',
+                'already-taken'             => 'The :name has already been taken.',
 
                 'create'     => [
                     'back-btn'                => 'Back',
@@ -1933,8 +1934,9 @@ return [
 
     'cms' => [
         'index' => [
-            'title'      => 'Pages',
-            'create-btn' => 'Create Page',
+            'title'             => 'Pages',
+            'create-btn'        => 'Create Page',
+            'already-taken'     => 'The :name has already been taken.',
 
             'datagrid' => [
                 'id'                  => 'ID',
