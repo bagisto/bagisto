@@ -14,6 +14,14 @@
             </p>
             
             <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-[10px] items-center">
+                    <a 
+                        href="{{ route('admin.theme.index') }}"
+                        class="transparent-button hover:bg-gray-200"> 
+                        Back 
+                    </a>
+                </div>
+                
                 <button 
                     type="submit"
                     class="primary-button"
@@ -66,11 +74,11 @@
                             </div>
 
                             <template v-for="(removeImage, index) in removedImages">
-                                    <!-- Hidden Input -->
-                                    <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                    <input type="hidden" :name="'removeImages[]'" :value="removeImage"/>  
-                                    <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
-                                    <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
+                                <!-- Hidden Input -->
+                                <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
+                                <input type="hidden" :name="'removeImages[]'" :value="removeImage"/>  
+                                <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
+                                <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
                             </template>
 
                             <div
@@ -84,12 +92,17 @@
                                 <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />    
                             
                                 <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                <div 
+                                    class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                    :class="{
+                                        'border-b-[1px] border-slate-300': index < sliders.images.length - 1
+                                    }"
+                                >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-gray-600">
                                                 <div> 
-                                                    @lang('admin::app.settings.themes.create.link'): 
+                                                    @lang('admin::app.settings.themes.edit.link'): 
 
                                                     <span class="text-gray-600 transition-all">
                                                         @{{ image.link }}
@@ -99,7 +112,7 @@
 
                                             <p class="text-gray-600">
                                                 <div class="flex justify-between"> 
-                                                    @lang('admin::app.settings.themes.create.image'): 
+                                                    @lang('admin::app.settings.themes.edit.image'): 
 
                                                     <span class="text-gray-600 transition-all">
                                                         <a 
@@ -278,15 +291,15 @@
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.settings.themes.create.link')
+                                                @lang('admin::app.settings.themes.edit.link')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="link"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.themes.create.link')"
-                                                :placeholder="trans('admin::app.settings.themes.create.link')"
+                                                rules="required|url"
+                                                :label="trans('admin::app.settings.themes.edit.link')"
+                                                :placeholder="trans('admin::app.settings.themes.edit.link')"
                                             >
                                             </x-admin::form.control-group.control>
             
@@ -431,7 +444,7 @@
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    @lang('admin::app.settings.themes.create.filters')
+                                    @lang('admin::app.settings.themes.edit.filters')
                                 </p>
                             </div>
             
@@ -440,51 +453,54 @@
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.productFilterModal.toggle()"
                                 >
-                                    @lang('admin::app.settings.themes.create.add-filter-btn')
+                                    @lang('admin::app.settings.themes.edit.add-filter-btn')
                                 </div>
                             </div>
                         </div>
 
                         <!-- Filters Lists -->
-                        <div v-if="options.filters.length">
-                            <div
-                                class="grid"
-                                v-for="filter in options.filters"
+                        <div
+                            class="grid"
+                            v-if="options.filters.length"
+                            v-for="(filter, index) in options.filters"
+                        >
+                            <!-- Hidden Input -->
+                            <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                        
+                            <!-- Details -->
+                            <div 
+                                class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                :class="{
+                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                }"
                             >
-                                <!-- Hidden Input -->
-                                <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
-                            
-                                <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                    <div class="flex gap-[10px]">
-                                        <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-gray-600">
-                                                <div> 
-                                                    @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
-                                                </div>
-                                            </p>
+                                <div class="flex gap-[10px]">
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-gray-600">
+                                            <div> 
+                                                @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
+                                            </div>
+                                        </p>
 
-                                            <p class="text-gray-600">
-                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
-                                            </p>
-                                        </div>
+                                        <p class="text-gray-600">
+                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    <!-- Actions -->
-                                    <div class="grid gap-[4px] place-content-start text-right">
-                                        <div class="flex gap-x-[20px] items-center">
-                                            <p 
-                                                class="text-red-600 cursor-pointer transition-all hover:underline"
-                                                @click="remove(filter)"
-                                            > 
-                                                @lang('admin::app.settings.themes.edit.delete')
-                                            </p>
-                                        </div>
+                                <!-- Actions -->
+                                <div class="grid gap-[4px] place-content-start text-right">
+                                    <div class="flex gap-x-[20px] items-center">
+                                        <p 
+                                            class="text-red-600 cursor-pointer transition-all hover:underline"
+                                            @click="remove(filter)"
+                                        > 
+                                            @lang('admin::app.settings.themes.edit.delete')
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                         <!-- Filters Illustration -->
                         <div    
                             class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
@@ -787,7 +803,7 @@
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    @lang('admin::app.settings.themes.create.filters')
+                                    @lang('admin::app.settings.themes.edit.filters')
                                 </p>
                             </div>
             
@@ -796,46 +812,50 @@
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.categoryFilterModal.toggle()"
                                 >
-                                    @lang('admin::app.settings.themes.create.add-filter-btn')
+                                    @lang('admin::app.settings.themes.edit.add-filter-btn')
                                 </div>
                             </div>
                         </div>
 
                         <!-- Filters Lists -->
-                        <div v-if="options.filters.length">
-                            <div
-                                class="grid"
-                                v-for="filter in options.filters"
+                        <div
+                            class="grid"
+                            v-if="options.filters.length"
+                            v-for="(filter, index) in options.filters"
+                        >
+                            <!-- Hidden Input -->
+                            <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                        
+                            <!-- Details -->
+                            <div 
+                                class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                :class="{
+                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                }"
                             >
-                                <!-- Hidden Input -->
-                                <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
-                            
-                                <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                    <div class="flex gap-[10px]">
-                                        <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-gray-600">
-                                                <div> 
-                                                    @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
-                                                </div>
-                                            </p>
+                                <div class="flex gap-[10px]">
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-gray-600">
+                                            <div> 
+                                                @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
+                                            </div>
+                                        </p>
 
-                                            <p class="text-gray-600">
-                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
-                                            </p>
-                                        </div>
+                                        <p class="text-gray-600">
+                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    <!-- Actions -->
-                                    <div class="grid gap-[4px] place-content-start text-right">
-                                        <div class="flex gap-x-[20px] items-center">
-                                            <p 
-                                                class="text-red-600 cursor-pointer transition-all hover:underline"
-                                                @click="remove(filter)"
-                                            > 
-                                                @lang('admin::app.settings.themes.edit.delete')
-                                            </p>
-                                        </div>
+                                <!-- Actions -->
+                                <div class="grid gap-[4px] place-content-start text-right">
+                                    <div class="flex gap-x-[20px] items-center">
+                                        <p 
+                                            class="text-red-600 cursor-pointer transition-all hover:underline"
+                                            @click="remove(filter)"
+                                        > 
+                                            @lang('admin::app.settings.themes.edit.delete')
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -1070,7 +1090,7 @@
                                             class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                         >
-                                            @lang('admin::app.settings.themes.create.html')
+                                            @lang('admin::app.settings.themes.edit.html')
                                         </div>
                                     </p>
 
@@ -1079,7 +1099,7 @@
                                             class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                         >
-                                            @lang('admin::app.settings.themes.create.css')
+                                            @lang('admin::app.settings.themes.edit.css')
                                         </div>
                                     </p>
                                 </div>
@@ -1256,9 +1276,9 @@
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][url]'" :value="link.url"> 
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][title]'" :value="link.title"> 
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][sort_order]'" :value="link.sort_order"> 
-                                
+                                    
                                     <div class="flex gap-[10px] justify-between border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                        <div class="flex gap-[10px]"><!-- Drag Icon -->
+                                        <div class="flex gap-[10px]">
                                             <div class="grid gap-[6px] place-content-start">
                                                 <p class="text-gray-600">
                                                     <div> 
@@ -1467,7 +1487,7 @@
                         <x-admin::modal ref="addLinksModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.settings.themes.edit.create-filter')
+                                    @lang('admin::app.settings.themes.edit.footer-link-form-title')
                                 </p>
                             </x-slot:header>
         
@@ -1525,7 +1545,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="url"
-                                            rules="required"
+                                            rules="required|url"
                                             :label="trans('admin::app.settings.themes.edit.url')"
                                             :placeholder="trans('admin::app.settings.themes.edit.url')"
                                             ::disabled="isUpdating"
