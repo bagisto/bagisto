@@ -2,8 +2,9 @@
 
 namespace Webkul\Core;
 
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use Carbon\Carbon;
 use Webkul\Core\Models\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CoreConfigRepository;
@@ -877,7 +878,7 @@ class Core
      */
     public function countries()
     {
-        return $this->countryRepository->all();
+        return DB::table('countries')->get();
     }
 
     /**
@@ -913,8 +914,8 @@ class Core
     {
         $collection = [];
 
-        foreach ($this->countryStateRepository->all() as $state) {
-            $collection[$state->country_code][] = $state->toArray();
+        foreach (DB::table('country_states')->get() as $state) {
+            $collection[$state->country_code][] = $state;
         }
 
         return $collection;
