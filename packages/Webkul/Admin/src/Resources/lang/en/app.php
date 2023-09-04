@@ -2287,8 +2287,11 @@ return [
 
         'channels' => [
             'index' => [
-                'title'      => 'Channels',
-                'create-btn' => 'Create Channel',
+                'title'             => 'Channels',
+                'create-btn'        => 'Create Channel',
+                'delete-success'    => 'Channel deleted successfully.',
+                'delete-failed'     => ':name Delete Failed',
+                'last-delete-error' => 'Last Channel deleted failed.',
 
                 'datagrid' => [
                     'id'        => 'ID',
@@ -2332,6 +2335,7 @@ return [
                 'settings'               => 'Settings',
                 'status'                 => 'Status',
                 'maintenance-mode-text'  => 'Message',
+                'create-success'         => 'Channel created successfully.',
             ],
 
             'edit' => [
@@ -2366,14 +2370,8 @@ return [
                 'settings'               => 'Settings',
                 'status'                 => 'Status',
                 'maintenance-mode-text'  => 'Message',
+                'update-success'         => 'Update Channel Successfully',
             ],
-
-            'create-success'         => 'Channel created successfully.',
-            'delete-success'         => 'Channel deleted successfully.',
-            'delete-failed'          => ':name Delete Failed',
-            'last-delete-error'      => 'Last Channel deleted failed.',
-            'update-success'         => 'Update Channel Successfully',
-
         ],
 
         'users' => [

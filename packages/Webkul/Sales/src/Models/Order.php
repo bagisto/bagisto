@@ -223,9 +223,9 @@ class Order extends Model implements OrderContract
     /**
      * Get the billing address for the order.
      */
-    public function billing_address(): HasMany
+    public function billing_address()
     {
-        return $this->addresses()
+        return $this->addresses
             ->where('address_type', OrderAddress::ADDRESS_TYPE_BILLING);
     }
 
@@ -241,9 +241,9 @@ class Order extends Model implements OrderContract
     /**
      * Get the shipping address for the order.
      */
-    public function shipping_address(): HasMany
+    public function shipping_address()
     {
-        return $this->addresses()
+        return $this->addresses
             ->where('address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
     }
 

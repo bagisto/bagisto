@@ -58,7 +58,7 @@
                     <div class="row grid grid-cols-4 grid-rows-1 gap-[10px] items-center px-[16px] py-[10px] border-b-[1px] border-gray-300 text-gray-600 bg-gray-50 font-semibold">
                         <div
                             class="flex gap-[10px] cursor-pointer"
-                            v-for="(columnGroup, index) in ['id', 'currency_name', 'currency_rate']"
+                            v-for="(columnGroup, index) in ['currency_exchange_id', 'currency_name', 'currency_rate']"
                         >
                             <p class="text-gray-600">
                                 <span class="[&>*]:after:content-['_/_']">
@@ -186,11 +186,9 @@
                                         :label="trans('admin::app.settings.exchange-rates.index.create.target-currency')"
                                     >
                                         @foreach ($currencies as $currency)
-                                            @if (is_null($currency->exchange_rate))
-                                                <option value="{{ $currency->id }}">
-                                                    {{ $currency->name }}
-                                                </option>
-                                            @endif
+                                            <option value="{{ $currency->id }}">
+                                                {{ $currency->name }}
+                                            </option>
                                         @endforeach
                                     </x-admin::form.control-group.control>
 

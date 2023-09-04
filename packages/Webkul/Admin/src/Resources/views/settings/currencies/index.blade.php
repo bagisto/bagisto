@@ -269,7 +269,7 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : {{ route('admin.settings.currencies.store') }}, params)
+                        this.$axios.post(params.id ? "{{ route('admin.settings.currencies.update') }}" : "{{ route('admin.settings.currencies.store') }}", params)
                         .then((response) => {
                             this.$refs.currencyUpdateOrCreateModal.close();
 
