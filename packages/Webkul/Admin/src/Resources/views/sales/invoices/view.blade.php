@@ -173,12 +173,12 @@
 
                                         {{--SKU --}}
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.invoices.view.sku') - {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
+                                             @lang('admin::app.sales.invoices.view.sku', ['sku' => $item->getTypeInstance()->getOrderedItem($item)->sku])
                                         </p>
 
                                         {{-- Quantity --}}
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.invoices.view.qty') - {{ $item->qty }}
+                                            @lang('admin::app.sales.invoices.view.qty', ['qty' => $item->qty])
                                         </p>
                                     </div>
                                 </div>
@@ -193,24 +193,24 @@
                                 {{-- Item Base Price --}}
                                 <div class="flex flex-col gap-[6px] items-end place-items-start">
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.invoices.view.price') - {{ core()->formatBasePrice($item->base_price) }}
+                                        @lang('admin::app.sales.invoices.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                     </p>
 
                                     {{-- Item Tax Amount --}}
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.invoices.view.tax') - {{ core()->formatBasePrice($item->base_tax_amount) }}
+                                        @lang('admin::app.sales.invoices.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                     </p>
 
                                     {{-- Item Discount --}}
                                     @if ($invoice->base_discount_amount > 0)
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.invoices.view.discount') - {{ core()->formatBasePrice($item->base_discount_amount) }}
+                                            @lang('admin::app.sales.invoices.view.discount', ['discount' => core()->formatBasePrice($item->base_discount_amount)])
                                         </p>
                                     @endif
 
                                     {{-- Item Sub-Total --}}
                                     <p class="text-gray-600">
-                                        @lang('admin::app.sales.invoices.view.sub-total') - {{ core()->formatBasePrice($item->base_total) }}
+                                        @lang('admin::app.sales.invoices.view.sub-total', ['sub-total' => core()->formatBasePrice($item->base_total)])
                                     </p>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@
                 <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                     <div class="flex flex-col gap-y-[6px]">
                         <p class="text-gray-600 font-semibold">
-                            @lang('admin::app.sales.invoices.view.sub-total')
+                            @lang('admin::app.sales.invoices.view.sub-total-summary')
                         </p>
 
                         <p class="text-gray-600">
@@ -295,7 +295,7 @@
                         {!! view_render_event('sales.invoice.customer_name.after', ['order' => $order]) !!}
 
                         <p class="text-gray-600">
-                            @lang('admin::app.sales.invoices.view.email') - {{ $invoice->order->customer_email }}
+                            @lang('admin::app.sales.invoices.view.email', ['email' => $invoice->order->customer_email])
                         </p>
 
                         {!! view_render_event('sales.invoice.customer_email.after', ['order' => $order]) !!}

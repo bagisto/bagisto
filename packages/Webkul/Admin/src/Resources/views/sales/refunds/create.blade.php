@@ -101,7 +101,7 @@
             
                                                     <!-- Item SKU -->
                                                     <p class="text-gray-600">
-                                                        @lang('admin::app.sales.refunds.create.sku') - {{ Webkul\Product\Helpers\ProductType::hasVariants($item->type) ? $item->child->sku : $item->sku }}
+                                                        @lang('admin::app.sales.refunds.create.sku', ['sku' => Webkul\Product\Helpers\ProductType::hasVariants($item->type) ? $item->child->sku : $item->sku])
                                                     </p>
 
                                                     <!-- Item Status -->
