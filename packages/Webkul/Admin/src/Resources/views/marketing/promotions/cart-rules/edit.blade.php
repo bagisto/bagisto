@@ -15,6 +15,7 @@
             <div>
                 <x-admin::form 
                     :action="route('admin.marketing.promotions.cart_rules.update', $cartRule->id)"
+                    method="PUT"
                     enctype="multipart/form-data"
                 >
                     <div class="flex gap-[16px] justify-between items-center mt-3 max-sm:flex-wrap">

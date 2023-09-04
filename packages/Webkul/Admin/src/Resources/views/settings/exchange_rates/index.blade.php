@@ -54,7 +54,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="selectedExchangeRate={}; $refs.exchangeRateUpdateOrCreateModal.toggle()"
+                            @click="selectRate=true; $refs.exchangeRateUpdateOrCreateModal.toggle()"
                         >
                             @lang('admin::app.settings.exchange-rates.index.create-btn')
                         </button>
@@ -123,7 +123,7 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="editModal(record.currency_exchange_id)">
+                            <a @click="selectRate=false; editModal(record.currency_exchange_id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
@@ -151,18 +151,21 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, updateOrCreate)">
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="exchangeRateCreateForm"
+                >
                     <!-- Modal -->
                     <x-admin::modal ref="exchangeRateUpdateOrCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
-                                <span v-if="selectedExchangeRate">
-                                    @lang('admin::app.settings.exchange-rates.index.edit.title')
+                                <span v-if="selectRate">
+                                    @lang('admin::app.settings.exchange-rates.index.create.title')
                                 </span>
 
                                 <span v-else>
-                                    @lang('admin::app.settings.exchange-rates.index.create.title')
+                                    @lang('admin::app.settings.exchange-rates.index.edit.title')
                                 </span>
                             </p>
                         </x-slot:header>
@@ -265,13 +268,21 @@
                     return {
                         selectedExchangeRate: {},
 
+                        selectRate: false,
+
                         currencies: @json($currencies),
                     }
                 },
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", params)
+                        let formData = new FormData(this.$refs.exchangeRateCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", formData)
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 

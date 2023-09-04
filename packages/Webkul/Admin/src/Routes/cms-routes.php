@@ -16,7 +16,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
         Route::get('edit/{id}', 'edit')->name('admin.cms.edit');
 
-        Route::post('edit/{id}', 'update')->name('admin.cms.update');
+        Route::put('edit/{id}', 'update')->name('admin.cms.update');
 
         Route::delete('edit/{id}', 'delete')->name('admin.cms.delete');
 

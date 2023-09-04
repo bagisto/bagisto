@@ -36,7 +36,10 @@
                     </x-admin::form.control-group.control>
                 </x-admin::form.control-group>
 
-                <form @submit="handleSubmit($event, update)">
+                <form
+                    @submit="handleSubmit($event, update)"
+                    ref="addressCreateForm"
+                >
                     <!-- Address Edit Modal -->
                     <x-admin::modal ref="CustomerAddressEdit">
 
@@ -405,9 +408,11 @@
                         delete params.default_address;
                     }
 
-                    let addressId = params.address_id;
+                    let formData = new FormData(this.$refs.addressCreateForm);
 
-                    this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${addressId}`, params, {
+                    formData.append('_method', 'put');
+
+                    this.$axios.post(`{{ route('admin.customers.customers.addresses.update', '') }}/${params?.address_id}`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }

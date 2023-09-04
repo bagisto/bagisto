@@ -107,7 +107,10 @@
                     as="div"
                     ref="modalForm"
                 >
-                    <form @submit="handleSubmit($event, create)">
+                    <form
+                        @submit="handleSubmit($event, update)"
+                        ref="subscriberCreateForm"
+                    >
                         <!-- Create Group Modal -->
                         <x-admin::modal ref="groupCreateModal">          
                             <x-slot:header>
@@ -120,6 +123,13 @@
                             <x-slot:content>
                                 <!-- Modal Content -->
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                    <!-- Id -->
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="id"
+                                    >
+                                    </x-admin::form.control-group.control>
+
                                     <!-- Email -->
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group.label class="required">
@@ -214,8 +224,12 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors  }) {
-                        this.$axios.post("{{ route('admin.marketing.communications.subscribers.update') }}", params)
+                    update(params, { resetForm, setErrors  }) {
+                        let formData = new FormData(this.$refs.subscriberCreateForm);
+
+                        formData.append('_method', 'put');
+
+                        this.$axios.post("{{ route('admin.marketing.communications.subscribers.update') }}", formData)
                         .then((response) => {
                             this.$refs.groupCreateModal.close();
 

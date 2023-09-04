@@ -6,11 +6,11 @@ use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
-use Webkul\Admin\Http\Controllers\Settings\TaxCategoryController;
-use Webkul\Admin\Http\Controllers\Settings\TaxRateController;
+use Webkul\Admin\Http\Controllers\Settings\Tax\TaxCategoryController;
+use Webkul\Admin\Http\Controllers\Settings\Tax\TaxRateController;
 use Webkul\Admin\Http\Controllers\Settings\ThemeController;
-use Webkul\Admin\Http\Controllers\User\RoleController;
-use Webkul\Admin\Http\Controllers\User\UserController;
+use Webkul\Admin\Http\Controllers\Settings\RoleController;
+use Webkul\Admin\Http\Controllers\Settings\UserController;
 
 /**
  * Settings routes.
@@ -44,7 +44,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.currencies.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.currencies.update');
+            Route::put('edit', 'update')->name('admin.settings.currencies.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.currencies.delete');
 
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('update-rates', 'updateRates')->name('admin.settings.exchange_rates.update_rates');
 
-            Route::post('edit', 'update')->name('admin.settings.exchange_rates.update');
+            Route::put('edit', 'update')->name('admin.settings.exchange_rates.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.exchange_rates.delete');
         });
@@ -111,7 +111,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.categories.edit');
 
-                Route::post('edit', 'update')->name('admin.settings.taxes.categories.update');
+                Route::put('edit', 'update')->name('admin.settings.taxes.categories.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.categories.delete');
             });
