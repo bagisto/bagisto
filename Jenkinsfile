@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building'
+                sh 'composer install'
             }
         }
 
@@ -22,13 +22,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Testing'
+               sh 'php vendor/bin/codecept run unit'
             }
         }
 
         stage('Release') {
             steps {
-                echo 'Releasing'
+                 sh 'php artisan serve'
             }
         }
     }
