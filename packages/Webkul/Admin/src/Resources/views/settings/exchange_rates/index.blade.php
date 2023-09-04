@@ -54,7 +54,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="selectedExchangeRate={}; $refs.exchangeRateUpdateOrCreateModal.toggle()"
+                            @click="selectRate=true; $refs.exchangeRateUpdateOrCreateModal.toggle()"
                         >
                             @lang('admin::app.settings.exchange-rates.index.create-btn')
                         </button>
@@ -123,7 +123,7 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="editModal(record.currency_exchange_id)">
+                            <a @click="selectRate=false; editModal(record.currency_exchange_id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
@@ -160,12 +160,12 @@
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
-                                <span v-if="selectedExchangeRate">
-                                    @lang('admin::app.settings.exchange-rates.index.edit.title')
+                                <span v-if="selectRate">
+                                    @lang('admin::app.settings.exchange-rates.index.create.title')
                                 </span>
 
                                 <span v-else>
-                                    @lang('admin::app.settings.exchange-rates.index.create.title')
+                                    @lang('admin::app.settings.exchange-rates.index.edit.title')
                                 </span>
                             </p>
                         </x-slot:header>
@@ -267,6 +267,8 @@
                 data() {
                     return {
                         selectedExchangeRate: {},
+
+                        selectRate: false,
 
                         currencies: @json($currencies),
                     }
