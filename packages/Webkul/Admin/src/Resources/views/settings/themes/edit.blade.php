@@ -359,7 +359,6 @@
                                                 type="checkbox"
                                                 name="status"
                                                 id="status"
-                                                value="{{ $theme->status }}"
                                                 class="sr-only peer"
                                                 v-bind="field"
                                                 :checked="{{ $theme->status }}"
