@@ -149,10 +149,10 @@
 
     @case('checkbox')
         <v-field
-            type="checkbox"
-            name="{{ $name }}"
-            class="hidden"
             v-slot="{ field }"
+            name="{{ $name }}"
+            type="checkbox"
+            class="hidden"
             {{ $attributes->only(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
         >
             <input

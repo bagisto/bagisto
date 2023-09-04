@@ -3,6 +3,7 @@
 namespace Webkul\CartRule\Repositories;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -252,7 +253,17 @@ class CartRuleRepository extends Repository
             ],
         ];
 
-        foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
+        $tempAttributes = $this->attributeRepository->with([
+            'translations',
+            'options',
+            'options.translations'
+        ])->findWhereNotIn('type', [
+            'textarea',
+            'image',
+            'file'
+        ]);
+
+        foreach ($tempAttributes as $attribute) {
             $attributeType = $attribute->type;
 
             if ($attribute->code == 'tax_category_id') {
@@ -381,7 +392,7 @@ class CartRuleRepository extends Repository
     {
         $countries = [];
 
-        foreach ($this->countryRepository->all() as $country) {
+        foreach (DB::table('countries')->get() as $country) {
             $countries[] = [
                 'id'         => $country->code,
                 'admin_name' => $country->name,
@@ -400,20 +411,21 @@ class CartRuleRepository extends Repository
     {
         $collection = [];
 
-        foreach ($this->countryRepository->all() as $country) {
-            $countryStates = $this->countryStateRepository->findWhere(
-                ['country_id' => $country->id],
-                ['code', 'default_name as admin_name']
-            )->toArray();
+        $countries = DB::table('countries')->get();
 
-            if (! count($countryStates)) {
+        $countriesStates = DB::table('country_states')->get();
+
+        foreach ($countries as $country) {
+            $states = $countriesStates->where('country_id', $country->id);
+
+            if (! count($states)) {
                 continue;
             }
 
             $collection[] = [
                 'id'         => $country->code,
                 'admin_name' => $country->name,
-                'states'     => $countryStates,
+                'states'     => $states,
             ];
         }
 

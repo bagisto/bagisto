@@ -19,7 +19,7 @@
 
         {{-- Added For Shimmer --}}
         <x-admin::shimmer.datagrid/>
-    <v-create-sitemaps/>
+    </v-create-sitemaps>
     
     @pushOnce('scripts')
         <script 
@@ -34,7 +34,7 @@
                 <!-- Create Button -->
                 <div 
                     class="primary-button"
-                    @click="id=0; $refs.sitemap.toggle()"
+                    @click="selectedSitemap=0; $refs.sitemap.toggle()"
                 >
                     @lang('admin::app.marketing.sitemaps.index.create-btn')
                 </div>
@@ -108,7 +108,7 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record)">
+                            <a @click="selectedSitemap=1; editModal(record)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
@@ -141,16 +141,20 @@
                     <x-admin::modal ref="sitemap">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
-                                <!-- Create Modal title -->
-                                <span v-if="id">
-                                    @lang('admin::app.marketing.sitemaps.index.edit.title')
-                                </span>
+                            <!-- Create Modal title -->
+                            <p
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-if="selectedSitemap"
+                            >
+                                @lang('admin::app.marketing.sitemaps.index.edit.title')
+                            </p>
 
-                                <!-- Edit Modal title -->
-                                <span v-else>
-                                    @lang('admin::app.marketing.sitemaps.index.create.title')
-                                </span>
+                            <!-- Edit Modal title -->
+                            <p 
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-else
+                            >
+                                @lang('admin::app.marketing.sitemaps.index.create.title')
                             </p>
                         </x-slot:header>
 
@@ -178,7 +182,7 @@
                                     >
                                     </x-admin::form.control-group.error>
 
-                                    <p class="mt-[8px] ml-[4px] text-[12px] text-gray-600 font-med  ium">
+                                    <p class="mt-[8px] ml-[4px] text-[12px] text-gray-600 font-medium">
                                         @lang('admin::app.marketing.sitemaps.index.create.file-name-info')
                                     </p>
 
@@ -229,30 +233,13 @@
 
                 data() {
                     return {
-                        id: 0,
+                        selectedSitemap: 0,
                     }
                 },
 
                 methods: {
                     create(params, { resetForm, setErrors }) {
-                        if (params.id) {
-                            this.$axios.post("{{ route('admin.marketing.promotions.sitemaps.update') }}", params )
-                                .then((response) => {
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    this.$refs.sitemap.toggle();
-
-                                    this.$refs.datagrid.get();
-
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        } else {
-                            this.$axios.post("{{ route('admin.marketing.promotions.sitemaps.store') }}", params )
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.promotions.sitemaps.update') }}" : "{{ route('admin.marketing.promotions.sitemaps.store') }}", params )
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
@@ -267,7 +254,6 @@
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                        }
                     },
 
                     editModal(values) {
@@ -277,17 +263,17 @@
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm("@lang('admin::app.marketing.sitemaps.index.create.delete-warning')")) {
                             return;
                         }
 
                         this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                                '_method': 'DELETE'
+                            })
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

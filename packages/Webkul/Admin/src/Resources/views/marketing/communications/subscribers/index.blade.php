@@ -129,7 +129,7 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="id"
-                                            id="id"
+                                            v-model="selectedSubscriber.id"
                                         >
                                         </x-admin::form.control-group.control>
 
@@ -139,6 +139,7 @@
                                             :value="old('email')"
                                             rules="required"
                                             class="mb-1 cursor-not-allowed"
+                                            v-model="selectedSubscriber.email"
                                             :label="trans('admin::app.marketing.communications.subscribers.index.edit.email')"
                                             disabled
                                         >
@@ -162,10 +163,11 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            name="status"
+                                            name="is_subscribed"
                                             class="cursor-pointer mb-1"
                                             rules="required"
-                                            label="{{ trans('admin::app.marketing.communications.subscribers.index.edit.subscribed') }}"
+                                            v-model="selectedSubscriber.is_subscribed"
+                                            :label="trans('admin::app.marketing.communications.subscribers.index.edit.subscribed')"
                                         >
                                             @foreach (['true', 'false'] as $state)
                                                 <option 
@@ -177,7 +179,7 @@
                                         </x-admin::form.control-group.control>
             
                                         <x-admin::form.control-group.error
-                                            control-name="status"
+                                            control-name="is_subscribed"
                                         >
                                         </x-admin::form.control-group.error>
                                     </x-admin::form.control-group>
@@ -205,6 +207,12 @@
             app.component('v-subscribers', {
                 template: '#v-subscribers-template',
 
+                data() {
+                    return {
+                        selectedSubscriber: {},
+                    }
+                },
+
                 methods: {
                     create(params, { resetForm, setErrors  }) {
                         this.$axios.post("{{ route('admin.marketing.communications.subscribers.update') }}", params)
@@ -213,7 +221,7 @@
 
                             this.$refs.datagrid.get();
 
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                             resetForm();
                         })
@@ -228,15 +236,9 @@
 
                         this.$axios.get(`{{ route('admin.marketing.communications.subscribers.edit', '') }}/${id}`)
                             .then((response) => {
-                                let values = {
-                                    id: response.data.data.id,
-                                    email: response.data.data.email,
-                                    status: response.data.data.is_subscribed,
-                                };
+                                this.selectedSubscriber = response.data.data;
 
                                 this.$refs.groupCreateModal.toggle();
-
-                                this.$refs.modalForm.setValues(values);
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {
@@ -246,17 +248,17 @@
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm("@lang('admin::app.marketing.communications.subscribers.delete-warning')")) {
                             return;
                         }
 
                         this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                                '_method': 'DELETE'
+                            })
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

@@ -11,6 +11,14 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
+                <!-- Update Exchange Rate Button -->
+                <a
+                    href="{{ route('admin.settings.exchange_rates.update_rates') }}"
+                    class="primary-button"
+                >
+                    @lang('admin::app.settings.exchange-rates.index.update-rates')
+                </a>
+
                  <!-- Create Button -->
                 <button
                     type="button"
@@ -36,12 +44,17 @@
                 </p>
 
                 <div class="flex gap-x-[10px] items-center">
+                    <!-- Update Exchange Rate Button -->
+                    <a href="{{ route('admin.settings.exchange_rates.update_rates') }}" class="primary-button">
+                        @lang('admin::app.settings.exchange-rates.index.update-rates')
+                    </a>
+
                      <!-- Create Button -->
                     @if (bouncer()->hasPermission('settings.exchange_rates.create'))
                         <button
                             type="button"
                             class="primary-button"
-                            @click="id=0; $refs.exchangeRateUpdateOrCreateModal.toggle()"
+                            @click="selectedExchangeRate={}; $refs.exchangeRateUpdateOrCreateModal.toggle()"
                         >
                             @lang('admin::app.settings.exchange-rates.index.create-btn')
                         </button>
@@ -110,7 +123,7 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.currency_exchange_id)">
+                            <a @click="editModal(record.currency_exchange_id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
@@ -144,7 +157,7 @@
                         <x-slot:header>
                             <!-- Modal Header -->
                             <p class="text-[18px] text-gray-800 font-bold">
-                                <span v-if="id">
+                                <span v-if="selectedExchangeRate">
                                     @lang('admin::app.settings.exchange-rates.index.edit.title')
                                 </span>
 
@@ -183,13 +196,17 @@
                                         type="select"
                                         name="target_currency"
                                         rules="required"
+                                        v-model="selectedExchangeRate.target_currency"
                                         :label="trans('admin::app.settings.exchange-rates.index.create.target-currency')"
                                     >
-                                        @foreach ($currencies as $currency)
-                                            <option value="{{ $currency->id }}">
-                                                {{ $currency->name }}
-                                            </option>
-                                        @endforeach
+                                        <option
+                                            v-for="currency in currencies"
+                                            :value="currency.id"
+                                            :selected="currency.id == selectedExchangeRate.target_currency"
+                                        >
+                                            @{{ currency.name }}
+                                        </option>
+
                                     </x-admin::form.control-group.control>
 
                                     <x-admin::form.control-group.error
@@ -207,11 +224,11 @@
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="rate"
-                                        id="rate"
                                         :value="old('rate')"
                                         rules="required"
-                                        label="{{ trans('admin::app.settings.exchange-rates.index.create.rate') }}"
-                                        placeholder="{{ trans('admin::app.settings.exchange-rates.index.create.rate') }}"
+                                        v-model="selectedExchangeRate.rate"
+                                        :label="trans('admin::app.settings.exchange-rates.index.create.rate')"
+                                        :placeholder="trans('admin::app.settings.exchange-rates.index.create.rate')"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -246,7 +263,9 @@
 
                 data() {
                     return {
-                        id: 0,
+                        selectedExchangeRate: {},
+
+                        currencies: @json($currencies),
                     }
                 },
 
@@ -272,15 +291,9 @@
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.settings.exchange_rates.edit', '') }}/${id}`)
                             .then((response) => {
-                                let values = {
-                                    id: response.data.data.exchangeRate.id,
-                                    rate: response.data.data.exchangeRate.rate,
-                                    target_currency: response.data.data.exchangeRate.target_currency,
-                                };
+                                this.selectedExchangeRate = response.data.data.exchangeRate;
 
                                 this.$refs.exchangeRateUpdateOrCreateModal.toggle();
-
-                                this.$refs.modalForm.setValues(values);
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
@@ -291,7 +304,7 @@
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm("@lang('admin::app.settings.exchange-rates.index.create.delete-warning')")) {
                             return;
                         }
 
@@ -301,7 +314,7 @@
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {
