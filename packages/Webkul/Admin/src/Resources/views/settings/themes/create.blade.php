@@ -336,6 +336,7 @@
                                             name="status"
                                             class="hidden"
                                             v-slot="{ field }"
+                                            :value="1"
                                         >
                                             <input
                                                 type="checkbox"
@@ -344,6 +345,7 @@
                                                 value="1"
                                                 class="sr-only peer"
                                                 v-bind="field"
+                                                :checked="1"
                                             />
                                         </v-field>
                             
@@ -687,6 +689,7 @@
                                         name="status"
                                         class="hidden"
                                         v-slot="{ field }"
+                                        :value="1"
                                     >
                                         <input
                                             type="checkbox"
@@ -695,6 +698,7 @@
                                             id="status"
                                             class="sr-only peer"
                                             v-bind="field"
+                                            :checked="1"
                                         />
                                     </v-field>
                         
@@ -1037,6 +1041,7 @@
                                         name="status"
                                         class="hidden"
                                         v-slot="{ field }"
+                                        :value="1"
                                     >
                                         <input
                                             type="checkbox"
@@ -1045,6 +1050,7 @@
                                             value="1"
                                             class="sr-only peer"
                                             v-bind="field"
+                                            :checked="1"
                                         />
                                     </v-field>
                         
@@ -1355,6 +1361,7 @@
                                             name="status"
                                             class="hidden"
                                             v-slot="{ field }"
+                                            :value="1"
                                         >
                                             <input
                                                 type="checkbox"
@@ -1363,6 +1370,7 @@
                                                 value="1"
                                                 class="sr-only peer"
                                                 v-bind="field"
+                                                :checked="1"
                                             />
                                         </v-field>
                             
@@ -1626,6 +1634,7 @@
                                         name="status"
                                         class="hidden"
                                         v-slot="{ field }"
+                                        :value="1"
                                     >
                                         <input
                                             type="checkbox"
@@ -1634,6 +1643,7 @@
                                             value="1"
                                             class="sr-only peer"
                                             v-bind="field"
+                                            :checked="1"
                                         />
                                     </v-field>
                         

@@ -353,6 +353,7 @@
                                             name="status"
                                             class="hidden"
                                             v-slot="{ field }"
+                                            :value="{{ $theme->status }}"
                                         >
                                             <input
                                                 type="checkbox"
@@ -361,6 +362,7 @@
                                                 value="{{ $theme->status }}"
                                                 class="sr-only peer"
                                                 v-bind="field"
+                                                :checked="{{ $theme->status }}"
                                             />
                                         </v-field>
                             
@@ -707,6 +709,7 @@
                                             id="status"
                                             class="sr-only peer"
                                             v-bind="field"
+                                            :checked="{{ $theme->status }}"
                                         />
                                     </v-field>
                         
@@ -1529,6 +1532,7 @@
                                             name="status"
                                             class="hidden"
                                             v-slot="{ field }"
+                                            :value="{{ $theme->status }}"
                                         >
                                             <input
                                                 type="checkbox"
@@ -1537,6 +1541,7 @@
                                                 value="{{ $theme->status }}"
                                                 class="sr-only peer"
                                                 v-bind="field"
+                                                :checked="{{ $theme->status }}"
                                             />
                                         </v-field>
                             

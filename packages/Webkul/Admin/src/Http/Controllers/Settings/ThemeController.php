@@ -48,7 +48,9 @@ class ThemeController extends Controller
      */
     public function store()
     {
-        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
+        $data = request()->only(['options', 'type', 'name', 'sort_order']);
+
+        $data['status'] = request()->input('status') == 'on';
         
         $theme = $this->themeCustomizationRepository->create($data);
 
