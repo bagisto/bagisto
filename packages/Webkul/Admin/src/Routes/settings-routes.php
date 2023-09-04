@@ -78,7 +78,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.locales.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.locales.update');
+            Route::put('edit', 'update')->name('admin.settings.locales.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.locales.delete');
         });
@@ -163,7 +163,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.users.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.users.update');
+            Route::put('edit', 'update')->name('admin.settings.users.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
 

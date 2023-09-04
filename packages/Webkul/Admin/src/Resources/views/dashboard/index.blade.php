@@ -33,7 +33,7 @@
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-sales.svg')}}"
@@ -75,7 +75,7 @@
                         </div>
 
                         {{-- Total Orders --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-orders.svg')}}"
@@ -117,7 +117,7 @@
                         </div>
 
                         {{-- Total Customers --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/customer.svg')}}"
@@ -159,7 +159,7 @@
                         </div>
 
                         {{-- Average sales --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/average-order.svg')}}"
@@ -200,7 +200,7 @@
                         </div>
 
                         {{-- Unpaid Invoices --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/unpaid-invoice.svg')}}"
@@ -373,31 +373,31 @@
                                     @switch($item->status)
                                         @case('processing')
                                             <p class="label-active">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('completed')
                                             <p class="label-active">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('pending')
                                             <p class="label-pending">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('canceled')
                                             <p class="label-cancelled">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('closed')
                                             <p class="label-closed">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
@@ -414,7 +414,7 @@
 
                                 {{-- Payment Mode --}}
                                 <p class="text-gray-600">
-                                    @lang('admin::app.dashboard.index.pay-by', ['method' => $item->payment->method])
+                                    @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.paymentmethods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}

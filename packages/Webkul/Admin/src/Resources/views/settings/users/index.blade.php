@@ -27,7 +27,6 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-users-template">
-
             <div class="flex justify-between items-center">
                 <p class="text-[20px] text-gray-800 font-bold">
                     @lang('admin::app.settings.users.index.title')
@@ -39,7 +38,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="$refs.userUpdateOrCreateModal.open()"
+                            @click="resetForm();$refs.userUpdateOrCreateModal.open()"
                         >
                             @lang('admin::app.settings.users.index.create.title')
                         </button>
@@ -103,8 +102,14 @@
 
                         <!-- User Profile -->
                         <p>
-                            <div class="flex gap-[10px] items-center">
-                                <div class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden">
+
+                            <div 
+                                class="flex gap-[10px] items-center"
+                            >
+                                <div 
+                                    class="inline-block w-[36px] h-[36px] rounded-full border-3 border-gray-800 align-middle text-center mr-2 overflow-hidden"
+                                    v-if="record.user_img"
+                                >
                                     <img
                                         class="w-[36px] h-[36px]"
                                         :src="record.user_img"
@@ -112,6 +117,16 @@
                                     />
                                 </div>
         
+                                <div 
+                                    class="profile-info-icon"
+                                    v-else
+                                >
+                                    <button
+                                        class="flex justify-center items-center w-[36px] h-[36px] bg-blue-400 rounded-full text-[14px] text-white font-semibold cursor-pointer leading-6 transition-all hover:bg-blue-500 focus:bg-blue-500">
+                                        @{{ record.user_name[0].toUpperCase() }}
+                                    </button>
+                                </div>
+
                                 <div
                                     class="text-sm"
                                     v-text="record.user_name"
@@ -159,20 +174,28 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, updateOrCreate)">
+                <form 
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="userCreateForm"
+                >
                     <!-- User Create Modal -->
                     <x-admin::modal ref="userUpdateOrCreateModal">
                         <x-slot:header>
                             <!-- Modal Header -->
-                            <p class="text-[18px] text-gray-800 font-bold">
-                                <span v-if="id">
-                                    @lang('admin::app.settings.users.index.edit.title')
-                                </span>
-
-                                <span v-else>
-                                    @lang('admin::app.settings.users.index.create.title')
-                                </span>
+                            <p 
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-if="isUpdating"
+                            >
+                                @lang('admin::app.settings.users.index.edit.title')
                             </p>    
+
+                            <p 
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-else
+                            >
+                                @lang('admin::app.settings.users.index.create.title')
+                            </p>    
+                            
                         </x-slot:header>
         
                         <x-slot:content>
@@ -183,7 +206,14 @@
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.users.index.create.name')
                                     </x-admin::form.control-group.label>
-        
+
+                                    <x-admin::form.control-group.control
+                                        type="hidden"
+                                        name="id"
+                                        v-model="data.user.id"
+                                    >
+                                    </x-admin::form.control-group.control>
+
                                     <x-admin::form.control-group.control
                                         type="text"
                                         name="name"
@@ -191,6 +221,7 @@
                                         rules="required"
                                         :label="trans('admin::app.settings.users.index.create.name')" 
                                         :placeholder="trans('admin::app.settings.users.index.create.name')"
+                                        v-model="data.user.name"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -213,6 +244,7 @@
                                         rules="required|email"
                                         label="{{ trans('admin::app.settings.users.index.create.email') }}"
                                         placeholder="email@example.com"
+                                        v-model="data.user.email"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -236,6 +268,7 @@
                                         rules="required|min:6"
                                         :label="trans('admin::app.settings.users.index.create.password')"
                                         :placeholder="trans('admin::app.settings.users.index.create.password')"
+                                        v-model="data.user.password"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -258,6 +291,7 @@
                                         rules="confirmed:@password"
                                         :label="trans('admin::app.settings.users.index.create.password')"
                                         :placeholder="trans('admin::app.settings.users.index.create.confirm-password')"
+                                        v-model="data.user.password_confirmation"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -273,40 +307,28 @@
                                         @lang('admin::app.settings.users.index.create.role')
                                     </x-admin::form.control-group.label>
 
-                                    <!-- For New Form -->
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="role_id"
-                                        v-if="! id"
+                                    <v-field
+                                        name="role_id" 
                                         rules="required"
-                                        :label="trans('admin::app.settings.users.index.create.role')"
-                                        :placeholder="trans('admin::app.settings.users.index.create.role')"
+                                        label="@lang('admin::app.settings.users.index.create.role')"
+                                        v-model="data.user.role_id"
                                     >
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">
-                                                {{ $role->name }}
-                                            </option>
-                                        @endforeach
-                                    </x-admin::form.control-group.control>
-
-                                    <!-- For Edit Form -->
-                                    <x-admin::form.control-group.control
-                                        type="select"
-                                        name="role_id"
-                                        v-if="id"
-                                        rules="required"
-                                        ::value="user.role_id"
-                                        :label="trans('admin::app.settings.users.index.create.role')"
-                                        :placeholder="trans('admin::app.settings.users.index.create.role')"
-                                    >
-                                        <option
-                                            v-for="role in roles"
-                                            :value="role.id"
+                                        <select
+                                            name="role_id" 
+                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                            :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                            v-model="data.user.role_id"
                                         >
-                                            @{{ role.name }}
-                                        </option>                                        
+                                            <option value="" disabled>@lang('admin::app.settings.taxes.categories.index.create.select')</option>
 
-                                    </x-admin::form.control-group.control>
+                                            <option 
+                                                v-for="role in roles"
+                                                :value="role.id"
+                                                :text="role.name"
+                                            >
+                                            </option>
+                                        </select>
+                                    </v-field>
         
                                     <x-admin::form.control-group.error
                                         control-name="role_id"
@@ -314,27 +336,19 @@
                                     </x-admin::form.control-group.error>
                                 </x-admin::form.control-group>
 
-                                <!-- Status -->
-                                <x-admin::form.control-group v-if="! id" class="!mb-[0px]">
-                                    <x-admin::form.control-group.label>
-                                        @lang('admin::app.settings.users.index.create.status')
-                                    </x-admin::form.control-group.label>
-
-                                    <x-admin::form.control-group.control
-                                        type="switch"
-                                        name="status"
-                                        :value="1"
-                                        :checked="old('status')"
+                                <x-admin::form.control-group>
+                                    <x-admin::media.images
+                                        name="image"
+                                        ::uploaded-images='data.images'
                                     >
-                                    </x-admin::form.control-group.control>
+                                    </x-admin::media.images>
 
-                                    <x-admin::form.control-group.error
-                                        control-name="status"
-                                    >
-                                    </x-admin::form.control-group.error>
+                                    <p class="required my-3 text-[14px] text-gray-400">
+                                        @lang('admin::app.settings.users.index.create.upload-image-info')
+                                    </p>
                                 </x-admin::form.control-group>
 
-                                <x-admin::form.control-group v-if="id" class="!mb-[0px]">
+                                <x-admin::form.control-group class="!mb-[0px]">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.settings.users.index.create.status')
                                     </x-admin::form.control-group.label>
@@ -342,8 +356,8 @@
                                     <x-admin::form.control-group.control
                                         type="switch"
                                         name="status"
-                                        ::checked="user.status ?? old('status')"
-                                        ::value="user.status ?? 1"
+                                        ::checked="data.user.status"
+                                        v-model="data.user.status"
                                     >
                                     </x-admin::form.control-group.control>
         
@@ -368,7 +382,8 @@
                         </x-slot:footer>
                     </x-admin::modal>
                 </form>
-            </x-admin::form>
+            </x-admin::form>                           
+
         </script>
 
         <script type="module">
@@ -377,15 +392,30 @@
 
                 data() {
                     return {
-                        roles: {},
-                        user: {},
-                        id: 0,
+                        isUpdating: false,
+                        
+                        roles: @json($roles),
+                        
+                        data: {
+                            user: {},
+                            images: [],
+                        },
                     }
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.users.update') }}" : "{{ route('admin.settings.users.store') }}", params)
+                    updateOrCreate(params, { setErrors }) {
+                        let formData = new FormData(this.$refs.userCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.settings.users.update') }}" : "{{ route('admin.settings.users.store') }}", formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                }
+                            })
                             .then((response) => {
                                 this.$refs.userUpdateOrCreateModal.close();
 
@@ -393,7 +423,7 @@
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                                resetForm();
+                                this.resetForm();
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
@@ -403,51 +433,58 @@
                     },
 
                     editModal(id) {
+                        this.isUpdating = true;
+
                         this.$axios.get(`{{ route('admin.settings.users.edit', '') }}/${id}`)
                             .then((response) => {
-                                let values = {
-                                    id: response.data.data.user.id,
-                                    name: response.data.data.user.name,
-                                    email: response.data.data.user.email,
-                                    status: response.data.data.user.sttus,
+                                this.data = {
+                                    ...response.data.data,
+                                        images: response.data.data.user.image_url
+                                        ? [{ id: 'image', url: response.data.data.user.image_url }]
+                                        : [],
                                 };
 
-                                this.roles = response.data.data.roles;
-
-                                this.user = response.data.data.user;
+                                this.$refs.modalForm.setValues(response.data.data.user);
 
                                 this.$refs.userUpdateOrCreateModal.toggle();
-
-                                this.$refs.modalForm.setValues(values);
                             })
                             .catch(error => {
-                                if (error.response.status ==422) {
+                                if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
                             });
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm('@lang('admin::app.settings.users.index.delete-warning')')) {
                             return;
                         }
 
                         this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                                '_method': 'DELETE'
+                            })
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
-                                if (error.response.status ==422) {
+                                if (error.response.status == 422) {
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                    }
-                }
-            })
+                    },
+
+                    resetForm() {
+                        this.isUpdating = false;
+                        
+                        this.data = {
+                            user: {},
+                            images: [],
+                        };
+                    },
+                },
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>

@@ -74,7 +74,11 @@
                 toggle() {
                     this.isCollapsed = parseInt(this.isCollapsedCookie()) ? 0 : 1;
 
-                    document.cookie = 'sidebar_collapsed=' + this.isCollapsed + '; path=/';
+                    var expiryDate = new Date();
+
+                    expiryDate.setMonth(expiryDate.getMonth() + 1);
+
+                    document.cookie = 'sidebar_collapsed=' + this.isCollapsed + '; path=/; expires=' + expiryDate.toGMTString();
 
                     this.$root.$refs.appLayout.classList.toggle('sidebar-collapsed');
                 },

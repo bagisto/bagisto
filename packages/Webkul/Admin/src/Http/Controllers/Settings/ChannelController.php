@@ -89,7 +89,7 @@ class ChannelController extends Controller
 
         Event::dispatch('core.channel.create.after', $channel);
 
-        session()->flash('success', trans('admin::app.settings.channels.create-success'));
+        session()->flash('success', trans('admin::app.settings.channels.create.create-success'));
 
         return redirect()->route('admin.settings.channels.index');
     }
@@ -169,14 +169,14 @@ class ChannelController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $channel = $this->channelRepository->findOrFail($id);
 
         if ($channel->code == config('app.channel')) {
-            return response()->json(['message' => trans('admin::app.settings.channels.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.channels.index.last-delete-error')], 400);
         }
 
         try {
@@ -186,13 +186,19 @@ class ChannelController extends Controller
 
             Event::dispatch('core.channel.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.channels.delete-success')]);
+            return response()->json([
+                'data' => [
+                    'message' => trans('admin::app.settings.channels.delete-success')
+                ]
+            ], 200);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.settings.channels.delete-failed')
-        ], 400);
+        return response()->json([
+            'data' => [
+                'message' => trans('admin::app.settings.channels.delete-failed'),
+            ]
+        ], 500);
     }
 
     /**

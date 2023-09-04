@@ -74,8 +74,11 @@ class UserDataGrid extends DataGrid
             'filterable' => true,
             'sortable'   => true,
             'closure'    => function ($row) {
-                return
-                    '' . Storage::url($row->user_image) . '';
+                if ($row->user_image) {
+                    return Storage::url($row->user_image);
+                }
+                
+                return null;
             },
         ]);
 
