@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Webkul\Admin\Http\Controllers\Customer\AddressController;
-use Webkul\Admin\Http\Controllers\Customer\CustomerController;
-use Webkul\Admin\Http\Controllers\Customer\CustomerGroupController;
-use Webkul\Admin\Http\Controllers\Customer\ReviewController;
+use Webkul\Admin\Http\Controllers\Customers\AddressController;
+use Webkul\Admin\Http\Controllers\Customers\CustomerController;
+use Webkul\Admin\Http\Controllers\Customers\CustomerGroupController;
+use Webkul\Admin\Http\Controllers\Customers\ReviewController;
 
 /**
  * Customers routes.
@@ -29,13 +29,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
             Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 
-            Route::post('edit/{id}', 'update')->name('admin.customers.customers.update');
-
-            Route::post('/{id}', 'destroy')->name('admin.customers.customers.delete');
+            Route::put('edit/{id}', 'update')->name('admin.customers.customers.update');
 
             Route::post('mass-delete', 'massDestroy')->name('admin.customers.customers.mass_delete');
 
             Route::post('mass-update', 'massUpdate')->name('admin.customers.customers.mass_update');
+
+            Route::post('/{id}', 'destroy')->name('admin.customers.customers.delete');
 
             Route::get('{id}/orders', 'orders')->name('admin.customers.customers.orders.data');
         });
@@ -50,14 +50,12 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
                 Route::get('create', 'create')->name('admin.customers.customers.addresses.create');
 
                 Route::post('create', 'store')->name('admin.customers.customers.addresses.store');
-
-                Route::post('mass-delete', 'massDestroy')->name('admin.customers.customers.addresses.mass_delete');
             });
 
             Route::prefix('addresses')->group(function () {
                 Route::get('edit/{id}', 'edit')->name('admin.customers.customers.addresses.edit');
 
-                Route::post('edit/{id}', 'update')->name('admin.customers.customers.addresses.update');
+                Route::put('edit/{id}', 'update')->name('admin.customers.customers.addresses.update');
 
                 Route::post('default/{id}', 'makeDefault')->name('admin.customers.customers.addresses.set_default');
 
@@ -74,7 +72,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
         Route::get('edit/{id}', 'edit')->name('admin.customers.customers.review.edit');
 
-        Route::post('edit/{id}', 'update')->name('admin.customers.customers.review.update');
+        Route::put('edit/{id}', 'update')->name('admin.customers.customers.review.update');
 
         Route::delete('/{id}', 'destroy')->name('admin.customers.customers.review.delete');
 
@@ -91,7 +89,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
         Route::post('create', 'store')->name('admin.customers.groups.store');
 
-        Route::post('edit', 'update')->name('admin.customers.groups.update');
+        Route::put('edit', 'update')->name('admin.customers.groups.update');
 
         Route::delete('delete/{id}', 'destroy')->name('admin.customers.groups.delete');
     });

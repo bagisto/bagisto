@@ -15,10 +15,11 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.sales.shipments.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.sales.shipments.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.account.edit.back-btn')
                 </a>
             </div>
         </div>
@@ -28,8 +29,8 @@
         {{-- Left sub-component --}}
         <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
             {{-- General --}}
-            <div class="p-[16px] bg-white rounded-[4px] box-shadow">
-                <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
+            <div class="bg-white rounded-[4px] box-shadow">
+                <p class="text-[16px] text-gray-800 font-semibold mb-[16px] p-[16px]">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
 
@@ -68,11 +69,11 @@
                                         @endif
 
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.shipments.view.sku') - {{ $item->sku }}
+                                            @lang('admin::app.sales.shipments.view.sku', ['sku' =>  $item->sku ])
                                         </p>
                                         
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.shipments.view.qty') - {{ $item->qty }}
+                                            @lang('admin::app.sales.shipments.view.qty', ['qty' =>  $item->qty ])
                                         </p>
                                     </div>
                                 </div>
@@ -106,7 +107,7 @@
 
                         {{-- Customer Email --}}
                         <p class="text-gray-600">
-                            @lang('admin::app.sales.shipments.view.email') - {{ $shipment->order->customer_email }}
+                            @lang('admin::app.sales.shipments.view.email', ['email' =>  $shipment->order->customer_email ])
                         </p>
                     </div>
 

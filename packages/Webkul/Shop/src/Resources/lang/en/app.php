@@ -68,9 +68,9 @@ return [
         ],
 
         'account' => [
-            'home' => 'Home',
-            'profile'   => [  
-                'title'                   => 'Profile',    
+            'home'      => 'Home',
+            'profile'   => [
+                'title'                   => 'Profile',
                 'first-name'              => 'First Name',
                 'last-name'               => 'Last Name',
                 'gender'                  => 'Gender',
@@ -95,8 +95,8 @@ return [
                 'other'                   => 'Other',
                 'save'                    => 'Save',
             ],
- 
-            'addresses' => [ 
+
+            'addresses' => [
                 'title'            => 'Address',
                 'edit'             => 'Edit',
                 'edit-address'     => 'Edit Address',
@@ -109,7 +109,7 @@ return [
                 'address-2'        => 'Address 2',
                 'city'             => 'City',
                 'state'            => 'State',
-                'select-country'   => "Select Country",
+                'select-country'   => 'Select Country',
                 'country'          => 'Country',
                 'default-address'  => 'Default Address',
                 'first-name'       => 'First Name',
@@ -128,11 +128,25 @@ return [
 
             'orders' => [
                 'title'         => 'Orders',
-                'order_id'      => 'Order Id',
+                'order_id'      => 'Order ID',
                 'order'         => 'Order',
                 'order_date'    => 'Order Date',
                 'total'         => 'Total',
-                'status'        => 'Status',
+
+                'status'        => [
+                    'title' => 'Status',
+
+                    'options' => [
+                        'processing'      => 'Processing',
+                        'completed'       => 'Completed',
+                        'canceled'        => 'Canceled',
+                        'closed'          => 'Closed',
+                        'pending'         => 'Pending',
+                        'pending-payment' => 'Pending Payment',
+                        'fraud'           => 'Fraud',
+                    ],
+                ],
+
                 'action'        => 'Action',
                 'empty-order'   => 'You have not ordered any product yet',
 
@@ -298,6 +312,49 @@ return [
             ],
         ],
 
+        'datagrid' => [
+            'toolbar' => [
+                'mass-actions' => [
+                    'select-action' => 'Select Action',
+                    'select-option' => 'Select Option',
+                    'submit'        => 'Submit',
+                ],
+
+                'filter' => [
+                    'title' => 'Filter',
+                ],
+
+                'search' => [
+                    'title' => 'Search',
+                ],
+            ],
+
+            'filters' => [
+                'title' => 'Apply Filters',
+
+                'custom-filters' => [
+                    'title'     => 'Custom Filters',
+                    'clear-all' => 'Clear All',
+                ],
+
+                'date-options' => [
+                    'today'             => 'Today',
+                    'yesterday'         => 'Yesterday',
+                    'this-week'         => 'This Week',
+                    'this-month'        => 'This Month',
+                    'last-month'        => 'Last Month',
+                    'last-three-months' => 'Last 3 Months',
+                    'last-six-months'   => 'Last 6 Months',
+                    'this-year'         => 'This Year',
+                ],
+            ],
+
+            'table' => [
+                'actions'              => 'Actions',
+                'no-records-available' => 'No Records Available.',
+            ],
+        ],
+
         'products'   => [
             'card' => [
                 'new'                => 'New',
@@ -369,9 +426,9 @@ return [
             'type' => [
                 'configurable' => [
                     'select-options'       => 'Please select an option',
-                    'select-above-options' => 'Please select above options'
+                    'select-above-options' => 'Please select above options',
                 ],
-                
+
                 'bundle' => [
                     'none' => 'None',
                 ],
@@ -397,7 +454,7 @@ return [
         'configurations' => [
             'compare_options'     => 'Compare options',
             'wishlist-options'    => 'Wishlist options',
-        ]
+        ],
     ],
 
     'categories' => [
@@ -422,7 +479,7 @@ return [
         'title'          => 'Search results for : :query',
         'configurations' => [
             'image-search-option' => 'Image Search Option',
-        ]
+        ],
     ],
 
     'compare'  => [
@@ -462,7 +519,7 @@ return [
             'illegal'                   => 'Quantity cannot be lesser than one.',
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
 
-            'index' => [ 
+            'index' => [
                 'home'                     => 'Home',
                 'cart'                     => 'Cart',
                 'view-cart'                => 'View Cart',
@@ -616,10 +673,33 @@ return [
         ],
     ],
 
-    'error' => [
-        'home'        => 'Go To Home',
-        'page-lost'   => 'Page lost content',
-        'description' => "The page you're looking for isn't available. Try to search again or use the Go Back button below.",
+    'errors' => [
+        'go-to-home'   => 'Go To Home',
+
+        '404' => [
+            'title'       => '404 Page Not Found',
+            'description' => 'Oops! The page you\'re looking for is on vacation. It seems we couldn\'t find what you were searching for.',
+        ],
+
+        '401' => [
+            'title'       => '401 Unauthorized',
+            'description' => 'Oops! Looks like you\'re not allowed to access this page. It seems you\'re missing the necessary credentials.',
+        ],
+
+        '403' => [
+            'title'       => '403 Forbidden',
+            'description' => 'Oops! This page is off-limits. It appears you don\'t have the required permissions to view this content.',
+        ],
+
+        '500' => [
+            'title'       => '500 Internal Server Error',
+            'description' => 'Oops! Something went wrong. It seems we\'re having trouble loading the page you\'re looking for.',
+        ],
+
+        '503' => [
+            'title'       => '503 Service Unavailable',
+            'description' => 'Oops! Looks like we\'re temporarily down for maintenance. Please check back in a bit.',
+        ]
     ],
 
     'layouts' => [
@@ -638,13 +718,108 @@ return [
         'unsubscribe-success' => 'You have successfully unsubscribed to our newsletter.',
     ],
 
-    'email' => [
-        'customer' => [
-            'note' =>[
-                'dear'          => 'Dear',
-                'subject'       => 'You Added a Note',
-                'description'   => 'Your note is',
+    'emails' => [
+        'dear'   => 'Dear :customer_name',
+        'thanks' => 'If you need any kind of help please contact us at <a href=":link" style=":style">:email</a>.<br/>Thanks!',
+
+        'customers' => [
+            'registration' => [
+                'subject'     => 'New Customer Registration',
+                'greeting'    => 'Welcome and thank you for registering with us!',
+                'description' => 'Your account has now been created successfully and you can login using your email address and password credentials. Upon logging in, you will be able to access other services including reviewing past orders, wishlists and editing your account information.',
+                'sign-in'    => 'Sign in'
             ],
+
+            'forgot-password' => [
+                'subject'        => 'Reset Password Email',
+                'greeting'       => 'Forgot Password!',
+                'description'    => 'You are receiving this email because we received a password reset request for your account.',
+                'reset-password' => 'Reset Password'
+            ],
+
+            'update-password' => [
+                'subject'     => 'Password Updated',
+                'greeting'    => 'Password Updated!',
+                'description' => 'You are receiving this email because you have updated your password.',
+            ],
+
+            'verification' => [
+                'subject'        => 'Account Verification Email',
+                'greeting'       => 'Welcome!',
+                'description'    => 'Please click the button below to verify your email address.',
+                'verify-email'   => 'Verify Email Address'
+            ],
+
+            'commented' => [
+                'subject' => 'New comment Added',
+                'description' => 'Note Is - :note' 
+            ],
+
+            'subscribed' => [
+                'subject'     => 'You! Subscribe to Our Newsletter',
+                'greeting'    => 'Welcome to our newsletter!',
+                'description' => 'Congratulations and welcome to our newsletter community! We\'re excited to have you on board and keep you updated with the latest news, trends, and exclusive offers.',
+                'unsubscribe' => 'Unsubscribe'
+            ]
+        ],
+
+        'orders' => [
+            'created' => [
+                'subject'  => 'New Order Confirmation',
+                'title'    => 'Order Confirmation!',
+                'greeting' => 'Thanks for your Order :order_id placed on :created_at',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'invoiced' => [
+                'subject'  => 'New Invoice Confirmation',
+                'title'    => 'Invoice Confirmation!',
+                'greeting' => 'Your invoice #:invoice_id for Order :order_id created on :created_at',
+                'summary'  => 'Summary of Invoice',
+            ],
+
+            'shipped' => [
+                'subject'  => 'New Shipment Confirmation',
+                'title'    => 'Order Shipped!',
+                'greeting' => 'Your order :order_id placed on :created_at has been shipped',
+                'summary'  => 'Summary of Shipment',
+            ],
+
+            'refunded' => [
+                'subject'  => 'New Refund Confirmation',
+                'title'    => 'Order Refunded!',
+                'greeting' => 'Refund has been initiated for the :order_id placed on :created_at',
+                'summary'  => 'Summary of Refund',
+            ],
+
+            'canceled' => [
+                'subject'  => 'New Order Canceled',
+                'title'    => 'Order Canceled!',
+                'greeting' => 'Your Order :order_id placed on :created_at has been canceled',
+                'summary'  => 'Summary of Order',
+            ],
+
+            'commented' => [
+                'subject' => 'New comment Added',
+                'title'   => 'New comment added to your order :order_id placed on :created_at',
+            ],
+
+            'shipping-address'  => 'Shipping Address',
+            'carrier'           => 'Carrier',
+            'tracking-number'   => 'Tracking Number',
+            'billing-address'   => 'Billing Address',
+            'contact'           => 'Contact',
+            'shipping'          => 'Shipping',
+            'payment'           => 'Payment',
+            'sku'               => 'SKU',
+            'name'              => 'Name',
+            'price'             => 'Price',
+            'qty'               => 'Qty',
+            'subtotal'          => 'Subtotal',
+            'shipping-handling' => 'Shipping Handling',
+            'tax'               => 'Tax',
+            'discount'          => 'Discount',
+            'grand-total'       => 'Grand Total',
         ],
     ],
 ];

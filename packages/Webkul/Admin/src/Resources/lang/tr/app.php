@@ -757,8 +757,8 @@ return [
         'yes'                         => 'Evet',
         'no'                          => 'Hayır',
         'delete'                      => 'Sil',
-        'enable-atleast-one-shipping' => 'En az bir gönderim yöntemini etkinleştirin.',
-        'enable-atleast-one-payment'  => 'En az bir ödeme yöntemini etkinleştirin.',
+        'enable-at-least-one-shipping' => 'En az bir gönderim yöntemini etkinleştirin.',
+        'enable-at-least-one-payment'  => 'En az bir ödeme yöntemini etkinleştirin.',
 
         'tax-categories' => [
             'title'           => 'Vergi Kategorileri',
@@ -1046,7 +1046,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'login as customer',
-            'login-message'=> 'you login as :customer_name',
+            'login-message' => 'you login as :customer_name',
         ],
 
         'note' => [

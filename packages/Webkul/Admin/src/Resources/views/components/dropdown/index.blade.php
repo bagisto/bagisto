@@ -30,7 +30,7 @@
     <script type="text/x-template" id="v-dropdown-template">
         <div>
             <div
-                class="select-none"
+                class="select-none flex"
                 ref="toggleBlock"
                 @click="toggle()"
             >

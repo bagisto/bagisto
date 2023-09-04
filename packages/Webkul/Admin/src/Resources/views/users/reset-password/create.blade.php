@@ -13,21 +13,21 @@
                 alt="Bagisto Logo"
             >
 
-            <div class="flex flex-col bg-white rounded-[6px] box-shadow">
+            <div class="flex flex-col min-w-[300px] bg-white rounded-[6px] box-shadow">
                 {{-- Login Form --}}
-                <x-shop::form :action="route('admin.reset_password.store')">
+                <x-admin::form :action="route('admin.reset_password.store')">
                     <div class="p-[16px]  ">
                         <p class="text-[20px] text-gray-800 font-bold ">
                             @lang('admin::app.users.reset-password.title')
                         </p>
                     </div>
 
-                    <x-shop::form.control-group.control
+                    <x-admin::form.control-group.control
                         type="hidden"
                         name="token"
                         :value="$token"       
                     >
-                    </x-shop::form.control-group.control>
+                    </x-admin::form.control-group.control>
 
                     <div class="p-[16px] border-t-[1px] border-b-[1px] border-gray-300">
                         <div class="mb-[10px]">
@@ -123,7 +123,7 @@
                             @lang('admin::app.users.reset-password.submit-btn')
                         </button>
                     </div>
-                </x-shop::form>
+                </x-admin::form>
             </div>
         </div>
     </div>

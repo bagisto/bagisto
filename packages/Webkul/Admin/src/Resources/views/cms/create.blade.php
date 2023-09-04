@@ -19,16 +19,17 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.cms.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.cms.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.account.edit.back-btn')
                 </a>
 
                 {{--Save Button --}}
                 <button
                     type="submit"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.cms.create.save-btn')
                 </button>
@@ -72,7 +73,10 @@
                         @lang('admin::app.cms.create.seo')
                     </p>
 
-                    <div class="mb-[10px]">
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
+
+                    <div class="mb-[30px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.cms.create.meta-title')
@@ -160,6 +164,7 @@
                     </div>
                 </div>
             </div>
+
             {{-- Right sub-component --}}
             <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                 {{-- General --}}
@@ -168,7 +173,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between p-[6px]">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.users.create.general')
+                                    @lang('admin::app.cms.create.general')
                                 </p>
                             </div>
                         </x-slot:header>

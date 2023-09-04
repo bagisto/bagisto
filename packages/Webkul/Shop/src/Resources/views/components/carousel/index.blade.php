@@ -7,17 +7,18 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-carousel-template">
         <div class="w-full relative m-auto">
-            <div
-                class="fade"
+            <a
                 v-for="(image, index) in images"
+                class="fade"
+                :href="image.link"
                 ref="slides"
                 :key="index"
             >
                 <x-shop::shimmer.image
                     class="w-full aspect-[2.743/1]"
-                    ::src="image"
+                    ::src="image.image"
                 ></x-shop::shimmer.image>
-            </div>
+            </a>
 
             <span
                 class="icon-arrow-left text-[24px] font-bold text-white w-auto -mt-[22px] p-[12px] absolute top-1/2 left-[10px] bg-[rgba(0,0,0,0.8)] transition-all opacity-30 rounded-full hover:opacity-100 cursor-pointer"

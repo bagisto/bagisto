@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Communications;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Marketing\Repositories\CampaignRepository;
@@ -66,7 +67,7 @@ class CampaignController extends Controller
 
         request()['status'] = request()->input('status') ? request()->input('status') : 0;
 
-        $campaign = $this->campaignRepository->create( request()->only([
+        $campaign = $this->campaignRepository->create(request()->only([
             'name',
             'subject',
             'marketing_event_id',
@@ -137,10 +138,10 @@ class CampaignController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->campaignRepository->findOrFail($id);
 
@@ -151,10 +152,14 @@ class CampaignController extends Controller
 
             Event::dispatch('marketing.campaigns.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.marketing.communications.campaigns.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.communications.campaigns.delete-success'),
+            ]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Email Campaign'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.marketing.communications.campaigns.delete-failed', ['name' => 'admin::app.marketing.communications.campaigns.email-campaign']),
+        ], 500);
     }
 }

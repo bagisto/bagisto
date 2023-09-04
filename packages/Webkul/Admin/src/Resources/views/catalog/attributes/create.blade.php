@@ -29,16 +29,17 @@
         
                     <div class="flex gap-x-[10px] items-center">
                         <!-- Cancel Button -->
-                        <a href="{{ route('admin.catalog.attributes.index') }}">
-                            <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                @lang('admin::app.catalog.attributes.create.back-btn')
-                            </span>
+                        <a
+                            href="{{ route('admin.catalog.attributes.index') }}"
+                            class="transparent-button hover:bg-gray-200"
+                        >
+                            @lang('admin::app.catalog.attributes.create.back-btn')
                         </a>
 
                         <!-- Save Button -->
                         <button
                             type="submit"
-                            class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="primary-button"
                         >
                             @lang('admin::app.catalog.attributes.create.save-btn')
                         </button>
@@ -117,7 +118,7 @@
 
                                 <!-- Add Row Button -->
                                 <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    class="secondary-button text-[14px]"
                                     @click="$refs.addOptionsRow.toggle()"
                                 >
                                     @lang('admin::app.catalog.attributes.create.add-row')
@@ -334,7 +335,7 @@
                                 <div class="grid gap-[14px] justify-items-center py-[40px] px-[10px]">
                                     <!-- Attribute Option Image -->
                                     <img 
-                                        class="w-[120px] h-[120px] border border-dashed border-gray-300 rounded-[4px]" 
+                                        class="w-[120px] h-[120px]" 
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}" 
                                         alt="{{ trans('admin::app.catalog.attributes.create.add-attribute-options') }}"
                                     >
@@ -352,7 +353,7 @@
 
                                     <!-- Add Row Button -->
                                     <div 
-                                        class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                        class="secondary-button text-[14px]"
                                         @click="$refs.addOptionsRow.toggle()"
                                     >
                                         @lang('admin::app.catalog.attributes.create.add-row')
@@ -737,7 +738,7 @@
                             <!-- Save Button -->
                             <button
                                 type="submit" 
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.catalog.attributes.create.option.save-btn')
                             </button>

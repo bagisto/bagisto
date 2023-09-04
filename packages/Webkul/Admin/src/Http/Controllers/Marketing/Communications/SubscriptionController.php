@@ -50,32 +50,30 @@ class SubscriptionController extends Controller
     /**
      * To unsubscribe the user without deleting the resource of the subscribed
      *
-     * @return JsonResource
+     * @return void
      */
-    public function update(): JsonResource
+    public function update()
     {
-        $id = request()->only('id');
-
-        $subscriber = $this->subscribersListRepository->findOrFail($id);
+        $subscriber = $this->subscribersListRepository->findOrFail(request()->id);
 
         $customer = $subscriber->customer;
 
-        if (!is_null($customer)) {
+        if (! is_null($customer)) {
             $customer->subscribed_to_news_letter = request('is_subscribed');
 
             $customer->save();
         }
 
-        $result = $subscriber->update(request()->only(['status']));
+        $result = $subscriber->update(request()->only('is_subscribed'));
 
         if ($result) {
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.marketing.communications.subscribers.index.edit.success'),
-            ]);
+            ], 200);
         } else {
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.marketing.communications.subscribers.index.edit.update-failed'),
-            ]);
+            ], 500);
         }
     }
 
@@ -83,24 +81,24 @@ class SubscriptionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return void
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $subscriber = $this->subscribersListRepository->findOrFail($id);
 
         try {
             $this->subscribersListRepository->delete($id);
 
-            return new JsonResource([
-                'message' => trans('admin::app.response.delete-success', ['name' => 'Subscriber']),
-            ]);
+            return response()->json([
+                'message' => trans('admin::app.marketing.communications.subscribers.delete-success'),
+            ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'Subscriber']),
+        return response()->json([
+            'message' => trans('admin::app.marketing.communications.subscribers.delete-failed'),
         ], 500);
     }
 }

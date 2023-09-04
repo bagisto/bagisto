@@ -771,8 +771,8 @@ return [
         'yes'                         => 'Oui',
         'no'                          => 'Non',
         'delete'                      => 'Effacer',
-        'enable-atleast-one-shipping' => 'Activez au moins une méthode d\'expédition.',
-        'enable-atleast-one-payment'  => 'Activez au moins un mode de paiement.',
+        'enable-at-least-one-shipping' => 'Activez au moins une méthode d\'expédition.',
+        'enable-at-least-one-payment'  => 'Activez au moins un mode de paiement.',
 
         'tax-categories' => [
             'title'           => 'Catégories de taxes',
@@ -1067,7 +1067,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'se connecter en tant que client',
-            'login-message'=> 'vous vous êtes connecté en tant que :customer_name',
+            'login-message' => 'vous vous êtes connecté en tant que :customer_name',
         ],
 
         'note' => [

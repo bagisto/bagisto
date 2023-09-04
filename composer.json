@@ -59,7 +59,6 @@
             "Database\\Seeders\\": "database/seeders/",
             "Webkul\\Admin\\": "packages/Webkul/Admin/src",
             "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
-            "Webkul\\BookingProduct\\": "packages/Webkul/BookingProduct/src",
             "Webkul\\CartRule\\": "packages/Webkul/CartRule/src",
             "Webkul\\CatalogRule\\": "packages/Webkul/CatalogRule/src",
             "Webkul\\Category\\": "packages/Webkul/Category/src",
@@ -84,7 +83,6 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\Ui\\": "packages/Webkul/Ui/src",
             "Webkul\\User\\": "packages/Webkul/User/src"
         }
     },

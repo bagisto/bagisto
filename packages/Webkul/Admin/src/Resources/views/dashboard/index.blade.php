@@ -3,6 +3,10 @@
 @endphp
 
 <x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.dashboard.index.title')
+    </x-slot:title>
+
     {{-- User Detailes Section --}}
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
         <div class="grid gap-[6px]">
@@ -29,7 +33,7 @@
                 <div class="p-[16px] bg-white rounded-[4px] box-shadow">
                     <div class="flex gap-[16px] flex-wrap ">
                         {{-- Total Sales --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-sales.svg')}}"
@@ -71,7 +75,7 @@
                         </div>
 
                         {{-- Total Orders --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/total-orders.svg')}}"
@@ -113,7 +117,7 @@
                         </div>
 
                         {{-- Total Customers --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/customer.svg')}}"
@@ -155,7 +159,7 @@
                         </div>
 
                         {{-- Average sales --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/average-order.svg')}}"
@@ -196,7 +200,7 @@
                         </div>
 
                         {{-- Unpaid Invoices --}}
-                        <div class="flex gap-[10px] flex-1">
+                        <div class="flex gap-[10px] flex-1 min-w-[200px]">
                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px]">
                                 <img
                                     src="{{ bagisto_asset('images/unpaid-invoice.svg')}}"
@@ -352,7 +356,7 @@
 
                     <!-- Today Orders Detailes -->
                     @foreach ($statistics['today_details']['today_orders']['current'] as $item)
-                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-1580:grid-cols-3 max-sm:grid-cols-1">
+                        <div class="row grid grid-cols-4  gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-1580:grid-cols-3 max-sm:grid-cols-1">
                             {{-- Order ID, Status, Created --}}
                             <div class="flex gap-[10px]">
                                 <div class="flex flex-col gap-[6px]">
@@ -369,31 +373,31 @@
                                     @switch($item->status)
                                         @case('processing')
                                             <p class="label-active">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('completed')
                                             <p class="label-active">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('pending')
                                             <p class="label-pending">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('canceled')
                                             <p class="label-cancelled">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('closed')
                                             <p class="label-closed">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
@@ -410,7 +414,7 @@
 
                                 {{-- Payment Mode --}}
                                 <p class="text-gray-600">
-                                    @lang('admin::app.dashboard.index.pay-by', ['method' => $item->payment->method])
+                                    @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.paymentmethods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}
@@ -478,17 +482,19 @@
                                             $item->items->count() - 3 
                                             && $item->items->count() > 4
                                         )
-                                            <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
-                                                <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
-                                                    @lang('admin::app.dashboard.index.more-products', ['product_count' => $item->items->count() - 3 ])
-                                                </p>
-                                            </div>
+                                            <a href="{{ route('admin.sales.orders.view', $item->id) }}">
+                                                <div class="flex items-center w-[65px] h-[65px] bg-gray-50 rounded-[4px]">
+                                                    <p class="text-[12px] text-gray-600 text-center font-bold px-[6px] py-[6px]">
+                                                        @lang('admin::app.dashboard.index.more-products', ['product_count' => $item->items->count() - 3 ])
+                                                    </p>
+                                                </div>
+                                            </a>
                                         @endif
                                     </div>
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.sales.orders.view', $item->id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -508,7 +514,7 @@
                     @foreach ($statistics['stock_threshold'] as $item)
                         <!-- Single Product -->
                         <div class="relative">
-                            <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 max-sm:grid-cols-[1fr_auto]">
+                            <div class="row grid grid-cols-2 gap-y-[24px] p-[16px] border-b-[1px] border-gray-300 transition-all hover:bg-gray-100 max-sm:grid-cols-[1fr_auto]">
                                 <div class="flex gap-[10px]">
                                     @if ($item->product->base_image_url)
                                         <div class="">
@@ -569,7 +575,7 @@
 
                                     {{-- View More Icon --}}
                                     <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
-                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-100 hover:rounded-[6px]"></span>
+                                        <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"></span>
                                     </a>
                                 </div>
                             </div>
@@ -588,7 +594,7 @@
 
             {{-- Store Stats --}}
             <v-store-stats>
-                <x-admin::shimmer.dashboard.right></x-admin::shimmer.dashboard.right>
+                <x-admin::shimmer.dashboard.right/>
             </v-store-stats>
         </div>
     </div>
@@ -601,7 +607,7 @@
                 <div class="bg-white rounded-[4px] box-shadow box-shadow">
                     <!-- Total Sales Shimmer -->
                     <template v-if="isLoading">
-                        <x-admin::shimmer.dashboard.right.total-sales></x-admin::shimmer.dashboard.right.total-sales>
+                        <x-admin::shimmer.dashboard.right.total-sales/>
                     </template>
 
                     <template v-else>
@@ -680,7 +686,7 @@
 
                     <!-- Top Selling Products -->
                     <div class="border-b border-gray-300">
-                        <div class="flex items-center justify-between p-[16px] pb-0">
+                        <div class="flex items-center justify-between p-[16px]">
                             <p class="text-gray-600 text-[16px] font-semibold">
                                 @lang('admin::app.dashboard.index.top-selling-products')
                             </p>
@@ -691,60 +697,59 @@
                         </div>
 
                         <!-- Top Selling Products Shimmer -->
-                        <div v-if="isLoading">
-                            <x-admin::shimmer.dashboard.right.top-selling></x-admin::shimmer.dashboard.right.top-selling>
-                        </div>
+                        <template v-if="isLoading">
+                            <x-admin::shimmer.dashboard.right.top-selling/>
+                        </template>
 
                         <!-- Top Selling Products Detailes -->
-                        <div v-else>
+                        <template v-else>
                             <div
-                                class="flex flex-col gap-[32px] p-[16px]"
+                                class="flex flex-col"
                                 v-if="statistics?.top_selling_products?.length"
                             >
                                 <a
-                                    v-for="item in statistics.top_selling_products"
                                     :href="`{{route('admin.catalog.products.edit', '')}}/${item.product_id}`"
+                                    class="flex gap-[10px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-100"
+                                    v-for="item in statistics.top_selling_products"
                                 >
-                                    <!-- Product Image -->
-                                    <div class="flex gap-[10px]">
-                                        <img
-                                            v-if="item?.product?.images.length"
-                                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
-                                            :src="item?.product?.images[0]?.url"
-                                        />
-    
-                                        <div
-                                            v-else
-                                            class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
+                                    <!-- Product Item -->
+                                    <img
+                                        v-if="item?.product?.images.length"
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative rounded-[4px] overflow-hidden"
+                                        :src="item?.product?.images[0]?.url"
+                                    />
+
+                                    <div
+                                        v-else
+                                        class="w-full h-[65px] max-w-[65px] max-h-[65px] relative border border-dashed border-gray-300 rounded-[4px] overflow-hidden"
+                                    >
+                                        <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
+                                        
+                                        <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
+                                            @lang('admin::app.dashboard.index.product-image')
+                                        </p>
+                                    </div>
+
+                                    <!-- Product Detailes -->
+                                    <div class="flex flex-col gap-[6px] w-full">
+                                        <p
+                                            class="text-gray-600"
+                                            v-text="item.name"
                                         >
-                                            <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
-                                            
-                                            <p class="w-full absolute bottom-[5px] text-[6px] text-gray-400 text-center font-semibold">
-                                                @lang('admin::app.dashboard.index.product-image')
-                                            </p>
-                                        </div>
-    
-                                        <!-- Product Detailes -->
-                                        <div class="flex flex-col gap-[6px] w-full">
+                                        </p>
+
+                                        <div class="flex justify-between">
                                             <p
-                                                class="text-gray-600"
-                                                v-text="item.name"
+                                                class="text-gray-600 font-semibold"
+                                                v-text="item.formatted_price"
                                             >
                                             </p>
-    
-                                            <div class="flex justify-between">
-                                                <p
-                                                    class="text-gray-600 font-semibold"
-                                                    v-text="item.formatted_price"
-                                                >
-                                                </p>
-    
-                                                <p
-                                                    class="text-[16px] text-gray-800 font-semibold"
-                                                    v-text="item.formatted_total"
-                                                >
-                                                </p>
-                                            </div>
+
+                                            <p
+                                                class="text-[16px] text-gray-800 font-semibold"
+                                                v-text="item.formatted_total"
+                                            >
+                                            </p>
                                         </div>
                                     </div>
                                 </a>
@@ -759,26 +764,26 @@
                                     <!-- Placeholder Image -->
                                     <img
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                        class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                        class="w-[80px] h-[80px]"
                                     >
     
                                     <!-- Add Variants Information -->
                                     <div class="flex flex-col items-center">
                                         <p class="text-[16px] text-gray-400 font-semibold">
-                                            @lang('admin::app.dahsboard.add-product')
+                                            @lang('admin::app.dashboard.index.add-product')
                                         </p>
     
                                         <p class="text-gray-400">
-                                            @lang('admin::app.dahsboard.product-info')
+                                            @lang('admin::app.dashboard.index.product-info')
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
 
                     <!-- Top Customers -->
-                    <div class="flex items-center justify-between p-[16px] pb-0">
+                    <div class="flex items-center justify-between p-[16px]">
                         <p class="text-gray-600 text-[16px] font-semibold">
                             @lang('admin::app.dashboard.index.customer-with-most-sales')
                         </p>
@@ -791,13 +796,13 @@
                     <!-- Customers Shimmer -->
                     
                     <template v-if="isLoading">
-                        <x-admin::shimmer.dashboard.right.most-customer-sales></x-admin::shimmer.dashboard.right.most-customer-sales>
+                        <x-admin::shimmer.dashboard.right.most-customer-sales/>
                     </template>
 
                     <template v-else>
                         <!-- Customers Lists -->
                         <div
-                            class="flex flex-col gap-[32px] p-[16px]"
+                            class="flex flex-col gap-[32px] p-[16px] border-b-[1px] border-gray-300 last:border-b-0 transition-all hover:bg-gray-100"
                             v-if="statistics?.customer_with_most_sales?.length"
                             v-for="item in statistics.customer_with_most_sales"
                         >
@@ -874,7 +879,7 @@
                                 <!-- Placeholder Image -->
                                 <img
                                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                                    class="w-[80px] h-[80px]"
                                 />
 
                                 <!-- Add Variants Information -->
@@ -884,7 +889,7 @@
                                     </p>
 
                                     <p class="text-gray-400">
-                                        @lang('admin::app.dahsboard.index.customer-info')
+                                        @lang('admin::app.dashboard.index.customer-info')
                                     </p>
                                 </div>
                             </div>

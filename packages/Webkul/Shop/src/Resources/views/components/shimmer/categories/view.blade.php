@@ -2,13 +2,13 @@
     <div class="flex gap-[40px] md:mt-[40px] items-start max-lg:gap-[20px]">
         {{-- Desktop Filter Shimmer Effect --}}
         <div class="max-md:hidden">
-            <x-shop::shimmer.categories.filters></x-shop::shimmer.categories.filters>
+            <x-shop::shimmer.categories.filters/>
         </div>
 
         <div class="flex-1">
             {{-- Desktop Toolbar Shimmer Effect --}}
             <div class="max-md:hidden">
-                <x-shop::shimmer.categories.toolbar></x-shop::shimmer.categories.toolbar>
+                <x-shop::shimmer.categories.toolbar/>
             </div>
 
             {{-- Product Card Container --}}

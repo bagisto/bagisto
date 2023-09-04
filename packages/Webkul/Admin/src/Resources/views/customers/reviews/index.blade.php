@@ -59,7 +59,7 @@
                                                 class="after:content-['/'] last:after:content-['']"
                                                 :class="{
                                                     'text-gray-800 font-medium': applied.sort.column == column,
-                                                    'cursor-pointer': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                                    'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                                 }"
                                                 @click="
                                                     columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
@@ -121,15 +121,7 @@
                                     >
                                     </p>
 
-                                    <p
-                                        :class="{
-                                            'label-cancelled': record.product_review_status === 'disapproved',
-                                            'label-pending': record.product_review_status === 'pending',
-                                            'label-active': record.product_review_status === 'approved',
-                                        }"
-                                        v-text="record.product_review_status"
-                                    >
-                                    </p>
+                                    <p v-html="record.product_review_status"></p>
                                 </div>
                             </div>
 
@@ -201,7 +193,10 @@
                     v-slot="{ meta, errors, handleSubmit }"
                     as="div"
                 >
-                    <form @submit="handleSubmit($event, update)">
+                    <form
+                        @submit="handleSubmit($event, update)"
+                        ref="reviewCreateForm"
+                    >
                         <x-admin::drawer ref="review">
                             <!-- Drawer Header -->
                             <x-slot:header>
@@ -210,7 +205,7 @@
                                         @lang('admin::app.customers.reviews.index.edit.title')
                                     </p>
                 
-                                    <button class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer">
+                                    <button class="mr-[45px] primary-button">
                                         @lang('admin::app.customers.reviews.index.edit.save-btn')
                                     </button>
                                 </div>
@@ -394,7 +389,11 @@
                     },
 
                     update(params) {
-                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, params)
+                        let formData = new FormData(this.$refs.reviewCreateForm);
+
+                        formData.append('_method', 'put');
+
+                        this.$axios.post(`{{ route('admin.customers.customers.review.update', '') }}/${params.id}`, formData)
                             .then((response) => {
                                 this.$refs.review.close();
 
@@ -420,7 +419,7 @@
                             .then((response) => {
                                 this.$refs.review_data.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: 'Currencies Deleted successfully' });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {

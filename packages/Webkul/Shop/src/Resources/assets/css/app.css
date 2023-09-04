@@ -258,7 +258,6 @@
 
     .icon-star-fill:before {
         content: "\e938";
-    color: #ffb600;
     }
 
     .icon-star:before {
@@ -439,5 +438,9 @@
     
     .break-word-custom {
         word-break: break-word;
+    }
+
+    .required:after {
+        content: "*";
     }
 }

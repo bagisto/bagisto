@@ -26,8 +26,8 @@ class DashboardController extends Controller
 
             return response()->json([
                 'statistics' => $statistics,
-                'startDate' => $this->dashboardService->getStartDate()->format('d M'),
-                'endDate' => $this->dashboardService->getEndDate()->format('d M'),
+                'startDate'  => $this->dashboardService->getStartDate()->format('d M'),
+                'endDate'    => $this->dashboardService->getEndDate()->format('d M'),
             ]);
         }
 

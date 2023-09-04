@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -19,7 +20,8 @@ class AttributeFamilyController extends Controller
     public function __construct(
         protected AttributeFamilyRepository $attributeFamilyRepository,
         protected AttributeRepository $attributeRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -87,7 +89,7 @@ class AttributeFamilyController extends Controller
     {
         $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOrFail($id, ['*']);
 
-        $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type']);
+        $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type', 'is_user_defined']);
 
         return view('admin::catalog.families.edit', compact('attributeFamily', 'customAttributes'));
     }
@@ -123,21 +125,21 @@ class AttributeFamilyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $attributeFamily = $this->attributeFamilyRepository->findOrFail($id);
 
         if ($this->attributeFamilyRepository->count() == 1) {
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.families.last-delete-error'),
             ], 400);
         }
 
         if ($attributeFamily->products()->count()) {
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.families.attribute-product-error'),
             ], 400);
         }
@@ -149,56 +151,16 @@ class AttributeFamilyController extends Controller
 
             Event::dispatch('catalog.attribute_family.delete.after', $id);
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.families.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
+        
+        return new JsonResource([
             'message' => trans('admin::app.catalog.families.delete-failed', ['name' => 'admin::app.catalog.families.family']),
         ], 500);
-    }
-
-    /**
-     * Remove the specified resources from database.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy()
-    {
-        $suppressFlash = false;
-
-        if (request()->isMethod('delete')) {
-            $indexes = explode(',', request()->input('indexes'));
-
-            foreach ($indexes as $index) {
-                try {
-                    Event::dispatch('catalog.attribute_family.delete.before', $index);
-
-                    $this->attributeFamilyRepository->delete($index);
-
-                    Event::dispatch('catalog.attribute_family.delete.after', $index);
-                } catch (\Exception $e) {
-                    report($e);
-                    $suppressFlash = true;
-
-                    continue;
-                }
-            }
-
-            if (! $suppressFlash) {
-                session()->flash('success', ('admin::app.catalog.families.index.datagrid.delete-success'));
-            } else {
-                session()->flash('info', trans('admin::app.catalog.families.index.datagrid.partial-action', ['resource' => trans('admin::app.catalog.families.attribute-family')]));
-            }
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.catalog.families.index.datagrid.method-error'));
-
-            return redirect()->back();
-        }
     }
 }

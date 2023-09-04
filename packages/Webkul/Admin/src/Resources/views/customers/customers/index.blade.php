@@ -13,7 +13,7 @@
             <!-- Dropdown -->
             <x-admin::dropdown position="bottom-right">
                 <x-slot:toggle>
-                    <span class="icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-100"></span>
+                    <span class="flex icon-setting p-[6px] rounded-[6px] text-[24px]  cursor-pointer transition-all hover:bg-gray-200"></span>
                 </x-slot:toggle>
 
                 <x-slot:content class="w-[174px] max-w-full !p-[8PX] border border-gray-300 rounded-[4px] z-10 bg-white shadow-[0px_8px_10px_0px_rgba(0,_0,_0,_0.2)]">
@@ -53,7 +53,7 @@
                                     <!-- Save Button -->
                                     <button
                                         type="submit" 
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('Export')
                                     </button>
@@ -69,7 +69,7 @@
                 <v-create-customer-form>
                     <button
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                     >
                         @lang('admin::app.customers.index.create.create-btn')
                     </button>
@@ -119,7 +119,7 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'text-gray-800 font-medium': applied.sort.column == column,
-                                            'cursor-pointer': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
                                             columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
@@ -234,15 +234,24 @@
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.customers.index.datagrid.order')".replace(':order', record.order_count) }}
                             </p>
+
                             <p class="text-gray-600">
                                 @{{ "@lang('admin::app.customers.index.datagrid.address')".replace(':address', record.address_count) }}
                             </p>
                         </div>
-                        <a 
-                            class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
-                            :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
-                        >
-                        </a>
+                        <div class="flex items-center">
+                            <a 
+                                class="icon-login text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                                :href=`{{ route('admin.customers.customers.login_as_customer', '') }}/${record.customer_id}`
+                            >
+                            </a>
+
+                            <a 
+                                class="icon-sort-right text-[24px] ml-[4px] p-[6px] cursor-pointer hover:bg-gray-200 hover:rounded-[6px]"
+                                :href=`{{ route('admin.customers.customers.view', '') }}/${record.customer_id}`
+                            >
+                            </a>
+                        </div>    
                     </div>
                 </div>
             </template>
@@ -261,7 +270,7 @@
                 @if (bouncer()->hasPermission('customers.customers.create'))
                     <button
                         type="button"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                         @click="$refs.customerCreateModal.toggle()"
                     >
                         @lang('admin::app.customers.index.create.create-btn')
@@ -290,7 +299,7 @@
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <!-- First Name -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
-                                            <x-admin::form.control-group.label>
+                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.first-name')
                                             </x-admin::form.control-group.label>
                 
@@ -312,7 +321,7 @@
         
                                         <!-- Last Name -->
                                         <x-admin::form.control-group class="w-full mb-[10px]">
-                                            <x-admin::form.control-group.label>
+                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.customers.index.create.last-name')
                                             </x-admin::form.control-group.label>
                 
@@ -335,7 +344,7 @@
 
                                     <!-- Email -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.index.create.email')
                                         </x-admin::form.control-group.label>
             
@@ -357,7 +366,7 @@
 
                                     <!-- Contact Number -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.customers.index.create.contact-number')
                                         </x-admin::form.control-group.label>
             
@@ -400,7 +409,7 @@
                                     <div class="flex gap-[16px] max-sm:flex-wrap">
                                         <!-- Gender -->
                                         <x-admin::form.control-group class="w-full">
-                                            <x-admin::form.control-group.label>
+                                            <x-admin::form.control-group.label class="required"> 
                                                 @lang('admin::app.customers.index.create.gender')
                                             </x-admin::form.control-group.label>
                 
@@ -465,7 +474,7 @@
                                     <!-- Save Button -->
                                     <button 
                                         type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('admin::app.customers.index.create.save-btn')
                                     </button>

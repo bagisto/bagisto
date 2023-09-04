@@ -46,13 +46,14 @@
                             <p
                                 v-for="column in $parent.available.columns"
                                 v-if="$parent.available.actions.length"
-                                :class="{'cursor-pointer': column.sortable}"
+                                class="flex gap-[5px] items-center"
+                                :class="{'cursor-pointer select-none hover:text-gray-800': column.sortable}"
                                 @click="$parent.sortPage(column)"
                             >
                                 @{{ column.label }}
 
                                 <i
-                                    class="ml-[5px] text-[16px] text-gray-600 align-text-bottom"
+                                    class="text-[16px] text-gray-600 align-text-bottom"
                                     :class="[$parent.applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
                                     v-if="column.index == $parent.applied.sort.column"
                                 ></i>
@@ -97,7 +98,6 @@
                                 </p>
 
                                 <!-- Columns -->
-                                
                                 <p
                                     v-if="record.is_closure"
                                     v-for="column in $parent.available.columns"
@@ -105,7 +105,7 @@
                                 >
                                 </p>
 
-                                <p  
+                                <p
                                     v-else
                                     v-for="column in $parent.available.columns"
                                     v-html="record[column.index]"

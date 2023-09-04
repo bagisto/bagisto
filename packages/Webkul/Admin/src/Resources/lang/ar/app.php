@@ -771,8 +771,8 @@ return [
         'yes'                         => 'نعم.',
         'no'                          => 'لا.',
         'delete'                      => 'احذف',
-        'enable-atleast-one-shipping' => 'تفعيل طريقة شحن واحدة على الأقل.',
-        'enable-atleast-one-payment'  => 'تفعيل طريقة دفع واحدة على الأقل.',
+        'enable-at-least-one-shipping' => 'تفعيل طريقة شحن واحدة على الأقل.',
+        'enable-at-least-one-payment'  => 'تفعيل طريقة دفع واحدة على الأقل.',
 
         'tax-categories' => [
             'title'           => 'فئات الضرائب',
@@ -1070,7 +1070,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'سجل دخولك كعميل',
-            'login-message'=> 'you login as :customer_name',
+            'login-message' => 'you login as :customer_name',
         ],
 
         'note' => [

@@ -45,8 +45,8 @@
         >
             <div class="flex gap-[10px] p-[6px] items-center">
                 <span
-                    class="icon-arrow-right text-[24px]"
-                    :class="{'!icon-arrow-left': isCollapsed}"
+                    class="icon-collapse text-[24px]"
+                    :class="{'rotate-[180deg]': isCollapsed}"
                 ></span>
 
                 <p
@@ -74,7 +74,11 @@
                 toggle() {
                     this.isCollapsed = parseInt(this.isCollapsedCookie()) ? 0 : 1;
 
-                    document.cookie = 'sidebar_collapsed=' + this.isCollapsed + '; path=/';
+                    var expiryDate = new Date();
+
+                    expiryDate.setMonth(expiryDate.getMonth() + 1);
+
+                    document.cookie = 'sidebar_collapsed=' + this.isCollapsed + '; path=/; expires=' + expiryDate.toGMTString();
 
                     this.$root.$refs.appLayout.classList.toggle('sidebar-collapsed');
                 },

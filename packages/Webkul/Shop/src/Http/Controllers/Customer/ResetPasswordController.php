@@ -62,9 +62,9 @@ class ResetPasswordController extends Controller
             );
 
             if ($response == Password::PASSWORD_RESET) {
-                $user = $this->customerRepository->findOneByField('email', request('email'));
+                $customer = $this->customerRepository->findOneByField('email', request('email'));
 
-                Event::dispatch('user.admin.update-password', $user);
+                Event::dispatch('customer.password.update.after', $customer);
 
                 return redirect()->route('shop.customers.account.profile.index');
             }

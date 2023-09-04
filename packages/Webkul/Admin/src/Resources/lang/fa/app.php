@@ -730,8 +730,8 @@ return [
         'yes'                         => 'بله',
         'no'                          => 'خیر',
         'delete'                      => 'حذف',
-        'enable-atleast-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
-        'enable-atleast-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
+        'enable-at-least-one-shipping' => 'حداقل یک روش حمل و نقل را فعال کنید.',
+        'enable-at-least-one-payment'  => 'حداقل یک روش پرداخت را فعال کنید.',
 
         'tax-categories' => [
             'title'           => 'دسته بندی های مالیات',
@@ -1019,7 +1019,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'به عنوان مشتری وارد شوید',
-            'login-message'=> 'به عنوان مشتری وارد شدید :customer_name',
+            'login-message' => 'به عنوان مشتری وارد شدید :customer_name',
         ],
 
         'note' => [

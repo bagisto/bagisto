@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
@@ -22,7 +23,8 @@ class UserController extends Controller
     public function __construct(
         protected AdminRepository $adminRepository,
         protected RoleRepository $roleRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -68,10 +70,16 @@ class UserController extends Controller
 
         $admin = $this->adminRepository->create($data);
 
+        if (request()->hasFile('image')) {
+            $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
+
+            $admin->save();
+        }
+
         Event::dispatch('user.admin.create.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.index.create.success'),
+            'message' => trans('admin::app.settings.users.index.create-success'),
         ]);
     }
 
@@ -113,14 +121,27 @@ class UserController extends Controller
 
         $admin = $this->adminRepository->update($data, $id);
 
+        $previousImage = $admin->image;
+
+        if (request()->hasFile('image')) {
+            $admin->image = current(request()->file('image'))->store('admins/' . $admin->id);
+
+        } else {
+            $admin->image = null;
+
+            Storage::delete((string)$previousImage);
+        }
+
+        $admin->save();
+
         if (!empty($data['password'])) {
-            Event::dispatch('user.admin.update-password', $admin);
+            Event::dispatch('admin.password.update.after', $admin);
         }
 
         Event::dispatch('user.admin.update.after', $admin);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.users.index.edit.success', ['name' => trans('admin::app.settings.users.index.user')]),
+            'message' => trans('admin::app.settings.users.index.update-success'),
         ]);
     }
 
@@ -133,7 +154,9 @@ class UserController extends Controller
     public function destroy($id): JsonResource
     {
         if ($this->adminRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'admin::app.settings.users.index.admin'])], 400);
+            return response()->json([
+                'message' => trans('admin::app.settings.users.last-delete-error'
+            )], 400);
         }
 
         if (auth()->guard('admin')->user()->id == $id) {
@@ -150,13 +173,13 @@ class UserController extends Controller
             Event::dispatch('user.admin.delete.after', $id);
 
             return new JsonResource([
-                'message' => trans('admin::app.response.delete-success', ['name' => trans('admin::app.settings.users.index.admin')]),
+                'message' => trans('admin::app.settings.users.delete-success')
             ]);
         } catch (\Exception $e) {
         }
 
         return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.users.index.admin')]),
+            'message' => trans('admin::app.settings.users.delete-failed'),
         ], 500);
     }
 
@@ -264,7 +287,7 @@ class UserController extends Controller
      */
     private function cannotChangeRedirectResponse(string $columnName): \Illuminate\Http\RedirectResponse
     {
-        session()->flash('error', trans('admin::app.response.cannot-change', [
+        session()->flash('error', trans('admin::app.settings.users.cannot-change', [
             'name' => $columnName,
         ]));
 

@@ -88,7 +88,7 @@ class ConfigurationController extends Controller
             }
 
             if (! $atLeastOneCarrierEnabled) {
-                session()->flash('error', trans('admin::app.configuration.enable-atleast-one-shipping'));
+                session()->flash('error', trans('admin::app.configuration.index.enable-at-least-one-shipping'));
 
                 return redirect()->back();
             }
@@ -104,7 +104,7 @@ class ConfigurationController extends Controller
             }
 
             if (! $atLeastOnePaymentMethodEnabled) {
-                session()->flash('error', trans('admin::app.configuration.enable-atleast-one-payment'));
+                session()->flash('error', trans('admin::app.configuration.enable-at-least-one-payment'));
 
                 return redirect()->back();
             }
@@ -112,7 +112,7 @@ class ConfigurationController extends Controller
 
         $this->coreConfigRepository->create($request->except(['_token', 'admin_locale']));
 
-        session()->flash('success', trans('admin::app.configuration.save-message'));
+        session()->flash('success', trans('admin::app.configuration.index.save-message'));
 
         return redirect()->back();
     }

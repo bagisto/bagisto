@@ -16,17 +16,18 @@
 
             <div class="flex gap-x-[10px] items-center">
                  <!-- Cancel Button -->
-                <a href="{{ route('admin.dashboard.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.account.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.dashboard.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.account.edit.back-btn')
                 </a>
 
                 <!-- Save Button -->
                 <div class="flex gap-x-[10px] items-center">
                     <button 
                         type="submit"
-                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                        class="primary-button"
                     >
                         @lang('admin::app.account.edit.save-btn')
                     </button>
@@ -46,23 +47,15 @@
 
                     {{-- Image --}}
                     <x-admin::form.control-group>
-                        <x-admin::form.control-group.control
-                            type="image"
-                            name="image"
-                            class="mb-0 !p-0 rounded-[12px] text-gray-700"
-                            :width="110"
-                            :height="110"
-                            :label="trans('admin::app.account.edit.profile-image')"
-                            :is-multiple="false"
-                            accepted-types="image/*"
-                            :src="isset($user) ? $user->image_url : ''"
-                        >
-                        </x-admin::form.control-group.control>
+                        @php
+                            $imageImages = $user->image ? [['id' => 'image', 'url' => $user->image_url]] : [];
+                        @endphp
 
-                        <x-admin::form.control-group.error
-                            control-name="image"
+                        <x-admin::media.images
+                            name="image"
+                            ::uploaded-images='{{ json_encode($imageImages) }}'
                         >
-                        </x-admin::form.control-group.error>
+                        </x-admin::media.images>
                     </x-admin::form.control-group>
 
                     <p class="my-5 text-[14px] text-gray-400">

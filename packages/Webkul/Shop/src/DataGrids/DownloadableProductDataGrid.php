@@ -8,20 +8,6 @@ use Webkul\DataGrid\DataGrid;
 class DownloadableProductDataGrid extends DataGrid
 {
     /**
-     * Index.
-     *
-     * @var string
-     */
-    protected $index = 'id';
-
-    /**
-     * Sort order.
-     *
-     * @var string
-     */
-    protected $sortOrder = 'desc';
-
-    /**
      * Prepare query builder.
      *
      * @return void
@@ -36,9 +22,9 @@ class DownloadableProductDataGrid extends DataGrid
             ->addSelect(DB::raw('(' . DB::getTablePrefix() . 'downloadable_link_purchased.download_bought - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_canceled - ' . DB::getTablePrefix() . 'downloadable_link_purchased.download_used) as remaining_downloads'))
             ->where('downloadable_link_purchased.customer_id', auth()->guard('customer')->user()->id);
 
-        // $this->addFilter('status', 'downloadable_link_purchased.status');
-        // $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
-        // $this->addFilter('increment_id', 'orders.increment_id');
+        $this->addFilter('increment_id', 'orders.increment_id');
+        $this->addFilter('status', 'downloadable_link_purchased.status');
+        $this->addFilter('created_at', 'downloadable_link_purchased.created_at');
 
         return $queryBuilder;
     }
@@ -97,11 +83,11 @@ class DownloadableProductDataGrid extends DataGrid
             'filterable' => true,
             'closure'    => function ($value) {
                 if ($value->status == 'pending') {
-                    return '<span class="badge badge-md badge-warning">' .trans('shop::app.customer.account.downloadable_products.pending'). '</span>';
+                    return '<span class="badge badge-md badge-warning">' . trans('shop::app.customer.account.downloadable_products.pending') . '</span>';
                 } elseif ($value->status == 'available') {
-                    return '<span class="badge badge-md badge-success">' .trans('shop::app.customer.account.downloadable_products.available'). '</span>';
+                    return '<span class="badge badge-md badge-success">' . trans('shop::app.customer.account.downloadable_products.available') . '</span>';
                 } elseif ($value->status == 'expired') {
-                    return '<span class="badge badge-md badge-danger">' .trans('shop::app.customer.account.downloadable_products.expired'). '</span>';
+                    return '<span class="badge badge-md badge-danger">' . trans('shop::app.customer.account.downloadable_products.expired') . '</span>';
                 }
             },
         ]);

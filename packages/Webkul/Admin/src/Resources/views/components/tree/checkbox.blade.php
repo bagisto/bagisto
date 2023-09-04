@@ -3,7 +3,7 @@
     <script type="text/x-template" id="v-tree-checkbox-template">
         <label
             :for="id"
-            class="inline-flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none"
+            class="inline-flex gap-[10px] w-max p-[6px] items-center cursor-pointer select-none group"
         >
             <input
                 type="checkbox"
@@ -19,7 +19,7 @@
             </span>
 
             <div
-                class="text-[14px] text-gray-600 cursor-pointer"
+                class="text-[14px] text-gray-600 cursor-pointer hover:text-gray-800"
                 v-text="label"
             >
             </div>

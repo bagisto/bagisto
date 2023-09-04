@@ -78,6 +78,15 @@ class ReviewDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
+            'closure'    => function ($value) {
+                if ($value->product_review_status == 'approved') {
+                    return '<p class="label-active">' . trans('admin::app.customers.reviews.index.datagrid.approved') . '</p>';
+                } elseif ($value->product_review_status == "pending") {
+                    return '<p class="label-pending">' . trans('admin::app.customers.reviews.index.datagrid.pending') . '</p>';
+                } elseif ($value->product_review_status == "disapproved") {  
+                    return '<p class="label-cancelled">' . trans('admin::app.customers.reviews.index.datagrid.disapproved') . '</p>';
+                }
+            },
         ]);
 
         $this->addColumn([
@@ -170,9 +179,18 @@ class ReviewDataGrid extends DataGrid
             'method'  => 'POST',
             'url'     => route('admin.customers.customers.review.mass_update'),
             'options' => [
-                trans('admin::app.customers.reviews.index.datagrid.pending')     => 0,
-                trans('admin::app.customers.reviews.index.datagrid.approved')    => 1,
-                trans('admin::app.customers.reviews.index.datagrid.disapproved') => 2,
+                [
+                    'name' => trans('admin::app.customers.reviews.index.datagrid.pending'),
+                    'value' => 0,
+                ],
+                [
+                    'name' => trans('admin::app.customers.reviews.index.datagrid.approved'),
+                    'value' => 1,
+                ],
+                [
+                    'name' => trans('admin::app.customers.reviews.index.datagrid.disapproved'),
+                    'value' => 2,
+                ],
             ],
         ]);
     }

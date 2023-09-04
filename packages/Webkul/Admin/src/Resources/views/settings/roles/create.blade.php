@@ -19,10 +19,11 @@
 
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel Button -->
-                            <a href="{{ route('admin.settings.roles.index') }}">
-                                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                    @lang('admin::app.settings.roles.create.back-btn')
-                                </span>
+                            <a
+                                href="{{ route('admin.settings.roles.index') }}"
+                                class="transparent-button hover:bg-gray-200"
+                            >
+                                @lang('admin::app.settings.roles.create.back-btn')
                             </a>
 
                             <!-- Save Button -->
@@ -87,65 +88,63 @@
                         </div>
                         <!-- Right sub-component -->
                         <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                            <div class="bg-white rounded-[4px] box-shadow">
-                                <x-admin::accordion>
-                                    <x-slot:header>
-                                        <div class="flex items-center justify-between p-[6px]">
-                                            <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                                @lang('admin::app.settings.roles.create.general')
-                                            </p>
-                                        </div>
-                                    </x-slot:header>
-                            
-                                    <x-slot:content>
-                                        <div class="mb-[10px]">
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label class="required">
-                                                    @lang('admin::app.settings.roles.create.name')
-                                                </x-admin::form.control-group.label>
-        
-                                                <x-admin::form.control-group.control
-                                                    type="text"
-                                                    name="name"
-                                                    value="{{ old('name') }}"
-                                                    id="name"
-                                                    rules="required"
-                                                    :label="trans('admin::app.settings.roles.create.name')"
-                                                    :placeholder="trans('admin::app.settings.roles.create.name')"
-                                                >
-                                                </x-admin::form.control-group.control>
-        
-                                                <x-admin::form.control-group.error
-                                                    control-name="name"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        
-                                            <x-admin::form.control-group class="mb-[10px]">
-                                                <x-admin::form.control-group.label class="required">
-                                                    @lang('admin::app.settings.roles.create.description')
-                                                </x-admin::form.control-group.label>
-        
-                                                <x-admin::form.control-group.control
-                                                    type="textarea"
-                                                    name="description"
-                                                    :value="old('description')"
-                                                    id="description"
-                                                    rules="required"
-                                                    :label="trans('admin::app.settings.roles.create.description')"
-                                                    :placeholder="trans('admin::app.settings.roles.create.description')"
-                                                >
-                                                </x-admin::form.control-group.control>
-        
-                                                <x-admin::form.control-group.error
-                                                    control-name="description"
-                                                >
-                                                </x-admin::form.control-group.error>
-                                            </x-admin::form.control-group>
-                                        </div>
-                                    </x-slot:content>
-                                </x-admin::accordion>
-                            </div>
+                            <x-admin::accordion>
+                                <x-slot:header>
+                                    <div class="flex items-center justify-between p-[6px]">
+                                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                            @lang('admin::app.settings.roles.create.general')
+                                        </p>
+                                    </div>
+                                </x-slot:header>
+                        
+                                <x-slot:content>
+                                    <div class="mb-[10px]">
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.settings.roles.create.name')
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="name"
+                                                value="{{ old('name') }}"
+                                                id="name"
+                                                rules="required"
+                                                :label="trans('admin::app.settings.roles.create.name')"
+                                                :placeholder="trans('admin::app.settings.roles.create.name')"
+                                            >
+                                            </x-admin::form.control-group.control>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="name"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.settings.roles.create.description')
+                                            </x-admin::form.control-group.label>
+    
+                                            <x-admin::form.control-group.control
+                                                type="textarea"
+                                                name="description"
+                                                :value="old('description')"
+                                                id="description"
+                                                rules="required"
+                                                :label="trans('admin::app.settings.roles.create.description')"
+                                                :placeholder="trans('admin::app.settings.roles.create.description')"
+                                            >
+                                            </x-admin::form.control-group.control>
+    
+                                            <x-admin::form.control-group.error
+                                                control-name="description"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+                                    </div>
+                                </x-slot:content>
+                            </x-admin::accordion>
                         </div>
                     </div>
                 </x-admin::form>

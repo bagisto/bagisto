@@ -54,4 +54,17 @@ class ThemeCustomization extends Model implements ThemeCustomizationContract
     protected $casts = [
         'options' => 'array',
     ];
+
+    /**
+     * Add fillable properties
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'type',
+        'name',
+        'options',
+        'sort_order',
+        'status',
+    ];
 }

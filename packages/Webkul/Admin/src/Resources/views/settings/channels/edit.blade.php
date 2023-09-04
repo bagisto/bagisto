@@ -23,15 +23,16 @@
             </p>
 
             <div class="flex gap-x-[10px] items-center">
-                <a href="{{ route('admin.settings.channels.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.settings.channels.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.settings.channels.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.settings.channels.edit.back-btn')
                 </a>
 
                 <button 
                     type="submit" 
-                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.settings.channels.edit.save-btn')
                 </button>
@@ -46,6 +47,7 @@
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
+                    
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
@@ -237,23 +239,15 @@
                                         @lang('admin::app.settings.channels.edit.logo')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group>
-                                        <x-admin::form.control-group.control
-                                            type="image"
-                                            name="logo[image_1]"
-                                            :src="$channel->logo_url"
-                                            :label="trans('admin::app.settings.channels.edit.logo')"
-                                            :is-multiple="false"
-                                            accepted-types="image/*"
-                                        >
-                                        </x-admin::form.control-group.control>
-    
-                                    </x-admin::form.control-group>
+                                    @php
+                                        $logoImages = $channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : [];
+                                    @endphp
 
-                                    <x-admin::form.control-group.error
-                                        control-name="logo[image_1]"
+                                    <x-admin::media.images
+                                        name="logo"
+                                        ::uploaded-images='{{ json_encode($logoImages) }}'
                                     >
-                                    </x-admin::form.control-group.error>
+                                    </x-admin::media.images>
                                 </x-admin::form.control-group>
 
                                 <p class="text-[12px] text-gray-600">
@@ -267,20 +261,15 @@
                                         @lang('admin::app.settings.channels.edit.favicon')
                                     </x-admin::form.control-group.label>
 
-                                    <x-admin::form.control-group.control
-                                        type="image"
-                                        name="favicon[image_1]"
-                                        :src="$channel->favicon_url"
-                                        :label="trans('admin::app.settings.channels.edit.favicon')"
-                                        :is-multiple="false"
-                                        accepted-types="image/*"
-                                    >
-                                    </x-admin::form.control-group.control>
+                                    @php
+                                        $faviconImages = $channel->favicon ? [['id' => 'logo_path', 'url' => $channel->favicon_url]] : [];
+                                    @endphp
 
-                                    <x-admin::form.control-group.error
-                                        control-name="favicon[image_1]"
+                                    <x-admin::media.images
+                                        name="favicon"
+                                        ::uploaded-images='{{ json_encode($faviconImages) }}'
                                     >
-                                    </x-admin::form.control-group.error>
+                                    </x-admin::media.images>
                                 </x-admin::form.control-group>
 
                                 <p class="text-[12px] text-gray-600">
@@ -297,6 +286,9 @@
                         @lang('admin::app.settings.channels.edit.seo')
                     </p>
 
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
+
                     <div class="mb-[10px]">
                         <x-admin::form.control-group class="mb-[10px]">
                             <x-admin::form.control-group.label class="required">
@@ -307,7 +299,7 @@
                                 type="text"
                                 :name="$locale . '[seo_title]'"
                                 :value="$seo->meta_title ?? (old($locale)['seo_title'] ?? '')"
-                                id="seo_title"
+                                id="meta_title"
                                 rules="required"
                                 :label="trans('admin::app.settings.channels.edit.seo-title')"
                                 :placeholder="trans('admin::app.settings.channels.edit.seo-title')"
@@ -316,28 +308,6 @@
 
                             <x-admin::form.control-group.error
                                 control-name="seo_title"
-                            >
-                            </x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
-                        <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.settings.channels.edit.seo-description')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="textarea"
-                                :name="$locale . '[seo_description]'"
-                                :value="$seo->meta_description ?? (old($locale)['seo_description'] ?? '')"
-                                id="seo_description"
-                                rules="required"
-                                :label="trans('admin::app.settings.channels.edit.seo-description')"
-                                :placeholder="trans('admin::app.settings.channels.edit.seo-description')"
-                            >
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error
-                                control-name="seo_description"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -359,6 +329,28 @@
 
                             <x-admin::form.control-group.error
                                 control-name="seo_keywords"
+                            >
+                            </x-admin::form.control-group.error>
+                        </x-admin::form.control-group>
+
+                        <x-admin::form.control-group class="mb-[10px]">
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.channels.edit.seo-description')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="textarea"
+                                :name="$locale . '[seo_description]'"
+                                :value="$seo->meta_description ?? (old($locale)['seo_description'] ?? '')"
+                                id="meta_description"
+                                rules="required"
+                                :label="trans('admin::app.settings.channels.edit.seo-description')"
+                                :placeholder="trans('admin::app.settings.channels.edit.seo-description')"
+                            >
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error
+                                control-name="seo_description"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -407,7 +399,6 @@
                                             {{ $locale->name }} 
                                         </span>
                                     </x-admin::form.control-group.label>
-                                    
                                 </x-admin::form.control-group>
                             @endforeach
 

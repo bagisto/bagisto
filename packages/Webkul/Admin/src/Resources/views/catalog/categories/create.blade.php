@@ -16,16 +16,17 @@
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Cancel Button -->
-                <a href="{{ route('admin.catalog.categories.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.catalog.categories.create.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.catalog.categories.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.catalog.categories.create.back-btn')
                 </a>
 
                 <!-- Save Button -->
                 <button
                     type="submit"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.catalog.categories.create.save-btn')
                 </button>
@@ -130,21 +131,7 @@
                                 @lang('admin::app.catalog.categories.create.logo-size')
                             </p>
 
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.control
-                                    type="image"
-                                    name="logo_path[image_1]"
-                                    class="mb-0 !p-0 rounded-[12px] text-gray-700"
-                                    :label="trans('admin::app.catalog.categories.create.add-logo')"
-                                    :is-multiple="false"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="logo_path[image_1]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                            <x-admin::media.images name="logo_path"></x-admin::media.images>
                         </div>
 
                         {{-- Add Banner --}}
@@ -157,25 +144,11 @@
                                 @lang('admin::app.catalog.categories.create.banner-size')
                             </p>
 
-                            <x-admin::form.control-group>
-                                <x-admin::form.control-group.control
-                                    type="image"
-                                    name="banner_path[]"
-                                    class="mb-0 !p-0 rounded-[12px] text-gray-700"
-                                    :width="200"
-                                    :height="110"
-                                    :is-multiple="false"
-                                    accepted-types="image/*"
-                                    :label="trans('admin::app.catalog.categories.create.add-banner')"
-                                    :src="isset($customer) ? $customer->category_icon_image : ''"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="banner_path[]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                            <x-admin::media.images
+                                name="banner_path"
+                                width="220px"
+                            >
+                            </x-admin::media.images>
                         </div>
                     </div>
                 </div>
@@ -186,8 +159,8 @@
                         @lang('admin::app.catalog.categories.create.seo-details')
                     </p>
 
-                    {{-- SEO Title & Description Vue Componnet --}}
-                    <v-category-seo></v-category-seo>
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
 
                     <div class="mt-[30px]">
                         {{-- Meta Title --}}
@@ -217,9 +190,11 @@
                                 type="text"
                                 name="slug"
                                 :value="old('slug')"
+                                id="slug"
                                 rules="required"
                                 :label="trans('admin::app.catalog.categories.create.slug')"
                                 :placeholder="trans('admin::app.catalog.categories.create.slug')"
+                                v-slugify
                             >
                             </x-admin::form.control-group.control>
 
@@ -379,58 +354,4 @@
             </div>
         </div>
     </x-admin::form>
-
-    @pushOnce('scripts')
-    {{-- SEO Vue Component Template --}}
-    <script type="text/x-template" id="v-category-seo-template">
-        <div class="flex flex-col gap-[3px] mb-[30px]">
-            <p 
-                class="text-[#161B9D]"
-                v-text="metaTitle"
-            >
-            </p>
-
-            <!-- SEO Meta Title -->
-            <p 
-                class="text-[#135F29]"
-                v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
-            >
-            </p>
-
-            <!-- SEP Meta Description -->
-            <p 
-                class="text-gray-600"
-                v-text="metaDescription"
-            >
-            </p>
-        </div>
-    </script>
-
-    {{-- SEO Vue Component --}}
-    <script type="module">
-        app.component('v-category-seo', {
-            template: '#v-category-seo-template',
-
-            data() {
-                return {
-                    metaTitle: this.$parent.getValues()['meta_title'],
-
-                    metaDescription: this.$parent.getValues()['meta_description'],
-                }
-            },
-
-            mounted() {
-                let self = this;
-
-                document.getElementById('meta_title').addEventListener('input', function(e) {
-                    self.metaTitle = e.target.value;
-                });
-
-                document.getElementById('meta_description').addEventListener('input', function(e) {
-                    self.metaDescription = e.target.value;
-                });
-            },
-        });
-    </script>
-@endPushOnce
 </x-admin::layouts>

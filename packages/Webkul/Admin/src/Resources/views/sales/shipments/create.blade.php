@@ -1,6 +1,7 @@
+
 <v-create-shipment>
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
     >
         <span class="icon-ship text-[24px]"></span> 
 
@@ -11,7 +12,7 @@
 @pushOnce('scripts')
     <script type="text/x-template" id="v-create-shipment-template">
     <div
-        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+        class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
         @click="$refs.shipment.open()"
     >
         <span class="icon-ship text-[24px]"></span> 
@@ -35,7 +36,7 @@
 
                         <button
                             type="submit"
-                            class="mr-[45px] px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                            class="mr-[45px] primary-button"
                         >
                             @lang('admin::app.sales.shipments.create.create-btn')
                         </button>
@@ -125,10 +126,10 @@
                             @foreach ($order->items as $item)
                                 <div class="flex gap-[10px] justify-between py-[16px]">
                                     <div class="flex gap-[10px]">
-                                        @if ($item->product->base_image_url)
+                                        @if ($item->product?->base_image_url)
                                             <img
                                                 class="w-full h-[60px] max-w-[60px] max-h-[60px] relative rounded-[4px]"
-                                                src="{{ $item->product->base_image_url }}"
+                                                src="{{ $item->product?->base_image_url }}"
                                             >
                                         @else
                                             <div class="w-full h-[60px] max-w-[60px] max-h-[60px] relative border border-dashed border-gray-300 rounded-[4px]">
@@ -165,7 +166,7 @@
 
                                                 <!-- Item SKU -->
                                                 <p class="text-gray-600">
-                                                    @lang('admin::app.sales.orders.view.sku') - {{ $item->sku }}
+                                                    @lang('admin::app.sales.shipments.create.sku', ['sku' => $item->sku])
                                                 </p>
 
                                                 <!--Item Status -->
@@ -202,7 +203,7 @@
                                                     @php
                                                         $product = $item->getTypeInstance()->getOrderedItem($item)->product;
 
-                                                        $sourceQty = $product->type == 'bundle' ? $item->qty_ordered : $product->inventory_source_qty($inventorySource->id);
+                                                        $sourceQty = $product?->type == 'bundle' ? $item->qty_ordered : $product?->inventory_source_qty($inventorySource->id);
                                                     @endphp
 
                                                     {{ $sourceQty }}

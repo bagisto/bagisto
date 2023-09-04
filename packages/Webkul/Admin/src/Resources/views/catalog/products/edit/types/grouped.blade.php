@@ -22,7 +22,7 @@
                 <!-- Add Button -->
                 <div class="flex gap-x-[4px] items-center">
                     <div
-                        class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                        class="secondary-button"
                         @click="$refs.productSearch.openDrawer()"
                     >
                         @lang('admin::app.catalog.products.edit.types.grouped.add-btn')
@@ -110,7 +110,7 @@
                                 </x-admin::form.control-group>
 
                                 <p
-                                    class="text-red-600 cursor-pointer"
+                                    class="text-red-600 cursor-pointer transition-all hover:underline"
                                     @click="remove(element)"
                                 >
                                     @lang('admin::app.catalog.products.edit.types.grouped.delete')
@@ -129,7 +129,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-add-product.svg') }}"
-                    class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                    class="w-[80px] h-[80px]"
                 />
 
                 <!-- Add Variants Information -->
@@ -145,7 +145,7 @@
                 
                 <!-- Add Row Button -->
                 <div
-                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-[14px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                    class="secondary-button text-[14px]"
                     @click="$refs.productSearch.openDrawer()"
                 >
                     @lang('admin::app.catalog.products.edit.types.grouped.add-btn')

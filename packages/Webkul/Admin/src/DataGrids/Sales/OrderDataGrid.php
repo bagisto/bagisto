@@ -76,39 +76,39 @@ class OrderDataGrid extends DataGrid
             'label'      => trans('admin::app.sales.orders.index.datagrid.status'),
             'type'       => 'checkbox',
             'options'    => [
-                'processing'      => trans('shop::app.customer.account.order.index.processing'),
-                'completed'       => trans('shop::app.customer.account.order.index.completed'),
-                'canceled'        => trans('shop::app.customer.account.order.index.canceled'),
-                'closed'          => trans('shop::app.customer.account.order.index.closed'),
-                'pending'         => trans('shop::app.customer.account.order.index.pending'),
-                'pending_payment' => trans('shop::app.customer.account.order.index.pending-payment'),
-                'fraud'           => trans('shop::app.customer.account.order.index.fraud'),
+                'processing'      => trans('admin::app.sales.orders.index.datagrid.processing'),
+                'completed'       => trans('admin::app.sales.orders.index.datagrid.completed'),
+                'canceled'        => trans('admin::app.sales.orders.index.datagrid.canceled'),
+                'closed'          => trans('admin::app.sales.orders.index.datagrid.closed'),
+                'pending'         => trans('admin::app.sales.orders.index.datagrid.pending'),
+                'pending_payment' => trans('admin::app.sales.orders.index.datagrid.pending-payment'),
+                'fraud'           => trans('admin::app.sales.orders.index.datagrid.fraud'),
             ],
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                switch ($value->status) {
+            'closure'    => function ($row) {
+                switch ($row->status) {
                     case 'processing':
-                        return '<p class="label-processing">' . trans('Processing') . '</p>';
+                        return '<p class="label-processing">' . trans('admin::app.sales.orders.index.datagrid.processing') . '</p>';
 
                     case 'completed':
-                        return '<p class="label-active">' . trans('Success') . '</p>';
+                        return '<p class="label-active">' . trans('admin::app.sales.orders.index.datagrid.completed') . '</p>';
 
                     case 'canceled':
-                        return '<p class="label-cancelled">' . trans('Cancelled') . '</p>';
+                        return '<p class="label-cancelled">' . trans('admin::app.sales.orders.index.datagrid.canceled') . '</p>';
 
                     case 'closed':
-                        return '<p class="label-closed">' . trans('Closed') . '</p>';
+                        return '<p class="label-closed">' . trans('admin::app.sales.orders.index.datagrid.closed') . '</p>';
 
                     case 'pending':
-                        return '<p class="label-pending">' . trans('Pending') . '</p>';
+                        return '<p class="label-pending">' . trans('admin::app.sales.orders.index.datagrid.pending') . '</p>';
 
                     case 'pending_payment':
-                        return '<p class="label-pending">' . trans('Pending Payment') . '</p>';
+                        return '<p class="label-pending">' . trans('admin::app.sales.orders.index.datagrid.pending-payment') . '</p>';
 
                     case 'fraud':
-                        return '<p class="label-cancelled">' . trans('Fraud') . '</p>';
+                        return '<p class="label-cancelled">' . trans('admin::app.sales.orders.index.datagrid.fraud') . '</p>';
                 }
             },
         ]);
@@ -129,6 +129,9 @@ class OrderDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'sortable'   => false,
+            'closure'    => function ($row) {
+                return core()->getConfigData('sales.paymentmethods.' . $row->method . '.title');
+            },
         ]);
 
         $this->addColumn([

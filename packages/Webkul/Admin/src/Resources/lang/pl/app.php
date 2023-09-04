@@ -730,8 +730,8 @@ return [
         'yes'            => 'Tak',
         'no'             => 'Nie',
         'delete'         => 'Usuń',
-        'enable-atleast-one-shipping' => 'Włącz co najmniej jedną metodę wysyłki.',
-        'enable-atleast-one-payment'  => 'Włącz co najmniej jedną formę płatności.',
+        'enable-at-least-one-shipping' => 'Włącz co najmniej jedną metodę wysyłki.',
+        'enable-at-least-one-payment'  => 'Włącz co najmniej jedną formę płatności.',
 
         'tax-categories' => [
             'title'           => 'Kategorie podatkowe',
@@ -1022,8 +1022,8 @@ return [
         ],
 
         'login-as-customer' => [
-            'grid-title'=>'zaloguj się jako klient',
-            'login-message'=>'logujesz się jako :customer_name'
+            'grid-title' => 'zaloguj się jako klient',
+            'login-message' => 'logujesz się jako :customer_name'
         ],
 
         'note' => [

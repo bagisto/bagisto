@@ -12,30 +12,32 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'user.admin.update-password' => [
-            'Webkul\Admin\Listeners\PasswordChange@sendUpdatePasswordMail'
+        'admin.password.update.after' => [
+            'Webkul\Admin\Listeners\Admin@afterPasswordUpdated',
         ],
+
         'checkout.order.save.after' => [
-            'Webkul\Admin\Listeners\Order@sendNewOrderMail'
+            'Webkul\Admin\Listeners\Order@afterCreated',
         ],
-        'sales.invoice.save.after' => [
-            'Webkul\Admin\Listeners\Order@sendNewInvoiceMail'
-        ],
-        'sales.shipment.save.after' => [
-            'Webkul\Admin\Listeners\Order@sendNewShipmentMail'
-        ],
+
         'sales.order.cancel.after' => [
-            'Webkul\Admin\Listeners\Order@sendCancelOrderMail'
+            'Webkul\Admin\Listeners\Order@afterCanceled',
         ],
+
+        'sales.invoice.save.after' => [
+            'Webkul\Admin\Listeners\Invoice@afterCreated',
+        ],
+
+        'sales.shipment.save.after' => [
+            'Webkul\Admin\Listeners\Shipment@afterCreated',
+        ],
+
         'sales.refund.save.after' => [
-            'Webkul\Admin\Listeners\Order@refundOrder',
-            'Webkul\Admin\Listeners\Order@sendNewRefundMail',
+            'Webkul\Admin\Listeners\Refund@afterCreated',
         ],
-        'sales.order.comment.create.after' => [
-            'Webkul\Admin\Listeners\Order@sendOrderCommentMail'
-        ],
+
         'core.channel.update.after' => [
-            'Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenanceMode'
+            'Webkul\Admin\Listeners\ChannelSettingsChange@checkForMaintenanceMode',
         ],
     ];
 }

@@ -2,8 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
-use Hash;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
+use Hash;
 use Webkul\Admin\Http\Controllers\Controller;
 
 class AccountController extends Controller
@@ -27,7 +28,6 @@ class AccountController extends Controller
      */
     public function update()
     {
-        $isPasswordChanged = false;
         $user = auth()->guard('admin')->user();
 
         $this->validate(request(), [
@@ -48,33 +48,43 @@ class AccountController extends Controller
         ]);
 
         if (! Hash::check($data['current_password'], $user->password)) {
-            session()->flash('warning', trans('admin::app.settings.users.password-match'));
+            session()->flash('warning', trans('admin::app.account.edit.invalid-password'));
 
             return redirect()->back();
         }
+
+        $isPasswordChanged = false;
 
         if (! $data['password']) {
             unset($data['password']);
         } else {
             $isPasswordChanged = true;
+
             $data['password'] = bcrypt($data['password']);
         }
 
-        if (request()->hasFile('image')) {
-            $data['image'] = request()->file('image')->store('admins/' . $user->id);
-        }
 
-        if (! empty($data['remove_image'])) {
-            $data['image'] = null;
+        if (request()->hasFile('image')) {
+            $data['image'] = current(request()->file('image'))->store('admins/' . $user->id);
+        } else {
+            if (! isset($data['image'])) {
+                if (! empty($data['image'])) {
+                    Storage::delete($user->image);
+                }
+
+                $data['image'] = null;
+            } else {
+                $data['image'] = $user->image;
+            }
         }
 
         $user->update($data);
 
         if ($isPasswordChanged) {
-            Event::dispatch('user.admin.update-password', $user);
+            Event::dispatch('admin.password.update.after', $user);
         }
 
-        session()->flash('success', trans('admin::app.settings.users.account-save'));
+        session()->flash('success', trans('admin::app.account.edit.update-success'));
 
         return back();
     }

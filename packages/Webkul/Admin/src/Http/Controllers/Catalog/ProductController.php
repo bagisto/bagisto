@@ -19,6 +19,8 @@ use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Admin\Http\Resources\AttributeResource;
 use Webkul\Admin\DataGrids\Catalog\ProductDataGrid;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Facades\ProductImage;
@@ -222,7 +224,7 @@ class ProductController extends Controller
             return redirect()->to(route('admin.catalog.products.index'));
         }
 
-        session()->flash('success', trans('admin::app.response.product-copied'));
+        session()->flash('success', trans('admin::app.catalog.products.product-copied'));
 
         return redirect()->route('admin.catalog.products.edit', $product->id);
     }
@@ -243,10 +245,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $product = $this->productRepository->findOrFail($id);
 
@@ -257,14 +259,14 @@ class ProductController extends Controller
 
             Event::dispatch('catalog.product.delete.after', $id);
 
-            return response()->json([
+            return new JsonResource([
                 'message' => trans('admin::app.catalog.products.delete-success'),
             ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json([
+        return new JsonResource([
             'message' => trans('admin::app.catalog.products.delete-failed'),
         ], 500);
     }
@@ -272,62 +274,61 @@ class ProductController extends Controller
     /**
      * Mass delete the products.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassDestroyRequest $massDestroyRequest
+     * @return JsonResource
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest): JsonResource
     {
-        $productIds = explode(',', request()->input('indexes'));
+        $productIds = $massDestroyRequest->input('indices');
 
-        foreach ($productIds as $productId) {
-            $product = $this->productRepository->find($productId);
-
-            if (isset($product)) {
-                Event::dispatch('catalog.product.delete.before', $productId);
-
-                $this->productRepository->delete($productId);
-
-                Event::dispatch('catalog.product.delete.after', $productId);
+        try {
+            foreach ($productIds as $productId) {
+                $product = $this->productRepository->find($productId);
+    
+                if (isset($product)) {
+                    Event::dispatch('catalog.product.delete.before', $productId);
+    
+                    $this->productRepository->delete($productId);
+    
+                    Event::dispatch('catalog.product.delete.after', $productId);
+                }
             }
+
+            return new JsonResource([
+                'message' => trans('admin::app.catalog.products.index.datagrid.mass-delete-success')
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResource([
+                'message' => $e->getMessage()
+            ], 500);
         }
-
-        session()->flash('success', trans('admin::app.catalog.products.mass-delete-success'));
-
-        return redirect()->route('admin.catalog.products.index');
     }
 
     /**
      * Mass update the products.
      *
-     * @return \Illuminate\Http\Response
+     * @param MassUpdateRequest $massUpdateRequest
+     * @return JsonResource
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest): JsonResource
     {
-        $data = request()->all();
+        $data = $massUpdateRequest->all();
 
-        if (
-            ! isset($data['mass-action-type'])
-            || $data['mass-action-type'] != 'update'
-        ) {
-            return redirect()->back();
-        }
-
-        $productIds = explode(',', $data['indexes']);
+        $productIds = $data['indices'];
 
         foreach ($productIds as $productId) {
             Event::dispatch('catalog.product.update.before', $productId);
 
             $product = $this->productRepository->update([
-                'channel' => $data['channel'],
-                'locale'  => $data['locale'],
-                'status'  => $data['update-options'],
+                'status'  => $massUpdateRequest->input('value'),
             ], $productId);
 
             Event::dispatch('catalog.product.update.after', $product);
         }
-
-        session()->flash('success', trans('admin::app.catalog.products.mass-update-success'));
-
-        return redirect()->route('admin.catalog.products.index');
+        
+        return new JsonResource([
+            'message' => trans('admin::app.catalog.products.index.datagrid.mass-update-success')
+        ], 200);
     }
 
     /**

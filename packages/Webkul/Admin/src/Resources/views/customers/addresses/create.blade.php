@@ -1,5 +1,5 @@
 <v-create-customer-address>
-    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]">
+    <div class="inline-flex gap-x-[8px] mr-[4px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]">
         <span class="icon-location text-[24px]"></span>
 
         @lang('admin::app.customers.addresses.create.create-address-btn')
@@ -9,11 +9,14 @@
 {{-- Customer Address Modal --}}
 @pushOnce('scripts')
     <!-- Customer Address Form -->
-    <script type="text/x-template" id="v-create-customer-address-template">
+    <script
+        type="text/x-template"
+        id="v-create-customer-address-template"
+    >
         <!-- Address Create Button -->
         @if (bouncer()->hasPermission('customers.addresses.create'))
             <div 
-                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+                class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
                 @click="$refs.CustomerAddress.toggle()"
             >
                 <span class="icon-location text-[24px]"></span>
@@ -29,7 +32,6 @@
             <form @submit="handleSubmit($event, create)">
                 <!-- Address Create Modal -->
                 <x-admin::modal ref="CustomerAddress">
-                
                     <x-slot:header>
                         <!-- Modal Header -->
                         <p class="text-[18px] text-gray-800 font-bold">
@@ -348,7 +350,7 @@
                         <div class="flex gap-x-[10px] items-center">
                             <button 
                                 type="submit"
-                                class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                class="primary-button"
                             >
                                 @lang('admin::app.customers.addresses.create.save-btn-title') 
                             </button>

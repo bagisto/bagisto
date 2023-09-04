@@ -20,8 +20,8 @@
                             @if (bouncer()->hasPermission('customers.groups.create'))
                                 <button 
                                     type="button"
-                                    class="text-gray-50 font-semibold px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] cursor-pointer"
-                                    @click="id=0; $refs.groupCreateModal.open()"
+                                    class="primary-button"
+                                    @click="id=0; $refs.groupUpdateOrCreateModal.open()"
                                 >
                                     @lang('admin::app.customers.groups.index.create.create-btn')
                                 </button>
@@ -45,7 +45,7 @@
                                             class="after:content-['/'] last:after:content-['']"
                                             :class="{
                                                 'text-gray-800 font-medium': applied.sort.column == columnGroup,
-                                                'cursor-pointer': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
+                                                'cursor-pointer hover:text-gray-800': columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable,
                                             }"
                                             @click="
                                                 columns.find(columnTemp => columnTemp.index === columnGroup)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === columnGroup)): {}
@@ -92,7 +92,7 @@
                                 <a @click="id=1; editModal(record)">
                                     <span
                                         :class="record.actions['0'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
                                         :title="record.actions['0'].title"
                                     >
                                     </span>
@@ -101,7 +101,7 @@
                                 <a @click="deleteModal(record.actions['1']?.url)">
                                     <span
                                         :class="record.actions['1'].icon"
-                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
+                                        class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
                                         :title="record.actions['1'].title"
                                     >
                                     </span>
@@ -117,9 +117,12 @@
                     as="div"
                     ref="modalForm"
                 >
-                    <form @submit="handleSubmit($event, create)">
+                    <form
+                        @submit="handleSubmit($event, updateOrCreate)"
+                        ref="groupCreateForm"
+                    >
                         <!-- Create Group Modal -->
-                        <x-admin::modal ref="groupCreateModal">          
+                        <x-admin::modal ref="groupUpdateOrCreateModal">          
                             <x-slot:header>
                                 <!-- Modal Header -->
                                 <p class="text-[18px] text-gray-800 font-bold">
@@ -144,9 +147,6 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="id"
-                                            id="id"
-                                            :label="trans('admin::app.customers.groups.index.create.code')"
-                                            :placeholder="trans('admin::app.customers.groups.index.create.code')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -195,7 +195,7 @@
                                 <div class="flex gap-x-[10px] items-center">
                                     <button 
                                         type="submit"
-                                        class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                        class="primary-button"
                                     >
                                         @lang('admin::app.customers.groups.index.create.save-btn')
                                     </button>
@@ -218,29 +218,16 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors  }) {
+                    updateOrCreate(params, { resetForm, setErrors  }) {
+                        let formData = new FormData(this.$refs.groupCreateForm);
+
                         if (params.id) {
-                            this.$axios.post("{{ route('admin.customers.groups.update') }}", params)
-                                .then((response) => {
-                                    this.$refs.groupCreateModal.close();
+                            formData.append('_method', 'put');
+                        }
 
-                                    this.$refs.datagrid.get();
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status ==422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        } else {
-                            this.$axios.post("{{ route('admin.customers.groups.store') }}", params)
+                        this.$axios.post(params.id ? "{{ route('admin.customers.groups.update') }}" : "{{ route('admin.customers.groups.store') }}", formData)
                             .then((response) => {
-                                this.$refs.groupCreateModal.close();
-
-                                this.$refs.datagrid.get();
+                                this.$refs.groupUpdateOrCreateModal.close();
 
                                 this.$refs.datagrid.get();
 
@@ -253,11 +240,10 @@
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                        }
                     },
 
                     editModal(value) {
-                        this.$refs.groupCreateModal.toggle();
+                        this.$refs.groupUpdateOrCreateModal.toggle();
 
                         this.$refs.modalForm.setValues(value);
                     },

@@ -27,23 +27,24 @@
                     </span>
                 @endif
             </p>
+
             {{-- Back Button --}}
-            <a href="{{ route('admin.customers.customers.index') }}">
-                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                    @lang('admin::app.customers.view.back-btn')
-                </span>
-            </a>   
+            <a
+                href="{{ route('admin.customers.customers.index') }}"
+                class="transparent-button hover:bg-gray-200"
+            >
+                @lang('admin::app.customers.view.back-btn')
+            </a>
         </div>
     </div>
 
     {{-- Filters --}}
     <div class="flex gap-x-[4px] gap-y-[8px] items-center flex-wrap mt-[28px]">
- 
         {{--Address Create component --}}
         @include('admin::customers.addresses.create')
-       
+
         <div 
-            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-100 hover:rounded-[6px]"
+            class="inline-flex gap-x-[8px] items-center justify-between w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center  cursor-pointer transition-all hover:bg-gray-200 hover:rounded-[6px]"
             onclick="if (confirm('@lang('admin::app.customers.view.delete-confirmation')')) {
                 event.preventDefault();
                 document.getElementById('delete-account{{ $customer->id }}').submit();
@@ -54,7 +55,6 @@
             @lang('admin::app.customers.view.delete-account')
 
               {{-- Delete Customer Account --}}
-       
               <form 
                 method="post"
                 action="{{ route('admin.customers.customers.delete', $customer->id) }}" 
@@ -75,126 +75,128 @@
                     <div class=" p-[16px] flex justify-between">
                         {{-- Total Order Count --}}
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders') ({{ $totalOrderCount }})
-                        </p>
-                        <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.total-revenue') - 
-                            {{ core()->currency($customer->orders
+                            @lang('admin::app.customers.view.orders', ['order_count' => $totalOrderCount])
+                        </p>    
+
+                        @php
+                            $revenue = core()->currency($customer->orders
                                 ->whereNotIn('status', ['canceled', 'closed'])
-                                ->sum('grand_total'))
-                            }}
+                                ->sum('grand_total'));
+                        @endphp
+
+                        <p class="text-[16px] text-gray-800 font-semibold">
+                            @lang('admin::app.customers.view.total-revenue', ['revenue' =>  $revenue])
                         </p>
                     </div>
 
                     {{-- Order Details --}}
                     <div class="table-responsive grid w-full">
                         @foreach ($customer->orders as $order)
-                            <div class="flex justify-between items-center px-[16px] py-[16px]">
+                            <div class="flex justify-between items-center px-[16px] py-[16px] transition-all hover:bg-gray-100">
                                 <div class="row grid grid-cols-3 w-full">
-                                    <div class="">
-                                        <div class="flex gap-[10px]">
+                                    <div class="flex gap-[10px]">
+                                        <div class="flex flex-col gap-[6px]">
+                                            <p class="text-[16px] text-gray-800 font-semibold">
+                                                @lang('admin::app.customers.view.increment-id', ['increment_id' => $order->increment_id])
+                                            </p>
 
-                                            <div class="flex flex-col gap-[6px]">
-                                                <p class="text-[16px] text-gray-800 font-semibold">
-                                                    #{{ $order->increment_id }}
-                                                </p>
+                                            <p class="text-gray-600">
+                                                {{ $order->created_at }}
+                                            </p>
 
-                                                <p class="text-gray-600">
-                                                    {{ $order->created_at }}
-                                                </p>
+                                            @switch($order->status)
+                                                @case('processing')
+                                                    <p class="label-active">
+                                                        @lang('admin::app.customers.view.processing')
+                                                    </p>
+                                                    @break
 
-                                                @switch($order->status)
-                                                    @case('processing')
-                                                        <p class="label-active">
-                                                            {{ $order->status }}
-                                                        </p>
-                                                        @break
+                                                @case('completed')
+                                                    <p class="label-active">
+                                                        @lang('admin::app.customers.view.completed')
+                                                    </p>
+                                                    @break
 
-                                                    @case('completed')
-                                                        <p class="label-active">
-                                                            {{ $order->status }}
-                                                        </p>
-                                                        @break
+                                                @case('pending')
+                                                    <p class="label-pending">
+                                                        @lang('admin::app.customers.view.pending')
+                                                    </p>
+                                                    @break
 
-                                                    @case('pending')
-                                                        <p class="label-pending">
-                                                            {{ $order->status }}
-                                                        </p>
-                                                        @break
+                                                @case('canceled')
+                                                    <p class="label-cancelled">
+                                                        @lang('admin::app.customers.view.canceled')
+                                                    </p>
+                                                    @break
 
-                                                    @case('canceled')
-                                                        <p class="label-cancelled">
-                                                            {{ $order->status }}
-                                                        </p>
-                                                        @break
+                                                @case('closed')
+                                                    <p class="label-closed">
+                                                        @lang('admin::app.customers.view.closed')
+                                                    </p>
+                                                    @break
 
-                                                    @case('closed')
-                                                        <p class="label-closed">
-                                                            {{ $order->status }}
-                                                        </p>
-                                                        @break
-
-                                                @endswitch
-                                            </div>
+                                            @endswitch
                                         </div>
                                     </div>
 
-                                    <div class="">
-                                        <div class="flex flex-col gap-[6px]">
-                                            {{-- Grand Total --}}
-                                            <p class="text-[16px] text-gray-800 font-semibold">
-                                                {{ core()->currency($order->grand_total ) }}
-                                            </p>
+                                    <div class="flex flex-col gap-[6px]">
+                                        {{-- Grand Total --}}
+                                        <p class="text-[16px] text-gray-800 font-semibold">
+                                            {{ core()->currency($order->grand_total ) }}
+                                        </p>
 
-                                            {{-- Payment methods --}}   
-                                            <p class="text-gray-600">
-                                                @lang('admin::app.customers.view.pay-by') - {{ core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title') }}
-                                            </p>
+                                        {{-- Payment methods --}}   
+                                        <p class="text-gray-600">
+                                            @lang('admin::app.customers.view.pay-by', ['payment_method' => core()->getConfigData('sales.paymentmethods.' . $order->payment->method . '.title')])
+                                        </p>
 
-                                            {{-- Channel Code --}}
-                                            <p class="text-gray-600">
-                                                {{ $order->channel->code }}
-                                            </p>
-                                        </div>
+                                        {{-- Channel Code --}}
+                                        <p class="text-gray-600">
+                                            {{ $order->channel->code }}
+                                        </p>
                                     </div>
 
                                     {{-- Order Address Details --}}
-                                    <div class="">
-                                        <div class="flex flex-col gap-[6px]">
-                                            <p class="text-[16px] text-gray-800">
-                                                {{ $order->billingAddress->name }}
-                                            </p>
+                                    <div class="flex flex-col gap-[6px]">
+                                        <p class="text-[16px] text-gray-800">
+                                            {{ $order->billingAddress->name }}
+                                        </p>
 
-                                            <p class="text-gray-600">
-                                                {{ $order->billingAddress->email }}
-                                            </p>
+                                        <p class="text-gray-600">
+                                            {{ $order->billingAddress->email }}
+                                        </p>
 
-                                            <p class="text-gray-600">
+                                        <p class="text-gray-600">
+                                            @if($order->billingAddress->address1)
                                                 {{ $order->billingAddress->address1 }},
+                                            @endif
+
+                                            @if($order->billingAddress->city)
                                                 {{ $order->billingAddress->city }},
-                                                {{ $order->billingAddress->state }}
-                                            </p>
-                                        </div>
+                                            @endif
+
+                                            @if($order->billingAddress->state)
+                                                {{ $order->billingAddress->state  }}
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
 
                                 <a 
                                     href="{{ route('admin.sales.orders.view', $order->id) }}" 
-                                    class="icon-sort-right text-[24px] ml-[4px] cursor-pointer"
+                                    class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"
                                 >
                                 </a>
                             </div>
+
                             <span class="block w-full border-b-[1px] border-gray-300"></span>
                         @endforeach
-
-                        {{-- single row --}}
-                        <span class="border-b-[1px] border-gray-300"></span>
                     </div>
                 @else
                     {{-- Empty Container --}} 
                     <div class="p-[16px] flex justify-between">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.orders') ({{ $totalOrderCount }})
+                            @lang('admin::app.customers.view.orders', ['order_count' => $totalOrderCount])
                         </p>
                     </div>
 
@@ -202,7 +204,11 @@
                     <div class="table-responsive grid w-full">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
                             <!-- Placeholder Image -->
-                            <img src="{{ bagisto_asset('images/empty-order.png') }}" class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]">
+                            <img
+                                src="{{ bagisto_asset('images/empty-order.png') }}"
+                                class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
+                            />
+
                             <div class="flex flex-col items-center">
                                 <p class="text-[16px] text-gray-400 font-semibold"> 
                                     @lang('admin::app.customers.view.empty-order')
@@ -218,7 +224,7 @@
                 @if ($totalInvoiceCount = count($customer->invoices))
                     {{--Invoice Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
+                        @lang('admin::app.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                     </p>
 
                     {{-- Invoice Table --}}
@@ -237,9 +243,9 @@
                             @foreach ($customer->invoices as $invoice)
                                 <tbody>
                                     {{-- Invoice Details --}}
-                                    <tr class="bg-white border-b ">
+                                    <tr class="bg-white border-b transition-all hover:bg-gray-100">
                                         <td class="px-6 py-[16px] text-gray-600">
-                                            #{{ $invoice->id }}
+                                            @lang('admin::app.customers.view.invoice-id-prefix', ['invoice_id' => $invoice->id] )
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600 whitespace-nowrap">
@@ -251,7 +257,7 @@
                                         </td>
 
                                         <td class="px-6 py-[16px] text-gray-600">
-                                            #{{ $invoice->order_id }}
+                                            @lang('admin::app.customers.view.order-id-prefix', ['order_id' => $invoice->order_id] )
                                         </td>
                                     </tr>
                                 </tbody>
@@ -262,13 +268,13 @@
                     {{-- Empty Container --}}
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.invoice') ({{ $totalInvoiceCount }})
+                            @lang('admin::app.customers.view.invoice', ['invoice_count' => $totalInvoiceCount])
                         </p>
                     </div>
 
                     <div class="table-responsive grid w-full">
                         <div class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]">
-                            <!-- Placeholder Image -->
+                            {{-- Placeholder Image --}}
                             <img
                                 src="{{ bagisto_asset('images/invoice-setting.png') }}"
                                 class="w-[80px] h-[80px] border border-dashed border-gray-300 rounded-[4px]"
@@ -289,94 +295,91 @@
                 @if($totalReviewsCount = count($customer->reviews) )
                     {{-- Reviews Count --}}
                     <p class=" p-[16px] text-[16px] text-gray-800 font-semibold">
-                        @lang('admin::app.customers.view.reviews') ({{ $totalReviewsCount }})
+                        @lang('admin::app.customers.view.reviews', ['review_count' => $totalReviewsCount])
                     </p>
 
                     @foreach($customer->reviews as $review)
                         {{-- Reviews Details --}}
-                        <div class="">
-                            <div class="grid gap-y-[16px] p-[16px]">
-                                <div class="flex justify-start [&amp;>*]:flex-1">
-                                    <div class="flex flex-col gap-[6px]">
-                                        {{-- Review Name --}}
-                                        <p class="text-[16px] text-gray-800 font-semibold">
-                                            {{ $review->name }}
-                                        </p>
+                        <div class="grid gap-y-[16px] p-[16px] transition-all hover:bg-gray-100">
+                            <div class="flex justify-start [&amp;>*]:flex-1">
+                                <div class="flex flex-col gap-[6px]">
+                                    {{-- Review Name --}}
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        {{ $review->name }}
+                                    </p>
 
-                                        {{-- Product Name --}}
-                                        <p class="text-gray-600">
-                                            {{ $review->product->name }}
-                                        </p>
+                                    {{-- Product Name --}}
+                                    <p class="text-gray-600">
+                                        {{ $review->product->name }}
+                                    </p>
 
-                                        {{-- Review Status --}}
-                                        @switch($review->status)
-                                            @case('approved')
-                                                <p class="label-active">
-                                                    {{ $review->status }}
-                                                </p>
-                                                @break
+                                    {{-- Review Status --}}
+                                    @switch($review->status)
+                                        @case('approved')
+                                            <p class="label-active">
+                                                @lang('admin::app.customers.view.approved')
+                                            </p>
+                                            @break
 
-                                            @case('pending')
-                                                <p class="label-pending">
-                                                    {{ $review->status }}
-                                                </p>
-                                                @break
+                                        @case('pending')
+                                            <p class="label-pending">
+                                                @lang('admin::app.customers.view.pending')
+                                            </p>
+                                            @break
 
-                                            @case('disapproved')
-                                                <p class="label-cancelled">
-                                                    {{ $review->status }}
-                                                </p>
-                                                @break
+                                        @case('disapproved')
+                                            <p class="label-cancelled">
+                                                @lang('admin::app.customers.view.disapproved')
+                                            </p>
+                                            @break
 
-                                        @endswitch
-                                    </div>
-
-                                    <div class="flex flex-col gap-[6px]">
-
-                                        {{-- need to update shivendra-webkul --}}
-                                        <div class="flex">
-                                            <x-admin::star-rating 
-                                                :is-editable="false"
-                                                :value="$review->rating"
-                                            >
-                                            </x-admin::star-rating>
-                                        </div>
-
-                                        <p class="text-gray-600">
-                                            {{ $review->created_at }}
-                                        </p>
-
-                                        <p class="text-gray-600">
-                                            @lang('admin::app.customers.view.id') - {{ $review->id }}
-                                        </p>
-                                    </div>
+                                    @endswitch
                                 </div>
 
-                                <div class="flex justify-between gap-x-[16px] items-center">
-                                    <div class="flex flex-col gap-[6px]">
-                                        {{-- Review Title --}}
-                                        <p class="text-[16px] text-gray-800 font-semibold">
-                                            {{ $review->title }}
-                                        </p>
-
-                                        {{-- Review Comment --}}
-                                        <p class="text-gray-600">
-                                            {{ $review->comment }}
-                                        </p>
+                                <div class="flex flex-col gap-[6px]">
+                                    {{-- need to update shivendra-webkul --}}
+                                    <div class="flex">
+                                        <x-admin::star-rating 
+                                            :is-editable="false"
+                                            :value="$review->rating"
+                                        >
+                                        </x-admin::star-rating>
                                     </div>
 
-                                    <span class="icon-sort-right ml-[4px] text-[24px] cursor-pointer"></span>
+                                    <p class="text-gray-600">
+                                        {{ $review->created_at }}
+                                    </p>
+
+                                    <p class="text-gray-600">
+                                        @lang('admin::app.customers.view.id', ['id' => $review->id])
+                                    </p>
                                 </div>
                             </div>
 
-                            <span class="block w-full border-b-[1px] border-gray-300"></span>
+                            <div class="flex justify-between gap-x-[16px] items-center">
+                                <div class="flex flex-col gap-[6px]">
+                                    {{-- Review Title --}}
+                                    <p class="text-[16px] text-gray-800 font-semibold">
+                                        {{ $review->title }}
+                                    </p>
+
+                                    {{-- Review Comment --}}
+                                    <p class="text-gray-600">
+                                        {{ $review->comment }}
+                                    </p>
+                                </div>
+
+                                <span class="icon-sort-right text-[24px] ml-[4px] p-[6px] rounded-[6px] cursor-pointer transition-all hover:bg-gray-200"></span>
+                            </div>
                         </div>
+
+                        <span class="block w-full border-b-[1px] border-gray-300"></span>
                     @endforeach    
                 @else
                     {{-- Empty Invoice Container --}}
                     <div class="flex justify-between p-[16px]">
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.customers.view.reviews') ({{$totalReviewsCount}})
+                            @lang('admin::app.customers.view.reviews', ['review_count' => $totalReviewsCount])
                         </p>
                     </div>
 
@@ -405,7 +408,7 @@
                 </p>
 
                 <x-admin::form 
-                    action="{{ route('admin.customer.note.store', $customer->id) }}"
+                    :action="route('admin.customer.note.store', $customer->id)"
                 >
                     <div class="p-[16px]">
                         {{-- Note --}}
@@ -450,7 +453,7 @@
                             {{--Note Submit Button --}}
                             <button
                                 type="submit"
-                                class="px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                class="secondary-button"
                             >
                                 @lang('admin::app.customers.view.submit-btn-title')
                             </button>
@@ -470,9 +473,9 @@
                         {{-- Notes List Title and Time --}}
                         <p class="text-gray-600">  
                             @if ($note->customer_notified)
-                                @lang('admin::app.customers.view.customer-notified') | {{$note->created_at}}
+                                @lang('admin::app.customers.view.customer-notified', ['created_at' => $note->created_at])
                             @else
-                                @lang('admin::app.customers.view.customer-not-notified') | {{$note->created_at}}
+                                @lang('admin::app.customers.view.customer-not-notified', ['created_at' => $note->created_at])
                             @endif
                         </p>
                     </div>
@@ -504,24 +507,23 @@
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.email') - {{ $customer->email }}
+                            @lang('admin::app.customers.view.email', ['email' => $customer->email])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.phone') - {{ $customer->phone ?? 'N/A' }}
+                            @lang('admin::app.customers.view.phone', ['phone' => $customer->phone ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.gender') - {{ $customer->gender ?? 'N/A' }}
+                            @lang('admin::app.customers.view.gender', ['gender' => $customer->gender ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.date-of-birth') -
-                            {{ $customer->date_of_birth ?? 'N/A' }}   
+                            @lang('admin::app.customers.view.date-of-birth', ['dob' => $customer->date_of_birth ?? 'N/A'])
                         </p>
 
                         <p class="text-gray-600">
-                            @lang('admin::app.customers.view.group') - {{ $customer->group->code ?? 'N/A' }}
+                            @lang('admin::app.customers.view.group', ['group_code' => $customer->group->code ?? 'N/A'])
                         </p>
                     </div>
                 </x-slot:content>
@@ -532,8 +534,7 @@
                 <x-slot:header>
                     <div class="flex items-center justify-between p-[6px]">
                         <p class="text-gray-600 text-[16px] font-semibold">
-                            @lang('admin::app.customers.view.address')
-                            ({{ count($customer->addresses) }})
+                            @lang('admin::app.customers.view.address', ['count' => count($customer->addresses)])
                         </p>
                     </div>
                 </x-slot:header>
@@ -548,25 +549,21 @@
                                     </p>
                                 @endif
 
-                                <div class="">
-                                    <p class="text-gray-800 font-semibold">
-                                        {{ $address->name }}
-                                    </p>
+                                <p class="text-gray-800 font-semibold">
+                                    {{ $address->name }}
+                                </p>
 
-                                    <p class="text-gray-600">
-                                        {{ $address->address1 }},
-                                        {{ $address->city }},
-                                        {{ $address->postcode }},
-                                        {{ $address->state }}, 
-                                        {{ core()->country_name($address->country) }}
-                                    </p>
-                                </div>
+                                <p class="text-gray-600">
+                                    {{ $address->address1 }},
+                                    {{ $address->city }},
+                                    {{ $address->postcode }},
+                                    {{ $address->state }}, 
+                                    {{ core()->country_name($address->country) }}
+                                </p>
 
-                                <div class="">
-                                    <p class="text-gray-600">
-                                        @lang('admin::app.customers.view.phone') : {{$address->phone}}
-                                    </p>
-                                </div>
+                                <p class="text-gray-600">
+                                    @lang('admin::app.customers.view.phone', ['phone' => $address->phone ?? 'N/A'])
+                                </p>
 
                                 <div class="flex gap-[10px]">
                                     {{-- Edit Address --}}
@@ -574,7 +571,7 @@
 
                                     {{-- Delete Address --}}
                                     <p 
-                                        class="text-blue-600 cursor-pointer"
+                                        class="text-blue-600 cursor-pointer transition-all hover:underline"
                                         onclick="event.preventDefault();
                                         document.getElementById('delete-address{{ $address->id }}').submit();"
                                     >
@@ -592,14 +589,14 @@
                                     {{-- Set Default Address --}}
                                     @if (! $address->default_address )
                                         <p 
-                                            class="text-blue-600 cursor-pointer"
+                                            class="text-blue-600 cursor-pointer transition-all hover:underline"
                                             onclick="event.preventDefault();
                                             document.getElementById('default-address{{ $address->id }}').submit();"
                                         >
                                             @lang('admin::app.customers.view.set-as-default')
                                         </p>
 
-                                        <form 
+                                        <form
                                             class="hidden"
                                             method="post"
                                             action="{{ route('admin.customers.customers.addresses.set_default', $customer->id) }}" 
@@ -611,7 +608,7 @@
                                                 type="text"
                                                 name="set_as_default"
                                                 value="{{ $address->id }}"
-                                            >
+                                            />
                                         </form>
                                     @endif
                                 </div>

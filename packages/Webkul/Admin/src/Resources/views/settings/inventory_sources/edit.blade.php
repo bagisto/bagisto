@@ -22,17 +22,18 @@
 
                         <div class="flex gap-x-[10px] items-center">
                             <!-- Cancel Button -->
-                            <a href="{{ route('admin.settings.inventory_sources.index') }}">
-                                <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                                    @lang('admin::app.settings.inventory-sources.edit.back-btn')
-                                </span>
+                            <a
+                                href="{{ route('admin.settings.inventory_sources.index') }}"
+                                class="transparent-button hover:bg-gray-200"
+                            >
+                                @lang('admin::app.settings.inventory-sources.edit.back-btn')
                             </a>
                                 
                             <!-- Save Inventory -->
                             <div class="flex gap-x-[10px] items-center">
                                 <button 
                                     type="submit"
-                                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                                    class="primary-button"
                                 >
                                     @lang('admin::app.settings.inventory-sources.edit.save-btn')
                                 </button>
@@ -461,7 +462,7 @@
                                         <x-admin::form.control-group.control
                                             type="switch"
                                             name="status"
-                                            :value="old('status') ?? $inventorySource->status"
+                                            :value="old('status') ?? ($inventorySource->status)"
                                             :label="trans('admin::app.settings.inventory-sources.edit.status')"
                                             :placeholder="trans('admin::app.settings.inventory-sources.edit.status')"
                                             :checked="(boolean) $selectedValue"

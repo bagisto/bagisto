@@ -19,7 +19,8 @@ class ExchangeRateController extends Controller
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
         protected CurrencyRepository $currencyRepository
-    ) {
+    )
+    {
     }
 
     /**
@@ -60,7 +61,7 @@ class ExchangeRateController extends Controller
         Event::dispatch('core.exchange_rate.create.after', $exchangeRate);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.exchange-rates.index.create.success'),
+            'message' => trans('admin::app.settings.exchange-rates.index.create-success'),
         ]);
     }
 
@@ -104,7 +105,7 @@ class ExchangeRateController extends Controller
         Event::dispatch('core.exchange_rate.update.after', $exchangeRate);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.exchange-rates.index.edit.success'),
+            'message' => trans('admin::app.settings.exchange-rates.index.update-success'),
         ]);
     }
 
@@ -118,7 +119,7 @@ class ExchangeRateController extends Controller
         try {
             app(config('services.exchange_api.' . config('services.exchange_api.default') . '.class'))->updateRates();
 
-            session()->flash('success', trans('admin::app.settings.exchange-rates.edit.update-success'));
+            session()->flash('success', trans('admin::app.settings.exchange-rates.update-success'));
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
@@ -130,9 +131,9 @@ class ExchangeRateController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return void
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->exchangeRateRepository->findOrFail($id);
 
@@ -143,15 +144,17 @@ class ExchangeRateController extends Controller
 
             Event::dispatch('core.exchange_rate.delete.after', $id);
 
-            return new JsonResource([
-                'message' => trans('admin::app.settings.exchange-rates.index.edit.delete'),
-            ]);
+            return response()->json([
+                'message' => trans('admin::app.settings.exchange-rates.index.delete-success'),
+            ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.response.delete-error', ['name' => trans('admin::app.settings.exchange-rates.index.exchange-rate')], 500),
-        ]);
+        return response()->json([
+            'message' => trans(
+                'admin::app.settings.exchange-rates.index.delete-error'
+            )
+        ], 500);
     }
 }

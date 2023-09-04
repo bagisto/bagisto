@@ -2,14 +2,17 @@
 
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
-use Webkul\Category\Repositories\CategoryRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Http\Requests\MassUpdateRequest;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\Category\Http\Requests\CategoryRequest;
 use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
-use Webkul\Admin\DataGrids\Catalog\Category\ProductDataGrid;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Admin\DataGrids\Catalog\CategoryProductDataGrid;
 
 class CategoryController extends Controller
 {
@@ -141,15 +144,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $category = $this->categoryRepository->findOrFail($id);
 
         if ($this->isCategoryDeletable($category)) {
-            return response()->json(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
+            return new JsonResource(['message' => trans('admin::app.catalog.categories.delete-category-root')], 400);
         }
 
         try {
@@ -159,11 +162,15 @@ class CategoryController extends Controller
 
             Event::dispatch('catalog.category.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.catalog.categories.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.catalog.categories.delete-success', ['name' => 'admin::app.catalog.categories.category'
+            ])]);
         } catch (\Exception $e) {
         }
 
-        return response()->json(['message' => trans('admin::app.catalog.categories.delete-failed')], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category'
+        ])], 500);
     }
 
     /**
@@ -171,12 +178,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massDestroy()
+    public function massDestroy(MassDestroyRequest $massDestroyRequest)
     {
         $suppressFlash = true;
 
-        $categoryIds = explode(',', request()->input('indexes'));
-
+        $categoryIds = $massDestroyRequest->input('indices');
+        
         foreach ($categoryIds as $categoryId) {
             $category = $this->categoryRepository->find($categoryId);
 
@@ -184,7 +191,7 @@ class CategoryController extends Controller
                 if ($this->isCategoryDeletable($category)) {
                     $suppressFlash = false;
 
-                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'Category']));
+                    session()->flash('warning', trans('admin::app.response.delete-category-root', ['name' => 'admin::app.catalog.categories.category']));
                 } else {
                     try {
                         $suppressFlash = true;
@@ -195,7 +202,7 @@ class CategoryController extends Controller
 
                         Event::dispatch('catalog.category.delete.after', $categoryId);
                     } catch (\Exception $e) {
-                        session()->flash('error', trans('admin::app.response.delete-failed', ['name' => 'Category']));
+                        session()->flash('error', trans('admin::app.catalog.categories.delete-failed', ['name' => 'admin::app.catalog.categories.category']));
                     }
                 }
             }
@@ -205,7 +212,7 @@ class CategoryController extends Controller
             count($categoryIds) != 1
             || $suppressFlash == true
         ) {
-            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'Category']));
+            session()->flash('success', trans('admin::app.catalog.categories.index.datagrid.delete-success', ['resource' => 'admin::app.catalog.categories.category']));
         }
 
         return redirect()->route('admin.catalog.categories.index');
@@ -216,33 +223,32 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function massUpdate()
+    public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
-        $data = request()->all();
-
-        if (
-            ! isset($data['mass-action-type'])
-            || $data['mass-action-type'] != 'update'
-        ) {
-            return redirect()->back();
+        try {
+            $data = $massUpdateRequest->all();
+    
+            $categoryIds = $data['indices'];
+    
+            foreach ($categoryIds as $categoryId) {
+                Event::dispatch('catalog.categories.mass-update.before', $categoryId);
+    
+                $category = $this->categoryRepository->find($categoryId);
+    
+                $category->status = $massUpdateRequest->input('value');
+                
+                $category->save();
+    
+                Event::dispatch('catalog.categories.mass-update.after', $category);
+            }
+    
+            return new JsonResource([
+                'message' => trans('admin::app.catalog.categories.update-success')]);
+        } catch (\Exception $e) {
+            return new JsonResource([
+                'message' => $e->getMessage(),
+            ], 500);
         }
-
-        $categoryIds = explode(',', $data['indexes']);
-
-        foreach ($categoryIds as $categoryId) {
-            Event::dispatch('catalog.categories.mass-update.before', $categoryId);
-
-            $category = $this->categoryRepository->find($categoryId);
-
-            $category->status = $data['update-options'];
-            $category->save();
-
-            Event::dispatch('catalog.categories.mass-update.after', $category);
-        }
-
-        session()->flash('success', trans('admin::app.catalog.categories.mass-update-success'));
-
-        return redirect()->route('admin.catalog.categories.index');
     }
 
     /**
@@ -254,9 +260,9 @@ class CategoryController extends Controller
     {
         $productCount = 0;
 
-        $indexes = explode(',', request()->input('indexes'));
+        $indices = request()->input('indices');
 
-        foreach ($indexes as $index) {
+        foreach ($indices as $index) {
             $category = $this->categoryRepository->find($index);
 
             $productCount += $category->products->count();

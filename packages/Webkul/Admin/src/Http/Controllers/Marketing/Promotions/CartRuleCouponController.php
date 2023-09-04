@@ -2,7 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Http\Requests\MassDestroyRequest;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 
@@ -31,9 +33,10 @@ class CartRuleCouponController extends Controller
     /**
      * Generate coupon code for cart rule.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $id
+     * @return JsonResource
      */
-    public function store($id)
+    public function store($id):JsonResource
     {
         $this->validate(request(), [
             'coupon_qty'  => 'required|integer|min:1',
@@ -41,13 +44,17 @@ class CartRuleCouponController extends Controller
             'code_format' => 'required',
         ]);
 
-        if (! request('id')) {
-            return response()->json(['message' => trans('admin::app.promotions.cart-rules.cart-rule-not-defined-error')], 400);
+        if (!request('id')) {
+            return new JsonResource([
+                'message' => trans('admin::app.promotions.cart-rules-coupons.cart-rule-not-defined-error'
+            )], 400);
         }
 
         $this->cartRuleCouponRepository->generateCoupons(request()->all(), request('id'));
 
-        return response()->json(['message' => trans('admin::app.response.create-success', ['name' => 'Cart rule coupons'])]);
+        return new JsonResource([
+            'message' => trans('admin::app.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']
+        )]);
     }
 
     /**
@@ -56,9 +63,9 @@ class CartRuleCouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function massDelete()
+    public function massDelete(MassDestroyRequest $massDestroyRequest)
     {
-        $couponIds = explode(',', request()->input('indexes'));
+        $couponIds = $massDestroyRequest->input('indices');
 
         foreach ($couponIds as $couponId) {
             $coupon = $this->cartRuleCouponRepository->find($couponId);
@@ -68,7 +75,7 @@ class CartRuleCouponController extends Controller
             }
         }
 
-        session()->flash('success', trans('admin::app.promotions.cart-rules.mass-delete-success'));
+        session()->flash('success', trans('admin::app.promotions.cart-rules-coupons.mass-delete-success'));
 
         return redirect()->back();
     }

@@ -41,7 +41,7 @@ class InvoicesTransactionsDatagrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.sales.invoice-transaction.index.datagrid.id'),
             'type'       => 'integer',
             'searchable' => false,
             'filterable' => true,
@@ -50,7 +50,7 @@ class InvoicesTransactionsDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'transaction_id',
-            'label'      => trans('admin::app.datagrid.transaction-id'),
+            'label'      => trans('admin::app.sales.invoice-transaction.index.datagrid.transaction-id'),
             'type'       => 'string',
             'searchable' => false,
             'filterable' => true,
@@ -59,7 +59,7 @@ class InvoicesTransactionsDatagrid extends DataGrid
 
         $this->addColumn([
             'index'      => 'created_at',
-            'label'      => trans('admin::app.datagrid.transaction-date'),
+            'label'      => trans('admin::app.sales.invoice-transaction.index.datagrid.transaction-date'),
             'type'       => 'datetime',
             'searchable' => true,
             'filterable' => true,
@@ -76,7 +76,7 @@ class InvoicesTransactionsDatagrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-view',
-            'title'  => trans('admin::app.datagrid.view'),
+            'title'  => trans('admin::app.sales.invoice-transaction.index.datagrid.view'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.sales.transactions.view', $row->id);

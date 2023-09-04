@@ -4,10 +4,6 @@
         @lang('admin::app.catalog.categories.edit.title')
     </x-slot:title>
 
-    @php
-        $locale = core()->getRequestedLocaleCode();
-    @endphp
-
     {{-- Input Form --}}
     <x-admin::form
         :action="route('admin.catalog.categories.update', $category->id)"
@@ -21,31 +17,60 @@
 
             <div class="flex gap-x-[10px] items-center">
                 <!-- Cancel Button -->
-                <a href="{{ route('admin.catalog.categories.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.catalog.categories.edit.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.catalog.categories.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.catalog.categories.edit.back-btn')
                 </a>
 
                 <!-- Save Button -->
                 <button
                     type="submit"
-                    class="px-[12px] py-[6px] bg-blue-600 border border-blue-700 rounded-[6px] text-gray-50 font-semibold cursor-pointer"
+                    class="primary-button"
                 >
                     @lang('admin::app.catalog.categories.edit.save-btn')
                 </button>
             </div>
         </div>
 
+        @php
+            $currentLocale = core()->getRequestedLocale();
+        @endphp
+
         <!-- Filter Row -->
         <div class="flex  gap-[16px] justify-between items-center mt-[28px] max-md:flex-wrap">
             <div class="flex gap-x-[4px] items-center">
-                <div>
-                    {{-- Locale switcher --}}
-                    <v-locale-switcher>
-                        <div class="shimmer w-[100px] h-[36px]"></div>
-                    </v-locale-switcher>
-                </div>
+                {{-- Locale Switcher --}}
+                <x-admin::dropdown>
+                    {{-- Dropdown Toggler --}}
+                    <x-slot:toggle>
+                        <button
+                            type="button"
+                            class="inline-flex gap-x-[4px] items-center justify-between w-full max-w-max text-gray-600 font-semibold px-[4px] py-[6px] rounded-[6px] text-center cursor-pointer marker:shadow appearance-none hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-gratext-gray-600"
+                        >
+                            <span class="icon-language text-[24px] "></span>
+
+                            {{ $currentLocale->name }}
+                            
+                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+
+                            <span class="icon-sort-down text-[24px]"></span>
+                        </button>
+                    </x-slot:toggle>
+
+                    {{-- Dropdown Content --}}
+                    <x-slot:content class="!p-[0px]">
+                        @foreach (core()->getAllLocales() as $locale)
+                            <a
+                                href="?{{ Arr::query(['locale' => $locale->code]) }}"
+                                class="flex gap-[10px] px-5 py-2 text-[16px] cursor-pointer hover:bg-gray-100 {{ $locale->code == $currentLocale->code ? 'bg-gray-100' : ''}}"
+                            >
+                                {{ $locale->name }}
+                            </a>
+                        @endforeach
+                    </x-slot:content>
+                </x-admin::dropdown>
             </div>
         </div>
 
@@ -70,8 +95,8 @@
 
                         <x-admin::form.control-group.control
                             type="text"
-                            name="{{$locale}}[name]"
-                            value="{{ old($locale)['name'] ?? ($category->translate($locale)['name'] ?? '') }}"
+                            name="{{$currentLocale->code}}[name]"
+                            value="{{ old($currentLocale->code)['name'] ?? ($category->translate($currentLocale->code)['name'] ?? '') }}"
                             class="w-full"
                             label="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
                             placeholder="{{ trans('admin::app.catalog.categories.edit.company-name') }}"
@@ -124,7 +149,7 @@
                             name="description"
                             id="description"
                             class="description"
-                            :value="old($locale)['description'] ?? ($category->translate($locale)['description'] ?? '')"
+                            :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
                             rules="required"
                             label="{{ trans('admin::app.catalog.categories.edit.description') }}"
                             :tinymce="true"
@@ -148,26 +173,15 @@
                                 @lang('admin::app.catalog.categories.edit.logo-size')
                             </p>
 
-                            <x-admin::form.control-group>
+                            @php
+                                $logoImages = $category->logo_path ? [['id' => 'logo_path', 'url' => $category->logo_url]] : [];
+                            @endphp
 
-                                @php $logo = $category->logo_path ? Storage::url($category->logo_path) : ''; @endphp
-
-                                <x-admin::form.control-group.control
-                                    type="image"
-                                    name="logo_path[image_1]"
-                                    class="mb-0 !p-0 rounded-[12px] text-gray-700"
-                                    :label="trans('admin::app.catalog.categories.edit.add-logo')"
-                                    :is-multiple="false"
-                                    :src="$logo"
-                                    accepted-types="image/*"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="image[]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                            <x-admin::media.images
+                                name="logo_path"
+                                ::uploaded-images='{{ json_encode($logoImages) }}'
+                            >
+                            </x-admin::media.images>
                         </div>
 
                         {{-- Add Banner --}}
@@ -180,28 +194,16 @@
                                 @lang('admin::app.catalog.categories.edit.banner-size')
                             </p>
 
-                            <x-admin::form.control-group>
+                            @php
+                                $bannerImages = $category->banner_path ? [['id' => 'banner_path', 'url' => $category->banner_url]] : [];
+                            @endphp
 
-                                @php $banner = $category->banner_path ? Storage::url($category->banner_path) : ''; @endphp
-
-                                <x-admin::form.control-group.control
-                                    type="image"
-                                    name="banner_path[]"
-                                    class="mb-0 !p-0 rounded-[12px] text-gray-700"
-                                    :width="200"
-                                    :height="110"
-                                    :label="trans('admin::app.catalog.categories.edit.add-banner')"
-                                    :is-multiple="false"
-                                    accepted-types="image/*"
-                                    :src="$banner"
-                                >
-                                </x-admin::form.control-group.control>
-
-                                <x-admin::form.control-group.error
-                                    control-name="category_icon_image[]"
-                                >
-                                </x-admin::form.control-group.error>
-                            </x-admin::form.control-group>
+                            <x-admin::media.images
+                                name="banner_path"
+                                ::uploaded-images='{{ json_encode($bannerImages) }}'
+                                width="220px"
+                            >
+                            </x-admin::media.images>
                         </div>
                     </div>
                 </div>
@@ -215,27 +217,9 @@
                     <p class="text-[16px] text-gray-800 font-semibold mb-[16px]">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
-
-                    <div class="flex flex-col gap-[3px]">
-                        <p
-                            class="text-[#161B9D]"
-                            v-text="metaTitle ? metaTitle : '{{ $category->translate($locale)['meta_title'] ?? '' }}'"
-                        >
-                        </p>
-
-                        {{-- Get Meta Title From v-model and convet in lower case also replace space with (-) --}}
-                        <p
-                            class="text-[#135F29]"
-                            v-text="'{{ URL::to('/') }}/' + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '{{ $category ? str_replace(' ', '-', $category->translate($locale)['meta_title']) : '' }}')"
-                        >
-                        </p>
-
-                        <p
-                            class="text-gray-600"
-                            v-text='metaDescription ?? "{{ $category?->translate($locale)['meta_description'] ?? '' }}"'
-                        >
-                        </p>
-                    </div>
+                    
+                    {{-- SEO Title & Description Blade Componnet --}}
+                    <x-admin::seo/>
 
                     <div class="mt-[30px]">
                         {{-- Meta Title --}}
@@ -246,11 +230,11 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="{{$locale}}[meta_title]"
-                                :value="old($locale)['meta_title'] ?? ($category->translate($locale)['meta_title'] ?? '')"
+                                name="{{$currentLocale->code}}[meta_title]"
+                                id="meta_title"
+                                :value="old($currentLocale->code)['meta_title'] ?? ($category->translate($currentLocale->code)['meta_title'] ?? '')"
                                 label="{{ trans('admin::app.catalog.categories.edit.meta-title') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.meta-title') }}"
-                                v-model="metaTitle"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -263,11 +247,12 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="{{$locale}}[slug]"
-                                :value="old($locale)['slug'] ?? ($category->translate($locale)['slug'] ?? '')"
+                                name="{{$currentLocale->code}}[slug]"
+                                :value="old($currentLocale->code)['slug'] ?? ($category->translate($currentLocale->code)['slug'] ?? '')"
                                 rules="required"
                                 label="{{ trans('admin::app.catalog.categories.create.slug') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.create.slug') }}"
+                                v-slugify
                             >
                             </x-admin::form.control-group.control>
 
@@ -285,8 +270,8 @@
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                name="{{$locale}}[meta_keywords]"
-                                :value="old($locale)['meta_keywords'] ?? ($category->translate($locale)['meta_keywords'] ?? '')"
+                                name="{{$currentLocale->code}}[meta_keywords]"
+                                :value="old($currentLocale->code)['meta_keywords'] ?? ($category->translate($currentLocale->code)['meta_keywords'] ?? '')"
                                 label="{{ trans('admin::app.catalog.categories.edit.meta-keywords') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.meta-keywords') }}"
                             >
@@ -301,11 +286,11 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                name="{{$locale}}[meta_description]"
-                                :value="old($locale)['meta_description'] ?? ($category->translate($locale)['meta_description'] ?? '')"
+                                name="{{$currentLocale->code}}[meta_description]"
+                                id="meta_description"
+                                :value="old($currentLocale->code)['meta_description'] ?? ($category->translate($currentLocale->code)['meta_description'] ?? '')"
                                 label="{{ trans('admin::app.catalog.categories.edit.meta-description') }}"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.meta-description') }}"
-                                v-model="metaDescription"
                             >
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -440,67 +425,4 @@
             </div>
         </div>
     </x-admin::form>
-
-    @pushOnce('scripts')
-        <script type="text/x-template" id="v-locale-switcher-template">
-            <div>
-                <!-- Locale dropdown -->
-                <x-admin::dropdown>
-                    <x-slot:toggle>
-                        <!-- Current Locale-->
-                        <div class="inline-flex gap-x-[4px] justify-between items-center w-full max-w-max px-[4px] py-[6px] text-gray-600 font-semibold text-center cursor-pointer marker:shadow appearance-none focus:ring-2 focus:outline-none focus:ring-gratext-gray-600">
-                            <span class="icon-language text-[24px] "></span>
-                                @{{ selectedLocale[0].name }}
-                            <span class="icon-sort-down text-[24px]"></span>
-                        </div>
-                    </x-slot:toggle>
-
-                    <!-- Locale content -->
-                    <x-slot:content class="!p-[0px]">
-                        <div class="grid gap-[4px] mt-[10px] pb-[10px]">
-                            <a
-                                class="px-5 py-2 text-[16px] hover:bg-gray-100 cursor-pointer"
-                                v-for="locale in locales"
-                                :class="{'bg-gray-100': locale.code == '{{ $locale }}'}"
-                                v-text="locale.name"
-                                @click="change(locale)"
-                            >
-                            </a>
-                        </div>
-                    </x-slot:content>
-                </x-admin::dropdown>
-            </div>
-        </script>
-
-        <script type="module">
-            app.component('v-locale-switcher', {
-                template: '#v-locale-switcher-template',
-                data() {
-                    return {
-                        locales: @json(core()->getAllLocales()),
-
-                        selectedLocale: {},
-                    }
-                },
-
-                created() {
-                    this.init();
-                },
-
-                methods: {
-                    init() {
-                        this.selectedLocale = this.locales.filter((locale) => "{{ $locale }}" == locale.code);
-                    },
-
-                    change(locale) {
-                        let url = new URL(window.location.href);
-
-                        url.searchParams.set('locale', locale.code);
-
-                        window.location.href = url.href;
-                    },
-                },
-            });
-        </script>
-    @endPushOnce
 </x-admin::layouts>

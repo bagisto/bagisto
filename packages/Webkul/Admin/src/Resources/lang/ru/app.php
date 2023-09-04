@@ -750,8 +750,8 @@ return [
         'yes'                         => 'Да',
         'no'                          => 'Нет',
         'delete'                      => 'Удалить',
-        'enable-atleast-one-shipping' => 'Включите хотя бы один способ доставки.',
-        'enable-atleast-one-payment'  => 'Включите хотя бы один способ оплаты.',
+        'enable-at-least-one-shipping' => 'Включите хотя бы один способ доставки.',
+        'enable-at-least-one-payment'  => 'Включите хотя бы один способ оплаты.',
 
         'tax-categories' => [
             'title'           => 'Налоговые категории',
@@ -1045,7 +1045,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'войти как клиент',
-            'login-message'=> 'вы вошли как :customer_name',
+            'login-message' => 'вы вошли как :customer_name',
         ],
 
         'note' => [

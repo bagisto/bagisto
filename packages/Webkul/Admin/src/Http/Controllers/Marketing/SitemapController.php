@@ -93,9 +93,9 @@ class SitemapController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return void
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
@@ -108,14 +108,14 @@ class SitemapController extends Controller
 
             Event::dispatch('marketing.sitemaps.delete.after', $id);
 
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.marketing.sitemaps.index.edit.delete-success'),
-            ]);
+            ], 200);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
+        return response()->json([
+            'message' => trans('admin::app.marketing.sitemaps.delete-failed', ['name' => 'admin::app.marketing.sitemaps.index.sitemap']),
         ], 500);
     }
 }

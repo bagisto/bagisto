@@ -80,7 +80,7 @@ class AddressDataGrid extends DataGrid
     {
         $this->addColumn([
             'index'      => 'address_id',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.customers.addresses.datagrid.id'),
             'type'       => 'integer',
             'searchable' => true,
             'filterable' => true,
@@ -166,7 +166,7 @@ class AddressDataGrid extends DataGrid
     {
         $this->addAction([
             'icon'   => 'icon-edit',
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => trans('admin::app.customers.addresses.datagrid.edit'),
             'method' => 'GET',
             'url'    => function ($row) {
                 return route('admin.customers.customers.addresses.edit', $row->address_id);
@@ -175,7 +175,7 @@ class AddressDataGrid extends DataGrid
 
         $this->addAction([
             'icon'    => 'icon-delete',
-            'title'   => trans('admin::app.datagrid.delete'),
+            'title'   => trans('admin::app.customers.addresses.datagrid.delete'),
             'method'  => 'POST',
             'url'     => function ($row) {
                 return route('admin.customers.customers.addresses.delete', $row->address_id);

@@ -58,8 +58,8 @@
             @case ($customization::CATEGORY_CAROUSEL)
                 {{-- Categories carousel --}}
                 <x-shop::categories.carousel
-                    :title="$customization->name"
-                    :src="route('shop.api.categories.index', $data)"
+                    :title="$data['title'] ?? ''"
+                    :src="route('shop.api.categories.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.home.index')"
                 >
                 </x-shop::categories.carousel>
@@ -70,8 +70,8 @@
                 {{-- Product Carousel --}}
                 <x-shop::products.carousel
                     {{-- title="Men's Collections" --}}
-                    :title="$customization->name"
-                    :src="route('shop.api.products.index', $data)"
+                    :title="$data['title'] ?? ''"
+                    :src="route('shop.api.products.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.home.index')"
                 >
                 </x-shop::products.carousel>

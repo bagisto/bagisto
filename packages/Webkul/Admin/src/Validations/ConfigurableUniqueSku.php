@@ -36,7 +36,7 @@ class ConfigurableUniqueSku implements Rule
      */
     public function message()
     {
-        return trans('admin::app.response.already-taken', ['name' => ':attribute']);
+        return trans('admin::app.catalog.products.index.already-taken', ['name' => ':attribute']);
     }
 
     /**

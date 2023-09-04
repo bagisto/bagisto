@@ -91,7 +91,7 @@ class CustomerController extends Controller
 
         if ($customer = $this->customerRepository->update($data, auth()->guard('customer')->user()->id)) {
             if ($isPasswordChanged) {
-                Event::dispatch('user.admin.update-password', $customer);
+                Event::dispatch('customer.password.update.after', $customer);
             }
 
             Event::dispatch('customer.update.after', $customer);

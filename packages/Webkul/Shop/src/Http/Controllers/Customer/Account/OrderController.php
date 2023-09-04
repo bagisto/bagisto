@@ -2,10 +2,11 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
-use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\Core\Traits\PDFHandler;
+use Webkul\Shop\DataGrids\OrderDataGrid;
+use Webkul\Shop\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -19,8 +20,7 @@ class OrderController extends Controller
     public function __construct(
         protected OrderRepository $orderRepository,
         protected InvoiceRepository $invoiceRepository
-    )
-    {
+    ) {
     }
 
     /**
@@ -30,11 +30,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->orderRepository->findWhere([
-            'customer_id' => auth()->guard('customer')->id(),
-        ]);
+        if (request()->ajax()) {
+            return app(OrderDataGrid::class)->toJson();
+        }
 
-        return view('shop::customers.account.orders.index', compact('orders'));
+        return view('shop::customers.account.orders.index');
     }
 
     /**

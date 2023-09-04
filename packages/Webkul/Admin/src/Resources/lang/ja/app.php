@@ -750,8 +750,8 @@ return [
         'yes'                         => 'Yes',
         'no'                          => 'No',
         'delete'                      => 'Delete',
-        'enable-atleast-one-shipping' => 'Enable atleast one shipping method.',
-        'enable-atleast-one-payment'  => 'Enable atleast one payment method.',
+        'enable-at-least-one-shipping' => 'Enable atleast one shipping method.',
+        'enable-at-least-one-payment'  => 'Enable atleast one payment method.',
 
         'tax-categories' => [
             'title'           => 'Tax Categories',
@@ -1045,7 +1045,7 @@ return [
 
         'login-as-customer' => [
             'grid-title'   => 'login as customer',
-            'login-message'=> 'you login as :customer_name',
+            'login-message' => 'you login as :customer_name',
         ],
 
         'note' => [

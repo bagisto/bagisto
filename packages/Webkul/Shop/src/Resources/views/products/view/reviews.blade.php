@@ -2,7 +2,7 @@
 
 <v-product-review :product-id="{{ $product->id }}">
     <div class="container max-1180:px-[20px]">
-        <x-shop::shimmer.products.reviews></x-shop::shimmer.products.reviews>
+        <x-shop::shimmer.products.reviews/>
     </div>
 </v-product-review>
 
@@ -49,9 +49,7 @@
                         
                         <div>
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label
-                                    class="mt-[0]"
-                                >
+                                <x-shop::form.control-group.label class="mt-[0] required">
                                     @lang('shop::app.products.rating')
                                 </x-shop::form.control-group.label>
 
@@ -71,7 +69,7 @@
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label>
+                                <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.products.title')
                                 </x-shop::form.control-group.label>
 
@@ -92,7 +90,7 @@
                             </x-shop::form.control-group>
 
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label>
+                                <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.products.comment')
                                 </x-shop::form.control-group.label>
 
@@ -139,7 +137,7 @@
             <div v-else>
                 <!-- Review Container Shimmer Effect -->
                 <template v-if="isLoading">
-                    <x-shop::shimmer.products.reviews></x-shop::shimmer.products.reviews>
+                    <x-shop::shimmer.products.reviews/>
                 </template>
 
                 <template v-else>

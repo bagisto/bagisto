@@ -49,13 +49,14 @@ class LocaleController extends Controller
             'code',
             'name',
             'direction',
-            'logo_path'
         ]);
+        
+        $data['logo_path'] = request()->file('logo_path');
 
         $this->localeRepository->create($data);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.locales.index.create.success'),
+            'message' => trans('admin::app.settings.locales.index.create-success'),
         ]);
     }
 
@@ -91,13 +92,14 @@ class LocaleController extends Controller
             'code',
             'name',
             'direction',
-            'logo_path'
         ]);
+
+        $data['logo_path'] = request()->file('logo_path');
 
         $this->localeRepository->update($data, request()->id);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.locales.index.edit.success'),
+            'message' => trans('admin::app.settings.locales.index.update-success'),
         ]);
     }
 
@@ -105,15 +107,15 @@ class LocaleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return \Illuminate\Http\Response|JsonResource
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->localeRepository->findOrFail($id);
 
         if ($this->localeRepository->count() == 1) {
-            return new JsonResource([
-                'message' => trans('admin::app.settings.locales.last-delete-error'),
+            return response()->json([
+                'message' => trans('admin::app.settings.locales.index.last-delete-error'),
             ], 400);
         }
 
@@ -121,13 +123,13 @@ class LocaleController extends Controller
             $this->localeRepository->delete($id);
 
             return new JsonResource([
-                'message' => trans('admin::app.settings.locales.index.edit.delete-success'),
+                'message' => trans('admin::app.settings.locales.index.delete-success'),
             ]);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => trans('admin::app.settings.locales.index.locales')]),
+        return response()->json([
+            'message' => trans('admin::app.settings.locales.index.delete-failed'),
         ], 500);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers\Settings;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
@@ -75,7 +76,7 @@ class InventorySourceController extends Controller
 
         Event::dispatch('inventory.inventory_source.create.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.settings.inventory_sources.create-success'));
+        session()->flash('success', trans('admin::app.settings.inventory-sources.create-success'));
 
         return redirect()->route('admin.settings.inventory_sources.index');
     }
@@ -103,6 +104,10 @@ class InventorySourceController extends Controller
     {
         Event::dispatch('inventory.inventory_source.update.before', $id);
 
+        if (! $inventorySourceRequest->status) {
+            $inventorySourceRequest['status'] = 0;
+        }
+
         $data = $inventorySourceRequest->only([
             'code',
             'name',
@@ -126,7 +131,7 @@ class InventorySourceController extends Controller
 
         Event::dispatch('inventory.inventory_source.update.after', $inventorySource);
 
-        session()->flash('success', trans('admin::app.settings.inventory_sources.update-success'));
+        session()->flash('success', trans('admin::app.settings.inventory-sources.update-success'));
 
         return redirect()->route('admin.settings.inventory_sources.index');
     }
@@ -134,15 +139,15 @@ class InventorySourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): JsonResource
     {
         $this->inventorySourceRepository->findOrFail($id);
 
         if ($this->inventorySourceRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.inventory_sources.last-delete-error')], 400);
+            return response()->json(['message' => trans('admin::app.settings.inventory-sources.last-delete-error')], 400);
         }
 
         try {
@@ -152,11 +157,15 @@ class InventorySourceController extends Controller
 
             Event::dispatch('inventory.inventory_source.delete.after', $id);
 
-            return response()->json(['message' => trans('admin::app.settings.inventory_sources.delete-success')]);
+            return new JsonResource([
+                'message' => trans('admin::app.settings.inventory-sources.delete-success')
+            ]);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Inventory source'])], 500);
+        return new JsonResource([
+            'message' => trans('admin::app.settings.inventory-sources.delete-failed', ['name' => 'admin::app.settings.inventory_sources.index.title'])
+        ], 500);
     }
 }

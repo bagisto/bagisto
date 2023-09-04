@@ -60,7 +60,7 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @var array
      */
-    protected $appends = ['image_url', 'banner_url', 'category_icon_url', 'url'];
+    protected $appends = ['logo_url', 'banner_url', 'url'];
 
     /**
      * The products that belong to the category.
@@ -243,13 +243,13 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @return string
      */
-    public function getImageUrlAttribute()
+    public function getLogoUrlAttribute()
     {
-        if (! $this->image) {
+        if (! $this->logo_path) {
             return;
         }
 
-        return Storage::url($this->image);
+        return Storage::url($this->logo_path);
     }
 
     /**
@@ -259,25 +259,11 @@ class Category extends TranslatableModel implements CategoryContract
      */
     public function getBannerUrlAttribute()
     {
-        if (! $this->category_banner) {
+        if (! $this->banner_path) {
             return;
         }
 
-        return Storage::url($this->category_banner);
-    }
-
-    /**
-     * Get category icon url for the category icon image.
-     *
-     * @return string
-     */
-    public function getCategoryIconUrlAttribute()
-    {
-        if (! $this->category_icon_path) {
-            return;
-        }
-
-        return Storage::url($this->category_icon_path);
+        return Storage::url($this->banner_path);
     }
 
     /**

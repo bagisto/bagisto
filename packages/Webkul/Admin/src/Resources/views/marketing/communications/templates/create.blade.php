@@ -12,10 +12,11 @@
 
             <div class="flex gap-x-[10px] items-center">
                 {{-- Cancel Button --}}
-                <a href="{{ route('admin.marketing.communications.email_templates.index') }}">
-                    <span class="px-[12px] py-[6px] border-[2px] border-transparent rounded-[6px] text-gray-600 font-semibold whitespace-nowrap transition-all hover:bg-gray-100 cursor-pointer">
-                        @lang('admin::app.marketing.communications.templates.create.back-btn')
-                    </span>
+                <a
+                    href="{{ route('admin.marketing.communications.email_templates.index') }}"
+                    class="transparent-button hover:bg-gray-200"
+                >
+                    @lang('admin::app.marketing.communications.templates.create.back-btn')
                 </a>
 
                 {{-- Save Button --}}
@@ -70,7 +71,7 @@
                         <x-slot:header>
                             <div class="flex items-center justify-between">
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                    @lang('admin::app.settings.users.create.general')
+                                    @lang('admin::app.marketing.communications.templates.create.general')
                                 </p>
                             </div>
                         </x-slot:header>

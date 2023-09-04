@@ -6,8 +6,9 @@ use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
 use Webkul\Admin\Http\Controllers\Settings\ExchangeRateController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
-use Webkul\Admin\Http\Controllers\Settings\TaxCategoryController;
-use Webkul\Admin\Http\Controllers\Settings\TaxRateController;
+use Webkul\Admin\Http\Controllers\Settings\Tax\TaxCategoryController;
+use Webkul\Admin\Http\Controllers\Settings\Tax\TaxRateController;
+use Webkul\Admin\Http\Controllers\Settings\ThemeController;
 use Webkul\Admin\Http\Controllers\Settings\RoleController;
 use Webkul\Admin\Http\Controllers\Settings\UserController;
 
@@ -39,13 +40,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
             Route::get('', 'index')->name('admin.settings.currencies.index');
 
-            Route::get('create', 'create')->name('admin.settings.currencies.create');
-
             Route::post('create', 'store')->name('admin.settings.currencies.store');
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.currencies.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.currencies.update');
+            Route::put('edit', 'update')->name('admin.settings.currencies.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.currencies.delete');
 
@@ -64,7 +63,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('update-rates', 'updateRates')->name('admin.settings.exchange_rates.update_rates');
 
-            Route::post('edit', 'update')->name('admin.settings.exchange_rates.update');
+            Route::put('edit', 'update')->name('admin.settings.exchange_rates.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.exchange_rates.delete');
         });
@@ -75,13 +74,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
         Route::controller(LocaleController::class)->prefix('locales')->group(function () {
             Route::get('', 'index')->name('admin.settings.locales.index');
 
-            Route::get('create', 'create')->name('admin.settings.locales.create');
-
             Route::post('create', 'store')->name('admin.settings.locales.store');
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.locales.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.locales.update');
+            Route::put('edit', 'update')->name('admin.settings.locales.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.locales.delete');
         });
@@ -107,35 +104,35 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
             /**
              * Tax categories routes.
              */
-            Route::controller(TaxCategoryController::class)->prefix('tax-categories')->group(function () {
-                Route::get('', 'index')->name('admin.settings.taxes.tax_categories.index');
+            Route::controller(TaxCategoryController::class)->prefix('categories')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.categories.index');
 
-                Route::post('', 'store')->name('admin.settings.taxes.tax_categories.store');
+                Route::post('', 'store')->name('admin.settings.taxes.categories.store');
 
-                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_categories.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.categories.edit');
 
-                Route::post('edit', 'update')->name('admin.settings.taxes.tax_categories.update');
+                Route::put('edit', 'update')->name('admin.settings.taxes.categories.update');
 
-                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_categories.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.categories.delete');
             });
 
             /**
              * Tax rates routes.
              */
-            Route::controller(TaxRateController::class)->prefix('tax-rates')->group(function () {
-                Route::get('', 'index')->name('admin.settings.taxes.tax_rates.index');
+            Route::controller(TaxRateController::class)->prefix('rates')->group(function () {
+                Route::get('', 'index')->name('admin.settings.taxes.rates.index');
 
-                Route::get('create', 'show')->name('admin.settings.taxes.tax_rates.create');
+                Route::get('create', 'show')->name('admin.settings.taxes.rates.create');
 
-                Route::post('create', 'create')->name('admin.settings.taxes.tax_rates.store');
+                Route::post('create', 'create')->name('admin.settings.taxes.rates.store');
 
-                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.tax_rates.edit');
+                Route::get('edit/{id}', 'edit')->name('admin.settings.taxes.rates.edit');
 
-                Route::put('edit/{id}', 'update')->name('admin.settings.taxes.tax_rates.update');
+                Route::put('edit/{id}', 'update')->name('admin.settings.taxes.rates.update');
 
-                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.tax_rates.delete');
+                Route::delete('edit/{id}', 'destroy')->name('admin.settings.taxes.rates.delete');
 
-                Route::post('import', 'import')->name('admin.settings.taxes.tax_rates.import');
+                Route::post('import', 'import')->name('admin.settings.taxes.rates.import');
             });
         });
 
@@ -166,13 +163,27 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::get('edit/{id}', 'edit')->name('admin.settings.users.edit');
 
-            Route::post('edit', 'update')->name('admin.settings.users.update');
+            Route::put('edit', 'update')->name('admin.settings.users.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
 
             Route::get('confirm/{id}', 'confirm')->name('super.settings.users.confirm');
 
-            Route::post('confirm/{id}', 'destroySelf')->name('admin.settings.users.destroy');
+            Route::post('confirm/{id}', 'destroy')->name('admin.settings.users.destroy');
         });
+    });
+
+    Route::controller(ThemeController::class)->prefix('settings/themes')->group(function () {
+        Route::get('', 'index')->name('admin.theme.index');
+
+        Route::get('create', 'create')->name('admin.theme.create');
+
+        Route::get('edit/{id}', 'edit')->name('admin.theme.edit');
+
+        Route::post('store', 'store')->name('admin.theme.store');
+
+        Route::post('edit/{id}', 'update')->name('admin.theme.update');
+
+        Route::delete('edit/{id}', 'destroy')->name('admin.theme.delete');
     });
 });

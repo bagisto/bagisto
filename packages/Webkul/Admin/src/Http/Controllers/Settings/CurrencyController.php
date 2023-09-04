@@ -54,7 +54,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->create($data);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.index.create.success'),
+            'message' => trans('admin::app.settings.currencies.index.create-success'),
         ]);
     }
 
@@ -95,7 +95,7 @@ class CurrencyController extends Controller
         $this->currencyRepository->update($data, $id);
 
         return new JsonResource([
-            'message' => trans('admin::app.settings.currencies.index.edit.success'),
+            'message' => trans('admin::app.settings.currencies.index.update-success'),
         ]);
     }
 
@@ -103,64 +103,30 @@ class CurrencyController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return void
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.currencies.last-delete-error')], 400);
+            return response()->json([
+                'message' => trans('admin::app.settings.currencies.index.last-delete-error')
+            ], 400);
         }
 
         try {
             $this->currencyRepository->delete($id);
 
-            return new JsonResource([
-                'message' => trans('admin::app.settings.currencies.index.edit.delete-success'),
-            ]);
+            return response()->json([
+                'message' => trans('admin::app.settings.currencies.index.delete-success'),
+            ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
-            'message' => trans('admin::app.response.delete-failed', ['name' => 'admin::app.settings.currencies.index.currency'])
+        return response()->json([
+            'message' => trans('admin::app.settings.currencies.index.delete-failed')
         ], 500);
-    }
-
-    /**
-     * Remove the specified resources from database.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy()
-    {
-        $suppressFlash = false;
-
-        if (request()->isMethod('post')) {
-            $indexes = explode(',', request()->input('indexes'));
-
-            foreach ($indexes as $key => $value) {
-                try {
-                    $this->currencyRepository->delete($value);
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
-                }
-            }
-
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.settings.currencies.index.datagrid.delete-success', ['resource' => 'currencies']));
-            } else {
-                session()->flash('info', trans('admin::app.settings.currencies.index.datagrid.partial-action', ['resource' => 'currencies']));
-            }
-
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.settings.currencies.index.datagrid.method-error'));
-
-            return redirect()->back();
-        }
     }
 }
