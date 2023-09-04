@@ -4,7 +4,7 @@ return [
     'users' => [
         'sessions' => [
             'email'                => 'Email Address',
-            'forget-password-link' => 'Forget Password?',
+            'forget-password-link' => 'Forget Password ?',
             'password'             => 'Password',
             'submit-btn'           => 'Sign In',
             'title'                => 'Sign In',
@@ -16,14 +16,14 @@ return [
                 'email_not_exist'  => 'Email Not Exists',
                 'page-title'       => 'Forget Password',
                 'reset_link_sent'  => 'Reset Password link sent',
-                'sign-in-link'     => 'Back to Sign In?',
+                'sign-in-link'     => 'Back to Sign In ?',
                 'submit-btn'       => 'Reset',
                 'title'            => 'Recover Password',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Back to Sign In?',
+            'back-link-title'  => 'Back to Sign In ?',
             'confirm-password' => 'Confirm Password',
             'email'            => 'Registered Email',
             'password'         => 'Password',
@@ -784,7 +784,7 @@ return [
         'attributes' => [
             'index' => [
                 'title'      => 'Attributes',
-                'create-btn' => 'Create Attribute',
+                'create-btn' => 'Create Attributes',
 
                 'datagrid' => [
                     'id'                  => 'ID',
@@ -2103,7 +2103,7 @@ return [
         'inventory-sources' => [
             'index'  => [
                 'title'      => 'Inventory Sources',
-                'create-btn' => 'Create Inventory Source',
+                'create-btn' => 'Create Inventory Sources',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2505,7 +2505,7 @@ return [
 
             'create' => [
                 'title'                         => 'Create Theme',
-                'slider'                        => 'Slider',
+                'sliders'                        => 'Sliders',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
                 'category-carousel-description' => 'Display dynamic categories attractively using a responsive category carousel.',
@@ -2513,7 +2513,7 @@ return [
                 'footer-link-description'       => 'Navigate via footer links for seamless website exploration and information.',
                 'category-carousel'             => 'Category Carousel',
                 'static-content'                => 'Static Content',
-                'footer-link'                   => 'Footer Link',
+                'footer-link'                   => 'Footer Links',
                 'slider-description'            => 'Slider related theme customization.',
                 'slider-add-btn'                => 'Add Slider',
                 'general'                       => 'General',
@@ -2524,17 +2524,21 @@ return [
                 'desc'                          => 'Desc',
                 'asc'                           => 'Asc',
                 'limit'                         => 'Limit',
+                'footer-title'                  => 'Title',
+                'link'                          => 'Link',
+                'add-logo'                      => 'Add Logo',
                 'key'                           => 'Key: :key',
                 'value'                         => 'Value: :value',
                 'delete'                        => 'Delete',
                 'name'                          => 'Name',
                 'sort-order'                    => 'Sort Order',
                 'status'                        => 'Status',
+                'image'                         => 'Image',
                 'create-filter'                 => 'Create Filter',
                 'key-input'                     => 'Key',
                 'value-input'                   => 'Value',
-                'html'                          => 'html',
-                'css'                           => 'css',
+                'html'                          => 'HTML',
+                'css'                           => 'CSS',
                 'add-footer-link-btn'           => 'Add Footer Link',
                 'filters'                       => 'Filters',
                 'edit'                          => 'Edit',
@@ -2556,7 +2560,8 @@ return [
                 'footer-link-description'       => 'Navigate via footer links for seamless website exploration and information.',
                 'category-carousel'             => 'Category Carousel',
                 'static-content'                => 'Static Content',
-                'footer-link'                   => 'Footer Link',
+                'footer-title'                  => 'Title',
+                'footer-link'                   => 'Footer Links',
                 'slider-description'            => 'Slider related theme customization.',
                 'slider-add-btn'                => 'Add Slider',
                 'general'                       => 'General',
@@ -2856,6 +2861,8 @@ return [
                     'accepted-currencies-info'       => 'Add currency code comma separated e.g. USD,INR,...',
                     'sandbox'                        => 'Sandbox',
                     'business-account'               => 'Business Account',
+
+
                 ],
 
                 'order-settings' => [

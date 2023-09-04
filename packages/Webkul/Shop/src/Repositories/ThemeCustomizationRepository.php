@@ -21,41 +21,35 @@ class ThemeCustomizationRepository extends Repository
     /**
      * Upload images
      *
-     * @param  array  $images
+     * @param  array  $imageOptions
      * @param  \Webkul\Shop\Contracts\ThemeCustomization  $theme
      * 
      * @return void
      */
-    public function uploadImage($images, $theme, $removeImages = [])
+    public function uploadImage($imageOptions, $theme, $removeImages = [])
     {
-        $options = ! empty($theme->options) ? $theme->options : [];
+        $options = [];
 
-        if (! empty($removeImages)) {
-            $options = [];
-
-            $result = array_diff($theme->options['images'], $removeImages);
-
-            Storage::delete($result);
-
-            foreach ($result as $value) {
-                $options['images'][]  = $value;
+        if (! empty($imageOptions)) {
+            foreach($imageOptions as $images) {
+                foreach ($images as $key => $image) {
+                    if (isset($image['image']) && $image['image'] instanceof UploadedFile) {
+                        $options['images'][] = [
+                            'image' =>  'storage/' . $image['image']->storeAs(
+                                'theme/' . $theme->id, ++$key . '.' . $image['image']->getClientOriginalExtension()
+                            ),
+                            'link' => $image['link'],
+                        ];
+                    } else {
+                        $options['images'] = $theme->options['images'];
+                    }
+                }   
             }
-        }
 
-        if (! empty($images)) {
-            foreach($images as $key => $image) {
-                if ($image instanceof UploadedFile) {
-                    $options['images'][] = 'storage/' . $image->storeAs(
-                        'theme/' . $theme->id, ++$key . '.' . $image->getClientOriginalExtension()
-                    );
-                }
-            }
+            $theme->options = $options;
+        
+            $theme->save();
         }
-
-         
-        $theme->options = $options;
-    
-        $theme->save();
     }
 }
 ?>

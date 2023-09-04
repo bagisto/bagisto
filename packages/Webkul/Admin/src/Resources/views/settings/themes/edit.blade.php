@@ -27,7 +27,7 @@
     </x-admin::form>
 
     @pushOnce('scripts')
-        {{-- Customizer parent --}}
+        {{-- Customizer Parent Template--}}
         <script type="text/x-template" id="v-theme-customizer-template">
             <div>
                 <div class="flex gap-[10px]">
@@ -156,44 +156,13 @@
                 <component
                     :errors="errors"
                     :is="componentName"
+                    ref="dynamicComponentThemeRef"
                 >
                 </component>
             </div>
         </script>
 
-        <script type="module">
-            app.component('v-theme-customizer', {
-                template: '#v-theme-customizer-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        componentName: 'v-slider-theme',
-
-                        themeType: {
-                            product_carousel: 'v-product-theme',
-                            category_carousel: 'v-category-theme',
-                            static_content: 'v-static-theme',
-                            image_carousel: 'v-slider-theme',
-                            footer_links: 'v-footer-link-theme',
-                        } 
-                    }
-                },
-
-                created(){
-                    this.componentName = this.themeType["{{ $theme->type }}"];
-                },
-
-                methods: {
-                    switchComponent(component) {
-                        return;
-                    }
-                },
-            })
-        </script>
-
-        {{-- Slider theme --}}
+        {{-- Slider Template --}}
         <script type="text/x-template" id="v-slider-theme-template">
             <div>
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
@@ -219,41 +188,69 @@
                                 </div>
                             </div>
 
-                            <template v-for="removeImage in removedImages">
-                                <input type="text" class="hidden" :name="'removeImages[]'" :value="removeImage"/>    
+                            <template v-for="(removeImage, index) in removedImages">
+                                @{{removeImage}}
+                                <input type="hidden" :name="'removeImages[]'" :value="removeImage"/>  
+                                
+                                    <!-- Hidden Input -->
+                                    <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
+                                    <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
+                                    <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
                             </template>
 
                             <div
                                 class="grid"
                                 v-if="sliders.images.length"
+                                v-for="(image, index) in sliders.images"
                             >
-                                <!-- Single product column -->
-                                <div    
-                                    class="flex gap-[10px] justify-between px-[16px] py-[24px] border-b-[1px] border-slate-300"
-                                    v-for="(image, index) in sliders.images"
-                                >
-                                    <input type="file" class="hidden" :name="'options[]'" :ref="'imageInput_' + index"/>    
+                                <!-- Hidden Input -->
+                                <input type="file" class="hidden" :name="'options['+ index +'][image]'" :ref="'imageInput_' + index" />
+                                <input type="hidden" :name="'options['+ index +'][link]'" :value="image.link" />    
+                                <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />    
+                            
+                                <!-- Details -->
+                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                    <div class="flex gap-[10px]">
+                                        <div class="grid gap-[6px] place-content-start">
+                                            <p class="text-gray-600">
+                                                <div> 
+                                                    @lang('admin::app.settings.themes.create.link'): 
 
-                                    <div class="flex items-center gap-[10px]">
-                                        <div class="grid gap-[4px] content-center justify-items-center min-w-[60px] h-[60px] px-[6px] border border-dashed border-gray-300 rounded-[4px]">
-                                            <img 
-                                                :src="'../../../../' + image"
-                                                :ref="'image_' + index"
-                                                class="w-[20px]"
-                                            >
-                                            
-                                            <p class="text-[6px] text-gray-400 font-semibold">
-                                                @lang('admin::app.settings.themes.edit.slider-image')
+                                                    <span class="text-gray-600 transition-all">
+                                                        @{{ image.link }}
+                                                    </span>
+                                                </div>
+                                            </p>
+
+                                            <p class="text-gray-600">
+                                                <div class="flex justify-between"> 
+                                                    @lang('admin::app.settings.themes.create.image'): 
+
+                                                    <span class="text-gray-600 transition-all">
+                                                        <a 
+                                                            :href="image.image"
+                                                            :ref="'image_' + index"
+                                                            target="_blank"
+                                                            class="ml-2 text-blue-600 transition-all hover:underline"
+                                                        >
+                                                            <span 
+                                                                :ref="'imageName_' + index"
+                                                                v-text="image.image"
+                                                            ></span>
+                                                        </a>
+                                                    </span>
+                                                </div>
                                             </p>
                                         </div>
                                     </div>
-                                    
-                                    <div class="grid gap-[4px] place-content-start">
-                                        <div class="flex gap-[10px]">
+
+                                    <!-- Actions -->
+                                    <div class="grid gap-[4px] place-content-start text-right">
+                                        <div class="flex gap-x-[20px] items-center">
                                             <p 
-                                                class="text-red-600 cursor-pointer"
+                                                class="text-red-600 cursor-pointer transition-all hover:underline"
                                                 @click="remove(image)"
-                                            >
+                                            > 
                                                 @lang('admin::app.settings.themes.edit.delete')
                                             </p>
                                         </div>
@@ -288,8 +285,8 @@
                         </div>
                     </div>
                 
-                        <!-- General -->
-                        <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
+                    <!-- General -->
+                    <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
                         <x-admin::accordion>
                             <x-slot:header>
                                 <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
@@ -301,7 +298,7 @@
                                 <input type="hidden" name="type" value="image_carousel">
     
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.name')
                                     </x-admin::form.control-group.label>
     
@@ -323,7 +320,7 @@
                                 </x-admin::form.control-group>
     
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.sort-order')
                                     </x-admin::form.control-group.label>
     
@@ -346,7 +343,7 @@
                                 </x-admin::form.control-group>
     
                                 <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
                                     </x-admin::form.control-group.label>
     
@@ -390,6 +387,7 @@
                     <form 
                         @submit="handleSubmit($event, saveSliderImage)"
                         enctype="multipart/form-data"
+                        ref="createSliderForm"
                     >
                         <x-admin::modal ref="addSliderModal">
                             <x-slot:header>
@@ -402,7 +400,27 @@
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group class="mb-[10px]">
+                                            <x-admin::form.control-group.label class="required">
+                                                @lang('admin::app.settings.themes.create.link')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="text"
+                                                name="link"
+                                                rules="required"
+                                                :label="trans('admin::app.settings.themes.create.link')"
+                                                :placeholder="trans('admin::app.settings.themes.create.link')"
+                                            >
+                                            </x-admin::form.control-group.control>
+            
+                                            <x-admin::form.control-group.error
+                                                control-name="link"
+                                            >
+                                            </x-admin::form.control-group.error>
+                                        </x-admin::form.control-group>
+
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.slider-image')
                                         </x-admin::form.control-group.label>
 
@@ -439,58 +457,7 @@
             </div>
         </script>
 
-        <script type="module">
-            app.component('v-slider-theme', {
-                template: '#v-slider-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        sliders: @json($theme->options),
-
-                        removedImages: [],
-                    };
-                },
-
-                created(){
-                    console.log(this.sliders);  
-                },
-                methods: {
-                    saveSliderImage(params) {
-                        this.sliders.images.push(params);
-
-                        if (params.slider_image instanceof File) {
-                            this.setFile(params, this.sliders.images.length - 1);
-                        }
-
-                        this.$refs.addSliderModal.toggle();
-                    },
-
-                    setFile(event, index) {
-                        let dataTransfer = new DataTransfer();
-
-                        dataTransfer.items.add(event.slider_image);
-
-                        setTimeout(() => {
-                            this.$refs['image_' + index][0].src =  URL.createObjectURL(event.slider_image);
-
-                            this.$refs['imageInput_' + index][0].files = dataTransfer.files;
-                        }, 0);
-                    },
-
-                    remove(image) {
-                        this.removedImages.push(image);
-
-                        let index = this.sliders.images.indexOf(image);
-
-                        this.sliders.images.splice(image, 1);
-                    }
-                }
-            });
-        </script>
-
-        {{-- Product Theme --}}
+        {{-- Product Template --}}
         <script type="text/x-template" id="v-product-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -513,18 +480,11 @@
                                 >
                                     @lang('admin::app.settings.themes.edit.add-filter-btn')
                                 </div>
-
-                                <button
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                    type="submit"
-                                >
-                                    @lang('admin::app.settings.themes.edit.save-btn')
-                                </button>
                             </div>
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.filter-title')
                             </x-admin::form.control-group.label>
 
@@ -547,7 +507,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort')
                             </x-admin::form.control-group.label>
 
@@ -577,7 +537,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.limit')
                             </x-admin::form.control-group.label>
 
@@ -599,39 +559,47 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
+                        <!-- Filters Lists -->
                         <div v-if="options.filters.length">
                             <div
-                                class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                class="grid"
                                 v-for="filter in options.filters"
                             >
+                                <!-- Hidden Input -->
                                 <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                            
+                                <!-- Details -->
+                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                    <div class="flex gap-[10px]">
+                                        <div class="grid gap-[6px] place-content-start">
+                                            <p class="text-gray-600">
+                                                <div> 
+                                                    @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
+                                                </div>
+                                            </p>
 
-                                <!-- Information -->
-                                <div class="flex gap-[10px]">
-                                    <!-- Details -->
-                                    <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
-                                        </p>
-
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
-                                        </p>
+                                            <p class="text-gray-600">
+                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- Actions -->
-                                <div class="flex gap-[4px] place-content-start text-right">
-                                    <p
-                                        class="text-red-600 cursor-pointer hover:underline"
-                                        @click="remove(filter)"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.delete')
-                                    </p>
+                                    <!-- Actions -->
+                                    <div class="grid gap-[4px] place-content-start text-right">
+                                        <div class="flex gap-x-[20px] items-center">
+                                            <p 
+                                                class="text-red-600 cursor-pointer transition-all hover:underline"
+                                                @click="remove(filter)"
+                                            > 
+                                                @lang('admin::app.settings.themes.edit.delete')
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <!-- Filters Illustration -->
                         <div    
                             class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
                             v-else
@@ -675,7 +643,7 @@
                             <input type="hidden" name="type" value="product_carousel">
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
 
@@ -698,7 +666,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
                                 </x-admin::form.control-group.label>
 
@@ -721,7 +689,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
 
@@ -774,7 +742,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Key -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.key-input')
                                         </x-admin::form.control-group.label>
         
@@ -795,7 +763,7 @@
 
                                     <!-- Value -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.value-input')
                                         </x-admin::form.control-group.label>
         
@@ -833,46 +801,7 @@
             </div>
         </script>
 
-        <script type="module">
-            app.component('v-product-theme', {
-                template: '#v-product-theme-template',
-
-                props: ['errors'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
-                },
-
-                created() {
-                    if (! this.options.filters) {
-                        this.options.filters = {};
-                    }
-
-                    this.options.filters = Object.keys(this.options.filters).map(key => ({
-                        key: key,
-                        value: this.options.filters[key]
-                    }));
-                },
-
-                methods: {
-                    addFilter(params) {
-                        this.options.filters.push(params);
-
-                        this.$refs.productFilterModal.toggle();
-                    },
-
-                    remove(filter) {
-                        let index = this.options.filters.indexOf(filter);
-
-                        this.options.filters.splice(index, 1);
-                    }
-                }
-            });
-        </script>
-
-        {{-- Category Theme --}}
+        {{-- Category Template --}}
         <script type="text/x-template" id="v-category-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -899,7 +828,7 @@
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.filter-title')
                             </x-admin::form.control-group.label>
 
@@ -922,7 +851,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort')
                             </x-admin::form.control-group.label>
 
@@ -952,7 +881,7 @@
                         </x-admin::form.control-group>
 
                         <x-admin::form.control-group class="mb-[10px]">
-                            <x-admin::form.control-group.label>
+                            <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.limit')
                             </x-admin::form.control-group.label>
 
@@ -974,39 +903,47 @@
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
 
+                        <!-- Filters Lists -->
                         <div v-if="options.filters.length">
                             <div
-                                class="flex gap-[10px] justify-between p-[16px] !pl-0 border-b-[1px] border-slate-300"
+                                class="grid"
                                 v-for="filter in options.filters"
                             >
+                                <!-- Hidden Input -->
                                 <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                            
+                                <!-- Details -->
+                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                    <div class="flex gap-[10px]">
+                                        <div class="grid gap-[6px] place-content-start">
+                                            <p class="text-gray-600">
+                                                <div> 
+                                                    @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
+                                                </div>
+                                            </p>
 
-                                <!-- Information -->
-                                <div class="flex gap-[10px]">
-                                    <!-- Details -->
-                                    <div class="grid gap-[6px] place-content-start">
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
-                                        </p>
-    
-                                        <p class="text-[16x] text-gray-800 font-semibold">
-                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
-                                        </p>
+                                            <p class="text-gray-600">
+                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- Actions -->
-                                <div class="flex gap-[4px] place-content-start text-right">
-                                    <p
-                                        class="text-red-600 cursor-pointer hover:underline"
-                                        @click="remove(filter)"
-                                    >
-                                        @lang('admin::app.settings.themes.edit.delete')
-                                    </p>
+                                    <!-- Actions -->
+                                    <div class="grid gap-[4px] place-content-start text-right">
+                                        <div class="flex gap-x-[20px] items-center">
+                                            <p 
+                                                class="text-red-600 cursor-pointer transition-all hover:underline"
+                                                @click="remove(filter)"
+                                            > 
+                                                @lang('admin::app.settings.themes.edit.delete')
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Filters Illustration -->
                         <div    
                             class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
                             v-else
@@ -1051,7 +988,7 @@
                             <input type="hidden" name="type" value="category_carousel">
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
 
@@ -1074,7 +1011,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
                                 </x-admin::form.control-group.label>
 
@@ -1097,7 +1034,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
 
@@ -1151,7 +1088,7 @@
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <!-- Key -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.key-input')
                                         </x-admin::form.control-group.label>
         
@@ -1172,7 +1109,7 @@
     
                                     <!-- Value -->
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.value-input')
                                         </x-admin::form.control-group.label>
         
@@ -1209,47 +1146,8 @@
                 </x-admin::form>
             </div>
         </script>
-    
-        <script type="module">
-            app.component('v-category-theme', {
-                template: '#v-category-theme-template',
 
-                props: ['errors'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
-                },
-    
-                created() {
-                    if (! this.options.filters) {
-                        this.options.filters = {};
-                    }
-
-                    this.options.filters = Object.keys(this.options.filters).map(key => ({
-                        key: key,
-                        value: this.options.filters[key]
-                    }));
-                },
-                
-                methods: {
-                    addFilter(params) {
-                        this.options.filters.push(params);
-    
-                        this.$refs.categoryFilterModal.toggle();
-                    },
-    
-                    remove(filter) {
-                        let index = this.options.filters.indexOf(filter);
-    
-                        this.options.filters.splice(index, 1);
-                    }
-                }
-            });
-        </script>
-
-        {{-- Static Theme --}}
+        {{-- Static Template --}}
         <script type="text/x-template" id="v-static-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
@@ -1264,55 +1162,43 @@
                                     @lang('admin::app.settings.themes.edit.static-content-description')
                                 </p>
                             </div>
-            
-                            <div class="flex gap-[10px]">
-                                <button
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                    type="submit"
-                                >
-                                    @lang('admin::app.settings.themes.edit.save-btn')
-                                </button>
+                        </div>
+
+                        
+                        <div class="text-sm font-medium text-center text-gray-500">
+                            <div class="tabs">
+                                <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
+                                    <p @click="switchEditor('v-html-editor-theme')">
+                                        <div
+                                            class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'border-blue-600': inittialEditor == 'v-html-editor-theme'}"
+                                        >
+                                            @lang('admin::app.settings.themes.create.html')
+                                        </div>
+                                    </p>
+
+                                    <p @click="switchEditor('v-css-editor-theme')">
+                                        <div
+                                            class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
+                                            :class="{'border-blue-600': inittialEditor == 'v-css-editor-theme'}"
+                                        >
+                                            @lang('admin::app.settings.themes.create.css')
+                                        </div>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label for="status">
-                                @lang('admin::app.settings.themes.edit.html')
-                            </x-admin::form.control-group.label>
+                        <input type="hidden" name="options[html]" v-model="options.html">
+                        <input type="hidden" name="options[css]" v-model="options.css">
 
-                            <div
-                                class="max-w-[870px]"
-                                ref="html"
+                        <KeepAlive>
+                            <component 
+                                :is="inittialEditor"
+                                @editor-data="editorData"
                             >
-                            </div>
-
-                            <v-field
-                                type="hidden"
-                                name="options[html]"
-                                v-model="options.html"
-                            >
-                            </v-field>
-
-                        </x-admin::form.control-group>
-
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label>
-                                @lang('admin::app.settings.themes.edit.css')
-                            </x-admin::form.control-group.label>
-
-                            <div
-                                class="max-w-[870px]"
-                                ref="css"
-                            >
-                            </div>
-
-                            <v-field
-                                type="hidden"
-                                name="options[css]"
-                                v-model="options.css"
-                            >
-                            </v-field>
-                        </x-admin::form.control-group>
+                            </component>
+                        </KeepAlive>
                     </div>
                 </div>
 
@@ -1329,7 +1215,7 @@
                             <input type="hidden" name="type" value="static_content">
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.name')
                                 </x-admin::form.control-group.label>
 
@@ -1352,7 +1238,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group class="mb-[10px]">
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.sort-order')
                                 </x-admin::form.control-group.label>
 
@@ -1375,7 +1261,7 @@
                             </x-admin::form.control-group>
 
                             <x-admin::form.control-group>
-                                <x-admin::form.control-group.label>
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
 
@@ -1414,61 +1300,21 @@
             </div>
         </script>
 
-        <script type="module">
-            app.component('v-static-theme', {
-                template: '#v-static-theme-template',
-
-                props: ['erros'],
-
-                data() {
-                    return {
-                        options: @json($theme->options),
-                    };
-                },
-
-                created() {
-                    this.initHtmlEditor();
-
-                    this.initCssEditor();
-                },
-
-                methods: {
-                    initHtmlEditor() {
-                        setTimeout(() => {
-                            this._html = new CodeMirror(this.$refs.html, {
-                                lineNumbers: true,
-                                tabSize: 2,
-                                value: this.options.html,
-                                mode: 'html',
-                                theme: 'monokai'
-                            });
-
-                            this._html.on('changes', () => {
-                                this.options.html = this._html.getValue();
-                            });
-                        }, 0);
-                    },
-
-                    initCssEditor() {
-                        setTimeout(() => {
-                            this._css = new CodeMirror(this.$refs.css, {
-                                lineNumbers: true,
-                                tabSize: 2,
-                                value: this.options.css,
-                                mode: 'css',
-                                theme: 'monokai'
-                            });
-
-                            this._css.on('changes', () => {
-                                this.options.css = this._css.getValue();
-                            });
-                        }, 0);
-                    },
-                },
-            });
+        {{-- Html Editor Template --}}
+        <script type="text/x-template" id="v-html-editor-theme-template">
+            <div>
+                <div ref="html"></div>
+            </div>
         </script>
 
-        {{-- Footer Link --}}
+        {{-- Css Editor Template --}}
+        <script type="text/x-template" id="v-css-editor-theme-template">
+            <div>
+                <div ref="css"></div>
+            </div>
+        </script>
+
+        {{-- Footer Template --}}
         <script type="text/x-template" id="v-footer-link-theme-template">
             <div>
                 <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
@@ -1627,7 +1473,7 @@
                                 <input type="hidden" name="type" value="footer_links">
 
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.name')
                                     </x-admin::form.control-group.label>
     
@@ -1650,7 +1496,7 @@
                                 </x-admin::form.control-group>
     
                                 <x-admin::form.control-group class="mb-[10px]">
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.sort-order')
                                     </x-admin::form.control-group.label>
 
@@ -1673,7 +1519,7 @@
                                 </x-admin::form.control-group>
     
                                 <x-admin::form.control-group>
-                                    <x-admin::form.control-group.label>
+                                    <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.settings.themes.edit.status')
                                     </x-admin::form.control-group.label>
     
@@ -1727,7 +1573,7 @@
                             <x-slot:content>
                                 <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.column')
                                         </x-admin::form.control-group.label>
         
@@ -1742,8 +1588,6 @@
                                             <option value="column_1">1</option>
                                             <option value="column_2">2</option>
                                             <option value="column_3">3</option>
-                                            <option value="column_4">4</option>
-                                            <option value="column_5">5</option>
                                         </x-admin::form.control-group.control>
         
                                         <x-admin::form.control-group.error
@@ -1753,16 +1597,16 @@
                                     </x-admin::form.control-group>
         
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
-                                            @lang('admin::app.settings.themes.edit.title')
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.themes.edit.footer-title')
                                         </x-admin::form.control-group.label>
         
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="title"
                                             rules="required"
-                                            :label="trans('admin::app.settings.themes.edit.title')"
-                                            :placeholder="trans('admin::app.settings.themes.edit.title')"
+                                            :label="trans('admin::app.settings.themes.edit.footer-title')"
+                                            :placeholder="trans('admin::app.settings.themes.edit.footer-title')"
                                         >
                                         </x-admin::form.control-group.control>
         
@@ -1773,7 +1617,7 @@
                                     </x-admin::form.control-group>
         
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.url')
                                         </x-admin::form.control-group.label>
         
@@ -1794,7 +1638,7 @@
                                     </x-admin::form.control-group>
 
                                     <x-admin::form.control-group class="mb-[10px]">
-                                        <x-admin::form.control-group.label>
+                                        <x-admin::form.control-group.label class="required">
                                             @lang('admin::app.settings.themes.edit.sort-order')
                                         </x-admin::form.control-group.label>
         
@@ -1832,6 +1676,63 @@
             </div>
         </script>
 
+        {{-- Slider Theme Component --}}
+        <script type="module">
+            app.component('v-slider-theme', {
+                template: '#v-slider-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        sliders: @json($theme->options),
+
+                        removedImages: [],
+                    };
+                },
+
+                methods: {
+                    saveSliderImage(params) {
+                        let formData = new FormData(this.$refs.createSliderForm);
+
+                        this.sliders.images.push({
+                            slider_image: formData.get("slider_image[]"),
+                            link: formData.get("link"),
+                        });
+
+                        if (formData.get("slider_image[]") instanceof File) {
+                            this.setFile(formData.get("slider_image[]"), this.sliders.images.length - 1);
+                        }
+
+                        this.$refs.addSliderModal.toggle();
+                    },
+
+                    setFile(file, index) {
+                        let dataTransfer = new DataTransfer();
+
+                        dataTransfer.items.add(file);
+
+                        setTimeout(() => {
+                            this.$refs['image_' + index][0].href =  URL.createObjectURL(file);
+
+                            this.$refs['imageName_' + index][0].innerHTML = file.name;
+
+                            this.$refs['imageInput_' + index][0].files = dataTransfer.files;
+                        }, 0);
+                    },
+
+                    remove(image) {
+                        this.removedImages.push(image);
+
+                        let index = this.sliders.images.indexOf(image);
+
+                        this.sliders.images.splice(image, 1);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Footer component --}}
         <script type="module">
             app.component('v-footer-link-theme', {
                 template: '#v-footer-link-theme-template',
@@ -1846,6 +1747,12 @@
                     };
                 },
 
+                computed: {
+                    isFooterLinksEmpty() {
+                        return Object.values(this.footerLinks).every(column => column.length === 0);
+                    },
+                },
+
                 mounted() {
                     Object.keys(this.footerLinks).forEach(key => {
                         this.footerLinks[key] = this.footerLinks[key].map(item => ({
@@ -1853,6 +1760,12 @@
                             column: key
                         }));
                     });
+
+                    for (let i = 1; i <= 3; i++) {
+                        if (!this.footerLinks.hasOwnProperty(`column_${i}`)) {
+                            this.footerLinks[`column_${i}`] = [];
+                        }
+                    }
                 },
 
                 methods: {
@@ -1880,11 +1793,15 @@
 
                     remove(footerLink) {
                         if (
-                            this.footerLinks.hasOwnProperty(footerLink.column) &&
-                            Array.isArray(this.footerLinks[footerLink.column]) &&
-                            this.footerLinks[footerLink.column].length > 0
+                            this.footerLinks.hasOwnProperty(footerLink.column) 
+                            && Array.isArray(this.footerLinks[footerLink.column])
+                            && this.footerLinks[footerLink.column].length > 0
                         ) {
                             this.footerLinks[footerLink.column].splice(0, 1);
+                        }
+
+                        if (this.isFooterLinksEmpty) {
+                            this.isShowIllustrator = true;
                         }
                     },
 
@@ -1895,7 +1812,229 @@
 
                         this.$refs.addLinksModal.toggle();
                     },
-                }
+                },
+            });
+        </script>
+
+        {{-- Parent Theme Customizer Component --}}
+        <script type="module">
+            app.component('v-theme-customizer', {
+                template: '#v-theme-customizer-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        componentName: 'v-slider-theme',
+
+                        themeType: {
+                            product_carousel: 'v-product-theme',
+                            category_carousel: 'v-category-theme',
+                            static_content: 'v-static-theme',
+                            image_carousel: 'v-slider-theme',
+                            footer_links: 'v-footer-link-theme',
+                        } 
+                    };
+                },
+
+                created(){
+                    this.componentName = this.themeType["{{ $theme->type }}"];
+                },
+
+                methods: {
+                    switchComponent(component) {
+                        return;
+                    },
+                },
+            });
+        </script>
+
+        {{-- Html Editor Component --}}
+        <script type="module">
+            app.component('v-html-editor-theme', {
+                template: '#v-html-editor-theme-template',
+
+                data() {
+                    return {
+                        options:{
+                            html: "{!! $theme->options['html'] ?? '' !!}",
+                        }
+                    };
+                },
+
+                created() {
+                    this.initHtmlEditor();
+                },
+
+                methods: {
+                    initHtmlEditor() {
+                        setTimeout(() => {
+                            this._html = new CodeMirror(this.$refs.html, {
+                                lineNumbers: true,
+                                tabSize: 2,
+                                value: this.options.html,
+                                mode: 'html',
+                                theme: 'monokai'
+                            });
+
+                            this._html.on('changes', () => {
+                                this.options.html = this._html.getValue();
+
+                                this.$emit('editorData', this.options);
+                            });
+                        }, 0);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Css Editor Component --}}
+        <script type="module">
+            app.component('v-css-editor-theme', {
+                template: '#v-css-editor-theme-template',
+
+                data() {
+                    return {
+                        options:{
+                            css: "{!! $theme->options['css'] ?? '' !!}",
+                        }
+                    };
+                },
+
+                created() {
+                    this.initCssEditor();
+                },
+
+                methods: {
+                    initCssEditor() {
+                        setTimeout(() => {
+                            this._css = new CodeMirror(this.$refs.css, {
+                                lineNumbers: true,
+                                tabSize: 2,
+                                value: this.options.css,
+                                mode: 'css',
+                                theme: 'monokai'
+                            });
+
+                            this._css.on('changes', () => {
+                                this.options.css = this._css.getValue();
+
+                                this.$emit('editorData', this.options);
+                            });
+                        }, 0);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Static Theme component --}}
+        <script type="module">
+            app.component('v-static-theme', {
+                template: '#v-static-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        inittialEditor: 'v-html-editor-theme',
+
+                        options: @json($theme->options)
+                    };
+                },
+
+                methods: {
+                    switchEditor(editor) {
+                        this.inittialEditor = editor;
+                    },
+
+                    editorData(value) {
+                        if (value.html) {
+                            this.options.html = value.html;
+                        } else {
+                            this.options.css = value.css;
+                        } 
+                    },
+                },
+            });
+        </script>
+            
+        {{-- Category Theme Component --}}
+        <script type="module">
+            app.component('v-category-theme', {
+                template: '#v-category-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        options: @json($theme->options),
+                    };
+                },
+
+                created() {
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters).map(key => ({
+                        key: key,
+                        value: this.options.filters[key]
+                    }));
+                },
+                
+                methods: {
+                    addFilter(params) {
+                        this.options.filters.push(params);
+
+                        this.$refs.categoryFilterModal.toggle();
+                    },
+
+                    remove(filter) {
+                        let index = this.options.filters.indexOf(filter);
+
+                        this.options.filters.splice(index, 1);
+                    },
+                },
+            });
+        </script>
+
+        {{-- Product Theme Component --}}
+        <script type="module">
+            app.component('v-product-theme', {
+                template: '#v-product-theme-template',
+
+                props: ['errors'],
+
+                data() {
+                    return {
+                        options: @json($theme->options),
+                    };
+                },
+
+                created() {
+                    if (! this.options.filters) {
+                        this.options.filters = {};
+                    }
+
+                    this.options.filters = Object.keys(this.options.filters).map(key => ({
+                        key: key,
+                        value: this.options.filters[key]
+                    }));
+                },
+
+                methods: {
+                    addFilter(params) {
+                        this.options.filters.push(params);
+
+                        this.$refs.productFilterModal.toggle();
+                    },
+
+                    remove(filter) {
+                        let index = this.options.filters.indexOf(filter);
+
+                        this.options.filters.splice(index, 1);
+                    },
+                },
             });
         </script>
 
