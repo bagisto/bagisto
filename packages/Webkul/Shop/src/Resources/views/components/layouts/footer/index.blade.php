@@ -20,24 +20,25 @@
 <footer class="mt-[36px] bg-lightOrange  max-sm:mt-[30px]">
     <div class="flex gap-x-[25px] gap-y-[30px] justify-between p-[60px] max-1060:flex-wrap max-1060:flex-col-reverse max-sm:px-[15px]">
         <div class="flex gap-[85px] items-start flex-wrap max-1180:gap-[25px] max-1060:justify-between">
-            @foreach ($customization->options as $footerLinkSection)
-                <ul class="grid gap-[20px] text-[14px]">
-                    @php
-                        usort($footerLinkSection, function ($a, $b) {
-                            return $a['sort_order'] - $b['sort_order'];
-                        });
-                    @endphp
-                    
-                    @foreach ($footerLinkSection as $link)
-                        <li>
-                            <a href="{{ $link['url'] }}">
-                                {{ $link['title'] }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>    
-            @endforeach
-        
+            @isset($customization->options)
+                @foreach ($customization->options as $footerLinkSection)
+                    <ul class="grid gap-[20px] text-[14px]">
+                        @php
+                            usort($footerLinkSection, function ($a, $b) {
+                                return $a['sort_order'] - $b['sort_order'];
+                            });
+                        @endphp
+                        
+                        @foreach ($footerLinkSection as $link)
+                            <li>
+                                <a href="{{ $link['url'] }}">
+                                    {{ $link['title'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>    
+                @endforeach
+            @endisset
         </div>
 
         {{-- News Letter subscription --}}
