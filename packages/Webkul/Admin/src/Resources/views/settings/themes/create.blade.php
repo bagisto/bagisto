@@ -17,8 +17,9 @@
                 <div class="flex gap-x-[10px] items-center">
                     <a 
                         href="{{ route('admin.theme.index') }}"
-                        class="transparent-button hover:bg-gray-200"> 
-                        Back 
+                        class="transparent-button hover:bg-gray-200"
+                    > 
+                        @lang('admin::app.settings.themes.create.back')
                     </a>
                 </div>
 

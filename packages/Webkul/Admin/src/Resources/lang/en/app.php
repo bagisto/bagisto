@@ -2555,6 +2555,7 @@ return [
                 'slider-image'                  => 'Slider Image',
                 'column'                        => 'Column',
                 'select'                        => 'Select',
+                'back'                          => 'Back',
              ],
 
             'edit' => [
@@ -2601,7 +2602,8 @@ return [
                 'add-link'                      => 'Add Link',
                 'column'                        => 'Column',
                 'url'                           => 'Url',
-                'edit'                          => 'Edit'
+                'edit'                          => 'Edit',
+                'back'                          => 'Back',
             ],
 
             'create-success' => 'Theme created successfully',
