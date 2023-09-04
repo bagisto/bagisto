@@ -524,7 +524,7 @@
                     ghost-class="draggable-ghost"
                     v-bind="{animation: 200}"
                     :list="samples"
-                    item-key="id"border-b-[1px]
+                    item-key="id"
                 >
                     <template #item="{ element, index }">
                         <div class="flex gap-[10px] justify-between p-[16px] border-b-[1px] border-slate-300 cursor-pointer">
