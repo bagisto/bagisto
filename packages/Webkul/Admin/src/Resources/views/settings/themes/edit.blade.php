@@ -521,7 +521,7 @@
                                 <select
                                     name="options[sort]"
                                     v-bind="field"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -865,7 +865,7 @@
                                 <select
                                     name="options[sort]"
                                     v-bind="field"
-                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                    class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
                                     :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -1044,7 +1044,7 @@
                                         name="status"
                                         class="hidden"
                                         v-slot="{ field }"
-                                        value="{{ $theme->sort_order }}"
+                                        value="{{ $theme->status }}"
                                     >
                                         <input
                                             type="checkbox"
@@ -1052,7 +1052,7 @@
                                             id="status"
                                             class="sr-only peer"
                                             v-bind="field"
-                                            :checked="{{ $theme->sort_order }}"
+                                            :checked="{{ $theme->status }}"
                                         />
                                     </v-field>
                         
@@ -1271,7 +1271,7 @@
                                         name="status"
                                         class="hidden"
                                         v-slot="{ field }"
-                                        value="{{ $theme->sort_order }}"
+                                        value="{{ $theme->status }}"
                                     >
                                         <input
                                             type="checkbox"
@@ -1279,7 +1279,7 @@
                                             id="status"
                                             class="sr-only peer"
                                             v-bind="field"
-                                            :checked="{{ $theme->sort_order }}"
+                                            :checked="{{ $theme->status }}"
                                         />
                                     </v-field>
                         

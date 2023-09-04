@@ -82,7 +82,9 @@ class ThemeController extends Controller
      */
     public function update($id)
     {
-        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
+        $data = request()->only(['options', 'type', 'name', 'sort_order']);
+
+        $data['status'] = request()->input('status') == 'on';
 
         if ($data['type'] == 'image_carousel') {
             unset($data['options']);
