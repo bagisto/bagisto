@@ -23,6 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing'
+                sh 'php vendor/bin/codecept run unit'
             }
         }
 
