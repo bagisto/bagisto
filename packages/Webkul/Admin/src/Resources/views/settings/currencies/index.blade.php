@@ -39,7 +39,7 @@
                     <button 
                         type="button"
                         class="primary-button"
-                        @click="id=0; $refs.currencyUpdateOrCreateModal.toggle()"
+                        @click="selectedCurrency={}; $refs.currencyUpdateOrCreateModal.toggle()"
                     >
                         @lang('admin::app.settings.currencies.index.create-btn')
                     </button>
@@ -107,7 +107,7 @@
 
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.id)">
+                            <a @click="editModal(record.id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-200 max-sm:place-self-center"
@@ -138,19 +138,31 @@
                 <form @submit="handleSubmit($event, updateOrCreate)">
                     <x-admin::modal ref="currencyUpdateOrCreateModal">
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
-                                <span v-if="id">
-                                    @lang('admin::app.settings.currencies.index.edit.title')
-                                </span>
-                                <span v-else>
-                                    @lang('admin::app.settings.currencies.index.create.title')
-                                </span>
+                            <p
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-if="selectedCurrency"
+                            >
+                                @lang('admin::app.settings.currencies.index.edit.title')
+                            </p>
+
+                            <p 
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-else
+                            >
+                                @lang('admin::app.settings.currencies.index.create.title')
                             </p>
                         </x-slot:header>
 
                         <x-slot:content>
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                                 {!! view_render_event('bagisto.admin.settings.currencies.create.before') !!}
+
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                    v-model="selectedCurrency.id"
+                                >
+                                </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
@@ -161,8 +173,8 @@
                                         type="text"
                                         name="code"
                                         :value="old('code')"
-                                        id="code"
                                         rules="required"
+                                        v-model="selectedCurrency.code"
                                         :label="trans('admin::app.settings.currencies.index.create.code')"
                                         :placeholder="trans('admin::app.settings.currencies.index.create.code')"
                                     >
@@ -183,8 +195,8 @@
                                         type="text"
                                         name="name"
                                         :value="old('name')"
-                                        id="name"
                                         rules="required"
+                                        v-model="selectedCurrency.name"
                                         :label="trans('admin::app.settings.currencies.index.create.name')"
                                         :placeholder="trans('admin::app.settings.currencies.index.create.name')"
                                     >
@@ -205,7 +217,7 @@
                                         type="text"
                                         name="symbol"
                                         :value="old('symbol')"
-                                        id="symbol"
+                                        v-model="selectedCurrency.symbol"
                                         :label="trans('admin::app.settings.currencies.index.create.symbol')"
                                         :placeholder="trans('admin::app.settings.currencies.index.create.symbol')"
                                     >
@@ -226,7 +238,7 @@
                                         type="text"
                                         name="decimal"
                                         :value="old('decimal')"
-                                        id="decimal"
+                                        v-model="selectedCurrency.decimal"
                                         :label="trans('admin::app.settings.currencies.index.create.decimal')"
                                         :placeholder="trans('admin::app.settings.currencies.index.create.decimal')"
                                     >
@@ -263,7 +275,7 @@
 
                 data() {
                     return {
-                        id: 0,
+                        selectedCurrency: {},
                     }
                 },
 
@@ -289,17 +301,9 @@
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.settings.currencies.edit', '') }}/${id}`)
                             .then((response) => {
-                                let values = {
-                                    id: response.data.data.id,
-                                    code: response.data.data.code,
-                                    name: response.data.data.name,
-                                    decimal: response.data.data.decimal,
-                                    symbol: response.data.data.symbol,
-                                };
+                                this.selectedCurrency = response.data.data;
 
                                 this.$refs.currencyUpdateOrCreateModal.toggle();
-
-                                this.$refs.modalForm.setValues(values);
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {
@@ -310,17 +314,17 @@
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm("@lang('admin::app.settings.currencies.index.create.delete-warning')")) {
                             return;
                         }
 
                         this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                                '_method': 'DELETE'
+                            })
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {
