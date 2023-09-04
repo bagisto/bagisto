@@ -82,14 +82,16 @@ class Customer extends Base
      * @param  \Webkul\Customer\Models\Customer  $customer
      * @return void
      */
-    public function afterCustomerNoteCreated($note)
+    public function afterNoteCreated($note)
     {
-        if (request()->has('customer_notified')) {
-            try {
-                Mail::send(new NoteNotification($note, request()->input('note', 'email')));
-            } catch (\Exception $e) {
-                session()->flash('warning', $e->getMessage());
-            }
+        if (! request()->has('customer_notified')) {
+            return;
+        }
+
+        try {
+            Mail::send(new NoteNotification($note, request()->input('note', 'email')));
+        } catch (\Exception $e) {
+            session()->flash('warning', $e->getMessage());
         }
     }
 }

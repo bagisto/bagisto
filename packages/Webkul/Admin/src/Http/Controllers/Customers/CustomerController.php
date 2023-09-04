@@ -11,7 +11,6 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
 use Webkul\Core\Http\Requests\MassUpdateRequest;
 use Webkul\Core\Http\Requests\MassDestroyRequest;
-use Webkul\Admin\Mail\NewCustomerNotification;
 use Webkul\Customer\Repositories\CustomerNoteRepository;
 
 class CustomerController extends Controller
@@ -76,17 +75,7 @@ class CustomerController extends Controller
             'is_verified' => 1,
         ]);
 
-        $customer = $this->customerRepository->create($data);
-
-        Event::dispatch('customer.registration.after', $customer);
-
-        if (core()->getConfigData('emails.general.notifications.emails.general.notifications.customer')) {
-            try {
-                Mail::queue(new NewCustomerNotification($customer, $password));
-            } catch (\Exception $e) {
-                report($e);
-            }
-        }
+        $this->customerRepository->create($data);
 
         return new JsonResource([
             'message' => trans('admin::app.customers.index.create.create-success'),

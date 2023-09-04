@@ -34,8 +34,3 @@ class NoteNotification extends Mailable
             ->with('customerNote', $this->customerNote);
     }
 }
-
-
-
-
-
