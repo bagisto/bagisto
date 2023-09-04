@@ -151,7 +151,10 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, updateOrCreate)">
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="exchangeRateCreateForm"
+                >
                     <!-- Modal -->
                     <x-admin::modal ref="exchangeRateUpdateOrCreateModal">
                         <x-slot:header>
@@ -271,7 +274,13 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", params)
+                        let formData = new FormData(this.$refs.exchangeRateCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.settings.exchange_rates.update')  }}" : "{{ route('admin.settings.exchange_rates.store')  }}", formData)
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 

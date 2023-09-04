@@ -47,7 +47,6 @@
             },
 
             mounted() {
-                console.log(this.images);
                 this.navigate(this.currentIndex);
 
                 this.play();

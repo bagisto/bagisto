@@ -142,7 +142,10 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, updateOrCreate)">
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="taxCategoryCreateForm"
+                >
                     <x-admin::modal ref="taxCategory">
                         <x-slot:header>
                             <p class="text-[18px] text-gray-800 font-bold">
@@ -332,7 +335,13 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}", params,{
+                        let formData = new FormData(this.$refs.taxCategoryCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.settings.taxes.categories.update') }}" : "{{ route('admin.settings.taxes.categories.store') }}", formData,{
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                                 }

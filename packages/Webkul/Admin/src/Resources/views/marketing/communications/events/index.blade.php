@@ -133,7 +133,10 @@
                 as="div"
                 ref="modalForm"
             >
-                <form @submit="handleSubmit($event, createEmailEvents)">
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="eventCreateForm"
+                >
                     <x-admin::modal ref="emailEvents">
                         <x-slot:header>
                             <p
@@ -257,8 +260,14 @@
                 },
 
                 methods: {
-                    createEmailEvents(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.marketing.communications.events.update')}}" : "{{ route('admin.marketing.communications.events.store') }}", params)
+                    updateOrCreate(params, { resetForm, setErrors }) {
+                        let formData = new FormData(this.$refs.eventCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.communications.events.update')}}" : "{{ route('admin.marketing.communications.events.store') }}", formData)
                             .then((response) => {
                                 this.$refs.emailEvents.toggle();
 
