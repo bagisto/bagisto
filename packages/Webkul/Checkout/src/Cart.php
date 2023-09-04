@@ -647,11 +647,11 @@ class Cart
      */
     private function collectAddress($address): array
     {
-        $address = $this->customerAddressRepository->find($address['address_id'] ?? null);
+        $address = $this->customerAddressRepository->find($address['address_id'] ?? null)?->toArray() ?? $address;
 
         return [
             ...$this->fillCustomerAttributes(),
-            ...$this->fillAddressAttributes($address?->toArray() ?? []),
+            ...$this->fillAddressAttributes($address ?? []),
         ];
     }
 
