@@ -91,65 +91,63 @@
                     </div>
                     <!-- Right sub-component -->
                     <div class="flex flex-col gap-[8px] w-[360px] max-w-full max-sm:w-full">
-                        <div class="bg-white rounded-[4px] box-shadow">
-                            <x-admin::accordion>
-                                <x-slot:header>
-                                    <div class="flex items-center justify-between p-[6px]">
-                                        <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
-                                            @lang('admin::app.settings.roles.edit.general')
-                                        </p>
-                                    </div>
-                                </x-slot:header>
-                        
-                                <x-slot:content>
-                                    <div class="mb-[10px]">
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.settings.roles.edit.name')
-                                            </x-admin::form.control-group.label>
-    
-                                            <x-admin::form.control-group.control
-                                                type="text"
-                                                name="name"
-                                                value="{{ old('name') ?: $role->name }}"
-                                                id="name"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.roles.edit.name')"
-                                                :placeholder="trans('admin::app.settings.roles.edit.name')"
-                                            >
-                                            </x-admin::form.control-group.control>
-    
-                                            <x-admin::form.control-group.error
-                                                control-name="name"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                                    
-                                        <x-admin::form.control-group class="mb-[10px]">
-                                            <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.settings.roles.edit.description')
-                                            </x-admin::form.control-group.label>
-    
-                                            <x-admin::form.control-group.control
-                                                type="textarea"
-                                                name="description"
-                                                value="{{ old('description') ?: $role->description }}"
-                                                id="description"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.roles.edit.description')"
-                                                :placeholder="trans('admin::app.settings.roles.edit.description')"
-                                            >
-                                            </x-admin::form.control-group.control>
-    
-                                            <x-admin::form.control-group.error
-                                                control-name="description"
-                                            >
-                                            </x-admin::form.control-group.error>
-                                        </x-admin::form.control-group>
-                                    </div>
-                                </x-slot:content>
-                            </x-admin::accordion>
-                        </div>
+                        <x-admin::accordion>
+                            <x-slot:header>
+                                <div class="flex items-center justify-between p-[6px]">
+                                    <p class="p-[10px] text-gray-600 text-[16px] font-semibold">
+                                        @lang('admin::app.settings.roles.edit.general')
+                                    </p>
+                                </div>
+                            </x-slot:header>
+                    
+                            <x-slot:content>
+                                <div class="mb-[10px]">
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.roles.edit.name')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            name="name"
+                                            value="{{ old('name') ?: $role->name }}"
+                                            id="name"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.roles.edit.name')"
+                                            :placeholder="trans('admin::app.settings.roles.edit.name')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="name"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                
+                                    <x-admin::form.control-group class="mb-[10px]">
+                                        <x-admin::form.control-group.label class="required">
+                                            @lang('admin::app.settings.roles.edit.description')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="textarea"
+                                            name="description"
+                                            value="{{ old('description') ?: $role->description }}"
+                                            id="description"
+                                            rules="required"
+                                            :label="trans('admin::app.settings.roles.edit.description')"
+                                            :placeholder="trans('admin::app.settings.roles.edit.description')"
+                                        >
+                                        </x-admin::form.control-group.control>
+
+                                        <x-admin::form.control-group.error
+                                            control-name="description"
+                                        >
+                                        </x-admin::form.control-group.error>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </x-slot:content>
+                        </x-admin::accordion>
                     </div>
                 </div>
                 </x-admin::form>
