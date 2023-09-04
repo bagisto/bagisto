@@ -14,6 +14,15 @@
             </p>
             
             <div class="flex gap-x-[10px] items-center">
+                <div class="flex gap-x-[10px] items-center">
+                    <a 
+                        href="{{ route('admin.theme.index') }}"
+                        class="transparent-button hover:bg-gray-200"
+                    > 
+                        @lang('admin::app.settings.themes.edit.back')
+                    </a>
+                </div>
+                
                 <button 
                     type="submit"
                     class="primary-button"
@@ -30,129 +39,6 @@
         {{-- Customizer Parent Template--}}
         <script type="text/x-template" id="v-theme-customizer-template">
             <div>
-                <div class="flex gap-[10px]">
-                    <div 
-                        class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2 box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentName == 'v-slider-theme'}"
-                        @click="switchComponent('v-slider-theme')"
-                    >
-                        <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
-                            <img
-                                v-if="componentName == 'v-slider-theme'"
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/active_slider.png') }}"
-                            >
-
-                            <img
-                                v-else
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/inactive_slider.png') }}"
-                            >
-                
-                
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
-                                @lang('admin::app.settings.themes.edit.slider')
-                            </p>
-                        </div>
-                    </div>
-                
-                    <div    
-                        class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentName == 'v-product-theme'}"
-                        @click="switchComponent('v-product-theme')"
-                    >   
-                        <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
-                            <img
-                                v-if="componentName == 'v-product-theme'"
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/product_carousel.png') }}"
-                            >
-
-                            <img
-                                v-else
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/inactive_product_carousel.png') }}"
-                            >
-                
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold"> 
-                                @lang('admin::app.settings.themes.edit.product-carousel')    
-                            </p>
-                        </div>
-                    </div>
-                
-                    <div    
-                        class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentName == 'v-category-theme'}"
-                        @click="switchComponent('v-category-theme')"
-                    >   
-                        <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
-                            <img
-                                v-if="componentName == 'v-category-theme'"
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/active_category.png') }}"
-                            >
-
-                            <img
-                                v-else
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/inactive_category.png') }}"
-                            >
-                
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
-                                @lang('admin::app.settings.themes.edit.category-carousel')    
-                            </p>
-                        </div>
-                    </div>
-                
-                    <div    
-                        class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentName == 'v-static-theme'}"
-                        @click="switchComponent('v-static-theme')"
-                    >   
-                        <div class="flex flex-col items-center max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
-                            <img
-                                v-if="componentName == 'v-static-theme'"
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/active_static_content.png') }}"
-                            >
-
-                            <img
-                                v-else
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/inactive_static_content.png') }}"
-                            >
-                
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
-                                @lang('admin::app.settings.themes.edit.static-content')    
-                            </p>
-                        </div>
-                    </div>
-                
-                    <div    
-                        class="flex justify-center w-[180px] h-[180px] p-[16px] mt-[8px] bg-white rounded-[4px] border-solid border-2  box-shadow max-1580:grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 cursor-pointer"
-                        :class="{'border-blue-600': componentName == 'v-footer-link-theme'}"
-                        @click="switchComponent('v-footer-link-theme')"
-                    >   
-                        <div class="max-w-[360px] p-[8px] rounded-[4px] transition-all hover:bg-gray-50">
-                            <img
-                                v-if="componentName == 'v-footer-link-theme'"
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/active_footer_link.png') }}"
-                            >
-
-                            <img
-                                v-else
-                                class="w-[80px] h-[80px]"
-                                src="{{ bagisto_asset('images/inactive_footer_link.png') }}"
-                            >
-                
-                            <p class="mb-[5px] text-[12px] top-[134px] text-center text-gray-800 font-semibold">
-                                @lang('admin::app.settings.themes.edit.footer-link')    
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <component
                     :errors="errors"
                     :is="componentName"
@@ -189,17 +75,15 @@
                             </div>
 
                             <template v-for="(removeImage, index) in removedImages">
-                                @{{removeImage}}
+                                <!-- Hidden Input -->
+                                <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
                                 <input type="hidden" :name="'removeImages[]'" :value="removeImage"/>  
-                                
-                                    <!-- Hidden Input -->
-                                    <input type="file" class="hidden" :name="'options_remove['+ index +'][image]'" :ref="'imageInput_' + index" />
-                                    <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
-                                    <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
+                                <input type="hidden" :name="'options_remove['+ index +'][link]'" :value="removeImage.link" />    
+                                <input type="hidden" :name="'options_remove['+ index +'][image]'" :value="removeImage.image" />  
                             </template>
 
                             <div
-                                class="grid"
+                                class="grid pt-[16px]"
                                 v-if="sliders.images.length"
                                 v-for="(image, index) in sliders.images"
                             >
@@ -209,12 +93,17 @@
                                 <input type="hidden" :name="'options['+ index +'][image]'" :value="image.image" />    
                             
                                 <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
+                                <div 
+                                    class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                    :class="{
+                                        'border-b-[1px] border-slate-300': index < sliders.images.length - 1
+                                    }"
+                                >
                                     <div class="flex gap-[10px]">
                                         <div class="grid gap-[6px] place-content-start">
                                             <p class="text-gray-600">
                                                 <div> 
-                                                    @lang('admin::app.settings.themes.create.link'): 
+                                                    @lang('admin::app.settings.themes.edit.link'): 
 
                                                     <span class="text-gray-600 transition-all">
                                                         @{{ image.link }}
@@ -224,7 +113,7 @@
 
                                             <p class="text-gray-600">
                                                 <div class="flex justify-between"> 
-                                                    @lang('admin::app.settings.themes.create.image'): 
+                                                    @lang('admin::app.settings.themes.edit.image'): 
 
                                                     <span class="text-gray-600 transition-all">
                                                         <a 
@@ -403,15 +292,15 @@
                                     <x-admin::form.control-group class="mb-[10px]">
                                         <x-admin::form.control-group class="mb-[10px]">
                                             <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.settings.themes.create.link')
+                                                @lang('admin::app.settings.themes.edit.link')
                                             </x-admin::form.control-group.label>
 
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="link"
-                                                rules="required"
-                                                :label="trans('admin::app.settings.themes.create.link')"
-                                                :placeholder="trans('admin::app.settings.themes.create.link')"
+                                                rules="required|url"
+                                                :label="trans('admin::app.settings.themes.edit.link')"
+                                                :placeholder="trans('admin::app.settings.themes.edit.link')"
                                             >
                                             </x-admin::form.control-group.control>
             
@@ -463,7 +352,7 @@
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.edit.product-carousel')
@@ -475,7 +364,7 @@
                             </div>
                         </div>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px] pt-[16px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.filter-title')
                             </x-admin::form.control-group.label>
@@ -556,7 +445,7 @@
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    @lang('admin::app.settings.themes.create.filters')
+                                    @lang('admin::app.settings.themes.edit.filters')
                                 </p>
                             </div>
             
@@ -565,51 +454,54 @@
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.productFilterModal.toggle()"
                                 >
-                                    @lang('admin::app.settings.themes.create.add-filter-btn')
+                                    @lang('admin::app.settings.themes.edit.add-filter-btn')
                                 </div>
                             </div>
                         </div>
 
                         <!-- Filters Lists -->
-                        <div v-if="options.filters.length">
-                            <div
-                                class="grid"
-                                v-for="filter in options.filters"
+                        <div
+                            class="grid"
+                            v-if="options.filters.length"
+                            v-for="(filter, index) in options.filters"
+                        >
+                            <!-- Hidden Input -->
+                            <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                        
+                            <!-- Details -->
+                            <div 
+                                class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                :class="{
+                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                }"
                             >
-                                <!-- Hidden Input -->
-                                <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
-                            
-                                <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                    <div class="flex gap-[10px]">
-                                        <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-gray-600">
-                                                <div> 
-                                                    @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
-                                                </div>
-                                            </p>
+                                <div class="flex gap-[10px]">
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-gray-600">
+                                            <div> 
+                                                @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
+                                            </div>
+                                        </p>
 
-                                            <p class="text-gray-600">
-                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
-                                            </p>
-                                        </div>
+                                        <p class="text-gray-600">
+                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    <!-- Actions -->
-                                    <div class="grid gap-[4px] place-content-start text-right">
-                                        <div class="flex gap-x-[20px] items-center">
-                                            <p 
-                                                class="text-red-600 cursor-pointer transition-all hover:underline"
-                                                @click="remove(filter)"
-                                            > 
-                                                @lang('admin::app.settings.themes.edit.delete')
-                                            </p>
-                                        </div>
+                                <!-- Actions -->
+                                <div class="grid gap-[4px] place-content-start text-right">
+                                    <div class="flex gap-x-[20px] items-center">
+                                        <p 
+                                            class="text-red-600 cursor-pointer transition-all hover:underline"
+                                            @click="remove(filter)"
+                                        > 
+                                            @lang('admin::app.settings.themes.edit.delete')
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                         <!-- Filters Illustration -->
                         <div    
                             class="grid gap-[14px] justify-center justify-items-center py-[40px] px-[10px]"
@@ -818,7 +710,7 @@
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
                 <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.edit.category-carousel')
@@ -830,7 +722,7 @@
                             </div>
                         </div>
 
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-[10px] pt-[16px]">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.filter-title')
                             </x-admin::form.control-group.label>
@@ -912,7 +804,7 @@
                         <div class="flex gap-x-[10px] justify-between items-center">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
-                                    @lang('admin::app.settings.themes.create.filters')
+                                    @lang('admin::app.settings.themes.edit.filters')
                                 </p>
                             </div>
             
@@ -921,46 +813,50 @@
                                     class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                     @click="$refs.categoryFilterModal.toggle()"
                                 >
-                                    @lang('admin::app.settings.themes.create.add-filter-btn')
+                                    @lang('admin::app.settings.themes.edit.add-filter-btn')
                                 </div>
                             </div>
                         </div>
 
                         <!-- Filters Lists -->
-                        <div v-if="options.filters.length">
-                            <div
-                                class="grid"
-                                v-for="filter in options.filters"
+                        <div
+                            class="grid"
+                            v-if="options.filters.length"
+                            v-for="(filter, index) in options.filters"
+                        >
+                            <!-- Hidden Input -->
+                            <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
+                        
+                            <!-- Details -->
+                            <div 
+                                class="flex gap-[10px] justify-between py-5 cursor-pointer"
+                                :class="{
+                                    'border-b-[1px] border-slate-300': index < options.filters.length - 1
+                                }"
                             >
-                                <!-- Hidden Input -->
-                                <input type="hidden" :name="'options[filters][' + filter.key +']'" :value="filter.value"> 
-                            
-                                <!-- Details -->
-                                <div class="flex gap-[10px] justify-between  border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                    <div class="flex gap-[10px]">
-                                        <div class="grid gap-[6px] place-content-start">
-                                            <p class="text-gray-600">
-                                                <div> 
-                                                    @{{ "@lang('admin::app.settings.themes.create.key')".replace(':key', filter.key) }}
-                                                </div>
-                                            </p>
+                                <div class="flex gap-[10px]">
+                                    <div class="grid gap-[6px] place-content-start">
+                                        <p class="text-gray-600">
+                                            <div> 
+                                                @{{ "@lang('admin::app.settings.themes.edit.key')".replace(':key', filter.key) }}
+                                            </div>
+                                        </p>
 
-                                            <p class="text-gray-600">
-                                                @{{ "@lang('admin::app.settings.themes.create.value')".replace(':value', filter.value) }}
-                                            </p>
-                                        </div>
+                                        <p class="text-gray-600">
+                                            @{{ "@lang('admin::app.settings.themes.edit.value')".replace(':value', filter.value) }}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    <!-- Actions -->
-                                    <div class="grid gap-[4px] place-content-start text-right">
-                                        <div class="flex gap-x-[20px] items-center">
-                                            <p 
-                                                class="text-red-600 cursor-pointer transition-all hover:underline"
-                                                @click="remove(filter)"
-                                            > 
-                                                @lang('admin::app.settings.themes.edit.delete')
-                                            </p>
-                                        </div>
+                                <!-- Actions -->
+                                <div class="grid gap-[4px] place-content-start text-right">
+                                    <div class="flex gap-x-[20px] items-center">
+                                        <p 
+                                            class="text-red-600 cursor-pointer transition-all hover:underline"
+                                            @click="remove(filter)"
+                                        > 
+                                            @lang('admin::app.settings.themes.edit.delete')
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -1173,9 +1069,9 @@
         {{-- Static Template --}}
         <script type="text/x-template" id="v-static-theme-template">
             <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
-                <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+                <div class="flex flex-col gap-[8px] flex-1 min-w-[931px] max-xl:flex-auto">
                     <div class="p-[16px] bg-white rounded box-shadow">
-                        <div class="flex gap-x-[10px] justify-between items-center">
+                        <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                             <div class="flex flex-col gap-[4px]">
                                 <p class="text-[16px] text-gray-800 font-semibold">
                                     @lang('admin::app.settings.themes.edit.static-content')
@@ -1186,9 +1082,8 @@
                                 </p>
                             </div>
                         </div>
-
                         
-                        <div class="text-sm font-medium text-center text-gray-500">
+                        <div class="text-sm font-medium text-center pt-[16px] text-gray-500">
                             <div class="tabs">
                                 <div class="flex gap-[15px] mb-[15px] pt-[8px] border-b-[2px] max-sm:hidden">
                                     <p @click="switchEditor('v-html-editor-theme')">
@@ -1196,7 +1091,7 @@
                                             class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-html-editor-theme'}"
                                         >
-                                            @lang('admin::app.settings.themes.create.html')
+                                            @lang('admin::app.settings.themes.edit.html')
                                         </div>
                                     </p>
 
@@ -1205,7 +1100,7 @@
                                             class="mb-[-1px] border-b-[2px] transition pb-[14px] px-[10px] text-[16px] font-medium text-gray-600 cursor-pointer"
                                             :class="{'border-blue-600': inittialEditor == 'v-css-editor-theme'}"
                                         >
-                                            @lang('admin::app.settings.themes.create.css')
+                                            @lang('admin::app.settings.themes.edit.css')
                                         </div>
                                     </p>
                                 </div>
@@ -1214,6 +1109,7 @@
 
                         <input type="hidden" name="options[html]" v-model="options.html">
                         <input type="hidden" name="options[css]" v-model="options.css">
+
 
                         <KeepAlive>
                             <component 
@@ -1344,7 +1240,7 @@
                     <div class=" flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
                         <div class="p-[16px] bg-white rounded box-shadow">
                             <!-- Add Links-->
-                            <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex gap-x-[10px] justify-between items-center mb-[10px]">
                                 <div class="flex flex-col gap-[4px]">
                                     <p class="text-[16px] text-gray-800 font-semibold">
                                         @lang('admin::app.settings.themes.edit.footer-link')
@@ -1360,18 +1256,20 @@
                                         class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
                                         @click="isUpdating=false;$refs.addLinksModal.toggle()"
                                     >
-                                        @lang('admin::app.settings.themes.edit.add-links')
+                                        @lang('admin::app.settings.themes.edit.add-link')
                                     </div>
                                 </div>
                             </div>
     
+                            <!-- Footer Links -->
                             <div
+                                class="pt-[16px]"
                                 v-if="Object.keys(footerLinks).length"
                                 v-for="(footerLink, index) in footerLinks"
                             >
                                 <!-- Information -->
                                 <div 
-                                    class="grid"
+                                    class="grid border-b-[1px] last:border-b-0 border-slate-300"
                                     v-for="(link, key) in footerLink"
                                 >
                                     <!-- Hidden Input -->
@@ -1379,9 +1277,9 @@
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][url]'" :value="link.url"> 
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][title]'" :value="link.title"> 
                                     <input type="hidden" :name="'options['+ link.column +'][' + key +'][sort_order]'" :value="link.sort_order"> 
-                                
-                                    <div class="flex gap-[10px] justify-between border-b-[1px] py-5 border-slate-300 cursor-pointer">
-                                        <div class="flex gap-[10px]"><!-- Drag Icon -->
+                                    
+                                    <div class="flex gap-[10px] justify-between py-5 cursor-pointer">
+                                        <div class="flex gap-[10px] ">
                                             <div class="grid gap-[6px] place-content-start">
                                                 <p class="text-gray-600">
                                                     <div> 
@@ -1590,7 +1488,7 @@
                         <x-admin::modal ref="addLinksModal">
                             <x-slot:header>
                                 <p class="text-[18px] text-gray-800 font-bold">
-                                    @lang('admin::app.settings.themes.edit.create-filter')
+                                    @lang('admin::app.settings.themes.edit.footer-link-form-title')
                                 </p>
                             </x-slot:header>
         
@@ -1648,7 +1546,7 @@
                                         <x-admin::form.control-group.control
                                             type="text"
                                             name="url"
-                                            rules="required"
+                                            rules="required|url"
                                             :label="trans('admin::app.settings.themes.edit.url')"
                                             :placeholder="trans('admin::app.settings.themes.edit.url')"
                                             ::disabled="isUpdating"
@@ -1864,12 +1762,6 @@
                 created(){
                     this.componentName = this.themeType["{{ $theme->type }}"];
                 },
-
-                methods: {
-                    switchComponent(component) {
-                        return;
-                    },
-                },
             });
         </script>
 
@@ -1893,11 +1785,13 @@
                 methods: {
                     initHtmlEditor() {
                         setTimeout(() => {
+                            this.options.html = beautify.html(this.options.html);
+
                             this._html = new CodeMirror(this.$refs.html, {
                                 lineNumbers: true,
                                 tabSize: 2,
                                 value: this.options.html,
-                                mode: 'html',
+                                mode: 'javascript',
                                 theme: 'monokai'
                             });
 
@@ -1932,6 +1826,8 @@
                 methods: {
                     initCssEditor() {
                         setTimeout(() => {
+                            this.options.css = beautify.css(this.options.css);
+
                             this._css = new CodeMirror(this.$refs.css, {
                                 lineNumbers: true,
                                 tabSize: 2,
@@ -2072,6 +1968,12 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"
         >
         </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/simply-beautiful@latest/dist/index.min.js"></script>
+
+        <script>
+            let beautify = SimplyBeautiful();
+        </script>
     @endPushOnce
 
     @pushOnce('styles')
@@ -2083,3 +1985,4 @@
         </link>
     @endPushOnce
 </x-admin::layouts>
+                            
