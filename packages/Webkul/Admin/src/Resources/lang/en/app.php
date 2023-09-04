@@ -585,7 +585,7 @@ return [
 
                 'videos' => [
                     'add-video-btn'     => 'Add Video',
-                    'allowed-types'     => 'png, jpeg, jpg',
+                    'allowed-types'     => 'mp4, webm, mkv',
                     'info'              => 'Maximum video size should be like :size',
                     'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
                     'title'             => 'Videos',
