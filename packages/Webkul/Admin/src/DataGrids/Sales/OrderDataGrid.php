@@ -87,13 +87,13 @@ class OrderDataGrid extends DataGrid
             'searchable' => true,
             'filterable' => true,
             'sortable'   => true,
-            'closure'    => function ($value) {
-                switch ($value->status) {
+            'closure'    => function ($row) {
+                switch ($row->status) {
                     case 'processing':
                         return '<p class="label-processing">' . trans('admin::app.sales.orders.index.datagrid.processing') . '</p>';
 
                     case 'completed':
-                        return '<p class="label-active">' . trans('admin::app.sales.orders.index.datagrid.success') . '</p>';
+                        return '<p class="label-active">' . trans('admin::app.sales.orders.index.datagrid.completed') . '</p>';
 
                     case 'canceled':
                         return '<p class="label-cancelled">' . trans('admin::app.sales.orders.index.datagrid.canceled') . '</p>';
@@ -129,6 +129,9 @@ class OrderDataGrid extends DataGrid
             'searchable' => false,
             'filterable' => true,
             'sortable'   => false,
+            'closure'    => function ($row) {
+                return core()->getConfigData('sales.paymentmethods.' . $row->method . '.title');
+            },
         ]);
 
         $this->addColumn([

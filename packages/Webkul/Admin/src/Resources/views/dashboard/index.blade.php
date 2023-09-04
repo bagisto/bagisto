@@ -373,31 +373,31 @@
                                     @switch($item->status)
                                         @case('processing')
                                             <p class="label-active">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('completed')
                                             <p class="label-active">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('pending')
                                             <p class="label-pending">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('canceled')
                                             <p class="label-cancelled">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
                                         @case('closed')
                                             <p class="label-closed">
-                                                {{ $item->status }}
+                                                {{ $item->status_label }}
                                             </p>
                                             @break
 
@@ -414,7 +414,7 @@
 
                                 {{-- Payment Mode --}}
                                 <p class="text-gray-600">
-                                    @lang('admin::app.dashboard.index.pay-by', ['method' => $item->payment->method])
+                                    @lang('admin::app.dashboard.index.pay-by', ['method' => core()->getConfigData('sales.paymentmethods.' . $item->payment->method . '.title')])
                                 </p>
 
                                 {{-- Channel Name --}}
