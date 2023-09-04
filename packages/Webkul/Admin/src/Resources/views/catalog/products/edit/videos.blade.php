@@ -97,7 +97,7 @@
 
                     <!-- Play Pause Button -->
                     <span
-                        class="text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-10"
+                        class="text-[24px] p-[6px] rounded-[6px] cursor-pointer hover:bg-gray-100"
                         :class="[isPlaying ? 'icon-sort-right': 'icon-sort-right']"
                         @click="playPause"
                     ></span>
