@@ -48,10 +48,8 @@ class ThemeController extends Controller
      */
     public function store()
     {
-        $data = request()->only(['options', 'type', 'name', 'sort_order']);
+        $data = request()->only(['options', 'type', 'name', 'sort_order', 'status']);
 
-        $data['status'] = request()->input('status') == 'on';
-        
         $theme = $this->themeCustomizationRepository->create($data);
 
         if ($data['type'] == 'image_carousel') {
