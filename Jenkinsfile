@@ -1,32 +1,36 @@
 pipeline {
     agent any
+
     stages {
-        stage('Checkout') {
+        stage('Hello') {
             steps {
-                // 检出代码，这一步可以根据需要配置SCM和仓库URL
-                // 例如，可以使用Git SCM插件
-                checkout([$class: 'GitSCM', branches: [[name: 'master']], 
-                          userRemoteConfigs: [[url: 'https://github.com/Ryann727/bagisto.git']]])
+                echo 'Hello World'
             }
         }
+
         stage('Build') {
             steps {
-                // 在这个阶段执行 composer install 命令
+                echo 'Building'
                 sh 'composer install'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+
         stage('Release') {
             steps {
-                // 在这个阶段执行 php artisan serve 命令（前台运行）
-                sh 'php artisan serve'
+                echo 'Releasing'
             }
         }
-        stage('Unit Test') {
-            steps {
-                // 在这个阶段执行单元测试
-                sh 'php vendor/bin/codecept run unit'
-            }
-        }
-        // 可以添加更多阶段，如部署等
     }
 }
