@@ -1,11 +1,11 @@
 @component('shop::emails.layout')
     <div style="margin-bottom: 34px;">
         <span style="font-size: 22px;font-weight: 600;color: #121A26">
-            {{ __('shop::app.emails.orders.shipped.title') }}
+            @lang('shop::app.emails.orders.shipped.title')
         </span> <br>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-            {{ __('shop::app.emails.dear', ['customer_name' => $shipment->order->customer_full_name]) }},👋
+            @lang('shop::app.emails.dear', ['customer_name' => $shipment->order->customer_full_name]),👋
         </p>
 
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
@@ -18,14 +18,14 @@
     </div>
 
     <div style="font-size: 20px;font-weight: 600;color: #121A26">
-        {{ __('shop::app.emails.orders.shipped.summary') }}
+        @lang('shop::app.emails.orders.shipped.summary')
     </div>
 
     <div style="display: flex;flex-direction: row;margin-top: 20px;justify-content: space-between;margin-bottom: 40px;">
         @if ($shipment->order->shipping_address)
             <div style="line-height: 25px;">
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('shop::app.emails.orders.shipping-address') }}
+                    @lang('shop::app.emails.orders.shipping-address')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;margin-bottom: 40px;">
@@ -41,11 +41,11 @@
 
                     ---<br/>
 
-                    {{ __('shop::app.emails.orders.contact') }} : {{ $shipment->order->billing_address->phone }}
+                    @lang('shop::app.emails.orders.contact') : {{ $shipment->order->billing_address->phone }}
                 </div>
 
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('shop::app.emails.orders.shipping') }}
+                    @lang('shop::app.emails.orders.shipping')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;">
@@ -57,15 +57,17 @@
                 @if (! empty($additionalDetails))
                     <div style="font-size: 16px; color: #384860;">
                         <div>
-                            <span>{{ __('shop::app.emails.orders.carrier') }} : </span>
+                            <span>
+                                @lang('shop::app.emails.orders.carrier') : 
+                            </span>
                             
                             {{ $shipment->carrier_title }}
                         </div>
 
                         <div>
-                            <span>{{ __('shop::app.emails.orders.tracking-number') }} : </span>
-                            
-                            {{ $shipment->track_number }}
+                            <span>
+                                @lang('shop::app.emails.orders.tracking-number', ['tracking_number' =>  $shipment->track_number])
+                            </span>
                         </div>
                     </div>
                 @endif
@@ -75,7 +77,7 @@
         @if ($shipment->order->billing_address)
             <div style="line-height: 25px;">
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('shop::app.emails.orders.billing-address') }}
+                    @lang('shop::app.emails.orders.billing-address')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;margin-bottom: 40px;">
@@ -91,11 +93,11 @@
 
                     ---<br/>
 
-                    {{ __('shop::app.emails.orders.contact') }} : {{ $shipment->order->billing_address->phone }}
+                    @lang('shop::app.emails.orders.contact') : {{ $shipment->order->billing_address->phone }}
                 </div>
 
                 <div style="font-size: 16px;font-weight: 600;color: #121A26;">
-                    {{ __('shop::app.emails.orders.payment') }}
+                    @lang('shop::app.emails.orders.payment')
                 </div>
 
                 <div style="font-size: 16px;font-weight: 400;color: #384860;">
@@ -110,10 +112,11 @@
         border-spacing: 0;width: 100%">
             <thead>
                 <tr style="color: #121A26;border-top: 1px solid #CBD5E1;border-bottom: 1px solid #CBD5E1;">
-                    <th style="text-align: left;padding: 15px">{{ __('shop::app.emails.orders.sku') }}</th>
-                    <th style="text-align: left;padding: 15px">{{ __('shop::app.emails.orders.name') }}</th>
-                    <th style="text-align: left;padding: 15px">{{ __('shop::app.emails.orders.price') }}</th>
-                    <th style="text-align: left;padding: 15px">{{ __('shop::app.emails.orders.qty') }}</th>
+                    @foreach (['sku', 'name', 'price', 'qty'] as $item)
+                        <th style="text-align: left;padding: 15px">
+                            @lang('shop::app.emails.orders.' . $item)
+                        </th>    
+                    @endforeach
                 </tr>
             </thead>
 
@@ -148,7 +151,9 @@
 
     <div style="display: grid;justify-content: end;font-size: 16px;color: #384860;line-height: 30px;padding-top: 20px;padding-bottom: 20px;">
         <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-            <span>{{ __('shop::app.emails.orders.subtotal') }}</span>
+            <span>
+                @lang('shop::app.emails.orders.subtotal')
+            </span>
 
             <span style="text-align: right;">
                 {{ core()->formatPrice($shipment->sub_total, $shipment->order_currency_code) }}
@@ -157,7 +162,9 @@
 
         @if ($shipment->order->shipping_address)
             <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>{{ __('shop::app.emails.orders.shipping-handling') }}</span>
+                <span>
+                    @lang('shop::app.emails.orders.shipping-handling')
+                </span>
 
                 <span style="text-align: right;">
                     {{ core()->formatPrice($shipment->shipping_amount, $shipment->order_currency_code) }}
@@ -168,7 +175,7 @@
         @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($shipment->order, false) as $taxRate => $taxAmount )
             <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
                 <span>
-                    {{ __('shop::app.emails.orders.tax') }} {{ $taxRate }} %
+                    @lang('shop::app.emails.orders.tax') {{ $taxRate }} %
                 </span>
 
                 <span style="text-align: right;">
@@ -179,7 +186,9 @@
 
         @if ($shipment->discount_amount > 0)
             <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <span>{{ __('shop::app.emails.orders.discount') }}</span>
+                <span>
+                    @lang('shop::app.emails.orders.discount')
+                </span>
 
                 <span style="text-align: right;">
                     {{ core()->formatPrice($shipment->discount_amount, $shipment->order_currency_code) }}
@@ -188,7 +197,9 @@
         @endif
 
         <div style="display: grid;gap: 100px;grid-template-columns: repeat(2, minmax(0, 1fr));font-weight: bold">
-            <span>{{ __('shop::app.emails.orders.grand-total') }}</span>
+            <span>
+                @lang('shop::app.emails.orders.grand-total')
+            </span>
 
             <span style="text-align: right;">
                 {{ core()->formatPrice($shipment->grand_total, $shipment->order_currency_code) }}

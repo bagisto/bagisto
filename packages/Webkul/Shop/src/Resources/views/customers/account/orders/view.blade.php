@@ -40,7 +40,7 @@
         <x-shop::tabs class="mt-5">
             <x-shop::tabs.item
                 class="!px-0"
-                title="{{ __('shop::app.customers.account.orders.view.information.info') }}"
+                :title="trans('shop::app.customers.account.orders.view.information.info')"
                 :is-selected="true"
             >
                 <div class="text-[15px] font-medium">
@@ -338,13 +338,13 @@
             </x-shop::tabs.item>
 
             @if ($order->invoices->count())
-                <x-shop::tabs.item  title="{{ __('shop::app.customers.account.orders.view.invoices.invoices') }}">
+                <x-shop::tabs.item  :title="trans('shop::app.customers.account.orders.view.invoices.invoices')">
 
                     @foreach ($order->invoices as $invoice)
                         <div class="flex justify-between items-center">
                             <div class="">
                                 <p class="text-[15px] font-medium">
-                                    {{ __('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
+                                    @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
                                 </p>
                             </div>
                             <div class="bs-secondary-button flex gap-x-[10px] items-center py-[12px] px-[20px] border-[#E9E9E9] font-normal">
@@ -565,7 +565,9 @@
                         </div>
 
                         <div class="text-[15px] font-medium">
-                            <span>{{ __('shop::app.customers.account.orders.view.shipments.individual-shipment', ['shipment_id' => $shipment->id]) }}</span>
+                            <span>
+                                @lang('shop::app.customers.account.orders.view.shipments.individual-shipment', ['shipment_id' => $shipment->id])
+                            </span>
                         </div>
 
                         <div class="relative overflow-x-auto border rounded-[12px] mt-[30px]">
@@ -629,12 +631,12 @@
 
             @if ($order->refunds->count())
                 <x-shop::tabs.item
-                    title="{{ __('shop::app.customers.account.orders.view.refunds.refunds') }}"
+                    title="@lang('shop::app.customers.account.orders.view.refunds.refunds') }}"
                 >
                     @foreach ($order->refunds as $refund)
                         <div class="text-[15px] font-medium">
                             <span>
-                                {{ __('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id]) }}
+                                @lang('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id])
                             </span>
                         </div>
 
