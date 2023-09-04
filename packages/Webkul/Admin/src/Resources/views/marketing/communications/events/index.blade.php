@@ -36,7 +36,7 @@
                     <!-- Create Button -->
                     <div
                         class="primary-button"
-                        @click="id=0; $refs.emailEvents.toggle()"
+                        @click="selectedEvents={}; $refs.emailEvents.toggle()"
                     >
                         @lang('admin::app.marketing.communications.events.index.create-btn')
                     </div>
@@ -105,7 +105,7 @@
         
                         <!-- Actions -->
                         <div class="flex justify-end">
-                            <a @click="id=1; editModal(record.id)">
+                            <a @click="editModal(record.id)">
                                 <span
                                     :class="record.actions['0'].icon"
                                     class="cursor-pointer rounded-[6px] p-[6px] text-[24px] transition-all hover:bg-gray-100 max-sm:place-self-center"
@@ -136,21 +136,34 @@
                 <form @submit="handleSubmit($event, createEmailEvents)">
                     <x-admin::modal ref="emailEvents">
                         <x-slot:header>
-                            <p class="text-[18px] text-gray-800 font-bold">
-                                <span v-if="id">
-                                    @lang('admin::app.marketing.communications.events.index.edit.title')
-                                </span>
+                            <p
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-if="selectedEvents"
+                            >
+                                @lang('admin::app.marketing.communications.events.index.create.title')
+                            </p>
 
-                                <span v-else>
-                                    @lang('admin::app.marketing.communications.events.index.create.title')
-                                </span>
+                            <p 
+                                class="text-[18px] text-gray-800 font-bold"
+                                v-else
+                            >
+                                @lang('admin::app.settings.users.index.create.title')
                             </p>
                         </x-slot:header>
 
                         <x-slot:content>
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+
+                                <!-- Id -->
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                    v-model="selectedEvents.id"
+                                >
+                                </x-admin::form.control-group.control>
+
                                 <!-- Event Name -->
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.events.index.create.name')
                                     </x-admin::form.control-group.label>
@@ -160,6 +173,7 @@
                                         name="name"
                                         :value="old('name')"
                                         rules="required"
+                                        v-model="selectedEvents.name"
                                         :label="trans('admin::app.marketing.communications.events.index.create.name')"
                                         :placeholder="trans('admin::app.marketing.communications.events.index.create.name')"
                                     >
@@ -172,7 +186,7 @@
                                 </x-admin::form.control-group>
         
                                 <!-- Event Description -->
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.events.index.create.description')
                                     </x-admin::form.control-group.label>
@@ -184,6 +198,7 @@
                                         rules="required"
                                         id="description"
                                         class="h-[100px]"
+                                        v-model="selectedEvents.description"
                                         :label="trans('admin::app.marketing.communications.events.index.create.description')"
                                     >
                                     </x-admin::form.control-group.control>
@@ -195,7 +210,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Event Date -->
-                                <x-admin::form.control-group class="mb-4">
+                                <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
                                         @lang('admin::app.marketing.communications.events.index.create.date')
                                     </x-admin::form.control-group.label>
@@ -203,9 +218,10 @@
                                     <x-admin::form.control-group.control
                                         type="date"
                                         name="date"
-                                        class="cursor-pointer"
                                         :value="old('date')"
                                         rules="required"
+                                        class="cursor-pointer"
+                                        v-model="selectedEvents.date"
                                         :label="trans('admin::app.marketing.communications.events.index.create.date')"
                                         :placeholder="trans('admin::app.marketing.communications.events.index.create.date')"
                                     >
@@ -236,60 +252,37 @@
 
                 data() {
                     return {
-                        id: 0,
+                        selectedEvents: {},
                     }
                 },
 
                 methods: {
                     createEmailEvents(params, { resetForm, setErrors }) {
-                        if (params.id) {
-                            this.$axios.post("{{ route('admin.marketing.communications.events.update')}}", params)
-                                .then((response) => {
-                                    this.$refs.emailEvents.toggle();
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.communications.events.update')}}" : "{{ route('admin.marketing.communications.events.store') }}", params)
+                            .then((response) => {
+                                this.$refs.emailEvents.toggle();
 
-                                    this.$refs.datagrid.get();
+                                this.$refs.datagrid.get();
 
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-                                })
-                                .catch(error => {
-                                    if (error.response.status ==422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                            
-                        } else {
-                            this.$axios.post("{{ route('admin.marketing.communications.events.store') }}", params)
-                                .then((response) => {
-                                    this.$refs.emailEvents.toggle();
-    
-                                    this.$refs.datagrid.get();
-
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
-
-                                    resetForm();
-                                })
-                                .catch(error => {
-                                    if (error.response.status == 422) {
-                                        setErrors(error.response.data.errors);
-                                    }
-                                });
-                        }
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    setErrors(error.response.data.errors);
+                                }
+                            });
                     },
 
                     editModal(id) {
                         this.$axios.get(`{{ route('admin.marketing.communications.events.edit', '') }}/${id}`)
                             .then((response) => {
+                                if (response.data.data.id) {
+                                    this.selectedEvents = response.data.data;
 
-                                let values = {
-                                    id: response.data.data.id,
-                                    name: response.data.data.name,
-                                    date: response.data.data.date,
-                                    description: response.data.data.description,
-                                };
-
-                                this.$refs.emailEvents.toggle();
-
-                                this.$refs.modalForm.setValues(values);
+                                    this.$refs.emailEvents.toggle();
+                                } else {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: response.data.data.message });
+                                }
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {
@@ -299,17 +292,17 @@
                     },
 
                     deleteModal(url) {
-                        if (! confirm('Are you sure, you want to perform this action?')) {
+                        if (! confirm("@lang('admin::app.marketing.communications.events.index.create.delete-warning')")) {
                             return;
                         }
 
                         this.$axios.post(url, {
-                            '_method': 'DELETE'
-                        })
+                                '_method': 'DELETE'
+                            })
                             .then((response) => {
                                 this.$refs.datagrid.get();
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                             })
                             .catch(error => {
                                 if (error.response.status ==422) {

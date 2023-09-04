@@ -131,9 +131,9 @@ class ExchangeRateController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return void
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->exchangeRateRepository->findOrFail($id);
 
@@ -144,14 +144,14 @@ class ExchangeRateController extends Controller
 
             Event::dispatch('core.exchange_rate.delete.after', $id);
 
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.settings.exchange-rates.index.delete-success'),
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
+        return response()->json([
             'message' => trans(
                 'admin::app.settings.exchange-rates.index.delete-error'
             )

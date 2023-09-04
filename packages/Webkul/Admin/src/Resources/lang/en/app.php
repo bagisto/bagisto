@@ -1519,6 +1519,7 @@ return [
                     'create'   => [
                         'description'    => 'Description',
                         'date'           => 'Date',
+                        'delete-warning' => 'Are you sure, you want to perform this action?',
                         'general'        => 'General',
                         'name'           => 'Name',
                         'save-btn'       => 'Save Event',
@@ -1565,6 +1566,7 @@ return [
                     ],
                 ],
 
+                'delete-warning'  => 'Are you sure, you want to perform this action?',
                 'delete-success'  => 'Subscriber Deleted Successfully',
                 'delete-failed'   => 'Subscriber Deleted Failure',
             ],
@@ -1904,7 +1906,8 @@ return [
                     'path-info'      => 'Example: "/sitemap/" or "/" for base path',
                     'save-btn'       => 'Save Sitemap',
                     'title'          => 'Create Sitemap',
-                    'success'        => 'Sitemap created successfully'
+                    'success'        => 'Sitemap created successfully',
+                    'delete-warning' => 'Are you sure, you want to perform this action?',
                 ],
 
                 'edit'  =>  [
@@ -2044,9 +2047,10 @@ return [
                     'create-btn'        => 'Create Currency',
                     'code'              => 'Code',
                     'decimal'           => 'Decimal',
+                    'delete-warning'    => 'Are you sure, you want to perform this action?',
                     'general'           => 'General',
                     'name'              => 'Name',
-                    'save-btn'          => 'Create Currency',
+                    'save-btn'          => 'Save Currency',
                     'symbol'            => 'Symbol',
                     'title'             => 'Create New Currency',
                 ],
@@ -2069,8 +2073,10 @@ return [
                 'title'         => 'Exchange Rates',
                 'create-btn'    => 'Create Exchange Rate',
                 'exchange-rate' => 'Exchange Rate',
+                'update-rates'  => 'Update Exchange Rate',
 
                 'create' => [
+                    'delete-warning'   => 'Are you sure, you want to perform this action?',
                     'title'            => 'Create Exchange Rate',
                     'rate'             => 'Rate',
                     'save-btn'         => 'Save Exchange Rate',
@@ -2726,7 +2732,7 @@ return [
                 'title' => 'Customer',
                 'info'  => 'Customer',
 
-                'address' =>[
+                'address' => [
                     'title'              => 'Address',
                     'info'               => 'Set country, state, zip and lines in a street address.',
                     'requirements'       => 'Requirements',
@@ -2741,11 +2747,11 @@ return [
 
                 ],
 
-                'settings' =>[
+                'settings' => [
                     'title'                   => 'Settings',
-                     'settings-info'          => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
-                     'wishlist'               => 'Wishlist',
-                     'wishlist-info'          => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
+                    'settings-info'          => 'Set wishlist, newsletter subscriptions, email verifications and social login.',
+                    'wishlist'               => 'Wishlist',
+                    'wishlist-info'          => '"Wishlist" is a personalized collection of desired items, allowing users to save products for future reference or potential purchase.',
                     'wishlist-share'          => 'Enable Sharing',
                     'newsletter'              => 'Newsletter Subscription',
                     'newsletter-info'         => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
@@ -2755,7 +2761,7 @@ return [
                 ],
             ],
 
-            'email' =>[
+            'email' => [
                 'title' => 'Email',
                 'info'  => 'Email',
 

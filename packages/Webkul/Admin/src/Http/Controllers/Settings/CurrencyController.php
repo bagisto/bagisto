@@ -103,27 +103,29 @@ class CurrencyController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return JsonResource
+     * @return void
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->currencyRepository->findOrFail($id);
 
         if ($this->currencyRepository->count() == 1) {
-            return response()->json(['message' => trans('admin::app.settings.currencies.index.last-delete-error')], 400);
+            return response()->json([
+                'message' => trans('admin::app.settings.currencies.index.last-delete-error')
+            ], 400);
         }
 
         try {
             $this->currencyRepository->delete($id);
 
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.settings.currencies.index.delete-success'),
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             report($e);
         }
 
-        return new JsonResource([
+        return response()->json([
             'message' => trans('admin::app.settings.currencies.index.delete-failed')
         ], 500);
     }

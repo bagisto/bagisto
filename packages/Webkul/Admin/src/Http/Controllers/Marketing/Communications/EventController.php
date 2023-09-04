@@ -38,7 +38,7 @@ class EventController extends Controller
      *
      * @return JsonResource
      */
-    public function store(): JsonResource
+    public function store()
     {
         $this->validate(request(), [
             'name'        => 'required',
@@ -56,9 +56,9 @@ class EventController extends Controller
 
         Event::dispatch('marketing.events.create.after', $event);
 
-        return new JsonResource([
+        return response()->json([
             'message' => trans('admin::app.marketing.communications.events.index.create.success'),
-        ]);
+        ], 200);
     }
 
     /**
@@ -70,9 +70,9 @@ class EventController extends Controller
     public function edit($id): JsonResource
     {
         if ($id == 1) {
-            session()->flash('error', trans('admin::app.marketing.communications.events.edit-error'));
-
-            return redirect()->back();
+            return new JsonResource([
+                'message' => trans('admin::app.marketing.communications.events.edit-error'),
+            ]);
         }
 
         $event = $this->eventRepository->findOrFail($id);
@@ -87,7 +87,7 @@ class EventController extends Controller
      *
      * @return JsonResource
      */
-    public function update(): JsonResource
+    public function update()
     {
         $id = request()->id;
 
@@ -107,9 +107,9 @@ class EventController extends Controller
 
         Event::dispatch('marketing.events.update.after', $event);
 
-        return new JsonResource([
+        return response()->json([
             'message' => trans('admin::app.marketing.communications.events.index.edit.success'),
-        ]);
+        ], 200);
     }
 
     /**
@@ -118,7 +118,7 @@ class EventController extends Controller
      * @param int $id
      * @return JsonResource
      */
-    public function destroy($id): JsonResource
+    public function destroy($id)
     {
         $this->eventRepository->findOrFail($id);
 
@@ -129,13 +129,13 @@ class EventController extends Controller
 
             Event::dispatch('marketing.events.delete.after', $id);
 
-            return new JsonResource([
+            return response()->json([
                 'message' => trans('admin::app.marketing.communications.events.delete-success'),
-            ]);
+            ], 200);
         } catch (\Exception $e) {
         }
 
-        return new JsonResource([
+        return response()->json([
             'message' => trans('admin::app.marketing.communications.events.delete-failed', ['name'  =>  'admin::app.marketing.communications.events.index.event']),
         ], 500);
     }
