@@ -9,8 +9,8 @@ use Webkul\Admin\Http\Controllers\Settings\InventorySourceController;
 use Webkul\Admin\Http\Controllers\Settings\Tax\TaxCategoryController;
 use Webkul\Admin\Http\Controllers\Settings\Tax\TaxRateController;
 use Webkul\Admin\Http\Controllers\Settings\ThemeController;
-use Webkul\Admin\Http\Controllers\User\RoleController;
-use Webkul\Admin\Http\Controllers\User\UserController;
+use Webkul\Admin\Http\Controllers\Settings\RoleController;
+use Webkul\Admin\Http\Controllers\Settings\UserController;
 
 /**
  * Settings routes.
