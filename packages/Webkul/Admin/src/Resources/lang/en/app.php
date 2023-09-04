@@ -2594,7 +2594,7 @@ return [
                 'slider-image'                  => 'Slider Image',
                 'update-slider'                 => 'Update Slider',
                 'select'                        => 'Select',
-                'add-links'                     => 'Add Links',
+                'add-link'                      => 'Add Link',
                 'column'                        => 'Column',
                 'url'                           => 'Url',
                 'edit'                          => 'Edit'
