@@ -38,7 +38,7 @@
                         <button
                             type="button"
                             class="primary-button"
-                            @click="isUpdating = false;data.user={};$refs.userUpdateOrCreateModal.open()"
+                            @click="resetForm();$refs.userUpdateOrCreateModal.open()"
                         >
                             @lang('admin::app.settings.users.index.create.title')
                         </button>
@@ -397,13 +397,14 @@
                         roles: @json($roles),
                         
                         data: {
-                            user: {}
+                            user: {},
+                            images: [],
                         },
                     }
                 },
 
                 methods: {
-                    updateOrCreate(params, { resetForm, setErrors }) {
+                    updateOrCreate(params, { setErrors }) {
                         let formData = new FormData(this.$refs.userCreateForm);
 
                         if (params.id) {
@@ -422,7 +423,7 @@
 
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                                resetForm();
+                                this.resetForm();
                             })
                             .catch(error => {
                                 if (error.response.status == 422) {
@@ -472,9 +473,18 @@
                                     setErrors(error.response.data.errors);
                                 }
                             });
-                    }
-                }
-            })
+                    },
+
+                    resetForm() {
+                        this.isUpdating = false;
+                        
+                        this.data = {
+                            user: {},
+                            images: [],
+                        };
+                    },
+                },
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>
