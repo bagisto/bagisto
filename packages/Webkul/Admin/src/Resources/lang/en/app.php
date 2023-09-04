@@ -1986,7 +1986,6 @@ return [
                 'title'             => 'Locales',
                 'locale'            => 'Locale',
                 'create-btn'        => 'Create Locale',
-                'last-delete-error' => 'At least one Locale is required.',
 
                 'datagrid' => [
                     'actions'   => 'Actions',
@@ -2016,9 +2015,9 @@ return [
                 'create-success'    => 'Locale created successfully.',
                 'update-success'    => 'Locale updated successfully.',
                 'delete-success'    => 'Locale deleted successfully.',
-                'delete-failed'     => ':name deleted Failed',
-                'last-delete-error' => 'Last Locale Can Not Be Deleted.',
-
+                'last-delete-error' => 'At least one Locale is required.',
+                'delete-warning'    => 'Are you sure, you want to perform this action?',
+                'delete-failed'     => 'Locale deletion failed',
             ],
         ],
 
@@ -2188,6 +2187,7 @@ return [
                 'index' => [
                     'title'        => 'Tax Categories',
                     'tax-category' => 'Tax Category',
+                    'delete-warning'  => 'Are You sure you want to delete ?',
 
                     'datagrid' => [
                         'id'     => 'ID',
@@ -2206,7 +2206,7 @@ return [
                         'name'            => 'Name',
                         'save-btn'        => 'Save Tax Category',
                         'tax-rates'       => 'Tax Rates',
-                        'title'           => 'Tax Categories',
+                        'select'          => 'Select',
                         'add-tax-rates'   => 'Add Tax Rates',
                         'empty-text'      => 'Tax Rates are not available please create new Tax Rates.',
                     ],
@@ -2381,14 +2381,15 @@ return [
                 'user'  => 'User',
 
                 'create'  => [
-                    'title'            => 'Create User',
-                    'name'             => 'Name',
-                    'email'            => 'Email',
-                    'password'         => 'Password',
-                    'confirm-password' => 'Confirm Password',
-                    'role'             => 'Role',
-                    'status'           => 'Status',
-                    'save-btn'         => 'Save User',
+                    'title'             => 'Create User',
+                    'name'              => 'Name',
+                    'email'             => 'Email',
+                    'password'          => 'Password',
+                    'confirm-password'  => 'Confirm Password',
+                    'role'              => 'Role',
+                    'status'            => 'Status',
+                    'save-btn'          => 'Save User',
+                    'upload-image-info' => 'Upload a Profile Image (110px X 110px) in PNG or JPG Format'
                 ],
 
                 'datagrid' => [
@@ -2416,6 +2417,7 @@ return [
                 'last-delete-error'  => 'Last User delete failed',
                 'login-error'        => 'Please check your credentials and try again.',
                 'update-success'     => 'User updated successfully.',
+                'delete-warning'     =>'Are you sure, you want to perform this action?',
             ],
 
             'edit'  => [
