@@ -487,7 +487,7 @@
                             </x-admin::form.control-group.label>
 
                             <v-field
-                                name="options[sort]"
+                                name="options[filters][sort]"
                                 v-slot="{ field }"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.create.sort')"
@@ -496,7 +496,7 @@
                                    
                                     v-bind="field"
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
-                                    :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.create.select')</option>
                                     <option value="desc">@lang('admin::app.settings.themes.create.desc')</option>
@@ -505,7 +505,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[sort]"
+                                control-name="options[filters][sort]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -517,9 +517,9 @@
 
                             <v-field
                                 type="text"
-                                name="options[limit]"
+                                name="options[filters][limit]"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.create.limit')"
                                 placeholder="@lang('admin::app.settings.themes.create.limit')"
@@ -527,7 +527,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[limit]"
+                                control-name="options[filters][limit]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -838,16 +838,16 @@
                             </x-admin::form.control-group.label>
 
                             <v-field
-                                name="options[sort]"
+                                name="options[filters][sort]"
                                 v-slot="{ field }"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.create.sort')"
                             >
                                 <select
-                                    name="options[sort]"
+                                    name="options[filters][sort]"
                                     v-bind="field"
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
-                                    :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>Select</option>
                                     <option value="desc">@lang('admin::app.settings.themes.create.desc')</option>
@@ -856,7 +856,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[sort]"
+                                control-name="options[filters][sort]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -868,9 +868,9 @@
 
                             <v-field
                                 type="text"
-                                name="options[limit]"
+                                name="options[filters][limit]"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.create.limit')"
                                 placeholder="@lang('admin::app.settings.themes.create.limit')"
@@ -878,7 +878,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[limit]"
+                                control-name="options[filters][limit]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>

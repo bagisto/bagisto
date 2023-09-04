@@ -473,15 +473,6 @@
                                     @lang('admin::app.settings.themes.edit.product-carousel-description')
                                 </p>
                             </div>
-            
-                            <div class="flex gap-[10px]">
-                                <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                    @click="$refs.productFilterModal.toggle()"
-                                >
-                                    @lang('admin::app.settings.themes.edit.add-filter-btn')
-                                </div>
-                            </div>
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
@@ -492,7 +483,7 @@
                             <v-field
                                 type="text"
                                 name="options[title]"
-                                :value="options.title"
+                                value="{{ $theme->options['title'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                 :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
@@ -513,17 +504,17 @@
                             </x-admin::form.control-group.label>
 
                             <v-field
-                                name="options[sort]"
+                                name="options[filters][sort]"
                                 v-slot="{ field }"
                                 rules="required"
-                                :value="options.sort"
+                                value="{{ $theme->options['filters']['sort'] ?? '' }}"
                                 label="@lang('admin::app.settings.themes.edit.sort')"
                             >
                                 <select
-                                    name="options[sort]"
+                                    name="options[filters][sort]"
                                     v-bind="field"
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
-                                    :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
                                     <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
@@ -532,7 +523,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[sort]"
+                                control-name="options[filters][sort]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -544,10 +535,10 @@
 
                             <v-field
                                 type="text"
-                                name="options[limit]"
-                                :value="options.limit"
+                                name="options[filters][limit]"
+                                value="{{ $theme->options['filters']['limit'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
                                 placeholder="@lang('admin::app.settings.themes.edit.limit')"
@@ -555,10 +546,29 @@
                             </v-field>
                             
                             <x-admin::form.control-group.error
-                                control-name="options[limit]"
+                                control-name="options[filters][limit]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
+
+                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+
+                        <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex flex-col gap-[4px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.settings.themes.create.filters')
+                                </p>
+                            </div>
+            
+                            <div class="flex gap-[10px]">
+                                <div
+                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    @click="$refs.productFilterModal.toggle()"
+                                >
+                                    @lang('admin::app.settings.themes.create.add-filter-btn')
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Filters Lists -->
                         <div v-if="options.filters.length">
@@ -818,15 +828,6 @@
                                     @lang('admin::app.settings.themes.edit.category-carousel-description')
                                 </p>
                             </div>
-            
-                            <div class="flex gap-[10px]">
-                                <div
-                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
-                                    @click="$refs.categoryFilterModal.toggle()"
-                                >
-                                    @lang('admin::app.settings.themes.edit.add-filter-btn')
-                                </div>
-                            </div>
                         </div>
 
                         <x-admin::form.control-group class="mb-[10px]">
@@ -837,7 +838,7 @@
                             <v-field
                                 type="text"
                                 name="options[title]"
-                                :value="options.title"
+                                value="{{ $theme->options['title'] ?? ''}}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
                                 :class="[errors['options[title]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
@@ -858,17 +859,17 @@
                             </x-admin::form.control-group.label>
 
                             <v-field
-                                name="options[sort]"
-                                :value="options.sort"
+                                name="options[filters][sort]"
+                                value="{{ $theme->options['filters']['sort'] ?? ''}}"
                                 v-slot="{ field }"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.sort')"
                             >
                                 <select
-                                    name="options[sort]"
+                                    name="options[filters][sort]"
                                     v-bind="field"
                                     class="custom-select flex w-full min-h-[39px] py-[6px] px-[12px] bg-white border border-gray-300 rounded-[6px] text-[14px] text-gray-600 font-normal transition-all hover:border-gray-400"
-                                    :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                    :class="[errors['options[filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 >
                                     <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
                                     <option value="desc">@lang('admin::app.settings.themes.edit.desc')</option>
@@ -877,7 +878,7 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[sort]"
+                                control-name="options[filters][sort]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
@@ -889,10 +890,10 @@
 
                             <v-field
                                 type="text"
-                                name="options[limit]"
-                                :value="options.limit"
+                                name="options[filters][limit]"
+                                value="{{ $theme->options['filters']['limit'] ?? '' }}"
                                 class="flex w-full min-h-[39px] py-2 px-3 border rounded-[6px] text-[14px] text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
-                                :class="[errors['options[limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                                :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                 rules="required"
                                 label="@lang('admin::app.settings.themes.edit.limit')"
                                 placeholder="@lang('admin::app.settings.themes.edit.limit')"
@@ -900,10 +901,30 @@
                             </v-field>
 
                             <x-admin::form.control-group.error
-                                control-name="options[limit]"
+                                control-name="options[filters][limit]"
                             >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
+
+
+                        <span class="block w-full mb-[16px] mt-[16px] border-b-[1px] border-gray-300"></span>
+
+                        <div class="flex gap-x-[10px] justify-between items-center">
+                            <div class="flex flex-col gap-[4px]">
+                                <p class="text-[16px] text-gray-800 font-semibold">
+                                    @lang('admin::app.settings.themes.create.filters')
+                                </p>
+                            </div>
+            
+                            <div class="flex gap-[10px]">
+                                <div
+                                    class="max-w-max px-[12px] py-[5px] bg-white border-[2px] border-blue-600 rounded-[6px] text-blue-600 font-semibold whitespace-nowrap cursor-pointer"
+                                    @click="$refs.categoryFilterModal.toggle()"
+                                >
+                                    @lang('admin::app.settings.themes.create.add-filter-btn')
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Filters Lists -->
                         <div v-if="options.filters.length">
@@ -1980,10 +2001,12 @@
                         this.options.filters = {};
                     }
 
-                    this.options.filters = Object.keys(this.options.filters).map(key => ({
-                        key: key,
-                        value: this.options.filters[key]
-                    }));
+                    this.options.filters = Object.keys(this.options.filters)
+                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                        .map(key => ({
+                            key: key,
+                            value: this.options.filters[key]
+                        }));
                 },
                 
                 methods: {
@@ -2020,10 +2043,12 @@
                         this.options.filters = {};
                     }
 
-                    this.options.filters = Object.keys(this.options.filters).map(key => ({
-                        key: key,
-                        value: this.options.filters[key]
-                    }));
+                    this.options.filters = Object.keys(this.options.filters)
+                        .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                        .map(key => ({
+                            key: key,
+                            value: this.options.filters[key]
+                        }));
                 },
 
                 methods: {
