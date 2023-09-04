@@ -124,7 +124,6 @@
                 </template>
             </x-admin::datagrid>
 
-
             <x-admin::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
