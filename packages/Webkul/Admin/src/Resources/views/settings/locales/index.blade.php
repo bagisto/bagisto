@@ -34,7 +34,7 @@
                     <button 
                         type="button"
                         class="primary-button"
-                        @click="resetForm();$refs.localeUpdateOrCreateModal.toggle()"
+                        @click="$refs.localeUpdateOrCreateModal.toggle()"
                     >
                         @lang('admin::app.settings.locales.index.create-btn')
                     </button>
@@ -154,6 +154,7 @@
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="id"
+                                    v-model="locale.id"
                                 >
                                 </x-admin::form.control-group.control>
 
@@ -169,6 +170,7 @@
                                         rules="required"
                                         :label="trans('admin::app.settings.locales.index.create.code')"
                                         :placeholder="trans('admin::app.settings.locales.index.create.code')"
+                                        v-model="locale.code"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -190,6 +192,7 @@
                                         rules="required"
                                         :label="trans('admin::app.settings.locales.index.create.name')"
                                         :placeholder="trans('admin::app.settings.locales.index.create.name')"
+                                        v-model="locale.name"
                                     >
                                     </x-admin::form.control-group.control>
 
@@ -210,6 +213,7 @@
                                         id="direction"
                                         rules="required"
                                         :label="trans('admin::app.settings.locales.index.create.direction')"
+                                        v-model="locale.direction"
                                     >
                                         <option value="ltr" selected title="Text direction left to right">LTR</option>
                     
@@ -229,7 +233,7 @@
 
                                     <x-admin::media.images
                                         name="logo_path"
-                                        ::uploaded-images='image'
+                                        ::uploaded-images='locale.image'
                                     >
                                     </x-admin::media.images>
 
@@ -264,7 +268,9 @@
 
                 data() {
                     return {
-                        image: [],
+                        locale: {
+                            image: [],
+                        },
 
                         isUpdating: false,
                     }
@@ -285,11 +291,11 @@
                         .then((response) => {
                             this.$refs.localeUpdateOrCreateModal.close();
 
-                            this.$refs.datagrid.get();
-
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
-                            this.resetForm();
+                            this.isUpdating = false;
+
+                            window.location.reload();
                         })
                         .catch(error => {
                             if (error.response.status == 422) {
@@ -303,12 +309,14 @@
 
                         this.$axios.get(`{{ route('admin.settings.locales.edit', '') }}/${id}`)
                             .then((response) => {
-                                this.image = [{
-                                    id: 'logo_path',
-                                    url: response.data.data.logo_url
-                                }];
+                                this.locale.image = [];
 
-                                this.$refs.modalForm.setValues(response.data.data);
+                                this.locale = {
+                                    ...response.data.data,
+                                        image: response.data.data.logo_path
+                                        ? [{ id: 'image', url: response.data.data.logo_url }]
+                                        : [],
+                                };
 
                                 this.$refs.localeUpdateOrCreateModal.toggle();
                             })
@@ -333,14 +341,8 @@
                                 }
                             });
                     },
-
-                    resetForm() {
-                        this.isUpdating = false;
-
-                        this.image = [];
-                    }
-                }
-            })
+                },
+            });
         </script>
     @endPushOnce
 </x-admin::layouts>
