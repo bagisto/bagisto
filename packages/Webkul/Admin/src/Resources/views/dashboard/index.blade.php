@@ -814,7 +814,7 @@
                                     <div class="flex flex-col">
                                         <p
                                             class="text-gray-600 font-semibold"
-                                            v-text="item.customer_full_name ?? item.first_name + ' ' + item.last_name"
+                                            v-text="item.customer_full_name ?? item?.customer_first_name + ' ' + item?.customer_last_name"
                                         >
                                         </p>
 

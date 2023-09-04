@@ -37,6 +37,16 @@ class DashboardService
     protected Carbon $lastEndDate;
 
     /**
+     * The start date for the previous day.
+     */
+    protected Carbon $yesterdayStartDate;
+
+    /**
+     * The end date for the previous day.
+     */
+    protected Carbon $yesterdayEndDate;
+
+    /**
      * Create a service instance.
      */
     public function __construct(
@@ -49,6 +59,8 @@ class DashboardService
     ) {
         $this->setLastStartDate();
         $this->setLastEndDate();
+        $this->yesterdayStartDate = now()->subDay()->startOfDay();
+        $this->yesterdayEndDate = now()->subDay()->endOfDay();
     }
 
     /**
@@ -154,12 +166,11 @@ class DashboardService
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
-                'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->lastStartDate, $this->lastEndDate),
+                'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
                 'current' => $current = $this->customerRepository->getCustomersCountByDate($todayStartOfDay, $todayEndOfDay),
                 'progress' => $this->getPercentageChange($previous, $current)
             ];
         }
-
 
         return [
             'previous' => $previous = $this->customerRepository->getCustomersCountByDate($this->lastStartDate, $this->lastEndDate),
@@ -175,7 +186,7 @@ class DashboardService
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
-                'previous' => $previous = $this->orderRepository->getOrdersCountByDate($this->lastStartDate, $this->lastEndDate),
+                'previous' => $previous = $this->orderRepository->getOrdersCountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
                 'current' => $current = $this->orderRepository->getOrdersByDate($todayStartOfDay, $todayEndOfDay),
                 'progress' => $this->getPercentageChange($previous, count($current))
             ];
@@ -195,7 +206,7 @@ class DashboardService
     {
         if ($todayStartOfDay && $todayEndOfDay) {
             return [
-                'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->lastStartDate, $this->lastEndDate),
+                'previous' => $previous = $this->orderRepository->calculateSaleAmountByDate($this->yesterdayEndDate, $this->yesterdayStartDate),
                 'current' => $current = $this->orderRepository->calculateSaleAmountByDate($todayStartOfDay, $todayEndOfDay),
                 'progress' => $this->getPercentageChange($previous, $current)
             ];
