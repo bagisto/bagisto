@@ -313,6 +313,14 @@
         content: "\e943";
     }
 
+    .icon-pause:before {
+        content: "\e944";
+    }
+
+    .icon-play:before {
+        content: "\e945";
+    }
+
 
     p {
         @apply text-[14px] leading-[17px];
