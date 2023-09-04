@@ -18,7 +18,10 @@
             v-slot="{ meta, errors, handleSubmit }"
             as="div"
         >
-            <form @submit="handleSubmit($event, update)">
+            <form
+                @submit="handleSubmit($event, update)"
+                ref="customerCreateForm"
+            >
                 <!-- Customer Edit Modal -->
                 <x-admin::modal ref="customerEditModal">
                     <x-slot:header>
@@ -34,6 +37,12 @@
 
                         <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
                             <div class="flex gap-[16px] max-sm:flex-wrap">
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                >
+                                </x-admin::form.control-group.control>
+
                                 <!--First Name -->
                                 <x-admin::form.control-group class="w-full mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
@@ -295,12 +304,17 @@
 
             methods: {
                 update(params, { resetForm, setErrors }) {
-                
-                    this.$axios.post("{{ route('admin.customers.customers.update', $customer->id) }}", params)
+                    let formData = new FormData(this.$refs.customerCreateForm);
+
+                    formData.append('_method', 'put');
+
+                    this.$axios.post("{{ route('admin.customers.customers.update', $customer->id) }}", formData)
                         .then((response) => {
                             this.$refs.customerEditModal.toggle();
 
                             window.location.reload();
+
+                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 
                             resetForm();
                         })

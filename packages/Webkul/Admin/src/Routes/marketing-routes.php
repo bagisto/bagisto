@@ -33,7 +33,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.cart_rules.edit');
 
-                Route::post('edit/{id}', 'update')->name('admin.marketing.promotions.cart_rules.update');
+                Route::put('edit/{id}', 'update')->name('admin.marketing.promotions.cart_rules.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.cart_rules.delete');
             });
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.marketing.promotions.catalog_rules.edit');
 
-                Route::post('edit/{id}', 'update')->name('admin.marketing.promotions.catalog_rules.update');
+                Route::put('edit/{id}', 'update')->name('admin.marketing.promotions.catalog_rules.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.catalog_rules.delete');
             });
@@ -83,7 +83,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.marketing.communications.email_templates.edit');
 
-                Route::post('edit/{id}', 'update')->name('admin.marketing.communications.email_templates.update');
+                Route::put('edit/{id}', 'update')->name('admin.marketing.communications.email_templates.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.communications.email_templates.delete');
             });
@@ -98,7 +98,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.marketing.communications.events.edit');
 
-                Route::post('edit', 'update')->name('admin.marketing.communications.events.update');
+                Route::put('edit', 'update')->name('admin.marketing.communications.events.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.communications.events.delete');
             });
@@ -115,7 +115,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.marketing.communications.campaigns.edit');
 
-                Route::post('edit/{id}', 'update')->name('admin.marketing.communications.campaigns.update');
+                Route::put('edit/{id}', 'update')->name('admin.marketing.communications.campaigns.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.communications.campaigns.delete');
             });
@@ -128,7 +128,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('edit/{id}', 'edit')->name('admin.marketing.communications.subscribers.edit');
 
-                Route::post('edit', 'update')->name('admin.marketing.communications.subscribers.update');
+                Route::put('edit', 'update')->name('admin.marketing.communications.subscribers.update');
 
                 Route::delete('edit/{id}', 'destroy')->name('admin.marketing.communications.subscribers.delete');
             });
@@ -142,7 +142,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
             Route::post('create', 'store')->name('admin.marketing.promotions.sitemaps.store');
 
-            Route::post('edit', 'update')->name('admin.marketing.promotions.sitemaps.update');
+            Route::put('edit', 'update')->name('admin.marketing.promotions.sitemaps.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.marketing.promotions.sitemaps.delete');
         });

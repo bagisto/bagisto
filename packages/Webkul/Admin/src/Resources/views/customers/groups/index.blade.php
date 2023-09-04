@@ -117,7 +117,10 @@
                     as="div"
                     ref="modalForm"
                 >
-                    <form @submit="handleSubmit($event, updateOrCreate)">
+                    <form
+                        @submit="handleSubmit($event, updateOrCreate)"
+                        ref="groupCreateForm"
+                    >
                         <!-- Create Group Modal -->
                         <x-admin::modal ref="groupUpdateOrCreateModal">          
                             <x-slot:header>
@@ -144,9 +147,6 @@
                                         <x-admin::form.control-group.control
                                             type="hidden"
                                             name="id"
-                                            id="id"
-                                            :label="trans('admin::app.customers.groups.index.create.code')"
-                                            :placeholder="trans('admin::app.customers.groups.index.create.code')"
                                         >
                                         </x-admin::form.control-group.control>
             
@@ -219,7 +219,13 @@
 
                 methods: {
                     updateOrCreate(params, { resetForm, setErrors  }) {
-                        this.$axios.post(params.id ? "{{ route('admin.customers.groups.update') }}" : "{{ route('admin.customers.groups.store') }}", params)
+                        let formData = new FormData(this.$refs.groupCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.customers.groups.update') }}" : "{{ route('admin.customers.groups.store') }}", formData)
                             .then((response) => {
                                 this.$refs.groupUpdateOrCreateModal.close();
 

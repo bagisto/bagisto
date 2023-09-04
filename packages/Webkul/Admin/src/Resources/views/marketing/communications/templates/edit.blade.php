@@ -5,7 +5,10 @@
     </x-slot:title>
 
     {{-- Input Form --}}
-    <x-admin::form :action="route('admin.marketing.communications.email_templates.update', $template->id)">
+    <x-admin::form
+        :action="route('admin.marketing.communications.email_templates.update', $template->id)"
+        method="PUT"
+    >
         <div class="flex justify-between items-center">
             <p class="text-[20px] text-gray-800 font-bold">
                 @lang('admin::app.marketing.communications.templates.edit.title')

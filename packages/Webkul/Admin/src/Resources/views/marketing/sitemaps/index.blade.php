@@ -137,7 +137,10 @@
                 ref="modalForm"
             >
                 <!-- Create Sitemap form -->
-                <form @submit="handleSubmit($event, create)">
+                <form
+                    @submit="handleSubmit($event, updateOrCreate)"
+                    ref="sitemapCreateForm"
+                >
                     <x-admin::modal ref="sitemap">
                         <!-- Modal Header -->
                         <x-slot:header>
@@ -161,6 +164,13 @@
                         <!-- Modal Content -->
                         <x-slot:content>
                             <div class="px-[16px] py-[10px] border-b-[1px] border-gray-300">
+                                <!-- Id -->
+                                <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="id"
+                                >
+                                </x-admin::form.control-group.control>
+
                                 <!-- File Name -->
                                 <x-admin::form.control-group class="mb-[10px]">
                                     <x-admin::form.control-group.label class="required">
@@ -238,8 +248,14 @@
                 },
 
                 methods: {
-                    create(params, { resetForm, setErrors }) {
-                        this.$axios.post(params.id ? "{{ route('admin.marketing.promotions.sitemaps.update') }}" : "{{ route('admin.marketing.promotions.sitemaps.store') }}", params )
+                    updateOrCreate(params, { resetForm, setErrors }) {
+                        let formData = new FormData(this.$refs.sitemapCreateForm);
+
+                        if (params.id) {
+                            formData.append('_method', 'put');
+                        }
+
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.promotions.sitemaps.update') }}" : "{{ route('admin.marketing.promotions.sitemaps.store') }}", formData )
                             .then((response) => {
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
 

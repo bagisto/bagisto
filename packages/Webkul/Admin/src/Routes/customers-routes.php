@@ -29,10 +29,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
             Route::post('note/{id}', 'storeNotes')->name('admin.customer.note.store');
 
-            Route::post('edit/{id}', 'update')->name('admin.customers.customers.update');
-            
+            Route::put('edit/{id}', 'update')->name('admin.customers.customers.update');
+
             Route::post('mass-delete', 'massDestroy')->name('admin.customers.customers.mass_delete');
-            
+
             Route::post('mass-update', 'massUpdate')->name('admin.customers.customers.mass_update');
 
             Route::post('/{id}', 'destroy')->name('admin.customers.customers.delete');
@@ -55,7 +55,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
             Route::prefix('addresses')->group(function () {
                 Route::get('edit/{id}', 'edit')->name('admin.customers.customers.addresses.edit');
 
-                Route::post('edit/{id}', 'update')->name('admin.customers.customers.addresses.update');
+                Route::put('edit/{id}', 'update')->name('admin.customers.customers.addresses.update');
 
                 Route::post('default/{id}', 'makeDefault')->name('admin.customers.customers.addresses.set_default');
 
@@ -72,7 +72,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
         Route::get('edit/{id}', 'edit')->name('admin.customers.customers.review.edit');
 
-        Route::post('edit/{id}', 'update')->name('admin.customers.customers.review.update');
+        Route::put('edit/{id}', 'update')->name('admin.customers.customers.review.update');
 
         Route::delete('/{id}', 'destroy')->name('admin.customers.customers.review.delete');
 
@@ -89,7 +89,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url') . '
 
         Route::post('create', 'store')->name('admin.customers.groups.store');
 
-        Route::post('edit', 'update')->name('admin.customers.groups.update');
+        Route::put('edit', 'update')->name('admin.customers.groups.update');
 
         Route::delete('delete/{id}', 'destroy')->name('admin.customers.groups.delete');
     });

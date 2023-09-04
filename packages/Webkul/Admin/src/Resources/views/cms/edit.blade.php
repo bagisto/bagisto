@@ -13,6 +13,7 @@
 
     <x-admin::form
         :action="route('admin.cms.update', $page->id)"
+        method="PUT"
         enctype="multipart/form-data"
     >
         <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
