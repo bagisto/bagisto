@@ -4,7 +4,7 @@ return [
     'users' => [
         'sessions' => [
             'email'                => 'Email Address',
-            'forget-password-link' => 'Forget Password ?',
+            'forget-password-link' => 'Forget Password?',
             'password'             => 'Password',
             'submit-btn'           => 'Sign In',
             'title'                => 'Sign In',
@@ -16,14 +16,14 @@ return [
                 'email_not_exist'  => 'Email Not Exists',
                 'page-title'       => 'Forget Password',
                 'reset_link_sent'  => 'Reset Password link sent',
-                'sign-in-link'     => 'Back to Sign In ?',
+                'sign-in-link'     => 'Back to Sign In?',
                 'submit-btn'       => 'Reset',
                 'title'            => 'Recover Password',
             ],
         ],
 
         'reset-password' => [
-            'back-link-title'  => 'Back to Sign In ?',
+            'back-link-title'  => 'Back to Sign In?',
             'confirm-password' => 'Confirm Password',
             'email'            => 'Registered Email',
             'password'         => 'Password',
@@ -784,7 +784,7 @@ return [
         'attributes' => [
             'index' => [
                 'title'      => 'Attributes',
-                'create-btn' => 'Create Attributes',
+                'create-btn' => 'Create Attribute',
 
                 'datagrid' => [
                     'id'                  => 'ID',
@@ -2102,7 +2102,7 @@ return [
         'inventory-sources' => [
             'index'  => [
                 'title'      => 'Inventory Sources',
-                'create-btn' => 'Create Inventory Sources',
+                'create-btn' => 'Create Inventory Source',
 
                 'datagrid' => [
                     'id'       => 'ID',
@@ -2750,8 +2750,6 @@ return [
                     'accepted-currencies-info'       => 'Add currency code comma separated e.g. USD,INR,...',
                     'sandbox'                        => 'Sandbox',
                     'business-account'               => 'Business Account',
-
-
                 ],
 
                 'order-settings' => [

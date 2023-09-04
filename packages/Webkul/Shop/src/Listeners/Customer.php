@@ -24,7 +24,6 @@ class Customer extends Base
                     return;
                 }
 
-                \Log::info('EmailVerificationNotification');
                 Mail::queue(new EmailVerificationNotification($customer));
             } catch (\Exception $e) {
                 \Log::info('EmailVerificationNotification Error');

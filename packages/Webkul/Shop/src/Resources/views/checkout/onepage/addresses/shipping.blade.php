@@ -174,7 +174,7 @@
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px]">
+                                <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.first-name')
                                 </x-shop::form.control-group.label>
                             
@@ -195,7 +195,7 @@
                             </x-shop::form.control-group>
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px]">
+                                <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.last-name')
                                 </x-shop::form.control-group.label>
                             
@@ -217,7 +217,7 @@
                         </div>
                         
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px]">
+                            <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.email')
                             </x-shop::form.control-group.label>
                         
@@ -238,7 +238,7 @@
                         </x-shop::form.control-group>
                         
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px]">
+                            <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.street-address')
                             </x-shop::form.control-group.label>
                         
@@ -276,7 +276,7 @@
                             <x-shop::form.control-group
                                 class="!mb-4"
                             >
-                                <x-shop::form.control-group.label class="!mt-[0px]">
+                                <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.country')
                                 </x-shop::form.control-group.label>
                             
@@ -306,7 +306,7 @@
                             </x-shop::form.control-group>
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px]">
+                                <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.state')
                                 </x-shop::form.control-group.label>
                             
@@ -350,7 +350,7 @@
 
                         <div class="grid grid-cols-2 gap-x-[20px]">
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px]">
+                                <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.city')
                                 </x-shop::form.control-group.label>
                             
@@ -371,7 +371,7 @@
                             </x-shop::form.control-group>
                             
                             <x-shop::form.control-group>
-                                <x-shop::form.control-group.label class="!mt-[0px]">
+                                <x-shop::form.control-group.label class="!mt-[0px] required">
                                     @lang('shop::app.checkout.onepage.addresses.shipping.postcode')
                                 </x-shop::form.control-group.label>
                             
@@ -393,7 +393,7 @@
                         </div>
 
                         <x-shop::form.control-group>
-                            <x-shop::form.control-group.label class="!mt-[0px]">
+                            <x-shop::form.control-group.label class="!mt-[0px] required">
                                 @lang('shop::app.checkout.onepage.addresses.shipping.telephone')
                             </x-shop::form.control-group.label>
                         

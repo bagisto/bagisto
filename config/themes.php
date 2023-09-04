@@ -1,6 +1,15 @@
 <?php
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Shop Theme Configuration
+    |--------------------------------------------------------------------------
+    |
+    | All the configurations are related to the shop themes.
+    |
+    */
+
     'default' => 'default',
 
     'themes' => [
@@ -10,11 +19,21 @@ return [
             'views_path'  => 'resources/themes/default/views',
 
             'vite'        => [
-                'hot_file'        => 'shop-default-vite.hot',
-                'build_directory' => 'themes/shop/default/build',
+                'hot_file'                 => 'shop-default-vite.hot',
+                'build_directory'          => 'themes/shop/default/build',
+                'package_assets_directory' => 'src/Resources/assets',
             ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Theme Configuration
+    |--------------------------------------------------------------------------
+    |
+    | All the configurations are related to the admin themes.
+    |
+    */
 
     'admin-default' => 'default',
 
@@ -25,8 +44,9 @@ return [
             'views_path'  => 'resources/admin-themes/default/views',
 
             'vite'        => [
-                'hot_file'        => 'admin-default-vite.hot',
-                'build_directory' => 'themes/admin/default/build',
+                'hot_file'                 => 'admin-default-vite.hot',
+                'build_directory'          => 'themes/admin/default/build',
+                'package_assets_directory' => 'src/Resources/assets',
             ],
         ],
     ],

@@ -36,7 +36,7 @@
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.before') !!}
 
                     <x-shop::form.control-group class="mb-4">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.first-name')
                         </x-shop::form.control-group.label>
 
@@ -60,7 +60,7 @@
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.firstname.after') !!}
 
                     <x-shop::form.control-group class="mb-4">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.last-name')
                         </x-shop::form.control-group.label>
 
@@ -84,7 +84,7 @@
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.lastname.after') !!}
 
                     <x-shop::form.control-group class="mb-4">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.email')
                         </x-shop::form.control-group.label>
 
@@ -108,7 +108,7 @@
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.email.after') !!}
 
                     <x-shop::form.control-group class="mb-6">
-                        <x-shop::form.control-group.label>
+                        <x-shop::form.control-group.label class="required">
                             @lang('shop::app.customers.signup-form.password')
                         </x-shop::form.control-group.label>
 

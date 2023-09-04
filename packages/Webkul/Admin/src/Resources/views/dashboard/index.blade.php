@@ -3,6 +3,10 @@
 @endphp
 
 <x-admin::layouts>
+    <x-slot:title>
+        @lang('admin::app.dashboard.index.title')
+    </x-slot:title>
+
     {{-- User Detailes Section --}}
     <div class="flex gap-[16px] justify-between items-center mb-[20px] max-sm:flex-wrap">
         <div class="grid gap-[6px]">
