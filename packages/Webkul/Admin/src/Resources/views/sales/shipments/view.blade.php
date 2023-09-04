@@ -69,11 +69,11 @@
                                         @endif
 
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.shipments.view.sku') - {{ $item->sku }}
+                                            @lang('admin::app.sales.shipments.view.sku', ['sku' =>  $item->sku ])
                                         </p>
                                         
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.shipments.view.qty') - {{ $item->qty }}
+                                            @lang('admin::app.sales.shipments.view.qty', ['qty' =>  $item->qty ])
                                         </p>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
 
                         {{-- Customer Email --}}
                         <p class="text-gray-600">
-                            @lang('admin::app.sales.shipments.view.email') - {{ $shipment->order->customer_email }}
+                            @lang('admin::app.sales.shipments.view.email', ['email' =>  $shipment->order->customer_email ])
                         </p>
                     </div>
 

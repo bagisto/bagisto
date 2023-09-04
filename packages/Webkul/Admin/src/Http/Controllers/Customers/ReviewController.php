@@ -87,7 +87,7 @@ class ReviewController extends Controller
 
             Event::dispatch('customer.review.delete.after', $id);
 
-            return new JsonResource(['message' => trans('admin::app.customers.reviews.delete-success', ['name' => 'Review'])]);
+            return new JsonResource(['message' => trans('admin::app.customers.reviews.index.datagrid.delete-success', ['name' => 'Review'])]);
         } catch (\Exception $e) {
             report($e);
         }

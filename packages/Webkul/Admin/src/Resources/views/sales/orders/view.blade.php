@@ -115,7 +115,7 @@
                         </p>
 
                         <p class="text-[16px] text-gray-800 font-semibold">
-                            @lang('admin::app.sales.orders.view.grand-total') - {{ core()->formatBasePrice($order->base_grand_total) }}
+                            @lang('admin::app.sales.orders.view.grand-total', ['grand-total' => core()->formatBasePrice($order->base_grand_total)])
                         </p>
                     </div>
 
@@ -160,7 +160,9 @@
                                                 </p>
                                             @endif
 
-                                            <p class="text-gray-600">@lang('admin::app.sales.orders.view.sku')  - {{ $item->sku }}</p>
+                                            <p class="text-gray-600">
+                                                @lang('admin::app.sales.orders.view.sku', ['sku' => $item->sku])
+                                            </p>
 
                                             <p class="text-gray-600">
                                                 {{ $item->qty_ordered ? trans('admin::app.sales.orders.view.item-ordered', ['qty_ordered' => $item->qty_ordered]) : '' }}
@@ -186,21 +188,21 @@
 
                                     <div class="flex flex-col gap-[6px] items-end place-items-start">
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.orders.view.price') - {{ core()->formatBasePrice($item->base_price) }}
+                                            @lang('admin::app.sales.orders.view.price', ['price' => core()->formatBasePrice($item->base_price)])
                                         </p>
 
                                         <p class="text-gray-600">
-                                            {{ $item->tax_percent }}% 
-                                            @lang('admin::app.sales.orders.view.tax') - {{ core()->formatBasePrice($item->base_tax_amount) }}
+                                            {{ $item->tax_percent }}%
+                                            @lang('admin::app.sales.orders.view.tax', ['tax' => core()->formatBasePrice($item->base_tax_amount)])
                                         </p>
                                         @if ($order->base_discount_amount > 0)
                                             <p class="text-gray-600">
-                                                @lang('admin::app.sales.orders.view.discount') - {{ core()->formatBasePrice($item->base_discount_amount) }}
+                                                @lang('admin::app.sales.orders.view.discount', ['discount' => core()->formatBasePrice($item->base_discount_amount)])
                                             </p>
                                         @endif
 
                                         <p class="text-gray-600">
-                                            @lang('admin::app.sales.orders.view.sub-total') - {{ core()->formatBasePrice($item->base_total) }}
+                                            @lang('admin::app.sales.orders.view.sub-total', ['sub_total' => core()->formatBasePrice($item->base_total)])
                                         </p>
                                     </div>
                                 </div>
@@ -211,11 +213,11 @@
                     <div class="flex w-full gap-[10px] justify-end mt-[16px] p-[16px]">
                         <div class="flex flex-col gap-y-[6px]">
                             <p class="text-gray-600 font-semibold">
-                                @lang('admin::app.sales.orders.view.sub-total')
+                                @lang('admin::app.sales.orders.view.summary-sub-total')
                             </p>
 
                             <p class="text-gray-600">
-                                @lang('admin::app.sales.orders.view.tax')
+                                @lang('admin::app.sales.orders.view.summary-tax')
                             </p>
 
                             @if ($haveStockableItems = $order->haveStockableItems())
@@ -224,7 +226,7 @@
                             @endif
 
                             <p class="text-[16px] text-gray-800 font-semibold">
-                                @lang('admin::app.sales.orders.view.grand-total')
+                                @lang('admin::app.sales.orders.view.summary-grand-total')
                             </p>
 
                             <p class="text-gray-600">
@@ -367,7 +369,9 @@
                 {{-- Customer and address information --}}
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('admin::app.sales.orders.view.customer')</p>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                            @lang('admin::app.sales.orders.view.customer')
+                        </p>
                     </x-slot:header>
 
                     <x-slot:content>
@@ -563,7 +567,7 @@
                             <div class="grid gap-y-[10px]">
                                 <div>
                                     <p class="text-gray-800 font-semibold">
-                                        @lang('admin::app.sales.orders.view.invoice') #{{ $invoice->increment_id ?? $invoice->id }}
+                                        @lang('admin::app.sales.orders.view.invoice-id', ['invoice' => $invoice->increment_id ?? $invoice->id])
                                     </p>
 
                                     <p class="text-gray-600">
@@ -613,7 +617,7 @@
                                 <div>
                                     {{-- Shipment Id --}}
                                     <p class="text-gray-800 font-semibold">
-                                        @lang('Shipment') #{{ $shipment->id }}
+                                        @lang('admin::app.sales.orders.view.shipment', ['shipment' => $shipment->id])
                                     </p>
 
                                     {{-- Shipment Created --}}
@@ -642,7 +646,9 @@
                 {{-- Refund Information--}}    
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">@lang('admin::app.sales.orders.view.refund')</p>
+                        <p class="text-gray-600 text-[16px] p-[10px] font-semibold">
+                            @lang('admin::app.sales.orders.view.refund')
+                        </p>
                     </x-slot:header>
 
                     <x-slot:content>
@@ -650,7 +656,7 @@
                             <div class="grid gap-y-[10px]">
                                 <div>
                                     <p class="text-gray-800 font-semibold">
-                                        @lang('admin::app.sales.orders.view.refund') #{{ $refund->id }}
+                                        @lang('admin::app.sales.orders.view.refund-id', ['refund' => $refund->id])
                                     </p>
 
                                     <p class="text-gray-600">
@@ -766,7 +772,7 @@
                                                     @endif
             
                                                     <p class="text-gray-600">
-                                                        @lang('admin::app.sales.orders.view.sku') - {{ $item->sku }}
+                                                        @lang('admin::app.sales.orders.view.sku', ['sku' => $item->sku])
                                                     </p>
                                                 </div>
                                             </div>
