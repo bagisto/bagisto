@@ -2,8 +2,10 @@
 
 namespace Webkul\DataGrid;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use Webkul\Admin\Exports\DataGridExport;
 use Webkul\DataGrid\Enums\ColumnTypeEnum;
 
 abstract class DataGrid
@@ -61,6 +63,16 @@ abstract class DataGrid
      * Paginator instance.
      */
     protected LengthAwarePaginator $paginator;
+
+    /**
+     * Exportable.
+     */
+    protected bool $exportable = false;
+
+    /**
+     * Export meta information.
+     */
+    protected mixed $exportFile = null;
 
     /**
      * Prepare query builder.
@@ -162,9 +174,11 @@ abstract class DataGrid
             'filters'     => ['sometimes', 'required', 'array'],
             'sort'        => ['sometimes', 'required', 'array'],
             'pagination'  => ['sometimes', 'required', 'array'],
+            'export'      => ['sometimes', 'required', 'boolean'],
+            'format'      => ['sometimes', 'required', 'in:xls,csv'],
         ]);
 
-        return request()->only(['filters', 'sort', 'pagination']);
+        return request()->only(['filters', 'sort', 'pagination', 'export', 'format']);
     }
 
     /**
@@ -249,7 +263,41 @@ abstract class DataGrid
 
         $this->queryBuilder = $this->processRequestedSorting($requestedParams['sort'] ?? []);
 
+        /**
+         * The `export` parameter is validated as a boolean in the `validatedRequest`. An `empty` function will not work,
+         * as it will always be treated as true because of "0" and "1".
+         */
+        if (isset($requestedParams['export']) && (bool) $requestedParams['export']) {
+            $this->exportable = true;
+
+            $this->setExportFile($this->queryBuilder->get(), $requestedParams['format']);
+
+            return;
+        }
+
         $this->paginator = $this->processRequestedPagination($requestedParams['pagination'] ?? []);
+    }
+
+    /**
+     * Set export file.
+     *
+     * @param  \Illuminate\Support\Collection  $records
+     * @param  string  $format
+     * @return void
+     */
+    public function setExportFile($records, $format = 'csv')
+    {
+        $this->exportFile = Excel::download(new DataGridExport($records), Str::random(36) . '.' . $format);
+    }
+
+    /**
+     * Download export file.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function downloadExportFile()
+    {
+        return $this->exportFile;
     }
 
     /**
@@ -310,9 +358,9 @@ abstract class DataGrid
     }
 
     /**
-     * Get json data.
+     * Prepare all the setup for datagrid.
      */
-    public function toJson(): JsonResponse
+    public function prepare(): void
     {
         $this->prepareColumns();
 
@@ -323,6 +371,18 @@ abstract class DataGrid
         $this->setQueryBuilder();
 
         $this->processRequest();
+    }
+
+    /**
+     * To json.
+     */
+    public function toJson()
+    {
+        $this->prepare();
+
+        if ($this->exportable) {
+            return $this->downloadExportFile();
+        }
 
         return response()->json($this->formatData());
     }

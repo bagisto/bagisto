@@ -1,11 +1,11 @@
 @props(['isMultiRow' => false])
 
-<v-table>
+<v-datagrid-table>
     {{ $slot }}
-</v-table>
+</v-datagrid-table>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-table-template">
+    <script type="text/x-template" id="v-datagrid-table-template">
         <div class="w-full">
             <div class="table-responsive grid w-full box-shadow rounded-[4px] bg-white overflow-hidden">
                 <slot name="header">
@@ -143,8 +143,8 @@
     </script>
 
     <script type="module">
-        app.component('v-table', {
-            template: '#v-table-template',
+        app.component('v-datagrid-table', {
+            template: '#v-datagrid-table-template',
 
             computed: {
                 gridsCount() {
