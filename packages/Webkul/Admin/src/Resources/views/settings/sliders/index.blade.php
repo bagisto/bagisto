@@ -1,7 +1,7 @@
 @extends('admin::layouts.content')
 
 @section('page_title')
-    {{ __('admin::app.settings.sliders.title') }}
+    @lang('admin::app.settings.sliders.title')
 @stop
 
 @section('content')
@@ -14,13 +14,15 @@
 
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.settings.sliders.title') }}</h1>
+                <h1>
+                    @lang('admin::app.settings.sliders.title')
+                </h1>
             </div>
 
             <div class="page-action">
                 @if (bouncer()->hasPermission('settings.sliders.create'))
                     <a href="{{ route('admin.sliders.store') }}" class="btn btn-lg btn-primary">
-                        {{ __('admin::app.settings.sliders.add-title') }}
+                        @lang('admin::app.settings.sliders.add-title')
                     </a>
                 @endif
             </div>

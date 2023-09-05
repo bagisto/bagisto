@@ -716,146 +716,146 @@
                         conditionOperators: {
                             'price': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
                                 }],
                             'decimal': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
                                 }],
                             'integer': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
                                 }],
                             'text': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }, {
                                     'operator': '{}',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.contain') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.contain') }}'
                                 }, {
                                     'operator': '!{}',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}'
                                 }],
                             'boolean': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }],
                             'date': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
                                 }],
                             'datetime': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }, {
                                     'operator': '>=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-greater-than') }}'
                                 }, {
                                     'operator': '<=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.equals-or-less-than') }}'
                                 }, {
                                     'operator': '>',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.greater-than') }}'
                                 }, {
                                     'operator': '<',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.less-than') }}'
                                 }],
                             'select': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }],
                             'radio': [{
                                     'operator': '==',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-equal-to') }}'
                                 }, {
                                     'operator': '!=',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.is-not-equal-to') }}'
                                 }],
                             'multiselect': [{
                                     'operator': '{}',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.contains') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.contains') }}'
                                 }, {
                                     'operator': '!{}',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}'
                                 }],
                             'checkbox': [{
                                     'operator': '{}',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.contains') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.contains') }}'
                                 }, {
                                     'operator': '!{}',
-                                    'label': '{{ __('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}'
+                                    'label': '{{ trans('admin::app.marketing.promotions.catalog-rules.edit.does-not-contain') }}'
                                 }]
                         }
                     }

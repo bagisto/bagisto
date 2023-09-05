@@ -5,7 +5,7 @@
         <div>
             <div class="control-group" :class="[errors.has('country') ? 'has-error' : '']">
                 <label for="country" class="{{ core()->isCountryRequired() ? 'required' : '' }}">
-                    {{ __('shop::app.customer.account.address.create.country') }}
+                    @lang('shop::app.customer.account.address.create.country')
                 </label>
 
                 <select
@@ -15,7 +15,7 @@
                     name="country"
                     v-model="country"
                     v-validate="'{{ core()->isCountryRequired() ? 'required' : '' }}'"
-                    data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.country') }}&quot;">
+                    data-vv-as="&quot;{{ trans('shop::app.customer.account.address.create.country') }}&quot;">
                     <option value=""></option>
 
                     @foreach (core()->countries() as $country)
@@ -32,7 +32,7 @@
 
             <div class="control-group" :class="[errors.has('state') ? 'has-error' : '']">
                 <label for="state" class="{{ core()->isStateRequired() ? 'required' : '' }}">
-                    {{ __('shop::app.customer.account.address.create.state') }}
+                    @lang('shop::app.customer.account.address.create.state')
                 </label>
 
                 <input
@@ -42,7 +42,7 @@
                     name="state"
                     v-model="state"
                     v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
-                    data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;"
+                    data-vv-as="&quot;{{ trans('shop::app.customer.account.address.create.state') }}&quot;"
                     v-if="! haveStates()"/>
 
                 <select
@@ -51,9 +51,11 @@
                     name="state"
                     v-model="state"
                     v-validate="'{{ core()->isStateRequired() ? 'required' : '' }}'"
-                    data-vv-as="&quot;{{ __('shop::app.customer.account.address.create.state') }}&quot;"
+                    data-vv-as="&quot;{{ trans('shop::app.customer.account.address.create.state') }}&quot;"
                     v-if="haveStates()">
-                    <option value="">{{ __('shop::app.customer.account.address.create.select-state') }}</option>
+                    <option value="">
+                        @lang('shop::app.customer.account.address.create.select-state')
+                    </option>
 
                     <option v-for='(state, index) in countryStates[country]' :value="state.code">
                         @{{ state.default_name }}

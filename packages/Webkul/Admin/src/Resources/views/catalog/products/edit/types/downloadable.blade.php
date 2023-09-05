@@ -309,11 +309,11 @@
                                             :label="trans('admin::app.catalog.products.edit.types.downloadable.links.update-create.file-type')"
                                         >
                                             <option value="file">
-                                                {{ __('admin::app.catalog.products.edit.types.downloadable.links.update-create.file') }}
+                                                @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.file')
                                             </option>
 
                                             <option value="url">
-                                                {{ __('admin::app.catalog.products.edit.types.downloadable.links.update-create.url') }}
+                                                @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.url')
                                             </option>
                                         </x-admin::form.control-group.control>
             
@@ -405,11 +405,11 @@
                                             v-model="selectedLink.sample_type"
                                         >
                                             <option value="file">
-                                                {{ __('admin::app.catalog.products.edit.types.downloadable.links.update-create.file') }}
+                                                @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.file')
                                             </option>
 
                                             <option value="url">
-                                                {{ __('admin::app.catalog.products.edit.types.downloadable.links.update-create.url') }}
+                                                @lang('admin::app.catalog.products.edit.types.downloadable.links.update-create.url')
                                             </option>
                                         </x-admin::form.control-group.control>
                                     </x-admin::form.control-group>
@@ -702,11 +702,11 @@
                                             :label="trans('admin::app.catalog.products.edit.types.downloadable.samples.update-create.file-type')"
                                         >
                                             <option value="file">
-                                                {{ __('admin::app.catalog.products.edit.types.downloadable.samples.update-create.file') }}
+                                                @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.file')
                                             </option>
 
                                             <option value="url">
-                                                {{ __('admin::app.catalog.products.edit.types.downloadable.samples.update-create.url') }}
+                                                @lang('admin::app.catalog.products.edit.types.downloadable.samples.update-create.url')
                                             </option>
                                         </x-admin::form.control-group.control>
             
